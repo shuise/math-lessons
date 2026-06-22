@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数学课程 - 小学到初中</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .stage { background: #fff; border-radius: 12px; padding: 24px 28px; margin: 20px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .stage h2 { color: #1a73e8; border-bottom: 2px solid #1a73e8; padding-bottom: 8px; margin-top: 0; border-left: none; padding-left: 0; }
+  .stage.primary h2 { color: #e67e22; border-color: #e67e22; }
+  .course-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; padding: 0; list-style: none; }
+  .course-item { background: #f8f9fa; border-radius: 8px; padding: 18px; border: 1px solid #e9ecef; transition: transform 0.2s, box-shadow 0.2s; }
+  .course-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .course-item a { text-decoration: none; color: #2c3e50; display: block; }
+  .course-item a h3 { margin: 0 0 6px 0; font-size: 1.1em; }
+  .course-item .desc { font-size: 0.9em; color: #666; margin: 0; line-height: 1.6; }
+  .intro { text-align: center; color: #555; margin: 20px 0 30px; font-size: 1.05em; }
+  h1 { text-align: center; font-size: 2em; border-bottom: none; }
+</style>
+</head>
+<body>
+<article>
+<h1>数学课程</h1>
+<p class="intro">从小学到初中 · 一步步打好数学基础</p>
+
+<div class="stage primary">
+  <h2>小学阶段 — 算术与基础代数</h2>
+  <ul class="course-list">
+    <li class="course-item">
+      <a href="整数与四则运算/index.html">
+        <h3>1. 整数与四则运算</h3>
+        <p class="desc">认识整数，学习加、减、乘、除，掌握五大运算定律</p>
+      </a>
+    </li>
+    <li class="course-item">
+      <a href="小数与分数/index.html">
+        <h3>2. 小数与分数</h3>
+        <p class="desc">理解小数和分数的意义，学会约分、通分和互化</p>
+      </a>
+    </li>
+    <li class="course-item">
+      <a href="因数与倍数/index.html">
+        <h3>3. 因数与倍数</h3>
+        <p class="desc">认识因数、倍数、质数、合数，找最大公因数和最小公倍数</p>
+      </a>
+    </li>
+    <li class="course-item">
+      <a href="百分数/index.html">
+        <h3>4. 百分数</h3>
+        <p class="desc">理解百分数的含义，掌握折扣、利率等生活应用</p>
+      </a>
+    </li>
+    <li class="course-item">
+      <a href="比与比例/index.html">
+        <h3>5. 比与比例</h3>
+        <p class="desc">理解比的意义和基本性质，认识正比例和反比例</p>
+      </a>
+    </li>
+    <li class="course-item">
+      <a href="简易方程/index.html">
+        <h3>6. 简易方程</h3>
+        <p class="desc">从用字母表示数开始，学会解一元一次方程</p>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div class="stage">
+  <h2>初中阶段 — 有理数到实数，整式到分式</h2>
+  <ul class="course-list">
+    <li class="course-item">
+      <a href="有理数/index.html">
+        <h3>7. 有理数</h3>
+        <p class="desc">认识正负数、数轴、相反数和绝对值，掌握有理数运算</p>
+      </a>
+    </li>
+    <li class="course-item">
+      <a href="实数/index.html">
+        <h3>8. 实数</h3>
+        <p class="desc">认识平方根、立方根和无理数，理解实数系的完整结构</p>
+      </a>
+    </li>
+    <li class="course-item">
+      <a href="整式/index.html">
+        <h3>9. 整式</h3>
+        <p class="desc">从代数式开始，学习整式的加减乘除、幂运算和乘法公式</p>
+      </a>
+    </li>
+    <li class="course-item">
+      <a href="分式/index.html">
+        <h3>10. 分式</h3>
+        <p class="desc">理解分式的概念和基本性质，掌握分式运算和分式方程</p>
+      </a>
+    </li>
+  </ul>
+</div>
+</article>
+</body>
+</html>
