@@ -4,8 +4,38 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>集合基础测验</title>
-<link rel="stylesheet" href="../style.css">
 <style>
+body {
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.9;
+  font-size: 16px;
+}
+article {
+  background: #fff;
+  border-radius: 12px;
+  padding: 36px 40px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+h1 {
+  color: #2c3e50;
+  font-size: 1.8em;
+  border-bottom: 3px solid #1a73e8;
+  padding-bottom: 10px;
+  margin-top: 0;
+}
+.back {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: #1a73e8;
+  text-decoration: none;
+  font-size: 0.95em;
+}
+.back:hover { text-decoration: underline; }
 .quiz-question {
   background: #fff;
   border: 2px solid #e0e0e0;
@@ -14,14 +44,8 @@
   margin: 16px 0;
   transition: all 0.2s;
 }
-.quiz-question.correct {
-  border-color: #4caf50;
-  background: #f1f8e9;
-}
-.quiz-question.wrong {
-  border-color: #f44336;
-  background: #fce4ec;
-}
+.quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+.quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
 .quiz-question .q-title {
   font-weight: bold;
   font-size: 1.05em;
@@ -90,9 +114,9 @@ sup, sub { font-size: 0.75em; }
 </style>
 </head>
 <body>
-<a class="back" href="../index.html">← 返回课程列表</a>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
 <article>
-<h1>📐 集合基础测验</h1>
+<h1>集合基础测验</h1>
 <p style="color:#666;">考试时间：20 分钟 &nbsp;|&nbsp; 题型：选择题 + 判断题 &nbsp;|&nbsp; 共 20 题，每题 5 分</p>
 <p style="font-size:0.93em; color:#888;">点击选项提交答案，系统自动判分并给出解析。</p>
 
@@ -101,245 +125,250 @@ sup, sub { font-size: 0.75em; }
 <div class="quiz-footer">
   <div class="score-box" id="scoreDisplay">得分：0 / 100</div>
   <br>
-  <button class="btn-reset" onclick="resetQuiz()">🔄 重新答题</button>
+  <button class="btn-reset" id="resetBtn">&ocy; 重新答题</button>
 </div>
 </article>
 
 <script>
-const questions = [
-// ===== 选择题 =====
-{
-  type: "choice",
-  question: "下列对象中，能构成集合的是（  ）",
-  options: ["某班所有高个子的同学", "接近 0 的数", "方程 x²−1=0 的实数解", "所有好看的电影"],
-  answer: 2,
-  explain: "集合的元素必须具有确定性——元素要么属于要么不属于，不能模棱两可。"高个子""接近""好看"都不确定，只有方程的解是确定的。"
-},
-{
-  type: "choice",
-  question: "下列关系中，正确的是（  ）",
-  options: ["0 ∈ ∅", "π ∈ Q", "√2 ∈ R", "−1 ∈ N"],
-  answer: 2,
-  explain: "∅ 是空集，没有任何元素，所以 0 ∉ ∅。Q 是有理数集，π 是无理数，π ∉ Q。R 是实数集，√2 是实数，所以 √2 ∈ R 正确。N 是自然数集，−1 不是自然数。"
-},
-{
-  type: "choice",
-  question: "集合 {x ∈ N | x < 4} 用列举法表示为（  ）",
-  options: ["{1, 2, 3}", "{0, 1, 2, 3}", "{−1, 0, 1, 2, 3}", "∅"],
-  answer: 1,
-  explain: "N 是自然数集，包含 0, 1, 2, 3, …。x < 4 的自然数有 0, 1, 2, 3，所以用列举法表示为 {0, 1, 2, 3}。注意：自然数集包含 0！"
-},
-{
-  type: "choice",
-  question: "已知 A = {1, 2, 3}，B = {1, 2}，则下列关系正确的是（  ）",
-  options: ["A ⊆ B", "B ⊆ A", "A ∈ B", "B ∈ A"],
-  answer: 1,
-  explain: "B 的每个元素（1 和 2）都在 A 中，所以 B 是 A 的子集，B ⊆ A。注意集合之间用 ⊆、= 等符号，不用 ∈（∈ 是元素和集合的关系）。"
-},
-{
-  type: "choice",
-  question: "设集合 A = {x | x² − 3x + 2 = 0}，则 A =（  ）",
-  options: ["{1, 2}", "{−1, −2}", "∅", "{3}"],
-  answer: 0,
-  explain: "解方程 x² − 3x + 2 = 0，因式分解得 (x−1)(x−2) = 0，解得 x = 1 或 x = 2。所以 A = {1, 2}。"
-},
-{
-  type: "choice",
-  question: "集合 A = {a, b, c} 的子集个数是（  ）",
-  options: ["3", "6", "7", "8"],
-  answer: 3,
-  explain: "n 个元素的集合，子集个数为 2ⁿ。A 有 3 个元素，子集个数 = 2³ = 8。包括：∅、{a}、{b}、{c}、{a,b}、{a,c}、{b,c}、{a,b,c}。"
-},
-{
-  type: "choice",
-  question: "已知全集 U = {1, 2, 3, 4, 5}，A = {1, 3, 5}，则 ∁<sub>U</sub>A =（  ）",
-  options: ["{2, 4}", "{1, 3, 5}", "∅", "U"],
-  answer: 0,
-  explain: "补集是指全集中不在 A 内的所有元素。U 中去掉 A 的 1, 3, 5，剩下 2 和 4，所以 ∁<sub>U</sub>A = {2, 4}。"
-},
-{
-  type: "choice",
-  question: "已知 A = {1, 2, 3}，B = {2, 3, 4}，则 A ∩ B =（  ）",
-  options: ["{1, 2, 3, 4}", "{2, 3}", "{1, 4}", "∅"],
-  answer: 1,
-  explain: "交集 ∩ 是取两个集合的公共元素。A 和 B 共有的元素是 2 和 3，所以 A ∩ B = {2, 3}。"
-},
-{
-  type: "choice",
-  question: "已知 A = {1, 2, 3}，B = {2, 3, 4}，则 A ∪ B =（  ）",
-  options: ["{2, 3}", "{1, 2, 3, 4}", "{1, 4}", "∅"],
-  answer: 1,
-  explain: "并集 ∪ 是取两个集合的"总和"——所有元素合在一起，重复的只写一次。A ∪ B = {1, 2, 3, 4}。"
-},
-{
-  type: "choice",
-  question: "设 A = {x | x > 2}，B = {x | x < 5}，则 A ∩ B =（  ）",
-  options: ["∅", "{x | x > 2}", "{x | x < 5}", "{x | 2 < x < 5}"],
-  answer: 3,
-  explain: "A ∩ B 既要满足 x > 2，又要满足 x < 5，所以是 {x | 2 < x < 5}。你可以画数轴帮助理解——在数轴上标出两个范围，重叠的部分就是交集。"
-},
-{
-  type: "choice",
-  question: "下列集合中，是空集的是（  ）",
-  options: ["{0}", "{x | x² + 1 = 0, x ∈ R}", "{∅}", "{x | x = 0}"],
-  answer: 1,
-  explain: "方程 x² + 1 = 0 在实数范围内无解（x² = −1 在实数中不可能），所以 {x | x² + 1 = 0, x ∈ R} = ∅。注意 {0} 和 {∅} 都不是空集——它们各有一个元素！"
-},
-{
-  type: "choice",
-  question: "已知集合 A = {1, 2}，B = {2, 1}，则 A 与 B 的关系是（  ）",
-  options: ["A ⊂ B", "B ⊂ A", "A = B", "A ≠ B"],
-  answer: 2,
-  explain: "集合的元素是无序的。{1, 2} 和 {2, 1} 的元素完全相同，所以 A = B。"
-},
-{
-  type: "choice",
-  question: "集合 A = {x | x = 2n, n ∈ Z} 表示的是（  ）",
-  options: ["所有奇数", "所有偶数", "所有自然数", "所有整数"],
-  answer: 1,
-  explain: "当 n 取所有整数时，x = 2n 就是所有 2 的倍数——也就是所有偶数。符号说明：Z 是整数集，包括：…, −3, −2, −1, 0, 1, 2, 3, …"
-},
-{
-  type: "choice",
-  question: "设全集 U = {x | x ≤ 5, x ∈ N}，A = {0, 2, 4}，则 ∁<sub>U</sub>A =（  ）",
-  options: ["{1, 3, 5}", "{0, 2, 4}", "∅", "U"],
-  answer: 0,
-  explain: "U = {0, 1, 2, 3, 4, 5}，去掉 A = {0, 2, 4}，剩下的就是 {1, 3, 5}。"
-},
-{
-  type: "choice",
-  question: "已知 A = {1, 2, 3, 4}，B = {2, 4}，A ∩ ∁<sub>U</sub>B（U = A）等于（  ）",
-  options: ["{1, 3}", "{1, 2, 3, 4}", "{2, 4}", "∅"],
-  answer: 0,
-  explain: "U = A = {1, 2, 3, 4}，则 ∁<sub>U</sub>B = {1, 3}。A ∩ {1, 3} = {1, 3}。"
-},
-// ===== 判断题 =====
-{
-  type: "tf",
-  question: "∅ = {0}",
-  answer: false,
-  explain: "∅ 是空集，里面没有任何元素；{0} 里面有一个元素 0。一个是空袋子，一个是袋子里装了 0，完全不同！"
-},
-{
-  type: "tf",
-  question: "若 A ⊆ B 且 B ⊆ C，则 A ⊆ C",
-  answer: true,
-  explain: "这是子集的传递性——如果 A 的所有元素都在 B 中，B 的所有元素都在 C 中，那么 A 的所有元素自然也在 C 中。这就像排队：你在第二个人的前面，第二个人在第三个人的前面，那你一定在第三个人的前面。"
-},
-{
-  type: "tf",
-  question: "{∅} 是空集",
-  answer: false,
-  explain: "{∅} 包含一个元素——这个元素就是空集本身。所以 {∅} 不是空集，它有 1 个元素！"
-},
-{
-  type: "tf",
-  question: "集合 {x | x² = 4} 与集合 {−2, 2} 相等",
-  answer: true,
-  explain: "方程 x² = 4 的解是 x = 2 和 x = −2，所以 {x | x² = 4} = {−2, 2}。描述法和列举法表示的是同一个集合，完全相等。"
-},
-{
-  type: "tf",
-  question: "若 A ∩ B = ∅，则 A 和 B 没有公共元素",
-  answer: true,
-  explain: "∩ 表示交集，即公共元素的集合。A ∩ B = ∅ 意味着 A 和 B 的公共元素构成空集，也就是没有任何公共元素。数学上称这样的两个集合为"不相交"。"
-}
+var questions = [
+  {
+    type: "choice",
+    question: "\u4e0b\u5217\u5bf9\u8c61\u4e2d\uff0c\u80fd\u6784\u6210\u96c6\u5408\u7684\u662f\uff08 \uff09",
+    opts: ["\u67d0\u73ed\u6240\u6709\u9ad8\u4e2a\u5b50\u7684\u540c\u5b66", "\u63a5\u8fd1 0 \u7684\u6570", "\u65b9\u7a0b x\u00b2\u22121=0 \u7684\u5b9e\u6570\u89e3", "\u6240\u6709\u597d\u770b\u7684\u7535\u5f71"],
+    answer: 2,
+    explain: "\u96c6\u5408\u7684\u5143\u7d20\u5fc5\u987b\u5177\u6709\u786e\u5b9a\u6027\u2014\u2014\u5143\u7d20\u8981\u4e48\u5c5e\u4e8e\u8981\u4e48\u4e0d\u5c5e\u4e8e\uff0c\u4e0d\u80fd\u6a21\u68b1\u4e24\u53ef\u3002\u201c\u9ad8\u4e2a\u5b50\u201d\u201c\u63a5\u8fd1\u201d\u201c\u597d\u770b\u201d\u90fd\u4e0d\u786e\u5b9a\uff0c\u53ea\u6709\u65b9\u7a0b\u7684\u89e3\u662f\u786e\u5b9a\u7684\u3002"
+  },
+  {
+    type: "choice",
+    question: "\u4e0b\u5217\u5173\u7cfb\u4e2d\uff0c\u6b63\u786e\u7684\u662f\uff08 \uff09",
+    opts: ["0 \u2208 \u2205", "\u03c0 \u2208 Q", "\u221a2 \u2208 R", "\u22121 \u2208 N"],
+    answer: 2,
+    explain: "\u2205 \u662f\u7a7a\u96c6\uff0c\u6ca1\u6709\u4efb\u4f55\u5143\u7d20\uff0c\u6240\u4ee5 0 \u2209 \u2205\u3002Q \u662f\u6709\u7406\u6570\u96c6\uff0c\u03c0 \u662f\u65e0\u7406\u6570\uff0c\u03c0 \u2209 Q\u3002R \u662f\u5b9e\u6570\u96c6\uff0c\u221a2 \u662f\u5b9e\u6570\uff0c\u6240\u4ee5 \u221a2 \u2208 R \u6b63\u786e\u3002N \u662f\u81ea\u7136\u6570\u96c6\uff0c\u22121 \u4e0d\u662f\u81ea\u7136\u6570\u3002"
+  },
+  {
+    type: "choice",
+    question: "\u96c6\u5408 {x \u2208 N | x < 4} \u7528\u5217\u4e3e\u6cd5\u8868\u793a\u4e3a\uff08 \uff09",
+    opts: ["{1, 2, 3}", "{0, 1, 2, 3}", "{\u22121, 0, 1, 2, 3}", "\u2205"],
+    answer: 1,
+    explain: "N \u662f\u81ea\u7136\u6570\u96c6\uff0c\u5305\u542b 0, 1, 2, 3, \u2026\u3002x < 4 \u7684\u81ea\u7136\u6570\u6709 0, 1, 2, 3\uff0c\u6240\u4ee5\u7528\u5217\u4e3e\u6cd5\u8868\u793a\u4e3a {0, 1, 2, 3}\u3002\u6ce8\u610f\uff1a\u81ea\u7136\u6570\u96c6\u5305\u542b 0\uff01"
+  },
+  {
+    type: "choice",
+    question: "\u5df2\u77e5 A = {1, 2, 3}\uff0cB = {1, 2}\uff0c\u5219\u4e0b\u5217\u5173\u7cfb\u6b63\u786e\u7684\u662f\uff08 \uff09",
+    opts: ["A \u2286 B", "B \u2286 A", "A \u2208 B", "B \u2208 A"],
+    answer: 1,
+    explain: "B \u7684\u6bcf\u4e2a\u5143\u7d20\uff081 \u548c 2\uff09\u90fd\u5728 A \u4e2d\uff0c\u6240\u4ee5 B \u662f A \u7684\u5b50\u96c6\uff0cB \u2286 A\u3002\u6ce8\u610f\u96c6\u5408\u4e4b\u95f4\u7528 \u2286\u3001= \u7b49\u7b26\u53f7\uff0c\u4e0d\u7528 \u2208\u3002"
+  },
+  {
+    type: "choice",
+    question: "\u8bbe\u96c6\u5408 A = {x | x\u00b2 \u2212 3x + 2 = 0}\uff0c\u5219 A =\uff08 \uff09",
+    opts: ["{1, 2}", "{\u22121, \u22122}", "\u2205", "{3}"],
+    answer: 0,
+    explain: "\u89e3\u65b9\u7a0b x\u00b2 \u2212 3x + 2 = 0\uff0c\u56e0\u5f0f\u5206\u89e3\u5f97 (x\u22121)(x\u22122) = 0\uff0c\u89e3\u5f97 x = 1 \u6216 x = 2\u3002\u6240\u4ee5 A = {1, 2}\u3002"
+  },
+  {
+    type: "choice",
+    question: "\u96c6\u5408 A = {a, b, c} \u7684\u5b50\u96c6\u4e2a\u6570\u662f\uff08 \uff09",
+    opts: ["3", "6", "7", "8"],
+    answer: 3,
+    explain: "n \u4e2a\u5143\u7d20\u7684\u96c6\u5408\uff0c\u5b50\u96c6\u4e2a\u6570\u4e3a 2\u207f\u3002A \u6709 3 \u4e2a\u5143\u7d20\uff0c\u5b50\u96c6\u4e2a\u6570 = 2\u00b3 = 8\u3002\u5305\u62ec\uff1a\u2205\u3001{a}\u3001{b}\u3001{c}\u3001{a,b}\u3001{a,c}\u3001{b,c}\u3001{a,b,c}\u3002"
+  },
+  {
+    type: "choice",
+    question: "\u5df2\u77e5\u5168\u96c6 U = {1, 2, 3, 4, 5}\uff0cA = {1, 3, 5}\uff0c\u5219 \u2201<sub>U</sub>A =\uff08 \uff09",
+    opts: ["{2, 4}", "{1, 3, 5}", "\u2205", "U"],
+    answer: 0,
+    explain: "\u8865\u96c6\u662f\u6307\u5168\u96c6\u4e2d\u4e0d\u5728 A \u5185\u7684\u6240\u6709\u5143\u7d20\u3002U \u4e2d\u53bb\u6389 A \u7684 1, 3, 5\uff0c\u5269\u4e0b 2 \u548c 4\uff0c\u6240\u4ee5 \u2201<sub>U</sub>A = {2, 4}\u3002"
+  },
+  {
+    type: "choice",
+    question: "\u5df2\u77e5 A = {1, 2, 3}\uff0cB = {2, 3, 4}\uff0c\u5219 A \u2229 B =\uff08 \uff09",
+    opts: ["{1, 2, 3, 4}", "{2, 3}", "{1, 4}", "\u2205"],
+    answer: 1,
+    explain: "\u4ea4\u96c6 \u2229 \u662f\u53d6\u4e24\u4e2a\u96c6\u5408\u7684\u516c\u5171\u5143\u7d20\u3002A \u548c B \u5171\u6709\u7684\u5143\u7d20\u662f 2 \u548c 3\uff0c\u6240\u4ee5 A \u2229 B = {2, 3}\u3002"
+  },
+  {
+    type: "choice",
+    question: "\u5df2\u77e5 A = {1, 2, 3}\uff0cB = {2, 3, 4}\uff0c\u5219 A \u222a B =\uff08 \uff09",
+    opts: ["{2, 3}", "{1, 2, 3, 4}", "{1, 4}", "\u2205"],
+    answer: 1,
+    explain: "\u5e76\u96c6 \u222a \u662f\u53d6\u4e24\u4e2a\u96c6\u5408\u7684\u6240\u6709\u5143\u7d20\u5408\u5728\u4e00\u8d77\uff0c\u91cd\u590d\u7684\u53ea\u5199\u4e00\u6b21\u3002A \u222a B = {1, 2, 3, 4}\u3002"
+  },
+  {
+    type: "choice",
+    question: "\u8bbe A = {x | x > 2}\uff0cB = {x | x < 5}\uff0c\u5219 A \u2229 B =\uff08 \uff09",
+    opts: ["\u2205", "{x | x > 2}", "{x | x < 5}", "{x | 2 < x < 5}"],
+    answer: 3,
+    explain: "\u753b\u6570\u8f74\u5e2e\u52a9\u7406\u89e3\uff1aA \u2229 B \u65e2\u8981\u6ee1\u8db3 x > 2\uff0c\u53c8\u8981\u6ee1\u8db3 x < 5\uff0c\u6240\u4ee5\u662f {x | 2 < x < 5}\u3002\u6570\u8f74\u4e0a\u4e24\u4e2a\u8303\u56f4\u91cd\u53e0\u7684\u90e8\u5206\u5c31\u662f\u4ea4\u96c6\u3002"
+  },
+  {
+    type: "choice",
+    question: "\u4e0b\u5217\u96c6\u5408\u4e2d\uff0c\u662f\u7a7a\u96c6\u7684\u662f\uff08 \uff09",
+    opts: ["{0}", "{x | x\u00b2 + 1 = 0, x \u2208 R}", "{\u2205}", "{x | x = 0}"],
+    answer: 1,
+    explain: "\u65b9\u7a0b x\u00b2 + 1 = 0 \u5728\u5b9e\u6570\u8303\u56f4\u5185\u65e0\u89e3\uff08x\u00b2 = \u22121 \u4e0d\u53ef\u80fd\uff09\uff0c\u6240\u4ee5 {x | x\u00b2 + 1 = 0, x \u2208 R} = \u2205\u3002\u6ce8\u610f {0} \u548c {\u2205} \u90fd\u4e0d\u662f\u7a7a\u96c6\uff0c\u5404\u6709\u4e00\u4e2a\u5143\u7d20\uff01"
+  },
+  {
+    type: "choice",
+    question: "\u5df2\u77e5\u96c6\u5408 A = {1, 2}\uff0cB = {2, 1}\uff0c\u5219 A \u4e0e B \u7684\u5173\u7cfb\u662f\uff08 \uff09",
+    opts: ["A \u2282 B", "B \u2282 A", "A = B", "A \u2260 B"],
+    answer: 2,
+    explain: "\u96c6\u5408\u7684\u5143\u7d20\u662f\u65e0\u5e8f\u7684\u3002{1, 2} \u548c {2, 1} \u7684\u5143\u7d20\u5b8c\u5168\u76f8\u540c\uff0c\u6240\u4ee5 A = B\u3002"
+  },
+  {
+    type: "choice",
+    question: "\u96c6\u5408 A = {x | x = 2n, n \u2208 Z} \u8868\u793a\u7684\u662f\uff08 \uff09",
+    opts: ["\u6240\u6709\u5947\u6570", "\u6240\u6709\u5076\u6570", "\u6240\u6709\u81ea\u7136\u6570", "\u6240\u6709\u6574\u6570"],
+    answer: 1,
+    explain: "\u5f53 n \u53d6\u6240\u6709\u6574\u6570\u65f6\uff0cx = 2n \u5c31\u662f\u6240\u6709 2 \u7684\u500d\u6570\uff0c\u4e5f\u5c31\u662f\u6240\u6709\u5076\u6570\u3002Z \u662f\u6574\u6570\u96c6\uff0c\u5305\u62ec\u2026, \u22123, \u22122, \u22121, 0, 1, 2, 3, \u2026"
+  },
+  {
+    type: "choice",
+    question: "\u8bbe\u5168\u96c6 U = {x | x \u2264 5, x \u2208 N}\uff0cA = {0, 2, 4}\uff0c\u5219 \u2201<sub>U</sub>A =\uff08 \uff09",
+    opts: ["{1, 3, 5}", "{0, 2, 4}", "\u2205", "U"],
+    answer: 0,
+    explain: "U = {0, 1, 2, 3, 4, 5}\uff0c\u53bb\u6389 A = {0, 2, 4}\uff0c\u5269\u4e0b\u7684\u5c31\u662f {1, 3, 5}\u3002"
+  },
+  {
+    type: "choice",
+    question: "\u5df2\u77e5 A = {1, 2, 3, 4}\uff0cB = {2, 4}\uff0cA \u2229 \u2201<sub>U</sub>B\uff08U = A\uff09\u7b49\u4e8e\uff08 \uff09",
+    opts: ["{1, 3}", "{1, 2, 3, 4}", "{2, 4}", "\u2205"],
+    answer: 0,
+    explain: "U = A = {1, 2, 3, 4}\uff0c\u5219 \u2201<sub>U</sub>B = {1, 3}\u3002A \u2229 {1, 3} = {1, 3}\u3002"
+  },
+  {
+    type: "tf",
+    question: "\u2205 = {0}",
+    answer: false,
+    explain: "\u2205 \u662f\u7a7a\u96c6\uff0c\u91cc\u9762\u6ca1\u6709\u4efb\u4f55\u5143\u7d20\uff1b{0} \u91cc\u9762\u6709\u4e00\u4e2a\u5143\u7d20 0\u3002\u4e00\u4e2a\u662f\u7a7a\u888b\u5b50\uff0c\u4e00\u4e2a\u662f\u888b\u5b50\u91cc\u88c5\u4e86 0\uff0c\u5b8c\u5168\u4e0d\u540c\uff01"
+  },
+  {
+    type: "tf",
+    question: "\u82e5 A \u2286 B \u4e14 B \u2286 C\uff0c\u5219 A \u2286 C",
+    answer: true,
+    explain: "\u8fd9\u662f\u5b50\u96c6\u7684\u4f20\u9012\u6027\u2014\u2014\u5982\u679c A \u7684\u6240\u6709\u5143\u7d20\u90fd\u5728 B \u4e2d\uff0cB \u7684\u6240\u6709\u5143\u7d20\u90fd\u5728 C \u4e2d\uff0c\u90a3\u4e48 A \u7684\u6240\u6709\u5143\u7d20\u81ea\u7136\u4e5f\u5728 C \u4e2d\u3002"
+  },
+  {
+    type: "tf",
+    question: "{\u2205} \u662f\u7a7a\u96c6",
+    answer: false,
+    explain: "{\u2205} \u5305\u542b\u4e00\u4e2a\u5143\u7d20\u2014\u2014\u8fd9\u4e2a\u5143\u7d20\u5c31\u662f\u7a7a\u96c6\u672c\u8eab\u3002\u6240\u4ee5 {\u2205} \u4e0d\u662f\u7a7a\u96c6\uff0c\u5b83\u6709 1 \u4e2a\u5143\u7d20\uff01"
+  },
+  {
+    type: "tf",
+    question: "\u96c6\u5408 {x | x\u00b2 = 4} \u4e0e\u96c6\u5408 {\u22122, 2} \u76f8\u7b49",
+    answer: true,
+    explain: "\u65b9\u7a0b x\u00b2 = 4 \u7684\u89e3\u662f x = 2 \u548c x = \u22122\uff0c\u6240\u4ee5 {x | x\u00b2 = 4} = {\u22122, 2}\u3002\u63cf\u8ff0\u6cd5\u548c\u5217\u4e3e\u6cd5\u8868\u793a\u7684\u662f\u540c\u4e00\u4e2a\u96c6\u5408\uff0c\u5b8c\u5168\u76f8\u7b49\u3002"
+  },
+  {
+    type: "tf",
+    question: "\u82e5 A \u2229 B = \u2205\uff0c\u5219 A \u548c B \u6ca1\u6709\u516c\u5171\u5143\u7d20",
+    answer: true,
+    explain: "\u2229 \u8868\u793a\u4ea4\u96c6\uff0c\u5373\u516c\u5171\u5143\u7d20\u7684\u96c6\u5408\u3002A \u2229 B = \u2205 \u610f\u5473\u7740 A \u548c B \u7684\u516c\u5171\u5143\u7d20\u6784\u6210\u7a7a\u96c6\uff0c\u4e5f\u5c31\u662f\u6ca1\u6709\u4efb\u4f55\u516c\u5171\u5143\u7d20\u3002\u6570\u5b66\u4e0a\u79f0\u8fd9\u6837\u7684\u4e24\u4e2a\u96c6\u5408\u4e3a\u4e0d\u76f8\u4ea4\u3002"
+  }
 ];
 
-// render
-const container = document.getElementById("quiz-container");
-questions.forEach((q, idx) => {
-  const div = document.createElement("div");
-  div.className = "quiz-question";
-  div.id = "q" + idx;
+function render() {
+  var container = document.getElementById("quiz-container");
+  var html = "";
+  for (var i = 0; i < questions.length; i++) {
+    var q = questions[i];
+    var tag = q.type === "choice" ? "\u9009\u62e9\u9898" : "\u5224\u65ad\u9898";
+    var tagCls = q.type === "choice" ? "choice" : "tf";
+    var letter = ["A", "B", "C", "D"];
 
-  const tag = q.type === "choice" ? "选择题" : "判断题";
-  const tagCls = q.type === "choice" ? "choice" : "tf";
+    html += '<div class="quiz-question" id="q' + i + '">';
+    html += '<div class="q-title"><span class="q-tag ' + tagCls + '">' + tag + '</span> ' + (i+1) + '. ' + q.question + '</div>';
+    html += '<div class="options">';
 
-  let html = `<div class="q-title"><span class="q-tag ${tagCls}">${tag}</span> ${idx+1}. ${q.question}</div><div class="options">`;
+    if (q.type === "choice") {
+      for (var j = 0; j < q.opts.length; j++) {
+        html += '<div class="opt" onclick="selectOpt(' + i + ',' + j + ')">' + letter[j] + '. ' + q.opts[j] + '</div>';
+      }
+    } else {
+      html += '<div class="opt" onclick="selectOpt(' + i + ',0)">\u2713 \u6b63\u786e</div>';
+      html += '<div class="opt" onclick="selectOpt(' + i + ',1)">\u2717 \u9519\u8bef</div>';
+    }
 
-  if (q.type === "choice") {
-    const labels = ["A", "B", "C", "D"];
-    q.options.forEach((opt, oi) => {
-      html += `<div class="opt" data-idx="${idx}" data-opt="${oi}" onclick="selectOpt(${idx}, ${oi})">${labels[oi]}. ${opt}</div>`;
-    });
-  } else {
-    html += `<div class="opt" data-idx="${idx}" data-opt="0" onclick="selectOpt(${idx}, 0)">✓ 正确</div>`;
-    html += `<div class="opt" data-idx="${idx}" data-opt="1" onclick="selectOpt(${idx}, 1)">✗ 错误</div>`;
+    html += '</div>';
+    html += '<div class="explain" id="exp' + i + '"></div>';
+    html += '</div>';
   }
-
-  html += `</div><div class="explain" id="exp${idx}"></div></div>`;
-  div.innerHTML = html;
-  container.appendChild(div);
-});
+  container.innerHTML = html;
+}
 
 function selectOpt(qIdx, chosen) {
-  const q = questions[qIdx];
-  const opts = document.querySelectorAll(`#q${qIdx} .opt`);
-  const expDiv = document.getElementById("exp" + qIdx);
-  const parent = document.getElementById("q" + qIdx);
+  var q = questions[qIdx];
+  var parent = document.getElementById("q" + qIdx);
+  var opts = parent.getElementsByClassName("opt");
+  var expDiv = document.getElementById("exp" + qIdx);
 
-  // 如果已经回答过，忽略点击
+  // \u5982\u679c\u5df2\u7ecf\u56de\u7b54\u8fc7\uff0c\u5ffd\u7565\u70b9\u51fb
   if (opts[0].classList.contains("disabled")) return;
 
-  // 禁用所有选项
-  opts.forEach(o => o.classList.add("disabled"));
+  // \u7981\u7528\u6240\u6709\u9009\u9879
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add("disabled");
+  }
 
-  // 高亮选中的
-  opts.forEach(o => o.classList.remove("selected"));
+  // \u9ad8\u4eae\u9009\u4e2d\u7684
   opts[chosen].classList.add("selected");
 
-  // 判断对错（tf: answer 是 boolean，若为 true 则正确选项是 0，否则是 1）
-  let correctIdx;
+  // \u5224\u65ad\u5bf9\u9519
+  var correctIdx;
   if (q.type === "choice") {
     correctIdx = q.answer;
   } else {
     correctIdx = q.answer === true ? 0 : 1;
   }
 
-  const isCorrect = chosen === correctIdx;
+  var isCorrect = chosen === correctIdx;
 
-  // 标记正确选项
+  // \u6807\u8bb0\u6b63\u786e\u9009\u9879
   opts[correctIdx].classList.add("correct-opt");
   if (!isCorrect) {
     opts[chosen].classList.add("wrong-opt");
   }
 
-  // 显示解析
+  // \u663e\u793a\u89e3\u6790
   expDiv.className = "explain show " + (isCorrect ? "ok" : "fail");
-  expDiv.innerHTML = (isCorrect ? "✅ 正确！" : "❌ 错误。") + " " + q.explain;
+  expDiv.innerHTML = (isCorrect ? "\u2705 \u6b63\u786e\uff01" : "\u274c \u9519\u8bef\u3002") + " " + q.explain;
 
-  // 高亮题目边框
+  // \u9ad8\u4eae\u9898\u76ee\u8fb9\u6846
   parent.classList.add(isCorrect ? "correct" : "wrong");
 
-  // 更新得分
+  // \u66f4\u65b0\u5f97\u5206
   updateScore();
 }
 
 function updateScore() {
-  let correct = 0;
-  questions.forEach((q, idx) => {
-    const parent = document.getElementById("q" + idx);
+  var correct = 0;
+  for (var i = 0; i < questions.length; i++) {
+    var parent = document.getElementById("q" + i);
     if (parent.classList.contains("correct")) correct++;
-  });
-  const score = correct * 5;
-  document.getElementById("scoreDisplay").textContent = `得分：${score} / 100`;
+  }
+  var score = correct * 5;
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a" + score + " / 100";
 }
 
 function resetQuiz() {
-  questions.forEach((q, idx) => {
-    const parent = document.getElementById("q" + idx);
+  for (var i = 0; i < questions.length; i++) {
+    var parent = document.getElementById("q" + i);
     parent.className = "quiz-question";
-    const opts = parent.querySelectorAll(".opt");
-    opts.forEach(o => {
-      o.className = "opt";
-    });
-    const exp = document.getElementById("exp" + idx);
+    var opts = parent.getElementsByClassName("opt");
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].className = "opt";
+    }
+    var exp = document.getElementById("exp" + i);
     exp.className = "explain";
     exp.innerHTML = "";
-  });
-  document.getElementById("scoreDisplay").textContent = "得分：0 / 100";
+  }
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a0 / 100";
 }
+
+document.getElementById("resetBtn").onclick = resetQuiz;
+
+render();
 </script>
 </body>
 </html>
