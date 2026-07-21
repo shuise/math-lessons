@@ -126,13 +126,43 @@ h1 {
 }
 .quiz-footer .btn-reset:hover { background: #1a73e8; color: #fff; }
 sup, sub { font-size: 0.75em; }
+.history-section {
+  margin-top: 40px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px 32px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border: 1px solid #e8e0d0;
+}
+.history-section h2 {
+  color: #8d6e3f;
+  font-size: 1.4em;
+  border-bottom: 2px solid #d4a854;
+  padding-bottom: 8px;
+  margin-top: 0;
+}
+.history-section h3 {
+  color: #6d4f2f;
+  font-size: 1.1em;
+  margin: 20px 0 10px;
+}
+.history-section p { line-height: 1.9; margin: 8px 0; color: #444; }
+.history-section .highlight {
+  background: #fff8e1;
+  padding: 12px 18px;
+  border-radius: 8px;
+  border-left: 4px solid #d4a854;
+  margin: 12px 0;
+}
+.history-section ul { padding-left: 20px; }
+.history-section li { margin: 8px 0; line-height: 1.8; }
 </style>
 </head>
 <body>
 <a class="back" href="../index.html">&larr; 返回课程列表</a>
 <article>
 <h1>集合基础测验</h1>
-<p style="color:#666;">考试时间：20 分钟 &nbsp;|&nbsp; 题型：填空题 + 选择题 + 判断题 &nbsp;|&nbsp; 共 25 题，每题 4 分</p>
+<p style="color:#666;">考试时间：20 分钟 &nbsp;|&nbsp; 题型：填空题 + 选择题 + 判断题 &nbsp;|&nbsp; 共 27 题（含 2 道综合题），满分 100 分</p>
 <p style="font-size:0.93em; color:#888;">填空题填写答案后点击"确认"提交，选择题/判断题点击选项提交，系统自动判分并给出解析。</p>
 
 <div id="quiz-container"></div>
@@ -143,6 +173,47 @@ sup, sub { font-size: 0.75em; }
   <button class="btn-reset" id="resetBtn">&ocy; 重新答题</button>
 </div>
 </article>
+
+<div class="history-section">
+  <h2>📖 集合的历史</h2>
+
+  <h3>一、集合论为什么会产生？</h3>
+  <p>19世纪后期，数学家们发现微积分和数学分析的基础存在问题。比如：</p>
+  <ul>
+    <li>无穷大到底有多大？自然数和偶数哪个"更多"？</li>
+    <li>实数轴上的点能不能一个一个数清楚？</li>
+    <li>是否存在"最大"的无穷大？</li>
+  </ul>
+  <p>这些问题都围绕着"无穷"这个概念，传统的数学方法无法回答。为了给整个数学大厦打下牢固的基础，一门全新的学科——<strong>集合论</strong>诞生了。</p>
+
+  <div class="highlight">
+    <strong>关键人物：格奥尔格·康托尔（Georg Cantor, 1845–1918）</strong><br>
+    集合论的创始人，德国数学家。他首次定义了"集合"的概念，并开创性地研究无穷集合，提出了基数、序数等概念。他的工作让数学家第一次能够严谨地讨论"无穷"。
+  </div>
+
+  <h3>二、集合论解决了什么问题？</h3>
+  <ul>
+    <li><strong>统一了数学语言</strong>：几乎所有数学概念都可以用集合来定义——自然数、函数、几何图形……</li>
+    <li><strong>给出了无穷的精确理论</strong>：康托尔证明了无穷也有大小之分（可数无穷和不可数无穷），实数比自然数"多得多"。</li>
+    <li><strong>奠定了现代数学的基础</strong>：数学家们后来用 ZFC 公理系统（策梅洛-弗兰克尔集合论+选择公理）建立了数学的完整基础。</li>
+  </ul>
+
+  <h3>三、有趣的故事与典故</h3>
+  <ul>
+    <li><strong>🎭 康托尔的悲剧</strong>：康托尔关于无穷的研究在当时遭到强烈反对。他的老师克罗内克（Kronecker）公开辱骂他是"骗子"和"科学败坏者"。康托尔后来患上了严重的抑郁症，在精神病院度过了生命最后时光。但如今，每一个学数学的人都在使用他创造的语言。</li>
+    <li><strong>⚡ 罗素悖论</strong>：1901年，哲学家罗素发现了一个集合论中的矛盾：用"所有不包含自身的集合"构成一个集合，那么这个集合包含自身吗？这个悖论引发了第三次数学危机。后来的 ZFC 公理系统通过限制集合的构造方式避免了这个问题。用通俗的话说："在一个小镇上，理发师规定只给所有不自己刮胡子的人刮胡子——那么理发师给自己刮胡子吗？"</li>
+    <li><strong>🔢 希尔伯特的"天堂"</strong>：当人们质疑康托尔的无穷理论时，大数学家希尔伯特（Hilbert）坚定地支持他，并说了一句名言："没有人能把我们从康托尔创造的天堂中赶走。"</li>
+    <li><strong>🎲 集合论与概率论</strong>：现代概率论完全建立在集合论的基础上——"随机事件"本质上就是集合，概率就是集合的"大小"。你在日常生活中看到的天气预报"降水概率30%"，背后全是集合论的知识。</li>
+  </ul>
+
+  <h3>四、一图总结</h3>
+  <table>
+    <tr><th>核心概念</th><th>提出者</th><th>时间</th><th>意义</th></tr>
+    <tr><td>集合</td><td>康托尔</td><td>1874年</td><td>定义了数学中最基本的概念</td></tr>
+    <tr><td>ZFC公理系统</td><td>策梅洛、弗兰克尔</td><td>1908–1922</td><td>消除了悖论，建立了严格的集合论根基</td></tr>
+    <tr><td>选择公理（AC）</td><td>策梅洛</td><td>1904年</td><td>成为数学中最重要的争议性公理之一</td></tr>
+  </table>
+</div>
 
 <script>
 var questions = [
@@ -310,6 +381,20 @@ var questions = [
     question: "\u82e5 A \u2229 B = \u2205\uff0c\u5219 A \u548c B \u6ca1\u6709\u516c\u5171\u5143\u7d20",
     answer: true,
     explain: "\u2229 \u8868\u793a\u4ea4\u96c6\uff0c\u5373\u516c\u5171\u5143\u7d20\u7684\u96c6\u5408\u3002A \u2229 B = \u2205 \u610f\u5473\u7740 A \u548c B \u7684\u516c\u5171\u5143\u7d20\u6784\u6210\u7a7a\u96c6\uff0c\u4e5f\u5c31\u662f\u6ca1\u6709\u4efb\u4f55\u516c\u5171\u5143\u7d20\u3002\u6570\u5b66\u4e0a\u79f0\u8fd9\u6837\u7684\u4e24\u4e2a\u96c6\u5408\u4e3a\u4e0d\u76f8\u4ea4\u3002"
+  },
+  {
+    type: "choice",
+    question: "\u8bbe\u96c6\u5408 A = {x | x\u00b2 \u2212 5x + 6 = 0}\uff0cB = {x | ax \u2212 2 = 0}\uff0c\u4e14 B \u2286 A\uff0c\u5219\u5b9e\u6570 a \u7684\u53d6\u503c\u96c6\u5408\u4e3a\uff08 \uff09",
+    opts: ["{1, 2/3}", "{0, 1, 2/3}", "{1}", "{0, 1}"],
+    answer: 1,
+    explain: "\u5148\u89e3 A\uff1ax\u00b2\u22125x+6=0 \u2192 (x\u22122)(x\u22123)=0 \u2192 A={2,3}\u3002\u7531 B\u2286A\uff0c\u9700\u8ba8\u8bba\uff1a\u2460 B={2}\u65f6\uff0c2a\u22122=0 \u2192 a=1\uff1b\u2461 B={3}\u65f6\uff0c3a\u22122=0 \u2192 a=2/3\uff1b\u2462 B=\u2205\u65f6\uff0c\u65b9\u7a0b ax\u22122=0 \u65e0\u89e3\uff0c\u5219 a=0\u3002\u4e09\u79cd\u60c5\u51b5\u5747\u6ee1\u8db3 B\u2286A\uff0c\u6545 a\u7684\u53d6\u503c\u96c6\u5408\u4e3a {0, 1, 2/3}\u3002"
+  },
+  {
+    type: "choice",
+    question: "\u5df2\u77e5\u975e\u7a7a\u96c6\u5408 M \u2286 {1, 2, 3, 4, 5}\uff0c\u4e14\u6ee1\u8db3\uff1a\u82e5 a \u2208 M\uff0c\u5219 6\u2212a \u2208 M\u3002\u8fd9\u6837\u7684\u96c6\u5408 M \u6709\u591a\u5c11\u4e2a\uff1f\uff08 \uff09",
+    opts: ["3", "6", "7", "8"],
+    answer: 2,
+    explain: "\u5143\u7d20\u9700\u6ee1\u8db3\u201c\u82e5 a\u2208M\u5219 6\u2212a\u2208M\u201d\uff0c\u628a 1~5 \u5206\u7ec4\uff1a(1,5)\u3001(2,4)\u3001(3)\u3002\u6bcf\u7ec4\u8981\u4e48\u5168\u53d6\u8981\u4e48\u5168\u4e0d\u53d6\uff0c\u5171 2\u00b3=8 \u79cd\uff0c\u4f46 M \u975e\u7a7a\u6392\u9664\u5168\u4e0d\u53d6\u7684\u60c5\u51b5\uff0c\u6545\u6709 8\u22121=7 \u4e2a\u3002"
   }
 ];
 
@@ -421,7 +506,7 @@ function updateScore() {
     var parent = document.getElementById("q" + i);
     if (parent.classList.contains("correct")) correct++;
   }
-  var score = correct * 4;
+  var score = Math.round(correct / questions.length * 100);
   document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a" + score + " / 100";
 }
 
