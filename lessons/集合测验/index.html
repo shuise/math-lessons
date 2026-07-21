@@ -62,6 +62,21 @@ h1 {
 }
 .q-tag.choice { background: #1a73e8; }
 .q-tag.tf { background: #e67e22; }
+.q-tag.fill { background: #9c27b0; }
+.fill-area { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
+.fill-input {
+  flex: 1; padding: 10px 14px; border: 2px solid #ddd; border-radius: 8px;
+  font-size: 1em; outline: none; transition: border-color 0.15s; box-sizing: border-box;
+}
+.fill-input:focus { border-color: #1a73e8; }
+.fill-input.correct-input { border-color: #4caf50; background: #e8f5e9; }
+.fill-input.wrong-input { border-color: #f44336; background: #fce4ec; }
+.btn-check {
+  padding: 10px 20px; background: #1a73e8; color: #fff; border: none;
+  border-radius: 8px; cursor: pointer; font-size: 0.95em; transition: 0.15s; white-space: nowrap;
+}
+.btn-check:hover { background: #1557b0; }
+.btn-check:disabled { opacity: 0.5; cursor: default; }
 .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
 .quiz-question .opt {
   padding: 8px 14px;
@@ -117,8 +132,8 @@ sup, sub { font-size: 0.75em; }
 <a class="back" href="../index.html">&larr; 返回课程列表</a>
 <article>
 <h1>集合基础测验</h1>
-<p style="color:#666;">考试时间：20 分钟 &nbsp;|&nbsp; 题型：选择题 + 判断题 &nbsp;|&nbsp; 共 20 题，每题 5 分</p>
-<p style="font-size:0.93em; color:#888;">点击选项提交答案，系统自动判分并给出解析。</p>
+<p style="color:#666;">考试时间：20 分钟 &nbsp;|&nbsp; 题型：填空题 + 选择题 + 判断题 &nbsp;|&nbsp; 共 25 题，每题 4 分</p>
+<p style="font-size:0.93em; color:#888;">填空题填写答案后点击"确认"提交，选择题/判断题点击选项提交，系统自动判分并给出解析。</p>
 
 <div id="quiz-container"></div>
 
@@ -131,6 +146,36 @@ sup, sub { font-size: 0.75em; }
 
 <script>
 var questions = [
+  {
+    type: "fill",
+    question: "\u96c6\u5408\u7684\u4e09\u4e2a\u57fa\u672c\u7279\u6027\u662f\u786e\u5b9a\u6027\u3001\u4e92\u5f02\u6027\u548c______\u3002",
+    answer: "\u65e0\u5e8f\u6027",
+    explain: "\u96c6\u5408\u7684\u4e09\u4e2a\u7279\u6027\u7f3a\u4e00\u4e0d\u53ef\uff1a\u786e\u5b9a\u6027\uff08\u5143\u7d20\u660e\u786e\uff09\u3001\u4e92\u5f02\u6027\uff08\u5143\u7d20\u4e0d\u91cd\u590d\uff09\u3001\u65e0\u5e8f\u6027\uff08\u5143\u7d20\u987a\u5e8f\u65e0\u5173\uff09\u3002\u8fd9\u662f\u5224\u65ad\u80fd\u5426\u6784\u6210\u96c6\u5408\u7684\u6839\u672c\u6807\u51c6\u3002"
+  },
+  {
+    type: "fill",
+    question: "\u4e0d\u542b\u4efb\u4f55\u5143\u7d20\u7684\u96c6\u5408\u53eb\u505a______\u3002",
+    answer: "\u7a7a\u96c6",
+    explain: "\u7a7a\u96c6\u662f\u6ca1\u6709\u4efb\u4f55\u5143\u7d20\u7684\u96c6\u5408\uff0c\u7528\u7b26\u53f7\u2205\u8868\u793a\u3002\u6ce8\u610f\uff1a{0}\u4e0d\u662f\u7a7a\u96c6\uff0c\u5b83\u6709\u4e00\u4e2a\u5143\u7d200\uff1b\u2205\u4e0e{\u2205}\u4e5f\u4e0d\u540c\uff0c{\u2205}\u6709\u4e00\u4e2a\u5143\u7d20\u2205\u3002"
+  },
+  {
+    type: "fill",
+    question: "\u81ea\u7136\u6570\u96c6\u7528\u5b57\u6bcd______\u8868\u793a\u3002",
+    answer: "N",
+    explain: "\u81ea\u7136\u6570\u96c6\u8bb0\u4f5cN\uff08Natural numbers\uff09\uff0c\u5305\u542b0,1,2,3,\u2026\u3002\u6ce8\u610f\u6709\u4e9b\u6559\u6750\u81ea\u7136\u6570\u4ece1\u5f00\u59cb\uff0c\u4f46\u9ad8\u4e2d\u6559\u6750\u5305\u542b0\u3002"
+  },
+  {
+    type: "fill",
+    question: "\u6574\u6570\u96c6\u7528\u5b57\u6bcd______\u8868\u793a\u3002",
+    answer: "Z",
+    explain: "\u6574\u6570\u96c6\u8bb0\u4f5cZ\uff08\u6e90\u81ea\u5fb7\u8bed\u201cZahlen\u201d\uff0c\u610f\u4e3a\u201c\u6570\u201d\uff09\uff0c\u5305\u542b\u2026,-2,-1,0,1,2,\u2026\u3002"
+  },
+  {
+    type: "fill",
+    question: "\u6709\u7406\u6570\u96c6\u7528\u5b57\u6bcd______\u8868\u793a\u3002",
+    answer: "Q",
+    explain: "\u6709\u7406\u6570\u96c6\u8bb0\u4f5cQ\uff08\u6e90\u81ea\u82f1\u8bed\u201cQuotient\u201d\uff0c\u610f\u4e3a\u201c\u5546\u201d\uff09\uff0c\u5373\u53ef\u4ee5\u8868\u793a\u4e3a\u4e24\u4e2a\u6574\u6570\u4e4b\u6bd4\u7684\u6570\u3002"
+  },
   {
     type: "choice",
     question: "\u4e0b\u5217\u5bf9\u8c61\u4e2d\uff0c\u80fd\u6784\u6210\u96c6\u5408\u7684\u662f\uff08 \uff09",
@@ -273,15 +318,20 @@ function render() {
   var html = "";
   for (var i = 0; i < questions.length; i++) {
     var q = questions[i];
-    var tag = q.type === "choice" ? "\u9009\u62e9\u9898" : "\u5224\u65ad\u9898";
-    var tagCls = q.type === "choice" ? "choice" : "tf";
+    var tag = q.type === "fill" ? "\u586b\u7a7a\u9898" : (q.type === "choice" ? "\u9009\u62e9\u9898" : "\u5224\u65ad\u9898");
+    var tagCls = q.type === "fill" ? "fill" : (q.type === "choice" ? "choice" : "tf");
     var letter = ["A", "B", "C", "D"];
 
     html += '<div class="quiz-question" id="q' + i + '">';
     html += '<div class="q-title"><span class="q-tag ' + tagCls + '">' + tag + '</span> ' + (i+1) + '. ' + q.question + '</div>';
     html += '<div class="options">';
 
-    if (q.type === "choice") {
+    if (q.type === "fill") {
+      html += '<div class="fill-area">';
+      html += '<input type="text" class="fill-input" id="fill' + i + '" placeholder="\u8bf7\u8f93\u5165\u7b54\u6848" onkeydown="if(event.key===\'Enter\')checkFill(' + i + ')">';
+      html += '<button class="btn-check" onclick="checkFill(' + i + ')">\u786e\u8ba4</button>';
+      html += '</div>';
+    } else if (q.type === "choice") {
       for (var j = 0; j < q.opts.length; j++) {
         html += '<div class="opt" onclick="selectOpt(' + i + ',' + j + ')">' + letter[j] + '. ' + q.opts[j] + '</div>';
       }
@@ -341,13 +391,37 @@ function selectOpt(qIdx, chosen) {
   updateScore();
 }
 
+function checkFill(qIdx) {
+  var q = questions[qIdx];
+  var input = document.getElementById("fill" + qIdx);
+  var parent = document.getElementById("q" + qIdx);
+  var expDiv = document.getElementById("exp" + qIdx);
+  var checkBtn = parent.querySelector(".btn-check");
+
+  if (input.disabled) return;
+
+  var userAnswer = input.value.trim();
+  var isCorrect = userAnswer.toLowerCase() === q.answer.toLowerCase();
+
+  input.disabled = true;
+  checkBtn.disabled = true;
+
+  input.classList.add(isCorrect ? "correct-input" : "wrong-input");
+
+  expDiv.className = "explain show " + (isCorrect ? "ok" : "fail");
+  expDiv.innerHTML = (isCorrect ? "\u2705 \u6b63\u786e\uff01" : "\u274c \u9519\u8bef\u3002\u6b63\u786e\u7b54\u6848\uff1a" + q.answer) + " " + q.explain;
+
+  parent.classList.add(isCorrect ? "correct" : "wrong");
+  updateScore();
+}
+
 function updateScore() {
   var correct = 0;
   for (var i = 0; i < questions.length; i++) {
     var parent = document.getElementById("q" + i);
     if (parent.classList.contains("correct")) correct++;
   }
-  var score = correct * 5;
+  var score = correct * 4;
   document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a" + score + " / 100";
 }
 
@@ -362,6 +436,17 @@ function resetQuiz() {
     var exp = document.getElementById("exp" + i);
     exp.className = "explain";
     exp.innerHTML = "";
+    // \u91cd\u7f6e\u586b\u7a7a\u9898\u8f93\u5165\u6846
+    var fillInput = document.getElementById("fill" + i);
+    if (fillInput) {
+      fillInput.value = "";
+      fillInput.disabled = false;
+      fillInput.className = "fill-input";
+    }
+    var checkBtn = parent.querySelector(".btn-check");
+    if (checkBtn) {
+      checkBtn.disabled = false;
+    }
   }
   document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a0 / 100";
 }
