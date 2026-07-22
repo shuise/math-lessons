@@ -9,3 +9,5 @@ tools/proc_*.png
 tools/proc_*.txt
 tools/*.processed.tif
 tools/easyocr_models/
+# Large epub files exceeding GitHub limit
+*.epub
