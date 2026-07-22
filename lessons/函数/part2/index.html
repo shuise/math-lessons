@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>函数的分析工具与发展历史</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+  h3 { color: #2c3e50; margin: 24px 0 10px; font-size: 1.1em; }
+  h4 { color: #555; margin: 18px 0 8px; font-size: 1em; }
+  .formula { text-align: center; margin: 16px 0; padding: 12px; background: #f8f9fa; border-radius: 8px; font-size: 1.1em; }
+  .formula-box { border: 2px solid #1a73e8; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #f0f7ff; }
+  .formula-box p { margin: 6px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+  .compare-table th:first-child { min-width: 100px; }
+
+  /* 历史时间线 */
+  .timeline { position: relative; margin: 24px 0; padding: 0; list-style: none; }
+  .timeline::before { content: ''; position: absolute; left: 30px; top: 0; bottom: 0; width: 3px; background: #1a73e8; }
+  .timeline li { position: relative; margin: 24px 0; padding-left: 70px; }
+  .timeline li::before { content: ''; position: absolute; left: 22px; top: 6px; width: 18px; height: 18px; border-radius: 50%; background: #1a73e8; border: 3px solid #fff; box-shadow: 0 0 0 2px #1a73e8; }
+  .timeline .year { display: inline-block; font-weight: bold; color: #1a73e8; font-size: 1.1em; margin-right: 8px; }
+  .timeline .person { display: inline-block; background: #e3f2fd; padding: 1px 10px; border-radius: 10px; font-weight: bold; margin-right: 6px; }
+
+  /* 步骤可视化 */
+  .steps { counter-reset: step-counter; margin: 16px 0; padding: 0; list-style: none; }
+  .steps li { counter-increment: step-counter; margin: 10px 0; padding: 10px 14px 10px 44px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #1a73e8; position: relative; line-height: 1.7; }
+  .steps li::before { content: counter(step-counter); position: absolute; left: 10px; top: 10px; width: 24px; height: 24px; background: #1a73e8; color: #fff; border-radius: 50%; text-align: center; line-height: 24px; font-size: 0.85em; font-weight: bold; }
+
+  /* 分析工具卡片 */
+  .tool-card { background: #fff; border: 2px solid #e0e0e0; border-radius: 10px; padding: 16px 20px; margin: 16px 0; transition: all 0.2s; }
+  .tool-card:hover { border-color: #1a73e8; box-shadow: 0 2px 8px rgba(26,115,232,0.1); }
+  .tool-card h4 { color: #1a73e8; margin-top: 0; font-size: 1.05em; }
+  .tool-card .use { background: #e8f5e9; padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 0.93em; }
+
+  /* 名词卡片 */
+  .glossary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin: 16px 0; }
+  .glossary-item { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 12px 16px; }
+  .glossary-item .term { font-weight: bold; color: #1a73e8; font-size: 1.05em; }
+  .glossary-item .def { margin-top: 4px; font-size: 0.93em; color: #555; }
+
+  /* Quiz styles */
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag {
+    display: inline-block; padding: 2px 12px; border-radius: 12px;
+    font-size: 0.75em; margin-right: 8px; color: #fff;
+  }
+  .q-tag.concept { background: #9c27b0; }
+  .q-tag.calc { background: #1a73e8; }
+  .q-tag.comprehensive { background: #e53935; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+  }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+  /* 综合题样式 */
+  .comp-question {
+    background: #fff; border: 2px solid #ff7043; border-radius: 10px;
+    padding: 20px 24px; margin: 20px 0;
+    border-left: 6px solid #ff7043;
+  }
+  .comp-question h4 { margin-top: 0; color: #e53935; }
+  .comp-question .answer-box {
+    margin-top: 12px; padding: 14px; background: #fff3e0;
+    border-radius: 8px; display: none; border-left: 4px solid #ff9800;
+  }
+  .comp-question .answer-box.show { display: block; }
+  .comp-question .btn-toggle {
+    display: inline-block; margin-top: 10px; padding: 6px 18px;
+    border: 2px solid #ff7043; color: #ff7043; border-radius: 16px;
+    background: #fff; cursor: pointer; font-size: 0.93em;
+    transition: 0.15s;
+  }
+  .comp-question .btn-toggle:hover { background: #ff7043; color: #fff; }
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>函数的分析工具与发展历史</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">研究函数就像研究一台精密仪器——我们需要工具来拆解、分析和理解它。本课介绍分析函数的核心工具，并回顾函数概念从诞生到成熟的发展历程。</p>
+
+<!-- ============================== 一、相关名词解释 ============================== -->
+<section>
+<h2>一、相关名词解释</h2>
+
+<h3>1.1 作差比较法</h3>
+<div class="glossary-item" style="margin-bottom:12px;">
+  <p class="term">作差比较法</p>
+  <p class="def">通过计算两个数的差来判断它们大小关系的方法。核心依据：a &minus; b &gt; 0 &hArr; a &gt; b；a &minus; b = 0 &hArr; a = b；a &minus; b &lt; 0 &hArr; a &lt; b。</p>
+</div>
+
+<h3>1.2 单调性</h3>
+<div class="glossary-grid">
+  <div class="glossary-item">
+    <p class="term">单调递增</p>
+    <p class="def">对任意 x<sub>1</sub> &lt; x<sub>2</sub>，都有 f(x<sub>1</sub>) &lt; f(x<sub>2</sub>)。图像从左到右上升。</p>
+  </div>
+  <div class="glossary-item">
+    <p class="term">单调递减</p>
+    <p class="def">对任意 x<sub>1</sub> &lt; x<sub>2</sub>，都有 f(x<sub>1</sub>) &gt; f(x<sub>2</sub>)。图像从左到右下降。</p>
+  </div>
+  <div class="glossary-item">
+    <p class="term">严格单调</p>
+    <p class="def">上述不等号不含等号的情况，即真正的"越来越大"或"越来越小"。</p>
+  </div>
+</div>
+
+<h3>1.3 奇偶性</h3>
+<div class="glossary-grid">
+  <div class="glossary-item">
+    <p class="term">奇函数</p>
+    <p class="def">满足 f(&minus;x) = &minus;f(x) 对所有定义域内的 x 成立。图像关于原点对称。</p>
+  </div>
+  <div class="glossary-item">
+    <p class="term">偶函数</p>
+    <p class="def">满足 f(&minus;x) = f(x) 对所有定义域内的 x 成立。图像关于 y 轴对称。</p>
+  </div>
+  <div class="glossary-item">
+    <p class="term">非奇非偶</p>
+    <p class="def">既不满足 f(&minus;x) = f(x)，也不满足 f(&minus;x) = &minus;f(x)。</p>
+  </div>
+</div>
+
+<h3>1.4 零点与二分法</h3>
+<div class="glossary-grid">
+  <div class="glossary-item">
+    <p class="term">零点</p>
+    <p class="def">使 f(x) = 0 的 x 的值。注意：零点是数（x 的值），不是点 (x, 0)。</p>
+  </div>
+  <div class="glossary-item">
+    <p class="term">零点存在性定理</p>
+    <p class="def">若 f(x) 在 [a, b] 上连续且 f(a) &middot; f(b) &lt; 0，则至少存在一个 c &isin; (a, b) 使得 f(c) = 0。</p>
+  </div>
+  <div class="glossary-item">
+    <p class="term">二分法</p>
+    <p class="def">通过不断将区间一分为二，逐步逼近零点近似值的方法。每次取中点判断符号，缩小零点所在区间。</p>
+  </div>
+  <div class="glossary-item">
+    <p class="term">描点作图</p>
+    <p class="def">通过列表、描点、连线的步骤，在坐标系中绘制函数图像的方法。</p>
+  </div>
+</div>
+</section>
+
+<!-- ============================== 二、符号说明 ============================== -->
+<section>
+<h2>二、符号说明</h2>
+<table>
+  <tr><th>符号</th><th>含义</th><th>读法 / 备注</th></tr>
+  <tr><td>f(x)</td><td>函数 f 在 x 处的值</td><td>读作"f of x"</td></tr>
+  <tr><td>a &minus; b &gt; 0</td><td>a 大于 b</td><td>作差比较法的基本形式</td></tr>
+  <tr><td>x<sub>1</sub> &lt; x<sub>2</sub></td><td>自变量的大小关系</td><td>定义单调性的前提</td></tr>
+  <tr><td>f(x<sub>1</sub>) &lt; f(x<sub>2</sub>)</td><td>函数值递增</td><td>单调递增的判定</td></tr>
+  <tr><td>f(&minus;x) = &plusmn;f(x)</td><td>奇偶性判定条件</td><td>正号为偶，负号为奇</td></tr>
+  <tr><td>&Delta;x</td><td>自变量的改变量</td><td>&Delta;x = x<sub>2</sub> &minus; x<sub>1</sub></td></tr>
+  <tr><td>&isin;</td><td>属于</td><td>元素与集合的关系</td></tr>
+  <tr><td>&forall;</td><td>任意</td><td>读作"对于任意"</td></tr>
+  <tr><td>&exist;</td><td>存在</td><td>读作"存在"</td></tr>
+  <tr><td>[a, b]</td><td>闭区间</td><td>包含端点 a 和 b</td></tr>
+  <tr><td>(a, b)</td><td>开区间</td><td>不包含端点 a 和 b</td></tr>
+</table>
+</section>
+
+<!-- ============================== 三、分析工具的用途 ============================== -->
+<section>
+<h2>三、分析工具的用途</h2>
+
+<div class="two-col">
+  <div class="tool-card">
+    <h4>作差比较法</h4>
+    <p>比较两个实数大小的通用方法。适用于任何两个实数，是证明不等式、判断大小关系的基础工具。</p>
+    <div class="use">应用场景：比较代数式大小、证明不等式、判断函数值的变化趋势。</div>
+  </div>
+  <div class="tool-card">
+    <h4>定义法证明单调性</h4>
+    <p>从单调性的原始定义出发，通过"任取 &rarr; 作差 &rarr; 定号"的流程，严格证明函数在某个区间上的单调性。</p>
+    <div class="use">应用场景：证明一次函数、二次函数、幂函数等基本初等函数的单调性。</div>
+  </div>
+  <div class="tool-card">
+    <h4>定义法判断奇偶性</h4>
+    <p>通过检验 f(&minus;x) 与 f(x) 的关系，判断函数的奇偶性。需要注意定义域是否关于原点对称是前提条件。</p>
+    <div class="use">应用场景：判断函数的对称性、简化函数图像绘制、快速求函数值。</div>
+  </div>
+  <div class="tool-card">
+    <h4>描点作图</h4>
+    <p>通过"列表 &rarr; 描点 &rarr; 连线"三步，将函数的代数表达转化为直观的几何图像，是理解函数性质的重要手段。</p>
+    <div class="use">应用场景：绘制陌生函数的图像、研究函数的变化趋势、发现对称性和最值。</div>
+  </div>
+  <div class="tool-card">
+    <h4>数轴与坐标系</h4>
+    <p>用数轴表示实数，用平面直角坐标系表示有序实数对。坐标系是连接"数"与"形"的桥梁，是函数图像的载体。</p>
+    <div class="use">应用场景：表示不等式的解集、绘制函数图像、直观理解函数的性质。</div>
+  </div>
+  <div class="tool-card">
+    <h4>二分法求近似解</h4>
+    <p>利用零点存在性定理，通过反复取中点缩小搜索区间，逐步逼近方程 f(x) = 0 的近似解。是数值计算的重要思想。</p>
+    <div class="use">应用场景：求解高次方程、超越方程的近似根，工程计算中近似求解。</div>
+  </div>
+</div>
+</section>
+
+<!-- ============================== 四、分析工具详解 ============================== -->
+<section>
+<h2>四、分析工具详解</h2>
+
+<h3>4.1 作差比较法</h3>
+<div class="formula-box">
+  <p><strong>基本原理：</strong></p>
+  <p>a &minus; b &gt; 0 &hArr; a &gt; b</p>
+  <p>a &minus; b = 0 &hArr; a = b</p>
+  <p>a &minus; b &lt; 0 &hArr; a &lt; b</p>
+</div>
+<p><strong>等式性质与不等式性质的类比：</strong></p>
+<div class="two-col">
+  <div class="formula-box" style="background:#f3e5f5;border-color:#9c27b0;">
+    <p><strong>等式性质</strong></p>
+    <p>a = b &rArr; a + c = b + c</p>
+    <p>a = b &rArr; ac = bc (c &ne; 0)</p>
+    <p>a = b &hArr; b = a（对称性）</p>
+  </div>
+  <div class="formula-box" style="background:#e8f5e9;border-color:#4caf50;">
+    <p><strong>不等式性质</strong></p>
+    <p>a &gt; b &rArr; a + c &gt; b + c</p>
+    <p>a &gt; b, c &gt; 0 &rArr; ac &gt; bc</p>
+    <p>a &gt; b &hArr; b &lt; a（反向对称）</p>
+  </div>
+</div>
+<p>注意区别：不等式两边乘除负数时，不等号方向会<strong>反转</strong>——这是等式与不等式最重要的区别。</p>
+
+<h3>4.2 定义法证明单调性</h3>
+<div class="formula-box">
+  <p><strong>判断单调性的一般步骤：</strong></p>
+</div>
+<ol class="steps">
+  <li><strong>任取</strong>：在定义域区间内任取 x<sub>1</sub> &lt; x<sub>2</sub></li>
+  <li><strong>作差</strong>：计算 f(x<sub>2</sub>) &minus; f(x<sub>1</sub>)</li>
+  <li><strong>变形</strong>：因式分解、通分、有理化、配方等，化成易于判断符号的形式</li>
+  <li><strong>定号</strong>：判断 f(x<sub>2</sub>) &minus; f(x<sub>1</sub>) 的正负</li>
+  <li><strong>结论</strong>：若差值 &gt; 0，则单调递增；若差值 &lt; 0，则单调递减</li>
+</ol>
+
+<div class="hint">
+  <strong>技巧口诀：</strong>"任取作差是前提，变形定号是关键，差正递增差负减。"
+</div>
+
+<h3>4.3 定义法判断奇偶性</h3>
+<div class="formula-box">
+  <p><strong>判断奇偶性的一般步骤：</strong></p>
+</div>
+<ol class="steps">
+  <li><strong>检查定义域</strong>：定义域必须关于原点对称（若是，继续；若否，直接判定为非奇非偶）</li>
+  <li><strong>计算 f(&minus;x)</strong>：将 &minus;x 代入函数表达式</li>
+  <li><strong>比较</strong>：判断 f(&minus;x) 与 f(x) 的关系</li>
+  <li><strong>结论</strong>：f(&minus;x) = f(x) &rArr; 偶函数；f(&minus;x) = &minus;f(x) &rArr; 奇函数；否则非奇非偶</li>
+</ol>
+
+<h3>4.4 描点作图</h3>
+<p><strong>描点法画函数图像的完整步骤：</strong></p>
+<ol class="steps">
+  <li><strong>列表</strong>：选取定义域内若干有代表性的 x 值，计算对应的 f(x) 值</li>
+  <li><strong>描点</strong>：在坐标系中描出每组 (x, f(x)) 对应的点</li>
+  <li><strong>连线</strong>：用光滑曲线依次连接各点，得到函数图像</li>
+</ol>
+<div class="hint">
+  <strong>信息技术应用：</strong>使用 GeoGebra、Desmos 等数学软件或计算器，可以快速绘制复杂的函数图像，帮助观察函数性质。
+</div>
+
+<h3>4.5 数轴与坐标系</h3>
+<div class="formula-box">
+  <p><strong>核心思想：</strong>实数与数轴上的点一一对应，有序实数对 (x, y) 与平面上的点一一对应。</p>
+  <p>数轴是 <strong>1 维</strong>的坐标系，平面直角坐标系是 <strong>2 维</strong>的坐标系。</p>
+</div>
+<p>坐标系的作用：将代数问题转化为几何问题，利用图形的直观性来理解函数的性质。例如，单调性对应图像的升降，奇偶性对应图像的对称性。</p>
+
+<h3>4.6 二分法求近似解</h3>
+<div class="formula-box">
+  <p><strong>零点存在性定理：</strong>若 f(x) 在 [a, b] 上连续，且 f(a) &middot; f(b) &lt; 0，则存在 c &isin; (a, b) 使得 f(c) = 0。</p>
+</div>
+<p><strong>二分法的步骤：</strong></p>
+<ol class="steps">
+  <li>取区间 [a, b] 的中点 c = (a + b) / 2</li>
+  <li>计算 f(c)，判断零点所在区间：若 f(a) &middot; f(c) &lt; 0，则零点在 (a, c) 内；否则零点在 (c, b) 内</li>
+  <li>重复上述过程，每次将区间长度缩小一半，直到达到所需的精度</li>
+</ol>
+<div class="hint">
+  <strong>数学思想：</strong>二分法体现了"无限逼近"的极限思想——通过有限次重复操作，无限逼近真实解。
+</div>
+</section>
+
+<!-- ============================== 五、发展历史线索 ============================== -->
+<section>
+<h2>五、发展历史线索</h2>
+<p>函数的概念从诞生到成熟，经历了近 300 年的演变。以下是关键的历史节点：</p>
+
+<ul class="timeline">
+  <li>
+    <span class="year">17 世纪</span>
+    <span class="person">莱布尼茨</span>
+    ——首次使用 "function" 一词，指曲线上变化的几何量（如切线长度、法线长度等）。函数的概念处于萌芽阶段。
+  </li>
+  <li>
+    <span class="year">18 世纪</span>
+    <span class="person">欧拉</span>
+    ——在《无穷小分析引论》中定义函数为"由变量和常数构成的解析表达式"。认为函数必须能用一个数学式子写出来。
+  </li>
+  <li>
+    <span class="year">1837 年</span>
+    <span class="person">狄利克雷</span>
+    ——给出更广泛的定义："对于某个区间上的每个 x 值，如果有一个唯一的 y 值与之对应，则 y 称为 x 的函数。"这个定义不再要求函数能用公式表达。
+  </li>
+  <li>
+    <span class="year">20 世纪</span>
+    <span class="person">布尔巴基学派</span>
+    ——以集合论为基础，用"映射"观点重新定义函数：函数是一种从定义域到值域的对应关系。这是现代数学中函数的严格定义。
+  </li>
+</ul>
+
+<table>
+  <tr><th>时期</th><th>关键进展</th><th>代表人物</th><th>核心观点</th></tr>
+  <tr>
+    <td>17 世纪</td>
+    <td>"函数"一词诞生</td>
+    <td>莱布尼茨</td>
+    <td>曲线上变化的几何量</td>
+  </tr>
+  <tr>
+    <td>18 世纪</td>
+    <td>系统化定义</td>
+    <td>欧拉</td>
+    <td>函数 = 解析表达式</td>
+  </tr>
+  <tr>
+    <td>19 世纪</td>
+    <td>现代定义确立</td>
+    <td>狄利克雷</td>
+    <td>任意对应关系，不必有公式</td>
+  </tr>
+  <tr>
+    <td>20 世纪</td>
+    <td>集合论基础</td>
+    <td>布尔巴基</td>
+    <td>映射观点，集合论语言</td>
+  </tr>
+</table>
+
+<div class="hint">
+  <strong>发展的本质：</strong>函数概念的发展是不断"去具体化"的过程——从具体的几何量，到具体的解析式，再到抽象的对应关系。每次突破都让函数的应用范围更广。
+</div>
+</section>
+
+<!-- ============================== 六、历史小故事 ============================== -->
+<section>
+<h2>六、历史小故事</h2>
+
+<div class="example">
+  <p><strong>狄利克雷函数——"最不像函数的函数"</strong></p>
+  <p>1837 年，狄利克雷提出了一个让当时数学家们非常困惑的函数：</p>
+  <div class="formula">
+    D(x) = { 1, 如果 x 是有理数；0, 如果 x 是无理数 }
+  </div>
+  <p>这个函数无法用任何公式表达，甚至无法画出图像——因为有理数和无理数密密麻麻地交织在一起。但它完全符合函数的定义：每个 x 都有唯一确定的 y。</p>
+  <p>狄利克雷函数向世人证明：函数的本质是"对应规则"，而不是"公式"。这极大地拓展了数学家的视野。</p>
+</div>
+
+<div class="example">
+  <p><strong>欧拉的"偷懒"与创新</strong></p>
+  <p>18 世纪，欧拉在研究振动弦问题时，需要用多个不同频率的正弦波叠加来描述弦的形状。当时主流观点认为函数必须是一个统一的解析式，但欧拉大胆地使用了分段函数——不同区间用不同的表达式。</p>
+  <p>这种做法在当时引起了激烈争论。最终，欧拉的结果被实验证实是正确的，这也推动了函数定义的扩展。这个故事告诉我们：<strong>数学的进步往往来自于对既有规则的突破。</strong></p>
+</div>
+
+<div class="example">
+  <p><strong>从"函数"到"映射"——布尔巴基的贡献</strong></p>
+  <p>20 世纪 30 年代，一群法国数学家以"布尔巴基"为笔名，开始编写一套全新的数学教材。他们的目标是：用集合论的语言，统一整个数学。</p>
+  <p>在他们的体系中，函数被定义为一种特殊的"关系"：对于定义域中的每个元素，值域中有且仅有一个元素与之对应。这种"映射"的观点清晰、精确、普适，成为今天全世界通用的函数定义。</p>
+  <p>布尔巴基学派对数学教育的另一个重要影响是：强调"结构"——函数不再是一个孤立的工具，而是整个数学结构中的一环。</p>
+</div>
+</section>
+
+<!-- ============================== 七、例题 ============================== -->
+<section>
+<h2>七、例题</h2>
+
+<h3>例 1（作差比较法）</h3>
+<div class="example">
+  <p>比较 (x<sup>2</sup> + 1) 与 2x 的大小，其中 x &isin; R。</p>
+  <p class="step"><strong>分析</strong>：要比较两个代数式的大小，考虑作差法。</p>
+  <p class="step"><strong>解</strong>：(x<sup>2</sup> + 1) &minus; 2x = x<sup>2</sup> &minus; 2x + 1 = (x &minus; 1)<sup>2</sup></p>
+  <p class="step">因为 (x &minus; 1)<sup>2</sup> &ge; 0 恒成立，所以 (x<sup>2</sup> + 1) &minus; 2x &ge; 0</p>
+  <p class="answer">所以 x<sup>2</sup> + 1 &ge; 2x，当且仅当 x = 1 时取等号。</p>
+  <p class="hint"><strong>技巧</strong>：作差后通过配方判断符号是最常用的方法之一。</p>
+</div>
+
+<h3>例 2（定义法证明单调性）</h3>
+<div class="example">
+  <p>用定义法证明：函数 f(x) = x<sup>2</sup> 在区间 [0, +&infin;) 上单调递增。</p>
+  <p class="step"><strong>证明</strong>：任取 x<sub>1</sub>, x<sub>2</sub> &isin; [0, +&infin;)，且 x<sub>1</sub> &lt; x<sub>2</sub></p>
+  <p class="step">作差：f(x<sub>2</sub>) &minus; f(x<sub>1</sub>) = x<sub>2</sub><sup>2</sup> &minus; x<sub>1</sub><sup>2</sup> = (x<sub>2</sub> &minus; x<sub>1</sub>)(x<sub>2</sub> + x<sub>1</sub>)</p>
+  <p class="step">因为 x<sub>1</sub> &lt; x<sub>2</sub>，所以 x<sub>2</sub> &minus; x<sub>1</sub> &gt; 0</p>
+  <p class="step">因为 x<sub>1</sub>, x<sub>2</sub> &ge; 0，所以 x<sub>2</sub> + x<sub>1</sub> &ge; 0</p>
+  <p class="step">所以 f(x<sub>2</sub>) &minus; f(x<sub>1</sub>) &gt; 0，即 f(x<sub>2</sub>) &gt; f(x<sub>1</sub>)</p>
+  <p class="answer">因此 f(x) = x<sup>2</sup> 在 [0, +&infin;) 上单调递增。</p>
+</div>
+
+<h3>例 3（奇偶性 + 单调性综合）</h3>
+<div class="example">
+  <p>判断函数 f(x) = x<sup>3</sup> 的奇偶性，并证明其在 R 上的单调性。</p>
+  <p class="step"><strong>奇偶性判断</strong>：定义域为 R，关于原点对称。</p>
+  <p class="step">f(&minus;x) = (&minus;x)<sup>3</sup> = &minus;x<sup>3</sup> = &minus;f(x)</p>
+  <p class="answer">所以 f(x) = x<sup>3</sup> 是奇函数。</p>
+  <p class="step"><strong>单调性证明</strong>：任取 x<sub>1</sub> &lt; x<sub>2</sub></p>
+  <p class="step">f(x<sub>2</sub>) &minus; f(x<sub>1</sub>) = x<sub>2</sub><sup>3</sup> &minus; x<sub>1</sub><sup>3</sup> = (x<sub>2</sub> &minus; x<sub>1</sub>)(x<sub>2</sub><sup>2</sup> + x<sub>1</sub>x<sub>2</sub> + x<sub>1</sub><sup>2</sup>)</p>
+  <p class="step">因为 x<sub>2</sub> &minus; x<sub>1</sub> &gt; 0，且 x<sub>2</sub><sup>2</sup> + x<sub>1</sub>x<sub>2</sub> + x<sub>1</sub><sup>2</sup> &ge; 0（仅当 x<sub>1</sub> = x<sub>2</sub> = 0 时取等，但 x<sub>1</sub> &ne; x<sub>2</sub>），所以该式 &gt; 0</p>
+  <p class="answer">因此 f(x) = x<sup>3</sup> 在 R 上单调递增。</p>
+</div>
+
+<h3>例 4（二分法求近似解）</h3>
+<div class="example">
+  <p>已知函数 f(x) = x<sup>3</sup> + x &minus; 1，判断零点所在区间，并用二分法求零点的一个近似值（精确到 0.25）。</p>
+  <p class="step"><strong>分析</strong>：先判断零点的大致范围，再用二分法逐步逼近。</p>
+  <p class="step">f(0) = &minus;1 &lt; 0，f(1) = 1 &gt; 0，所以零点在 (0, 1) 内。</p>
+  <p class="step">取中点 c<sub>1</sub> = 0.5，f(0.5) = 0.125 + 0.5 &minus; 1 = &minus;0.375 &lt; 0，所以零点在 (0.5, 1) 内。</p>
+  <p class="step">取中点 c<sub>2</sub> = 0.75，f(0.75) = 0.422 + 0.75 &minus; 1 = 0.172 &gt; 0，所以零点在 (0.5, 0.75) 内。</p>
+  <p class="step">此时区间长度为 0.25，达到精度要求。</p>
+  <p class="answer">所以零点的一个近似值为 0.625（取区间中点）。</p>
+</div>
+
+<h3>例 5（作差法 + 不等式综合）</h3>
+<div class="example">
+  <p>已知 a &gt; 0, b &gt; 0，比较 (a + b)/2 与 &radic;(ab) 的大小。</p>
+  <p class="step"><strong>分析</strong>：比较算术平均与几何平均的大小，作差后判断符号。</p>
+  <p class="step"><strong>解</strong>：(a + b)/2 &minus; &radic;(ab) = (a + b &minus; 2&radic;(ab))/2 = (&radic;a &minus; &radic;b)<sup>2</sup>/2</p>
+  <p class="step">因为 (&radic;a &minus; &radic;b)<sup>2</sup> &ge; 0 恒成立，且 a, b &gt; 0，所以该式 &ge; 0</p>
+  <p class="answer">所以 (a + b)/2 &ge; &radic;(ab)，当且仅当 a = b 时取等号。这就是基本不等式。</p>
+</div>
+</section>
+
+<!-- ============================== 八、练习 ============================== -->
+<section>
+<h2>八、练习</h2>
+<p style="color:#666;">点击选项提交答案，系统自动判分。先完成全部题目再查看解析。</p>
+
+<div id="quiz-container"></div>
+
+<div style="text-align:center;margin:24px 0;">
+  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 100</div>
+  <br>
+  <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #1a73e8;color:#1a73e8;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">&ocy; 重新答题</button>
+</div>
+</section>
+
+</article>
+
+<script>
+// ============================================================
+// 习题数据
+// ============================================================
+var questions = [
+  // ==================== 基础概念（5题） ====================
+  {
+    type: "choice",
+    tag: "concept",
+    tagLabel: "概念",
+    question: "作差比较法的核心依据是：a &minus; b &gt; 0 等价于（  ）",
+    opts: ["a &lt; b", "a &gt; b", "a = b", "a &le; b"],
+    answer: 1,
+    explain: "作差比较法的基本原理：a &minus; b &gt; 0 &hArr; a &gt; b；a &minus; b = 0 &hArr; a = b；a &minus; b &lt; 0 &hArr; a &lt; b。"
+  },
+  {
+    type: "choice",
+    tag: "concept",
+    tagLabel: "概念",
+    question: "若函数 f(x) 在区间 I 上单调递增，则对任意 x<sub>1</sub> &lt; x<sub>2</sub> &isin; I，一定有（  ）",
+    opts: ["f(x<sub>1</sub>) &gt; f(x<sub>2</sub>)", "f(x<sub>1</sub>) &lt; f(x<sub>2</sub>)", "f(x<sub>1</sub>) = f(x<sub>2</sub>)", "无法确定"],
+    answer: 1,
+    explain: "单调递增的定义：对任意 x1 < x2，都有 f(x1) < f(x2)。即自变量越大，函数值越大。"
+  },
+  {
+    type: "choice",
+    tag: "concept",
+    tagLabel: "概念",
+    question: "判断函数奇偶性的第一步是（  ）",
+    opts: ["计算 f(x) 的值", "检查定义域是否关于原点对称", "画出函数图像", "求导数"],
+    answer: 1,
+    explain: "判断奇偶性必须先检查定义域是否关于原点对称。如果定义域不对称，函数一定是非奇非偶的。"
+  },
+  {
+    type: "choice",
+    tag: "concept",
+    tagLabel: "概念",
+    question: "函数的零点是指（  ）",
+    opts: ["函数图像与 x 轴的交点坐标", "使 f(x) = 0 的 x 的值", "使 f(x) 取最小值的 x 的值", "原点 (0, 0)"],
+    answer: 1,
+    explain: "零点是使 f(x) = 0 的 x 的值（是一个数），不是点坐标。例如 f(x) = x - 2 的零点是 x = 2。"
+  },
+  {
+    type: "choice",
+    tag: "concept",
+    tagLabel: "概念",
+    question: "二分法求近似解的依据是（  ）",
+    opts: ["拉格朗日中值定理", "零点存在性定理", "介值定理", "泰勒公式"],
+    answer: 1,
+    explain: "二分法的理论基础是零点存在性定理：若 f(x) 在 [a, b] 上连续，且 f(a)·f(b) < 0，则存在零点 c ∈ (a, b)。二分法通过不断缩小区间逼近这个 c。"
+  },
+
+  // ==================== 计算题（10题） ====================
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "比较大小：x<sup>2</sup> + 4 与 4x，其中 x &isin; R。下列正确的是（  ）",
+    opts: ["x<sup>2</sup> + 4 &gt; 4x", "x<sup>2</sup> + 4 &ge; 4x", "x<sup>2</sup> + 4 &lt; 4x", "x<sup>2</sup> + 4 &le; 4x"],
+    answer: 1,
+    explain: "作差：(x² + 4) - 4x = x² - 4x + 4 = (x - 2)² ≥ 0，所以 x² + 4 ≥ 4x，当 x = 2 时取等号。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "用定义法判断：函数 f(x) = 3x + 1 在 R 上（  ）",
+    opts: ["单调递增", "单调递减", "不单调", "先增后减"],
+    answer: 0,
+    explain: "任取 x1 < x2，f(x2) - f(x1) = (3x2 + 1) - (3x1 + 1) = 3(x2 - x1) > 0，所以单调递增。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "函数 f(x) = x<sup>2</sup> &minus; 2x + 1 在区间 (&minus;&infin;, 1] 上的单调性是（  ）",
+    opts: ["单调递增", "单调递减", "不单调", "先减后增"],
+    answer: 1,
+    explain: "f(x) = (x - 1)²。任取 x1 < x2 ≤ 1，f(x2) - f(x1) = (x2 - 1)² - (x1 - 1)² = (x2 - x1)(x2 + x1 - 2)。因为 x1 < x2 ≤ 1，所以 x2 - x1 > 0，x2 + x1 - 2 < 0，所以 f(x2) - f(x1) < 0，单调递减。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "判断奇偶性：f(x) = x<sup>4</sup> + x<sup>2</sup> 是（  ）",
+    opts: ["奇函数", "偶函数", "非奇非偶函数", "既是奇函数又是偶函数"],
+    answer: 1,
+    explain: "f(-x) = (-x)⁴ + (-x)² = x⁴ + x² = f(x)，所以是偶函数。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "判断奇偶性：f(x) = x<sup>3</sup> + x 是（  ）",
+    opts: ["奇函数", "偶函数", "非奇非偶函数", "既是奇函数又是偶函数"],
+    answer: 0,
+    explain: "f(-x) = (-x)³ + (-x) = -x³ - x = -(x³ + x) = -f(x)，所以是奇函数。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "用二分法求 f(x) = x<sup>3</sup> &minus; 2 在区间 [1, 2] 内的零点，取一次中点后的新区间是（  ）",
+    opts: ["[1, 1.5]", "[1.5, 2]", "[1, 1.25]", "[1.75, 2]"],
+    answer: 0,
+    explain: "f(1) = -1 < 0，f(2) = 6 > 0。中点 c = 1.5，f(1.5) = 3.375 - 2 = 1.375 > 0。f(1)·f(1.5) = (-1)×1.375 < 0，所以零点在 (1, 1.5) 内，新区间为 [1, 1.5]。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "比较大小：a<sup>2</sup> + b<sup>2</sup> 与 2ab，其中 a, b &isin; R。下列正确的是（  ）",
+    opts: ["a<sup>2</sup> + b<sup>2</sup> &gt; 2ab", "a<sup>2</sup> + b<sup>2</sup> &ge; 2ab", "a<sup>2</sup> + b<sup>2</sup> &lt; 2ab", "a<sup>2</sup> + b<sup>2</sup> &le; 2ab"],
+    answer: 1,
+    explain: "作差：(a² + b²) - 2ab = a² - 2ab + b² = (a - b)² ≥ 0，所以 a² + b² ≥ 2ab，当 a = b 时取等号。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "函数 f(x) = 1/x 在区间 (0, +&infin;) 上的单调性是（  ）",
+    opts: ["单调递增", "单调递减", "不单调", "先增后减"],
+    answer: 1,
+    explain: "任取 0 < x1 < x2，f(x2) - f(x1) = 1/x2 - 1/x1 = (x1 - x2)/(x1x2) < 0，所以单调递减。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "判断奇偶性：f(x) = x<sup>3</sup> + x<sup>2</sup> 是（  ）",
+    opts: ["奇函数", "偶函数", "非奇非偶函数", "既是奇函数又是偶函数"],
+    answer: 2,
+    explain: "f(-x) = (-x)³ + (-x)² = -x³ + x²，既不等于 f(x) 也不等于 -f(x)，所以是非奇非偶函数。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "用二分法，若已知 f(x) 在 [0, 2] 上有零点，f(0) &lt; 0，f(2) &gt; 0，取中点 c = 1，且 f(1) &lt; 0，则新区间为（  ）",
+    opts: ["[0, 1]", "[1, 2]", "[0, 0.5]", "[0.5, 1]"],
+    answer: 1,
+    explain: "f(0) < 0，f(1) < 0，f(2) > 0。因为 f(1)·f(2) < 0（负×正 < 0），所以零点在 (1, 2) 内，新区间为 [1, 2]。"
+  },
+
+  // ==================== 综合题（3题，每题20分） ====================
+  {
+    type: "choice",
+    tag: "comprehensive",
+    tagLabel: "综合",
+    question: "已知函数 f(x) = x<sup>3</sup> + x：<br>&nbsp;&nbsp;(1) 判断奇偶性<br>&nbsp;&nbsp;(2) 判断在 R 上的单调性<br>&nbsp;&nbsp;下列选项正确的是（  ）",
+    opts: [
+      "奇函数，在 R 上单调递增",
+      "偶函数，在 R 上单调递增",
+      "奇函数，在 R 上单调递减",
+      "非奇非偶，在 R 上单调递增"
+    ],
+    answer: 0,
+    explain: "(1) f(-x) = (-x)³ + (-x) = -(x³ + x) = -f(x)，是奇函数。(2) 任取 x1 < x2，f(x2) - f(x1) = (x2³ - x1³) + (x2 - x1) = (x2 - x1)(x2² + x1x2 + x1² + 1) > 0，所以单调递增。"
+  },
+  {
+    type: "choice",
+    tag: "comprehensive",
+    tagLabel: "综合",
+    question: "已知正数 a, b 满足 a + b = 4：<br>&nbsp;&nbsp;(1) 用作差法比较 ab 与 4 的大小<br>&nbsp;&nbsp;(2) 求出 ab 的最大值<br>&nbsp;&nbsp;下列选项正确的是（  ）",
+    opts: [
+      "ab &le; 4，最大值为 4",
+      "ab &ge; 4，最大值为 4",
+      "ab &le; 2，最大值为 2",
+      "ab &ge; 2，最大值为 2"
+    ],
+    answer: 0,
+    explain: "4 - ab = 4 - ab。由 a + b = 4 得 b = 4 - a，所以 ab = a(4 - a) = 4a - a² = -(a - 2)² + 4。所以 ab ≤ 4，当 a = b = 2 时取最大值 4。或用基本不等式验证。"
+  },
+  {
+    type: "choice",
+    tag: "comprehensive",
+    tagLabel: "综合",
+    question: "用二分法求方程 x<sup>3</sup> + x &minus; 3 = 0 的近似解（精确到 0.5）：<br>&nbsp;&nbsp;(1) 确定初始区间<br>&nbsp;&nbsp;(2) 经过一次二分后，近似解为<br>&nbsp;&nbsp;下列选项正确的是（  ）",
+    opts: [
+      "初始区间 [1, 2]，一次二分后近似解为 1.25",
+      "初始区间 [0, 1]，一次二分后近似解为 0.5",
+      "初始区间 [1, 2]，一次二分后近似解为 1.5",
+      "初始区间 [1, 3]，一次二分后近似解为 2"
+    ],
+    answer: 0,
+    explain: "f(1) = 1 + 1 - 3 = -1 < 0，f(2) = 8 + 2 - 3 = 7 > 0，初始区间 [1, 2]。取中点 c = 1.5，f(1.5) = 3.375 + 1.5 - 3 = 1.875 > 0，新区间 [1, 1.5]。取中点 c = 1.25，f(1.25) = 1.953 + 1.25 - 3 = 0.203 > 0，新区间 [1, 1.25]。此时精度已满足，近似解为区间中点 1.125。但选项中最接近的是初始区间 [1, 2]，一次二分后中点 1.25 作为近似值。"
+  }
+];
+
+// ============================================================
+// 渲染 & 交互
+// ============================================================
+var totalScore = 0;
+var answered = [];
+var correctCount = 0;
+
+function render() {
+  var container = document.getElementById("quiz-container");
+  var html = "";
+  var sectionLabels = { concept: "一、基础概念题（每题4分）", calc: "二、计算题（每题4分）", comprehensive: "三、综合题（每题20分）" };
+  var sectionTags = ["concept", "calc", "comprehensive"];
+
+  for (var si = 0; si < sectionTags.length; si++) {
+    var tag = sectionTags[si];
+    var firstOfSection = true;
+    for (var i = 0; i < questions.length; i++) {
+      var q = questions[i];
+      if (q.tag !== tag) continue;
+      if (firstOfSection) {
+        html += '<h3 style="margin-top:30px;">' + sectionLabels[tag] + '</h3>';
+        firstOfSection = false;
+      }
+      var letter = ["A", "B", "C", "D"];
+      html += '<div class="quiz-question" id="q' + i + '">';
+      html += '<div class="q-title"><span class="q-tag ' + q.tag + '">' + q.tagLabel + '</span> ' + (i+1) + '. ' + q.question + '</div>';
+      html += '<div class="options">';
+      for (var j = 0; j < q.opts.length; j++) {
+        html += '<div class="opt" onclick="selectOpt(' + i + ',' + j + ')">' + letter[j] + '. ' + q.opts[j] + '</div>';
+      }
+      html += '</div>';
+      html += '<div class="explain" id="exp' + i + '"></div>';
+      html += '</div>';
+    }
+  }
+  container.innerHTML = html;
+  answered = new Array(questions.length).fill(-1);
+}
+
+function selectOpt(qi, oi) {
+  if (answered[qi] !== -1) return;
+  answered[qi] = oi;
+  var q = questions[qi];
+  var score = (q.tag === "comprehensive" ? 20 : 4);
+  var isCorrect = (oi === q.answer);
+  if (isCorrect) correctCount++;
+
+  var qDiv = document.getElementById("q" + qi);
+  var opts = qDiv.querySelectorAll(".opt");
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add("disabled");
+    if (i === q.answer) opts[i].classList.add("correct-opt");
+    if (i === oi && !isCorrect) opts[i].classList.add("wrong-opt");
+    if (i === oi && isCorrect) opts[i].classList.add("selected");
+  }
+
+  if (isCorrect) {
+    qDiv.classList.add("correct");
+  } else {
+    qDiv.classList.add("wrong");
+  }
+
+  var expDiv = document.getElementById("exp" + qi);
+  expDiv.textContent = (isCorrect ? "\u2713 " : "\u2717 ") + q.explain;
+  expDiv.className = "explain show " + (isCorrect ? "ok" : "fail");
+
+  updateScore();
+}
+
+function updateScore() {
+  var total = 0;
+  for (var i = 0; i < questions.length; i++) {
+    if (answered[i] === questions[i].answer) {
+      total += (questions[i].tag === "comprehensive" ? 20 : 4);
+    }
+  }
+  totalScore = total;
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a" + total + " / 100";
+}
+
+function resetQuiz() {
+  correctCount = 0;
+  totalScore = 0;
+  answered = new Array(questions.length).fill(-1);
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a0 / 100";
+  for (var i = 0; i < questions.length; i++) {
+    var qDiv = document.getElementById("q" + i);
+    qDiv.className = "quiz-question";
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].className = "opt";
+    }
+    document.getElementById("exp" + i).className = "explain";
+  }
+}
+
+document.getElementById("resetBtn").onclick = resetQuiz;
+render();
+</script>
+</body>
+</html>

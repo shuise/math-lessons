@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>函数类型总览</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+  h3 { color: #2c3e50; margin: 24px 0 10px; font-size: 1.1em; }
+  h4 { color: #555; margin: 18px 0 8px; font-size: 1em; }
+  .formula { text-align: center; margin: 16px 0; padding: 12px; background: #f8f9fa; border-radius: 8px; font-size: 1.1em; }
+  .formula-box { border: 2px solid #1a73e8; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #f0f7ff; }
+  .formula-box p { margin: 6px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  table th, table td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; }
+  table th { background: #1a73e8; color: #fff; font-weight: 600; }
+  table tr:nth-child(even) { background: #f5f8ff; }
+  table tr:hover { background: #e8f0fe; }
+  .compare-table th:first-child { min-width: 100px; }
+  .cat-box { border: 2px solid #e8a317; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #fff8f0; }
+  .cat-box h4 { margin-top: 0; color: #bf6f00; }
+
+  /* Quiz styles - 与参考文件保持一致 */
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag {
+    display: inline-block; padding: 2px 12px; border-radius: 12px;
+    font-size: 0.75em; margin-right: 8px; color: #fff;
+  }
+  .q-tag.concept { background: #9c27b0; }
+  .q-tag.calc { background: #1a73e8; }
+  .q-tag.comprehensive { background: #e53935; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+  }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>函数类型总览</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">从代数结构、运算关系和性质三个维度，全面认识各类函数。</p>
+
+<!-- ============================== 一、函数类型总览 ============================== -->
+<section>
+<h2>一、基本初等函数一览表</h2>
+<p>函数可以按照代数结构分为六大基本初等函数类型。下表总结了它们的一般形式、核心特征和图像特点：</p>
+
+<table class="compare-table">
+  <tr>
+    <th>函数类型</th><th>一般形式</th><th>核心特征</th><th>图像特点</th>
+  </tr>
+  <tr>
+    <td>一次函数</td><td>y = kx + b (k &ne; 0)</td><td>线性关系，变化率恒定</td><td>一条直线，斜率 k 决定倾斜方向</td>
+  </tr>
+  <tr>
+    <td>二次函数</td><td>y = ax&sup2; + bx + c (a &ne; 0)</td><td>抛物线，顶点对称</td><td>开口向上或向下，顶点为对称中心</td>
+  </tr>
+  <tr>
+    <td>幂函数</td><td>y = x<sup>&alpha;</sup> (&alpha; 为常数)</td><td>&alpha; 决定形状与性质</td><td>过 (1, 1)，&alpha; &gt; 0 过 (0, 0)</td>
+  </tr>
+  <tr>
+    <td>指数函数</td><td>y = a<sup>x</sup> (a &gt; 0, a &ne; 1)</td><td>爆炸增长 / 衰减</td><td>过 (0, 1)，以 x 轴为渐近线</td>
+  </tr>
+  <tr>
+    <td>对数函数</td><td>y = log<sub>a</sub>x (a &gt; 0, a &ne; 1)</td><td>指数反函数</td><td>过 (1, 0)，以 y 轴为渐近线</td>
+  </tr>
+  <tr>
+    <td>三角函数</td><td>y = sin x, y = cos x, y = tan x</td><td>周期震荡</td><td>周期性波形，值域有限或无限</td>
+  </tr>
+</table>
+
+<div class="hint">
+  <strong>记忆口诀：</strong>一次直线二次抛，幂指对函各逍遥。三角周期来回荡，六大家族要记牢。
+</div>
+</section>
+
+<!-- ============================== 二、代数函数与超越函数 ============================== -->
+<section>
+<h2>二、代数函数 vs 超越函数</h2>
+
+<p>按照运算关系的不同，函数可以划分为代数函数和超越函数两大类：</p>
+
+<div class="two-col">
+  <div class="cat-box">
+    <h4>代数函数</h4>
+    <p>由自变量经过有限次的<strong>加、减、乘、除、开方、乘方</strong>等代数运算构成的函数。</p>
+    <p><strong>常见类型：</strong></p>
+    <ul>
+      <li>整式函数：一次函数 y = kx + b、二次函数 y = ax&sup2; + bx + c</li>
+      <li>分式函数：y = 1/x（幂函数 &alpha; = &minus;1 的特例）</li>
+      <li>根式函数：y = &radic;x（幂函数 &alpha; = 1/2 的特例）</li>
+    </ul>
+    <div class="hint" style="margin:8px 0 0;font-size:0.92em;">
+      <strong>本质：</strong>代数函数满足形如 P(x, y) = 0 的多项式方程，其中 P 是二元多项式。
+    </div>
+  </div>
+  <div class="cat-box" style="border-color:#1a73e8;background:#f0f7ff;">
+    <h4 style="color:#1a73e8;">超越函数</h4>
+    <p>不满足任何代数方程的函数，即<strong>无法只用有限次代数运算</strong>表示的函数。</p>
+    <p><strong>常见类型：</strong></p>
+    <ul>
+      <li>指数函数：y = a<sup>x</sup></li>
+      <li>对数函数：y = log<sub>a</sub>x</li>
+      <li>三角函数：y = sin x, y = cos x, y = tan x</li>
+      <li>反三角函数：y = arcsin x 等</li>
+    </ul>
+    <div class="hint" style="margin:8px 0 0;font-size:0.92em;background:#e3f2fd;">
+      <strong>本质：</strong>超越函数"超越"了代数运算的范畴。例如 y = 2<sup>x</sup> 无法表示为 x 的有限次多项式或根式。
+    </div>
+  </div>
+</div>
+
+<div class="formula-box">
+  <p><strong>区分要点</strong></p>
+  <p>&bull; 看能否用有限次代数运算（+、&minus;、&times;、&divide;、开方、乘方）表示。</p>
+  <p>&bull; 代数函数：多项式函数、有理函数、根式函数等。</p>
+  <p>&bull; 超越函数：指数、对数、三角、反三角等。</p>
+  <p>&bull; 注意：幂函数 y = x<sup>&alpha;</sup> 当 &alpha; 为有理数时是代数函数，当 &alpha; 为无理数时是超越函数。</p>
+</div>
+</section>
+
+<!-- ============================== 三、按性质分类 ============================== -->
+<section>
+<h2>三、按性质分类</h2>
+
+<h3>3.1 单调函数 vs 非单调函数</h3>
+<table>
+  <tr><th>类型</th><th>定义</th><th>举例</th></tr>
+  <tr>
+    <td>单调递增</td><td>对任意 x<sub>1</sub> &lt; x<sub>2</sub>，有 f(x<sub>1</sub>) &lt; f(x<sub>2</sub>)</td>
+    <td>y = 2x, y = x&sup3;, y = 2<sup>x</sup> (a &gt; 1)</td>
+  </tr>
+  <tr>
+    <td>单调递减</td><td>对任意 x<sub>1</sub> &lt; x<sub>2</sub>，有 f(x<sub>1</sub>) &gt; f(x<sub>2</sub>)</td>
+    <td>y = &minus;x, y = (1/2)<sup>x</sup> (0 &lt; a &lt; 1)</td>
+  </tr>
+  <tr>
+    <td>非单调</td><td>在某些区间上递增，另一些区间上递减</td>
+    <td>y = x&sup2;（先减后增）, y = sin x（交替增减）</td>
+  </tr>
+</table>
+
+<h3>3.2 奇函数 vs 偶函数 vs 非奇非偶函数</h3>
+<table>
+  <tr><th>类型</th><th>定义</th><th>图像特征</th><th>举例</th></tr>
+  <tr>
+    <td>奇函数</td><td>f(&minus;x) = &minus;f(x)</td><td>关于原点对称</td>
+    <td>y = x, y = x&sup3;, y = sin x, y = 1/x</td>
+  </tr>
+  <tr>
+    <td>偶函数</td><td>f(&minus;x) = f(x)</td><td>关于 y 轴对称</td>
+    <td>y = x&sup2;, y = |x|, y = cos x</td>
+  </tr>
+  <tr>
+    <td>非奇非偶</td><td>以上都不满足</td><td>无对称性</td>
+    <td>y = 2<sup>x</sup>, y = log<sub>2</sub>x, y = x + 1</td>
+  </tr>
+</table>
+
+<h3>3.3 周期函数 vs 非周期函数</h3>
+<table>
+  <tr><th>类型</th><th>定义</th><th>举例</th></tr>
+  <tr>
+    <td>周期函数</td><td>存在 T &gt; 0，使 f(x + T) = f(x) 对所有 x 成立</td>
+    <td>y = sin x（周期 2&pi;）, y = cos x（周期 2&pi;）, y = tan x（周期 &pi;）</td>
+  </tr>
+  <tr>
+    <td>非周期函数</td><td>不存在这样的 T</td>
+    <td>幂函数、指数函数、对数函数均为非周期函数</td>
+  </tr>
+</table>
+
+<div class="formula-box">
+  <p><strong>常见函数性质速查：</strong></p>
+  <p>&bull; 一次函数 y = kx + b：k &gt; 0 时单调递增，k &lt; 0 时单调递减；b = 0 时为奇函数</p>
+  <p>&bull; 二次函数 y = ax&sup2; + bx + c：a &gt; 0 开口向上先减后增，a &lt; 0 开口向下先增后减；b = 0 时为偶函数</p>
+  <p>&bull; 幂函数 y = x<sup>&alpha;</sup>：&alpha; 为奇数时是奇函数，&alpha; 为偶数时是偶函数</p>
+  <p>&bull; 指数函数 y = a<sup>x</sup>：a &gt; 1 时递增，0 &lt; a &lt; 1 时递减；非奇非偶</p>
+  <p>&bull; 对数函数 y = log<sub>a</sub>x：a &gt; 1 时递增，0 &lt; a &lt; 1 时递减；非奇非偶</p>
+  <p>&bull; 三角函数：sin x 奇函数，cos x 偶函数，tan x 奇函数；均为周期函数</p>
+</div>
+</section>
+
+<!-- ============================== 四、相关名词解释 ============================== -->
+<section>
+<h2>四、相关名词解释</h2>
+<table>
+  <tr><th>名词</th><th>解释</th><th>举例说明</th></tr>
+  <tr>
+    <td>基本初等函数</td><td>六类最基本的函数：幂、指、对、三角、反三角、常数函数</td>
+    <td>y = x&sup2;, y = 2<sup>x</sup>, y = sin x 等</td>
+  </tr>
+  <tr>
+    <td>代数函数</td><td>由有限次代数运算构成的函数</td>
+    <td>y = 3x&sup2; + 2x &minus; 1, y = &radic;(x + 1)</td>
+  </tr>
+  <tr>
+    <td>超越函数</td><td>非代数函数的总称</td>
+    <td>y = 2<sup>x</sup>, y = ln x, y = sin x</td>
+  </tr>
+  <tr>
+    <td>单调性</td><td>函数值随自变量增大而增大（或减小）的趋势</td>
+    <td>f(x) = 2<sup>x</sup> 在 R 上单调递增</td>
+  </tr>
+  <tr>
+    <td>奇偶性</td><td>函数关于原点或 y 轴的对称性质</td>
+    <td>f(x) = x&sup2; 是偶函数，f(x) = x&sup3; 是奇函数</td>
+  </tr>
+  <tr>
+    <td>周期性</td><td>函数值按固定周期重复出现的性质</td>
+    <td>sin(x + 2&pi;) = sin x，周期为 2&pi;</td>
+  </tr>
+  <tr>
+    <td>有界性</td><td>函数值是否被某个常数限制在范围内</td>
+    <td>y = sin x 有界，值域为 [&minus;1, 1]</td>
+  </tr>
+  <tr>
+    <td>零点</td><td>使 f(x) = 0 的 x 值</td>
+    <td>f(x) = x &minus; 3 的零点是 x = 3</td>
+  </tr>
+  <tr>
+    <td>渐近线</td><td>函数图像无限接近但永不触及的直线</td>
+    <td>y = 2<sup>x</sup> 以 x 轴为水平渐近线</td>
+  </tr>
+  <tr>
+    <td>反函数</td><td>与原函数互为"逆映射"的函数</td>
+    <td>y = 2<sup>x</sup> 与 y = log<sub>2</sub>x 互为反函数</td>
+  </tr>
+</table>
+</section>
+
+<!-- ============================== 五、符号说明 ============================== -->
+<section>
+<h2>五、符号说明</h2>
+<table>
+  <tr><th>符号</th><th>含义</th><th>读法 / 备注</th></tr>
+  <tr><td>y = f(x)</td><td>y 是 x 的函数</td><td>读作"y equals f of x"</td></tr>
+  <tr><td>f: A &rarr; B</td><td>从集合 A 到 B 的映射</td><td>A 为定义域，B 包含值域</td></tr>
+  <tr><td>a<sup>x</sup></td><td>a 的 x 次幂</td><td>指数运算，底数为 a</td></tr>
+  <tr><td>log<sub>a</sub>x</td><td>以 a 为底 x 的对数</td><td>a &gt; 0, a &ne; 1, x &gt; 0</td></tr>
+  <tr><td>ln x</td><td>自然对数（以 e 为底）</td><td>ln x = log<sub>e</sub>x</td></tr>
+  <tr><td>sin &theta;</td><td>&theta; 的正弦</td><td>对边 / 斜边（直角三角形）</td></tr>
+  <tr><td>cos &theta;</td><td>&theta; 的余弦</td><td>邻边 / 斜边</td></tr>
+  <tr><td>tan &theta;</td><td>&theta; 的正切</td><td>对边 / 邻边 = sin &theta; / cos &theta;</td></tr>
+  <tr><td>&alpha;</td><td>幂函数的指数</td><td>希腊字母 alpha，为任意实数</td></tr>
+  <tr><td>&omega;</td><td>角频率 / 角速度</td><td>希腊字母 omega，T = 2&pi;/&omega;</td></tr>
+  <tr><td>&phi;</td><td>初相</td><td>希腊字母 phi，决定水平偏移</td></tr>
+  <tr><td>T</td><td>周期</td><td>最小正周期 T 满足 f(x + T) = f(x)</td></tr>
+</table>
+</section>
+
+<!-- ============================== 六、各种函数类型用途 ============================== -->
+<section>
+<h2>六、各种函数类型用途</h2>
+
+<h3>一次函数 &mdash; 线性关系</h3>
+<ul>
+  <li><strong>匀速运动</strong>：路程 = 速度 &times; 时间，典型的线性关系</li>
+  <li><strong>价格计算</strong>：总价 = 单价 &times; 数量</li>
+  <li><strong>温度换算</strong>：&deg;F = 1.8 &times; &deg;C + 32</li>
+  <li><strong>线性回归</strong>：用直线拟合数据趋势，预测未来</li>
+</ul>
+
+<h3>二次函数 &mdash; 最优化与抛射</h3>
+<ul>
+  <li><strong>抛射运动</strong>：篮球、炮弹的飞行轨迹为抛物线</li>
+  <li><strong>最大利润</strong>：利润函数常为二次函数，求顶点得最优解</li>
+  <li><strong>面积优化</strong>：固定周长下求最大矩形面积</li>
+  <li><strong>桥梁设计</strong>：悬索桥的主缆形状接近抛物线</li>
+</ul>
+
+<h3>幂函数 &mdash; 比例与缩放</h3>
+<ul>
+  <li><strong>物理学定律</strong>：牛顿万有引力 F = GmM/r&sup2;（&alpha; = &minus;2）</li>
+  <li><strong>面积与体积</strong>：面积与边长平方成正比，体积与边长立方成正比</li>
+  <li><strong>开普勒第三定律</strong>：行星周期平方与轨道半径立方成正比</li>
+</ul>
+
+<h3>指数函数 &mdash; 增长与衰减</h3>
+<ul>
+  <li><strong>人口增长</strong>：N(t) = N<sub>0</sub> e<sup>rt</sup>，初期呈指数增长</li>
+  <li><strong>复利计算</strong>：A = P(1 + r/n)<sup>nt</sup>，利滚利模型</li>
+  <li><strong>放射性衰变</strong>：半衰期 m(t) = m<sub>0</sub> (1/2)<sup>t/T</sup></li>
+  <li><strong>病毒传播</strong>：早期病例数往往呈指数增长</li>
+</ul>
+
+<h3>对数函数 &mdash; 压缩尺度</h3>
+<ul>
+  <li><strong>地震震级</strong>：里氏震级 M = lg(A / A<sub>0</sub>)，每级能量差约 32 倍</li>
+  <li><strong>酸碱度</strong>：pH = &minus;lg[H<sup>+</sup>]</li>
+  <li><strong>声音分贝</strong>：dB = 10 lg(I / I<sub>0</sub>)</li>
+  <li><strong>信息熵</strong>：信息量用对数度量：I = &minus;log<sub>2</sub>p</li>
+</ul>
+
+<h3>三角函数 &mdash; 周期现象</h3>
+<ul>
+  <li><strong>简谐运动</strong>：弹簧振子 y = A sin(&omega;t + &phi;)</li>
+  <li><strong>交流电</strong>：V(t) = V<sub>0</sub> sin(2&pi;ft)</li>
+  <li><strong>声波</strong>：声音波形为不同频率三角函数的叠加</li>
+  <li><strong>潮汐</strong>：海平面周期性涨落用三角函数拟合</li>
+  <li><strong>音乐理论</strong>：音调与频率的三角函数关系</li>
+</ul>
+</section>
+
+<!-- ============================== 七、函数分类历史 ============================== -->
+<section>
+<h2>七、函数分类历史</h2>
+
+<div class="example">
+  <p><strong>从"几何量"到"映射关系"</strong></p>
+  <p>17 世纪，<strong>莱布尼茨</strong>首次使用"function"一词，指的是随曲线变化的几何量。</p>
+  <p>18 世纪，<strong>欧拉</strong>在《无穷小分析引论》中将函数定义为"由变量和常数构成的解析表达式"，并将函数分为"代数函数"和"超越函数"两大类。这是最早的函数分类体系。</p>
+  <p>19 世纪，<strong>傅里叶</strong>在研究热传导时发现，任何函数（包括不连续的）都可以表示为三角函数的无穷级数之和，大大拓展了人们对函数的认识。</p>
+  <p>同一时期，<strong>狄利克雷</strong>给出了现代函数定义，并构造了狄利克雷函数（有理数为 1、无理数为 0），這表明函数可以没有公式，打破了"函数 = 解析式"的固有观念。</p>
+</div>
+
+<div class="example">
+  <p><strong>指数与对数：从计算工具到基本函数</strong></p>
+  <p>1614 年，<strong>纳皮尔</strong>发明对数，初衷是简化天文学中的复杂计算。当时的"对数"还只是一个计算工具，而非独立的函数概念。</p>
+  <p>1748 年，欧拉将指数函数和对数函数纳入基本初等函数体系，并建立了指数与对数的互逆关系。</p>
+  <p>有趣的是，"指数函数"这个名称来自"指数"运算，而"对数"（logarithm）由希腊语"logos"（比例）和"arithmos"（数）合成，意为"比例之数"。</p>
+</div>
+
+<div class="example">
+  <p><strong>三角函数：从测量到分析</strong></p>
+  <p>三角学起源于古代天文学和测量学。古希腊的<strong>喜帕恰斯</strong>编制了最早的弦表。</p>
+  <p>16 世纪，<strong>哥白尼</strong>的日心说推动了三角学的发展。但当时的三角函数仍被视为"与角度相关的线段长度"。</p>
+  <p>18 世纪，欧拉在《无穷分析引论》中系统建立了三角函数的分析理论，将三角函数定义为<strong>单位圆上的函数</strong>，并引入了弧度制，使三角函数成为真正的"函数"而非几何量。</p>
+  <p>19 世纪，<strong>傅里叶级数</strong>的发现揭示了一个惊人事实：任何周期函数（甚至不光滑的）都可以用正弦和余弦函数来分解。这一发现深刻影响了数学、物理学和工程学。</p>
+</div>
+</section>
+
+<!-- ============================== 八、例题 ============================== -->
+<section>
+<h2>八、例题</h2>
+
+<h3>例 1（识别函数类型）</h3>
+<div class="example">
+  <p>判断下列函数各属于哪种基本初等函数类型：</p>
+  <p>(1) y = 3<sup>x</sup> + 1 &nbsp;&nbsp; (2) y = x<sup>&minus;2</sup> &nbsp;&nbsp; (3) y = 2 sin(3x) &nbsp;&nbsp; (4) y = log<sub>5</sub>(x + 1)</p>
+  <p class="step"><strong>分析</strong>：对照基本初等函数的定义，看函数的主体结构对应何种形式。</p>
+  <p class="step"><strong>解</strong>：</p>
+  <p class="step">(1) y = 3<sup>x</sup> + 1 &mdash; 底数为常数 3，自变量 x 在指数位置，属于<strong>指数函数</strong>（平移后的指数函数）。</p>
+  <p class="step">(2) y = x<sup>&minus;2</sup> &mdash; 自变量 x 在底数位置，指数为常数 &minus;2，属于<strong>幂函数</strong>。</p>
+  <p class="step">(3) y = 2 sin(3x) &mdash; 主体为正弦函数，属于<strong>三角函数</strong>。</p>
+  <p class="step">(4) y = log<sub>5</sub>(x + 1) &mdash; 底数为常数 5，自变量 x 在真数位置，属于<strong>对数函数</strong>（平移后的对数函数）。</p>
+  <p class="answer">(1) 指数函数 &nbsp; (2) 幂函数 &nbsp; (3) 三角函数 &nbsp; (4) 对数函数</p>
+</div>
+
+<h3>例 2（比较不同类型函数增长）</h3>
+<div class="example">
+  <p>在同一个坐标系中，函数 f(x) = 2<sup>x</sup>（指数函数）、g(x) = x&sup2;（幂函数）、h(x) = log<sub>2</sub>x（对数函数）。</p>
+  <p>当 x 分别取 2、4、8、16 时，比较三者的大小关系，并说明当 x &rarr; +&infin; 时哪个增长最快。</p>
+  <p class="step"><strong>解</strong>：列表计算：</p>
+  <table style="max-width:500px;margin:12px auto;">
+    <tr><th>x</th><th>2<sup>x</sup></th><th>x&sup2;</th><th>log<sub>2</sub>x</th></tr>
+    <tr><td>2</td><td>4</td><td>4</td><td>1</td></tr>
+    <tr><td>4</td><td>16</td><td>16</td><td>2</td></tr>
+    <tr><td>8</td><td>256</td><td>64</td><td>3</td></tr>
+    <tr><td>16</td><td>65536</td><td>256</td><td>4</td></tr>
+  </table>
+  <p class="step">从表中可见，当 x 较小时，x&sup2; 和 2<sup>x</sup> 增长相当；但当 x 增大后，2<sup>x</sup> 的增长远超 x&sup2;。</p>
+  <p class="step">当 x &rarr; +&infin; 时：指数函数 2<sup>x</sup> 增长最快（指数爆炸），其次是幂函数 x&sup2;，对数函数 log<sub>2</sub>x 增长最慢。</p>
+  <p class="answer">x &rarr; +&infin; 时增长速度：指数函数 &gt; 幂函数 &gt; 对数函数</p>
+  <p class="hint"><strong>结论</strong>：任何指数函数的增长最终都会超过任何幂函数，而任何幂函数的增长最终都会超过任何对数函数。这被称为"增长阶"的比较。</p>
+</div>
+
+<h3>例 3（区分代数函数与超越函数）</h3>
+<div class="example">
+  <p>判断下列函数是代数函数还是超越函数，并说明理由：</p>
+  <p>(1) y = &radic;(2x + 3) &nbsp;&nbsp; (2) y = x<sup>&pi;</sup> &nbsp;&nbsp; (3) y = 3x&sup2; + 2x &minus; 1 &nbsp;&nbsp; (4) y = cos x</p>
+  <p class="step"><strong>分析</strong>：代数函数由有限次代数运算构成，超越函数涉及指数、对数、三角等超越运算。</p>
+  <p class="step"><strong>解</strong>：</p>
+  <p class="step">(1) y = &radic;(2x + 3) &mdash; 由加法和开方运算构成，是<strong>代数函数</strong>（根式函数）。</p>
+  <p class="step">(2) y = x<sup>&pi;</sup> &mdash; 指数 &pi; 是无理数，虽然形式上是幂函数，但 x<sup>&pi;</sup> 不能表示为有限次代数运算，因此是<strong>超越函数</strong>。</p>
+  <p class="step">(3) y = 3x&sup2; + 2x &minus; 1 &mdash; 由乘法和加减法构成，是<strong>代数函数</strong>（多项式函数）。</p>
+  <p class="step">(4) y = cos x &mdash; 涉及三角运算，属于<strong>超越函数</strong>。</p>
+  <p class="answer">(1) 代数函数 &nbsp; (2) 超越函数 &nbsp; (3) 代数函数 &nbsp; (4) 超越函数</p>
+  <p class="hint"><strong>注意</strong>：幂函数 y = x<sup>&alpha;</sup> 当 &alpha; 为有理数时是代数函数，当 &alpha; 为无理数时是超越函数。</p>
+</div>
+</section>
+
+<!-- ============================== 九、习题集 ============================== -->
+<section>
+<h2>九、习题集</h2>
+<p style="color:#666;">点击选项提交答案，系统自动判分。先完成全部题目再查看解析。</p>
+
+<div id="quiz-container"></div>
+
+<div style="text-align:center;margin:24px 0;">
+  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 120</div>
+  <br>
+  <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #1a73e8;color:#1a73e8;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">&ocy; 重新答题</button>
+</div>
+</section>
+
+</article>
+
+<script>
+// ============================================================
+// 习题数据
+// ============================================================
+var questions = [
+  // ==================== 基础概念（5题，每题4分） ====================
+  {
+    type: "choice",
+    tag: "concept",
+    tagLabel: "概念",
+    question: "函数 y = a<sup>x</sup>（a &gt; 0, a &ne; 1）属于哪种基本初等函数？（  ）",
+    opts: ["幂函数", "指数函数", "对数函数", "三角函数"],
+    answer: 1,
+    explain: "y = a<sup>x</sup> 中的自变量 x 在指数位置，底数为常数，这是指数函数的定义形式。"
+  },
+  {
+    type: "choice",
+    tag: "concept",
+    tagLabel: "概念",
+    question: "下列函数中，哪一个属于超越函数？（  ）",
+    opts: ["y = 2x + 1", "y = x&sup2; &minus; 3x + 2", "y = &radic;(x &minus; 1)", "y = ln x"],
+    answer: 3,
+    explain: "y = ln x 是自然对数函数，属于超越函数。其他三个选项均由有限次代数运算构成，是代数函数。"
+  },
+  {
+    type: "choice",
+    tag: "concept",
+    tagLabel: "概念",
+    question: "判定函数分类的主要依据是（  ）",
+    opts: ["函数值的大小", "自变量和因变量的对应关系能否由有限次代数运算实现", "函数的定义域", "函数的图像形状"],
+    answer: 1,
+    explain: "代数函数与超越函数的本质区别在于：能否通过有限次代数运算（加、减、乘、除、开方、乘方）表示。能则为代数函数，不能则为超越函数。"
+  },
+  {
+    type: "choice",
+    tag: "concept",
+    tagLabel: "概念",
+    question: "函数 y = 1/x 属于哪种函数类型？（  ）",
+    opts: ["一次函数", "二次函数", "幂函数", "指数函数"],
+    answer: 2,
+    explain: "y = 1/x 可改写为 y = x<sup>&minus;1</sup>，符合幂函数 y = x<sup>&alpha;</sup> 的形式，其中 &alpha; = &minus;1。"
+  },
+  {
+    type: "choice",
+    tag: "concept",
+    tagLabel: "概念",
+    question: "下列函数中，哪个是周期函数？（  ）",
+    opts: ["y = 2<sup>x</sup>", "y = log<sub>2</sub>x", "y = sin x", "y = x&sup2;"],
+    answer: 2,
+    explain: "y = sin x 是三角函数，其最小正周期为 2&pi;。幂函数、指数函数、对数函数均不是周期函数。"
+  },
+
+  // ==================== 计算题（10题，每题4分） ====================
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "判断函数 y = 3x&sup2; &minus; 2x + 1 的基本初等函数类型（  ）",
+    opts: ["一次函数", "二次函数", "幂函数", "指数函数"],
+    answer: 1,
+    explain: "y = 3x&sup2; &minus; 2x + 1 符合二次函数的一般形式 y = ax&sup2; + bx + c，其中 a = 3, b = &minus;2, c = 1。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "比较 2<sup>0.3</sup> 和 2<sup>0.5</sup> 的大小（  ）",
+    opts: ["2<sup>0.3</sup> &gt; 2<sup>0.5</sup>", "2<sup>0.3</sup> &lt; 2<sup>0.5</sup>", "两者相等", "无法比较"],
+    answer: 1,
+    explain: "底数 2 &gt; 1，指数函数 y = 2<sup>x</sup> 在 R 上单调递增。因为 0.3 &lt; 0.5，所以 2<sup>0.3</sup> &lt; 2<sup>0.5</sup>。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "函数 y = x&sup3; 的奇偶性是（  ）",
+    opts: ["奇函数", "偶函数", "非奇非偶函数", "既是奇函数又是偶函数"],
+    answer: 0,
+    explain: "f(&minus;x) = (&minus;x)&sup3; = &minus;x&sup3; = &minus;f(x)，满足奇函数的定义。图像关于原点对称。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "函数 y = (1/3)<sup>x</sup> 在 R 上的单调性是（  ）",
+    opts: ["单调递增", "单调递减", "先增后减", "先减后增"],
+    answer: 1,
+    explain: "底数 0 &lt; 1/3 &lt; 1，指数函数 y = (1/3)<sup>x</sup> 在 R 上单调递减。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "函数 y = log<sub>3</sub>x 在 (0, +&infin;) 上的单调性是（  ）",
+    opts: ["单调递增", "单调递减", "先增后减", "先减后增"],
+    answer: 0,
+    explain: "底数 3 &gt; 1，对数函数 y = log<sub>3</sub>x 在 (0, +&infin;) 上单调递增。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "函数 y = cos x 的奇偶性是（  ）",
+    opts: ["奇函数", "偶函数", "非奇非偶函数", "既是奇函数又是偶函数"],
+    answer: 1,
+    explain: "cos(&minus;x) = cos x，满足偶函数的定义。cos x 的图像关于 y 轴对称。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "判断 y = &radic;(x + 1) 属于代数函数还是超越函数（  ）",
+    opts: ["代数函数（根式函数）", "超越函数（指数型）", "超越函数（对数型）", "超越函数（三角型）"],
+    answer: 0,
+    explain: "y = &radic;(x + 1) 由加法和开方运算构成，开方是有限次代数运算，因此属于代数函数中的根式函数。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "幂函数 y = x<sup>&minus;2</sup> 在 (0, +&infin;) 上的单调性是（  ）",
+    opts: ["单调递增", "单调递减", "非单调", "常数函数"],
+    answer: 1,
+    explain: "&alpha; = &minus;2 &lt; 0，幂函数 y = x<sup>&minus;2</sup> 在 (0, +&infin;) 上单调递减。例如 1<sup>&minus;2</sup> = 1，2<sup>&minus;2</sup> = 1/4。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "比较 log<sub>2</sub>5 和 log<sub>2</sub>3 的大小（  ）",
+    opts: ["log<sub>2</sub>5 &gt; log<sub>2</sub>3", "log<sub>2</sub>5 &lt; log<sub>2</sub>3", "两者相等", "无法比较"],
+    answer: 0,
+    explain: "底数 2 &gt; 1，对数函数 y = log<sub>2</sub>x 在 (0, +&infin;) 上单调递增。因为 5 &gt; 3，所以 log<sub>2</sub>5 &gt; log<sub>2</sub>3。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "函数 y = |x| 的奇偶性是（  ）",
+    opts: ["奇函数", "偶函数", "非奇非偶函数", "既是奇函数又是偶函数"],
+    answer: 1,
+    explain: "|&minus;x| = |x|，满足偶函数的定义。y = |x| 的图像关于 y 轴对称。"
+  },
+
+  // ==================== 综合题（3题，每题20分） ====================
+  {
+    type: "choice",
+    tag: "comprehensive",
+    tagLabel: "综合",
+    question: "已知三个函数：f(x) = x&sup2;，g(x) = 2<sup>x</sup>，h(x) = x：<br>&nbsp;&nbsp;(1) f(x) 和 h(x) 分别属于什么基本初等函数？<br>&nbsp;&nbsp;(2) 当 x &gt; 2 时，哪个函数的增长速度最快？<br>&nbsp;&nbsp;下列选项正确的是（  ）",
+    opts: [
+      "f(x) 幂函数，h(x) 一次函数；g(x) 增长最快",
+      "f(x) 二次函数，h(x) 幂函数；f(x) 增长最快",
+      "f(x) 指数函数，h(x) 幂函数；h(x) 增长最快",
+      "f(x) 幂函数，h(x) 指数函数；三者增长相同"
+    ],
+    answer: 0,
+    explain: "f(x) = x&sup2; 是幂函数（&alpha; = 2），h(x) = x 是一次函数（也是幂函数 &alpha; = 1），g(x) = 2<sup>x</sup> 是指数函数。当 x &gt; 2 时，指数函数 g(x) = 2<sup>x</sup> 的增长速度远超幂函数，增长速度：指数函数 &gt; 幂函数 &gt; 一次函数。"
+  },
+  {
+    type: "choice",
+    tag: "comprehensive",
+    tagLabel: "综合",
+    question: "分析以下三个函数在 (0, +&infin;) 上的增长差异：<br>&nbsp;&nbsp;f(x) = 2<sup>x</sup>，g(x) = x&sup2;，h(x) = log<sub>2</sub>x<br>&nbsp;&nbsp;当 x 从 1 增大到 10 时，以下描述正确的是（  ）",
+    opts: [
+      "f(x) 增长越来越快（指数爆炸），g(x) 平方增长，h(x) 增长越来越慢",
+      "三者增长速度相同",
+      "h(x) 增长最快，f(x) 增长最慢",
+      "g(x) 增长最快，h(x) 次之，f(x) 最慢"
+    ],
+    answer: 0,
+    explain: "指数函数 2<sup>x</sup> 的增长速度随 x 增大而加快（指数爆炸）；幂函数 x&sup2; 以平方速度增长；对数函数 log<sub>2</sub>x 的增长速度越来越慢。在 x &gt; 1 时，增长速度：指数函数 &gt; 幂函数 &gt; 对数函数。"
+  },
+  {
+    type: "choice",
+    tag: "comprehensive",
+    tagLabel: "综合",
+    question: "已知函数 f(x) = 3x&sup2; + 2 和 g(x) = x&sup3;：<br>&nbsp;&nbsp;(1) 判断 f(x) 和 g(x) 的奇偶性<br>&nbsp;&nbsp;(2) 它们分别属于代数函数还是超越函数？<br>&nbsp;&nbsp;下列选项正确的是（  ）",
+    opts: [
+      "f(x) 偶、g(x) 奇；两者都是代数函数",
+      "f(x) 奇、g(x) 偶；f(x) 代数函数，g(x) 超越函数",
+      "f(x) 偶、g(x) 偶；两者都是超越函数",
+      "f(x) 非奇非偶、g(x) 奇；两者都是代数函数"
+    ],
+    answer: 0,
+    explain: "f(&minus;x) = 3(&minus;x)&sup2; + 2 = 3x&sup2; + 2 = f(x)，所以 f(x) 是偶函数；g(&minus;x) = (&minus;x)&sup3; = &minus;x&sup3; = &minus;g(x)，所以 g(x) 是奇函数。两者都由有限次代数运算构成，属于代数函数（多项式函数）。"
+  }
+];
+
+// ============================================================
+// 渲染 & 交互
+// ============================================================
+var totalScore = 0;
+var answered = [];
+var correctCount = 0;
+
+function render() {
+  var container = document.getElementById("quiz-container");
+  var html = "";
+  var sectionLabels = { concept: "一、基础概念题（每题4分）", calc: "二、计算题（每题4分）", comprehensive: "三、综合题（每题20分）" };
+  var sectionTags = ["concept", "calc", "comprehensive"];
+  var firstOfSection = {};
+
+  for (var si = 0; si < sectionTags.length; si++) {
+    var tag = sectionTags[si];
+    firstOfSection[tag] = true;
+    for (var i = 0; i < questions.length; i++) {
+      var q = questions[i];
+      if (q.tag !== tag) continue;
+      if (firstOfSection[tag]) {
+        html += '<h3 style="margin-top:30px;">' + sectionLabels[tag] + '</h3>';
+        firstOfSection[tag] = false;
+      }
+      var letter = ["A", "B", "C", "D"];
+      html += '<div class="quiz-question" id="q' + i + '">';
+      html += '<div class="q-title"><span class="q-tag ' + q.tag + '">' + q.tagLabel + '</span> ' + (i+1) + '. ' + q.question + '</div>';
+      html += '<div class="options">';
+      for (var j = 0; j < q.opts.length; j++) {
+        html += '<div class="opt" onclick="selectOpt(' + i + ',' + j + ')">' + letter[j] + '. ' + q.opts[j] + '</div>';
+      }
+      html += '</div>';
+      html += '<div class="explain" id="exp' + i + '"></div>';
+      html += '</div>';
+    }
+  }
+  container.innerHTML = html;
+  answered = new Array(questions.length).fill(-1);
+}
+
+function selectOpt(qi, oi) {
+  if (answered[qi] !== -1) return;
+  answered[qi] = oi;
+  var q = questions[qi];
+  var isCorrect = (oi === q.answer);
+  if (isCorrect) correctCount++;
+
+  var qDiv = document.getElementById("q" + qi);
+  var opts = qDiv.querySelectorAll(".opt");
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add("disabled");
+    if (i === q.answer) opts[i].classList.add("correct-opt");
+    if (i === oi && !isCorrect) opts[i].classList.add("wrong-opt");
+    if (i === oi && isCorrect) opts[i].classList.add("selected");
+  }
+
+  if (isCorrect) {
+    qDiv.classList.add("correct");
+  } else {
+    qDiv.classList.add("wrong");
+  }
+
+  var expDiv = document.getElementById("exp" + qi);
+  expDiv.textContent = (isCorrect ? "\u2713 " : "\u2717 ") + q.explain;
+  expDiv.className = "explain show " + (isCorrect ? "ok" : "fail");
+
+  updateScore();
+}
+
+function updateScore() {
+  var total = 0;
+  for (var i = 0; i < questions.length; i++) {
+    if (answered[i] === questions[i].answer) {
+      total += (questions[i].tag === "comprehensive" ? 20 : 4);
+    }
+  }
+  totalScore = total;
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a" + total + " / 120";
+}
+
+function resetQuiz() {
+  correctCount = 0;
+  totalScore = 0;
+  answered = new Array(questions.length).fill(-1);
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a0 / 120";
+  for (var i = 0; i < questions.length; i++) {
+    var qDiv = document.getElementById("q" + i);
+    qDiv.className = "quiz-question";
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].className = "opt";
+    }
+    document.getElementById("exp" + i).className = "explain";
+  }
+}
+
+document.getElementById("resetBtn").onclick = resetQuiz;
+render();
+</script>
+</body>
+</html>
