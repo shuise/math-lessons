@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>函数 - 从概念到应用</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  h3 { color: #2c3e50; margin: 24px 0 10px; font-size: 1.1em; }
+  h4 { color: #555; margin: 18px 0 8px; font-size: 1em; }
+  .formula { text-align: center; margin: 16px 0; padding: 12px; background: #f8f9fa; border-radius: 8px; font-size: 1.1em; }
+  .formula-box { border: 2px solid #1a73e8; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #f0f7ff; }
+  .formula-box p { margin: 6px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+  .compare-table th:first-child { min-width: 100px; }
+
+  /* Quiz styles */
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag {
+    display: inline-block; padding: 2px 12px; border-radius: 12px;
+    font-size: 0.75em; margin-right: 8px; color: #fff;
+  }
+  .q-tag.concept { background: #9c27b0; }
+  .q-tag.calc { background: #1a73e8; }
+  .q-tag.comprehensive { background: #e53935; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+  }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+  /* Comprehensive question styles */
+  .comp-question {
+    background: #fff; border: 2px solid #ff7043; border-radius: 10px;
+    padding: 20px 24px; margin: 20px 0;
+    border-left: 6px solid #ff7043;
+  }
+  .comp-question h4 { margin-top: 0; color: #e53935; }
+  .comp-question .answer-box {
+    margin-top: 12px; padding: 14px; background: #fff3e0;
+    border-radius: 8px; display: none; border-left: 4px solid #ff9800;
+  }
+  .comp-question .answer-box.show { display: block; }
+  .comp-question .btn-toggle {
+    display: inline-block; margin-top: 10px; padding: 6px 18px;
+    border: 2px solid #ff7043; color: #ff7043; border-radius: 16px;
+    background: #fff; cursor: pointer; font-size: 0.93em;
+    transition: 0.15s;
+  }
+  .comp-question .btn-toggle:hover { background: #ff7043; color: #fff; }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>函数 &mdash; 从概念到应用</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">涵盖了函数的概念、分析工具、常见函数类型、指数/对数/三角以及综合应用。</p>
+
+<!-- ============================== 第一部分：知识名称 ============================== -->
+<section>
+<h2>一、知识名称</h2>
+<p><strong>函数</strong>&mdash;&mdash;描述变量之间依赖关系的数学工具。</p>
+<p>无论是自然现象（温度随时间变化）、经济活动（利润随销量变化）还是日常经验（路程随速度变化），只要一个量随另一个量变化，就可以用函数来描述。</p>
+<div class="hint">
+  <strong>一句话记忆：</strong>函数就是一台"输入-输出"机器&mdash;&mdash;你给它一个输入值，它按照规则产生一个输出值。
+</div>
+<p>本课涵盖以下函数类型：<strong>二次函数</strong>、<strong>幂函数</sub>、<strong>指数函数</strong>、<strong>对数函数</strong>和<strong>三角函数</strong>。</p>
+</section>
+
+<!-- ============================== 第二部分：定理/公理 ============================== -->
+<section>
+<h2>二、定理 / 公理</h2>
+
+<h3>2.1 函数的定义（三要素）</h3>
+<div class="formula-box">
+  <p><strong>函数</strong>：设 A、B 是两个非空数集，按照某种对应关系 f，对于 A 中的任意一个数 x，在 B 中都有<strong>唯一确定</strong>的数 f(x) 和它对应，则称 f 为从 A 到 B 的函数。</p>
+  <p>三要素：<strong>定义域</strong>（A）、<strong>值域</strong>（{f(x) | x &isin; A}）、<strong>对应关系</strong>（f）</p>
+</div>
+
+<h3>2.2 基本不等式</h3>
+<div class="formula-box">
+  <p>对于任意正数 a、b，有：&radic;(ab) &le; (a + b)/2</p>
+  <p>当且仅当 a = b 时取等号。</p>
+</div>
+
+<h3>2.3 指数与对数的运算性质</h3>
+<div class="two-col">
+  <div class="formula-box">
+    <p><strong>指数运算：</strong></p>
+    <p>a<sup>m</sup> &middot; a<sup>n</sup> = a<sup>m+n</sup></p>
+    <p>(a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup></p>
+    <p>(ab)<sup>n</sup> = a<sup>n</sup>b<sup>n</sup></p>
+  </div>
+  <div class="formula-box">
+    <p><strong>对数运算：</strong></p>
+    <p>log<sub>a</sub>(MN) = log<sub>a</sub>M + log<sub>a</sub>N</p>
+    <p>log<sub>a</sub>(M/N) = log<sub>a</sub>M &minus; log<sub>a</sub>N</p>
+    <p>log<sub>a</sub>(M<sup>n</sup>) = n &middot; log<sub>a</sub>M</p>
+    <p><strong>换底公式：</strong>log<sub>a</sub>b = log<sub>c</sub>b / log<sub>c</sub>a</p>
+  </div>
+</div>
+
+<h3>2.4 三角恒等式</h3>
+<div class="formula-box">
+  <p><strong>同角关系：</strong>sin<sup>2</sup>&alpha; + cos<sup>2</sup>&alpha; = 1 &nbsp;&nbsp;&nbsp; tan&alpha; = sin&alpha; / cos&alpha;</p>
+  <p><strong>两角和：</strong>sin(&alpha; &plusmn; &beta;) = sin&alpha; cos&beta; &plusmn; cos&alpha; sin&beta;</p>
+  <p><strong>倍角：</strong>sin 2&alpha; = 2 sin&alpha; cos&alpha; &nbsp;&nbsp;&nbsp; cos 2&alpha; = cos<sup>2</sup>&alpha; &minus; sin<sup>2</sup>&alpha;</p>
+</div>
+
+<h3>2.5 单调性判定定理</h3>
+<div class="formula-box">
+  <p>设函数 f(x) 在区间 I 上有定义，对任意 x<sub>1</sub> &lt; x<sub>2</sub> &isin; I：</p>
+  <p>若 f(x<sub>1</sub>) &lt; f(x<sub>2</sub>)，则 f 在 I 上<strong>单调递增</strong></p>
+  <p>若 f(x<sub>1</sub>) &gt; f(x<sub>2</sub>)，则 f 在 I 上<strong>单调递减</strong></p>
+</div>
+
+<h3>2.6 奇偶性判定</h3>
+<div class="formula-box">
+  <p>若定义域关于原点对称：</p>
+  <p>f(&minus;x) = f(x) &rArr; <strong>偶函数</strong>（图像关于 y 轴对称）</p>
+  <p>f(&minus;x) = &minus;f(x) &rArr; <strong>奇函数</strong>（图像关于原点对称）</p>
+</div>
+</section>
+
+<!-- ============================== 第三部分：相关名词解释 ============================== -->
+<section>
+<h2>三、相关名词解释</h2>
+<table>
+  <tr><th>名词</th><th>解释</th><th>举例说明</th></tr>
+  <tr>
+    <td>定义域</td><td>函数自变量 x 可以取的所有值的集合</td>
+    <td>f(x) = &radic;x 的定义域是 [0, +&infin;)</td>
+  </tr>
+  <tr>
+    <td>值域</td><td>函数所有可能的输出值 f(x) 构成的集合</td>
+    <td>f(x) = x<sup>2</sup> 的值域是 [0, +&infin;)</td>
+  </tr>
+  <tr>
+    <td>单调递增</td><td>x 越大，f(x) 也越大</td>
+    <td>f(x) = 2x，x 增加时函数值增加</td>
+  </tr>
+  <tr>
+    <td>单调递减</td><td>x 越大，f(x) 越小</td>
+    <td>f(x) = &minus;x，x 增加时函数值减小</td>
+  </tr>
+  <tr>
+    <td>奇函数</td><td>图像关于原点对称，f(&minus;x) = &minus;f(x)</td>
+    <td>f(x) = x<sup>3</sup>，f(&minus;2) = &minus;8 = &minus;f(2)</td>
+  </tr>
+  <tr>
+    <td>偶函数</td><td>图像关于 y 轴对称，f(&minus;x) = f(x)</td>
+    <td>f(x) = x<sup>2</sup>，f(&minus;2) = 4 = f(2)</td>
+  </tr>
+  <tr>
+    <td>幂函数</td><td>形如 y = x<sup>&alpha;</sup> 的函数，&alpha; 为常数</td>
+    <td>y = x<sup>2</sup>、y = x<sup>3</sup>、y = &radic;x</td>
+  </tr>
+  <tr>
+    <td>指数函数</td><td>形如 y = a<sup>x</sup>（a &gt; 0，a &ne; 1）</td>
+    <td>y = 2<sup>x</sup> 经过 (0, 1)，随 x 增大快速上升</td>
+  </tr>
+  <tr>
+    <td>对数函数</td><td>形如 y = log<sub>a</sub>x（a &gt; 0，a &ne; 1）</td>
+    <td>y = log<sub>2</sub>x 经过 (1, 0)，是指数函数的反函数</td>
+  </tr>
+  <tr>
+    <td>弧度制</td><td>用弧长与半径之比度量角的方式</td>
+    <td>&pi; rad = 180&deg;</td>
+  </tr>
+  <tr>
+    <td>周期</td><td>使 f(x + T) = f(x) 的最小正数 T</td>
+    <td>sin x 的周期是 2&pi;</td>
+  </tr>
+  <tr>
+    <td>零点</td><td>使 f(x) = 0 的 x 值</td>
+    <td>f(x) = x &minus; 2 的零点是 x = 2</td>
+  </tr>
+</table>
+</section>
+
+<!-- ============================== 第四部分：符号说明 ============================== -->
+<section>
+<h2>四、符号说明</h2>
+<table>
+  <tr><th>符号</th><th>含义</th><th>读法 / 备注</th></tr>
+  <tr><td>f(x)</td><td>函数 f 在 x 处的值</td><td>读作"f of x"</td></tr>
+  <tr><td>f: A &rarr; B</td><td>从 A 到 B 的函数</td><td>箭头表示"映射到"</td></tr>
+  <tr><td>D<sub>f</sub></td><td>函数 f 的定义域</td><td>Domain 的缩写</td></tr>
+  <tr><td>R<sub>f</sub></td><td>函数 f 的值域</td><td>Range 的缩写</td></tr>
+  <tr><td>x &rarr; a</td><td>x 趋近于 a</td><td>极限思维常用</td></tr>
+  <tr><td>sin &theta;</td><td>&theta; 的正弦</td><td>对边 / 斜边（直角三角形）</td></tr>
+  <tr><td>cos &theta;</td><td>&theta; 的余弦</td><td>邻边 / 斜边</td></tr>
+  <tr><td>tan &theta;</td><td>&theta; 的正切</td><td>对边 / 邻边 = sin &theta; / cos &theta;</td></tr>
+  <tr><td>a<sup>x</sup></td><td>a 的 x 次幂</td><td>指数运算</td></tr>
+  <tr><td>log<sub>a</sub>b</td><td>以 a 为底 b 的对数</td><td>a<sup>log<sub>a</sub>b</sup> = b</td></tr>
+  <tr><td>ln x</td><td>自然对数（以 e 为底）</td><td>ln x = log<sub>e</sub>x</td></tr>
+  <tr><td>&pi;</td><td>圆周率，约 3.14159</td><td>圆的周长与直径之比</td></tr>
+</table>
+</section>
+
+<!-- ============================== 第五部分：知识点的用途 ============================== -->
+<section>
+<h2>五、知识点的用途</h2>
+
+<h3>二次函数</h3>
+<ul>
+  <li><strong>抛射运动</strong>：篮球投出的轨迹、烟花弹的飞行路径都是抛物线</li>
+  <li><strong>经济模型</strong>：利润 = &minus;ax<sup>2</sup> + bx + c 的形式，求最大利润</li>
+  <li><strong>面积优化</strong>：固定周长时，求最大面积的矩形</li>
+</ul>
+
+<h3>指数与对数函数</h3>
+<ul>
+  <li><strong>人口增长</strong>：初期呈指数增长 N(t) = N<sub>0</sub> &middot; 2<sup>t/T</sup></li>
+  <li><strong>复利计算</strong>：A = P(1 + r/n)<sup>nt</sup>，利息产生利息</li>
+  <li><strong>放射性衰变</strong>：半衰期模型 m(t) = m<sub>0</sub> &middot; (1/2)<sup>t/T</sup></li>
+  <li><strong>地震震级</strong>：里氏震级是对数尺度，M = log(A / A<sub>0</sub>)</li>
+  <li><strong>酸碱度</strong>：pH = &minus;log[H<sup>+</sup>]</li>
+</ul>
+
+<h3>三角函数</h3>
+<ul>
+  <li><strong>简谐运动</strong>：弹簧振子的位移 y = A sin(&omega;t + &phi;)</li>
+  <li><strong>交流电</strong>：电压 V(t) = V<sub>0</sub> sin(2&pi;ft)</li>
+  <li><strong>声波</strong>：声音的波形是不同频率三角函数的叠加</li>
+  <li><strong>潮汐</strong>：海平面周期性涨落可以用三角函数拟合</li>
+</ul>
+</section>
+
+<!-- ============================== 第六部分：历史小故事 ============================== -->
+<section>
+<h2>六、历史小故事</h2>
+
+<div class="example">
+  <p><strong>&ldquo;函数&rdquo;的诞生与演变</strong></p>
+  <p>1698 年，德国数学家<strong>莱布尼茨</strong>在一封信里首次使用了 "function" 这个词。当时他指的是一条曲线上变化的几何量。</p>
+  <p>1748 年，瑞士数学家<strong>欧拉</strong>在他著名的《无穷小分析引论》中，把函数定义为"由变量和常数构成的解析表达式"。这是最早的系统化定义。</p>
+  <p>1837 年，德国数学家<strong>狄利克雷</strong>给出了接近现代的定义："如果对于某个区间上的每个 x 值，都有一个唯一的 y 值与之对应，则 y 称为 x 的函数。"</p>
+  <p>有趣的是，狄利克雷还构造了一个当时让人非常难以接受的函数：当 x 是有理数时，f(x) = 1；当 x 是无理数时，f(x) = 0。这个函数无法用任何公式写出，但完全符合函数的定义。它告诉人们：函数的概念远比"公式"更广泛。</p>
+</div>
+
+<div class="example">
+  <p><strong>对数的发明与天文学</strong></p>
+  <p>16 世纪末，天文学家第谷积累了海量天文数据，他的学生开普勒需要做大量的乘除运算。那时没有计算器，一次乘法需要耗时数分钟，还容易出错。</p>
+  <p>苏格兰数学家<strong>纳皮尔</strong>花了 20 年时间，在 1614 年发表了对数。它的核心思想是把<strong>乘法变成加法</strong>：log(ab) = log a + log b。有了对数表，天文学家把几年的计算量缩短成了几周。</p>
+  <p>拉普拉斯后来感叹：&ldquo;对数的发明，把天文学家的寿命延长了一倍！&rdquo;</p>
+</div>
+
+<div class="example">
+  <p><strong>弧度制与&pi;</strong></p>
+  <p>为什么数学家用弧度而不是角度来度量角？因为弧度是<strong>自然的</strong>：1 弧度对应的是"半径长的弧"。</p>
+  <p>使用弧度制时，许多公式变得简洁优美。例如，sin x 的导数就是 cos x（使用角度制时，sin x 的导数是 &pi;/180 &middot; cos x，多了一个难看的系数）。</p>
+  <p>数学家的选择标准是：哪个公式更简单，就用哪个。</p>
+</div>
+</section>
+
+<!-- ============================== 第七部分：例题 ============================== -->
+<section>
+<h2>七、例题</h2>
+
+<h3>例 1（二次函数与基本不等式）</h3>
+<div class="example">
+  <p>已知 x &gt; 0，求 y = x + 1/x 的最小值。</p>
+  <p class="step"><strong>分析</strong>：两个正数之和的最小值，想到基本不等式。</p>
+  <p class="step"><strong>解</strong>：由基本不等式：x + 1/x &ge; 2&radic;(x &middot; 1/x) = 2</p>
+  <p class="step">当且仅当 x = 1/x，即 x = 1 时取等号。</p>
+  <p class="answer">所以 y 的最小值为 2。</p>
+</div>
+
+<h3>例 2（幂函数）</h3>
+<div class="example">
+  <p>比较 (0.5)<sup>0.4</sup> 和 (0.5)<sup>0.6</sup> 的大小。</p>
+  <p class="step"><strong>分析</strong>：底数相同（0.5），考察指数函数 y = (0.5)<sup>x</sup> 的单调性。</p>
+  <p class="step"><strong>解</strong>：y = (0.5)<sup>x</sup> 中 0 &lt; 0.5 &lt; 1，所以函数在 R 上<strong>单调递减</strong>。</p>
+  <p class="step">因为 0.4 &lt; 0.6，所以 (0.5)<sup>0.4</sup> &gt; (0.5)<sup>0.6</sup>。</p>
+  <p class="answer">(0.5)<sup>0.4</sup> &gt; (0.5)<sup>0.6</sup></p>
+  <p class="hint"><strong>技巧</strong>：比较幂的大小，可以先看底数是否相同。底数相同&rArr;用指数函数单调性；指数相同&rArr;用幂函数单调性。</p>
+</div>
+
+<h3>例 3（指数与对数）</h3>
+<div class="example">
+  <p>计算 log<sub>2</sub>8 + log<sub>2</sub>(1/2) 的值。</p>
+  <p class="step"><strong>解</strong>：log<sub>2</sub>8 = log<sub>2</sub>2<sup>3</sup> = 3</p>
+  <p class="step">log<sub>2</sub>(1/2) = log<sub>2</sub>2<sup>&minus;1</sup> = &minus;1</p>
+  <p class="step">所以 log<sub>2</sub>8 + log<sub>2</sub>(1/2) = 3 + (&minus;1) = 2</p>
+  <p class="answer">结果为 2。</p>
+</div>
+
+<h3>例 4（三角函数）</h3>
+<div class="example">
+  <p>已知 sin&alpha; = 3/5，&alpha; 是锐角，求 cos&alpha; 和 tan&alpha; 的值。</p>
+  <p class="step"><strong>分析</strong>：利用同角三角函数关系 sin<sup>2</sup>&alpha; + cos<sup>2</sup>&alpha; = 1。</p>
+  <p class="step"><strong>解</strong>：cos<sup>2</sup>&alpha; = 1 &minus; sin<sup>2</sup>&alpha; = 1 &minus; 9/25 = 16/25</p>
+  <p class="step">因为 &alpha; 是锐角，cos&alpha; &gt; 0，所以 cos&alpha; = 4/5</p>
+  <p class="step">tan&alpha; = sin&alpha; / cos&alpha; = (3/5) / (4/5) = 3/4</p>
+  <p class="answer">cos&alpha; = 4/5，tan&alpha; = 3/4。</p>
+</div>
+
+<h3>例 5（函数图像变换）</h3>
+<div class="example">
+  <p>函数 y = 2 sin(3x + &pi;/4) 的振幅、周期和初相分别是多少？</p>
+  <p class="step"><strong>解</strong>：对照标准形式 y = A sin(&omega;x + &phi;)</p>
+  <p class="step">&bull; 振幅 A = 2</p>
+  <p class="step">&bull; 角频率 &omega; = 3，周期 T = 2&pi;/|&omega;| = 2&pi;/3</p>
+  <p class="step">&bull; 初相 &phi; = &pi;/4</p>
+  <p class="answer">振幅为 2，周期为 2&pi;/3，初相为 &pi;/4。</p>
+</div>
+</section>
+
+<!-- ============================== 第八部分：练习 ============================== -->
+<section>
+<h2>八、练习</h2>
+<p style="color:#666;">点击选项提交答案，系统自动判分。先完成全部题目再查看解析。</p>
+
+<div id="quiz-container"></div>
+
+<div style="text-align:center;margin:24px 0;">
+  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 100</div>
+  <br>
+  <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #1a73e8;color:#1a73e8;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">&ocy; 重新答题</button>
+</div>
+</section>
+
+</article>
+
+<script>
+// ============================================================
+// 习题数据
+// ============================================================
+var questions = [
+  // ==================== 基础概念（5题） ====================
+  {
+    type: "choice",
+    tag: "concept",
+    tagLabel: "概念",
+    question: "函数的三要素是（  ）",
+    opts: ["定义域、值域、对应关系", "定义域、值域、图像", "解析式、定义域、单调性", "图像、表格、解析式"],
+    answer: 0,
+    explain: "函数的三要素是定义域、值域和对应关系。图像、表格、解析式只是函数的表示方法，不是三要素。"
+  },
+  {
+    type: "choice",
+    tag: "concept",
+    tagLabel: "概念",
+    question: "下列哪一个是正确的函数定义？（  ）",
+    opts: ["函数是公式", "函数是图像", "函数是一种输入输出的对应规则，每个输入对应唯一输出", "函数是变量"],
+    answer: 2,
+    explain: "\u51fd\u6570\u7684\u672c\u8d28\u662f\u201c\u5bf9\u5e94\u89c4\u5219\u201d\u2014\u2014\u7ed9\u5b9a\u4e00\u4e2a\u8f93\u5165\uff0c\u4ea7\u751f\u552f\u4e00\u786e\u5b9a\u7684\u8f93\u51fa\u3002\u51fd\u6570\u4e0d\u4e00\u5b9a\u662f\u516c\u5f0f\uff0c\u4e5f\u4e0d\u4e00\u5b9a\u662f\u56fe\u50cf\u3002"
+  },
+  {
+    type: "choice",
+    tag: "concept",
+    tagLabel: "概念",
+    question: "若函数 f(x) 满足 f(&minus;x) = f(x) 对所有 x 成立，则 f 是（  ）",
+    opts: ["奇函数", "偶函数", "非奇非偶函数", "单调函数"],
+    answer: 1,
+    explain: "f(&minus;x) = f(x) 是偶函数的定义。偶函数的图像关于 y 轴对称。"
+  },
+  {
+    type: "choice",
+    tag: "concept",
+    tagLabel: "概念",
+    question: "方程 x<sup>2</sup> &minus; 5x + 6 = 0 的解集为（  ）",
+    opts: ["{2, 3}", "{&minus;2, &minus;3}", "&empty;", "{5}"],
+    answer: 0,
+    explain: "因式分解得 (x &minus; 2)(x &minus; 3) = 0，解为 x = 2 或 x = 3，所以解集为 {2, 3}。"
+  },
+  {
+    type: "choice",
+    tag: "concept",
+    tagLabel: "概念",
+    question: "对数函数 y = log<sub>2</sub>x 的图像恒过定点（  ）",
+    opts: ["(0, 0)", "(1, 0)", "(0, 1)", "(2, 1)"],
+    answer: 1,
+    explain: "因为 2<sup>0</sup> = 1，所以 log<sub>2</sub>1 = 0，图像恒过定点 (1, 0)。所有对数函数图像都过 (1, 0)。"
+  },
+
+  // ==================== 基础计算（10题） ====================
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "计算：2<sup>3</sup> = （  ）",
+    opts: ["5", "6", "8", "9"],
+    answer: 2,
+    explain: "2<sup>3</sup> = 2 &times; 2 &times; 2 = 8。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "计算：log<sub>3</sub>9 = （  ）",
+    opts: ["2", "3", "9", "27"],
+    answer: 0,
+    explain: "因为 3<sup>2</sup> = 9，所以 log<sub>3</sub>9 = 2。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "化简：a<sup>2</sup> &middot; a<sup>3</sup> = （  ）",
+    opts: ["a<sup>5</sup>", "a<sup>6</sup>", "2a<sup>5</sup>", "a"],
+    answer: 0,
+    explain: "a<sup>2</sup> &middot; a<sup>3</sup> = a<sup>2+3</sup> = a<sup>5</sup>。指数相乘：底数不变，指数相加。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "sin(&pi;/6) = （  ）",
+    opts: ["0", "1/2", "&radic;2/2", "1"],
+    answer: 1,
+    explain: "&pi;/6 = 30&deg;，sin30&deg; = 1/2。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "cos(&pi;/3) = （  ）",
+    opts: ["0", "1/2", "&radic;3/2", "1"],
+    answer: 1,
+    explain: "&pi;/3 = 60&deg;，cos60&deg; = 1/2。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "函数 y = &radic;(x &minus; 2) 的定义域是（  ）",
+    opts: ["(&minus;&infin;, 2]", "[2, +&infin;)", "(&minus;&infin;, 2)", "(2, +&infin;)"],
+    answer: 1,
+    explain: "根号内必须非负：x &minus; 2 &ge; 0，所以 x &ge; 2。定义域为 [2, +&infin;)。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "log<sub>2</sub>16 &minus; log<sub>2</sub>4 = （  ）",
+    opts: ["0", "1", "2", "4"],
+    answer: 2,
+    explain: "log<sub>2</sub>16 = 4，log<sub>2</sub>4 = 2，所以 4 &minus; 2 = 2。或者用性质：log<sub>2</sub>(16/4) = log<sub>2</sub>4 = 2。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "2<sup>&minus;3</sup> = （  ）",
+    opts: ["&minus;8", "&minus;6", "1/6", "1/8"],
+    answer: 3,
+    explain: "2<sup>&minus;3</sup> = 1 / 2<sup>3</sup> = 1/8。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "若 sin&alpha; = 0.6 且 &alpha; 为锐角，则 cos&alpha; = （  ）",
+    opts: ["0.4", "0.6", "0.8", "0.64"],
+    answer: 2,
+    explain: "由 sin<sup>2</sup>&alpha; + cos<sup>2</sup>&alpha; = 1，得 cos<sup>2</sup>&alpha; = 1 &minus; 0.36 = 0.64，因为 &alpha; 是锐角，cos&alpha; = 0.8。"
+  },
+  {
+    type: "choice",
+    tag: "calc",
+    tagLabel: "计算",
+    question: "函数 f(x) = x<sup>2</sup> &minus; 2x 的对称轴是（  ）",
+    opts: ["x = 0", "x = 1", "x = 2", "x = &minus;1"],
+    answer: 1,
+    explain: "二次函数 y = ax<sup>2</sup> + bx + c 的对称轴是 x = &minus;b/(2a) = &minus;(&minus;2)/(2&times;1) = 1。"
+  },
+
+  // ==================== 综合题（3题，用选择形式，但考察综合能力） ====================
+  {
+    type: "choice",
+    tag: "comprehensive",
+    tagLabel: "综合",
+    question: "已知二次函数 f(x) = x<sup>2</sup> &minus; 4x + 3：<br>&nbsp;&nbsp;(1) 求顶点坐标<br>&nbsp;&nbsp;(2) 求与 x 轴的交点<br>&nbsp;&nbsp;下列选项正确的是（  ）",
+    opts: [
+      "顶点 (2, &minus;1)，交点 (1, 0) 和 (3, 0)",
+      "顶点 (&minus;2, 15)，无交点",
+      "顶点 (4, 3)，交点 (0, 3)",
+      "顶点 (2, 1)，交点 (1, 0) 和 (3, 0)"
+    ],
+    answer: 0,
+    explain: "f(x) = (x &minus; 2)<sup>2</sup> &minus; 1，所以顶点是 (2, &minus;1)。令 f(x) = 0，解得 x = 1 或 x = 3，交点为 (1, 0) 和 (3, 0)。"
+  },
+  {
+    type: "choice",
+    tag: "comprehensive",
+    tagLabel: "综合",
+    question: "已知函数 f(x) = a<sup>x</sup>（a &gt; 0, a &ne; 1）经过点 (2, 9)：<br>&nbsp;&nbsp;(1) 求 a 的值<br>&nbsp;&nbsp;(2) 判断 f(x) 的单调性<br>&nbsp;&nbsp;下列选项正确的是（  ）",
+    opts: [
+      "a = 3，f(x) 在 R 上递增",
+      "a = 9，f(x) 在 R 上递增",
+      "a = 3，f(x) 在 R 上递减",
+      "a = 4.5，f(x) 在 R 上递增"
+    ],
+    answer: 0,
+    explain: "代入 (2, 9)：a<sup>2</sup> = 9，a &gt; 0，所以 a = 3。因为 a = 3 &gt; 1，所以 f(x) 在 R 上单调递增。"
+  },
+  {
+    type: "choice",
+    tag: "comprehensive",
+    tagLabel: "综合",
+    question: "已知 f(x) = 2 sin(x &minus; &pi;/3)：<br>&nbsp;&nbsp;(1) 判断奇偶性<br>&nbsp;&nbsp;(2) 求在 [0, 2&pi;] 上与 x 轴的交点数<br>&nbsp;&nbsp;下列选项正确的是（  ）",
+    opts: [
+      "非奇非偶函数，有 2 个交点",
+      "奇函数，有 3 个交点",
+      "偶函数，有 2 个交点",
+      "非奇非偶函数，有 1 个交点"
+    ],
+    answer: 0,
+    explain: "f(&minus;x) = 2 sin(&minus;x &minus; &pi;/3) = &minus;2 sin(x + &pi;/3) &ne; &plusmn;f(x)，所以非奇非偶。在 [0, 2&pi;] 上，令 sin(x &minus; &pi;/3) = 0，得 x = &pi;/3 和 x = 4&pi;/3，有 2 个交点。"
+  }
+];
+
+// ============================================================
+// 渲染 & 交互
+// ============================================================
+var totalScore = 0;
+var answered = [];
+var correctCount = 0;
+
+function render() {
+  var container = document.getElementById("quiz-container");
+  var html = "";
+  var sectionLabels = { concept: "一、基础概念题（每题4分）", calc: "二、基础计算题（每题4分）", comprehensive: "三、综合题（每题20分）" };
+  var sectionTags = ["concept", "calc", "comprehensive"];
+  var sectionIdx = 0;
+
+  for (var si = 0; si < sectionTags.length; si++) {
+    var tag = sectionTags[si];
+    var firstOfSection = true;
+    for (var i = 0; i < questions.length; i++) {
+      var q = questions[i];
+      if (q.tag !== tag) continue;
+      if (firstOfSection) {
+        html += '<h3 style="margin-top:30px;">' + sectionLabels[tag] + '</h3>';
+        firstOfSection = false;
+      }
+      var letter = ["A", "B", "C", "D"];
+      html += '<div class="quiz-question" id="q' + i + '">';
+      html += '<div class="q-title"><span class="q-tag ' + q.tag + '">' + q.tagLabel + '</span> ' + (i+1) + '. ' + q.question + '</div>';
+      html += '<div class="options">';
+      for (var j = 0; j < q.opts.length; j++) {
+        html += '<div class="opt" onclick="selectOpt(' + i + ',' + j + ')">' + letter[j] + '. ' + q.opts[j] + '</div>';
+      }
+      html += '</div>';
+      html += '<div class="explain" id="exp' + i + '"></div>';
+      html += '</div>';
+    }
+  }
+  container.innerHTML = html;
+  answered = new Array(questions.length).fill(-1);
+}
+
+function selectOpt(qi, oi) {
+  if (answered[qi] !== -1) return;
+  answered[qi] = oi;
+  var q = questions[qi];
+  var score = (q.tag === "comprehensive" ? 20 : 4);
+  var isCorrect = (oi === q.answer);
+  if (isCorrect) correctCount++;
+
+  var qDiv = document.getElementById("q" + qi);
+  var opts = qDiv.querySelectorAll(".opt");
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add("disabled");
+    if (i === q.answer) opts[i].classList.add("correct-opt");
+    if (i === oi && !isCorrect) opts[i].classList.add("wrong-opt");
+    if (i === oi && isCorrect) opts[i].classList.add("selected");
+  }
+
+  if (isCorrect) {
+    qDiv.classList.add("correct");
+  } else {
+    qDiv.classList.add("wrong");
+  }
+
+  var expDiv = document.getElementById("exp" + qi);
+  expDiv.textContent = (isCorrect ? "\u2713 " : "\u2717 ") + q.explain;
+  expDiv.className = "explain show " + (isCorrect ? "ok" : "fail");
+
+  updateScore();
+}
+
+function updateScore() {
+  var total = 0;
+  for (var i = 0; i < questions.length; i++) {
+    if (answered[i] === questions[i].answer) {
+      total += (questions[i].tag === "comprehensive" ? 20 : 4);
+    }
+  }
+  totalScore = total;
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a" + total + " / 100";
+}
+
+function resetQuiz() {
+  correctCount = 0;
+  totalScore = 0;
+  answered = new Array(questions.length).fill(-1);
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a0 / 100";
+  for (var i = 0; i < questions.length; i++) {
+    var qDiv = document.getElementById("q" + i);
+    qDiv.className = "quiz-question";
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].className = "opt";
+    }
+    document.getElementById("exp" + i).className = "explain";
+  }
+}
+
+document.getElementById("resetBtn").onclick = resetQuiz;
+render();
+</script>
+</body>
+</html>
