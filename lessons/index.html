@@ -18,6 +18,16 @@
   .course-item .desc { font-size: 0.9em; color: #666; margin: 0; line-height: 1.6; }
   .intro { text-align: center; color: #555; margin: 20px 0 30px; font-size: 1.05em; }
   h1 { text-align: center; font-size: 2em; border-bottom: none; }
+  /* 底部固定标语 */
+  .fix-banner {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #e0e0e0; text-align: center; padding: 14px 24px;
+    font-size: 0.95em; line-height: 1.7; box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+  }
+  .fix-banner strong { color: #ffd54f; }
+  .fix-banner .sep { color: #4fc3f7; margin: 0 8px; }
+  body { padding-bottom: 80px; }
 </style>
 </head>
 <body>
@@ -145,5 +155,10 @@
   </ul>
 </div>
 </article>
+<div class="fix-banner">
+  <p><strong>数学</strong>是关于自然的学科，但<strong>数学工具</strong>、<strong>数学方法</strong>是人创造的。</p>
+  <p>不同的数学方法代表了不同的解决问题方式，每个方法都有其适用的场景和优势。</p>
+  <p>搞清楚场景和问题，选择正确的数学工具，剩下的就是计算。</p>
+</div>
 </body>
 </html>
