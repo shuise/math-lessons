@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>常见函数图形 — 交互式动画</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+  h3 { color: #2c3e50; margin: 28px 0 12px; font-size: 1.15em; border-bottom: 2px solid #e0e0e0; padding-bottom: 6px; }
+  .func-section {
+    background: #fafbfc; border: 1px solid #e0e0e0; border-radius: 12px;
+    padding: 20px 24px; margin: 24px 0;
+  }
+  .func-section .desc { color: #555; font-size: 0.93em; margin: 6px 0 12px; }
+  .plot-wrap { position: relative; width: 100%; margin: 8px 0; }
+  .plot-wrap svg { display: block; margin: 0 auto; border-radius: 8px; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .controls {
+    display: flex; flex-wrap: wrap; gap: 12px 20px;
+    margin: 10px 0 0; padding: 12px 16px;
+    background: #f0f4f8; border-radius: 8px; align-items: center;
+  }
+  .controls label { font-size: 0.88em; color: #444; display: flex; align-items: center; gap: 6px; }
+  .controls input[type="range"] { width: 100px; margin: 0 4px; vertical-align: middle; }
+  .controls .val { display: inline-block; min-width: 28px; text-align: center; font-weight: bold; color: #1a73e8; font-size: 0.92em; }
+  .btn-replay {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 4px 14px; border: 2px solid #1a73e8; border-radius: 16px;
+    background: #fff; color: #1a73e8; cursor: pointer;
+    font-size: 0.85em; transition: 0.15s; margin-left: auto;
+  }
+  .btn-replay:hover { background: #1a73e8; color: #fff; }
+  .formula-label {
+    text-align: center; margin: 8px 0; font-size: 1.05em;
+    font-family: 'Times New Roman', serif; color: #2c3e50;
+  }
+  .func-cat { display: inline-block; padding: 2px 12px; border-radius: 10px; font-size: 0.78em; color: #fff; margin-right: 6px; }
+  .cat-linear { background: #e53935; }
+  .cat-quadratic { background: #fb8c00; }
+  .cat-power { background: #43a047; }
+  .cat-exponential { background: #1e88e5; }
+  .cat-logarithmic { background: #8e24aa; }
+  .cat-trig { background: #00acc1; }
+
+  /* 图例 */
+  .legend-row { display: flex; justify-content: center; gap: 20px; margin: 6px 0 2px; font-size: 0.85em; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-swatch { width: 20px; height: 3px; border-radius: 2px; display: inline-block; }
+
+  @media (max-width: 640px) {
+    .controls { flex-direction: column; align-items: stretch; }
+    .controls label { justify-content: space-between; }
+    .controls input[type="range"] { width: 60%; }
+    .btn-replay { margin-left: 0; align-self: flex-end; }
+  }
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>常见函数图形</h1>
+<p class="tip" style="text-align:center;font-size:1.05em;">交互式动画 · 拖动滑块调节参数，观察函数图像如何变化。每个图形首次加载时会自动"画出"曲线。</p>
+
+<!-- ==================== 1. 一次函数 ==================== -->
+<div class="func-section">
+  <h3><span class="func-cat cat-linear">一次</span> y = kx + b</h3>
+  <p class="desc">一条直线，<strong>k</strong> 决定倾斜方向和陡峭程度（斜率），<strong>b</strong> 决定与 y 轴的交点（截距）。</p>
+  <p class="formula-label" id="linear-label">y = 2.0x + 1.0</p>
+  <div class="plot-wrap">
+    <div id="plot-linear" class="func-plot"></div>
+  </div>
+  <div class="controls">
+    <label>k <input type="range" min="-5" max="5" step="0.1" value="2" data-plot="linear" data-param="k"><span class="val" id="linear-k-val">2.0</span></label>
+    <label>b <input type="range" min="-5" max="5" step="0.1" value="1" data-plot="linear" data-param="b"><span class="val" id="linear-b-val">1.0</span></label>
+    <button class="btn-replay" data-replay="linear">&#9654; 重播动画</button>
+  </div>
+</div>
+
+<!-- ==================== 2. 二次函数 ==================== -->
+<div class="func-section">
+  <h3><span class="func-cat cat-quadratic">二次</span> y = ax² + bx + c</h3>
+  <p class="desc"><strong>a</strong> 决定开口方向和宽窄（a&gt;0 开口向上，a&lt;0 向下），<strong>b</strong> 影响对称轴位置，<strong>c</strong> 为 y 轴截距。</p>
+  <p class="formula-label" id="quadratic-label">y = 1.0x² + 0.0x - 2.0</p>
+  <div class="plot-wrap">
+    <div id="plot-quadratic" class="func-plot"></div>
+  </div>
+  <div class="controls">
+    <label>a <input type="range" min="-3" max="3" step="0.1" value="1" data-plot="quadratic" data-param="a"><span class="val" id="quadratic-a-val">1.0</span></label>
+    <label>b <input type="range" min="-5" max="5" step="0.1" value="0" data-plot="quadratic" data-param="b"><span class="val" id="quadratic-b-val">0.0</span></label>
+    <label>c <input type="range" min="-5" max="5" step="0.1" value="-2" data-plot="quadratic" data-param="c"><span class="val" id="quadratic-c-val">-2.0</span></label>
+    <button class="btn-replay" data-replay="quadratic">&#9654; 重播动画</button>
+  </div>
+</div>
+
+<!-- ==================== 3. 幂函数 ==================== -->
+<div class="func-section">
+  <h3><span class="func-cat cat-power">幂</span> y = x<sup>&alpha;</sup></h3>
+  <p class="desc"><strong>&alpha;</strong> 决定曲线形状：过定点 (1, 1)。&alpha;&gt;0 过 (0, 0) 且单调递增；&alpha;&lt;0 为双曲线一支。</p>
+  <p class="formula-label" id="power-label">y = x², y = x³, y = √x, y = x⁻¹</p>
+  <div class="plot-wrap">
+    <div id="plot-power" class="func-plot"></div>
+  </div>
+  <div class="legend-row">
+    <span class="legend-item"><span class="legend-swatch" style="background:#e53935;"></span> y = x²</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:#fb8c00;"></span> y = x³</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:#43a047;"></span> y = √x</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:#1e88e5;"></span> y = x⁻¹</span>
+  </div>
+</div>
+
+<!-- ==================== 4. 指数函数 ==================== -->
+<div class="func-section">
+  <h3><span class="func-cat cat-exponential">指数</span> y = a<sup>x</sup></h3>
+  <p class="desc"><strong>a &gt; 1</strong> 时增长（指数爆炸），<strong>0 &lt; a &lt; 1</strong> 时衰减。恒过定点 (0, 1)，以 x 轴为渐近线。</p>
+  <p class="formula-label" id="exp-label">y = 2ˣ, y = (½)ˣ</p>
+  <div class="plot-wrap">
+    <div id="plot-exp" class="func-plot"></div>
+  </div>
+  <div class="controls">
+    <label>底数 <input type="range" min="0.1" max="5" step="0.1" value="2" data-plot="exp" data-param="base"><span class="val" id="exp-base-val">2.0</span></label>
+    <button class="btn-replay" data-replay="exp">&#9654; 重播动画</button>
+  </div>
+</div>
+
+<!-- ==================== 5. 对数函数 ==================== -->
+<div class="func-section">
+  <h3><span class="func-cat cat-logarithmic">对数</span> y = log<sub>a</sub>x</h3>
+  <p class="desc"><strong>a &gt; 1</strong> 递增，<strong>0 &lt; a &lt; 1</strong> 递减。恒过定点 (1, 0)，以 y 轴为渐近线。指数函数的反函数。</p>
+  <p class="formula-label" id="log-label">y = log₂x, y = log₁'₂x</p>
+  <div class="plot-wrap">
+    <div id="plot-log" class="func-plot"></div>
+  </div>
+  <div class="controls">
+    <label>底数 <input type="range" min="0.1" max="5" step="0.1" value="2" data-plot="log" data-param="base"><span class="val" id="log-base-val">2.0</span></label>
+    <button class="btn-replay" data-replay="log">&#9654; 重播动画</button>
+  </div>
+</div>
+
+<!-- ==================== 6. 三角函数 ==================== -->
+<div class="func-section">
+  <h3><span class="func-cat cat-trig">三角</span> y = sin x, y = cos x, y = tan x</h3>
+  <p class="desc">正弦和余弦周期为 <strong>2&pi;</strong>，正切周期为 <strong>&pi;</strong>。正弦奇函数，余弦偶函数。</p>
+  <p class="formula-label" id="trig-label">y = sin x, y = cos x, y = tan x</p>
+  <div class="plot-wrap">
+    <div id="plot-trig" class="func-plot"></div>
+  </div>
+  <div class="controls">
+    <label>A（振幅）<input type="range" min="0.2" max="3" step="0.1" value="1" data-plot="trig" data-param="amp"><span class="val" id="trig-amp-val">1.0</span></label>
+    <label>&omega;（频率）<input type="range" min="0.2" max="3" step="0.1" value="1" data-plot="trig" data-param="freq"><span class="val" id="trig-freq-val">1.0</span></label>
+    <button class="btn-replay" data-replay="trig">&#9654; 重播动画</button>
+  </div>
+  <div class="legend-row">
+    <span class="legend-item"><span class="legend-swatch" style="background:#e53935;"></span> y = sin x</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:#1e88e5;"></span> y = cos x</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:#43a047;"></span> y = tan x</span>
+  </div>
+</div>
+
+</article>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  var W = 720, H = 360;
+  var M = { top: 16, right: 16, bottom: 28, left: 38 };
+  var IW = W - M.left - M.right;
+  var IH = H - M.top - M.bottom;
+  var COLORS = ['#e53935','#fb8c00','#43a047','#1e88e5','#8e24aa','#00acc1'];
+  var SAMPLES = 300;
+
+  // 安全求值，处理渐近线和定义域边界
+  function safeEval(fnStr, x) {
+    try {
+      // 内置常用函数
+      var abs = Math.abs, sqrt = Math.sqrt, pow = Math.pow;
+      var sin = Math.sin, cos = Math.cos, tan = Math.tan;
+      var log = Math.log, ln = Math.log;
+      var PI = Math.PI, E = Math.E;
+      var result = eval(fnStr);
+      return isFinite(result) ? result : undefined;
+    } catch(e) { return undefined; }
+  }
+
+  // 生成数据点（跳过渐近线附近）
+  function genPoints(fnStr, x0, x1, samples) {
+    var step = (x1 - x0) / samples;
+    var points = [];
+    var prevY = undefined;
+    for (var x = x0; x <= x1; x += step) {
+      var y = safeEval(fnStr, x);
+      if (y !== undefined) {
+        // 跳过跳跃（渐近线检测）
+        if (prevY !== undefined && Math.abs(y - prevY) > 10) {
+          points.push({x: x - step/2, y: null}); // null = 断开
+        }
+        points.push({x: x, y: y});
+        prevY = y;
+      } else {
+        prevY = undefined;
+      }
+    }
+    return points;
+  }
+
+  // D3 线段生成器（支持 null 自动断开）
+  var lineGen = d3.line()
+    .x(function(d) { return d.x; })
+    .y(function(d) { return d.y; })
+    .defined(function(d) { return d.y !== null && isFinite(d.y); });
+
+  // ---- 核心：绘制一个 SVG 图表 ---- 
+  function drawChart(containerId, functions, xDomain, yDomain) {
+    var container = d3.select('#' + containerId);
+    container.selectAll('*').remove();
+
+    var svg = container.append('svg')
+      .attr('width', W).attr('height', H)
+      .style('display', 'block').style('margin', '0 auto')
+      .style('background', '#fff').style('border-radius', '8px')
+      .style('box-shadow', '0 1px 4px rgba(0,0,0,0.06)');
+
+    var g = svg.append('g')
+      .attr('transform', 'translate(' + M.left + ',' + M.top + ')');
+
+    var xScale = d3.scaleLinear().domain(xDomain).range([0, IW]);
+    var yScale = d3.scaleLinear().domain(yDomain).range([IH, 0]);
+
+    // 网格
+    g.append('g').attr('class', 'grid')
+      .call(d3.axisLeft(yScale).tickSize(-IW).tickFormat(''))
+      .selectAll('line').attr('stroke', '#eee');
+    g.append('g').attr('class', 'grid')
+      .call(d3.axisBottom(xScale).tickSize(-IH).tickFormat(''))
+      .selectAll('line').attr('stroke', '#eee');
+
+    // 坐标轴
+    g.append('g').call(d3.axisLeft(yScale).tickSizeOuter(0));
+    g.append('g')
+      .attr('transform', 'translate(0,' + IH + ')')
+      .call(d3.axisBottom(xScale).tickSizeOuter(0));
+
+    // 原点标记
+    if (xDomain[0] <= 0 && xDomain[1] >= 0 && yDomain[0] <= 0 && yDomain[1] >= 0) {
+      g.append('circle').attr('cx', xScale(0)).attr('cy', yScale(0))
+        .attr('r', 3).attr('fill', '#999');
+    }
+
+    // 坐标轴标签
+    g.append('text').attr('x', IW/2).attr('y', IH + 22)
+      .attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', '#888').text('x');
+    g.append('text').attr('x', -28).attr('y', IH/2)
+      .attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', '#888')
+      .attr('transform', 'rotate(-90,-28,' + IH/2 + ')').text('y');
+
+    // 绘制函数曲线
+    var paths = [];
+    functions.forEach(function(f, idx) {
+      var pts = genPoints(f.fn, xDomain[0], xDomain[1], SAMPLES);
+      var scaled = pts.map(function(p) {
+        return { x: xScale(p.x), y: p.y !== null ? yScale(p.y) : null };
+      });
+
+      var path = g.append('path')
+        .datum(scaled)
+        .attr('fill', 'none')
+        .attr('stroke', f.color || COLORS[idx % COLORS.length])
+        .attr('stroke-width', 2)
+        .attr('stroke-linejoin', 'round')
+        .attr('d', lineGen);
+
+      paths.push({el: path, stroke: f.color || COLORS[idx % COLORS.length]});
+    });
+
+    // 返回路径以便外部触发动画
+    return paths;
+  }
+
+  // ---- 动画 ----
+  function animatePaths(paths, cb) {
+    if (!paths || paths.length === 0) { if (cb) cb(); return; }
+    paths.forEach(function(p, i) {
+      var node = p.el.node();
+      if (!node) return;
+      var len = node.getTotalLength();
+      if (len > 0 && isFinite(len)) {
+        p.el
+          .attr('stroke-dasharray', len + ' ' + len)
+          .attr('stroke-dashoffset', len)
+          .transition()
+          .delay(i * 100)
+          .duration(1600)
+          .ease(d3.easeCubicOut)
+          .attr('stroke-dashoffset', 0)
+          .on('end', function() {
+            p.el.attr('stroke-dasharray', null); // 清理
+          });
+      }
+    });
+  }
+
+  // ---- 各函数渲染器 ----
+  var animCache = {};
+
+  function renderLinear(k, b) {
+    animCache['linear'] = drawChart('plot-linear', [
+      { fn: k + ' * x + ' + b, color: '#e53935' }
+    ], [-6, 6], [-5, 5]);
+    animatePaths(animCache['linear']);
+  }
+
+  function renderQuadratic(a, b, c) {
+    animCache['quadratic'] = drawChart('plot-quadratic', [
+      { fn: a + ' * x * x + ' + b + ' * x + ' + c, color: '#fb8c00' }
+    ], [-6, 6], [-5, 5]);
+    animatePaths(animCache['quadratic']);
+  }
+
+  function renderPower() {
+    var fns = [
+      { fn: 'x * x', color: '#e53935' },
+      { fn: 'x * x * x', color: '#fb8c00' },
+      { fn: 'sqrt(x)', color: '#43a047' },
+      { fn: '1 / x', color: '#1e88e5' }
+    ];
+    animCache['power'] = drawChart('plot-power', fns, [-3, 3], [-3, 3]);
+    animatePaths(animCache['power']);
+  }
+
+  function renderExp(base) {
+    var b1 = base, b2 = 1 / base;
+    animCache['exp'] = drawChart('plot-exp', [
+      { fn: 'pow(' + b1 + ', x)', color: '#1e88e5' },
+      { fn: 'pow(' + b2 + ', x)', color: '#8e24aa' }
+    ], [-4, 4], [-0.5, 6]);
+    animatePaths(animCache['exp']);
+  }
+
+  function renderLog(base) {
+    var b1 = base, b2 = 1 / base;
+    animCache['log'] = drawChart('plot-log', [
+      { fn: 'log(x) / log(' + b1 + ')', color: '#8e24aa' },
+      { fn: 'log(x) / log(' + b2 + ')', color: '#00acc1' }
+    ], [0.1, 5], [-3, 3]);
+    animatePaths(animCache['log']);
+  }
+
+  function renderTrig(amp, freq) {
+    var a = amp, w = freq;
+    animCache['trig'] = drawChart('plot-trig', [
+      { fn: a + ' * sin(' + w + ' * x)', color: '#e53935' },
+      { fn: a + ' * cos(' + w + ' * x)', color: '#1e88e5' },
+      { fn: a + ' * tan(' + w + ' * x)', color: '#43a047' }
+    ], [-6.5, 6.5], [-4, 4]);
+    animatePaths(animCache['trig']);
+  }
+
+  // ---- 批量渲染 ----
+  function renderAll() {
+    renderLinear(2, 1);
+    renderQuadratic(1, 0, -2);
+    renderPower();
+    renderExp(2);
+    renderLog(2);
+    renderTrig(1, 1);
+  }
+
+  // ---- 更新滑块值 ----
+  function updateLabel(id, val) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = val;
+  }
+
+  function showReplay(plotId) {
+    var paths = animCache[plotId];
+    if (paths) animatePaths(paths);
+  }
+
+  // 数字转下标
+  function sub(n) {
+    var map = {'0':'₀','1':'₁','2':'₂','3':'₃','4':'₄','5':'₅','6':'₆','7':'₇','8':'₈','9':'₉','.':'·'};
+    return String(n).split('').map(function(c) { return map[c] || c; }).join('');
+  }
+
+  // ---- 绑定滑块 ----
+  document.querySelectorAll('.controls input[type="range"]').forEach(function(input) {
+    input.addEventListener('input', function() {
+      var plot = this.dataset.plot;
+      var param = this.dataset.param;
+      var val = parseFloat(this.value);
+      var fmt = val.toFixed(1);
+
+      switch (plot) {
+        case 'linear':
+          updateLabel('linear-k-val', fmt);
+          updateLabel('linear-b-val', fmt);
+          var k = parseFloat(document.querySelector('[data-plot="linear"][data-param="k"]').value);
+          var b = parseFloat(document.querySelector('[data-plot="linear"][data-param="b"]').value);
+          document.getElementById('linear-label').textContent = 'y = ' + k.toFixed(1) + 'x + ' + b.toFixed(1);
+          renderLinear(k, b);
+          break;
+
+        case 'quadratic':
+          updateLabel('quadratic-a-val', fmt);
+          updateLabel('quadratic-b-val', fmt);
+          updateLabel('quadratic-c-val', fmt);
+          var a = parseFloat(document.querySelector('[data-plot="quadratic"][data-param="a"]').value);
+          var qb = parseFloat(document.querySelector('[data-plot="quadratic"][data-param="b"]').value);
+          var c = parseFloat(document.querySelector('[data-plot="quadratic"][data-param="c"]').value);
+          document.getElementById('quadratic-label').textContent = 'y = ' + a.toFixed(1) + 'x² + ' + qb.toFixed(1) + 'x + ' + c.toFixed(1);
+          renderQuadratic(a, qb, c);
+          break;
+
+        case 'exp':
+          updateLabel('exp-base-val', fmt);
+          document.getElementById('exp-label').textContent = 'y = ' + fmt + 'ˣ, y = (1/' + fmt + ')ˣ';
+          renderExp(val);
+          break;
+
+        case 'log':
+          updateLabel('log-base-val', fmt);
+          var r = 1 / val;
+          document.getElementById('log-label').textContent = 'y = log' + sub(val) + 'x, y = log' + sub(r) + 'x';
+          renderLog(val);
+          break;
+
+        case 'trig':
+          updateLabel('trig-amp-val', fmt);
+          updateLabel('trig-freq-val', fmt);
+          var amp = parseFloat(document.querySelector('[data-plot="trig"][data-param="amp"]').value);
+          var freq = parseFloat(document.querySelector('[data-plot="trig"][data-param="freq"]').value);
+          document.getElementById('trig-label').textContent = 'y = ' + amp.toFixed(1) + ' sin(' + freq.toFixed(1) + 'x), y = ' + amp.toFixed(1) + ' cos(' + freq.toFixed(1) + 'x), y = ' + amp.toFixed(1) + ' tan(' + freq.toFixed(1) + 'x)';
+          renderTrig(amp, freq);
+          break;
+      }
+    });
+  });
+
+  // ---- 重播 ----
+  document.querySelectorAll('.btn-replay').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      showReplay(this.dataset.replay);
+    });
+  });
+
+  // ---- 初始渲染 ----
+  renderAll();
+})();
+</script>
+</body>
+</html>

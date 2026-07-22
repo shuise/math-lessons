@@ -242,10 +242,11 @@
   <tr><td>log<sub>a</sub>N</td><td>以 a 为底 N 的对数</td><td>a 叫底数，N 叫真数</td></tr>
   <tr><td>lg N</td><td>常用对数</td><td>以 10 为底：lg N = log<sub>10</sub>N</td></tr>
   <tr><td>ln N</td><td>自然对数</td><td>以 e 为底：ln N = log<sub>e</sub>N</td></tr>
+  <tr><td>e</td><td>自然常数（欧拉数）</td><td>e &asymp; 2.71828；连续增长/衰减的极限值，如连续复利</td></tr>
   <tr><td>sin &alpha;</td><td>&alpha; 的正弦</td><td>单位圆上终边交点的纵坐标</td></tr>
   <tr><td>cos &alpha;</td><td>&alpha; 的余弦</td><td>单位圆上终边交点的横坐标</td></tr>
   <tr><td>tan &alpha;</td><td>&alpha; 的正切</td><td>sin &alpha; / cos &alpha;</td></tr>
-  <tr><td>&pi;</td><td>圆周率</td><td>&pi; &asymp; 3.14159，&pi; rad = 180&deg;</td></tr>
+  <tr><td>&pi;</td><td>圆周率</td><td>&pi; &asymp; 3.14159，&pi; rad = 180&deg;；描述圆形和周期性的根本常数</td></tr>
   <tr><td>rad</td><td>弧度单位</td><td>弧度（radian）的缩写</td></tr>
 </table>
 </section>
@@ -279,9 +280,142 @@
 </ul>
 </section>
 
-<!-- ============================== 六、历史故事 ============================== -->
+<!-- ============================== 六、指数与对数在自然界的意义 ============================== -->
 <section>
-<h2>六、历史小故事</h2>
+<h2>六、指数与对数在自然界的意义</h2>
+<p>指数和对数不仅仅是数学运算工具——它们精确描述了自然界中两类最基本的规律：<strong>自复制</strong>和<strong>感知尺度</strong>。</p>
+
+<h3>6.1 指数——描述"自复制"过程</h3>
+<p>当一个东西的变化率<strong>与它当前的数量成正比</strong>时，就会出现指数增长或指数衰减。自然界中这种"自复制"过程无处不在：</p>
+
+<div class="two-col">
+  <div class="example" style="margin:0;">
+    <p><strong>细菌繁殖</strong></p>
+    <p>一个细菌每 20 分钟分裂一次：</p>
+    <p>数量 &asymp; 2<sup>t/20</sup></p>
+    <p class="step">（t 为分钟数）</p>
+    <p>翻倍周期固定，数量增长越来越快——这就是指数爆炸。</p>
+  </div>
+  <div class="example" style="margin:0;">
+    <p><strong>放射性衰变</strong></p>
+    <p>放射性原子核每经过一个半衰期 T：</p>
+    <p>剩余量 &asymp; (1/2)<sup>t/T</sup></p>
+    <p class="step">（t 为经过的时间）</p>
+    <p>衰变到一半的时间固定，但数量永远不为零——这就是指数衰减。</p>
+  </div>
+</div>
+
+<div class="example">
+  <p><strong>共同特征</strong></p>
+  <p>这些过程的数学本质相同：<strong>变化率 = 比例常数 × 当前量</strong></p>
+  <p>用微积分的语言写出来就是：dy/dt = ky</p>
+  <p>其中 k 是比例常数（正数为增长，负数为衰减）。这个方程的解就是 y = y<sub>0</sub> &middot; e<sup>kt</sup>——自然常数 e 之所以叫"自然"，正是因为它天然地出现在连续变化的过程中。</p>
+</div>
+
+<div class="hint">
+  <p><strong>核心洞察：</strong>只要一个过程是"现有量越多，增长越快"（如利息生利息、人口繁殖、核裂变链式反应），其数学描述就一定离不开指数函数。指数不是人为创造的，是自然规律写下的数学公式。</p>
+</div>
+
+<h3>6.2 对数——描述人类的"感知尺度"</h3>
+<p>与指数相反，对数描述的是：当刺激按<strong>几何级数</strong>增长时，人的感知按<strong>算术级数</strong>增长。</p>
+
+<div class="two-col">
+  <div class="example" style="margin:0;">
+    <p><strong>里氏震级</strong></p>
+    <p>地震每增加 1 级，能量 ×32 倍：</p>
+    <p>震级 M = lg(能量比)</p>
+    <p class="step">6 级地震的能量是 5 级的 32 倍，但在地震仪上标尺只长了 1 格。</p>
+  </div>
+  <div class="example" style="margin:0;">
+    <p><strong>声音分贝</strong></p>
+    <p>声音强度每 ×10，感知响度 ×2：</p>
+    <p>分贝 dB = 10 &middot; lg(强度比)</p>
+    <p class="step">10 分贝的差异意味着强度差了 10 倍，但耳朵听起来只是"大了一点点"。</p>
+  </div>
+</div>
+
+<div class="example" style="margin-top:12px;">
+  <p><strong>这就是著名的韦伯-费希纳定律：</strong></p>
+  <p>人对声、光、触、味等几乎所有感觉，都与外界刺激强度的<strong>对数</strong>成正比。</p>
+  <p>原因是：感知系统需要处理极大范围的信号强度（从微弱耳语到喷气式飞机轰鸣，声强跨越了 10<sup>12</sup> 倍）。使用对数尺度，人类的一根神经就能同时编码"微弱"和"巨响"——这是进化给出的高效方案。</p>
+</div>
+
+<div class="hint">
+  <p><strong>核心洞察：</strong>对数就是大自然用来"压缩"极端尺度的工具。从不到 1 到上万亿，对数把乘除关系变成了加减关系，让人脑可以理解。</p>
+</div>
+
+<h3>6.3 自然常数 e——"连续增长"的极限</h3>
+<div class="formula-box">
+  <p><strong>定义：</strong>e = 2.71828 18284 59045 23536…</p>
+  <p><strong>一句话：</strong>e 是"单位增长在连续复利下的极限值"。</p>
+</div>
+<p>让我们用一个思想实验来理解 e 是什么：</p>
+<ul>
+  <li>假设你存了 1 元钱，年利率 100%。</li>
+  <li>如果每年结一次利息：年末变成 1 + 1 = 2 元。</li>
+  <li>如果每半年结一次：半年后 1.5 元（1 + 1/2），年末 2.25 元（1.5 &times; 1.5）。</li>
+  <li>如果每月结一次：年末 &asymp; 2.6130 元（1 + 1/12）<sup>12</sup>。</li>
+  <li>如果每天结一次：年末 &asymp; 2.7145 元。</li>
+  <li>如果每秒钟结一次：年末无限趋近于 <strong>2.71828…</strong> 元。</li>
+</ul>
+<p>这个极限值就是 <strong>e</strong>。换句话说：<br>
+  e = lim<sub>n→∞</sub>(1 + 1/n)<sup>n</sup></p>
+<p>自然界中的连续增长几乎都涉及 e——不是因为数学家喜欢它，而是因为自然界本身是"连续的"而不是"每秒钟跳一次"的。细菌无时无刻不在分裂，放射性原子随时可能衰变——这些连续过程天然地以 e 为底。</p>
+
+<h3>6.4 圆周率 π——"转一圈"的数字</h3>
+<div class="formula-box">
+  <p><strong>定义：</strong>&pi; = 3.14159 26535 89793 23846…</p>
+  <p><strong>一句话：</strong>&pi; 是"圆的周长与直径之比"，但更本质地说——它是<strong>转了半圈</strong>的数字。</p>
+</div>
+<p>为什么 π 会出现在三角函数中？因为三角函数描述的是<strong>旋转</strong>：</p>
+<ul>
+  <li><strong>&pi; rad = 180&deg;</strong> —— 正好转了半圈</li>
+  <li><strong>2&pi; rad = 360&deg;</strong> —— 转了一圈（回到起点）</li>
+  <li><strong>&pi;/2 rad = 90&deg;</strong> —— 转了四分之一圈</li>
+</ul>
+<p>所以 sin(&pi;) = 0（半圈后回到水平轴），sin(&pi;/2) = 1（四分之一圈后到达最高点）。三角函数的所有性质，本质上都是<strong>圆周运动投影到直线</strong>的结果。</p>
+<div class="hint">
+  <p><strong>π 与圆的关系</strong>：圆是最完美的周期性形状。<br>
+  当你看到 sin、cos、tan 中出现 π 时，把它想象成"转了半圈"就行。<br>
+  为什么波浪、声波、电磁波都用三角函数描述？<br>
+  因为波的本质就是"旋转的投影"——一个点绕圆匀速转动，它在垂直方向的投影就是正弦波。</p>
+</div>
+
+<h3>6.5 为什么说"大自然用指数、对数和三角函数书写"？</h3>
+<div class="growth-box">
+  <div class="growth-item linear">线性<br><small>y = x</small><br><span style="font-weight:normal;">一维尺度</span></div>
+  <div class="growth-item explosion">指数<br><small>y = e<sup>x</sup></small><br><span style="font-weight:normal;">自复制、增长与衰变</span></div>
+  <div class="growth-item log">对数<br><small>y = ln x</small><br><span style="font-weight:normal;">尺度压缩、感知与编码</span></div>
+</div>
+<div class="example">
+  <p><strong>一张表看懂三个常数：</strong></p>
+  <table>
+    <tr><th>常数</th><th>数值</th><th>它描述什么</th><th>出现在哪里</th></tr>
+    <tr>
+      <td><strong>e</strong></td><td>2.71828…</td>
+      <td>"连续增长"的极限</td>
+      <td>复利、衰变、人口、电容充放电、热传导</td>
+    </tr>
+    <tr>
+      <td><strong>&pi;</strong></td><td>3.14159…</td>
+      <td>"转一圈"的度量</td>
+      <td>圆周、周期运动、波、交流电、行星轨道</td>
+    </tr>
+    <tr>
+      <td><strong>i</strong></td><td>&radic;(&minus;1)</td>
+      <td>"旋转 90&deg;"的运算符</td>
+      <td>欧拉公式 e<sup>i&pi;</sup> + 1 = 0</td>
+    </tr>
+  </table>
+  <p style="margin-top:10px;color:#555;font-size:0.93em;">
+    <strong>欧拉公式</strong> e<sup>i&pi;</sup> + 1 = 0 把 e（连续增长）、&pi;（转半圈）、i（旋转 90&deg;）统一在一个等式里——被誉为"上帝创造的公式"。
+  </p>
+</div>
+</section>
+
+<!-- ============================== 七、历史小故事 ============================== -->
+<section>
+<h2>七、历史小故事</h2>
 
 <div class="example">
   <p><strong>对数的诞生——纳皮尔与天文学家的福音</strong></p>
@@ -304,9 +438,9 @@
 </div>
 </section>
 
-<!-- ============================== 七、例题 ============================== -->
+<!-- ============================== 八、例题 ============================== -->
 <section>
-<h2>七、例题</h2>
+<h2>八、例题</h2>
 
 <h3>例 1（指数计算）</h3>
 <div class="example">
@@ -359,9 +493,9 @@
 </div>
 </section>
 
-<!-- ============================== 八、练习 ============================== -->
+<!-- ============================== 九、练习 ============================== -->
 <section>
-<h2>八、练习</h2>
+<h2>九、练习</h2>
 <p style="color:#666;">点击选项提交答案，系统自动判分。先完成全部题目再查看解析。</p>
 
 <div id="quiz-container"></div>
