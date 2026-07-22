@@ -1,24 +1,10 @@
-# 超大文件（>100MB，GitHub 限制）
-books/美国数学*
-
-# 已解压的无文本目录（仅图片，无文字内容）
-books/用通俗方式解释复杂概念全14册.epub/
-
-# 解压后的临时目录（.epub 才是源文件）
-books/尖叫的数学/
-books/数学的逻辑/
-books/魔鬼数学/
-books/简单逻辑学/
-
-# macOS 系统文件
-.DS_Store
-
-# 临时文件
-*.tmp
-*.swp
-*.swo
-*~
-
-# 系统隐藏文件
-.*
-!.gitignore
+# OCR temp artifacts
+tools/ocr_*.txt
+tools/ocr_*.py
+tools/ocr_*.sh
+tools/img2_*.png
+tools/img2_*.txt
+tools/proc_*.png
+tools/proc_*.txt
+tools/*.processed.tif
+tools/easyocr_models/
