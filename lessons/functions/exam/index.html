@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>函数进阶测验</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+body {
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.9;
+  font-size: 16px;
+}
+article {
+  background: #fff; border-radius: 12px; padding: 36px 40px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow-wrap: break-word; word-wrap: break-word; overflow-x: hidden;
+}
+h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding-bottom: 10px; margin-top: 0; text-align: center; }
+.back {
+  display: inline-block; margin-bottom: 16px;
+  color: #1a73e8; text-decoration: none; font-size: 0.95em;
+}
+.back:hover { text-decoration: underline; }
+.tip { text-align: center; color: #888; margin-bottom: 24px; }
+.note { text-align: center; color: #999; font-size: 0.88em; margin-bottom: 8px; }
+
+/* ------ 选择题样式 ------ */
+.quiz-question {
+  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+  padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+}
+.quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+/* 仅答错时使用红色 */
+.quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+.quiz-question .q-title {
+  font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50;
+}
+.quiz-question .q-title .q-tag {
+  display: inline-block; padding: 1px 10px; border-radius: 12px;
+  font-size: 0.75em; margin-right: 6px; color: #fff;
+}
+.q-tag.choice { background: #1a73e8; }
+.quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-question .opt {
+  padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+  cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+}
+.quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+.quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+.quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+/* 仅答错时使用红色 */
+.quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+.quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+.quiz-question .explain {
+  margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+  font-size: 0.93em; display: none;
+}
+.quiz-question .explain.show { display: block; }
+.quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+/* 仅答错时使用红色 */
+.quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+/* 难度标签 */
+.diff-tag {
+  display: inline-block; padding: 1px 8px; border-radius: 8px;
+  font-size: 0.7em; margin-left: 6px; font-weight: normal;
+}
+.diff-easy { background: #e8f5e9; color: #2e7d32; }
+.diff-medium { background: #fff8e1; color: #f57f17; }
+.diff-hard { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+.diff-exam { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
+
+/* ------ 计算大题样式（与选择题保持一致） ------ */
+.calc-card {
+  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+  padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+}
+.calc-card.correct { border-color: #4caf50; background: #f1f8e9; }
+.calc-card.wrong { border-color: #f44336; background: #fce4ec; }
+.calc-card .q-title {
+  font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50;
+}
+.calc-card .q-title .q-tag {
+  display: inline-block; padding: 1px 10px; border-radius: 12px;
+  font-size: 0.75em; margin-right: 6px; color: #fff; background: #1a73e8;
+}
+.calc-card .step-area {
+  margin: 10px 0; padding: 10px 14px; border-radius: 8px;
+  font-size: 0.93em; display: none; line-height: 1.8;
+}
+.calc-card .step-area.show { display: block; }
+.calc-card .step-area.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+.calc-card .step-area.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+.calc-card .step-area .step { margin: 4px 0; padding-left: 12px; border-left: 3px solid #bbb; }
+.calc-card .step-area .answer { color: #2c3e50; font-weight: bold; margin: 6px 0 0; font-size: 1.05em; }
+.calc-card .btn-toggle {
+  display: inline-block; margin-top: 16px; padding: 6px 20px;
+  border: 2px solid #1a73e8; color: #1a73e8; border-radius: 16px;
+  background: #fff; cursor: pointer; font-size: 0.93em; transition: 0.15s;
+}
+.calc-card .btn-toggle:hover { background: #1a73e8; color: #fff; }
+.calc-card .calc-input {
+  width: 100%; padding: 10px 14px; border: 2px solid #ddd; border-radius: 8px;
+  font-size: 0.95em; outline: none; transition: border-color 0.15s;
+  margin: 6px 0; box-sizing: border-box;
+  font-family: 'Times New Roman', 'STIX', serif;
+}
+.calc-card .calc-input:focus { border-color: #1a73e8; }
+.calc-card .calc-input.correct-input { border-color: #4caf50; background: #e8f5e9; }
+/* 仅答错时使用红色 */
+.calc-card .calc-input.wrong-input { border-color: #f44336; background: #fce4ec; }
+.calc-card .btn-check {
+  padding: 6px 16px; background: #1a73e8; color: #fff; border: none;
+  border-radius: 8px; cursor: pointer; font-size: 0.9em; transition: 0.15s;
+}
+.calc-card .btn-check:hover { background: #1557b0; }
+.calc-card .btn-check:disabled { opacity: 0.5; cursor: default; }
+
+/* 底部 */
+#scoreDisplay {
+  display: inline-block; background: #1a73e8; color: #fff;
+  padding: 12px 32px; border-radius: 30px; font-size: 1.2em; font-weight: bold;
+}
+.reset-btn {
+  display: inline-block; margin-top: 12px; padding: 8px 28px;
+  border: 2px solid #1a73e8; color: #1a73e8; border-radius: 20px;
+  background: #fff; cursor: pointer; font-size: 1em; transition: 0.15s;
+}
+.reset-btn:hover { background: #e3f2fd; }
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>函数进阶测验（Part 1&ndash;4）</h1>
+<p class="tip">总分 100 分 · 选择题（每题 6 分，共 60 分）· 计算题（每题 8 分，共 40 分）</p>
+<p class="tip" style="font-size:0.9em;">点击选项提交答案，提交计算题后自动显示参考答案。</p>
+
+<!-- ==================== 第一部分：选择题 ==================== -->
+<section>
+<h2>一、选择题（每题 6 分）</h2>
+<div id="choice-container"></div>
+</section>
+
+<!-- ==================== 第二部分：计算题 ==================== -->
+<section>
+<h2>二、计算题（每题 8 分）</h2>
+<div id="calc-container"></div>
+</section>
+
+<!-- ==================== 得分 ==================== -->
+<div style="text-align:center;margin:24px 0;">
+  <div id="scoreDisplay">得分：0 / 100</div>
+  <br>
+  <button class="reset-btn" onclick="resetExam()">&#8635; 重新答题</button>
+</div>
+
+</article>
+
+<script>
+// ============================================================
+// 选择题（10 题 — 阶梯式难度，20% 高考难度）
+// 难度：基础×3 → 进阶×3 → 挑战×2 → 高考难度×2
+// ============================================================
+var choiceQuestions = [
+  // ----- 基础（Q1~Q3：函数概念、指数运算、分段函数）-----
+  {
+    diff: "基础",
+    question: "已知 f(x) = &radic;(x &minus; 1)，则 f(x) 的定义域是（  ）",
+    opts: ["x &gt; 1", "x &ge; 1", "x &lt; 1", "x &le; 1"],
+    answer: 1,
+    explain: "根号内须非负：x &minus; 1 &ge; 0，所以 x &ge; 1。"
+  },
+  {
+    diff: "基础",
+    question: "计算 2<sup>3</sup> &times; 2<sup>-1</sup> = （  ）",
+    opts: ["2<sup>2</sup>", "2<sup>-3</sup>", "2<sup>4</sup>", "2<sup>-2</sup>"],
+    answer: 0,
+    explain: "同底数幂相乘，指数相加：2<sup>3</sup> &times; 2<sup>-1</sup> = 2<sup>3-1</sup> = 2<sup>2</sup>。"
+  },
+  {
+    diff: "基础",
+    question: "已知 f(x) = { x + 1, x &ge; 0; x &minus; 1, x &lt; 0 }，则 f(2) + f(&minus;1) = （  ）",
+    opts: ["1", "2", "3", "4"],
+    answer: 0,
+    explain: "f(2) = 2 + 1 = 3，f(&minus;1) = (&minus;1) &minus; 1 = &minus;2，所以 3 + (&minus;2) = 1。"
+  },
+
+  // ----- 进阶（Q4~Q6：单调性、函数类型、对数运算）-----
+  {
+    diff: "进阶",
+    question: "函数 f(x) = &minus;x&sup2; + 1 在区间 [0, +&infin;) 上的单调性是（  ）",
+    opts: ["单调递增", "单调递减", "不增不减", "先增后减"],
+    answer: 1,
+    explain: "对任意 0 &le; x<sub>1</sub> &lt; x<sub>2</sub>，f(x<sub>1</sub>)&minus;f(x<sub>2</sub>) = (&minus;x<sub>1</sub>&sup2;+1)&minus;(&minus;x<sub>2</sub>&sup2;+1) = x<sub>2</sub>&sup2;&minus;x<sub>1</sub>&sup2; = (x<sub>2</sub>&minus;x<sub>1</sub>)(x<sub>2</sub>+x<sub>1</sub>) &gt; 0，所以 f(x<sub>1</sub>) &gt; f(x<sub>2</sub>)，单调递减。"
+  },
+  {
+    diff: "进阶",
+    question: "下列函数中，既是奇函数又在 R 上单调递增的是（  ）",
+    opts: ["f(x) = x&sup2;", "f(x) = x&sup3;", "f(x) = 2<sup>x</sup>", "f(x) = sin x"],
+    answer: 1,
+    explain: "x&sup3; 是奇函数且 R 上递增。x&sup2; 是偶函数；2<sup>x</sup> 非奇非偶；sin x 是奇函数但不单调（周期震荡）。"
+  },
+  {
+    diff: "进阶",
+    question: "log<sub>3</sub>9 + log<sub>2</sub>(1/4) = （  ）",
+    opts: ["0", "1", "2", "&minus;1"],
+    answer: 0,
+    explain: "log<sub>3</sub>9 = 2（3&sup2; = 9），log<sub>2</sub>(1/4) = &minus;2（2<sup>-2</sup> = 1/4），所以 2 + (&minus;2) = 0。"
+  },
+
+  // ----- 挑战（Q7~Q8：奇偶单调联合、诱导公式）-----
+  {
+    diff: "挑战",
+    question: "已知奇函数 f(x) 在 (0, +&infin;) 上单调递增，且 f(&minus;3) = 0，则 f(x) &gt; 0 的解集是（  ）",
+    opts: ["(&minus;3, 0) &cup; (3, +&infin;)", "(&minus;&infin;, &minus;3) &cup; (0, 3)", "(&minus;&infin;, &minus;3) &cup; (3, +&infin;)", "(&minus;3, 3)"],
+    answer: 0,
+    explain: "奇函数：f(3) = &minus;f(&minus;3) = 0。在 (0,+&infin;) 递增，故 (0,3) 上 f(x)&lt;0，(3,+&infin;) 上 f(x)&gt;0。由奇函数对称性，在(&minus;&infin;,&minus;3) 上 f(x)&lt;0，在(&minus;3,0) 上 f(x)&gt;0。所以 f(x)&gt;0 的解集为 (&minus;3,0)&cup;(3,+&infin;)。"
+  },
+  {
+    diff: "挑战",
+    question: "sin(&pi; &minus; &alpha;) &minus; cos(&pi;/2 + &alpha;) = （  ）",
+    opts: ["0", "2 sin &alpha;", "2 cos &alpha;", "2 sin &alpha; cos &alpha;"],
+    answer: 1,
+    explain: "由诱导公式：sin(&pi;&minus;&alpha;) = sin &alpha;，cos(&pi;/2+&alpha;) = &minus;sin &alpha;，所以原式 = sin &alpha; &minus; (&minus;sin &alpha;) = 2 sin &alpha;。"
+  },
+
+  // ----- 高考难度（Q9~Q10：抽象函数、复合函数值域）-----
+  {
+    diff: "高考难度",
+    question: "函数 f(x) 定义域为 R，对任意 x, y &isin; R 满足 f(x+y) = f(x) + f(y)。若 f(2) = 4，则 f(&minus;1) = （  ）",
+    opts: ["&minus;2", "&minus;1", "0", "1"],
+    answer: 0,
+    explain: "由 f(1+1)=f(1)+f(1)=4 得 f(1)=2。令 x=1,y=&minus;1，得 f(0)=f(1)+f(&minus;1)。又 f(0)=f(0+0)=f(0)+f(0) → f(0)=0。所以 0=2+f(&minus;1) → f(&minus;1)=&minus;2。"
+  },
+  {
+    diff: "高考难度",
+    question: "设 a &gt; 0 且 a &ne; 1，若 f(x) = log<sub>a</sub>(ax&sup2; &minus; 2x + 3) 的值域为 R，则 a 的取值范围是（  ）",
+    opts: ["(0, 1/3]", "(0, 1)", "(1/3, 1)", "(1, +&infin;)"],
+    answer: 0,
+    explain: "令 g(x) = ax&sup2; &minus; 2x + 3。要使 f(x) 值域为 R，g(x) 须取遍所有正数。a &gt; 0 时开口向上，最小值 g(1/a) = a(1/a&sup2;) &minus; 2(1/a) + 3 = 3 &minus; 1/a。需 3 &minus; 1/a &le; 0 → a &le; 1/3。所以 a &isin; (0, 1/3]。"
+  }
+];
+
+// ============================================================
+// 计算题（5 题 — 阶梯式难度，最后一题为高考难度）
+// ============================================================
+var calcQuestions = [
+  // 基础 — 定义域
+  {
+    question: "求函数 f(x) = &radic;(3 &minus; x) + 1/(x + 1) 的定义域。<br>（请用区间或不等式表示）",
+    answer: "(&minus;&infin;, &minus;1) &cup; (&minus;1, 3]",
+    keywords: ["3", "-1"],
+    keywordMode: "and",
+    steps: [
+      "需同时满足两个条件：",
+      "① 根号内非负：3 &minus; x &ge; 0 → x &le; 3",
+      "② 分母不为零：x + 1 &ne; 0 → x &ne; &minus;1",
+      "综上，定义域为 (&minus;&infin;, &minus;1) &cup; (&minus;1, 3]"
+    ]
+  },
+  // 进阶 — 单调性证明
+  {
+    question: "用定义法证明函数 f(x) = 1/x 在 (0, +&infin;) 上单调递减。",
+    answer: "任取 x&#8321;&lt;x&#8322;&isin;(0,+&infin;)，f(x&#8321;)&minus;f(x&#8322;) = (x&#8322;&minus;x&#8321;)/(x&#8321;x&#8322;) &gt; 0，故递减。",
+    keywords: ["x1", "x2", "递减"],
+    keywordMode: "and",
+    steps: [
+      "任取 x&#8321; &lt; x&#8322; &isin; (0, +&infin;)",
+      "f(x&#8321;) &minus; f(x&#8322;) = 1/x&#8321; &minus; 1/x&#8322; = (x&#8322; &minus; x&#8321;)/(x&#8321;x&#8322;)",
+      "&because; x&#8321; &lt; x&#8322; &rArr; x&#8322; &minus; x&#8321; &gt; 0",
+      "&because; x&#8321;, x&#8322; &isin; (0, +&infin;) &rArr; x&#8321;x&#8322; &gt; 0",
+      "&there4; f(x&#8321;) &minus; f(x&#8322;) &gt; 0，即 f(x&#8321;) &gt; f(x&#8322;)",
+      "由定义，f(x) 在 (0, +&infin;) 上单调递减"
+    ]
+  },
+  // 进阶 — 指数对数计算
+  {
+    question: "计算：8<sup>2/3</sup> &times; (1/4)<sup>&minus;1</sup> + log<sub>2</sub>16 &minus; log<sub>5</sub>1",
+    answer: "20",
+    keywords: ["20"],
+    keywordMode: "or",
+    steps: [
+      "8<sup>2/3</sup> = (2&sup3;)<sup>2/3</sup> = 2&sup2; = 4",
+      "(1/4)<sup>&minus;1</sup> = 4",
+      "log<sub>2</sub>16 = 4（2<sup>4</sup> = 16）",
+      "log<sub>5</sub>1 = 0（5&deg; = 1）",
+      "原式 = 4 &times; 4 + 4 &minus; 0 = 16 + 4 = 20"
+    ]
+  },
+  // 挑战 — 奇偶性 + 单调性证明
+  {
+    question: "判断函数 f(x) = x&sup3; + x 的奇偶性，并用定义法证明 f(x) 在 R 上单调递增。",
+    answer: "奇函数，任取 x&#8321;&lt;x&#8322;，f(x&#8321;)&minus;f(x&#8322;) = (x&#8321;&minus;x&#8322;)(x&#8321;&sup2;+x&#8321;x&#8322;+x&#8322;&sup2;+1) &lt; 0，故递增。",
+    keywords: ["奇函数", "f(-x)", "递增"],
+    keywordMode: "and",
+    steps: [
+      "奇偶性：",
+      "f(&minus;x) = (&minus;x)&sup3; + (&minus;x) = &minus;x&sup3; &minus; x = &minus;(x&sup3;+x) = &minus;f(x)",
+      "&there4; f(x) 是奇函数",
+      "",
+      "单调性：",
+      "任取 x&#8321; &lt; x&#8322; &isin; R",
+      "f(x&#8321;) &minus; f(x&#8322;) = (x&#8321;&sup3;+x&#8321;) &minus; (x&#8322;&sup3;+x&#8322;)",
+      "= (x&#8321;&sup3; &minus; x&#8322;&sup3;) + (x&#8321; &minus; x&#8322;)",
+      "= (x&#8321; &minus; x&#8322;)(x&#8321;&sup2; + x&#8321;x&#8322; + x&#8322;&sup2; + 1)",
+      "&because; x&#8321; &minus; x&#8322; &lt; 0，且 x&#8321;&sup2;+x&#8321;x&#8322;+x&#8322;&sup2;+1 = (x&#8321;+x&#8322;/2)&sup2; + 3x&#8322;&sup2;/4 + 1 &gt; 0",
+      "&there4; f(x&#8321;) &minus; f(x&#8322;) &lt; 0，即 f(x&#8321;) &lt; f(x&#8322;)",
+      "故 f(x) 在 R 上单调递增"
+    ]
+  },
+  // 高考难度 — 对数复合函数
+  {
+    question: "已知函数 f(x) = lg(a<sup>x</sup> &minus; 1)，其中 a &gt; 0 且 a &ne; 1。<br>(1) 求 f(x) 的定义域；<br>(2) 判断 f(x) 的单调性，并说明理由。",
+    answer: "(1) a&gt;1时 x&gt;0；0&lt;a&lt;1时 x&lt;0 (2) a&gt;1时递增，0&lt;a&lt;1时递减",
+    keywords: ["a>1", "0<a<1"],
+    keywordMode: "or",
+    steps: [
+      "真数须大于零：a<sup>x</sup> &minus; 1 &gt; 0 → a<sup>x</sup> &gt; 1",
+      "(1) 定义域：",
+      "  当 a &gt; 1 时，x &gt; 0，定义域为 (0, +&infin;)",
+      "  当 0 &lt; a &lt; 1 时，x &lt; 0，定义域为 (&minus;&infin;, 0)",
+      "",
+      "(2) 单调性：",
+      "  当 a &gt; 1 时：a<sup>x</sup> 递增 &rArr; a<sup>x</sup>&minus;1 递增 &rArr; lg(a<sup>x</sup>&minus;1) 递增（y=lg t 递增）",
+      "  当 0 &lt; a &lt; 1 时：a<sup>x</sup> 递减 &rArr; a<sup>x</sup>&minus;1 递减 &rArr; lg(a<sup>x</sup>&minus;1) 递减（y=lg t 递增）",
+      "",
+      "或者用定义法证明：任取 x&#8321;&lt;x&#8322;，比较 f(x&#8321;) 和 f(x&#8322;) 的大小。"
+    ]
+  }
+];
+
+// ============================================================
+// 渲染
+// ============================================================
+var choiceAnswered = [];
+var calcChecked = [];
+var totalScore = 0;
+
+var diffLabels = {
+  "基础": '<span class="diff-tag diff-easy">基础</span>',
+  "进阶": '<span class="diff-tag diff-medium">进阶</span>',
+  "挑战": '<span class="diff-tag diff-hard">挑战</span>',
+  "高考难度": '<span class="diff-tag diff-exam">高考难度</span>'
+};
+
+function render() {
+  // 渲染选择题
+  var choiceHtml = "";
+  for (var i = 0; i < choiceQuestions.length; i++) {
+    var q = choiceQuestions[i];
+    var letter = ["A", "B", "C", "D"];
+    choiceHtml += '<div class="quiz-question" id="cq' + i + '">';
+    choiceHtml += '<div class="q-title"><span class="q-tag choice">选择</span> ' + (i+1) + '. ' + q.question + ' ' + (diffLabels[q.diff] || "") + '</div>';
+    choiceHtml += '<div class="options">';
+    for (var j = 0; j < q.opts.length; j++) {
+      choiceHtml += '<div class="opt" onclick="selectChoice(' + i + ',' + j + ')">' + letter[j] + '. ' + q.opts[j] + '</div>';
+    }
+    choiceHtml += '</div>';
+    choiceHtml += '<div class="explain" id="cexp' + i + '"></div>';
+    choiceHtml += '</div>';
+  }
+  document.getElementById("choice-container").innerHTML = choiceHtml;
+  choiceAnswered = new Array(choiceQuestions.length).fill(-1);
+
+  // 渲染计算题
+  var calcHtml = "";
+  for (var i = 0; i < calcQuestions.length; i++) {
+    var q = calcQuestions[i];
+    var calcDiff = (i >= 4) ? ' <span class="diff-tag diff-exam">高考难度</span>' : (i >= 3) ? ' <span class="diff-tag diff-hard">挑战</span>' : (i >= 1) ? ' <span class="diff-tag diff-medium">进阶</span>' : '';
+    calcHtml += '<div class="calc-card" id="calc' + i + '">';
+    calcHtml += '<div class="q-title"><span class="q-tag">计算</span> ' + (i+1) + '. ' + q.question + calcDiff + '</div>';
+    calcHtml += '<div style="margin:8px 0;"><strong>你的答案：</strong></div>';
+    calcHtml += '<textarea class="calc-input" id="calcInput' + i + '" rows="3" placeholder="请输入你的解答过程..."></textarea>';
+    calcHtml += '<button class="btn-check" id="calcBtn' + i + '" onclick="checkCalc(' + i + ')">提交</button>';
+    calcHtml += '<div class="step-area" id="calcStep' + i + '">';
+    for (var k = 0; k < q.steps.length; k++) {
+      if (q.steps[k] === "") {
+        calcHtml += '<br>';
+      } else {
+        calcHtml += '<div class="step">' + q.steps[k] + '</div>';
+      }
+    }
+    calcHtml += '<div class="answer">答案：' + q.answer + '</div>';
+    calcHtml += '</div>';
+    calcHtml += '<button class="btn-toggle" onclick="toggleCalc(' + i + ')">查看解答</button>';
+    calcHtml += '</div>';
+  }
+  document.getElementById("calc-container").innerHTML = calcHtml;
+  calcChecked = new Array(calcQuestions.length).fill(false);
+}
+
+// ============================================================
+// 选择题交互
+// ============================================================
+function selectChoice(qi, oi) {
+  if (choiceAnswered[qi] !== -1) return;
+  choiceAnswered[qi] = oi;
+  var q = choiceQuestions[qi];
+  var isCorrect = (oi === q.answer);
+
+  var qDiv = document.getElementById("cq" + qi);
+  var opts = qDiv.querySelectorAll(".opt");
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add("disabled");
+    if (i === q.answer) opts[i].classList.add("correct-opt");
+    if (i === oi && !isCorrect) opts[i].classList.add("wrong-opt");
+    if (i === oi && isCorrect) opts[i].classList.add("selected");
+  }
+
+  qDiv.classList.add(isCorrect ? "correct" : "wrong");
+
+  var expDiv = document.getElementById("cexp" + qi);
+  expDiv.innerHTML = (isCorrect ? "\u2713 " : "\u2717 ") + q.explain;
+  expDiv.className = "explain show " + (isCorrect ? "ok" : "fail");
+
+  updateScore();
+}
+
+// ============================================================
+// 计算题交互
+// ============================================================
+function checkCalc(qi) {
+  if (calcChecked[qi]) return;
+  calcChecked[qi] = true;
+  var input = document.getElementById("calcInput" + qi);
+  var q = calcQuestions[qi];
+  var userAnswer = input.value.trim();
+  var isCorrect = false;
+  if (q.keywords && q.keywords.length > 0) {
+    var matchCount = 0;
+    for (var k = 0; k < q.keywords.length; k++) {
+      if (userAnswer.indexOf(q.keywords[k]) !== -1) {
+        matchCount++;
+      }
+    }
+    if (q.keywordMode === "or") {
+      isCorrect = (matchCount >= 1);
+    } else {
+      isCorrect = (matchCount >= q.keywords.length);
+    }
+  }
+  input.disabled = true;
+  document.getElementById("calcBtn" + qi).disabled = true;
+  if (isCorrect) {
+    input.classList.add("correct-input");
+  } else {
+    input.classList.add("wrong-input");
+  }
+  // 卡片容器添加 correct/wrong 类（与选择题一致）
+  var card = document.getElementById("calc" + qi);
+  card.classList.add(isCorrect ? "correct" : "wrong");
+  // 自动显示步骤区域，并添加 ok/fail 类（与选择题 explain 一致）
+  var stepArea = document.getElementById("calcStep" + qi);
+  stepArea.classList.add("show", isCorrect ? "ok" : "fail");
+  updateScore();
+}
+
+function toggleCalc(qi) {
+  var stepArea = document.getElementById("calcStep" + qi);
+  stepArea.classList.toggle("show");
+}
+
+// ============================================================
+// 计分
+// ============================================================
+function updateScore() {
+  var total = 0;
+  for (var i = 0; i < choiceQuestions.length; i++) {
+    if (choiceAnswered[i] === choiceQuestions[i].answer) {
+      total += 6;
+    }
+  }
+  for (var i = 0; i < calcQuestions.length; i++) {
+    if (calcChecked[i]) {
+      var input = document.getElementById("calcInput" + i);
+      if (input && input.classList.contains("correct-input")) {
+        total += 8;
+      }
+    }
+  }
+  totalScore = total;
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a" + total + " / 100";
+}
+
+function resetExam() {
+  choiceAnswered = new Array(choiceQuestions.length).fill(-1);
+  calcChecked = new Array(calcQuestions.length).fill(false);
+  totalScore = 0;
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a0 / 100";
+
+  for (var i = 0; i < choiceQuestions.length; i++) {
+    var qDiv = document.getElementById("cq" + i);
+    if (qDiv) {
+      qDiv.className = "quiz-question";
+      var opts = qDiv.querySelectorAll(".opt");
+      for (var j = 0; j < opts.length; j++) {
+        opts[j].className = "opt";
+      }
+      document.getElementById("cexp" + i).className = "explain";
+    }
+  }
+
+  for (var i = 0; i < calcQuestions.length; i++) {
+    var card = document.getElementById("calc" + i);
+    if (card) card.className = "calc-card";
+    var input = document.getElementById("calcInput" + i);
+    if (input) {
+      input.disabled = false;
+      input.value = "";
+      input.className = "calc-input";
+      document.getElementById("calcBtn" + i).disabled = false;
+      document.getElementById("calcStep" + i).className = "step-area";
+    }
+  }
+}
+
+render();
+</script>
+</body>
+</html>

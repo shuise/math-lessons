@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>统计</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  h3 { color: #2c3e50; margin: 28px 0 12px; font-size: 1.15em; }
+  h4 { color: #555; margin: 18px 0 8px; font-size: 1em; }
+  .formula-box { border: 2px solid #1a73e8; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #f0f7ff; }
+  .formula-box p { margin: 6px 0; text-align: center; font-size: 1.05em; }
+  .key-point { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+  .compare-table th:first-child { min-width: 80px; }
+
+  /* Quiz styles */
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag {
+    display: inline-block; padding: 2px 12px; border-radius: 12px;
+    font-size: 0.75em; margin-right: 8px; color: #fff;
+  }
+  .q-tag.concept { background: #1a73e8; }
+  .q-tag.calc { background: #e67e22; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+  }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+  /* Fill-in quiz styles */
+  .quiz-question .fill-input {
+    padding: 8px 12px; border: 2px solid #ddd; border-radius: 8px;
+    font-size: 1em; width: 120px; margin: 8px 0; outline: none; transition: border-color 0.2s;
+  }
+  .quiz-question .fill-input:focus { border-color: #1a73e8; }
+  .quiz-question .fill-input.correct-input { border-color: #4caf50; background: #e8f5e9; }
+  .quiz-question .fill-input.wrong-input { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .btn-check {
+    padding: 6px 20px; border: 2px solid #1a73e8; color: #1a73e8;
+    border-radius: 16px; background: #fff; cursor: pointer; font-size: 0.93em;
+    margin-left: 8px; transition: 0.15s;
+  }
+  .quiz-question .btn-check:hover { background: #1a73e8; color: #fff; }
+  .quiz-question .btn-check:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* Comprehensive exercise styles */
+  .comp-exercise {
+    background: #fff; border: 2px solid #1a73e8; border-radius: 10px;
+    padding: 20px 24px; margin: 20px 0; border-left: 6px solid #1a73e8;
+  }
+  .comp-exercise h4 { margin-top: 0; color: #1a73e8; }
+  .comp-exercise .answer-box {
+    margin-top: 12px; padding: 14px; background: #f0f7ff;
+    border-radius: 8px; display: none; border-left: 4px solid #1a73e8;
+  }
+  .comp-exercise .answer-box.show { display: block; }
+  .comp-exercise .btn-toggle {
+    display: inline-block; margin-top: 10px; padding: 6px 18px;
+    border: 2px solid #1a73e8; color: #1a73e8; border-radius: 16px;
+    background: #fff; cursor: pointer; font-size: 0.93em;
+    transition: 0.15s;
+  }
+  .comp-exercise .btn-toggle:hover { background: #1a73e8; color: #fff; }
+
+  /* Score panel */
+  .score-panel {
+    text-align: center; padding: 16px; margin: 20px 0;
+    background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8;
+  }
+  .score-panel .score-num { font-size: 2em; font-weight: bold; color: #1a73e8; }
+  .score-panel .btn-reset {
+    margin-left: 16px; padding: 8px 24px; border: 2px solid #1a73e8;
+    color: #1a73e8; border-radius: 20px; background: #fff;
+    cursor: pointer; font-size: 0.95em; transition: 0.15s;
+  }
+  .score-panel .btn-reset:hover { background: #1a73e8; color: #fff; }
+
+  /* Data table for statistics */
+  .data-table { font-size: 0.92em; }
+  .data-table td, .data-table th { padding: 6px 10px; }
+  .histogram-bar { display: inline-block; background: #1a73e8; margin-right: 2px; border-radius: 2px 2px 0 0; vertical-align: bottom; }
+  .scatter-plot { position: relative; width: 100%; height: 240px; background: #fafafa; border: 1px solid #ddd; border-radius: 8px; margin: 12px 0; overflow: hidden; }
+  .scatter-point { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: #1a73e8; transform: translate(-50%, -50%); }
+  .scatter-point.highlight { background: #e67e22; width: 10px; height: 10px; }
+  .regression-line { position: absolute; height: 2px; background: #e67e22; transform-origin: left center; opacity: 0; transition: opacity 0.5s; }
+  .regression-line.show { opacity: 1; }
+
+  /* Contingency table */
+  .ctable td { min-width: 60px; }
+  .ctable th { min-width: 60px; }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>统计</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">从实际问题出发，理解"如何收集数据、分析数据、从数据中得出结论"——统计不是公式堆砌，而是从混乱中找规律的思维方式。</p>
+
+<!-- ============================== 一、随机抽样 ============================== -->
+<section>
+<h2>一、随机抽样</h2>
+
+<h3>为什么要抽样？</h3>
+<p>假设你想知道全校 2000 名学生的平均身高，你会怎么做？如果挨个测量每一个人，工作量太大，而且有些同学可能当天不在学校。更现实的做法是：<strong>从全校学生中选出一部分人（一个样本）来测量，然后用样本的平均身高去估计全校的平均身高</strong>。</p>
+
+<p>但这里有一个关键问题：<strong>怎么选"这一部分人"？</strong>如果只选篮球队员，估计值会偏高；如果只选田径队的，可能又偏低。我们需要一种方法，让每个人被选中的机会<strong>均等</strong>，这样样本才能代表总体。这就是<strong>随机抽样</strong>的思想。</p>
+
+<div class="definition">
+  <p><strong>随机抽样</strong>：从总体中按照某种规则抽取一部分个体作为样本，使得每个个体被抽中的概率相等，从而样本能够较好地反映总体的特征。</p>
+</div>
+
+<h3>1. 简单随机抽样</h3>
+<p>这是最基本的抽样方法——<strong>每个个体被抽中的概率完全相同</strong>。适用于总体不太大的情况（比如全校 2000 人以内）。</p>
+
+<p>常用两种方式：</p>
+<ul>
+  <li><strong>抽签法：</strong>把每个学生写在一张纸条上，放入箱子充分搅拌，然后随机抽取。简单直观，但总体很大时操作不便。</li>
+  <li><strong>随机数表法：</strong>给每个学生编号（如 0001~2000），然后用随机数表（或计算机生成的随机数）选出一组编号。效率更高，避免人为偏差。</li>
+</ul>
+
+<div class="example">
+  <p><strong>例：</strong>从 50 名同学中用抽签法选 5 人。</p>
+  <p class="step">步骤 1：给 50 名同学每人写一张编号为 01~50 的纸条。</p>
+  <p class="step">步骤 2：将所有纸条放入箱子，充分搅拌。</p>
+  <p class="step">步骤 3：从中随机抽出 5 张纸条，对应的同学即为样本。</p>
+  <p class="step"><strong>优点：</strong>操作简单，原理直观。<strong>缺点：</strong>人数太多时，搅拌不均匀可能导致偏差。</p>
+</div>
+
+<h3>2. 系统抽样</h3>
+<p>当总体数量很大时，抽签法就不太方便了。系统抽样提供了一种更高效的替代方案。</p>
+
+<div class="example">
+  <p><strong>例：</strong>从全校 2000 名学生中抽取 100 人。</p>
+  <p class="step">步骤 1：将 2000 名学生按某种顺序编号（如学号 0001~2000）。</p>
+  <p class="step">步骤 2：计算抽样间隔 k = 2000 &divide; 100 = 20。</p>
+  <p class="step">步骤 3：在 1~20 中随机选一个起点，比如 7。</p>
+  <p class="step">步骤 4：然后依次取编号为 7, 27, 47, 67, … 的学生，直到取满 100 人。</p>
+</div>
+
+<div class="hint">
+  <strong>系统抽样的关键：</strong>先确定间隔 k = N/n（N 为总体数，n 为样本数），再随机确定起点，之后每隔 k 个取一个。<strong>适用场景：</strong>总体无明显分层或周期性规律时。
+</div>
+
+<h3>3. 分层抽样</h3>
+<p>如果全校学生中，高一、高二、高三的身高有显著差异，那么简单随机抽样可能会让某个年级的人数偏多或偏少。这时用<strong>分层抽样</strong>更好——先按年级分成"层"，再按比例从各层中抽取。</p>
+
+<div class="example">
+  <p><strong>例：</strong>全校 2000 人中，高一 800 人、高二 600 人、高三 600 人。要抽 100 人了解身高情况。</p>
+  <p class="step">按照各年级人数比例分配：</p>
+  <p class="step">高一应抽：100 &times; (800 &divide; 2000) = 40 人</p>
+  <p class="step">高二应抽：100 &times; (600 &divide; 2000) = 30 人</p>
+  <p class="step">高三应抽：100 &times; (600 &divide; 2000) = 30 人</p>
+  <p class="step">然后在各年级内部用简单随机抽样或系统抽样抽取相应人数。</p>
+</div>
+
+<div class="hint">
+  <strong>三种方法的对比：</strong>
+  <br>简单随机抽样：每人均等，适合小总体
+  <br>系统抽样：等间隔抽取，适合大总体、无规律
+  <br>分层抽样：按比例分层，适合层内差异小、层间差异大
+</div>
+</section>
+
+<!-- 知识点1：抽样方法选择 -->
+<div class="quiz-question" id="q1">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    某校有走读生 300 人、住宿生 700 人。要调查学生对食堂的满意度，最合适的抽样方法是？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(1, 0)">A. 简单随机抽样</div>
+    <div class="opt" onclick="checkChoice(1, 1)">B. 系统抽样</div>
+    <div class="opt" onclick="checkChoice(1, 2)">C. 分层抽样</div>
+    <div class="opt" onclick="checkChoice(1, 3)">D. 随意找 50 个学生</div>
+  </div>
+  <div class="explain" id="explain1">
+    <strong>解析：</strong>走读生和住宿生对食堂的满意度可能有较大差异（层间差异大），且两类人数差异也大。用<strong>分层抽样</strong>可以按比例从两类中各抽一定人数，使样本更有代表性。选 C。
+  </div>
+</div>
+
+<!-- 知识点2：系统抽样 -->
+<div class="quiz-question" id="q2">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    从 1200 名学生中用系统抽样抽 60 人，间隔 k 是多少？如果在 1~20 中随机抽到的起点是 15，那么第 3 个被抽中的编号是多少？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(2, 0)">A. k=20, 编号 55</div>
+    <div class="opt" onclick="checkChoice(2, 1)">B. k=20, 编号 35</div>
+    <div class="opt" onclick="checkChoice(2, 2)">C. k=20, 编号 75</div>
+    <div class="opt" onclick="checkChoice(2, 3)">D. k=20, 编号 15</div>
+  </div>
+  <div class="explain" id="explain2">
+    <strong>解析：</strong>间隔 k = 1200 / 60 = 20。起点为 15，第 2 个为 15+20=35，第 3 个为 15+40=<strong>55</strong>。选 A。
+  </div>
+</div>
+
+<!-- ============================== 二、用样本估计总体 ============================== -->
+<section>
+<h2>二、用样本估计总体</h2>
+
+<h3>从数据到信息</h3>
+<p>我们通过抽样收集到了一批数据，比如 100 名学生的身高（单位：cm）：</p>
+
+<div class="example">
+  <p><strong>数据：</strong>155, 158, 160, 162, 163, 165, 165, 166, 167, 168, 168, 169, 170, 170, 171, 172, 173, 174, 175, 178</p>
+  <p class="step">（以上为简化数据，实际样本通常会更大）</p>
+</div>
+
+<p>面对一堆数字，我们很难直接看出规律。需要用一些方法把它们<strong>整理成可视化的形式</strong>，再从中提取关键特征。</p>
+
+<h3>1. 频率分布直方图</h3>
+<p>将数据分成若干组（组），统计每组数据出现的次数（频数），然后计算频率（频数 &divide; 总数），用矩形的高度表示频率密度（频率 &divide; 组距）。</p>
+
+<div class="example">
+  <p><strong>以 20 个身高数据为例：</strong></p>
+  <p class="step">确定组距为 5，分组为：[155,160), [160,165), [165,170), [170,175), [175,180)</p>
+  <table class="data-table">
+    <tr><th>分组</th><th>频数</th><th>频率</th><th>频率/组距</th></tr>
+    <tr><td>[155, 160)</td><td>2</td><td>0.10</td><td>0.020</td></tr>
+    <tr><td>[160, 165)</td><td>3</td><td>0.15</td><td>0.030</td></tr>
+    <tr><td>[165, 170)</td><td>7</td><td>0.35</td><td>0.070</td></tr>
+    <tr><td>[170, 175)</td><td>5</td><td>0.25</td><td>0.050</td></tr>
+    <tr><td>[175, 180)</td><td>3</td><td>0.15</td><td>0.030</td></tr>
+  </table>
+  <p class="step">直方图中，<strong>所有矩形面积之和 = 1</strong>（因为各组频率之和为 1）。</p>
+</div>
+
+<div class="hint">
+  <strong>为什么用"频率/组距"做高度而不是直接用频数？</strong>
+  因为组距不同时，直接用频数做柱状图会误导。用"频率/组距"可以保证面积 = 频率，使不同分组方案的图形有可比性。
+</div>
+
+<h3>2. 样本数字特征</h3>
+<p>直方图给了我们直观的形状，但我们还需要一些<strong>数字</strong>来描述数据的集中趋势和离散程度。</p>
+
+<div class="definition">
+  <p><strong>均值（平均数）：</strong>所有数据之和 &divide; 数据个数。反映数据的"重心"。</p>
+  <p style="text-align:center;font-size:1.15em;font-weight:bold;margin:6px 0;">x̄ = (x<sub>1</sub> + x<sub>2</sub> + … + x<sub>n</sub>) / n</p>
+  <p><strong>中位数：</strong>将数据从小到大排列，位于中间位置的数。如果数据个数为偶数，取中间两个数的平均值。不受极端值影响。</p>
+  <p><strong>众数：</strong>出现次数最多的数据。可能不止一个。</p>
+  <p><strong>方差：</strong>各数据与均值之差的平方的平均值。反映数据的"波动程度"。</p>
+  <p style="text-align:center;font-size:1.15em;font-weight:bold;margin:6px 0;">s<sup>2</sup> = [(x<sub>1</sub>-x̄)<sup>2</sup> + (x<sub>2</sub>-x̄)<sup>2</sup> + … + (x<sub>n</sub>-x̄)<sup>2</sup>] / n</p>
+  <p><strong>标准差：</strong>方差的正平方根 s，与原数据单位相同，更便于解释。</p>
+</div>
+
+<div class="example">
+  <p><strong>用上面的身高数据计算：</strong></p>
+  <p class="step">均值 x̄ = (155+158+160+162+163+165+165+166+167+168+168+169+170+170+171+172+173+174+175+178) &divide; 20</p>
+  <p class="step">= 3356 &divide; 20 = <strong>167.8 cm</strong></p>
+  <p class="step">中位数：第 10 个（168）和第 11 个（168）的平均数 = <strong>168 cm</strong></p>
+  <p class="step">众数：165、168、170 都出现了 2 次（最多）→ <strong>165, 168, 170</strong></p>
+  <p class="step">方差 s<sup>2</sup> &asymp; <strong>33.56</strong>，标准差 s &asymp; <strong>5.79 cm</strong></p>
+  <p class="step"><strong>结论：</strong>样本平均身高约 167.8cm，标准差约 5.79cm，说明大部分人的身高在 167.8 &plusmn; 5.79 范围内。</p>
+</div>
+
+<div class="hint">
+  <strong>均值 vs 中位数：</strong>如果数据中有异常大的值（比如一个人身高 220cm），均值会被拉高，但中位数不变。所以当数据可能有极端值时，中位数更能反映"典型"水平。
+</div>
+</section>
+
+<!-- 知识点3：直方图理解 -->
+<div class="quiz-question" id="q3">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    在频率分布直方图中，所有矩形的面积之和等于？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(3, 0)">A. 样本容量 n</div>
+    <div class="opt" onclick="checkChoice(3, 1)">B. 组数</div>
+    <div class="opt" onclick="checkChoice(3, 2)">C. 1</div>
+    <div class="opt" onclick="checkChoice(3, 3)">D. 组距 &times; 组数</div>
+  </div>
+  <div class="explain" id="explain3">
+    <strong>解析：</strong>频率分布直方图中，每个矩形的面积 = (频率/组距) &times; 组距 = 频率，所有矩形面积之和 = 所有频率之和 = <strong>1</strong>。选 C。
+  </div>
+</div>
+
+<!-- 知识点4：数字特征 -->
+<div class="quiz-question" id="q4">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    一组数据：2, 4, 6, 8, 10，这组数据的方差是多少？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(4, 0)">A. 6</div>
+    <div class="opt" onclick="checkChoice(4, 1)">B. 8</div>
+    <div class="opt" onclick="checkChoice(4, 2)">C. 4</div>
+    <div class="opt" onclick="checkChoice(4, 3)">D. 10</div>
+  </div>
+  <div class="explain" id="explain4">
+    <strong>解析：</strong>均值 x̄ = (2+4+6+8+10)/5 = 6。<br>
+    方差 s<sup>2</sup> = [(2-6)<sup>2</sup>+(4-6)<sup>2</sup>+(6-6)<sup>2</sup>+(8-6)<sup>2</sup>+(10-6)<sup>2</sup>] / 5<br>
+    = [16+4+0+4+16] / 5 = 40/5 = <strong>8</strong>。选 B。
+  </div>
+</div>
+
+<!-- ============================== 三、回归分析 ============================== -->
+<section>
+<h2>三、回归分析</h2>
+
+<h3>广告费越多，销售额越高吗？</h3>
+<p>假设某公司记录了 6 个月的广告投入和销售额数据：</p>
+
+<table class="data-table">
+  <tr><th>广告费 x（万元）</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+  <tr><th>销售额 y（万元）</th><td>12</td><td>15</td><td>18</td><td>20</td><td>24</td><td>28</td></tr>
+</table>
+
+<p>直观上看，广告费越多，销售额似乎越高。但两者之间的<strong>关系有多强？能否用一个数学公式来描述这种关系？</strong></p>
+
+<h3>1. 散点图</h3>
+<p>将每组 (x, y) 数据在坐标系中描点，得到<strong>散点图</strong>。如果这些点大致分布在一条直线附近，我们就说 x 与 y 存在<strong>线性相关关系</strong>。</p>
+
+<div id="scatter-container" class="scatter-plot"></div>
+
+<h3>2. 最小二乘法</h3>
+<p>我们希望找到一条直线 ŷ = a + bx，使得它"最好地"拟合这些点。怎么定义"最好"？</p>
+
+<p>对于每个数据点 (x<sub>i</sub>, y<sub>i</sub>)，直线上的预测值是 ŷ<sub>i</sub> = a + bx<sub>i</sub>，真实值与预测值的差 y<sub>i</sub> - ŷ<sub>i</sub> 叫做<strong>残差</strong>。</p>
+
+<div class="key-point">
+  <p><strong>最小二乘法的核心思想：</strong>找到 a 和 b，使得所有残差的<strong>平方和</strong>最小：</p>
+  <p style="text-align:center;font-size:1.15em;font-weight:bold;margin:8px 0;">Q = &sum;(y<sub>i</sub> - ŷ<sub>i</sub>)<sup>2</sup> = &sum;(y<sub>i</sub> - a - bx<sub>i</sub>)<sup>2</sup> 取最小值</p>
+</div>
+
+<div class="hint">
+  <strong>为什么用平方和而不是绝对值和？</strong>
+  <br>如果用 |y<sub>i</sub>-ŷ<sub>i</sub>| 的求和，绝对值函数在零点不可导，数学上难以求解最小值。平方函数处处可导，可以通过求导得到唯一解。<br>
+  而且平方放大了较大误差的影响，使得回归直线更"关注"偏离较大的点——这在大多数情况下是合理的。
+</div>
+
+<p>通过数学推导（对 a 和 b 求偏导令其为零），得到：</p>
+
+<div class="formula-box">
+  <p style="font-size:1.1em;font-weight:bold;">线性回归方程 ŷ = a + bx</p>
+  <p>b = [&sum;(x<sub>i</sub>-x̄)(y<sub>i</sub>-ȳ)] / [&sum;(x<sub>i</sub>-x̄)<sup>2</sup>]</p>
+  <p>a = ȳ - b &middot; x̄</p>
+  <p style="font-size:0.9em;color:#666;">其中 x̄ 是 x 的均值，ȳ 是 y 的均值</p>
+</div>
+
+<div class="example">
+  <p><strong>用上面的广告-销售额数据计算：</strong></p>
+  <p class="step">x̄ = (1+2+3+4+5+6)/6 = 3.5, ȳ = (12+15+18+20+24+28)/6 = 19.5</p>
+  <p class="step">分子 &sum;(x<sub>i</sub>-x̄)(y<sub>i</sub>-ȳ) = (1-3.5)(12-19.5)+(2-3.5)(15-19.5)+…+(6-3.5)(28-19.5)</p>
+  <p class="step">= (-2.5)(-7.5)+(-1.5)(-4.5)+(-0.5)(-1.5)+(0.5)(0.5)+(1.5)(4.5)+(2.5)(8.5)</p>
+  <p class="step">= 18.75 + 6.75 + 0.75 + 0.25 + 6.75 + 21.25 = <strong>54.5</strong></p>
+  <p class="step">分母 &sum;(x<sub>i</sub>-x̄)<sup>2</sup> = 6.25 + 2.25 + 0.25 + 0.25 + 2.25 + 6.25 = <strong>17.5</strong></p>
+  <p class="step">b = 54.5 / 17.5 &asymp; <strong>3.11</strong></p>
+  <p class="step">a = 19.5 - 3.11 &times; 3.5 &asymp; 19.5 - 10.89 = <strong>8.61</strong></p>
+  <p class="step"><strong>回归方程：ŷ = 8.61 + 3.11x</strong></p>
+  <p class="step"><strong>含义：</strong>广告费每增加 1 万元，销售额平均增加约 3.11 万元。</p>
+</div>
+</section>
+
+<!-- 知识点5：回归分析 -->
+<div class="quiz-question" id="q5">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    最小二乘法最小化的是什么？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(5, 0)">A. 残差的绝对值之和</div>
+    <div class="opt" onclick="checkChoice(5, 1)">B. 残差的平方和</div>
+    <div class="opt" onclick="checkChoice(5, 2)">C. 残差的和</div>
+    <div class="opt" onclick="checkChoice(5, 3)">D. 残差的最大值</div>
+  </div>
+  <div class="explain" id="explain5">
+    <strong>解析：</strong>最小二乘法最小化的是<strong>残差的平方和</strong> &sum;(y<sub>i</sub>-ŷ<sub>i</sub>)<sup>2</sup>。用平方而非绝对值是因为平方函数可导，方便数学求解。选 B。
+  </div>
+</div>
+
+<!-- 知识点6：回归方程计算 -->
+<div class="quiz-question" id="q6">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    已知回归方程 ŷ = 8.61 + 3.11x，当广告费 x=3.5 万元时，预测的销售额约为多少万元？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(6, 0)">A. 18.5</div>
+    <div class="opt" onclick="checkChoice(6, 1)">B. 19.5</div>
+    <div class="opt" onclick="checkChoice(6, 2)">C. 20.5</div>
+    <div class="opt" onclick="checkChoice(6, 3)">D. 21.5</div>
+  </div>
+  <div class="explain" id="explain6">
+    <strong>解析：</strong>ŷ = 8.61 + 3.11 &times; 3.5 = 8.61 + 10.885 = <strong>19.495 &asymp; 19.5</strong> 万元。选 B。<br>
+    注意：当 x = x̄（均值）时，ŷ = ȳ，这是回归直线的一个性质。
+  </div>
+</div>
+
+<!-- ============================== 四、独立性检验 ============================== -->
+<section>
+<h2>四、独立性检验</h2>
+
+<h3>吸烟与肺癌有关吗？</h3>
+<p>在医学研究中，经常需要判断两个分类变量之间是否有关联。比如"吸烟"和"患肺癌"这两个变量——通过观察数据，我们能否说吸烟的人更容易患肺癌？</p>
+
+<p>假设我们调查了 500 人，得到以下数据：</p>
+
+<table class="ctable">
+  <tr><th></th><th>患肺癌</th><th>未患肺癌</th><th>合计</th></tr>
+  <tr><td><strong>吸烟</strong></td><td>40</td><td>160</td><td>200</td></tr>
+  <tr><td><strong>不吸烟</strong></td><td>10</td><td>290</td><td>300</td></tr>
+  <tr><td><strong>合计</strong></td><td>50</td><td>450</td><td>500</td></tr>
+</table>
+
+<p>这个 2&times;2 的表格就是<strong>列联表</strong>。直观上看，吸烟组中患肺癌的比例是 40/200 = 20%，而不吸烟组只有 10/300 &asymp; 3.3%，相差很大。但这是否具有<strong>统计显著性</strong>？即这种差异是不是偶然造成的？</p>
+
+<h3>卡方统计量的基本思想</h3>
+<p>独立性检验的思路是这样的：</p>
+<ul>
+  <li><strong>第一步（假设）：</strong>先假设吸烟和肺癌<strong>没有关系</strong>（即相互独立）。这叫做<strong>原假设 H<sub>0</sub></strong>。</li>
+  <li><strong>第二步（计算期望）：</strong>如果 H<sub>0</sub> 成立，那么"吸烟且患肺癌"的人数应该是多少？</li>
+</ul>
+
+<div class="example">
+  <p>如果吸烟和肺癌无关，那么患肺癌的比例应该是总体比例 50/500 = 10%。</p>
+  <p class="step">吸烟组（200 人）中，期望的患肺癌人数 = 200 &times; 10% = <strong>20 人</strong></p>
+  <p class="step">同理可计算所有格子的"期望频数"：</p>
+  <table class="ctable">
+    <tr><th></th><th>患肺癌</th><th>未患肺癌</th></tr>
+    <tr><td><strong>吸烟</strong></td><td>20</td><td>180</td></tr>
+    <tr><td><strong>不吸烟</strong></td><td>30</td><td>270</td></tr>
+  </table>
+  <p class="step">一般公式：期望频数 = (行合计 &times; 列合计) / 总计</p>
+  <p class="step">例如吸烟&肺癌 = 200 &times; 50 / 500 = 20</p>
+</div>
+
+<ul>
+  <li><strong>第三步（计算卡方）：</strong>比较实际观测值 O 和期望值 E 的差异：</li>
+</ul>
+
+<div class="formula-box">
+  <p style="font-size:1.2em;font-weight:bold;margin:6px 0;">&#967;<sup>2</sup> = &sum; (O - E)<sup>2</sup> / E</p>
+  <p style="font-size:0.95em;color:#555;">其中 O 是实际观测频数，E 是期望频数，对 4 个格子求和</p>
+</div>
+
+<div class="example">
+  <p><strong>计算：</strong></p>
+  <p class="step">&#967;<sup>2</sup> = (40-20)<sup>2</sup>/20 + (160-180)<sup>2</sup>/180 + (10-30)<sup>2</sup>/30 + (290-270)<sup>2</sup>/270</p>
+  <p class="step">= 400/20 + 400/180 + 400/30 + 400/270</p>
+  <p class="step">= 20 + 2.22 + 13.33 + 1.48 &asymp; <strong>37.03</strong></p>
+</div>
+
+<ul>
+  <li><strong>第四步（判断）：</strong>&#967;<sup>2</sup> 值越大，说明观测值与期望值差异越大，原假设越不可靠。通常与临界值比较（自由度为 1 时，显著性水平 0.05 的临界值为 3.841）。</li>
+</ul>
+
+<div class="key-point">
+  <p><strong>结论：</strong>这里 &#967;<sup>2</sup> &asymp; 37.03 > 3.841，所以<strong>拒绝原假设</strong>，认为吸烟与肺癌存在关联。</p>
+</div>
+
+<div class="hint">
+  <strong>卡方统计量的思想总结：</strong>
+  <br>① 假设两个变量独立 → ② 计算期望频数 → ③ 比较实际与期望的差距（&#967;<sup>2</sup>）→ ④ 差距越大，越说明两者有关
+  <br>这就像"如果你说骰子没问题，但我掷了 600 次发现每个面出现次数都远偏离 100 次，那你的假设就很可疑"。
+</div>
+</section>
+
+<!-- 知识点7：独立性检验 -->
+<div class="quiz-question" id="q7">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    在 2&times;2 列联表的独立性检验中，如果 &#967;<sup>2</sup> 值很大，说明什么？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(7, 0)">A. 两个变量很可能独立</div>
+    <div class="opt" onclick="checkChoice(7, 1)">B. 样本量太小</div>
+    <div class="opt" onclick="checkChoice(7, 2)">C. 两个变量很可能有关联</div>
+    <div class="opt" onclick="checkChoice(7, 3)">D. 数据有错误</div>
+  </div>
+  <div class="explain" id="explain7">
+    <strong>解析：</strong>&#967;<sup>2</sup> 值大意味着实际观测值与期望值（假设独立时的值）相差很大，所以<strong>原假设（独立）很可能是错的</strong>，即两个变量有关联。选 C。
+  </div>
+</div>
+
+<!-- 知识点8：期望频数计算 -->
+<div class="quiz-question" id="q8">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    在一项调查中，共调查了 200 人。其中男生 120 人、女生 80 人，喜欢数学的有 60 人。如果性别和喜欢数学相互独立，那么男生中喜欢数学的期望人数是多少？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(8, 0)">A. 60</div>
+    <div class="opt" onclick="checkChoice(8, 1)">B. 36</div>
+    <div class="opt" onclick="checkChoice(8, 2)">C. 24</div>
+    <div class="opt" onclick="checkChoice(8, 3)">D. 40</div>
+  </div>
+  <div class="explain" id="explain8">
+    <strong>解析：</strong>期望频数 = 行合计 &times; 列合计 / 总数 = 120 &times; 60 / 200 = <strong>36</strong>。选 B。
+  </div>
+</div>
+
+<!-- ============================== 五、综合练习 ============================== -->
+<section>
+<h2>五、综合练习</h2>
+<p>以下 5 道综合题覆盖了本节全部知识点，动手试试吧！</p>
+
+<div class="score-panel">
+  得分：<span class="score-num" id="totalScore">0</span> / 50
+  <button class="btn-reset" onclick="resetAll()">重置全部</button>
+</div>
+
+<!-- 综合题1：抽样方法 -->
+<div class="comp-exercise" id="c1">
+  <h4>练习 1（10 分）</h4>
+  <p>某地区有农村居民 5000 人、城镇居民 3000 人。要调查该地区居民的年收入情况。</p>
+  <p>(1) 最适合的抽样方法是？</p>
+  <p>(2) 如果样本总数为 200 人，农村和城镇各应抽多少人？</p>
+
+  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
+    <p>(1) 请填写抽样方法名称：<input class="fill-input" id="c1a1" type="text" placeholder="如：简单随机抽样">
+      <button class="btn-check" onclick="checkFill('c1a1', '分层抽样')">检查</button></p>
+    <p>(2) 农村应抽 <input class="fill-input" id="c1a2" type="text" style="width:60px;" placeholder="人数"> 人，城镇应抽 <input class="fill-input" id="c1a3" type="text" style="width:60px;" placeholder="人数"> 人
+      <button class="btn-check" onclick="checkFillPair('c1a2','c1a3',125,75)">检查</button></p>
+  </div>
+
+  <div class="answer-box" id="c1answer">
+    <strong>解析：</strong><br>
+    (1) 农村和城镇居民收入可能有较大差异（层间差异大），应用<strong>分层抽样</strong>。<br>
+    (2) 农村比例 = 5000/8000 = 62.5%，应抽 200 &times; 62.5% = <strong>125 人</strong>；城镇比例 = 3000/8000 = 37.5%，应抽 200 &times; 37.5% = <strong>75 人</strong>。
+  </div>
+  <button class="btn-toggle" onclick="toggleAnswer('c1answer')">显示解析</button>
+</div>
+
+<!-- 综合题2：数字特征计算 -->
+<div class="comp-exercise" id="c2">
+  <h4>练习 2（10 分）</h4>
+  <p>某班 10 名同学的数学月考成绩（满分 100 分）：65, 70, 72, 78, 80, 82, 85, 88, 90, 95</p>
+  <p>(1) 计算均值和中位数。</p>
+  <p>(2) 计算方差（保留一位小数）。</p>
+
+  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
+    <p>(1) 均值 = <input class="fill-input" id="c2a1" type="text" style="width:60px;" placeholder="数字">，中位数 = <input class="fill-input" id="c2a2" type="text" style="width:60px;" placeholder="数字">
+      <button class="btn-check" onclick="checkFillPair('c2a1','c2a2',80.5,81)">检查</button></p>
+    <p>(2) 方差 = <input class="fill-input" id="c2a3" type="text" style="width:70px;" placeholder="保留1位小数">
+      <button class="btn-check" onclick="checkFill('c2a3', 82.3)">检查</button></p>
+  </div>
+
+  <div class="answer-box" id="c2answer">
+    <strong>解析：</strong><br>
+    (1) 均值 = (65+70+72+78+80+82+85+88+90+95)/10 = 805/10 = <strong>80.5 分</strong>。<br>
+    &emsp;中位数 = (80+82)/2 = <strong>81 分</strong>。<br>
+    (2) 方差 s<sup>2</sup> = [(65-80.5)<sup>2</sup>+(70-80.5)<sup>2</sup>+...+(95-80.5)<sup>2</sup>] / 10<br>
+    &emsp;= (240.25+110.25+72.25+6.25+0.25+2.25+20.25+56.25+90.25+210.25)/10<br>
+    &emsp;= 808.5/10 = <strong>82.3</strong>（保留一位小数）。
+  </div>
+  <button class="btn-toggle" onclick="toggleAnswer('c2answer')">显示解析</button>
+</div>
+
+<!-- 综合题3：回归分析 -->
+<div class="comp-exercise" id="c3">
+  <h4>练习 3（10 分）</h4>
+  <p>某产品 5 个月的产量 x（万件）与生产成本 y（万元）数据如下：</p>
+  <table style="width:auto;margin:8px auto;">
+    <tr><th>x</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+    <tr><th>y</th><td>10</td><td>9</td><td>8</td><td>7</td><td>6</td></tr>
+  </table>
+  <p>求 y 关于 x 的线性回归方程 ŷ = a + bx。</p>
+  <p class="tip">提示：先计算 x̄ 和 ȳ，再用公式求 b 和 a。</p>
+
+  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
+    <p>b = <input class="fill-input" id="c3a1" type="text" style="width:60px;" placeholder="数字">
+      ，a = <input class="fill-input" id="c3a2" type="text" style="width:60px;" placeholder="数字">
+      <button class="btn-check" onclick="checkFillPair('c3a1','c3a2',-1,11)">检查</button></p>
+  </div>
+
+  <div class="answer-box" id="c3answer">
+    <strong>解析：</strong><br>
+    x̄ = (1+2+3+4+5)/5 = 3，ȳ = (10+9+8+7+6)/5 = 8<br>
+    分子 &sum;(x<sub>i</sub>-x̄)(y<sub>i</sub>-ȳ) = (-2)(2)+(-1)(1)+(0)(0)+(1)(-1)+(2)(-2) = -4-1+0-1-4 = -10<br>
+    分母 &sum;(x<sub>i</sub>-x̄)<sup>2</sup> = 4+1+0+1+4 = 10<br>
+    b = -10/10 = <strong>-1</strong>，a = 8 - (-1)&times;3 = 8+3 = <strong>11</strong><br>
+    <strong>回归方程：ŷ = 11 - x</strong><br>
+    <strong>含义：</strong>产量每增加 1 万件，成本平均降低 1 万元（规模效应）。
+  </div>
+  <button class="btn-toggle" onclick="toggleAnswer('c3answer')">显示解析</button>
+</div>
+
+<!-- 综合题4：独立性检验 -->
+<div class="comp-exercise" id="c4">
+  <h4>练习 4（10 分）</h4>
+  <p>为研究"经常锻炼"与"睡眠质量"的关系，调查了 300 人，数据如下：</p>
+  <table style="width:auto;margin:8px auto;">
+    <tr><th></th><th>睡眠好</th><th>睡眠差</th><th>合计</th></tr>
+    <tr><td>经常锻炼</td><td>80</td><td>40</td><td>120</td></tr>
+    <tr><td>很少锻炼</td><td>60</td><td>120</td><td>180</td></tr>
+    <tr><td>合计</td><td>140</td><td>160</td><td>300</td></tr>
+  </table>
+  <p>(1) 如果锻炼与睡眠质量无关，经常锻炼且睡眠好的人的期望频数是多少？</p>
+  <p>(2) &#967;<sup>2</sup> 值约为多少？（保留一位小数）</p>
+
+  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
+    <p>(1) 期望频数 = <input class="fill-input" id="c4a1" type="text" style="width:60px;" placeholder="数字">
+      <button class="btn-check" onclick="checkFill('c4a1', 56)">检查</button></p>
+    <p>(2) &#967;<sup>2</sup> = <input class="fill-input" id="c4a2" type="text" style="width:70px;" placeholder="保留1位小数">
+      <button class="btn-check" onclick="checkFill('c4a2', 30.2)">检查</button></p>
+  </div>
+
+  <div class="answer-box" id="c4answer">
+    <strong>解析：</strong><br>
+    (1) 期望频数 = 行合计 &times; 列合计 / 总数 = 120 &times; 140 / 300 = <strong>56</strong>。<br>
+    (2) 计算 &#967;<sup>2</sup>：<br>
+    &emsp;期望频数格子（按顺序：锻炼&睡眠好、锻炼&睡眠差、不锻炼&睡眠好、不锻炼&睡眠差）：<br>
+    &emsp;56, 64, 84, 96<br>
+    &emsp;&#967;<sup>2</sup> = (80-56)<sup>2</sup>/56 + (40-64)<sup>2</sup>/64 + (60-84)<sup>2</sup>/84 + (120-96)<sup>2</sup>/96<br>
+    &emsp;= 576/56 + 576/64 + 576/84 + 576/96<br>
+    &emsp;&asymp; 10.29 + 9.00 + 6.86 + 6.00 = <strong>30.2</strong>（保留一位小数）。<br>
+    &emsp;大于临界值 3.841，说明锻炼与睡眠质量显著相关。
+  </div>
+  <button class="btn-toggle" onclick="toggleAnswer('c4answer')">显示解析</button>
+</div>
+
+<!-- 综合题5：综合应用 -->
+<div class="comp-exercise" id="c5">
+  <h4>练习 5（10 分）</h4>
+  <p>某校从高一学生中抽取 50 人，记录他们的身高和体重数据，计算得：</p>
+  <p>身高均值 x̄ = 165cm，标准差 s<sub>x</sub> = 6cm</p>
+  <p>体重均值 ȳ = 58kg，标准差 s<sub>y</sub> = 8kg</p>
+  <p>现有甲同学身高 170cm，乙同学身高 160cm。</p>
+  <p>(1) 甲同学的身高在样本中大约处于什么水平？（用标准差解释）</p>
+  <p>(2) 通常认为：样本中约 95% 的数据落在 (x̄-2s, x̄+2s) 范围内。那么身高的 95% 范围是多少？</p>
+
+  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
+    <p>(1) 甲的身高比均值高 <input class="fill-input" id="c5a1" type="text" style="width:60px;" placeholder="数字"> 个标准差</p>
+    <p>(2) 身高 95% 范围：<input class="fill-input" id="c5a2" type="text" style="width:80px;" placeholder="最小值"> ~ <input class="fill-input" id="c5a3" type="text" style="width:80px;" placeholder="最大值"> cm
+      <button class="btn-check" onclick="checkFill('c5a1', 0.83)">检查</button>
+      <button class="btn-check" onclick="checkFillPair('c5a2','c5a3',153,177)">检查范围</button></p>
+  </div>
+
+  <div class="answer-box" id="c5answer">
+    <strong>解析：</strong><br>
+    (1) 甲的身高减去均值：170 - 165 = 5cm，比均值高 5cm。5 &divide; 6 &asymp; <strong>0.83 个标准差</strong>，属于正常偏高。<br>
+    (2) 95% 范围 = (165 - 2&times;6, 165 + 2&times;6) = (165-12, 165+12) = <strong>(153, 177) cm</strong>。<br>
+    &emsp;乙的身高 160cm 也在这个范围内。
+  </div>
+  <button class="btn-toggle" onclick="toggleAnswer('c5answer')">显示解析</button>
+</div>
+
+</section>
+
+</article>
+
+<script>
+// ============================================================
+// 散点图与回归线
+// ============================================================
+(function() {
+  var container = document.getElementById('scatter-container');
+  if (!container) return;
+  var data = [{x:1,y:12},{x:2,y:15},{x:3,y:18},{x:4,y:20},{x:5,y:24},{x:6,y:28}];
+  var w = container.clientWidth || container.parentElement.clientWidth - 40 || 600;
+  var h = 240;
+  var padL = 50, padR = 20, padT = 20, padB = 30;
+  var plotW = w - padL - padR;
+  var plotH = h - padT - padB;
+  var xMin = 0, xMax = 7, yMin = 10, yMax = 30;
+
+  function toX(v) { return padL + (v - xMin) / (xMax - xMin) * plotW; }
+  function toY(v) { return padT + plotH - (v - yMin) / (yMax - yMin) * plotH; }
+
+  for (var i = 0; i < data.length; i++) {
+    var pt = document.createElement('div');
+    pt.className = 'scatter-point';
+    pt.style.left = toX(data[i].x) + 'px';
+    pt.style.top = toY(data[i].y) + 'px';
+    container.appendChild(pt);
+  }
+
+  // Draw axes
+  container.style.position = 'relative';
+  var xAxis = document.createElement('div');
+  xAxis.style.cssText = 'position:absolute;left:' + padL + 'px;bottom:' + (padB-1) + 'px;width:' + plotW + 'px;height:1px;background:#999;';
+  container.appendChild(xAxis);
+
+  var yAxis = document.createElement('div');
+  yAxis.style.cssText = 'position:absolute;left:' + (padL-1) + 'px;top:' + padT + 'px;height:' + plotH + 'px;width:1px;background:#999;';
+  container.appendChild(yAxis);
+
+  // Labels
+  var xLabel = document.createElement('div');
+  xLabel.style.cssText = 'position:absolute;bottom:4px;right:10px;font-size:12px;color:#666;';
+  xLabel.textContent = '广告费（万元）';
+  container.appendChild(xLabel);
+
+  var yLabel = document.createElement('div');
+  yLabel.style.cssText = 'position:absolute;top:4px;left:4px;font-size:12px;color:#666;';
+  yLabel.textContent = '销售额（万元）';
+  container.appendChild(yLabel);
+
+  // Regression line: y = 8.61 + 3.11x
+  var a = 8.61, b = 3.11;
+  var x1 = 0.5, y1 = a + b * x1;
+  var x2 = 6.5, y2 = a + b * x2;
+  var px1 = toX(x1), py1 = toY(y1);
+  var px2 = toX(x2), py2 = toY(y2);
+  var dx = px2 - px1, dy = py2 - py1;
+  var len = Math.sqrt(dx*dx + dy*dy);
+  var angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+  var line = document.createElement('div');
+  line.className = 'regression-line';
+  line.style.cssText = 'position:absolute;left:' + px1 + 'px;top:' + py1 + 'px;width:' + len + 'px;height:2px;background:#e67e22;transform-origin:left center;transform:rotate(' + angle + 'deg);opacity:0;transition:opacity 0.8s;';
+  container.appendChild(line);
+
+  // Show line after a short delay
+  setTimeout(function() { line.style.opacity = '1'; }, 500);
+
+  // Add legend
+  var legend = document.createElement('div');
+  legend.style.cssText = 'position:absolute;bottom:28px;right:10px;font-size:11px;color:#555;background:rgba(255,255,255,0.9);padding:4px 8px;border-radius:4px;border:1px solid #ddd;';
+  legend.innerHTML = '<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#1a73e8;margin-right:4px;"></span> 实际数据 <span style="display:inline-block;width:20px;height:2px;background:#e67e22;margin:0 4px;"></span> 回归线 ŷ=8.61+3.11x';
+  container.appendChild(legend);
+})();
+
+// ============================================================
+// 选择题交互
+// ============================================================
+var answered = {};
+var totalScore = 0;
+
+function checkChoice(qid, idx) {
+  var answers = {1:2, 2:0, 3:2, 4:1, 5:1, 6:1, 7:2, 8:1};
+  if (answered[qid]) return;
+
+  var qDiv = document.getElementById("q" + qid);
+  var opts = qDiv.querySelectorAll(".opt");
+  var explain = document.getElementById("explain" + qid);
+
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add("disabled");
+  }
+
+  var correct = answers[qid];
+  if (idx === correct) {
+    opts[idx].classList.add("correct-opt");
+    qDiv.classList.add("correct");
+    explain.className = "explain show ok";
+    totalScore += (qid <= 4 ? 5 : 6);
+  } else {
+    opts[idx].classList.add("wrong-opt");
+    opts[correct].classList.add("correct-opt");
+    qDiv.classList.add("wrong");
+    explain.className = "explain show fail";
+  }
+
+  answered[qid] = true;
+  updateTotalScore();
+}
+
+// ============================================================
+// 填空题交互
+// ============================================================
+function checkFill(inputId, correctAnswer) {
+  var input = document.getElementById(inputId);
+  if (!input) return;
+  if (input.classList.contains("correct-input") || input.classList.contains("wrong-input")) return;
+
+  var val = input.value.trim();
+  var btn = input.nextElementSibling;
+  var isCorrect = false;
+
+  // Allow multiple correct answers for text inputs (e.g., "分层抽样")
+  if (typeof correctAnswer === 'string') {
+    if (val === correctAnswer) {
+      isCorrect = true;
+    }
+  } else {
+    var numVal = parseFloat(val);
+    if (!isNaN(numVal) && Math.abs(numVal - correctAnswer) < 0.1) {
+      isCorrect = true;
+    }
+  }
+
+  if (isCorrect) {
+    input.className = "fill-input correct-input";
+  } else {
+    input.className = "fill-input wrong-input";
+  }
+
+  if (btn && btn.tagName === "BUTTON") {
+    btn.disabled = true;
+    btn.style.opacity = "0.5";
+  }
+
+  updateTotalScore();
+}
+
+// Check a pair of fill inputs
+function checkFillPair(id1, id2, ans1, ans2) {
+  var in1 = document.getElementById(id1);
+  var in2 = document.getElementById(id2);
+  if (!in1 || !in2) return;
+
+  if (in1.classList.contains("correct-input") || in1.classList.contains("wrong-input")) return;
+  if (in2.classList.contains("correct-input") || in2.classList.contains("wrong-input")) return;
+
+  var v1 = parseFloat(in1.value.trim());
+  var v2 = parseFloat(in2.value.trim());
+  var btn = in2.nextElementSibling;
+
+  if (!isNaN(v1) && Math.abs(v1 - ans1) < 0.1) {
+    in1.className = "fill-input correct-input";
+  } else {
+    in1.className = "fill-input wrong-input";
+  }
+
+  if (!isNaN(v2) && Math.abs(v2 - ans2) < 0.1) {
+    in2.className = "fill-input correct-input";
+  } else {
+    in2.className = "fill-input wrong-input";
+  }
+
+  if (btn && btn.tagName === "BUTTON") {
+    btn.disabled = true;
+    btn.style.opacity = "0.5";
+  }
+
+  // Also disable the first button if it's not already disabled
+  var btn1 = in1.nextElementSibling;
+  if (btn1 && btn1.tagName === "BUTTON") {
+    btn1.disabled = true;
+    btn1.style.opacity = "0.5";
+  }
+
+  updateTotalScore();
+}
+
+function updateTotalScore() {
+  var quizScore = 0;
+  for (var i = 1; i <= 8; i++) {
+    if (answered[i]) {
+      var qDiv = document.getElementById("q" + i);
+      if (qDiv && qDiv.classList.contains("correct")) {
+        quizScore += (i <= 4 ? 5 : 6);
+      }
+    }
+  }
+  // Quiz total = 5*4 + 6*4 = 44, cap at 25 for quiz section (proportionate)
+  if (quizScore > 25) quizScore = 25;
+
+  // Count fill-in answers
+  var fillScore = 0;
+  var fillExercises = {
+    "c1": ["c1a1","c1a2","c1a3"],
+    "c2": ["c2a1","c2a2","c2a3"],
+    "c3": ["c3a1","c3a2"],
+    "c4": ["c4a1","c4a2"],
+    "c5": ["c5a1","c5a2","c5a3"]
+  };
+
+  for (var ex in fillExercises) {
+    var ids = fillExercises[ex];
+    var allAnswered = true;
+    var correctCount = 0;
+    for (var j = 0; j < ids.length; j++) {
+      var inp = document.getElementById(ids[j]);
+      if (!inp || (!inp.classList.contains("correct-input") && !inp.classList.contains("wrong-input"))) {
+        allAnswered = false;
+        break;
+      }
+      if (inp.classList.contains("correct-input")) correctCount++;
+    }
+    if (allAnswered) {
+      var perQ = Math.floor(10 / ids.length);
+      var score = correctCount * perQ;
+      if (correctCount === ids.length) score = 10;
+      else if (correctCount > 0) {
+        var remainder = 10 - perQ * ids.length;
+        score += Math.min(remainder, correctCount);
+      }
+      fillScore += score;
+    }
+  }
+
+  totalScore = quizScore + fillScore;
+  var scoreEl = document.getElementById("totalScore");
+  if (scoreEl) scoreEl.textContent = totalScore;
+}
+
+// ============================================================
+// 综合练习解析切换
+// ============================================================
+function toggleAnswer(id) {
+  var box = document.getElementById(id);
+  if (box) box.classList.toggle("show");
+}
+
+// ============================================================
+// 重置
+// ============================================================
+function resetAll() {
+  for (var i = 1; i <= 8; i++) {
+    var qDiv = document.getElementById("q" + i);
+    if (!qDiv) continue;
+    qDiv.className = "quiz-question";
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].className = "opt";
+    }
+    var explain = document.getElementById("explain" + i);
+    if (explain) explain.className = "explain";
+  }
+
+  var fillIds = ["c1a1","c1a2","c1a3","c2a1","c2a2","c2a3","c3a1","c3a2","c4a1","c4a2","c5a1","c5a2","c5a3"];
+  for (var k = 0; k < fillIds.length; k++) {
+    var inp = document.getElementById(fillIds[k]);
+    if (inp) {
+      inp.className = "fill-input";
+      inp.value = "";
+      var btn = inp.nextElementSibling;
+      if (btn && btn.tagName === "BUTTON") {
+        btn.disabled = false;
+        btn.style.opacity = "1";
+      }
+    }
+  }
+
+  var answerBoxes = document.querySelectorAll(".answer-box");
+  for (var m = 0; m < answerBoxes.length; m++) {
+    answerBoxes[m].classList.remove("show");
+  }
+
+  answered = {};
+  totalScore = 0;
+  var scoreEl = document.getElementById("totalScore");
+  if (scoreEl) scoreEl.textContent = "0";
+}
+</script>
+</body>
+</html>

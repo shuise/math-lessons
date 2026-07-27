@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>集合与函数综合测验（中级→奥数）</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+body {
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.9;
+  font-size: 16px;
+}
+article {
+  background: #fff; border-radius: 12px; padding: 36px 40px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow-wrap: break-word; word-wrap: break-word; overflow-x: hidden;
+}
+h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding-bottom: 10px; margin-top: 0; text-align: center; }
+.back {
+  display: inline-block; margin-bottom: 16px;
+  color: #1a73e8; text-decoration: none; font-size: 0.95em;
+}
+.back:hover { text-decoration: underline; }
+.tip { text-align: center; color: #888; margin-bottom: 24px; }
+
+/* 通用题目卡片 */
+.question-card {
+  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+  padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+}
+.question-card.correct { border-color: #4caf50; background: #f1f8e9; }
+.question-card.wrong { border-color: #f44336; background: #fce4ec; }
+.question-card .q-title {
+  font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50;
+}
+.question-card .q-title .q-tag {
+  display: inline-block; padding: 1px 10px; border-radius: 12px;
+  font-size: 0.75em; margin-right: 6px; color: #fff;
+}
+.q-tag.choice { background: #1a73e8; }
+.q-tag.tf { background: #e67e22; }
+.q-tag.fill { background: #9c27b0; }
+.q-tag.proof { background: #2e7d32; }
+
+/* 难度标签 */
+.diff-tag {
+  display: inline-block; padding: 1px 8px; border-radius: 8px;
+  font-size: 0.7em; margin-left: 6px; font-weight: normal;
+}
+.diff-easy { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+.diff-medium { background: #fff8e1; color: #f57f17; border: 1px solid #ffe082; }
+.diff-hard { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+.diff-exam { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
+.diff-olym { background: #e0f7fa; color: #006064; border: 1px solid #80deea; }
+
+/* 选择题/判断题选项 */
+.question-card .options { display: flex; flex-direction: column; gap: 8px; }
+.question-card .opt {
+  padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+  cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+}
+.question-card .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+.question-card .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+.question-card .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+.question-card .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+.question-card .opt.disabled { pointer-events: none; opacity: 0.7; }
+
+/* 填空题 */
+.fill-area { display: flex; gap: 10px; align-items: flex-start; margin-top: 8px; flex-wrap: wrap; }
+.fill-input {
+  flex: 1; min-width: 200px; padding: 10px 14px; border: 2px solid #ddd; border-radius: 8px;
+  font-size: 1em; outline: none; transition: border-color 0.15s; box-sizing: border-box;
+}
+.fill-input:focus { border-color: #1a73e8; }
+.fill-input.correct-input { border-color: #4caf50; background: #e8f5e9; }
+.fill-input.wrong-input { border-color: #f44336; background: #fce4ec; }
+
+/* 推导证明题 */
+.proof-area { margin-top: 8px; }
+.proof-textarea {
+  width: 100%; padding: 10px 14px; border: 2px solid #ddd; border-radius: 8px;
+  font-size: 0.95em; outline: none; transition: border-color 0.15s;
+  margin: 6px 0; box-sizing: border-box; resize: vertical;
+  font-family: 'Times New Roman', 'STIX', serif; line-height: 1.7;
+}
+.proof-textarea:focus { border-color: #1a73e8; }
+.proof-textarea.correct-input { border-color: #4caf50; background: #e8f5e9; }
+.proof-textarea.wrong-input { border-color: #f44336; background: #fce4ec; }
+
+.btn-check {
+  padding: 8px 20px; background: #1a73e8; color: #fff; border: none;
+  border-radius: 8px; cursor: pointer; font-size: 0.93em; transition: 0.15s; white-space: nowrap;
+}
+.btn-check:hover { background: #1557b0; }
+.btn-check:disabled { opacity: 0.5; cursor: default; }
+.btn-show-answer {
+  padding: 6px 16px; background: #fff; color: #1a73e8; border: 2px solid #1a73e8;
+  border-radius: 16px; cursor: pointer; font-size: 0.85em; transition: 0.15s; margin-left: 8px;
+}
+.btn-show-answer:hover { background: #e3f2fd; }
+
+.question-card .explain {
+  margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+  font-size: 0.93em; display: none;
+}
+.question-card .explain.show { display: block; }
+.question-card .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+.question-card .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+/* 底部 */
+#scoreDisplay {
+  display: inline-block; background: #1a73e8; color: #fff;
+  padding: 12px 32px; border-radius: 30px; font-size: 1.2em; font-weight: bold;
+}
+.reset-btn {
+  display: inline-block; margin-top: 12px; padding: 8px 28px;
+  border: 2px solid #1a73e8; color: #1a73e8; border-radius: 20px;
+  background: #fff; cursor: pointer; font-size: 1em; transition: 0.15s;
+}
+.reset-btn:hover { background: #e3f2fd; }
+.section-header { margin: 28px 0 12px; color: #2c3e50; font-size: 1.2em; border-left: 4px solid #1a73e8; padding-left: 12px; }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>集合与函数综合测验</h1>
+<p class="tip">总分 200 分 · 15 分钟 | 题型：10 选择 + 10 判断 + 10 填空 + 10 推导证明 | 难度从中级到奥数</p>
+<p class="tip" style="font-size:0.9em;">选择题/判断题点击选项提交；填空题/推导题填写后点击"确认"提交，系统自动判分。</p>
+
+<div id="quiz-container"></div>
+
+<div style="text-align:center;margin:24px 0;">
+  <div id="scoreDisplay">得分：0 / 200</div>
+  <br>
+  <button class="reset-btn" onclick="resetExam()">&#8635; 重新答题</button>
+</div>
+
+</article>
+
+<script>
+// ============================================================
+// 40 道题 = 10 选择 + 10 判断 + 10 填空 + 10 推导证明
+// 难度构成：中级×15 → 高等×8 → 高考×8 → 奥数×9
+// ============================================================
+var diffLabels = {
+  "中级": '<span class="diff-tag diff-easy">中级</span>',
+  "高等": '<span class="diff-tag diff-medium">高等</span>',
+  "高考": '<span class="diff-tag diff-exam">高考</span>',
+  "奥数": '<span class="diff-tag diff-olym">&#x2B50; 奥数</span>'
+};
+
+var questions = [
+  // ==================== 选择题（Q1~Q10）====================
+  {
+    type: "choice", countInType: 0,
+    diff: "中级",
+    question: "已知集合 A = {x | x\u00b2 \u2212 3x + 2 = 0}，B = {1, 2, 3}，则 A \u2229 B = （  ）",
+    opts: ["{1, 2}", "{3}", "\u2205", "{1, 2, 3}"],
+    answer: 0,
+    explain: "解方程 x\u00b2 \u2212 3x + 2 = 0 得 x = 1 或 x = 2，所以 A = {1, 2}。A \u2229 B 取公共元素，得 {1, 2}。"
+  },
+  {
+    type: "choice", countInType: 1,
+    diff: "中级",
+    question: "函数 f(x) = \u221a(x + 2) / (x \u2212 1) 的定义域是（  ）",
+    opts: ["[\u22122, 1) \u222a (1, +\u221e)", "(\u22122, +\u221e)", "[\u22122, +\u221e)", "(\u2212\u221e, 1) \u222a (1, +\u221e)"],
+    answer: 0,
+    explain: "需同时满足两个条件：根号内 x + 2 \u2265 0 得 x \u2265 \u22122；分母 x \u2212 1 \u2260 0 得 x \u2260 1。所以定义域为 [\u22122, 1) \u222a (1, +\u221e)。"
+  },
+  {
+    type: "choice", countInType: 2,
+    diff: "高等",
+    question: "下列函数中，在 (0, +\u221e) 上既是增函数又是奇函数的是（  ）",
+    opts: ["f(x) = x\u00b2", "f(x) = x\u00b3", "f(x) = 2\u1d58", "f(x) = \u22121/x"],
+    answer: 1,
+    explain: "x\u00b3 是奇函数（f(\u2212x)=\u2212x\u00b3=\u2212f(x)）且在 R 上递增。x\u00b2 是偶函数；2\u1d58 非奇非偶；\u22121/x 在 (0,+\u221e) 递增但不是奇函数。"
+  },
+  {
+    type: "choice", countInType: 3,
+    diff: "高考",
+    question: "函数 f(x) = log\u2082(x\u00b2 \u2212 2x + 3) 的单调递增区间是（  ）",
+    opts: ["(\u2212\u221e, 1]", "[1, +\u221e)", "(\u2212\u221e, +\u221e)", "(0, +\u221e)"],
+    answer: 1,
+    explain: "令 t = x\u00b2 \u2212 2x + 3 = (x\u22121)\u00b2 + 2，在 (\u2212\u221e, 1] 上递减，在 [1, +\u221e) 上递增。y = log\u2082t 是增函数，所以 f(x) 在 [1, +\u221e) 上递增。"
+  },
+  {
+    type: "choice", countInType: 4,
+    diff: "奥数",
+    question: "设函数 f(x) 满足 f(x + y) = f(x) + f(y) 对所有实数 x, y 成立。若 f(1) = 2，A = {x | f(x) > 0}，则 A = （  ）",
+    opts: ["(0, +\u221e)", "(\u2212\u221e, 0)", "R", "\u2205"],
+    answer: 0,
+    explain: "由 f(0+0)=f(0)+f(0) \u2192 f(0)=0。由 f(1)=2 和 f(n)=n\u00b7f(1)=2n 知 x > 0 时 f(x) > 0。由 f(x)+f(\u2212x)=f(0)=0 \u2192 f(\u2212x)=\u2212f(x) 是奇函数，故 x < 0 时 f(x) < 0。所以 A = (0, +\u221e)。"
+  },
+  {
+    type: "choice", countInType: 5,
+    diff: "中级",
+    question: "已知 U = {1, 2, 3, 4, 5}，A = {1, 3, 5}，则 \u2202<sub>U</sub>A = （  ）",
+    opts: ["{2, 4}", "{2, 3, 4}", "{1, 3, 5}", "\u2205"],
+    answer: 0,
+    explain: "补集是 U 中不属于 A 的元素组成的集合。U 中不属于 A 的元素是 2 和 4，所以 \u2202<sub>U</sub>A = {2, 4}。"
+  },
+  {
+    type: "choice", countInType: 6,
+    diff: "中级",
+    question: "已知 f(x) = x\u00b2 + 1，则 f(f(0)) = （  ）",
+    opts: ["1", "2", "3", "4"],
+    answer: 1,
+    explain: "f(0) = 0\u00b2 + 1 = 1；f(f(0)) = f(1) = 1\u00b2 + 1 = 2。"
+  },
+  {
+    type: "choice", countInType: 7,
+    diff: "高等",
+    question: "集合 A = {x | x\u00b2 \u2212 5x + 6 = 0}，B = {x | x\u00b2 \u2212 7x + 12 = 0}，A \u222a B = （  ）",
+    opts: ["{2, 3, 4}", "{3, 4}", "{2, 3}", "{2, 4}"],
+    answer: 0,
+    explain: "解 A 得 x = 2, 3；解 B 得 x = 3, 4。A \u222a B = {2, 3, 4}。"
+  },
+  {
+    type: "choice", countInType: 8,
+    diff: "高考",
+    question: "奇函数 f(x) 在 [0, +\u221e) 上单调递增，且 f(1) = 0，则不等式 f(x) < 0 的解集为（  ）",
+    opts: ["(\u2212\u221e, \u22121)", "(\u22121, 1)", "(\u2212\u221e, 0)", "(\u2212\u221e, \u22121) \u222a (0, 1)"],
+    answer: 0,
+    explain: "奇函数在对称区间上单调性相同。f(1)=0，由奇函数知 f(-1)=-f(1)=0。f(x) 在 R 上递增，故 x < -1 时 f(x) < f(-1) = 0。所以 f(x) < 0 的解集为 (-∞, -1)。"
+  },
+  {
+    type: "choice", countInType: 9,
+    diff: "奥数",
+    question: "函数 f(x) 定义域为 R，满足 f(x) + f(1 \u2212 x) = 1 对任意 x \u2208 R 成立，则 f(1/2) = （  ）",
+    opts: ["0", "1/2", "1", "无法确定"],
+    answer: 1,
+    explain: "令 x = 1/2，得 f(1/2) + f(1/2) = 1，即 2f(1/2) = 1，解得 f(1/2) = 1/2。"
+  },
+
+  // ==================== 判断题（Q11~Q20）====================
+  {
+    type: "tf", countInType: 0,
+    diff: "中级",
+    question: "空集是任何集合的子集。",
+    answer: true,
+    explain: "\u2205 \u2286 A 对任意集合 A 都成立，因为空集不含任何元素，不存在不属于 A 的元素。"
+  },
+  {
+    type: "tf", countInType: 1,
+    diff: "中级",
+    question: "函数 f(x) = x\u00b2 是偶函数。",
+    answer: true,
+    explain: "f(\u2212x) = (\u2212x)\u00b2 = x\u00b2 = f(x)，满足偶函数定义。"
+  },
+  {
+    type: "tf", countInType: 2,
+    diff: "高等",
+    question: "若 A \u2286 B，则 A \u2229 B = A。",
+    answer: true,
+    explain: "A \u2286 B 意味着 A 的所有元素都在 B 中，所以 A 与 B 的公共元素就是 A 的全部元素。"
+  },
+  {
+    type: "tf", countInType: 3,
+    diff: "高考",
+    question: "函数 f(x) = 1/x 在 (\u2212\u221e, +\u221e) 上单调递减。",
+    answer: false,
+    explain: "f(x) = 1/x 在 (\u2212\u221e, 0) 和 (0, +\u221e) 上分别递减，但不能说在整个定义域上递减。反例：f(\u22121) = \u22121 < f(1) = 1，但 \u22121 < 1，递减要求自变量大时函数值反而小，这里 \u22121 < 1 时 f(\u22121) < f(1)，说明不是递减。"
+  },
+  {
+    type: "tf", countInType: 4,
+    diff: "奥数",
+    question: "若函数 f(x) 满足 f(2x) = 3f(x) 对任意 x \u2208 R 成立，且 f(1) = 1，则 f(2\u207f) = 3\u207f。",
+    answer: true,
+    explain: "f(2) = 3f(1) = 3；f(4) = 3f(2) = 9 = 3\u00b2。由数学归纳法：假设 f(2\u1d47) = 3\u1d47，则 f(2\u1d47\u207a\u00b9) = f(2\u00b72\u1d47) = 3f(2\u1d47) = 3\u00b73\u1d47 = 3\u1d47\u207a\u00b9。故对一切 n \u2208 N 成立。"
+  },
+  {
+    type: "tf", countInType: 5,
+    diff: "中级",
+    question: "若 A \u2286 B 且 B \u2286 C，则 A \u2286 C。",
+    answer: true,
+    explain: "子集关系具有传递性。A 的元素都在 B 中，B 的元素都在 C 中，所以 A 的元素都在 C 中。"
+  },
+  {
+    type: "tf", countInType: 6,
+    diff: "中级",
+    question: "函数 f(x) = \u221ax 的定义域是 (0, +\u221e)。",
+    answer: false,
+    explain: "\u221ax 要求 x \u2265 0，所以定义域是 [0, +\u221e)，包括 0。"
+  },
+  {
+    type: "tf", countInType: 7,
+    diff: "高等",
+    question: "(A \u222a B) \u2229 C = A \u222a (B \u2229 C) 对任意集合 A, B, C 都成立。",
+    answer: false,
+    explain: "不成立。反例：A = {1}，B = {2}，C = {2}，左边 = ({1} \u222a {2}) \u2229 {2} = {2}，右边 = {1} \u222a ({2} \u2229 {2}) = {1, 2}，两者不相等。正确公式是 (A \u222a B) \u2229 C = (A \u2229 C) \u222a (B \u2229 C)。"
+  },
+  {
+    type: "tf", countInType: 8,
+    diff: "高考",
+    question: "若函数 f(x) 在 [a, b] 上单调递增，则对任意 x\u2081, x\u2082 \u2208 [a, b]，若 f(x\u2081) < f(x\u2082)，则 x\u2081 < x\u2082。",
+    answer: true,
+    explain: "单调递增的定义：x\u2081 < x\u2082 \u21d4 f(x\u2081) < f(x\u2082)。逆否命题：若 f(x\u2081) < f(x\u2082)，则 x\u2081 < x\u2082 也成立。"
+  },
+  {
+    type: "tf", countInType: 9,
+    diff: "奥数",
+    question: "若集合 A 满足：对任意 x \u2208 A，都有 x + 1 \u2208 A 成立，则 A 一定是无限集。",
+    answer: false,
+    explain: "反例：A = \u2205（空集）。前提 `\u2208 A` 在 A 为空时无条件成立（空真），但 \u2205 是有限集。所以 A 可以是空集。"
+  },
+
+  // ==================== 填空题（Q21~Q30）====================
+  {
+    type: "fill", countInType: 0,
+    diff: "中级",
+    question: "集合 A = {1, 2, 3, 4} 的非空真子集个数为 ______。",
+    answer: "14",
+    explain: "4 个元素的集合共有 2\u2074 = 16 个子集，去掉空集和自身，得 16 \u2212 2 = 14 个非空真子集。"
+  },
+  {
+    type: "fill", countInType: 1,
+    diff: "中级",
+    question: "已知 f(x) = 2x \u2212 1，则 f(f(2)) = ______。",
+    answer: "5",
+    explain: "f(2) = 2\u00d72 \u2212 1 = 3，f(f(2)) = f(3) = 2\u00d73 \u2212 1 = 5。"
+  },
+  {
+    type: "fill", countInType: 2,
+    diff: "高等",
+    question: "已知集合 A = {x | |x| \u2264 3}，B = {x | x\u00b2 \u2212 2x \u2212 8 \u2264 0}，则 A \u2229 B 中整数元素的个数为 ______。",
+    answer: "6",
+    explain: "A = [\u22123, 3]，B = [\u22122, 4]（解 x\u00b2\u22122x\u22128=0 得 x=\u22122 或 4）。A\u2229B = [\u22122, 3]。其中的整数有 \u22122, \u22121, 0, 1, 2, 3，共 6 个。"
+  },
+  {
+    type: "fill", countInType: 3,
+    diff: "高考",
+    question: "已知 f(x) 是奇函数，且当 x > 0 时 f(x) = x\u00b2 + 1，则 f(\u22122) = ______。",
+    answer: "\u22125",
+    explain: "f(2) = 2\u00b2 + 1 = 5。由奇函数性质 f(\u2212x) = \u2212f(x)，得 f(\u22122) = \u2212f(2) = \u22125。"
+  },
+  {
+    type: "fill", countInType: 4,
+    diff: "奥数",
+    question: "设 A = {1, 2, 3, ..., 10}，B = {x | x = k\u00b2 mod 5, k \u2208 A}。则集合 B 的元素个数为 ______。<br><small>说明：k\u00b2 mod 5 表示 k\u00b2 除以 5 的余数。</small>",
+    answer: "3",
+    explain: "计算各数平方 mod 5：1\u00b2=1(mod5)=1，2\u00b2=4\u21924，3\u00b2=9\u21924，4\u00b2=16\u21921，5\u00b2=25\u21920，6\u00b2=36\u21921，7\u00b2=49\u21924，8\u00b2=64\u21924，9\u00b2=81\u21921，10\u00b2=100\u21920。所以 B = {0, 1, 4}，共 3 个元素。"
+  },
+  {
+    type: "fill", countInType: 5,
+    diff: "中级",
+    question: "已知全集 U = {0, 1, 2, 3, 4}，A = {0, 3}，B = {1, 3, 4}，则 (\u2202<sub>U</sub>A) \u2229 B = ______。",
+    answer: "{1, 4}",
+    explain: "\u2202<sub>U</sub>A = {1, 2, 4}，与 B = {1, 3, 4} 取交集得 {1, 4}。"
+  },
+  {
+    type: "fill", countInType: 6,
+    diff: "中级",
+    question: "已知分段函数 f(x) = { x + 1, x \u2265 0；x\u00b2, x < 0 }，则 f(\u22121) + f(1) = ______。",
+    answer: "3",
+    explain: "f(-1) = (-1)\u00b2 = 1，f(1) = 1 + 1 = 2，和为 3。"
+  },
+  {
+    type: "fill", countInType: 7,
+    diff: "高等",
+    question: "已知 A = {x | x \u2208 Z, |x| \u2264 3}，则 A 的子集个数为 ______。",
+    answer: "128",
+    explain: "|x| \u2264 3 的整数有 -3, -2, -1, 0, 1, 2, 3，共 7 个元素。子集个数为 2\u2077 = 128。"
+  },
+  {
+    type: "fill", countInType: 8,
+    diff: "高考",
+    question: "若 f(x) 是定义在 R 上的奇函数，且 f(x + 1) = \u2212f(x)，f(1) = 2，则 f(2026) = ______。",
+    answer: "\u22122",
+    explain: "由 f(x+1) = -f(x) 得周期为 2。2026 mod 2 = 0，所以 f(2026) = f(0)。令 x = 0 得 f(1) = -f(0)，代入 f(1) = 2 得 2 = -f(0)，即 f(0) = -2。故 f(2026) = f(0) = -2。"
+  },
+  {
+    type: "fill", countInType: 9,
+    diff: "奥数",
+    question: "定义在 R 上的函数 f(x) 满足 f(x + y) = f(x) + f(y) + xy。若 f(1) = 1，则 f(10) = ______。",
+    answer: "55",
+    explain: "f(2) = f(1+1) = 1+1+1 = 3；f(3) = f(2+1) = 3+1+2 = 6；f(4) = f(3+1) = 6+1+3 = 10。归纳得 f(n) = 1+2+...+n = n(n+1)/2。所以 f(10) = 55。"
+  },
+
+  // ==================== 推导证明题（Q31~Q40）====================
+  {
+    type: "proof", countInType: 0,
+    diff: "中级",
+    question: "用定义法证明函数 f(x) = x\u00b2 在 [0, +\u221e) 上单调递增。",
+    answer: "任取 0 \u2264 x\u2081 < x\u2082，f(x\u2081)\u2212f(x\u2082) = x\u2081\u00b2\u2212x\u2082\u00b2 = (x\u2081\u2212x\u2082)(x\u2081+x\u2082) < 0，所以 f(x\u2081) < f(x\u2082)，单调递增。",
+    keywords: ["x1", "x2", "递增"],
+    keywordMode: "and",
+    steps: [
+      "任取 0 \u2264 x\u2081 < x\u2082 \u2208 [0, +\u221e)",
+      "作差：f(x\u2081) \u2212 f(x\u2082) = x\u2081\u00b2 \u2212 x\u2082\u00b2 = (x\u2081 \u2212 x\u2082)(x\u2081 + x\u2082)",
+      "\u2235 x\u2081 \u2212 x\u2082 < 0，且 x\u2081 + x\u2082 > 0",
+      "\u2234 f(x\u2081) \u2212 f(x\u2082) < 0，即 f(x\u2081) < f(x\u2082)",
+      "由定义，f(x) 在 [0, +\u221e) 上单调递增"
+    ]
+  },
+  {
+    type: "proof", countInType: 1,
+    diff: "高等",
+    question: "证明集合分配律：A \u2229 (B \u222a C) = (A \u2229 B) \u222a (A \u2229 C)。",
+    answer: "x\u2208A\u2229(B\u222aC) \u21d4 x\u2208A\u2227x\u2208B\u222aC \u21d4 x\u2208A\u2227(x\u2208B\u2228x\u2208C) \u21d4 (x\u2208A\u2227x\u2208B)\u2228(x\u2208A\u2227x\u2208C) \u21d4 x\u2208(A\u2229B)\u222a(A\u2229C)",
+    keywords: ["A\u2229(B\u222aC)", "(A\u2229B)\u222a(A\u2229C)"],
+    keywordMode: "or",
+    steps: [
+      "要证 A \u2229 (B \u222a C) = (A \u2229 B) \u222a (A \u2229 C)",
+      "只需证左右互为子集，即证元素 x 属于左边 \u21d4 属于右边",
+      "x \u2208 A \u2229 (B \u222a C)",
+      "\u21d4 x \u2208 A \u2227 x \u2208 (B \u222a C)（交集定义）",
+      "\u21d4 x \u2208 A \u2227 (x \u2208 B \u2228 x \u2208 C)（并集定义）",
+      "\u21d4 (x \u2208 A \u2227 x \u2208 B) \u2228 (x \u2208 A \u2227 x \u2208 C)（逻辑分配律）",
+      "\u21d4 x \u2208 (A \u2229 B) \u2228 x \u2208 (A \u2229 C)",
+      "\u21d4 x \u2208 (A \u2229 B) \u222a (A \u2229 C)",
+      "因此 A \u2229 (B \u222a C) = (A \u2229 B) \u222a (A \u2229 C)"
+    ]
+  },
+  {
+    type: "proof", countInType: 2,
+    diff: "高考",
+    question: "已知函数 f(x) = ln(\u221a(x\u00b2 + 1) + x)，判断其奇偶性并证明。",
+    answer: "奇函数。f(\u2212x)=ln(\u221a(x\u00b2+1)\u2212x)=ln(1/(\u221a(x\u00b2+1)+x))=\u2212ln(\u221a(x\u00b2+1)+x)=\u2212f(x)。",
+    keywords: ["奇函数", "f(-x)"],
+    keywordMode: "and",
+    steps: [
+      "f(\u2212x) = ln(\u221a((\u2212x)\u00b2 + 1) + (\u2212x)) = ln(\u221a(x\u00b2 + 1) \u2212 x)",
+      "注意到 \u221a(x\u00b2+1) \u2212 x = 1 / (\u221a(x\u00b2+1) + x)（有理化技巧）",
+      "f(\u2212x) = ln(1 / (\u221a(x\u00b2+1) + x)) = \u2212ln(\u221a(x\u00b2+1) + x) = \u2212f(x)",
+      "\u2234 f(x) 是奇函数"
+    ]
+  },
+  {
+    type: "proof", countInType: 3,
+    diff: "奥数",
+    question: "定义集合的\"对称差\"：A \u0394 B = (A \u2212 B) \u222a (B \u2212 A)。<br>已知 A = {1, 3, 5, 7, 9}，B = {2, 3, 5, 7, 11}，求 A \u0394 B。<br>（只需写出结果，无需证明过程）",
+    answer: "A\u0394B = {1, 2, 9, 11}",
+    keywords: ["1", "2", "9", "11"],
+    keywordMode: "or",
+    steps: [
+      "A \u2212 B = {1, 3, 5, 7, 9} \u2212 {2, 3, 5, 7, 11} = {1, 9}",
+      "B \u2212 A = {2, 3, 5, 7, 11} \u2212 {1, 3, 5, 7, 9} = {2, 11}",
+      "A \u0394 B = (A \u2212 B) \u222a (B \u2212 A) = {1, 9} \u222a {2, 11} = {1, 2, 9, 11}"
+    ]
+  },
+  {
+    type: "proof", countInType: 4,
+    diff: "奥数",
+    question: "设函数 f: R \u2192 R 满足 f(x + y) = f(x) + f(y) + 2xy。已知 f(1) = 1。<br>(1) 求 f(0) 和 f(\u22121) 的值；<br>(2) 猜测 f(x) 的解析式并证明。",
+    answer: "f(0)=0, f(\u22121)=3, f(x)=x\u00b2",
+    keywords: ["f(0)=0", "f(-1)=3", "x\u00b2"],
+    keywordMode: "or",
+    steps: [
+      "(1) 令 x = y = 0，得 f(0) = f(0) + f(0) + 0 \u2192 f(0) = 0",
+      "令 x = 1, y = \u22121，得 f(0) = f(1) + f(\u22121) + 2\u00d71\u00d7(\u22121)",
+      "即 0 = 1 + f(\u22121) \u2212 2 \u2192 f(\u22121) = 1",
+      "",
+      "(2) 猜测 f(x) = x\u00b2",
+      "证明：令 g(x) = f(x) \u2212 x\u00b2，则",
+      "g(x+y) = f(x+y) \u2212 (x+y)\u00b2 = f(x)+f(y)+2xy \u2212 (x\u00b2+2xy+y\u00b2)",
+      "= [f(x)\u2212x\u00b2] + [f(y)\u2212y\u00b2] = g(x) + g(y)",
+      "又 g(1) = f(1) \u2212 1\u00b2 = 0，故 g(n) = 0 对一切整数 n 成立",
+      "推广到所有实数，得 g(x) \u2261 0，即 f(x) = x\u00b2"
+    ]
+  },
+  {
+    type: "proof", countInType: 5,
+    diff: "中级",
+    question: "已知 A \u2286 B，证明 A \u2229 C \u2286 B \u2229 C。",
+    answer: "任取 x \u2208 A\u2229C，则 x\u2208A 且 x\u2208C。由 A\u2286B 得 x\u2208B，故 x\u2208B 且 x\u2208C，即 x\u2208B\u2229C。",
+    keywords: ["A\u2229C", "B\u2229C"],
+    keywordMode: "or",
+    steps: [
+      "任取 x \u2208 A \u2229 C",
+      "由交集定义：x \u2208 A 且 x \u2208 C",
+      "\u2235 A \u2286 B，\u2234 x \u2208 B",
+      "\u2234 x \u2208 B 且 x \u2208 C，即 x \u2208 B \u2229 C",
+      "由 x 的任意性，A \u2229 C \u2286 B \u2229 C"
+    ]
+  },
+  {
+    type: "proof", countInType: 6,
+    diff: "中级",
+    question: "判断并证明函数 f(x) = x\u00b3 + x 的奇偶性。",
+    answer: "奇函数。f(\u2212x) = (\u2212x)\u00b3 + (\u2212x) = \u2212x\u00b3 \u2212 x = \u2212(x\u00b3 + x) = \u2212f(x)。",
+    keywords: ["奇函数", "f(-x)"],
+    keywordMode: "and",
+    steps: [
+      "f(\u2212x) = (\u2212x)\u00b3 + (\u2212x)",
+      "= \u2212x\u00b3 \u2212 x",
+      "= \u2212(x\u00b3 + x)",
+      "= \u2212f(x)",
+      "\u2234 f(x) 是奇函数"
+    ]
+  },
+  {
+    type: "proof", countInType: 7,
+    diff: "高等",
+    question: "用定义证明函数 f(x) = 1/x 在 (0, +\u221e) 上单调递减。",
+    answer: "任取 0 < x\u2081 < x\u2082，f(x\u2081)\u2212f(x\u2082) = 1/x\u2081 \u2212 1/x\u2082 = (x\u2082\u2212x\u2081)/(x\u2081x\u2082) > 0，所以 f(x\u2081) > f(x\u2082)，单调递减。",
+    keywords: ["x1", "x2", "递减"],
+    keywordMode: "and",
+    steps: [
+      "任取 0 < x\u2081 < x\u2082 \u2208 (0, +\u221e)",
+      "作差：f(x\u2081) \u2212 f(x\u2082) = 1/x\u2081 \u2212 1/x\u2082",
+      "= (x\u2082 \u2212 x\u2081) / (x\u2081 x\u2082)",
+      "\u2235 x\u2082 \u2212 x\u2081 > 0 且 x\u2081 x\u2082 > 0",
+      "\u2234 f(x\u2081) \u2212 f(x\u2082) > 0，即 f(x\u2081) > f(x\u2082)",
+      "由定义，f(x) 在 (0, +\u221e) 上单调递减"
+    ]
+  },
+  {
+    type: "proof", countInType: 8,
+    diff: "高考",
+    question: "已知函数 f(x) = x\u00b2 + 1，用定义证明 f(x) 在 (\u2212\u221e, 0) 上单调递减。",
+    answer: "任取 x\u2081 < x\u2082 < 0，f(x\u2081)\u2212f(x\u2082) = (x\u2081\u00b2+1)\u2212(x\u2082\u00b2+1) = (x\u2081\u2212x\u2082)(x\u2081+x\u2082)。\u2235 x\u2081\u2212x\u2082<0，x\u2081+x\u2082<0，\u2234 f(x\u2081)\u2212f(x\u2082) > 0，即 f(x\u2081) > f(x\u2082)，递减。",
+    keywords: ["x1", "x2", "递减"],
+    keywordMode: "and",
+    steps: [
+      "任取 x\u2081 < x\u2082 < 0",
+      "作差：f(x\u2081) \u2212 f(x\u2082) = (x\u2081\u00b2+1) \u2212 (x\u2082\u00b2+1) = x\u2081\u00b2 \u2212 x\u2082\u00b2",
+      "= (x\u2081 \u2212 x\u2082)(x\u2081 + x\u2082)",
+      "\u2235 x\u2081 \u2212 x\u2082 < 0（由 x\u2081 < x\u2082），且 x\u2081 + x\u2082 < 0（均为负）",
+      "\u2234 f(x\u2081) \u2212 f(x\u2082) > 0，即 f(x\u2081) > f(x\u2082)",
+      "由定义，f(x) 在 (\u2212\u221e, 0) 上单调递减"
+    ]
+  },
+  {
+    type: "proof", countInType: 9,
+    diff: "奥数",
+    question: "设函数 f: R \u2192 R 满足对任意实数 x, y：<br>(1) f(x + y) = f(x) + f(y)<br>(2) f(xy) = f(x)f(y)<br>已知 f(1) = 1。<br>① 求 f(0) 和 f(\u22121) 的值；<br>② 证明对所有有理数 q，有 f(q) = q。",
+    answer: "f(0)=0, f(\u22121)=1；由 f(n)=n 对整数成立，再推广到有理数。",
+    keywords: ["f(0)=0", "有理数"],
+    keywordMode: "or",
+    steps: [
+      "① 令 x = y = 0，由 (1) 得 f(0) = f(0) + f(0) \u2192 f(0) = 0",
+      "令 x = 1, y = \u22121，由 (1) 得 f(0) = f(1) + f(\u22121) \u2192 0 = 1 + f(\u22121) \u2192 f(\u22121) = \u22121",
+      "",
+      "② 先用数学归纳法证 f(n) = n 对所有正整数 n 成立：",
+      "n=1 时 f(1)=1 成立；假设 f(k)=k，则 f(k+1) = f(k)+f(1) = k+1",
+      "由 f(0)=0 和 f(n) + f(\u2212n) = f(0) = 0，得 f(\u2212n) = \u2212n",
+      "\u2234 对所有整数 n，f(n) = n",
+      "对有理数 p/q（q>0），由 (2) 得 f(q) = f(q\u00b71/q\u00b7q) = f(q)f(1/q) = qf(1/q)",
+      "\u2234 f(1/q) = 1/q",
+      "再由 (1)：f(p/q) = f(p)f(1/q) = p \u00b7 1/q = p/q"
+    ]
+  }
+];
+
+// ============================================================
+// 渲染与交互
+// ============================================================
+var answered = [];
+
+function render() {
+  var html = "";
+  // 题型分组标题
+  html += '<div class="section-header">一、选择题（每题 5 分）</div>';
+  for (var i = 0; i < 10; i++) { html += renderOne(i); }
+  html += '<div class="section-header">二、判断题（每题 5 分）</div>';
+  for (var i = 10; i < 20; i++) { html += renderOne(i); }
+  html += '<div class="section-header">三、填空题（每题 6 分）</div>';
+  for (var i = 20; i < 30; i++) { html += renderOne(i); }
+  html += '<div class="section-header">四、推导证明题（每题 4 分）</div>';
+  for (var i = 30; i < 40; i++) { html += renderOne(i); }
+  document.getElementById("quiz-container").innerHTML = html;
+  answered = new Array(questions.length).fill(-1);
+}
+
+function renderOne(i) {
+  var q = questions[i];
+  var num = i + 1;
+  var tagHtml = "";
+  var diffHtml = diffLabels[q.diff] || "";
+  if (q.type === "choice") tagHtml = '<span class="q-tag choice">选择</span>';
+  else if (q.type === "tf") tagHtml = '<span class="q-tag tf">判断</span>';
+  else if (q.type === "fill") tagHtml = '<span class="q-tag fill">填空</span>';
+  else if (q.type === "proof") tagHtml = '<span class="q-tag proof">证明</span>';
+
+  var cardId = 'q' + i;
+  var html = '<div class="question-card" id="' + cardId + '">';
+  html += '<div class="q-title">' + tagHtml + ' ' + num + '. ' + q.question + ' ' + diffHtml + '</div>';
+
+  if (q.type === "choice" || q.type === "tf") {
+    html += '<div class="options">';
+    if (q.type === "choice") {
+      var letter = ["A", "B", "C", "D"];
+      for (var j = 0; j < q.opts.length; j++) {
+        html += '<div class="opt" onclick="selectOpt(' + i + ',' + j + ')">' + letter[j] + '. ' + q.opts[j] + '</div>';
+      }
+    } else {
+      html += '<div class="opt" onclick="selectOpt(' + i + ',0)">\u221a 正确</div>';
+      html += '<div class="opt" onclick="selectOpt(' + i + ',1)">\u00d7 错误</div>';
+    }
+    html += '</div>';
+  } else if (q.type === "fill") {
+    html += '<div class="fill-area">';
+    html += '<input class="fill-input" id="fill' + i + '" type="text" placeholder="请输入答案...">';
+    html += '<button class="btn-check" id="btn' + i + '" onclick="checkFill(' + i + ')">确认</button>';
+    html += '</div>';
+  } else if (q.type === "proof") {
+    html += '<div class="proof-area">';
+    html += '<textarea class="proof-textarea" id="proof' + i + '" rows="4" placeholder="请在此输入你的推导过程..."></textarea>';
+    html += '<div>';
+    html += '<button class="btn-check" id="btn' + i + '" onclick="checkProof(' + i + ')">提交</button>';
+    html += '<button class="btn-show-answer" onclick="toggleAnswer(' + i + ')">\u25bc 查看参考答案</button>';
+    html += '</div>';
+    html += '<div class="step-area" id="step' + i + '" style="display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:#f8f9fa;border-left:4px solid #1a73e8;line-height:1.8;font-size:0.93em;">';
+    if (q.steps) {
+      for (var k = 0; k < q.steps.length; k++) {
+        if (q.steps[k] === "") {
+          html += '<br>';
+        } else {
+          html += '<div style="margin:4px 0;padding-left:12px;border-left:3px solid #bbb;">' + q.steps[k] + '</div>';
+        }
+      }
+    }
+    html += '<div style="margin-top:6px;font-weight:bold;color:#2c3e50;">答案：' + q.answer + '</div>';
+    html += '</div>';
+    html += '</div>';
+  }
+
+  html += '<div class="explain" id="exp' + i + '"></div>';
+  html += '</div>';
+  return html;
+}
+
+// 选择/判断
+function selectOpt(qi, oi) {
+  if (answered[qi] !== -1) return;
+  answered[qi] = oi;
+  var q = questions[qi];
+  var isCorrect = (q.type === "tf") ? ((oi === 0 && q.answer) || (oi === 1 && !q.answer)) : (oi === q.answer);
+
+  var card = document.getElementById("q" + qi);
+  var opts = card.querySelectorAll(".opt");
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add("disabled");
+  }
+
+  if (q.type === "choice") {
+    opts[q.answer].classList.add("correct-opt");
+    if (!isCorrect) opts[oi].classList.add("wrong-opt");
+    else opts[oi].classList.add("selected");
+  } else {
+    // tf: 正确答案高亮
+    var correctIdx = q.answer ? 0 : 1;
+    opts[correctIdx].classList.add("correct-opt");
+    if (!isCorrect) opts[oi].classList.add("wrong-opt");
+    else opts[oi].classList.add("selected");
+  }
+
+  card.classList.add(isCorrect ? "correct" : "wrong");
+
+  var expDiv = document.getElementById("exp" + qi);
+  expDiv.innerHTML = (isCorrect ? "\u2713 " : "\u2717 ") + q.explain;
+  expDiv.className = "explain show " + (isCorrect ? "ok" : "fail");
+
+  updateScore();
+}
+
+// 填空
+function checkFill(qi) {
+  if (answered[qi] !== -1) return;
+  var input = document.getElementById("fill" + qi);
+  var q = questions[qi];
+  var userAnswer = input.value.trim();
+  // 负号归一化：将 Unicode minus (U+2212) 替换为 ASCII hyphen
+  var normalize = function(s) { return s.replace(/\u2212/g, "-"); };
+  var normUser = normalize(userAnswer);
+  var normAnswer = normalize(q.answer);
+  var isCorrect = (userAnswer === q.answer || userAnswer.indexOf(q.answer) !== -1);
+  isCorrect = isCorrect || (normUser === normAnswer || normUser.indexOf(normAnswer) !== -1);
+  answered[qi] = isCorrect ? 1 : 0;
+  input.disabled = true;
+  document.getElementById("btn" + qi).disabled = true;
+  input.classList.add(isCorrect ? "correct-input" : "wrong-input");
+
+  var card = document.getElementById("q" + qi);
+  card.classList.add(isCorrect ? "correct" : "wrong");
+
+  var expDiv = document.getElementById("exp" + qi);
+  expDiv.innerHTML = (isCorrect ? "\u2713 " : "\u2717 ") + (isCorrect ? "正确！" : "正确答案是：" + q.answer + "。") + q.explain;
+  expDiv.className = "explain show " + (isCorrect ? "ok" : "fail");
+
+  updateScore();
+}
+
+// 推导证明
+function checkProof(qi) {
+  if (answered[qi] !== -1) return;
+  var input = document.getElementById("proof" + qi);
+  var q = questions[qi];
+  var userAnswer = input.value.trim();
+  var isCorrect = false;
+  if (q.keywords && q.keywords.length > 0) {
+    var matchCount = 0;
+    for (var k = 0; k < q.keywords.length; k++) {
+      if (userAnswer.indexOf(q.keywords[k]) !== -1) {
+        matchCount++;
+      }
+    }
+    if (q.keywordMode === "or") {
+      isCorrect = (matchCount >= 1);
+    } else {
+      isCorrect = (matchCount >= q.keywords.length);
+    }
+  }
+  answered[qi] = isCorrect ? 1 : 0;
+  input.disabled = true;
+  document.getElementById("btn" + qi).disabled = true;
+  input.classList.add(isCorrect ? "correct-input" : "wrong-input");
+
+  var card = document.getElementById("q" + qi);
+  card.classList.add(isCorrect ? "correct" : "wrong");
+
+  // 展开答案区域
+  var stepArea = document.getElementById("step" + qi);
+  if (stepArea) stepArea.style.display = "block";
+
+  var expDiv = document.getElementById("exp" + qi);
+  expDiv.innerHTML = (isCorrect ? "\u2713 " : "\u2717 ") + (isCorrect ? "你的推导方向正确！" : "参考答案见下方。") + (q.explain || "");
+  expDiv.className = "explain show " + (isCorrect ? "ok" : "fail");
+
+  updateScore();
+}
+
+function toggleAnswer(qi) {
+  var stepArea = document.getElementById("step" + qi);
+  if (stepArea) {
+    stepArea.style.display = stepArea.style.display === "none" ? "block" : "none";
+  }
+}
+
+// 计分
+function updateScore() {
+  var total = 0;
+  // 选择题 1~10 (每题5分，共 50 分)
+  for (var i = 0; i < 10; i++) {
+    if (answered[i] !== -1) {
+      var q = questions[i];
+      if ((q.type === "choice" && answered[i] === q.answer) ||
+          (q.type === "tf" && ((answered[i] === 0 && q.answer) || (answered[i] === 1 && !q.answer)))) {
+        total += 5;
+      }
+    }
+  }
+  // 判断题 11~20 (每题5分，共 50 分)
+  for (var i = 10; i < 20; i++) {
+    if (answered[i] !== -1) {
+      var q = questions[i];
+      if ((answered[i] === 0 && q.answer) || (answered[i] === 1 && !q.answer)) {
+        total += 5;
+      }
+    }
+  }
+  // 填空题 21~30 (每题6分，共 60 分)
+  for (var i = 20; i < 30; i++) {
+    if (answered[i] === 1) total += 6;
+  }
+  // 推导证明 31~40 (每题4分，共 40 分)
+  for (var i = 30; i < 40; i++) {
+    if (answered[i] === 1) total += 4;
+  }
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a" + total + " / 200";
+}
+
+function resetExam() {
+  answered = new Array(questions.length).fill(-1);
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a0 / 200";
+  for (var i = 0; i < questions.length; i++) {
+    var card = document.getElementById("q" + i);
+    if (card) {
+      card.className = "question-card";
+      var opts = card.querySelectorAll(".opt");
+      for (var j = 0; j < opts.length; j++) opts[j].className = "opt";
+      var expDiv = document.getElementById("exp" + i);
+      if (expDiv) expDiv.className = "explain";
+    }
+    var fillInput = document.getElementById("fill" + i);
+    if (fillInput) {
+      fillInput.disabled = false;
+      fillInput.value = "";
+      fillInput.className = "fill-input";
+      var btn = document.getElementById("btn" + i);
+      if (btn) btn.disabled = false;
+    }
+    var proofInput = document.getElementById("proof" + i);
+    if (proofInput) {
+      proofInput.disabled = false;
+      proofInput.value = "";
+      proofInput.className = "proof-textarea";
+      var btn2 = document.getElementById("btn" + i);
+      if (btn2) btn2.disabled = false;
+      var stepArea = document.getElementById("step" + i);
+      if (stepArea) stepArea.style.display = "none";
+    }
+  }
+}
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>函数与方程思想</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+/* 交互式习题专用样式 */
+.quiz-question {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin: 16px 0;
+  transition: all 0.2s;
+}
+.quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+.quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+.quiz-question .q-title {
+  font-weight: bold;
+  font-size: 1.05em;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+.quiz-question .q-title .q-tag {
+  display: inline-block;
+  padding: 1px 10px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  margin-right: 8px;
+  color: #fff;
+}
+.q-tag.choice { background: #1a73e8; }
+.q-tag.fill { background: #9c27b0; }
+.fill-area { display: flex; gap: 10px; align-items: center; margin-top: 8px; flex-wrap: wrap; }
+.fill-input {
+  flex: 1; padding: 10px 14px; border: 2px solid #ddd; border-radius: 8px;
+  font-size: 1em; outline: none; transition: border-color 0.15s; box-sizing: border-box; min-width: 120px;
+}
+.fill-input:focus { border-color: #1a73e8; }
+.fill-input.correct-input { border-color: #4caf50; background: #e8f5e9; }
+.fill-input.wrong-input { border-color: #f44336; background: #fce4ec; }
+.btn-check {
+  padding: 10px 20px; background: #1a73e8; color: #fff; border: none;
+  border-radius: 8px; cursor: pointer; font-size: 0.95em; transition: 0.15s; white-space: nowrap;
+}
+.btn-check:hover { background: #1557b0; }
+.btn-check:disabled { opacity: 0.5; cursor: default; }
+.quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-question .opt {
+  padding: 8px 14px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: #fafafa;
+  user-select: none;
+}
+.quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+.quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+.quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+.quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+.quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+.quiz-question .explain {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.93em;
+  display: none;
+}
+.quiz-question .explain.show { display: block; }
+.quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+.quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+.quiz-footer { text-align: center; margin: 30px 0; }
+.quiz-footer .score-box {
+  display: inline-block;
+  background: #1a73e8;
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 30px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.quiz-footer .btn-reset {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 28px;
+  border: 2px solid #1a73e8;
+  color: #1a73e8;
+  border-radius: 20px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 1em;
+  transition: 0.15s;
+}
+.quiz-footer .btn-reset:hover { background: #1a73e8; color: #fff; }
+.example .step { margin: 4px 0 4px 20px; color: #555; }
+.analysis-label {
+  display: inline-block;
+  background: #1a73e8;
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  margin-right: 6px;
+}
+.solution-label {
+  display: inline-block;
+  background: #2c3e50;
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  margin-right: 6px;
+}
+.example .answer {
+  color: #d32f2f;
+  font-weight: bold;
+}
+.practice-section {
+  margin: 30px 0;
+}
+.practice-section h2 {
+  margin-top: 0;
+}
+.practice-item {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 12px 0;
+}
+.practice-item .p-title {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #2c3e50;
+}
+.notice-box {
+  background: #e3f2fd;
+  border-left: 4px solid #1a73e8;
+  padding: 14px 18px;
+  margin: 20px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95em;
+}
+.summary-box {
+  background: #f3e5f5;
+  border-left: 4px solid #9c27b0;
+  padding: 14px 18px;
+  margin: 20px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95em;
+}
+.section-intro {
+  font-size: 1em;
+  color: #555;
+  padding: 10px 16px;
+  background: #f0f7ff;
+  border-radius: 8px;
+  margin: 10px 0 20px;
+  border-left: 4px solid #1a73e8;
+}
+.exercise-section-title {
+  color: #1a73e8;
+  font-size: 1.1em;
+  margin: 28px 0 12px;
+  padding-left: 10px;
+  border-left: 4px solid #1a73e8;
+}
+</style>
+</head>
+<body>
+
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+
+<h1>函数与方程思想</h1>
+
+<div class="notice-box">
+  <strong>学习目标：</strong>理解函数思想和方程思想的本质区别与内在联系，学会在解题中灵活运用"构造函数"和"设未知数列方程"这两种核心方法。
+</div>
+
+<p style="color:#666; font-size:0.95em;">
+  函数与方程思想是高中数学最重要的两大思想方法。简单来说：<strong>函数思想</strong>是"动"的——把问题中的变量关系抽象为函数，通过研究函数的性质（单调性、最值、图像等）来解决问题；<strong>方程思想</strong>是"静"的——把问题中的等量关系转化为方程（组），通过解方程来求解未知量。两者相辅相成，贯穿整个高中数学。
+</p>
+
+<!-- ============================================================ -->
+<!-- 第一部分：函数思想 -->
+<!-- ============================================================ -->
+<h2>一、函数思想（构造函数解题）</h2>
+
+<div class="section-intro">
+  <strong>本质：</strong>把问题中的变量关系抽象为函数，利用函数性质（单调性、奇偶性、最值、零点等）解决问题。<br>
+  <strong>核心思维：</strong>"看到变化的量，就想想能不能构造一个函数来研究它。"
+</div>
+
+<h3>示例1：配方法 + 函数图像求最值</h3>
+<div class="example">
+  <p><strong>题目：</strong>求函数 f(x)=x²-2x+3 在区间 [0,3] 上的最大值和最小值。</p>
+  <p>
+    <span class="analysis-label">思路分析</span>
+    这是一个二次函数在闭区间上的最值问题。二次函数的图像是抛物线，开口向上，对称轴 x=1 在区间 [0,3] 内部。最小值出现在对称轴处，最大值出现在离对称轴较远的端点处。通过配方法将函数化为顶点式，结合图像即可求解。
+  </p>
+  <p>
+    <span class="solution-label">解答过程</span>
+  </p>
+  <p class="step">第一步：配方法将函数化为顶点式。</p>
+  <p class="step">f(x) = x² - 2x + 3 = (x² - 2x + 1) + 2 = (x-1)² + 2</p>
+  <p class="step">第二步：函数图像是开口向上的抛物线，对称轴为 x=1。</p>
+  <p class="step">第三步：因为 1 ∈ [0,3]，所以在 x=1 处取得最小值 f(1)=2。</p>
+  <p class="step">第四步：比较端点值：f(0)=0²-2·0+3=3，f(3)=9-6+3=6。</p>
+  <p class="step">所以最大值为 6（在 x=3 处取得），最小值为 2（在 x=1 处取得）。</p>
+  <p class="answer">答案：最大值 6，最小值 2。</p>
+</div>
+
+<h3>示例2：构造函数利用最值证明不等式</h3>
+<div class="example">
+  <p><strong>题目：</strong>证明：对任意 x>0，有 x + 1/x ≥ 2。</p>
+  <p>
+    <span class="analysis-label">思路分析</span>
+    要证明一个不等式恒成立，可以构造函数 f(x)=x+1/x-2，转化为证明 f(x)≥0 恒成立。利用导数或基本不等式求出 f(x) 的最小值，如果最小值≥0，则不等式成立。<br>
+    <strong>关键点：</strong>为什么想到构造函数？因为不等式左边是 x 的函数，右边是常数，作差后就是一个函数的最值问题。
+  </p>
+  <p>
+    <span class="solution-label">解答过程</span>
+  </p>
+  <p class="step">方法一（构造函数法）：</p>
+  <p class="step">令 f(x) = x + 1/x - 2，x>0。</p>
+  <p class="step">f'(x) = 1 - 1/x² = (x²-1)/x²</p>
+  <p class="step">令 f'(x)=0，得 x=1（x=-1舍去）。</p>
+  <p class="step">当 0&lt;x&lt;1 时 f'(x)&lt;0，f(x)递减；当 x>1 时 f'(x)>0，f(x)递增。</p>
+  <p class="step">所以 f(x) 在 x=1 处取得最小值 f(1)=1+1-2=0。</p>
+  <p class="step">故对任意 x>0，f(x) ≥ 0，即 x+1/x ≥ 2，得证。</p>
+  <p class="step">方法二（基本不等式）：</p>
+  <p class="step">由基本不等式，x + 1/x ≥ 2√(x·1/x) = 2（当且仅当 x=1 时取等号）。</p>
+</div>
+
+<h3>示例3：构造函数利用单调性和零点定理研究方程根的个数</h3>
+<div class="example">
+  <p><strong>题目：</strong>判断方程 x³-3x+1=0 的实根个数。</p>
+  <p>
+    <span class="analysis-label">思路分析</span>
+    方程根的问题等价于函数零点问题。构造函数 f(x)=x³-3x+1，研究它的单调性和零点。三次函数的零点个数可以通过求导分析单调区间，再结合零点定理（若 f(a)·f(b)&lt;0，则在 (a,b) 内至少有一个零点）来判断。
+  </p>
+  <p>
+    <span class="solution-label">解答过程</span>
+  </p>
+  <p class="step">第一步：构造函数 f(x) = x³ - 3x + 1。</p>
+  <p class="step">第二步：求导。f'(x) = 3x² - 3 = 3(x²-1) = 3(x+1)(x-1)</p>
+  <p class="step">第三步：令 f'(x)=0，得 x=-1 或 x=1。</p>
+  <p class="step">第四步：列表分析单调性：</p>
+  <p class="step">· x&lt;-1 时 f'(x)>0，f(x)单调递增；</p>
+  <p class="step">· -1&lt;x&lt;1 时 f'(x)&lt;0，f(x)单调递减；</p>
+  <p class="step">· x>1 时 f'(x)>0，f(x)单调递增。</p>
+  <p class="step">第五步：计算极值：f(-1)=(-1)³-3(-1)+1=-1+3+1=3（极大值），f(1)=1-3+1=-1（极小值）。</p>
+  <p class="step">第六步：因为极大值 3>0，极小值 -1&lt;0，且当 x→-∞ 时 f(x)→-∞，当 x→+∞ 时 f(x)→+∞，</p>
+  <p class="step">由零点定理，f(x) 在每个单调区间上各有一个零点，共 <strong>3 个</strong>实根。</p>
+  <p class="answer">答案：方程有 3 个不同的实根。</p>
+</div>
+
+<h3>示例4：利用递推思想求数列通项</h3>
+<div class="example">
+  <p><strong>题目：</strong>已知数列 {a<sub>n</sub>} 满足 a₁=1，a<sub>n+1</sub>=2a<sub>n</sub>+1，求数列的通项公式。</p>
+  <p>
+    <span class="analysis-label">思路分析</span>
+    这是一个线性递推数列。递推式 a<sub>n+1</sub>=2a<sub>n</sub>+1 不是标准的等比数列形式，但可以通过"构造法"——在等式两边同时加 1，得到 a<sub>n+1</sub>+1=2(a<sub>n</sub>+1)，从而转化为等比数列。这种构造的思想和函数思想中的"构造函数"一脉相承。
+  </p>
+  <p>
+    <span class="solution-label">解答过程</span>
+  </p>
+  <p class="step">方法一（构造等比数列）：</p>
+  <p class="step">由 a<sub>n+1</sub> = 2a<sub>n</sub> + 1</p>
+  <p class="step">设 a<sub>n+1</sub> + λ = 2(a<sub>n</sub> + λ)</p>
+  <p class="step">展开得：a<sub>n+1</sub> + λ = 2a<sub>n</sub> + 2λ</p>
+  <p class="step">即 a<sub>n+1</sub> = 2a<sub>n</sub> + λ，对比原式得 λ=1。</p>
+  <p class="step">所以 a<sub>n+1</sub> + 1 = 2(a<sub>n</sub> + 1)</p>
+  <p class="step">故 {a<sub>n</sub>+1} 是首项为 a₁+1=2，公比为 2 的等比数列。</p>
+  <p class="step">因此 a<sub>n</sub> + 1 = 2 · 2<sup>n-1</sup> = 2<sup>n</sup></p>
+  <p class="step">即 a<sub>n</sub> = 2<sup>n</sup> - 1</p>
+  <p class="step">方法二（迭代法）：</p>
+  <p class="step">a<sub>n</sub> = 2a<sub>n-1</sub> + 1 = 2(2a<sub>n-2</sub>+1) + 1 = 2²a<sub>n-2</sub> + 2 + 1</p>
+  <p class="step">继续迭代：a<sub>n</sub> = 2<sup>n-1</sup>a₁ + (2<sup>n-2</sup> + 2<sup>n-3</sup> + … + 2 + 1)</p>
+  <p class="step">= 2<sup>n-1</sup>·1 + (2<sup>n-1</sup>-1) = 2<sup>n</sup> - 1</p>
+  <p class="answer">答案：a<sub>n</sub> = 2<sup>n</sup> - 1。</p>
+</div>
+
+<div class="summary-box">
+  <strong>函数思想小结：</strong>函数思想的核心是"构造函数"——把看似不是函数的问题转化为函数问题。常见题型包括：求最值（构造函数利用单调性）、证明不等式（构造函数作差求最值）、研究方程根（构造函数利用零点定理）、数列递推（构造等比/等差）等。
+</div>
+
+<!-- 第一部分 交互题 -->
+<h3 class="exercise-section-title">函数思想 · 自我检测</h3>
+
+<div class="quiz-question" id="q0">
+  <div class="q-title"><span class="q-tag choice">选择题</span> 1. 构造函数证明不等式时，最常用的转化方法是：</div>
+  <div class="options">
+    <div class="opt" onclick="selectOpt(0,0)">A. 将不等式两边同时平方</div>
+    <div class="opt" onclick="selectOpt(0,1)">B. 将不等式转化为函数的最值问题</div>
+    <div class="opt" onclick="selectOpt(0,2)">C. 直接将不等式代入函数</div>
+    <div class="opt" onclick="selectOpt(0,3)">D. 将不等式两边同时取倒数</div>
+  </div>
+  <div class="explain" id="exp0"></div>
+</div>
+
+<div class="quiz-question" id="q1">
+  <div class="q-title"><span class="q-tag choice">选择题</span> 2. 对于递推数列 a<sub>n+1</sub>=pa<sub>n</sub>+q（p≠1），构造等比数列时，应该：</div>
+  <div class="options">
+    <div class="opt" onclick="selectOpt(1,0)">A. 两边同时除以 p</div>
+    <div class="opt" onclick="selectOpt(1,1)">B. 两边同时加上 q/(p-1) 构造等比</div>
+    <div class="opt" onclick="selectOpt(1,2)">C. 两边同时乘以 p</div>
+    <div class="opt" onclick="selectOpt(1,3)">D. 两边同时减去 q</div>
+  </div>
+  <div class="explain" id="exp1"></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 第二部分：方程思想 -->
+<!-- ============================================================ -->
+<h2>二、方程思想（设未知数列方程）</h2>
+
+<div class="section-intro">
+  <strong>本质：</strong>把问题中的等量关系转化为方程（组），通过解方程来求解未知量。<br>
+  <strong>核心思维：</strong>"看到等量关系，就设未知数，把文字描述转化为数学方程。"
+</div>
+
+<h3>示例1：利用方程组求两个数</h3>
+<div class="example">
+  <p><strong>题目：</strong>两个数的和为 10，积为 24，求这两个数。</p>
+  <p>
+    <span class="analysis-label">思路分析</span>
+    设两个未知数，根据题目给出的两个等量关系（和=10、积=24）列出方程组。这是一个典型的"已知和与积"问题，可以用一元二次方程的根与系数关系（韦达定理）求解——以这两个数为根构造方程 t²-(和)t+(积)=0。
+  </p>
+  <p>
+    <span class="solution-label">解答过程</span>
+  </p>
+  <p class="step">解法一（方程组法）：</p>
+  <p class="step">设两数分别为 x 和 y，则：</p>
+  <p class="step" style="margin-left:40px;">x + y = 10 ……①</p>
+  <p class="step" style="margin-left:40px;">xy = 24 ……②</p>
+  <p class="step">由①得 y=10-x，代入②：x(10-x)=24</p>
+  <p class="step">即 -x²+10x-24=0，即 x²-10x+24=0</p>
+  <p class="step">因式分解：(x-4)(x-6)=0</p>
+  <p class="step">解得 x=4 或 x=6，对应 y=6 或 y=4。</p>
+  <p class="step">解法二（韦达定理法）：</p>
+  <p class="step">由韦达定理，这两个数是方程 t²-10t+24=0 的两个根。</p>
+  <p class="step">t²-10t+24=0，(t-4)(t-6)=0，所以两根为 4 和 6。</p>
+  <p class="answer">答案：这两个数是 4 和 6。</p>
+</div>
+
+<h3>示例2：几何问题列方程组</h3>
+<div class="example">
+  <p><strong>题目：</strong>一个直角三角形的周长为 12，斜边长为 5，求两条直角边的长。</p>
+  <p>
+    <span class="analysis-label">思路分析</span>
+    几何问题中通常隐含多个等量关系。本题中有两个未知数（两直角边），需要两个方程：一个是周长关系（a+b+5=12），另一个是勾股定理（a²+b²=25）。联立解方程组即可。
+  </p>
+  <p>
+    <span class="solution-label">解答过程</span>
+  </p>
+  <p class="step">设两直角边分别为 a 和 b（a>0, b>0）。</p>
+  <p class="step">由周长条件：a + b + 5 = 12，即 a + b = 7 ……①</p>
+  <p class="step">由勾股定理：a² + b² = 5² = 25 ……②</p>
+  <p class="step">将①式平方：a²+2ab+b²=49</p>
+  <p class="step">减去②式得：2ab=24，即 ab=12 ……③</p>
+  <p class="step">由①和③知，a、b 是方程 t²-7t+12=0 的两个根。</p>
+  <p class="step">解得 t=3 或 t=4，即两直角边分别为 3 和 4。</p>
+  <p class="answer">答案：两条直角边分别为 3 和 4。</p>
+</div>
+
+<h3>示例3：待定系数法求函数解析式</h3>
+<div class="example">
+  <p><strong>题目：</strong>已知 f(x) 是一次函数，且满足 f(f(x))=4x+3，求 f(x) 的解析式。</p>
+  <p>
+    <span class="analysis-label">思路分析</span>
+    一次函数的一般形式是 f(x)=kx+b（k≠0）。题目给出了复合函数的表达式，只需设出待定系数，代入复合关系，得到一个恒等式。比较等式两边对应项的系数，列出方程组求解 k 和 b。这就是典型的"待定系数法"——本质上就是方程思想的应用。
+  </p>
+  <p>
+    <span class="solution-label">解答过程</span>
+  </p>
+  <p class="step">第一步：设 f(x) = kx + b（k≠0）。</p>
+  <p class="step">第二步：f(f(x)) = k(kx+b) + b = k²x + kb + b</p>
+  <p class="step">第三步：由已知 f(f(x)) = 4x + 3，得：</p>
+  <p class="step" style="margin-left:40px;">k²x + kb + b = 4x + 3</p>
+  <p class="step">第四步：比较系数得方程组：</p>
+  <p class="step" style="margin-left:40px;">k² = 4 ……①</p>
+  <p class="step" style="margin-left:40px;">kb + b = 3 ……②</p>
+  <p class="step">第五步：由①得 k=2 或 k=-2。</p>
+  <p class="step">· 当 k=2 时，代入②：2b+b=3，得 b=1，所以 f(x)=2x+1。</p>
+  <p class="step">· 当 k=-2 时，代入②：-2b+b=3，得 b=-3，所以 f(x)=-2x-3。</p>
+  <p class="step">第六步：验证（略），两组解均满足条件。</p>
+  <p class="answer">答案：f(x)=2x+1 或 f(x)=-2x-3。</p>
+</div>
+
+<h3>示例4：行程问题列方程</h3>
+<div class="example">
+  <p><strong>题目：</strong>甲、乙两人从相距 30km 的两地同时出发，相向而行，2 小时后相遇。甲比乙每小时多走 3km，求甲、乙各自的速度。</p>
+  <p>
+    <span class="analysis-label">思路分析</span>
+    行程问题中的基本关系是：路程=速度×时间。本题有两个未知数（甲速、乙速），有两个等量关系：（1）两人 2 小时走的路程之和 = 30km；（2）甲速 - 乙速 = 3km/h。设未知数列方程组即可求解。
+  </p>
+  <p>
+    <span class="solution-label">解答过程</span>
+  </p>
+  <p class="step">设甲的速度为 x km/h，乙的速度为 y km/h（x>0, y>0）。</p>
+  <p class="step">由相遇条件：甲走的路程 + 乙走的路程 = 30，即 2x + 2y = 30</p>
+  <p class="step" style="margin-left:40px;">化简得 x + y = 15 ……①</p>
+  <p class="step">由速度差条件：x - y = 3 ……②</p>
+  <p class="step">①+②得：2x=18，解得 x=9。</p>
+  <p class="step">代入①得：y=6。</p>
+  <p class="step">验证：甲 2 小时走 18km，乙 2 小时走 12km，合计 30km，且甲比乙快 3km/h，符合题意。</p>
+  <p class="answer">答案：甲的速度为 9 km/h，乙的速度为 6 km/h。</p>
+</div>
+
+<div class="summary-box">
+  <strong>方程思想小结：</strong>方程思想的核心是"设未知数列方程"——先找出问题中的等量关系，再设未知数把文字转化为方程。常见的等量关系来源包括：几何中的勾股定理/面积/周长公式、代数中的运算关系、应用题中的行程/工程/利润关系等。<br>
+  <strong>关键提醒：</strong>不要急于计算，先理清有几个未知数、有几个等量关系。一般情况下，有 n 个未知数就需要 n 个独立的方程。
+</div>
+
+<!-- 第二部分 交互题 -->
+<h3 class="exercise-section-title">方程思想 · 自我检测</h3>
+
+<div class="quiz-question" id="q2">
+  <div class="q-title"><span class="q-tag choice">选择题</span> 3. 已知一元二次方程 x²-5x+6=0 的两根是一个长方形的长和宽，则这个长方形的面积为：</div>
+  <div class="options">
+    <div class="opt" onclick="selectOpt(2,0)">A. 5</div>
+    <div class="opt" onclick="selectOpt(2,1)">B. 6</div>
+    <div class="opt" onclick="selectOpt(2,2)">C. 2</div>
+    <div class="opt" onclick="selectOpt(2,3)">D. 3</div>
+  </div>
+  <div class="explain" id="exp2"></div>
+</div>
+
+<div class="quiz-question" id="q3">
+  <div class="q-title"><span class="q-tag choice">选择题</span> 4. 待定系数法求函数解析式的本质是：</div>
+  <div class="options">
+    <div class="opt" onclick="selectOpt(3,0)">A. 代入数值计算</div>
+    <div class="opt" onclick="selectOpt(3,1)">B. 列出方程（组）求解未知系数</div>
+    <div class="opt" onclick="selectOpt(3,2)">C. 画函数图像</div>
+    <div class="opt" onclick="selectOpt(3,3)">D. 因式分解</div>
+  </div>
+  <div class="explain" id="exp3"></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 第三部分：综合应用 -->
+<!-- ============================================================ -->
+<h2>三、函数与方程的综合应用</h2>
+
+<div class="section-intro">
+  <strong>核心：</strong>很多数学问题中，函数思想和方程思想是交织在一起的。方程的根对应函数的零点，函数的值域对应方程的有解条件。"函数—方程—不等式"三者经常相互转化。
+</div>
+
+<h3>示例1：二次方程根的分布（函数与方程结合）</h3>
+<div class="example">
+  <p><strong>题目：</strong>已知方程 x²-2ax+4=0 有两个正实根，求实数 a 的取值范围。</p>
+  <p>
+    <span class="analysis-label">思路分析</span>
+    二次方程根的问题可以转化为二次函数图像与 x 轴的交点问题。要使方程有两个正根，等价于二次函数 f(x)=x²-2ax+4 的图像与 x 轴正半轴有两个交点。需要同时满足三个条件：（1）判别式 Δ>0（保证有两个不同实根）；（2）对称轴 x=a>0（保证两根同号且都在正半轴）；（3）f(0)>0（保证两根都为正）。韦达定理也可以辅助判断。
+  </p>
+  <p>
+    <span class="solution-label">解答过程</span>
+  </p>
+  <p class="step">设 f(x) = x² - 2ax + 4。</p>
+  <p class="step">条件一（判别式）：Δ = (-2a)² - 4·1·4 = 4a² - 16 > 0</p>
+  <p class="step" style="margin-left:40px;">即 a² > 4，所以 a < -2 或 a > 2</p>
+  <p class="step">条件二（对称轴）：x = a > 0（保证至少有一个正根）</p>
+  <p class="step">条件三（f(0)>0）：f(0) = 4 > 0（已自动满足）</p>
+  <p class="step">或者用韦达定理：两根之和 x₁+x₂=2a>0，两根之积 x₁x₂=4>0</p>
+  <p class="step">综合条件一（a<-2 或 a>2）和条件二（a>0），得 a>2。</p>
+  <p class="answer">答案：a > 2。</p>
+</div>
+
+<h3>示例2：含参方程根的个数讨论（函数图像法）</h3>
+<div class="example">
+  <p><strong>题目：</strong>讨论方程 |x²-2x-3| = m 的实数根的个数与参数 m 的关系。</p>
+  <p>
+    <span class="analysis-label">思路分析</span>
+    方程 |x²-2x-3|=m 的根的个数等于函数 y=|x²-2x-3| 与水平直线 y=m 的交点个数。先画出函数 y=|x²-2x-3| 的图像（即把二次函数在 x 轴下方的部分翻折到上方），然后让水平线 y=m 上下移动，观察交点个数随 m 的变化。这是"数形结合"的典型应用。
+  </p>
+  <p>
+    <span class="solution-label">解答过程</span>
+  </p>
+  <p class="step">第一步：构造函数 g(x) = |x²-2x-3|。</p>
+  <p class="step">第二步：分析二次函数 h(x)=x²-2x-3=(x-1)²-4，顶点为 (1,-4)，与 x 轴交于 x=-1 和 x=3。</p>
+  <p class="step">第三步：画出 |h(x)| 的图像（将 h(x) 在 x 轴下方的部分翻折到上方）：</p>
+  <p class="step">· 当 -1≤x≤3 时，h(x)≤0，|h(x)|=-h(x)，即顶点翻折到 (1,4)；</p>
+  <p class="step">· 当 x<-1 或 x>3 时，|h(x)|=h(x)。</p>
+  <p class="step">第四步：讨论 y=m 与图像交点的个数：</p>
+  <p class="step">· 当 m < 0 时，无交点，方程无实根；</p>
+  <p class="step">· 当 m = 0 时，2 个交点（x=-1 和 x=3），方程有 2 个实根；</p>
+  <p class="step">· 当 0 < m < 4 时，4 个交点，方程有 4 个实根；</p>
+  <p class="step">· 当 m = 4 时，3 个交点（x=1 处为切点），方程有 3 个实根；</p>
+  <p class="step">· 当 m > 4 时，2 个交点，方程有 2 个实根。</p>
+  <p class="answer">答案：见上表。</p>
+</div>
+
+<h3>示例3：方程有解问题（分离参数法）</h3>
+<div class="example">
+  <p><strong>题目：</strong>若关于 x 的方程 x²+2x+a=0 在区间 [-2,2] 上有实数解，求实数 a 的取值范围。</p>
+  <p>
+    <span class="analysis-label">思路分析</span>
+    方程在区间上有解问题，可以转化为函数在区间上的值域问题。分离参数 a：由方程得 a = -(x²+2x) = -x²-2x。问题转化为：当 x ∈ [-2,2] 时，求 a 的取值范围，即求函数 φ(x) = -x²-2x 在 [-2,2] 上的值域。这样就将"方程有解"转化为了"函数值域"问题。
+  </p>
+  <p>
+    <span class="solution-label">解答过程</span>
+  </p>
+  <p class="step">第一步：分离参数，由 x²+2x+a=0 得 a = -x²-2x。</p>
+  <p class="step">第二步：构造函数 φ(x) = -x²-2x，x∈[-2,2]。</p>
+  <p class="step">第三步：配方法：φ(x) = -(x²+2x) = -(x+1)² + 1</p>
+  <p class="step">第四步：φ(x) 的图像是开口向下的抛物线，对称轴 x=-1 ∈ [-2,2]。</p>
+  <p class="step">· 最大值：在 x=-1 处取得，φ(-1)=1。</p>
+  <p class="step">· 端点值：φ(-2) = -4+4=0，φ(2) = -4-4=-8。</p>
+  <p class="step">· 最小值：在 x=2 处取得，φ(2) = -8。</p>
+  <p class="step">第五步：φ(x) 在 [-2,2] 上的值域为 [-8, 1]。</p>
+  <p class="step">故 a 的取值范围是 [-8, 1]。</p>
+  <p class="answer">答案：a ∈ [-8, 1]。</p>
+</div>
+
+<h3>示例4：含参二次函数最值的分类讨论</h3>
+<div class="example">
+  <p><strong>题目：</strong>已知函数 f(x)=x²-2ax+1 在区间 [0,2] 上的最小值为 -3，求 a 的值。</p>
+  <p>
+    <span class="analysis-label">思路分析</span>
+    这是一个"已知最值反求参数"的问题，需要根据对称轴与区间的位置关系进行分类讨论。二次函数在闭区间上的最值问题，对称轴 x=a 相对于区间 [0,2] 有三种情况：在区间左侧（a≤0）、在区间内部（0&lt;a&lt;2）、在区间右侧（a≥2）。分别讨论后，令最小值等于 -3 求解 a，并验证是否在对应的分类范围内。
+  </p>
+  <p>
+    <span class="solution-label">解答过程</span>
+  </p>
+  <p class="step">f(x) = x²-2ax+1 = (x-a)² + 1-a²，对称轴 x=a，开口向上。</p>
+  <p class="step"><strong>情况一：</strong>a ≤ 0，对称轴在区间左侧，f(x)在[0,2]上单调递增。</p>
+  <p class="step" style="margin-left:20px;">最小值 f(0)=1，令 1=-3，无解。</p>
+  <p class="step"><strong>情况二：</strong>0 < a < 2，对称轴在区间内部。</p>
+  <p class="step" style="margin-left:20px;">最小值 f(a)=1-a²，令 1-a²=-3，得 a²=4，即 a=±2。</p>
+  <p class="step" style="margin-left:20px;">但 a=±2 不在 0&lt;a&lt;2 范围内，舍去。</p>
+  <p class="step"><strong>情况三：</strong>a ≥ 2，对称轴在区间右侧，f(x)在[0,2]上单调递减。</p>
+  <p class="step" style="margin-left:20px;">最小值 f(2)=4-4a+1=5-4a，令 5-4a=-3，得 a=2。</p>
+  <p class="step" style="margin-left:20px;">a=2 满足 a≥2，有效。</p>
+  <p class="step">综上所述：a=2。</p>
+  <p class="answer">答案：a = 2。</p>
+</div>
+
+<div class="summary-box">
+  <strong>综合应用小结：</strong>函数与方程思想经常一起使用——<br>
+  （1）由方程联想对应的函数，通过函数图像和性质分析方程的根（如示例1、示例2）；<br>
+  （2）由函数问题构造方程，通过解方程求解参数（如示例4）；<br>
+  （3）分离参数法本质上是"方程→函数"的转化（如示例3）。<br>
+  <strong>口诀：</strong>"方程根，函数零；函数值，方程解。两边互相转化，难题便不难。"
+</div>
+
+<!-- 第三部分 交互题 -->
+<h3 class="exercise-section-title">综合应用 · 自我检测</h3>
+
+<div class="quiz-question" id="q4">
+  <div class="q-title"><span class="q-tag choice">选择题</span> 5. 讨论方程 |x²-1|=m 的根的个数时，最适合的方法是：</div>
+  <div class="options">
+    <div class="opt" onclick="selectOpt(4,0)">A. 直接求解方程</div>
+    <div class="opt" onclick="selectOpt(4,1)">B. 构造函数并画出函数图像</div>
+    <div class="opt" onclick="selectOpt(4,2)">C. 使用韦达定理</div>
+    <div class="opt" onclick="selectOpt(4,3)">D. 配方法</div>
+  </div>
+  <div class="explain" id="exp4"></div>
+</div>
+
+<div class="quiz-question" id="q5">
+  <div class="q-title"><span class="q-tag choice">选择题</span> 6. 若方程 x²-2x+a=0 在 [0,3] 上有解，分离参数后构造函数 g(x)=-x²+2x，则 a 的取值范围等于 g(x) 在 [0,3] 上的：</div>
+  <div class="options">
+    <div class="opt" onclick="selectOpt(5,0)">A. 最大值</div>
+    <div class="opt" onclick="selectOpt(5,1)">B. 最小值</div>
+    <div class="opt" onclick="selectOpt(5,2)">C. 值域</div>
+    <div class="opt" onclick="selectOpt(5,3)">D. 定义域</div>
+  </div>
+  <div class="explain" id="exp5"></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 综合练习题 -->
+<!-- ============================================================ -->
+<h2>综合练习题</h2>
+
+<div class="notice-box">
+  <strong>说明：</strong>以下 5 道综合练习题涵盖函数思想和方程思想的各种应用场景，请认真作答，完成后点击"确认"查看解析。
+</div>
+
+<div class="quiz-question" id="q6">
+  <div class="q-title"><span class="q-tag choice">选择题</span> 7. 方程 x³-3x²+2=0 的实根个数为：</div>
+  <div class="options">
+    <div class="opt" onclick="selectOpt(6,0)">A. 1</div>
+    <div class="opt" onclick="selectOpt(6,1)">B. 2</div>
+    <div class="opt" onclick="selectOpt(6,2)">C. 3</div>
+    <div class="opt" onclick="selectOpt(6,3)">D. 0</div>
+  </div>
+  <div class="explain" id="exp6"></div>
+</div>
+
+<div class="quiz-question" id="q7">
+  <div class="q-title"><span class="q-tag choice">选择题</span> 8. 已知函数 f(x)=x²-2ax+2 在 [1,3] 上的最小值为 1，则 a 的值为：</div>
+  <div class="options">
+    <div class="opt" onclick="selectOpt(7,0)">A. 1</div>
+    <div class="opt" onclick="selectOpt(7,1)">B. 1 或 2</div>
+    <div class="opt" onclick="selectOpt(7,2)">C. 2</div>
+    <div class="opt" onclick="selectOpt(7,3)">D. 3</div>
+  </div>
+  <div class="explain" id="exp7"></div>
+</div>
+
+<div class="quiz-question" id="q8">
+  <div class="q-title"><span class="q-tag choice">选择题</span> 9. 若关于 x 的方程 x²+mx+4=0 有两个正根，则实数 m 的取值范围是：</div>
+  <div class="options">
+    <div class="opt" onclick="selectOpt(8,0)">A. m > 4</div>
+    <div class="opt" onclick="selectOpt(8,1)">B. m < -4</div>
+    <div class="opt" onclick="selectOpt(8,2)">C. m ≤ -4</div>
+    <div class="opt" onclick="selectOpt(8,3)">D. -4 < m < 4</div>
+  </div>
+  <div class="explain" id="exp8"></div>
+</div>
+
+<div class="quiz-question" id="q9">
+  <div class="q-title"><span class="q-tag choice">选择题</span> 10. 数列 {a<sub>n</sub>} 满足 a₁=2，a<sub>n+1</sub>=3a<sub>n</sub>-2，则 a<sub>n</sub> = </div>
+  <div class="options">
+    <div class="opt" onclick="selectOpt(9,0)">A. 3<sup>n-1</sup> + 1</div>
+    <div class="opt" onclick="selectOpt(9,1)">B. 2·3<sup>n-1</sup></div>
+    <div class="opt" onclick="selectOpt(9,2)">C. 3<sup>n</sup> - 1</div>
+    <div class="opt" onclick="selectOpt(9,3)">D. 3<sup>n</sup> + 1</div>
+  </div>
+  <div class="explain" id="exp9"></div>
+</div>
+
+<div class="quiz-question" id="q10">
+  <div class="q-title"><span class="q-tag choice">选择题</span> 11. 设 f(x) 是二次函数，且 f(x+1)+f(x-1)=2x²-4x，则 f(x)=</div>
+  <div class="options">
+    <div class="opt" onclick="selectOpt(10,0)">A. x² - 2x - 1</div>
+    <div class="opt" onclick="selectOpt(10,1)">B. x² - 2x + 1</div>
+    <div class="opt" onclick="selectOpt(10,2)">C. x² - 2x</div>
+    <div class="opt" onclick="selectOpt(10,3)">D. 2x² - 4x</div>
+  </div>
+  <div class="explain" id="exp10"></div>
+</div>
+
+<!-- 底部 -->
+<div class="quiz-footer">
+  <div class="score-box" id="scoreDisplay">得分：0 / 11</div>
+  <br>
+  <button class="btn-reset" id="resetBtn">&#8635; 重新答题</button>
+</div>
+
+<script>
+// 习题数据
+var questions = [
+  {
+    type: "choice",
+    question: "构造函数证明不等式时，最常用的转化方法是：",
+    opts: ["将不等式两边同时平方", "将不等式转化为函数的最值问题", "直接将不等式代入函数", "将不等式两边同时取倒数"],
+    answer: 1,
+    explain: "构造函数证明不等式的核心思想是：移项构造新函数 f(x)=左式-右式，然后证明 f(x)≥0（或≤0）恒成立，也就是求 f(x) 的最小值（或最大值）。这是函数思想最经典的应用。"
+  },
+  {
+    type: "choice",
+    question: "对于递推数列 a<sub>n+1</sub>=pa<sub>n</sub>+q（p≠1），构造等比数列时，应该：",
+    opts: ["两边同时除以 p", "两边同时加上 q/(p-1) 构造等比", "两边同时乘以 p", "两边同时减去 q"],
+    answer: 1,
+    explain: "设 a<sub>n+1</sub>+λ=p(a<sub>n</sub>+λ)，展开得 a<sub>n+1</sub>=pa<sub>n</sub>+(p-1)λ。令 (p-1)λ=q，得 λ=q/(p-1)。所以在等式两边同时加上 q/(p-1) 即可构造等比数列 {a<sub>n</sub>+q/(p-1)}。"
+  },
+  {
+    type: "choice",
+    question: "已知一元二次方程 x²-5x+6=0 的两根是一个长方形的长和宽，则这个长方形的面积为：",
+    opts: ["5", "6", "2", "3"],
+    answer: 1,
+    explain: "方程 x²-5x+6=0 的根由韦达定理知：两根之积 = c/a = 6。长方形的面积 = 长×宽 = 两根之积 = 6。事实上方程即 (x-2)(x-3)=0，两根为 2 和 3，面积=2×3=6。"
+  },
+  {
+    type: "choice",
+    question: "待定系数法求函数解析式的本质是：",
+    opts: ["代入数值计算", "列出方程（组）求解未知系数", "画函数图像", "因式分解"],
+    answer: 1,
+    explain: "待定系数法的核心是：先设出含有待定系数的函数形式（如 f(x)=kx+b 或 f(x)=ax²+bx+c），然后根据题目条件列出方程（组），解方程（组）求出待定系数。这正是方程思想的典型应用。"
+  },
+  {
+    type: "choice",
+    question: "讨论方程 |x²-1|=m 的根的个数时，最适合的方法是：",
+    opts: ["直接求解方程", "构造函数并画出函数图像", "使用韦达定理", "配方法"],
+    answer: 1,
+    explain: "含绝对值的方程直接求解较复杂，且需要讨论 m 的不同取值。最好的方法是构造函数 y=|x²-1| 并画出函数图像，然后观察水平线 y=m 与函数图像的交点个数随 m 的变化。这是数形结合思想的典型应用。"
+  },
+  {
+    type: "choice",
+    question: "若方程 x²-2x+a=0 在 [0,3] 上有解，分离参数后构造函数 g(x)=-x²+2x，则 a 的取值范围等于 g(x) 在 [0,3] 上的：",
+    opts: ["最大值", "最小值", "值域", "定义域"],
+    answer: 2,
+    explain: "分离参数得 a=-x²+2x=g(x)。方程在 [0,3] 上有解，意味着存在 x∈[0,3] 使得 a=g(x)，即 a 属于 g(x) 在 [0,3] 上的值域。g(x)=-(x-1)²+1，在 [0,3] 上的值域为 [-3,1]，所以 a∈[-3,1]。"
+  },
+  {
+    type: "choice",
+    question: "方程 x³-3x²+2=0 的实根个数为：",
+    opts: ["1", "2", "3", "0"],
+    answer: 2,
+    explain: "构造函数 f(x)=x³-3x²+2。f'(x)=3x²-6x=3x(x-2)。令 f'(x)=0 得 x=0 或 x=2。f(0)=2>0，f(2)=8-12+2=-2<0。当 x→-∞ 时 f(x)→-∞，当 x→+∞ 时 f(x)→+∞。由单调性分析和零点定理，f(x) 有三个单调区间，但 f(0) 和 f(2) 异号，说明在 (0,2) 内有一个零点；x<0 时 f(x)→-∞ 到 f(0)=2，有 1 个零点；x>2 时 f(2)=-2 到 f(x)→+∞，有 1 个零点。共 3 个实根。"
+  },
+  {
+    type: "choice",
+    question: "已知函数 f(x)=x²-2ax+2 在 [1,3] 上的最小值为 1，则 a 的值为：",
+    opts: ["1", "1 或 2", "2", "3"],
+    answer: 0,
+    explain: "f(x)=(x-a)²+2-a²，对称轴 x=a，开口向上。①a≤1 时，f(x)在[1,3]上递增，最小值 f(1)=3-2a=1→a=1（符合）；②1&lt;a&lt;3 时，最小值 f(a)=2-a²=1→a=±1，均不在(1,3)内，舍去；③a≥3 时，f(x)递减，最小值 f(3)=11-6a=1→a=5/3，不满足 a≥3。故只有 a=1。"
+  },
+  {
+    type: "choice",
+    question: "若关于 x 的方程 x²+mx+4=0 有两个正根，则实数 m 的取值范围是：",
+    opts: ["m > 4", "m < -4", "m ≤ -4", "-4 < m < 4"],
+    answer: 1,
+    explain: "设 f(x)=x²+mx+4，方程有两个正根等价于：①Δ=m²-16≥0，得 m≤-4 或 m≥4；②对称轴 x=-m/2>0，得 m<0；③f(0)=4>0 已满足。综合得 m≤-4。注意 m=-4 时 Δ=0，有两相等正根 x=2，同样满足条件。所以 m≤-4。"
+  },
+  {
+    type: "choice",
+    question: "数列 {a<sub>n</sub>} 满足 a₁=2，a<sub>n+1</sub>=3a<sub>n</sub>-2，则 a<sub>n</sub> = ",
+    opts: ["3<sup>n-1</sup> + 1", "2·3<sup>n-1</sup>", "3<sup>n</sup> - 1", "3<sup>n</sup> + 1"],
+    answer: 0,
+    explain: "由 a<sub>n+1</sub>=3a<sub>n</sub>-2，构造等比：设 a<sub>n+1</sub>+λ=3(a<sub>n</sub>+λ)，得 λ=-2 时 a<sub>n+1</sub>-1=3(a<sub>n</sub>-1)。所以 {a<sub>n</sub>-1} 是首项为 a₁-1=1，公比为 3 的等比数列，a<sub>n</sub>-1=1·3<sup>n-1</sup>，即 a<sub>n</sub>=3<sup>n-1</sup>+1。"
+  },
+  {
+    type: "choice",
+    question: "设 f(x) 是二次函数，且 f(x+1)+f(x-1)=2x²-4x，则 f(x)=",
+    opts: ["x² - 2x - 1", "x² - 2x + 1", "x² - 2x", "2x² - 4x"],
+    answer: 0,
+    explain: "设 f(x)=ax²+bx+c（a≠0），则 f(x+1)=a(x+1)²+b(x+1)+c=ax²+2ax+a+bx+b+c；f(x-1)=a(x-1)²+b(x-1)+c=ax²-2ax+a+bx-b+c。相加得 f(x+1)+f(x-1)=2ax²+2a+2bx+2c=2ax²+2bx+(2a+2c)=2x²-4x。比较系数得：2a=2→a=1，2b=-4→b=-2，2a+2c=0→c=-1。所以 f(x)=x²-2x-1。"
+  }
+];
+
+function selectOpt(qIdx, chosen) {
+  var q = questions[qIdx];
+  var parent = document.getElementById("q" + qIdx);
+  var opts = parent.getElementsByClassName("opt");
+  var expDiv = document.getElementById("exp" + qIdx);
+
+  if (opts[0].classList.contains("disabled")) return;
+
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add("disabled");
+  }
+
+  opts[chosen].classList.add("selected");
+
+  var correctIdx = q.answer;
+  var isCorrect = chosen === correctIdx;
+
+  opts[correctIdx].classList.add("correct-opt");
+  if (!isCorrect) {
+    opts[chosen].classList.add("wrong-opt");
+  }
+
+  expDiv.className = "explain show " + (isCorrect ? "ok" : "fail");
+  expDiv.innerHTML = (isCorrect ? "&#9989; 正确！" : "&#10060; 错误。") + " " + q.explain;
+
+  parent.classList.add(isCorrect ? "correct" : "wrong");
+
+  updateScore();
+}
+
+function updateScore() {
+  var correct = 0;
+  for (var i = 0; i < questions.length; i++) {
+    var parent = document.getElementById("q" + i);
+    if (parent.classList.contains("correct")) correct++;
+  }
+  var total = questions.length;
+  document.getElementById("scoreDisplay").textContent = "得分：" + correct + " / " + total;
+}
+
+function resetQuiz() {
+  for (var i = 0; i < questions.length; i++) {
+    var parent = document.getElementById("q" + i);
+    parent.className = "quiz-question";
+    var opts = parent.getElementsByClassName("opt");
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].className = "opt";
+    }
+    var exp = document.getElementById("exp" + i);
+    exp.className = "explain";
+    exp.innerHTML = "";
+  }
+  document.getElementById("scoreDisplay").textContent = "得分：0 / " + questions.length;
+}
+
+document.getElementById("resetBtn").onclick = resetQuiz;
+</script>
+
+</body>
+</html>

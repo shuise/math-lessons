@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>集合进阶测验</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+body {
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.9;
+  font-size: 16px;
+}
+article {
+  background: #fff; border-radius: 12px; padding: 36px 40px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow-wrap: break-word; word-wrap: break-word; overflow-x: hidden;
+}
+h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding-bottom: 10px; margin-top: 0; text-align: center; }
+.back {
+  display: inline-block; margin-bottom: 16px;
+  color: #1a73e8; text-decoration: none; font-size: 0.95em;
+}
+.back:hover { text-decoration: underline; }
+.tip { text-align: center; color: #888; margin-bottom: 24px; }
+.note { text-align: center; color: #999; font-size: 0.88em; margin-bottom: 8px; }
+
+/* ------ 选择题样式 ------ */
+.quiz-question {
+  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+  padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+}
+.quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+/* 仅答错时使用红色 */
+.quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+.quiz-question .q-title {
+  font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50;
+}
+.quiz-question .q-title .q-tag {
+  display: inline-block; padding: 1px 10px; border-radius: 12px;
+  font-size: 0.75em; margin-right: 6px; color: #fff;
+}
+.q-tag.choice { background: #1a73e8; }
+.quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-question .opt {
+  padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+  cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+}
+.quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+.quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+.quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+/* 仅答错时使用红色 */
+.quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+.quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+.quiz-question .explain {
+  margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+  font-size: 0.93em; display: none;
+}
+.quiz-question .explain.show { display: block; }
+.quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+/* 仅答错时使用红色 */
+.quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+/* 难度标签 */
+.diff-tag {
+  display: inline-block; padding: 1px 8px; border-radius: 8px;
+  font-size: 0.7em; margin-left: 6px; font-weight: normal;
+}
+.diff-easy { background: #e8f5e9; color: #2e7d32; }
+.diff-medium { background: #fff8e1; color: #f57f17; }
+.diff-hard { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+.diff-exam { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
+
+/* ------ 计算大题样式（与选择题保持一致） ------ */
+.calc-card {
+  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+  padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+}
+.calc-card.correct { border-color: #4caf50; background: #f1f8e9; }
+.calc-card.wrong { border-color: #f44336; background: #fce4ec; }
+.calc-card .q-title {
+  font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50;
+}
+.calc-card .q-title .q-tag {
+  display: inline-block; padding: 1px 10px; border-radius: 12px;
+  font-size: 0.75em; margin-right: 6px; color: #fff; background: #1a73e8;
+}
+.calc-card .step-area {
+  margin: 10px 0; padding: 10px 14px; border-radius: 8px;
+  font-size: 0.93em; display: none; line-height: 1.8;
+}
+.calc-card .step-area.show { display: block; }
+.calc-card .step-area.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+.calc-card .step-area.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+.calc-card .step-area .step { margin: 4px 0; padding-left: 12px; border-left: 3px solid #bbb; }
+.calc-card .step-area .answer { color: #2c3e50; font-weight: bold; margin: 6px 0 0; font-size: 1.05em; }
+.calc-card .btn-toggle {
+  display: inline-block; margin-top: 16px; padding: 6px 20px;
+  border: 2px solid #1a73e8; color: #1a73e8; border-radius: 16px;
+  background: #fff; cursor: pointer; font-size: 0.93em; transition: 0.15s;
+}
+.calc-card .btn-toggle:hover { background: #1a73e8; color: #fff; }
+.calc-card .calc-input {
+  width: 100%; padding: 10px 14px; border: 2px solid #ddd; border-radius: 8px;
+  font-size: 0.95em; outline: none; transition: border-color 0.15s;
+  margin: 6px 0; box-sizing: border-box;
+  font-family: 'Times New Roman', 'STIX', serif;
+}
+.calc-card .calc-input:focus { border-color: #1a73e8; }
+.calc-card .calc-input.correct-input { border-color: #4caf50; background: #e8f5e9; }
+/* 仅答错时使用红色 */
+.calc-card .calc-input.wrong-input { border-color: #f44336; background: #fce4ec; }
+.calc-card .btn-check {
+  padding: 6px 16px; background: #1a73e8; color: #fff; border: none;
+  border-radius: 8px; cursor: pointer; font-size: 0.9em; transition: 0.15s;
+}
+.calc-card .btn-check:hover { background: #1557b0; }
+.calc-card .btn-check:disabled { opacity: 0.5; cursor: default; }
+
+/* 底部 */
+#scoreDisplay {
+  display: inline-block; background: #1a73e8; color: #fff;
+  padding: 12px 32px; border-radius: 30px; font-size: 1.2em; font-weight: bold;
+}
+.reset-btn {
+  display: inline-block; margin-top: 12px; padding: 8px 28px;
+  border: 2px solid #1a73e8; color: #1a73e8; border-radius: 20px;
+  background: #fff; cursor: pointer; font-size: 1em; transition: 0.15s;
+}
+.reset-btn:hover { background: #e3f2fd; }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>集合进阶测验</h1>
+<p class="tip">总分 100 分 · 选择题（每题 6 分，共 60 分）· 计算题（每题 8 分，共 40 分）</p>
+<p class="tip" style="font-size:0.9em;">点击选项提交答案，点击"查看解答"查看计算题详细过程。</p>
+
+<!-- ==================== 第一部分：选择题 ==================== -->
+<section>
+<h2>一、选择题（每题 6 分）</h2>
+<div id="choice-container"></div>
+</section>
+
+<!-- ==================== 第二部分：计算题 ==================== -->
+<section>
+<h2>二、计算题（每题 8 分）</h2>
+<div id="calc-container"></div>
+</section>
+
+<!-- ==================== 得分 ==================== -->
+<div style="text-align:center;margin:24px 0;">
+  <div id="scoreDisplay">得分：0 / 100</div>
+  <br>
+  <button class="reset-btn" onclick="resetExam()">&#8635; 重新答题</button>
+</div>
+
+</article>
+
+<script>
+// ============================================================
+// 选择题（10 题 — 阶梯式难度，20% 高考难度）
+// 难度：基础×3 → 进阶×3 → 挑战×2 → 高考难度×2
+// ============================================================
+var choiceQuestions = [
+  // ----- 基础（Q1~Q3）-----
+  {
+    diff: "基础",
+    question: "已知集合 A = {1, 2, 3}，B = {2, 3, 4}，则 A ∩ B = （  ）",
+    opts: ["{1, 2, 3, 4}", "{2, 3}", "{1, 4}", "∅"],
+    answer: 1,
+    explain: "交集取两个集合的公共元素。A 和 B 共有的元素是 2 和 3，所以 A ∩ B = {2, 3}。"
+  },
+  {
+    diff: "基础",
+    question: "设 U = {1, 2, 3, 4, 5}，A = {1, 3}，则 ∁<sub>U</sub>A = （  ）",
+    opts: ["{2, 4, 5}", "{2, 4}", "{1, 3, 5}", "{5}"],
+    answer: 0,
+    explain: "补集是 U 中不在 A 中的元素。U 中去掉 1 和 3，剩下 {2, 4, 5}。"
+  },
+  {
+    diff: "基础",
+    question: "集合 A = {x | x² &minus; 3x + 2 = 0} 用列举法表示为（  ）",
+    opts: ["{1, 2}", "{&minus;1, &minus;2}", "{1}", "{0, 1}"],
+    answer: 0,
+    explain: "解方程 x² &minus; 3x + 2 = 0，得 (x &minus; 1)(x &minus; 2) = 0，所以 x = 1 或 x = 2，即 A = {1, 2}。"
+  },
+
+  // ----- 进阶（Q4~Q6）-----
+  {
+    diff: "进阶",
+    question: "若集合 A = {a, b, c}，则 A 的子集个数为（  ）",
+    opts: ["3", "6", "8", "9"],
+    answer: 2,
+    explain: "n 个元素的集合有 2ⁿ 个子集。这里 n = 3，所以子集个数为 2³ = 8。"
+  },
+  {
+    diff: "进阶",
+    question: "设全集 U = {1, 2, 3, 4, 5, 6}，A = {1, 2, 3}，B = {2, 4, 6}，则 (∁<sub>U</sub>A) ∩ B = （  ）",
+    opts: ["{4, 6}", "{2, 4, 6}", "{5}", "{1, 3}"],
+    answer: 0,
+    explain: "先求 ∁<sub>U</sub>A = {4, 5, 6}，再与 B = {2, 4, 6} 取交集，得 {4, 6}。"
+  },
+  {
+    diff: "进阶",
+    question: "已知集合 A = {x | x &gt; 2}，B = {x | x &le; 5}，则 A ∪ B = （  ）",
+    opts: ["{x | x &gt; 2}", "{x | x &le; 5}", "{x | 2 &lt; x &le; 5}", "R"],
+    answer: 3,
+    explain: "A 表示大于 2 的所有实数，B 表示小于等于 5 的所有实数。取并集后覆盖所有实数，所以 A ∪ B = R（全体实数）。"
+  },
+
+  // ----- 挑战（Q7~Q8）-----
+  {
+    diff: "挑战",
+    question: "已知集合 M = {x | x = 2k, k ∈ Z}，N = {x | x = 4k ± 1, k ∈ Z}，则 M 与 N 的关系是（  ）",
+    opts: ["M = N", "M ⊇ N", "N ⊇ M", "M ∩ N = ∅"],
+    answer: 3,
+    explain: "M 是全体偶数集，N 是奇数集（4k±1 一定是奇数）。偶数和奇数没有公共元素，所以 M ∩ N = ∅。"
+  },
+  {
+    diff: "挑战",
+    question: "设集合 A = {x | x² &minus; 3x + 2 = 0}，B = {x | x² &minus; ax + (a&minus;1) = 0}，且 A ∪ B = A，则实数 a 的值为（  ）",
+    opts: ["2", "3", "2 或 3", "0"],
+    answer: 2,
+    explain: "A = {1, 2}。由 A ∪ B = A 得 B ⊆ A。<br>B 的方程即 (x&minus;1)(x&minus;a+1)=0。<br>若 B = {1}，则 a&minus;1 = 1 → a = 2；<br>若 B = {1, 2}，则 a&minus;1 = 2 → a = 3。<br>所以 a = 2 或 a = 3。"
+  },
+
+  // ----- 高考难度（Q9~Q10）-----
+  {
+    diff: "高考难度",
+    question: "已知集合 A = {x | x² &minus; 2x &minus; 3 &le; 0}，B = {x | x² &minus; 2mx + m² &minus; 4 &le; 0, m ∈ R}。<br>若 A ∩ B = {x | 0 &le; x &le; 3}，则实数 m 的值为（  ）",
+    opts: ["1", "2", "&minus;1", "&minus;2"],
+    answer: 1,
+    explain: "A = [&minus;1, 3]。B = [m&minus;2, m+2]。<br>A ∩ B = [0, 3]，说明 B 的左端点必须正好是 0：<br>m&minus;2 = 0 → m = 2。<br>验证：m = 2 时 B = [0, 4]，A ∩ B = [0, 3] ← 符合题意。<br>m &ne; 2 时左端点不是 0，交集不会是 [0, 3]。"
+  },
+  {
+    diff: "高考难度",
+    question: "设集合 A = {1, 2, 3, 4}，B = {3, 4, 5}。定义 A ⊕ B = (A &minus; B) ∪ (B &minus; A)（对称差集）。<br>则 A ⊕ B 的非空真子集个数为（  ）",
+    opts: ["2", "4", "6", "8"],
+    answer: 2,
+    explain: "A &minus; B = {1, 2}，B &minus; A = {5}。<br>所以 A ⊕ B = {1, 2, 5}，共 3 个元素。<br>非空真子集个数 = 2ⁿ &minus; 2 = 2³ &minus; 2 = 6。"
+  }
+];
+
+// ============================================================
+// 计算题（5 题 — 阶梯式难度，最后一题为高考难度）
+// ============================================================
+var calcQuestions = [
+  // 基础
+  {
+    question: "已知全集 U = {x ∈ N | x ≤ 10}，A = {1, 3, 5, 7, 9}，B = {2, 3, 5, 7}。<br>求：(1) A ∪ B；(2) A ∩ B；(3) ∁<sub>U</sub>A；(4) (∁<sub>U</sub>A) ∩ B。",
+    answer: "A∪B={1,2,3,5,7,9}, A∩B={3,5,7}, ∁UA={2,4,6,8,10}, (∁UA)∩B={2}",
+    keywords: ["1,2,3,5,7,9"],
+    steps: [
+      "U = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}",
+      "(1) A ∪ B = {1, 3, 5, 7, 9} ∪ {2, 3, 5, 7} = {1, 2, 3, 5, 7, 9}",
+      "(2) A ∩ B = {1, 3, 5, 7, 9} ∩ {2, 3, 5, 7} = {3, 5, 7}",
+      "(3) ∁<sub>U</sub>A = U &minus; A = {2, 4, 6, 8, 10}",
+      "(4) (∁<sub>U</sub>A) ∩ B = {2, 4, 6, 8, 10} ∩ {2, 3, 5, 7} = {2}"
+    ]
+  },
+  // 进阶 — 容斥原理
+  {
+    question: "某班 50 名学生中，喜欢数学的有 30 人，喜欢物理的有 25 人，两科都喜欢的有 12 人。<br>求：(1) 至少喜欢一科的人数；(2) 两科都不喜欢的人数。",
+    answer: "至少喜欢一科 43 人，两科都不喜欢 7 人",
+    keywords: ["43", "7"],
+    steps: [
+      "设 A = {喜欢数学的学生}，B = {喜欢物理的学生}，则 |A| = 30，|B| = 25，|A∩B| = 12",
+      "(1) 至少喜欢一科的人数 = |A ∪ B|",
+      "由容斥原理：|A ∪ B| = |A| + |B| &minus; |A ∩ B|",
+      "= 30 + 25 &minus; 12 = 43（人）",
+      "(2) 两科都不喜欢的人数 = 全班人数 &minus; |A ∪ B|",
+      "= 50 &minus; 43 = 7（人）"
+    ]
+  },
+  // 进阶 — 子集分类讨论
+  {
+    question: "已知集合 A = {x | x² &minus; 5x + 6 = 0}，B = {x | ax &minus; 1 = 0}，且 B ⊆ A。<br>求实数 a 的值组成的集合。",
+    answer: "a ∈ {0, 1/2, 1/3}",
+    keywords: ["0", "1/2", "1/3"],
+    steps: [
+      "解 A：x² &minus; 5x + 6 = 0 → (x &minus; 2)(x &minus; 3) = 0 → x = 2 或 x = 3",
+      "所以 A = {2, 3}",
+      "由 B ⊆ A，需分情况讨论：",
+      "情况 1：B = ∅，则 ax &minus; 1 = 0 无解，此时 a = 0",
+      "情况 2：B = {2}，则 2a &minus; 1 = 0 → a = 1/2",
+      "情况 3：B = {3}，则 3a &minus; 1 = 0 → a = 1/3",
+      "综上，a 的取值集合为 {0, 1/2, 1/3}"
+    ]
+  },
+  // 挑战 — 区间含参讨论
+  {
+    question: "已知集合 A = {x | &minus;2 ≤ x ≤ 5}，B = {x | m + 1 ≤ x ≤ 2m &minus; 1}。<br>若 B ⊆ A，求实数 m 的取值范围。",
+    answer: "m ≤ 3",
+    keywords: ["≤3"],
+    keywordMode: "or",
+    steps: [
+      "B ⊆ A 意味着 B 中的每个元素都在 A 中",
+      "注意：B 可能为空集，需分类讨论",
+      "情况 1：B = ∅，则 m + 1 &gt; 2m &minus; 1 → m &lt; 2",
+      "情况 2：B ≠ ∅，则需同时满足三个条件：",
+      "  ① m + 1 ≤ 2m &minus; 1（B 非空）→ m ≥ 2",
+      "  ② m + 1 ≥ &minus;2（左端点 ≥ A 的左边界）→ m ≥ &minus;3",
+      "  ③ 2m &minus; 1 ≤ 5（右端点 ≤ A 的右边界）→ m ≤ 3",
+      "综合①②③得 2 ≤ m ≤ 3",
+      "综合情况 1（m &lt; 2）和情况 2（2 ≤ m ≤ 3），得 m ≤ 3",
+      "所以 m 的取值范围是 (&minus;∞, 3]"
+    ]
+  },
+  // 高考难度 — 集合新定义 + 元素计数
+  {
+    question: "设 S 是实数集 R 的非空子集。若对任意 x, y ∈ S，都有 x + y, x &minus; y, xy ∈ S，则称 S 为&ldquo;封闭集&rdquo;。<br>(1) 判断整数集 Z 是否为封闭集，并说明理由；<br>(2) 若 S 是封闭集且 0 ∈ S，1 ∈ S，求 S 中至少还有哪些元素？",
+    answer: "(1) Z 是封闭集；(2) 至少还有 &minus;1",
+    keywords: ["封闭", "-1"],
+    steps: [
+      "(1) 整数集 Z 是封闭集。理由：",
+      "  任意两个整数的和、差、积仍是整数，所以三大运算在 Z 中封闭。",
+      "(2) 已知 0, 1 ∈ S：",
+      "  由封闭性，1 &minus; 1 = 0 已在（已给出）",
+      "  由封闭性，0 &minus; 1 = &minus;1 ∈ S（差运算）",
+      "  再由封闭性，&minus;1 &minus; 1 = &minus;2 ∈ S",
+      "  再由封闭性，(&minus;1) × (&minus;2) = 2 ∈ S",
+      "  以此类推，实际上 S 会包含所有整数 Z。",
+      "所以至少还有 &minus;1（由 0 &minus; 1 得到）。"
+    ]
+  }
+];
+
+// ============================================================
+// 渲染
+// ============================================================
+var choiceAnswered = [];
+var calcChecked = [];
+var totalScore = 0;
+
+var diffLabels = {
+  "基础": '<span class="diff-tag diff-easy">基础</span>',
+  "进阶": '<span class="diff-tag diff-medium">进阶</span>',
+  "挑战": '<span class="diff-tag diff-hard">挑战</span>',
+  "高考难度": '<span class="diff-tag diff-exam">高考难度</span>'
+};
+
+function render() {
+  // 渲染选择题
+  var choiceHtml = "";
+  for (var i = 0; i < choiceQuestions.length; i++) {
+    var q = choiceQuestions[i];
+    var letter = ["A", "B", "C", "D"];
+    choiceHtml += '<div class="quiz-question" id="cq' + i + '">';
+    choiceHtml += '<div class="q-title"><span class="q-tag choice">选择</span> ' + (i+1) + '. ' + q.question + ' ' + (diffLabels[q.diff] || "") + '</div>';
+    choiceHtml += '<div class="options">';
+    for (var j = 0; j < q.opts.length; j++) {
+      choiceHtml += '<div class="opt" onclick="selectChoice(' + i + ',' + j + ')">' + letter[j] + '. ' + q.opts[j] + '</div>';
+    }
+    choiceHtml += '</div>';
+    choiceHtml += '<div class="explain" id="cexp' + i + '"></div>';
+    choiceHtml += '</div>';
+  }
+  document.getElementById("choice-container").innerHTML = choiceHtml;
+  choiceAnswered = new Array(choiceQuestions.length).fill(-1);
+
+  // 渲染计算题
+  var calcHtml = "";
+  for (var i = 0; i < calcQuestions.length; i++) {
+    var q = calcQuestions[i];
+    var calcDiff = (i >= 4) ? ' <span class="diff-tag diff-exam">高考难度</span>' : (i >= 3) ? ' <span class="diff-tag diff-hard">挑战</span>' : (i >= 1) ? ' <span class="diff-tag diff-medium">进阶</span>' : '';
+    calcHtml += '<div class="calc-card" id="calc' + i + '">';
+    calcHtml += '<div class="q-title"><span class="q-tag">计算</span> ' + (i+1) + '. ' + q.question + calcDiff + '</div>';
+    calcHtml += '<div style="margin:8px 0;"><strong>你的答案：</strong></div>';
+    calcHtml += '<textarea class="calc-input" id="calcInput' + i + '" rows="3" placeholder="请在此输入你的解答过程或答案..."></textarea>';
+    calcHtml += '<button class="btn-check" id="calcBtn' + i + '" onclick="checkCalc(' + i + ')">提交</button>';
+    calcHtml += '<div class="step-area" id="calcStep' + i + '">';
+    for (var k = 0; k < q.steps.length; k++) {
+      calcHtml += '<div class="step">' + q.steps[k] + '</div>';
+    }
+    calcHtml += '<div class="answer">答案：' + q.answer + '</div>';
+    calcHtml += '</div>';
+    calcHtml += '<button class="btn-toggle" onclick="toggleCalc(' + i + ')">查看解答</button>';
+    calcHtml += '</div>';
+  }
+  document.getElementById("calc-container").innerHTML = calcHtml;
+  calcChecked = new Array(calcQuestions.length).fill(false);
+}
+
+// ============================================================
+// 选择题交互
+// ============================================================
+function selectChoice(qi, oi) {
+  if (choiceAnswered[qi] !== -1) return;
+  choiceAnswered[qi] = oi;
+  var q = choiceQuestions[qi];
+  var isCorrect = (oi === q.answer);
+
+  var qDiv = document.getElementById("cq" + qi);
+  var opts = qDiv.querySelectorAll(".opt");
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add("disabled");
+    if (i === q.answer) opts[i].classList.add("correct-opt");
+    if (i === oi && !isCorrect) opts[i].classList.add("wrong-opt");
+    if (i === oi && isCorrect) opts[i].classList.add("selected");
+  }
+
+  qDiv.classList.add(isCorrect ? "correct" : "wrong");
+
+  var expDiv = document.getElementById("cexp" + qi);
+  expDiv.innerHTML = (isCorrect ? "\u2713 " : "\u2717 ") + q.explain;
+  expDiv.className = "explain show " + (isCorrect ? "ok" : "fail");
+
+  updateScore();
+}
+
+// ============================================================
+// 计算题交互
+// ============================================================
+function checkCalc(qi) {
+  if (calcChecked[qi]) return;
+  calcChecked[qi] = true;
+  var input = document.getElementById("calcInput" + qi);
+  var q = calcQuestions[qi];
+  var userAnswer = input.value.trim();
+  var isCorrect = false;
+  if (q.keywords && q.keywords.length > 0) {
+    var matchCount = 0;
+    for (var k = 0; k < q.keywords.length; k++) {
+      if (userAnswer.indexOf(q.keywords[k]) !== -1) {
+        matchCount++;
+      }
+    }
+    if (q.keywordMode === "or") {
+      // 或模式：至少匹配一个关键词就算正确
+      isCorrect = (matchCount >= 1);
+    } else {
+      // 与模式（默认）：所有关键词都匹配才算正确
+      isCorrect = (matchCount >= q.keywords.length);
+    }
+  }
+  input.disabled = true;
+  document.getElementById("calcBtn" + qi).disabled = true;
+  if (isCorrect) {
+    input.classList.add("correct-input");
+  } else {
+    input.classList.add("wrong-input");
+  }
+  // 卡片容器添加 correct/wrong 类（与选择题一致）
+  var card = document.getElementById("calc" + qi);
+  card.classList.add(isCorrect ? "correct" : "wrong");
+  // 自动显示步骤区域，并添加 ok/fail 类（与选择题 explain 一致）
+  var stepArea = document.getElementById("calcStep" + qi);
+  stepArea.classList.add("show", isCorrect ? "ok" : "fail");
+  updateScore();
+}
+
+function toggleCalc(qi) {
+  var stepArea = document.getElementById("calcStep" + qi);
+  stepArea.classList.toggle("show");
+}
+
+// ============================================================
+// 计分
+// ============================================================
+function updateScore() {
+  var total = 0;
+  for (var i = 0; i < choiceQuestions.length; i++) {
+    if (choiceAnswered[i] === choiceQuestions[i].answer) {
+      total += 6;
+    }
+  }
+  for (var i = 0; i < calcQuestions.length; i++) {
+    if (calcChecked[i]) {
+      // 需要再次验证是否正确
+      var input = document.getElementById("calcInput" + i);
+      if (input && input.classList.contains("correct-input")) {
+        total += 8;
+      }
+    }
+  }
+  totalScore = total;
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a" + total + " / 100";
+}
+
+function resetExam() {
+  choiceAnswered = new Array(choiceQuestions.length).fill(-1);
+  calcChecked = new Array(calcQuestions.length).fill(false);
+  totalScore = 0;
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a0 / 100";
+
+  for (var i = 0; i < choiceQuestions.length; i++) {
+    var qDiv = document.getElementById("cq" + i);
+    if (qDiv) {
+      qDiv.className = "quiz-question";
+      var opts = qDiv.querySelectorAll(".opt");
+      for (var j = 0; j < opts.length; j++) {
+        opts[j].className = "opt";
+      }
+      document.getElementById("cexp" + i).className = "explain";
+    }
+  }
+
+  for (var i = 0; i < calcQuestions.length; i++) {
+    var card = document.getElementById("calc" + i);
+    if (card) card.className = "calc-card";
+    var input = document.getElementById("calcInput" + i);
+    if (input) {
+      input.disabled = false;
+      input.value = "";
+      input.className = "calc-input";
+      document.getElementById("calcBtn" + i).disabled = false;
+      document.getElementById("calcStep" + i).className = "step-area";
+    }
+  }
+}
+
+render();
+</script>
+</body>
+</html>

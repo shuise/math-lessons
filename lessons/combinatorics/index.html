@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>计数原理</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  h3 { color: #2c3e50; margin: 28px 0 12px; font-size: 1.15em; }
+  h4 { color: #555; margin: 18px 0 8px; font-size: 1em; }
+  .formula-box { border: 2px solid #1a73e8; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #f0f7ff; }
+  .formula-box p { margin: 6px 0; text-align: center; font-size: 1.05em; }
+  .key-point { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+  .compare-table th:first-child { min-width: 80px; }
+
+  /* Quiz styles */
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag {
+    display: inline-block; padding: 2px 12px; border-radius: 12px;
+    font-size: 0.75em; margin-right: 8px; color: #fff;
+  }
+  .q-tag.concept { background: #1a73e8; }
+  .q-tag.calc { background: #e67e22; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+  }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+  /* Fill-in quiz styles */
+  .quiz-question .fill-input {
+    padding: 8px 12px; border: 2px solid #ddd; border-radius: 8px;
+    font-size: 1em; width: 120px; margin: 8px 0; outline: none; transition: border-color 0.2s;
+  }
+  .quiz-question .fill-input:focus { border-color: #1a73e8; }
+  .quiz-question .fill-input.correct-input { border-color: #4caf50; background: #e8f5e9; }
+  .quiz-question .fill-input.wrong-input { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .btn-check {
+    padding: 6px 20px; border: 2px solid #1a73e8; color: #1a73e8;
+    border-radius: 16px; background: #fff; cursor: pointer; font-size: 0.93em;
+    margin-left: 8px; transition: 0.15s;
+  }
+  .quiz-question .btn-check:hover { background: #1a73e8; color: #fff; }
+  .quiz-question .btn-check:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* Comprehensive exercise styles */
+  .comp-exercise {
+    background: #fff; border: 2px solid #1a73e8; border-radius: 10px;
+    padding: 20px 24px; margin: 20px 0; border-left: 6px solid #1a73e8;
+  }
+  .comp-exercise h4 { margin-top: 0; color: #1a73e8; }
+  .comp-exercise .answer-box {
+    margin-top: 12px; padding: 14px; background: #f0f7ff;
+    border-radius: 8px; display: none; border-left: 4px solid #1a73e8;
+  }
+  .comp-exercise .answer-box.show { display: block; }
+  .comp-exercise .btn-toggle {
+    display: inline-block; margin-top: 10px; padding: 6px 18px;
+    border: 2px solid #1a73e8; color: #1a73e8; border-radius: 16px;
+    background: #fff; cursor: pointer; font-size: 0.93em;
+    transition: 0.15s;
+  }
+  .comp-exercise .btn-toggle:hover { background: #1a73e8; color: #fff; }
+
+  /* Score panel */
+  .score-panel {
+    text-align: center; padding: 16px; margin: 20px 0;
+    background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8;
+  }
+  .score-panel .score-num { font-size: 2em; font-weight: bold; color: #1a73e8; }
+  .score-panel .btn-reset {
+    margin-left: 16px; padding: 8px 24px; border: 2px solid #1a73e8;
+    color: #1a73e8; border-radius: 20px; background: #fff;
+    cursor: pointer; font-size: 0.95em; transition: 0.15s;
+  }
+  .score-panel .btn-reset:hover { background: #1a73e8; color: #fff; }
+
+  /* Triangle (Yang Hui) */
+  .yanghui {
+    display: flex; flex-direction: column; align-items: center;
+    margin: 16px 0; font-family: 'Times New Roman', serif; font-size: 1em;
+  }
+  .yanghui .row { display: flex; justify-content: center; }
+  .yanghui .cell {
+    width: 40px; text-align: center; padding: 4px 2px;
+    font-weight: bold; color: #2c3e50;
+  }
+  @media (max-width: 480px) { .yanghui .cell { width: 32px; font-size: 0.9em; } }
+
+  /* Color coding for combinational identities */
+  .highlight-red { color: #d32f2f; font-weight: bold; }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>计数原理</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">从具体问题出发，理解"计数"的基本方法——分类加法、分步乘法、排列、组合与二项式定理。</p>
+
+<!-- ============================== 一、分类加法计数原理 ============================== -->
+<section>
+<h2>一、分类加法计数原理</h2>
+
+<h3>先看一个问题</h3>
+<div class="example">
+  <p><strong>问题：</strong>小明从 A 地到 B 地，可以坐飞机、火车或汽车。飞机有 2 个班次，火车有 3 个班次，汽车有 1 个班次。小明从 A 地到 B 地共有多少种不同的选择？</p>
+  <p class="step"><strong>思考：</strong>坐飞机有 2 种选择，坐火车有 3 种选择，坐汽车有 1 种选择。</p>
+  <p class="step">这些方式是<strong>相互独立</strong>的——选择了飞机就不会同时选择火车。</p>
+  <p class="step">所以总选择数 = 2 + 3 + 1 = <strong>6 种</strong>。</p>
+</div>
+
+<h3>引出原理</h3>
+<p>上面的问题中，我们把所有方式分成了<strong>三类</strong>（飞机、火车、汽车），每一类内部有若干种选择，且不同类之间没有重叠。这就是<strong>分类加法计数原理</strong>：</p>
+
+<div class="definition">
+  <p><strong>分类加法计数原理</strong>：完成一件事有 <em>n</em> 类不同的方案，在第 1 类方案中有 <em>m</em><sub>1</sub> 种不同方法，在第 2 类方案中有 <em>m</em><sub>2</sub> 种不同方法，……，在第 <em>n</em> 类方案中有 <em>m</em><sub>n</sub> 种不同方法，那么完成这件事共有</p>
+  <p style="text-align:center;font-size:1.3em;font-weight:bold;margin:10px 0;">N = m<sub>1</sub> + m<sub>2</sub> + … + m<sub>n</sub></p>
+  <p style="text-align:center;">种不同的方法。</p>
+</div>
+
+<div class="hint">
+  <strong>关键：</strong>"分类"意味着各类之间<strong>互斥</strong>（不重复）、<strong>互补</strong>（不遗漏）。用哪一类都能独立完成任务，所以用加法。
+</div>
+
+<h3>再巩固一个例子</h3>
+<div class="example">
+  <p><strong>例：</strong>书架上有 5 本不同的语文书、3 本不同的数学书、2 本不同的英语书。从中任取一本，有多少种不同的取法？</p>
+  <p class="step"><strong>分析：</strong>取一本书有三类方案——取语文书、取数学书、取英语书。</p>
+  <p class="step">取语文书有 5 种方法，取数学书有 3 种方法，取英语书有 2 种方法。</p>
+  <p class="step">总取法 = 5 + 3 + 2 = <strong>10 种</strong>。</p>
+</div>
+</section>
+
+<!-- 知识点1 交互式选择题 -->
+<div class="quiz-question" id="q1">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    某校高一有 6 个班，高二有 5 个班，高三有 4 个班。从全校任选一个班参加活动，共有多少种选法？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(1, 0)">A. 15 种</div>
+    <div class="opt" onclick="checkChoice(1, 1)">B. 120 种</div>
+    <div class="opt" onclick="checkChoice(1, 2)">C. 6+5+4=15 还是 6&times;5&times;4=120？不清楚</div>
+    <div class="opt" onclick="checkChoice(1, 3)">D. 6 种</div>
+  </div>
+  <div class="explain" id="explain1">
+    <strong>解析：</strong>这是分类问题——选高一、高二或高三的班，三类互斥。总选法 = 6 + 5 + 4 = <strong>15 种</strong>。选 A。
+  </div>
+</div>
+
+<!-- ============================== 二、分步乘法计数原理 ============================== -->
+<section>
+<h2>二、分步乘法计数原理</h2>
+
+<h3>先看一个问题</h3>
+<div class="example">
+  <p><strong>问题：</strong>小明有 3 件上衣和 2 条裤子。他要选一件上衣和一条裤子搭配出门，共有多少种不同的穿法？</p>
+  <p class="step"><strong>思考：</strong>先选上衣，有 3 种选择；再选裤子，有 2 种选择。</p>
+  <p class="step">穿上衣的每一种都可以搭配 2 条不同的裤子。</p>
+  <p class="step">所以总搭配数 = 3 &times; 2 = <strong>6 种</strong>。</p>
+</div>
+
+<h3>引出原理</h3>
+<p>上面的问题中，我们把"穿好衣服"这件事分成了<strong>两个步骤</strong>——先选上衣、再选裤子。两个步骤必须<strong>依次完成</strong>才能达成目标。这就是<strong>分步乘法计数原理</strong>：</p>
+
+<div class="definition">
+  <p><strong>分步乘法计数原理</strong>：完成一件事需要 <em>n</em> 个步骤，做第 1 步有 <em>m</em><sub>1</sub> 种不同方法，做第 2 步有 <em>m</em><sub>2</sub> 种不同方法，……，做第 <em>n</em> 步有 <em>m</em><sub>n</sub> 种不同方法，那么完成这件事共有</p>
+  <p style="text-align:center;font-size:1.3em;font-weight:bold;margin:10px 0;">N = m<sub>1</sub> &times; m<sub>2</sub> &times; … &times; m<sub>n</sub></p>
+  <p style="text-align:center;">种不同的方法。</p>
+</div>
+
+<div class="hint">
+  <strong>关键：</strong>"分步"意味着各步骤<strong>依次相依</strong>——只有所有步骤都完成了，事情才算做完。因此用乘法。
+</div>
+
+<h3>再巩固一个例子</h3>
+<div class="example">
+  <p><strong>例：</strong>设置一个 4 位数字密码（每位 0~9），共有多少种不同的密码？</p>
+  <p class="step"><strong>分析：</strong>设置密码需要 4 个步骤——依次确定第 1 位、第 2 位、第 3 位、第 4 位数字。</p>
+  <p class="step">每一位都有 10 种选择（0~9）。</p>
+  <p class="step">总密码数 = 10 &times; 10 &times; 10 &times; 10 = 10<sup>4</sup> = <strong>10000 种</strong>。</p>
+</div>
+</section>
+
+<!-- 知识点2 交互式选择题 -->
+<div class="quiz-question" id="q2">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    从 3 本不同的数学书和 4 本不同的语文书中，各取一本，有多少种不同的取法？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(2, 0)">A. 7 种</div>
+    <div class="opt" onclick="checkChoice(2, 1)">B. 12 种</div>
+    <div class="opt" onclick="checkChoice(2, 2)">C. 3+4=7 还是 3&times;4=12？</div>
+    <div class="opt" onclick="checkChoice(2, 3)">D. 81 种</div>
+  </div>
+  <div class="explain" id="explain2">
+    <strong>解析：</strong>这是分步问题——先取数学书（3 种），再取语文书（4 种），两步缺一不可。总取法 = 3 &times; 4 = <strong>12 种</strong>。选 B。
+  </div>
+</div>
+
+<!-- 两种原理对比 -->
+<section>
+<h3>两种原理的对比</h3>
+<table class="compare-table">
+  <tr><th></th><th>分类加法</th><th>分步乘法</th></tr>
+  <tr><td><strong>特征</strong></td><td>"要么…要么…"，任选一类即可</td><td>"先…再…"，依次做完所有步骤</td></tr>
+  <tr><td><strong>关系</strong></td><td>各类互斥独立</td><td>各步依次相依</td></tr>
+  <tr><td><strong>运算</strong></td><td>加法</td><td>乘法</td></tr>
+  <tr><td><strong>生活类比</strong></td><td>菜单上选一道主菜（选一个就行）</td><td>先选主菜再选饮品（两个都要）</td></tr>
+  <tr><td><strong>判定口诀</strong></td><td>"分类用加法"</td><td>"分步用乘法"</td></tr>
+</table>
+</section>
+
+<!-- 知识点3 区分两种原理 -->
+<div class="quiz-question" id="q3">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    某餐厅提供 4 种主食和 5 种菜品。以下哪种情况用加法原理，哪种用乘法原理？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(3, 0)">A. 选一种主食或一种菜品（只选一个）：4+5=9 种；各选一种：4&times;5=20 种</div>
+    <div class="opt" onclick="checkChoice(3, 1)">B. 选一种主食或一种菜品：4&times;5=20 种；各选一种：4+5=9 种</div>
+    <div class="opt" onclick="checkChoice(3, 2)">C. 两种都用加法：4+5=9</div>
+    <div class="opt" onclick="checkChoice(3, 3)">D. 两种都用乘法：4&times;5=20</div>
+  </div>
+  <div class="explain" id="explain3">
+    <strong>解析：</strong>"主食或菜品任选一个"是分类（二选一），用加法：4 + 5 = 9。"主食和菜品各选一个"是分步（两步），用乘法：4 &times; 5 = 20。选 A。
+  </div>
+</div>
+
+<!-- ============================== 三、排列 ============================== -->
+<section>
+<h2>三、排列</h2>
+
+<h3>先看一个问题</h3>
+<div class="example">
+  <p><strong>问题：</strong>有 3 个同学 A、B、C 要排成一排照相，共有多少种不同的排法？</p>
+  <p class="step"><strong>思考：</strong>第一个位置有 3 种选择（A、B、C 都可以）；</p>
+  <p class="step">第二个位置有 2 种选择（剩下 2 人中选）；</p>
+  <p class="step">第三个位置只有 1 种选择（最后 1 人）。</p>
+  <p class="step">总排法 = 3 &times; 2 &times; 1 = <strong>6 种</strong>。</p>
+</div>
+
+<h3>引出排列的概念</h3>
+<p>上面的问题，本质上是"从 3 个不同元素中取出 3 个，按顺序排成一列"。在计数原理中，我们把这类问题称为<strong>排列</strong>问题。</p>
+
+<div class="definition">
+  <p><strong>排列</strong>：从 <em>n</em> 个不同元素中取出 <em>m</em> (<em>m</em> &le; <em>n</em>) 个元素，按照一定的顺序排成一列，叫做从 <em>n</em> 个不同元素中取出 <em>m</em> 个元素的一个<strong>排列</strong>。</p>
+  <p><strong>排列数公式</strong>：</p>
+  <p style="text-align:center;font-size:1.3em;font-weight:bold;margin:10px 0;">P(n,m) = n &times; (n&minus;1) &times; (n&minus;2) &times; … &times; (n&minus;m+1)</p>
+  <p style="text-align:center;font-size:1.2em;margin:6px 0;">即 <span style="font-weight:bold;">P(n,m) = n! / (n&minus;m)!</span></p>
+  <p style="text-align:center;">（其中 n! = 1 &times; 2 &times; 3 &times; … &times; n，读作"n 的阶乘"）</p>
+</div>
+
+<div class="hint">
+  <strong>记忆口诀：</strong>排列是"<strong>先选后排，顺序重要</strong>"。
+</div>
+
+<h3>再巩固一个例子</h3>
+<div class="example">
+  <p><strong>例：</strong>从 4 本不同的书中选出 3 本，按从左到右的顺序摆放在书架上，有多少种不同的摆放方式？</p>
+  <p class="step"><strong>分析：</strong>这是从 4 个元素中取 3 个的排列问题，顺序重要。</p>
+  <p class="step"><strong>方法一（分步）：</strong>第 1 位有 4 种选择，第 2 位有 3 种，第 3 位有 2 种。</p>
+  <p class="step">总排法 = 4 &times; 3 &times; 2 = <strong>24 种</strong>。</p>
+  <p class="step"><strong>方法二（公式）：</strong>P(4,3) = 4! / (4&minus;3)! = 24 / 1 = <strong>24 种</strong>。</p>
+</div>
+</section>
+
+<!-- 知识点4 排列选择题 -->
+<div class="quiz-question" id="q4">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    从 5 个不同元素中选出 2 个进行排列，共有多少种排法？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(4, 0)">A. 10 种</div>
+    <div class="opt" onclick="checkChoice(4, 1)">B. 20 种</div>
+    <div class="opt" onclick="checkChoice(4, 2)">C. 5 种</div>
+    <div class="opt" onclick="checkChoice(4, 3)">D. 25 种</div>
+  </div>
+  <div class="explain" id="explain4">
+    <strong>解析：</strong>P(5,2) = 5 &times; 4 = <strong>20 种</strong>。选 B。
+  </div>
+</div>
+
+<div class="quiz-question" id="q5">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    3 个男生和 2 个女生排成一排，要求女生必须排在两端（左端和右端各一个女生），共有多少种排法？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(5, 0)">A. 12 种</div>
+    <div class="opt" onclick="checkChoice(5, 1)">B. 24 种</div>
+    <div class="opt" onclick="checkChoice(5, 2)">C. 120 种</div>
+    <div class="opt" onclick="checkChoice(5, 3)">D. 6 种</div>
+  </div>
+  <div class="explain" id="explain5">
+    <strong>解析：</strong>第一步：两个女生排两端，有 P(2,2) = 2 种排法；第二步：3 个男生排中间 3 个位置，有 P(3,3) = 6 种排法。由分步乘法原理，共 2 &times; 6 = <strong>12 种</strong>。选 A。
+  </div>
+</div>
+
+<!-- ============================== 四、组合 ============================== -->
+<section>
+<h2>四、组合</h2>
+
+<h3>先看一个问题</h3>
+<div class="example">
+  <p><strong>问题：</strong>从 A、B、C 三人中选出 2 人组成一个小组，有多少种不同的选法？</p>
+  <p class="step"><strong>思考：</strong>可能的组合有——(A,B)、(A,C)、(B,C)，共 3 种。</p>
+  <p class="step"><strong>注意：</strong>(A,B) 和 (B,A) 是同一个小组，顺序不重要！</p>
+</div>
+
+<h3>与排列的对比</h3>
+<p>如果是排列（顺序重要），从 3 人中选 2 人排列有 P(3,2) = 6 种。但如果是组合（顺序不重要），只有 3 种。区别就在于<strong>是否考虑顺序</strong>。</p>
+
+<div class="definition">
+  <p><strong>组合</strong>：从 <em>n</em> 个不同元素中取出 <em>m</em> (<em>m</em> &le; <em>n</em>) 个元素，<strong>不考虑顺序</strong>地组成一组，叫做从 <em>n</em> 个不同元素中取出 <em>m</em> 个元素的一个<strong>组合</strong>。</p>
+  <p><strong>组合数公式</strong>：</p>
+  <p style="text-align:center;font-size:1.3em;font-weight:bold;margin:10px 0;">C(n,m) = P(n,m) / m! = n! / [m!(n&minus;m)!]</p>
+  <p style="text-align:center;font-size:1.1em;margin:6px 0;">也记作 <span style="font-family:'Times New Roman',serif;">C<sub>n</sub><sup>m</sup></span> 或 <span style="font-family:'Times New Roman',serif;">( <sup>n</sup><sub>m</sub> )</span></p>
+</div>
+
+<div class="hint">
+  <strong>排列 vs 组合：</strong>排列是"顺序重要"，组合是"顺序不重要"。<br>
+  <strong>关系：</strong>P(n,m) = C(n,m) &times; m! —— 先组合再排列。
+</div>
+
+<h3>再巩固一个例子</h3>
+<div class="example">
+  <p><strong>例：</strong>从 5 本书中选 3 本送给朋友（不区分顺序），有多少种不同的送法？</p>
+  <p class="step"><strong>分析：</strong>从 5 个元素中取 3 个的组合问题，顺序不重要。</p>
+  <p class="step">C(5,3) = 5! / (3! &times; 2!) = 120 / (6 &times; 2) = <strong>10 种</strong>。</p>
+  <p class="step"><strong>对比：</strong>如果是从 5 本书中选 3 本排列到书架上（顺序重要），则有 P(5,3) = 60 种。</p>
+</div>
+</section>
+
+<!-- 知识点6 组合选择题 -->
+<div class="quiz-question" id="q6">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    从 6 个同学中选出 4 人参加数学竞赛，有多少种不同的选法？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(6, 0)">A. 360 种</div>
+    <div class="opt" onclick="checkChoice(6, 1)">B. 30 种</div>
+    <div class="opt" onclick="checkChoice(6, 2)">C. 15 种</div>
+    <div class="opt" onclick="checkChoice(6, 3)">D. 24 种</div>
+  </div>
+  <div class="explain" id="explain6">
+    <strong>解析：</strong>C(6,4) = 6! / (4! &times; 2!) = 720 / (24 &times; 2) = 720 / 48 = <strong>15 种</strong>。选 C。<br>
+    也可以利用性质：C(6,4) = C(6,2) = 6&times;5/2 = 15。
+  </div>
+</div>
+
+<div class="quiz-question" id="q7">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    从 7 名学生中选 3 人组成班委会（不分职位），再从剩下的 4 人中选 2 人组成卫生小组，共有多少种不同的选择方案？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(7, 0)">A. 210 种</div>
+    <div class="opt" onclick="checkChoice(7, 1)">B. 35 种</div>
+    <div class="opt" onclick="checkChoice(7, 2)">C. 420 种</div>
+    <div class="opt" onclick="checkChoice(7, 3)">D. 70 种</div>
+  </div>
+  <div class="explain" id="explain7">
+    <strong>解析：</strong>第一步：从 7 人中选 3 人组成班委会，有 C(7,3) = 35 种；第二步：从剩下的 4 人中选 2 人，有 C(4,2) = 6 种。由分步乘法原理，共 35 &times; 6 = <strong>210 种</strong>。选 A。
+  </div>
+</div>
+
+<!-- ============================== 五、二项式定理 ============================== -->
+<section>
+<h2>五、二项式定理</h2>
+
+<h3>先看一个规律</h3>
+<p>我们来做几个展开式，观察它们的规律：</p>
+
+<div class="formula-box">
+  <p>(a + b)<sup>0</sup> = 1</p>
+  <p>(a + b)<sup>1</sup> = a + b</p>
+  <p>(a + b)<sup>2</sup> = a<sup>2</sup> + 2ab + b<sup>2</sup></p>
+  <p>(a + b)<sup>3</sup> = a<sup>3</sup> + 3a<sup>2</sup>b + 3ab<sup>2</sup> + b<sup>3</sup></p>
+  <p>(a + b)<sup>4</sup> = a<sup>4</sup> + 4a<sup>3</sup>b + 6a<sup>2</sup>b<sup>2</sup> + 4ab<sup>3</sup> + b<sup>4</sup></p>
+</div>
+
+<p>观察各展开式的<strong>系数</strong>：</p>
+<div class="yanghui">
+  <div class="row"><div class="cell">1</div></div>
+  <div class="row"><div class="cell">1</div><div class="cell">1</div></div>
+  <div class="row"><div class="cell">1</div><div class="cell">2</div><div class="cell">1</div></div>
+  <div class="row"><div class="cell">1</div><div class="cell">3</div><div class="cell">3</div><div class="cell">1</div></div>
+  <div class="row"><div class="cell">1</div><div class="cell">4</div><div class="cell">6</div><div class="cell">4</div><div class="cell">1</div></div>
+</div>
+
+<p>这个三角形就是<strong>杨辉三角</strong>（Pascal's Triangle）。每个数等于它<strong>上方两数之和</strong>。而第 n 行的第 m 个数，恰好是组合数 C(n, m)（从 n 行 0 列开始编号）。</p>
+
+<div class="definition">
+  <p><strong>二项式定理</strong>：对于任意正整数 n，</p>
+  <p style="text-align:center;font-size:1.2em;font-weight:bold;margin:10px 0;">
+    (a + b)<sup>n</sup> = C(n,0)a<sup>n</sup> + C(n,1)a<sup>n&minus;1</sup>b + C(n,2)a<sup>n&minus;2</sup>b<sup>2</sup> + … + C(n,n)b<sup>n</sup>
+  </p>
+  <p style="text-align:center;margin:6px 0;">
+    即 <span style="font-size:1.1em;">(a + b)<sup>n</sup> = &sum;<sub>k=0</sub><sup>n</sup> C(n,k) &middot; a<sup>n&minus;k</sup> &middot; b<sup>k</sup></span>
+  </p>
+</div>
+
+<div class="hint">
+  <strong>杨辉三角与组合数的关系：</strong>第 n 行的第 k 个数（从 0 开始）就是 C(n,k)。例如第 4 行：C(4,0)=1, C(4,1)=4, C(4,2)=6, C(4,3)=4, C(4,4)=1。
+</div>
+
+<h3>举个例子</h3>
+<div class="example">
+  <p><strong>例：</strong>求 (x + 2)<sup>5</sup> 展开式中 x<sup>3</sup> 的系数。</p>
+  <p class="step"><strong>分析：</strong>根据二项式定理，展开式中 x<sup>3</sup> 项对应的 k = 2（因为 x<sup>5&minus;2</sup> = x<sup>3</sup>）。</p>
+  <p class="step">该项为 C(5,2) &middot; x<sup>3</sup> &middot; 2<sup>2</sup> = 10 &times; x<sup>3</sup> &times; 4 = <strong>40x<sup>3</sup></strong>。</p>
+  <p class="step">所以 x<sup>3</sup> 的系数为 <strong>40</strong>。</p>
+</div>
+</section>
+
+<!-- 知识点8 二项式定理选择题 -->
+<div class="quiz-question" id="q8">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    杨辉三角第 5 行（从 0 开始计数）的数字依次是什么？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(8, 0)">A. 1, 4, 6, 4, 1</div>
+    <div class="opt" onclick="checkChoice(8, 1)">B. 1, 5, 10, 10, 5, 1</div>
+    <div class="opt" onclick="checkChoice(8, 2)">C. 1, 3, 3, 1</div>
+    <div class="opt" onclick="checkChoice(8, 3)">D. 1, 6, 15, 20, 15, 6, 1</div>
+  </div>
+  <div class="explain" id="explain8">
+    <strong>解析：</strong>杨辉三角第 5 行对应 (a+b)<sup>5</sup> 的系数，即 C(5,0) 到 C(5,5)：1, 5, 10, 10, 5, 1。选 B。
+  </div>
+</div>
+
+<div class="quiz-question" id="q9">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    求 (1 + x)<sup>6</sup> 展开式中 x<sup>2</sup> 项的系数。
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(9, 0)">A. 6</div>
+    <div class="opt" onclick="checkChoice(9, 1)">B. 10</div>
+    <div class="opt" onclick="checkChoice(9, 2)">C. 15</div>
+    <div class="opt" onclick="checkChoice(9, 3)">D. 20</div>
+  </div>
+  <div class="explain" id="explain9">
+    <strong>解析：</strong>根据二项式定理，x<sup>2</sup> 项对应 k = 2，系数为 C(6,2) = 6! / (2! &times; 4!) = 720 / (2 &times; 24) = <strong>15</strong>。选 C。
+  </div>
+</div>
+
+<!-- ============================== 六、综合练习 ============================== -->
+<section>
+<h2>六、综合练习</h2>
+<p>以下 5 道综合题覆盖了本节全部知识点，动手试试吧！</p>
+
+<div class="score-panel">
+  得分：<span class="score-num" id="totalScore">0</span> / 50
+  <button class="btn-reset" onclick="resetAll()">重置全部</button>
+</div>
+
+<!-- 综合题1 -->
+<div class="comp-exercise" id="c1">
+  <h4>练习 1（10 分）</h4>
+  <p>某班有 10 名班干部候选人。<strong>（注意区分分类/分步）</strong></p>
+  <p>(1) 从中选 1 人担任班长，有多少种选法？</p>
+  <p>(2) 从中选 1 人担任班长、1 人担任副班长（不可兼任），有多少种选法？</p>
+  <p>(3) 从中选 3 人组成一个学习小组（无职务），有多少种选法？</p>
+
+  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
+    <p>请回答 (1) 的答案：<input class="fill-input" id="c1a1" type="text" placeholder="数字">
+      <button class="btn-check" onclick="checkFill('c1a1', 10)">检查</button></p>
+    <p>请回答 (2) 的答案：<input class="fill-input" id="c1a2" type="text" placeholder="数字">
+      <button class="btn-check" onclick="checkFill('c1a2', 90)">检查</button></p>
+    <p>请回答 (3) 的答案：<input class="fill-input" id="c1a3" type="text" placeholder="数字">
+      <button class="btn-check" onclick="checkFill('c1a3', 120)">检查</button></p>
+  </div>
+
+  <div class="answer-box" id="c1answer">
+    <strong>解析：</strong><br>
+    (1) 从 10 人中选 1 人当班长，是<strong>分类</strong>（选任意一人即可），有 10 种选法。<br>
+    (2) 先选班长（10 种）再选副班长（剩下 9 种），是<strong>分步排列</strong>，P(10,2) = 10 &times; 9 = 90 种。<br>
+    (3) 选 3 人组成小组，<strong>顺序不重要</strong>，是组合问题，C(10,3) = 120 种。
+  </div>
+  <button class="btn-toggle" onclick="toggleAnswer('c1answer')">显示解析</button>
+</div>
+
+<!-- 综合题2 -->
+<div class="comp-exercise" id="c2">
+  <h4>练习 2（10 分）</h4>
+  <p>用数字 1、2、3、4、5 可以组成多少个：</p>
+  <p>(1) 无重复数字的三位数？</p>
+  <p>(2) 无重复数字的三位偶数？</p>
+
+  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
+    <p>请回答 (1) 的答案：<input class="fill-input" id="c2a1" type="text" placeholder="数字">
+      <button class="btn-check" onclick="checkFill('c2a1', 60)">检查</button></p>
+    <p>请回答 (2) 的答案：<input class="fill-input" id="c2a2" type="text" placeholder="数字">
+      <button class="btn-check" onclick="checkFill('c2a2', 24)">检查</button></p>
+  </div>
+
+  <div class="answer-box" id="c2answer">
+    <strong>解析：</strong><br>
+    (1) 三位数的每一位数字都不同，是排列问题：P(5,3) = 5 &times; 4 &times; 3 = 60 个。<br>
+    (2) 三位偶数要求个位为偶数（只能是 2 或 4）：<br>
+    &emsp;步骤 1：个位有 2 种选择（2 或 4）；<br>
+    &emsp;步骤 2：十位从剩下 4 个数字中选 1 个；<br>
+    &emsp;步骤 3：百位从剩下 3 个数字中选 1 个。<br>
+    &emsp;总数 = 2 &times; 4 &times; 3 = 24 个。
+  </div>
+  <button class="btn-toggle" onclick="toggleAnswer('c2answer')">显示解析</button>
+</div>
+
+<!-- 综合题3 -->
+<div class="comp-exercise" id="c3">
+  <h4>练习 3（10 分）</h4>
+  <p>从 4 名男同学和 3 名女同学中选出 3 人：</p>
+  <p>(1) 至少选 1 名女生，有多少种选法？</p>
+
+  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
+    <p>请回答答案：<input class="fill-input" id="c3a1" type="text" placeholder="数字">
+      <button class="btn-check" onclick="checkFill('c3a1', 31)">检查</button></p>
+  </div>
+
+  <div class="answer-box" id="c3answer">
+    <strong>解析：</strong><br>
+    <strong>方法一（分类讨论）：</strong>至少 1 名女生 = 1 女 2 男 + 2 女 1 男 + 3 女 0 男<br>
+    &emsp;C(3,1)C(4,2) + C(3,2)C(4,1) + C(3,3) = 3&times;6 + 3&times;4 + 1 = 18 + 12 + 1 = 31 种。<br>
+    <strong>方法二（排除法）：</strong>无限制 - 全是男生 = C(7,3) - C(4,3) = 35 - 4 = 31 种。
+  </div>
+  <button class="btn-toggle" onclick="toggleAnswer('c3answer')">显示解析</button>
+</div>
+
+<!-- 综合题4 -->
+<div class="comp-exercise" id="c4">
+  <h4>练习 4（10 分）</h4>
+  <p>求 (2x + 1)<sup>4</sup> 展开式中 x<sup>2</sup> 项的系数。</p>
+
+  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
+    <p>请回答答案：<input class="fill-input" id="c4a1" type="text" placeholder="数字">
+      <button class="btn-check" onclick="checkFill('c4a1', 24)">检查</button></p>
+  </div>
+
+  <div class="answer-box" id="c4answer">
+    <strong>解析：</strong><br>
+    根据二项式定理，展开式中 x<sup>2</sup> 项对应 k = 2：<br>
+    C(4,2) &middot; (2x)<sup>2</sup> &middot; 1<sup>2</sup> = 6 &times; 4x<sup>2</sup> &times; 1 = <strong>24x<sup>2</sup></strong>。<br>
+    所以 x<sup>2</sup> 的系数为 <strong>24</strong>。
+  </div>
+  <button class="btn-toggle" onclick="toggleAnswer('c4answer')">显示解析</button>
+</div>
+
+<!-- 综合题5 -->
+<div class="comp-exercise" id="c5">
+  <h4>练习 5（10 分）</h4>
+  <p>某班有 6 名同学报名参加 4 项不同的比赛（每人限报一项）：</p>
+  <p>(1) 每项比赛至少有一人参加，这样的分配方案有多少种？</p>
+  <p style="font-size:0.95em;color:#666;">提示：先分组再分配——把 6 名同学分成 4 组（每组至少 1 人），再将 4 组分配到 4 项不同的比赛。</p>
+
+  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
+    <p>请回答答案：<input class="fill-input" id="c5a1" type="text" placeholder="数字">
+      <button class="btn-check" onclick="checkFill('c5a1', 1560)">检查</button></p>
+  </div>
+
+  <div class="answer-box" id="c5answer">
+    <strong>解析：</strong><br>
+    6 人分 4 组，每组至少 1 人，可能的方案是 3+1+1+1 或 2+2+1+1。<br>
+    <strong>情况一（3,1,1,1）：</strong>先选 3 人成一组，其余各 1 人：C(6,3) = 20 种分组法。<br>
+    <strong>情况二（2,2,1,1）：</strong>选 2 人、再选 2 人（注意两两对称除重）：C(6,2)&times;C(4,2)/2! = 15&times;6/2 = 45 种分组法。<br>
+    <strong>总分组数：</strong>20 + 45 = 65 种。<br>
+    <strong>分配：</strong>将 4 组对应到 4 项不同比赛，有 P(4,4) = 24 种。<br>
+    <strong>总数：</strong>65 &times; 24 = <strong>1560 种</strong>。
+  </div>
+  <button class="btn-toggle" onclick="toggleAnswer('c5answer')">显示解析</button>
+</div>
+
+</section>
+
+</article>
+
+<script>
+// ============================================================
+// 选择题交互
+// ============================================================
+var answered = {};
+var totalScore = 0;
+
+function checkChoice(qid, idx) {
+  var answers = {1:0, 2:1, 3:0, 4:1, 5:0, 6:2, 7:0, 8:1, 9:2};
+  if (answered[qid]) return;
+
+  var qDiv = document.getElementById("q" + qid);
+  var opts = qDiv.querySelectorAll(".opt");
+  var explain = document.getElementById("explain" + qid);
+
+  // Disable all options
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add("disabled");
+  }
+
+  var correct = answers[qid];
+  if (idx === correct) {
+    opts[idx].classList.add("correct-opt");
+    qDiv.classList.add("correct");
+    explain.className = "explain show ok";
+    totalScore += (qid <= 3 ? 5 : 6);
+    // For comprehensive exercises count
+  } else {
+    opts[idx].classList.add("wrong-opt");
+    opts[correct].classList.add("correct-opt");
+    qDiv.classList.add("wrong");
+    explain.className = "explain show fail";
+  }
+
+  answered[qid] = true;
+  updateTotalScore();
+}
+
+// ============================================================
+// 填空题交互
+// ============================================================
+function checkFill(inputId, correctAnswer) {
+  var input = document.getElementById(inputId);
+  if (input.classList.contains("correct-input") || input.classList.contains("wrong-input")) return;
+
+  var val = parseInt(input.value.trim());
+  var btn = input.nextElementSibling;
+  var compDiv = input.closest(".comp-exercise");
+  var allFilled = true;
+
+  if (val === correctAnswer) {
+    input.className = "fill-input correct-input";
+  } else {
+    input.className = "fill-input wrong-input";
+  }
+
+  // Check if all inputs in this comp-exercise are answered
+  var inputs = compDiv.querySelectorAll(".fill-input");
+  for (var i = 0; i < inputs.length; i++) {
+    if (!inputs[i].classList.contains("correct-input") && !inputs[i].classList.contains("wrong-input")) {
+      allFilled = false;
+      break;
+    }
+  }
+
+  if (allFilled) {
+    // Calculate score for this exercise (each sub-question equally weighted)
+    var perQuestionScore = Math.floor(10 / inputs.length);
+    var earned = 0;
+    for (var j = 0; j < inputs.length; j++) {
+      if (inputs[j].classList.contains("correct-input")) {
+        earned += perQuestionScore;
+      }
+    }
+    // Round up for remainder
+    if (earned > 0) {
+      // Add bonus remainder if some correct
+      var remainder = 10 - perQuestionScore * inputs.length;
+      // Check if all correct
+      var allCorrect = true;
+      for (var k = 0; k < inputs.length; k++) {
+        if (!inputs[k].classList.contains("correct-input")) { allCorrect = false; break; }
+      }
+      if (allCorrect) earned = 10; // Full marks if all correct
+    }
+    // We'll handle scoring differently - just add to total based on correctness
+  }
+
+  btn.disabled = true;
+  btn.style.opacity = "0.5";
+  updateTotalScore();
+}
+
+function updateTotalScore() {
+  // Count correct quiz questions (each worth 5 or 6 points, total 45)
+  var quizScore = 0;
+  for (var i = 1; i <= 9; i++) {
+    if (answered[i]) {
+      var qDiv = document.getElementById("q" + i);
+      if (qDiv.classList.contains("correct")) {
+        quizScore += (i <= 3 ? 5 : 6);
+      }
+    }
+  }
+  // Quiz total = 5*3 + 6*6 = 15 + 36 = 51, but we cap at 50 for simplicity
+  if (quizScore > 50) quizScore = 50;
+
+  // Count correct fill-in answers (each fill worth proportion of 50)
+  var fillScore = 0;
+  var fillMap = {"c1a1":10, "c1a2":90, "c1a3":120, "c2a1":60, "c2a2":24, "c3a1":31, "c4a1":24, "c5a1":1560};
+  // Each exercise is 10 points, sub-questions weighted equally
+  var fillExercises = {
+    "c1": ["c1a1","c1a2","c1a3"],
+    "c2": ["c2a1","c2a2"],
+    "c3": ["c3a1"],
+    "c4": ["c4a1"],
+    "c5": ["c5a1"]
+  };
+
+  for (var ex in fillExercises) {
+    var ids = fillExercises[ex];
+    var allAnswered = true;
+    var correctCount = 0;
+    for (var j = 0; j < ids.length; j++) {
+      var inp = document.getElementById(ids[j]);
+      if (!inp || (!inp.classList.contains("correct-input") && !inp.classList.contains("wrong-input"))) {
+        allAnswered = false;
+        break;
+      }
+      if (inp.classList.contains("correct-input")) correctCount++;
+    }
+    if (allAnswered) {
+      // Correct proportion of each exercise's 10 points
+      var perQ = Math.floor(10 / ids.length);
+      var remainder = 10 - perQ * ids.length;
+      var score = correctCount * perQ;
+      // Bonus: if all correct, full 10 points; if some correct, add remainder
+      if (correctCount === ids.length) score = 10;
+      else if (correctCount > 0) score += Math.min(remainder, correctCount);
+      fillScore += score;
+    }
+  }
+
+  totalScore = quizScore + fillScore;
+  document.getElementById("totalScore").textContent = totalScore;
+}
+
+// ============================================================
+// 综合练习解析切换
+// ============================================================
+function toggleAnswer(id) {
+  var box = document.getElementById(id);
+  box.classList.toggle("show");
+}
+
+// ============================================================
+// 重置
+// ============================================================
+function resetAll() {
+  // Reset quiz questions
+  for (var i = 1; i <= 9; i++) {
+    var qDiv = document.getElementById("q" + i);
+    if (!qDiv) continue;
+    qDiv.className = "quiz-question";
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].className = "opt";
+    }
+    var explain = document.getElementById("explain" + i);
+    explain.className = "explain";
+  }
+
+  // Reset fill inputs
+  var fillIds = ["c1a1","c1a2","c1a3","c2a1","c2a2","c3a1","c4a1","c5a1"];
+  for (var k = 0; k < fillIds.length; k++) {
+    var inp = document.getElementById(fillIds[k]);
+    if (inp) {
+      inp.className = "fill-input";
+      inp.value = "";
+      var btn = inp.nextElementSibling;
+      if (btn && btn.tagName === "BUTTON") {
+        btn.disabled = false;
+        btn.style.opacity = "1";
+      }
+    }
+  }
+
+  // Reset answer boxes
+  var answerBoxes = document.querySelectorAll(".answer-box");
+  for (var m = 0; m < answerBoxes.length; m++) {
+    answerBoxes[m].classList.remove("show");
+  }
+
+  answered = {};
+  totalScore = 0;
+  document.getElementById("totalScore").textContent = "0";
+}
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>指数、对数、三角函数基础</title>
+<title>指数(Exponent)、对数(Logarithm)、三角函数(Trigonometric Functions)基础</title>
 <link rel="stylesheet" href="../../style.css">
 <style>
   h3 { color: #2c3e50; margin: 24px 0 10px; font-size: 1.1em; }
@@ -31,7 +31,7 @@
   }
   .q-tag.concept { background: #9c27b0; }
   .q-tag.calc { background: #1a73e8; }
-  .q-tag.comprehensive { background: #e53935; }
+  .q-tag.comprehensive { background: #6a1b9a; }
   .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
   .quiz-question .opt {
     padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
@@ -56,7 +56,7 @@
     padding: 20px 24px; margin: 20px 0;
     border-left: 6px solid #ff7043;
   }
-  .comp-question h4 { margin-top: 0; color: #e53935; }
+  .comp-question h4 { margin-top: 0; color: #e65100; }
   .comp-question .answer-box {
     margin-top: 12px; padding: 14px; background: #fff3e0;
     border-radius: 8px; display: none; border-left: 4px solid #ff9800;
@@ -80,7 +80,7 @@
     text-align: center; color: #fff; font-weight: bold;
   }
   .growth-item.linear { background: linear-gradient(135deg, #66bb6a, #43a047); }
-  .growth-item.explosion { background: linear-gradient(135deg, #ef5350, #d32f2f); }
+  .growth-item.explosion { background: linear-gradient(135deg, #ff8a65, #e64a19); }
   .growth-item.log { background: linear-gradient(135deg, #42a5f5, #1e88e5); }
 
   /* Tooltip popover */
@@ -120,27 +120,27 @@
 <body>
 <a class="back" href="../../index.html">&larr; 返回课程列表</a>
 <article>
-<h1>指数、对数、三角函数基础</h1>
+<h1>指数(Exponent)、对数(Logarithm)、三角函数(Trigonometric Functions)基础</h1>
 <p class="tip" style="text-align:center;font-size:1.1em;">从整数指数到实数指数、对数的产生与运算、三角函数的概念拓展——为后续学习各类函数打好基础。</p>
 
 <!-- ============================== 一、知识名称 ============================== -->
 <section>
 <h2>一、知识名称</h2>
 
-<h3>1.1 指数</h3>
-<p><strong>指数</strong>是描述"一个数自乘多少次"的数学工具。从正整数指数出发，逐步推广到零指数、负整数指数、分数指数幂，直至无理数指数幂，构成了完整的实数指数体系。</p>
+<h3>1.1 指数 (Exponent)</h3>
+<p><strong>指数 (Exponent)</strong> 是描述"一个数自乘多少次"的数学工具。从正整数指数出发，逐步推广到零指数、负整数指数、分数指数幂，直至无理数指数幂，构成了完整的实数指数体系。</p>
 <div class="hint">
   <strong>一句话记忆：</strong>指数回答的是"a 要乘自己多少次"——正整数指数是重复乘法，分数指数是开方，负指数是倒数。
 </div>
 
-<h3>1.2 对数</h3>
-<p><strong>对数</strong>是指数运算的逆运算：已知幂和底数，求指数。如果 a<sup>x</sup> = N，那么 x = log<sub>a</sub>N。对数的发明（纳皮尔，1614年）极大地简化了天文学中的复杂计算。</p>
+<h3>1.2 对数 (Logarithm)</h3>
+<p><strong>对数 (Logarithm, 简写 log)</strong> 是指数运算的逆运算：已知幂和底数，求指数。如果 a<sup>x</sup> = N，那么 x = log<sub>a</sub>N。对数的发明（纳皮尔，1614年）极大地简化了天文学中的复杂计算。</p>
 <div class="hint">
   <strong>一句话记忆：</strong>对数就是"已知结果求指数"——a 的多少次方等于 N？答案就是 log<sub>a</sub>N。
 </div>
 
-<h3>1.3 三角函数</h3>
-<p><strong>三角函数</strong>（正弦、余弦、正切）最初源于直角三角形的边长比，后通过单位圆推广到任意角。它们是描述周期性现象（如声波、潮汐、交流电）的核心数学工具。</p>
+<h3>1.3 三角函数 (Trigonometric Functions)</h3>
+<p><strong>三角函数 (Trigonometric Functions)</strong>（正弦 sine、余弦 cosine、正切 tangent）最初源于直角三角形的边长比，后通过单位圆推广到任意角。它们是描述周期性现象（如声波、潮汐、交流电）的核心数学工具。</p>
 <div class="hint">
   <strong>一句话记忆：</strong>三角函数架起了"角度"与"比值"之间的桥梁——单位圆上点的坐标定义了任意角的正弦和余弦。
 </div>
@@ -150,66 +150,66 @@
 <section>
 <h2>二、定理 / 公理</h2>
 
-<h3>2.1 指数运算性质</h3>
+<h3>2.1 指数运算性质 (Properties of Exponents)</h3>
 <div class="formula-box">
-  <p><strong>正整数指数</strong>：a<sup>n</sup> = a &times; a &times; ... &times; a（n 个）</p>
-  <p><strong>零指数</strong>：a<sup>0</sup> = 1（a &ne; 0）</p>
-  <p><strong>负整数指数</strong>：a<sup>&minus;n</sup> = 1 / a<sup>n</sup>（a &ne; 0）</p>
-  <p><strong>分数指数幂</strong>：a<sup>m/n</sup> = <sup>n</sup>&radic;(a<sup>m</sup>)（a &gt; 0）</p>
-  <p><strong>无理数指数幂</strong>：用有理数逼近理解</p>
+  <p><strong>正整数指数 (Positive Integer Exponent)</strong>：a<sup>n</sup> = a &times; a &times; ... &times; a（n 个）</p>
+  <p><strong>零指数 (Zero Exponent)</strong>：a<sup>0</sup> = 1（a &ne; 0）</p>
+  <p><strong>负整数指数 (Negative Integer Exponent)</strong>：a<sup>&minus;n</sup> = 1 / a<sup>n</sup>（a &ne; 0）</p>
+  <p><strong>分数指数幂 (Fractional Exponent)</strong>：a<sup>m/n</sup> = <sup>n</sup>&radic;(a<sup>m</sup>)（a &gt; 0）</p>
+  <p><strong>无理数指数幂 (Irrational Exponent)</strong>：用有理数逼近理解</p>
 </div>
 <div class="formula-box">
-  <p><strong>指数运算法则</strong>（底数 a &gt; 0）：</p>
+  <p><strong>指数运算法则 (Laws of Exponents)</strong>（底数 base a &gt; 0）：</p>
   <p>a<sup>m</sup> &middot; a<sup>n</sup> = a<sup>m+n</sup></p>
   <p>(a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup></p>
   <p>(ab)<sup>n</sup> = a<sup>n</sup> &middot; b<sup>n</sup></p>
 </div>
 
-<h3>2.2 对数运算性质</h3>
+<h3>2.2 对数运算性质 (Properties of Logarithms)</h3>
 <div class="formula-box">
-  <p><strong>对数的定义</strong>：a<sup>x</sup> = N &hArr; x = log<sub>a</sub>N（a &gt; 0, a &ne; 1, N &gt; 0）</p>
-  <p><strong>对数恒等式</strong>：a<sup>log<sub>a</sub>N</sup> = N，log<sub>a</sub>a<sup>x</sup> = x</p>
+  <p><strong>对数的定义 (Definition of Logarithm)</strong>：a<sup>x</sup> = N &hArr; x = log<sub>a</sub>N（a &gt; 0, a &ne; 1, N &gt; 0）</p>
+  <p><strong>对数恒等式 (Logarithmic Identities)</strong>：a<sup>log<sub>a</sub>N</sup> = N，log<sub>a</sub>a<sup>x</sup> = x</p>
 </div>
 <div class="two-col">
   <div class="formula-box">
-    <p><strong>对数运算法则</strong>（M, N &gt; 0）：</p>
+    <p><strong>对数运算法则 (Laws of Logarithms)</strong>（M, N &gt; 0）：</p>
     <p>log<sub>a</sub>(MN) = log<sub>a</sub>M + log<sub>a</sub>N</p>
     <p>log<sub>a</sub>(M/N) = log<sub>a</sub>M &minus; log<sub>a</sub>N</p>
     <p>log<sub>a</sub>(M<sup>n</sup>) = n &middot; log<sub>a</sub>M</p>
   </div>
   <div class="formula-box">
-    <p><strong>换底公式</strong>：</p>
+    <p><strong>换底公式 (Change of Base)</strong>：</p>
     <p>log<sub>a</sub>b = log<sub>c</sub>b / log<sub>c</sub>a</p>
-    <p><strong>常用对数</strong>：lg N = log<sub>10</sub>N</p>
-    <p><strong>自然对数</strong>：ln N = log<sub>e</sub>N</p>
+    <p><strong>常用对数 (Common Logarithm)</strong>：lg N = log<sub>10</sub>N</p>
+    <p><strong>自然对数 (Natural Logarithm)</strong>：ln N = log<sub>e</sub>N</p>
   </div>
 </div>
 
-<h3>2.3 三角函数基础</h3>
+<h3>2.3 三角函数基础 (Basics of Trigonometric Functions)</h3>
 <div class="formula-box">
-  <p><strong>角的概念拓展</strong>：正角（逆时针）、负角（顺时针）、零角</p>
-  <p><strong>弧度制</strong>：&pi; rad = 180&deg;，1 rad &asymp; 57.3&deg;</p>
-  <p><strong>弧长公式</strong>：l = |&alpha;| &middot; r（&alpha; 为圆心角的弧度数）</p>
+  <p><strong>角的概念拓展 (Extended Angle Concept)</strong>：正角 positive angle（逆时针）、负角 negative angle（顺时针）、零角 zero angle</p>
+  <p><strong>弧度制 (Radian Measure)</strong>：&pi; rad = 180&deg;，1 rad &asymp; 57.3&deg;</p>
+  <p><strong>弧长公式 (Arc Length Formula)</strong>：l = |&alpha;| &middot; r（&alpha; 为圆心角的弧度数）</p>
 </div>
 <div class="two-col">
   <div class="formula-box">
-    <p><strong>单位圆定义</strong>（&alpha; 为任意角）：</p>
-    <p>sin &alpha; = y（纵坐标）</p>
-    <p>cos &alpha; = x（横坐标）</p>
+    <p><strong>单位圆定义 (Unit Circle Definition)</strong>（&alpha; 为任意角）：</p>
+    <p>sin &alpha; = y（纵坐标 y-coordinate）</p>
+    <p>cos &alpha; = x（横坐标 x-coordinate）</p>
     <p>tan &alpha; = y / x（x &ne; 0）</p>
   </div>
   <div class="formula-box">
-    <p><strong>同角关系</strong>：</p>
+    <p><strong>同角关系 (Pythagorean Identity)</strong>：</p>
     <p>sin<sup>2</sup>&alpha; + cos<sup>2</sup>&alpha; = 1</p>
     <p>tan &alpha; = sin &alpha; / cos &alpha;</p>
-    <p><strong>诱导公式口诀</strong>：</p>
+    <p><strong>诱导公式口诀 (Reduction Formulas Mnemonic)</strong>：</p>
     <p>奇变偶不变，符号看象限</p>
   </div>
 </div>
 
-<h3>2.4 指数函数与对数函数的关系</h3>
+<h3>2.4 指数函数与对数函数的关系 (Relationship Between Exponential and Logarithmic Functions)</h3>
 <div class="formula-box">
-  <p>y = a<sup>x</sup> 与 y = log<sub>a</sub>x 互为<strong>反函数</strong></p>
+  <p>y = a<sup>x</sup> 与 y = log<sub>a</sub>x 互为<strong>反函数 (Inverse Functions)</strong></p>
   <p>图像关于直线 <strong>y = x</strong> 对称</p>
   <p>指数函数的值域 (0, +&infin;) = 对数函数的定义域</p>
   <p>指数函数的定义域 R = 对数函数的值域</p>
@@ -222,43 +222,43 @@
 <table>
   <tr><th>名词</th><th>解释</th><th>举例说明</th></tr>
   <tr>
-    <td>底数</td><td>指数运算中被乘的数，或对数运算中的基数</td>
+    <td>底数 (Base)</td><td>指数运算中被乘的数，或对数运算中的基数</td>
     <td>2<sup>3</sup> 中底数为 2；log<sub>2</sub>8 中底数为 2</td>
   </tr>
   <tr>
-    <td>指数</td><td>表示底数自乘次数的数</td>
+    <td>指数 (Exponent)</td><td>表示底数自乘次数的数</td>
     <td>2<sup>3</sup> 中指数为 3</td>
   </tr>
   <tr>
-    <td>幂</td><td>指数运算的结果</td>
+    <td>幂 (Power)</td><td>指数运算的结果</td>
     <td>2<sup>3</sup> = 8，8 就是幂</td>
   </tr>
   <tr>
-    <td>对数</td><td>指数运算的逆运算的结果</td>
+    <td>对数 (Logarithm)</td><td>指数运算的逆运算的结果</td>
     <td>log<sub>2</sub>8 = 3，3 就是以 2 为底 8 的对数</td>
   </tr>
   <tr>
-    <td>真数</td><td>对数符号中的真数部分（N）</td>
+    <td>真数 (Argument)</td><td>对数符号中的真数部分（N）</td>
     <td>log<sub>a</sub>N 中 N 为真数，要求 N &gt; 0</td>
   </tr>
   <tr>
-    <td>弧度</td><td>用弧长与半径之比度量角的大小</td>
+    <td>弧度 (Radian)</td><td>用弧长与半径之比度量角的大小</td>
     <td>半圆对应的弧度数为 &pi;，即 180&deg;</td>
   </tr>
   <tr>
-    <td>象限角</td><td>角的终边落在第几象限就称为第几象限角</td>
+    <td>象限角 (Quadrant Angle)</td><td>角的终边落在第几象限就称为第几象限角</td>
     <td>30&deg; 是第一象限角，150&deg; 是第二象限角</td>
   </tr>
   <tr>
-    <td>单位圆</td><td>半径为 1 的圆，用于定义任意角的三角函数</td>
+    <td>单位圆 (Unit Circle)</td><td>半径为 1 的圆，用于定义任意角的三角函数</td>
     <td>圆上点 (cos &theta;, sin &theta;)</td>
   </tr>
   <tr>
-    <td>诱导公式</td><td>将任意角三角函数化归为锐角三角函数的公式</td>
+    <td>诱导公式 (Reduction Formula)</td><td>将任意角三角函数化归为锐角三角函数的公式</td>
     <td>sin(&pi; + &alpha;) = &minus;sin &alpha;</td>
   </tr>
   <tr>
-    <td>反函数</td><td>交换输入输出的一对函数</td>
+    <td>反函数 (Inverse Function)</td><td>交换输入输出的一对函数</td>
     <td>y = 2<sup>x</sup> 与 y = log<sub>2</sub>x 互为反函数</td>
   </tr>
 </table>
@@ -269,18 +269,18 @@
 <h2>四、符号说明</h2>
 <table>
   <tr><th>符号</th><th>含义</th><th>读法 / 备注</th></tr>
-  <tr><td>a<sup>n</sup></td><td>a 的 n 次幂</td><td>读作"a 的 n 次方"</td></tr>
+  <tr><td>a<sup>n</sup></td><td>a 的 n 次幂</td><td>读作"a 的 n 次方" (n-th power of a)</td></tr>
   <tr><td>a<sup>&minus;n</sup></td><td>a 的 &minus;n 次幂</td><td>等于 1 / a<sup>n</sup></td></tr>
   <tr><td>a<sup>m/n</sup></td><td>a 的 m/n 次幂</td><td>等于 <sup>n</sup>&radic;(a<sup>m</sup>)</td></tr>
-  <tr><td>log<sub>a</sub>N</td><td>以 a 为底 N 的对数</td><td>a 叫底数，N 叫真数</td></tr>
-  <tr><td>lg N</td><td>常用对数</td><td>以 10 为底：lg N = log<sub>10</sub>N</td></tr>
-  <tr><td>ln N</td><td>自然对数</td><td>以 e 为底：ln N = log<sub>e</sub>N</td></tr>
-  <tr><td>e</td><td>自然常数（欧拉数）</td><td>e &asymp; 2.71828；连续增长/衰减的极限值，如连续复利</td></tr>
-  <tr><td>sin &alpha;</td><td>&alpha; 的正弦</td><td>单位圆上终边交点的纵坐标</td></tr>
-  <tr><td>cos &alpha;</td><td>&alpha; 的余弦</td><td>单位圆上终边交点的横坐标</td></tr>
-  <tr><td>tan &alpha;</td><td>&alpha; 的正切</td><td>sin &alpha; / cos &alpha;</td></tr>
-  <tr><td>&pi;</td><td>圆周率</td><td>&pi; &asymp; 3.14159，&pi; rad = 180&deg;；描述圆形和周期性的根本常数</td></tr>
-  <tr><td>rad</td><td>弧度单位</td><td>弧度（radian）的缩写</td></tr>
+  <tr><td>log<sub>a</sub>N</td><td>以 a 为底 N 的对数</td><td>a 叫底数 (base)，N 叫真数 (argument)</td></tr>
+  <tr><td>lg N</td><td>常用对数 (Common Logarithm)</td><td>以 10 为底：lg N = log<sub>10</sub>N</td></tr>
+  <tr><td>ln N</td><td>自然对数 (Natural Logarithm)</td><td>以 e 为底：ln N = log<sub>e</sub>N</td></tr>
+  <tr><td>e</td><td>自然常数 / 欧拉数 (Euler's Number)</td><td>e &asymp; 2.71828；连续增长/衰减的极限值，如连续复利</td></tr>
+  <tr><td>sin &alpha;</td><td>&alpha; 的正弦 (Sine)</td><td>单位圆上终边交点的纵坐标</td></tr>
+  <tr><td>cos &alpha;</td><td>&alpha; 的余弦 (Cosine)</td><td>单位圆上终边交点的横坐标</td></tr>
+  <tr><td>tan &alpha;</td><td>&alpha; 的正切 (Tangent)</td><td>sin &alpha; / cos &alpha;</td></tr>
+  <tr><td>&pi;</td><td>圆周率 (Pi)</td><td>&pi; &asymp; 3.14159，&pi; rad = 180&deg;；描述圆形和周期性的根本常数</td></tr>
+  <tr><td>rad</td><td>弧度单位 (Radian)</td><td>弧度（radian）的缩写</td></tr>
 </table>
 </section>
 
@@ -288,53 +288,53 @@
 <section>
 <h2>五、应用场景</h2>
 
-<h3>指数的应用</h3>
+<h3>指数的应用 (Applications of Exponents)</h3>
 <ul>
-  <li><strong>人口增长</strong>：人口在理想条件下呈指数增长 N(t) = N<sub>0</sub> &middot; 2<sup>t/T</sup></li>
-  <li><strong>复利计算</strong>：A = P(1 + r/n)<sup>nt</sup>，利息产生利息，财富指数增长</li>
-  <li><strong>放射性衰变</strong>：半衰期模型 m(t) = m<sub>0</sub> &middot; (1/2)<sup>t/T</sup></li>
-  <li><strong>细菌繁殖</strong>：每分裂一次数量翻倍，呈指数增长</li>
+  <li><strong>人口增长 (Population Growth)</strong>：人口在理想条件下呈指数增长 N(t) = N<sub>0</sub> &middot; 2<sup>t/T</sup></li>
+  <li><strong>复利计算 (Compound Interest)</strong>：A = P(1 + r/n)<sup>nt</sup>，利息产生利息，财富指数增长</li>
+  <li><strong>放射性衰变 (Radioactive Decay)</strong>：半衰期模型 m(t) = m<sub>0</sub> &middot; (1/2)<sup>t/T</sup></li>
+  <li><strong>细菌繁殖 (Bacterial Growth)</strong>：每分裂一次数量翻倍，呈指数增长</li>
 </ul>
 
-<h3>对数的应用</h3>
+<h3>对数的应用 (Applications of Logarithms)</h3>
 <ul>
-  <li><strong>地震震级</strong>：里氏震级 M = lg(A / A<sub>0</sub>)，每增加 1 级能量约增加 32 倍</li>
-  <li><strong>声音分贝</strong>：dB = 10 &middot; lg(I / I<sub>0</sub>)</li>
-  <li><strong>酸碱度</strong>：pH = &minus;lg[H<sup>+</sup>]</li>
-  <li><strong>信息论</strong>：信息熵 H = &minus;&sum;p<sub>i</sub> &middot; log<sub>2</sub>p<sub>i</sub></li>
+  <li><strong>地震震级 (Earthquake Magnitude)</strong>：里氏震级 M = lg(A / A<sub>0</sub>)，每增加 1 级能量约增加 32 倍</li>
+  <li><strong>声音分贝 (Decibel)</strong>：dB = 10 &middot; lg(I / I<sub>0</sub>)</li>
+  <li><strong>酸碱度 (pH Value)</strong>：pH = &minus;lg[H<sup>+</sup>]</li>
+  <li><strong>信息论 (Information Theory)</strong>：信息熵 H = &minus;&sum;p<sub>i</sub> &middot; log<sub>2</sub>p<sub>i</sub></li>
 </ul>
 
-<h3>三角函数的应用</h3>
+<h3>三角函数的应用 (Applications of Trigonometric Functions)</h3>
 <ul>
-  <li><strong>简谐运动</strong>：弹簧振子的位移 y = A sin(&omega;t + &phi;)</li>
-  <li><strong>交流电</strong>：电压 V(t) = V<sub>0</sub> sin(2&pi;ft)</li>
-  <li><strong>潮汐预报</strong>：海平面周期性涨落可以用三角函数拟合预测</li>
-  <li><strong>声波分析</strong>：声音的波形是不同频率三角函数的叠加（傅里叶分析）</li>
+  <li><strong>简谐运动 (Simple Harmonic Motion)</strong>：弹簧振子的位移 y = A sin(&omega;t + &phi;)</li>
+  <li><strong>交流电 (Alternating Current)</strong>：电压 V(t) = V<sub>0</sub> sin(2&pi;ft)</li>
+  <li><strong>潮汐预报 (Tide Prediction)</strong>：海平面周期性涨落可以用三角函数拟合预测</li>
+  <li><strong>声波分析 (Sound Wave Analysis)</strong>：声音的波形是不同频率三角函数的叠加（傅里叶分析 Fourier Analysis）</li>
 </ul>
 </section>
 
 <!-- ============================== 六、指数与对数在自然界的意义 ============================== -->
 <section>
-<h2>六、指数与对数在自然界的意义</h2>
-<p>指数和对数不仅仅是数学运算工具——它们精确描述了自然界中两类最基本的规律：<strong>自复制</strong>和<strong>感知尺度</strong>。</p>
+<h2>六、指数与对数在自然界的意义 (Exponential and Logarithm in Nature)</h2>
+<p>指数和对数不仅仅是数学运算工具——它们精确描述了自然界中两类最基本的规律：<strong>自复制 (Self-Replication)</strong> 和 <strong>感知尺度 (Perceptual Scale)</strong>。</p>
 
-<h3>6.1 指数——描述"自复制"过程</h3>
+<h3>6.1 指数——描述"自复制"过程 (Exponential — Self-Replication)</h3>
 <p>当一个东西的变化率<strong>与它当前的数量成正比</strong>时，就会出现指数增长或指数衰减。自然界中这种"自复制"过程无处不在：</p>
 
 <div class="two-col">
   <div class="example" style="margin:0;">
-    <p><strong>细菌繁殖</strong></p>
+    <p><strong>细菌繁殖 (Bacterial Growth)</strong></p>
     <p>一个细菌每 20 分钟分裂一次：</p>
     <p>数量 &asymp; 2<sup>t/20</sup></p>
     <p class="step">（t 为分钟数）</p>
-    <p>翻倍周期固定，数量增长越来越快——这就是指数爆炸。</p>
+    <p>翻倍周期固定，数量增长越来越快——这就是指数爆炸 (Exponential Explosion)。</p>
   </div>
   <div class="example" style="margin:0;">
-    <p><strong>放射性衰变</strong></p>
+    <p><strong>放射性衰变 (Radioactive Decay)</strong></p>
     <p>放射性原子核每经过一个半衰期 T：</p>
     <p>剩余量 &asymp; (1/2)<sup>t/T</sup></p>
     <p class="step">（t 为经过的时间）</p>
-    <p>衰变到一半的时间固定，但数量永远不为零——这就是指数衰减。</p>
+    <p>衰变到一半的时间固定，但数量永远不为零——这就是指数衰减 (Exponential Decay)。</p>
   </div>
 </div>
 
@@ -349,12 +349,12 @@
   <p><strong>核心洞察：</strong>只要一个过程是"现有量越多，增长越快"（如利息生利息、人口繁殖、核裂变链式反应），其数学描述就一定离不开指数函数。指数不是人为创造的，是自然规律写下的数学公式。</p>
 </div>
 
-<h3>6.2 对数——描述人类的"感知尺度"</h3>
-<p>与指数相反，对数描述的是：当刺激按<strong>几何级数</strong>增长时，人的感知按<strong>算术级数</strong>增长。</p>
+<h3>6.2 对数——描述人类的"感知尺度" (Logarithm — Perceptual Scale)</h3>
+<p>与指数相反，对数描述的是：当刺激按<strong>几何级数 (Geometric Progression)</strong> 增长时，人的感知按<strong>算术级数 (Arithmetic Progression)</strong> 增长。</p>
 
 <div class="two-col">
   <div class="example" style="margin:0;">
-    <p><strong>里氏震级</strong></p>
+    <p><strong>里氏震级 (Richter Scale)</strong></p>
     <p>地震每增加 1 级，能量 <span class="tip-trigger" id="trig-earthquake">×32 倍
     <span class="tip-popover" id="tip-earthquake">
       <button class="close-btn" data-close="tip-earthquake">&times;</button>
@@ -369,7 +369,7 @@
     <p class="step">6 级地震的能量是 5 级的 32 倍，但在地震仪上标尺只长了 1 格。</p>
   </div>
   <div class="example" style="margin:0;">
-    <p><strong>声音分贝</strong></p>
+    <p><strong>声音分贝 (Decibel)</strong></p>
     <p>声音强度每 ×10，感知响度 ×2：</p>
   <p>分贝 dB = 10 &middot; lg(强度比)</p>
   <p class="step">10 分贝的差异意味着强度差了 10 倍，但耳朵听起来只是"大了一点点"。</p>
@@ -377,7 +377,7 @@
 </div>
 
 <div class="example" style="margin-top:12px;">
-  <p><strong>这就是著名的韦伯-费希纳定律：</strong></p>
+  <p><strong>这就是著名的韦伯-费希纳定律 (Weber-Fechner Law)：</strong></p>
   <p>人对声、光、触、味等几乎所有感觉，都与外界刺激强度的<strong>对数</strong>成正比。</p>
   <p>原因是：感知系统需要处理极大范围的信号强度（从微弱耳语到喷气式飞机轰鸣，声强跨越了 10<sup>12</sup> 倍）。使用对数尺度，人类的一根神经就能同时编码"微弱"和"巨响"——这是进化给出的高效方案。</p>
 </div>
@@ -386,7 +386,7 @@
   <p><strong>核心洞察：</strong>对数就是大自然用来"压缩"极端尺度的工具。从不到 1 到上万亿，对数把乘除关系变成了加减关系，让人脑可以理解。</p>
 </div>
 
-<h3>6.3 自然常数 e——"连续增长"的极限</h3>
+<h3>6.3 自然常数 e——"连续增长"的极限 (Euler's Number — Limit of Continuous Growth)</h3>
 <div class="formula-box">
   <p><strong>定义：</strong>e = 2.71828 18284 59045 23536…</p>
   <p><strong>一句话：</strong>e 是"单位增长在连续复利下的极限值"。</p>
@@ -404,16 +404,16 @@
   e = lim<sub>n→∞</sub>(1 + 1/n)<sup>n</sup></p>
 <p>自然界中的连续增长几乎都涉及 e——不是因为数学家喜欢它，而是因为自然界本身是"连续的"而不是"每秒钟跳一次"的。细菌无时无刻不在分裂，放射性原子随时可能衰变——这些连续过程天然地以 e 为底。</p>
 
-<h3>6.4 圆周率 π——"转一圈"的数字</h3>
+<h3>6.4 圆周率 π——"转一圈"的数字 (Pi — The Number of Half-Turn)</h3>
 <div class="formula-box">
-  <p><strong>定义：</strong>&pi; = 3.14159 26535 89793 23846…</p>
+  <p><strong>定义：</strong>&pi; = 3.14159 26535 89793 23846… (Pi = Circumference / Diameter)</p>
   <p><strong>一句话：</strong>&pi; 是"圆的周长与直径之比"，但更本质地说——它是<strong>转了半圈</strong>的数字。</p>
 </div>
-<p>为什么 π 会出现在三角函数中？因为三角函数描述的是<strong>旋转</strong>：</p>
+<p>为什么 π 会出现在三角函数中？因为三角函数描述的是<strong>旋转 (Rotation)</strong>：</p>
 <ul>
-  <li><strong>&pi; rad = 180&deg;</strong> —— 正好转了半圈</li>
-  <li><strong>2&pi; rad = 360&deg;</strong> —— 转了一圈（回到起点）</li>
-  <li><strong>&pi;/2 rad = 90&deg;</strong> —— 转了四分之一圈</li>
+  <li><strong>&pi; rad = 180&deg;</strong> —— 正好转了半圈 (half-turn)</li>
+  <li><strong>2&pi; rad = 360&deg;</strong> —— 转了一圈 (full turn，回到起点）</li>
+  <li><strong>&pi;/2 rad = 90&deg;</strong> —— 转了四分之一圈 (quarter-turn)</li>
 </ul>
 <p>所以 sin(&pi;) = 0（半圈后回到水平轴），sin(&pi;/2) = 1（四分之一圈后到达最高点）。三角函数的所有性质，本质上都是<strong>圆周运动投影到直线</strong>的结果。</p>
 <div class="hint">
@@ -423,11 +423,11 @@
   因为波的本质就是"旋转的投影"——一个点绕圆匀速转动，它在垂直方向的投影就是正弦波。</p>
 </div>
 
-<h3>6.5 为什么说"大自然用指数、对数和三角函数书写"？</h3>
+<h3>6.5 为什么说"大自然用指数、对数和三角函数书写"？ (Why Nature Writes in Exponentials, Logarithms &amp; Trigonometry)</h3>
 <div class="growth-box">
-  <div class="growth-item linear">线性<br><small>y = x</small><br><span style="font-weight:normal;">一维尺度</span></div>
-  <div class="growth-item explosion">指数<br><small>y = e<sup>x</sup></small><br><span style="font-weight:normal;">自复制、增长与衰变</span></div>
-  <div class="growth-item log">对数<br><small>y = ln x</small><br><span style="font-weight:normal;">尺度压缩、感知与编码</span></div>
+  <div class="growth-item linear">线性 (Linear)<br><small>y = x</small><br><span style="font-weight:normal;">一维尺度</span></div>
+  <div class="growth-item explosion">指数 (Exponential)<br><small>y = e<sup>x</sup></small><br><span style="font-weight:normal;">自复制、增长与衰变</span></div>
+  <div class="growth-item log">对数 (Logarithmic)<br><small>y = ln x</small><br><span style="font-weight:normal;">尺度压缩、感知与编码</span></div>
 </div>
 <div class="example">
   <p><strong>一张表看懂三个常数：</strong></p>
@@ -450,31 +450,32 @@
     </tr>
   </table>
   <p style="margin-top:10px;color:#555;font-size:0.93em;">
-    <strong>欧拉公式</strong> e<sup>i&pi;</sup> + 1 = 0 把 e（连续增长）、&pi;（转半圈）、i（旋转 90&deg;）统一在一个等式里——被誉为"上帝创造的公式"。
+    <strong>欧拉公式 (Euler's Formula)</strong> e<sup>i&pi;</sup> + 1 = 0 把 e（连续增长 continuous growth）、&pi;（转半圈 half-turn）、i（旋转 90&deg; rotate 90&deg;）统一在一个等式里——被誉为"上帝创造的公式"。<br>
+    它的扩展形式 e<sup>i&theta;</sup> = cos &theta; + i sin &theta; 正是连接指数函数与三角函数的桥梁。
   </p>
 </div>
 </section>
 
 <!-- ============================== 七、历史小故事 ============================== -->
 <section>
-<h2>七、历史小故事</h2>
+<h2>七、历史小故事 (History Stories)</h2>
 
 <div class="example">
-  <p><strong>对数的诞生——纳皮尔与天文学家的福音</strong></p>
+  <p><strong>对数的诞生——纳皮尔与天文学家的福音 (Napier &amp; the Gift to Astronomers)</strong></p>
   <p>16 世纪末，天文学家面临着巨大的计算难题：开普勒需要处理第谷留下的海量观测数据，其中大量涉及乘除和开方运算。手工计算一次乘法就要数分钟，而且极易出错。</p>
-  <p>苏格兰数学家<strong>约翰·纳皮尔</strong>（John Napier, 1550–1617）花费了约 20 年时间，在 1614 年发表了《奇妙的对数表》。他的核心思想是：利用指数运算把<strong>乘法转化为加法</strong>、<strong>除法转化为减法</strong>。</p>
+  <p>苏格兰数学家<strong>约翰·纳皮尔 (John Napier, 1550–1617)</strong> 花费了约 20 年时间，在 1614 年发表了《奇妙的对数表》。他的核心思想是：利用指数运算把<strong>乘法转化为加法</strong>、<strong>除法转化为减法</strong>。</p>
   <p>拉普拉斯后来评价道："对数的发明，把天文学家的寿命延长了一倍。"这句话绝非夸张——原本需要数月的计算工作，利用对数表只需数天即可完成。</p>
 </div>
 
 <div class="example">
-  <p><strong>弧度制——为什么数学家不用角度？</strong></p>
-  <p>角度制（把圆周分成 360 份）源于古代巴比伦人，但数学家发现用"弧度"来度量角更为自然。1 弧度定义为"半径长的弧所对的圆心角"。</p>
+  <p><strong>弧度制——为什么数学家不用角度？ (Why Radians over Degrees?)</strong></p>
+  <p>角度制（把圆周分成 360 份）源于古代巴比伦人，但数学家发现用"弧度 (Radian)"来度量角更为自然。1 弧度定义为"半径长的弧所对的圆心角"。</p>
   <p>使用弧度制的根本原因在于<strong>公式简洁</strong>。例如，在弧度制下 sin x 的导数是 cos x；而在角度制下，sin x 的导数是 (&pi;/180) &middot; cos x——多了一个不必要的系数。弧度制让微积分中的公式保持了最简洁的形式。</p>
   <p>数学家的选择标准其实很简单：哪个更方便、更优美，就用哪个。</p>
 </div>
 
 <div class="example">
-  <p><strong>指数爆炸——从棋盘问题说起</strong></p>
+  <p><strong>指数爆炸——从棋盘问题说起 (Exponential Explosion — The Chessboard Problem)</strong></p>
   <p>传说古印度国王要奖励发明国际象棋的宰相。宰相请求："请在棋盘第一格放 1 粒麦子，第二格放 2 粒，第三格放 4 粒……每格放前一格的 2 倍。"国王觉得这要求太简单了，欣然答应。</p>
   <p>然而，放到第 21 格就已经超过 100 万粒；放到第 41 格超过 1 万亿粒；到第 64 格时，总数高达 2<sup>64</sup> &minus; 1 &asymp; 1.84 &times; 10<sup>19</sup> 粒——相当于当时全球小麦年产量的上千倍！这就是"指数爆炸"的力量。</p>
 </div>
@@ -482,11 +483,11 @@
 
 <!-- ============================== 八、例题 ============================== -->
 <section>
-<h2>八、例题</h2>
+<h2>八、例题 (Examples)</h2>
 
-<h3>例 1（指数计算）</h3>
+<h3>例 1（指数计算 Exponential Calculation）</h3>
 <div class="example">
-  <p>计算：(1) 8<sup>2/3</sup> &nbsp;&nbsp; (2) 16<sup>&minus;3/4</sup></p>
+  <p>计算 (Evaluate)：(1) 8<sup>2/3</sup> &nbsp;&nbsp; (2) 16<sup>&minus;3/4</sup></p>
   <p class="step"><strong>分析</strong>：分数指数幂的含义：a<sup>m/n</sup> = <sup>n</sup>&radic;(a<sup>m</sup>)；负指数即取倒数。</p>
   <p class="step"><strong>解</strong>：</p>
   <p class="step">(1) 8<sup>2/3</sup> = ( <sup>3</sup>&radic;8 )<sup>2</sup> = 2<sup>2</sup> = 4</p>
@@ -494,9 +495,9 @@
   <p class="answer">答案：8<sup>2/3</sup> = 4，16<sup>&minus;3/4</sup> = 1/8</p>
 </div>
 
-<h3>例 2（对数计算）</h3>
+<h3>例 2（对数计算 Logarithmic Calculation）</h3>
 <div class="example">
-  <p>计算：log<sub>2</sub>32 + log<sub>2</sub>(1/4) &minus; log<sub>2</sub>8</p>
+  <p>计算 (Evaluate)：log<sub>2</sub>32 + log<sub>2</sub>(1/4) &minus; log<sub>2</sub>8</p>
   <p class="step"><strong>分析</strong>：利用对数运算性质，也可以直接计算各项再合并。</p>
   <p class="step"><strong>解法一（逐项计算）</strong>：</p>
   <p class="step">log<sub>2</sub>32 = 5（因为 2<sup>5</sup> = 32）</p>
@@ -509,9 +510,9 @@
   <p class="hint"><strong>技巧</strong>：熟练掌握对数运算性质，可以将多个对数项合并为一个，简化计算。</p>
 </div>
 
-<h3>例 3（三角值与诱导公式）</h3>
+<h3>例 3（三角值与诱导公式 Trigonometric Values &amp; Reduction Formulas）</h3>
 <div class="example">
-  <p>求值：(1) sin(5&pi;/6) &nbsp;&nbsp; (2) cos(240&deg;) &nbsp;&nbsp; (3) tan(&minus;&pi;/4)</p>
+  <p>求值 (Find Values)：(1) sin(5&pi;/6) &nbsp;&nbsp; (2) cos(240&deg;) &nbsp;&nbsp; (3) tan(&minus;&pi;/4)</p>
   <p class="step"><strong>分析</strong>：利用诱导公式将任意角化归为锐角。"奇变偶不变，符号看象限"。</p>
   <p class="step"><strong>解</strong>：</p>
   <p class="step">(1) sin(5&pi;/6) = sin(&pi; &minus; &pi;/6) = sin(&pi;/6) = 1/2</p>
@@ -520,12 +521,12 @@
   <p class="answer">答案：sin(5&pi;/6) = 1/2，cos(240&deg;) = &minus;1/2，tan(&minus;&pi;/4) = &minus;1</p>
 </div>
 
-<h3>例 4（指数对数互化）</h3>
+<h3>例 4（指数对数互化 Converting Between Exponential and Logarithmic Forms）</h3>
 <div class="example">
   <p>将下列指数式与对数式互化：</p>
-  <p class="step">(1) 2<sup>5</sup> = 32 化为对数式</p>
-  <p class="step">(2) log<sub>3</sub>81 = 4 化为指数式</p>
-  <p class="step">(3) 求 x：log<sub>x</sub>64 = 3</p>
+  <p class="step">(1) 2<sup>5</sup> = 32 化为对数式 (convert to logarithmic form)</p>
+  <p class="step">(2) log<sub>3</sub>81 = 4 化为指数式 (convert to exponential form)</p>
+  <p class="step">(3) 求 x (solve for x)：log<sub>x</sub>64 = 3</p>
   <p class="step"><strong>解</strong>：</p>
   <p class="step">(1) log<sub>2</sub>32 = 5</p>
   <p class="step">(2) 3<sup>4</sup> = 81</p>
@@ -537,7 +538,7 @@
 
 <!-- ============================== 九、练习 ============================== -->
 <section>
-<h2>九、练习</h2>
+<h2>九、练习 (Exercises)</h2>
 <p style="color:#666;">点击选项提交答案，系统自动判分。先完成全部题目再查看解析。</p>
 
 <div id="quiz-container"></div>

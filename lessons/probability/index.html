@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>概率</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  h3 { color: #2c3e50; margin: 28px 0 12px; font-size: 1.15em; }
+  h4 { color: #555; margin: 18px 0 8px; font-size: 1em; }
+  .formula-box { border: 2px solid #1a73e8; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #f0f7ff; }
+  .formula-box p { margin: 6px 0; text-align: center; font-size: 1.05em; }
+  .key-point { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* 模拟数据表格 */
+  .sim-table { margin: 12px auto; width: auto; min-width: 300px; }
+  .sim-table td, .sim-table th { padding: 6px 14px; }
+
+  /* Quiz styles (matching combinatorics pattern) */
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag {
+    display: inline-block; padding: 2px 12px; border-radius: 12px;
+    font-size: 0.75em; margin-right: 8px; color: #fff;
+  }
+  .q-tag.concept { background: #1a73e8; }
+  .q-tag.calc { background: #e67e22; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+  }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+  /* Fill-in quiz styles */
+  .quiz-question .fill-input {
+    padding: 8px 12px; border: 2px solid #ddd; border-radius: 8px;
+    font-size: 1em; width: 120px; margin: 8px 0; outline: none; transition: border-color 0.2s;
+  }
+  .quiz-question .fill-input:focus { border-color: #1a73e8; }
+  .quiz-question .fill-input.correct-input { border-color: #4caf50; background: #e8f5e9; }
+  .quiz-question .fill-input.wrong-input { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .btn-check {
+    padding: 6px 20px; border: 2px solid #1a73e8; color: #1a73e8;
+    border-radius: 16px; background: #fff; cursor: pointer; font-size: 0.93em;
+    margin-left: 8px; transition: 0.15s;
+  }
+  .quiz-question .btn-check:hover { background: #1a73e8; color: #fff; }
+  .quiz-question .btn-check:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* Comprehensive exercise styles */
+  .comp-exercise {
+    background: #fff; border: 2px solid #1a73e8; border-radius: 10px;
+    padding: 20px 24px; margin: 20px 0; border-left: 6px solid #1a73e8;
+  }
+  .comp-exercise h4 { margin-top: 0; color: #1a73e8; }
+  .comp-exercise .answer-box {
+    margin-top: 12px; padding: 14px; background: #f0f7ff;
+    border-radius: 8px; display: none; border-left: 4px solid #1a73e8;
+  }
+  .comp-exercise .answer-box.show { display: block; }
+  .comp-exercise .btn-toggle {
+    display: inline-block; margin-top: 10px; padding: 6px 18px;
+    border: 2px solid #1a73e8; color: #1a73e8; border-radius: 16px;
+    background: #fff; cursor: pointer; font-size: 0.93em;
+    transition: 0.15s;
+  }
+  .comp-exercise .btn-toggle:hover { background: #1a73e8; color: #fff; }
+
+  /* Score panel */
+  .score-panel {
+    text-align: center; padding: 16px; margin: 20px 0;
+    background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8;
+  }
+  .score-panel .score-num { font-size: 2em; font-weight: bold; color: #1a73e8; }
+  .score-panel .btn-reset {
+    margin-left: 16px; padding: 8px 24px; border: 2px solid #1a73e8;
+    color: #1a73e8; border-radius: 20px; background: #fff;
+    cursor: pointer; font-size: 0.95em; transition: 0.15s;
+  }
+  .score-panel .btn-reset:hover { background: #1a73e8; color: #fff; }
+
+  /* 模拟抛硬币按钮 */
+  .sim-btn {
+    padding: 8px 24px; border: 2px solid #1a73e8; color: #1a73e8;
+    border-radius: 20px; background: #fff; cursor: pointer; font-size: 0.95em;
+    transition: 0.15s; margin: 4px;
+  }
+  .sim-btn:hover { background: #1a73e8; color: #fff; }
+  .sim-result {
+    margin: 10px 0; padding: 10px 16px; background: #f0f7ff;
+    border-radius: 8px; font-family: 'Courier New', monospace; font-size: 0.95em;
+    min-height: 40px; line-height: 1.6;
+  }
+  .prob-bar-container {
+    margin: 8px 0; display: flex; align-items: center; gap: 8px;
+  }
+  .prob-bar {
+    height: 22px; background: #1a73e8; border-radius: 4px;
+    transition: width 0.3s; min-width: 2px;
+  }
+  .prob-bar-label { font-size: 0.9em; color: #555; min-width: 80px; }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>概率</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">从具体问题出发，理解概率——它是描述不确定性的数学语言，帮我们在随机世界中做出合理判断。</p>
+
+<!-- ============================== 一、随机事件与概率 ============================== -->
+<section>
+<h2>一、随机事件与概率</h2>
+
+<h3>先看一个问题</h3>
+<div class="example">
+  <p><strong>问题：</strong>掷一颗均匀的骰子，会出现哪些结果？每一面朝上的可能性有多大？</p>
+  <p class="step"><strong>观察：</strong>骰子有 6 个面，分别标有 1、2、3、4、5、6。掷一次，只会出现其中一面朝上。</p>
+  <p class="step">我们无法提前预知具体是哪一面——这就是<strong>随机现象</strong>。</p>
+  <p class="step">但我们可以说：每一面朝上的"可能性"都是 1/6。这个"可能性"的数学度量就是<strong>概率</strong>。</p>
+</div>
+
+<h3>基本概念</h3>
+<p>从掷骰子出发，我们引入三个基本概念：</p>
+
+<div class="definition">
+  <p><strong>样本空间 &Omega;</strong>：一个随机试验所有可能结果的集合。掷一颗骰子，&Omega; = {1, 2, 3, 4, 5, 6}，共 6 个样本点。</p>
+  <p><strong>随机事件 A</strong>：样本空间的一个子集。"点数为偶数"对应 A = {2, 4, 6}。</p>
+  <p><strong>概率 P(A)</strong>：事件 A 发生的可能性大小的数值度量，取值范围 [0, 1]。</p>
+</div>
+
+<h3>频率与概率——大数定律的思想</h3>
+<p>概率到底是怎么确定的？我们做一个实验：抛一枚均匀硬币，记录正面朝上的频率。</p>
+
+<div class="example">
+  <p><strong>模拟抛硬币：</strong>点击下方按钮，模拟抛硬币。观察随着抛掷次数增加，正面频率的变化。</p>
+  <div id="coinSimArea">
+    <div>
+      <button class="sim-btn" onclick="simCoin(1)">抛 1 次</button>
+      <button class="sim-btn" onclick="simCoin(10)">抛 10 次</button>
+      <button class="sim-btn" onclick="simCoin(100)">抛 100 次</button>
+      <button class="sim-btn" onclick="resetCoin()">重置</button>
+    </div>
+    <div class="sim-result" id="coinResult">点击按钮开始模拟</div>
+    <div class="prob-bar-container">
+      <span class="prob-bar-label">正面频率：</span>
+      <div class="prob-bar" id="coinBar" style="width:2px;"></div>
+      <span id="coinFreq" style="font-size:0.9em;color:#555;">0.00</span>
+    </div>
+    <div class="prob-bar-container">
+      <span class="prob-bar-label">理论概率：</span>
+      <div class="prob-bar" style="width:50%;background:#90caf9;"></div>
+      <span style="font-size:0.9em;color:#555;">0.50</span>
+    </div>
+  </div>
+</div>
+
+<div class="hint">
+  <strong>大数定律的思想：</strong>当试验次数足够多时，事件发生的频率会稳定在它的概率附近。这就是为什么我们可以用频率来估计概率——抛硬币次数越多，正面频率越接近 0.5。
+</div>
+
+<div class="key-point">
+  <p><strong>频率 vs 概率：</strong></p>
+  <p>频率 = 事件发生的次数 / 总试验次数（是一个<strong>实际值</strong>，随试验变化）</p>
+  <p>概率 = 事件发生的固有可能性（是一个<strong>理论值</strong>，固定不变）</p>
+  <p>大数定律告诉我们：随着试验次数 n 增大，频率趋近于概率。</p>
+</div>
+</section>
+
+<!-- 知识点1 交互式选择题 -->
+<div class="quiz-question" id="q1">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    掷一颗均匀的骰子，事件 A = "点数大于 4"，则 A 包含几个样本点？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(1, 0)">A. 1 个（5）</div>
+    <div class="opt" onclick="checkChoice(1, 1)">B. 2 个（5, 6）</div>
+    <div class="opt" onclick="checkChoice(1, 2)">C. 3 个（4, 5, 6）</div>
+    <div class="opt" onclick="checkChoice(1, 3)">D. 4 个（3, 4, 5, 6）</div>
+  </div>
+  <div class="explain" id="explain1">
+    <strong>解析：</strong>点数大于 4，即点数为 5 或 6，共 2 个样本点。选 B。
+  </div>
+</div>
+
+<div class="quiz-question" id="q2">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    关于频率和概率，以下哪个说法是正确的？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(2, 0)">A. 频率就是概率</div>
+    <div class="opt" onclick="checkChoice(2, 1)">B. 抛 10 次硬币正面出现 6 次，说明正面概率是 0.6</div>
+    <div class="opt" onclick="checkChoice(2, 2)">C. 随着试验次数增加，频率会越来越接近概率</div>
+    <div class="opt" onclick="checkChoice(2, 3)">D. 概率会随着试验次数变化</div>
+  </div>
+  <div class="explain" id="explain2">
+    <strong>解析：</strong>频率随试验变化，概率是固定值。大数定律说明当试验次数足够多时，频率趋近于概率。选 C。
+  </div>
+</div>
+
+<!-- ============================== 二、古典概型 ============================== -->
+<section>
+<h2>二、古典概型</h2>
+
+<h3>先看一个问题</h3>
+<div class="example">
+  <p><strong>问题：</strong>掷一颗均匀的骰子，点数为偶数的概率是多少？</p>
+  <p class="step"><strong>分析：</strong></p>
+  <p class="step">样本空间 &Omega; = {1, 2, 3, 4, 5, 6}，共 6 个可能结果。</p>
+  <p class="step">每个结果出现的可能性相同（骰子是均匀的）。</p>
+  <p class="step">事件 A = "点数为偶数" = {2, 4, 6}，包含 3 个结果。</p>
+  <p class="step">所以 P(A) = 3/6 = <strong>1/2</strong>。</p>
+</div>
+
+<h3>引出古典概型</h3>
+<p>上面的问题有两个重要特征：</p>
+<ul>
+  <li><strong>有限性</strong>：样本空间中只有有限个可能结果</li>
+  <li><strong>等可能性</strong>：每个结果出现的可能性相同</li>
+</ul>
+<p>满足这两个条件的概率模型叫做<strong>古典概型</strong>（Classical Probability Model）。</p>
+
+<div class="definition">
+  <p><strong>古典概型</strong>：如果随机试验满足：</p>
+  <p>（1）样本空间 &Omega; 包含有限个样本点；</p>
+  <p>（2）每个样本点发生的可能性相等。</p>
+  <p>则事件 A 的概率为：</p>
+  <p style="text-align:center;font-size:1.3em;font-weight:bold;margin:10px 0;">
+    P(A) = |A| / |&Omega;| = A 包含的样本点个数 / 样本空间总样本点个数
+  </p>
+</div>
+
+<div class="hint">
+  <strong>关键：</strong>古典概型的核心就是"<strong>数数</strong>"——数清楚总共有多少种等可能的结果，以及事件包含多少种结果。计数工具（排列组合）就是干这个用的。
+</div>
+
+<h3>更多例子</h3>
+<div class="example">
+  <p><strong>例 1（抽卡片）：</strong>一副 52 张的扑克牌（无大小王），随机抽一张，抽到红心的概率是多少？</p>
+  <p class="step"><strong>分析：</strong>总共有 52 张牌，每张被抽到等可能。红心有 13 张。</p>
+  <p class="step">P(红心) = 13/52 = <strong>1/4</strong>。</p>
+</div>
+
+<div class="example">
+  <p><strong>例 2（摸球）：</strong>一个袋中有 3 个红球和 2 个白球，除颜色外完全相同。随机摸一个球，摸到红球的概率是多少？</p>
+  <p class="step"><strong>分析：</strong>总共有 5 个球，每个球被摸到等可能。红球有 3 个。</p>
+  <p class="step">P(红球) = 3/5 = <strong>0.6</strong>。</p>
+</div>
+</section>
+
+<!-- 知识点3 交互式选择题 -->
+<div class="quiz-question" id="q3">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    一个袋中有 4 个白球和 6 个黑球，除颜色外完全相同。随机摸一个球，摸到黑球的概率是？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(3, 0)">A. 2/5</div>
+    <div class="opt" onclick="checkChoice(3, 1)">B. 3/5</div>
+    <div class="opt" onclick="checkChoice(3, 2)">C. 3/10</div>
+    <div class="opt" onclick="checkChoice(3, 3)">D. 4/5</div>
+  </div>
+  <div class="explain" id="explain3">
+    <strong>解析：</strong>总共 10 个球，黑球 6 个。P = 6/10 = 3/5 = 0.6。选 B。
+  </div>
+</div>
+
+<div class="quiz-question" id="q4">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    同时掷两枚均匀骰子，点数之和为 7 的概率是多少？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(4, 0)">A. 1/6</div>
+    <div class="opt" onclick="checkChoice(4, 1)">B. 1/12</div>
+    <div class="opt" onclick="checkChoice(4, 2)">C. 5/36</div>
+    <div class="opt" onclick="checkChoice(4, 3)">D. 1/36</div>
+  </div>
+  <div class="explain" id="explain4">
+    <strong>解析：</strong>总结果数为 6 &times; 6 = 36。和为 7 的组合有：(1,6), (2,5), (3,4), (4,3), (5,2), (6,1)，共 6 种。P = 6/36 = <strong>1/6</strong>。选 A。
+  </div>
+</div>
+
+<!-- ============================== 三、几何概型 ============================== -->
+<section>
+<h2>三、几何概型</h2>
+
+<h3>先看一个问题</h3>
+<div class="example">
+  <p><strong>问题：</strong>在 1 米长的线段上随机取一个点，求这个点落在线段前 30 厘米（即 [0, 0.3] 区间内）的概率。</p>
+  <p class="step"><strong>思考：</strong>线段上的点有无穷多个，没法用"个数"来计数了！古典概型失效。</p>
+  <p class="step">但我们可以用<strong>长度</strong>来衡量——"取到某区域内的点"的概率，等于该区域长度与总长度的比值。</p>
+  <p class="step">P = 0.3 / 1 = <strong>0.3</strong>。</p>
+</div>
+
+<h3>引出几何概型</h3>
+<p>当试验的可能结果是无穷多个（比如线段上的点、平面上的区域），且每个结果等可能时，我们用<strong>几何概型</strong>（Geometric Probability Model）。</p>
+
+<div class="definition">
+  <p><strong>几何概型</strong>：如果随机试验的样本空间 &Omega; 是一个可度量的几何区域（长度、面积、体积等），且样本点均匀分布（等可能），则事件 A 的概率为：</p>
+  <p style="text-align:center;font-size:1.3em;font-weight:bold;margin:10px 0;">
+    P(A) = 测度(A) / 测度(&Omega;)
+  </p>
+  <p style="text-align:center;">其中"测度"可以是长度、面积或体积。</p>
+</div>
+
+<div class="hint">
+  <strong>古典 vs 几何：</strong>古典概型数"个数"，几何概型量"大小"。根本区别在于样本空间是<strong>有限</strong>还是<strong>无限</strong>。
+</div>
+
+<h3>更多例子</h3>
+<div class="example">
+  <p><strong>例 1（等公交车）：</strong>某路公交车每 15 分钟一班（整点发车）。小明随机到达车站，等待时间不超过 5 分钟的概率是多少？</p>
+  <p class="step"><strong>分析：</strong>小明到达时间在 15 分钟间隔内均匀分布。等待时间 ≤ 5 分钟，对应到达时间在发车前 5 分钟内。</p>
+  <p class="step">P = 5/15 = <strong>1/3</strong>。</p>
+</div>
+
+<div class="example">
+  <p><strong>例 2（投飞镖）：</strong>一个边长为 1 米的正方形靶子，内有一个半径为 0.3 米的圆形区域。假设飞镖随机落在正方形内任意一点（不计边界），求飞镖命中圆形区域的概率。</p>
+  <p class="step"><strong>分析：</strong>正方形面积 = 1 m&sup2;，圆形面积 = &pi; &times; 0.3&sup2; = 0.09&pi; m&sup2;。</p>
+  <p class="step">P = 0.09&pi; / 1 &asymp; <strong>0.283</strong>。</p>
+</div>
+</section>
+
+<!-- 知识点5 交互式选择题 -->
+<div class="quiz-question" id="q5">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    以下哪个情形适合用几何概型而不是古典概型？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(5, 0)">A. 从一副扑克牌中随机抽一张</div>
+    <div class="opt" onclick="checkChoice(5, 1)">B. 从一个装有 5 个球的袋中随机摸一个球</div>
+    <div class="opt" onclick="checkChoice(5, 2)">C. 在 [0, 10] 区间上随机取一个实数</div>
+    <div class="opt" onclick="checkChoice(5, 3)">D. 掷一颗骰子</div>
+  </div>
+  <div class="explain" id="explain5">
+    <strong>解析：</strong>A、B、D 的结果都是有限的，适用古典概型。C 中 [0, 10] 区间上有无穷多个实数，适用几何概型。选 C。
+  </div>
+</div>
+
+<div class="quiz-question" id="q6">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    在半径为 R 的圆内随机取一点，该点到圆心的距离小于 R/2 的概率是多少？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(6, 0)">A. 1/2</div>
+    <div class="opt" onclick="checkChoice(6, 1)">B. 1/4</div>
+    <div class="opt" onclick="checkChoice(6, 2)">C. 1/8</div>
+    <div class="opt" onclick="checkChoice(6, 3)">D. 1/16</div>
+  </div>
+  <div class="explain" id="explain6">
+    <strong>解析：</strong>这是面积比问题。半径为 R/2 的小圆面积 = &pi;(R/2)&sup2; = &pi;R&sup2;/4，大圆面积 = &pi;R&sup2;。P = (&pi;R&sup2;/4) / (&pi;R&sup2;) = <strong>1/4</strong>。选 B。
+  </div>
+</div>
+
+<!-- ============================== 四、条件概率与乘法公式 ============================== -->
+<section>
+<h2>四、条件概率与乘法公式</h2>
+
+<h3>先看一个问题</h3>
+<div class="example">
+  <p><strong>问题：</strong>某班有 40 名学生，其中男生 24 人，女生 16 人。戴眼镜的有 12 人，其中男生戴眼镜的有 8 人。已知抽到一名男生，求他是戴眼镜的概率。</p>
+  <p class="step"><strong>思考：</strong>题目说"已知抽到一名男生"，这意味着我们的范围缩小到了 24 名男生。在这 24 人中，有 8 人戴眼镜。</p>
+  <p class="step">所以要求的概率 = 8/24 = <strong>1/3</strong>。</p>
+  <p class="step">这个概率就是在"已知是男生"这个条件下的概率，记作 P(B|A)，其中 A 表示"抽到男生"，B 表示"戴眼镜"。</p>
+</div>
+
+<h3>引出条件概率公式</h3>
+<p>上面的计算可以写成：P(B|A) = 8/24 = (8/40) / (24/40) = P(A &cap; B) / P(A)。</p>
+
+<div class="definition">
+  <p><strong>条件概率</strong>：在事件 A 已发生的条件下，事件 B 发生的概率记为 P(B|A)，且</p>
+  <p style="text-align:center;font-size:1.3em;font-weight:bold;margin:10px 0;">
+    P(B|A) = P(A &cap; B) / P(A) &emsp;（其中 P(A) &gt; 0）
+  </p>
+</div>
+
+<div class="hint">
+  <strong>直观理解：</strong>条件概率就是"缩小样本空间"——已知 A 发生了，那么新的样本空间就是 A，B 发生的可能性就是 A 和 B 同时发生的部分占 A 的比例。
+</div>
+
+<h3>乘法公式</h3>
+<p>由条件概率公式变形立即得到：</p>
+
+<div class="definition">
+  <p><strong>乘法公式</strong>：</p>
+  <p style="text-align:center;font-size:1.3em;font-weight:bold;margin:10px 0;">
+    P(A &cap; B) = P(A) &middot; P(B|A)
+  </p>
+  <p style="text-align:center;">即：两个事件同时发生的概率 = 第一个事件发生的概率 &times; 在第一个事件发生的条件下第二个事件发生的概率。</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>一个袋中有 5 个红球和 3 个白球，不放回地依次摸两个球。求第一个摸到红球且第二个也摸到红球的概率。</p>
+  <p class="step"><strong>分析：</strong></p>
+  <p class="step">设 A = "第一次摸到红球"，B = "第二次摸到红球"。</p>
+  <p class="step">P(A) = 5/8。</p>
+  <p class="step">在第一次已摸到红球的条件下，袋中还剩 4 红 3 白，所以 P(B|A) = 4/7。</p>
+  <p class="step">由乘法公式：P(A &cap; B) = (5/8) &times; (4/7) = 20/56 = <strong>5/14</strong>。</p>
+</div>
+</section>
+
+<!-- 知识点7 交互式选择题 -->
+<div class="quiz-question" id="q7">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    某班 60% 是女生，女生中 30% 戴眼镜。随机选一名女生，她戴眼镜的概率是多少？<br>
+    <span style="font-size:0.85em;color:#666;">（提示：这就是条件概率 P(戴眼镜|女生)）</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(7, 0)">A. 0.18</div>
+    <div class="opt" onclick="checkChoice(7, 1)">B. 0.30</div>
+    <div class="opt" onclick="checkChoice(7, 2)">C. 0.50</div>
+    <div class="opt" onclick="checkChoice(7, 3)">D. 0.60</div>
+  </div>
+  <div class="explain" id="explain7">
+    <strong>解析：</strong>题目直接给出了"女生中 30% 戴眼镜"，即 P(戴眼镜|女生) = 30% = 0.30。选 B。注意这里不需要乘以 60%，因为"已知是女生"已经缩小了范围。
+  </div>
+</div>
+
+<div class="quiz-question" id="q8">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    一个袋中有 4 个红球和 2 个白球，不放回地依次摸两个球。求两次都摸到红球的概率。
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(8, 0)">A. 4/9</div>
+    <div class="opt" onclick="checkChoice(8, 1)">B. 2/5</div>
+    <div class="opt" onclick="checkChoice(8, 2)">C. 1/3</div>
+    <div class="opt" onclick="checkChoice(8, 3)">D. 1/2</div>
+  </div>
+  <div class="explain" id="explain8">
+    <strong>解析：</strong>P(第一次红) = 4/6 = 2/3。在第一次红条件下，剩 3 红 2 白，P(第二次红|第一次红) = 3/5。由乘法公式：P = (2/3) &times; (3/5) = <strong>2/5</strong> = 0.4。选 B。
+  </div>
+</div>
+
+<!-- ============================== 五、离散型随机变量及其分布列 ============================== -->
+<section>
+<h2>五、离散型随机变量及其分布列</h2>
+
+<h3>先看一个问题</h3>
+<div class="example">
+  <p><strong>问题：</strong>掷一颗骰子，出现的点数我们无法事先确定。但我们希望用一个<strong>变量</strong>来描述这个随机结果。</p>
+  <p class="step">令 X = "掷骰子出现的点数"，则 X 可以取 1, 2, 3, 4, 5, 6 中的任意一个值，取每个值的概率都是 1/6。</p>
+  <p class="step">X 就是一个<strong>随机变量</strong>——它的取值是随机的，但每个取值有确定的概率。</p>
+</div>
+
+<h3>引出随机变量</h3>
+<div class="definition">
+  <p><strong>随机变量</strong>：把随机试验的结果用实数表示的变量。通常用大写字母 X, Y, Z 等表示。</p>
+  <p><strong>离散型随机变量</strong>：取值可以一一列举（有限个或可数无限个）的随机变量。</p>
+  <p>掷骰子的点数 X 是离散型的（取值 1~6）；"掷到正面朝上所需次数"也是离散型的（可取 1, 2, 3, ...）。</p>
+</div>
+
+<h3>分布列</h3>
+<p>要完整描述一个离散型随机变量，需要知道它取每个值的概率。这就是<strong>分布列</strong>。</p>
+
+<div class="definition">
+  <p><strong>分布列</strong>：设离散型随机变量 X 的所有可能取值为 x<sub>1</sub>, x<sub>2</sub>, ..., x<sub>n</sub>，且 P(X = x<sub>i</sub>) = p<sub>i</sub>，则称</p>
+  <p style="text-align:center;font-size:1.2em;font-weight:bold;margin:10px 0;">
+    P(X = x<sub>i</sub>) = p<sub>i</sub> &emsp; (i = 1, 2, ..., n)
+  </p>
+  <p>为 X 的<strong>分布列</strong>。分布列满足：</p>
+  <p style="text-align:center;">（1）p<sub>i</sub> &ge; 0 &emsp;（2）p<sub>1</sub> + p<sub>2</sub> + ... + p<sub>n</sub> = <strong>1</strong></p>
+</div>
+
+<div class="hint">
+  <strong>为什么概率和要为 1？</strong>因为随机变量<strong>一定</strong>会取到某个值，所有可能取值的概率加起来就是"必然事件"的概率，即 1。
+</div>
+
+<div class="example">
+  <p><strong>例（2 次投篮）：</strong>某篮球运动员投篮命中率为 0.6，独立投篮 2 次。设 X = "命中次数"，求 X 的分布列。</p>
+  <p class="step"><strong>分析：</strong>X 的可能取值为 0, 1, 2。</p>
+  <p class="step">P(X=0) = (1-0.6) &times; (1-0.6) = 0.4 &times; 0.4 = 0.16</p>
+  <p class="step">P(X=1) = 0.6 &times; 0.4 + 0.4 &times; 0.6 = 0.48</p>
+  <p class="step">P(X=2) = 0.6 &times; 0.6 = 0.36</p>
+  <p class="step">检验：0.16 + 0.48 + 0.36 = <strong>1</strong> &#10003;</p>
+  <p class="step">分布列为：</p>
+  <table>
+    <tr><th>X</th><td>0</td><td>1</td><td>2</td></tr>
+    <tr><th>P</th><td>0.16</td><td>0.48</td><td>0.36</td></tr>
+  </table>
+</div>
+</section>
+
+<!-- 知识点9 交互式选择题 -->
+<div class="quiz-question" id="q9">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    以下哪个量是离散型随机变量？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(9, 0)">A. 某市一天的气温</div>
+    <div class="opt" onclick="checkChoice(9, 1)">B. 抛一枚硬币 3 次正面朝上的次数</div>
+    <div class="opt" onclick="checkChoice(9, 2)">C. 某人的身高</div>
+    <div class="opt" onclick="checkChoice(9, 3)">D. 公交车到站的时间</div>
+  </div>
+  <div class="explain" id="explain9">
+    <strong>解析：</strong>离散型随机变量的取值可以一一列举。A、C、D 的取值是连续的（不可列），B 的取值只能是 0, 1, 2, 3（可列），所以选 B。
+  </div>
+</div>
+
+<div class="quiz-question" id="q10">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    一个盒中有 3 个红球和 1 个白球，随机摸一个球。设 X = 0 表示摸到白球，X = 1 表示摸到红球。则 P(X=0) = ?
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(10, 0)">A. 3/4</div>
+    <div class="opt" onclick="checkChoice(10, 1)">B. 1/2</div>
+    <div class="opt" onclick="checkChoice(10, 2)">C. 1/4</div>
+    <div class="opt" onclick="checkChoice(10, 3)">D. 1</div>
+  </div>
+  <div class="explain" id="explain10">
+    <strong>解析：</strong>总球数 4 个，白球 1 个。P(摸到白球) = P(X=0) = 1/4。选 C。
+  </div>
+</div>
+
+<!-- ============================== 六、二项分布 ============================== -->
+<section>
+<h2>六、二项分布</h2>
+
+<h3>先看一个问题</h3>
+<div class="example">
+  <p><strong>问题：</strong>抛一枚均匀硬币 5 次，恰好有 3 次正面朝上的概率是多少？</p>
+  <p class="step"><strong>思考：</strong>每次抛硬币是<strong>独立</strong>的，正面概率 p = 0.5。</p>
+  <p class="step">先想一个特定的序列：正正正反反，概率为 0.5 &times; 0.5 &times; 0.5 &times; 0.5 &times; 0.5 = 0.5<sup>5</sup>。</p>
+  <p class="step">但"恰好 3 次正面"对应的序列不止一种——我们需要从 5 个位置中选 3 个放正面，共有 C(5,3) 种不同的序列。</p>
+  <p class="step">所以 P = C(5,3) &times; 0.5<sup>3</sup> &times; (1-0.5)<sup>2</sup> = 10 &times; 0.125 &times; 0.25 = <strong>0.3125</strong>。</p>
+</div>
+
+<h3>引出二项分布</h3>
+<p>上述问题就是典型的<strong>n 次独立重复试验</strong>（也叫伯努利试验），它具有以下特征：</p>
+<ul>
+  <li>每次试验只有两种结果：成功/失败（正面/反面、命中/未命中）</li>
+  <li>每次试验成功的概率 p 相同</li>
+  <li>各次试验相互独立</li>
+</ul>
+
+<div class="definition">
+  <p><strong>二项分布</strong>：在 n 次独立重复试验中，设每次成功的概率为 p，以 X 表示成功的次数，则 X 的分布列为：</p>
+  <p style="text-align:center;font-size:1.2em;font-weight:bold;margin:10px 0;">
+    P(X = k) = C(n, k) &middot; p<sup>k</sup> &middot; (1 &minus; p)<sup>n &minus; k</sup>
+  </p>
+  <p style="text-align:center;">其中 k = 0, 1, 2, ..., n</p>
+  <p style="text-align:center;margin-top:8px;">记作 X ~ B(n, p)，读作"X 服从参数为 n, p 的二项分布"。</p>
+</div>
+
+<div class="hint">
+  <strong>公式理解：</strong>C(n,k) 负责"挑位置"——从 n 次试验中选出哪 k 次成功；p<sup>k</sup> 是 k 次成功的概率；(1-p)<sup>n-k</sup> 是其余 n-k 次失败的概率。
+</div>
+
+<div class="example">
+  <p><strong>例（投篮命中率）：</strong>某球员投篮命中率 p = 0.7，独立投篮 4 次。求恰好命中 2 次的概率。</p>
+  <p class="step"><strong>分析：</strong>X ~ B(4, 0.7)</p>
+  <p class="step">P(X=2) = C(4,2) &times; 0.7&sup2; &times; (1-0.7)<sup>2</sup></p>
+  <p class="step">= 6 &times; 0.49 &times; 0.09 = 6 &times; 0.0441 = <strong>0.2646</strong></p>
+</div>
+</section>
+
+<!-- 知识点11 交互式选择题 -->
+<div class="quiz-question" id="q11">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    抛一枚均匀硬币 6 次，恰好有 4 次正面朝上的概率是多少？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(11, 0)">A. C(6,4) &times; (1/2)<sup>4</sup> &times; (1/2)<sup>2</sup></div>
+    <div class="opt" onclick="checkChoice(11, 1)">B. C(6,4) &times; (1/2)<sup>6</sup></div>
+    <div class="opt" onclick="checkChoice(11, 2)">C. (1/2)<sup>4</sup></div>
+    <div class="opt" onclick="checkChoice(11, 3)">D. C(6,4) &times; (1/2)<sup>4</sup></div>
+  </div>
+  <div class="explain" id="explain11">
+    <strong>解析：</strong>二项分布公式：P(X=k) = C(n,k) p<sup>k</sup> (1-p)<sup>n-k</sup>。这里 p = 1/2，所以 P = C(6,4) &times; (1/2)<sup>4</sup> &times; (1/2)<sup>2</sup> = C(6,4) &times; (1/2)<sup>6</sup>。A 和 B 实际上等价，但 A 更完整地体现了公式结构。选 A。
+  </div>
+</div>
+
+<div class="quiz-question" id="q12">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    某射手打靶命中率为 0.8，独立射击 3 次。恰好命中 0 次的概率是？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(12, 0)">A. 0.008</div>
+    <div class="opt" onclick="checkChoice(12, 1)">B. 0.512</div>
+    <div class="opt" onclick="checkChoice(12, 2)">C. 0.096</div>
+    <div class="opt" onclick="checkChoice(12, 3)">D. 0.384</div>
+  </div>
+  <div class="explain" id="explain12">
+    <strong>解析：</strong>命中 0 次即全部不中。P = C(3,0) &times; 0.8<sup>0</sup> &times; (1-0.8)<sup>3</sup> = 1 &times; 1 &times; 0.2<sup>3</sup> = <strong>0.008</strong>。选 A。
+  </div>
+</div>
+
+<!-- ============================== 七、均值和方差 ============================== -->
+<section>
+<h2>七、均值和方差</h2>
+
+<h3>先看一个问题</h3>
+<div class="example">
+  <p><strong>问题（赌博游戏）：</strong>一个游戏规则如下：掷一颗骰子，出现几点你就赢几元（比如掷出 3 点赢 3 元）。但每次参加需付 3.5 元。这个游戏公不公平？</p>
+  <p class="step"><strong>思考：</strong>虽然每次结果不确定，但我们可以计算"平均"每局赢多少钱。</p>
+  <p class="step">X = "每局赢的钱"，可能取值 1, 2, 3, 4, 5, 6，每个概率 1/6。</p>
+  <p class="step">"平均"每局赢的钱 = 1&times;1/6 + 2&times;1/6 + 3&times;1/6 + 4&times;1/6 + 5&times;1/6 + 6&times;1/6 = 3.5 元。</p>
+  <p class="step">付 3.5 元参加，平均赢回 3.5 元——这个游戏是<strong>公平</strong>的！</p>
+</div>
+
+<h3>引出均值（数学期望）</h3>
+
+<div class="definition">
+  <p><strong>均值（数学期望）</strong>：设离散型随机变量 X 的分布列为 P(X = x<sub>i</sub>) = p<sub>i</sub>，则</p>
+  <p style="text-align:center;font-size:1.3em;font-weight:bold;margin:10px 0;">
+    E(X) = x<sub>1</sub>&middot;p<sub>1</sub> + x<sub>2</sub>&middot;p<sub>2</sub> + ... + x<sub>n</sub>&middot;p<sub>n</sub> = &sum; x<sub>i</sub> &middot; p<sub>i</sub>
+  </p>
+  <p style="text-align:center;">称为 X 的<strong>均值</strong>或<strong>数学期望</strong>，它反映随机变量取值的"平均水平"。</p>
+</div>
+
+<h3>引出方差</h3>
+<p>均值告诉我们"平均是多少"，但没告诉我们"波动有多大"。两个随机变量可能有相同的均值，但一个稳定、一个波动很大。方差就是衡量波动大小的指标。</p>
+
+<div class="example">
+  <p><strong>为什么方差用平方？</strong>考虑两个分布：</p>
+  <p class="step">甲：总是得 5 元（稳定），乙：一半概率得 0 元、一半概率得 10 元（波动大）。</p>
+  <p class="step">均值都是 5 元，但乙显然风险更大。</p>
+  <p class="step">如果用 |X - E(X)| 的平均值来度量波动，甲为 0，乙为 5。</p>
+  <p class="step">但绝对值数学上不好处理，所以用<strong>平方</strong>——放大偏离，且可导。</p>
+</div>
+
+<div class="definition">
+  <p><strong>方差</strong>：</p>
+  <p style="text-align:center;font-size:1.2em;font-weight:bold;margin:10px 0;">
+    D(X) = &sum; (x<sub>i</sub> &minus; E(X))&sup2; &middot; p<sub>i</sub>
+  </p>
+  <p style="text-align:center;">方差越大，说明 X 的取值越分散（波动越大）。</p>
+  <p style="text-align:center;margin-top:6px;">标准差 &sigma;(X) = &radic;<span style="border-top:1px solid #333;">D(X)</span>，与 X 的单位相同，更直观。</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>接上面的掷骰子游戏，X = 赢的钱。</p>
+  <p class="step">E(X) = 3.5</p>
+  <p class="step">D(X) = (1-3.5)&sup2;&times;1/6 + (2-3.5)&sup2;&times;1/6 + (3-3.5)&sup2;&times;1/6 + (4-3.5)&sup2;&times;1/6 + (5-3.5)&sup2;&times;1/6 + (6-3.5)&sup2;&times;1/6</p>
+  <p class="step">= (6.25 + 2.25 + 0.25 + 0.25 + 2.25 + 6.25) / 6 = 17.5 / 6 &asymp; <strong>2.92</strong></p>
+  <p class="step">标准差 &sigma; = &radic;2.92 &asymp; <strong>1.71</strong>（元）</p>
+</div>
+</section>
+
+<!-- 知识点13 交互式选择题 -->
+<div class="quiz-question" id="q13">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    随机变量 X 的分布列为 P(X=0)=0.4, P(X=1)=0.6。求 E(X)。
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(13, 0)">A. 0.4</div>
+    <div class="opt" onclick="checkChoice(13, 1)">B. 0.5</div>
+    <div class="opt" onclick="checkChoice(13, 2)">C. 0.6</div>
+    <div class="opt" onclick="checkChoice(13, 3)">D. 1.0</div>
+  </div>
+  <div class="explain" id="explain13">
+    <strong>解析：</strong>E(X) = 0 &times; 0.4 + 1 &times; 0.6 = <strong>0.6</strong>。选 C。
+  </div>
+</div>
+
+<div class="quiz-question" id="q14">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    接上题，X 的方差 D(X) 是多少？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(14, 0)">A. 0.24</div>
+    <div class="opt" onclick="checkChoice(14, 1)">B. 0.60</div>
+    <div class="opt" onclick="checkChoice(14, 2)">C. 0.40</div>
+    <div class="opt" onclick="checkChoice(14, 3)">D. 0.16</div>
+  </div>
+  <div class="explain" id="explain14">
+    <strong>解析：</strong>E(X)=0.6。D(X) = (0-0.6)&sup2;&times;0.4 + (1-0.6)&sup2;&times;0.6 = 0.36&times;0.4 + 0.16&times;0.6 = 0.144 + 0.096 = <strong>0.24</strong>。选 A。
+  </div>
+</div>
+
+<!-- ============================== 八、正态分布 ============================== -->
+<section>
+<h2>八、正态分布</h2>
+
+<h3>先看一个问题</h3>
+<div class="example">
+  <p><strong>问题：</strong>随机测量一个班级 50 名同学的身高，你会发现大部分人的身高集中在某个值附近，特别高和特别矮的人都很少。如果画出身高的分布直方图，它大致呈现一个"钟形"。</p>
+  <p class="step">这个钟形曲线就是<strong>正态分布</strong>的密度曲线——自然界和社会中大量现象都服从这种分布。</p>
+</div>
+
+<h3>正态分布的特征</h3>
+
+<div class="definition">
+  <p><strong>正态分布</strong>：如果随机变量 X 的概率密度函数为</p>
+  <p style="text-align:center;font-size:1.1em;margin:10px 0;">
+    f(x) = <span style="font-size:1.2em;">1</span> / (&sigma;&radic;<span style="border-top:1px solid #333;">2&pi;</span>) &middot; e<sup>&minus;(x&minus;&mu;)&sup2; / (2&sigma;&sup2;)</sup>
+  </p>
+  <p style="text-align:center;">则称 X 服从正态分布，记作 X ~ N(&mu;, &sigma;&sup2;)。</p>
+</div>
+
+<p>正态分布曲线具有以下特征：</p>
+<ul>
+  <li><strong>钟形</strong>：中间高、两边低</li>
+  <li><strong>对称</strong>：关于直线 x = &mu; 对称</li>
+  <li><strong>&mu; 决定位置</strong>：&mu; 是均值，曲线中心就在 x = &mu; 处</li>
+  <li><strong>&sigma; 决定形状</strong>：&sigma; 是标准差，&sigma; 越大曲线越矮胖（数据分散），&sigma; 越小曲线越高瘦（数据集中）</li>
+</ul>
+
+<h3>3&sigma; 原则</h3>
+<p>对于正态分布 X ~ N(&mu;, &sigma;&sup2;)，以下概率是固定的：</p>
+<table>
+  <tr><th>区间</th><th>概率</th><th>意义</th></tr>
+  <tr><td>(&mu; &minus; &sigma;, &mu; + &sigma;)</td><td>约 68.27%</td><td>约 68% 的数据在 1 个标准差内</td></tr>
+  <tr><td>(&mu; &minus; 2&sigma;, &mu; + 2&sigma;)</td><td>约 95.45%</td><td>约 95% 的数据在 2 个标准差内</td></tr>
+  <tr><td>(&mu; &minus; 3&sigma;, &mu; + 3&sigma;)</td><td>约 99.73%</td><td>几乎全部数据在 3 个标准差内</td></tr>
+</table>
+
+<div class="hint">
+  <strong>3&sigma; 原则的应用：</strong>在质量控制中，如果某个数据点超出 &mu; &plusmn; 3&sigma; 的范围，说明这个数据极不寻常（概率不到 0.3%），可能是异常值或出现了问题。
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>某校学生身高 X ~ N(170, 36)（单位：cm），即 &mu; = 170，&sigma; = 6。求身高在 158 cm 到 182 cm 之间的学生比例。</p>
+  <p class="step"><strong>分析：</strong>158 = 170 &minus; 12 = &mu; &minus; 2&sigma;，182 = 170 + 12 = &mu; + 2&sigma;。</p>
+  <p class="step">根据 3&sigma; 原则，在 (&mu; &minus; 2&sigma;, &mu; + 2&sigma;) 内的概率约为 <strong>95.45%</strong>。</p>
+</div>
+</section>
+
+<!-- 知识点15 交互式选择题 -->
+<div class="quiz-question" id="q15">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    对于正态分布 N(&mu;, &sigma;&sup2;)，以下说法错误的是？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(15, 0)">A. 曲线关于 x = &mu; 对称</div>
+    <div class="opt" onclick="checkChoice(15, 1)">B. &sigma; 越大，曲线越"矮胖"</div>
+    <div class="opt" onclick="checkChoice(15, 2)">C. 数据在 (&mu;-3&sigma;, &mu;+3&sigma;) 内的概率约 95%</div>
+    <div class="opt" onclick="checkChoice(15, 3)">D. &mu; 决定曲线的中心位置</div>
+  </div>
+  <div class="explain" id="explain15">
+    <strong>解析：</strong>3&sigma; 原则中，(&mu;-3&sigma;, &mu;+3&sigma;) 内的概率约 99.73%，不是 95%。95% 对应的是 (&mu;-2&sigma;, &mu;+2&sigma;)。选 C。
+  </div>
+</div>
+
+<div class="quiz-question" id="q16">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    某产品重量 X ~ N(500, 25)（单位：g），即 &mu;=500, &sigma;=5。根据 3&sigma; 原则，重量在 495g 到 505g 之间的产品约占多少？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(16, 0)">A. 68.27%</div>
+    <div class="opt" onclick="checkChoice(16, 1)">B. 95.45%</div>
+    <div class="opt" onclick="checkChoice(16, 2)">C. 99.73%</div>
+    <div class="opt" onclick="checkChoice(16, 3)">D. 50%</div>
+  </div>
+  <div class="explain" id="explain16">
+    <strong>解析：</strong>495 = 500-5 = &mu;-&sigma;，505 = 500+5 = &mu;+&sigma;。在 (&mu;-&sigma;, &mu;+&sigma;) 内的概率约 <strong>68.27%</strong>。选 A。
+  </div>
+</div>
+
+<!-- ============================== 九、综合练习 ============================== -->
+<section>
+<h2>九、综合练习</h2>
+<p>以下 5 道综合题覆盖了本节全部知识点，动手试试吧！</p>
+
+<div class="score-panel">
+  得分：<span class="score-num" id="totalScore">0</span> / 50
+  <button class="btn-reset" onclick="resetAll()">重置全部</button>
+</div>
+
+<!-- 综合题1 -->
+<div class="comp-exercise" id="c1">
+  <h4>练习 1（10 分）</h4>
+  <p>一个袋中有 5 个红球和 3 个白球，除颜色外完全相同。</p>
+  <p>(1) 随机摸 1 个球，摸到红球的概率是多少？（填分数，如 3/5）</p>
+  <p>(2) 不放回地依次摸 2 个球，两次都摸到红球的概率是多少？（填分数）</p>
+
+  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
+    <p>请回答 (1) 的答案：<input class="fill-input" id="c1a1" type="text" placeholder="分数">
+      <button class="btn-check" onclick="checkFill('c1a1', '5/8')">检查</button></p>
+    <p>请回答 (2) 的答案：<input class="fill-input" id="c1a2" type="text" placeholder="分数">
+      <button class="btn-check" onclick="checkFill('c1a2', '5/14')">检查</button></p>
+  </div>
+
+  <div class="answer-box" id="c1answer">
+    <strong>解析：</strong><br>
+    (1) 古典概型：总球数 8，红球 5，P = 5/8。<br>
+    (2) 条件概率 + 乘法公式：P(第一次红) = 5/8，在第一次红的条件下剩 4 红 3 白，P(第二次红|第一次红) = 4/7。<br>
+    &emsp;P(两次都红) = 5/8 &times; 4/7 = 20/56 = <strong>5/14</strong>。
+  </div>
+  <button class="btn-toggle" onclick="toggleAnswer('c1answer')">显示解析</button>
+</div>
+
+<!-- 综合题2 -->
+<div class="comp-exercise" id="c2">
+  <h4>练习 2（10 分）</h4>
+  <p>某篮球运动员罚球命中率为 0.6，独立罚球 3 次。设 X 为命中次数。</p>
+  <p>(1) X 服从什么分布？参数是什么？</p>
+  <p>(2) 求 P(X = 2)（精确到 0.001）。</p>
+  <p>(3) 求 E(X) 和 D(X)。</p>
+
+  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
+    <p>(1) X ~ B(n, p)，n = <input class="fill-input" id="c2a1" type="text" placeholder="n" style="width:60px;">，p = <input class="fill-input" id="c2a2" type="text" placeholder="p" style="width:60px;">
+      <button class="btn-check" onclick="checkFillTuple('c2', ['c2a1','c2a2'], ['3','0.6'])">检查</button></p>
+    <p>(2) P(X=2) = <input class="fill-input" id="c2a3" type="text" placeholder="数字">
+      <button class="btn-check" onclick="checkFill('c2a3', '0.432')">检查</button></p>
+    <p>(3) E(X) = <input class="fill-input" id="c2a4" type="text" placeholder="数字" style="width:60px;">，D(X) = <input class="fill-input" id="c2a5" type="text" placeholder="数字" style="width:60px;">
+      <button class="btn-check" onclick="checkFillTuple('c2b', ['c2a4','c2a5'], ['1.8','0.72'])">检查</button></p>
+  </div>
+
+  <div class="answer-box" id="c2answer">
+    <strong>解析：</strong><br>
+    (1) X ~ B(3, 0.6)，即 n = 3, p = 0.6。<br>
+    (2) P(X=2) = C(3,2) &times; 0.6&sup2; &times; 0.4&sup1; = 3 &times; 0.36 &times; 0.4 = <strong>0.432</strong>。<br>
+    (3) 二项分布均值公式 E(X) = np = 3 &times; 0.6 = <strong>1.8</strong>。<br>
+    &emsp;二项分布方差公式 D(X) = np(1-p) = 3 &times; 0.6 &times; 0.4 = <strong>0.72</strong>。
+  </div>
+  <button class="btn-toggle" onclick="toggleAnswer('c2answer')">显示解析</button>
+</div>
+
+<!-- 综合题3 -->
+<div class="comp-exercise" id="c3">
+  <h4>练习 3（10 分）</h4>
+  <p>在区间 [0, 8] 上随机取一个实数 x。</p>
+  <p>(1) 该试验是什么概型？</p>
+  <p>(2) 求 x &le; 3 的概率。</p>
+  <p>(3) 求 2 &le; x &le; 6 的概率。</p>
+
+  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
+    <p>(1) 概型：<input class="fill-input" id="c3a0" type="text" placeholder="几何/古典" style="width:100px;">
+      <button class="btn-check" onclick="checkFill('c3a0', '几何')">检查</button></p>
+    <p>(2) P(x &le; 3) = <input class="fill-input" id="c3a1" type="text" placeholder="分数">
+      <button class="btn-check" onclick="checkFill('c3a1', '3/8')">检查</button></p>
+    <p>(3) P(2 &le; x &le; 6) = <input class="fill-input" id="c3a2" type="text" placeholder="分数">
+      <button class="btn-check" onclick="checkFill('c3a2', '1/2')">检查</button></p>
+  </div>
+
+  <div class="answer-box" id="c3answer">
+    <strong>解析：</strong><br>
+    (1) 样本空间 [0, 8] 有无穷多个点，是<strong>几何概型</strong>。<br>
+    (2) P(x &le; 3) = (3-0) / (8-0) = <strong>3/8</strong>。<br>
+    (3) P(2 &le; x &le; 6) = (6-2) / (8-0) = 4/8 = <strong>1/2</strong>。
+  </div>
+  <button class="btn-toggle" onclick="toggleAnswer('c3answer')">显示解析</button>
+</div>
+
+<!-- 综合题4 -->
+<div class="comp-exercise" id="c4">
+  <h4>练习 4（10 分）</h4>
+  <p>某射击运动员命中率为 0.7，独立射击 5 次。</p>
+  <p>(1) 求恰好命中 3 次的概率（精确到 0.001）。</p>
+  <p>(2) 求至少命中 1 次的概率（精确到 0.001）。</p>
+
+  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
+    <p>(1) P(X=3) = <input class="fill-input" id="c4a1" type="text" placeholder="0.xxx">
+      <button class="btn-check" onclick="checkFill('c4a1', '0.309')">检查</button></p>
+    <p>(2) P(X &ge; 1) = <input class="fill-input" id="c4a2" type="text" placeholder="0.xxx">
+      <button class="btn-check" onclick="checkFill('c4a2', '0.998')">检查</button></p>
+  </div>
+
+  <div class="answer-box" id="c4answer">
+    <strong>解析：</strong><br>
+    (1) X ~ B(5, 0.7)，P(X=3) = C(5,3) &times; 0.7&sup3; &times; 0.3&sup2; = 10 &times; 0.343 &times; 0.09 = <strong>0.309</strong>。<br>
+    (2) P(X &ge; 1) = 1 &minus; P(X=0) = 1 &minus; C(5,0) &times; 0.7&sup0; &times; 0.3&sup5; = 1 &minus; 0.3&sup5; = 1 &minus; 0.00243 = <strong>0.998</strong>（精确到 0.001）。
+  </div>
+  <button class="btn-toggle" onclick="toggleAnswer('c4answer')">显示解析</button>
+</div>
+
+<!-- 综合题5 -->
+<div class="comp-exercise" id="c5">
+  <h4>练习 5（10 分）</h4>
+  <p>某校学生数学竞赛成绩近似服从正态分布 N(75, 100)（&mu;=75, &sigma;=10）。</p>
+  <p>(1) 成绩在 65 分到 85 分之间的学生大约占多少百分比？</p>
+  <p>(2) 成绩在 55 分到 95 分之间的学生大约占多少百分比？</p>
+
+  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
+    <p>(1) 百分比（填百分数，如 68.27%）：<input class="fill-input" id="c5a1" type="text" placeholder="如 68.27%" style="width:120px;">
+      <button class="btn-check" onclick="checkFill('c5a1', '68.27%')">检查</button></p>
+    <p>(2) 百分比：<input class="fill-input" id="c5a2" type="text" placeholder="如 95.45%" style="width:120px;">
+      <button class="btn-check" onclick="checkFill('c5a2', '95.45%')">检查</button></p>
+  </div>
+
+  <div class="answer-box" id="c5answer">
+    <strong>解析：</strong><br>
+    (1) 65 = 75 &minus; 10 = &mu; &minus; &sigma;，85 = 75 + 10 = &mu; + &sigma;。根据 3&sigma; 原则，在 (&mu;&minus;&sigma;, &mu;+&sigma;) 内的概率约 <strong>68.27%</strong>。<br>
+    (2) 55 = 75 &minus; 20 = &mu; &minus; 2&sigma;，95 = 75 + 20 = &mu; + 2&sigma;。在 (&mu;&minus;2&sigma;, &mu;+2&sigma;) 内的概率约 <strong>95.45%</strong>。
+  </div>
+  <button class="btn-toggle" onclick="toggleAnswer('c5answer')">显示解析</button>
+</div>
+
+</section>
+
+</article>
+
+<script>
+// ============================================================
+// 抛硬币模拟
+// ============================================================
+var coinTotal = 0;
+var coinHeads = 0;
+
+function simCoin(n) {
+  for (var i = 0; i < n; i++) {
+    coinTotal++;
+    if (Math.random() < 0.5) coinHeads++;
+  }
+  updateCoinDisplay();
+}
+
+function resetCoin() {
+  coinTotal = 0;
+  coinHeads = 0;
+  updateCoinDisplay();
+}
+
+function updateCoinDisplay() {
+  var resultDiv = document.getElementById("coinResult");
+  var freqSpan = document.getElementById("coinFreq");
+  var bar = document.getElementById("coinBar");
+  if (coinTotal === 0) {
+    resultDiv.textContent = "点击按钮开始模拟";
+    freqSpan.textContent = "0.00";
+    bar.style.width = "2px";
+    return;
+  }
+  var freq = (coinHeads / coinTotal).toFixed(4);
+  var seq = "";
+  // Show last up to 20 results as H/T sequence
+  resultDiv.innerHTML = "已抛 <strong>" + coinTotal + "</strong> 次，正面 <strong>" + coinHeads + "</strong> 次（" + coinHeads + "/" + coinTotal + " = " + freq + "）";
+  freqSpan.textContent = freq;
+  bar.style.width = (freq * 100) + "%";
+}
+
+// ============================================================
+// 选择题交互
+// ============================================================
+var answered = {};
+var totalScore = 0;
+
+function checkChoice(qid, idx) {
+  var answers = {1:1, 2:2, 3:1, 4:0, 5:2, 6:1, 7:1, 8:1, 9:1, 10:2, 11:0, 12:0, 13:2, 14:0, 15:2, 16:0};
+  if (answered[qid]) return;
+
+  var qDiv = document.getElementById("q" + qid);
+  var opts = qDiv.querySelectorAll(".opt");
+  var explain = document.getElementById("explain" + qid);
+
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add("disabled");
+  }
+
+  var correct = answers[qid];
+  if (idx === correct) {
+    opts[idx].classList.add("correct-opt");
+    qDiv.classList.add("correct");
+    explain.className = "explain show ok";
+  } else {
+    opts[idx].classList.add("wrong-opt");
+    opts[correct].classList.add("correct-opt");
+    qDiv.classList.add("wrong");
+    explain.className = "explain show fail";
+  }
+
+  answered[qid] = true;
+  updateTotalScore();
+}
+
+// ============================================================
+// 填空题交互（单值）
+// ============================================================
+function checkFill(inputId, correctAnswer) {
+  var input = document.getElementById(inputId);
+  if (input.classList.contains("correct-input") || input.classList.contains("wrong-input")) return;
+
+  var val = input.value.trim();
+  var btn = input.nextElementSibling;
+
+  if (val === correctAnswer) {
+    input.className = "fill-input correct-input";
+  } else {
+    input.className = "fill-input wrong-input";
+  }
+
+  btn.disabled = true;
+  btn.style.opacity = "0.5";
+  updateTotalScore();
+}
+
+// ============================================================
+// 填空题交互（多值元组）
+// ============================================================
+function checkFillTuple(exId, inputIds, correctAnswers) {
+  var allDone = true;
+  for (var i = 0; i < inputIds.length; i++) {
+    var inp = document.getElementById(inputIds[i]);
+    if (inp.classList.contains("correct-input") || inp.classList.contains("wrong-input")) {
+      // already answered, skip
+      continue;
+    }
+    var val = inp.value.trim();
+    if (val === correctAnswers[i]) {
+      inp.className = "fill-input correct-input";
+    } else {
+      inp.className = "fill-input wrong-input";
+    }
+    var btn = inp.nextElementSibling;
+    if (btn && btn.tagName === "BUTTON") {
+      btn.disabled = true;
+      btn.style.opacity = "0.5";
+    }
+  }
+  updateTotalScore();
+}
+
+function updateTotalScore() {
+  var quizScore = 0;
+  for (var i = 1; i <= 16; i++) {
+    if (answered[i]) {
+      var qDiv = document.getElementById("q" + i);
+      if (qDiv && qDiv.classList.contains("correct")) {
+        quizScore++;
+      }
+    }
+  }
+
+  var fillExercises = [
+    { id: "c1", inputs: ["c1a1","c1a2"] },
+    { id: "c2", inputs: ["c2a1","c2a2","c2a3","c2a4","c2a5"] },
+    { id: "c3", inputs: ["c3a0","c3a1","c3a2"] },
+    { id: "c4", inputs: ["c4a1","c4a2"] },
+    { id: "c5", inputs: ["c5a1","c5a2"] }
+  ];
+
+  var fillScore = 0;
+  for (var e = 0; e < fillExercises.length; e++) {
+    var ids = fillExercises[e].inputs;
+    var allAnswered = true;
+    var correctCount = 0;
+    for (var j = 0; j < ids.length; j++) {
+      var inp = document.getElementById(ids[j]);
+      if (!inp || (!inp.classList.contains("correct-input") && !inp.classList.contains("wrong-input"))) {
+        allAnswered = false;
+        break;
+      }
+      if (inp.classList.contains("correct-input")) correctCount++;
+    }
+    if (allAnswered && ids.length > 0) {
+      if (correctCount === ids.length) {
+        fillScore += 10;
+      } else {
+        var perQ = Math.floor(10 / ids.length);
+        fillScore += correctCount * perQ;
+      }
+    }
+  }
+
+  totalScore = quizScore + fillScore;
+  var scoreEl = document.getElementById("totalScore");
+  if (scoreEl) scoreEl.textContent = totalScore;
+}
+
+// ============================================================
+// 综合练习解析切换
+// ============================================================
+function toggleAnswer(id) {
+  var box = document.getElementById(id);
+  box.classList.toggle("show");
+}
+
+// ============================================================
+// 重置
+// ============================================================
+function resetAll() {
+  // Reset quiz questions
+  for (var i = 1; i <= 16; i++) {
+    var qDiv = document.getElementById("q" + i);
+    if (!qDiv) continue;
+    qDiv.className = "quiz-question";
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].className = "opt";
+    }
+    var explain = document.getElementById("explain" + i);
+    if (explain) explain.className = "explain";
+  }
+
+  // Reset fill inputs
+  var allFillIds = ["c1a1","c1a2","c2a1","c2a2","c2a3","c2a4","c2a5","c3a0","c3a1","c3a2","c4a1","c4a2","c5a1","c5a2"];
+  for (var k = 0; k < allFillIds.length; k++) {
+    var inp = document.getElementById(allFillIds[k]);
+    if (inp) {
+      inp.className = "fill-input";
+      inp.value = "";
+      var btn = inp.nextElementSibling;
+      while (btn && btn.tagName !== "BUTTON") {
+        btn = btn.nextElementSibling;
+      }
+      if (btn && btn.tagName === "BUTTON") {
+        btn.disabled = false;
+        btn.style.opacity = "1";
+      }
+    }
+  }
+
+  // Reset answer boxes
+  var answerBoxes = document.querySelectorAll(".answer-box");
+  for (var m = 0; m < answerBoxes.length; m++) {
+    answerBoxes[m].classList.remove("show");
+  }
+
+  // Reset coin simulator
+  resetCoin();
+
+  answered = {};
+  totalScore = 0;
+  var scoreEl = document.getElementById("totalScore");
+  if (scoreEl) scoreEl.textContent = "0";
+}
+</script>
+</body>
+</html>

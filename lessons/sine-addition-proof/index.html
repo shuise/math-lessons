@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sin(α±β) 公式的几何证明</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  .canvas-wrap { text-align: center; margin: 20px 0; }
+  #proofCanvas {
+    border: 1px solid #ddd; border-radius: 10px;
+    background: #fcfcfc; max-width: 100%;
+    cursor: pointer;
+  }
+  .controls {
+    display: flex; justify-content: center; gap: 24px;
+    flex-wrap: wrap; margin: 12px 0;
+  }
+  .control-group {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .control-group label {
+    font-weight: bold; font-size: 0.95em; min-width: 80px;
+  }
+  .control-group input[type="range"] {
+    width: 140px;
+  }
+  .control-group .val {
+    color: #1a73e8; font-weight: bold; min-width: 40px;
+    font-family: 'Times New Roman', serif;
+  }
+  .proof-steps {
+    counter-reset: step;
+    margin: 20px 0;
+  }
+  .proof-step {
+    background: #f8f9fa; border-left: 4px solid #1a73e8;
+    padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0;
+    position: relative; padding-left: 52px;
+  }
+  .proof-step::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute; left: 14px; top: 12px;
+    width: 26px; height: 26px; background: #1a73e8; color: #fff;
+    border-radius: 50%; text-align: center; line-height: 26px;
+    font-size: 0.85em; font-weight: bold;
+  }
+  .proof-step strong { color: #1a73e8; }
+  .proof-step .formula {
+    text-align: center; padding: 6px; margin: 4px 0;
+    font-size: 1.1em; font-family: 'Times New Roman', serif;
+  }
+  .derivation {
+    background: #fff; border: 2px solid #e8e8e8;
+    border-radius: 10px; padding: 16px 20px; margin: 20px 0;
+  }
+  .derivation .dline {
+    padding: 4px 0; text-align: center;
+    font-family: 'Times New Roman', serif; font-size: 1.05em;
+  }
+  .derivation .dline .reason {
+    font-family: -apple-system, sans-serif; color: #888;
+    font-size: 0.85em; margin-left: 8px;
+  }
+  .highlight { background: #fff8e1; padding: 2px 6px; border-radius: 4px; }
+  @media (max-width: 640px) {
+    .control-group input[type="range"] { width: 100px; }
+  }
+</style>
+</head>
+<body>
+<article>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<h1>sin(&alpha; &plusmn; &beta;) 公式的几何证明</h1>
+<p class="tip" style="text-align:center;font-size:1.05em;">核心思想：用单位圆上的<strong>向量点积</strong>推导出余弦差公式，再通过诱导公式得到正弦的和差公式。</p>
+
+<!-- ===== 交互式演示 ===== -->
+<h2>一、交互式演示</h2>
+<p>拖拽下方滑块调整 &alpha; 和 &beta; 的角度，观察单位圆上各点的位置变化。</p>
+<div class="canvas-wrap">
+  <canvas id="proofCanvas" width="640" height="480"></canvas>
+</div>
+<div class="controls">
+  <div class="control-group">
+    <label>&alpha; (角A):</label>
+    <input type="range" id="sliderA" min="5" max="355" value="60">
+    <span class="val" id="valA">60&deg;</span>
+  </div>
+  <div class="control-group">
+    <label>&beta; (角B):</label>
+    <input type="range" id="sliderB" min="5" max="355" value="30">
+    <span class="val" id="valB">30&deg;</span>
+  </div>
+</div>
+
+<!-- ===== 证明过程 ===== -->
+<h2>二、证明过程</h2>
+
+<div class="proof-steps">
+
+<div class="proof-step">
+  <p><strong>第一步：在单位圆上标记关键点</strong></p>
+  <p>考虑单位圆（半径为 1）。在圆上标记三个点：</p>
+  <ul>
+    <li>点 P 在角度 &alpha; 处：<strong>P = (cos &alpha;, sin &alpha;)</strong></li>
+    <li>点 Q 在角度 &beta; 处：<strong>Q = (cos &beta;, sin &beta;)</strong></li>
+    <li>点 R 在角度 (&alpha; &minus; &beta;) 处：<strong>R = (cos(&alpha;&minus;&beta;), sin(&alpha;&minus;&beta;))</strong></li>
+  </ul>
+</div>
+
+<div class="proof-step">
+  <p><strong>第二步：向量 OP 与 OQ 的夹角</strong></p>
+  <p>从原点到 P 和 Q 的向量分别为 OP 和 OQ。它们之间的夹角正是 <strong>|&alpha; &minus; &beta;|</strong>。</p>
+  <p class="formula">&ang;(OP, OQ) = |&alpha; &minus; &beta;|</p>
+</div>
+
+<div class="proof-step">
+  <p><strong>第三步：用点积求 cos(&alpha; &minus; &beta;)</strong></p>
+  <p>两向量的点积有两种等价的计算方式：</p>
+  <p class="formula">(1) OP &middot; OQ = |OP| &middot; |OQ| &middot; cos(&alpha; &minus; &beta;) = 1 &times; 1 &times; cos(&alpha; &minus; &beta;) = <strong>cos(&alpha; &minus; &beta;)</strong></p>
+  <p class="formula">(2) OP &middot; OQ = cos &alpha; &middot; cos &beta; + sin &alpha; &middot; sin &beta;</p>
+  <p>令两者相等，立即得到：</p>
+  <p class="formula" style="background:#e3f2fd;border-radius:8px;padding:10px;font-size:1.2em;color:#1565c0;">
+    <strong>cos(&alpha; &minus; &beta;) = cos &alpha; cos &beta; + sin &alpha; sin &beta;</strong>
+  </p>
+  <p class="hint" style="margin-top:6px;"><strong>关键洞察：</strong>向量点积架起了"几何角度"与"坐标代数"之间的桥梁。左边是角度的余弦，右边是坐标的代数组合——这正是整个证明的起点。</p>
+</div>
+
+<div class="proof-step">
+  <p><strong>第四步：推导 cos(&alpha; + &beta;)</strong></p>
+  <p>在上式中将 &beta; 替换为 &minus;&beta;。因为 cos(&minus;&beta;) = cos &beta;，sin(&minus;&beta;) = &minus;sin &beta;：</p>
+  <p class="formula">cos(&alpha; + &beta;) = cos(&alpha; &minus; (&minus;&beta;)) = cos &alpha; cos(&minus;&beta;) + sin &alpha; sin(&minus;&beta;)</p>
+  <p class="formula">cos(&alpha; + &beta;) = <strong>cos &alpha; cos &beta; &minus; sin &alpha; sin &beta;</strong></p>
+</div>
+
+<div class="proof-step">
+  <p><strong>第五步：利用诱导公式求 sin(&alpha; + &beta;)</strong></p>
+  <p>正弦可以写成余弦的平移：sin &theta; = cos(&pi;/2 &minus; &theta;)。所以：</p>
+  <div class="derivation" style="margin:6px 0;">
+    <div class="dline">sin(&alpha; + &beta;) = cos[&pi;/2 &minus; (&alpha; + &beta;)] <span class="reason">（诱导公式：sin &theta; = cos(&pi;/2 &minus; &theta;)）</span></div>
+    <div class="dline">= cos[(&pi;/2 &minus; &alpha;) &minus; &beta;] <span class="reason">（重新结合）</span></div>
+    <div class="dline">= cos(&pi;/2 &minus; &alpha;) cos &beta; + sin(&pi;/2 &minus; &alpha;) sin &beta; <span class="reason">（代入余弦差公式）</span></div>
+    <div class="dline">= <strong>sin &alpha; cos &beta; + cos &alpha; sin &beta;</strong> <span class="reason">（cos(&pi;/2&minus;&alpha;) = sin &alpha;，sin(&pi;/2&minus;&alpha;) = cos &alpha;）</span></div>
+  </div>
+  <p class="formula" style="background:#e3f2fd;border-radius:8px;padding:10px;font-size:1.2em;color:#1565c0;">
+    <strong>sin(&alpha; + &beta;) = sin &alpha; cos &beta; + cos &alpha; sin &beta;</strong>
+  </p>
+</div>
+
+<div class="proof-step">
+  <p><strong>第六步：由此推出 sin(&alpha; &minus; &beta;)</strong></p>
+  <p>同理，将 &beta; 替换为 &minus;&beta;：</p>
+  <p class="formula">sin(&alpha; &minus; &beta;) = sin &alpha; cos(&minus;&beta;) + cos &alpha; sin(&minus;&beta;)</p>
+  <p class="formula">= sin &alpha; cos &beta; + cos &alpha; (&minus;sin &beta;)</p>
+  <p class="formula" style="background:#e3f2fd;border-radius:8px;padding:10px;font-size:1.2em;color:#1565c0;">
+    <strong>sin(&alpha; &minus; &beta;) = sin &alpha; cos &beta; &minus; cos &alpha; sin &beta;</strong>
+  </p>
+</div>
+
+</div>
+
+<!-- ===== 完整推导树 ===== -->
+<h2>三、完整推导路线</h2>
+<div class="derivation" style="border-color:#1a73e8;">
+  <div class="dline" style="font-size:1.15em;font-weight:bold;color:#1a73e8;">单位圆 &times; 向量点积</div>
+  <div class="dline" style="color:#888;font-size:0.9em;">&darr;</div>
+  <div class="dline"><strong>cos(&alpha; &minus; &beta;) = cos &alpha; cos &beta; + sin &alpha; sin &beta;</strong> <span class="reason">（核心起点）</span></div>
+  <div class="dline" style="color:#888;font-size:0.9em;">&darr; 替换 &beta; &rarr; &minus;&beta;</div>
+  <div class="dline"><strong>cos(&alpha; + &beta;) = cos &alpha; cos &beta; &minus; sin &alpha; sin &beta;</strong></div>
+  <div class="dline" style="color:#888;font-size:0.9em;">&darr; 诱导公式 sin &theta; = cos(&pi;/2 &minus; &theta;)</div>
+  <div class="dline"><strong>sin(&alpha; + &beta;) = sin &alpha; cos &beta; + cos &alpha; sin &beta;</strong></div>
+  <div class="dline" style="color:#888;font-size:0.9em;">&darr; 替换 &beta; &rarr; &minus;&beta;</div>
+  <div class="dline"><strong>sin(&alpha; &minus; &beta;) = sin &alpha; cos &beta; &minus; cos &alpha; sin &beta;</strong></div>
+</div>
+<p style="color:#888;font-size:0.9em;text-align:center;margin-top:8px;">只需记住"余弦差"一条公式，其余三条和差公式均可推导出来。</p>
+
+<h2>四、为什么这个证明是严格的？</h2>
+<ul>
+  <li><strong>向量点积既独立于三角函数公式</strong>——点积的几何定义 OP · OQ = |OP||OQ|cos&theta; 是欧氏几何的基本定理，可以从余弦定理证明，不依赖任何三角恒等式。</li>
+  <li><strong>坐标表示</strong>——OP · OQ = x₁x₂ + y₁y₂ 来自代数定义，与几何定义一致。</li>
+  <li>因此，令两种表达相等得出 cos(&alpha; &minus; &beta;) 的公式是逻辑自洽的，不存在循环论证。</li>
+</ul>
+
+</article>
+
+<script>
+// ===== Canvas 绘制逻辑 =====
+var canvas = document.getElementById("proofCanvas");
+var ctx = canvas.getContext("2d");
+var W = canvas.width, H = canvas.height;
+var cx = W / 2, cy = H / 2;
+var radius = Math.min(W, H) / 2 - 60;
+var sliderA = document.getElementById("sliderA");
+var sliderB = document.getElementById("sliderB");
+var valA = document.getElementById("valA");
+var valB = document.getElementById("valB");
+
+function degToRad(d) { return d * Math.PI / 180; }
+
+function draw() {
+  var alpha = parseFloat(sliderA.value);
+  var beta = parseFloat(sliderB.value);
+  valA.textContent = alpha + "\u00B0";
+  valB.textContent = beta + "\u00B0";
+
+  var aRad = degToRad(alpha);
+  var bRad = degToRad(beta);
+
+  // 点坐标
+  var pAngle = aRad;
+  var qAngle = bRad;
+  var rAngle = aRad - bRad;
+
+  var px = cx + radius * Math.cos(pAngle);
+  var py = cy - radius * Math.sin(pAngle);
+  var qx = cx + radius * Math.cos(qAngle);
+  var qy = cy - radius * Math.sin(qAngle);
+  var rx = cx + radius * Math.cos(rAngle);
+  var ry = cy - radius * Math.sin(rAngle);
+
+  ctx.clearRect(0, 0, W, H);
+
+  // 背景网格（极坐标参考）
+  ctx.save();
+  for (var i = 0; i < 360; i += 30) {
+    var rad = degToRad(i);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + radius * Math.cos(rad), cy - radius * Math.sin(rad));
+    ctx.strokeStyle = "#f0f0f0";
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  // 单位圆
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
+  ctx.strokeStyle = "#999";
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // 坐标轴
+  ctx.beginPath();
+  ctx.moveTo(cx - radius - 10, cy);
+  ctx.lineTo(cx + radius + 10, cy);
+  ctx.moveTo(cx, cy - radius - 10);
+  ctx.lineTo(cx, cy + radius + 10);
+  ctx.strokeStyle = "#bbb";
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // X/Y labels
+  ctx.fillStyle = "#999";
+  ctx.font = "13px sans-serif";
+  ctx.fillText("x", cx + radius + 14, cy + 4);
+  ctx.fillText("y", cx + 4, cy - radius - 10);
+
+  // 角度 α 弧线
+  ctx.beginPath();
+  ctx.arc(cx, cy, 28, -aRad, 0);
+  ctx.strokeStyle = "#e53935";
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+  ctx.fillStyle = "#e53935";
+  ctx.font = "bold 14px sans-serif";
+  var aLabelAngle = -aRad / 2;
+  ctx.fillText("\u03B1", cx + 36 * Math.cos(aLabelAngle) - 6, cy + 36 * Math.sin(aLabelAngle) + 5);
+
+  // 角度 β 弧线
+  ctx.beginPath();
+  ctx.arc(cx, cy, 22, -bRad, 0);
+  ctx.strokeStyle = "#1e88e5";
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+  ctx.fillStyle = "#1e88e5";
+  ctx.font = "bold 14px sans-serif";
+  var bLabelAngle = -bRad / 2;
+  ctx.fillText("\u03B2", cx + 30 * Math.cos(bLabelAngle) - 6, cy + 30 * Math.sin(bLabelAngle) + 5);
+
+  // 角度 (α-β) 弧线
+  ctx.beginPath();
+  ctx.arc(cx, cy, 34, -rAngle, 0);
+  ctx.strokeStyle = "#43a047";
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+  ctx.fillStyle = "#43a047";
+  ctx.font = "bold 13px sans-serif";
+  var rLabelAngle = -rAngle / 2;
+  ctx.fillText("\u03B1\u2212\u03B2", cx + 44 * Math.cos(rLabelAngle) - 10, cy + 44 * Math.sin(rLabelAngle) + 5);
+
+  // 画向量
+  function drawVector(x1, y1, x2, y2, color, label) {
+    var dx = x2 - x1, dy = y2 - y1;
+    var len = Math.sqrt(dx * dx + dy * dy);
+    if (len < 1) return;
+    var ux = dx / len, uy = dy / len;
+    // 箭头主体
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+    // 箭头头部
+    var arrowSize = 10;
+    ctx.beginPath();
+    ctx.moveTo(x2, y2);
+    ctx.lineTo(x2 - ux * arrowSize - uy * arrowSize * 0.4, y2 - uy * arrowSize + ux * arrowSize * 0.4);
+    ctx.lineTo(x2 - ux * arrowSize + uy * arrowSize * 0.4, y2 - uy * arrowSize - ux * arrowSize * 0.4);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+    // label
+    if (label) {
+      var lx = (x1 + x2) / 2 + uy * 16;
+      var ly = (y1 + y2) / 2 - ux * 16;
+      ctx.fillStyle = color;
+      ctx.font = "bold 14px sans-serif";
+      ctx.fillText(label, lx - 6, ly + 5);
+    }
+  }
+
+  // 向量 OP (红)
+  drawVector(cx, cy, px, py, "#e53935", "P");
+  // 向量 OQ (蓝)
+  drawVector(cx, cy, qx, qy, "#1e88e5", "Q");
+  // 向量 OR (绿)
+  drawVector(cx, cy, rx, ry, "#43a047", "R");
+
+  // 画点 (突出显示)
+  function drawDot(x, y, color, label) {
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, 2 * Math.PI);
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    if (label) {
+      ctx.fillStyle = "#333";
+      ctx.font = "bold 15px sans-serif";
+      ctx.fillText(label, x + 10, y - 8);
+    }
+  }
+  drawDot(px, py, "#e53935", "P(cos \u03B1, sin \u03B1)");
+  drawDot(qx, qy, "#1e88e5", "Q(cos \u03B2, sin \u03B2)");
+  drawDot(rx, ry, "#43a047", "R(cos(\u03B1\u2212\u03B2), sin(\u03B1\u2212\u03B2))");
+
+  // 显示点积计算结果
+  ctx.fillStyle = "#555";
+  ctx.font = "14px sans-serif";
+  ctx.textAlign = "left";
+
+  var cosDiff = Math.cos(aRad) * Math.cos(bRad) + Math.sin(aRad) * Math.sin(bRad);
+  var cosDiffAngle = Math.cos(aRad - bRad);
+  var dp = Math.cos(aRad) * Math.cos(bRad) + Math.sin(aRad) * Math.sin(bRad);
+
+  ctx.fillStyle = "#1a73e8";
+  ctx.font = "bold 15px sans-serif";
+  ctx.textAlign = "left";
+  ctx.fillText("OP \u00B7 OQ = cos" + alpha + "\u00B0 \u00B7 cos" + beta + "\u00B0 + sin" + alpha + "\u00B0 \u00B7 sin" + beta + "\u00B0", 20, 24);
+  ctx.fillStyle = "#e53935";
+  ctx.fillText("= " + dp.toFixed(4), 20, 48);
+  ctx.fillStyle = "#1a73e8";
+  ctx.fillText("= |OP|\u00B7|OQ|\u00B7cos(\u03B1\u2212\u03B2) = cos(" + (alpha - beta).toFixed(1) + "\u00B0)", 20, 72);
+  ctx.fillStyle = "#e53935";
+  ctx.font = "bold 16px sans-serif";
+  ctx.fillText("= " + Math.cos(aRad - bRad).toFixed(4), 20, 96);
+  ctx.fillStyle = "#333";
+  ctx.font = "bold 16px sans-serif";
+  ctx.fillText("\u2713 \u4e24\u8005\u76f8\u7b49", 20, 126);
+}
+
+// 绑定滑块
+sliderA.addEventListener("input", draw);
+sliderB.addEventListener("input", draw);
+
+// 初始绘制
+draw();
+</script>
+</body>
+</html>

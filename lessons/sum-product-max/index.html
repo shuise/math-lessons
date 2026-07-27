@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>和定积最大定理的证明</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  h3 { color: #2c3e50; margin: 24px 0 10px; font-size: 1.1em; }
+  h4 { color: #555; margin: 18px 0 8px; font-size: 1em; }
+  .formula { text-align: center; margin: 16px 0; padding: 12px; background: #f8f9fa; border-radius: 8px; font-size: 1.15em; font-family: 'Times New Roman', 'STIX', serif; }
+  .formula-box { border: 2px solid #1a73e8; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #f0f7ff; }
+  .formula-box p { margin: 6px 0; }
+  .derive-box {
+    background: #fafafa; border: 1px solid #e0e0e0; border-radius: 8px;
+    padding: 14px 18px; margin: 10px 0; font-family: 'Times New Roman', 'STIX', serif;
+    font-size: 1.05em; line-height: 2;
+  }
+  .derive-line { margin: 4px 0; }
+  .derive-line .note { color: #888; font-size: 0.9em; font-family: -apple-system, sans-serif; }
+  
+  /* 交互式矩形可视化 */
+  #canvas-container {
+    display: flex; flex-direction: column; align-items: center;
+    background: #fafafa; border-radius: 10px; padding: 20px;
+    margin: 16px 0; border: 1px solid #e0e0e0;
+  }
+  #canvas-container canvas {
+    border: 1px solid #ddd; border-radius: 8px; background: #fff;
+    max-width: 100%;
+  }
+  .slider-group {
+    display: flex; align-items: center; gap: 12px;
+    margin: 8px 0; flex-wrap: wrap; justify-content: center;
+  }
+  .slider-group label { font-weight: bold; min-width: 40px; color: #555; }
+  .slider-group input[type="range"] { width: 180px; }
+  .slider-group .val { font-family: 'Times New Roman', serif; font-size: 1.1em; color: #1565c0; min-width: 60px; }
+  .stats {
+    display: flex; gap: 24px; margin: 8px 0; flex-wrap: wrap; justify-content: center;
+  }
+  .stat-item {
+    text-align: center; padding: 8px 16px; background: #fff; border-radius: 8px;
+    border: 1px solid #e0e0e0; min-width: 100px;
+  }
+  .stat-item .label { font-size: 0.85em; color: #888; }
+  .stat-item .value { font-size: 1.2em; font-weight: bold; color: #1565c0; font-family: 'Times New Roman', serif; }
+  .stat-item .value.max { color: #e65100; }
+
+  .method-tabs {
+    display: flex; gap: 8px; margin: 16px 0; flex-wrap: wrap;
+  }
+  .method-tab {
+    padding: 8px 20px; border: 2px solid #1a73e8; border-radius: 20px;
+    cursor: pointer; background: #fff; color: #1a73e8; font-weight: bold;
+    transition: all 0.15s;
+  }
+  .method-tab:hover { background: #e3f2fd; }
+  .method-tab.active { background: #1a73e8; color: #fff; }
+  .method-content { display: none; }
+  .method-content.active { display: block; }
+
+  .app-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  @media (max-width: 640px) { .app-grid { grid-template-columns: 1fr; } }
+  .app-card {
+    border: 1px solid #e0e0e0; border-radius: 10px; padding: 16px;
+    background: #fff;
+  }
+  .app-card h4 { margin: 0 0 8px 0; color: #1565c0; }
+  .app-card .solution { font-size: 0.95em; margin-top: 8px; }
+
+  .conclusion-box {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border: 2px solid #4caf50; border-radius: 12px;
+    padding: 20px 24px; margin: 24px 0; text-align: center;
+  }
+  .conclusion-box h3 { margin: 0 0 8px 0; color: #2e7d32; }
+  .conclusion-box .big-formula { font-size: 1.6em; color: #1b5e20; font-weight: bold; font-family: 'Times New Roman', serif; }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>和定积最大定理的证明</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">
+  若 a + b 为定值，则当 a = b 时，乘积 ab 取得最大值。
+</p>
+
+<!-- ============================== 一、问题陈述 ============================== -->
+<section>
+<h2>一、问题陈述</h2>
+<div class="formula-box">
+  <p><strong>定理</strong>：设 a, b 为非负实数，且 a + b = S（S 为正常数），则</p>
+  <p style="text-align:center;font-size:1.3em;color:#1565c0;">
+    ab &le; (S/2)<sup>2</sup>
+  </p>
+  <p style="text-align:center;">等号成立当且仅当 <strong>a = b = S/2</strong></p>
+</div>
+<p>换句话说：当两个正数的和固定时，它们的乘积在两者相等时达到最大。</p>
+</section>
+
+<!-- ============================== 二、交互式可视化 ============================== -->
+<section>
+<h2>二、交互式可视化</h2>
+<p>拖动下方滑块，观察当 a + b = S 固定时，乘积 ab 的变化规律：</p>
+
+<div id="canvas-container">
+  <canvas id="rectCanvas" width="500" height="340"></canvas>
+
+  <div class="slider-group">
+    <label>和 S</label>
+    <input type="range" id="sliderS" min="2" max="20" step="0.5" value="10">
+    <span class="val" id="valS">10</span>
+  </div>
+  <div class="slider-group">
+    <label>a</label>
+    <input type="range" id="sliderA" min="0.5" max="9.5" step="0.1" value="3">
+    <span class="val" id="valA">3</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat-item">
+      <div class="label">a</div>
+      <div class="value" id="statA">3.0</div>
+    </div>
+    <div class="stat-item">
+      <div class="label">b = S &minus; a</div>
+      <div class="value" id="statB">7.0</div>
+    </div>
+    <div class="stat-item">
+      <div class="label">矩形面积 ab</div>
+      <div class="value" id="statProd">21.0</div>
+    </div>
+    <div class="stat-item">
+      <div class="label">最大面积 (S/2)²</div>
+      <div class="value max" id="statMax">25.0</div>
+    </div>
+    <div class="stat-item">
+      <div class="label">差值 (S/2)² &minus; ab</div>
+      <div class="value" id="statDiff">4.0</div>
+    </div>
+  </div>
+</div>
+
+<p style="text-align:center;color:#888;font-size:0.93em;">
+  <strong>操作提示：</strong>拖动 a 的滑块，观察矩形面积 ab 的变化。当 a 接近 S/2 时，面积达到最大。
+  右侧曲线显示了 ab 作为 a 的函数图像（抛物线），红色点标记当前位置。
+</p>
+</section>
+
+<!-- ============================== 三、几何意义 ============================== -->
+<section>
+<h2>三、几何意义</h2>
+<p>定理的几何意义非常直观：</p>
+<ul>
+  <li>a 和 b 可以看作一个矩形的两条邻边</li>
+  <li>a + b = S 固定，意味着矩形的<strong>半周长</strong>固定</li>
+  <li>矩形的面积 = a × b</li>
+  <li>在固定半周长的矩形中，<strong>正方形的面积最大</strong>（即 a = b 时）</li>
+</ul>
+<p>这一结论在日常生活中也有体现：用固定长度的篱笆围矩形菜园，围成正方形时面积最大。</p>
+</section>
+
+<!-- ============================== 四、证明方法 ============================== -->
+<section>
+<h2>四、证明方法</h2>
+
+<div class="method-tabs">
+  <span class="method-tab active" onclick="switchMethod('completing-square')">配方法</span>
+  <span class="method-tab" onclick="switchMethod('am-gm')">均值不等式</span>
+</div>
+
+<!-- 配方法 -->
+<div class="method-content active" id="method-completing-square">
+  <h3>方法一：配方法 (Completing the Square)</h3>
+  <p>由 a + b = S，得 b = S &minus; a，则：</p>
+  <div class="derive-box">
+    <div class="derive-line">ab = a(S &minus; a)</div>
+    <div class="derive-line">= &minus;a² + Sa</div>
+    <div class="derive-line">= &minus;(a² &minus; Sa)</div>
+    <div class="derive-line">= &minus;[a² &minus; Sa + (S/2)² &minus; (S/2)²] <span class="note">（加减 (S/2)² 配平方）</span></div>
+    <div class="derive-line">= &minus;[(a &minus; S/2)² &minus; S²/4] <span class="note">（完全平方公式）</span></div>
+    <div class="derive-line" style="font-size:1.15em;color:#1565c0;"><strong>ab = &minus;(a &minus; S/2)² + S²/4</strong> <span class="note">（配方法完成）</span></div>
+  </div>
+  <p>现在分析这个表达式：</p>
+  <ul>
+    <li>&minus;(a &minus; S/2)² &le; 0（任何实数的平方非负，前面有负号）</li>
+    <li>因此 ab &le; S²/4</li>
+    <li>等号成立当且仅当 (a &minus; S/2)² = 0，即 <strong>a = S/2</strong></li>
+    <li>此时 b = S &minus; a = S/2，所以 <strong>a = b</strong></li>
+  </ul>
+  <p>最大值：ab<sub>max</sub> = (S/2)²</p>
+</div>
+
+<!-- 均值不等式 -->
+<div class="method-content" id="method-am-gm">
+  <h3>方法二：均值不等式 (AM-GM Inequality)</h3>
+  <p>对于任意非负实数 a, b，算术平均值不小于几何平均值：</p>
+  <div class="formula-box">
+    <p style="text-align:center;font-size:1.2em;">
+      (a + b) / 2 &ge; &radic;(ab)
+    </p>
+  </div>
+  <p>证明思路如下：</p>
+  <div class="derive-box">
+    <div class="derive-line">由 (&radic;a &minus; &radic;b)² &ge; 0 <span class="note">（任何实数的平方非负）</span></div>
+    <div class="derive-line">展开：a &minus; 2&radic;(ab) + b &ge; 0</div>
+    <div class="derive-line">移项：a + b &ge; 2&radic;(ab)</div>
+    <div class="derive-line">即：(a + b) / 2 &ge; &radic;(ab) <span class="note">（算术平均值 &ge; 几何平均值）</span></div>
+  </div>
+  <p>代入 a + b = S：</p>
+  <div class="derive-box">
+    <div class="derive-line">S / 2 &ge; &radic;(ab)</div>
+    <div class="derive-line">两边平方：ab &le; (S/2)² <span class="note">（等号成立当 a = b）</span></div>
+  </div>
+  <ul>
+    <li>等号成立当且仅当 &radic;a &minus; &radic;b = 0，即 <strong>a = b</strong></li>
+    <li>此时 a = b = S/2</li>
+  </ul>
+  <p>最大值：ab<sub>max</sub> = (S/2)²</p>
+</div>
+</section>
+
+<!-- ============================== 五、结论 ============================== -->
+<section>
+<div class="conclusion-box">
+  <h3>结论</h3>
+  <p class="big-formula">若 a + b = S（定值），则 ab &le; (S/2)²</p>
+  <p style="font-size:1.1em;color:#2e7d32;">
+    等号成立当且仅当 <strong>a = b = S/2</strong>
+  </p>
+  <p style="margin-top:8px;">即：两数之和固定时，两数相等时乘积最大。</p>
+</div>
+</section>
+
+<!-- ============================== 六、应用举例 ============================== -->
+<section>
+<h2>六、应用举例</h2>
+
+<div class="app-grid">
+  <div class="app-card">
+    <h4>例1：固定周长的矩形</h4>
+    <p>用 40 米长的篱笆围一个矩形菜园，长和宽分别为多少时面积最大？最大面积是多少？</p>
+    <div class="solution">
+      <p><strong>解：</strong>设长为 a，宽为 b，则 2(a + b) = 40，即 a + b = 20。</p>
+      <p>由和定积最大定理：ab &le; (20/2)² = 100。</p>
+      <p>当 a = b = 10 时取等号，即围成 <strong>正方形</strong> 时面积最大，最大面积为 <strong>100 m²</strong>。</p>
+    </div>
+  </div>
+
+  <div class="app-card">
+    <h4>例2：固定乘积的最小和</h4>
+    <p>已知 ab = 36（a, b &gt; 0），求 a + b 的最小值。</p>
+    <div class="solution">
+      <p><strong>解：</strong>由均值不等式：(a + b)/2 &ge; &radic;(ab) = &radic;36 = 6。</p>
+      <p>所以 a + b &ge; 12，当 a = b = 6 时取最小值 <strong>12</strong>。</p>
+      <p>（这是和定积最大的"对偶形式"：积定和最小）</p>
+    </div>
+  </div>
+
+  <div class="app-card">
+    <h4>例3：拆数求积最大</h4>
+    <p>将正数 12 拆成两个正数之和，使它们的乘积最大。</p>
+    <div class="solution">
+      <p><strong>解：</strong>设两个数为 a 和 b，则 a + b = 12。</p>
+      <p>ab &le; (12/2)² = 36。</p>
+      <p>当 a = b = 6 时取等号，最大乘积为 <strong>36</strong>。</p>
+    </div>
+  </div>
+
+  <div class="app-card">
+    <h4>例4：固定周长的三角形</h4>
+    <p>用 30 cm 长的铁丝围成一个直角三角形，两直角边各为多少时面积最大？</p>
+    <div class="solution">
+      <p><strong>解：</strong>设直角边为 a 和 b，斜边为 &radic;(a² + b²)。</p>
+      <p>问题比较复杂：a + b + &radic;(a² + b²) = 30，不是 a + b 固定。</p>
+      <p>但如果在约束 a + b = 固定值的前提下，直角三角形的面积 S = (1/2)ab，同样当 a = b 时面积最大。</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============================== 七、深入思考 ============================== -->
+<section>
+<h2>七、深入思考</h2>
+
+<h3>7.1 三个正数的情况</h3>
+<p>若 a + b + c = S（定值），当 a = b = c = S/3 时，abc 取得最大值 (S/3)³。</p>
+<p>更一般地，n 个正数之和固定时，各数相等时乘积最大。这由 <strong>AM-GM 不等式</strong> 直接给出。</p>
+
+<h3>7.2 与二次函数的关系</h3>
+<p>从配方法可见：ab = &minus;a² + Sa = &minus;(a &minus; S/2)² + S²/4，这是一个开口向下的二次函数。</p>
+<p>因此 ab 关于 a 的图像是一条<strong>开口向下的抛物线</strong>，顶点在 a = S/2 处，顶点纵坐标即为最大值 S²/4。这也解释了为什么可视化中的曲线是抛物线形状。</p>
+
+<h3>7.3 定理的推广</h3>
+<div class="formula-box">
+  <p><strong>加权形式</strong>：若 pa + qb = S（p, q &gt; 0），则当 pa = qb = S/2 时 ab 取得最大值。</p>
+  <p><strong>证明思路</strong>：设 x = pa, y = qb，则 x + y = S，转化为普通形式。</p>
+</div>
+</section>
+
+</article>
+
+<script>
+// ==================== 交互式可视化 ====================
+var canvas = document.getElementById('rectCanvas');
+var ctx = canvas.getContext('2d');
+var sliderS = document.getElementById('sliderS');
+var sliderA = document.getElementById('sliderA');
+var valS = document.getElementById('valS');
+var valA = document.getElementById('valA');
+
+function draw() {
+  var S = parseFloat(sliderS.value);
+  var a = parseFloat(sliderA.value);
+  // 保持 a 在合理范围内
+  if (a >= S) a = S - 0.1;
+  if (a <= 0) a = 0.1;
+  var b = S - a;
+  var prod = a * b;
+  var maxProd = (S / 2) * (S / 2);
+
+  // 更新 UI
+  valS.textContent = S;
+  valA.textContent = a.toFixed(1);
+  document.getElementById('statA').textContent = a.toFixed(1);
+  document.getElementById('statB').textContent = b.toFixed(1);
+  document.getElementById('statProd').textContent = prod.toFixed(2);
+  document.getElementById('statMax').textContent = maxProd.toFixed(2);
+  document.getElementById('statDiff').textContent = (maxProd - prod).toFixed(2);
+
+  // 更新 sliderA 的范围
+  sliderA.max = (S - 0.1).toFixed(1);
+
+  // 清空
+  ctx.clearRect(0, 0, 500, 340);
+
+  var margin = { top: 20, bottom: 30, left: 40, right: 30 };
+  var plotW = 500 - margin.left - margin.right;
+  var plotH = 200;
+  var plotY = margin.top;
+  var rectY = plotY + plotH + 15;
+  var rectH = 340 - rectY - 10;
+
+  // ========== 左侧：矩形 ==========
+  var rectLeft = 30;
+  var rectW = 180;
+  var scale = rectH / S;  // 高度方向缩放
+  var hA = a * scale;
+  var hB = b * scale;
+
+  // 填充矩形
+  ctx.fillStyle = 'rgba(21, 101, 192, 0.15)';
+  ctx.strokeStyle = '#1565c0';
+  ctx.lineWidth = 2;
+  ctx.fillRect(rectLeft, rectY + rectH - hA, rectW, hA);
+  ctx.strokeRect(rectLeft, rectY + rectH - hA, rectW, hA);
+
+  // 标尺线 a
+  ctx.fillStyle = '#1565c0';
+  ctx.font = '14px "Times New Roman", serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('a = ' + a.toFixed(1), rectLeft + rectW + 6, rectY + rectH - hA + 5);
+
+  // 标尺线 b
+  if (hB > 20) {
+    ctx.fillText('b = ' + b.toFixed(1), rectLeft + rectW + 6, rectY + rectH - hA - hB + 14);
+  }
+
+  // a 的标记线
+  ctx.strokeStyle = '#1565c0';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(rectLeft, rectY + rectH - hA);
+  ctx.lineTo(rectLeft + rectW, rectY + rectH - hA);
+  ctx.stroke();
+
+  // b 的标记线
+  ctx.strokeStyle = '#e65100';
+  ctx.beginPath();
+  ctx.moveTo(rectLeft, rectY + rectH - hA - hB);
+  ctx.lineTo(rectLeft + rectW, rectY + rectH - hA - hB);
+  ctx.stroke();
+
+  ctx.setLineDash([]);
+
+  // 标注 a, b
+  ctx.fillStyle = '#1565c0';
+  ctx.textAlign = 'center';
+  ctx.font = 'bold 15px "Times New Roman", serif';
+  ctx.fillText('a', rectLeft + rectW / 2, rectY + rectH - 4);
+  ctx.fillStyle = '#e65100';
+  ctx.fillText('b', rectLeft + rectW / 2, rectY + rectH - hA - 6);
+
+  // 标注面积
+  ctx.fillStyle = '#1565c0';
+  ctx.font = '13px "Times New Roman", serif';
+  ctx.fillText('面积 = a × b = ' + prod.toFixed(2), rectLeft + rectW / 2, rectY + rectH - hA / 2 + 5);
+
+  // ========== 右侧：抛物线 ==========
+  var plotLeft = 270;
+  var pW = 200;
+  var pH = plotH;
+  var pTop = plotY;
+  var pBottom = pTop + pH;
+
+  // 坐标轴
+  ctx.strokeStyle = '#888';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(plotLeft, pBottom);
+  ctx.lineTo(plotLeft + pW, pBottom);
+  ctx.moveTo(plotLeft, pBottom);
+  ctx.lineTo(plotLeft, pTop);
+  ctx.stroke();
+
+  // x 轴标签
+  ctx.fillStyle = '#888';
+  ctx.font = '11px "Times New Roman", serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('0', plotLeft - 8, pBottom + 15);
+  ctx.fillText('S', plotLeft + pW, pBottom + 15);
+  ctx.fillText('S/2', plotLeft + pW / 2, pBottom + 15);
+
+  // y 轴标签
+  ctx.textAlign = 'right';
+  ctx.fillText('Max', plotLeft - 4, pTop + 14);
+
+  // 抛物线 f(a) = -a² + Sa
+  ctx.strokeStyle = '#e53935';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+
+  var px = function(av) { return plotLeft + (av / S) * pW; };
+  var py = function(pv) { return pBottom - (pv / maxProd) * pH; };
+
+  for (var i = 0; i <= 100; i++) {
+    var av = (i / 100) * S;
+    var pv = -av * av + S * av;
+    var x = px(av);
+    var y = py(pv);
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  // 当前点
+  var curPv = -a * a + S * a;
+  var curX = px(a);
+  var curY = py(curPv);
+
+  ctx.fillStyle = '#e53935';
+  ctx.beginPath();
+  ctx.arc(curX, curY, 6, 0, 2 * Math.PI);
+  ctx.fill();
+
+  ctx.fillStyle = '#fff';
+  ctx.beginPath();
+  ctx.arc(curX, curY, 2.5, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // 最大值点
+  var bestPv = maxProd;
+  var bestX = px(S/2);
+  var bestY = py(bestPv);
+
+  ctx.strokeStyle = '#4caf50';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([3, 3]);
+  ctx.beginPath();
+  ctx.moveTo(bestX, bestY);
+  ctx.lineTo(bestX, pBottom);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.fillStyle = '#4caf50';
+  ctx.beginPath();
+  ctx.arc(bestX, bestY, 5, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // 图例
+  ctx.fillStyle = '#e53935';
+  ctx.font = '12px -apple-system, sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillRect(plotLeft + 10, pTop + 4, 12, 3);
+  ctx.fillText('ab 随 a 的变化', plotLeft + 26, pTop + 8);
+
+  ctx.fillStyle = '#4caf50';
+  ctx.fillRect(plotLeft + 10, pTop + 20, 12, 3);
+  ctx.fillText('最大值 (S/2)²', plotLeft + 26, pTop + 24);
+}
+
+// 滑块事件
+sliderS.oninput = function() {
+  var S = parseFloat(sliderS.value);
+  // 调整 a 使其不超过 S
+  if (parseFloat(sliderA.value) >= S) {
+    sliderA.value = (S / 2).toFixed(1);
+  }
+  draw();
+};
+sliderA.oninput = draw;
+
+// ==================== 证明方法切换 ====================
+function switchMethod(method) {
+  document.querySelectorAll('.method-tab').forEach(function(el) { el.classList.remove('active'); });
+  document.querySelectorAll('.method-content').forEach(function(el) { el.classList.remove('active'); });
+  document.querySelector('.method-tab[onclick*="' + method + '"]').classList.add('active');
+  document.getElementById('method-' + method).classList.add('active');
+}
+
+// 初始绘制
+draw();
+</script>
+</body>
+</html>

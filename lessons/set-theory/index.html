@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>集合 — 概念、定理与提出人</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  .person-card {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 16px 20px; margin: 16px 0;
+    border-left: 4px solid #1a73e8;
+  }
+  .person-card h3 { margin: 0 0 4px 0; color: #1a73e8; }
+  .person-card .era { color: #888; font-size: 0.85em; }
+  .person-card .theorem { margin: 8px 0 0; padding-left: 16px; border-left: 3px solid #e67e22; }
+  .person-card .theorem strong { color: #e65100; }
+  .timeline {
+    position: relative; padding-left: 28px; margin: 20px 0;
+  }
+  .timeline::before {
+    content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+    width: 3px; background: #1a73e8; border-radius: 2px;
+  }
+  .tl-item {
+    position: relative; margin: 18px 0; padding: 10px 14px;
+    background: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef;
+  }
+  .tl-item::before {
+    content: ''; position: absolute; left: -24px; top: 14px;
+    width: 12px; height: 12px; background: #1a73e8;
+    border-radius: 50%; border: 2px solid #fff;
+  }
+  .tl-item .year {
+    display: inline-block; background: #1a73e8; color: #fff;
+    padding: 1px 10px; border-radius: 10px; font-size: 0.8em; font-weight: bold;
+    margin-right: 8px;
+  }
+  .equiv-table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  .equiv-table td {
+    border: 1px solid #ddd; padding: 10px 14px; text-align: left; vertical-align: top;
+  }
+  .equiv-table td:first-child { width: 30%; font-weight: bold; color: #1a73e8; }
+  .axiom-box {
+    background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 12px 16px;
+    margin: 12px 0; border-radius: 0 8px 8px 0;
+  }
+  .axiom-box strong { color: #6a1b9a; }
+</style>
+</head>
+<body>
+<article style="background:#fff;border-radius:12px;padding:36px 40px;box-shadow:0 2px 12px rgba(0,0,0,0.06);overflow-wrap:break-word;word-wrap:break-word;overflow-x:hidden;">
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+
+<h1>集合</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">集合论是现代数学的通用语言——它把"一堆东西"变成了一个严谨的数学分支。</p>
+
+<!-- ==================== 一、知识名称 ==================== -->
+<h2>一、什么是集合？</h2>
+<p><strong class="keyword">集合</strong>（Set）就是把一些确定的、互不相同的对象汇集在一起，形成一个整体。组成集合的每个对象称为这个集合的<strong class="definition">元素</strong>（Element）。</p>
+
+<div class="example">
+  <p><strong>生活例子</strong></p>
+  <p>• <strong>一个班级里所有戴眼镜的学生</strong>——这是一个集合。"小明"如果是戴眼镜的，他就是这个集合的元素。</p>
+  <p>• <strong>自然数 1 到 5</strong>——也是集合。它的元素就是 1, 2, 3, 4, 5 这五个数。</p>
+  <p>• <strong>世界上所有身高超过 2 米的人</strong>——边界不够清晰，传统集合论不处理这种情况（模糊集合论解决了这个问题）。</p>
+</div>
+
+<p>集合有三个基本特征：</p>
+<ul>
+  <li><strong>确定性</strong>：任何事物，要么属于这个集合，要么不属于——不能模棱两可。</li>
+  <li><strong>互异性</strong>：集合中的元素互不相同，重复的元素算一个。</li>
+  <li><strong>无序性</strong>：集合中的元素没有顺序之分，{1,2,3} = {3,2,1}。</li>
+</ul>
+
+<!-- ==================== 二、相关名词解释 ==================== -->
+<h2>二、基本概念</h2>
+
+<table>
+  <tr><th style="width:18%">概念</th><th style="width:30%">含义</th><th>示例</th></tr>
+  <tr><td>元素</td><td>构成集合的每个对象</td><td style="text-align:left;">A = {1,2,3}，则 1 是 A 的元素，记作 1∈A</td></tr>
+  <tr><td>属于</td><td>元素与集合的关系</td><td style="text-align:left;">a∈A 表示 a 是 A 的元素</td></tr>
+  <tr><td>子集</td><td>A 的所有元素都是 B 的元素</td><td style="text-align:left;">{1,2} ⊆ {1,2,3}</td></tr>
+  <tr><td>真子集</td><td>A 是 B 的子集且 A≠B</td><td style="text-align:left;">{1,2} ⊂ {1,2,3}</td></tr>
+  <tr><td>并集</td><td>两个集合的所有元素合在一起</td><td style="text-align:left;">{1,2} ∪ {2,3} = {1,2,3}</td></tr>
+  <tr><td>交集</td><td>两个集合共有的元素</td><td style="text-align:left;">{1,2} ∩ {2,3} = {2}</td></tr>
+  <tr><td>差集</td><td>A 中扣掉 B 的元素</td><td style="text-align:left;">{1,2,3} \ {2} = {1,3}</td></tr>
+  <tr><td>补集</td><td>在全集中但不在子集中的元素</td><td style="text-align:left;">∁<sub>U</sub>A = U \ A</td></tr>
+  <tr><td>空集</td><td>不含任何元素的集合</td><td style="text-align:left;">∅ = {}，空集是任何集合的子集</td></tr>
+  <tr><td>幂集</td><td>一个集合的所有子集构成的集合</td><td style="text-align:left;">P({a,b}) = {∅, {a}, {b}, {a,b}}</td></tr>
+  <tr><td>基数</td><td>集合中元素的个数</td><td style="text-align:left;">|{1,2,3}| = 3；无穷集合的基数用 ℵ₀, ℵ₁ 表示</td></tr>
+  <tr><td>可数无穷</td><td>能与自然数集 N 一一对应的无穷集合</td><td style="text-align:left;">整数集 Z、有理数集 Q 都是可数的</td></tr>
+  <tr><td>不可数无穷</td><td>比自然数"更多"的无穷集合</td><td style="text-align:left;">实数集 R 是不可数的</td></tr>
+</table>
+
+<!-- ==================== 三、符号说明 ==================== -->
+<h2>三、常用符号</h2>
+<table>
+  <tr><th>符号</th><th>含义</th><th>示例</th></tr>
+  <tr><td>∈</td><td>属于</td><td style="text-align:left;">2 ∈ {1,2,3}</td></tr>
+  <tr><td>∉</td><td>不属于</td><td style="text-align:left;">4 ∉ {1,2,3}</td></tr>
+  <tr><td>⊆</td><td>子集</td><td style="text-align:left;">{a} ⊆ {a,b}</td></tr>
+  <tr><td>⊂</td><td>真子集</td><td style="text-align:left;">{a} ⊂ {a,b}</td></tr>
+  <tr><td>∪</td><td>并集</td><td style="text-align:left;">{1,2} ∪ {2,3} = {1,2,3}</td></tr>
+  <tr><td>∩</td><td>交集</td><td style="text-align:left;">{1,2} ∩ {2,3} = {2}</td></tr>
+  <tr><td>\</td><td>差集</td><td style="text-align:left;">{1,2,3} \ {2} = {1,3}</td></tr>
+  <tr><td>∅</td><td>空集</td><td style="text-align:left;">∅ 是任何集合的子集</td></tr>
+  <tr><td>P(·)</td><td>幂集</td><td style="text-align:left;">P({1}) = {∅, {1}}</td></tr>
+  <tr><td>|·|</td><td>基数（元素个数）</td><td style="text-align:left;">|{1,2,3}| = 3</td></tr>
+  <tr><td>ℵ₀</td><td>阿列夫零（自然数集的基数）</td><td style="text-align:left;">|N| = ℵ₀</td></tr>
+  <tr><td>ℵ₁</td><td>阿列夫一（实数集的基数，即 2^ℵ₀）</td><td style="text-align:left;">|R| = 2^ℵ₀</td></tr>
+</table>
+
+<!-- ==================== 四、核心定理与提出人 ==================== -->
+<h2>四、核心定理与提出人</h2>
+<p>以下按时间顺序列出集合论发展历程中最关键的定理和它们背后的数学家。</p>
+
+<div class="timeline">
+
+  <div class="tl-item">
+    <span class="year">1874</span>
+    <strong>康托尔——代数数的可数性</strong>
+    <p>康托尔证明了<strong>代数数</strong>（即整系数方程的解）是可数的，而所有实数是不可数的——这意味<strong>超越数"几乎占了全部"</strong>。</p>
+    <div class="person-card" style="margin:8px 0 0;">
+      <h3>格奥尔格·康托尔</h3>
+      <div class="era">Georg Cantor · 1845–1918 · 德国</div>
+      <div class="theorem"><strong>定理：</strong>代数数集是可数的，实数集是不可数的。</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <span class="year">1891</span>
+    <strong>康托尔——对角线论证法</strong>
+    <p>一个极其简洁却影响深远的证明。康托尔假设实数可数，构造了一个"不在列表中的实数"，从而导致矛盾。这个<strong>对角线方法</strong>后来被哥德尔、图灵等人反复使用，成为 20 世纪逻辑学最核心的工具。</p>
+    <div class="person-card" style="margin:8px 0 0;">
+      <h3>格奥尔格·康托尔</h3>
+      <div class="theorem"><strong>对角线论证法：</strong>实数集 R 的基数严格大于自然数集 N 的基数，即 |N| &lt; |R|。</div>
+      <div class="theorem" style="margin-top:4px;"><strong>影响：</strong>哥德尔不完备定理、图灵停机问题、丘奇不可判定性定理，都以对角线方法为核心。</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <span class="year">1878</span>
+    <strong>康托尔——连续统假设</strong>
+    <p>康托尔提出了一个大胆的猜测：<strong>不存在基数严格介于 ℵ₀（自然数）和 2^ℵ₀（实数）之间的集合</strong>。这个问题被称为"连续统假设"（CH），是数学史上最著名的未解难题之一。</p>
+    <div class="person-card" style="margin:8px 0 0;">
+      <h3>格奥尔格·康托尔</h3>
+      <div class="theorem"><strong>连续统假设（CH）：</strong>不存在基数严格介于自然数和实数之间的集合。</div>
+      <div class="theorem" style="margin-top:4px;"><strong>现状：</strong>1940 年哥德尔证明 CH 与 ZFC 相容；1963 年科恩证明 CH 独立于 ZFC。CH 既不能证明也不能证伪。</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <span class="year">1899</span>
+    <strong>康托尔——最大基数悖论</strong>
+    <p>康托尔自己发现了"所有集合的集合"会导致矛盾——如果存在包含一切集合的"大全集"，那么它的幂集会更大，产生矛盾。这是集合论中第一个发现的悖论。</p>
+  </div>
+
+  <div class="tl-item">
+    <span class="year">1901</span>
+    <strong>罗素——罗素悖论</strong>
+    <p>罗素发现了一个更简洁的悖论：<strong>设 R = { x | x ∉ x }，那么 R ∈ R 当且仅当 R ∉ R</strong>。这直接动摇了朴素集合论的根基，引发了"第三次数学危机"。</p>
+    <div class="person-card" style="margin:8px 0 0;">
+      <h3>伯特兰·罗素</h3>
+      <div class="era">Bertrand Russell · 1872–1970 · 英国</div>
+      <div class="theorem"><strong>罗素悖论：</strong>{ x | x ∉ x } 不是一个合法的集合。著名的通俗版本——"理发师悖论"。</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <span class="year">1904</span>
+    <strong>策梅洛——选择公理</strong>
+    <p>策梅洛提出：<strong>对于任意一组非空集合，可以从每个集合中选出一个元素，组成一个新的集合</strong>。这个看似显然的"公理"却引发了巨大的争议——因为它只断言存在性，不给出具体的选取方法。</p>
+    <div class="person-card" style="margin:8px 0 0;">
+      <h3>恩斯特·策梅洛</h3>
+      <div class="era">Ernst Zermelo · 1871–1953 · 德国</div>
+      <div class="theorem"><strong>选择公理（AC）：</strong>对任意非空集合族 {X<sub>i</sub>}<sub>i∈I</sub>，存在选择函数 f: I → ⋃X<sub>i</sub>，使得 f(i) ∈ X<sub>i</sub>。</div>
+      <div class="theorem" style="margin-top:4px;"><strong>等价命题：</strong>良序定理（策梅洛）、佐恩引理、任何向量空间都有基、任意两个集合的基数可以比较大小。</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <span class="year">1908–1922</span>
+    <strong>策梅洛 + 弗兰克尔——ZFC 公理系统</strong>
+    <p>为了避开罗素悖论，策梅洛在 1908 年提出了第一个集合论公理系统。1922 年，弗兰克尔和斯科朗补充了"替换公理"，形成了今天的 <strong>ZFC 公理系统</strong>（Zermelo-Fraenkel + Choice）——现代数学最广泛接受的基础。</p>
+    <div class="person-card" style="margin:8px 0 0;">
+      <h3>恩斯特·策梅洛 &amp; 阿道夫·弗兰克尔</h3>
+      <div class="era">Zermelo 1871–1953 · Fraenkel 1891–1965</div>
+      <div class="theorem" style="margin-top:4px;"><strong>ZFC 九条公理：</strong></div>
+      <ol style="margin:4px 0 0 20px;font-size:0.9em;">
+        <li><strong>外延公理</strong>：两个集合相等当且仅当它们有相同的元素</li>
+        <li><strong>空集公理</strong>：存在一个不含任何元素的集合</li>
+        <li><strong>对偶公理</strong>：给定 x, y，存在 {x, y}</li>
+        <li><strong>并集公理</strong>：给定集合族，存在其并集</li>
+        <li><strong>幂集公理</strong>：给定 x，存在其幂集 P(x)</li>
+        <li><strong>无穷公理</strong>：存在无穷集合（如自然数集）</li>
+        <li><strong>分离公理模式</strong>：从集合中分出满足特定性质的元素</li>
+        <li><strong>替换公理模式</strong>（弗兰克尔补充）：函数的像构成一个集合</li>
+        <li><strong>正则公理</strong>：不存在无限下降的 ∈ 链</li>
+      </ol>
+      <p style="margin:4px 0 0;font-size:0.9em;">再加上 <strong>选择公理</strong>（第 10 条），就是完整的 ZFC。</p>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <span class="year">1925</span>
+    <strong>冯·诺伊曼——正则公理</strong>
+    <p>冯·诺伊曼提出了正则公理，禁止了"x ∈ x"这种自包含的情况，从根上排除了罗素悖论产生的可能性。他还提出了"序数"的严谨定义——每个序数被定义为所有更小的序数构成的集合。</p>
+    <div class="person-card" style="margin:8px 0 0;">
+      <h3>约翰·冯·诺伊曼</h3>
+      <div class="era">John von Neumann · 1903–1957 · 匈牙利裔美国</div>
+      <div class="theorem"><strong>正则公理：</strong>每个非空集合都包含一个与自身不相交的元素（即不存在 x 使得 x ∈ x）。</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <span class="year">1931</span>
+    <strong>哥德尔——不完备定理</strong>
+    <p>年仅 25 岁的哥德尔证明了一个摧毁性的结果：<strong>任何包含算术的、一致的形式系统，必定存在不可证明的真命题</strong>。这直接宣判了希尔伯特"完备形式化数学"计划的死刑。</p>
+    <div class="person-card" style="margin:8px 0 0;">
+      <h3>库尔特·哥德尔</h3>
+      <div class="era">Kurt Gödel · 1906–1978 · 奥地利裔美国</div>
+      <div class="theorem"><strong>第一不完备定理：</strong>如果形式系统 T （包含初等算术）是一致的，则存在一个真命题 G 在 T 中既不能证明也不能证伪。</div>
+      <div class="theorem" style="margin-top:4px;"><strong>第二不完备定理：</strong>如果 T 是一致的，那么 T 自身不能证明自己的一致性。</div>
+      <div class="theorem" style="margin-top:4px;"><strong>关键方法：</strong>哥德尔编码（把数学公式编码为自然数）+ 对角线化（构造自指语句"此语句不可证明"）。</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <span class="year">1933</span>
+    <strong>柯尔莫哥洛夫——概率论的公理化</strong>
+    <p>柯尔莫哥洛夫发表《概率论基础》，用测度论的语言（本质上是集合论）为概率论建立了严格公理体系。从此概率论从"赌博的数学"升格为严谨的数学分支。</p>
+    <div class="person-card" style="margin:8px 0 0;">
+      <h3>安德雷·柯尔莫哥洛夫</h3>
+      <div class="era">Andrey Kolmogorov · 1903–1987 · 苏联</div>
+      <div class="theorem"><strong>概率论三公理：</strong></div>
+      <ol style="margin:4px 0 0 20px;font-size:0.9em;">
+        <li>P(Ω) = 1（必然事件的概率为 1）</li>
+        <li>0 ≤ P(A) ≤ 1（任何事件的概率在 0 到 1 之间）</li>
+        <li>对互斥事件列 {A<sub>i</sub>}，P(⋃A<sub>i</sub>) = ΣP(A<sub>i</sub>)（可列可加性）</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <span class="year">1936</span>
+    <strong>图灵——停机问题</strong>
+    <p>图灵用"对角线方法"证明了：<strong>不存在一个通用算法能判断任意程序是否会终止</strong>。这个结论直接来自集合论的可数性思想——所有可能的程序是可数的，但所有可能的问题是不可数的。</p>
+    <div class="person-card" style="margin:8px 0 0;">
+      <h3>艾伦·图灵</h3>
+      <div class="era">Alan Turing · 1912–1954 · 英国</div>
+      <div class="theorem"><strong>停机定理：</strong>不存在判定任意程序是否终止的通用算法。这是计算理论的基础。</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <span class="year">1940</span>
+    <strong>哥德尔——连续统假设的相容性</strong>
+    <p>哥德尔证明：<strong>如果 ZF 是一致的，那么 ZF + CH 也是一致的</strong>——即连续统假设不能从 ZF 中被证伪。这也被称为"可构造宇宙"（Constructible Universe, L）。</p>
+    <div class="person-card" style="margin:8px 0 0;">
+      <h3>库尔特·哥德尔</h3>
+      <div class="theorem"><strong>定理：</strong>Con(ZF) → Con(ZF + CH)。连续统假设至少在 ZFC 中是不会出错的。</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <span class="year">1963</span>
+    <strong>科恩——连续统假设的独立性</strong>
+    <p>科恩发明了"力迫法"（Forcing），证明了 <strong>CH 不能从 ZFC 中被证明</strong>。结合哥德尔 1940 年的结果，CH 完全独立于 ZFC——在 ZFC 框架内既不能证明也不能证伪。</p>
+    <div class="person-card" style="margin:8px 0 0;">
+      <h3>保罗·科恩</h3>
+      <div class="era">Paul Cohen · 1934–2007 · 美国</div>
+      <div class="theorem"><strong>定理：</strong>Con(ZF) → Con(ZF + ¬CH)。连续统假设独立于 ZFC。</div>
+      <div class="theorem" style="margin-top:4px;"><strong>贡献：</strong>发明的"力迫法"至今仍是集合论中最强大的工具之一。</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <span class="year">1965</span>
+    <strong>扎德——模糊集合论</strong>
+    <p>扎德提出：<strong>元素可以"部分属于"一个集合</strong>（隶属度在 [0,1] 之间）。传统集合论是二值的（属于/不属于），而模糊集合是连续值的。这在工程控制领域得到广泛应用（空调、洗衣机、汽车 ABS）。</p>
+    <div class="person-card" style="margin:8px 0 0;">
+      <h3>洛特菲·扎德</h3>
+      <div class="era">Lotfi Zadeh · 1921–2017 · 美国（伊朗裔）</div>
+      <div class="theorem"><strong>模糊集合：</strong>设 U 是论域，A 是 U 上的模糊集合当且仅当存在隶属函数 μ<sub>A</sub>: U → [0,1]。</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <span class="year">约 2000–今</span>
+    <strong>伍丁——终极 L 猜想</strong>
+    <p>当代集合论领军人物休·伍丁提出了一套程序试图证明：在某种大基数假设下，连续统假设是错的。如果"终极 L"（Ultimate L）计划成功，将为集合论提供一个更接近"真相"的基础。</p>
+    <div class="person-card" style="margin:8px 0 0;">
+      <h3>休·伍丁</h3>
+      <div class="era">Hugh Woodin · 1955– · 美国</div>
+      <div class="theorem"><strong>终极 L 猜想：</strong>在大基数假设下，ZFC 可以扩展为一个更完整的集合论体系，其中 CH 为假。</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ==================== 五、定理汇总表 ==================== -->
+<h2>五、定理与提出人汇总</h2>
+<table>
+  <tr><th>提出人</th><th>时间</th><th>定理 / 贡献</th><th>核心内容</th></tr>
+  <tr>
+    <td>康托尔</td><td>1874</td>
+    <td>实数的不可数性</td>
+    <td style="text-align:left;">代数数可数，实数不可数 → 超越数几乎占全部</td>
+  </tr>
+  <tr>
+    <td>康托尔</td><td>1891</td>
+    <td>对角线论证法</td>
+    <td style="text-align:left;">|N| &lt; |R|；方法被哥德尔、图灵继承</td>
+  </tr>
+  <tr>
+    <td>康托尔</td><td>1878</td>
+    <td>连续统假设 (CH)</td>
+    <td style="text-align:left;">不存在基数介于 ℵ₀ 和 2^ℵ₀ 之间的集合</td>
+  </tr>
+  <tr>
+    <td>罗素</td><td>1901</td>
+    <td>罗素悖论</td>
+    <td style="text-align:left;">{ x | x ∉ x } 不是合法集合 → 第三次数学危机</td>
+  </tr>
+  <tr>
+    <td>策梅洛</td><td>1904</td>
+    <td>选择公理 (AC)</td>
+    <td style="text-align:left;">可从每个非空集合中选出一个元素</td>
+  </tr>
+  <tr>
+    <td>策梅洛+弗兰克尔</td><td>1908–1922</td>
+    <td>ZFC 公理系统</td>
+    <td style="text-align:left;">9 条公理 + 选择公理，现代数学的基础</td>
+  </tr>
+  <tr>
+    <td>冯·诺伊曼</td><td>1925</td>
+    <td>正则公理</td>
+    <td style="text-align:left;">禁止自包含（x ∈ x），消除罗素型悖论</td>
+  </tr>
+  <tr>
+    <td>哥德尔</td><td>1931</td>
+    <td>不完备定理</td>
+    <td style="text-align:left;">一致的系统必有不可证的真命题</td>
+  </tr>
+  <tr>
+    <td>柯尔莫哥洛夫</td><td>1933</td>
+    <td>概率论公理化</td>
+    <td style="text-align:left;">用测度论为概率论建立严格基础</td>
+  </tr>
+  <tr>
+    <td>图灵</td><td>1936</td>
+    <td>停机问题</td>
+    <td style="text-align:left;">不存在通用的停机判定算法</td>
+  </tr>
+  <tr>
+    <td>哥德尔</td><td>1940</td>
+    <td>CH 的相容性</td>
+    <td style="text-align:left;">ZFC 无法证伪 CH</td>
+  </tr>
+  <tr>
+    <td>科恩</td><td>1963</td>
+    <td>CH 的独立性</td>
+    <td style="text-align:left;">ZFC 无法证明 CH → CH 独立于 ZFC</td>
+  </tr>
+  <tr>
+    <td>扎德</td><td>1965</td>
+    <td>模糊集合论</td>
+    <td style="text-align:left;">元素可部分属于集合，隶属度 ∈ [0,1]</td>
+  </tr>
+  <tr>
+    <td>伍丁</td><td>约 2000</td>
+    <td>终极 L 猜想</td>
+    <td style="text-align:left;">试图用大基数解决 CH 问题</td>
+  </tr>
+</table>
+
+<!-- ==================== 六、ZFC 公理详解 ==================== -->
+<h2>六、ZFC 公理系统（现代集合论的基石）</h2>
+<p>ZFC 由 9 条 ZF 公理 + 1 条选择公理构成。以下逐一解释每条公理的含义和目的。</p>
+
+<div class="axiom-box">
+  <strong>1. 外延公理（Axiom of Extensionality）</strong><br>
+  如果两个集合有完全相同的元素，则它们相等。<br>
+  <span style="font-size:0.9em;">&forall;x&forall;y(&forall;z(z∈x ↔ z∈y) → x=y)</span><br>
+  <span style="color:#888;font-size:0.85em;">→ 集合完全由其元素决定，与如何描述无关</span>
+</div>
+<div class="axiom-box">
+  <strong>2. 空集公理（Axiom of Empty Set）</strong><br>
+  存在一个不含任何元素的集合。<br>
+  <span style="font-size:0.9em;">&exist;x&forall;y(¬(y∈x))</span>
+</div>
+<div class="axiom-box">
+  <strong>3. 对偶公理（Axiom of Pairing）</strong><br>
+  给定任意两个集合 x, y，存在一个只包含 x 和 y 的集合 {x,y}。<br>
+  <span style="font-size:0.9em;">&forall;x&forall;y&exist;z&forall;w(w∈z ↔ w=x ∨ w=y)</span>
+</div>
+<div class="axiom-box">
+  <strong>4. 并集公理（Axiom of Union）</strong><br>
+  给定一个集合族 F，存在其所有元素的并集。<br>
+  <span style="font-size:0.9em;">&forall;F&exist;A&forall;x(&exist;y(y∈F ∧ x∈y) → x∈A)</span>
+</div>
+<div class="axiom-box">
+  <strong>5. 幂集公理（Axiom of Power Set）</strong><br>
+  给定集合 x，存在所有 x 的子集构成的集合 P(x)。<br>
+  <span style="font-size:0.9em;">&forall;x&exist;y&forall;z(z ⊆ x → z∈y)</span>
+</div>
+<div class="axiom-box">
+  <strong>6. 无穷公理（Axiom of Infinity）</strong><br>
+  存在无穷集合。具体来说，存在一个包含空集且对后继运算封闭的集合（即自然数集 N）。<br>
+  <span style="font-size:0.9em;">&exist;x(&empty;∈x ∧ &forall;y(y∈x → y∪{y}∈x))</span>
+</div>
+<div class="axiom-box">
+  <strong>7. 分离公理模式（Axiom Schema of Specification）</strong><br>
+  对任意集合 A 和性质 P(x)，可以构造 {x∈A : P(x)}。这限制了"只能从已有集合中分离出子集"，防止了"所有集合的集合"这种悖论。<br>
+  <span style="font-size:0.9em;">&forall;A&exist;B&forall;x(x∈B ↔ x∈A ∧ P(x))</span>
+</div>
+<div class="axiom-box">
+  <strong>8. 替换公理模式（Axiom Schema of Replacement）</strong><br>
+  如果 F 是一个函数（由逻辑公式定义），那么对任意集合 A，F(A) 也是一个集合。<br>
+  <span style="font-size:0.9em;">由弗兰克尔 1922 年补充，使 ZFC 更强大</span>
+</div>
+<div class="axiom-box">
+  <strong>9. 正则公理（Axiom of Foundation / Regularity）</strong><br>
+  每个非空集合 x 都包含一个与 x 不相交的元素。这等价于：不存在无限下降的 ∈ 链。它防止了自包含和循环包含。<br>
+  <span style="font-size:0.9em;">&forall;x(x≠∅ → &exist;y(y∈x ∧ y∩x=∅))</span>
+</div>
+<div class="axiom-box">
+  <strong>10. 选择公理（Axiom of Choice, AC）</strong><br>
+  对任意由非空集合构成的族 {X<sub>i</sub>}<sub>i∈I</sub>，存在一个选择函数 f: I → ⋃X<sub>i</sub>，使得 f(i) ∈ X<sub>i</sub>。<br>
+  <span style="color:#888;font-size:0.85em;">→ 最富争议的公理——只断言存在，不给出构造方法</span>
+</div>
+
+<!-- ==================== 七、应用 ==================== -->
+<h2>七、集合论的应用</h2>
+<table>
+  <tr><th>领域</th><th>如何利用集合论</th></tr>
+  <tr><td>数学基础</td><td style="text-align:left;">一切数学对象（自然数、实数、函数、空间）都可以用集合定义</td></tr>
+  <tr><td>概率论</td><td style="text-align:left;">"事件"就是集合，"概率"就是集合的测度。柯尔莫哥洛夫的三条公理全是集合论的语言</td></tr>
+  <tr><td>计算理论</td><td style="text-align:left;">可计算性理论本质上是对"可数/不可数"和"可判定/不可判定"的集合论分析</td></tr>
+  <tr><td>数据库</td><td style="text-align:left;">关系数据库的核心操作（交、并、差、笛卡尔积）直接来自集合论</td></tr>
+  <tr><td>机器学习</td><td style="text-align:left;">训练集、验证集、测试集是集合划分；集成学习（Bagging/Boosting）在集合上做抽样</td></tr>
+  <tr><td>编程语言</td><td style="text-align:left;">类型论本质上是一种集合论；泛型、接口、继承都涉及集合的包含关系</td></tr>
+  <tr><td>模糊控制</td><td style="text-align:left;">模糊集合论被广泛应用于空调、洗衣机、相机对焦等日常设备</td></tr>
+</table>
+
+<!-- ==================== 八、历史小故事 ==================== -->
+<h2>八、历史小故事</h2>
+
+<div class="person-card">
+  <h3>🎭 康托尔的悲剧</h3>
+  <p>当康托尔提出他的无穷理论时，遭到了以他的老师克罗内克（Kronecker）为首的强烈反对。克罗内克公开称康托尔为"骗子"和"科学败坏者"，认为谈论"无穷"是对数学的亵渎。康托尔在学术孤立和精神压力下患上了严重的抑郁症，在精神病院度过了生命最后的时光。但如今，每一个学过数学的人都在使用他创造的概念——∈、ℵ₀、一一对应……</p>
+</div>
+
+<div class="person-card">
+  <h3>⚡ 希尔伯特的名言</h3>
+  <p>希尔伯特是康托尔最坚定的支持者之一。当有人质疑康托尔的理论时，希尔伯特大声宣告：<strong>"没有人能把我们从康托尔创造的天堂中赶走。"</strong>（Aus dem Paradies, das Cantor uns geschaffen, soll uns niemand vertreiben können.）</p>
+</div>
+
+<div class="person-card">
+  <h3>📝 罗素写《数学原理》</h3>
+  <p>罗素悖论发现之后，罗素与怀特海（Whitehead）合作写了三大卷的《数学原理》（Principia Mathematica, 1910–1913），试图从逻辑中推导出全部数学。书中第 1 页定义"1"花了 300 多页才证明"1+1=2"。书末的总结："上述命题偶尔会有用。"</p>
+</div>
+
+<div class="person-card">
+  <h3>🔢 哥德尔的震撼</h3>
+  <p>1930 年，希尔伯特在 Königsberg 的会议上信心满满地宣称："我们必须知道，我们必将知道。" 仅仅一年后，哥德尔就用他的不完备定理粉碎了这个梦想。哥德尔当时只有 25 岁，是维也纳大学的一名普通研究人员。当他在会议上宣读自己的结果时，在场的数学家们震惊得说不出话来。</p>
+</div>
+
+<div class="person-card">
+  <h3>🎲 概率论的"转正"</h3>
+  <p>在柯尔莫哥洛夫 1933 年的公理体系之前，概率论被数学家们看作"赌博的数学"，缺乏严格的数学地位。柯尔莫哥洛夫用集合论（测度论）的语言为概率论建立公理后，概率论才正式成为数学的一个分支。如今，保险精算、金融工程、天气预报、人工智能——全都建立在柯尔莫哥洛夫的三条公理之上。</p>
+</div>
+
+</article>
+</body>
+</html>

@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>复数</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  h3 { color: #2c3e50; margin: 24px 0 10px; font-size: 1.1em; }
+  .formula { text-align: center; margin: 16px 0; padding: 12px; background: #f8f9fa; border-radius: 8px; font-size: 1.1em; }
+  .formula-box { border: 2px solid #1a73e8; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #f0f7ff; }
+  .formula-box p { margin: 6px 0; }
+  .number-line { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 16px 0; flex-wrap: wrap; }
+  .num-set { display: inline-block; padding: 6px 14px; border-radius: 8px; font-weight: bold; font-size: 1em; }
+  .num-set.n { background: #e3f2fd; color: #1565c0; }
+  .num-set.z { background: #e8f5e9; color: #2e7d32; }
+  .num-set.q { background: #fff8e1; color: #f57f17; }
+  .num-set.r { background: #fce4ec; color: #c62828; }
+  .num-set.c { background: #f3e5f5; color: #6a1b9a; }
+  .arrow { font-size: 1.4em; color: #999; }
+  .complex-plane { text-align: center; margin: 16px 0; }
+  .complex-plane svg { max-width: 100%; height: auto; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* Quiz styles */
+  .quiz-section { margin: 24px 0; }
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag {
+    display: inline-block; padding: 2px 12px; border-radius: 12px;
+    font-size: 0.75em; margin-right: 8px; color: #fff;
+  }
+  .q-tag.concept { background: #9c27b0; }
+  .q-tag.calc { background: #1a73e8; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+  }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+  /* Fill-in-blank styles */
+  .fill-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .fill-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .fill-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .fill-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .fill-question .q-tag {
+    display: inline-block; padding: 2px 12px; border-radius: 12px;
+    font-size: 0.75em; margin-right: 8px; color: #fff;
+  }
+  .q-tag.fill { background: #ff7043; }
+  .fill-question input[type="text"] {
+    padding: 6px 12px; border: 2px solid #ddd; border-radius: 6px;
+    font-size: 1em; width: 120px; margin: 4px 4px; outline: none; transition: 0.15s;
+  }
+  .fill-question input[type="text"]:focus { border-color: #1a73e8; }
+  .fill-question .btn-check {
+    display: inline-block; padding: 6px 18px; border: none; border-radius: 8px;
+    background: #1a73e8; color: #fff; cursor: pointer; font-size: 0.93em; margin: 4px 0;
+    transition: 0.15s;
+  }
+  .fill-question .btn-check:hover { background: #1557b0; }
+  .fill-question .btn-check:disabled { background: #ccc; cursor: not-allowed; }
+  .fill-question .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .fill-question .explain.show { display: block; }
+  .fill-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .fill-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+  /* Score display */
+  .score-bar {
+    text-align: center; padding: 16px; margin: 20px 0;
+    background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8;
+  }
+  .score-bar .score-text { font-size: 1.2em; font-weight: bold; color: #1a73e8; }
+  .score-bar .btn-reset {
+    display: inline-block; margin-left: 16px; padding: 6px 20px;
+    border: 2px solid #1a73e8; color: #1a73e8; border-radius: 16px;
+    background: #fff; cursor: pointer; font-size: 0.93em; transition: 0.15s;
+  }
+  .score-bar .btn-reset:hover { background: #1a73e8; color: #fff; }
+
+  /* Comprehensive exercises */
+  .comp-section { margin: 24px 0; }
+  .comp-question {
+    background: #fff; border: 2px solid #ff7043; border-radius: 10px;
+    padding: 20px 24px; margin: 16px 0; border-left: 6px solid #ff7043;
+  }
+  .comp-question h4 { margin: 0 0 10px; color: #e65100; font-size: 1em; }
+  .comp-question .options { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
+  .comp-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+  }
+  .comp-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .comp-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+  .comp-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .comp-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .comp-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .comp-question .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .comp-question .explain.show { display: block; }
+  .comp-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .comp-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+  .comp-question .correct { border-color: #4caf50; }
+  .comp-question .wrong { border-color: #f44336; }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>复数</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">从"没有解"到"有解"——虚数 i 的引入让一切方程都有了答案。</p>
+
+<!-- ==================== 一、为什么要引入复数 ==================== -->
+<section>
+<h2>一、为什么要引入复数</h2>
+
+<h3>1.1 一个"无解"的方程</h3>
+<p>考虑一个最简单的方程：</p>
+<div class="formula">x² + 1 = 0</div>
+<p>移项得 x² = −1。在实数范围内，任何实数的平方都是非负的，所以这个方程没有实数解。</p>
+<p>这不是个例。许多形如 x² = a（a &lt; 0）的方程在实数范围内都无解。例如：</p>
+<ul>
+  <li>x² + 4 = 0 &rArr; x² = −4，无实数解</li>
+  <li>x² + 2 = 0 &rArr; x² = −2，无实数解</li>
+</ul>
+
+<div class="hint">
+  <strong>思考：</strong>数学史上，每当遇到"无解"的情况，数学家们的做法不是放弃，而是<strong>扩展数的范围</strong>，让"无解"变成"有解"。
+</div>
+
+<h3>1.2 数系的扩展脉络</h3>
+<p>数系的每一次扩展，都是为了解决上一级数系中某些方程无解的问题：</p>
+
+<div class="number-line">
+  <span class="num-set n">自然数 N</span>
+  <span class="arrow">&rarr;</span>
+  <span class="num-set z">整数 Z</span>
+  <span class="arrow">&rarr;</span>
+  <span class="num-set q">有理数 Q</span>
+  <span class="arrow">&rarr;</span>
+  <span class="num-set r">实数 R</span>
+  <span class="arrow">&rarr;</span>
+  <span class="num-set c">复数 C</span>
+</div>
+
+<table>
+  <tr><th>数系</th><th>解决的问题</th><th>举例</th></tr>
+  <tr>
+    <td>自然数 N</td>
+    <td>用来数数——不够用时需要减法</td>
+    <td>3 − 5 = ?</td>
+  </tr>
+  <tr>
+    <td>整数 Z</td>
+    <td>x + 5 = 3 &rArr; x = −2（负数的引入）</td>
+    <td>−2 &times; 3 = −6</td>
+  </tr>
+  <tr>
+    <td>有理数 Q</td>
+    <td>2x = 3 &rArr; x = 3/2（分数的引入）</td>
+    <td>1 &divide; 3 = 1/3</td>
+  </tr>
+  <tr>
+    <td>实数 R</td>
+    <td>x² = 2 &rArr; x = √2（无理数的引入）</td>
+    <td>√2, π, e</td>
+  </tr>
+  <tr>
+    <td><strong>复数 C</strong></td>
+    <td><strong>x² = −1 &rArr; x = i（虚数的引入）</strong></td>
+    <td><strong>i, 2 + 3i</strong></td>
+  </tr>
+</table>
+
+<div class="example">
+  <p><strong>核心思想：</strong>每一次扩展，我们都"创造"一个新数，让原来无解的方程有解。虚数 i 就是这样的创造——我们定义 i² = −1，于是 x² + 1 = 0 就有了解 x = i 和 x = −i。</p>
+</div>
+
+<p>复数不仅解决了代数方程的求解问题，更在物理学（交流电路、量子力学）、工程学（信号处理、控制论）中有广泛的应用。</p>
+</section>
+
+<!-- 互动选择题 1 -->
+<div class="quiz-section">
+<div class="quiz-question" id="qz0">
+  <div class="q-title"><span class="q-tag concept">概念</span> 1. 方程 x² + 9 = 0 在实数范围内的解的情况是？</div>
+  <div class="options">
+    <div class="opt" onclick="selectQuiz(0,0)">A. 有两个解：x = 3 和 x = −3</div>
+    <div class="opt" onclick="selectQuiz(0,1)">B. 有一个解：x = 3</div>
+    <div class="opt" onclick="selectQuiz(0,2)">C. 无解，因为任何实数的平方都不等于 −9</div>
+    <div class="opt" onclick="selectQuiz(0,3)">D. 有无穷多个解</div>
+  </div>
+  <div class="explain" id="exp0"></div>
+</div>
+
+<div class="quiz-question" id="qz1">
+  <div class="q-title"><span class="q-tag concept">概念</span> 2. 数系扩展的顺序正确的是？</div>
+  <div class="options">
+    <div class="opt" onclick="selectQuiz(1,0)">A. 自然数 &rarr; 实数 &rarr; 整数 &rarr; 有理数 &rarr; 复数</div>
+    <div class="opt" onclick="selectQuiz(1,1)">B. 自然数 &rarr; 整数 &rarr; 有理数 &rarr; 实数 &rarr; 复数</div>
+    <div class="opt" onclick="selectQuiz(1,2)">C. 整数 &rarr; 自然数 &rarr; 有理数 &rarr; 复数 &rarr; 实数</div>
+    <div class="opt" onclick="selectQuiz(1,3)">D. 有理数 &rarr; 自然数 &rarr; 整数 &rarr; 实数 &rarr; 复数</div>
+  </div>
+  <div class="explain" id="exp1"></div>
+</div>
+</div>
+
+<!-- ==================== 二、复数的概念 ==================== -->
+<section>
+<h2>二、复数的概念</h2>
+
+<h3>2.1 虚数单位 i</h3>
+<p>我们定义<strong class="keyword">虚数单位</strong> i 满足：</p>
+<div class="formula-box">
+  <p><strong>i² = −1</strong></p>
+  <p>于是 &#x221A;(−1) = i，更一般地，对于任意正实数 a，&#x221A;(−a) = i&#x221A;a</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong></p>
+  <p>&#x221A;(−4) = i&#x221A;4 = 2i</p>
+  <p>&#x221A;(−9) = i&#x221A;9 = 3i</p>
+  <p>&#x221A;(−5) = i&#x221A;5</p>
+</div>
+
+<h3>2.2 复数的定义</h3>
+<p><strong class="definition">复数</strong>（Complex Number）是指形如 a + bi 的数，其中 a 和 b 都是实数，i 是虚数单位。</p>
+
+<div class="formula-box">
+  <p><strong>z = a + bi</strong></p>
+  <p>a 称为复数的<strong class="keyword">实部</strong>（Real Part），记作 Re(z) = a</p>
+  <p>b 称为复数的<strong class="keyword">虚部</strong>（Imaginary Part），记作 Im(z) = b</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong></p>
+  <p>z₁ = 3 + 2i：实部 Re(z₁) = 3，虚部 Im(z₁) = 2</p>
+  <p>z₂ = −1 + 4i：实部 Re(z₂) = −1，虚部 Im(z₂) = 4</p>
+  <p>z₃ = 5（即 5 + 0i）：实部 5，虚部 0 &rArr; <strong>纯实数</strong></p>
+  <p>z₄ = 3i（即 0 + 3i）：实部 0，虚部 3 &rArr; <strong>纯虚数</strong></p>
+</div>
+
+<h3>2.3 复数相等</h3>
+<p>两个复数相等，当且仅当它们的实部和虚部分别相等：</p>
+<div class="formula-box">
+  <p><strong>a + bi = c + di &hArr; a = c 且 b = d</strong></p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>已知 (x + y) + (x − y)i = 3 + i，求 x, y。</p>
+  <p class="step">由复数相等条件：</p>
+  <p class="step">x + y = 3</p>
+  <p class="step">x − y = 1</p>
+  <p class="step">解得：x = 2, y = 1</p>
+  <p class="answer" style="color:#1a73e8;">所以 x = 2, y = 1</p>
+</div>
+</section>
+
+<!-- 互动选择题 2 -->
+<div class="quiz-section">
+<div class="quiz-question" id="qz2">
+  <div class="q-title"><span class="q-tag concept">概念</span> 3. 复数 z = −3 + 5i 的实部和虚部分别是？</div>
+  <div class="options">
+    <div class="opt" onclick="selectQuiz(2,0)">A. Re = 3, Im = 5</div>
+    <div class="opt" onclick="selectQuiz(2,1)">B. Re = −3, Im = 5</div>
+    <div class="opt" onclick="selectQuiz(2,2)">C. Re = 5, Im = −3</div>
+    <div class="opt" onclick="selectQuiz(2,3)">D. Re = −3, Im = 5i</div>
+  </div>
+  <div class="explain" id="exp2"></div>
+</div>
+
+<div class="quiz-question" id="qz3">
+  <div class="q-title"><span class="q-tag concept">概念</span> 4. 已知 (2x − 1) + (3y + 2)i = 5 − i，则 x 和 y 的值分别为？</div>
+  <div class="options">
+    <div class="opt" onclick="selectQuiz(3,0)">A. x = 2, y = −1</div>
+    <div class="opt" onclick="selectQuiz(3,1)">B. x = 3, y = 1</div>
+    <div class="opt" onclick="selectQuiz(3,2)">C. x = 2, y = 1</div>
+    <div class="opt" onclick="selectQuiz(3,3)">D. x = 3, y = −1</div>
+  </div>
+  <div class="explain" id="exp3"></div>
+</div>
+
+<div class="quiz-question" id="qz4">
+  <div class="q-title"><span class="q-tag concept">概念</span> 5. 下列哪个是纯虚数？</div>
+  <div class="options">
+    <div class="opt" onclick="selectQuiz(4,0)">A. 2 + 0i</div>
+    <div class="opt" onclick="selectQuiz(4,1)">B. 0 + 3i</div>
+    <div class="opt" onclick="selectQuiz(4,2)">C. 1 + i</div>
+    <div class="opt" onclick="selectQuiz(4,3)">D. −1 + 0i</div>
+  </div>
+  <div class="explain" id="exp4"></div>
+</div>
+</div>
+
+<!-- ==================== 三、复数的几何意义 ==================== -->
+<section>
+<h2>三、复数的几何意义</h2>
+
+<h3>3.1 复平面</h3>
+<p>每个复数 z = a + bi 可以唯一对应平面上的一个点 (a, b)：</p>
+<ul>
+  <li>横轴（x 轴）代表<strong>实轴</strong>（Real Axis）——对应实部 a</li>
+  <li>纵轴（y 轴）代表<strong>虚轴</strong>（Imaginary Axis）——对应虚部 b</li>
+</ul>
+<p>这个平面称为<strong class="keyword">复平面</strong>（Complex Plane），也叫阿甘图（Argand Diagram）。</p>
+
+<div class="complex-plane">
+<svg width="400" height="380" viewBox="0 0 400 380">
+  <!-- 坐标轴 -->
+  <line x1="30" y1="190" x2="390" y2="190" stroke="#333" stroke-width="2"/>
+  <line x1="200" y1="360" x2="200" y2="20" stroke="#333" stroke-width="2"/>
+  <!-- 箭头 -->
+  <polygon points="385,190 390,190 387,184" fill="#333"/>
+  <polygon points="200,25 200,20 194,23" fill="#333"/>
+  <!-- 轴标签 -->
+  <text x="380" y="180" font-size="16" fill="#1a73e8" font-weight="bold">实轴</text>
+  <text x="205" y="30" font-size="16" fill="#9c27b0" font-weight="bold">虚轴</text>
+  <!-- 刻度 -->
+  <text x="85" y="180" font-size="13" fill="#666">−2</text>
+  <text x="185" y="180" font-size="13" fill="#666">0</text>
+  <text x="285" y="180" font-size="13" fill="#666">2</text>
+  <text x="385" y="180" font-size="13" fill="#666">4</text>
+  <text x="205" y="285" font-size="13" fill="#666">−2</text>
+  <text x="205" y="195" font-size="13" fill="#666">0</text>
+  <text x="205" y="105" font-size="13" fill="#666">2</text>
+  <!-- 点 z = 3 + 2i -->
+  <circle cx="310" cy="110" r="6" fill="#1a73e8"/>
+  <text x="318" y="100" font-size="14" fill="#1a73e8" font-weight="bold">z = 3 + 2i</text>
+  <!-- 点 z = −1 + i -->
+  <circle cx="120" cy="160" r="6" fill="#e65100"/>
+  <text x="60" y="152" font-size="14" fill="#e65100" font-weight="bold">−1 + i</text>
+  <!-- 网格辅助线 -->
+  <line x1="310" y1="190" x2="310" y2="110" stroke="#1a73e8" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="200" y1="110" x2="310" y2="110" stroke="#1a73e8" stroke-width="1" stroke-dasharray="4,4"/>
+  <!-- 原点标签 -->
+  <text x="195" y="205" font-size="13" fill="#666">O</text>
+</svg>
+</div>
+
+<div class="example">
+  <p><strong>几何对应：</strong></p>
+  <p>复数 z = a + bi &hArr; 点 P(a, b) &hArr; 向量 <strong>OP</strong> = (a, b)</p>
+  <p>复数的加减法，就对应了向量的加减法。</p>
+</div>
+
+<h3>3.2 复数的模</h3>
+<p><strong class="definition">模</strong>（Modulus）是复数 z = a + bi 到原点的距离：</p>
+<div class="formula-box">
+  <p><strong>|z| = &#x221A;(a² + b²)</strong></p>
+  <p>几何意义：点 (a, b) 到原点 O 的距离（勾股定理）</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>求 z = 3 + 4i 的模。</p>
+  <p class="step">|z| = &#x221A;(3² + 4²) = &#x221A;(9 + 16) = &#x221A;25 = 5</p>
+  <p class="answer" style="color:#1a73e8;font-weight:bold;">|3 + 4i| = 5</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>求 z = 1 − i 的模。</p>
+  <p class="step">|z| = &#x221A;(1² + (−1)²) = &#x221A;(1 + 1) = &#x221A;2</p>
+  <p class="answer" style="color:#1a73e8;font-weight:bold;">|1 − i| = &#x221A;2</p>
+</div>
+</section>
+
+<!-- 互动选择题 3 -->
+<div class="quiz-section">
+<div class="quiz-question" id="qz5">
+  <div class="q-title"><span class="q-tag calc">计算</span> 6. 复数 z = −5 + 12i 的模 |z| = ？</div>
+  <div class="options">
+    <div class="opt" onclick="selectQuiz(5,0)">A. 7</div>
+    <div class="opt" onclick="selectQuiz(5,1)">B. 13</div>
+    <div class="opt" onclick="selectQuiz(5,2)">C. 17</div>
+    <div class="opt" onclick="selectQuiz(5,3)">D. 169</div>
+  </div>
+  <div class="explain" id="exp5"></div>
+</div>
+
+<div class="quiz-question" id="qz6">
+  <div class="q-title"><span class="q-tag concept">概念</span> 7. 在复平面上，复数 2 − 3i 对应的点位于第几象限？</div>
+  <div class="options">
+    <div class="opt" onclick="selectQuiz(6,0)">A. 第一象限</div>
+    <div class="opt" onclick="selectQuiz(6,1)">B. 第二象限</div>
+    <div class="opt" onclick="selectQuiz(6,2)">C. 第三象限</div>
+    <div class="opt" onclick="selectQuiz(6,3)">D. 第四象限</div>
+  </div>
+  <div class="explain" id="exp6"></div>
+</div>
+</div>
+
+<!-- ==================== 四、复数的四则运算 ==================== -->
+<section>
+<h2>四、复数的四则运算</h2>
+
+<h3>4.1 加减法</h3>
+<p>复数加减法：<strong>实部相加减，虚部相加减</strong>：</p>
+<div class="formula-box">
+  <p><strong>(a + bi) + (c + di) = (a + c) + (b + d)i</strong></p>
+  <p><strong>(a + bi) − (c + di) = (a − c) + (b − d)i</strong></p>
+</div>
+<p>几何意义：对应向量的平行四边形法则（加法）和三角形法则（减法）。</p>
+
+<div class="example">
+  <p><strong>例：</strong>(2 + 5i) + (3 − 2i) = (2 + 3) + (5 − 2)i = <span class="answer" style="color:#1a73e8;">5 + 3i</span></p>
+  <p><strong>例：</strong>(4 + i) − (1 + 3i) = (4 − 1) + (1 − 3)i = <span class="answer" style="color:#1a73e8;">3 − 2i</span></p>
+</div>
+
+<h3>4.2 乘法</h3>
+<p>按照分配律展开，并利用 i² = −1：</p>
+<div class="formula-box">
+  <p><strong>(a + bi)(c + di) = ac + adi + bci + bdi²</strong></p>
+  <p><strong>= (ac − bd) + (ad + bc)i</strong></p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>(2 + 3i)(1 + 4i)</p>
+  <p class="step">= 2 &times; 1 + 2 &times; 4i + 3i &times; 1 + 3i &times; 4i</p>
+  <p class="step">= 2 + 8i + 3i + 12i²</p>
+  <p class="step">= 2 + 11i + 12(−1)</p>
+  <p class="step">= 2 + 11i − 12</p>
+  <p class="step answer" style="color:#1a73e8;">= −10 + 11i</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>(1 + i)²</p>
+  <p class="step">= (1 + i)(1 + i) = 1 + 2i + i²</p>
+  <p class="step">= 1 + 2i − 1</p>
+  <p class="step answer" style="color:#1a73e8;">= 2i</p>
+</div>
+
+<h3>4.3 除法 &mdash; 分母实数化</h3>
+<p>复数除法的核心思想：利用<strong class="keyword">共轭复数</strong>将分母化为实数。</p>
+
+<div class="formula-box">
+  <p><strong>(a + bi) / (c + di) = (a + bi)(c − di) / (c² + d²)</strong></p>
+  <p>其中 c − di 是 c + di 的共轭复数</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>计算 (1 + i) / (1 − i)</p>
+  <p class="step">分子分母同乘分母的共轭 (1 + i)：</p>
+  <p class="step">= (1 + i)(1 + i) / (1 − i)(1 + i)</p>
+  <p class="step">= (1 + 2i + i²) / (1 − i²)</p>
+  <p class="step">= (1 + 2i − 1) / (1 − (−1))</p>
+  <p class="step">= 2i / 2</p>
+  <p class="step answer" style="color:#1a73e8;">= i</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>计算 (3 + i) / (2 − i)</p>
+  <p class="step">= (3 + i)(2 + i) / (2 − i)(2 + i)</p>
+  <p class="step">= (6 + 3i + 2i + i²) / (4 − i²)</p>
+  <p class="step">= (6 + 5i − 1) / (4 + 1)</p>
+  <p class="step">= (5 + 5i) / 5</p>
+  <p class="step answer" style="color:#1a73e8;">= 1 + i</p>
+</div>
+</section>
+
+<!-- 互动选择题 4 -->
+<div class="quiz-section">
+<div class="quiz-question" id="qz7">
+  <div class="q-title"><span class="q-tag calc">计算</span> 8. (3 + 2i) + (−1 + 4i) = ？</div>
+  <div class="options">
+    <div class="opt" onclick="selectQuiz(7,0)">A. 2 + 6i</div>
+    <div class="opt" onclick="selectQuiz(7,1)">B. 4 + 6i</div>
+    <div class="opt" onclick="selectQuiz(7,2)">C. 2 − 2i</div>
+    <div class="opt" onclick="selectQuiz(7,3)">D. −3 + 8i</div>
+  </div>
+  <div class="explain" id="exp7"></div>
+</div>
+
+<div class="quiz-question" id="qz8">
+  <div class="q-title"><span class="q-tag calc">计算</span> 9. (1 + 2i)(3 − i) = ？</div>
+  <div class="options">
+    <div class="opt" onclick="selectQuiz(8,0)">A. 1 + 5i</div>
+    <div class="opt" onclick="selectQuiz(8,1)">B. 5 + 5i</div>
+    <div class="opt" onclick="selectQuiz(8,2)">C. 3 − 2i</div>
+    <div class="opt" onclick="selectQuiz(8,3)">D. 1 − 5i</div>
+  </div>
+  <div class="explain" id="exp8"></div>
+</div>
+
+<div class="quiz-question" id="qz9">
+  <div class="q-title"><span class="q-tag calc">计算</span> 10. (2 + i) / (1 + i) = ？</div>
+  <div class="options">
+    <div class="opt" onclick="selectQuiz(9,0)">A. (3 − i)/2</div>
+    <div class="opt" onclick="selectQuiz(9,1)">B. (3 + i)/2</div>
+    <div class="opt" onclick="selectQuiz(9,2)">C. (1 + i)/2</div>
+    <div class="opt" onclick="selectQuiz(9,3)">D. (1 − i)/2</div>
+  </div>
+  <div class="explain" id="exp9"></div>
+</div>
+</div>
+
+<!-- ==================== 五、共轭复数 ==================== -->
+<section>
+<h2>五、共轭复数</h2>
+
+<h3>5.1 定义</h3>
+<p>复数 z = a + bi 的<strong class="keyword">共轭复数</strong>（Conjugate）记为 <strong>z̄</strong>（z bar）：</p>
+<div class="formula-box">
+  <p><strong>z̄ = a − bi</strong></p>
+  <p>几何意义：在复平面上关于实轴对称</p>
+</div>
+
+<div class="complex-plane">
+<svg width="400" height="300" viewBox="0 0 400 300">
+  <line x1="30" y1="150" x2="390" y2="150" stroke="#333" stroke-width="2"/>
+  <line x1="200" y1="280" x2="200" y2="20" stroke="#333" stroke-width="2"/>
+  <polygon points="385,150 390,150 387,144" fill="#333"/>
+  <polygon points="200,25 200,20 194,23" fill="#333"/>
+  <text x="380" y="140" font-size="14" fill="#1a73e8" font-weight="bold">实轴</text>
+  <text x="205" y="30" font-size="14" fill="#9c27b0" font-weight="bold">虚轴</text>
+  <text x="195" y="165" font-size="13" fill="#666">O</text>
+  <!-- z = 3 + 2i -->
+  <circle cx="310" cy="70" r="6" fill="#1a73e8"/>
+  <text x="318" y="60" font-size="14" fill="#1a73e8" font-weight="bold">z = 3 + 2i</text>
+  <!-- z bar = 3 - 2i -->
+  <circle cx="310" cy="230" r="6" fill="#e65100"/>
+  <text x="318" y="250" font-size="14" fill="#e65100" font-weight="bold">z̄ = 3 − 2i</text>
+  <!-- 虚线连接 -->
+  <line x1="310" y1="76" x2="310" y2="224" stroke="#999" stroke-width="1.5" stroke-dasharray="5,5"/>
+</svg>
+</div>
+
+<h3>5.2 共轭的性质</h3>
+<table>
+  <tr><th>性质</th><th>公式</th></tr>
+  <tr><td>z 与 z̄ 的乘积</td><td>z &middot; z̄ = a² + b² = |z|²（总是实数）</td></tr>
+  <tr><td>z + z̄</td><td>z + z̄ = 2a（实数）</td></tr>
+  <tr><td>z − z̄</td><td>z − z̄ = 2bi（纯虚数或 0）</td></tr>
+  <tr><td>共轭的共轭</td><td>(z̄)̄ = z</td></tr>
+  <tr><td>和的共轭</td><td>z₁ + z₂ = z̄₁ + z̄₂</td></tr>
+  <tr><td>积的共轭</td><td>z₁ &middot; z₂ = z̄₁ &middot; z̄₂</td></tr>
+</table>
+
+<div class="hint">
+  <strong>关键性质：</strong>z &middot; z̄ = |z|² 是实数，这正是复数除法中"分母实数化"的依据。
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>z = 3 + 4i，则 z̄ = 3 − 4i</p>
+  <p class="step">z &middot; z̄ = (3 + 4i)(3 − 4i) = 9 − 12i + 12i − 16i²</p>
+  <p class="step">= 9 + 16 = 25 = 5² = |z|²</p>
+  <p class="step answer" style="color:#1a73e8;">验证了 z &middot; z̄ = |z|²</p>
+</div>
+</section>
+
+<!-- 互动选择题 5 -->
+<div class="quiz-section">
+<div class="quiz-question" id="qz10">
+  <div class="q-title"><span class="q-tag concept">概念</span> 11. 复数 z = 2 − 5i 的共轭复数是？</div>
+  <div class="options">
+    <div class="opt" onclick="selectQuiz(10,0)">A. −2 − 5i</div>
+    <div class="opt" onclick="selectQuiz(10,1)">B. −2 + 5i</div>
+    <div class="opt" onclick="selectQuiz(10,2)">C. 2 + 5i</div>
+    <div class="opt" onclick="selectQuiz(10,3)">D. 2 − 5i</div>
+  </div>
+  <div class="explain" id="exp10"></div>
+</div>
+
+<div class="quiz-question" id="qz11">
+  <div class="q-title"><span class="q-tag calc">计算</span> 12. 已知 z = 1 + i，则 z &middot; z̄ = ？</div>
+  <div class="options">
+    <div class="opt" onclick="selectQuiz(11,0)">A. 0</div>
+    <div class="opt" onclick="selectQuiz(11,1)">B. 1</div>
+    <div class="opt" onclick="selectQuiz(11,2)">C. 2</div>
+    <div class="opt" onclick="selectQuiz(11,3)">D. &#x221A;2</div>
+  </div>
+  <div class="explain" id="exp11"></div>
+</div>
+</div>
+
+<!-- ==================== 六、复数的三角形式 ==================== -->
+<section>
+<h2>六、复数的三角形式（简要介绍）</h2>
+
+<h3>6.1 从直角坐标到极坐标</h3>
+<p>在复平面上，复数 z = a + bi 也可以用<strong>极坐标</strong>表示：</p>
+<ul>
+  <li>r = |z| = &#x221A;(a² + b²)——到原点的距离（模）</li>
+  <li>&theta; 为从正实轴到向量 OP 的夹角，称为<strong class="keyword">辐角</strong>（Argument）</li>
+</ul>
+
+<div class="formula-box">
+  <p><strong>z = r(cos &theta; + i sin &theta;)</strong></p>
+  <p>其中 r = |z|，&theta; 是辐角</p>
+  <p>a = r cos &theta;，b = r sin &theta;</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>将 z = 1 + i 化为三角形式。</p>
+  <p class="step">r = |z| = &#x221A;(1² + 1²) = &#x221A;2</p>
+  <p class="step">cos &theta; = 1/&#x221A;2，sin &theta; = 1/&#x221A;2 &rArr; &theta; = 45&deg; = &pi;/4</p>
+  <p class="step answer" style="color:#1a73e8;">z = &#x221A;2 (cos &pi;/4 + i sin &pi;/4)</p>
+</div>
+
+<h3>6.2 三角形式的乘法和除法</h3>
+<p>三角形式下，乘法和除法变得非常简洁：</p>
+<div class="formula-box">
+  <p><strong>乘法：</strong>r₁(cos &theta;₁ + i sin &theta;₁) &middot; r₂(cos &theta;₂ + i sin &theta;₂)</p>
+  <p><strong>= r₁r₂[cos(&theta;₁ + &theta;₂) + i sin(&theta;₁ + &theta;₂)]</strong></p>
+  <p style="margin-top:10px;"><strong>除法：</strong>r₁(cos &theta;₁ + i sin &theta;₁) / r₂(cos &theta;₂ + i sin &theta;₂)</p>
+  <p><strong>= (r₁/r₂)[cos(&theta;₁ − &theta;₂) + i sin(&theta;₁ − &theta;₂)]</strong></p>
+</div>
+
+<div class="hint">
+  <strong>记忆口诀：</strong>三角形式下，<strong>模相乘、辐角相加</strong>（乘法）；<strong>模相除、辐角相减</strong>（除法）。
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>用三角形式计算 (1 + i)(&#x221A;3 + i)</p>
+  <p class="step">1 + i = &#x221A;2(cos &pi;/4 + i sin &pi;/4)</p>
+  <p class="step">&#x221A;3 + i = 2(cos &pi;/6 + i sin &pi;/6)（因为 r = 2，&theta; = 30&deg;）</p>
+  <p class="step">乘积 = &#x221A;2 &times; 2 &times; [cos(&pi;/4 + &pi;/6) + i sin(&pi;/4 + &pi;/6)]</p>
+  <p class="step">= 2&#x221A;2 [cos(5&pi;/12) + i sin(5&pi;/12)]</p>
+  <p class="step answer" style="color:#1a73e8;">= 2&#x221A;2(cos 75&deg; + i sin 75&deg;)</p>
+</div>
+</section>
+
+<!-- 互动选择题 6 -->
+<div class="quiz-section">
+<div class="quiz-question" id="qz12">
+  <div class="q-title"><span class="q-tag concept">概念</span> 13. 复数 z = −1 的三角形式是？</div>
+  <div class="options">
+    <div class="opt" onclick="selectQuiz(12,0)">A. cos 0 + i sin 0</div>
+    <div class="opt" onclick="selectQuiz(12,1)">B. cos &pi; + i sin &pi;</div>
+    <div class="opt" onclick="selectQuiz(12,2)">C. cos(&pi;/2) + i sin(&pi;/2)</div>
+    <div class="opt" onclick="selectQuiz(12,3)">D. cos(−&pi;/2) + i sin(−&pi;/2)</div>
+  </div>
+  <div class="explain" id="exp12"></div>
+</div>
+
+<div class="quiz-question" id="qz13">
+  <div class="q-title"><span class="q-tag concept">概念</span> 14. 三角形式下，复数乘法时辐角如何变化？</div>
+  <div class="options">
+    <div class="opt" onclick="selectQuiz(13,0)">A. 辐角相乘</div>
+    <div class="opt" onclick="selectQuiz(13,1)">B. 辐角相加</div>
+    <div class="opt" onclick="selectQuiz(13,2)">C. 辐角相减</div>
+    <div class="opt" onclick="selectQuiz(13,3)">D. 辐角不变</div>
+  </div>
+  <div class="explain" id="exp13"></div>
+</div>
+</div>
+
+<!-- ==================== 七、综合练习 ==================== -->
+<section>
+<h2>七、综合练习</h2>
+<p class="tip">完成以下 5 道练习，检验你对复数的掌握程度。</p>
+
+<div class="score-bar" id="scoreBar">
+  <span class="score-text" id="finalScore">得分：0 / 100</span>
+  <span class="btn-reset" onclick="resetComp()">重新开始</span>
+</div>
+
+<div class="comp-section" id="compSection">
+
+<!-- 综合题 1 -->
+<div class="comp-question" id="comp0">
+  <h4>练习 1（20分）</h4>
+  <p>已知复数 z = 2 − i，求：</p>
+  <p>(1) z 的实部和虚部<br>
+  (2) z 的共轭复数 z̄<br>
+  (3) z 的模 |z|<br>
+  (4) z²</p>
+  <div class="options">
+    <div class="opt" onclick="selectComp(0,0)">A. Re=2, Im=−1, z̄=2+i, |z|=√5, z²=3−4i</div>
+    <div class="opt" onclick="selectComp(0,1)">B. Re=2, Im=1, z̄=2−i, |z|=√3, z²=3+4i</div>
+    <div class="opt" onclick="selectComp(0,2)">C. Re=2, Im=−1, z̄=2+i, |z|=√5, z²=4−4i</div>
+    <div class="opt" onclick="selectComp(0,3)">D. Re=−1, Im=2, z̄=−1−2i, |z|=√5, z²=3+4i</div>
+  </div>
+  <div class="explain" id="compExp0"></div>
+</div>
+
+<!-- 综合题 2 -->
+<div class="comp-question" id="comp1">
+  <h4>练习 2（20分）</h4>
+  <p>计算 (2 + 3i)(1 − 2i) − (4 + i)，结果是多少？</p>
+  <div class="options">
+    <div class="opt" onclick="selectComp(1,0)">A. 4 − 2i</div>
+    <div class="opt" onclick="selectComp(1,1)">B. 6 − 2i</div>
+    <div class="opt" onclick="selectComp(1,2)">C. 8 + 2i</div>
+    <div class="opt" onclick="selectComp(1,3)">D. 4 + 8i</div>
+  </div>
+  <div class="explain" id="compExp1"></div>
+</div>
+
+<!-- 综合题 3 -->
+<div class="comp-question" id="comp2">
+  <h4>练习 3（20分）</h4>
+  <p>计算 (1 + i) / (2 − i)，将结果化为 a + bi 的形式。</p>
+  <div class="options">
+    <div class="opt" onclick="selectComp(2,0)">A. (1 + 3i)/5</div>
+    <div class="opt" onclick="selectComp(2,1)">B. (1 + i)/5</div>
+    <div class="opt" onclick="selectComp(2,2)">C. (1 + 3i)/3</div>
+    <div class="opt" onclick="selectComp(2,3)">D. (2 + 3i)/5</div>
+  </div>
+  <div class="explain" id="compExp2"></div>
+</div>
+
+<!-- 综合题 4 -->
+<div class="comp-question" id="comp3">
+  <h4>练习 4（20分）</h4>
+  <p>已知复数 z 满足 (1 + i)z = 2i，求 z。</p>
+  <div class="options">
+    <div class="opt" onclick="selectComp(3,0)">A. 1 + i</div>
+    <div class="opt" onclick="selectComp(3,1)">B. 1 − i</div>
+    <div class="opt" onclick="selectComp(3,2)">C. −1 + i</div>
+    <div class="opt" onclick="selectComp(3,3)">D. −1 − i</div>
+  </div>
+  <div class="explain" id="compExp3"></div>
+</div>
+
+<!-- 综合题 5 -->
+<div class="comp-question" id="comp4">
+  <h4>练习 5（20分）</h4>
+  <p>在复平面上，点 A 对应复数 1 + i，点 B 对应复数 2 − 3i。求向量 AB 对应的复数，以及 |AB|。</p>
+  <div class="options">
+    <div class="opt" onclick="selectComp(4,0)">A. AB = 1 − 4i, |AB| = √17</div>
+    <div class="opt" onclick="selectComp(4,1)">B. AB = −1 + 4i, |AB| = √15</div>
+    <div class="opt" onclick="selectComp(4,2)">C. AB = 1 − 4i, |AB| = √15</div>
+    <div class="opt" onclick="selectComp(4,3)">D. AB = 3 − 2i, |AB| = √13</div>
+  </div>
+  <div class="explain" id="compExp4"></div>
+</div>
+
+</div>
+</section>
+
+</article>
+
+<script>
+// ============================================================
+// 课程内互动选择题（14 题）
+// ============================================================
+var quizQuestions = [
+  { answer: 2, explain: "x² = −9，任何实数的平方都不为负，所以实数范围内无解。" },
+  { answer: 1, explain: "正确的扩展顺序是：自然数 → 整数 → 有理数 → 实数 → 复数。每一步都是为了解决上一级数系中某些方程无解的问题。" },
+  { answer: 1, explain: "z = −3 + 5i，实部 Re = −3，虚部 Im = 5（注意虚部是实数 5，不是 5i）。" },
+  { answer: 3, explain: "由复数相等：2x − 1 = 5 → 2x = 6 → x = 3；3y + 2 = −1 → 3y = −3 → y = −1。" },
+  { answer: 1, explain: "纯虚数是指实部为 0 的复数。0 + 3i 的实部为 0，是纯虚数。2 + 0i 是实数。" },
+  { answer: 1, explain: "|−5 + 12i| = √((−5)² + 12²) = √(25 + 144) = √169 = 13。" },
+  { answer: 3, explain: "2 − 3i 对应点 (2, −3)，横坐标为正、纵坐标为负，位于第四象限。" },
+  { answer: 0, explain: "(3 + 2i) + (−1 + 4i) = (3 − 1) + (2 + 4)i = 2 + 6i。" },
+  { answer: 1, explain: "(1 + 2i)(3 − i) = 3 − i + 6i − 2i² = 3 + 5i + 2 = 5 + 5i。" },
+  { answer: 0, explain: "(2 + i)/(1 + i) = (2 + i)(1 − i)/(1 + i)(1 − i) = (2 − 2i + i − i²)/(1 − i²) = (2 − i + 1)/(1 + 1) = (3 − i)/2。" },
+  { answer: 2, explain: "共轭复数虚部符号取反：z = 2 − 5i → z̄ = 2 + 5i。" },
+  { answer: 2, explain: "z · z̄ = (1 + i)(1 − i) = 1 − i² = 1 + 1 = 2。也可用公式 z · z̄ = |z|² = (√2)² = 2。" },
+  { answer: 1, explain: "z = −1 的模 r = 1，辐角 θ = π（在负实轴上）。所以三角形式为 cos π + i sin π。" },
+  { answer: 1, explain: "三角形式下，复数乘法 = 模相乘、辐角相加。" }
+];
+
+var quizAnswered = new Array(quizQuestions.length).fill(-1);
+
+function selectQuiz(qi, oi) {
+  if (quizAnswered[qi] !== -1) return;
+  quizAnswered[qi] = oi;
+  var q = quizQuestions[qi];
+  var isCorrect = (oi === q.answer);
+  var qDiv = document.getElementById("qz" + qi);
+  var opts = qDiv.querySelectorAll(".opt");
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add("disabled");
+    if (i === q.answer) opts[i].classList.add("correct-opt");
+    if (i === oi && !isCorrect) opts[i].classList.add("wrong-opt");
+    if (i === oi && isCorrect) opts[i].classList.add("selected");
+  }
+  if (isCorrect) {
+    qDiv.classList.add("correct");
+  } else {
+    qDiv.classList.add("wrong");
+  }
+  var expDiv = document.getElementById("exp" + qi);
+  expDiv.textContent = (isCorrect ? "✓ " : "✗ ") + q.explain;
+  expDiv.className = "explain show " + (isCorrect ? "ok" : "fail");
+}
+
+// ============================================================
+// 综合练习题（5 题，每题 20 分）
+// ============================================================
+var compQuestions = [
+  { answer: 0, explain: "z = 2 − i：Re=2, Im=−1；z̄ = 2 + i；|z| = √(4+1) = √5；z² = (2−i)² = 4 − 4i + i² = 4 − 4i − 1 = 3 − 4i。" },
+  { answer: 0, explain: "(2 + 3i)(1 − 2i) = 2·1 + 2·(−2i) + 3i·1 + 3i·(−2i) = 2 − 4i + 3i − 6i² = 2 − i + 6 = 8 − i。减去 (4 + i)：8 − i − 4 − i = 4 − 2i。" },
+  { answer: 0, explain: "(1 + i)/(2 − i) = (1 + i)(2 + i)/(2 − i)(2 + i) = (2 + i + 2i + i²)/(4 − i²) = (2 + 3i − 1)/(4 + 1) = (1 + 3i)/5。" },
+  { answer: 0, explain: "z = 2i/(1 + i) = 2i(1 − i)/(1 + i)(1 − i) = 2i(1 − i)/(1 − i²) = 2i(1 − i)/2 = i(1 − i) = i − i² = i + 1 = 1 + i。" },
+  { answer: 0, explain: "AB = B − A = (2 − 3i) − (1 + i) = 1 − 4i。|AB| = √(1² + (−4)²) = √(1 + 16) = √17。注意：向量 AB = B − A，即终点减起点。" }
+];
+
+var compAnswered = new Array(compQuestions.length).fill(-1);
+var compCorrectCount = 0;
+
+function selectComp(qi, oi) {
+  if (compAnswered[qi] !== -1) return;
+  compAnswered[qi] = oi;
+  var q = compQuestions[qi];
+  var isCorrect = (oi === q.answer);
+  if (isCorrect) compCorrectCount++;
+
+  var qDiv = document.getElementById("comp" + qi);
+  var opts = qDiv.querySelectorAll(".opt");
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add("disabled");
+    if (i === q.answer) opts[i].classList.add("correct-opt");
+    if (i === oi && !isCorrect) opts[i].classList.add("wrong-opt");
+    if (i === oi && isCorrect) opts[i].classList.add("selected");
+  }
+  if (isCorrect) {
+    qDiv.classList.add("correct");
+  } else {
+    qDiv.classList.add("wrong");
+    qDiv.style.borderColor = "#f44336";
+  }
+
+  var expDiv = document.getElementById("compExp" + qi);
+  expDiv.textContent = (isCorrect ? "✓ " : "✗ ") + q.explain;
+  expDiv.className = "explain show " + (isCorrect ? "ok" : "fail");
+
+  updateCompScore();
+}
+
+function updateCompScore() {
+  var total = 0;
+  for (var i = 0; i < compQuestions.length; i++) {
+    if (compAnswered[i] === compQuestions[i].answer) {
+      total += 20;
+    }
+  }
+  document.getElementById("finalScore").textContent = "得分：" + total + " / 100";
+}
+
+function resetComp() {
+  compCorrectCount = 0;
+  compAnswered = new Array(compQuestions.length).fill(-1);
+  document.getElementById("finalScore").textContent = "得分：0 / 100";
+  for (var i = 0; i < compQuestions.length; i++) {
+    var qDiv = document.getElementById("comp" + i);
+    qDiv.className = "comp-question";
+    qDiv.style.borderColor = "";
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].className = "opt";
+    }
+    document.getElementById("compExp" + i).className = "explain";
+  }
+}
+</script>
+</body>
+</html>

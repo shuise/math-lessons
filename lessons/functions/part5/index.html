@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>各类函数详解与应用</title>
+<title>各类函数详解与应用 (Functions: Detailed Explanation and Application)</title>
 <link rel="stylesheet" href="../../style.css">
 <style>
   h3 { color: #2c3e50; margin: 24px 0 10px; font-size: 1.1em; }
@@ -23,7 +23,7 @@
   /* 属性标签 */
   .prop-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 0.8em; color: #fff; margin: 2px; }
   .prop-tag.increase { background: #4caf50; }
-  .prop-tag.decrease { background: #f44336; }
+  .prop-tag.decrease { background: #1565c0; }
   .prop-tag.odd { background: #9c27b0; }
   .prop-tag.even { background: #ff9800; }
   .prop-tag.none { background: #607d8b; }
@@ -42,7 +42,7 @@
   }
   .q-tag.concept { background: #9c27b0; }
   .q-tag.calc { background: #1a73e8; }
-  .q-tag.comprehensive { background: #e53935; }
+  .q-tag.comprehensive { background: #6a1b9a; }
   .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
   .quiz-question .opt {
     padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
@@ -67,7 +67,7 @@
     padding: 20px 24px; margin: 20px 0;
     border-left: 6px solid #ff7043;
   }
-  .comp-question h4 { margin-top: 0; color: #e53935; }
+  .comp-question h4 { margin-top: 0; color: #e65100; }
   .comp-question .answer-box {
     margin-top: 12px; padding: 14px; background: #fff3e0;
     border-radius: 8px; display: none; border-left: 4px solid #ff9800;
@@ -90,127 +90,127 @@
 <body>
 <a class="back" href="../../index.html">&larr; 返回课程列表</a>
 <article>
-<h1>各类函数详解与应用</h1>
-<p class="tip" style="text-align:center;font-size:1.1em;">系统讲解二次函数与不等式、幂函数、指数函数、对数函数和三角函数的图像、性质与应用。</p>
+<h1>各类函数详解与应用 <span style="font-size:0.55em;color:#888;">(Functions: Detailed Explanation and Application)</span></h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">系统讲解二次函数与不等式、幂函数、指数函数、对数函数和三角函数的图像、性质与应用。<br><span style="font-size:0.85em;color:#999;">Quadratic Functions &amp; Inequalities, Power Functions, Exponential Functions, Logarithmic Functions, Trigonometric Functions — their graphs, properties, and applications.</span></p>
 
 <!-- ============================== 知识大纲 ============================== -->
 <section>
-<h2>一、知识大纲</h2>
+<h2>一、知识大纲 <span style="font-size:0.6em;color:#888;font-weight:normal;">(Outline)</span></h2>
 <div class="outline">
   <ol>
-    <li><strong>二次函数与不等式</strong> &mdash; 不等式性质、基本不等式、三个"二次"的关系</li>
-    <li><strong>幂函数</strong> &mdash; y = x&alpha;，五种常见幂函数，&alpha; 对图像的影响</li>
-    <li><strong>指数函数</strong> &mdash; y = a&supx;，a&gt;1 与 0&lt;a&lt;1 对比，指数爆炸</li>
-    <li><strong>对数函数</strong> &mdash; y = log<sub>a</sub>x，a&gt;1 与 0&lt;a&lt;1 对比，对数增长</li>
-    <li><strong>三角函数</strong> &mdash; 正弦、余弦、正切，五点作图，三角恒等变换，y = A sin(&omega;x + &phi;)</li>
+    <li><strong>二次函数与不等式</strong> <span style="color:#888;">(Quadratic Functions &amp; Inequalities)</span> &mdash; 不等式性质、基本不等式、三个"二次"的关系</li>
+    <li><strong>幂函数</strong> <span style="color:#888;">(Power Functions)</span> &mdash; y = x<sup>&alpha;</sup>，五种常见幂函数，&alpha; 对图像的影响</li>
+    <li><strong>指数函数</strong> <span style="color:#888;">(Exponential Functions)</span> &mdash; y = a<sup>x</sup>，a&gt;1 与 0&lt;a&lt;1 对比，指数爆炸</li>
+    <li><strong>对数函数</strong> <span style="color:#888;">(Logarithmic Functions)</span> &mdash; y = log<sub>a</sub>x，a&gt;1 与 0&lt;a&lt;1 对比，对数增长</li>
+    <li><strong>三角函数</strong> <span style="color:#888;">(Trigonometric Functions)</span> &mdash; 正弦(Sine)、余弦(Cosine)、正切(Tangent)，五点作图，三角恒等变换，y = A sin(&omega;x + &phi;)</li>
   </ol>
 </div>
 </section>
 
 <!-- ============================== 第二部分：定理/公式 ============================== -->
 <section>
-<h2>二、定理 / 公式</h2>
+<h2>二、定理 / 公式 <span style="font-size:0.6em;color:#888;font-weight:normal;">(Theorems &amp; Formulas)</span></h2>
 
-<h3>2.1 等式与不等式的性质</h3>
+<h3>2.1 等式与不等式的性质 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Properties of Equality and Inequality)</span></h3>
 <div class="formula-box">
-  <p><strong>对称性：</strong>a &gt; b &hArr; b &lt; a</p>
-  <p><strong>传递性：</strong>a &gt; b 且 b &gt; c &rArr; a &gt; c</p>
-  <p><strong>可加性：</strong>a &gt; b &rArr; a + c &gt; b + c</p>
-  <p><strong>可乘性：</strong>a &gt; b, c &gt; 0 &rArr; ac &gt; bc；a &gt; b, c &lt; 0 &rArr; ac &lt; bc</p>
+  <p><strong>对称性 (Symmetry)：</strong>a &gt; b &hArr; b &lt; a</p>
+  <p><strong>传递性 (Transitivity)：</strong>a &gt; b 且 b &gt; c &rArr; a &gt; c</p>
+  <p><strong>可加性 (Additivity)：</strong>a &gt; b &rArr; a + c &gt; b + c</p>
+  <p><strong>可乘性 (Multiplicativity)：</strong>a &gt; b, c &gt; 0 &rArr; ac &gt; bc；a &gt; b, c &lt; 0 &rArr; ac &lt; bc</p>
 </div>
 
-<h3>2.2 基本不等式</h3>
+<h3>2.2 基本不等式 <span style="font-weight:normal;font-size:0.85em;color:#888;">(AM-GM Inequality / Basic Inequality)</span></h3>
 <div class="formula-box">
   <p>对于任意正数 a、b，有：<strong>&radic;(ab) &le; (a + b)/2</strong></p>
   <p>当且仅当 <strong>a = b</strong> 时取等号。</p>
-  <p style="margin-top:8px;color:#555;">&bull; <strong>和定积最大</strong>：若 a + b 为定值，则当 a = b 时 ab 取得最大值</p>
-  <p style="color:#555;">&bull; <strong>积定和最小</strong>：若 ab 为定值，则当 a = b 时 a + b 取得最小值</p>
+  <p style="margin-top:8px;color:#555;">&bull; <strong>和定积最大</strong> <span style="color:#888;">(Maximum product given fixed sum)</span>：若 a + b 为定值，则当 a = b 时 ab 取得最大值</p>
+  <p style="color:#555;">&bull; <strong>积定和最小</strong> <span style="color:#888;">(Minimum sum given fixed product)</span>：若 ab 为定值，则当 a = b 时 a + b 取得最小值</p>
 </div>
 
-<h3>2.3 三个"二次"的关系</h3>
+<h3>2.3 三个"二次"的关系 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Relationship of the Three "Quadratics")</span></h3>
 <div class="formula-box">
   <p>对于二次函数 y = ax&sup2; + bx + c（a &ne; 0）：</p>
   <p>&bull; 函数图像与 x 轴的交点的<strong>横坐标</strong>，就是方程 ax&sup2; + bx + c = 0 的<strong>根</strong></p>
   <p>&bull; 不等式 ax&sup2; + bx + c &gt; 0（或 &lt; 0）的解集，对应图像在 x 轴上方（或下方）的部分</p>
-  <p style="margin-top:8px;color:#555;">解题步骤：先解方程 &rarr; 画函数图像 &rarr; 读解集</p>
+  <p style="margin-top:8px;color:#555;">解题步骤 (Solution steps)：先解方程 &rarr; 画函数图像 &rarr; 读解集</p>
 </div>
 
-<h3>2.4 幂函数</h3>
+<h3>2.4 幂函数 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Power Functions)</span></h3>
 <div class="formula-box">
-  <p>一般形式：<strong>y = x<sup>&alpha;</sup></strong>，其中 &alpha; 为常数</p>
+  <p>一般形式：<strong>y = x<sup>&alpha;</sup></strong>，其中 &alpha; 为常数 (constant)</p>
 </div>
 <table class="compare-table">
-  <tr><th>函数</th><th>&alpha;</th><th>图像特征</th><th>定义域</th><th>值域</th><th>单调性</th><th>奇偶性</th></tr>
-  <tr><td>y = x</td><td>1</td><td>过原点的直线</td><td>R</td><td>R</td><td><span class="prop-tag increase">递增</span></td><td><span class="prop-tag odd">奇</span></td></tr>
-  <tr><td>y = x&sup2;</td><td>2</td><td>开口向上的抛物线</td><td>R</td><td>[0, +&infin;)</td><td>(-&infin;,0] <span class="prop-tag decrease">减</span> [0,&infin;) <span class="prop-tag increase">增</span></td><td><span class="prop-tag even">偶</span></td></tr>
-  <tr><td>y = x&sup3;</td><td>3</td><td>S 形增长曲线</td><td>R</td><td>R</td><td><span class="prop-tag increase">递增</span></td><td><span class="prop-tag odd">奇</span></td></tr>
-  <tr><td>y = &radic;x</td><td>1/2</td><td>右半支抛物线</td><td>[0,+&infin;)</td><td>[0,+&infin;)</td><td><span class="prop-tag increase">递增</span></td><td><span class="prop-tag none">非奇非偶</span></td></tr>
-  <tr><td>y = 1/x</td><td>-1</td><td>双曲线</td><td>(-&infin;,0)&cup;(0,+&infin;)</td><td>(-&infin;,0)&cup;(0,+&infin;)</td><td>(-&infin;,0)<span class="prop-tag decrease">减</span> (0,&infin;)<span class="prop-tag decrease">减</span></td><td><span class="prop-tag odd">奇</span></td></tr>
+  <tr><th>函数 <span style="color:#888;font-size:0.85em;font-weight:normal;">(Function)</span></th><th>&alpha;</th><th>图像特征 <span style="color:#888;font-size:0.85em;font-weight:normal;">(Graph)</span></th><th>定义域 <span style="color:#888;font-size:0.85em;font-weight:normal;">(Domain)</span></th><th>值域 <span style="color:#888;font-size:0.85em;font-weight:normal;">(Range)</span></th><th>单调性 <span style="color:#888;font-size:0.85em;font-weight:normal;">(Monotonicity)</span></th><th>奇偶性 <span style="color:#888;font-size:0.85em;font-weight:normal;">(Parity)</span></th></tr>
+  <tr><td>y = x</td><td>1</td><td>过原点的直线 <span style="color:#888;">(Line through origin)</span></td><td>R</td><td>R</td><td><span class="prop-tag increase">递增</span></td><td><span class="prop-tag odd">奇</span></td></tr>
+  <tr><td>y = x&sup2;</td><td>2</td><td>开口向上的抛物线 <span style="color:#888;">(Upward parabola)</span></td><td>R</td><td>[0, +&infin;)</td><td>(-&infin;,0] <span class="prop-tag decrease">减</span> [0,&infin;) <span class="prop-tag increase">增</span></td><td><span class="prop-tag even">偶</span></td></tr>
+  <tr><td>y = x&sup3;</td><td>3</td><td>S 形增长曲线 <span style="color:#888;">(S-shaped curve)</span></td><td>R</td><td>R</td><td><span class="prop-tag increase">递增</span></td><td><span class="prop-tag odd">奇</span></td></tr>
+  <tr><td>y = &radic;x</td><td>1/2</td><td>右半支抛物线 <span style="color:#888;">(Right half-parabola)</span></td><td>[0,+&infin;)</td><td>[0,+&infin;)</td><td><span class="prop-tag increase">递增</span></td><td><span class="prop-tag none">非奇非偶</span></td></tr>
+  <tr><td>y = 1/x</td><td>-1</td><td>双曲线 <span style="color:#888;">(Hyperbola)</span></td><td>(-&infin;,0)&cup;(0,+&infin;)</td><td>(-&infin;,0)&cup;(0,+&infin;)</td><td>(-&infin;,0)<span class="prop-tag decrease">减</span> (0,&infin;)<span class="prop-tag decrease">减</span></td><td><span class="prop-tag odd">奇</span></td></tr>
 </table>
 
-<h3>2.5 指数函数</h3>
+<h3>2.5 指数函数 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Exponential Functions)</span></h3>
 <div class="formula-box">
   <p>一般形式：<strong>y = a<sup>x</sup>（a &gt; 0，a &ne; 1）</strong></p>
-  <p>定义域：<strong>R</strong> &nbsp;&nbsp; 值域：<strong>(0, +&infin;)</strong> &nbsp;&nbsp; 恒过定点 <strong>(0, 1)</strong></p>
+  <p>定义域 (Domain)：<strong>R</strong> &nbsp;&nbsp; 值域 (Range)：<strong>(0, +&infin;)</strong> &nbsp;&nbsp; 恒过定点 (Fixed point) <strong>(0, 1)</strong></p>
 </div>
 <table class="compare-table">
-  <tr><th>性质</th><th>a &gt; 1</th><th>0 &lt; a &lt; 1</th></tr>
-  <tr><td>单调性</td><td><span class="prop-tag increase">R 上递增</span></td><td><span class="prop-tag decrease">R 上递减</span></td></tr>
-  <tr><td>图像趋势</td><td>从左到右上升</td><td>从左到右下降</td></tr>
-  <tr><td>x &rarr; -&infin;</td><td>趋近于 0</td><td>趋近于 +&infin;</td></tr>
-  <tr><td>x &rarr; +&infin;</td><td>趋近于 +&infin;</td><td>趋近于 0</td></tr>
+  <tr><th>性质 <span style="color:#888;font-size:0.85em;font-weight:normal;">(Property)</span></th><th>a &gt; 1</th><th>0 &lt; a &lt; 1</th></tr>
+  <tr><td>单调性 <span style="color:#888;">(Monotonicity)</span></td><td><span class="prop-tag increase">R 上递增</span></td><td><span class="prop-tag decrease">R 上递减</span></td></tr>
+  <tr><td>图像趋势 <span style="color:#888;">(Trend)</span></td><td>从左到右上升 <span style="color:#888;">(Increasing left to right)</span></td><td>从左到右下降 <span style="color:#888;">(Decreasing left to right)</span></td></tr>
+  <tr><td>x &rarr; -&infin;</td><td>趋近于 0 <span style="color:#888;">(Approaches 0)</span></td><td>趋近于 +&infin; <span style="color:#888;">(Approaches +&infin;)</span></td></tr>
+  <tr><td>x &rarr; +&infin;</td><td>趋近于 +&infin; <span style="color:#888;">(Approaches +&infin;)</span></td><td>趋近于 0 <span style="color:#888;">(Approaches 0)</span></td></tr>
 </table>
 
-<h3>2.6 对数函数</h3>
+<h3>2.6 对数函数 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Logarithmic Functions)</span></h3>
 <div class="formula-box">
   <p>一般形式：<strong>y = log<sub>a</sub>x（a &gt; 0，a &ne; 1）</strong></p>
-  <p>定义域：<strong>(0, +&infin;)</strong> &nbsp;&nbsp; 值域：<strong>R</strong> &nbsp;&nbsp; 恒过定点 <strong>(1, 0)</strong></p>
+  <p>定义域 (Domain)：<strong>(0, +&infin;)</strong> &nbsp;&nbsp; 值域 (Range)：<strong>R</strong> &nbsp;&nbsp; 恒过定点 <strong>(1, 0)</strong></p>
 </div>
 <table class="compare-table">
-  <tr><th>性质</th><th>a &gt; 1</th><th>0 &lt; a &lt; 1</th></tr>
-  <tr><td>单调性</td><td><span class="prop-tag increase">(0,&infin;) 递增</span></td><td><span class="prop-tag decrease">(0,&infin;) 递减</span></td></tr>
-  <tr><td>图像趋势</td><td>从左到右上升</td><td>从左到右下降</td></tr>
-  <tr><td>x &rarr; 0<sup>+</sup></td><td>趋近于 -&infin;</td><td>趋近于 +&infin;</td></tr>
+  <tr><th>性质 <span style="color:#888;font-size:0.85em;font-weight:normal;">(Property)</span></th><th>a &gt; 1</th><th>0 &lt; a &lt; 1</th></tr>
+  <tr><td>单调性 <span style="color:#888;">(Monotonicity)</span></td><td><span class="prop-tag increase">(0,&infin;) 递增</span></td><td><span class="prop-tag decrease">(0,&infin;) 递减</span></td></tr>
+  <tr><td>图像趋势 <span style="color:#888;">(Trend)</span></td><td>从左到右上升 <span style="color:#888;">(Increasing left to right)</span></td><td>从左到右下降 <span style="color:#888;">(Decreasing left to right)</span></td></tr>
+  <tr><td>x &rarr; 0<sup>+</sup></td><td>趋近于 -&infin; <span style="color:#888;">(Approaches -&infin;)</span></td><td>趋近于 +&infin; <span style="color:#888;">(Approaches +&infin;)</span></td></tr>
 </table>
 
 <div class="hint">
-  <strong>对数增长 vs 指数爆炸：</strong>对数函数增长最慢（越增越慢），指数函数增长最快（越增越快）。在同一个坐标系中，指数曲线快速远离 x 轴，对数曲线缓慢远离 y 轴。
+  <strong>对数增长 (Logarithmic Growth) vs 指数爆炸 (Exponential Explosion)：</strong>对数函数增长最慢（越增越慢），指数函数增长最快（越增越快）。在同一个坐标系中，指数曲线快速远离 x 轴，对数曲线缓慢远离 y 轴。
 </div>
 
-<h3>2.7 三角函数</h3>
+<h3>2.7 三角函数 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Trigonometric Functions)</span></h3>
 
-<h4>正弦函数 y = sin x</h4>
+<h4>正弦函数 y = sin x <span style="font-weight:normal;font-size:0.85em;color:#888;">(Sine Function)</span></h4>
 <div class="formula-box">
-  <p>定义域：<strong>R</strong> &nbsp;&nbsp; 值域：<strong>[-1, 1]</strong></p>
-  <p>周期：<strong>2&pi;</strong> &nbsp;&nbsp; 奇偶性：<span class="prop-tag odd">奇函数</span></p>
-  <p><strong>五点作图</strong>关键点：(0, 0), (&pi;/2, 1), (&pi;, 0), (3&pi;/2, -1), (2&pi;, 0)</p>
-  <p>递增区间：[-&pi;/2 + 2k&pi;, &pi;/2 + 2k&pi;] &nbsp; 递减区间：[&pi;/2 + 2k&pi;, 3&pi;/2 + 2k&pi;]</p>
+  <p>定义域 (Domain)：<strong>R</strong> &nbsp;&nbsp; 值域 (Range)：<strong>[-1, 1]</strong></p>
+  <p>周期 (Period)：<strong>2&pi;</strong> &nbsp;&nbsp; 奇偶性：<span class="prop-tag odd">奇函数 (Odd)</span></p>
+  <p><strong>五点作图 (Five-Key-Point Method)</strong> 关键点：(0, 0), (&pi;/2, 1), (&pi;, 0), (3&pi;/2, -1), (2&pi;, 0)</p>
+  <p>递增区间 (Increasing)：[-&pi;/2 + 2k&pi;, &pi;/2 + 2k&pi;] &nbsp; 递减区间 (Decreasing)：[&pi;/2 + 2k&pi;, 3&pi;/2 + 2k&pi;]</p>
 </div>
 
-<h4>余弦函数 y = cos x</h4>
+<h4>余弦函数 y = cos x <span style="font-weight:normal;font-size:0.85em;color:#888;">(Cosine Function)</span></h4>
 <div class="formula-box">
-  <p>定义域：<strong>R</strong> &nbsp;&nbsp; 值域：<strong>[-1, 1]</strong></p>
-  <p>周期：<strong>2&pi;</strong> &nbsp;&nbsp; 奇偶性：<span class="prop-tag even">偶函数</span></p>
-  <p><strong>五点作图</strong>关键点：(0, 1), (&pi;/2, 0), (&pi;, -1), (3&pi;/2, 0), (2&pi;, 1)</p>
-  <p>递减区间：[0 + 2k&pi;, &pi; + 2k&pi;] &nbsp; 递增区间：[&pi; + 2k&pi;, 2&pi; + 2k&pi;]</p>
+  <p>定义域 (Domain)：<strong>R</strong> &nbsp;&nbsp; 值域 (Range)：<strong>[-1, 1]</strong></p>
+  <p>周期 (Period)：<strong>2&pi;</strong> &nbsp;&nbsp; 奇偶性：<span class="prop-tag even">偶函数 (Even)</span></p>
+  <p><strong>五点作图 (Five-Key-Point Method)</strong> 关键点：(0, 1), (&pi;/2, 0), (&pi;, -1), (3&pi;/2, 0), (2&pi;, 1)</p>
+  <p>递减区间 (Decreasing)：[0 + 2k&pi;, &pi; + 2k&pi;] &nbsp; 递增区间 (Increasing)：[&pi; + 2k&pi;, 2&pi; + 2k&pi;]</p>
 </div>
 
-<h4>正切函数 y = tan x</h4>
+<h4>正切函数 y = tan x <span style="font-weight:normal;font-size:0.85em;color:#888;">(Tangent Function)</span></h4>
 <div class="formula-box">
-  <p>定义域：{x | x &ne; &pi;/2 + k&pi;} &nbsp;&nbsp; 值域：<strong>R</strong></p>
-  <p>周期：<strong>&pi;</strong> &nbsp;&nbsp; 奇偶性：<span class="prop-tag odd">奇函数</span></p>
+  <p>定义域 (Domain)：{x | x &ne; &pi;/2 + k&pi;} &nbsp;&nbsp; 值域 (Range)：<strong>R</strong></p>
+  <p>周期 (Period)：<strong>&pi;</strong> &nbsp;&nbsp; 奇偶性：<span class="prop-tag odd">奇函数 (Odd)</span></p>
 </div>
 
-<h3>2.8 三角恒等变换</h3>
+<h3>2.8 三角恒等变换 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Trigonometric Identities)</span></h3>
 <div class="two-col">
   <div class="formula-box">
-    <p><strong>两角和与差：</strong></p>
+    <p><strong>两角和与差 (Sum &amp; Difference Formulas)：</strong></p>
     <p>sin(&alpha; &plusmn; &beta;) = sin&alpha; cos&beta; &plusmn; cos&alpha; sin&beta;</p>
     <p>cos(&alpha; &plusmn; &beta;) = cos&alpha; cos&beta; &mp; sin&alpha; sin&beta;</p>
     <p>tan(&alpha; &plusmn; &beta;) = (tan&alpha; &plusmn; tan&beta;) / (1 &mp; tan&alpha; tan&beta;)</p>
   </div>
   <div class="formula-box">
-    <p><strong>二倍角：</strong></p>
+    <p><strong>二倍角 (Double-Angle Formulas)：</strong></p>
     <p>sin 2&alpha; = 2 sin&alpha; cos&alpha;</p>
     <p>cos 2&alpha; = cos&sup2;&alpha; &minus; sin&sup2;&alpha;</p>
     <p>&emsp;= 2 cos&sup2;&alpha; &minus; 1</p>
@@ -218,59 +218,59 @@
   </div>
 </div>
 
-<h3>2.9 函数 y = A sin(&omega;x + &phi;)</h3>
+<h3>2.9 函数 y = A sin(&omega;x + &phi;) <span style="font-weight:normal;font-size:0.85em;color:#888;">(Sinusoidal Functions)</span></h3>
 <div class="formula-box">
-  <p><strong>振幅 A：</strong>决定波形的高度，最大值为 |A|</p>
-  <p><strong>角频率 &omega;：</strong>决定周期 T = 2&pi;/|&omega;|</p>
-  <p><strong>初相 &phi;：</strong>决定水平平移（&phi; &gt; 0 向左移，&phi; &lt; 0 向右移）</p>
-  <p><strong>垂直偏移 k：</strong>决定上下平移</p>
-  <p style="margin-top:8px;color:#555;">应用：简谐运动 y = A sin(&omega;t + &phi;)，交流电 V(t) = V<sub>0</sub> sin(2&pi;ft)</p>
+  <p><strong>振幅 A (Amplitude)：</strong>决定波形的高度，最大值为 |A|</p>
+  <p><strong>角频率 &omega; (Angular Frequency)：</strong>决定周期 T = 2&pi;/|&omega;|</p>
+  <p><strong>初相 &phi; (Phase Shift)：</strong>决定水平平移（&phi; &gt; 0 向左移，&phi; &lt; 0 向右移）</p>
+  <p><strong>垂直偏移 k (Vertical Shift)：</strong>决定上下平移</p>
+  <p style="margin-top:8px;color:#555;">应用：简谐运动 (Simple Harmonic Motion) y = A sin(&omega;t + &phi;)，交流电 (AC Current) V(t) = V<sub>0</sub> sin(2&pi;ft)</p>
 </div>
 </section>
 
 <!-- ============================== 第三部分：相关名词解释 ============================== -->
 <section>
-<h2>三、相关名词解释</h2>
+<h2>三、相关名词解释 <span style="font-size:0.6em;color:#888;font-weight:normal;">(Glossary of Terms)</span></h2>
 <table>
   <tr><th>名词</th><th>解释</th><th>举例说明</th></tr>
   <tr>
-    <td>不等式</td><td>用 &gt;、&lt;、&ge;、&le; 表示大小关系的式子</td>
+    <td>不等式 <span style="color:#888;font-size:0.85em;">(Inequality)</span></td><td>用 &gt;、&lt;、&ge;、&le; 表示大小关系的式子</td>
     <td>x &gt; 3 表示所有大于 3 的实数</td>
   </tr>
   <tr>
-    <td>基本不等式</td><td>&radic;(ab) &le; (a+b)/2，两个正数的几何平均不超过算术平均</td>
+    <td>基本不等式 <span style="color:#888;font-size:0.85em;">(AM-GM Inequality)</span></td><td>&radic;(ab) &le; (a+b)/2，两个正数的几何平均不超过算术平均</td>
     <td>x + 1/x &ge; 2（x &gt; 0）</td>
   </tr>
   <tr>
-    <td>幂函数</td><td>形如 y = x<sup>&alpha;</sup> 的函数，&alpha; 决定图像形状</td>
+    <td>幂函数 <span style="color:#888;font-size:0.85em;">(Power Function)</span></td><td>形如 y = x<sup>&alpha;</sup> 的函数，&alpha; 决定图像形状</td>
     <td>y = x&sup2;、y = &radic;x、y = 1/x 都是幂函数</td>
   </tr>
   <tr>
-    <td>指数爆炸</td><td>指数函数值随 x 增大而急剧增加的现象</td>
+    <td>指数爆炸 <span style="color:#888;font-size:0.85em;">(Exponential Growth / Explosion)</span></td><td>指数函数值随 x 增大而急剧增加的现象</td>
     <td>y = 2<sup>x</sup>，x = 10 时已达 1024</td>
   </tr>
   <tr>
-    <td>对数增长</td><td>对数函数值随 x 增大而缓慢增加的现象</td>
+    <td>对数增长 <span style="color:#888;font-size:0.85em;">(Logarithmic Growth)</span></td><td>对数函数值随 x 增大而缓慢增加的现象</td>
     <td>y = log<sub>2</sub>x，x = 1024 时仅为 10</td>
   </tr>
   <tr>
-    <td>五点作图法</td><td>找出一个周期内的五个关键点来描绘三角函数图像</td>
+    <td>五点作图法 <span style="color:#888;font-size:0.85em;">(Five-Key-Point Method)</span></td><td>找出一个周期内的五个关键点来描绘三角函数图像</td>
     <td>sin x 取 0, &pi;/2, &pi;, 3&pi;/2, 2&pi;</td>
   </tr>
   <tr>
-    <td>振幅</td><td>周期性变化量偏离平衡位置的最大距离</td>
+    <td>振幅 <span style="color:#888;font-size:0.85em;">(Amplitude)</span></td><td>周期性变化量偏离平衡位置的最大距离</td>
     <td>y = 3 sin x 的振幅为 3</td>
   </tr>
   <tr>
-    <td>周期</td><td>使 f(x + T) = f(x) 的最小正数 T</td>
+    <td>周期 <span style="color:#888;font-size:0.85em;">(Period)</span></td><td>使 f(x + T) = f(x) 的最小正数 T</td>
     <td>sin x 和 cos x 的周期为 2&pi;，tan x 的周期为 &pi;</td>
   </tr>
   <tr>
-    <td>初相</td><td>y = A sin(&omega;x + &phi;) 中的 &phi;，决定初始位置</td>
+    <td>初相 <span style="color:#888;font-size:0.85em;">(Phase Shift)</span></td><td>y = A sin(&omega;x + &phi;) 中的 &phi;，决定初始位置</td>
     <td>y = sin(x + &pi;/3) 的初相为 &pi;/3</td>
   </tr>
   <tr>
-    <td>三个"二次"</td><td>二次函数、一元二次方程、一元二次不等式的统称</td>
+    <td>三个"二次" <span style="color:#888;font-size:0.85em;">(Three "Quadratics")</span></td><td>二次函数、一元二次方程、一元二次不等式的统称</td>
     <td>y = x&sup2;&minus;x&minus;2 的零点即方程 x&sup2;&minus;x&minus;2 = 0 的根</td>
   </tr>
 </table>
@@ -278,30 +278,30 @@
 
 <!-- ============================== 第四部分：符号说明 ============================== -->
 <section>
-<h2>四、符号说明</h2>
+<h2>四、符号说明 <span style="font-size:0.6em;color:#888;font-weight:normal;">(Notation)</span></h2>
 <table>
   <tr><th>符号</th><th>含义</th><th>读法 / 备注</th></tr>
-  <tr><td>&gt; / &lt;</td><td>大于 / 小于</td><td>严格不等号</td></tr>
-  <tr><td>&ge; / &le;</td><td>大于等于 / 小于等于</td><td>非严格不等号</td></tr>
-  <tr><td>&radic;ab</td><td>a、b 的几何平均</td><td>&radic;(a &times; b)</td></tr>
-  <tr><td>x<sup>&alpha;</sup></td><td>x 的 &alpha; 次幂</td><td>&alpha; 为任意实数</td></tr>
-  <tr><td>a<sup>x</sup></td><td>a 的 x 次幂</td><td>a &gt; 0 且 a &ne; 1</td></tr>
-  <tr><td>log<sub>a</sub>b</td><td>以 a 为底 b 的对数</td><td>等价于 a<sup>x</sup> = b</td></tr>
-  <tr><td>ln x</td><td>自然对数（以 e 为底）</td><td>ln x = log<sub>e</sub>x</td></tr>
-  <tr><td>sin &theta;</td><td>&theta; 的正弦</td><td>对边 / 斜边</td></tr>
-  <tr><td>cos &theta;</td><td>&theta; 的余弦</td><td>邻边 / 斜边</td></tr>
-  <tr><td>tan &theta;</td><td>&theta; 的正切</td><td>对边 / 邻边</td></tr>
-  <tr><td>&omega;</td><td>角频率（角速度）</td><td>单位：rad/s</td></tr>
-  <tr><td>&phi;</td><td>初相</td><td>决定初始时刻的位置</td></tr>
-  <tr><td>&Delta;</td><td>判别式 &Delta; = b&sup2; &minus; 4ac</td><td>判定二次方程根的个数</td></tr>
+  <tr><td>&gt; / &lt;</td><td>大于 / 小于 <span style="color:#888;">(Greater than / Less than)</span></td><td>严格不等号</td></tr>
+  <tr><td>&ge; / &le;</td><td>大于等于 / 小于等于 <span style="color:#888;">(Greater than or equal / Less than or equal)</span></td><td>非严格不等号</td></tr>
+  <tr><td>&radic;ab</td><td>a、b 的几何平均 <span style="color:#888;">(Geometric mean)</span></td><td>&radic;(a &times; b)</td></tr>
+  <tr><td>x<sup>&alpha;</sup></td><td>x 的 &alpha; 次幂 <span style="color:#888;">(x to the power &alpha;)</span></td><td>&alpha; 为任意实数</td></tr>
+  <tr><td>a<sup>x</sup></td><td>a 的 x 次幂 <span style="color:#888;">(a to the power x)</span></td><td>a &gt; 0 且 a &ne; 1</td></tr>
+  <tr><td>log<sub>a</sub>b</td><td>以 a 为底 b 的对数 <span style="color:#888;">(Logarithm base a of b)</span></td><td>等价于 a<sup>x</sup> = b</td></tr>
+  <tr><td>ln x</td><td>自然对数（以 e 为底）<span style="color:#888;">(Natural logarithm)</span></td><td>ln x = log<sub>e</sub>x</td></tr>
+  <tr><td>sin &theta;</td><td>&theta; 的正弦 <span style="color:#888;">(Sine of &theta;)</span></td><td>对边 / 斜边</td></tr>
+  <tr><td>cos &theta;</td><td>&theta; 的余弦 <span style="color:#888;">(Cosine of &theta;)</span></td><td>邻边 / 斜边</td></tr>
+  <tr><td>tan &theta;</td><td>&theta; 的正切 <span style="color:#888;">(Tangent of &theta;)</span></td><td>对边 / 邻边</td></tr>
+  <tr><td>&omega;</td><td>角频率（角速度）<span style="color:#888;">(Angular frequency)</span></td><td>单位：rad/s</td></tr>
+  <tr><td>&phi;</td><td>初相 <span style="color:#888;">(Phase shift)</span></td><td>决定初始时刻的位置</td></tr>
+  <tr><td>&Delta;</td><td>判别式 <span style="color:#888;">(Discriminant)</span> &Delta; = b&sup2; &minus; 4ac</td><td>判定二次方程根的个数</td></tr>
 </table>
 </section>
 
 <!-- ============================== 第五部分：各种函数的实际用途 ============================== -->
 <section>
-<h2>五、各种函数的实际用途</h2>
+<h2>五、各种函数的实际用途 <span style="font-size:0.6em;color:#888;font-weight:normal;">(Applications)</span></h2>
 
-<h3>二次函数与不等式</h3>
+<h3>二次函数与不等式 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Quadratic Functions &amp; Inequalities)</span></h3>
 <ul>
   <li><strong>最大利润模型</strong>：利润函数 L(x) = &minus;ax&sup2; + bx + c，顶点处利润最大</li>
   <li><strong>抛射轨迹</strong>：篮球、炮弹的飞行路径为抛物线</li>
@@ -309,14 +309,14 @@
   <li><strong>成本控制</strong>：用不等式确定盈利区间，制定生产计划</li>
 </ul>
 
-<h3>幂函数</h3>
+<h3>幂函数 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Power Functions)</span></h3>
 <ul>
   <li><strong>物理学</strong>：自由落体距离 s = (1/2)gt&sup2;（&alpha; = 2），开普勒第三定律 T&sup2; = k&middot;r&sup3;</li>
   <li><strong>工程学</strong>：梁的弯曲量与跨度的三次方成正比</li>
   <li><strong>经济学</strong>：学习曲线 y = ax<sup>b</sup> 描述单位成本随累计产量递减</li>
 </ul>
 
-<h3>指数函数</h3>
+<h3>指数函数 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Exponential Functions)</span></h3>
 <ul>
   <li><strong>复利计算</strong>：A = P(1 + r/n)<sup>nt</sup>，利滚利增长</li>
   <li><strong>人口增长</strong>：N(t) = N<sub>0</sub> &middot; e<sup>rt</sup>，初期快速增长</li>
@@ -324,7 +324,7 @@
   <li><strong>病毒传播</strong>：初期病例呈指数增长，预警疫情爆发</li>
 </ul>
 
-<h3>对数函数</h3>
+<h3>对数函数 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Logarithmic Functions)</span></h3>
 <ul>
   <li><strong>地震震级</strong>：里氏震级 M = lg(A / A<sub>0</sub>)，每增加 1 级能量约 32 倍</li>
   <li><strong>酸碱度</strong>：pH = &minus;lg[H<sup>+</sup>]</li>
@@ -332,7 +332,7 @@
   <li><strong>信息熵</strong>：香农熵 H = &minus;&Sigma;p<sub>i</sub> log<sub>2</sub>p<sub>i</sub></li>
 </ul>
 
-<h3>三角函数</h3>
+<h3>三角函数 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Trigonometric Functions)</span></h3>
 <ul>
   <li><strong>简谐运动</strong>：弹簧振子位移 y = A sin(&omega;t + &phi;)</li>
   <li><strong>交流电</strong>：电压 V(t) = V<sub>0</sub> sin(2&pi;ft)</li>
@@ -345,29 +345,29 @@
 
 <!-- ============================== 第六部分：历史典故 ============================== -->
 <section>
-<h2>六、历史典故</h2>
+<h2>六、历史典故 <span style="font-size:0.6em;color:#888;font-weight:normal;">(History)</span></h2>
 
 <div class="example">
-  <p><strong>&ldquo;不等式&rdquo;的雏形 &mdash; 阿基米德的智慧</strong></p>
+  <p><strong>&ldquo;不等式&rdquo;的雏形 &mdash; 阿基米德的智慧 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Archimedes' Cleverness)</span></strong></p>
   <p>公元前 3 世纪，古希腊数学家阿基米德利用&ldquo;夹逼&rdquo;思想（即不等式）来估算圆周率 &pi;。他通过计算圆内接和外切正 96 边形的周长，得到：</p>
   <p style="text-align:center;font-size:1.1em;">3 <sup>10</sup>/<sub>71</sub> &lt; &pi; &lt; 3 <sup>1</sup>/<sub>7</sub></p>
   <p>这一结果精确到了两位小数，且保持了近千年未被超越。这就是不等式在数学史上最早也最优雅的应用之一。今天我们用基本不等式求最值，正是这种&ldquo;夹逼&rdquo;思想的延伸。</p>
 </div>
 
 <div class="example">
-  <p><strong>幂函数的起源 &mdash; 从平方到立方再到高次</strong></p>
+  <p><strong>幂函数的起源 &mdash; 从平方到立方再到高次 <span style="font-weight:normal;font-size:0.85em;color:#888;">(From Squares to Higher Powers)</span></strong></p>
   <p>&ldquo;幂&rdquo;字在中文中本意是&ldquo;覆盖食物的布巾&rdquo;，古人用它来比喻&ldquo;自乘&rdquo;的概念。古希腊人就知道正方形面积是边长的平方，立方体体积是边长的立方。但高次幂（如 x&sup4;）在现实中没有对应的几何体，直到 16 世纪法国数学家<strong>韦达</strong>将代数符号化，人们才开始自由地研究任意次幂。</p>
   <p>1637 年，法国数学家<strong>费马</strong>在研究 y = x&supn; 的图像时，注意到当 n 为偶数时曲线对称于 y 轴，n 为奇数时对称于原点。这可能是最早对幂函数奇偶性的规律总结。</p>
 </div>
 
 <div class="example">
-  <p><strong>指数爆炸的警示 &mdash; 国王与麦粒</strong></p>
+  <p><strong>指数爆炸的警示 &mdash; 国王与麦粒 <span style="font-weight:normal;font-size:0.85em;color:#888;">(The King and the Wheat Grains)</span></strong></p>
   <p>传说古印度国王要奖励国际象棋的发明者，发明者说：&ldquo;请在棋盘的第一个格子放 1 粒麦子，第二个格子放 2 粒，第三个放 4 粒，以此类推，每个格子是前一个的两倍，放满 64 格即可。&rdquo;国王欣然答应，以为这很简单。</p>
   <p>然而计算后发现，第 64 格需要 2<sup>63</sup> &asymp; 9.22 &times; 10<sup>18</sup> 粒麦子，所有格子的总和约为 1.84 &times; 10<sup>19</sup> 粒 &mdash;&mdash; 这相当于当时全球 2000 年的小麦总产量！这就是&ldquo;指数爆炸&rdquo;的惊人力量。这个故事也提醒我们：看似微小的增长，经过指数累积也会变成天文数字。</p>
 </div>
 
 <div class="example">
-  <p><strong>傅里叶与三角函数的伟大发现</strong></p>
+  <p><strong>傅里叶与三角函数的伟大发现 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Fourier's Great Discovery)</span></strong></p>
   <p>1807 年，法国数学家<strong>傅里叶</strong>向巴黎科学院提交了一篇研究热传导的论文，提出了一个惊人的观点：<strong>任何周期函数都可以写成一系列正弦和余弦函数的和</strong>。当时拉格朗日和拉普拉斯等大数学家对此持怀疑态度 &mdash;&mdash; 一个锯齿形的周期波怎么可能用光滑的正弦曲线拼出来？</p>
   <p>但傅里叶是对的。现在，傅里叶变换被广泛应用于图像压缩（JPEG）、音频编码（MP3）、信号处理、量子物理等几乎所有科技领域。三角函数也因此从几何工具，一跃成为理解整个物质世界周期现象的核心语言。</p>
 </div>
@@ -375,9 +375,9 @@
 
 <!-- ============================== 第七部分：例题 ============================== -->
 <section>
-<h2>七、例题</h2>
+<h2>七、例题 <span style="font-size:0.6em;color:#888;font-weight:normal;">(Examples)</span></h2>
 
-<h3>例 1（二次函数与不等式）&mdash; 基本不等式求最值</h3>
+<h3>例 1（二次函数与不等式）&mdash; 基本不等式求最值 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Max/Min via AM-GM)</span></h3>
 <div class="example">
   <p>已知 x &gt; 0，y &gt; 0，且 x + y = 10，求 xy 的最大值。</p>
   <p class="step"><strong>分析</strong>：两正数之和为定值，积有最大值，使用基本不等式。</p>
@@ -387,7 +387,7 @@
   <p class="answer">所以 xy 的最大值为 25。</p>
 </div>
 
-<h3>例 2（幂函数）&mdash; 比较大小</h3>
+<h3>例 2（幂函数）&mdash; 比较大小 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Comparing Powers)</span></h3>
 <div class="example">
   <p>比较 0.2<sup>0.3</sup> 和 0.2<sup>0.5</sup> 的大小。</p>
   <p class="step"><strong>分析</strong>：底数相同（0.2），考察指数函数 y = (0.2)<sup>x</sup> 的单调性。</p>
@@ -397,7 +397,7 @@
   <p class="hint"><strong>技巧</strong>：比较幂的大小，先看底数是否相同。底数相同 &rArr; 利用指数函数单调性；指数相同 &rArr; 利用幂函数单调性。</p>
 </div>
 
-<h3>例 3（指数函数）&mdash; 指数方程</h3>
+<h3>例 3（指数函数）&mdash; 指数方程 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Exponential Equation)</span></h3>
 <div class="example">
   <p>解方程 2<sup>x</sup> = 16。</p>
   <p class="step"><strong>分析</strong>：将两边化为同底数幂的形式。</p>
@@ -408,7 +408,7 @@
   <p class="hint"><strong>拓展</strong>：如果底数不同，可两边取对数求解。如 3<sup>x</sup> = 5 &rArr; x = log<sub>3</sub>5。</p>
 </div>
 
-<h3>例 4（对数函数）&mdash; 对数运算</h3>
+<h3>例 4（对数函数）&mdash; 对数运算 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Logarithmic Operation)</span></h3>
 <div class="example">
   <p>计算 log<sub>2</sub>(32 &times; 4) 的值。</p>
   <p class="step"><strong>分析</strong>：利用对数运算性质 log<sub>a</sub>(MN) = log<sub>a</sub>M + log<sub>a</sub>N。</p>
@@ -417,7 +417,7 @@
   <p class="answer">结果为 7。</p>
 </div>
 
-<h3>例 5（三角函数）&mdash; y = A sin(&omega;x + &phi;)</h3>
+<h3>例 5（三角函数）&mdash; y = A sin(&omega;x + &phi;) <span style="font-weight:normal;font-size:0.85em;color:#888;">(Sinusoidal Analysis)</span></h3>
 <div class="example">
   <p>已知函数 y = 3 sin(2x + &pi;/6)：</p>
   <p>(1) 求振幅、周期、初相；</p>
@@ -436,7 +436,7 @@
 
 <!-- ============================== 第八部分：练习 ============================== -->
 <section>
-<h2>八、练习</h2>
+<h2>八、练习 <span style="font-size:0.6em;color:#888;font-weight:normal;">(Exercises)</span></h2>
 <p style="color:#666;">点击选项提交答案，系统自动判分。先完成全部题目再查看解析。</p>
 
 <div id="quiz-container"></div>

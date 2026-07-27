@@ -37,7 +37,7 @@
   }
   .q-tag.concept { background: #9c27b0; }
   .q-tag.calc { background: #1a73e8; }
-  .q-tag.comprehensive { background: #e53935; }
+  .q-tag.comprehensive { background: #6a1b9a; }
   .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
   .quiz-question .opt {
     padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
@@ -59,6 +59,13 @@
 </head>
 <body>
 <a class="back" href="../../index.html">&larr; 返回课程列表</a>
+
+<pre style="background-color: #f5f5f5;padding:20px 10px;">
+  已知非空集合 M ⊆ {1, 2, 3, 4, 5,,, n }，
+  且满足：若 a ∈ M，则 N−a ∈ M  (n < N < 2n + 1)。
+  这样的集合 M 有多少个？
+</pre>
+
 <article>
 <h1>函数类型总览</h1>
 <p class="tip" style="text-align:center;font-size:1.1em;">从代数结构、运算关系和性质三个维度，全面认识各类函数。</p>
@@ -568,7 +575,7 @@ var questions = [
     type: "choice",
     tag: "comprehensive",
     tagLabel: "综合",
-    question: "已知三个函数：f(x) = x&sup2;，g(x) = 2<sup>x</sup>，h(x) = x：<br>&nbsp;&nbsp;(1) f(x) 和 h(x) 分别属于什么基本初等函数？<br>&nbsp;&nbsp;(2) 当 x &gt; 2 时，哪个函数的增长速度最快？<br>&nbsp;&nbsp;下列选项正确的是（  ）",
+    question: "已知三个函数：f(x) = x&sup2;，g(x) = 2<sup>x</sup>，h(x) = x：<br>&nbsp;&nbsp;(1) f(x) 和 h(x) 分别属于什么基本初等函数？<br>&nbsp;&nbsp;(2) 当 x &gt; 4 时，哪个函数的增长速度最快？<br>&nbsp;&nbsp;下列选项正确的是（  ）",
     opts: [
       "f(x) 幂函数，h(x) 一次函数；g(x) 增长最快",
       "f(x) 二次函数，h(x) 幂函数；f(x) 增长最快",
@@ -576,7 +583,7 @@ var questions = [
       "f(x) 幂函数，h(x) 指数函数；三者增长相同"
     ],
     answer: 0,
-    explain: "f(x) = x&sup2; 是幂函数（&alpha; = 2），h(x) = x 是一次函数（也是幂函数 &alpha; = 1），g(x) = 2<sup>x</sup> 是指数函数。当 x &gt; 2 时，指数函数 g(x) = 2<sup>x</sup> 的增长速度远超幂函数，增长速度：指数函数 &gt; 幂函数 &gt; 一次函数。"
+    explain: "f(x) = x&sup2; 是幂函数（&alpha; = 2），h(x) = x 是一次函数（也是幂函数 &alpha; = 1），g(x) = 2<sup>x</sup> 是指数函数。当 x &gt; 4 时，指数函数 g(x) = 2<sup>x</sup> 的增长速度远超幂函数，增长速度：指数函数 &gt; 幂函数 &gt; 一次函数。"
   },
   {
     type: "choice",
@@ -590,7 +597,7 @@ var questions = [
       "g(x) 增长最快，h(x) 次之，f(x) 最慢"
     ],
     answer: 0,
-    explain: "指数函数 2<sup>x</sup> 的增长速度随 x 增大而加快（指数爆炸）；幂函数 x&sup2; 以平方速度增长；对数函数 log<sub>2</sub>x 的增长速度越来越慢。在 x &gt; 1 时，增长速度：指数函数 &gt; 幂函数 &gt; 对数函数。"
+    explain: "指数函数 2<sup>x</sup> 的增长速度随 x 增大而加快（指数爆炸）；幂函数 x&sup2; 以平方速度增长；对数函数 log<sub>2</sub>x 的增长速度越来越慢。当 x 足够大时，增长速度：指数函数 &gt; 幂函数 &gt; 对数函数。"
   },
   {
     type: "choice",
