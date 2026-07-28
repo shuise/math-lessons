@@ -175,7 +175,7 @@
 </table>
 
 <div class="hint">
-  <strong>对数增长 (Logarithmic Growth) vs 指数爆炸 (Exponential Explosion)：</strong>对数函数增长最慢（越增越慢），指数函数增长最快（越增越快）。在同一个坐标系中，指数曲线快速远离 x 轴，对数曲线缓慢远离 y 轴。
+  <strong>增长阶的直观比较：</strong>在常见的增长阶比较中，对数函数增长慢于幂函数，而底数大于 1 的指数函数增长快于任意固定次数的幂函数。结论需结合函数的定义域、底数和比较范围理解。
 </div>
 
 <h3>2.7 三角函数 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Trigonometric Functions)</span></h3>
@@ -221,9 +221,9 @@
 
 <h3>2.9 函数 y = A sin(&omega;x + &phi;) <span style="font-weight:normal;font-size:0.85em;color:#888;">(Sinusoidal Functions)</span></h3>
 <div class="formula-box">
-  <p><strong>振幅 A (Amplitude)：</strong>决定波形的高度，最大值为 |A|</p>
+  <p><strong>振幅 |A| (Amplitude)：</strong>决定波形相对中线的最大偏离；函数的振幅为 |A|，而 A 的符号还会造成关于中线的翻转。</p>
   <p><strong>角频率 &omega; (Angular Frequency)：</strong>决定周期 T = 2&pi;/|&omega;|</p>
-  <p><strong>初相 &phi; (Phase Shift)：</strong>决定水平平移（&phi; &gt; 0 向左移，&phi; &lt; 0 向右移）</p>
+  <p><strong>初相 &phi; (Phase Shift)：</strong>水平平移量为 -&phi;/&omega;（需 &omega; &ne; 0）；当约定 &omega; &gt; 0 时，&phi; &gt; 0 向左移，&phi; &lt; 0 向右移。</p>
   <p><strong>垂直偏移 k (Vertical Shift)：</strong>决定上下平移</p>
   <p style="margin-top:8px;color:#555;">应用：简谐运动 (Simple Harmonic Motion) y = A sin(&omega;t + &phi;)，交流电 (AC Current) V(t) = V<sub>0</sub> sin(2&pi;ft)</p>
 </div>
@@ -357,8 +357,8 @@
 
 <div class="example">
   <p><strong>幂函数的起源 &mdash; 从平方到立方再到高次 <span style="font-weight:normal;font-size:0.85em;color:#888;">(From Squares to Higher Powers)</span></strong></p>
-  <p>&ldquo;幂&rdquo;字在中文中本意是&ldquo;覆盖食物的布巾&rdquo;，古人用它来比喻&ldquo;自乘&rdquo;的概念。古希腊人就知道正方形面积是边长的平方，立方体体积是边长的立方。但高次幂（如 x&sup4;）在现实中没有对应的几何体，直到 16 世纪法国数学家<strong>韦达</strong>将代数符号化，人们才开始自由地研究任意次幂。</p>
-  <p>1637 年，法国数学家<strong>费马</strong>在研究 y = x&supn; 的图像时，注意到当 n 为偶数时曲线对称于 y 轴，n 为奇数时对称于原点。这可能是最早对幂函数奇偶性的规律总结。</p>
+  <p>&ldquo;幂&rdquo;字在中文中本意是&ldquo;覆盖食物的布巾&rdquo;，古人用它来比喻&ldquo;自乘&rdquo;的概念。古希腊人就知道正方形面积是边长的平方，立方体体积是边长的立方。但高次幂（如 x<sup>4</sup>）在现实中没有对应的几何体，直到 16 世纪法国数学家<strong>韦达</strong>将代数符号化，人们才开始自由地研究任意次幂。</p>
+  <p>1637 年，法国数学家<strong>费马</strong>在研究 y = x<sup>n</sup> 的图像时，注意到当 n 为偶数时曲线对称于 y 轴，n 为奇数时对称于原点。这可能是最早对幂函数奇偶性的规律总结。</p>
 </div>
 
 <div class="example">
@@ -482,7 +482,7 @@ var questions = [
     question: "指数函数 y = a<sup>x</sup>（a &gt; 0, a &ne; 1）的图像恒过定点（  ）",
     opts: ["(0, 0)", "(1, 0)", "(0, 1)", "(1, 1)"],
     answer: 2,
-    explain: "当 x = 0 时，a&sup0; = 1，所以指数函数的图像恒过定点 (0, 1)。"
+    explain: "当 x = 0 时，a<sup>0</sup> = 1，所以指数函数的图像恒过定点 (0, 1)。"
   },
   {
     type: "choice",
@@ -529,7 +529,7 @@ var questions = [
     question: "化简 2<sup>3</sup> &times; 2<sup>4</sup> &divide; 2<sup>2</sup> = （  ）",
     opts: ["2<sup>5</sup>", "2<sup>6</sup>", "2<sup>7</sup>", "2<sup>9</sup>"],
     answer: 0,
-    explain: "2&sup3; &times; 2&sup4; &divide; 2&sup2; = 2<sup>3+4-2</sup> = 2<sup>5</sup>。"
+    explain: "2<sup>3</sup> &times; 2<sup>4</sup> &divide; 2<sup>2</sup> = 2<sup>3+4-2</sup> = 2<sup>5</sup>。"
   },
   {
     type: "choice",
@@ -608,7 +608,7 @@ var questions = [
       "f(3) = 9，g(8) = 3，关于 x 轴对称"
     ],
     answer: 0,
-    explain: "f(3) = 2&sup3; = 8，g(8) = log&sub2;8 = 3。指数函数与对数函数互为反函数，图像关于 y = x 对称。"
+    explain: "f(3) = 2&sup3; = 8，g(8) = log<sub>2</sub>8 = 3。指数函数与对数函数互为反函数，图像关于 y = x 对称。"
   },
   {
     type: "choice",

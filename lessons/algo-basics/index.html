@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>算法基础 — 初等数论与组合</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  h2 { margin: 36px 0 16px; padding-bottom: 8px; border-bottom: 2px solid #1a73e8; }
+  h3 { color: #2c3e50; margin: 28px 0 12px; font-size: 1.15em; }
+  h4 { color: #555; margin: 18px 0 8px; font-size: 1em; }
+  .formula-box { border: 2px solid #1a73e8; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #f0f7ff; }
+  .formula-box p { margin: 6px 0; text-align: center; font-size: 1.05em; }
+  .key-point { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+  .score-panel {
+    text-align: center; padding: 16px; margin: 20px 0;
+    background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8;
+  }
+  .score-panel .score-num { font-size: 2em; font-weight: bold; color: #1a73e8; }
+  .score-panel .btn-reset {
+    margin-left: 16px; padding: 8px 24px; border: 2px solid #1a73e8;
+    color: #1a73e8; border-radius: 20px; background: #fff;
+    cursor: pointer; font-size: 0.95em; transition: 0.15s;
+  }
+  .score-panel .btn-reset:hover { background: #1a73e8; color: #fff; }
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag {
+    display: inline-block; padding: 2px 12px; border-radius: 12px;
+    font-size: 0.75em; margin-right: 8px; color: #fff;
+  }
+  .q-tag.concept { background: #1a73e8; }
+  .q-tag.calc { background: #e67e22; }
+  .q-tag.comprehensive { background: #e65100; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+  }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+  .diff-tag {
+    display: inline-block; padding: 1px 10px; border-radius: 10px;
+    font-size: 0.7em; margin-left: 6px; font-weight: normal; vertical-align: middle;
+  }
+  .diff-easy { background: #e8f5e9; color: #2e7d32; }
+  .diff-medium { background: #fff8e1; color: #f57f17; }
+  .diff-hard { background: #fce4ec; color: #b71c1c; }
+
+  /* 欧几里得算法步骤 */
+  .algo-steps {
+    background: #f0f7ff; border: 2px solid #1a73e8; border-radius: 10px;
+    padding: 16px 20px; margin: 16px 0; font-family: 'Courier New', monospace;
+  }
+  .algo-steps p { margin: 4px 0; }
+  .venn-diagram {
+    display: flex; justify-content: center; margin: 16px 0;
+  }
+  .graph-simple {
+    display: flex; flex-direction: column; align-items: center; margin: 16px 0;
+  }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>算法基础 — 初等数论与组合</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">从整数的性质出发，理解同余、不定方程等数论基础，再走进组合数学的世界，体会数学中"离散"的美感。</p>
+
+<!-- ============================================================ -->
+<!-- 分数面板（放在正文开始之前） -->
+<!-- ============================================================ -->
+<div class="score-panel">
+  得分：<span class="score-num" id="totalScore">0 / 6</span>
+  <button class="btn-reset" onclick="resetAll()">重置全部</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- 一、整除进阶 -->
+<!-- ============================================================ -->
+<section>
+<h2>一、整除进阶</h2>
+
+<h3>整除的基本概念</h3>
+<p>如果整数 <em>a</em> 除以整数 <em>b</em> (<em>b</em> ≠ 0) 的商是整数且余数为 0，我们就说 <strong><em>b</em> 整除 <em>a</em></strong>，记作 <em>b</em> | <em>a</em>。例如 3 | 12，因为 12 &divide; 3 = 4 是整数。</p>
+
+<h3>带余除法</h3>
+<p>对于任意整数 <em>a</em> 和正整数 <em>b</em>，存在唯一的整数 <em>q</em>（商）和 <em>r</em>（余数），使得：</p>
+
+<div class="formula-box">
+  <p><strong>带余除法</strong></p>
+  <p>a = bq + r, &emsp;0 &le; r &lt; b</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>求 37 除以 5 的商和余数。</p>
+  <p class="step">37 = 5 &times; 7 + 2，所以商 q = 7，余数 r = 2。</p>
+  <p class="step">验证：0 &le; 2 &lt; 5，满足条件。</p>
+</div>
+
+<h3>最大公约数（GCD）与辗转相除法</h3>
+<p><strong class="keyword">最大公约数</strong>（Greatest Common Divisor，简称 GCD）是指两个或多个整数共有的约数中最大的一个。例如 gcd(12, 18) = 6。</p>
+
+<p>求最大公约数最经典的方法是<strong class="keyword">辗转相除法</strong>（欧几里得算法，Euclidean Algorithm），其核心思想是：</p>
+
+<div class="formula-box">
+  <p><strong>辗转相除法原理</strong></p>
+  <p>gcd(a, b) = gcd(b, a mod b) &emsp;(其中 a mod b 表示 a 除以 b 的余数)</p>
+  <p>反复运用，直到余数为 0，此时的除数即为最大公约数。</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>计算 gcd(84, 60)。</p>
+  <div class="algo-steps">
+    <p>84 = 60 &times; 1 + 24 &emsp;&rarr; gcd(84, 60) = gcd(60, 24)</p>
+    <p>60 = 24 &times; 2 + 12 &emsp;&rarr; gcd(60, 24) = gcd(24, 12)</p>
+    <p>24 = 12 &times; 2 + 0 &emsp;&rarr; gcd(24, 12) = 12</p>
+  </div>
+  <p class="step">所以 <strong>gcd(84, 60) = 12</strong>。</p>
+</div>
+
+<h3>最小公倍数（LCM）</h3>
+<p><strong class="keyword">最小公倍数</strong>（Least Common Multiple，简称 LCM）是两个或多个整数公有的倍数中最小的一个。例如 lcm(4, 6) = 12。</p>
+
+<div class="formula-box">
+  <p><strong>GCD 与 LCM 的关系</strong></p>
+  <p>gcd(a, b) &times; lcm(a, b) = a &times; b</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>已知 gcd(12, 18) = 6，求 lcm(12, 18)。</p>
+  <p class="step">由公式：lcm(12, 18) = 12 &times; 18 &divide; gcd(12, 18) = 216 &divide; 6 = <strong>36</strong>。</p>
+</div>
+</section>
+
+<!-- 第1题 -->
+<div class="quiz-question" id="q1">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    用辗转相除法计算 gcd(84, 60)，结果是？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(1, 0)">A. 6</div>
+    <div class="opt" onclick="checkChoice(1, 1)">B. 12</div>
+    <div class="opt" onclick="checkChoice(1, 2)">C. 24</div>
+    <div class="opt" onclick="checkChoice(1, 3)">D. 4</div>
+  </div>
+  <div class="explain" id="explain1">
+    <strong>解析：</strong>辗转相除法步骤：84 = 60&times;1 + 24 → 60 = 24&times;2 + 12 → 24 = 12&times;2 + 0，余数为 0 时的除数为 12。故 gcd(84, 60) = <strong>12</strong>。选 B。
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 二、同余基础 -->
+<!-- ============================================================ -->
+<section>
+<h2>二、同余基础</h2>
+
+<h3>同余的定义</h3>
+<p>在数论中，<strong class="keyword">同余</strong>（Congruence）是描述两个整数除以同一个数后余数相等的关系。</p>
+
+<div class="formula-box">
+  <p><strong>同余的定义</strong></p>
+  <p>如果整数 a 和 b 除以正整数 m 的余数相同，则称 a 与 b 关于模 m 同余，记作</p>
+  <p>a &equiv; b (mod m)</p>
+  <p>等价于 m | (a &minus; b)，即 m 整除 a &minus; b。</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>判断 37 与 13 是否关于模 12 同余。</p>
+  <p class="step">37 &minus; 13 = 24，24 能被 12 整除，所以 37 &equiv; 13 (mod 12)。</p>
+  <p class="step">验证：37 &divide; 12 = 3 余 1，13 &divide; 12 = 1 余 1，余数相同。</p>
+</div>
+
+<h3>同余的性质</h3>
+<p>同余关系具有以下重要性质：</p>
+
+<div class="formula-box">
+  <p><strong>同余的性质（设 a &equiv; b (mod m), c &equiv; d (mod m)）</strong></p>
+  <p><strong>自反性：</strong>a &equiv; a (mod m)</p>
+  <p><strong>对称性：</strong>若 a &equiv; b (mod m)，则 b &equiv; a (mod m)</p>
+  <p><strong>传递性：</strong>若 a &equiv; b (mod m) 且 b &equiv; c (mod m)，则 a &equiv; c (mod m)</p>
+  <p><strong>可加性：</strong>a + c &equiv; b + d (mod m)</p>
+  <p><strong>可减性：</strong>a &minus; c &equiv; b &minus; d (mod m)</p>
+  <p><strong>可乘性：</strong>a &times; c &equiv; b &times; d (mod m)</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>已知 17 &equiv; 5 (mod 12)，8 &equiv; 20 (mod 12)，则：</p>
+  <p class="step">17 + 8 = 25，5 + 20 = 25，25 &equiv; 25 (mod 12) ✓</p>
+  <p class="step">17 &times; 8 = 136，5 &times; 20 = 100，136 &minus; 100 = 36 = 3 &times; 12 ✓</p>
+</div>
+
+<div class="key-point">
+  <p><strong>同余思想的本质：</strong>把无限多的整数按照除以 m 的余数分成 <strong>m 个等价类</strong>（称为剩余类），每个类中的数两两同余。这样一来，很多大数的计算可以"模掉"m 来简化。</p>
+</div>
+</section>
+
+<!-- 第2题 -->
+<div class="quiz-question" id="q2">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    判断：37 &equiv; 13 (mod 12) 是否成立？<span class="diff-tag diff-easy">基础</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(2, 0)">A. 成立</div>
+    <div class="opt" onclick="checkChoice(2, 1)">B. 不成立</div>
+    <div class="opt" onclick="checkChoice(2, 2)">C. 条件不足无法判断</div>
+    <div class="opt" onclick="checkChoice(2, 3)">D. 同余只对质数成立</div>
+  </div>
+  <div class="explain" id="explain2">
+    <strong>解析：</strong>37 &minus; 13 = 24 = 2 &times; 12，12 整除 24，所以 37 &equiv; 13 (mod 12) <strong>成立</strong>。选 A。
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 三、一次不定方程 -->
+<!-- ============================================================ -->
+<section>
+<h2>三、一次不定方程</h2>
+
+<h3>问题引入</h3>
+<p>在实际问题中，我们经常会遇到"找两个整数 x、y，使 ax + by = c 成立"的问题。这样的方程有无限多组解（如果有的话），所以称为<strong>不定方程</strong>。</p>
+
+<div class="formula-box">
+  <p><strong>二元一次不定方程的一般形式</strong></p>
+  <p>ax + by = c &emsp;(其中 a、b、c 是已知整数，a、b 不全为 0)</p>
+</div>
+
+<h3>有解的条件</h3>
+<p>方程 ax + by = c 有整数解的<strong>充要条件</strong>是：</p>
+
+<div class="formula-box">
+  <p><strong>有解条件</strong></p>
+  <p>gcd(a, b) | c &emsp;（即 c 能被 gcd(a, b) 整除）</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>判断 3x + 5y = 7 是否有整数解。</p>
+  <p class="step">gcd(3, 5) = 1，而 1 | 7，所以方程有整数解。</p>
+  <p class="step">事实上，我们可以找到一组特解：x = 4, y = &minus;1（因为 3&times;4 + 5&times;(&minus;1) = 12 &minus; 5 = 7）。</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>判断 2x + 4y = 3 是否有整数解。</p>
+  <p class="step">gcd(2, 4) = 2，而 2 ∤ 3（2 不能整除 3），所以方程<strong>没有</strong>整数解。</p>
+</div>
+
+<h3>特解与通解</h3>
+<p>如果 (x<sub>0</sub>, y<sub>0</sub>) 是方程的一组特解，那么全部整数解（通解）为：</p>
+
+<div class="formula-box">
+  <p><strong>通解公式</strong></p>
+  <p>x = x<sub>0</sub> + (b / d) &middot; t</p>
+  <p>y = y<sub>0</sub> &minus; (a / d) &middot; t</p>
+  <p>其中 d = gcd(a, b)，t 为任意整数。</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>已知 3x + 5y = 7 的一组特解为 (4, &minus;1)，求通解。</p>
+  <p class="step">d = gcd(3, 5) = 1，所以：</p>
+  <p class="step">x = 4 + 5t, &emsp;y = &minus;1 &minus; 3t &emsp;(t &infin; Z)</p>
+  <p class="step">验证 t = 1：x = 9, y = &minus;4，3&times;9 + 5&times;(&minus;4) = 27 &minus; 20 = 7 ✓</p>
+  <p class="step">验证 t = &minus;1：x = &minus;1, y = 2，3&times;(&minus;1) + 5&times;2 = &minus;3 + 10 = 7 ✓</p>
+</div>
+</section>
+
+<!-- 第3题 -->
+<div class="quiz-question" id="q3">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    以下哪组是方程 3x + 5y = 7 的一组整数解？<span class="diff-tag diff-medium">中等</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(3, 0)">A. x = 1, y = 1</div>
+    <div class="opt" onclick="checkChoice(3, 1)">B. x = 2, y = 1</div>
+    <div class="opt" onclick="checkChoice(3, 2)">C. x = 4, y = &minus;1</div>
+    <div class="opt" onclick="checkChoice(3, 3)">D. 无整数解</div>
+  </div>
+  <div class="explain" id="explain3">
+    <strong>解析：</strong>将各选项代入验证：<br>
+    A：3&times;1 + 5&times;1 = 3 + 5 = 8 &ne; 7 ✗<br>
+    B：3&times;2 + 5&times;1 = 6 + 5 = 11 &ne; 7 ✗<br>
+    C：3&times;4 + 5&times;(&minus;1) = 12 &minus; 5 = <strong>7</strong> ✓<br>
+    由于 gcd(3,5)=1 整除 7，方程必有解，D 错误。选 C。
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 四、容斥原理与抽屉原理 -->
+<!-- ============================================================ -->
+<section>
+<h2>四、容斥原理与抽屉原理</h2>
+
+<h3>容斥原理（Inclusion-Exclusion Principle）</h3>
+<p>容斥原理是计数中处理"重叠"情况的利器。当我们需要计算多个集合的并集中的元素个数时，直接相加会重复计数重叠的部分，需要"容"（包含）再"斥"（排除）。</p>
+
+<div class="formula-box">
+  <p><strong>两个集合的容斥原理</strong></p>
+  <p>|A &cup; B| = |A| + |B| &minus; |A &cap; B|</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>某班 40 人中，喜欢数学的有 25 人，喜欢物理的有 20 人，两科都喜欢的有 10 人。问至少喜欢一科的有多少人？</p>
+  <p class="step">设 A = {喜欢数学的人}，B = {喜欢物理的人}。</p>
+  <p class="step">|A &cup; B| = |A| + |B| &minus; |A &cap; B| = 25 + 20 &minus; 10 = <strong>35 人</strong>。</p>
+</div>
+
+<div class="formula-box">
+  <p><strong>三个集合的容斥原理</strong></p>
+  <p>|A &cup; B &cup; C| = |A| + |B| + |C| &minus; |A&cap;B| &minus; |A&cap;C| &minus; |B&cap;C| + |A&cap;B&cap;C|</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>某班 50 人，参加数学竞赛 20 人，物理竞赛 15 人，化学竞赛 10 人，同时参加数学和物理的 8 人，数学和化学的 5 人，物理和化学的 3 人，三科都参加的 2 人。问至少参加一科的有多少人？</p>
+  <p class="step">|M &cup; P &cup; C| = 20 + 15 + 10 &minus; 8 &minus; 5 &minus; 3 + 2 = <strong>31 人</strong>。</p>
+</div>
+
+<h3>抽屉原理（Pigeonhole Principle）</h3>
+<p>抽屉原理（又称鸽巢原理）是最基本的组合数学原理之一，它描述了一个非常直观的现象：</p>
+
+<div class="formula-box">
+  <p><strong>抽屉原理（第一形式）</strong></p>
+  <p>如果把 n + 1 个物品放入 n 个抽屉中，那么<strong>至少有一个抽屉</strong>里有<strong>至少两个</strong>物品。</p>
+</div>
+
+<div class="formula-box">
+  <p><strong>抽屉原理（推广形式）</strong></p>
+  <p>如果把 m 个物品放入 n 个抽屉中（m > n），那么至少有一个抽屉里有至少 &lceil;m / n&rceil; 个物品。</p>
+  <p>（其中 &lceil;x&rceil; 表示不小于 x 的最小整数）</p>
+</div>
+
+<div class="example">
+  <p><strong>例 1（基础）：</strong>367 个人中，至少有两个人在同一天过生日。</p>
+  <p class="step">一年最多 366 天（闰年），367 个人放入 366 个"生日抽屉"，由抽屉原理知结论成立。</p>
+</div>
+
+<div class="example">
+  <p><strong>例 2（推广）：</strong>把 10 个苹果放入 3 个抽屉，至少有一个抽屉里有多少个苹果？</p>
+  <p class="step">&lceil;10 / 3&rceil; = &lceil;3.33&rceil; = <strong>4 个</strong>。</p>
+</div>
+</section>
+
+<!-- 第4题 -->
+<div class="quiz-question" id="q4">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    把 10 个苹果放入 9 个抽屉中，以下哪个说法正确？<span class="diff-tag diff-easy">基础</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(4, 0)">A. 每个抽屉恰好有 1 个苹果</div>
+    <div class="opt" onclick="checkChoice(4, 1)">B. 至少有一个抽屉有至少 2 个苹果</div>
+    <div class="opt" onclick="checkChoice(4, 2)">C. 至少有一个抽屉是空的</div>
+    <div class="opt" onclick="checkChoice(4, 3)">D. 所有苹果都在同一个抽屉里</div>
+  </div>
+  <div class="explain" id="explain4">
+    <strong>解析：</strong>10 个苹果放入 9 个抽屉，10 > 9。由抽屉原理，<strong>至少有一个抽屉有至少 2 个苹果</strong>。选 B。
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 五、图论入门 -->
+<!-- ============================================================ -->
+<section>
+<h2>五、图论入门</h2>
+
+<h3>图的基本要素</h3>
+<p><strong class="keyword">图</strong>（Graph）是组合数学中最基本的结构之一，它由<strong>顶点</strong>（Vertex）和<strong>边</strong>（Edge）组成。图论研究的是顶点之间如何通过边相互连接。</p>
+
+<div class="definition">
+  <p><strong>图 G = (V, E)</strong></p>
+  <p>V 是顶点的集合（非空），E 是边的集合。</p>
+  <p>每条边连接两个顶点（可以是同一个顶点——此时称为"自环"）。</p>
+</div>
+
+<h3>有向图与无向图</h3>
+<div class="two-col">
+  <div class="formula-box" style="text-align:center;">
+    <p><strong>无向图</strong></p>
+    <p>边没有方向，用线段连接两个顶点。</p>
+    <p>如朋友关系图——A 认识 B 等价于 B 认识 A。</p>
+    <p style="font-size:0.9em;margin-top:8px;">边用 (u, v) 表示，其中 (u, v) = (v, u)</p>
+  </div>
+  <div class="formula-box" style="text-align:center;">
+    <p><strong>有向图</strong></p>
+    <p>边有方向，用箭头表示。</p>
+    <p>如微博关注关系——A 关注 B 不意味着 B 关注 A。</p>
+    <p style="font-size:0.9em;margin-top:8px;">边用 &lt;u, v&gt; 表示，&lt;u, v&gt; &ne; &lt;v, u&gt;</p>
+  </div>
+</div>
+
+<h3>基本概念</h3>
+<table>
+  <tr><th>概念</th><th>含义</th><th>示例</th></tr>
+  <tr><td><strong>顶点数</strong> |V|</td><td>图中顶点的总个数</td><td>3 个顶点即 |V| = 3</td></tr>
+  <tr><td><strong>边数</strong> |E|</td><td>图中边的总条数</td><td>连接 3 个顶点的三角形有 3 条边</td></tr>
+  <tr><td><strong>度</strong> deg(v)</td><td>与顶点 v 相连的边的数目</td><td>三角形中每个顶点度为 2</td></tr>
+  <tr><td><strong>路径</strong></td><td>从一点到另一点经过的顶点序列</td><td>A &rarr; B &rarr; C 是一条路径</td></tr>
+  <tr><td><strong>回路</strong></td><td>起点和终点相同的路径</td><td>A &rarr; B &rarr; C &rarr; A</td></tr>
+  <tr><td><strong>连通图</strong></td><td>任意两个顶点之间都有路径</td><td>树、完全图都是连通的</td></tr>
+</table>
+
+<div class="example">
+  <p><strong>例：</strong>一个完全图 K<sub>4</sub>（4 个顶点，每两个顶点之间都有一条边）有多少条边？</p>
+  <p class="step">4 个顶点中任选 2 个连边，边的数量 = C(4, 2) = 6 条。</p>
+  <p class="step">一般地，n 个顶点的完全图有 C(n, 2) = n(n&minus;1) / 2 条边。</p>
+</div>
+
+<h3>图的表示</h3>
+<p>图可以用<strong>邻接矩阵</strong>或<strong>邻接表</strong>来表示：</p>
+
+<div class="two-col">
+  <div class="formula-box">
+    <p><strong>邻接矩阵</strong></p>
+    <p>一个 n &times; n 的矩阵 A，</p>
+    <p>A[i][j] = 1 表示顶点 i 到 j 有边，</p>
+    <p>A[i][j] = 0 表示无边。</p>
+    <p>无向图的邻接矩阵是<strong>对称</strong>的。</p>
+  </div>
+  <div class="formula-box">
+    <p><strong>邻接表</strong></p>
+    <p>为每个顶点维护一个列表，</p>
+    <p>列出与该顶点相邻的所有顶点。</p>
+    <p>适合表示<strong>稀疏图</strong>（边数远小于 n&sup2;）。</p>
+  </div>
+</div>
+</section>
+
+<!-- 第5题 -->
+<div class="quiz-question" id="q5">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    以下关于无向图的描述，哪一个是正确的？<span class="diff-tag diff-easy">基础</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(5, 0)">A. 无向图的边有方向</div>
+    <div class="opt" onclick="checkChoice(5, 1)">B. 无向图中顶点数必须等于边数</div>
+    <div class="opt" onclick="checkChoice(5, 2)">C. 无向图的边没有方向，即 (u, v) = (v, u)</div>
+    <div class="opt" onclick="checkChoice(5, 3)">D. 无向图一定是连通的</div>
+  </div>
+  <div class="explain" id="explain5">
+    <strong>解析：</strong>无向图的边没有方向，连接顶点 u 和 v 的边 (u, v) 与 (v, u) 是<strong>同一条边</strong>。A 错误（有方向就是有向图）；B 错误（顶点数和边数没有必然相等关系）；D 错误（无向图可以不连通，如两个分离的三角形）。选 C。
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 六、进阶数论与几何组合 -->
+<!-- ============================================================ -->
+<section>
+<h2>六、进阶数论与几何组合</h2>
+
+<h3>欧拉函数 &phi;(n)</h3>
+<p><strong class="keyword">欧拉函数</strong> &phi;(n)（Euler's totient function）指的是小于或等于 n 的正整数中与 n 互质的数的个数。</p>
+
+<div class="formula-box">
+  <p><strong>欧拉函数的定义</strong></p>
+  <p>&phi;(n) = |{ k | 1 &le; k &le; n, gcd(k, n) = 1 }|</p>
+</div>
+
+<div class="example">
+  <p><strong>例 1：</strong>计算 &phi;(6)。</p>
+  <p class="step">1 到 6 中，与 6 互质的数有：1, 5（因为 gcd(2,6)=2, gcd(3,6)=3, gcd(4,6)=2, gcd(6,6)=6）</p>
+  <p class="step">所以 &phi;(6) = <strong>2</strong>。</p>
+</div>
+
+<div class="example">
+  <p><strong>例 2：</strong>计算 &phi;(12)。</p>
+  <p class="step">1 到 12 中，与 12 互质的数有：1, 5, 7, 11（共 4 个）。</p>
+  <p class="step">所以 &phi;(12) = <strong>4</strong>。</p>
+</div>
+
+<div class="formula-box">
+  <p><strong>欧拉函数的计算公式</strong></p>
+  <p>若 n 的质因数分解为 n = p<sub>1</sub><sup>e<sub>1</sub></sup> &middot; p<sub>2</sub><sup>e<sub>2</sub></sup> &middot; … &middot; p<sub>k</sub><sup>e<sub>k</sub></sup>，则</p>
+  <p>&phi;(n) = n &middot; (1 &minus; 1/p<sub>1</sub>) &middot; (1 &minus; 1/p<sub>2</sub>) &middot; … &middot; (1 &minus; 1/p<sub>k</sub>)</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>用公式计算 &phi;(12)。</p>
+  <p class="step">12 = 2<sup>2</sup> &times; 3</p>
+  <p class="step">&phi;(12) = 12 &times; (1 &minus; 1/2) &times; (1 &minus; 1/3) = 12 &times; 1/2 &times; 2/3 = <strong>4</strong> ✓</p>
+</div>
+
+<h3>几何组合初步：皮克定理</h3>
+<p><strong class="keyword">皮克定理</strong>（Pick's Theorem）给出了格点多边形面积与内部和边界上格点个数之间的优美关系。</p>
+
+<div class="formula-box">
+  <p><strong>皮克定理</strong></p>
+  <p>对于一个顶点都在格点（坐标均为整数的点）上的简单多边形，</p>
+  <p>S = I + B / 2 &minus; 1</p>
+  <p>其中 S 是多边形的面积，I 是<strong>内部</strong>格点的个数，B 是<strong>边界</strong>（含顶点）上格点的个数。</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>求以 (0,0)、(4,0)、(0,3) 为顶点的三角形面积，并用皮克定理验证。</p>
+  <p class="step"><strong>直接计算：</strong>直角三角形，两直角边长 4 和 3，面积 S = 4 &times; 3 / 2 = <strong>6</strong>。</p>
+  <p class="step"><strong>数格点：</strong></p>
+  <p class="step">&emsp;边界格点 B：在 (0,0)&rarr;(4,0) 上有 5 个（含端点），(0,0)&rarr;(0,3) 上有 4 个，(4,0)&rarr;(0,3) 上只有 2 个端点，重复计数的 3 个顶点各算一次，B = 5 + 4 + 2 &minus; 3 = <strong>8</strong>。</p>
+  <p class="step">&emsp;内部格点 I：可直接数出来——(1,1)、(2,1)、(1,2) 共 <strong>3</strong> 个。</p>
+  <p class="step"><strong>皮克定理验证：</strong>S = I + B / 2 &minus; 1 = 3 + 8/2 &minus; 1 = 3 + 4 &minus; 1 = <strong>6</strong> ✓</p>
+</div>
+
+<div class="key-point">
+  <p><strong>皮克定理的美妙之处：</strong>它把几何量（面积）与数论量（格点个数）联系起来，是"数形结合"的一个经典范例。皮克定理只对<strong>格点多边形</strong>成立，且要求多边形是<strong>简单</strong>的（不自交）。</p>
+</div>
+</section>
+
+<!-- 第6题 -->
+<div class="quiz-question" id="q6">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    格点三角形的顶点为 (0,0)、(4,0)、(0,3)，用皮克定理计算其面积是多少？<span class="diff-tag diff-medium">中等</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(6, 0)">A. 4</div>
+    <div class="opt" onclick="checkChoice(6, 1)">B. 6</div>
+    <div class="opt" onclick="checkChoice(6, 2)">C. 8</div>
+    <div class="opt" onclick="checkChoice(6, 3)">D. 12</div>
+  </div>
+  <div class="explain" id="explain6">
+    <strong>解析：</strong>该三角形是直角三角形，直接计算面积 = 4 &times; 3 / 2 = <strong>6</strong>。<br>
+    用皮克定理验证：边界格点 B = 8，内部格点 I = 3，S = I + B/2 &minus; 1 = 3 + 4 &minus; 1 = <strong>6</strong>。选 B。
+  </div>
+</div>
+
+</article>
+
+<script>
+var answers = {1:1, 2:0, 3:2, 4:1, 5:2, 6:1};
+var answered = {};
+var score = 0;
+
+function checkChoice(q, choice) {
+  if (answered[q]) return;
+  answered[q] = true;
+  var correct = (choice === answers[q]);
+  var qDiv = document.getElementById("q" + q);
+  var opts = qDiv.querySelectorAll(".opt");
+  for (var i = 0; i < opts.length; i++) opts[i].classList.add("disabled");
+  opts[choice].classList.add(correct ? "correct-opt" : "wrong-opt");
+  if (!correct) opts[answers[q]].classList.add("correct-opt");
+  qDiv.classList.add(correct ? "correct" : "wrong");
+  var exp = document.getElementById("explain" + q);
+  exp.classList.add("show", correct ? "ok" : "fail");
+  if (correct) { score++; document.getElementById("totalScore").textContent = score + " / 6"; }
+}
+
+function resetAll() {
+  answered = {}; score = 0;
+  document.getElementById("totalScore").textContent = "0 / 6";
+  for (var q = 1; q <= 6; q++) {
+    var qDiv = document.getElementById("q" + q);
+    qDiv.classList.remove("correct", "wrong");
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var i = 0; i < opts.length; i++) opts[i].classList.remove("correct-opt", "wrong-opt", "disabled");
+    document.getElementById("explain" + q).className = "explain";
+  }
+}
+</script>
+    <script src="../dt.js"></script>
+</body>
+</html>

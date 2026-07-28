@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图论基础 — 顶点、边与结构</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  h3 { color: #2c3e50; margin: 28px 0 12px; font-size: 1.15em; }
+  h4 { color: #555; margin: 18px 0 8px; font-size: 1em; }
+  .formula-box { border: 2px solid #1a73e8; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #f0f7ff; }
+  .formula-box p { margin: 6px 0; text-align: center; font-size: 1.05em; }
+  .key-point { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* SVG 图容器 */
+  .graph-svg { display: flex; justify-content: center; margin: 14px 0; }
+  .graph-svg svg { background: #fafafa; border-radius: 8px; border: 1px solid #e0e0e0; }
+  .graph-caption { text-align: center; font-size: 0.88em; color: #666; margin-bottom: 10px; }
+
+  /* Quiz styles */
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag {
+    display: inline-block; padding: 2px 12px; border-radius: 12px;
+    font-size: 0.75em; margin-right: 8px; color: #fff;
+  }
+  .q-tag.concept { background: #1a73e8; }
+  .q-tag.calc { background: #e67e22; }
+  .q-tag.graph { background: #8e24aa; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+  }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+  /* Score panel */
+  .score-panel {
+    text-align: center; padding: 16px; margin: 20px 0;
+    background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8;
+  }
+  .score-panel .score-num { font-size: 2em; font-weight: bold; color: #1a73e8; }
+  .score-panel .btn-reset {
+    margin-left: 16px; padding: 8px 24px; border: 2px solid #1a73e8;
+    color: #1a73e8; border-radius: 20px; background: #fff;
+    cursor: pointer; font-size: 0.95em; transition: 0.15s;
+  }
+  .score-panel .btn-reset:hover { background: #1a73e8; color: #fff; }
+
+  /* 表格样式增强 */
+  .compare-table th:first-child { min-width: 80px; }
+  .def-list { margin: 10px 0; padding-left: 20px; }
+  .def-list li { margin: 8px 0; line-height: 1.7; }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>图论基础 &mdash; 顶点、边与结构</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">图论是研究"顶点"和"边"之间关系的数学分支，从七桥问题到社交网络分析，无处不在。</p>
+
+<!-- ============================== 一、图的定义 ============================== -->
+<section>
+<h2>一、图的定义</h2>
+
+<h3>先看一个问题</h3>
+<div class="example">
+  <p><strong>问题：</strong>有 4 个城市 A、B、C、D，它们之间的直达航线如下：A&harr;B、A&harr;C、B&harr;D、C&harr;D。如何用数学方式来描述这个交通网络？</p>
+  <p class="step"><strong>思考：</strong>我们把每个城市看作一个<strong>点</strong>，把每条直达航线看作连接两个点的<strong>线</strong>。这样就形成了图论中最基础的结构——一个<strong>图</strong>。</p>
+</div>
+
+<h3>图的定义</h3>
+<div class="definition">
+  <p>一个<strong>图</strong> G 定义为一个有序对 <strong>G = (V, E)</strong>，其中：</p>
+  <ul>
+    <li><strong>V</strong>（Vertex Set）：顶点集，图中的所有顶点（也叫节点）的集合。</li>
+    <li><strong>E</strong>（Edge Set）：边集，连接顶点的所有边的集合。</li>
+  </ul>
+</div>
+
+<div class="formula-box">
+  <p>G = (V, E) &emsp; V 是顶点集，E 是边集</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>上面城市航线的例子中，V = {A, B, C, D}，E = {AB, AC, BD, CD}。</p>
+</div>
+
+<div class="graph-svg">
+  <svg width="280" height="200" viewBox="0 0 280 200">
+    <circle cx="140" cy="30" r="18" fill="#bbdefb" stroke="#1a73e8" stroke-width="2"/>
+    <text x="140" y="36" text-anchor="middle" font-size="14" fill="#1a73e8" font-weight="bold">A</text>
+    <circle cx="40" cy="140" r="18" fill="#bbdefb" stroke="#1a73e8" stroke-width="2"/>
+    <text x="40" y="146" text-anchor="middle" font-size="14" fill="#1a73e8" font-weight="bold">B</text>
+    <circle cx="240" cy="140" r="18" fill="#bbdefb" stroke="#1a73e8" stroke-width="2"/>
+    <text x="240" y="146" text-anchor="middle" font-size="14" fill="#1a73e8" font-weight="bold">C</text>
+    <circle cx="140" cy="180" r="18" fill="#bbdefb" stroke="#1a73e8" stroke-width="2"/>
+    <text x="140" y="186" text-anchor="middle" font-size="14" fill="#1a73e8" font-weight="bold">D</text>
+    <line x1="128" y1="46" x2="50" y2="124" stroke="#1a73e8" stroke-width="2"/>
+    <line x1="152" y1="46" x2="230" y2="124" stroke="#1a73e8" stroke-width="2"/>
+    <line x1="50" y1="156" x2="130" y2="164" stroke="#1a73e8" stroke-width="2"/>
+    <line x1="150" y1="164" x2="230" y2="156" stroke="#1a73e8" stroke-width="2"/>
+  </svg>
+</div>
+<div class="graph-caption">图 G：顶点集 V = {A, B, C, D}, 边集 E = {AB, AC, BD, CD}</div>
+
+<h3>无向图与有向图</h3>
+<ul>
+  <li><strong>无向图（Undirected Graph）：</strong>边没有方向。边 AB 和 BA 表示同一条边，即 A 和 B 之间是双向连接。</li>
+  <li><strong>有向图（Directed Graph / Digraph）：</strong>边有方向。用箭头表示，从起点指向终点，记作 A&rarr;B。</li>
+</ul>
+
+<div class="example">
+  <p><strong>例：</strong>社交网络中的"好友关系"是无向图（A 是 B 的好友 = B 是 A 的好友）；而"关注关系"是有向图（A 关注 B 并不意味着 B 关注 A）。</p>
+</div>
+
+<div class="graph-svg">
+  <svg width="420" height="160" viewBox="0 0 420 160">
+    <!-- 无向图 -->
+    <text x="105" y="20" text-anchor="middle" font-size="15" fill="#2c3e50" font-weight="bold">无向图</text>
+    <circle cx="60" cy="100" r="16" fill="#bbdefb" stroke="#1a73e8" stroke-width="2"/>
+    <text x="60" y="106" text-anchor="middle" font-size="13" fill="#1a73e8" font-weight="bold">A</text>
+    <circle cx="150" cy="100" r="16" fill="#bbdefb" stroke="#1a73e8" stroke-width="2"/>
+    <text x="150" y="106" text-anchor="middle" font-size="13" fill="#1a73e8" font-weight="bold">B</text>
+    <line x1="76" y1="100" x2="134" y2="100" stroke="#1a73e8" stroke-width="2"/>
+    <!-- 有向图 -->
+    <text x="315" y="20" text-anchor="middle" font-size="15" fill="#2c3e50" font-weight="bold">有向图</text>
+    <circle cx="260" cy="100" r="16" fill="#bbdefb" stroke="#e67e22" stroke-width="2"/>
+    <text x="260" y="106" text-anchor="middle" font-size="13" fill="#e67e22" font-weight="bold">A</text>
+    <circle cx="370" cy="100" r="16" fill="#bbdefb" stroke="#e67e22" stroke-width="2"/>
+    <text x="370" y="106" text-anchor="middle" font-size="13" fill="#e67e22" font-weight="bold">B</text>
+    <!-- 箭头：从 A 到 B -->
+    <line x1="276" y1="96" x2="350" y2="96" stroke="#e67e22" stroke-width="2"/>
+    <polygon points="352,96 342,90 342,102" fill="#e67e22"/>
+  </svg>
+</div>
+<div class="graph-caption">左：无向图（AB = BA）；右：有向图（A&rarr;B，但 B&rarr;A 不一定成立）</div>
+
+<h3>简单图与完全图</h3>
+<ul>
+  <li><strong>简单图（Simple Graph）：</strong>没有重边（两条顶点间最多一条边），也没有自环（顶点不能有边连向自己）。</li>
+  <li><strong>完全图 K<sub>n</sub>（Complete Graph）：</strong>任意两个不同顶点之间都有且仅有一条边的简单图，记作 K<sub>n</sub>。K<sub>n</sub> 的边数为 C(n, 2) = n(n&minus;1)/2。</li>
+</ul>
+
+<div class="graph-svg">
+  <svg width="420" height="160" viewBox="0 0 420 160">
+    <!-- K3 -->
+    <text x="105" y="20" text-anchor="middle" font-size="15" fill="#2c3e50" font-weight="bold">K<sub>3</sub>（三角形）</text>
+    <circle cx="105" cy="50" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+    <text x="105" y="56" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>1</sub></text>
+    <circle cx="60" cy="130" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+    <text x="60" y="136" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>2</sub></text>
+    <circle cx="150" cy="130" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+    <text x="150" y="136" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>3</sub></text>
+    <line x1="105" y1="64" x2="67" y2="118" stroke="#4caf50" stroke-width="1.5"/>
+    <line x1="105" y1="64" x2="143" y2="118" stroke="#4caf50" stroke-width="1.5"/>
+    <line x1="74" y1="130" x2="136" y2="130" stroke="#4caf50" stroke-width="1.5"/>
+    <!-- K4 -->
+    <text x="315" y="20" text-anchor="middle" font-size="15" fill="#2c3e50" font-weight="bold">K<sub>4</sub></text>
+    <circle cx="280" cy="50" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+    <text x="280" y="56" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>1</sub></text>
+    <circle cx="240" cy="130" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+    <text x="240" y="136" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>2</sub></text>
+    <circle cx="350" cy="130" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+    <text x="350" y="136" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>3</sub></text>
+    <circle cx="315" cy="80" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+    <text x="315" y="86" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>4</sub></text>
+    <!-- 边：v1 到 v2, v3, v4 -->
+    <line x1="271" y1="62" x2="247" y2="118" stroke="#4caf50" stroke-width="1.5"/>
+    <line x1="289" y1="62" x2="343" y2="118" stroke="#4caf50" stroke-width="1.5"/>
+    <line x1="286" y1="62" x2="315" y2="80" stroke="#4caf50" stroke-width="1.5"/>
+    <!-- 边：v2 到 v3, v4 -->
+    <line x1="254" y1="130" x2="336" y2="130" stroke="#4caf50" stroke-width="1.5"/>
+    <line x1="240" y1="130" x2="308" y2="86" stroke="#4caf50" stroke-width="1.5"/>
+    <!-- 边：v3 到 v4 -->
+    <line x1="343" y1="120" x2="322" y2="90" stroke="#4caf50" stroke-width="1.5"/>
+  </svg>
+</div>
+<div class="graph-caption">完全图 K<sub>3</sub>（3 个顶点，3 条边）和 K<sub>4</sub>（4 个顶点，6 条边）</div>
+
+<div class="key-point">
+  <p><strong>边数公式：</strong>完全图 K<sub>n</sub> 的边数为</p>
+  <p style="text-align:center;font-size:1.2em;font-weight:bold;">|E| = C(n, 2) = n(n &minus; 1) / 2</p>
+</div>
+</section>
+
+<!-- 第1题 -->
+<div class="quiz-question" id="q1">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    以下哪个图不是简单图？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(1, 0)">A. 包含一条自环（顶点连向自身）的图</div>
+    <div class="opt" onclick="checkChoice(1, 1)">B. 有 3 个顶点和 3 条边的无向图</div>
+    <div class="opt" onclick="checkChoice(1, 2)">C. 有 4 个顶点且任意两点之间都有一条边的图</div>
+    <div class="opt" onclick="checkChoice(1, 3)">D. 有 5 个顶点和 5 条边的图</div>
+  </div>
+  <div class="explain" id="explain1">
+    <strong>解析：</strong>简单图不允许自环和重边。包含自环的图不是简单图。B 描述的是三角形 K<sub>3</sub>，C 描述的是完全图 K<sub>4</sub>，它们都是简单图。选 <strong>A</strong>。
+  </div>
+</div>
+
+<!-- ============================== 二、度数 ============================== -->
+<section>
+<h2>二、度数</h2>
+
+<h3>先看一个问题</h3>
+<div class="example">
+  <p><strong>问题：</strong>在一个有 5 位同学的群聊中，如果每两个人之间恰好发过一次私信，那么总共发了多少条私信？所有同学收发私信的总次数是多少？</p>
+  <p class="step"><strong>思考：</strong>把每位同学看作顶点，一次私信看作连接两个顶点的一条边。5 个顶点两两相连，就是完全图 K<sub>5</sub>，共有 C(5,2) = 10 条边（10 条私信）。</p>
+  <p class="step">每位同学与另外 4 位都发过私信，所以每位同学的"度数"是 4。所有同学的度数之和 = 5 &times; 4 = 20，恰好等于边数 10 的两倍。</p>
+</div>
+
+<h3>顶点的度数</h3>
+<p>在无向图中，一个顶点的<strong>度数（degree）</strong>是指与该顶点<strong>关联</strong>的边的数目，记作 d(v)。</p>
+
+<div class="key-point">
+  <p><strong>握手引理（Handshaking Lemma）：</strong>在任何无向图中，所有顶点的度数之和等于边数的两倍。</p>
+  <p style="text-align:center;font-size:1.3em;font-weight:bold;margin:10px 0;">
+    &sum;<sub>v&in;V</sub> d(v) = 2 &times; |E|
+  </p>
+</div>
+
+<div class="hint">
+  <strong>直观理解：</strong>每条边有两个端点，所以贡献 2 到度数总和中。这就是"握手"的比喻——一次握手涉及两只手。
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>下图是一个有 5 个顶点的图，计算各顶点的度数和总边数。</p>
+  <div class="graph-svg">
+    <svg width="300" height="180" viewBox="0 0 300 180">
+      <circle cx="60" cy="40" r="16" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
+      <text x="60" y="46" text-anchor="middle" font-size="13" fill="#1a73e8" font-weight="bold">v<sub>1</sub></text>
+      <circle cx="200" cy="40" r="16" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
+      <text x="200" y="46" text-anchor="middle" font-size="13" fill="#1a73e8" font-weight="bold">v<sub>2</sub></text>
+      <circle cx="30" cy="130" r="16" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
+      <text x="30" y="136" text-anchor="middle" font-size="13" fill="#1a73e8" font-weight="bold">v<sub>3</sub></text>
+      <circle cx="150" cy="150" r="16" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
+      <text x="150" y="156" text-anchor="middle" font-size="13" fill="#1a73e8" font-weight="bold">v<sub>4</sub></text>
+      <circle cx="250" cy="130" r="16" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
+      <text x="250" y="136" text-anchor="middle" font-size="13" fill="#1a73e8" font-weight="bold">v<sub>5</sub></text>
+      <line x1="76" y1="40" x2="184" y2="40" stroke="#1a73e8" stroke-width="1.5"/>
+      <line x1="60" y1="56" x2="40" y2="115" stroke="#1a73e8" stroke-width="1.5"/>
+      <line x1="200" y1="56" x2="240" y2="115" stroke="#1a73e8" stroke-width="1.5"/>
+      <line x1="44" y1="130" x2="136" y2="145" stroke="#1a73e8" stroke-width="1.5"/>
+      <line x1="164" y1="145" x2="236" y2="135" stroke="#1a73e8" stroke-width="1.5"/>
+      <line x1="200" y1="56" x2="160" y2="135" stroke="#1a73e8" stroke-width="1.5"/>
+    </svg>
+  </div>
+  <p class="step">d(v<sub>1</sub>) = 2（连 v<sub>2</sub> 和 v<sub>3</sub>）</p>
+  <p class="step">d(v<sub>2</sub>) = 3（连 v<sub>1</sub>、v<sub>4</sub>、v<sub>5</sub>）</p>
+  <p class="step">d(v<sub>3</sub>) = 2（连 v<sub>1</sub>、v<sub>4</sub>）</p>
+  <p class="step">d(v<sub>4</sub>) = 3（连 v<sub>2</sub>、v<sub>3</sub>、v<sub>5</sub>）</p>
+  <p class="step">d(v<sub>5</sub>) = 2（连 v<sub>2</sub>、v<sub>4</sub>）</p>
+  <p class="step">度数之和 = 2 + 3 + 2 + 3 + 2 = <strong>12</strong>，边数 = <strong>6</strong>，验证：12 = 2 &times; 6 &#10003;</p>
+</div>
+</section>
+
+<!-- 第2题 -->
+<div class="quiz-question" id="q2">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    一个图有 8 个顶点，每个顶点的度数都是 3。根据握手引理，这个图有多少条边？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(2, 0)">A. 8 条</div>
+    <div class="opt" onclick="checkChoice(2, 1)">B. 12 条</div>
+    <div class="opt" onclick="checkChoice(2, 2)">C. 24 条</div>
+    <div class="opt" onclick="checkChoice(2, 3)">D. 16 条</div>
+  </div>
+  <div class="explain" id="explain2">
+    <strong>解析：</strong>度数之和 = 8 &times; 3 = 24。由握手引理，边数 = 度数之和 / 2 = 24 / 2 = <strong>12 条</strong>。选 <strong>B</strong>。
+  </div>
+</div>
+
+<!-- ============================== 三、路径与连通 ============================== -->
+<section>
+<h2>三、路径与连通</h2>
+
+<h3>基本概念</h3>
+<ul>
+  <li><strong>路径（Path）：</strong>一个顶点序列 v<sub>1</sub>, v<sub>2</sub>, ..., v<sub>k</sub>，其中相邻顶点之间都有边连接，且顶点互不相同。路径的长度是路径中边的数目。</li>
+  <li><strong>回路（Cycle）：</strong>起点和终点相同且中间顶点互不相同的路径（即 v<sub>1</sub> = v<sub>k</sub>，其他顶点互异）。</li>
+  <li><strong>连通图（Connected Graph）：</strong>图中任意两个顶点之间都存在一条路径。</li>
+</ul>
+
+<div class="example">
+  <p><strong>例：</strong>在下图中，从 v<sub>1</sub> 到 v<sub>4</sub> 有一条路径：v<sub>1</sub> &rarr; v<sub>2</sub> &rarr; v<sub>3</sub> &rarr; v<sub>4</sub>（长度为 3）。图中还有一个回路：v<sub>1</sub> &rarr; v<sub>2</sub> &rarr; v<sub>3</sub> &rarr; v<sub>1</sub>（长度为 3 的三角形回路）。</p>
+</div>
+
+<div class="graph-svg">
+  <svg width="400" height="160" viewBox="0 0 400 160">
+    <!-- 连通图 -->
+    <text x="100" y="20" text-anchor="middle" font-size="15" fill="#2c3e50" font-weight="bold">连通图</text>
+    <circle cx="40" cy="100" r="14" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
+    <text x="40" y="106" text-anchor="middle" font-size="12" fill="#1a73e8" font-weight="bold">v<sub>1</sub></text>
+    <circle cx="100" cy="50" r="14" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
+    <text x="100" y="56" text-anchor="middle" font-size="12" fill="#1a73e8" font-weight="bold">v<sub>2</sub></text>
+    <circle cx="160" cy="100" r="14" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
+    <text x="160" y="106" text-anchor="middle" font-size="12" fill="#1a73e8" font-weight="bold">v<sub>3</sub></text>
+    <line x1="54" y1="100" x2="86" y2="64" stroke="#1a73e8" stroke-width="1.5"/>
+    <line x1="114" y1="64" x2="146" y2="86" stroke="#1a73e8" stroke-width="1.5"/>
+    <line x1="146" y1="100" x2="54" y2="100" stroke="#1a73e8" stroke-width="1.5"/>
+    <!-- 非连通图 -->
+    <text x="300" y="20" text-anchor="middle" font-size="15" fill="#2c3e50" font-weight="bold">非连通图</text>
+    <circle cx="240" cy="100" r="14" fill="#fce4ec" stroke="#f44336" stroke-width="2"/>
+    <text x="240" y="106" text-anchor="middle" font-size="12" fill="#c62828" font-weight="bold">a</text>
+    <circle cx="290" cy="60" r="14" fill="#fce4ec" stroke="#f44336" stroke-width="2"/>
+    <text x="290" y="66" text-anchor="middle" font-size="12" fill="#c62828" font-weight="bold">b</text>
+    <circle cx="340" cy="100" r="14" fill="#fce4ec" stroke="#f44336" stroke-width="2"/>
+    <text x="340" y="106" text-anchor="middle" font-size="12" fill="#c62828" font-weight="bold">c</text>
+    <line x1="254" y1="100" x2="276" y2="74" stroke="#f44336" stroke-width="1.5"/>
+    <line x1="304" y1="74" x2="326" y2="86" stroke="#f44336" stroke-width="1.5"/>
+    <!-- 孤立的 d -->
+    <circle cx="290" cy="140" r="14" fill="#fce4ec" stroke="#f44336" stroke-width="2"/>
+    <text x="290" y="146" text-anchor="middle" font-size="12" fill="#c62828" font-weight="bold">d</text>
+  </svg>
+</div>
+<div class="graph-caption">左图是连通的（任意两点都有路径）；右图不连通（d 与 a、b、c 之间没有路径）</div>
+
+<div class="key-point">
+  <p><strong>连通分量：</strong>非连通图可以分成若干个连通的"部分"，每个部分称为一个<strong>连通分量</strong>。右图有两个连通分量：{a, b, c} 和 {d}。</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>社交网络中，"朋友圈"就是连通分量——一个朋友圈内的人可以通过好友关系链相互联系，而不同朋友圈之间则没有联系。</p>
+</div>
+</section>
+
+<!-- 第3题 -->
+<div class="quiz-question" id="q3">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    一个图有 6 个顶点：v<sub>1</sub>&ndash;v<sub>2</sub>、v<sub>2</sub>&ndash;v<sub>3</sub>、v<sub>3</sub>&ndash;v<sub>4</sub>、v<sub>4</sub>&ndash;v<sub>5</sub>、v<sub>5</sub>&ndash;v<sub>6</sub> 之间有边，其他顶点之间没有边。这个图是连通的吗？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(3, 0)">A. 是连通的</div>
+    <div class="opt" onclick="checkChoice(3, 1)">B. 不是连通的，因为它缺少三角形回路</div>
+    <div class="opt" onclick="checkChoice(3, 2)">C. 不是连通的，因为它有 6 个独立的部分</div>
+    <div class="opt" onclick="checkChoice(3, 3)">D. 无法判断</div>
+  </div>
+  <div class="explain" id="explain3">
+    <strong>解析：</strong>顶点排列成一条链 v<sub>1</sub>&ndash;v<sub>2</sub>&ndash;v<sub>3</sub>&ndash;v<sub>4</sub>&ndash;v<sub>5</sub>&ndash;v<sub>6</sub>。虽然形状像一条线，但任意两个顶点之间都可以沿着这条链找到路径，所以它是连通的。选 <strong>A</strong>。
+  </div>
+</div>
+
+<!-- ============================== 四、树 ============================== -->
+<section>
+<h2>四、树</h2>
+
+<h3>先看一个问题</h3>
+<div class="example">
+  <p><strong>问题：</strong>一个公司有 6 个部门，需要铺设网络线缆将它们连接起来。要求任意两个部门之间都能通信（直接或间接），但希望线缆总长度尽可能短。最少需要多少条线缆？</p>
+  <p class="step"><strong>思考：</strong>如果 6 个部门两两相连，需要 C(6,2) = 15 条线缆，但很多是多余的。实际上，我们只需要 5 条线缆，将它们连接成一种特殊的图——<strong>树</strong>。</p>
+</div>
+
+<h3>树的定义</h3>
+<div class="definition">
+  <p><strong>树（Tree）</strong>：一个<strong>连通</strong>且<strong>无回路</strong>的无向图称为树。树是最简单的连通图结构——用最少的边保持连通。</p>
+</div>
+
+<div class="key-point">
+  <p><strong>树的重要性质：</strong>一棵有 n 个顶点的树，恰好有 <strong>n &minus; 1</strong> 条边。</p>
+  <p style="text-align:center;font-size:1.3em;font-weight:bold;margin:10px 0;">
+    树：|V| = n &rArr; |E| = n &minus; 1
+  </p>
+</div>
+
+<div class="hint">
+  <strong>为什么是 n &minus; 1？</strong>树是连通图，至少需要 n&minus;1 条边才能把 n 个顶点串起来。如果少于 n&minus;1 条边，图一定不连通；如果多于 n&minus;1 条边，图中一定会出现回路。
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>一棵有 7 个顶点的树，必然有 6 条边。下面是一棵树的结构：</p>
+  <div class="graph-svg">
+    <svg width="320" height="180" viewBox="0 0 320 180">
+      <circle cx="160" cy="20" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+      <text x="160" y="26" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>1</sub></text>
+      <circle cx="60" cy="80" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+      <text x="60" y="86" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>2</sub></text>
+      <circle cx="260" cy="80" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+      <text x="260" y="86" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>3</sub></text>
+      <circle cx="30" cy="150" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+      <text x="30" y="156" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>4</sub></text>
+      <circle cx="90" cy="150" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+      <text x="90" y="156" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>5</sub></text>
+      <circle cx="220" cy="150" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+      <text x="220" y="156" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>6</sub></text>
+      <circle cx="300" cy="150" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+      <text x="300" y="156" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>7</sub></text>
+      <line x1="150" y1="32" x2="72" y2="68" stroke="#4caf50" stroke-width="1.5"/>
+      <line x1="170" y1="32" x2="248" y2="68" stroke="#4caf50" stroke-width="1.5"/>
+      <line x1="60" y1="94" x2="36" y2="138" stroke="#4caf50" stroke-width="1.5"/>
+      <line x1="60" y1="94" x2="84" y2="138" stroke="#4caf50" stroke-width="1.5"/>
+      <line x1="260" y1="94" x2="226" y2="138" stroke="#4caf50" stroke-width="1.5"/>
+      <line x1="260" y1="94" x2="294" y2="138" stroke="#4caf50" stroke-width="1.5"/>
+    </svg>
+  </div>
+  <div class="graph-caption">7 个顶点、6 条边的树。任意两顶点之间恰有一条路径，没有回路。</div>
+</div>
+
+<h3>生成树</h3>
+<p>给定一个连通图 G，如果 G 的某个子图 T 是树，且包含 G 的所有顶点，则称 T 是 G 的一个<strong>生成树（Spanning Tree）</strong>。</p>
+
+<div class="example">
+  <p><strong>例：</strong>一个连通图通常有多个不同的生成树。找生成树就是在图中"剪掉"多余的边，保留下 n&minus;1 条边使之不再有回路。</p>
+</div>
+</section>
+
+<!-- 第4题 -->
+<div class="quiz-question" id="q4">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    一棵树有 15 个顶点，那么它有多少条边？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(4, 0)">A. 14 条</div>
+    <div class="opt" onclick="checkChoice(4, 1)">B. 15 条</div>
+    <div class="opt" onclick="checkChoice(4, 2)">C. 30 条</div>
+    <div class="opt" onclick="checkChoice(4, 3)">D. 7 条</div>
+  </div>
+  <div class="explain" id="explain4">
+    <strong>解析：</strong>树的性质：n 个顶点的树有 n &minus; 1 条边。15 个顶点，边数 = 15 &minus; 1 = <strong>14 条</strong>。选 <strong>A</strong>。
+  </div>
+</div>
+
+<!-- ============================== 五、欧拉图 ============================== -->
+<section>
+<h2>五、欧拉图</h2>
+
+<h3>七桥问题——图论的起源</h3>
+<div class="example">
+  <p><strong>问题（哥尼斯堡七桥）：</strong>18 世纪的哥尼斯堡城中有七座桥，连接着两座岛和两岸。问题是：能否从某处出发，恰好每座桥走一次且不重复，最后回到起点？</p>
+  <p class="step">1736 年，欧拉（Euler）用图论的方法证明：这是<strong>不可能</strong>的。这个问题的解决标志着图论的诞生。</p>
+</div>
+
+<div class="graph-svg">
+  <svg width="300" height="160" viewBox="0 0 300 160">
+    <!-- 七桥问题的简化图 -->
+    <text x="150" y="18" text-anchor="middle" font-size="14" fill="#2c3e50" font-weight="bold">七桥问题的图模型</text>
+    <circle cx="80" cy="80" r="16" fill="#fff9c4" stroke="#f57f17" stroke-width="2"/>
+    <text x="80" y="86" text-anchor="middle" font-size="12" fill="#e65100" font-weight="bold">A</text>
+    <circle cx="180" cy="50" r="16" fill="#fff9c4" stroke="#f57f17" stroke-width="2"/>
+    <text x="180" y="56" text-anchor="middle" font-size="12" fill="#e65100" font-weight="bold">B</text>
+    <circle cx="180" cy="120" r="16" fill="#fff9c4" stroke="#f57f17" stroke-width="2"/>
+    <text x="180" y="126" text-anchor="middle" font-size="12" fill="#e65100" font-weight="bold">C</text>
+    <circle cx="250" cy="80" r="16" fill="#fff9c4" stroke="#f57f17" stroke-width="2"/>
+    <text x="250" y="86" text-anchor="middle" font-size="12" fill="#e65100" font-weight="bold">D</text>
+    <!-- 7 条边 -->
+    <line x1="94" y1="70" x2="166" y2="56" stroke="#f57f17" stroke-width="1.5"/>
+    <line x1="94" y1="90" x2="166" y2="112" stroke="#f57f17" stroke-width="1.5"/>
+    <line x1="94" y1="80" x2="166" y2="50" stroke="#f57f17" stroke-width="1"/>
+    <line x1="94" y1="80" x2="166" y2="120" stroke="#f57f17" stroke-width="1"/>
+    <line x1="196" y1="54" x2="236" y2="74" stroke="#f57f17" stroke-width="1.5"/>
+    <line x1="196" y1="116" x2="236" y2="90" stroke="#f57f17" stroke-width="1.5"/>
+    <line x1="180" y1="66" x2="180" y2="104" stroke="#f57f17" stroke-width="1.5"/>
+    <!-- 度数标注 -->
+    <text x="80" y="110" text-anchor="middle" font-size="11" fill="#e65100">d=3</text>
+    <text x="166" y="44" text-anchor="middle" font-size="11" fill="#e65100">d=5</text>
+    <text x="166" y="134" text-anchor="middle" font-size="11" fill="#e65100">d=3</text>
+    <text x="250" y="106" text-anchor="middle" font-size="11" fill="#e65100">d=3</text>
+  </svg>
+</div>
+<div class="graph-caption">七桥问题的图模型。四个顶点的度数分别为 3、5、3、3，全是奇数。</div>
+
+<h3>欧拉图的概念</h3>
+<ul>
+  <li><strong>欧拉通路（Eulerian Trail）：</strong>经过图中每条边恰好一次的路径。</li>
+  <li><strong>欧拉回路（Eulerian Circuit）：</strong>经过图中每条边恰好一次且回到起点的回路。</li>
+  <li><strong>欧拉图（Eulerian Graph）：</strong>具有欧拉回路的图。</li>
+</ul>
+
+<div class="key-point">
+  <p><strong>欧拉定理：</strong>对于一个连通图，</p>
+  <p style="text-align:center;font-size:1.1em;font-weight:bold;margin:10px 0;">
+    图有欧拉回路 &hArr; 所有顶点的度数都是偶数
+  </p>
+  <p style="text-align:center;font-size:1.1em;font-weight:bold;margin:6px 0;">
+    图有欧拉通路（但不是回路） &hArr; 恰好有两个顶点的度数为奇数
+  </p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>七桥问题中四个顶点的度数分别为 3、5、3、3，全是奇数，所以既没有欧拉回路也没有欧拉通路——不可能不重复地走完所有桥。</p>
+  <div class="graph-svg">
+    <svg width="200" height="120" viewBox="0 0 200 120">
+      <text x="100" y="18" text-anchor="middle" font-size="13" fill="#4caf50" font-weight="bold">欧拉图示例</text>
+      <circle cx="60" cy="70" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+      <text x="60" y="76" text-anchor="middle" font-size="11" fill="#2e7d32" font-weight="bold">v<sub>1</sub></text>
+      <circle cx="140" cy="70" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+      <text x="140" y="76" text-anchor="middle" font-size="11" fill="#2e7d32" font-weight="bold">v<sub>2</sub></text>
+      <circle cx="60" cy="110" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+      <text x="60" y="116" text-anchor="middle" font-size="11" fill="#2e7d32" font-weight="bold">v<sub>3</sub></text>
+      <circle cx="140" cy="110" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
+      <text x="140" y="116" text-anchor="middle" font-size="11" fill="#2e7d32" font-weight="bold">v<sub>4</sub></text>
+      <line x1="74" y1="70" x2="126" y2="70" stroke="#4caf50" stroke-width="1.5"/>
+      <line x1="60" y1="84" x2="60" y2="96" stroke="#4caf50" stroke-width="1.5"/>
+      <line x1="140" y1="84" x2="140" y2="96" stroke="#4caf50" stroke-width="1.5"/>
+      <line x1="74" y1="110" x2="126" y2="110" stroke="#4caf50" stroke-width="1.5"/>
+      <line x1="74" y1="74" x2="126" y2="106" stroke="#4caf50" stroke-width="1.5"/>
+      <line x1="126" y1="74" x2="74" y2="106" stroke="#4caf50" stroke-width="1.5"/>
+    </svg>
+  </div>
+  <div class="graph-caption">所有顶点度数均为偶数（d=3, 3, 3, 3），存在欧拉回路</div>
+</div>
+
+<div class="hint">
+  <strong>实际应用：</strong>欧拉图的思想被用于邮递路线规划（中国邮路问题）、垃圾清运路线优化等——如何走遍所有街道且不重复，路线最短。
+</div>
+</section>
+
+<!-- 第5题 -->
+<div class="quiz-question" id="q5">
+  <div class="q-title">
+    <span class="q-tag graph">图论</span>
+    以下哪个图是欧拉图（存在欧拉回路）？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(5, 0)">A. 有 4 个顶点，度数分别为 3、3、1、1 的连通图</div>
+    <div class="opt" onclick="checkChoice(5, 1)">B. 有 4 个顶点，度数分别为 2、2、2、2 的连通图</div>
+    <div class="opt" onclick="checkChoice(5, 2)">C. 有 5 个顶点，度数分别为 1、1、2、2、2 的连通图</div>
+    <div class="opt" onclick="checkChoice(5, 3)">D. 有 3 个顶点，度数分别为 2、2、1 的连通图</div>
+  </div>
+  <div class="explain" id="explain5">
+    <strong>解析：</strong>欧拉回路要求所有顶点的度数均为偶数。A 有奇数度顶点（1,1,3,3）；C 有奇数度顶点（1,1）；D 有奇数度顶点（1）。只有 B 全为偶数（2,2,2,2），是欧拉图。选 <strong>B</strong>。
+  </div>
+</div>
+
+<!-- ============================== 六、二分图 ============================== -->
+<section>
+<h2>六、二分图</h2>
+
+<h3>先看一个问题</h3>
+<div class="example">
+  <p><strong>问题：</strong>有 3 名工人和 4 项任务，每名工人只能做其中的某些任务。如何用图来表示这种"谁可以做哪项任务"的关系？</p>
+  <p class="step"><strong>思考：</strong>我们把工人放在一边，任务放在另一边，如果工人能做某项任务，就连一条边。这样得到的图，顶点天然被分成了两组——<strong>二分图</strong>。</p>
+</div>
+
+<h3>二分图的定义</h3>
+<div class="definition">
+  <p><strong>二分图（Bipartite Graph）：</strong>一个图的顶点集 V 可以分成两个不相交的非空子集 U 和 W，使得每一条边都连接 U 中的一个顶点和 W 中的一个顶点（即边不连接同一子集内的顶点）。</p>
+</div>
+
+<div class="graph-svg">
+  <svg width="360" height="160" viewBox="0 0 360 160">
+    <!-- 二分图 -->
+    <text x="100" y="20" text-anchor="middle" font-size="15" fill="#2c3e50" font-weight="bold">二分图</text>
+    <circle cx="50" cy="60" r="14" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
+    <text x="50" y="66" text-anchor="middle" font-size="11" fill="#1a73e8" font-weight="bold">U<sub>1</sub></text>
+    <circle cx="50" cy="110" r="14" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
+    <text x="50" y="116" text-anchor="middle" font-size="11" fill="#1a73e8" font-weight="bold">U<sub>2</sub></text>
+    <circle cx="50" cy="150" r="14" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
+    <text x="50" y="156" text-anchor="middle" font-size="11" fill="#1a73e8" font-weight="bold">U<sub>3</sub></text>
+
+    <circle cx="200" cy="60" r="14" fill="#fff9c4" stroke="#f57f17" stroke-width="2"/>
+    <text x="200" y="66" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">W<sub>1</sub></text>
+    <circle cx="200" cy="95" r="14" fill="#fff9c4" stroke="#f57f17" stroke-width="2"/>
+    <text x="200" y="101" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">W<sub>2</sub></text>
+    <circle cx="200" cy="130" r="14" fill="#fff9c4" stroke="#f57f17" stroke-width="2"/>
+    <text x="200" y="136" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">W<sub>3</sub></text>
+    <circle cx="200" cy="160" r="14" fill="#fff9c4" stroke="#f57f17" stroke-width="2"/>
+    <text x="200" y="166" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">W<sub>4</sub></text>
+
+    <line x1="64" y1="60" x2="186" y2="60" stroke="#1a73e8" stroke-width="1.2"/>
+    <line x1="64" y1="60" x2="186" y2="95" stroke="#1a73e8" stroke-width="1.2"/>
+    <line x1="64" y1="110" x2="186" y2="95" stroke="#1a73e8" stroke-width="1.2"/>
+    <line x1="64" y1="110" x2="186" y2="130" stroke="#1a73e8" stroke-width="1.2"/>
+    <line x1="64" y1="150" x2="186" y2="130" stroke="#1a73e8" stroke-width="1.2"/>
+    <line x1="64" y1="150" x2="186" y2="160" stroke="#1a73e8" stroke-width="1.2"/>
+
+    <!-- 非二分图 -->
+    <text x="300" y="20" text-anchor="middle" font-size="15" fill="#2c3e50" font-weight="bold">非二分图</text>
+    <circle cx="270" cy="80" r="14" fill="#fce4ec" stroke="#f44336" stroke-width="2"/>
+    <text x="270" y="86" text-anchor="middle" font-size="11" fill="#c62828" font-weight="bold">a</text>
+    <circle cx="310" cy="50" r="14" fill="#fce4ec" stroke="#f44336" stroke-width="2"/>
+    <text x="310" y="56" text-anchor="middle" font-size="11" fill="#c62828" font-weight="bold">b</text>
+    <circle cx="350" cy="80" r="14" fill="#fce4ec" stroke="#f44336" stroke-width="2"/>
+    <text x="350" y="86" text-anchor="middle" font-size="11" fill="#c62828" font-weight="bold">c</text>
+    <line x1="284" y1="80" x2="296" y2="64" stroke="#f44336" stroke-width="1.5"/>
+    <line x1="324" y1="64" x2="336" y2="80" stroke="#f44336" stroke-width="1.5"/>
+    <line x1="284" y1="80" x2="336" y2="80" stroke="#f44336" stroke-width="1.5"/>
+  </svg>
+</div>
+<div class="graph-caption">左：二分图（所有边连接 U 和 W 两部分）；右：三角形 K<sub>3</sub> 不是二分图（含奇环）</div>
+
+<h3>判定定理</h3>
+<div class="key-point">
+  <p><strong>二分图判定定理：</strong>一个图是二分图当且仅当它<strong>不含奇环</strong>（即回路的长度为奇数）。</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>正方形（4 个顶点回路）是二分图，但三角形（3 个顶点回路）不是。任何树都是二分图（因为树没有回路）。</p>
+  <p class="step"><strong>染色法判定：</strong>给每个顶点染两种颜色之一，要求相邻顶点颜色不同。如果能完成染色，就是二分图。三角形无法用两种颜色给三个顶点正确染色（因为每两两相邻），所以不是二分图。</p>
+</div>
+
+<div class="hint">
+  <strong>实际应用：</strong>二分图广泛用于匹配问题——如招聘平台上的求职者与职位匹配、在线约车中司机与乘客的匹配等。
+</div>
+</section>
+
+<!-- 第6题 -->
+<div class="quiz-question" id="q6">
+  <div class="q-title">
+    <span class="q-tag graph">图论</span>
+    以下哪个图不是二分图？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(6, 0)">A. 一条有 5 个顶点的链（路径图）</div>
+    <div class="opt" onclick="checkChoice(6, 1)">B. 一个有 6 个顶点的偶环（六边形回路）</div>
+    <div class="opt" onclick="checkChoice(6, 2)">C. 一个有 5 个顶点的奇环（五边形回路）</div>
+    <div class="opt" onclick="checkChoice(6, 3)">D. 一棵有 10 个顶点的树</div>
+  </div>
+  <div class="explain" id="explain6">
+    <strong>解析：</strong>不含奇环的图是二分图。A（路径图）和 D（树）都没有回路；B（六边形回路）是偶环；只有 C（五边形回路）是奇环（长度为 5），不是二分图。选 <strong>C</strong>。
+  </div>
+</div>
+
+<!-- ============================== 七、染色原理 ============================== -->
+<section>
+<h2>七、染色原理</h2>
+
+<h3>先看一个问题</h3>
+<div class="example">
+  <p><strong>问题：</strong>在一张地图上给各个区域涂色，要求相邻区域（有共同边界）的颜色不同。最少需要几种颜色？</p>
+  <p class="step"><strong>思考：</strong>我们把每个区域看作一个顶点，相邻区域之间连一条边。问题就变成了：给图的每个顶点涂色，使得相邻顶点颜色不同。最少需要的颜色数就是图的<strong>色数</strong>。</p>
+</div>
+
+<h3>图的顶点染色问题</h3>
+<div class="definition">
+  <p><strong>图的顶点染色（Vertex Coloring）：</strong>给图的每个顶点分配一种颜色，使得任意两个相邻顶点颜色不同。</p>
+  <p><strong>色数 &chi;(G)（Chromatic Number）：</strong>给图 G 染色所需的最少颜色种数。</p>
+</div>
+
+<div class="key-point">
+  <p><strong>四色定理（Four Color Theorem）：</strong>任何平面地图（即可以画在平面上且边不相交的图）都可以用最多 <strong>4</strong> 种颜色染色，使得相邻区域颜色不同。</p>
+  <p style="font-size:0.9em;color:#666;">这是数学史上著名的定理——1852 年提出，直到 1976 年才首次由计算机辅助证明，也是第一个借助计算机证明的重要数学定理。</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>计算以下图的色数。</p>
+  <div class="graph-svg">
+    <svg width="300" height="160" viewBox="0 0 300 160">
+      <text x="150" y="20" text-anchor="middle" font-size="14" fill="#2c3e50" font-weight="bold">这个图需要几种颜色？</text>
+      <circle cx="60" cy="70" r="16" fill="#ffcdd2" stroke="#e53935" stroke-width="2"/>
+      <text x="60" y="76" text-anchor="middle" font-size="12" fill="#c62828" font-weight="bold">A</text>
+      <circle cx="150" cy="40" r="16" fill="#bbdefb" stroke="#1a73e8" stroke-width="2"/>
+      <text x="150" y="46" text-anchor="middle" font-size="12" fill="#0d47a1" font-weight="bold">B</text>
+      <circle cx="240" cy="70" r="16" fill="#c8e6c9" stroke="#43a047" stroke-width="2"/>
+      <text x="240" y="76" text-anchor="middle" font-size="12" fill="#1b5e20" font-weight="bold">C</text>
+      <circle cx="100" cy="130" r="16" fill="#fff9c4" stroke="#fdd835" stroke-width="2"/>
+      <text x="100" y="136" text-anchor="middle" font-size="12" fill="#f57f17" font-weight="bold">D</text>
+      <circle cx="200" cy="130" r="16" fill="#e1bee7" stroke="#8e24aa" stroke-width="2"/>
+      <text x="200" y="136" text-anchor="middle" font-size="12" fill="#4a148c" font-weight="bold">E</text>
+      <line x1="76" y1="70" x2="134" y2="54" stroke="#333" stroke-width="1.5"/>
+      <line x1="166" y1="54" x2="224" y2="70" stroke="#333" stroke-width="1.5"/>
+      <line x1="60" y1="86" x2="90" y2="116" stroke="#333" stroke-width="1.5"/>
+      <line x1="240" y1="86" x2="210" y2="116" stroke="#333" stroke-width="1.5"/>
+      <line x1="114" y1="130" x2="186" y2="130" stroke="#333" stroke-width="1.5"/>
+      <line x1="150" y1="56" x2="150" y2="130" stroke="#333" stroke-width="1.5"/>
+    </svg>
+  </div>
+  <p class="step">图中 A、B、C 两两相连（形成一个三角形），因此至少需要 <strong>3</strong> 种颜色（A=红, B=蓝, C=绿）。</p>
+  <p class="step">D 与 A、B、E 相邻，E 与 B、C、D 相邻。3 种颜色可以完成整张图的染色（例如 D=绿, E=红）。</p>
+  <p class="step">所以色数 &chi;(G) = <strong>3</strong>。</p>
+</div>
+
+<div class="hint">
+  <strong>色数与完全图的关系：</strong>如果图 G 包含一个 K<sub>m</sub>（m 个顶点的完全图），那么 &chi;(G) &ge; m，因为 K<sub>m</sub> 需要 m 种颜色。同理，含有三角形的图色数至少为 3。
+</div>
+
+<table>
+  <tr><th>图的结构</th><th>色数</th><th>说明</th></tr>
+  <tr><td>空图（无边）</td><td>1</td><td>所有顶点可涂同色</td></tr>
+  <tr><td>二分图（含树）</td><td>2</td><td>两部分各涂一色</td></tr>
+  <tr><td>奇环（如 C<sub>5</sub>）</td><td>3</td><td>奇数长度回路需要 3 色</td></tr>
+  <tr><td>完全图 K<sub>n</sub></td><td>n</td><td>每个顶点必须颜色不同</td></tr>
+  <tr><td>平面图</td><td>&le; 4</td><td>四色定理保证</td></tr>
+</table>
+</section>
+
+<!-- 第7题 -->
+<div class="quiz-question" id="q7">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    一个完全图 K<sub>5</sub>（5 个顶点两两相连）的色数是多少？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(7, 0)">A. 5</div>
+    <div class="opt" onclick="checkChoice(7, 1)">B. 4</div>
+    <div class="opt" onclick="checkChoice(7, 2)">C. 3</div>
+    <div class="opt" onclick="checkChoice(7, 3)">D. 2</div>
+  </div>
+  <div class="explain" id="explain7">
+    <strong>解析：</strong>完全图 K<sub>n</sub> 中任意两个顶点都相邻，每个顶点必须颜色不同，所以色数 = n。K<sub>5</sub> 的色数为 <strong>5</strong>。选 <strong>A</strong>。
+  </div>
+</div>
+
+<!-- ============================== 综合评分面板 ============================== -->
+<section>
+<div class="score-panel">
+  <h3 style="margin:0 0 10px;color:#2c3e50;">章节测验得分</h3>
+  得分：<span class="score-num" id="totalScore">0</span> / 7
+  <button class="btn-reset" onclick="resetAll()">重置全部</button>
+</div>
+</section>
+
+</article>
+
+<script>
+var answers = {1:0, 2:1, 3:0, 4:0, 5:1, 6:2, 7:0};
+var answered = {};
+var score = 0;
+
+function checkChoice(q, choice) {
+  if (answered[q]) return;
+  answered[q] = true;
+  var correct = (choice === answers[q]);
+  var qDiv = document.getElementById("q" + q);
+  var opts = qDiv.querySelectorAll(".opt");
+  for (var i = 0; i < opts.length; i++) opts[i].classList.add("disabled");
+  opts[choice].classList.add(correct ? "correct-opt" : "wrong-opt");
+  if (!correct) opts[answers[q]].classList.add("correct-opt");
+  qDiv.classList.add(correct ? "correct" : "wrong");
+  var exp = document.getElementById("explain" + q);
+  exp.classList.add("show", correct ? "ok" : "fail");
+  if (correct) { score++; document.getElementById("totalScore").textContent = score + " / 7"; }
+}
+
+function resetAll() {
+  answered = {}; score = 0;
+  document.getElementById("totalScore").textContent = "0 / 7";
+  for (var q = 1; q <= 7; q++) {
+    var qDiv = document.getElementById("q" + q);
+    qDiv.classList.remove("correct", "wrong");
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var i = 0; i < opts.length; i++) opts[i].classList.remove("correct-opt", "wrong-opt", "disabled");
+    document.getElementById("explain" + q).className = "explain";
+  }
+}
+</script>
+    <script src="../dt.js"></script>
+</body>
+</html>

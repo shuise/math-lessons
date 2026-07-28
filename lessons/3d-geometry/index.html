@@ -10,6 +10,9 @@
   h4 { color: #555; margin: 18px 0 8px; font-size: 1em; }
   .formula-box { border: 2px solid #1a73e8; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #f0f7ff; }
   .formula-box p { margin: 6px 0; text-align: center; font-size: 1.05em; }
+  /* 用脉动点提示空间点及其投影关系，降低静态示意图的阅读门槛。 */
+  .space-point { transform-box: fill-box; transform-origin: center; animation: point-pulse 1.8s ease-in-out infinite; }
+  @keyframes point-pulse { 0%, 100% { r: 4.5px; opacity: .85; } 50% { r: 7px; opacity: 1; } }
   .key-point { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; }
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
@@ -127,7 +130,7 @@
           <line x1="52" y1="150" x2="157" y2="102" stroke="#1a73e8" stroke-dasharray="5,5" stroke-width="1.5"/>
 
           <!-- 点 P -->
-          <circle cx="157" cy="102" r="4.5" fill="#e74c3c"/>
+          <circle class="space-point" cx="157" cy="102" r="4.5" fill="#e74c3c"/>
           <text x="165" y="98" font-family="serif" font-size="16" fill="#e74c3c" font-weight="bold">P(3,2,4)</text>
 
           <!-- 刻度 -->
@@ -510,7 +513,7 @@
 <h3>1.5 空间点、直线、平面之间的位置关系</h3>
 
 <h4>平面的基本性质（公理体系）</h4>
-<p>立体几何以以下 4 个公理为出发点：</p>
+<p>立体几何以下面 4 个公理为出发点：</p>
 
 <div class="key-point">
   <p><strong>公理 1：</strong>如果一条直线上的两点在一个平面内，那么这条直线在此平面内。</p>

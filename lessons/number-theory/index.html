@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数论 — 进位制、同余与定理</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  h2 { border-bottom: 2px solid #1a73e8; padding-bottom: 6px; }
+  h3 { color: #2c3e50; margin: 28px 0 12px; font-size: 1.15em; }
+  h4 { color: #555; margin: 18px 0 8px; font-size: 1em; }
+  .formula-box { border: 2px solid #1a73e8; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #f0f7ff; }
+  .formula-box p { margin: 6px 0; text-align: center; font-size: 1.05em; }
+  .key-point { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+
+  /* Quiz styles */
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag {
+    display: inline-block; padding: 2px 12px; border-radius: 12px;
+    font-size: 0.75em; margin-right: 8px; color: #fff;
+  }
+  .q-tag.concept { background: #1a73e8; }
+  .q-tag.calc { background: #e67e22; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+  }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+  /* Score panel */
+  .score-panel {
+    text-align: center; padding: 16px; margin: 20px 0;
+    background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8;
+  }
+  .score-panel .score-num { font-size: 2em; font-weight: bold; color: #1a73e8; }
+  .score-panel .btn-reset {
+    margin-left: 16px; padding: 8px 24px; border: 2px solid #1a73e8;
+    color: #1a73e8; border-radius: 20px; background: #fff;
+    cursor: pointer; font-size: 0.95em; transition: 0.15s;
+  }
+  .score-panel .btn-reset:hover { background: #1a73e8; color: #fff; }
+
+  /* Conversion table */
+  .convert-table { width: 100%; margin: 12px 0; }
+  .convert-table th { background: #1a73e8; color: #fff; }
+  .convert-table th, .convert-table td { border: 1px solid #ddd; padding: 8px 12px; text-align: center; }
+
+  /* Number theory specific */
+  .example {
+    background: #f0f7ff;
+    border-left: 4px solid #1a73e8;
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .example p { margin: 6px 0; }
+  .example .step { margin: 4px 0 4px 20px; color: #555; }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>数论 — 进位制、同余与定理</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">从进位制出发，探索同余、素数、定理与方程的奥秘——数论是数学皇冠上的明珠。</p>
+
+<div class="score-panel">
+  小测验得分：<span class="score-num" id="totalScore">0 / 9</span>
+  <button class="btn-reset" onclick="resetAll()">重置</button>
+</div>
+
+<!-- ============================== 一、进位制 ============================== -->
+<section>
+<h2>一、进位制</h2>
+
+<h3>什么是进位制</h3>
+<p>进位制是一种记数方式，用有限的数字符号表示所有的数。我们最熟悉的是<strong>十进制</strong>（逢十进一），但计算机科学中广泛使用二进制、八进制和十六进制。</p>
+
+<div class="formula-box">
+  <p><strong>进制表示法：</strong></p>
+  <p>十进制数 1234 = 1&times;10<sup>3</sup> + 2&times;10<sup>2</sup> + 3&times;10<sup>1</sup> + 4&times;10<sup>0</sup></p>
+  <p>二进制数 1011<sub>(2)</sub> = 1&times;2<sup>3</sup> + 0&times;2<sup>2</sup> + 1&times;2<sup>1</sup> + 1&times;2<sup>0</sup> = 8 + 0 + 2 + 1 = <strong>11</strong></p>
+  <p>八进制数 17<sub>(8)</sub> = 1&times;8<sup>1</sup> + 7&times;8<sup>0</sup> = 8 + 7 = <strong>15</strong></p>
+  <p>十六进制数 1A<sub>(16)</sub> = 1&times;16<sup>1</sup> + 10&times;16<sup>0</sup> = 16 + 10 = <strong>26</strong></p>
+</div>
+
+<h3>进制转换方法</h3>
+<div class="example">
+  <p><strong>例 1：</strong>将二进制 11010 转为十进制。</p>
+  <p class="step">11010<sub>(2)</sub> = 1&times;2<sup>4</sup> + 1&times;2<sup>3</sup> + 0&times;2<sup>2</sup> + 1&times;2<sup>1</sup> + 0&times;2<sup>0</sup></p>
+  <p class="step">= 16 + 8 + 0 + 2 + 0 = <strong>26</strong></p>
+</div>
+
+<div class="example">
+  <p><strong>例 2：</strong>将十进制 47 转为二进制。</p>
+  <p class="step">用除 2 取余法：</p>
+  <p class="step">47 &divide; 2 = 23 &hellip; 1（最低位）</p>
+  <p class="step">23 &divide; 2 = 11 &hellip; 1</p>
+  <p class="step">11 &divide; 2 = 5 &hellip; 1</p>
+  <p class="step">5 &divide; 2 = 2 &hellip; 1</p>
+  <p class="step">2 &divide; 2 = 1 &hellip; 0</p>
+  <p class="step">1 &divide; 2 = 0 &hellip; 1（最高位）</p>
+  <p class="step">从下往上读取余数：47 = <strong>101111<sub>(2)</sub></strong></p>
+</div>
+
+<div class="key-point">
+  <strong>常用进制对照：</strong>
+  <table class="convert-table">
+    <tr><th>十进制</th><th>二进制</th><th>八进制</th><th>十六进制</th></tr>
+    <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+    <tr><td>2</td><td>10</td><td>2</td><td>2</td></tr>
+    <tr><td>3</td><td>11</td><td>3</td><td>3</td></tr>
+    <tr><td>4</td><td>100</td><td>4</td><td>4</td></tr>
+    <tr><td>5</td><td>101</td><td>5</td><td>5</td></tr>
+    <tr><td>6</td><td>110</td><td>6</td><td>6</td></tr>
+    <tr><td>7</td><td>111</td><td>7</td><td>7</td></tr>
+    <tr><td>8</td><td>1000</td><td>10</td><td>8</td></tr>
+    <tr><td>9</td><td>1001</td><td>11</td><td>9</td></tr>
+    <tr><td>10</td><td>1010</td><td>12</td><td>A</td></tr>
+    <tr><td>11</td><td>1011</td><td>13</td><td>B</td></tr>
+    <tr><td>12</td><td>1100</td><td>14</td><td>C</td></tr>
+    <tr><td>13</td><td>1101</td><td>15</td><td>D</td></tr>
+    <tr><td>14</td><td>1110</td><td>16</td><td>E</td></tr>
+    <tr><td>15</td><td>1111</td><td>17</td><td>F</td></tr>
+  </table>
+</div>
+</section>
+
+<!-- Quiz 1 -->
+<div class="quiz-question" id="q1">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    将二进制数 1011 转换为十进制，结果是？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(1, 0)">A. 11</div>
+    <div class="opt" onclick="checkChoice(1, 1)">B. 13</div>
+    <div class="opt" onclick="checkChoice(1, 2)">C. 10</div>
+    <div class="opt" onclick="checkChoice(1, 3)">D. 14</div>
+  </div>
+  <div class="explain" id="explain1">
+    <strong>解析：</strong>1011<sub>(2)</sub> = 1&times;2<sup>3</sup> + 0&times;2<sup>2</sup> + 1&times;2<sup>1</sup> + 1&times;2<sup>0</sup> = 8 + 0 + 2 + 1 = <strong>11</strong>。选 A。
+  </div>
+</div>
+
+<!-- ============================== 二、高斯函数 ============================== -->
+<section>
+<h2>二、高斯函数</h2>
+
+<h3>定义</h3>
+<p><strong>高斯函数</strong>（又称取整函数、向下取整函数）记作 [x]，定义为：</p>
+
+<div class="formula-box">
+  <p><strong>[x] 表示不超过 x 的最大整数</strong></p>
+  <p style="text-align:center;font-size:1.15em;">[x] &le; x &lt; [x] + 1</p>
+</div>
+
+<h3>基本性质</h3>
+<ul>
+  <li><strong>性质 1：</strong>[x] &le; x &lt; [x] + 1</li>
+  <li><strong>性质 2：</strong>若 x 为整数，则 [x] = x</li>
+  <li><strong>性质 3：</strong>[x] + [y] &le; [x + y] &le; [x] + [y] + 1</li>
+  <li><strong>性质 4：</strong>[-x] = &minus;[x] &minus; 1（当 x 不是整数时）</li>
+</ul>
+
+<div class="example">
+  <p><strong>例：</strong>计算以下各值：</p>
+  <p class="step">[3.7] = 3（不超过 3.7 的最大整数是 3）</p>
+  <p class="step">[&minus;1.2] = &minus;2（不超过 &minus;1.2 的最大整数是 &minus;2，因为 &minus;2 &le; &minus;1.2 &lt; &minus;1）</p>
+  <p class="step">[5] = 5（整数取整等于自身）</p>
+  <p class="step">[&pi;] = 3（&pi; &approx; 3.14159&hellip;）</p>
+</div>
+
+<div class="key-point">
+  <strong>注意：</strong>取整函数与"四舍五入"不同！[x] 是直接去掉小数部分并向负无穷方向取整。<br>
+  例如 [&minus;1.2] = &minus;2，而 &minus;1.2 四舍五入是 &minus;1。
+</div>
+</section>
+
+<!-- Quiz 2 -->
+<div class="quiz-question" id="q2">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    计算 [3.7] + [&minus;1.2] 的值。
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(2, 0)">A. 0</div>
+    <div class="opt" onclick="checkChoice(2, 1)">B. 1</div>
+    <div class="opt" onclick="checkChoice(2, 2)">C. 2</div>
+    <div class="opt" onclick="checkChoice(2, 3)">D. 3</div>
+  </div>
+  <div class="explain" id="explain2">
+    <strong>解析：</strong>[3.7] = 3，[&minus;1.2] = &minus;2（不超过 &minus;1.2 的最大整数是 &minus;2）。所以 [3.7] + [&minus;1.2] = 3 + (&minus;2) = <strong>1</strong>。选 B。
+  </div>
+</div>
+
+<!-- ============================== 三、格点问题 ============================== -->
+<section>
+<h2>三、格点问题</h2>
+
+<h3>格点的概念</h3>
+<p>在平面直角坐标系中，横、纵坐标都是<strong>整数</strong>的点称为<strong>格点</strong>（也称整点）。例如 (0,0)、(1,2)、(3,4) 都是格点，而 (1.5,2) 不是格点。</p>
+
+<h3>皮克定理</h3>
+<p>皮克定理（Pick's Theorem）给出了顶点为格点的多边形的面积与内部和边界上的格点数量之间的关系。</p>
+
+<div class="formula-box">
+  <p><strong>皮克定理：</strong></p>
+  <p style="text-align:center;font-size:1.25em;font-weight:bold;">S = I + B/2 &minus; 1</p>
+  <p style="text-align:center;">其中 S 为多边形面积，I 为多边形<strong>内部</strong>的格点数，B 为多边形<strong>边界</strong>上的格点数</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>右图（想象）一个格点三角形的三个顶点为 (0,0)、(4,0)、(0,3)。</p>
+  <p class="step">边界格点数 B：底边有 (0,0)(1,0)(2,0)(3,0)(4,0) 共 5 个；右边从 (4,0) 到 (0,3) 只有端点（因 gcd(4,3)=1）；左边有 (0,0)(0,1)(0,2)(0,3) 共 4 个。去重后 B = 5 + 1 + 2 = 8。</p>
+  <p class="step">内部格点数 I：格点 (1,1)(2,1)(1,2) 共 3 个（直接数或用公式 I = S &minus; B/2 + 1 算）。</p>
+  <p class="step">面积 S = (4 &times; 3) / 2 = 6。</p>
+  <p class="step">验证皮克定理：S = I + B/2 &minus; 1 = 3 + 8/2 &minus; 1 = 3 + 4 &minus; 1 = <strong>6</strong>。成立！</p>
+</div>
+
+<div class="key-point">
+  <strong>皮克定理的适用条件：</strong>多边形顶点必须是格点，且多边形必须是简单多边形（边界不自交）。这个定理在竞赛数学中非常实用。
+</div>
+</section>
+
+<!-- Quiz 3 -->
+<div class="quiz-question" id="q3">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    一个格点三角形的顶点为 (0,0)、(3,0)、(0,4)，内部有 3 个格点，边界上有 8 个格点。根据皮克定理，其面积为多少？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(3, 0)">A. 5</div>
+    <div class="opt" onclick="checkChoice(3, 1)">B. 7</div>
+    <div class="opt" onclick="checkChoice(3, 2)">C. 6</div>
+    <div class="opt" onclick="checkChoice(3, 3)">D. 8</div>
+  </div>
+  <div class="explain" id="explain3">
+    <strong>解析：</strong>S = I + B/2 &minus; 1 = 3 + 8/2 &minus; 1 = 3 + 4 &minus; 1 = <strong>6</strong>。选 C。
+  </div>
+</div>
+
+<!-- ============================== 四、素数与算术基本定理 ============================== -->
+<section>
+<h2>四、素数与算术基本定理</h2>
+
+<h3>素数（质数）与合数</h3>
+<p>一个大于 1 的自然数，如果除了 1 和它自身外，不能被其他自然数整除，则称为<strong>素数</strong>（或质数）；否则称为<strong>合数</strong>。注意：1 既不是素数也不是合数。</p>
+
+<div class="formula-box">
+  <p><strong>前 20 个素数：</strong></p>
+  <p style="text-align:center;">2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>判断下列各数是否为素数。</p>
+  <p class="step"><strong>29：</strong>不能被 2, 3, 5, 7 整除（&radic;29 &approx; 5.38），是素数。✓</p>
+  <p class="step"><strong>39：</strong>39 &divide; 3 = 13，是合数（3&times;13）。✗</p>
+  <p class="step"><strong>57：</strong>57 &divide; 3 = 19，是合数（3&times;19）。✗</p>
+  <p class="step"><strong>97：</strong>不能被 2, 3, 5, 7, 11 整除（&radic;97 &approx; 9.85），是素数。✓</p>
+</div>
+
+<h3>算术基本定理</h3>
+<p><strong>算术基本定理</strong>（也称唯一分解定理）是数论中最重要的定理之一：</p>
+
+<div class="formula-box">
+  <p><strong>算术基本定理：</strong></p>
+  <p>每个大于 1 的自然数，都可以<strong>唯一</strong>地分解为有限个素数的乘积（不计因子的顺序）。</p>
+  <p style="text-align:center;font-size:1.15em;margin:10px 0;">n = p<sub>1</sub><sup>&alpha;<sub>1</sub></sup> &middot; p<sub>2</sub><sup>&alpha;<sub>2</sub></sup> &middot; &hellip; &middot; p<sub>k</sub><sup>&alpha;<sub>k</sub></sup></p>
+  <p style="text-align:center;">其中 p<sub>1</sub>, p<sub>2</sub>, &hellip;, p<sub>k</sub> 是互不相同的素数，&alpha;<sub>1</sub>, &alpha;<sub>2</sub>, &hellip;, &alpha;<sub>k</sub> 是正整数。</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>分解质因数。</p>
+  <p class="step">12 = 2<sup>2</sup> &times; 3</p>
+  <p class="step">84 = 2<sup>2</sup> &times; 3 &times; 7</p>
+  <p class="step">360 = 2<sup>3</sup> &times; 3<sup>2</sup> &times; 5</p>
+  <p class="step">1001 = 7 &times; 11 &times; 13</p>
+</div>
+
+<div class="key-point">
+  <strong>重要推论：</strong>算术基本定理告诉我们，素数就像是自然数的"原子"——每个自然数都由唯一的素数集合构成。这也是 RSA 加密算法的理论基础。
+</div>
+</section>
+
+<!-- Quiz 4 -->
+<div class="quiz-question" id="q4">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    下列哪个数是素数（质数）？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(4, 0)">A. 29</div>
+    <div class="opt" onclick="checkChoice(4, 1)">B. 39</div>
+    <div class="opt" onclick="checkChoice(4, 2)">C. 49</div>
+    <div class="opt" onclick="checkChoice(4, 3)">D. 57</div>
+  </div>
+  <div class="explain" id="explain4">
+    <strong>解析：</strong>29 是素数（不能被 2, 3, 5 整除）。39 = 3 &times; 13，49 = 7 &times; 7，57 = 3 &times; 19，均为合数。选 A。
+  </div>
+</div>
+
+<!-- ============================== 五、费马小定理 ============================== -->
+<section>
+<h2>五、费马小定理</h2>
+
+<h3>同余的概念</h3>
+<p>在介绍费马小定理之前，先引入<strong>同余</strong>的概念：若两个整数 a、b 除以正整数 m 有相同的余数，则称 a 与 b 模 m 同余，记作</p>
+
+<div class="formula-box">
+  <p style="text-align:center;font-size:1.2em;font-weight:bold;">a &equiv; b (mod m)</p>
+  <p style="text-align:center;">等价于 m | (a &minus; b)</p>
+</div>
+
+<h3>费马小定理</h3>
+<p>费马小定理是数论中关于素数的一个基本定理：</p>
+
+<div class="formula-box">
+  <p><strong>费马小定理：</strong></p>
+  <p>若 p 是素数，a 是整数且 p &#8740; a（即 p 不能整除 a），则</p>
+  <p style="text-align:center;font-size:1.3em;font-weight:bold;">a<sup>p&minus;1</sup> &equiv; 1 (mod p)</p>
+</div>
+
+<div class="example">
+  <p><strong>例 1：</strong>计算 2<sup>6</sup> mod 7。</p>
+  <p class="step">由于 7 是素数，且 7 &#8740; 2，根据费马小定理：</p>
+  <p class="step">2<sup>7&minus;1</sup> = 2<sup>6</sup> &equiv; 1 (mod 7)</p>
+  <p class="step">验证：2<sup>6</sup> = 64，64 &divide; 7 = 9 &hellip; <strong>1</strong>。✓</p>
+</div>
+
+<div class="example">
+  <p><strong>例 2：</strong>计算 3<sup>100</sup> mod 101。</p>
+  <p class="step">101 是素数，且 101 &#8740; 3，由费马小定理：</p>
+  <p class="step">3<sup>100</sup> &equiv; <strong>1</strong> (mod 101)</p>
+  <p class="step">本题直接使用定理即得结果，无需进行大量计算。</p>
+</div>
+
+<div class="key-point">
+  <strong>应用：</strong>费马小定理可用于简化模运算、判断素数（虽然存在伪素数）、以及 RSA 加密算法中解密过程的数学证明。
+</div>
+</section>
+
+<!-- Quiz 5 -->
+<div class="quiz-question" id="q5">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    根据费马小定理，2<sup>6</sup> mod 7 等于多少？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(5, 0)">A. 0</div>
+    <div class="opt" onclick="checkChoice(5, 1)">B. 1</div>
+    <div class="opt" onclick="checkChoice(5, 2)">C. 2</div>
+    <div class="opt" onclick="checkChoice(5, 3)">D. 6</div>
+  </div>
+  <div class="explain" id="explain5">
+    <strong>解析：</strong>7 是素数且 7 &#8740; 2，由费马小定理知 2<sup>7&minus;1</sup> &equiv; 1 (mod 7)，所以 2<sup>6</sup> mod 7 = <strong>1</strong>。验证：2<sup>6</sup> = 64，64 = 9&times;7 + 1。选 B。
+  </div>
+</div>
+
+<!-- ============================== 六、欧拉函数 ============================== -->
+<section>
+<h2>六、欧拉函数</h2>
+
+<h3>定义</h3>
+<p><strong>欧拉函数</strong> &phi;(n) 定义为小于等于 n 且与 n 互质的正整数的个数。</p>
+
+<div class="formula-box">
+  <p style="text-align:center;font-size:1.2em;font-weight:bold;">&phi;(n) = |{ k | 1 &le; k &le; n, gcd(k, n) = 1 }|</p>
+</div>
+
+<h3>基本性质</h3>
+<ul>
+  <li><strong>性质 1：</strong>若 p 是素数，则 &phi;(p) = p &minus; 1</li>
+  <li><strong>性质 2：</strong>若 p 是素数，k 为正整数，则 &phi;(p<sup>k</sup>) = p<sup>k</sup> &minus; p<sup>k&minus;1</sup></li>
+  <li><strong>性质 3：</strong>若 m、n 互质，则 &phi;(mn) = &phi;(m) &middot; &phi;(n)（积性函数）</li>
+</ul>
+
+<div class="example">
+  <p><strong>例 1：</strong>计算 &phi;(12)。</p>
+  <p class="step"><strong>方法一（枚举）：</strong>12 以内与 12 互质的数：1, 5, 7, 11，共 <strong>4</strong> 个。所以 &phi;(12) = 4。</p>
+  <p class="step"><strong>方法二（公式）：</strong>12 = 2<sup>2</sup> &times; 3，由积性性质：&phi;(12) = &phi;(2<sup>2</sup>) &middot; &phi;(3) = (4 &minus; 2) &times; (3 &minus; 1) = 2 &times; 2 = <strong>4</strong>。</p>
+  <p class="step"><strong>方法三（公式进阶）：</strong>&phi;(12) = 12 &times; (1 &minus; 1/2) &times; (1 &minus; 1/3) = 12 &times; 1/2 &times; 2/3 = <strong>4</strong>。</p>
+</div>
+
+<div class="example">
+  <p><strong>例 2：</strong>计算 &phi;(100)。</p>
+  <p class="step">100 = 2<sup>2</sup> &times; 5<sup>2</sup></p>
+  <p class="step">&phi;(100) = 100 &times; (1 &minus; 1/2) &times; (1 &minus; 1/5) = 100 &times; 1/2 &times; 4/5 = <strong>40</strong></p>
+  <p class="step">验证：小于 100 且与 100 互质的数有 40 个。</p>
+</div>
+
+<div class="key-point">
+  <strong>欧拉函数与费马小定理：</strong>欧拉将费马小定理推广到了模数不必为素数的情况——<strong>欧拉定理</strong>：若 gcd(a, n) = 1，则 a<sup>&phi;(n)</sup> &equiv; 1 (mod n)。费马小定理是欧拉定理在 n 为素数时的特例。
+</div>
+</section>
+
+<!-- Quiz 6 -->
+<div class="quiz-question" id="q6">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    欧拉函数 &phi;(12) 的值为多少？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(6, 0)">A. 2</div>
+    <div class="opt" onclick="checkChoice(6, 1)">B. 6</div>
+    <div class="opt" onclick="checkChoice(6, 2)">C. 4</div>
+    <div class="opt" onclick="checkChoice(6, 3)">D. 12</div>
+  </div>
+  <div class="explain" id="explain6">
+    <strong>解析：</strong>12 以内与 12 互质的数为 1, 5, 7, 11，共 4 个。或使用公式：12 = 2<sup>2</sup> &times; 3，&phi;(12) = 12 &times; (1 &minus; 1/2) &times; (1 &minus; 1/3) = 12 &times; 1/2 &times; 2/3 = <strong>4</strong>。选 C。
+  </div>
+</div>
+
+<!-- ============================== 七、中国剩余定理 ============================== -->
+<section>
+<h2>七、中国剩余定理</h2>
+
+<h3>一次同余方程组</h3>
+<p>中国剩余定理（Chinese Remainder Theorem）解决的是这样一类问题：</p>
+
+<div class="formula-box">
+  <p><strong>一次同余方程组：</strong></p>
+  <p style="text-align:center;font-size:1.1em;">
+    x &equiv; a<sub>1</sub> (mod m<sub>1</sub>)<br>
+    x &equiv; a<sub>2</sub> (mod m<sub>2</sub>)<br>
+    &vellip;<br>
+    x &equiv; a<sub>k</sub> (mod m<sub>k</sub>)
+  </p>
+  <p>其中 m<sub>1</sub>, m<sub>2</sub>, &hellip;, m<sub>k</sub> 两两互质。</p>
+</div>
+
+<h3>定理的表述</h3>
+<div class="formula-box">
+  <p><strong>中国剩余定理：</strong></p>
+  <p>设 m<sub>1</sub>, m<sub>2</sub>, &hellip;, m<sub>k</sub> 两两互质，则对任意整数 a<sub>1</sub>, a<sub>2</sub>, &hellip;, a<sub>k</sub>，同余方程组在模 M = m<sub>1</sub>m<sub>2</sub>&hellip;m<sub>k</sub> 下有<strong>唯一</strong>解。</p>
+</div>
+
+<h3>求解方法步骤</h3>
+<p>以两个方程的情况为例，设 x &equiv; a (mod m), x &equiv; b (mod n)，其中 gcd(m, n) = 1。</p>
+
+<div class="example">
+  <p><strong>例：</strong>解同余方程组：x &equiv; 2 (mod 3), x &equiv; 3 (mod 5)。</p>
+  <p class="step"><strong>步骤 1：</strong>设 x = 3k + 2（由第一个方程）。</p>
+  <p class="step"><strong>步骤 2：</strong>代入第二个方程：3k + 2 &equiv; 3 (mod 5)</p>
+  <p class="step">&emsp;即 3k &equiv; 1 (mod 5)，两边乘以 3 的逆元 2（因为 3&times;2=6&equiv;1 mod 5）：</p>
+  <p class="step">&emsp;k &equiv; 2 (mod 5)，即 k = 5t + 2</p>
+  <p class="step"><strong>步骤 3：</strong>回代：x = 3(5t + 2) + 2 = 15t + 8</p>
+  <p class="step">所以 x &equiv; <strong>8</strong> (mod 15)。验算：8 mod 3 = 2 ✓，8 mod 5 = 3 ✓。</p>
+</div>
+
+<div class="example">
+  <p><strong>另一个经典问题：</strong>"今有物不知其数，三三数之剩二，五五数之剩三，七七数之剩二，问物几何？"</p>
+  <p class="step">即方程组：x &equiv; 2 (mod 3), x &equiv; 3 (mod 5), x &equiv; 2 (mod 7)</p>
+  <p class="step">根据中国剩余定理，最小正整数解为 <strong>23</strong>。</p>
+</div>
+</section>
+
+<!-- Quiz 7 -->
+<div class="quiz-question" id="q7">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    解同余方程组：x &equiv; 2 (mod 3), x &equiv; 3 (mod 5)，则 x &equiv; ? (mod 15)
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(7, 0)">A. 8</div>
+    <div class="opt" onclick="checkChoice(7, 1)">B. 2</div>
+    <div class="opt" onclick="checkChoice(7, 2)">C. 3</div>
+    <div class="opt" onclick="checkChoice(7, 3)">D. 13</div>
+  </div>
+  <div class="explain" id="explain7">
+    <strong>解析：</strong>设 x = 3k + 2，代入 3k + 2 &equiv; 3 (mod 5) 得 3k &equiv; 1 (mod 5)，即 k &equiv; 2 (mod 5)。所以 x = 3(5t + 2) + 2 = 15t + 8，即 x &equiv; <strong>8</strong> (mod 15)。选 A。
+  </div>
+</div>
+
+<!-- ============================== 八、勾股方程 ============================== -->
+<section>
+<h2>八、勾股方程</h2>
+
+<h3>勾股方程的定义</h3>
+<p><strong>勾股方程</strong>是指形如 x<sup>2</sup> + y<sup>2</sup> = z<sup>2</sup> 的三元二次不定方程，其中 x、y、z 为正整数。满足勾股方程的正整数三元组 (x, y, z) 称为<strong>勾股数</strong>（或毕达哥拉斯三元组）。</p>
+
+<div class="formula-box">
+  <p style="text-align:center;font-size:1.2em;font-weight:bold;">x<sup>2</sup> + y<sup>2</sup> = z<sup>2</sup></p>
+</div>
+
+<div class="example">
+  <p><strong>经典的勾股数：</strong></p>
+  <p class="step">(3, 4, 5)：3<sup>2</sup> + 4<sup>2</sup> = 9 + 16 = 25 = 5<sup>2</sup> ✓</p>
+  <p class="step">(5, 12, 13)：5<sup>2</sup> + 12<sup>2</sup> = 25 + 144 = 169 = 13<sup>2</sup> ✓</p>
+  <p class="step">(8, 15, 17)：8<sup>2</sup> + 15<sup>2</sup> = 64 + 225 = 289 = 17<sup>2</sup> ✓</p>
+  <p class="step">(7, 24, 25)：7<sup>2</sup> + 24<sup>2</sup> = 49 + 576 = 625 = 25<sup>2</sup> ✓</p>
+</div>
+
+<h3>本原勾股数</h3>
+<p>若 gcd(x, y, z) = 1，则 (x, y, z) 称为<strong>本原勾股数</strong>。所有本原勾股数可以用以下参数形式生成：</p>
+
+<div class="formula-box">
+  <p><strong>本原勾股数的参数形式：</strong></p>
+  <p style="text-align:center;font-size:1.1em;">
+    x = m<sup>2</sup> &minus; n<sup>2</sup><br>
+    y = 2mn<br>
+    z = m<sup>2</sup> + n<sup>2</sup>
+  </p>
+  <p style="text-align:center;">其中 m &gt; n &gt; 0，gcd(m, n) = 1，且 m、n 一奇一偶。</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>取 m = 2, n = 1：</p>
+  <p class="step">x = 2<sup>2</sup> &minus; 1<sup>2</sup> = 3</p>
+  <p class="step">y = 2 &times; 2 &times; 1 = 4</p>
+  <p class="step">z = 2<sup>2</sup> + 1<sup>2</sup> = 5</p>
+  <p class="step">得到本原勾股数 (3, 4, 5)。</p>
+</div>
+
+<div class="key-point">
+  <strong>费马大定理：</strong>勾股方程 x<sup>2</sup> + y<sup>2</sup> = z<sup>2</sup> 有无数多组正整数解。但费马断言，对 n &ge; 3，方程 x<sup>n</sup> + y<sup>n</sup> = z<sup>n</sup> 没有正整数解——这就是费马大定理，历经 350 多年才被怀尔斯证明。
+</div>
+</section>
+
+<!-- Quiz 8 -->
+<div class="quiz-question" id="q8">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    下列哪一组是勾股数？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(8, 0)">A. (2, 3, 4)</div>
+    <div class="opt" onclick="checkChoice(8, 1)">B. (5, 12, 13)</div>
+    <div class="opt" onclick="checkChoice(8, 2)">C. (1, 2, 3)</div>
+    <div class="opt" onclick="checkChoice(8, 3)">D. (4, 5, 7)</div>
+  </div>
+  <div class="explain" id="explain8">
+    <strong>解析：</strong>(5, 12, 13)：5<sup>2</sup> + 12<sup>2</sup> = 25 + 144 = 169 = 13<sup>2</sup> ✓。其他：2<sup>2</sup>+3<sup>2</sup>=13&ne;16，1<sup>2</sup>+2<sup>2</sup>=5&ne;9，4<sup>2</sup>+5<sup>2</sup>=41&ne;49。选 B。
+  </div>
+</div>
+
+<!-- ============================== 九、完全平方数与平方剩余 ============================== -->
+<section>
+<h2>九、完全平方数与平方剩余</h2>
+
+<h3>完全平方数</h3>
+<p>一个整数若能写成某个整数的平方，则称其为<strong>完全平方数</strong>。例如 1, 4, 9, 16, 25, 36, &hellip; 都是完全平方数。</p>
+
+<div class="key-point">
+  <strong>完全平方数的性质：</strong>
+  <ul>
+    <li>完全平方数的个位只能是 0, 1, 4, 5, 6, 9</li>
+    <li>奇完全平方数除以 4 余 1，偶完全平方数能被 4 整除</li>
+    <li>完全平方数有奇数个正因数</li>
+  </ul>
+</div>
+
+<h3>平方剩余</h3>
+<p>在模 m 的意义下，若存在整数 x 使得 x<sup>2</sup> &equiv; a (mod m)，则称 a 为模 m 的<strong>平方剩余</strong>（二次剩余）；否则称为平方非剩余。</p>
+
+<div class="formula-box">
+  <p><strong>平方剩余的定义：</strong></p>
+  <p style="text-align:center;">若存在 x 使 x<sup>2</sup> &equiv; a (mod m)，则 a 是模 m 的平方剩余。</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>求模 7 的所有平方剩余。</p>
+  <p class="step">计算 1<sup>2</sup> 到 6<sup>2</sup> 模 7 的值：</p>
+  <p class="step">1<sup>2</sup> = 1 &equiv; 1 (mod 7)</p>
+  <p class="step">2<sup>2</sup> = 4 &equiv; 4 (mod 7)</p>
+  <p class="step">3<sup>2</sup> = 9 &equiv; 2 (mod 7)</p>
+  <p class="step">4<sup>2</sup> = 16 &equiv; 2 (mod 7)</p>
+  <p class="step">5<sup>2</sup> = 25 &equiv; 4 (mod 7)</p>
+  <p class="step">6<sup>2</sup> = 36 &equiv; 1 (mod 7)</p>
+  <p class="step">所以模 7 的平方剩余为：<strong>1, 2, 4</strong>（共 3 个）；平方非剩余为：<strong>3, 5, 6</strong>。</p>
+</div>
+
+<div class="key-point">
+  <strong>勒让德符号：</strong>用于判断 a 是否为模素数 p 的平方剩余，记作 (a/p)。若 a 是模 p 的平方剩余则值为 1，否则为 &minus;1，若 p|a 则值为 0。勒让德符号具有许多优美的性质，是数论研究的重要工具。
+</div>
+</section>
+
+<!-- Quiz 9 -->
+<div class="quiz-question" id="q9">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    在模 7 下，以下哪个数不是平方剩余？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(9, 0)">A. 1</div>
+    <div class="opt" onclick="checkChoice(9, 1)">B. 2</div>
+    <div class="opt" onclick="checkChoice(9, 2)">C. 3</div>
+    <div class="opt" onclick="checkChoice(9, 3)">D. 4</div>
+  </div>
+  <div class="explain" id="explain9">
+    <strong>解析：</strong>模 7 下，1<sup>2</sup>&equiv;1，2<sup>2</sup>&equiv;4，3<sup>2</sup>&equiv;2。所以平方剩余为 {1, 2, 4}。<strong>3</strong> 不是平方剩余（不存在整数 x 使得 x<sup>2</sup> &equiv; 3 mod 7）。选 C。
+  </div>
+</div>
+
+</article>
+
+<script>
+var answers = {1:0, 2:1, 3:2, 4:0, 5:1, 6:2, 7:0, 8:1, 9:2};
+var answered = {};
+var score = 0;
+
+function checkChoice(q, choice) {
+  if (answered[q]) return;
+  answered[q] = true;
+  var correct = (choice === answers[q]);
+  var qDiv = document.getElementById("q" + q);
+  var opts = qDiv.querySelectorAll(".opt");
+  for (var i = 0; i < opts.length; i++) opts[i].classList.add("disabled");
+  opts[choice].classList.add(correct ? "correct-opt" : "wrong-opt");
+  if (!correct) opts[answers[q]].classList.add("correct-opt");
+  qDiv.classList.add(correct ? "correct" : "wrong");
+  var exp = document.getElementById("explain" + q);
+  exp.classList.add("show", correct ? "ok" : "fail");
+  if (correct) { score++; document.getElementById("totalScore").textContent = score + " / 9"; }
+}
+
+function resetAll() {
+  answered = {}; score = 0;
+  document.getElementById("totalScore").textContent = "0 / 9";
+  for (var q = 1; q <= 9; q++) {
+    var qDiv = document.getElementById("q" + q);
+    qDiv.classList.remove("correct", "wrong");
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var i = 0; i < opts.length; i++) opts[i].classList.remove("correct-opt", "wrong-opt", "disabled");
+    document.getElementById("explain" + q).className = "explain";
+  }
+}
+</script>
+<script src="../dt.js"></script>
+</body>
+</html>
