@@ -73,6 +73,13 @@
   }
   .example p { margin: 6px 0; }
   .example .step { margin: 4px 0 4px 20px; color: #555; }
+  .lattice-figure { display: flex; justify-content: center; margin: 16px 0; }
+  .lattice-figure svg { width: min(100%, 320px); height: auto; background: #fff; border: 1px solid #d9e2ec; border-radius: 8px; }
+  .lattice-figure .grid { stroke: #dce6f0; stroke-width: 1; }
+  .lattice-figure .axis { stroke: #607d8b; stroke-width: 1.5; }
+  .lattice-figure .triangle { fill: rgba(26, 115, 232, 0.12); stroke: #1a73e8; stroke-width: 2.5; }
+  .lattice-figure .lattice-point { fill: #455a64; }
+  .lattice-figure .interior-point { fill: #e65100; }
 </style>
 </head>
 <body>
@@ -91,7 +98,7 @@
 <h2>一、进位制</h2>
 
 <h3>什么是进位制</h3>
-<p>进位制是一种记数方式，用有限的数字符号表示所有的数。我们最熟悉的是<strong>十进制</strong>（逢十进一），但计算机科学中广泛使用二进制、八进制和十六进制。</p>
+<p>进位制是一种记数方式。对底数为 <em>b</em> 的整数进位制（<em>b</em> &ge; 2），每一位使用 <em>0,1,2,&hellip;,b&minus;1</em> 这些数字，并按位权表示非负整数。我们最熟悉的是<strong>十进制</strong>（逢十进一），但计算机科学中广泛使用二进制、八进制和十六进制。</p>
 
 <div class="formula-box">
   <p><strong>进制表示法：</strong></p>
@@ -229,7 +236,34 @@
 </div>
 
 <div class="example">
-  <p><strong>例：</strong>右图（想象）一个格点三角形的三个顶点为 (0,0)、(4,0)、(0,3)。</p>
+  <p><strong>例：</strong>以下格点三角形的三个顶点为 (0,0)、(4,0)、(0,3)。</p>
+  <div class="lattice-figure">
+    <svg viewBox="0 0 260 220" role="img" aria-label="顶点为（0,0）、（4,0）、（0,3）的格点三角形">
+      <g class="grid">
+        <line x1="40" y1="20" x2="40" y2="180"/><line x1="80" y1="20" x2="80" y2="180"/>
+        <line x1="120" y1="20" x2="120" y2="180"/><line x1="160" y1="20" x2="160" y2="180"/>
+        <line x1="200" y1="20" x2="200" y2="180"/><line x1="240" y1="20" x2="240" y2="180"/>
+        <line x1="40" y1="20" x2="240" y2="20"/><line x1="40" y1="60" x2="240" y2="60"/>
+        <line x1="40" y1="100" x2="240" y2="100"/><line x1="40" y1="140" x2="240" y2="140"/>
+        <line x1="40" y1="180" x2="240" y2="180"/>
+      </g>
+      <line class="axis" x1="32" y1="180" x2="246" y2="180"/>
+      <line class="axis" x1="40" y1="188" x2="40" y2="14"/>
+      <polygon class="triangle" points="40,180 200,180 40,60"/>
+      <g class="lattice-point">
+        <circle cx="40" cy="180" r="3"/><circle cx="80" cy="180" r="3"/><circle cx="120" cy="180" r="3"/><circle cx="160" cy="180" r="3"/><circle cx="200" cy="180" r="3"/>
+        <circle cx="40" cy="140" r="3"/><circle cx="40" cy="100" r="3"/><circle cx="40" cy="60" r="3"/>
+        <circle cx="80" cy="140" r="3"/><circle cx="120" cy="140" r="3"/><circle cx="80" cy="100" r="3"/>
+      </g>
+      <g class="interior-point">
+        <circle cx="80" cy="140" r="4"/><circle cx="120" cy="140" r="4"/><circle cx="80" cy="100" r="4"/>
+      </g>
+      <text x="30" y="197" font-size="12" fill="#455a64">(0,0)</text>
+      <text x="192" y="197" font-size="12" fill="#455a64">(4,0)</text>
+      <text x="4" y="56" font-size="12" fill="#455a64">(0,3)</text>
+      <text x="126" y="126" font-size="11" fill="#e65100">内部格点</text>
+    </svg>
+  </div>
   <p class="step">边界格点数 B：底边有 (0,0)(1,0)(2,0)(3,0)(4,0) 共 5 个；右边从 (4,0) 到 (0,3) 只有端点（因 gcd(4,3)=1）；左边有 (0,0)(0,1)(0,2)(0,3) 共 4 个。去重后 B = 5 + 1 + 2 = 8。</p>
   <p class="step">内部格点数 I：格点 (1,1)(2,1)(1,2) 共 3 个（直接数或用公式 I = S &minus; B/2 + 1 算）。</p>
   <p class="step">面积 S = (4 &times; 3) / 2 = 6。</p>
@@ -380,7 +414,7 @@
 <h2>六、欧拉函数</h2>
 
 <h3>定义</h3>
-<p><strong>欧拉函数</strong> &phi;(n) 定义为小于等于 n 且与 n 互质的正整数的个数。</p>
+<p><strong>欧拉函数</strong> &phi;(n) 定义为正整数 <em>n</em> 的范围内，满足 1 &le; k &le; n 且与 n 互质的正整数 k 的个数。</p>
 
 <div class="formula-box">
   <p style="text-align:center;font-size:1.2em;font-weight:bold;">&phi;(n) = |{ k | 1 &le; k &le; n, gcd(k, n) = 1 }|</p>
@@ -444,13 +478,13 @@
     &vellip;<br>
     x &equiv; a<sub>k</sub> (mod m<sub>k</sub>)
   </p>
-  <p>其中 m<sub>1</sub>, m<sub>2</sub>, &hellip;, m<sub>k</sub> 两两互质。</p>
+  <p>其中 m<sub>1</sub>, m<sub>2</sub>, &hellip;, m<sub>k</sub> 是两两互质的正整数。</p>
 </div>
 
 <h3>定理的表述</h3>
 <div class="formula-box">
   <p><strong>中国剩余定理：</strong></p>
-  <p>设 m<sub>1</sub>, m<sub>2</sub>, &hellip;, m<sub>k</sub> 两两互质，则对任意整数 a<sub>1</sub>, a<sub>2</sub>, &hellip;, a<sub>k</sub>，同余方程组在模 M = m<sub>1</sub>m<sub>2</sub>&hellip;m<sub>k</sub> 下有<strong>唯一</strong>解。</p>
+  <p>设正整数 m<sub>1</sub>, m<sub>2</sub>, &hellip;, m<sub>k</sub> 两两互质，则对任意整数 a<sub>1</sub>, a<sub>2</sub>, &hellip;, a<sub>k</sub>，同余方程组在模 M = m<sub>1</sub>m<sub>2</sub>&hellip;m<sub>k</sub> 下有<strong>唯一的剩余类解</strong>（任意两个整数解相差 M 的倍数）。</p>
 </div>
 
 <h3>求解方法步骤</h3>
@@ -510,7 +544,7 @@
 </div>
 
 <h3>本原勾股数</h3>
-<p>若 gcd(x, y, z) = 1，则 (x, y, z) 称为<strong>本原勾股数</strong>。所有本原勾股数可以用以下参数形式生成：</p>
+<p>若 gcd(x, y, z) = 1，则 (x, y, z) 称为<strong>本原勾股数</strong>。所有本原勾股数（交换两条直角边后视为同一类）可以用以下参数形式生成：</p>
 
 <div class="formula-box">
   <p><strong>本原勾股数的参数形式：</strong></p>
@@ -519,7 +553,7 @@
     y = 2mn<br>
     z = m<sup>2</sup> + n<sup>2</sup>
   </p>
-  <p style="text-align:center;">其中 m &gt; n &gt; 0，gcd(m, n) = 1，且 m、n 一奇一偶。</p>
+  <p style="text-align:center;">其中 m &gt; n &gt; 0，gcd(m, n) = 1，且 m、n 一奇一偶；所得的 x、y 两式也可以互换。</p>
 </div>
 
 <div class="example">
@@ -557,39 +591,40 @@
 <h2>九、完全平方数与平方剩余</h2>
 
 <h3>完全平方数</h3>
-<p>一个整数若能写成某个整数的平方，则称其为<strong>完全平方数</strong>。例如 1, 4, 9, 16, 25, 36, &hellip; 都是完全平方数。</p>
+<p>一个非负整数若能写成某个整数的平方，则称其为<strong>完全平方数</strong>。例如 0, 1, 4, 9, 16, 25, 36, &hellip; 都是完全平方数。</p>
 
 <div class="key-point">
   <strong>完全平方数的性质：</strong>
   <ul>
     <li>完全平方数的个位只能是 0, 1, 4, 5, 6, 9</li>
     <li>奇完全平方数除以 4 余 1，偶完全平方数能被 4 整除</li>
-    <li>完全平方数有奇数个正因数</li>
+    <li>每个<strong>正的</strong>完全平方数有奇数个正因数（0 不适用此说法）</li>
   </ul>
 </div>
 
 <h3>平方剩余</h3>
-<p>在模 m 的意义下，若存在整数 x 使得 x<sup>2</sup> &equiv; a (mod m)，则称 a 为模 m 的<strong>平方剩余</strong>（二次剩余）；否则称为平方非剩余。</p>
+<p>在模 <em>m</em>（<em>m</em> &ge; 2）的意义下，若存在整数 x 使得 x<sup>2</sup> &equiv; a (mod m)，则称 a 为模 m 的<strong>平方剩余</strong>（二次剩余）；否则称为平方非剩余。按此定义，允许 x = 0，因此 0 也是平方剩余；在讨论勒让德符号时另行区分非零平方剩余。</p>
 
 <div class="formula-box">
   <p><strong>平方剩余的定义：</strong></p>
-  <p style="text-align:center;">若存在 x 使 x<sup>2</sup> &equiv; a (mod m)，则 a 是模 m 的平方剩余。</p>
+  <p style="text-align:center;">若存在整数 x 使 x<sup>2</sup> &equiv; a (mod m)，则 a 是模 m 的平方剩余。</p>
 </div>
 
 <div class="example">
   <p><strong>例：</strong>求模 7 的所有平方剩余。</p>
-  <p class="step">计算 1<sup>2</sup> 到 6<sup>2</sup> 模 7 的值：</p>
+  <p class="step">计算 0<sup>2</sup> 到 6<sup>2</sup> 模 7 的值：</p>
+  <p class="step">0<sup>2</sup> &equiv; 0 (mod 7)</p>
   <p class="step">1<sup>2</sup> = 1 &equiv; 1 (mod 7)</p>
   <p class="step">2<sup>2</sup> = 4 &equiv; 4 (mod 7)</p>
   <p class="step">3<sup>2</sup> = 9 &equiv; 2 (mod 7)</p>
   <p class="step">4<sup>2</sup> = 16 &equiv; 2 (mod 7)</p>
   <p class="step">5<sup>2</sup> = 25 &equiv; 4 (mod 7)</p>
   <p class="step">6<sup>2</sup> = 36 &equiv; 1 (mod 7)</p>
-  <p class="step">所以模 7 的平方剩余为：<strong>1, 2, 4</strong>（共 3 个）；平方非剩余为：<strong>3, 5, 6</strong>。</p>
+  <p class="step">所以模 7 的平方剩余为：<strong>0, 1, 2, 4</strong>（共 4 个）；其中非零平方剩余为 1, 2, 4，平方非剩余为：<strong>3, 5, 6</strong>。</p>
 </div>
 
 <div class="key-point">
-  <strong>勒让德符号：</strong>用于判断 a 是否为模素数 p 的平方剩余，记作 (a/p)。若 a 是模 p 的平方剩余则值为 1，否则为 &minus;1，若 p|a 则值为 0。勒让德符号具有许多优美的性质，是数论研究的重要工具。
+  <strong>勒让德符号：</strong>对奇素数 p，记作 (a/p)。若 p 不整除 a 且 a 是模 p 的非零平方剩余，则值为 1；若 a 是平方非剩余，则值为 &minus;1；若 p|a，则值为 0。勒让德符号具有许多优美的性质，是数论研究的重要工具。
 </div>
 </section>
 
@@ -606,7 +641,7 @@
     <div class="opt" onclick="checkChoice(9, 3)">D. 4</div>
   </div>
   <div class="explain" id="explain9">
-    <strong>解析：</strong>模 7 下，1<sup>2</sup>&equiv;1，2<sup>2</sup>&equiv;4，3<sup>2</sup>&equiv;2。所以平方剩余为 {1, 2, 4}。<strong>3</strong> 不是平方剩余（不存在整数 x 使得 x<sup>2</sup> &equiv; 3 mod 7）。选 C。
+    <strong>解析：</strong>模 7 下，0<sup>2</sup>&equiv;0，1<sup>2</sup>&equiv;1，2<sup>2</sup>&equiv;4，3<sup>2</sup>&equiv;2。所以平方剩余为 {0, 1, 2, 4}。<strong>3</strong> 不是平方剩余（不存在整数 x 使得 x<sup>2</sup> &equiv; 3 mod 7）。选 C。
   </div>
 </div>
 

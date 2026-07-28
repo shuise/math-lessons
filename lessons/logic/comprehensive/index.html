@@ -292,7 +292,7 @@
     <div class="opt" onclick="checkChoice(10, 0)">A. m ≤ 1</div>
     <div class="opt" onclick="checkChoice(10, 1)">B. m ≥ 0 或 m < 0</div>
     <div class="opt" onclick="checkChoice(10, 2)">C. m ≤ 0 或 m ≥ 4</div>
-    <div class="opt" onclick="checkChoice(10, 3)">D. m < 0 或 m ≥ 4</div>
+    <div class="opt" onclick="checkChoice(10, 3)">D. m < 0</div>
   </div>
   <div class="explain" id="explain10">
     <strong>推导步骤：</strong><br>
@@ -341,7 +341,7 @@
     <div class="opt" onclick="checkChoice(12, 0)">A. a ≥ e</div>
     <div class="opt" onclick="checkChoice(12, 1)">B. a < 4</div>
     <div class="opt" onclick="checkChoice(12, 2)">C. a < 4 且 a < e</div>
-    <div class="opt" onclick="checkChoice(12, 3)">D. a ≥ e 或 a < 4，但不同时成立</div>
+    <div class="opt" onclick="checkChoice(12, 3)">D. a > 4 或 a < e</div>
   </div>
   <div class="explain" id="explain12">
     <strong>推导步骤：</strong><br>
@@ -351,7 +351,7 @@
     <strong>情况一：</strong>p 真 q 假。则 a ≥ e 且 a > 4，即 a > 4。<br>
     <strong>情况二：</strong>p 假 q 真。则 a < e 且 a ≤ 4，即 a < e。<br>
     <strong>综合：a > 4 或 a < e。</strong><br>
-    四个选项中 D 选项表述最接近："a ≥ e 或 a < 4，但不同时成立"——这与 a ≥ e 与 a < 4 不同时成立等价。<strong>选 D。</strong>
+    四个选项中 D 选项 "a > 4 或 a < e" 正确。<strong>选 D。</strong>
   </div>
 </div>
 
@@ -519,11 +519,6 @@
     - 小强做的：小美假(P✗)、小兰真(&not;P✓)、小刚假(P✗)、小强假(是我做的✗) &rarr; <strong>1真</strong> ✓<br>
     <strong>唯一解：小强做的。选D。</strong>
   </div>
-</div>
-
-<div class="score-panel">
-  得分：<span class="score-num" id="totalScore">0 / 18</span>
-  <button class="btn-reset" onclick="resetAll()">重置</button>
 </div>
 
 </article>

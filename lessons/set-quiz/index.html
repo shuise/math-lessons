@@ -676,7 +676,10 @@ function checkFill(qIdx) {
   if (input.disabled) return;
 
   var userAnswer = input.value.trim();
-  var isCorrect = userAnswer.toLowerCase() === q.answer.toLowerCase();
+  function normalizeAnswer(s) {
+    return s.replace(/≤/g, '<=').replace(/≥/g, '>=').toLowerCase();
+  }
+  var isCorrect = normalizeAnswer(userAnswer) === normalizeAnswer(q.answer);
 
   input.disabled = true;
   checkBtn.disabled = true;

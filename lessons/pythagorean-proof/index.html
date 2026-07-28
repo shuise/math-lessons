@@ -231,8 +231,8 @@
   <text x="128" y="304" font-size="13" fill="#d32f2f" font-family="serif" font-style="italic">I</text>
 
   <!-- Perpendicular foot labels -->
-  <text x="227" y="237" font-size="14" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">F</text>
-  <text x="152" y="320" font-size="14" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">G</text>
+  <text x="227" y="237" font-size="14" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">M</text>
+  <text x="152" y="320" font-size="14" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">N</text>
 
   <!-- Side length labels -->
   <text x="210" y="255" font-size="14" fill="#333" font-family="serif" font-style="italic">b</text>
@@ -242,12 +242,12 @@
   <polygon points="200,280 215,280 215,265 200,265" fill="#999" opacity="0.5"/>
 
   <!-- Perpendicular label -->
-  <text x="178" y="295" font-size="13" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">CF</text>
+  <text x="178" y="295" font-size="13" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">CM</text>
 </svg>
 </div>
 
 <div class="aux-desc">
-  <strong>辅助线思路：</strong>欧几里得证法"从直角顶点向斜边作垂线，并延长至大正方形的对边"，目的是将大正方形分割成两个矩形，通过证明每个矩形与对应的小正方形面积相等来得出结论。垂线 CF 是解题的关键——它将斜边上的正方形分成两个矩形，每个矩形的面积恰好等于一条直角边上的正方形面积。这条辅助线的思路来源于"要证明 a²+b²=c²，只需证明 c² 可以分解为 a² 和 b² 两部分"。
+  <strong>辅助线思路：</strong>欧几里得证法"从直角顶点向斜边作垂线，并延长至大正方形的对边"，目的是将大正方形分割成两个矩形，通过证明每个矩形与对应的小正方形面积相等来得出结论。垂线 CM 是解题的关键——它将斜边上的正方形分成两个矩形，每个矩形的面积恰好等于一条直角边上的正方形面积。这条辅助线的思路来源于"要证明 a²+b²=c²，只需证明 c² 可以分解为 a² 和 b² 两部分"。
 </div>
 
 <h3>分步推导</h3>
@@ -256,12 +256,23 @@
   <p>在三边上分别向外作正方形 ACDE、BCGF、ABHI。</p>
   <p><strong>求证：</strong>a² + b² = c²</p>
   <p class="step"><strong>证明（思路）：</strong></p>
-  <p class="step">① 从直角顶点 C 向斜边 AB 作垂线，垂足为 F，</p>
-  <p class="step">&emsp;&emsp;延长 CF 交 IH 于点 G。</p>
-  <p class="step">② 垂线 FG 将正方形 ABHI 分割成两个矩形 AIGF 和 BHGF。</p>
-  <p class="step">③ 可以证明：矩形 AIGF 的面积 = 正方形 ACDE 的面积 = b²，</p>
-  <p class="step">&emsp;&emsp;矩形 BHGF 的面积 = 正方形 BCGF 的面积 = a²。</p>
-  <p class="step">④ 由于矩形 AIGF + 矩形 BHGF = 正方形 ABHI = c²，</p>
+  <p class="step">① 从直角顶点 C 向斜边 AB 作垂线，垂足为 M，</p>
+  <p class="step">&emsp;&emsp;延长 CM 交 IH 于点 N。</p>
+  <p class="step">② 垂线 MN 将正方形 ABHI 分割成两个矩形 AIMN 和 BHMN。</p>
+  <p class="step">③ 连接 CE、AH。证明矩形 AIMN 的面积 = 正方形 ACDE 的面积：</p>
+  <p class="step">&emsp;&emsp;在 △CAE 和 △HAB 中：</p>
+  <p class="step">&emsp;&emsp;&emsp;CA = HA（正方形 ACDE 和 ABHI 均为同边长的正方形），</p>
+  <p class="step">&emsp;&emsp;&emsp;AE = AB（同为正方形边长），</p>
+  <p class="step">&emsp;&emsp;&emsp;∠CAE = ∠CAB + 90° = ∠HAB（∠HAB = ∠CAB + 90°），</p>
+  <p class="step">&emsp;&emsp;∴ △CAE ≅ △HAB（SAS），故 S<sub>△CAE</sub> = S<sub>△HAB</sub>。</p>
+  <p class="step">&emsp;&emsp;又 ∵ △CAE 与正方形 ACDE 同底（AE）等高（AC），</p>
+  <p class="step">&emsp;&emsp;&emsp;∴ S<sub>正方形ACDE</sub> = 2 × S<sub>△CAE</sub>。</p>
+  <p class="step">&emsp;&emsp;∵ △HAB 与矩形 AIMN 同底（AH）等高（AI），</p>
+  <p class="step">&emsp;&emsp;&emsp;∴ S<sub>矩形AIMN</sub> = 2 × S<sub>△HAB</sub>。</p>
+  <p class="step">&emsp;&emsp;∴ S<sub>矩形AIMN</sub> = S<sub>正方形ACDE</sub> = b²。</p>
+  <p class="step">④ 同理，连接 CG、BH，可证 △CBG ≅ △HBN，</p>
+  <p class="step">&emsp;&emsp;进而得到 S<sub>矩形BHMN</sub> = S<sub>正方形BCGF</sub> = a²。</p>
+  <p class="step">⑤ 由于矩形 AIMN + 矩形 BHMN = 正方形 ABHI = c²，</p>
   <p class="step">&emsp;&emsp;∴ a² + b² = c²。</p>
   <p class="answer">∴ 勾股定理成立。</p>
 </div>
@@ -275,15 +286,15 @@
 <div id="quiz-container"></div>
 
 <div class="score-panel">
-  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 3</div>
+  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 5</div>
   <br>
-  <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #1a73e8;color:#1a73e8;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">⊕ 重新答题</button>
+  <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #1a73e8;color:#1a73e8;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">重置</button>
 </div>
 
 </article>
 
 <script>
-var answers = {1:2, 2:1, 3:1};
+var answers = {1:2, 2:1, 3:1, 4:0, 5:1};
 
 var questions = [
   {
@@ -309,6 +320,22 @@ var questions = [
     opts: ["作角平分线", "从直角顶点向斜边作垂线", "作中位线", "作切线"],
     answer: 1,
     explain: "欧几里得证法从直角顶点 C 向斜边 AB 作垂线，并延长至大正方形的对边，将大正方形分割成两个矩形，从而将问题转化为面积关系的证明。"
+  },
+  {
+    qid: 4,
+    tag: "推理",
+    question: "欧几里得证法中，△CAE ≅ △HAB 的依据是？",
+    opts: ["SSS（三边相等）", "SAS（两边夹角）", "ASA（两角夹边）", "AAS（两角一对边）"],
+    answer: 1,
+    explain: "CA = HA（正方形边相等）、AE = AB（正方形边相等）、∠CAE = ∠CAB + 90° = ∠HAB，满足 SAS（两边及其夹角对应相等）。"
+  },
+  {
+    qid: 5,
+    tag: "应用",
+    question: "已知直角三角形的两直角边分别为 3 和 4，则斜边上的正方形面积是？",
+    opts: ["7", "12", "25", "49"],
+    answer: 2,
+    explain: "由勾股定理，c² = a² + b² = 3² + 4² = 9 + 16 = 25。斜边上的正方形面积即为 c² = 25。"
   }
 ];
 
@@ -335,11 +362,11 @@ function checkChoice(qid, idx) {
 
 function updateTotalScore() {
   var total = 0;
-  for (var i = 1; i <= 3; i++) {
+  for (var i = 1; i <= 5; i++) {
     var qDiv = document.getElementById('q' + i);
     if (qDiv && qDiv.classList.contains('correct')) total += scoreWeight();
   }
-  document.getElementById('scoreDisplay').textContent = '得分：' + total + ' / 3';
+  document.getElementById('scoreDisplay').textContent = '得分：' + total + ' / 5';
 }
 
 function scoreWeight() {
@@ -347,8 +374,8 @@ function scoreWeight() {
 }
 
 function resetAll() {
-  document.getElementById('scoreDisplay').textContent = '得分：0 / 3';
-  for (var i = 1; i <= 3; i++) {
+  document.getElementById('scoreDisplay').textContent = '得分：0 / 5';
+  for (var i = 1; i <= 5; i++) {
     var qDiv = document.getElementById('q' + i);
     if (!qDiv) continue;
     qDiv.className = 'quiz-question';

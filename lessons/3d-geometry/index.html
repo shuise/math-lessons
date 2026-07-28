@@ -175,7 +175,7 @@
 <p>由若干个<strong>平面多边形</strong>围成的封闭几何体称为<strong>多面体</strong>。</p>
 
 <h4>棱柱</h4>
-<p><strong>棱柱</strong>：有两个面互相平行（底面），其余各面都是四边形，且每相邻两个四边形的公共边互相平行。</p>
+<p><strong>棱柱</strong>：有两个互相平行且全等的多边形面作为底面，其余各面都是平行四边形，且所有侧棱互相平行。</p>
 <ul>
   <li>分类：三棱柱、四棱柱、五棱柱……</li>
   <li>侧面都是平行四边形</li>
@@ -301,7 +301,7 @@
     <div class="opt" onclick="checkChoice(3, 3)">D. 矩形</div>
   </div>
   <div class="explain" id="explain3">
-    <strong>解析：</strong>由棱柱的定义，每相邻两个四边形的公共边互相平行，因此侧面都是平行四边形。直棱柱的侧面是矩形，但一般棱柱的侧面不一定为矩形。选 B。
+    <strong>解析：</strong>棱柱的两个底面互相平行且全等，侧棱互相平行，因此侧面都是平行四边形。直棱柱的侧面是矩形，但一般棱柱的侧面不一定为矩形。选 B。
   </div>
 </div>
 
@@ -400,7 +400,7 @@
 
 <h4>柱体</h4>
 <div class="formula-box">
-  <p><strong>圆柱表面积：</strong>S = 2&pi;r&sup2; + 2&pi;rl = 2&pi;r(r + l)</p>
+  <p><strong>圆柱表面积：</strong>S = 2&pi;r&sup2; + 2&pi;rh = 2&pi;r(r + h)</p>
   <p><strong>柱体体积：</strong>V = Sh（S 为底面积，h 为高）</p>
   <p><strong>圆柱体积：</strong>V = &pi;r&sup2;h</p>
 </div>
@@ -416,6 +416,7 @@
 <div class="formula-box">
   <p><strong>圆台表面积：</strong>S = &pi;(r&sup2; + r'&sup2; + rl + r'l)</p>
   <p><strong>台体体积：</strong>V = &frac13;(S' + &radic;<span style="text-decoration:overline;">S'S</span> + S)h</p>
+  <p style="font-size:0.92em;color:#555;">其中 S、S&prime; 为两个底面的面积，h 为高。</p>
   <p><strong>圆台体积：</strong>V = &frac13;&pi;(r&sup2; + rr' + r'&sup2;)h</p>
 </div>
 
@@ -618,12 +619,12 @@
 </div>
 
 <div class="example">
-  <p><strong>例：</strong>如图，在正方体 ABCD-A<sub>1</sub>B<sub>1</sub>C<sub>1</sub>D<sub>1</sub> 中，E、F 分别为 AB、AD 的中点。求证：EF ∥ 平面 BCD<sub>1</sub>。</p>
+  <p><strong>例：</strong>如图，在正方体 ABCD-A<sub>1</sub>B<sub>1</sub>C<sub>1</sub>D<sub>1</sub> 中，E、F 分别为 AB、AD 的中点。求证：EF ∥ 平面 BDA<sub>1</sub>。</p>
   <p class="step"><strong>证明：</strong>连接 BD。</p>
   <p class="step">在 &triangle;ABD 中，E、F 分别为 AB、AD 的中点，</p>
   <p class="step">所以 EF &par; BD（三角形中位线定理）。</p>
-  <p class="step">又因为 BD &sub; 平面 BCD<sub>1</sub>，而 EF &nsub; 平面 BCD<sub>1</sub>，</p>
-  <p class="step">由线面平行的判定定理，EF &par; 平面 BCD<sub>1</sub>。得证。</p>
+  <p class="step">又因为 BD &sub; 平面 BDA<sub>1</sub>，而 EF &nsub; 平面 BDA<sub>1</sub>，</p>
+  <p class="step">由线面平行的判定定理，EF &par; 平面 BDA<sub>1</sub>。得证。</p>
 </div>
 
         <!-- SVG 1.6: 平行关系 -->

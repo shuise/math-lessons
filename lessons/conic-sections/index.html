@@ -419,8 +419,28 @@
       <div class="explain" id="explain7"></div>
     </div>
 
-    <!-- ==================== 1.5 圆锥曲线的统一 定义 ==================== -->
-    <h3>1.5 圆锥曲线的统一 定义</h3>
+    <!-- Q9 抛物线 -->
+    <div class="quiz-question" id="q9">
+      <p><span class="q-tag concept">抛物线</span><strong>Q9.</strong> 抛物线 \(y^2 = 12x\) 的准线方程是？</p>
+      <div class="opt" data-q="9" data-idx="0" onclick="checkChoice(9,0)">A. \(x = -3\)</div>
+      <div class="opt" data-q="9" data-idx="1" onclick="checkChoice(9,1)">B. \(x = 3\)</div>
+      <div class="opt" data-q="9" data-idx="2" onclick="checkChoice(9,2)">C. \(x = -6\)</div>
+      <div class="opt" data-q="9" data-idx="3" onclick="checkChoice(9,3)">D. \(y = -3\)</div>
+      <div class="explain" id="explain9"></div>
+    </div>
+
+    <!-- Q10 抛物线 -->
+    <div class="quiz-question" id="q10">
+      <p><span class="q-tag concept">抛物线</span><strong>Q10.</strong> 顶点在原点、焦点在 \((3, 0)\) 的抛物线的标准方程是？</p>
+      <div class="opt" data-q="10" data-idx="0" onclick="checkChoice(10,0)">A. \(y^2 = 6x\)</div>
+      <div class="opt" data-q="10" data-idx="1" onclick="checkChoice(10,1)">B. \(y^2 = 12x\)</div>
+      <div class="opt" data-q="10" data-idx="2" onclick="checkChoice(10,2)">C. \(x^2 = 12y\)</div>
+      <div class="opt" data-q="10" data-idx="3" onclick="checkChoice(10,3)">D. \(x^2 = 6y\)</div>
+      <div class="explain" id="explain10"></div>
+    </div>
+
+    <!-- ==================== 1.5 圆锥曲线的统一定义 ==================== -->
+    <h3>1.5 圆锥曲线的统一定义</h3>
     <p><strong>统一定义（第二定义）：</strong>平面内到一个定点 \(F\)（焦点）的距离与到一条定直线 \(l\)（准线）的距离之比为常数 \(e\)（离心率）的点的轨迹叫做圆锥曲线。</p>
     <ul>
       <li>当 \(0 &lt; e &lt; 1\) 时，轨迹是椭圆；</li>
@@ -524,7 +544,7 @@
     <div class="score-panel">
       <h3>得分面板</h3>
       <p style="font-size: 1.3em; margin: 10px 0;">
-        当前得分：<strong id="totalScore">0</strong> / <strong>8</strong>
+        当前得分：<strong id="totalScore">0</strong> / <strong>10</strong>
       </p>
       <button onclick="resetAll()" style="padding: 8px 24px; font-size: 1em; border: none; border-radius: 6px; background: #1a73e8; color: #fff; cursor: pointer;">重置所有题目</button>
     </div>
@@ -540,7 +560,22 @@
       5: 2,
       6: 1,
       7: 0,
-      8: 2
+      8: 2,
+      9: 0,
+      10: 1
+    };
+
+    var explanations = {
+      1: { ok: '正确！曲线上的点都满足方程且方程的解都在曲线上，二者缺一不可。这就是纯粹性和完备性的要求。', fail: '不对。必须同时满足纯粹性（曲线上点的坐标都满足方程）和完备性（方程的解都在曲线上）两方面，缺一不可。' },
+      2: { ok: '正确！求曲线方程的一般步骤为：建系 → 设点 → 列式 → 化简 → 验证，"列式"之后应当进行"化简"。', fail: '不对。正确的顺序是：建系 → 设点 → 列式 → 化简 → 验证，"列式"之后是"化简"。' },
+      3: { ok: '正确！\(a^2 = 25\)，\(b^2 = 9\)，\(c^2 = a^2 - b^2 = 16\)，\(c = 4\)，离心率 \(e = \dfrac{c}{a} = \dfrac{4}{5}\)。', fail: '不对。由 \(a^2 = 25\)，\(b^2 = 9\) 得 \(c^2 = a^2 - b^2 = 16\)，\(c = 4\)，离心率 \(e = \dfrac{c}{a} = \dfrac{4}{5}\)。' },
+      4: { ok: '正确！\(a^2 = 16\)，\(b^2 = 7\)，\(c^2 = a^2 - b^2 = 9\)，\(c = 3\)，焦点在 \(x\) 轴上，所以焦点坐标为 \((\pm 3, 0)\)。', fail: '不对。\(a^2 = 16\)，\(b^2 = 7\)，\(c^2 = 16 - 7 = 9\)，\(c = 3\)，焦点在 \(x\) 轴上（分母大的对应焦点所在轴），所以为 \((\pm 3, 0)\)。' },
+      5: { ok: '正确！\(a^2 = 4\)，\(b^2 = 5\)，\(c^2 = a^2 + b^2 = 9\)，\(c = 3\)，焦距 \(2c = 6\)。', fail: '不对。双曲线中 \(c^2 = a^2 + b^2 = 4 + 5 = 9\)，\(c = 3\)，焦距 \(2c = 6\)。' },
+      6: { ok: '正确！双曲线 \(\dfrac{y^2}{9} - \dfrac{x^2}{16} = 1\) 焦点在 \(y\) 轴上，渐近线方程为 \(y = \pm \dfrac{a}{b}x = \pm \dfrac{3}{4}x\)。', fail: '不对。该双曲线焦点在 \(y\) 轴上，渐近线方程为 \(y = \pm \dfrac{a}{b}x\)，其中 \(a^2 = 9\)，\(b^2 = 16\)，所以 \(y = \pm \dfrac{3}{4}x\)。' },
+      7: { ok: '正确！\(x^2 = -8y\) 对应开口向下，\(2p = 8\)，\(p = 4\)，焦点为 \((0, -\dfrac{p}{2}) = (0, -2)\)。', fail: '不对。\(x^2 = -8y\) 的标准形式为 \(x^2 = -2py\)，所以 \(2p = 8\)，\(p = 4\)，焦点在 \(y\) 轴负半轴上，坐标为 \((0, -\dfrac{p}{2}) = (0, -2)\)。' },
+      8: { ok: '正确！统一定义中，\(e = 1\) 时轨迹为抛物线；\(0 < e < 1\) 时为椭圆；\(e > 1\) 时为双曲线。', fail: '不对。根据圆锥曲线的统一定义，\(e = 1\) 时轨迹为抛物线；\(0 < e < 1\) 时为椭圆；\(e > 1\) 时为双曲线。' },
+      9: { ok: '正确！\(y^2 = 12x\) 中 \(2p = 12\)，\(p = 6\)，准线方程为 \(x = -\dfrac{p}{2} = -3\)。', fail: '不对。\(y^2 = 12x\) 的标准形式为 \(y^2 = 2px\)，所以 \(2p = 12\)，\(p = 6\)，准线方程为 \(x = -\dfrac{p}{2} = -3\)。' },
+      10: { ok: '正确！焦点在 \((3, 0)\) 即 \(\dfrac{p}{2} = 3\)，\(p = 6\)，焦点在 \(x\) 轴正半轴上，标准方程为 \(y^2 = 2px = 12x\)。', fail: '不对。焦点在 \((3, 0)\) 说明 \(\dfrac{p}{2} = 3\)，\(p = 6\)，且焦点在 \(x\) 轴正半轴上，标准方程应为 \(y^2 = 2px = 12x\)。' }
     };
 
     var answered = {};
@@ -567,12 +602,12 @@
       if (idx === answers[qid]) {
         el.classList.add('correct');
         explain.className = 'explain show ok';
-        explain.textContent = '回答正确！+1 分。';
+        explain.innerHTML = explanations[qid].ok;
         correctCount++;
       } else {
         el.classList.add('wrong');
         explain.className = 'explain show fail';
-        explain.textContent = '回答错误。正确答案已用绿色标出。';
+        explain.innerHTML = explanations[qid].fail;
       }
 
       updateTotalScore();

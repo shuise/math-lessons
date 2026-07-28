@@ -78,6 +78,27 @@
   }
   .conclusion-box h3 { margin: 0 0 8px 0; color: #2e7d32; }
   .conclusion-box .big-formula { font-size: 1.6em; color: #1b5e20; font-weight: bold; font-family: 'Times New Roman', serif; }
+
+  /* Quiz styles */
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 0.75em; margin-right: 8px; color: #fff; background: #1a73e8; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt { padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none; }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain { margin-top: 10px; padding: 10px 14px; border-radius: 8px; font-size: 0.93em; display: none; }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+  .score-panel { text-align: center; margin: 24px 0; }
 </style>
 </head>
 <body>
@@ -271,12 +292,13 @@
   </div>
 
   <div class="app-card">
-    <h4>例4：固定周长的三角形</h4>
-    <p>用 30 cm 长的铁丝围成一个直角三角形，两直角边各为多少时面积最大？</p>
+    <h4>例4：矩形面积最大</h4>
+    <p>已知某矩形的长比宽多 4 cm，且矩形的周长为 24 cm，求该矩形面积的最大值。</p>
     <div class="solution">
-      <p><strong>解：</strong>设直角边为 a 和 b，斜边为 &radic;(a² + b²)。</p>
-      <p>问题比较复杂：a + b + &radic;(a² + b²) = 30，不是 a + b 固定。</p>
-      <p>但如果在约束 a + b = 固定值的前提下，直角三角形的面积 S = (1/2)ab，同样当 a = b 时面积最大。</p>
+      <p><strong>解：</strong>设宽为 a，长为 a + 4，则 2(a + a + 4) = 24，解得 a = 4 cm。</p>
+      <p>但实际上，若周长固定为 24 cm，即 2(a + b) = 24，</p>
+      <p>则 a + b = 12。由和定积最大定理：ab &le; (12/2)² = 36。</p>
+      <p>当 a = b = 6 时取等号，即围成 <strong>边长为 6 cm 的正方形</strong> 时面积最大，最大面积为 <strong>36 cm²</strong>。</p>
     </div>
   </div>
 </div>
@@ -298,222 +320,159 @@
 <div class="formula-box">
   <p><strong>加权形式</strong>：若 pa + qb = S（p, q &gt; 0），则当 pa = qb = S/2 时 ab 取得最大值。</p>
   <p><strong>证明思路</strong>：设 x = pa, y = qb，则 x + y = S，转化为普通形式。</p>
+  <p><strong>用 AM-GM 推导</strong>：</p>
+  <div class="derive-box" style="font-size:0.95em;">
+    <div class="derive-line">已知 pa + qb = S，其中 p, q &gt; 0。</div>
+    <div class="derive-line">令 a' = &radic;p &middot; &radic;a，b' = &radic;q &middot; &radic;b，对 &radic;p &middot; &radic;a 和 &radic;q &middot; &radic;b 应用 AM-GM：</div>
+    <div class="derive-line">(pa + qb) / 2 = S / 2 &ge; &radic;(pa &middot; qb) = &radic;(pq &middot; ab) <span class="note">（AM-GM 不等式）</span></div>
+    <div class="derive-line">两边平方：S²/4 &ge; pq &middot; ab</div>
+    <div class="derive-line">∴ ab &le; S²/(4pq) <span class="note">（得证）</span></div>
+    <div class="derive-line">等号成立当且仅当 pa = qb = S/2。</div>
+  </div>
 </div>
+</section>
+
+<!-- ============================== 八、交互式测验 ============================== -->
+<section>
+<h2>八、互动问答</h2>
+<p style="color:#666;">点击选项提交答案，系统自动判分。</p>
+
+<div id="quiz-container"></div>
+
+<div class="score-panel">
+  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 3</div>
+  <br>
+  <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #1a73e8;color:#1a73e8;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">重置</button>
+</div>
+
 </section>
 
 </article>
 
 <script>
-// ==================== 交互式可视化 ====================
-var canvas = document.getElementById('rectCanvas');
-var ctx = canvas.getContext('2d');
-var sliderS = document.getElementById('sliderS');
-var sliderA = document.getElementById('sliderA');
-var valS = document.getElementById('valS');
-var valA = document.getElementById('valA');
-
-function draw() {
-  var S = parseFloat(sliderS.value);
-  var a = parseFloat(sliderA.value);
-  // 保持 a 在合理范围内
-  if (a >= S) a = S - 0.1;
-  if (a <= 0) a = 0.1;
-  var b = S - a;
-  var prod = a * b;
-  var maxProd = (S / 2) * (S / 2);
-
-  // 更新 UI
-  valS.textContent = S;
-  valA.textContent = a.toFixed(1);
-  document.getElementById('statA').textContent = a.toFixed(1);
-  document.getElementById('statB').textContent = b.toFixed(1);
-  document.getElementById('statProd').textContent = prod.toFixed(2);
-  document.getElementById('statMax').textContent = maxProd.toFixed(2);
-  document.getElementById('statDiff').textContent = (maxProd - prod).toFixed(2);
-
-  // 更新 sliderA 的范围
-  sliderA.max = (S - 0.1).toFixed(1);
-
-  // 清空
-  ctx.clearRect(0, 0, 500, 340);
-
-  var margin = { top: 20, bottom: 30, left: 40, right: 30 };
-  var plotW = 500 - margin.left - margin.right;
-  var plotH = 200;
-  var plotY = margin.top;
-  var rectY = plotY + plotH + 15;
-  var rectH = 340 - rectY - 10;
-
-  // ========== 左侧：矩形 ==========
-  var rectLeft = 30;
-  var rectW = 180;
-  var scale = rectH / S;  // 高度方向缩放
-  var hA = a * scale;
-  var hB = b * scale;
-
-  // 填充矩形
-  ctx.fillStyle = 'rgba(21, 101, 192, 0.15)';
-  ctx.strokeStyle = '#1565c0';
-  ctx.lineWidth = 2;
-  ctx.fillRect(rectLeft, rectY + rectH - hA, rectW, hA);
-  ctx.strokeRect(rectLeft, rectY + rectH - hA, rectW, hA);
-
-  // 标尺线 a
-  ctx.fillStyle = '#1565c0';
-  ctx.font = '14px "Times New Roman", serif';
-  ctx.textAlign = 'left';
-  ctx.fillText('a = ' + a.toFixed(1), rectLeft + rectW + 6, rectY + rectH - hA + 5);
-
-  // 标尺线 b
-  if (hB > 20) {
-    ctx.fillText('b = ' + b.toFixed(1), rectLeft + rectW + 6, rectY + rectH - hA - hB + 14);
+// ============================================================
+// 习题数据
+// ============================================================
+var questions = [
+  {
+    type: "choice",
+    tag: "选择",
+    question: "若 a + b = 20（a, b &gt; 0），则 ab 的最大值为？",
+    opts: [
+      "50",
+      "100",
+      "200",
+      "400"
+    ],
+    answer: 1,
+    explain: "由和定积最大定理，当 a = b = 10 时，ab 取得最大值 (20/2)² = 100。"
+  },
+  {
+    type: "choice",
+    tag: "选择",
+    question: "用 60 米长的篱笆围矩形菜园，最大面积是多少？",
+    opts: [
+      "180 m²",
+      "225 m²",
+      "400 m²",
+      "900 m²"
+    ],
+    answer: 1,
+    explain: "设长 a 宽 b，则 2(a+b)=60，即 a+b=30。最大面积在 a=b=15 时取得，S=ab=15×15=225 m²。"
+  },
+  {
+    type: "choice",
+    tag: "选择",
+    question: "加权形式中，若 2a + 3b = 24（a, b &gt; 0），则 ab 的最大值为？",
+    opts: [
+      "12",
+      "24",
+      "36",
+      "48"
+    ],
+    answer: 0,
+    explain: "由加权形式结论：ab ≤ S²/(4pq) = 24²/(4×2×3) = 576/24 = 12。当 2a = 3b = 12，即 a = 6, b = 4 时取等号。"
   }
+];
 
-  // a 的标记线
-  ctx.strokeStyle = '#1565c0';
-  ctx.lineWidth = 1;
-  ctx.setLineDash([4, 4]);
-  ctx.beginPath();
-  ctx.moveTo(rectLeft, rectY + rectH - hA);
-  ctx.lineTo(rectLeft + rectW, rectY + rectH - hA);
-  ctx.stroke();
-
-  // b 的标记线
-  ctx.strokeStyle = '#e65100';
-  ctx.beginPath();
-  ctx.moveTo(rectLeft, rectY + rectH - hA - hB);
-  ctx.lineTo(rectLeft + rectW, rectY + rectH - hA - hB);
-  ctx.stroke();
-
-  ctx.setLineDash([]);
-
-  // 标注 a, b
-  ctx.fillStyle = '#1565c0';
-  ctx.textAlign = 'center';
-  ctx.font = 'bold 15px "Times New Roman", serif';
-  ctx.fillText('a', rectLeft + rectW / 2, rectY + rectH - 4);
-  ctx.fillStyle = '#e65100';
-  ctx.fillText('b', rectLeft + rectW / 2, rectY + rectH - hA - 6);
-
-  // 标注面积
-  ctx.fillStyle = '#1565c0';
-  ctx.font = '13px "Times New Roman", serif';
-  ctx.fillText('面积 = a × b = ' + prod.toFixed(2), rectLeft + rectW / 2, rectY + rectH - hA / 2 + 5);
-
-  // ========== 右侧：抛物线 ==========
-  var plotLeft = 270;
-  var pW = 200;
-  var pH = plotH;
-  var pTop = plotY;
-  var pBottom = pTop + pH;
-
-  // 坐标轴
-  ctx.strokeStyle = '#888';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(plotLeft, pBottom);
-  ctx.lineTo(plotLeft + pW, pBottom);
-  ctx.moveTo(plotLeft, pBottom);
-  ctx.lineTo(plotLeft, pTop);
-  ctx.stroke();
-
-  // x 轴标签
-  ctx.fillStyle = '#888';
-  ctx.font = '11px "Times New Roman", serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('0', plotLeft - 8, pBottom + 15);
-  ctx.fillText('S', plotLeft + pW, pBottom + 15);
-  ctx.fillText('S/2', plotLeft + pW / 2, pBottom + 15);
-
-  // y 轴标签
-  ctx.textAlign = 'right';
-  ctx.fillText('Max', plotLeft - 4, pTop + 14);
-
-  // 抛物线 f(a) = -a² + Sa
-  ctx.strokeStyle = '#e53935';
-  ctx.lineWidth = 2.5;
-  ctx.beginPath();
-
-  var px = function(av) { return plotLeft + (av / S) * pW; };
-  var py = function(pv) { return pBottom - (pv / maxProd) * pH; };
-
-  for (var i = 0; i <= 100; i++) {
-    var av = (i / 100) * S;
-    var pv = -av * av + S * av;
-    var x = px(av);
-    var y = py(pv);
-    if (i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
+// ============================================================
+// 渲染与交互逻辑
+// ============================================================
+function render() {
+  var container = document.getElementById("quiz-container");
+  var html = "";
+  for (var i = 0; i < questions.length; i++) {
+    var q = questions[i];
+    var optsHtml = "";
+    for (var j = 0; j < q.opts.length; j++) {
+      optsHtml += '<div class="opt" data-q="' + i + '" data-idx="' + j + '">'
+        + String.fromCharCode(65 + j) + '. ' + q.opts[j] + '</div>';
+    }
+    html += '<div id="q' + i + '" class="quiz-question">'
+      + '<div class="q-title"><span class="q-tag">' + q.tag + '</span>' + q.question + '</div>'
+      + '<div class="options">' + optsHtml + '</div>'
+      + '<div class="explain" id="exp' + i + '">' + q.explain + '</div>'
+      + '</div>';
   }
-  ctx.stroke();
+  container.innerHTML = html;
 
-  // 当前点
-  var curPv = -a * a + S * a;
-  var curX = px(a);
-  var curY = py(curPv);
-
-  ctx.fillStyle = '#e53935';
-  ctx.beginPath();
-  ctx.arc(curX, curY, 6, 0, 2 * Math.PI);
-  ctx.fill();
-
-  ctx.fillStyle = '#fff';
-  ctx.beginPath();
-  ctx.arc(curX, curY, 2.5, 0, 2 * Math.PI);
-  ctx.fill();
-
-  // 最大值点
-  var bestPv = maxProd;
-  var bestX = px(S/2);
-  var bestY = py(bestPv);
-
-  ctx.strokeStyle = '#4caf50';
-  ctx.lineWidth = 1;
-  ctx.setLineDash([3, 3]);
-  ctx.beginPath();
-  ctx.moveTo(bestX, bestY);
-  ctx.lineTo(bestX, pBottom);
-  ctx.stroke();
-  ctx.setLineDash([]);
-
-  ctx.fillStyle = '#4caf50';
-  ctx.beginPath();
-  ctx.arc(bestX, bestY, 5, 0, 2 * Math.PI);
-  ctx.fill();
-
-  // 图例
-  ctx.fillStyle = '#e53935';
-  ctx.font = '12px -apple-system, sans-serif';
-  ctx.textAlign = 'left';
-  ctx.fillRect(plotLeft + 10, pTop + 4, 12, 3);
-  ctx.fillText('ab 随 a 的变化', plotLeft + 26, pTop + 8);
-
-  ctx.fillStyle = '#4caf50';
-  ctx.fillRect(plotLeft + 10, pTop + 20, 12, 3);
-  ctx.fillText('最大值 (S/2)²', plotLeft + 26, pTop + 24);
+  var opts = document.querySelectorAll(".opt");
+  for (var k = 0; k < opts.length; k++) {
+    opts[k].onclick = function() {
+      var qIdx = parseInt(this.getAttribute("data-q"));
+      var optIdx = parseInt(this.getAttribute("data-idx"));
+      checkAnswer(qIdx, optIdx);
+    };
+  }
 }
 
-// 滑块事件
-sliderS.oninput = function() {
-  var S = parseFloat(sliderS.value);
-  // 调整 a 使其不超过 S
-  if (parseFloat(sliderA.value) >= S) {
-    sliderA.value = (S / 2).toFixed(1);
-  }
-  draw();
-};
-sliderA.oninput = draw;
+function checkAnswer(qIdx, chosen) {
+  var qDiv = document.getElementById("q" + qIdx);
+  if (qDiv.classList.contains("correct") || qDiv.classList.contains("wrong")) return;
 
-// ==================== 证明方法切换 ====================
-function switchMethod(method) {
-  document.querySelectorAll('.method-tab').forEach(function(el) { el.classList.remove('active'); });
-  document.querySelectorAll('.method-content').forEach(function(el) { el.classList.remove('active'); });
-  document.querySelector('.method-tab[onclick*="' + method + '"]').classList.add('active');
-  document.getElementById('method-' + method).classList.add('active');
+  var correct = questions[qIdx].answer;
+  var opts = qDiv.querySelectorAll(".opt");
+
+  for (var j = 0; j < opts.length; j++) {
+    opts[j].classList.add("disabled");
+    if (j === correct) opts[j].classList.add("correct-opt");
+    if (j === chosen && chosen !== correct) opts[j].classList.add("wrong-opt");
+  }
+
+  qDiv.classList.add(chosen === correct ? "correct" : "wrong");
+  var exp = document.getElementById("exp" + qIdx);
+  exp.classList.add("show");
+  exp.classList.add(chosen === correct ? "ok" : "fail");
+
+  updateScore();
 }
 
-// 初始绘制
-draw();
+function updateScore() {
+  var total = 0;
+  for (var i = 0; i < questions.length; i++) {
+    var qDiv = document.getElementById("q" + i);
+    if (qDiv.classList.contains("correct")) total++;
+  }
+  document.getElementById("scoreDisplay").textContent = "得分：" + total + " / 3";
+}
+
+function resetQuiz() {
+  document.getElementById("scoreDisplay").textContent = "得分：0 / 3";
+  for (var i = 0; i < questions.length; i++) {
+    var qDiv = document.getElementById("q" + i);
+    qDiv.className = "quiz-question";
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].className = "opt";
+    }
+    var exp = document.getElementById("exp" + i);
+    exp.className = "explain";
+    exp.classList.remove("ok", "fail");
+  }
+}
+
+document.getElementById("resetBtn").onclick = resetQuiz;
+render();
 </script>
     <script src="../dt.js"></script>
 </body>

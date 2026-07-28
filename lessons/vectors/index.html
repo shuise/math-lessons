@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>平面向量</title>
 <link rel="stylesheet" href="../style.css">
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)'], ['$', '$']],
+      displayMath: [['\\[', '\\]'], ['$$', '$$']]
+    },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 <style>
   h3 { color: #2c3e50; margin: 24px 0 10px; font-size: 1.1em; }
   .formula { text-align: center; margin: 16px 0; padding: 12px; background: #f8f9fa; border-radius: 8px; font-size: 1.1em; }
@@ -180,8 +190,52 @@
 
 <div class="example">
   <p><strong>例 2：</strong>如图，在正六边形 ABCDEF 中，找出与 <b>AB</b> 相等的向量和相反的向量。</p>
-  <p class="step">相等向量（大小相等、方向相同）：<b>ED</b>、<b>FC</b>（需方向一致）</p>
-  <p class="step">相反向量（大小相等、方向相反）：<b>BA</b>、<b>DE</b>、<b>CF</b></p>
+
+  <!-- SVG: 正六边形 ABCDEF -->
+  <svg width="500" height="260" viewBox="0 0 500 260" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;">
+    <defs>
+      <marker id="hex-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z" fill="#1a73e8"/>
+      </marker>
+      <marker id="hex-opp" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z" fill="#d32f2f"/>
+      </marker>
+    </defs>
+    <!-- 六边形边框 -->
+    <polygon points="330,130 290,61 210,61 170,130 210,199 290,199"
+             fill="none" stroke="#333" stroke-width="2"/>
+    <!-- 对角线（辅助参考，虚线） -->
+    <line x1="330" y1="130" x2="210" y2="199" stroke="#ccc" stroke-width="1" stroke-dasharray="4,4"/>
+    <line x1="290" y1="61" x2="290" y2="199" stroke="#ccc" stroke-width="1" stroke-dasharray="4,4"/>
+    <line x1="210" y1="61" x2="210" y2="199" stroke="#ccc" stroke-width="1" stroke-dasharray="4,4"/>
+    <!-- 顶点标注 -->
+    <circle cx="330" cy="130" r="3" fill="#333"/>
+    <text x="336" y="135" font-size="14" fill="#333" font-weight="bold" font-family="serif">A</text>
+    <circle cx="290" cy="61" r="3" fill="#333"/>
+    <text x="283" y="55" font-size="14" fill="#333" font-weight="bold" font-family="serif">B</text>
+    <circle cx="210" cy="61" r="3" fill="#333"/>
+    <text x="198" y="55" font-size="14" fill="#333" font-weight="bold" font-family="serif">C</text>
+    <circle cx="170" cy="130" r="3" fill="#333"/>
+    <text x="155" y="135" font-size="14" fill="#333" font-weight="bold" font-family="serif">D</text>
+    <circle cx="210" cy="199" r="3" fill="#333"/>
+    <text x="200" y="218" font-size="14" fill="#333" font-weight="bold" font-family="serif">E</text>
+    <circle cx="290" cy="199" r="3" fill="#333"/>
+    <text x="293" y="218" font-size="14" fill="#333" font-weight="bold" font-family="serif">F</text>
+    <!-- 向量 AB（蓝色箭头） -->
+    <line x1="330" y1="130" x2="293" y2="66" stroke="#1a73e8" stroke-width="2.5" marker-end="url(#hex-arr)"/>
+    <!-- 向量 ED（蓝色箭头，与 AB 同向等长） -->
+    <line x1="210" y1="199" x2="173" y2="135" stroke="#1a73e8" stroke-width="2.5" marker-end="url(#hex-arr)"/>
+    <!-- 向量 BA（红色箭头，与 AB 相反） -->
+    <line x1="290" y1="61" x2="327" y2="125" stroke="#d32f2f" stroke-width="2" marker-end="url(#hex-opp)"/>
+    <!-- 向量 DE（红色箭头，与 AB 相反） -->
+    <line x1="170" y1="130" x2="207" y2="194" stroke="#d32f2f" stroke-width="2" marker-end="url(#hex-opp)"/>
+    <!-- 图例 -->
+    <text x="10" y="18" font-size="12" fill="#1a73e8" font-weight="bold">AB = ED</text>
+    <text x="10" y="36" font-size="12" fill="#d32f2f" font-weight="bold">BA、DE 与 AB 相反</text>
+  </svg>
+
+  <p class="step">相等向量（大小相等、方向相同）：<b>ED</b></p>
+  <p class="step">相反向量（大小相等、方向相反）：<b>BA</b>、<b>DE</b></p>
   <p class="answer" style="color:#1a73e8;">注意：向量相等只关心大小和方向，与起点位置无关。</p>
 </div>
 </section>
@@ -193,7 +247,7 @@
   <div class="options">
     <div class="opt" onclick="checkChoice(1, 0)">A. 若 |<b>a</b>| = |<b>b</b>|，则 <b>a</b> = <b>b</b></div>
     <div class="opt" onclick="checkChoice(1, 1)">B. 若 <b>a</b> = <b>b</b>，则 <b>a</b> 与 <b>b</b> 的方向相同</div>
-    <div class="opt" onclick="checkChoice(1, 2)">C. 零向量没有方向</div>
+    <div class="opt" onclick="checkChoice(1, 2)">C. 零向量有唯一确定的方向</div>
     <div class="opt" onclick="checkChoice(1, 3)">D. 单位向量都相等</div>
   </div>
   <div class="explain" id="explain1"></div>
@@ -215,7 +269,7 @@
 <section>
 <h2>二、平面向量的线性运算</h2>
 
-<h3>1.2 向量加法</h3>
+<h3>2.1 向量加法</h3>
 <p>向量加法遵循以下两种法则：</p>
 
 <div class="formula-box">
@@ -284,7 +338,7 @@
   <p class="step">(3) <b>AB</b> + <b>BC</b> + <b>CD</b> + <b>DE</b> = <b>AE</b></p>
 </div>
 
-<h3>1.3 向量减法</h3>
+<h3>2.2 向量减法</h3>
 <p>向量减法可以转化为加法：<b>a</b> − <b>b</b> = <b>a</b> + (−<b>b</b>)。</p>
 
 <div class="formula-box">
@@ -329,7 +383,7 @@
   <b>AB</b> − <b>AC</b> = <b>CB</b>
 </div>
 
-<h3>1.4 数乘向量</h3>
+<h3>2.3 数乘向量</h3>
 <p>实数 &lambda; 与向量 <b>a</b> 的乘积是一个向量，记作 &lambda;<b>a</b>：</p>
 <ul>
   <li>|&lambda;<b>a</b>| = |&lambda;| &middot; |<b>a</b>|</li>
@@ -379,7 +433,7 @@
 <section>
 <h2>三、平面向量的基本定理及坐标表示</h2>
 
-<h3>1.3 平面向量基本定理</h3>
+<h3>3.1 平面向量基本定理</h3>
 <p><strong class="definition">平面向量基本定理：</strong>如果 <b>e</b><sub>1</sub>、<b>e</b><sub>2</sub> 是同一平面内的两个<strong>不共线</strong>向量，那么对于这一平面内的任一向量 <b>a</b>，有且只有一对实数 &lambda;<sub>1</sub>、&lambda;<sub>2</sub>，使得：</p>
 <div class="formula-box">
   <p><b>a</b> = &lambda;<sub>1</sub><b>e</b><sub>1</sub> + &lambda;<sub>2</sub><b>e</b><sub>2</sub></p>
@@ -451,7 +505,7 @@
   <strong>说明：</strong>基底不唯一，只要两个向量不共线即可。同一向量在不同基底下的表示不同。
 </div>
 
-<h3>1.4 正交分解与坐标表示</h3>
+<h3>3.2 正交分解与坐标表示</h3>
 <p>取两个<strong>互相垂直</strong>的单位向量作为基底——<b>i</b>（x 轴方向）和 <b>j</b>（y 轴方向），这种分解称为<strong class="keyword">正交分解</strong>。</p>
 
 <div class="formula-box">
@@ -460,7 +514,7 @@
   <p>(x, y) 称为向量 <b>a</b> 的<strong class="keyword">坐标</strong>，记作 <b>a</b> = (x, y)</p>
 </div>
 
-<h3>1.5 向量的坐标运算</h3>
+<h3>3.3 向量的坐标运算</h3>
 
 <table>
   <tr><th>运算</th><th>坐标表示</th></tr>
@@ -504,7 +558,7 @@
 <section>
 <h2>四、平面向量的数量积</h2>
 
-<h3>1.4 数量积的定义</h3>
+<h3>4.1 数量积的定义</h3>
 <p>已知两个非零向量 <b>a</b> 和 <b>b</b>，它们的夹角为 &theta;（0&deg; &le; &theta; &le; 180&deg;），那么：</p>
 <div class="formula-box">
   <p><strong>数量积</strong>（也称<strong>点乘</strong>）：</p>
@@ -515,7 +569,7 @@
   <strong>注意：</strong>两个向量的数量积是一个<strong>实数</strong>（标量），不是向量。因此数量积也称为"点积"或"内积"。
 </div>
 
-<h3>1.5 几何意义——投影</h3>
+<h3>4.2 几何意义——投影</h3>
 <p><b>a</b> &middot; <b>b</b> 的几何意义：|<b>a</b>| 乘以 <b>b</b> 在 <b>a</b> 方向上的投影，或 |<b>b</b>| 乘以 <b>a</b> 在 <b>b</b> 方向上的投影。</p>
 <div class="formula">
   <b>b</b> 在 <b>a</b> 方向上的投影为：|<b>b</b>| cos &theta;
@@ -555,7 +609,7 @@
   <text x="10" y="16" font-size="11" fill="#888">a &middot; b = |a| |b| cos&theta;</text>
 </svg>
 
-<h3>1.6 数量积的性质</h3>
+<h3>4.3 数量积的性质</h3>
 <table>
   <tr><th>性质</th><th>公式</th></tr>
   <tr><td>垂直条件</td><td><b>a</b> &perp; <b>b</b> &hArr; <b>a</b> &middot; <b>b</b> = 0</td></tr>
@@ -564,14 +618,14 @@
   <tr><td>自身点乘</td><td><b>a</b> &middot; <b>a</b> = |<b>a</b>|&sup2;</td></tr>
 </table>
 
-<h3>1.7 运算律</h3>
+<h3>4.4 运算律</h3>
 <ul>
   <li><b>a</b> &middot; <b>b</b> = <b>b</b> &middot; <b>a</b>（交换律）</li>
   <li>(&lambda;<b>a</b>) &middot; <b>b</b> = &lambda;(<b>a</b> &middot; <b>b</b>)（数乘结合律）</li>
   <li>(<b>a</b> + <b>b</b>) &middot; <b>c</b> = <b>a</b> &middot; <b>c</b> + <b>b</b> &middot; <b>c</b>（分配律）</li>
 </ul>
 
-<h3>1.8 坐标表示下的数量积</h3>
+<h3>4.5 坐标表示下的数量积</h3>
 <p>设 <b>a</b> = (x<sub>1</sub>, y<sub>1</sub>)，<b>b</b> = (x<sub>2</sub>, y<sub>2</sub>)，则：</p>
 <div class="formula-box">
   <p><b>a</b> &middot; <b>b</b> = x<sub>1</sub>x<sub>2</sub> + y<sub>1</sub>y<sub>2</sub></p>
@@ -623,7 +677,7 @@
 <section>
 <h2>五、平面向量应用举例</h2>
 
-<h3>1.5 向量在平面几何中的应用</h3>
+<h3>5.1 向量在平面几何中的应用</h3>
 <p>向量是沟通代数与几何的桥梁，利用向量可以简洁地证明几何命题：</p>
 
 <div class="formula-box">
@@ -656,7 +710,7 @@
   <p class="step" style="color:#1a73e8;">所以 |<b>a</b>| = |<b>b</b>|，即邻边相等，ABCD 是菱形。证毕。</p>
 </div>
 
-<h3>1.6 向量在物理中的应用</h3>
+<h3>5.2 向量在物理中的应用</h3>
 <p>向量在物理学中有广泛的应用，主要体现在：</p>
 
 <div class="formula-box">
@@ -711,12 +765,12 @@
 </div>
 
 <div class="example">
-  <p><strong>例 12：</strong>一船在静水中的速度为 5 km/h，河水流速为 3 km/h，若要垂直渡河（船头指向与河岸垂直），求船的实际速度大小和方向。</p>
+  <p><strong>例 12：</strong>一船在静水中的速度为 5 km/h，河水流速为 3 km/h。若船头指向与河岸垂直，求船的实际速度大小和方向。</p>
   <p class="step">设船速 <b>v</b><sub>船</sub> = (0, 5)，水速 <b>v</b><sub>水</sub> = (3, 0)</p>
   <p class="step">实际速度 <b>v</b> = <b>v</b><sub>船</sub> + <b>v</b><sub>水</sub> = (3, 5)</p>
   <p class="step">速度大小：|<b>v</b>| = &radic;(3&sup2; + 5&sup2;) = &radic;34 &asymp; 5.83 km/h</p>
   <p class="step">方向：与河岸的夹角 &theta; 满足 tan &theta; = 5/3，&theta; &asymp; 59&deg;</p>
-  <p class="answer" style="color:#1a73e8;">实际速度大小约为 5.83 km/h，与河岸的夹角约为 59&deg;。</p>
+  <p class="answer" style="color:#1a73e8;">实际速度大小约为 5.83 km/h，与河岸的夹角约为 59&deg;；因此实际航迹并不垂直于河岸。</p>
 </div>
 </section>
 

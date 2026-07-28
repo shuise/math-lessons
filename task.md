@@ -1,6 +1,6 @@
 # 数学课件项目 — 任务执行总结
 
-## 一、已完成的课程（index.html 中 11 个栏目, 共 40 门课）
+## 一、已完成的课程（index.html 中 12 个栏目, 共 42 门课）
 
 ### 集合论（1 门）
 | # | 课程 | 文件 |
@@ -70,6 +70,12 @@
 | 3 | 推理与证明总结 | `math-methods-unit/summary/index.html` |
 | 4 | 单项测试卷（40 题） | `math-methods-unit/quiz-basic/index.html` |
 | 5 | 综合考验（20 题，高考+奥数） | `math-methods-unit/exam/index.html` |
+
+### 数学之美（2 门）← 新增
+| # | 课程 | 文件 |
+|:-:|------|------|
+| 1 | 数字与运算中的韵律美 | `beauty-of-math/part1/index.html` |
+| 2 | 有趣的函数及图形 | `beauty-of-math/part2/index.html` |
 
 ### 测验专区（6 门）
 | # | 课程 | 文件 |

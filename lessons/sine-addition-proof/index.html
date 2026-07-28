@@ -64,6 +64,24 @@
     font-size: 0.85em; margin-left: 8px;
   }
   .highlight { background: #fff8e1; padding: 2px 6px; border-radius: 4px; }
+
+  /* Quiz styles */
+  .quiz-question { background: #fff; border: 2px solid #e0e0e0; border-radius: 10px; padding: 18px 22px; margin: 16px 0; }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 0.75em; margin-right: 8px; color: #fff; background: #1a73e8; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt { padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none; }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain { margin-top: 10px; padding: 10px 14px; border-radius: 8px; font-size: 0.93em; display: none; }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+  .score-panel { text-align: center; margin: 24px 0; }
   @media (max-width: 640px) {
     .control-group input[type="range"] { width: 100px; }
   }
@@ -150,9 +168,13 @@
 
 <div class="proof-step">
   <p><strong>第六步：由此推出 sin(&alpha; &minus; &beta;)</strong></p>
-  <p>同理，将 &beta; 替换为 &minus;&beta;：</p>
-  <p class="formula">sin(&alpha; &minus; &beta;) = sin &alpha; cos(&minus;&beta;) + cos &alpha; sin(&minus;&beta;)</p>
-  <p class="formula">= sin &alpha; cos &beta; + cos &alpha; (&minus;sin &beta;)</p>
+  <p>在 sin(&alpha; + &beta;) 的公式中将 &beta; 替换为 &minus;&beta;：</p>
+  <div class="derivation" style="margin:6px 0;">
+    <div class="dline">sin(&alpha; &minus; &beta;) = sin(&alpha; + (&minus;&beta;)) <span class="reason">（将减号转化为加负数）</span></div>
+    <div class="dline">= sin &alpha; cos(&minus;&beta;) + cos &alpha; sin(&minus;&beta;) <span class="reason">（代入 sin(&alpha;+&beta;) 公式）</span></div>
+    <div class="dline">= sin &alpha; &middot; cos &beta; + cos &alpha; &middot; (&minus; sin &beta;) <span class="reason">（cos(&minus;&beta;) = cos &beta;，sin(&minus;&beta;) = &minus;sin &beta;）</span></div>
+    <div class="dline">= <strong>sin &alpha; cos &beta; &minus; cos &alpha; sin &beta;</strong> <span class="reason">（化简）</span></div>
+  </div>
   <p class="formula" style="background:#e3f2fd;border-radius:8px;padding:10px;font-size:1.2em;color:#1565c0;">
     <strong>sin(&alpha; &minus; &beta;) = sin &alpha; cos &beta; &minus; cos &alpha; sin &beta;</strong>
   </p>
@@ -182,203 +204,147 @@
   <li>因此，令两种表达相等得出 cos(&alpha; &minus; &beta;) 的公式是逻辑自洽的，不存在循环论证。</li>
 </ul>
 
+<!-- ========================= 交互式测验 ========================= -->
+<section>
+<h2>五、互动问答</h2>
+<p style="color:#666;">点击选项提交答案，系统自动判分。</p>
+
+<div id="quiz-container"></div>
+
+<div class="score-panel">
+  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 3</div>
+  <br>
+  <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #1a73e8;color:#1a73e8;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">重置</button>
+</div>
+
+</section>
+
 </article>
 
 <script>
-// ===== Canvas 绘制逻辑 =====
-var canvas = document.getElementById("proofCanvas");
-var ctx = canvas.getContext("2d");
-var W = canvas.width, H = canvas.height;
-var cx = W / 2, cy = H / 2;
-var radius = Math.min(W, H) / 2 - 60;
-var sliderA = document.getElementById("sliderA");
-var sliderB = document.getElementById("sliderB");
-var valA = document.getElementById("valA");
-var valB = document.getElementById("valB");
-
-function degToRad(d) { return d * Math.PI / 180; }
-
-function draw() {
-  var alpha = parseFloat(sliderA.value);
-  var beta = parseFloat(sliderB.value);
-  valA.textContent = alpha + "\u00B0";
-  valB.textContent = beta + "\u00B0";
-
-  var aRad = degToRad(alpha);
-  var bRad = degToRad(beta);
-
-  // 点坐标
-  var pAngle = aRad;
-  var qAngle = bRad;
-  var rAngle = aRad - bRad;
-
-  var px = cx + radius * Math.cos(pAngle);
-  var py = cy - radius * Math.sin(pAngle);
-  var qx = cx + radius * Math.cos(qAngle);
-  var qy = cy - radius * Math.sin(qAngle);
-  var rx = cx + radius * Math.cos(rAngle);
-  var ry = cy - radius * Math.sin(rAngle);
-
-  ctx.clearRect(0, 0, W, H);
-
-  // 背景网格（极坐标参考）
-  ctx.save();
-  for (var i = 0; i < 360; i += 30) {
-    var rad = degToRad(i);
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.lineTo(cx + radius * Math.cos(rad), cy - radius * Math.sin(rad));
-    ctx.strokeStyle = "#f0f0f0";
-    ctx.lineWidth = 0.5;
-    ctx.stroke();
+// ============================================================
+// 习题数据
+// ============================================================
+var questions = [
+  {
+    type: "choice",
+    tag: "选择",
+    question: "sin(&alpha; + &beta;) 的展开公式是？",
+    opts: [
+      "sin &alpha; cos &beta; &minus; cos &alpha; sin &beta;",
+      "sin &alpha; cos &beta; + cos &alpha; sin &beta;",
+      "cos &alpha; cos &beta; + sin &alpha; sin &beta;",
+      "cos &alpha; cos &beta; &minus; sin &alpha; sin &beta;"
+    ],
+    answer: 1,
+    explain: "sin(&alpha; + &beta;) = sin &alpha; cos &beta; + cos &alpha; sin &beta;。这是正弦和角公式，可通过诱导公式从余弦差公式推导得到。"
+  },
+  {
+    type: "choice",
+    tag: "选择",
+    question: "sin(60&deg; &minus; 30&deg;) 的值为？",
+    opts: [
+      "0",
+      "1/2",
+      "&radic;3/2",
+      "1"
+    ],
+    answer: 0,
+    explain: "sin(60&deg; &minus; 30&deg;) = sin 30&deg; = 1/2。代入公式验证：sin60&deg;cos30&deg; &minus; cos60&deg;sin30&deg; = (&radic;3/2)(&radic;3/2) &minus; (1/2)(1/2) = 3/4 &minus; 1/4 = 1/2。"
+  },
+  {
+    type: "choice",
+    tag: "选择",
+    question: "将 &beta; 替换为 &minus;&beta; 推导 sin(&alpha;&minus;&beta;) 时，用到了哪些三角恒等式？",
+    opts: [
+      "cos(&minus;&beta;) = &minus;cos &beta;，sin(&minus;&beta;) = &minus;sin &beta;",
+      "cos(&minus;&beta;) = cos &beta;，sin(&minus;&beta;) = sin &beta;",
+      "cos(&minus;&beta;) = cos &beta;，sin(&minus;&beta;) = &minus;sin &beta;",
+      "cos(&minus;&beta;) = &minus;cos &beta;，sin(&minus;&beta;) = sin &beta;"
+    ],
+    answer: 2,
+    explain: "余弦是偶函数，cos(&minus;&beta;) = cos &beta;；正弦是奇函数，sin(&minus;&beta;) = &minus;sin &beta;。代入 sin(&alpha;+&beta;) 公式即得 sin(&alpha;&minus;&beta;) = sin &alpha; cos &beta; &minus; cos &alpha; sin &beta;。"
   }
-  ctx.restore();
+];
 
-  // 单位圆
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
-  ctx.strokeStyle = "#999";
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-
-  // 坐标轴
-  ctx.beginPath();
-  ctx.moveTo(cx - radius - 10, cy);
-  ctx.lineTo(cx + radius + 10, cy);
-  ctx.moveTo(cx, cy - radius - 10);
-  ctx.lineTo(cx, cy + radius + 10);
-  ctx.strokeStyle = "#bbb";
-  ctx.lineWidth = 1;
-  ctx.stroke();
-
-  // X/Y labels
-  ctx.fillStyle = "#999";
-  ctx.font = "13px sans-serif";
-  ctx.fillText("x", cx + radius + 14, cy + 4);
-  ctx.fillText("y", cx + 4, cy - radius - 10);
-
-  // 角度 α 弧线
-  ctx.beginPath();
-  ctx.arc(cx, cy, 28, -aRad, 0);
-  ctx.strokeStyle = "#e53935";
-  ctx.lineWidth = 2.5;
-  ctx.stroke();
-  ctx.fillStyle = "#e53935";
-  ctx.font = "bold 14px sans-serif";
-  var aLabelAngle = -aRad / 2;
-  ctx.fillText("\u03B1", cx + 36 * Math.cos(aLabelAngle) - 6, cy + 36 * Math.sin(aLabelAngle) + 5);
-
-  // 角度 β 弧线
-  ctx.beginPath();
-  ctx.arc(cx, cy, 22, -bRad, 0);
-  ctx.strokeStyle = "#1e88e5";
-  ctx.lineWidth = 2.5;
-  ctx.stroke();
-  ctx.fillStyle = "#1e88e5";
-  ctx.font = "bold 14px sans-serif";
-  var bLabelAngle = -bRad / 2;
-  ctx.fillText("\u03B2", cx + 30 * Math.cos(bLabelAngle) - 6, cy + 30 * Math.sin(bLabelAngle) + 5);
-
-  // 角度 (α-β) 弧线
-  ctx.beginPath();
-  ctx.arc(cx, cy, 34, -rAngle, 0);
-  ctx.strokeStyle = "#43a047";
-  ctx.lineWidth = 2.5;
-  ctx.stroke();
-  ctx.fillStyle = "#43a047";
-  ctx.font = "bold 13px sans-serif";
-  var rLabelAngle = -rAngle / 2;
-  ctx.fillText("\u03B1\u2212\u03B2", cx + 44 * Math.cos(rLabelAngle) - 10, cy + 44 * Math.sin(rLabelAngle) + 5);
-
-  // 画向量
-  function drawVector(x1, y1, x2, y2, color, label) {
-    var dx = x2 - x1, dy = y2 - y1;
-    var len = Math.sqrt(dx * dx + dy * dy);
-    if (len < 1) return;
-    var ux = dx / len, uy = dy / len;
-    // 箭头主体
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 2.5;
-    ctx.stroke();
-    // 箭头头部
-    var arrowSize = 10;
-    ctx.beginPath();
-    ctx.moveTo(x2, y2);
-    ctx.lineTo(x2 - ux * arrowSize - uy * arrowSize * 0.4, y2 - uy * arrowSize + ux * arrowSize * 0.4);
-    ctx.lineTo(x2 - ux * arrowSize + uy * arrowSize * 0.4, y2 - uy * arrowSize - ux * arrowSize * 0.4);
-    ctx.closePath();
-    ctx.fillStyle = color;
-    ctx.fill();
-    // label
-    if (label) {
-      var lx = (x1 + x2) / 2 + uy * 16;
-      var ly = (y1 + y2) / 2 - ux * 16;
-      ctx.fillStyle = color;
-      ctx.font = "bold 14px sans-serif";
-      ctx.fillText(label, lx - 6, ly + 5);
+// ============================================================
+// 渲染与交互逻辑
+// ============================================================
+function render() {
+  var container = document.getElementById("quiz-container");
+  var html = "";
+  for (var i = 0; i < questions.length; i++) {
+    var q = questions[i];
+    var optsHtml = "";
+    for (var j = 0; j < q.opts.length; j++) {
+      optsHtml += '<div class="opt" data-q="' + i + '" data-idx="' + j + '">'
+        + String.fromCharCode(65 + j) + '. ' + q.opts[j] + '</div>';
     }
+    html += '<div id="q' + i + '" class="quiz-question">'
+      + '<div class="q-title"><span class="q-tag">' + q.tag + '</span>' + q.question + '</div>'
+      + '<div class="options">' + optsHtml + '</div>'
+      + '<div class="explain" id="exp' + i + '">' + q.explain + '</div>'
+      + '</div>';
   }
+  container.innerHTML = html;
 
-  // 向量 OP (红)
-  drawVector(cx, cy, px, py, "#e53935", "P");
-  // 向量 OQ (蓝)
-  drawVector(cx, cy, qx, qy, "#1e88e5", "Q");
-  // 向量 OR (绿)
-  drawVector(cx, cy, rx, ry, "#43a047", "R");
-
-  // 画点 (突出显示)
-  function drawDot(x, y, color, label) {
-    ctx.beginPath();
-    ctx.arc(x, y, 5, 0, 2 * Math.PI);
-    ctx.fillStyle = color;
-    ctx.fill();
-    ctx.strokeStyle = "#fff";
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-    if (label) {
-      ctx.fillStyle = "#333";
-      ctx.font = "bold 15px sans-serif";
-      ctx.fillText(label, x + 10, y - 8);
-    }
+  var opts = document.querySelectorAll(".opt");
+  for (var k = 0; k < opts.length; k++) {
+    opts[k].onclick = function() {
+      var qIdx = parseInt(this.getAttribute("data-q"));
+      var optIdx = parseInt(this.getAttribute("data-idx"));
+      checkAnswer(qIdx, optIdx);
+    };
   }
-  drawDot(px, py, "#e53935", "P(cos \u03B1, sin \u03B1)");
-  drawDot(qx, qy, "#1e88e5", "Q(cos \u03B2, sin \u03B2)");
-  drawDot(rx, ry, "#43a047", "R(cos(\u03B1\u2212\u03B2), sin(\u03B1\u2212\u03B2))");
-
-  // 显示点积计算结果
-  ctx.fillStyle = "#555";
-  ctx.font = "14px sans-serif";
-  ctx.textAlign = "left";
-
-  var cosDiff = Math.cos(aRad) * Math.cos(bRad) + Math.sin(aRad) * Math.sin(bRad);
-  var cosDiffAngle = Math.cos(aRad - bRad);
-  var dp = Math.cos(aRad) * Math.cos(bRad) + Math.sin(aRad) * Math.sin(bRad);
-
-  ctx.fillStyle = "#1a73e8";
-  ctx.font = "bold 15px sans-serif";
-  ctx.textAlign = "left";
-  ctx.fillText("OP \u00B7 OQ = cos" + alpha + "\u00B0 \u00B7 cos" + beta + "\u00B0 + sin" + alpha + "\u00B0 \u00B7 sin" + beta + "\u00B0", 20, 24);
-  ctx.fillStyle = "#e53935";
-  ctx.fillText("= " + dp.toFixed(4), 20, 48);
-  ctx.fillStyle = "#1a73e8";
-  ctx.fillText("= |OP|\u00B7|OQ|\u00B7cos(\u03B1\u2212\u03B2) = cos(" + (alpha - beta).toFixed(1) + "\u00B0)", 20, 72);
-  ctx.fillStyle = "#e53935";
-  ctx.font = "bold 16px sans-serif";
-  ctx.fillText("= " + Math.cos(aRad - bRad).toFixed(4), 20, 96);
-  ctx.fillStyle = "#333";
-  ctx.font = "bold 16px sans-serif";
-  ctx.fillText("\u2713 \u4e24\u8005\u76f8\u7b49", 20, 126);
 }
 
-// 绑定滑块
-sliderA.addEventListener("input", draw);
-sliderB.addEventListener("input", draw);
+function checkAnswer(qIdx, chosen) {
+  var qDiv = document.getElementById("q" + qIdx);
+  if (qDiv.classList.contains("correct") || qDiv.classList.contains("wrong")) return;
 
-// 初始绘制
-draw();
+  var correct = questions[qIdx].answer;
+  var opts = qDiv.querySelectorAll(".opt");
+
+  for (var j = 0; j < opts.length; j++) {
+    opts[j].classList.add("disabled");
+    if (j === correct) opts[j].classList.add("correct-opt");
+    if (j === chosen && chosen !== correct) opts[j].classList.add("wrong-opt");
+  }
+
+  qDiv.classList.add(chosen === correct ? "correct" : "wrong");
+  var exp = document.getElementById("exp" + qIdx);
+  exp.classList.add("show");
+  exp.classList.add(chosen === correct ? "ok" : "fail");
+
+  updateScore();
+}
+
+function updateScore() {
+  var total = 0;
+  for (var i = 0; i < questions.length; i++) {
+    var qDiv = document.getElementById("q" + i);
+    if (qDiv.classList.contains("correct")) total++;
+  }
+  document.getElementById("scoreDisplay").textContent = "得分：" + total + " / 3";
+}
+
+function resetQuiz() {
+  document.getElementById("scoreDisplay").textContent = "得分：0 / 3";
+  for (var i = 0; i < questions.length; i++) {
+    var qDiv = document.getElementById("q" + i);
+    qDiv.className = "quiz-question";
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].className = "opt";
+    }
+    var exp = document.getElementById("exp" + i);
+    exp.className = "explain";
+    exp.classList.remove("ok", "fail");
+  }
+}
+
+document.getElementById("resetBtn").onclick = resetQuiz;
+render();
 </script>
     <script src="../dt.js"></script>
 </body>

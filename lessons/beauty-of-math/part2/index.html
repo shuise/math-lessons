@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数学之美 · 有趣的函数及图形</title>
+<link rel="stylesheet" href="../../style.css">
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)'], ['$', '$']],
+      displayMath: [['\\[', '\\]'], ['$$', '$$']]
+    },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<script src="../../lib/d3.v7.min.js"></script>
+<style>
+  h3 { color: #2c3e50; margin: 28px 0 12px; font-size: 1.15em; }
+  h4 { color: #555; margin: 18px 0 8px; font-size: 1em; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  table th, table td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; }
+  table th { background: #9c27b0; color: #fff; font-weight: 600; }
+  table tr:nth-child(even) { background: #f5f0ff; }
+  table tr:hover { background: #ede7f6; }
+
+  .graph-wrap {
+    display: flex; flex-wrap: wrap; gap: 16px; margin: 12px 0 24px;
+    align-items: flex-start;
+  }
+  .graph-wrap svg {
+    border: 1px solid #e0e0e0; border-radius: 8px;
+    background: #fafafa; flex-shrink: 0; max-width: 100%; height: auto;
+  }
+  .graph-wrap .coord-info {
+    flex: 1; min-width: 160px; padding: 10px 14px;
+    background: #f5f0ff; border-radius: 8px; border-left: 4px solid #9c27b0;
+    font-size: 0.93em; line-height: 1.8;
+  }
+  .graph-wrap .coord-info .val { color: #9c27b0; font-weight: bold; }
+
+  .func-section {
+    background: #fff; border: 2px solid #e8a317; border-radius: 10px;
+    padding: 18px 22px; margin: 20px 0; border-left: 6px solid #e8a317;
+  }
+  .func-section h3 { margin-top: 0; color: #bf6f00; }
+
+  /* tooltip */
+  .tooltip-d3 {
+    position: absolute; padding: 6px 12px; background: rgba(0,0,0,0.75);
+    color: #fff; border-radius: 6px; font-size: 0.85em;
+    pointer-events: none; display: none;
+  }
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>数学之美 · 有趣的函数及图形 <span style="font-size:0.55em;color:#888;">(Interesting Functions &amp; Graphs)</span></h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">
+  以下 12 种函数的图形各具特色，体现了数学中"数"与"形"的巧妙结合。鼠标悬停或移动可查看坐标。
+</p>
+
+<div id="tooltip" class="tooltip-d3"></div>
+
+<section id="graph-section">
+
+</section>
+
+<!-- 心形函数表格模板 -->
+<table id="heart-table" style="display:none;">
+  <tr><th>特性</th><th>说明</th></tr>
+  <tr><td>图形</td><td>心形，两叶上拱，底部尖点</td></tr>
+  <tr><td>参数方程</td><td>x = 16 sin³(t), y = 13 cos(t) − 5 cos(2t) − 2 cos(3t) − cos(4t)</td></tr>
+  <tr><td>定义域</td><td>t ∈ [0, 2π]</td></tr>
+  <tr><td>对称性</td><td>关于 y 轴对称</td></tr>
+  <tr><td>特殊点</td><td>底部尖点 (0, −17)，顶部交汇处 (0, 5)</td></tr>
+  <tr><td>应用</td><td>浪漫数学、参数曲线教学、数值分析</td></tr>
+</table>
+
+<!-- 玫瑰形函数表格模板 -->
+<table id="rose-table" style="display:none;">
+  <tr><th>特性</th><th>说明</th></tr>
+  <tr><td>图形</td><td>玫瑰形，五片花瓣均匀分布</td></tr>
+  <tr><td>极坐标方程</td><td>r = 7 cos(5θ)</td></tr>
+  <tr><td>参数方程</td><td>x = r cosθ, y = r sinθ</td></tr>
+  <tr><td>定义域</td><td>θ ∈ [0, π]</td></tr>
+  <tr><td>对称性</td><td>关于 x 轴、y 轴对称, k 为奇数时花瓣数 = k</td></tr>
+  <tr><td>特殊点</td><td>花瓣顶端距原点 7, 相邻花瓣夹角 72°</td></tr>
+  <tr><td>应用</td><td>极坐标教学、花瓣建模、分形艺术</td></tr>
+</table>
+
+</article>
+<script src="../../dt.js"></script>
+<script>
+// ==================== D3 通用绘图工具 ====================
+// responsive dimensions: PC 900×600, mobile 400×280
+var dims = (function() {
+  var m = window.innerWidth < 640;
+  return { W: m ? 400 : 900, H: m ? 280 : 600 };
+})();
+var W = dims.W, H = dims.H;
+
+const MARGIN = { top: 20, right: 20, bottom: 30, left: 40 };
+var IW = W - MARGIN.left - MARGIN.right;
+var IH = H - MARGIN.top - MARGIN.bottom;
+
+const tooltip = d3.select('#tooltip');
+
+function drawFunc(containerId, fn, xDomain, yDomain, opts = {}) {
+  const svg = d3.select('#' + containerId).append('svg')
+    .attr('width', W).attr('height', H)
+    .attr('viewBox', '0 0 ' + W + ' ' + H)
+    .style('max-width', '100%');
+
+  const g = svg.append('g')
+    .attr('transform', `translate(${MARGIN.left},${MARGIN.top})`);
+
+  const xScale = d3.scaleLinear().domain(xDomain).range([0, IW]);
+  const yScale = d3.scaleLinear().domain(yDomain).range([IH, 0]);
+
+  // grid
+  g.append('g').call(d3.axisLeft(yScale).ticks(6).tickSize(-IW).tickFormat(''))
+    .selectAll('.tick line').attr('stroke', '#e8e8e8');
+  g.append('g').call(d3.axisBottom(xScale).ticks(8).tickSize(-IH).tickFormat(''))
+    .selectAll('.tick line').attr('stroke', '#e8e8e8');
+
+  // axes
+  g.append('g').call(d3.axisLeft(yScale).ticks(6))
+    .selectAll('text').attr('font-size', '11px');
+  g.append('g').call(d3.axisBottom(xScale).ticks(8))
+    .attr('transform', `translate(0,${IH})`)
+    .selectAll('text').attr('font-size', '11px');
+
+  // zero lines
+  if (xDomain[0] <= 0 && xDomain[1] >= 0) {
+    g.append('line').attr('x1', xScale(0)).attr('x2', xScale(0))
+      .attr('y1', 0).attr('y2', IH).attr('stroke', '#bbb').attr('stroke-dasharray', '3,3');
+  }
+  if (yDomain[0] <= 0 && yDomain[1] >= 0) {
+    g.append('line').attr('x1', 0).attr('x2', IW)
+      .attr('y1', yScale(0)).attr('y2', yScale(0)).attr('stroke', '#bbb').attr('stroke-dasharray', '3,3');
+  }
+
+  // compute path
+  const step = (xDomain[1] - xDomain[0]) / 300;
+  const points = [];
+  for (let x = xDomain[0]; x <= xDomain[1]; x += step) {
+    const y = fn(x);
+    if (y !== undefined && isFinite(y) && y >= yDomain[0] && y <= yDomain[1]) {
+      points.push([x, y]);
+    } else if (points.length > 1) {
+      // break and draw existing segment
+      drawSegment(g, points, xScale, yScale, opts);
+      points.length = 0;
+    } else {
+      points.length = 0;
+    }
+  }
+  if (points.length > 1) drawSegment(g, points, xScale, yScale, opts);
+
+  // extra decorations
+  if (opts.decorations) opts.decorations(g, xScale, yScale);
+
+  // mouse tracker
+  const tracker = g.append('circle').attr('r', 4).attr('fill', '#e65100')
+    .attr('stroke', '#fff').attr('stroke-width', 2).style('display', 'none');
+  const trackerLine = g.append('line').attr('stroke', '#e65100')
+    .attr('stroke-dasharray', '2,2').style('display', 'none');
+
+  const bisect = d3.bisector(d => d[0]).left;
+
+  // hover rect
+  g.append('rect').attr('width', IW).attr('height', IH)
+    .attr('fill', 'none').attr('pointer-events', 'all')
+    .on('mouseenter', () => { tracker.style('display', null); trackerLine.style('display', null); })
+    .on('mouseleave', () => { tracker.style('display', 'none'); trackerLine.style('display', 'none'); tooltip.style('display', 'none'); })
+    .on('mousemove', (event) => {
+      const mx = d3.pointer(event)[0];
+      const xv = xScale.invert(mx);
+      const yv = fn(xv);
+      if (yv === undefined || !isFinite(yv)) return;
+      tracker.attr('cx', xScale(xv)).attr('cy', yScale(yv));
+      trackerLine.attr('x1', xScale(xv)).attr('x2', xScale(xv))
+        .attr('y1', yScale(yv)).attr('y2', yScale(0));
+      tooltip.style('display', 'block')
+        .html(`x = ${xv.toFixed(3)}, y = ${yv.toFixed(3)}`)
+        .style('left', (event.pageX + 12) + 'px')
+        .style('top', (event.pageY - 28) + 'px');
+    });
+}
+
+// ==================== 玫瑰形曲线 (极坐标) ====================
+function drawRose(containerId, color, delay) {
+  const xDomain = [-8, 8], yDomain = [-8, 8];
+  const svg = d3.select('#' + containerId).append('svg')
+    .attr('width', W).attr('height', H)
+    .attr('viewBox', '0 0 ' + W + ' ' + H)
+    .style('max-width', '100%');
+
+  const g = svg.append('g')
+    .attr('transform', 'translate(' + MARGIN.left + ',' + MARGIN.top + ')');
+
+  var xS = d3.scaleLinear().domain(xDomain).range([0, IW]);
+  var yS = d3.scaleLinear().domain(yDomain).range([IH, 0]);
+
+  // grid
+  g.append('g').call(d3.axisLeft(yS).ticks(6).tickSize(-IW).tickFormat(''))
+    .selectAll('.tick line').attr('stroke', '#e8e8e8');
+  g.append('g').call(d3.axisBottom(xS).ticks(8).tickSize(-IH).tickFormat(''))
+    .selectAll('.tick line').attr('stroke', '#e8e8e8');
+  g.append('g').call(d3.axisLeft(yS).ticks(6));
+  g.append('g').call(d3.axisBottom(xS).ticks(8))
+    .attr('transform', 'translate(0,' + IH + ')');
+
+  // zero lines
+  g.append('line').attr('x1', xS(0)).attr('x2', xS(0))
+    .attr('y1', 0).attr('y2', IH).attr('stroke', '#bbb').attr('stroke-dasharray', '3,3');
+  g.append('line').attr('x1', 0).attr('x2', IW)
+    .attr('y1', yS(0)).attr('y2', yS(0)).attr('stroke', '#bbb').attr('stroke-dasharray', '3,3');
+
+  // compute parametric points for r = 7 * cos(5*theta), theta in [0, pi]
+  var pts = [];
+  var n = 400;
+  for (var i = 0; i <= n; i++) {
+    var t = Math.PI * i / n;
+    var r = 7 * Math.cos(5 * t);
+    var x = r * Math.cos(t);
+    var y = r * Math.sin(t);
+    pts.push([x, y]);
+  }
+
+  // filled
+  var areaGen = d3.area()
+    .x0(function(d) { return xS(0); })
+    .x1(function(d) { return xS(d[0]); })
+    .y0(function(d) { return yS(0); })
+    .y1(function(d) { return yS(d[1]); });
+  g.append('path').attr('d', areaGen(pts))
+    .attr('fill', color).attr('opacity', 0.12);
+
+  // outline with animation
+  var lineGen = d3.line()
+    .x(function(d) { return xS(d[0]); })
+    .y(function(d) { return yS(d[1]); })
+    .curve(d3.curveCardinal.tension(0.05));
+
+  var path = g.append('path')
+    .attr('d', lineGen(pts))
+    .attr('fill', 'none')
+    .attr('stroke', color)
+    .attr('stroke-width', 2.5)
+    .attr('stroke-linejoin', 'round');
+
+  var len = path.node().getTotalLength();
+  path.attr('stroke-dasharray', len + ' ' + len)
+    .attr('stroke-dashoffset', len)
+    .transition().duration(1200).delay(delay)
+    .attr('stroke-dashoffset', 0);
+
+  // mouse tracker
+  var tracker = g.append('circle').attr('r', 4).attr('fill', '#e65100')
+    .attr('stroke', '#fff').attr('stroke-width', 2).style('display', 'none');
+  var tLine = g.append('line').attr('stroke', '#e65100')
+    .attr('stroke-dasharray', '2,2').style('display', 'none');
+
+  g.append('rect').attr('width', IW).attr('height', IH)
+    .attr('fill', 'none').attr('pointer-events', 'all')
+    .on('mouseenter', function() { tracker.style('display', null); tLine.style('display', null); })
+    .on('mouseleave', function() { tracker.style('display', 'none'); tLine.style('display', 'none'); tooltip.style('display', 'none'); })
+    .on('mousemove', function(event) {
+      var mx = d3.pointer(event)[0], my = d3.pointer(event)[1];
+      var best = 0, bestD = Infinity;
+      for (var k = 0; k < pts.length; k++) {
+        var dx = xS(pts[k][0]) - mx, dy = yS(pts[k][1]) - my;
+        var d = dx * dx + dy * dy;
+        if (d < bestD) { bestD = d; best = k; }
+      }
+      tracker.attr('cx', xS(pts[best][0])).attr('cy', yS(pts[best][1]));
+      tLine.attr('x1', xS(pts[best][0])).attr('x2', xS(pts[best][0]))
+        .attr('y1', yS(pts[best][1])).attr('y2', yS(0));
+      tooltip.style('display', 'block')
+        .html('x = ' + pts[best][0].toFixed(2) + ', y = ' + pts[best][1].toFixed(2))
+        .style('left', (event.pageX + 12) + 'px')
+        .style('top', (event.pageY - 28) + 'px');
+    });
+}
+
+function drawSegment(g, pts, xScale, yScale, opts) {
+  const lineGen = d3.line()
+    .x(d => xScale(d[0]))
+    .y(d => yScale(d[1]))
+    .curve(d3.curveLinear);
+
+  const totalLen = pts.length;
+  const path = g.append('path')
+    .attr('d', lineGen(pts))
+    .attr('fill', 'none')
+    .attr('stroke', opts.color || '#1a73e8')
+    .attr('stroke-width', opts.width || 2.5)
+    .attr('stroke-linejoin', 'round');
+
+  // draw animation
+  const len = path.node().getTotalLength();
+  path.attr('stroke-dasharray', len + ' ' + len)
+    .attr('stroke-dashoffset', len)
+    .transition().duration(800).delay(opts.delay || 0)
+    .attr('stroke-dashoffset', 0);
+
+  // discontinuous: open circles at ends
+  if (opts.discontinuous) {
+    g.append('circle').attr('cx', xScale(pts[0][0])).attr('cy', yScale(pts[0][1]))
+      .attr('r', 3).attr('fill', '#fff').attr('stroke', opts.color || '#1a73e8').attr('stroke-width', 2);
+    g.append('circle').attr('cx', xScale(pts[pts.length-1][0])).attr('cy', yScale(pts[pts.length-1][1]))
+      .attr('r', 3).attr('fill', '#fff').attr('stroke', opts.color || '#1a73e8').attr('stroke-width', 2);
+  }
+}
+
+// ==================== 绘制 10 个函数 ====================
+
+const funcs = [
+  // 1. 绝对值函数 y = |x|
+  { id: 'g1', fn: x => Math.abs(x), xd: [-5,5], yd: [0,5.5],
+    color: '#e65100', label: 'y = |x|' },
+  // 2. 对勾函数 y = x + 1/x (x>0)
+  { id: 'g2', fn: x => x + 1/x, xd: [0.1,5], yd: [0,7],
+    color: '#2e7d32', label: 'y = x + 1/x', delay: 200 },
+  // 3. 高斯取整函数 y = [x]
+  { id: 'g3', fn: x => Math.floor(x), xd: [-3,3], yd: [-3.5,3.5],
+    color: '#1565c0', label: 'y = [x]', delay: 400 },
+  // 4. 狄利克雷函数 (模拟散点)
+  { id: 'g4', fn: null, xd: [0,1], yd: [-0.2,1.2],
+    color: '#6a1b9a', label: 'D(x)', delay: 600 },
+  // 5. 正态分布 y = e^{-x^2}
+  { id: 'g5', fn: x => Math.exp(-x*x), xd: [-3,3], yd: [0,1.1],
+    color: '#c62828', label: 'y = e^{-x^2}', delay: 800 },
+  // 6. 悬链线 y = cosh(x)
+  { id: 'g6', fn: x => (Math.exp(x) + Math.exp(-x))/2, xd: [-3,3], yd: [0,11],
+    color: '#f57c00', label: 'y = cosh(x)', delay: 1000 },
+  // 7. 三次函数 y = x^3
+  { id: 'g7', fn: x => x*x*x, xd: [-2.5,2.5], yd: [-16,16],
+    color: '#00695c', label: 'y = x^3', delay: 1200 },
+  // 8. W 形函数 y = ||x|-1|
+  { id: 'g8', fn: x => Math.abs(Math.abs(x)-1), xd: [-3,3], yd: [0,2.5],
+    color: '#ad1457', label: 'y = ||x|-1|', delay: 1400 },
+  // 9. 符号函数 sgn(x)
+  { id: 'g9', fn: x => x > 0 ? 1 : x < 0 ? -1 : 0, xd: [-3,3], yd: [-1.5,1.5],
+    color: '#283593', label: 'sgn(x)', delay: 1600 },
+  // 10. 取小数部分 y = x - [x]
+  { id: 'g10', fn: x => x - Math.floor(x), xd: [-2,3], yd: [-0.2,1.2],
+    color: '#4e342e', label: 'y = x - [x]', delay: 1800 },
+  // 11. 心形曲线 (参数方程)
+  { id: 'g11', fn: null, isHeart: true, xd: [-18,18], yd: [-18,14],
+    color: '#d32f2f', label: 'Heart', delay: 2000, tableId: 'heart-table' },
+  // 12. 玫瑰形曲线 (极坐标)
+  { id: 'g12', fn: null, isRose: true, xd: [-8,8], yd: [-8,8],
+    color: '#e91e63', label: 'Rose', delay: 2200, tableId: 'rose-table' },
+];
+
+const names = [
+  '绝对值函数 — y = |x|',
+  '对勾函数 — y = x + 1/x (x>0)',
+  '高斯取整函数 — y = [x]',
+  '狄利克雷函数 — D(x)',
+  '正态分布曲线 — y = e^{-x^2}',
+  '悬链线 — y = cosh(x)',
+  '三次函数 — y = x³',
+  'W 形函数 — y = ||x|-1|',
+  '符号函数 — sgn(x)',
+  '取小数部分函数 — y = x - [x]',
+  '心形曲线 — 参数方程 Heart Curve',
+  '玫瑰形曲线 — 极坐标 Rose Curve (r = 7cos(5θ))',
+];
+
+const tables = document.querySelectorAll('table');
+
+funcs.forEach((f, i) => {
+  const section = document.createElement('div');
+  section.className = 'func-section';
+  section.innerHTML = `<h3>${i+1}. ${names[i]}</h3>`;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'graph-wrap';
+
+  const svgDiv = document.createElement('div');
+  svgDiv.id = f.id;
+  wrap.appendChild(svgDiv);
+
+  section.appendChild(wrap);
+
+  // insert table after graph
+  if (f.tableId) {
+    var tpl = document.getElementById(f.tableId);
+    if (tpl) section.appendChild(tpl.cloneNode(true));
+  } else if (tables.length > 0) {
+    section.appendChild(tables[0].cloneNode(true));
+    tables[0].remove();
+  }
+
+  document.getElementById('graph-section').appendChild(section);
+});
+
+// draw each function
+funcs.forEach((f, i) => {
+  if (f.id === 'g4') {
+    drawDirichlet(f.id, f.xd, f.yd, f.delay);
+    return;
+  }
+  if (f.isHeart) {
+    drawHeart(f.id, f.color, f.delay);
+    return;
+  }
+  if (f.isRose) {
+    drawRose(f.id, f.color, f.delay);
+    return;
+  }
+  drawFunc(f.id, f.fn, f.xd, f.yd, {
+    color: f.color, delay: f.delay || 0,
+    discontinuous: f.id === 'g3' || f.id === 'g9' || f.id === 'g10'
+  });
+});
+
+// ==================== 狄利克雷函数 (散点图) ====================
+function drawDirichlet(containerId, xDomain, yDomain, delay) {
+  const svg = d3.select('#' + containerId).append('svg')
+    .attr('width', W).attr('height', H)
+    .attr('viewBox', '0 0 ' + W + ' ' + H)
+    .style('max-width', '100%');
+
+  const g = svg.append('g')
+    .attr('transform', `translate(${MARGIN.left},${MARGIN.top})`);
+
+  const xScale = d3.scaleLinear().domain(xDomain).range([0, IW]);
+  const yScale = d3.scaleLinear().domain(yDomain).range([IH, 0]);
+
+  g.append('g').call(d3.axisLeft(yScale).ticks(4).tickSize(-IW).tickFormat(''))
+    .selectAll('.tick line').attr('stroke', '#e8e8e8');
+  g.append('g').call(d3.axisBottom(xScale).ticks(6).tickSize(-IH).tickFormat(''))
+    .selectAll('.tick line').attr('stroke', '#e8e8e8');
+  g.append('g').call(d3.axisLeft(yScale).ticks(4));
+  g.append('g').call(d3.axisBottom(xScale).ticks(6))
+    .attr('transform', `translate(0,${IH})`);
+
+  // generate rational approximations + irrational random points
+  const rationals = [];
+  const irrationals = [];
+  for (let i = 1; i <= 80; i++) {
+    const a = Math.floor(Math.random() * 100) + 1;
+    const b = Math.floor(Math.random() * 100) + 1;
+    const x = a / b;
+    if (x >= xDomain[0] && x <= xDomain[1]) rationals.push(x);
+  }
+  for (let i = 0; i < 300; i++) {
+    const x = xDomain[0] + Math.random() * (xDomain[1] - xDomain[0]);
+    // skip if too close to a rational
+    irrationals.push(x);
+  }
+
+  const rGroup = g.append('g').attr('opacity', 0);
+  rGroup.selectAll('circle.r')
+    .data(rationals).enter().append('circle')
+    .attr('class', 'r')
+    .attr('cx', d => xScale(d)).attr('cy', yScale(1)).attr('r', 2.5)
+    .attr('fill', '#6a1b9a').attr('opacity', 0.7);
+
+  const iGroup = g.append('g').attr('opacity', 0);
+  iGroup.selectAll('circle.i')
+    .data(irrationals).enter().append('circle')
+    .attr('class', 'i')
+    .attr('cx', d => xScale(d)).attr('cy', yScale(0)).attr('r', 2.5)
+    .attr('fill', '#9c27b0').attr('opacity', 0.3);
+
+  // animate appearance
+  rGroup.transition().delay(delay).duration(400).attr('opacity', 1);
+  iGroup.transition().delay(delay + 200).duration(400).attr('opacity', 1);
+
+  // labels
+  g.append('text').attr('x', IW/2).attr('y', yScale(1)-10)
+    .attr('text-anchor', 'middle').attr('font-size', '12px').attr('fill', '#6a1b9a')
+    .text('有理数点 → 1').attr('opacity', 0)
+    .transition().delay(delay+400).duration(400).attr('opacity', 1);
+  g.append('text').attr('x', IW/2).attr('y', yScale(0)+18)
+    .attr('text-anchor', 'middle').attr('font-size', '12px').attr('fill', '#9c27b0')
+    .text('无理数点 → 0').attr('opacity', 0)
+    .transition().delay(delay+600).duration(400).attr('opacity', 1);
+}
+
+// ==================== 心形曲线 (参数方程) ====================
+function drawHeart(containerId, color, delay) {
+  const xDomain = [-18, 18], yDomain = [-18, 14];
+  const svg = d3.select('#' + containerId).append('svg')
+    .attr('width', W).attr('height', H)
+    .attr('viewBox', '0 0 ' + W + ' ' + H)
+    .style('max-width', '100%');
+
+  const g = svg.append('g')
+    .attr('transform', 'translate(' + MARGIN.left + ',' + MARGIN.top + ')');
+
+  var xS = d3.scaleLinear().domain(xDomain).range([0, IW]);
+  var yS = d3.scaleLinear().domain(yDomain).range([IH, 0]);
+
+  // grid
+  g.append('g').call(d3.axisLeft(yS).ticks(6).tickSize(-IW).tickFormat(''))
+    .selectAll('.tick line').attr('stroke', '#e8e8e8');
+  g.append('g').call(d3.axisBottom(xS).ticks(8).tickSize(-IH).tickFormat(''))
+    .selectAll('.tick line').attr('stroke', '#e8e8e8');
+  g.append('g').call(d3.axisLeft(yS).ticks(6));
+  g.append('g').call(d3.axisBottom(xS).ticks(8))
+    .attr('transform', 'translate(0,' + IH + ')');
+
+  // zero lines
+  g.append('line').attr('x1', xS(0)).attr('x2', xS(0))
+    .attr('y1', 0).attr('y2', IH).attr('stroke', '#bbb').attr('stroke-dasharray', '3,3');
+  g.append('line').attr('x1', 0).attr('x2', IW)
+    .attr('y1', yS(0)).attr('y2', yS(0)).attr('stroke', '#bbb').attr('stroke-dasharray', '3,3');
+
+  // compute parametric points
+  var pts = [];
+  var n = 200;
+  for (var i = 0; i <= n; i++) {
+    var t = 2 * Math.PI * i / n;
+    var x = 16 * Math.pow(Math.sin(t), 3);
+    var y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+    pts.push([x, y]);
+  }
+
+  // filled heart (semi-transparent)
+  var areaGen = d3.area()
+    .x0(function(d) { return xS(d[0]); })
+    .x1(function(d) { return xS(d[0]); })
+    .y0(yS(0))
+    .y1(function(d) { return yS(d[1]); });
+  g.append('path').attr('d', areaGen(pts))
+    .attr('fill', color).attr('opacity', 0.1);
+
+  // outline with animation
+  var lineGen = d3.line()
+    .x(function(d) { return xS(d[0]); })
+    .y(function(d) { return yS(d[1]); })
+    .curve(d3.curveCardinal.tension(0.1));
+
+  var path = g.append('path')
+    .attr('d', lineGen(pts))
+    .attr('fill', 'none')
+    .attr('stroke', color)
+    .attr('stroke-width', 3)
+    .attr('stroke-linejoin', 'round');
+
+  var len = path.node().getTotalLength();
+  path.attr('stroke-dasharray', len + ' ' + len)
+    .attr('stroke-dashoffset', len)
+    .transition().duration(1200).delay(delay)
+    .attr('stroke-dashoffset', 0);
+
+  // mouse tracker
+  var tracker = g.append('circle').attr('r', 4).attr('fill', '#e65100')
+    .attr('stroke', '#fff').attr('stroke-width', 2).style('display', 'none');
+  var tLine = g.append('line').attr('stroke', '#e65100')
+    .attr('stroke-dasharray', '2,2').style('display', 'none');
+
+  g.append('rect').attr('width', IW).attr('height', IH)
+    .attr('fill', 'none').attr('pointer-events', 'all')
+    .on('mouseenter', function() { tracker.style('display', null); tLine.style('display', null); })
+    .on('mouseleave', function() { tracker.style('display', 'none'); tLine.style('display', 'none'); tooltip.style('display', 'none'); })
+    .on('mousemove', function(event) {
+      var mx = d3.pointer(event)[0], my = d3.pointer(event)[1];
+      var xv = xS.invert(mx), yv = yS.invert(my);
+      // find nearest point on heart
+      var best = 0, bestD = Infinity;
+      for (var k = 0; k < pts.length; k++) {
+        var dx = xS(pts[k][0]) - mx, dy = yS(pts[k][1]) - my;
+        var d = dx * dx + dy * dy;
+        if (d < bestD) { bestD = d; best = k; }
+      }
+      tracker.attr('cx', xS(pts[best][0])).attr('cy', yS(pts[best][1]));
+      tLine.attr('x1', xS(pts[best][0])).attr('x2', xS(pts[best][0]))
+        .attr('y1', yS(pts[best][1])).attr('y2', yS(0));
+      tooltip.style('display', 'block')
+        .html('x = ' + pts[best][0].toFixed(2) + ', y = ' + pts[best][1].toFixed(2))
+        .style('left', (event.pageX + 12) + 'px')
+        .style('top', (event.pageY - 28) + 'px');
+    });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数学之美 · 数字与运算中的韵律美</title>
+<link rel="stylesheet" href="../../style.css">
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)'], ['$', '$']],
+      displayMath: [['\\[', '\\]'], ['$$', '$$']]
+    },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  h3 { color: #2c3e50; margin: 28px 0 12px; font-size: 1.15em; }
+  h4 { color: #555; margin: 18px 0 8px; font-size: 1em; }
+  .beauty-item {
+    background: #fff; border: 2px solid #e8a317; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; border-left: 6px solid #e8a317;
+  }
+  .beauty-item h4 { margin-top: 0; color: #bf6f00; }
+  .beauty-item p { margin: 8px 0; line-height: 1.9; }
+  .tag-gold {
+    display: inline-block; padding: 2px 12px; border-radius: 12px;
+    font-size: 0.75em; background: #e8a317; color: #fff; margin-right: 6px;
+  }
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>数学之美 · 数字与运算中的韵律美 <span style="font-size:0.55em;color:#888;">(The Beauty of Numbers &amp; Operations)</span></h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">
+  数学不仅是工具，更是一种独特的审美体验。数字的规律、公式的对称——处处蕴含着数学独有的美感。
+</p>
+
+<section>
+
+<div class="beauty-item">
+  <h4><span class="tag-gold">发现 1</span> 连续自然数的平方之差，是一个奇数等差数列</h4>
+  <p>
+    观察以下等式：
+    $$1^2 - 0^2 = 1$$
+    $$2^2 - 1^2 = 3$$
+    $$3^2 - 2^2 = 5$$
+    $$4^2 - 3^2 = 7$$
+    $$5^2 - 4^2 = 9$$
+  </p>
+  <p>
+    相邻自然数的平方差，恰好构成所有正奇数：$1, 3, 5, 7, 9, \dots$。
+    更一般地：$(n+1)^2 - n^2 = 2n + 1$。
+    这个简洁的等式将平方运算与奇数序列完美地联系在一起——平方的本质，就是奇数累加。
+  </p>
+</div>
+
+<div class="beauty-item">
+  <h4><span class="tag-gold">发现 2</span> 斐波那契数列的深层之美</h4>
+  <p>
+    除了前 $n$ 项和之外，斐波那契数列（$F_1=1, F_2=1, F_3=2, F_4=3 \dots$）还有这些令人惊叹的性质：
+  </p>
+  <p><strong>相邻两项平方和</strong>：连续两项的平方和，恰好也是斐波那契数！
+    $$F_n^2 + F_{n+1}^2 = F_{2n+1}$$
+    例如：$1^2 + 2^2 = 5$（$F_5$），$2^2 + 3^2 = 13$（$F_7$）。
+  </p>
+  <p><strong>黄金分割比极限</strong>：相邻两项的比值，随着 $n$ 增大无限逼近黄金比例 $\phi \approx 1.61803\dots$：
+    $$\lim_{n \to \infty} \frac{F_{n+1}}{F_n} = \frac{1 + \sqrt{5}}{2}$$
+  </p>
+  <p><strong>卡西尼身份（Cassini's Identity）</strong>：
+    $$F_{n-1}F_{n+1} - F_n^2 = (-1)^n$$
+    相邻三项构成的乘积与中间项平方只相差 $1$，这是著名的"失踪的方块"几何错觉谜题的数学本质。
+  </p>
+</div>
+
+<div class="beauty-item">
+  <h4><span class="tag-gold">发现 3</span> 连续自然数立方和的"神奇巧合"</h4>
+  <p>
+    前 $n$ 个自然数的立方和，竟然恰好等于它们和的平方：
+    $$1^3 + 2^3 + 3^3 + \cdots + n^3 = (1 + 2 + 3 + \cdots + n)^2$$
+    例如：$1^3 + 2^3 + 3^3 = 1 + 8 + 27 = 36 = (1 + 2 + 3)^2$。
+  </p>
+  <p>
+    几何解释：可以构造一个边长为 $1+2+\cdots+n$ 的大正方形，将其巧妙分割后，每块区域的面积恰好对应一个立方数。这是几何与数字交织之美的典范。
+  </p>
+</div>
+
+<div class="beauty-item">
+  <h4><span class="tag-gold">发现 4</span> 帕斯卡三角（杨辉三角）的宝藏</h4>
+  <p>
+    杨辉三角不仅是二次项展开式的系数，它还是一个数学宝库：
+  </p>
+  <p><strong>斜线和与斐波那契</strong>：将杨辉三角沿斜线方向求和，得到的数列恰好就是斐波那契数列！</p>
+  <p><strong>每行求和</strong>：第 $n$ 行数字之和恰好是 $2^{n-1}$。</p>
+  <p><strong>分形图形（谢尔宾斯基三角形）</strong>：如果把杨辉三角里所有的奇数涂上颜色、偶数留白，会呈现出完美的分形几何图形。</p>
+</div>
+
+<div class="beauty-item">
+  <h4><span class="tag-gold">发现 5</span> 9 的神奇"魔力"（数字根性质）</h4>
+  <p>
+    在十进制中，数字 9 拥有绝无仅有的美感：
+  </p>
+  <p><strong>各位数字之和</strong>：任何自然数乘以 $9$，所得积的各位数字相加，最终归一化结果永远是 $9$。（例如：$9 \times 7 = 63 \to 6+3=9$；$9 \times 48 = 432 \to 4+3+2=9$）。</p>
+  <p><strong>颠倒相减</strong>：任意一个两位数，交换十位和个位后，大数减小数的结果必然是 9 的倍数（例如 $82 - 28 = 54 = 9 \times 6$）。</p>
+</div>
+
+<div class="beauty-item">
+  <h4><span class="tag-gold">发现 6</span> 回文数与回文平方</h4>
+  <p>
+    有些数字在正着读和倒着读时完全一样，它们的平方甚至也保持这种对称美：
+    $$11^2 = 121$$
+    $$111^2 = 12321$$
+    $$1111^2 = 1234321$$
+    $$111111111^2 = 12345678987654321$$
+  </p>
+  <p>
+    这种对称性不仅让人赏心悦目，更揭示了十进制数字系统的内在规律——重复的 1 构成的数字，其平方呈现对称的递增递减模式。
+  </p>
+</div>
+
+<div class="beauty-item">
+  <h4><span class="tag-gold">发现 7</span> 欧拉公式（Euler's Identity）——终极优雅的数学恒等式</h4>
+  <p>
+    被称为"宇宙第一完美公式"，它将数学中最基础、最不相关的 5 个常数（$e, i, \pi, 1, 0$）和 3 种基本运算（加法、乘法、乘方）完美融为一体：
+    $$e^{i\pi} + 1 = 0$$
+  </p>
+  <p>
+    这个公式的美在于它的"不期而遇"：$e$（自然对数的底，来自连续复利和微积分）、$i$（虚数单位，来自代数方程）、$\pi$（圆周率，来自几何）——三个看似毫无关联的常数，通过乘方和加法，竟然精确地等于 $-1$，再与 $1$ 相加得 $0$。数学家 Benjamin Peirce 曾说："这个公式对我们来说是一个悖论；我们无法理解它，但我们知道它是真的，因为它已被证明。"
+  </p>
+</div>
+
+<div class="beauty-item">
+  <h4><span class="tag-gold">发现 8</span> 莱布尼茨 $\pi$ 级数（无穷与奇数的邂逅）</h4>
+  <p>
+    圆周率 $\pi$ 是一个几何常数，但它竟然可以用所有奇数的加减组合来精确表达：
+    $$\frac{\pi}{4} = 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \frac{1}{9} - \cdots$$
+  </p>
+  <p>
+    这个无穷级数将几何常数 $\pi$ 与奇数的交替加减联系了起来。尽管收敛极慢（需要数千项才能得到 $\pi$ 的几位精确值），但它揭示了圆与整数序列之间一种令人惊叹的深层联系——这也是历史上第一个将 $\pi$ 表示为无穷级数的公式。
+  </p>
+</div>
+
+</section>
+
+</article>
+<script src="../../dt.js"></script>
+</body>
+</html>

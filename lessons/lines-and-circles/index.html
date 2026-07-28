@@ -438,6 +438,54 @@ h3 { color: #1557b0; font-size: 1.15em; margin: 28px 0 12px; padding-left: 8px; 
 <figcaption style="font-size:0.85em;color:#666;margin-top:4px;">图 1.4(b) 直线与圆的三种位置关系</figcaption>
 </figure>
 
+<figure class="svg-figure" style="text-align:center;margin:16px 0;">
+<svg width="450" height="320" viewBox="0 0 450 320" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e0e0e0;border-radius:8px;background:#fff;">
+  <!-- 坐标轴 -->
+  <line x1="60" y1="260" x2="420" y2="260" stroke="#333" stroke-width="1.5"/>
+  <line x1="180" y1="260" x2="180" y2="20" stroke="#333" stroke-width="1.5"/>
+  <polygon points="412,260 420,260 416,254" fill="#333"/>
+  <polygon points="180,28 180,20 174,24" fill="#333"/>
+  <text x="418" y="278" font-family="serif" font-size="14">x</text>
+  <text x="162" y="22" font-family="serif" font-size="14">y</text>
+  <text x="165" y="275" font-family="serif" font-size="13">O</text>
+  <!-- 刻度 -->
+  <line x1="210" y1="258" x2="210" y2="262" stroke="#333" stroke-width="1"/>
+  <line x1="240" y1="258" x2="240" y2="262" stroke="#333" stroke-width="1"/>
+  <line x1="270" y1="258" x2="270" y2="262" stroke="#333" stroke-width="1"/>
+  <line x1="300" y1="258" x2="300" y2="262" stroke="#333" stroke-width="1"/>
+  <line x1="150" y1="258" x2="150" y2="262" stroke="#333" stroke-width="1"/>
+  <line x1="120" y1="258" x2="120" y2="262" stroke="#333" stroke-width="1"/>
+  <text x="208" y="275" font-family="serif" font-size="11">1</text>
+  <text x="238" y="275" font-family="serif" font-size="11">2</text>
+  <text x="268" y="275" font-family="serif" font-size="11">3</text>
+  <text x="298" y="275" font-family="serif" font-size="11">4</text>
+  <text x="148" y="275" font-family="serif" font-size="11">-1</text>
+  <!-- 圆 (x-1)²+y²=8，圆心 C(1,0)，半径 r=2√2≈2.83 -->
+  <circle cx="210" cy="260" r="85" fill="none" stroke="#1e88e5" stroke-width="2.5"/>
+  <!-- 圆心 C -->
+  <circle cx="210" cy="260" r="4" fill="#e53935"/>
+  <text x="215" y="255" font-family="serif" font-size="15" fill="#e53935" font-weight="bold">C(1, 0)</text>
+  <!-- 半径 -->
+  <line x1="210" y1="260" x2="270" y2="210" stroke="#43a047" stroke-width="1.5"/>
+  <text x="245" y="230" font-family="serif" font-size="14" fill="#43a047">r=2√2</text>
+  <!-- 直线 x-y+4=0，即 y=x+4 -->
+  <line x1="50" y1="150" x2="430" y2="30" stroke="#e53935" stroke-width="2.5"/>
+  <text x="390" y="28" font-family="serif" font-size="15" fill="#e53935" font-style="italic">l: x − y + 4 = 0</text>
+  <!-- 圆心到直线的垂线（虚线） -->
+  <line x1="210" y1="260" x2="120" y2="200" stroke="#fb8c00" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <!-- 垂足 H -->
+  <circle cx="120" cy="200" r="3" fill="#fb8c00"/>
+  <text x="110" y="195" font-family="serif" font-size="13" fill="#fb8c00">H</text>
+  <!-- 直角标记 -->
+  <polyline points="170,230 180,224 186,234" fill="none" stroke="#999" stroke-width="1"/>
+  <!-- 距离 d 标注 -->
+  <text x="155" y="240" font-family="serif" font-size="15" fill="#fb8c00" font-style="italic">d</text>
+  <!-- 标注 -->
+  <text x="200" y="310" font-family="serif" font-size="13" fill="#666" text-anchor="middle">d = 5√2/2 &gt; r = 2√2，直线与圆相离</text>
+</svg>
+<figcaption style="font-size:0.85em;color:#666;margin-top:4px;">图 1.4(c) 例题 4 示意图：直线与圆相离</figcaption>
+</figure>
+
 <div class="example">
   <p><strong>例题 4：</strong>判断直线 x &minus; y + 4 = 0 与圆 (x &minus; 1)&sup2; + y&sup2; = 8 的位置关系。</p>
   <p class="step"><strong>解：</strong></p>
@@ -459,93 +507,39 @@ h3 { color: #1557b0; font-size: 1.15em; margin: 28px 0 12px; padding-left: 8px; 
 </section>
 
 <!-- ============================================================ -->
-<!-- 1.5 空间直角坐标系 -->
+<!-- 1.5 直线与圆的综合应用 -->
 <!-- ============================================================ -->
-<h3>1.5 空间直角坐标系</h3>
+<h3>1.5 直线与圆的综合应用</h3>
 
 <section>
-<p><strong>三维坐标系简介：</strong>在平面直角坐标系的基础上，过原点 O 再增加一条与 xOy 平面垂直的 z 轴，就建立了空间直角坐标系 O&minus;xyz。通常 x 轴和 y 轴在水平面内，z 轴竖直向上。</p>
+<p><strong>直线与圆的综合问题</strong>通常涉及求圆的方程、判断直线与圆的位置关系、求弦长、求切线方程等。解决这类问题的关键是熟练运用点到直线的距离公式、勾股定理和圆的性质。</p>
 
-<p><strong>空间点的坐标：</strong>空间中任意一点 P 的位置用有序数组 (x, y, z) 表示，其中 x、y、z 分别叫作点 P 的横坐标、纵坐标、竖坐标。</p>
-
-<p><strong>空间两点间距离公式：</strong>点 P<sub>1</sub>(x<sub>1</sub>, y<sub>1</sub>, z<sub>1</sub>) 与 P<sub>2</sub>(x<sub>2</sub>, y<sub>2</sub>, z<sub>2</sub>) 之间的距离为</p>
-<div class="example">
-  <p><strong>|P<sub>1</sub>P<sub>2</sub>| = &radic;[(x<sub>2</sub> &minus; x<sub>1</sub>)&sup2; + (y<sub>2</sub> &minus; y<sub>1</sub>)&sup2; + (z<sub>2</sub> &minus; z<sub>1</sub>)&sup2;]</strong></p>
-</div>
-
-<p><strong>空间中的对称点：</strong>点 P(x, y, z) 关于坐标平面、坐标轴和原点的对称点：</p>
+<p><strong>常用方法：</strong></p>
 <ul>
-  <li>关于 xOy 平面对称 &rarr; (x, y, &minus;z)</li>
-  <li>关于 yOz 平面对称 &rarr; (&minus;x, y, z)</li>
-  <li>关于 xOz 平面对称 &rarr; (x, &minus;y, z)</li>
-  <li>关于 x 轴对称 &rarr; (x, &minus;y, &minus;z)</li>
-  <li>关于原点对称 &rarr; (&minus;x, &minus;y, &minus;z)</li>
+  <li>求圆的方程：根据条件设标准方程或一般方程，利用待定系数法求解</li>
+  <li>判断位置关系：计算圆心到直线的距离 d，与半径 r 比较</li>
+  <li>求弦长：利用垂径定理，弦长 = 2&radic;(r&sup2; &minus; d&sup2;)</li>
+  <li>求切线：利用圆心到切线的距离等于半径</li>
 </ul>
 
-<figure class="svg-figure" style="text-align:center;margin:16px 0;">
-<svg width="450" height="350" viewBox="0 0 450 350" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #e0e0e0;border-radius:8px;background:#fff;">
-  <!-- O-xyz 空间直角坐标系 -->
-  <!-- 原点 O -->
-  <circle cx="120" cy="280" r="3" fill="#333"/>
-  <!-- x 轴 -->
-  <line x1="120" y1="280" x2="400" y2="280" stroke="#333" stroke-width="1.5"/>
-  <polygon points="392,280 400,280 396,274" fill="#333"/>
-  <text x="400" y="298" font-family="serif" font-size="15" font-style="italic">x</text>
-  <!-- y 轴 -->
-  <line x1="120" y1="280" x2="40" y2="200" stroke="#333" stroke-width="1.5"/>
-  <polygon points="44,204 40,200 48,198" fill="#333"/>
-  <text x="20" y="200" font-family="serif" font-size="15" font-style="italic">y</text>
-  <!-- z 轴 -->
-  <line x1="120" y1="280" x2="120" y2="30" stroke="#333" stroke-width="1.5"/>
-  <polygon points="120,38 120,30 114,34" fill="#333"/>
-  <text x="105" y="25" font-family="serif" font-size="15" font-style="italic">z</text>
-  <!-- 原点标签 -->
-  <text x="110" y="295" font-family="serif" font-size="14">O</text>
-  <!-- 空间点 P(x,y,z) -->
-  <circle cx="320" cy="160" r="4" fill="#e53935"/>
-  <text x="325" y="155" font-family="serif" font-size="15" fill="#e53935" font-weight="bold">P(x, y, z)</text>
-  <!-- 从 P 到坐标轴投影的虚线 -->
-  <!-- P 到 x 轴的垂线 -->
-  <line x1="320" y1="160" x2="320" y2="280" stroke="#1e88e5" stroke-width="1" stroke-dasharray="4,4"/>
-  <!-- P 在 x 轴上的投影 -->
-  <circle cx="320" cy="280" r="3" fill="#1e88e5"/>
-  <!-- P 到 y 方向的线（平行于 x 轴投影到 y 方向） -->
-  <line x1="320" y1="160" x2="120" y2="160" stroke="#43a047" stroke-width="1" stroke-dasharray="4,4"/>
-  <!-- P 到 z 方向的线 -->
-  <line x1="120" y1="160" x2="120" y2="280" stroke="#fb8c00" stroke-width="1" stroke-dasharray="4,4"/>
-  <!-- 长方体框架 -->
-  <!-- 底面（在 x-y 水平面上） -->
-  <line x1="120" y1="280" x2="320" y2="280" stroke="#999" stroke-width="0.8" stroke-dasharray="3,3"/>
-  <line x1="320" y1="280" x2="240" y2="200" stroke="#999" stroke-width="0.8" stroke-dasharray="3,3"/>
-  <line x1="40" y1="200" x2="240" y2="200" stroke="#999" stroke-width="0.8" stroke-dasharray="3,3"/>
-  <!-- 顶面（平行于底面） -->
-  <line x1="120" y1="160" x2="320" y2="160" stroke="#999" stroke-width="0.8" stroke-dasharray="3,3"/>
-  <line x1="320" y1="160" x2="240" y2="80" stroke="#999" stroke-width="0.8" stroke-dasharray="3,3"/>
-  <line x1="40" y1="80" x2="240" y2="80" stroke="#999" stroke-width="0.8" stroke-dasharray="3,3"/>
-  <!-- 侧面竖线 -->
-  <line x1="40" y1="200" x2="40" y2="80" stroke="#999" stroke-width="0.8" stroke-dasharray="3,3"/>
-  <line x1="240" y1="200" x2="240" y2="80" stroke="#999" stroke-width="0.8" stroke-dasharray="3,3"/>
-  <!-- 坐标轴标签 -->
-  <text x="125" y="295" font-family="serif" font-size="12" fill="#666">O(0,0,0)</text>
-</svg>
-<figcaption style="font-size:0.85em;color:#666;margin-top:4px;">图 1.5 空间直角坐标系 O-xyz</figcaption>
-</figure>
-
 <div class="example">
-  <p><strong>例题 5：</strong>已知点 A(1, 2, 3) 和 B(4, &minus;2, &minus;1)，求 A、B 两点间的距离。</p>
+  <p><strong>例题 5：</strong>求经过点 A(4, 2) 和 B(&minus;2, &minus;6)，且圆心在直线 y = &minus;2x 上的圆的方程。</p>
   <p class="step"><strong>解：</strong></p>
-  <p class="step">|AB| = &radic;[(4 &minus; 1)&sup2; + (&minus;2 &minus; 2)&sup2; + (&minus;1 &minus; 3)&sup2;]</p>
-  <p class="step">= &radic;[3&sup2; + (&minus;4)&sup2; + (&minus;4)&sup2;] = &radic;(9 + 16 + 16) = &radic;41。</p>
-  <p class="answer">答：A、B 两点间的距离为 &radic;41。</p>
+  <p class="step">设圆心为 C(a, &minus;2a)（因为在 y = &minus;2x 上），半径为 r。</p>
+  <p class="step">由 |CA| = |CB| 得 (a &minus; 4)&sup2; + (&minus;2a &minus; 2)&sup2; = (a + 2)&sup2; + (&minus;2a + 6)&sup2;。</p>
+  <p class="step">展开得 a&sup2; &minus; 8a + 16 + 4a&sup2; + 8a + 4 = a&sup2; + 4a + 4 + 4a&sup2; &minus; 24a + 36。</p>
+  <p class="step">整理得 5a&sup2; + 20 = 5a&sup2; &minus; 20a + 40，解得 a = 1。</p>
+  <p class="step">圆心为 C(1, &minus;2)，r&sup2; = (1 &minus; 4)&sup2; + (&minus;2 &minus; 2)&sup2; = 9 + 16 = 25。</p>
+  <p class="answer">答：圆的方程为 (x &minus; 1)&sup2; + (y + 2)&sup2; = 25，即 x&sup2; + y&sup2; &minus; 2x + 4y &minus; 20 = 0。</p>
 </div>
 
-<!-- Q8 空间直角坐标系 -->
+<!-- Q8 直线与圆 -->
 <div class="quiz-question" id="q8">
-  <p><span class="q-tag concept">概念</span><strong>第 8 题：</strong>点 P(2, &minus;3, 5) 关于 xOy 平面对称的点的坐标是？</p>
-  <div class="opt" data-q="q8" data-idx="0">A. (2, &minus;3, &minus;5)</div>
-  <div class="opt" data-q="q8" data-idx="1">B. (&minus;2, 3, &minus;5)</div>
-  <div class="opt" data-q="q8" data-idx="2">C. (2, 3, 5)</div>
-  <div class="opt" data-q="q8" data-idx="3">D. (&minus;2, &minus;3, 5)</div>
+  <p><span class="q-tag concept">计算</span><strong>第 8 题：</strong>已知直线 l: 3x + 4y &minus; 5 = 0 与圆 C: (x &minus; 1)&sup2; + (y + 2)&sup2; = 25，则直线与圆的位置关系是？</p>
+  <div class="opt" data-q="q8" data-idx="0">A. 相离</div>
+  <div class="opt" data-q="q8" data-idx="1">B. 相切</div>
+  <div class="opt" data-q="q8" data-idx="2">C. 相交</div>
+  <div class="opt" data-q="q8" data-idx="3">D. 直线过圆心</div>
   <div class="explain" id="exp8"></div>
 </div>
 </section>
@@ -573,7 +567,7 @@ h3 { color: #1557b0; font-size: 1.15em; margin: 28px 0 12px; padding-left: 8px; 
     q5: 0, // |3+8-1|/√(1²+2²)=10/√5=2√5
     q6: 0,
     q7: 0,
-    q8: 0
+    q8: 2 // 圆心(1,-2)到直线3x+4y-5=0距离d=2 < r=5，相交
   };
 
   // 解析
@@ -585,7 +579,7 @@ h3 { color: #1557b0; font-size: 1.15em; margin: 28px 0 12px; padding-left: 8px; 
     q5: { ok: '正确！d = |3 + 2&times;4 &minus; 1| / &radic;(1&sup2; + 2&sup2;) = |10| / &radic;5 = 10/&radic;5 = 2&radic;5。', fail: '不对。套用点到直线的距离公式 d = |Ax₀ + By₀ + C| / &radic;(A&sup2; + B&sup2;)，仔细计算分子和分母的值。' },
     q6: { ok: '正确！d = |2 &minus; (&minus;8)| / &radic;(3&sup2; + 4&sup2;) = 10 / 5 = 2。', fail: '不对。平行线距离公式 d = |C₁ &minus; C₂| / &radic;(A&sup2; + B&sup2;)。注意 C₂ = &minus;8，所以 |2 &minus; (&minus;8)| = 10。' },
     q7: { ok: '正确！配方得 (x &minus; 3)&sup2; + (y + 2)&sup2; = 4，因此圆心为 (3, &minus;2)，半径 r = 2。', fail: '不对。将一般式配方：(x&sup2; &minus; 6x + 9) + (y&sup2; + 4y + 4) = &minus;9 + 9 + 4，即 (x &minus; 3)&sup2; + (y + 2)&sup2; = 4。' },
-    q8: { ok: '正确！关于 xOy 平面对称，x、y 坐标不变，z 坐标变为相反数，即 (2, &minus;3, &minus;5)。', fail: '不对。关于 xOy 平面对称时，横坐标和纵坐标保持不变，只有竖坐标（z）取相反数。' }
+    q8: { ok: '正确！圆心 C(1, &minus;2) 到直线 3x + 4y &minus; 5 = 0 的距离 d = |3 &minus; 8 &minus; 5| / 5 = 2，半径 r = 5，d &lt; r，所以直线与圆相交。', fail: '不对。先计算圆心到直线的距离 d = |3&times;1 + 4&times;(&minus;2) &minus; 5| / &radic;(3&sup2; + 4&sup2;) = |3 &minus; 8 &minus; 5| / 5 = 2，因为 d = 2 &lt; r = 5，所以直线与圆相交。' }
   };
 
   const totalQ = 8;

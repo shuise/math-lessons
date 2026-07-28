@@ -306,17 +306,76 @@
 </div>
 </section>
 
+<!-- ========================= 推论：直径所对的圆周角 ========================= -->
+<section>
+<h2>五、重要推论——直径所对的圆周角</h2>
+
+<div class="svg-wrap">
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circle -->
+  <circle cx="200" cy="200" r="150" fill="rgba(26,115,232,0.04)" stroke="#333" stroke-width="2"/>
+
+  <!-- Diameter AB -->
+  <line x1="50" y1="200" x2="350" y2="200" stroke="#333" stroke-width="2"/>
+
+  <!-- Point C on circle -->
+  <line x1="50" y1="200" x2="310" y2="95" stroke="#333" stroke-width="2"/>
+  <line x1="350" y1="200" x2="310" y2="95" stroke="#333" stroke-width="2"/>
+
+  <!-- Center O dot -->
+  <circle cx="200" cy="200" r="4" fill="#333"/>
+  <text x="195" y="194" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">O</text>
+
+  <!-- Vertex labels -->
+  <text x="30" y="218" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">A</text>
+  <text x="350" y="218" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">B</text>
+  <text x="312" y="84" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">C</text>
+
+  <!-- Right angle at C -->
+  <polygon points="310,200 302,192 310,184 318,192" fill="#999" opacity="0.5"/>
+
+  <!-- ===== ∠ACB arc ===== -->
+  <path d="M 280,195 A 30,30 0 0,1 293.5,117.5" fill="none" stroke="#e53935" stroke-width="2.5"/>
+  <text x="286" y="146" font-size="14" font-weight="bold" fill="#e53935" font-family="serif" font-style="italic">&ang;ACB = 90&deg;</text>
+
+  <!-- Small dots -->
+  <circle cx="50" cy="200" r="3" fill="#333"/>
+  <circle cx="350" cy="200" r="3" fill="#333"/>
+  <circle cx="310" cy="95" r="3" fill="#333"/>
+</svg>
+</div>
+
+<div class="aux-desc">
+  <strong>推论：</strong>若 AB 是圆 O 的直径，C 是圆上任意一点（不与 A、B 重合），则 &ang;ACB = 90°。即"<strong>直径所对的圆周角是直角</strong>"。
+</div>
+
+<h3>证明</h3>
+<div class="example">
+  <p class="step">① ∵ AB 是直径，&ang;AOB = 180°（圆心角为平角）。</p>
+  <p class="step">② 由圆周角定理：同弧所对的圆周角等于圆心角的一半，</p>
+  <p class="step">&emsp;&emsp;∴ &ang;ACB = &frac12; &ang;AOB = &frac12; × 180° = 90°。</p>
+  <p class="answer">∴ 直径所对的圆周角是直角。</p>
+</div>
+
+<h3>应用</h3>
+<ul>
+  <li>判断三点是否共圆：若 &ang;ACB = 90°，则 A、B、C 三点共圆，且 AB 为直径。</li>
+  <li>在直角三角形中，斜边中点即为外接圆圆心。</li>
+  <li>常用于证明线段垂直或构造直角三角形。</li>
+</ul>
+</section>
+
 <!-- ========================= 交互式测验 ========================= -->
 <section>
-<h2>五、互动问答</h2>
+<h2>六、互动问答</h2>
 <p style="color:#666;">点击选项提交答案，系统自动判分。</p>
 
 <div id="quiz-container"></div>
 
 <div class="score-panel">
-  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 3</div>
+  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 5</div>
   <br>
-  <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #1a73e8;color:#1a73e8;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">&ocy; 重新答题</button>
+  <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #1a73e8;color:#1a73e8;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">重置</button>
 </div>
 
 </article>
@@ -364,6 +423,32 @@ var questions = [
     ],
     answer: 2,
     explain: "三种情形的证明都遵循同一个思路：添加辅助线将复杂情形（圆心在内部或外部）转化为已证明的简单情形（圆心在一边上），体现了数学中\u201C化归\u201D的重要思想。"
+  },
+  {
+    type: "choice",
+    tag: "选择",
+    question: "若 AB 是圆 O 的直径，C 是圆上一点，则 ∠ACB 的度数是？",
+    opts: [
+      "45°",
+      "60°",
+      "90°",
+      "180°"
+    ],
+    answer: 2,
+    explain: "由圆周角定理的推论：直径所对的圆周角是直角，因此 ∠ACB = 90°。这是因为直径对应的圆心角为 180°，圆周角等于圆心角的一半。"
+  },
+  {
+    type: "choice",
+    tag: "选择",
+    question: "在圆中，若圆周角为 30°，则它所对弧的圆心角为？",
+    opts: [
+      "15°",
+      "30°",
+      "60°",
+      "90°"
+    ],
+    answer: 2,
+    explain: "根据圆周角定理，同弧所对的圆心角等于圆周角的两倍，所以圆心角 = 2 × 30° = 60°。"
   }
 ];
 
@@ -431,11 +516,11 @@ function updateTotalScore() {
     var qDiv = document.getElementById("q" + i);
     if (qDiv.classList.contains("correct")) total++;
   }
-  document.getElementById("scoreDisplay").textContent = "得分：" + total + " / 3";
+  document.getElementById("scoreDisplay").textContent = "得分：" + total + " / 5";
 }
 
 function resetAll() {
-  document.getElementById("scoreDisplay").textContent = "得分：0 / 3";
+  document.getElementById("scoreDisplay").textContent = "得分：0 / 5";
   for (var i = 0; i < questions.length; i++) {
     var qDiv = document.getElementById("q" + i);
     qDiv.className = "quiz-question";

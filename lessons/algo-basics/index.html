@@ -115,13 +115,13 @@
 </div>
 
 <h3>最大公约数（GCD）与辗转相除法</h3>
-<p><strong class="keyword">最大公约数</strong>（Greatest Common Divisor，简称 GCD）是指两个或多个整数共有的约数中最大的一个。例如 gcd(12, 18) = 6。</p>
+<p><strong class="keyword">最大公约数</strong>（Greatest Common Divisor，简称 GCD）是指两个或多个<strong>正整数</strong>共有的约数中最大的一个。例如 gcd(12, 18) = 6。</p>
 
-<p>求最大公约数最经典的方法是<strong class="keyword">辗转相除法</strong>（欧几里得算法，Euclidean Algorithm），其核心思想是：</p>
+<p>对<strong>正整数</strong> <em>a</em>、<em>b</em>，求最大公约数最经典的方法是<strong class="keyword">辗转相除法</strong>（欧几里得算法，Euclidean Algorithm），其核心思想是：</p>
 
 <div class="formula-box">
   <p><strong>辗转相除法原理</strong></p>
-  <p>gcd(a, b) = gcd(b, a mod b) &emsp;(其中 a mod b 表示 a 除以 b 的余数)</p>
+  <p>gcd(a, b) = gcd(b, a mod b) &emsp;(其中 a mod b 表示 a 除以 b 的余数，且 a、b 为正整数)</p>
   <p>反复运用，直到余数为 0，此时的除数即为最大公约数。</p>
 </div>
 
@@ -136,11 +136,11 @@
 </div>
 
 <h3>最小公倍数（LCM）</h3>
-<p><strong class="keyword">最小公倍数</strong>（Least Common Multiple，简称 LCM）是两个或多个整数公有的倍数中最小的一个。例如 lcm(4, 6) = 12。</p>
+<p><strong class="keyword">最小公倍数</strong>（Least Common Multiple，简称 LCM）是两个或多个<strong>正整数</strong>公有的倍数中最小的一个。例如 lcm(4, 6) = 12。</p>
 
 <div class="formula-box">
   <p><strong>GCD 与 LCM 的关系</strong></p>
-  <p>gcd(a, b) &times; lcm(a, b) = a &times; b</p>
+  <p>gcd(a, b) &times; lcm(a, b) = a &times; b &emsp;(a、b 为正整数)</p>
 </div>
 
 <div class="example">
@@ -275,7 +275,7 @@
 <div class="example">
   <p><strong>例：</strong>已知 3x + 5y = 7 的一组特解为 (4, &minus;1)，求通解。</p>
   <p class="step">d = gcd(3, 5) = 1，所以：</p>
-  <p class="step">x = 4 + 5t, &emsp;y = &minus;1 &minus; 3t &emsp;(t &infin; Z)</p>
+  <p class="step">x = 4 + 5t, &emsp;y = &minus;1 &minus; 3t &emsp;(t &isin; &#8484;)</p>
   <p class="step">验证 t = 1：x = 9, y = &minus;4，3&times;9 + 5&times;(&minus;4) = 27 &minus; 20 = 7 ✓</p>
   <p class="step">验证 t = &minus;1：x = &minus;1, y = 2，3&times;(&minus;1) + 5&times;2 = &minus;3 + 10 = 7 ✓</p>
 </div>

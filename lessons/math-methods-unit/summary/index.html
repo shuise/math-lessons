@@ -567,13 +567,13 @@ h3 {
   </div>
 </div>
 
-<div class="question-card" data-correct="1" data-idx="0">
+<div class="question-card" data-correct="2" data-idx="0">
   <div class="q-title">选择题 1（综合题 1 对应）</div>
   <p style="margin:6px 0;">上题中，如果改为 f(x) = x² − 2ax + 1 在 [−1, 2] 上的最大值 ≥ 3，a 的范围是？</p>
   <div class="options">
     <div class="opt" data-val="0">A. a ≤ −1 或 a ≥ 2</div>
     <div class="opt" data-val="1">B. a ≤ −1 或 a ≥ 5/4</div>
-    <div class="opt" data-val="2">C. −1 ≤ a ≤ 2</div>
+    <div class="opt" data-val="2">C. a ∈ R（全体实数）</div>
     <div class="opt" data-val="3">D. a ≥ 2</div>
   </div>
   <div class="explain"></div>
@@ -666,13 +666,13 @@ h3 {
   </div>
 </div>
 
-<div class="question-card" data-correct="2" data-idx="2">
+<div class="question-card" data-correct="0" data-idx="2">
   <div class="q-title">选择题 3（综合题 3 对应）</div>
   <p style="margin:6px 0;">数列 {aₙ} 满足 a₁ = 2，aₙ₊₁ = 3aₙ − 2，则 aₙ = ?</p>
   <div class="options">
     <div class="opt" data-val="0">A. 3ⁿ⁻¹ + 1</div>
     <div class="opt" data-val="1">B. 3ⁿ − 1</div>
-    <div class="opt" data-val="2">C. 3ⁿ⁻¹ + 1</div>
+    <div class="opt" data-val="2">C. 3ⁿ</div>
     <div class="opt" data-val="3">D. 2 · 3ⁿ⁻¹</div>
   </div>
   <div class="explain"></div>
@@ -860,8 +860,8 @@ h3 {
   var explanations = [
     // 选择题 1（综合题 1 对应）
     {
-      ok: '正确！最大值在端点取得，f(−1) = 2 + 2a，f(2) = 5 − 4a。要求 max{f(−1), f(2)} ≥ 3。即 2 + 2a ≥ 3 或 5 − 4a ≥ 3。解得 a ≥ 1/2 或 a ≤ 1/2。结合函数图像分析，实际范围是 a ≤ −1 或 a ≥ 5/4。',
-      fail: '最大值在端点处取得，需比较 f(−1) = 2 + 2a 和 f(2) = 5 − 4a。至少一个 ≥ 3，解得 a ≤ −1 或 a ≥ 5/4。'
+      ok: '正确！最大值在端点取得，f(−1) = 2 + 2a，f(2) = 5 − 4a。要求 max{f(−1), f(2)} ≥ 3，即 2 + 2a ≥ 3 或 5 − 4a ≥ 3，解得 a ≥ 1/2 或 a ≤ 1/2，即 a 可以是任意实数。所以 a ∈ R（全体实数），选 C。',
+      fail: '最大值在端点处取得，需比较 f(−1) = 2 + 2a 和 f(2) = 5 − 4a。至少一个 ≥ 3，即 a ≥ 1/2 或 a ≤ 1/2，对任意 a 都成立。所以 a ∈ R，选 C。'
     },
     // 选择题 2（综合题 2 对应）
     {
@@ -870,8 +870,8 @@ h3 {
     },
     // 选择题 3（综合题 3 对应）
     {
-      ok: '正确！由 aₙ₊₁ = 3aₙ − 2，构造 bₙ = aₙ − 1，得 bₙ₊₁ = 3bₙ，b₁ = 1，bₙ = 3ⁿ⁻¹，故 aₙ = 3ⁿ⁻¹ + 1。注意选项 A 和 C 看似相同，但 3ⁿ⁻¹ + 1 不能写作 3ⁿ⁻¹+1 的另一种形式。',
-      fail: '设 bₙ = aₙ − 1，则 bₙ₊₁ = 3bₙ，b₁ = 1，bₙ = 3ⁿ⁻¹，aₙ = 3ⁿ⁻¹ + 1。'
+      ok: '正确！由 aₙ₊₁ = 3aₙ − 2，构造 bₙ = aₙ − 1，得 bₙ₊₁ = 3bₙ，b₁ = 1，bₙ = 3ⁿ⁻¹，故 aₙ = 3ⁿ⁻¹ + 1。故选 A。',
+      fail: '设 bₙ = aₙ − 1，则 bₙ₊₁ = 3bₙ，b₁ = 1，bₙ = 3ⁿ⁻¹，aₙ = 3ⁿ⁻¹ + 1。选 A。'
     },
     // 选择题 4（综合题 4 对应）
     {

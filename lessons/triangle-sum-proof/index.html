@@ -209,16 +209,15 @@
   <line x1="222" y1="197" x2="232" y2="185" stroke="#43a047" stroke-width="1.5"/>
 
   <!-- Angle arcs around P -->
-  <!-- Around P - three angles corresponding to A, B, C -->
-  <path d="M 257,195 A 15,15 0 0,1 242.5,186.5" fill="none" stroke="#e53935" stroke-width="2"/>
-  <path d="M 242.5,186.5 A 15,15 0 0,1 257,165" fill="none" stroke="#1a73e8" stroke-width="2"/>
-  <path d="M 257,165 A 15,15 0 0,1 270,182" fill="none" stroke="#43a047" stroke-width="2"/>
-  <path d="M 270,182 A 15,15 0 0,1 257,195" fill="none" stroke="#43a047" stroke-width="2"/>
+  <!-- Semicircle: three angles corresponding to A, B, C forming a straight angle -->
+  <path d="M 242,180 A 15,15 0 0,1 249.5,167" fill="none" stroke="#e53935" stroke-width="2"/>
+  <path d="M 249.5,167 A 15,15 0 0,1 264.5,167" fill="none" stroke="#1a73e8" stroke-width="2"/>
+  <path d="M 264.5,167 A 15,15 0 0,1 272,180" fill="none" stroke="#43a047" stroke-width="2"/>
 
   <!-- Label angles at P -->
-  <text x="248" y="192" font-size="11" fill="#e53935" font-family="serif" font-style="italic">&ang;A</text>
-  <text x="246" y="170" font-size="11" fill="#1a73e8" font-family="serif" font-style="italic">&ang;B</text>
-  <text x="264" y="186" font-size="11" fill="#43a047" font-family="serif" font-style="italic">&ang;C</text>
+  <text x="243" y="174" font-size="11" fill="#e53935" font-family="serif" font-style="italic">&ang;A</text>
+  <text x="254" y="160" font-size="11" fill="#1a73e8" font-family="serif" font-style="italic">&ang;B</text>
+  <text x="270" y="174" font-size="11" fill="#43a047" font-family="serif" font-style="italic">&ang;C</text>
 
   <!-- Small dots at vertices -->
   <circle cx="100" cy="290" r="3" fill="#333"/>
@@ -231,7 +230,7 @@
 </div>
 
 <div class="aux-desc">
-  <strong>辅助线思路：</strong>"在内部取一点 P，分别作三边的平行线"——这种方法的巧妙之处在于将三角形"复制"并转化为一个完整的平面角。通过三组平行关系，利用同位角、内错角将原三角形的三个角转移到 P 点周围形成一个周角，每个内角等同于对应平行四边形的一角，从而更直观地展示了 180° 的结论。这种方法也常用于证明"任意凸多边形内角和 = (n−2)×180°"。
+  <strong>辅助线思路：</strong>"在内部取一点 P，分别作三边的平行线"——这种方法通过三组平行关系，利用同位角、内错角将原三角形的三个角转移到 P 点周围形成一个平角，从而更直观地展示了 180° 的结论。这种方法也常用于证明"任意凸多边形内角和 = (n−2)×180°"。
 </div>
 
 <h3>分步推导</h3>
@@ -239,13 +238,15 @@
   <p><strong>已知：</strong>在 △ABC 中，内部取一点 P，DE ∥ BC、FG ∥ CA、HI ∥ AB。</p>
   <p><strong>求证：</strong>&ang;A + &ang;B + &ang;C = 180°</p>
   <p class="step"><strong>证明：</strong></p>
-  <p class="step">① ∵ DE ∥ BC（辅助线），</p>
-  <p class="step">&emsp;&emsp;∴ 在 P 点处，&ang;A 的同位角被转移到对应位置。</p>
-  <p class="step">② ∵ FG ∥ CA（辅助线），</p>
-  <p class="step">&emsp;&emsp;∴ 在 P 点处，&ang;B 的内错角被转移到对应位置。</p>
-  <p class="step">③ ∵ HI ∥ AB（辅助线），</p>
-  <p class="step">&emsp;&emsp;∴ 在 P 点处，&ang;C 的同位角被转移到对应位置。</p>
-  <p class="step">④ 三个角在 P 点处恰好拼成一个周角，即 &ang;A + &ang;B + &ang;C = 180°。</p>
+  <p class="step">① ∵ DE ∥ BC，FG ∥ CA（辅助线），</p>
+  <p class="step">&emsp;&emsp;∴ DE 与 FG 的夹角 = BC 与 CA 的夹角 = &ang;C（对应边平行，夹角相等）。</p>
+  <p class="step">② ∵ FG ∥ CA，HI ∥ AB（辅助线），</p>
+  <p class="step">&emsp;&emsp;∴ FG 与 HI 的夹角 = CA 与 AB 的夹角 = &ang;A。</p>
+  <p class="step">③ ∵ HI ∥ AB，DE ∥ BC（辅助线），</p>
+  <p class="step">&emsp;&emsp;∴ HI 与 DE 的夹角 = AB 与 BC 的夹角 = &ang;B。</p>
+  <p class="step">④ 三条过点 P 的平行线两两相交，形成三个夹角：</p>
+  <p class="step">&emsp;&emsp;∠(DE,FG) + ∠(FG,HI) + ∠(HI,DE) = 180°（周角的一半，即平角）。</p>
+  <p class="step">⑤ 由①②③代入得：&ang;C + &ang;A + &ang;B = 180°，即三角形内角和为 180°。</p>
   <p class="answer">∴ 三角形内角和等于 180°。</p>
 </div>
 </section>
@@ -341,9 +342,9 @@
 <div id="quiz-container"></div>
 
 <div style="text-align:center;margin:24px 0;">
-  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 3</div>
+  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 5</div>
   <br>
-  <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #1a73e8;color:#1a73e8;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">&ocy; 重新答题</button>
+  <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #1a73e8;color:#1a73e8;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">重置</button>
 </div>
 
 </article>
@@ -377,7 +378,7 @@ var questions = [
       "证明两组边相等"
     ],
     answer: 1,
-    explain: "过内部点作三边的平行线，利用三组平行关系将原三角形的三个角转移到内部点 P 周围，恰好拼成一个周角的一半（平角），从而证明内角和为 180°。"
+    explain: "过内部点作三边的平行线，利用三组平行关系将原三角形的三个角转移到内部点 P 周围，恰好拼成一个平角，从而证明内角和为 180°。"
   },
   {
     type: "choice",
@@ -391,6 +392,32 @@ var questions = [
     ],
     answer: 2,
     explain: '在三角形内角和定理的经典证明中，最核心的辅助线思路是\u201C作平行线\u201D\u2014\u2014无论是过顶点作平行线（证明一）还是过内部点作平行线（证明二），都利用了平行线的角关系来转移角度，将三个角合并到同一直线或同一点上。'
+  },
+  {
+    type: "choice",
+    tag: "选择",
+    question: "过内部点作平行线法中，三组平行线两两之间的夹角分别对应什么？",
+    opts: [
+      "三角形的三条边长",
+      "三角形的三个外角",
+      "三角形的三个内角",
+      "三角形的三条中线"
+    ],
+    answer: 2,
+    explain: "过内部点 P 作三边的平行线后，DE∥BC、FG∥CA、HI∥AB，这三组平行线两两之间的夹角恰好等于三角形对应的三个内角：∠(DE,FG)=∠C、∠(FG,HI)=∠A、∠(HI,DE)=∠B。"
+  },
+  {
+    type: "choice",
+    tag: "选择",
+    question: "一个三角形中，若∠A = 50°，∠B = 65°，则∠C等于？",
+    opts: [
+      "55°",
+      "65°",
+      "75°",
+      "85°"
+    ],
+    answer: 1,
+    explain: "由三角形内角和定理，∠A + ∠B + ∠C = 180°，所以∠C = 180° - 50° - 65° = 65°。"
   }
 ];
 
@@ -457,11 +484,11 @@ function updateScore() {
     var qDiv = document.getElementById("q" + i);
     if (qDiv.classList.contains("correct")) total++;
   }
-  document.getElementById("scoreDisplay").textContent = "得分：" + total + " / 3";
+  document.getElementById("scoreDisplay").textContent = "得分：" + total + " / 5";
 }
 
 function resetQuiz() {
-  document.getElementById("scoreDisplay").textContent = "得分：0 / 3";
+  document.getElementById("scoreDisplay").textContent = "得分：0 / 5";
   for (var i = 0; i < questions.length; i++) {
     var qDiv = document.getElementById("q" + i);
     qDiv.className = "quiz-question";

@@ -210,9 +210,9 @@
   </div>
   <div class="options">
     <div class="opt" onclick="checkChoice(1, 0)">A. 包含一条自环（顶点连向自身）的图</div>
-    <div class="opt" onclick="checkChoice(1, 1)">B. 有 3 个顶点和 3 条边的无向图</div>
+    <div class="opt" onclick="checkChoice(1, 1)">B. 三角形 K<sub>3</sub>（3 个顶点、3 条边）</div>
     <div class="opt" onclick="checkChoice(1, 2)">C. 有 4 个顶点且任意两点之间都有一条边的图</div>
-    <div class="opt" onclick="checkChoice(1, 3)">D. 有 5 个顶点和 5 条边的图</div>
+    <div class="opt" onclick="checkChoice(1, 3)">D. 五边形回路 C<sub>5</sub>（5 个顶点、5 条边）</div>
   </div>
   <div class="explain" id="explain1">
     <strong>解析：</strong>简单图不允许自环和重边。包含自环的图不是简单图。B 描述的是三角形 K<sub>3</sub>，C 描述的是完全图 K<sub>4</sub>，它们都是简单图。选 <strong>A</strong>。
@@ -232,6 +232,7 @@
 
 <h3>顶点的度数</h3>
 <p>在无向图中，一个顶点的<strong>度数（degree）</strong>是指与该顶点<strong>关联</strong>的边的数目，记作 d(v)。</p>
+<p class="hint">若图含有自环，按约定一条自环对该顶点的度数贡献 2。</p>
 
 <div class="key-point">
   <p><strong>握手引理（Handshaking Lemma）：</strong>在任何无向图中，所有顶点的度数之和等于边数的两倍。</p>
@@ -451,6 +452,7 @@
 <div class="example">
   <p><strong>问题（哥尼斯堡七桥）：</strong>18 世纪的哥尼斯堡城中有七座桥，连接着两座岛和两岸。问题是：能否从某处出发，恰好每座桥走一次且不重复，最后回到起点？</p>
   <p class="step">1736 年，欧拉（Euler）用图论的方法证明：这是<strong>不可能</strong>的。这个问题的解决标志着图论的诞生。</p>
+  <p class="step">七桥模型允许同一对顶点之间有多条边，因此它是<strong>多重图</strong>；边的重复表示不同的桥。</p>
 </div>
 
 <div class="graph-svg">
@@ -469,7 +471,7 @@
     <line x1="94" y1="70" x2="166" y2="56" stroke="#f57f17" stroke-width="1.5"/>
     <line x1="94" y1="90" x2="166" y2="112" stroke="#f57f17" stroke-width="1.5"/>
     <line x1="94" y1="80" x2="166" y2="50" stroke="#f57f17" stroke-width="1"/>
-    <line x1="94" y1="80" x2="166" y2="120" stroke="#f57f17" stroke-width="1"/>
+    <line x1="196" y1="44" x2="236" y2="70" stroke="#f57f17" stroke-width="1"/>
     <line x1="196" y1="54" x2="236" y2="74" stroke="#f57f17" stroke-width="1.5"/>
     <line x1="196" y1="116" x2="236" y2="90" stroke="#f57f17" stroke-width="1.5"/>
     <line x1="180" y1="66" x2="180" y2="104" stroke="#f57f17" stroke-width="1.5"/>
@@ -484,13 +486,13 @@
 
 <h3>欧拉图的概念</h3>
 <ul>
-  <li><strong>欧拉通路（Eulerian Trail）：</strong>经过图中每条边恰好一次的路径。</li>
-  <li><strong>欧拉回路（Eulerian Circuit）：</strong>经过图中每条边恰好一次且回到起点的回路。</li>
+  <li><strong>欧拉通路（Eulerian Trail）：</strong>经过图中每条边恰好一次的<strong>边迹</strong>；允许在途中重复经过顶点，但不能重复经过边。</li>
+  <li><strong>欧拉回路（Eulerian Circuit）：</strong>经过图中每条边恰好一次且回到起点的<strong>闭边迹</strong>。</li>
   <li><strong>欧拉图（Eulerian Graph）：</strong>具有欧拉回路的图。</li>
 </ul>
 
 <div class="key-point">
-  <p><strong>欧拉定理：</strong>对于一个连通图，</p>
+  <p><strong>欧拉定理：</strong>对于一个连通图（更一般地，忽略孤立顶点后连通的图），</p>
   <p style="text-align:center;font-size:1.1em;font-weight:bold;margin:10px 0;">
     图有欧拉回路 &hArr; 所有顶点的度数都是偶数
   </p>
@@ -502,7 +504,7 @@
 <div class="example">
   <p><strong>例：</strong>七桥问题中四个顶点的度数分别为 3、5、3、3，全是奇数，所以既没有欧拉回路也没有欧拉通路——不可能不重复地走完所有桥。</p>
   <div class="graph-svg">
-    <svg width="200" height="120" viewBox="0 0 200 120">
+    <svg width="200" height="140" viewBox="0 0 200 140">
       <text x="100" y="18" text-anchor="middle" font-size="13" fill="#4caf50" font-weight="bold">欧拉图示例</text>
       <circle cx="60" cy="70" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
       <text x="60" y="76" text-anchor="middle" font-size="11" fill="#2e7d32" font-weight="bold">v<sub>1</sub></text>
@@ -516,11 +518,9 @@
       <line x1="60" y1="84" x2="60" y2="96" stroke="#4caf50" stroke-width="1.5"/>
       <line x1="140" y1="84" x2="140" y2="96" stroke="#4caf50" stroke-width="1.5"/>
       <line x1="74" y1="110" x2="126" y2="110" stroke="#4caf50" stroke-width="1.5"/>
-      <line x1="74" y1="74" x2="126" y2="106" stroke="#4caf50" stroke-width="1.5"/>
-      <line x1="126" y1="74" x2="74" y2="106" stroke="#4caf50" stroke-width="1.5"/>
     </svg>
   </div>
-  <div class="graph-caption">所有顶点度数均为偶数（d=3, 3, 3, 3），存在欧拉回路</div>
+  <div class="graph-caption">所有顶点度数均为偶数（d=2, 2, 2, 2），存在欧拉回路</div>
 </div>
 
 <div class="hint">
@@ -561,7 +561,7 @@
 </div>
 
 <div class="graph-svg">
-  <svg width="360" height="160" viewBox="0 0 360 160">
+  <svg width="380" height="190" viewBox="0 0 380 190">
     <!-- 二分图 -->
     <text x="100" y="20" text-anchor="middle" font-size="15" fill="#2c3e50" font-weight="bold">二分图</text>
     <circle cx="50" cy="60" r="14" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
@@ -678,8 +678,8 @@
       <line x1="150" y1="56" x2="150" y2="130" stroke="#333" stroke-width="1.5"/>
     </svg>
   </div>
-  <p class="step">图中 A、B、C 两两相连（形成一个三角形），因此至少需要 <strong>3</strong> 种颜色（A=红, B=蓝, C=绿）。</p>
-  <p class="step">D 与 A、B、E 相邻，E 与 B、C、D 相邻。3 种颜色可以完成整张图的染色（例如 D=绿, E=红）。</p>
+  <p class="step">图中 A、B、D 两两相连（形成一个三角形），因此至少需要 <strong>3</strong> 种颜色（A=红, B=蓝, D=绿）。</p>
+  <p class="step">D 与 A、B、E 相邻，E 与 C、D 相邻。3 种颜色可以完成整张图的染色（例如 C=绿, D=绿, E=红）。</p>
   <p class="step">所以色数 &chi;(G) = <strong>3</strong>。</p>
 </div>
 
@@ -690,7 +690,7 @@
 <table>
   <tr><th>图的结构</th><th>色数</th><th>说明</th></tr>
   <tr><td>空图（无边）</td><td>1</td><td>所有顶点可涂同色</td></tr>
-  <tr><td>二分图（含树）</td><td>2</td><td>两部分各涂一色</td></tr>
+  <tr><td>二分图（含边）</td><td>2</td><td>两部分各涂一色；无边图的色数为 1</td></tr>
   <tr><td>奇环（如 C<sub>5</sub>）</td><td>3</td><td>奇数长度回路需要 3 色</td></tr>
   <tr><td>完全图 K<sub>n</sub></td><td>n</td><td>每个顶点必须颜色不同</td></tr>
   <tr><td>平面图</td><td>&le; 4</td><td>四色定理保证</td></tr>

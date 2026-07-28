@@ -139,7 +139,7 @@ h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding
 <a class="back" href="../index.html">&larr; 返回课程列表</a>
 <article>
 <h1>集合进阶测验</h1>
-<p class="tip">总分 100 分 · 选择题（每题 6 分，共 60 分）· 计算题（每题 8 分，共 40 分）</p>
+<p class="tip">考试时间：35 分钟 · 总分 90 分 · 选择题（每题 4 分，共 40 分）· 计算题（每题 10 分，共 50 分）</p>
 <p class="tip" style="font-size:0.9em;">点击选项提交答案，点击"查看解答"查看计算题详细过程。</p>
 
 <!-- ==================== 第一部分：选择题 ==================== -->
@@ -156,7 +156,7 @@ h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding
 
 <!-- ==================== 得分 ==================== -->
 <div style="text-align:center;margin:24px 0;">
-  <div id="scoreDisplay">得分：0 / 100</div>
+  <div id="scoreDisplay">得分：0 / 90</div>
   <br>
   <button class="reset-btn" onclick="resetExam()">&#8635; 重新答题</button>
 </div>
@@ -254,6 +254,7 @@ var choiceQuestions = [
 var calcQuestions = [
   // 基础
   {
+    diff: "基础",
     question: "已知全集 U = {x ∈ N | x ≤ 10}，A = {1, 3, 5, 7, 9}，B = {2, 3, 5, 7}。<br>求：(1) A ∪ B；(2) A ∩ B；(3) ∁<sub>U</sub>A；(4) (∁<sub>U</sub>A) ∩ B。",
     answer: "A∪B={1,2,3,5,7,9}, A∩B={3,5,7}, ∁UA={2,4,6,8,10}, (∁UA)∩B={2}",
     keywords: ["1,2,3,5,7,9"],
@@ -267,6 +268,7 @@ var calcQuestions = [
   },
   // 进阶 — 容斥原理
   {
+    diff: "进阶",
     question: "某班 50 名学生中，喜欢数学的有 30 人，喜欢物理的有 25 人，两科都喜欢的有 12 人。<br>求：(1) 至少喜欢一科的人数；(2) 两科都不喜欢的人数。",
     answer: "至少喜欢一科 43 人，两科都不喜欢 7 人",
     keywords: ["43", "7"],
@@ -281,6 +283,7 @@ var calcQuestions = [
   },
   // 进阶 — 子集分类讨论
   {
+    diff: "进阶",
     question: "已知集合 A = {x | x² &minus; 5x + 6 = 0}，B = {x | ax &minus; 1 = 0}，且 B ⊆ A。<br>求实数 a 的值组成的集合。",
     answer: "a ∈ {0, 1/2, 1/3}",
     keywords: ["0", "1/2", "1/3"],
@@ -296,6 +299,7 @@ var calcQuestions = [
   },
   // 挑战 — 区间含参讨论
   {
+    diff: "挑战",
     question: "已知集合 A = {x | &minus;2 ≤ x ≤ 5}，B = {x | m + 1 ≤ x ≤ 2m &minus; 1}。<br>若 B ⊆ A，求实数 m 的取值范围。",
     answer: "m ≤ 3",
     keywords: ["≤3"],
@@ -315,19 +319,21 @@ var calcQuestions = [
   },
   // 高考难度 — 集合新定义 + 元素计数
   {
+    diff: "高考难度",
     question: "设 S 是实数集 R 的非空子集。若对任意 x, y ∈ S，都有 x + y, x &minus; y, xy ∈ S，则称 S 为&ldquo;封闭集&rdquo;。<br>(1) 判断整数集 Z 是否为封闭集，并说明理由；<br>(2) 若 S 是封闭集且 0 ∈ S，1 ∈ S，求 S 中至少还有哪些元素？",
-    answer: "(1) Z 是封闭集；(2) 至少还有 &minus;1",
-    keywords: ["封闭", "-1"],
+    answer: "(1) Z 是封闭集；(2) 至少还有 &minus;1, 2",
+    keywords: ["封闭", "-1", "2"],
     steps: [
       "(1) 整数集 Z 是封闭集。理由：",
       "  任意两个整数的和、差、积仍是整数，所以三大运算在 Z 中封闭。",
       "(2) 已知 0, 1 ∈ S：",
       "  由封闭性，1 &minus; 1 = 0 已在（已给出）",
       "  由封闭性，0 &minus; 1 = &minus;1 ∈ S（差运算）",
+      "  再由封闭性，1 &minus; (&minus;1) = 2 ∈ S（差运算）",
       "  再由封闭性，&minus;1 &minus; 1 = &minus;2 ∈ S",
-      "  再由封闭性，(&minus;1) × (&minus;2) = 2 ∈ S",
+      "  再由封闭性，(&minus;1) × (&minus;2) = 2 ∈ S（已包含）",
       "  以此类推，实际上 S 会包含所有整数 Z。",
-      "所以至少还有 &minus;1（由 0 &minus; 1 得到）。"
+      "所以至少还有 &minus;1 和 2（由 0&minus;1 得 &minus;1，1&minus;(&minus;1) 得 2）。"
     ]
   }
 ];
@@ -369,7 +375,7 @@ function render() {
   var calcHtml = "";
   for (var i = 0; i < calcQuestions.length; i++) {
     var q = calcQuestions[i];
-    var calcDiff = (i >= 4) ? ' <span class="diff-tag diff-exam">高考难度</span>' : (i >= 3) ? ' <span class="diff-tag diff-hard">挑战</span>' : (i >= 1) ? ' <span class="diff-tag diff-medium">进阶</span>' : '';
+    var calcDiff = diffLabels[q.diff] || '';
     calcHtml += '<div class="calc-card" id="calc' + i + '">';
     calcHtml += '<div class="q-title"><span class="q-tag">计算</span> ' + (i+1) + '. ' + q.question + calcDiff + '</div>';
     calcHtml += '<div style="margin:8px 0;"><strong>你的答案：</strong></div>';
@@ -468,7 +474,7 @@ function updateScore() {
   var total = 0;
   for (var i = 0; i < choiceQuestions.length; i++) {
     if (choiceAnswered[i] === choiceQuestions[i].answer) {
-      total += 6;
+      total += 4;
     }
   }
   for (var i = 0; i < calcQuestions.length; i++) {
@@ -476,19 +482,19 @@ function updateScore() {
       // 需要再次验证是否正确
       var input = document.getElementById("calcInput" + i);
       if (input && input.classList.contains("correct-input")) {
-        total += 8;
+        total += 10;
       }
     }
   }
   totalScore = total;
-  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a" + total + " / 100";
+  document.getElementById("scoreDisplay").textContent = "得分：" + total + " / 90";
 }
 
 function resetExam() {
   choiceAnswered = new Array(choiceQuestions.length).fill(-1);
   calcChecked = new Array(calcQuestions.length).fill(false);
   totalScore = 0;
-  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a0 / 100";
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a0 / 90";
 
   for (var i = 0; i < choiceQuestions.length; i++) {
     var qDiv = document.getElementById("cq" + i);
