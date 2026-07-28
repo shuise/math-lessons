@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../../lib/logo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6. 反函数</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+  h3 { color: #2c3e50; margin: 24px 0 10px; font-size: 1.1em; }
+  .formula { text-align: center; margin: 16px 0; padding: 12px; background: #f8f9fa; border-radius: 8px; font-size: 1.1em; }
+  .formula-box { border: 2px solid #1a73e8; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #f0f7ff; }
+  .formula-box p { margin: 6px 0; }
+  .highlight-box {
+    background: #e8f5e9; border-left: 4px solid #4caf50;
+    padding: 14px 18px; margin: 16px 0; border-radius: 0 8px 8px 0;
+  }
+  .warn-box {
+    background: #fff8e1; border-left: 4px solid #ffc107;
+    padding: 14px 18px; margin: 16px 0; border-radius: 0 8px 8px 0;
+  }
+
+  .plot-wrap { position: relative; width: 100%; margin: 8px 0; }
+  .plot-wrap svg { display: block; margin: 0 auto; border-radius: 8px; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .controls {
+    display: flex; flex-wrap: wrap; gap: 12px 20px;
+    margin: 10px 0 0; padding: 12px 16px;
+    background: #f0f4f8; border-radius: 8px; align-items: center;
+  }
+  .controls label { font-size: 0.88em; color: #444; display: flex; align-items: center; gap: 6px; }
+  .controls input[type="range"] { width: 120px; margin: 0 4px; vertical-align: middle; }
+  .controls .val { display: inline-block; min-width: 28px; text-align: center; font-weight: bold; color: #1a73e8; font-size: 0.92em; }
+
+  .func-select { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0; }
+  .func-select button {
+    padding: 6px 16px; border: 2px solid #ddd; border-radius: 16px;
+    background: #fff; cursor: pointer; font-size: 0.85em;
+    transition: all 0.15s; font-family: 'Times New Roman', serif;
+  }
+  .func-select button:hover { border-color: #1a73e8; background: #e3f2fd; }
+  .func-select button.active { border-color: #1a73e8; background: #1a73e8; color: #fff; }
+
+  .legend-row { display: flex; justify-content: center; gap: 20px; margin: 6px 0 2px; font-size: 0.85em; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-swatch { width: 20px; height: 3px; border-radius: 2px; display: inline-block; }
+  .legend-dash { width: 20px; height: 0; border-top: 2px dashed #999; display: inline-block; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+  .steps-box {
+    counter-reset: step; margin: 16px 0;
+  }
+  .steps-box .step {
+    background: #f8f9fa; border-left: 4px solid #1a73e8;
+    padding: 10px 14px; margin: 8px 0; border-radius: 0 8px 8px 0;
+    position: relative; padding-left: 42px;
+  }
+  .steps-box .step::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute; left: 10px; top: 10px;
+    width: 24px; height: 24px; background: #1a73e8; color: #fff;
+    border-radius: 50%; text-align: center; line-height: 24px;
+    font-size: 0.8em; font-weight: bold;
+  }
+
+  /* Quiz styles */
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 0.75em; margin-right: 8px; color: #fff; }
+  .q-tag.concept { background: #9c27b0; }
+  .q-tag.calc { background: #1a73e8; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+  }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+  .score-panel { text-align: center; margin: 24px 0; }
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>6. 反函数</h1>
+<p class="tip" style="text-align:center;font-size:1.05em;">反函数（Inverse Function）是与原函数互为"逆操作"的函数——<strong>输入输出互换</strong>，<strong>图像关于 y = x 对称</strong>。</p>
+
+<!-- ===== 一、引入 ===== -->
+<h2>一、从"逆运算"理解反函数</h2>
+
+<p>在数学中，很多运算都有对应的"逆运算"：</p>
+
+<table>
+  <tr><th>运算</th><th>逆运算</th><th>原运算 → 结果 → 逆运算 → 原值</th></tr>
+  <tr><td>加法 +3</td><td>减法 −3</td><td>x → x+3 → (x+3)−3 = x</td></tr>
+  <tr><td>平方 x²</td><td>开方 √x</td><td>x → x² → √(x²) = x（x ≥ 0）</td></tr>
+  <tr><td>指数 2<sup>x</sup></td><td>对数 log₂x</td><td>x → 2<sup>x</sup> → log₂(2<sup>x</sup>) = x</td></tr>
+</table>
+
+<p>把"运算"看作函数 f，它的"逆运算"就是它的<strong>反函数 f⁻¹</strong>。</p>
+
+<div class="highlight-box">
+  <p><strong>核心思想：</strong>f 和 f⁻¹ 互为"逆映射"——先走 f 再走 f⁻¹，相当于什么都没做（回到了起点 x）。</p>
+</div>
+
+<!-- ===== 二、定义与存在条件 ===== -->
+<h2>二、反函数的定义与存在条件</h2>
+
+<h3>2.1 正式定义</h3>
+
+<div class="formula-box">
+  <p><strong>设函数 y = f(x) 的定义域为 A，值域为 C。</strong></p>
+  <p>如果对于 C 中的每一个 y，在 A 中都有<strong>唯一</strong>的 x 与之对应，</p>
+  <p>那么就能定义一个新的函数 x = f⁻¹(y)，称为 f 的<strong>反函数</strong>。</p>
+  <p style="margin-top:8px;">习惯上将反函数写作 <strong>y = f⁻¹(x)</strong>（即把 x 和 y 互换后书写）。</p>
+</div>
+
+<h3>2.2 存在条件：一一对应（单调性）</h3>
+
+<p>一个函数有反函数的<strong>充要条件</strong>是：它在定义域内是<strong>一一映射</strong>（单射 + 满射）。</p>
+
+<ul>
+  <li>如果 f 在区间 I 上<strong>严格单调</strong>（严格增或严格减），则它一定有反函数</li>
+  <li>如果 f 不是单调的（如 y = x² 在整个 R 上），则没有反函数（因为一个 y 对应两个 x）</li>
+  <li>但可以通过<strong>限制定义域</strong>来构造反函数（如 y = x², x ≥ 0 的反函数是 y = √x）</li>
+</ul>
+
+<div class="warn-box">
+  <p><strong>注意：</strong>单调性只是充分条件，不是必要条件。一个函数可以不单调但仍然一一对应（例如离散函数），但对于高中阶段接触的连续函数，单调性与是否存在反函数等价。</p>
+</div>
+
+<!-- ===== 三、交互式演示 ===== -->
+<h2>三、交互式演示：原函数 ↔ 反函数</h2>
+
+<p>选择下方函数类型，拖拽滑块调节参数，观察原函数（蓝）与反函数（橙）关于 y = x（灰虚线）对称。</p>
+
+<div class="func-select" id="funcSelect">
+  <button class="active" data-fn="exp">y = a<sup>x</sup></button>
+  <button data-fn="log">y = log<sub>a</sub>x</button>
+  <button data-fn="sqrt">y = x² (x≥0)</button>
+  <button data-fn="cubic">y = x³</button>
+  <button data-fn="linear">y = kx + b</button>
+</div>
+
+<div class="plot-wrap">
+  <svg id="plot" width="520" height="520" viewBox="0 0 520 520"></svg>
+</div>
+
+<div class="controls">
+  <label>参数：
+    <input type="range" id="paramSlider" min="5" max="40" value="20">
+    <span class="val" id="paramVal">2.0</span>
+  </label>
+  <label>显示反函数：<input type="checkbox" id="showInverse" checked></label>
+  <label>显示对称线：<input type="checkbox" id="showSymLine" checked></label>
+</div>
+
+<div class="legend-row">
+  <span class="legend-item"><span class="legend-swatch" style="background:#1a73e8;"></span> y = f(x)</span>
+  <span class="legend-item"><span class="legend-swatch" style="background:#e65100;"></span> y = f⁻¹(x)</span>
+  <span class="legend-item"><span class="legend-dash"></span> y = x</span>
+</div>
+
+<!-- ===== 四、求反函数的步骤 ===== -->
+<h2>四、求反函数的步骤</h2>
+
+<div class="steps-box">
+  <div class="step"><strong>第一步：</strong>将 y = f(x) 中的 x 和 y 互换位置，得到 x = f(y)</div>
+  <div class="step"><strong>第二步：</strong>从上式中解出 y，用 x 表示，即 y = f⁻¹(x)</div>
+  <div class="step"><strong>第三步：</strong>标注反函数的定义域（即原函数的值域）</div>
+</div>
+
+<div class="example">
+  <p><strong>例 1：</strong>求 f(x) = 3x + 2 的反函数</p>
+  <p class="step">① 互换 x, y：x = 3y + 2</p>
+  <p class="step">② 解出 y：3y = x − 2 → y = (x − 2)/3</p>
+  <p class="step">③ 定义域：原函数值域为 R，所以反函数 f⁻¹(x) = (x − 2)/3，定义域 R</p>
+  <p class="step answer" style="color:#1a73e8;">f⁻¹(x) = (x − 2)/3</p>
+</div>
+
+<div class="example">
+  <p><strong>例 2：</strong>求 f(x) = 2<sup>x</sup> 的反函数</p>
+  <p class="step">① 互换 x, y：x = 2<sup>y</sup></p>
+  <p class="step">② 解出 y：y = log₂x</p>
+  <p class="step">③ 定义域：原函数值域为 (0, +∞)，所以反函数 f⁻¹(x) = log₂x，定义域 (0, +∞)</p>
+  <p class="step answer" style="color:#1a73e8;">f⁻¹(x) = log₂x (x &gt; 0)</p>
+</div>
+
+<div class="example">
+  <p><strong>例 3：</strong>求 f(x) = x² + 1（x ≥ 0）的反函数</p>
+  <p class="step">① 互换 x, y：x = y² + 1</p>
+  <p class="step">② 解出 y：y² = x − 1 → y = √(x − 1)（因为原限制 x ≥ 0，对应反函数取非负根）</p>
+  <p class="step">③ 定义域：原函数值域为 [1, +∞)，所以 f⁻¹(x) = √(x − 1)，定义域 [1, +∞)</p>
+  <p class="step answer" style="color:#1a73e8;">f⁻¹(x) = √(x − 1) (x ≥ 1)</p>
+</div>
+
+<!-- ===== 五、原函数与反函数的关系 ===== -->
+<h2>五、原函数与反函数的关系</h2>
+
+<div class="two-col">
+<div>
+<h3>5.1 定义域和值域互换</h3>
+<div class="formula-box">
+  <p><strong>D(f) = R(f⁻¹)</strong>，<strong>R(f) = D(f⁻¹)</strong></p>
+  <p>原函数的定义域 = 反函数的值域</p>
+  <p>原函数的值域 = 反函数的定义域</p>
+</div>
+</div>
+<div>
+<h3>5.2 图像关于 y = x 对称</h3>
+<div class="formula-box">
+  <p>点 (a, b) 在 y = f(x) 上</p>
+  <p>&hArr; 点 (b, a) 在 y = f⁻¹(x) 上</p>
+  <p>两条曲线关于直线 y = x 对称</p>
+</div>
+</div>
+</div>
+
+<h3>5.3 复合性质（最核心的性质）</h3>
+
+<div class="formula-box">
+  <p style="text-align:center;font-size:1.1em;">
+    <strong>f(f⁻¹(x)) = x</strong>（对任意 x ∈ D(f⁻¹) 成立）
+  </p>
+  <p style="text-align:center;font-size:1.1em;margin-top:6px;">
+    <strong>f⁻¹(f(x)) = x</strong>（对任意 x ∈ D(f) 成立）
+  </p>
+  <p style="text-align:center;font-size:0.9em;color:#666;margin-top:8px;">
+    "先走 f 再走 f⁻¹，回到起点"——这是判断两个函数是否互为反函数的<strong>充要条件</strong>。
+  </p>
+</div>
+
+<div class="example">
+  <p><strong>验证：</strong>f(x) = 2x + 1，g(x) = (x − 1)/2</p>
+  <p class="step">f(g(x)) = 2·(x − 1)/2 + 1 = (x − 1) + 1 = x ✓</p>
+  <p class="step">g(f(x)) = (2x + 1 − 1)/2 = 2x/2 = x ✓</p>
+  <p class="step answer" style="color:#1a73e8;">所以 f 和 g 互为反函数。</p>
+</div>
+
+<!-- ===== 六、常见函数的反函数 ===== -->
+<h2>六、常见函数的反函数</h2>
+
+<table>
+  <tr><th>函数 f(x)</th><th>定义域</th><th>反函数 f⁻¹(x)</th><th>备注</th></tr>
+  <tr>
+    <td>kx + b (k ≠ 0)</td><td>R</td><td>(x − b)/k</td><td>一次函数</td>
+  </tr>
+  <tr>
+    <td>a<sup>x</sup> (a &gt; 0, a ≠ 1)</td><td>R</td><td>log<sub>a</sub>x</td><td>指数 ↔ 对数</td>
+  </tr>
+  <tr>
+    <td>log<sub>a</sub>x (a &gt; 0, a ≠ 1)</td><td>(0, +∞)</td><td>a<sup>x</sup></td><td>对数 ↔ 指数</td>
+  </tr>
+  <tr>
+    <td>x² (x ≥ 0)</td><td>[0, +∞)</td><td>√x</td><td>限制定义域后</td>
+  </tr>
+  <tr>
+    <td>x³</td><td>R</td><td>∛x = x<sup>1/3</sup></td><td>奇函数，反函数也是奇函数</td>
+  </tr>
+  <tr>
+    <td>sin x（x ∈ [−π/2, π/2]）</td><td>[−π/2, π/2]</td><td>arcsin x</td><td>限制定义域，值域 [−π/2, π/2]</td>
+  </tr>
+  <tr>
+    <td>cos x（x ∈ [0, π]）</td><td>[0, π]</td><td>arccos x</td><td>限制定义域，值域 [0, π]</td>
+  </tr>
+  <tr>
+    <td>tan x（x ∈ (−π/2, π/2)）</td><td>(−π/2, π/2)</td><td>arctan x</td><td>限制定义域，值域 (−π/2, π/2)</td>
+  </tr>
+</table>
+
+<!-- ===== 七、互动问答 ===== -->
+<h2>七、互动问答</h2>
+
+<div id="quizContainer"></div>
+
+<div class="score-panel">
+  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 5</div>
+  <br>
+  <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #1a73e8;color:#1a73e8;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">重置</button>
+</div>
+
+</article>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+// ============================================================
+// SVG 交互式绘图
+// ============================================================
+var svg = d3.select("#plot");
+var margin = { top: 30, right: 30, bottom: 30, left: 30 };
+var W = 520, H = 520;
+var plotW = W - margin.left - margin.right;
+var plotH = H - margin.top - margin.bottom;
+
+var xScale = d3.scaleLinear().domain([-5, 5]).range([margin.left, margin.left + plotW]);
+var yScale = d3.scaleLinear().domain([5, -5]).range([margin.top, margin.top + plotH]);
+
+// --- 网格 ---
+function drawGrid() {
+  svg.selectAll(".grid-line").remove();
+  for (var i = -5; i <= 5; i++) {
+    if (i === 0) continue;
+    svg.append("line").attr("class", "grid-line")
+      .attr("x1", xScale(i)).attr("y1", yScale(-5))
+      .attr("x2", xScale(i)).attr("y2", yScale(5))
+      .attr("stroke", "#eee").attr("stroke-width", 1);
+    svg.append("line").attr("class", "grid-line")
+      .attr("x1", xScale(-5)).attr("y1", yScale(i))
+      .attr("x2", xScale(5)).attr("y2", yScale(i))
+      .attr("stroke", "#eee").attr("stroke-width", 1);
+  }
+}
+
+// --- 坐标轴 ---
+function drawAxes() {
+  svg.selectAll(".axis-line").remove();
+  svg.selectAll(".axis-label").remove();
+  // x 轴
+  svg.append("line").attr("class", "axis-line")
+    .attr("x1", xScale(-5)).attr("y1", yScale(0))
+    .attr("x2", xScale(5)).attr("y2", yScale(0))
+    .attr("stroke", "#333").attr("stroke-width", 1.5);
+  // y 轴
+  svg.append("line").attr("class", "axis-line")
+    .attr("x1", xScale(0)).attr("y1", yScale(-5))
+    .attr("x2", xScale(0)).attr("y2", yScale(5))
+    .attr("stroke", "#333").attr("stroke-width", 1.5);
+  // 箭头
+  svg.append("polygon").attr("class", "axis-line")
+    .attr("points", (xScale(5)-10)+","+(yScale(0)-4)+" "+(xScale(5)) +","+ yScale(0)+" "+(xScale(5)-10)+","+(yScale(0)+4))
+    .attr("fill", "#333");
+  svg.append("polygon").attr("class", "axis-line")
+    .attr("points", (xScale(0)-4)+","+(yScale(5)-10)+" "+(xScale(0))+","+(yScale(5))+" "+(xScale(0)+4)+","+(yScale(5)-10))
+    .attr("fill", "#333");
+  // 标签
+  svg.append("text").attr("class", "axis-label")
+    .attr("x", xScale(5)-8).attr("y", yScale(0)-10)
+    .attr("text-anchor", "middle").attr("font-size", "13px")
+    .attr("fill", "#1a73e8").text("x");
+  svg.append("text").attr("class", "axis-label")
+    .attr("x", xScale(0)+14).attr("y", yScale(5)+4)
+    .attr("text-anchor", "middle").attr("font-size", "13px")
+    .attr("fill", "#9c27b0").text("y");
+  // 原点
+  svg.append("text").attr("class", "axis-label")
+    .attr("x", xScale(0)-12).attr("y", yScale(0)+16)
+    .attr("text-anchor", "middle").attr("font-size", "12px")
+    .attr("fill", "#999").text("O");
+  // 刻度
+  for (var i = -4; i <= 4; i++) {
+    if (i === 0) continue;
+    svg.append("text").attr("class", "axis-label")
+      .attr("x", xScale(i)).attr("y", yScale(0)+16)
+      .attr("text-anchor", "middle").attr("font-size", "11px")
+      .attr("fill", "#999").text(i);
+    svg.append("text").attr("class", "axis-label")
+      .attr("x", xScale(0)-14).attr("y", yScale(i)+4)
+      .attr("text-anchor", "middle").attr("font-size", "11px")
+      .attr("fill", "#999").text(i);
+  }
+}
+
+// --- 函数绘图 ---
+var currentFn = "exp";
+
+function getFunc(name, param) {
+  var maxY = 4.5;
+  var fn, invFn, fnLabel, invLabel;
+  switch (name) {
+    case "exp":
+      var a = param;
+      fn = function(x) { return Math.pow(a, x); };
+      invFn = function(x) { return x > 0 ? Math.log(x) / Math.log(a) : NaN; };
+      fnLabel = "y = " + a.toFixed(1) + "<sup>x</sup>";
+      invLabel = "y = log<sub>" + a.toFixed(1) + "</sub>x";
+      break;
+    case "log":
+      var a = param;
+      fn = function(x) { return x > 0 ? Math.log(x) / Math.log(a) : NaN; };
+      invFn = function(x) { return Math.pow(a, x); };
+      fnLabel = "y = log<sub>" + a.toFixed(1) + "</sub>x";
+      invLabel = "y = " + a.toFixed(1) + "<sup>x</sup>";
+      break;
+    case "sqrt":
+      fn = function(x) { return x >= 0 ? Math.sqrt(x) : NaN; };
+      invFn = function(x) { return x >= 0 ? x * x : NaN; };
+      fnLabel = "y = x² (x≥0)";
+      invLabel = "y = √x";
+      break;
+    case "cubic":
+      fn = function(x) { return x * x * x; };
+      invFn = function(x) { return Math.cbrt(x); };
+      fnLabel = "y = x³";
+      invLabel = "y = ∛x";
+      break;
+    case "linear":
+      var k = param / 10;
+      var b = 0;
+      fn = function(x) { return k * x + b; };
+      invFn = function(x) { return k !== 0 ? (x - b) / k : NaN; };
+      fnLabel = "y = " + k.toFixed(1) + "x";
+      invLabel = "y = x/" + k.toFixed(1);
+      break;
+  }
+  return { fn: fn, invFn: invFn, fnLabel: fnLabel, invLabel: invLabel };
+}
+
+function generatePath(f, xMin, xMax, steps) {
+  steps = steps || 200;
+  var points = [];
+  for (var i = 0; i <= steps; i++) {
+    var x = xMin + (xMax - xMin) * i / steps;
+    var y = f(x);
+    if (y !== null && isFinite(y) && Math.abs(y) <= 5) {
+      points.push([xScale(x), yScale(y)]);
+    } else {
+      // 如果有有效点，先加一个 null 断开路径
+      if (points.length > 0 && points[points.length-1] !== null) {
+        points.push(null);
+      }
+    }
+  }
+  return points;
+}
+
+function lineDef(points) {
+  if (points.length === 0) return "";
+  var d = "";
+  for (var i = 0; i < points.length; i++) {
+    if (points[i] === null) {
+      // 断开路径
+      continue;
+    }
+    if (i === 0 || points[i-1] === null) {
+      d += "M" + points[i][0] + "," + points[i][1];
+    } else {
+      d += "L" + points[i][0] + "," + points[i][1];
+    }
+  }
+  return d;
+}
+
+function drawPlot() {
+  svg.selectAll(".fn-path").remove();
+  svg.selectAll(".sym-line").remove();
+  svg.selectAll(".fn-label").remove();
+
+  var param = parseFloat(document.getElementById("paramSlider").value) / 10;
+  var showInv = document.getElementById("showInverse").checked;
+  var showSym = document.getElementById("showSymLine").checked;
+
+  // y=x 对称线
+  if (showSym) {
+    svg.append("line").attr("class", "sym-line")
+      .attr("x1", xScale(-5)).attr("y1", yScale(-5))
+      .attr("x2", xScale(5)).attr("y2", yScale(5))
+      .attr("stroke", "#bbb").attr("stroke-width", 1.5)
+      .attr("stroke-dasharray", "6,4");
+    svg.append("text").attr("class", "fn-label")
+      .attr("x", xScale(4.5)).attr("y", yScale(4.4))
+      .attr("text-anchor", "middle").attr("font-size", "12px")
+      .attr("fill", "#999").style("font-style", "italic").text("y = x");
+  }
+
+  var funcs = getFunc(currentFn, param);
+
+  // 原函数
+  var pts = generatePath(funcs.fn, -5, 5);
+  svg.append("path").attr("class", "fn-path")
+    .attr("d", lineDef(pts))
+    .attr("stroke", "#1a73e8").attr("stroke-width", 2.5)
+    .attr("fill", "none");
+
+  // 函数标签
+  svg.append("text").attr("class", "fn-label")
+    .attr("x", xScale(3.8)).attr("y", yScale(funcs.fn(3.8)-0.2))
+    .attr("text-anchor", "start").attr("font-size", "13px")
+    .attr("fill", "#1a73e8").style("font-weight", "bold")
+    .html(funcs.fnLabel);
+
+  // 反函数
+  if (showInv) {
+    var invPts = generatePath(funcs.invFn, -5, 5);
+    svg.append("path").attr("class", "fn-path")
+      .attr("d", lineDef(invPts))
+      .attr("stroke", "#e65100").attr("stroke-width", 2.5)
+      .attr("fill", "none");
+
+    var invY = funcs.invFn(3.5);
+    if (isFinite(invY) && Math.abs(invY) <= 4.5) {
+      svg.append("text").attr("class", "fn-label")
+        .attr("x", xScale(3.5)).attr("y", yScale(invY - 0.2))
+        .attr("text-anchor", "start").attr("font-size", "13px")
+        .attr("fill", "#e65100").style("font-weight", "bold")
+        .html(funcs.invLabel);
+    }
+  }
+
+  document.getElementById("paramVal").textContent = param.toFixed(1);
+}
+
+// --- 事件绑定 ---
+document.getElementById("paramSlider").addEventListener("input", drawPlot);
+document.getElementById("showInverse").addEventListener("change", drawPlot);
+document.getElementById("showSymLine").addEventListener("change", drawPlot);
+
+// 函数选择
+var fnBtns = document.querySelectorAll("#funcSelect button");
+fnBtns.forEach(function(btn) {
+  btn.addEventListener("click", function() {
+    fnBtns.forEach(function(b) { b.classList.remove("active"); });
+    this.classList.add("active");
+    currentFn = this.getAttribute("data-fn");
+    drawPlot();
+  });
+});
+
+// 初始化
+drawGrid();
+drawAxes();
+drawPlot();
+
+// ============================================================
+// 互动测验
+// ============================================================
+var questions = [
+  {
+    question: "函数 f(x) = 5x − 3 的反函数是？",
+    opts: [
+      "f⁻¹(x) = (x + 3)/5",
+      "f⁻¹(x) = (x − 3)/5",
+      "f⁻¹(x) = 5x + 3",
+      "f⁻¹(x) = x/5 − 3"
+    ],
+    answer: 0,
+    explain: "互换 x,y: x = 5y − 3 → 5y = x + 3 → y = (x + 3)/5。"
+  },
+  {
+    question: "f(x) = log₃x 的反函数是？",
+    opts: [
+      "f⁻¹(x) = 3ˣ",
+      "f⁻¹(x) = x³",
+      "f⁻¹(x) = logₓ3",
+      "f⁻¹(x) = 1/log₃x"
+    ],
+    answer: 0,
+    explain: "对数函数 y = logₐx 与指数函数 y = aˣ 互为反函数。y = log₃x → 互换 x,y: x = log₃y → y = 3ˣ。"
+  },
+  {
+    question: "原函数的图像和反函数的图像关于什么对称？",
+    opts: [
+      "x 轴",
+      "y 轴",
+      "原点",
+      "直线 y = x"
+    ],
+    answer: 3,
+    explain: "点 (a,b) 在原函数图像上当且仅当点 (b,a) 在反函数图像上，所以两条曲线关于直线 y = x 对称。"
+  },
+  {
+    question: "下列哪个函数在全体实数 R 上存在反函数？",
+    opts: [
+      "f(x) = x²",
+      "f(x) = |x|",
+      "f(x) = x³ − x",
+      "f(x) = x³"
+    ],
+    answer: 3,
+    explain: "f(x) = x³ 在 R 上严格单调递增，一一对应，所以有反函数。x² 不是一一对应（如 x=±2 都得到 4），|x| 同理，x³−x 不单调。"
+  },
+  {
+    question: "若 f(2) = 5，且 f 有反函数 f⁻¹，则 f⁻¹(5) = ？",
+    opts: [
+      "2",
+      "5",
+      "无法确定",
+      "−2"
+    ],
+    answer: 0,
+    explain: "反函数的定义：f(a) = b &hArr; f⁻¹(b) = a。因为 f(2) = 5，所以 f⁻¹(5) = 2。输入输出恰好互换。"
+  }
+];
+
+var qAnswered = new Array(questions.length).fill(-1);
+
+function renderQuiz() {
+  var c = document.getElementById("quizContainer");
+  var html = "";
+  for (var i = 0; i < questions.length; i++) {
+    var q = questions[i];
+    var opsHtml = "";
+    for (var j = 0; j < q.opts.length; j++) {
+      opsHtml += '<div class="opt" data-q="' + i + '" data-idx="' + j + '">'
+        + String.fromCharCode(65 + j) + '. ' + q.opts[j] + '</div>';
+    }
+    html += '<div id="qz' + i + '" class="quiz-question">'
+      + '<div class="q-title"><span class="q-tag calc">选择</span>' + q.question + '</div>'
+      + '<div class="options">' + opsHtml + '</div>'
+      + '<div class="explain" id="expQ' + i + '">' + q.explain + '</div>'
+      + '</div>';
+  }
+  c.innerHTML = html;
+
+  document.querySelectorAll(".opt").forEach(function(el) {
+    el.onclick = function() {
+      var qi = parseInt(this.getAttribute("data-q"));
+      var oi = parseInt(this.getAttribute("data-idx"));
+      if (qAnswered[qi] !== -1) return;
+      qAnswered[qi] = oi;
+      var q = questions[qi];
+      var ok = (oi === q.answer);
+      var div = document.getElementById("qz" + qi);
+      var opts = div.querySelectorAll(".opt");
+      for (var k = 0; k < opts.length; k++) {
+        opts[k].classList.add("disabled");
+        if (k === q.answer) opts[k].classList.add("correct-opt");
+        if (k === oi && !ok) opts[k].classList.add("wrong-opt");
+        if (k === oi && ok) opts[k].classList.add("selected");
+      }
+      div.classList.add(ok ? "correct" : "wrong");
+      var exp = document.getElementById("expQ" + qi);
+      exp.textContent = (ok ? "✓ " : "✗ ") + q.explain;
+      exp.className = "explain show " + (ok ? "ok" : "fail");
+      updateScore();
+    };
+  });
+}
+
+function updateScore() {
+  var n = 0;
+  for (var i = 0; i < questions.length; i++) {
+    if (qAnswered[i] === questions[i].answer) n++;
+  }
+  document.getElementById("scoreDisplay").textContent = "得分：" + n + " / " + questions.length;
+}
+
+document.getElementById("resetBtn").onclick = function() {
+  qAnswered = new Array(questions.length).fill(-1);
+  document.getElementById("scoreDisplay").textContent = "得分：0 / " + questions.length;
+  document.querySelectorAll(".opt").forEach(function(o) { o.className = "opt"; });
+  document.querySelectorAll(".quiz-question").forEach(function(q) { q.className = "quiz-question"; });
+  document.querySelectorAll(".explain").forEach(function(e) { e.className = "explain"; });
+};
+
+renderQuiz();
+</script>
+<script src="../../dt.js"></script>
+</body>
+</html>

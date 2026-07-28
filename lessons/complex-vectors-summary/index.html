@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../lib/logo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4. 总结 — 复数·向量·平行四边形·合力</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  .canvas-wrap { text-align: center; margin: 20px 0; }
+  #mainCanvas {
+    border: 1px solid #ddd; border-radius: 10px;
+    background: #fcfcfc; max-width: 100%;
+  }
+  .controls {
+    display: flex; justify-content: center; gap: 12px;
+    flex-wrap: wrap; margin: 10px 0;
+  }
+  .control-group {
+    display: flex; align-items: center; gap: 6px;
+  }
+  .control-group label {
+    font-weight: bold; font-size: 0.88em; min-width: 50px;
+  }
+  .control-group input[type="range"] {
+    width: 110px;
+  }
+  .control-group .val {
+    color: #1a73e8; font-weight: bold; min-width: 48px;
+    font-family: 'Times New Roman', serif; font-size: 0.9em;
+  }
+  .legend-row {
+    display: flex; justify-content: center; gap: 18px;
+    flex-wrap: wrap; margin: 8px 0;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.88em; }
+  .legend-swatch { width: 22px; height: 4px; border-radius: 2px; display: inline-block; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+  .big-diagram { text-align: center; margin: 24px 0; }
+  .big-diagram svg { max-width: 100%; }
+
+  .unify-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  .unify-table th { background: #1a73e8; color: #fff; padding: 10px 12px; }
+  .unify-table td { padding: 10px 12px; border: 1px solid #ddd; text-align: center; }
+
+  .insight-box {
+    background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+    border: 2px solid #7b1fa2; border-radius: 12px;
+    padding: 20px 24px; margin: 20px 0; text-align: center;
+  }
+  .insight-box .big { font-size: 1.2em; font-weight: bold; color: #2c3e50; }
+  .insight-box .highlight { color: #7b1fa2; }
+
+  /* Quiz styles */
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 0.75em; margin-right: 8px; color: #fff; }
+  .q-tag.concept { background: #7b1fa2; }
+  .q-tag.calc { background: #1a73e8; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+  }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+  .score-panel { text-align: center; margin: 24px 0; }
+</style>
+</head>
+<body>
+<article>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<h1>4. 总结 — 复数·向量·平行四边形·合力</h1>
+<p class="tip" style="text-align:center;font-size:1.05em;">
+  本章将前三课的内容统合在一起，揭示 <strong>复数</strong>、<strong>平面向量</strong>、<strong>平行四边形法则</strong> 与 <strong>力的合成（合力）</strong> 背后同一个数学结构。
+</p>
+
+<!-- ===== 一、总览全景图 ===== -->
+<h2>一、一张图看清全部联系</h2>
+
+<div class="big-diagram">
+<svg width="700" height="420" viewBox="0 0 700 420">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#666"/></marker>
+  </defs>
+
+  <!-- 中心标题 -->
+  <rect x="220" y="10" width="260" height="40" rx="20" fill="#7b1fa2" opacity="0.9"/>
+  <text x="350" y="36" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">统一框架：二维有向量的代数表示</text>
+
+  <!-- 四个板块 -->
+  <!-- 左上：复数 -->
+  <rect x="40" y="80" width="260" height="120" rx="12" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
+  <text x="170" y="108" text-anchor="middle" fill="#1a73e8" font-size="15" font-weight="bold">复数 Complex Numbers</text>
+  <text x="170" y="132" text-anchor="middle" fill="#333" font-size="13">z = a + bi</text>
+  <text x="170" y="152" text-anchor="middle" fill="#555" font-size="12">实部 a、虚部 b</text>
+  <text x="170" y="172" text-anchor="middle" fill="#555" font-size="12">复平面上的点 (a, b)</text>
+  <text x="170" y="192" text-anchor="middle" fill="#555" font-size="12">加法：实部 + 实部，虚部 + 虚部</text>
+
+  <!-- 右上：向量 -->
+  <rect x="400" y="80" width="260" height="120" rx="12" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+  <text x="530" y="108" text-anchor="middle" fill="#e65100" font-size="15" font-weight="bold">平面向量 Plane Vectors</text>
+  <text x="530" y="132" text-anchor="middle" fill="#333" font-size="13">v = (a, b)</text>
+  <text x="530" y="152" text-anchor="middle" fill="#555" font-size="12">大小（模）和方向</text>
+  <text x="530" y="172" text-anchor="middle" fill="#555" font-size="12">坐标表示：分量 (a, b)</text>
+  <text x="530" y="192" text-anchor="middle" fill="#555" font-size="12">加法：x + x，y + y</text>
+
+  <!-- 左下：平行四边形 -->
+  <rect x="40" y="230" width="260" height="120" rx="12" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="170" y="258" text-anchor="middle" fill="#2e7d32" font-size="15" font-weight="bold">平行四边形法则</text>
+  <text x="170" y="282" text-anchor="middle" fill="#333" font-size="13">v + w = 对角线的向量</text>
+  <text x="170" y="302" text-anchor="middle" fill="#555" font-size="12">以 v、w 为邻边作平行四边形</text>
+  <text x="170" y="322" text-anchor="middle" fill="#555" font-size="12">从原点出发的对角线 = 和向量</text>
+  <text x="170" y="342" text-anchor="middle" fill="#555" font-size="12">交换律成立：v+w = w+v</text>
+
+  <!-- 右下：合力 -->
+  <rect x="400" y="230" width="260" height="120" rx="12" fill="#fce4ec" stroke="#c62828" stroke-width="2"/>
+  <text x="530" y="258" text-anchor="middle" fill="#c62828" font-size="15" font-weight="bold">力的合成（合力）</text>
+  <text x="530" y="282" text-anchor="middle" fill="#333" font-size="13">F₁ + F₂ = F<sub>合</sub></text>
+  <text x="530" y="302" text-anchor="middle" fill="#555" font-size="12">两个力作用，效果等同于</text>
+  <text x="530" y="322" text-anchor="middle" fill="#555" font-size="12">它们所张平行四边形的</text>
+  <text x="530" y="342" text-anchor="middle" fill="#555" font-size="12">对角线方向和大小的一个力</text>
+
+  <!-- 连接线 -->
+  <line x1="300" y1="140" x2="400" y2="140" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="170" y1="200" x2="170" y2="230" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="530" y1="200" x2="530" y2="230" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="300" y1="290" x2="400" y2="290" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 连接标签 -->
+  <text x="350" y="130" text-anchor="middle" fill="#666" font-size="11" font-style="italic">代数 ↔ 几何</text>
+  <text x="350" y="280" text-anchor="middle" fill="#666" font-size="11" font-style="italic">几何 ↔ 物理</text>
+  <text x="100" y="222" text-anchor="middle" fill="#666" font-size="11" font-style="italic">运算统一</text>
+  <text x="600" y="222" text-anchor="middle" fill="#666" font-size="11" font-style="italic">应用统一</text>
+
+  <!-- 底部最终陈述 -->
+  <rect x="150" y="370" width="400" height="40" rx="20" fill="#7b1fa2" opacity="0.12"/>
+  <text x="350" y="395" text-anchor="middle" fill="#7b1fa2" font-size="14" font-weight="bold">复数的代数运算 = 向量的几何操作 = 物理力的合成与旋转</text>
+</svg>
+</div>
+
+<!-- ===== 二、核心对应关系 ===== -->
+<h2>二、四者之间的核心对应关系</h2>
+
+<table class="unify-table">
+  <tr><th>概念</th><th>复数形式</th><th>向量形式</th><th>几何/物理意义</th></tr>
+  <tr>
+    <td><strong>基本对象</strong></td>
+    <td>z = a + bi</td>
+    <td>v = (a, b)</td>
+    <td>平面上一个具有大小和方向的量</td>
+  </tr>
+  <tr>
+    <td><strong>加法</strong></td>
+    <td>(a+bi)+(c+di)<br>= (a+c)+(b+d)i</td>
+    <td>(a,b)+(c,d)<br>= (a+c, b+d)</td>
+    <td>平行四边形法则：合力 F₁ + F₂</td>
+  </tr>
+  <tr>
+    <td><strong>减法</strong></td>
+    <td>(a+bi)−(c+di)<br>= (a−c)+(b−d)i</td>
+    <td>(a,b)−(c,d)<br>= (a−c, b−d)</td>
+    <td>从一个向量指向另一个的向量</td>
+  </tr>
+  <tr>
+    <td><strong>数乘</strong></td>
+    <td>k(a+bi) = ka + kbi</td>
+    <td>k(a,b) = (ka, kb)</td>
+    <td>向量伸缩（k &gt; 0 同向，k &lt; 0 反向）</td>
+  </tr>
+  <tr>
+    <td><strong>模（大小）</strong></td>
+    <td>|z| = √(a²+b²)</td>
+    <td>|v| = √(a²+b²)</td>
+    <td>长度 / 力的大小</td>
+  </tr>
+  <tr>
+    <td><strong>旋转 90°</strong></td>
+    <td>z · i = −b + ai</td>
+    <td>(a,b) → (−b, a)</td>
+    <td>方向改变 90°，大小不变</td>
+  </tr>
+  <tr>
+    <td><strong>方向角</strong></td>
+    <td>辐角 &theta;</td>
+    <td>与 x 轴夹角 &theta;</td>
+    <td>方向 = 力的方向</td>
+  </tr>
+</table>
+
+<div class="insight-box">
+  <p class="big">
+    复数 = 向量的"代数身份证"<br>
+    复数加法 = 平行四边形法则的代数表达<br>
+    平行四边形法则 = 力的合成的几何法则<br>
+    乘以 i = 将向量逆时针旋转 90°
+  </p>
+</div>
+
+<!-- ===== 三、交互式演示 ===== -->
+<h2>三、交互式演示：看透四者的统一性</h2>
+
+<p>拖拽两个向量（力）的端点，观察它们的<strong>复数表示</strong>、<strong>向量坐标</strong>、<strong>平行四边形</strong>和<strong>合力</strong>同步变化。</p>
+
+<div class="canvas-wrap">
+  <canvas id="mainCanvas" width="640" height="520"></canvas>
+</div>
+
+<div class="legend-row">
+  <span class="legend-item"><span class="legend-swatch" style="background:#1a73e8;"></span> 向量 v / 复数 z₁</span>
+  <span class="legend-item"><span class="legend-swatch" style="background:#e65100;"></span> 向量 w / 复数 z₂</span>
+  <span class="legend-item"><span class="legend-swatch" style="background:#c62828;"></span> 合力 v+w / 复数 z₁+z₂</span>
+  <span class="legend-item"><span class="legend-dot" style="background:#2e7d32;"></span> 平行四边形辅助线</span>
+</div>
+
+<div class="controls">
+  <div class="control-group">
+    <label>z₁ (a,b)：</label>
+    <input type="range" id="slA1" min="-3" max="3" value="3" step="0.1">
+    <input type="range" id="slB1" min="-3" max="3" value="1.5" step="0.1">
+  </div>
+  <div class="control-group">
+    <label>z₂ (c,d)：</label>
+    <input type="range" id="slA2" min="-3" max="3" value="1" step="0.1">
+    <input type="range" id="slB2" min="-3" max="3" value="2.5" step="0.1">
+  </div>
+</div>
+
+<div class="controls" style="gap:24px;font-size:0.9em;">
+  <span><strong>z₁</strong> = <span id="infoZ1" style="color:#1a73e8;">3 + 1.5i</span></span>
+  <span><strong>z₂</strong> = <span id="infoZ2" style="color:#e65100;">1 + 2.5i</span></span>
+  <span><strong>合力</strong> = <span id="infoSum" style="color:#c62828;font-weight:bold;">4 + 4i</span></span>
+</div>
+
+<h3>三组对应查看</h3>
+
+<table class="unify-table">
+  <tr><th>视角</th><th>z₁ = 3 + 1.5i</th><th>z₂ = 1 + 2.5i</th><th>z₁+z₂ = 合力</th></tr>
+  <tr>
+    <td><strong>复数</strong></td>
+    <td>3 + 1.5i</td>
+    <td>1 + 2.5i</td>
+    <td><strong>4 + 4i</strong></td>
+  </tr>
+  <tr>
+    <td><strong>向量</strong></td>
+    <td>(3, 1.5)</td>
+    <td>(1, 2.5)</td>
+    <td><strong>(4, 4)</strong></td>
+  </tr>
+  <tr>
+    <td><strong>平行四边形</strong></td>
+    <td>邻边 1</td>
+    <td>邻边 2</td>
+    <td><strong>对角线</strong></td>
+  </tr>
+  <tr>
+    <td><strong>力（物理）</strong></td>
+    <td>F₁ 的大小 ≈ 3.35</td>
+    <td>F₂ 的大小 ≈ 2.69</td>
+    <td><strong>合力大小 ≈ 5.66</strong></td>
+  </tr>
+</table>
+
+<!-- ===== 四、深度分析：为什么是同一回事？ ===== -->
+<h2>四、深度分析：为什么是同一回事？</h2>
+
+<h3>4.1 从代数到几何</h3>
+
+<p>复数 z = a + bi 本质上就是 <strong>实数有序对 (a, b)</strong>。复数的运算规则——</p>
+
+<div class="formula-box">
+  <p>(a + bi) + (c + di) = (a + c) + (b + d)i</p>
+  <p>(a + bi) · (c + di) = (ac − bd) + (ad + bc)i</p>
+</div>
+
+<p>——完全由实数的运算定义，不需要任何额外假设。<strong>所谓"复平面"，就是把这个有序对画在平面直角坐标系中</strong>，于是每个复数就自然对应了一个向量。</p>
+
+<h3>4.2 平行四边形法则的代数证明</h3>
+
+<p>设两个向量 v = (a, b) 和 w = (c, d)，它们对应的复数是 z₁ = a + bi 和 z₂ = c + di。</p>
+
+<p>按照平行四边形法则，以 v、w 为邻边作平行四边形，从原点出发的对角线向量为 v + w = (a + c, b + d)。</p>
+
+<p>按照复数加法，z₁ + z₂ = (a + c) + (b + d)i，对应的向量正是 (a + c, b + d)。</p>
+
+<div class="highlight-box">
+  <p><strong>结论：</strong>复数加法与平行四边形法则给出的结果是完全一致的。复数"提前"算好了平行四边形的对角线坐标。</p>
+</div>
+
+<h3>4.3 力的合成——物理世界的平行四边形</h3>
+
+<p>在物理学中，力是既有大小又有方向的量，因此力就是向量。两个力 F₁、F₂ 同时作用于一个物体时，它们的效果等同于一个<strong>合力</strong> F<sub>合</sub>。</p>
+
+<p>实验表明：以 F₁、F₂ 为邻边作平行四边形，其对角线就是合力 F<sub>合</sub>（大小和方向均如此）。</p>
+
+<div class="example">
+  <p><strong>物理实例：</strong>两个人拉一个箱子</p>
+  <p class="step">甲用 F₁ = 3N 的力向右拉，乙用 F₂ = 4N 的力向上拉。</p>
+  <p class="step">设右为 x 轴、上为 y 轴：F₁ = (3, 0)，F₂ = (0, 4)。</p>
+  <p class="step">复数的观点：F₁ + F₂ = 3 + 4i，合力 F<sub>合</sub> = (3, 4)。</p>
+  <p class="step">合力大小 |F<sub>合</sub>| = √(3²+4²) = 5N。</p>
+  <p class="step answer" style="color:#1a73e8;">箱子将沿右上方 53° 方向以 5N 的力移动。</p>
+</div>
+
+<h3>4.4 旋转的物理意义</h3>
+
+<p>既然复数 i 对应向量 (0, 1)，即竖直向上的单位力，那么 "乘以 i" 的旋转操作在物理上意味着什么？</p>
+
+<ul>
+  <li><strong>电流中的相位差：</strong>在交流电路中，电压和电流的相位关系可以用复数 i 表示——电流滞后电压 90°（即乘以 −i）或超前 90°（即乘以 i）</li>
+  <li><strong>振动的叠加：</strong>两个简谐振动的合成，等价于复数平面上两个旋转向量的加法</li>
+  <li><strong>力的力矩：</strong>力 F 绕某点的力矩可以看作力臂向量乘以力向量再乘以 i（旋转 90° 得到垂直分量）</li>
+</ul>
+
+<!-- ===== 五、总结性陈述 ===== -->
+<h2>五、最终总结</h2>
+
+<div class="insight-box">
+  <p class="big" style="font-size:1.3em;">
+    复数 &nbsp;=&nbsp; 向量的代数表示<br>
+    向量加法 &nbsp;=&nbsp; 平行四边形法则<br>
+    平行四边形法则 &nbsp;=&nbsp; 力的合成<br>
+    乘以 i &nbsp;=&nbsp; 旋转 90°
+  </p>
+  <p style="margin-top:14px;color:#555;font-size:0.95em;">
+    以上四条，既是<strong>同一个数学结构</strong>的不同侧面，也是连接<strong>代数、几何、物理</strong>三大领域的桥梁。<br>
+    掌握了这个统一框架，你就能在复数、向量、平行四边形、力的合成之间自由切换视角。
+  </p>
+</div>
+
+<!-- ===== 六、互动问答 ===== -->
+<h2>六、互动问答</h2>
+<p style="color:#666;">点击选项提交答案，系统自动判分。</p>
+
+<div id="quizContainer"></div>
+
+<div class="score-panel">
+  <div id="scoreDisplay" style="display:inline-block;background:#7b1fa2;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 4</div>
+  <br>
+  <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #7b1fa2;color:#7b1fa2;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">重置</button>
+</div>
+
+</article>
+
+<script>
+// ============================================================
+// Canvas 交互式演示
+// ============================================================
+var canvas = document.getElementById("mainCanvas");
+var ctx = canvas.getContext("2d");
+var W = canvas.width, H = canvas.height;
+var ox = 320, oy = 300;
+var scale = 55;
+
+var a1 = 3.0, b1 = 1.5;  // z1 = a1 + b1*i
+var a2 = 1.0, b2 = 2.5;  // z2 = a2 + b2*i
+
+function toScr(x, y) {
+  return [ox + x * scale, oy - y * scale];
+}
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  // --- 网格 ---
+  ctx.strokeStyle = "#e8e8e8";
+  ctx.lineWidth = 1;
+  for (var i = -5; i <= 5; i++) {
+    var [sx, sy] = toScr(i, -5);
+    var [ex, ey] = toScr(i, 5);
+    ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(ex, ey); ctx.stroke();
+    var [sx2, sy2] = toScr(-5, i);
+    var [ex2, ey2] = toScr(5, i);
+    ctx.beginPath(); ctx.moveTo(sx2, sy2); ctx.lineTo(ex2, ey2); ctx.stroke();
+  }
+
+  // --- 坐标轴 ---
+  ctx.strokeStyle = "#333";
+  ctx.lineWidth = 2;
+  var [xL, yL] = toScr(-5.5, 0);
+  var [xR, yR] = toScr(5.5, 0);
+  var [xD, yD] = toScr(0, -5.5);
+  var [xU, yU] = toScr(0, 5.5);
+  ctx.beginPath(); ctx.moveTo(xL[0], xL[1]); ctx.lineTo(xR[0], xR[1]); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(xD[0], xD[1]); ctx.lineTo(xU[0], xU[1]); ctx.stroke();
+  ctx.fillStyle = "#333";
+  ctx.beginPath(); ctx.moveTo(xR[0], xR[1]); ctx.lineTo(xR[0]-10, xR[1]-4); ctx.lineTo(xR[0]-10, xR[1]+4); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(xU[0], xU[1]); ctx.lineTo(xU[0]-4, xU[1]+10); ctx.lineTo(xU[0]+4, xU[1]+10); ctx.fill();
+  ctx.fillStyle = "#1a73e8"; ctx.font = "14px sans-serif"; ctx.textAlign = "center";
+  ctx.fillText("实轴 (x)", xR[0]-10, xR[1]-10);
+  ctx.fillStyle = "#9c27b0";
+  ctx.fillText("虚轴 (y)", xU[0]+14, xU[1]+4);
+  ctx.fillStyle = "#999"; ctx.font = "11px sans-serif"; ctx.textAlign = "center";
+  for (var i = -4; i <= 4; i++) {
+    if (i === 0) continue;
+    var [tx, ty] = toScr(i, 0);
+    ctx.fillText(i, tx, ty+16);
+    var [tx2, ty2] = toScr(0, i);
+    ctx.fillText(i, tx2-14, ty2+4);
+  }
+  ctx.fillText("O", ox-12, oy+16);
+
+  // 合力坐标
+  var sumA = a1 + a2, sumB = b1 + b2;
+
+  // --- 平行四边形辅助线（虚线） ---
+  var [p1x, p1y] = toScr(a1, b1);
+  var [p2x, p2y] = toScr(a2, b2);
+  var [pSx, pSy] = toScr(sumA, sumB);
+
+  ctx.strokeStyle = "#2e7d32";
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([5, 4]);
+  // 从 v 的终点到合力终点
+  ctx.beginPath(); ctx.moveTo(p1x, p1y); ctx.lineTo(pSx, pSy); ctx.stroke();
+  // 从 w 的终点到合力终点
+  ctx.beginPath(); ctx.moveTo(p2x, p2y); ctx.lineTo(pSx, pSy); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // --- 向量 v (z1) ---
+  drawArrow(ctx, ox, oy, p1x, p1y, "#1a73e8", 3);
+  ctx.fillStyle = "#1a73e8";
+  ctx.beginPath(); ctx.arc(p1x, p1y, 6, 0, 2*Math.PI); ctx.fill();
+  ctx.font = "bold 13px sans-serif"; ctx.textAlign = "left";
+  ctx.fillText("v (z₁ = " + a1.toFixed(1) + "+" + b1.toFixed(1) + "i)", p1x+8, p1y-6);
+
+  // --- 向量 w (z2) ---
+  drawArrow(ctx, ox, oy, p2x, p2y, "#e65100", 3);
+  ctx.fillStyle = "#e65100";
+  ctx.beginPath(); ctx.arc(p2x, p2y, 6, 0, 2*Math.PI); ctx.fill();
+  ctx.fillText("w (z₂ = " + a2.toFixed(1) + "+" + b2.toFixed(1) + "i)", p2x+8, p2y-6);
+
+  // --- 合力向量 ---
+  drawArrow(ctx, ox, oy, pSx, pSy, "#c62828", 3.5);
+  ctx.fillStyle = "#c62828";
+  ctx.beginPath(); ctx.arc(pSx, pSy, 7, 0, 2*Math.PI); ctx.fill();
+  ctx.font = "bold 14px sans-serif";
+  ctx.fillText("合力 (z₁+z₂ = " + sumA.toFixed(1) + "+" + sumB.toFixed(1) + "i)", pSx+8, pSy-8);
+
+  // --- 标记角度 ---
+  function drawAngle(px, py, color, label) {
+    var ang = Math.atan2(oy - py, px - ox);
+    if (ang < 0) ang += 2 * Math.PI;
+    ctx.strokeStyle = color; ctx.lineWidth = 1; ctx.setLineDash([3,2]);
+    ctx.beginPath(); ctx.arc(ox, oy, 30, 0, ang); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = color; ctx.font = "11px sans-serif";
+    var lx = ox + 38 * Math.cos(ang/2);
+    var ly = oy - 38 * Math.sin(ang/2);
+    ctx.fillText(label, lx-6, ly+4);
+  }
+
+  // --- 更新信息 ---
+  function fmtCplx(r, i) {
+    r = Math.round(r*10)/10; i = Math.round(i*10)/10;
+    if (i === 0) return r.toFixed(1);
+    if (r === 0) return (i > 0 ? "" : "-") + Math.abs(i).toFixed(1) + "i";
+    return r.toFixed(1) + (i > 0 ? " + " : " - ") + Math.abs(i).toFixed(1) + "i";
+  }
+  document.getElementById("infoZ1").textContent = fmtCplx(a1, b1);
+  document.getElementById("infoZ2").textContent = fmtCplx(a2, b2);
+  document.getElementById("infoSum").textContent = fmtCplx(sumA, sumB);
+
+  // 更新表格中的大小为力的大小
+  var mag1 = Math.sqrt(a1*a1 + b1*b1);
+  var mag2 = Math.sqrt(a2*a2 + b2*b2);
+  var magS = Math.sqrt(sumA*sumA + sumB*sumB);
+  // Update the HTML table dynamically
+  var table = document.querySelector(".unify-table:last-of-type");
+  if (table) {
+    var rows = table.querySelectorAll("tr");
+    if (rows.length >= 5) {
+      var cells = rows[4].querySelectorAll("td");
+      if (cells.length >= 4) {
+        cells[1].textContent = "F₁ 的大小 ≈ " + mag1.toFixed(2);
+        cells[2].textContent = "F₂ 的大小 ≈ " + mag2.toFixed(2);
+        cells[3].textContent = "合力大小 ≈ " + magS.toFixed(2);
+      }
+    }
+  }
+}
+
+function drawArrow(ctx, x1, y1, x2, y2, color, width) {
+  var dx = x2 - x1, dy = y2 - y1;
+  var len = Math.sqrt(dx*dx + dy*dy);
+  if (len < 1) return;
+  var angle = Math.atan2(y1 - y2, x2 - x1);
+  var headLen = Math.min(14, len * 0.35);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = width;
+  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - headLen * Math.cos(angle - 0.4), y2 + headLen * Math.sin(angle - 0.4));
+  ctx.lineTo(x2 - headLen * Math.cos(angle + 0.4), y2 + headLen * Math.sin(angle + 0.4));
+  ctx.fill();
+}
+
+// --- 事件绑定 ---
+document.getElementById("slA1").oninput = function() {
+  a1 = parseFloat(this.value);
+  b1 = parseFloat(document.getElementById("slB1").value);
+  draw();
+};
+document.getElementById("slB1").oninput = function() {
+  b1 = parseFloat(this.value);
+  a1 = parseFloat(document.getElementById("slA1").value);
+  draw();
+};
+document.getElementById("slA2").oninput = function() {
+  a2 = parseFloat(this.value);
+  b2 = parseFloat(document.getElementById("slB2").value);
+  draw();
+};
+document.getElementById("slB2").oninput = function() {
+  b2 = parseFloat(this.value);
+  a2 = parseFloat(document.getElementById("slA2").value);
+  draw();
+};
+
+draw();
+
+// ============================================================
+// 互动测验
+// ============================================================
+var questions = [
+  {
+    question: "两个力的合力最大可能值等于它们模的和，这对应什么几何情形？",
+    opts: [
+      "两力方向相反",
+      "两力方向相同",
+      "两力互相垂直",
+      "两力夹角 120°"
+    ],
+    answer: 1,
+    explain: "当两个力方向相同时，平行四边形的对角线最长，合力大小等于 |F₁| + |F₂|。此时 v 和 w 在同一直线上且同向。"
+  },
+  {
+    question: "复数加法与平行四边形法则的关系是？",
+    opts: [
+      "两者完全等价，只是表述方式不同",
+      "复数是代数的，平行四边形是几何的，没有关系",
+      "平行四边形法则只能用于物理力，复数只能用于数学",
+      "复数加法比平行四边形更复杂"
+    ],
+    answer: 0,
+    explain: "复数加法 (a+bi)+(c+di)=(a+c)+(b+d)i 与向量加法的平行四边形法则给出完全相同的坐标结果，是同一种运算的代数形式和几何形式。"
+  },
+  {
+    question: "在平面直角坐标系中，复数 z = 3 + 4i 对应的向量模是？若这个向量表示一个力，则力的大小是？",
+    opts: [
+      "3，即横坐标的值",
+      "5，即 √(3²+4²)",
+      "7，即 3+4",
+      "12，即 3×4"
+    ],
+    answer: 1,
+    explain: "复数的模 |z| = √(a²+b²) = √(3²+4²) = 5。在物理中，这就是力的大小，与向量的长度直接对应。"
+  },
+  {
+    question: "两个互成 90° 的力 F₁=3N、F₂=4N 同时拉一个物体，合力多大？对应的复数是？",
+    opts: [
+      "5N，对应复数 3 + 4i",
+      "7N，对应复数 3 + 4i",
+      "5N，对应复数 7i",
+      "12N，对应复数 12i"
+    ],
+    answer: 0,
+    explain: "F₁ = (3,0)、F₂ = (0,4)，合力 = (3,4)，对应复数 3+4i。合力大小 = √(3²+4²) = 5N。这就是勾股定理在力合成中的体现。"
+  }
+];
+
+var qAnswered = new Array(questions.length).fill(-1);
+
+function renderQuiz() {
+  var c = document.getElementById("quizContainer");
+  var html = "";
+  for (var i = 0; i < questions.length; i++) {
+    var q = questions[i];
+    var opsHtml = "";
+    for (var j = 0; j < q.opts.length; j++) {
+      opsHtml += '<div class="opt" data-q="' + i + '" data-idx="' + j + '">'
+        + String.fromCharCode(65 + j) + '. ' + q.opts[j] + '</div>';
+    }
+    html += '<div id="qz' + i + '" class="quiz-question">'
+      + '<div class="q-title"><span class="q-tag concept">综合</span>' + q.question + '</div>'
+      + '<div class="options">' + opsHtml + '</div>'
+      + '<div class="explain" id="expQ' + i + '">' + q.explain + '</div>'
+      + '</div>';
+  }
+  c.innerHTML = html;
+
+  document.querySelectorAll(".opt").forEach(function(el) {
+    el.onclick = function() {
+      var qi = parseInt(this.getAttribute("data-q"));
+      var oi = parseInt(this.getAttribute("data-idx"));
+      if (qAnswered[qi] !== -1) return;
+      qAnswered[qi] = oi;
+      var q = questions[qi];
+      var ok = (oi === q.answer);
+      var div = document.getElementById("qz" + qi);
+      var opts = div.querySelectorAll(".opt");
+      for (var k = 0; k < opts.length; k++) {
+        opts[k].classList.add("disabled");
+        if (k === q.answer) opts[k].classList.add("correct-opt");
+        if (k === oi && !ok) opts[k].classList.add("wrong-opt");
+        if (k === oi && ok) opts[k].classList.add("selected");
+      }
+      div.classList.add(ok ? "correct" : "wrong");
+      var exp = document.getElementById("expQ" + qi);
+      exp.textContent = (ok ? "✓ " : "✗ ") + q.explain;
+      exp.className = "explain show " + (ok ? "ok" : "fail");
+      updateScore();
+    };
+  });
+}
+
+function updateScore() {
+  var n = 0;
+  for (var i = 0; i < questions.length; i++) {
+    if (qAnswered[i] === questions[i].answer) n++;
+  }
+  document.getElementById("scoreDisplay").textContent = "得分：" + n + " / " + questions.length;
+}
+
+document.getElementById("resetBtn").onclick = function() {
+  qAnswered = new Array(questions.length).fill(-1);
+  document.getElementById("scoreDisplay").textContent = "得分：0 / " + questions.length;
+  document.querySelectorAll(".opt").forEach(function(o) { o.className = "opt"; });
+  document.querySelectorAll(".quiz-question").forEach(function(q) { q.className = "quiz-question"; });
+  document.querySelectorAll(".explain").forEach(function(e) { e.className = "explain"; });
+};
+
+renderQuiz();
+</script>
+<script src="../dt.js"></script>
+</body>
+</html>
