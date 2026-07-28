@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>单项测试卷 · 方法论大单元</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+/* ====== 交互式选择题 ====== */
+.question-card {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin: 16px 0;
+  transition: all 0.2s;
+}
+.question-card.correct { border-color: #4caf50; background: #f1f8e9; }
+.question-card.wrong { border-color: #f44336; background: #fce4ec; }
+.question-card .q-title {
+  font-weight: bold;
+  font-size: 1.03em;
+  margin-bottom: 8px;
+  color: #2c3e50;
+}
+.question-card .q-text { margin: 6px 0 10px; line-height: 1.7; color: #444; }
+.question-card .options { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.question-card .opt {
+  padding: 8px 14px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: #fafafa;
+  user-select: none;
+  line-height: 1.6;
+}
+.question-card .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+.question-card .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+.question-card .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+.question-card .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+.question-card .opt.disabled { pointer-events: none; opacity: 0.7; }
+.question-card .explain {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.93em;
+  display: none;
+  line-height: 1.7;
+}
+.question-card .explain.show { display: block; }
+.question-card .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+.question-card .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+/* ====== 分隔横线 ====== */
+.section-divider {
+  border: none;
+  border-top: 3px solid #1a73e8;
+  margin: 40px 0;
+  opacity: 0.3;
+}
+
+/* ====== 段标题 ====== */
+.section-header {
+  margin: 40px 0 20px;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #1a73e8, #1557b0);
+  color: #fff;
+  border-radius: 10px;
+  font-size: 1.15em;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* ====== 顶部信息栏 ====== */
+.quiz-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin: 16px 0 24px;
+  padding: 14px 20px;
+  background: #f8faff;
+  border-radius: 10px;
+  border: 1px solid #e0e8f0;
+  font-size: 0.95em;
+  color: #555;
+}
+.quiz-info .info-item strong { color: #1a73e8; }
+.quiz-info .difficulty-bar {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+.quiz-info .diff-block {
+  display: inline-block;
+  width: 60px;
+  height: 10px;
+  border-radius: 5px;
+}
+.quiz-info .diff-block.easy { background: #4caf50; }
+.quiz-info .diff-block.mid { background: #ff9800; }
+.quiz-info .diff-block.hard { background: #f44336; }
+
+/* ====== 评分面板 ====== */
+.quiz-footer {
+  text-align: center;
+  margin: 36px 0 20px;
+  padding-top: 24px;
+  border-top: 2px solid #e0e0e0;
+}
+.quiz-footer .score-box {
+  display: inline-block;
+  background: #1a73e8;
+  color: #fff;
+  padding: 14px 40px;
+  border-radius: 30px;
+  font-size: 1.4em;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.quiz-footer .score-detail {
+  margin: 10px 0 6px;
+  font-size: 0.9em;
+  color: #666;
+  line-height: 1.7;
+}
+.quiz-footer .btn-reset {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 10px 32px;
+  border: 2px solid #1a73e8;
+  color: #1a73e8;
+  border-radius: 24px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 1em;
+  transition: 0.15s;
+}
+.quiz-footer .btn-reset:hover { background: #1a73e8; color: #fff; }
+
+/* ====== 题号标签 ====== */
+.q-number {
+  display: inline-block;
+  background: #1a73e8;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 0.82em;
+  font-weight: bold;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* ====== 难度标签 ====== */
+.diff-tag {
+  display: inline-block;
+  font-size: 0.72em;
+  padding: 1px 8px;
+  border-radius: 10px;
+  margin-left: 6px;
+  vertical-align: middle;
+  font-weight: normal;
+}
+.diff-tag.easy { background: #e8f5e9; color: #2e7d32; }
+.diff-tag.mid { background: #fff3e0; color: #e65100; }
+.diff-tag.hard { background: #fce4ec; color: #c62828; }
+
+.intro-text {
+  color: #555;
+  font-size: 1.05em;
+  line-height: 1.8;
+  margin: 16px 0 24px;
+  padding: 14px 18px;
+  background: #f8faff;
+  border-radius: 10px;
+  border: 1px solid #e0e8f0;
+}
+</style>
+</head>
+<body>
+<article>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<h1>单项测试卷</h1>
+<p class="intro-text">
+  本测试卷面向"方法论大单元"全部内容，检测你对数学思想、数学方法、推理方式的综合掌握情况。
+</p>
+
+<div class="quiz-info">
+  <span class="info-item"><strong>总分：</strong>200 分</span>
+  <span class="info-item"><strong>时间：</strong>25 分钟</span>
+  <span class="info-item"><strong>题型：</strong>40 道选择题</span>
+  <span class="info-item"><strong>考察：</strong>概念掌握和基础工具方法使用</span>
+  <span class="info-item">
+    <strong>难度分布：</strong>
+    <span class="difficulty-bar">
+      <span class="diff-block easy"></span> 基础 30%
+      <span class="diff-block mid" style="margin-left:8px;"></span> 中级 40%
+      <span class="diff-block hard" style="margin-left:8px;"></span> 高等 30%
+    </span>
+  </span>
+</div>
+
+<!-- ============================================================
+     第一部分：数学思想的理解（10题，1-10）
+     ============================================================ -->
+<div class="section-header">第一部分 · 数学思想的理解（共 10 题，每题 5 分）</div>
+
+<!-- Q1 -->
+<div class="question-card" data-correct="1" data-idx="0">
+  <div class="q-title"><span class="q-number">1</span>数形结合思想 <span class="diff-tag easy">基础</span></div>
+  <div class="q-text">下列选项中，最能体现"数形结合思想"的是？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 用配方法求二次函数最值</div>
+    <div class="opt" data-val="1">B. 用函数图像解不等式 x² − 2x − 3 &lt; 0</div>
+    <div class="opt" data-val="2">C. 用反证法证明√2是无理数</div>
+    <div class="opt" data-val="3">D. 用数学归纳法证明等式</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q2 -->
+<div class="question-card" data-correct="2" data-idx="1">
+  <div class="q-title"><span class="q-number">2</span>分类讨论思想 <span class="diff-tag easy">基础</span></div>
+  <div class="q-text">解关于 x 的不等式 ax &gt; 1（a ∈ R），以下哪种处理方式体现了分类讨论思想？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 直接得到 x &gt; 1/a</div>
+    <div class="opt" data-val="1">B. 两边同时除以 a，得到 x &gt; 1/a</div>
+    <div class="opt" data-val="2">C. 分 a &gt; 0、a = 0、a &lt; 0 三种情况讨论</div>
+    <div class="opt" data-val="3">D. 将 1 移到左边，通分求解</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q3 -->
+<div class="question-card" data-correct="0" data-idx="2">
+  <div class="q-title"><span class="q-number">3</span>函数与方程思想 <span class="diff-tag easy">基础</span></div>
+  <div class="q-text">"函数与方程思想"的核心是？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 用函数视角研究变量关系，用方程工具求解具体未知量</div>
+    <div class="opt" data-val="1">B. 只研究函数的单调性和周期性</div>
+    <div class="opt" data-val="2">C. 把所有问题都转化为解方程</div>
+    <div class="opt" data-val="3">D. 用图像代替代数计算</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q4 -->
+<div class="question-card" data-correct="3" data-idx="3">
+  <div class="q-title"><span class="q-number">4</span>化归与转化思想 <span class="diff-tag easy">基础</span></div>
+  <div class="q-text">化归与转化思想的本质是？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 把简单问题变复杂</div>
+    <div class="opt" data-val="1">B. 用几何方法解决所有问题</div>
+    <div class="opt" data-val="2">C. 将答案转化为标准形式</div>
+    <div class="opt" data-val="3">D. 把陌生问题转化为熟悉问题，把复杂问题转化为简单问题</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q5 -->
+<div class="question-card" data-correct="1" data-idx="4">
+  <div class="q-title"><span class="q-number">5</span>特殊与一般的思想 <span class="diff-tag easy">基础</span></div>
+  <div class="q-text">以下哪个做法最直接体现了"特殊与一般的思想"？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 用换元法化简复杂表达式</div>
+    <div class="opt" data-val="1">B. 令 x = 1 求 (1+x)ⁿ 展开式的系数和</div>
+    <div class="opt" data-val="2">C. 用配方法求二次函数顶点</div>
+    <div class="opt" data-val="3">D. 用反证法证明存在性命题</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q6 -->
+<div class="question-card" data-correct="0" data-idx="5">
+  <div class="q-title"><span class="q-number">6</span>有限与无限的思想 <span class="diff-tag easy">基础</span></div>
+  <div class="q-text">"有限与无限的思想"在数学中最典型的应用是？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 极限理论——通过有限步骤理解无限过程</div>
+    <div class="opt" data-val="1">B. 用有限元法近似计算</div>
+    <div class="opt" data-val="2">C. 数列中有限项求和</div>
+    <div class="opt" data-val="3">D. 将无限集合与有限集合一一对应</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q7 -->
+<div class="question-card" data-correct="2" data-idx="6">
+  <div class="q-title"><span class="q-number">7</span>或然与必然的思想 <span class="diff-tag easy">基础</span></div>
+  <div class="q-text">大数定律所体现的"或然与必然的思想"核心观点是？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 随机事件完全不可预测</div>
+    <div class="opt" data-val="1">B. 小概率事件一定不会发生</div>
+    <div class="opt" data-val="2">C. 大量重复试验中，频率趋近于概率，从偶然中显现必然</div>
+    <div class="opt" data-val="3">D. 每次试验的结果都是确定的</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q8 -->
+<div class="question-card" data-correct="0" data-idx="7">
+  <div class="q-title"><span class="q-number">8</span>数形结合的应用 <span class="diff-tag mid">中级</span></div>
+  <div class="q-text">方程 |x − 1| + |x + 2| = 5 的解的个数可通过什么方式最直观地判断？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 在数轴上画出到两点距离之和为常数，观察交点</div>
+    <div class="opt" data-val="1">B. 两边平方消去绝对值</div>
+    <div class="opt" data-val="2">C. 分三段讨论去掉绝对值</div>
+    <div class="opt" data-val="3">D. 代入特殊值验证</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q9 -->
+<div class="question-card" data-correct="3" data-idx="8">
+  <div class="q-title"><span class="q-number">9</span>分类讨论与函数方程综合 <span class="diff-tag mid">中级</span></div>
+  <div class="q-text">已知函数 f(x) = x² − 2ax + 2 在 [0, 2] 上的最小值为 1，求 a 的值。这类问题通常需要：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 直接代入端点值计算</div>
+    <div class="opt" data-val="1">B. 只考虑顶点处取值</div>
+    <div class="opt" data-val="2">C. 用导数求出极值点</div>
+    <div class="opt" data-val="3">D. 先确定二次函数对称轴，再分对称轴在区间左、中、右三类讨论</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q10 -->
+<div class="question-card" data-correct="1" data-idx="9">
+  <div class="q-title"><span class="q-number">10</span>化归思想的应用 <span class="diff-tag mid">中级</span></div>
+  <div class="q-text">已知 a₁ = 1，aₙ₊₁ = 2aₙ + 1，求通项公式时，构造 bₙ = aₙ + 1 属于哪种思想的运用？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 数形结合思想</div>
+    <div class="opt" data-val="1">B. 化归与转化思想——将递推关系化归为等比数列</div>
+    <div class="opt" data-val="2">C. 分类讨论思想</div>
+    <div class="opt" data-val="3">D. 或然与必然思想</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     第二部分：数学方法的辨识和应用（18题，11-28）
+     ============================================================ -->
+<div class="section-header">第二部分 · 数学方法的辨识和应用（共 18 题，每题 5 分）</div>
+
+<!-- Q11 -->
+<div class="question-card" data-correct="2" data-idx="10">
+  <div class="q-title"><span class="q-number">11</span>反证法 <span class="diff-tag easy">基础</span></div>
+  <div class="q-text">用反证法证明"若 a + b &gt; 10，则 a 和 b 中至少有一个大于 5"，正确的假设是？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. a &gt; 5 且 b &gt; 5</div>
+    <div class="opt" data-val="1">B. a ≤ 5 或 b ≤ 5</div>
+    <div class="opt" data-val="2">C. a ≤ 5 且 b ≤ 5</div>
+    <div class="opt" data-val="3">D. a &lt; 5 且 b &lt; 5</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q12 -->
+<div class="question-card" data-correct="0" data-idx="11">
+  <div class="q-title"><span class="q-number">12</span>分析法 <span class="diff-tag easy">基础</span></div>
+  <div class="q-text">分析法是从____出发，反向寻找____的推理方法。</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 结论，充分条件</div>
+    <div class="opt" data-val="1">B. 条件，必要条件</div>
+    <div class="opt" data-val="2">C. 结论，必要条件</div>
+    <div class="opt" data-val="3">D. 条件，充分条件</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q13 -->
+<div class="question-card" data-correct="3" data-idx="12">
+  <div class="q-title"><span class="q-number">13</span>综合法 <span class="diff-tag easy">基础</span></div>
+  <div class="q-text">综合法与分析法的主要区别在于？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 综合法用于几何，分析法用于代数</div>
+    <div class="opt" data-val="1">B. 综合法较复杂，分析法较简单</div>
+    <div class="opt" data-val="2">C. 两者没有本质区别</div>
+    <div class="opt" data-val="3">D. 综合法由因导果（正向），分析法执果索因（反向）</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q14 -->
+<div class="question-card" data-correct="1" data-idx="13">
+  <div class="q-title"><span class="q-number">14</span>比较法 <span class="diff-tag easy">基础</span></div>
+  <div class="q-text">要比较 a = √7 − √6 与 b = √6 − √5 的大小，最合适的方法是？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 直接计算近似值</div>
+    <div class="opt" data-val="1">B. 作差法或分子有理化后作比较</div>
+    <div class="opt" data-val="2">C. 代入特殊值</div>
+    <div class="opt" data-val="3">D. 用反证法假设 a ≥ b</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q15 -->
+<div class="question-card" data-correct="0" data-idx="14">
+  <div class="q-title"><span class="q-number">15</span>放缩法 <span class="diff-tag mid">中级</span></div>
+  <div class="q-text">用放缩法证明不等式 1/1² + 1/2² + … + 1/n² &lt; 2 时，关键的一步是：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 将 1/k² 放大为 1/(k(k−1))，再裂项相消</div>
+    <div class="opt" data-val="1">B. 将每一项缩小为 1/(k+1)²</div>
+    <div class="opt" data-val="2">C. 直接求前 n 项和公式</div>
+    <div class="opt" data-val="3">D. 用数学归纳法证明</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q16 -->
+<div class="question-card" data-correct="2" data-idx="15">
+  <div class="q-title"><span class="q-number">16</span>数学归纳法 <span class="diff-tag mid">中级</span></div>
+  <div class="q-text">数学归纳法证明"1 + 3 + 5 + … + (2n−1) = n²"过程中，归纳假设 n = k 成立后，证明 n = k+1 时左端应加上：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. k + 1</div>
+    <div class="opt" data-val="1">B. 2k</div>
+    <div class="opt" data-val="2">C. 2k + 1</div>
+    <div class="opt" data-val="3">D. 2(k + 1)</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q17 -->
+<div class="question-card" data-correct="3" data-idx="16">
+  <div class="q-title"><span class="q-number">17</span>同一法 <span class="diff-tag mid">中级</span></div>
+  <div class="q-text">同一法最常用于证明什么类型的命题？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 不等式关系</div>
+    <div class="opt" data-val="1">B. 函数的单调性</div>
+    <div class="opt" data-val="2">C. 数列的通项公式</div>
+    <div class="opt" data-val="3">D. 唯一性（如中点唯一、垂线唯一）</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q18 -->
+<div class="question-card" data-correct="1" data-idx="17">
+  <div class="q-title"><span class="q-number">18</span>待定系数法 <span class="diff-tag easy">基础</span></div>
+  <div class="q-text">用待定系数法分解 x² − 5x + 6，设其为 (x + a)(x + b)，则 a、b 满足的方程组为：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. a + b = 5, ab = 6</div>
+    <div class="opt" data-val="1">B. a + b = −5, ab = 6</div>
+    <div class="opt" data-val="2">C. a + b = 6, ab = −5</div>
+    <div class="opt" data-val="3">D. a + b = −6, ab = 5</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q19 -->
+<div class="question-card" data-correct="2" data-idx="18">
+  <div class="q-title"><span class="q-number">19</span>换元法 <span class="diff-tag easy">基础</span></div>
+  <div class="q-text">解方程 (x² + 2x)² − 2(x² + 2x) − 3 = 0，最自然的换元是？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. t = x</div>
+    <div class="opt" data-val="1">B. t = x²</div>
+    <div class="opt" data-val="2">C. t = x² + 2x</div>
+    <div class="opt" data-val="3">D. t = (x² + 2x)²</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q20 -->
+<div class="question-card" data-correct="0" data-idx="19">
+  <div class="q-title"><span class="q-number">20</span>配方法 <span class="diff-tag easy">基础</span></div>
+  <div class="q-text">函数 f(x) = x² − 4x + 6 配方后的结果是？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. (x − 2)² + 2</div>
+    <div class="opt" data-val="1">B. (x − 2)² + 4</div>
+    <div class="opt" data-val="2">C. (x + 2)² + 2</div>
+    <div class="opt" data-val="3">D. (x − 4)² + 2</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- Q21 -->
+<div class="question-card" data-correct="1" data-idx="20">
+  <div class="q-title"><span class="q-number">21</span>构造法 <span class="diff-tag mid">中级</span></div>
+  <div class="q-text">已知 a + 1/a = 3，求 a² + 1/a² 的值。构造法的思路是？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 直接解出 a 再代入</div>
+    <div class="opt" data-val="1">B. 利用 (a + 1/a)² = a² + 2 + 1/a² 整体构造</div>
+    <div class="opt" data-val="2">C. 用待定系数法</div>
+    <div class="opt" data-val="3">D. 两边同时乘以 a 再求解</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q22 -->
+<div class="question-card" data-correct="3" data-idx="21">
+  <div class="q-title"><span class="q-number">22</span>消元法 <span class="diff-tag easy">基础</span></div>
+  <div class="q-text">解方程组 x + y = 5, x − y = 1，最简单的方法是？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 代入法：由 x + y = 5 得 y = 5 − x，代入第二式</div>
+    <div class="opt" data-val="1">B. 代入法：由 x − y = 1 得 x = y + 1，代入第一式</div>
+    <div class="opt" data-val="2">C. 两式直接相乘</div>
+    <div class="opt" data-val="3">D. 加减消元：两式相加求 x，相减求 y</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q23 -->
+<div class="question-card" data-correct="0" data-idx="22">
+  <div class="q-title"><span class="q-number">23</span>赋值法 <span class="diff-tag mid">中级</span></div>
+  <div class="q-text">若 (1 + x)ⁿ 展开式中所有项的系数之和等于 64，则 n 等于多少？用赋值法应令 x = ？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. x = 1</div>
+    <div class="opt" data-val="1">B. x = 0</div>
+    <div class="opt" data-val="2">C. x = −1</div>
+    <div class="opt" data-val="3">D. x = 2</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q24 -->
+<div class="question-card" data-correct="2" data-idx="23">
+  <div class="q-title"><span class="q-number">24</span>分离参数法 <span class="diff-tag mid">中级</span></div>
+  <div class="q-text">不等式 x² − 2x + m &gt; 0 对任意 x ∈ [0, 3] 恒成立，求 m 的范围时，分离参数法的操作是？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 令 Δ &lt; 0 求解</div>
+    <div class="opt" data-val="1">B. 直接代入 x = 0 和 x = 3</div>
+    <div class="opt" data-val="2">C. 将不等式化为 m &gt; −x² + 2x，求右端最大值</div>
+    <div class="opt" data-val="3">D. 两边同除以 x</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q25 -->
+<div class="question-card" data-correct="1" data-idx="24">
+  <div class="q-title"><span class="q-number">25</span>累加法 <span class="diff-tag mid">中级</span></div>
+  <div class="q-text">已知 a₁ = 2，aₙ₊₁ − aₙ = 2n，求 aₙ 的通项应使用什么方法？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 累乘法</div>
+    <div class="opt" data-val="1">B. 累加法</div>
+    <div class="opt" data-val="2">C. 数学归纳法</div>
+    <div class="opt" data-val="3">D. 待定系数法</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q26 -->
+<div class="question-card" data-correct="3" data-idx="25">
+  <div class="q-title"><span class="q-number">26</span>累乘法 <span class="diff-tag mid">中级</span></div>
+  <div class="q-text">已知 a₁ = 3，aₙ₊₁ / aₙ = n / (n + 1)，则 aₙ 的通项为？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. aₙ = 3n</div>
+    <div class="opt" data-val="1">B. aₙ = 3 / (n + 1)</div>
+    <div class="opt" data-val="2">C. aₙ = 3n / (n + 1)</div>
+    <div class="opt" data-val="3">D. aₙ = 3 / n</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q27 -->
+<div class="question-card" data-correct="0" data-idx="26">
+  <div class="q-title"><span class="q-number">27</span>迭代法 <span class="diff-tag hard">高等</span></div>
+  <div class="q-text">a₁ = 2，aₙ₊₁ = (aₙ + 2/aₙ) / 2，该迭代格式用于求哪个数的近似值？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. √2</div>
+    <div class="opt" data-val="1">B. √3</div>
+    <div class="opt" data-val="2">C. 2</div>
+    <div class="opt" data-val="3">D. 无理数 π</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q28 -->
+<div class="question-card" data-correct="2" data-idx="27">
+  <div class="q-title"><span class="q-number">28</span>组合计数方法 <span class="diff-tag mid">中级</span></div>
+  <div class="q-text">5 个男生和 3 个女生排成一排，要求女生互不相邻，应先用什么方法？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 捆绑法——将女生捆绑为一个整体</div>
+    <div class="opt" data-val="1">B. 隔板法——在男生间插入隔板</div>
+    <div class="opt" data-val="2">C. 插空法——先排男生，在空位中插入女生</div>
+    <div class="opt" data-val="3">D. 直接全排列再减去相邻情况</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     第三部分：推理方式的判断（6题，29-34）
+     ============================================================ -->
+<div class="section-header">第三部分 · 推理方式的判断（共 6 题，每题 5 分）</div>
+
+<!-- Q29 -->
+<div class="question-card" data-correct="1" data-idx="28">
+  <div class="q-title"><span class="q-number">29</span>直接推理（综合法） <span class="diff-tag easy">基础</span></div>
+  <div class="q-text">"已知 a &gt; 0, b &gt; 0，由 (√a − √b)² ≥ 0 展开得 a + b ≥ 2√(ab)，因此 (a+b)/2 ≥ √(ab)。" 这段推理属于？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 逆向推理（分析法）</div>
+    <div class="opt" data-val="1">B. 直接推理（综合法）</div>
+    <div class="opt" data-val="2">C. 反证推理</div>
+    <div class="opt" data-val="3">D. 归纳推理</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q30 -->
+<div class="question-card" data-correct="0" data-idx="29">
+  <div class="q-title"><span class="q-number">30</span>逆向推理（分析法） <span class="diff-tag easy">基础</span></div>
+  <div class="q-text">"要证 √3 + √7 &lt; 2√5，只需证 (√3 + √7)² &lt; (2√5)²，即 10 + 2√21 &lt; 20，即 √21 &lt; 5，即 21 &lt; 25，此式显然成立。" 这段推理属于？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 逆向推理（分析法）</div>
+    <div class="opt" data-val="1">B. 直接推理（综合法）</div>
+    <div class="opt" data-val="2">C. 类比推理</div>
+    <div class="opt" data-val="3">D. 反证推理</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q31 -->
+<div class="question-card" data-correct="3" data-idx="30">
+  <div class="q-title"><span class="q-number">31</span>反证推理 <span class="diff-tag mid">中级</span></div>
+  <div class="q-text">"假设√2是有理数，设√2 = p/q（既约分数），导出p、q均为偶数的矛盾，故√2不是有理数。" 这段推理属于？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 直接推理</div>
+    <div class="opt" data-val="1">B. 逆向推理</div>
+    <div class="opt" data-val="2">C. 归纳推理</div>
+    <div class="opt" data-val="3">D. 反证推理</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q32 -->
+<div class="question-card" data-correct="2" data-idx="31">
+  <div class="q-title"><span class="q-number">32</span>归纳推理 <span class="diff-tag mid">中级</span></div>
+  <div class="q-text">"先验证 n = 1 时 1 = 1² 成立；假设 n = k 时 1+3+…+(2k−1) = k² 成立，则 n = k+1 时左端 = k² + (2k+1) = (k+1)²，也成立。故对所有正整数 n 恒成立。" 这段推理属于？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 类比推理</div>
+    <div class="opt" data-val="1">B. 逆向推理</div>
+    <div class="opt" data-val="2">C. 归纳推理（数学归纳法）</div>
+    <div class="opt" data-val="3">D. 反证推理</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q33 -->
+<div class="question-card" data-correct="1" data-idx="32">
+  <div class="q-title"><span class="q-number">33</span>类比推理 <span class="diff-tag mid">中级</span></div>
+  <div class="q-text">"已知 (a + b)² = a² + 2ab + b²，类比可得 (a + b + c)² = a² + b² + c² + 2ab + 2ac + 2bc。" 这段推理属于？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 归纳推理</div>
+    <div class="opt" data-val="1">B. 类比推理</div>
+    <div class="opt" data-val="2">C. 逆向推理</div>
+    <div class="opt" data-val="3">D. 反证推理</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q34 -->
+<div class="question-card" data-correct="0" data-idx="33">
+  <div class="q-title"><span class="q-number">34</span>综合运用推理 <span class="diff-tag hard">高等</span></div>
+  <div class="q-text">一道复杂的证明题中，先用分析法找到思路（要证啥→需啥条件），再用综合法书写过程（由已知→结论）。这体现了：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 多种推理方式的综合运用</div>
+    <div class="opt" data-val="1">B. 只用了一种推理方式</div>
+    <div class="opt" data-val="2">C. 违反了逻辑规则</div>
+    <div class="opt" data-val="3">D. 只能使用其中一种推理方式</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     第四部分：综合情境下的思想方法选择（6题，35-40）
+     ============================================================ -->
+<div class="section-header">第四部分 · 综合情境下的思想方法选择（共 6 题，每题 5 分）</div>
+
+<!-- Q35 -->
+<div class="question-card" data-correct="1" data-idx="34">
+  <div class="q-title"><span class="q-number">35</span>综合情境 <span class="diff-tag hard">高等</span></div>
+  <div class="q-text">已知函数 f(x) = x² − 2mx + 1 在区间 [−1, 2] 上的最小值 ≥ 0，求 m 的范围。解决此问题最核心的思路组合是？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 仅用判别式法</div>
+    <div class="opt" data-val="1">B. 函数与方程思想 + 分类讨论思想 + 数形结合思想</div>
+    <div class="opt" data-val="2">C. 仅用换元法</div>
+    <div class="opt" data-val="3">D. 仅用赋值法求特殊值</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q36 -->
+<div class="question-card" data-correct="0" data-idx="35">
+  <div class="q-title"><span class="q-number">36</span>综合情境 <span class="diff-tag hard">高等</span></div>
+  <div class="q-text">解关于 x 的不等式 ax² − (a+1)x + 1 &lt; 0（a ∈ R），应先采用什么策略？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 先因式分解，再分 a = 0、a &gt; 0、a &lt; 0 讨论</div>
+    <div class="opt" data-val="1">B. 直接用求根公式</div>
+    <div class="opt" data-val="2">C. 两边同除以 x</div>
+    <div class="opt" data-val="3">D. 代入 x = 1 判断</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q37 -->
+<div class="question-card" data-correct="2" data-idx="36">
+  <div class="q-title"><span class="q-number">37</span>综合情境 <span class="diff-tag hard">高等</span></div>
+  <div class="q-text">已知 a, b, c 为正实数且 a + b + c = 1，求证 (1/a − 1)(1/b − 1)(1/c − 1) ≥ 8。以下分析思路正确的是？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 直接展开左边，代入 a + b + c = 1 化简</div>
+    <div class="opt" data-val="1">B. 用反证法假设左边 &lt; 8</div>
+    <div class="opt" data-val="2">C. 逆向推理（分析法）：将左边化为 (b+c)(c+a)(a+b)/(abc)，再用均值不等式</div>
+    <div class="opt" data-val="3">D. 代入 a = b = c = 1/3 验证即可</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q38 -->
+<div class="question-card" data-correct="3" data-idx="37">
+  <div class="q-title"><span class="q-number">38</span>综合情境 <span class="diff-tag hard">高等</span></div>
+  <div class="q-text">数列 {aₙ} 满足 a₁ = 1，aₙ₊₁ = 3aₙ + 2ⁿ，求通项公式。以下哪种方法组合最合适？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 直接用累加法</div>
+    <div class="opt" data-val="1">B. 直接用累乘法</div>
+    <div class="opt" data-val="2">C. 仅用数学归纳法</div>
+    <div class="opt" data-val="3">D. 构造新数列（化归）+ 累加法或待定系数法</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q39 -->
+<div class="question-card" data-correct="0" data-idx="38">
+  <div class="q-title"><span class="q-number">39</span>综合情境 <span class="diff-tag hard">高等</span></div>
+  <div class="q-text">求函数 y = x + √(1 − x²) 的值域，以下哪种方法最恰当？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 三角换元：设 x = sinθ，转化为三角函数最值</div>
+    <div class="opt" data-val="1">B. 两边平方去根号</div>
+    <div class="opt" data-val="2">C. 求导找极值点</div>
+    <div class="opt" data-val="3">D. 代入端点 x = −1, 0, 1</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- Q40 -->
+<div class="question-card" data-correct="2" data-idx="39">
+  <div class="q-title"><span class="q-number">40</span>综合情境 <span class="diff-tag hard">高等</span></div>
+  <div class="q-text">4 个男生和 3 个女生排成一排，要求女生互不相邻，且男生甲、乙必须相邻。解决此问题需要联合使用的方法是？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 仅用捆绑法</div>
+    <div class="opt" data-val="1">B. 仅用插空法</div>
+    <div class="opt" data-val="2">C. 捆绑法（处理甲乙相邻）+ 插空法（处理女生不相邻）</div>
+    <div class="opt" data-val="3">D. 隔板法 + 捆绑法</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     评分面板
+     ============================================================ -->
+<div class="quiz-footer">
+  <div class="score-box" id="scoreBox">0 / 200</div>
+  <div class="score-detail" id="scoreDetail">思想理解 0/50 · 方法辨识 0/90 · 推理判断 0/30 · 综合情境 0/30</div>
+  <div class="btn-reset" id="resetBtn">重新作答</div>
+</div>
+
+</article>
+
+<script>
+(function() {
+  const questions = document.querySelectorAll('.question-card');
+  const scoreBox = document.getElementById('scoreBox');
+  const scoreDetail = document.getElementById('scoreDetail');
+  const SCORE_PER_Q = 5;
+  const TOTAL_SCORE = 200;
+  let totalCorrect = 0;
+  let answered = new Array(questions.length).fill(false);
+
+  const explanations = [
+    // ===== 第一部分：思想的理解 =====
+    // Q1 (0)
+    { ok: '正确！用函数图像解不等式，将代数不等式转化为几何直观——这正是数形结合思想的核心体现。', fail: '数形结合的关键是将数与形相互转化。A是配方法（代数变形），C是反证法（逻辑推理），D是数学归纳法（推理方式）。B用图像解不等式，代数问题几何化，才是数形结合。' },
+    // Q2 (1)
+    { ok: '正确！a 的正负影响不等号方向，a = 0 时不等式退化为 0 > 1（无解）。必须分三类讨论，这正是分类讨论思想的典型应用。', fail: '含参不等式必须考虑参数的不同取值对解的影响。a > 0 时 x > 1/a，a = 0 时无解，a < 0 时 x < 1/a。不分类直接除会出错。' },
+    // Q3 (2)
+    { ok: '正确！函数与方程思想的核心是用函数观点分析变量关系（如变化趋势、最值），用方程求解具体的未知量。二者相辅相成。', fail: '函数与方程思想 ≠ 只研究函数性质，也不等于只解方程。它的精髓在于将两者结合——用函数视角理解方程，用方程工具解决函数问题（如求零点）。' },
+    // Q4 (3)
+    { ok: '正确！化归与转化思想就是"把不会的变成会的"——把陌生问题归结为已知问题，把复杂问题降维成简单问题。', fail: '化归不是把简单变复杂，而是反其道而行之——将新问题转化为已解决的问题，将复杂问题分解为简单问题的组合。' },
+    // Q5 (4)
+    { ok: '正确！令 x = 1 是特殊的赋值，通过这一个特殊值求出所有系数之和，再由这个特殊结果推广到一般结论——正是特殊与一般思想的典型运用。', fail: '赋值法（令 x = 1）求系数和，是由特殊到一般的典型例子。A是换元法（化归思想），C是配方法（代数方法），D是反证法（逻辑推理）。' },
+    // Q6 (5)
+    { ok: '正确！有限与无限思想的核心是通过有限的操作和步骤来理解和处理无限的过程与对象，极限理论是其最典型的应用。', fail: '极限思想正是有限与无限思想的集中体现——通过有限步骤的逼近来理解无限趋近的过程。数列求和是应用之一，但不是思想本身的核心。' },
+    // Q7 (6)
+    { ok: '正确！大数定律表明：虽然每次试验结果偶然，但大量重复后频率稳定趋近概率——这就是从偶然的"或然"中寻找必然的统计规律。', fail: '大数定律的精髓在于：个体随机（或然），整体稳定（必然）。这正是或然与必然思想的集中体现。' },
+    // Q8 (7)
+    { ok: '正确！|x−1| 表示 x 到 1 的距离，|x+2| 表示 x 到 −2 的距离。在数轴上画出距离之和为定值，直观可得两个解——这就是数形结合的力量。', fail: '虽然代数三段讨论也能解，但数形结合法最直观：|x−1|+|x+2|=5 表示到 1 和 −2 的距离之和为 5，在数轴上一目了然有 2 个解。' },
+    // Q9 (8)
+    { ok: '正确！二次函数在闭区间上的最值问题，必须考虑对称轴相对于区间的位置，分三种情况讨论——这融合了函数方程思想和分类讨论思想。', fail: '二次函数最值不只在端点或顶点取得，取决于对称轴位置。必须分对称轴在区间左侧、内部、右侧三类讨论，不能想当然。' },
+    // Q10 (9)
+    { ok: '正确！构造 bₙ = aₙ + 1 是将递推关系 aₙ₊₁ = 2aₙ + 1 化归为等比数列 bₙ₊₁ = 2bₙ，是化归与转化思想的典型应用。', fail: '构造新数列的目的是将陌生递推类型转化为已知的等比数列，本质上是化归思想——把未知问题转化为已掌握的标准形式。' },
+
+    // ===== 第二部分：方法的辨识和应用 =====
+    // Q11 (10)
+    { ok: '正确！"至少有一个大于5"的反面是"全都小于等于5"，即 a ≤ 5 且 b ≤ 5。这是反证法假设的关键步骤。', fail: '"至少有一个大于5"的否定是"没有一个大于5"，即 a ≤ 5 且 b ≤ 5。注意：是"且"不是"或"。"至少一个"的否定是"全都不是"。' },
+    // Q12 (11)
+    { ok: '正确！分析法从结论出发，反向寻找使结论成立的充分条件，核心表述是"要证A，只需证B"。', fail: '分析法 ≠ 综合法。分析法从结论（要证的）出发，找充分条件。B是必要条件，不符合分析法的逻辑方向。' },
+    // Q13 (12)
+    { ok: '正确！综合法从已知条件正向推导到结论（由因导果），分析法从结论反向追溯条件（执果索因）。二者方向相反。', fail: '综合法和分析法的本质区别在于方向。综合法是"因为A，所以B"的正向推进；分析法是"要证B，只需证A"的反向追溯。' },
+    // Q14 (13)
+    { ok: '正确！比较两个无理数的大小，作差法结合分子有理化是标准方法：a − b = (√7−√6) − (√6−√5) = ... 可判断 a < b。', fail: '对于这种形式的无理数比较，作差后分子有理化是最高效的方法，可转化为比较分母大小。直接算近似值不精确。' },
+    // Q15 (14)
+    { ok: '正确！将 1/k² 放大为 1/(k(k−1)) = 1/(k−1) − 1/k，然后裂项相消，是放缩法证明数列不等式最经典的技巧。', fail: '放缩法的关键在于找到合适的放缩尺度。此题将 1/k² 放大为 1/k(k−1)（k≥2），使得裂项后大部分项抵消，剩下小于 2 的有限项。' },
+    // Q16 (15)
+    { ok: '正确！前 k 个奇数和为 k²，第 k+1 个奇数是 2(k+1)−1 = 2k+1，所以 n = k+1 时左端应加上 2k+1。', fail: '第 k+1 个奇数的表达式为 2(k+1)−1 = 2k+1。这是数学归纳法递推步骤的关键。' },
+    // Q17 (16)
+    { ok: '正确！同一法专门用于唯一性证明——构造一个满足条件的对象，再证明它就是原对象，常用于证明中点唯一、垂线唯一等。', fail: '同一法的核心应用场景是唯一性或存在唯一性的证明。不等式用比较法，单调性用导数，数列通项用累加累乘或归纳法。' },
+    // Q18 (17)
+    { ok: '正确！(x + a)(x + b) = x² + (a+b)x + ab，比较系数得 a+b = −5, ab = 6，解得 a = −2, b = −3。', fail: '展开 (x+a)(x+b) 得 x² + (a+b)x + ab。与 x² − 5x + 6 比较，一次项系数 a+b = −5，常数项 ab = 6。注意 a+b 是负的。' },
+    // Q19 (18)
+    { ok: '正确！设 t = x² + 2x，原方程化为 t² − 2t − 3 = 0，解出 t = 3 或 t = −1，再代回求 x。最自然、最直接。', fail: '观察结构的重复模式：x²+2x 出现了两次。设 t = x²+2x 即可将四次方程降为二次，这是换元法的最优选择。' },
+    // Q20 (19)
+    { ok: '正确！f(x) = x² − 4x + 6 = (x² − 4x + 4) + 2 = (x−2)² + 2，顶点 (2, 2)。', fail: '配方步骤：x² − 4x + 6 = (x² − 4x + 4) − 4 + 6 = (x−2)² + 2。注意常数项的处理。' },
+    // Q21 (20)
+    { ok: '正确！直接利用已知的整体结构：(a + 1/a)² = a² + 2 + 1/a²，所以 a² + 1/a² = 3² − 2 = 7。这是构造法的巧妙应用。', fail: '构造法的精髓是利用已知条件整体变形，而非硬解。将 a + 1/a 看作一个整体，两边平方即可得结果，无需解出 a。' },
+    // Q22 (21)
+    { ok: '正确！两式相加得 2x = 6 → x = 3；两式相减得 2y = 4 → y = 2。加减消元法在此题中最简便。', fail: '加减消元法直接将两个方程相加消去 y、相减消去 x，一步到位。代入法虽然也可行，但步骤更多。' },
+    // Q23 (22)
+    { ok: '正确！求展开式所有项系数和，令 x = 1，得 (1+1)ⁿ = 2ⁿ = 64，故 n = 6。赋值法用特殊值求一般结论。', fail: '所有项系数之和就是将 x = 1 代入展开式的结果。令 x = 1 得 2ⁿ = 64，所以 n = 6。这是赋值法的标准应用。' },
+    // Q24 (23)
+    { ok: '正确！分离参数 m > −x² + 2x，问题转化为求函数 g(x) = −x² + 2x 在 [0, 3] 上的最大值，避免了含参讨论。', fail: '分离参数法的核心是把参数 m 分离到一边，另一边变为不含参数的函数，求该函数在给定区间上的最值即可。' },
+    // Q25 (24)
+    { ok: '正确！递推形式 aₙ₊₁ − aₙ = f(n) 是累加法的标准特征，将 n−1 个差值累加即可得到通项。', fail: '当递推关系给出的是相邻两项的差时，应使用累加法。累乘法用于比值形式。看到差的形式（aₙ₊₁ − aₙ），立刻想到累加法。' },
+    // Q26 (25)
+    { ok: '正确！aₙ = a₁ × (a₂/a₁) × (a₃/a₂) × … × (aₙ/aₙ₋₁) = 3 × (1/2) × (2/3) × … × ((n−1)/n) = 3/n。', fail: '用累乘法：aₙ = 3 × (1/2) × (2/3) × … × ((n−1)/n)。分子分母逐项约去，最后剩下 3/n。这是累乘法的标准操作。' },
+    // Q27 (26)
+    { ok: '正确！aₙ₊₁ = (aₙ + 2/aₙ)/2 是牛顿迭代法求 √2 的迭代公式。取 a₁ = 2，a₂ = 1.5，a₃ ≈ 1.4167，很快收敛到 √2 ≈ 1.4142。', fail: '牛顿迭代法求 √a 的公式是 xₙ₊₁ = (xₙ + a/xₙ)/2。此处 a = 2，正是求 √2 的迭代格式。' },
+    // Q28 (27)
+    { ok: '正确！"不相邻"问题用插空法：先排没有限制的男生（5人产生6个空位），再从6个空位中选3个插入女生。', fail: '"不相邻"是插空法的标志词。先排没限制的元素，再在空位中插入有限制的元素。捆绑法用于"相邻"问题，隔板法用于分组问题。' },
+
+    // ===== 第三部分：推理方式的判断 =====
+    // Q29 (28)
+    { ok: '正确！从已知条件 (√a−√b)² ≥ 0 正向推导出结论 (a+b)/2 ≥ √(ab)，这是典型的综合法（直接推理）。', fail: '本题从已知条件出发，逐步推出结论，方向由因到果，属于直接推理（综合法）。分析法的标志是"要证…只需证…"。' },
+    // Q30 (29)
+    { ok: '正确！从要证明的结论出发，逐步寻找使结论成立的充分条件，是关键标志。', fail: '分析法的典型语言是"要证A，只需证B"，从结论反推到显然成立的条件。综合法则反过来从已知到结论。' },
+    // Q31 (30)
+    { ok: '正确！假设结论的反面（√2是有理数），推导出矛盾（p、q均为偶数与既约矛盾），从而肯定原结论成立——这是反证法的标准结构。', fail: '反证法的三步骤：否定结论 → 逻辑推导 → 得到矛盾。本题"假设…有矛盾"的完整结构正是反证法。' },
+    // Q32 (31)
+    { ok: '正确！先验证基础步 n=1，再假设 n=k 成立递推到 n=k+1——这是数学归纳法（归纳推理）的完整结构。', fail: '数学归纳法是一种从特殊到一般的严格推理方式。它包含两个关键步骤：验证基础步 + 归纳递推步，缺一不可。' },
+    // Q33 (32)
+    { ok: '正确！从二元的展开公式出发，类比推广到三元的展开形式，属于类比推理。类比是从特殊到特殊的推理。', fail: '类比推理是根据两个对象在某些方面的相似，推断它们在其它方面也可能相似。从 (a+b)² 到 (a+b+c)² 就是典型的类比推广。' },
+    // Q34 (33)
+    { ok: '正确！实际解题中，各种推理方式不是互斥的。先用分析法找思路，再用综合法写解答，是多种推理方式综合运用的典型。', fail: '分析法用于探索思路（执果索因），综合法用于书写证明（由因导果）。两者结合使用是解决复杂问题的常见策略。' },
+
+    // ===== 第四部分：综合情境 =====
+    // Q35 (34)
+    { ok: '正确！首先用函数与方程思想将问题转化为最值问题，然后用分类讨论思想按对称轴位置分三类，最后用数形结合思想辅助理解每种情况的最小值位置。三种思想协同。', fail: '二次函数闭区间最值问题需要：①函数思想（转化为最值问题）；②分类讨论（对称轴三种位置）；③数形结合（画图辅助判断）。三种思想缺一不可。' },
+    // Q36 (35)
+    { ok: '正确！先因式分解为 (ax−1)(x−1) &lt; 0（化归思想），再按 a 的符号和根的大小讨论（分类讨论思想），思路清晰。', fail: '含参二次不等式应：①先因式分解简化形式；②按 a = 0（一次）、a &gt; 0、a &lt; 0 分类；③对于二次情况还需比较两根 1 和 1/a 的大小。' },
+    // Q37 (36)
+    { ok: '正确！用分析法从结论反推，将左边化归为 (b+c)(c+a)(a+b)/(abc)，再用均值不等式证明。这是逆向推理 + 化归的经典配合。', fail: '直接展开很复杂。正确的思路是：用分析法从结论出发，将 (1/a−1) 转化为 (b+c)/a（利用 a+b+c=1），然后转化为乘积形式用均值不等式。' },
+    // Q38 (37)
+    { ok: '正确！aₙ₊₁ = 3aₙ + 2ⁿ 需先构造新数列（化归思想），再结合累加法或待定系数法求解。单一方法不足以解决此类递推。', fail: '这种"线性递推 + 指数项"的形式，需要先通过构造（如两边同除以 2ⁿ⁺¹）化归为等差数列或等比数列，再求解。' },
+    // Q39 (38)
+    { ok: '正确！含 √(1−x²) 的表达式，三角换元 x = sinθ 是最佳选择，化归为三角函数 y = sinθ + cosθ = √2 sin(θ+π/4)，值域轻松可得。', fail: '三角换元将代数问题化归为三角函数问题，是处理含 √(1−x²) 形式的标准方法。两边平方可能引入增根，求导较繁琐。' },
+    // Q40 (39)
+    { ok: '正确！先捆绑（甲乙相邻）将他们视为一个整体，再插空（女生不相邻）处理限制条件。两种计数方法联合使用解决复合约束问题。', fail: '题目包含两类约束：①甲乙相邻→用捆绑法；②女生不相邻→用插空法。两种方法需联合使用，先处理相邻再处理不相邻。' }
+  ];
+
+  // 四段分类范围及名称
+  const segmentNames = ['思想理解', '方法辨识', '推理判断', '综合情境'];
+  const segmentRanges = [[0, 9], [10, 27], [28, 33], [34, 39]];
+  const segmentScores = [50, 90, 30, 30]; // 每题5分
+
+  function updateScore() {
+    let count = 0;
+    for (let i = 0; i < answered.length; i++) {
+      if (answered[i]) count++;
+    }
+    totalCorrect = count;
+    scoreBox.textContent = (totalCorrect * SCORE_PER_Q) + ' / ' + TOTAL_SCORE;
+
+    let parts = [];
+    for (let s = 0; s < segmentRanges.length; s++) {
+      const [start, end] = segmentRanges[s];
+      let segCount = 0;
+      for (let i = start; i <= end; i++) {
+        if (answered[i]) segCount++;
+      }
+      parts.push(segmentNames[s] + ' ' + (segCount * SCORE_PER_Q) + '/' + segmentScores[s]);
+    }
+    scoreDetail.textContent = '模块得分：' + parts.join(' · ');
+  }
+
+  questions.forEach(function(q, idx) {
+    const opts = q.querySelectorAll('.opt');
+    const explainDiv = q.querySelector('.explain');
+
+    opts.forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        if (q.classList.contains('correct') || q.classList.contains('wrong')) return;
+
+        const val = parseInt(this.getAttribute('data-val'), 10);
+        const correctVal = parseInt(q.getAttribute('data-correct'), 10);
+        const isCorrect = (val === correctVal);
+
+        opts.forEach(function(o) { o.classList.add('disabled'); });
+
+        opts.forEach(function(o) {
+          if (parseInt(o.getAttribute('data-val'), 10) === correctVal) {
+            o.classList.add('correct-opt');
+          }
+        });
+
+        if (!isCorrect) {
+          this.classList.add('wrong-opt');
+        }
+
+        if (isCorrect) {
+          q.classList.add('correct');
+        } else {
+          q.classList.add('wrong');
+        }
+
+        const exp = explanations[idx];
+        const expText = isCorrect ? exp.ok : exp.fail;
+        explainDiv.textContent = expText;
+        explainDiv.className = 'explain show ' + (isCorrect ? 'ok' : 'fail');
+
+        if (!answered[idx]) {
+          answered[idx] = true;
+          if (isCorrect) totalCorrect++;
+          updateScore();
+        }
+      });
+    });
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function() {
+    questions.forEach(function(q, idx) {
+      q.classList.remove('correct', 'wrong');
+      const opts = q.querySelectorAll('.opt');
+      opts.forEach(function(o) {
+        o.classList.remove('correct-opt', 'wrong-opt', 'disabled');
+      });
+      const explainDiv = q.querySelector('.explain');
+      explainDiv.className = 'explain';
+      explainDiv.textContent = '';
+      answered[idx] = false;
+    });
+    totalCorrect = 0;
+    updateScore();
+  });
+
+})();
+</script>
+
+    <script src="../../dt.js"></script>
+</body>
+</html>

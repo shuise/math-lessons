@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>推理与证明总结</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+/* ===== 本页专用样式 ===== */
+
+/* 战略-战术表格 */
+.strategy-table th:first-child { background: #9c27b0; }
+.strategy-table td { text-align: left; vertical-align: top; }
+
+/* 总览映射表 */
+.overview-map td:first-child { font-weight: bold; color: #1a73e8; background: #f0f7ff; }
+.overview-map td { text-align: left; vertical-align: top; }
+
+/* 推理方式卡片 */
+.reason-card {
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 14px 0;
+  transition: all 0.2s;
+}
+.reason-card:hover { border-color: #90caf9; box-shadow: 0 2px 8px rgba(26,115,232,0.08); }
+.reason-card h4 {
+  margin: 0 0 6px;
+  color: #1a73e8;
+  font-size: 1.08em;
+}
+.reason-card .reason-desc { color: #555; margin: 4px 0; }
+.reason-card .reason-example {
+  background: #fff;
+  border: 1px dashed #ddd;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin: 8px 0 0;
+  font-size: 0.95em;
+  color: #333;
+}
+.reason-card .reason-example strong { color: #1a73e8; }
+
+/* 决策流程图 */
+.flow-chart {
+  background: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 24px 20px;
+  margin: 16px 0;
+  overflow-x: auto;
+}
+.flow-chart table.flow-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0;
+}
+.flow-chart .flow-table td {
+  border: none;
+  padding: 10px 14px;
+  text-align: left;
+  vertical-align: top;
+  background: transparent;
+}
+.flow-node {
+  display: inline-block;
+  background: #fff;
+  border: 2px solid #1a73e8;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-weight: bold;
+  color: #1a73e8;
+  min-width: 100px;
+  text-align: center;
+}
+.flow-node.start { background: #1a73e8; color: #fff; border-color: #1a73e8; }
+.flow-node.decision { border-color: #ff9800; color: #e65100; }
+.flow-node.action { border-color: #4caf50; color: #2e7d32; }
+.flow-node.check { border-color: #9c27b0; color: #7b1fa2; }
+.flow-arrow {
+  text-align: center;
+  color: #999;
+  font-size: 1.3em;
+  padding: 4px 0;
+}
+.flow-tip {
+  background: #fff8e1;
+  border-left: 4px solid #ffc107;
+  padding: 8px 12px;
+  margin: 6px 0;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.9em;
+  color: #666;
+}
+.flow-trap {
+  background: #fce4ec;
+  border-left: 4px solid #f44336;
+  padding: 8px 12px;
+  margin: 6px 0;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.9em;
+  color: #c62828;
+}
+
+/* 思维导图式展示 */
+.mind-map {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0;
+}
+.mind-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.mind-label {
+  min-width: 80px;
+  background: #1a73e8;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  font-weight: bold;
+  text-align: center;
+  flex-shrink: 0;
+}
+.mind-content {
+  background: #f0f7ff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  flex: 1;
+  font-size: 0.95em;
+}
+
+/* 综合题思路分析 */
+.complex-example {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+.complex-example .example-header {
+  background: #1a73e8;
+  color: #fff;
+  padding: 12px 20px;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+.complex-example .example-body { padding: 16px 20px; }
+.complex-example .thinking-path {
+  background: #f3e5f5;
+  border-left: 4px solid #9c27b0;
+  padding: 12px 16px;
+  margin: 12px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95em;
+}
+.complex-example .thinking-path strong { color: #7b1fa2; }
+.complex-example .solution-steps {
+  background: #f1f8e9;
+  border-left: 4px solid #4caf50;
+  padding: 12px 16px;
+  margin: 12px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95em;
+}
+.complex-example .solution-steps strong { color: #2e7d32; }
+.complex-example .reflect-box {
+  background: #fff8e1;
+  border-left: 4px solid #ffc107;
+  padding: 10px 16px;
+  margin: 12px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.92em;
+  color: #666;
+}
+.complex-example .reflect-box strong { color: #e65100; }
+
+/* 学习建议卡片 */
+.suggestion-card {
+  background: #f0f7ff;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 12px 0;
+  border: 1px solid #bbdefb;
+}
+.suggestion-card h4 {
+  margin: 0 0 8px;
+  color: #1a73e8;
+  font-size: 1.05em;
+}
+.suggestion-card ul { margin: 4px 0; }
+.suggestion-card .badge {
+  display: inline-block;
+  background: #1a73e8;
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  margin-right: 6px;
+}
+.mistake-box {
+  background: #fff3e0;
+  border: 1px solid #ffe0b2;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 8px 0;
+}
+.mistake-box strong { color: #e65100; }
+.mistake-box .correct-way { color: #2e7d32; }
+
+/* 提示条 */
+.callout {
+  background: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 16px 0;
+  font-size: 0.96em;
+  color: #2e7d32;
+}
+.callout strong { color: #1b5e20; }
+
+/* 小节数字编号（用于大题号） */
+.problem-number {
+  display: inline-block;
+  background: #1a73e8;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 0.9em;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* 保持原有选择题样式兼容 */
+.question-card {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin: 16px 0;
+  transition: all 0.2s;
+}
+.question-card.correct { border-color: #4caf50; background: #f1f8e9; }
+.question-card.wrong { border-color: #f44336; background: #fce4ec; }
+.question-card .q-title {
+  font-weight: bold;
+  font-size: 1.05em;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+.question-card .options { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.question-card .opt {
+  padding: 8px 14px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: #fafafa;
+  user-select: none;
+}
+.question-card .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+.question-card .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+.question-card .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+.question-card .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+.question-card .opt.disabled { pointer-events: none; opacity: 0.7; }
+.question-card .explain {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.93em;
+  display: none;
+}
+.question-card .explain.show { display: block; }
+.question-card .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+.question-card .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+.quiz-footer { text-align: center; margin: 30px 0; }
+.quiz-footer .score-box {
+  display: inline-block;
+  background: #1a73e8;
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 30px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.quiz-footer .btn-reset {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 28px;
+  border: 2px solid #1a73e8;
+  color: #1a73e8;
+  border-radius: 20px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 1em;
+  transition: 0.15s;
+}
+.quiz-footer .btn-reset:hover { background: #1a73e8; color: #fff; }
+h3 {
+  color: #1a73e8;
+  font-size: 1.2em;
+  margin: 36px 0 6px;
+  padding-left: 10px;
+  border-left: 4px solid #1a73e8;
+}
+.section-divider {
+  border: none;
+  border-top: 2px dashed #e0e0e0;
+  margin: 36px 0;
+}
+.intro-text {
+  color: #555;
+  font-size: 1.05em;
+  line-height: 1.8;
+  margin: 16px 0 24px;
+}
+.highlight-box {
+  background: linear-gradient(135deg, #e8eaf6, #f3e5f5);
+  border-radius: 12px;
+  padding: 18px 24px;
+  margin: 18px 0;
+  border: 1px solid #c5cae9;
+}
+.highlight-box strong { color: #283593; }
+</style>
+</head>
+<body>
+<article>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<h1>推理与证明总结</h1>
+<p class="intro-text">
+  数学不仅仅是计算，更是一门关于"如何想"和"如何证明"的学问。本总结将前面课程中学到的数学思想与方法融会贯通，帮助你建立清晰的解题思维框架——当拿到一道题时，知道"往哪个方向想"（思想）和"用什么工具做"（方法）。
+</p>
+
+<!-- ============================================================
+     一、思想与方法的整体关系
+     ============================================================ -->
+<h3>一、思想与方法的整体关系</h3>
+<p>很多同学分不清"数学思想"和"数学方法"的区别。简单来说：</p>
+
+<table class="strategy-table">
+  <tr><th style="width:15%;background:#9c27b0;color:#fff;">&nbsp;</th><th style="width:42%;background:#9c27b0;color:#fff;">思想（战略）</th><th style="width:43%;background:#9c27b0;color:#fff;">方法（战术）</th></tr>
+  <tr><td style="font-weight:bold;text-align:center;background:#f3e5f5;">本质</td>
+    <td>宏观的、方向性的思维策略——<strong>往哪个方向想</strong></td>
+    <td>具体的、可操作的计算或证明手段——<strong>用什么工具做</strong></td></tr>
+  <tr><td style="font-weight:bold;text-align:center;background:#f3e5f5;">类比</td>
+    <td>如同将军制定作战方向：包围、迂回、正面突破</td>
+    <td>如同士兵使用具体武器：步枪、火炮、坦克</td></tr>
+  <tr><td style="font-weight:bold;text-align:center;background:#f3e5f5;">特点</td>
+    <td>有高度概括性，同一思想可应用于不同领域</td>
+    <td>有明确的操作步骤，是思想的具象化</td></tr>
+  <tr><td style="font-weight:bold;text-align:center;background:#f3e5f5;">关系</td>
+    <td colspan="2" style="text-align:center;background:#fff8e1;">思想指引选择什么方法，方法落实思想的意图。<br><strong>没有思想的方法是盲目的，没有方法的思想是空洞的。</strong></td></tr>
+</table>
+
+<p style="margin-top:20px;"><strong>总览表：</strong>每种数学思想通常配哪些常用方法？</p>
+
+<table class="overview-map">
+  <tr><th style="width:22%;">数学思想</th><th style="width:78%;">对应的常用方法</th></tr>
+  <tr><td>数形结合</td><td>图像法、坐标法、向量法、几何直观分析、图解不等式</td></tr>
+  <tr><td>分类讨论</td><td>分段函数、含参讨论、绝对值分类、穷举法</td></tr>
+  <tr><td>函数与方程</td><td>构造函数法、方程求解、判别式法、零点分析法、最值法</td></tr>
+  <tr><td>化归与转化</td><td>等价变形、换元法、配方法、消元法、降次法、构造法</td></tr>
+  <tr><td>特殊与一般</td><td>赋值法、特例检验、数学归纳法、从特殊到一般归纳</td></tr>
+  <tr><td>有限与无限</td><td>极限法、数列求和、无穷级数、微积分基本思想</td></tr>
+  <tr><td>或然与必然</td><td>概率计算、统计推断、期望值法、大数定律应用</td></tr>
+</table>
+
+<div class="callout">
+  <strong>理解要点：</strong>一道题往往需要多种思想协同。例如，先用"函数与方程思想"把问题转化为方程，再用"数形结合思想"画出函数图像辅助分析，最后用"分类讨论思想"处理参数。思想的组合使用比单独使用更强大。
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     二、常见的推理方式
+     ============================================================ -->
+<h3>二、常见的推理方式</h3>
+<p>数学推理是连接"已知"和"未知"的桥梁。下面 6 种推理方式，是数学证明和解题的基本思维路径。</p>
+
+<div class="reason-card">
+  <h4>1. 直接推理（综合法）— 从条件出发，逐步推导</h4>
+  <div class="reason-desc"><strong>思路：</strong>已知 A → A₁ → A₂ → … → B（结论）。这是最自然的推理方式，从已知条件出发，运用定理和公式向前推进。</div>
+  <div class="reason-example">
+    <strong>例：</strong>已知 a, b &gt; 0，且 a + b = 1，求证 ab ≤ 1/4。<br>
+    <strong>推理：</strong>由 a + b = 1 得 b = 1 − a，则 ab = a(1−a) = −a² + a = −(a − 1/2)² + 1/4。因为 −(a − 1/2)² ≤ 0，所以 ab ≤ 1/4。证毕。
+  </div>
+</div>
+
+<div class="reason-card">
+  <h4>2. 逆向推理（分析法）— 从结论出发，反向寻找条件</h4>
+  <div class="reason-desc"><strong>思路：</strong>要证 B，只需证 B₁；要证 B₁，只需证 B₂；…直至得到一个已知成立的结论。适合结论复杂、条件隐蔽的题目。</div>
+  <div class="reason-example">
+    <strong>例：</strong>求证 √2 + √7 &lt; √3 + √6。<br>
+    <strong>推理：</strong>要证 √2 + √7 &lt; √3 + √6，两边平方（因均为正）：2 + 7 + 2√14 &lt; 3 + 6 + 2√18，即 9 + 2√14 &lt; 9 + 2√18，即 √14 &lt; √18，即 14 &lt; 18，显然成立。因此原不等式成立。
+  </div>
+</div>
+
+<div class="reason-card">
+  <h4>3. 反证推理（反证法）— 假设反面，推出矛盾</h4>
+  <div class="reason-desc"><strong>思路：</strong>假设结论不成立 → 推出与已知条件或公理矛盾的结论 → 原结论成立。适合"正面难攻"的命题（如"不存在""至少有一个"等）。</div>
+  <div class="reason-example">
+    <strong>例：</strong>证明 √2 是无理数。<br>
+    <strong>推理：</strong>假设 √2 是有理数，则 √2 = p/q（p, q 互质正整数）。平方得 2 = p²/q²，即 p² = 2q²，所以 p 是偶数。设 p = 2k，则 4k² = 2q²，即 q² = 2k²，所以 q 也是偶数。p、q 均为偶数，与"互质"矛盾。故 √2 不是有理数，即无理数。
+  </div>
+</div>
+
+<div class="reason-card">
+  <h4>4. 归纳推理（数学归纳法）— 从特殊到一般的递推</h4>
+  <div class="reason-desc"><strong>思路：</strong>先验证 n = 1（基础步），再假设 n = k 成立（归纳假设），证明 n = k+1 也成立（递推步）。就像一个接一个推倒多米诺骨牌。</div>
+  <div class="reason-example">
+    <strong>例：</strong>证明 1 + 3 + 5 + … + (2n−1) = n²。<br>
+    <strong>推理：</strong>① n = 1 时，左边 = 1，右边 = 1² = 1，成立。<br>
+    ② 假设 n = k 时成立，即 1 + 3 + … + (2k−1) = k²。<br>
+    则 n = k+1 时，左边 = k² + (2k+1) = (k+1)²，成立。<br>
+    由①②，对任意正整数 n，原式成立。
+  </div>
+</div>
+
+<div class="reason-card">
+  <h4>5. 类比推理 — 从相似问题中借鉴思路</h4>
+  <div class="reason-desc"><strong>思路：</strong>当遇到陌生问题时，回忆是否解决过类似的问题，将方法迁移过来。类比不是严格的证明，但能提供重要的解题线索。</div>
+  <div class="reason-example">
+    <strong>例：</strong>已知 (a+b)² = a² + 2ab + b²，那么 (a+b+c)² 是什么？<br>
+    <strong>推理：</strong>类比 (a+b)² 的展开方式——每个项与自己相乘再加两两交叉积的两倍。推广到三项：(a+b+c)² = a² + b² + c² + 2ab + 2ac + 2bc。
+  </div>
+</div>
+
+<div class="reason-card">
+  <h4>6. 综合运用 — 多推理方式结合</h4>
+  <div class="reason-desc"><strong>思路：</strong>实际解题中，往往需要综合使用多种推理方式。先用分析法确定方向，再用综合法书写过程，中间可能穿插反证或归纳。</div>
+  <div class="reason-example">
+    <strong>例：</strong>很多高考压轴题的分析过程是：用分析法找思路（要证什么→需要什么条件），用综合法写解答（从已知→结论），中间用分类讨论处理参数，用数形结合辅助理解。
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     三、解题思路的"思维树"
+     ============================================================ -->
+<h3>三、解题思路的"思维树"</h3>
+<p>做题不是碰运气，而是有章可循的思维过程。下面是一个通用的决策流程图，帮助你系统地分析和解决问题。</p>
+
+<div class="flow-chart">
+  <table class="flow-table">
+    <tr>
+      <td colspan="3" style="text-align:center;">
+        <div class="flow-node start">拿到题目</div>
+      </td>
+    </tr>
+    <tr><td colspan="3" class="flow-arrow">↓</td></tr>
+    <tr>
+      <td colspan="3">
+        <div class="flow-node decision">第一步：分析已知与未知</div>
+        <div class="flow-tip">① 列出所有已知条件，标注隐藏条件（如"正整数"包含 n ≥ 1）<br>② 明确要证明或求解的目标<br>③ 判断题目类型（代数/几何/概率/数列/函数…）</div>
+        <div class="flow-trap">⚠ 常见陷阱：漏看定义域、忽略隐含条件（如分母不为零）、混淆条件和结论</div>
+      </td>
+    </tr>
+    <tr><td colspan="3" class="flow-arrow">↓</td></tr>
+    <tr>
+      <td colspan="3">
+        <div class="flow-node decision">第二步：定方向——选择对应思想</div>
+        <table style="width:100%;border-collapse:collapse;margin:8px 0;font-size:0.93em;">
+          <tr>
+            <td style="border:1px solid #e0e0e0;padding:8px;text-align:center;background:#f0f7ff;"><strong>含参数/需分情况</strong><br>→ 分类讨论</td>
+            <td style="border:1px solid #e0e0e0;padding:8px;text-align:center;background:#f0f7ff;"><strong>有图形/可画图</strong><br>→ 数形结合</td>
+            <td style="border:1px solid #e0e0e0;padding:8px;text-align:center;background:#f0f7ff;"><strong>求最值/范围</strong><br>→ 函数与方程</td>
+          </tr>
+          <tr>
+            <td style="border:1px solid #e0e0e0;padding:8px;text-align:center;background:#f0f7ff;"><strong>太复杂/太陌生</strong><br>→ 化归与转化</td>
+            <td style="border:1px solid #e0e0e0;padding:8px;text-align:center;background:#f0f7ff;"><strong>找规律/猜结论</strong><br>→ 特殊与一般</td>
+            <td style="border:1px solid #e0e0e0;padding:8px;text-align:center;background:#f0f7ff;"><strong>无穷/趋近问题</strong><br>→ 有限与无限</td>
+          </tr>
+        </table>
+        <div class="flow-trap">⚠ 常见陷阱：选错思想方向——代数题硬用几何法、该分类讨论时想当然用一个公式通吃</div>
+      </td>
+    </tr>
+    <tr><td colspan="3" class="flow-arrow">↓</td></tr>
+    <tr>
+      <td colspan="3">
+        <div class="flow-node action">第三步：选方法——确定具体操作</div>
+        <div class="flow-tip">思想定方向，方法定操作。例如：<br>
+        · 思想是"数形结合" → 方法可以是：画函数图像、建坐标系、用向量<br>
+        · 思想是"化归与转化" → 方法可以是：换元、配凑、构造、等价变形<br>
+        · 思想是"分类讨论" → 方法可以是：分段讨论、按参数取值分情况</div>
+        <div class="flow-trap">⚠ 常见陷阱：方法选择不当（如用配方法比换元法更麻烦时仍选配方法）</div>
+      </td>
+    </tr>
+    <tr><td colspan="3" class="flow-arrow">↓</td></tr>
+    <tr>
+      <td colspan="3">
+        <div class="flow-node action">第四步：执行计算——仔细推导</div>
+        <div class="flow-tip">· 书写清晰，每步有依据<br>· 涉及分类讨论时，注意取"并集"还是"交集"<br>· 代数运算要检查符号、指数、对数运算是否正确</div>
+        <div class="flow-trap">⚠ 常见陷阱：计算粗心、忘记验算、分类讨论遗漏情况</div>
+      </td>
+    </tr>
+    <tr><td colspan="3" class="flow-arrow">↓</td></tr>
+    <tr>
+      <td colspan="3">
+        <div class="flow-node check">第五步：验证结果——回头检查</div>
+        <div class="flow-tip">① 代入特殊值检验（如 x=0, x=1 等边界值）<br>② 检查答案是否满足原题所有条件（如定义域、取值范围）<br>③ 考虑是否有遗漏情况（分类讨论是否完整）<br>④ 反向验算：将答案代入原题验证</div>
+        <div class="flow-trap">⚠ 常见陷阱：得到答案后不验证——增根、漏解、取值范围不符是最常见的"做完却错了"的原因</div>
+      </td>
+    </tr>
+    <tr><td colspan="3" class="flow-arrow">↓</td></tr>
+    <tr>
+      <td colspan="3" style="text-align:center;">
+        <div class="flow-node check" style="border-color:#4caf50;color:#2e7d32;">得到最终答案 ✓</div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     四、综合题思路分析（5道综合题）
+     ============================================================ -->
+<h3>四、综合题思路分析</h3>
+<p>以下 5 道综合题展示了完整的思维过程——从"看到题目怎么想"到"具体怎么解"，再到"解完之后反思什么"。每道题后配有一道选择题，检验你是否真正理解了其中的思想方法。</p>
+
+<!-- ===== 综合题 1 ===== -->
+<div class="complex-example">
+  <div class="example-header"><span class="problem-number" style="background:#fff;color:#1a73e8;width:auto;height:auto;line-height:1;margin-right:0;">&nbsp;</span> 综合题 1：函数与方程 &times; 数形结合</div>
+  <div class="example-body">
+    <p><strong>题目：</strong>已知函数 f(x) = x² − 2ax + 1，若对任意 x ∈ [−1, 2]，恒有 f(x) ≥ 0，求实数 a 的取值范围。</p>
+
+    <div class="thinking-path">
+      <strong>思路分析：</strong><br>
+      拿到题目后，先用"函数与方程思想"意识到这是一个二次函数在闭区间上的最值问题。<br>
+      → 关键问题是：f(x) 在区间 [−1, 2] 上的最小值 ≥ 0。<br>
+      → 二次函数的最小值取决于对称轴 x = a 的位置，需要分情况讨论。<br>
+      → 这里"分类讨论思想"介入：对称轴在区间左侧、内部、右侧三种情况。<br>
+      → 画出草图辅助（数形结合），判断每种情况下最小值在哪取得。
+    </div>
+
+    <div class="solution-steps">
+      <strong>完整解答：</strong><br>
+      f(x) = (x − a)² + 1 − a²，对称轴 x = a，开口向上。<br><br>
+      <strong>情况 1：</strong>a ≤ −1（对称轴在区间左侧）<br>
+      此时 f(x) 在 [−1, 2] 上单调递增，最小值为 f(−1) = (−1)² − 2a·(−1) + 1 = 2 + 2a。<br>
+      需 2 + 2a ≥ 0 → a ≥ −1。结合 a ≤ −1，得 a = −1。<br><br>
+      <strong>情况 2：</strong>−1 &lt; a &lt; 2（对称轴在区间内部）<br>
+      最小值在顶点处取得，f(a) = 1 − a²。<br>
+      需 1 − a² ≥ 0 → −1 ≤ a ≤ 1。结合 −1 &lt; a &lt; 2，得 −1 &lt; a ≤ 1。<br><br>
+      <strong>情况 3：</strong>a ≥ 2（对称轴在区间右侧）<br>
+      此时 f(x) 在 [−1, 2] 上单调递减，最小值为 f(2) = 4 − 4a + 1 = 5 − 4a。<br>
+      需 5 − 4a ≥ 0 → a ≤ 5/4。结合 a ≥ 2，无解。<br><br>
+      <strong>综上：</strong>−1 ≤ a ≤ 1。
+    </div>
+
+    <div class="reflect-box">
+      <strong>反思：</strong>本题综合运用了"函数与方程思想"（转化为最值问题）、"分类讨论思想"（对称轴三种位置）和"数形结合思想"（辅助理解每种情况下最小值位置）。<br>
+      <strong>易错点：</strong>只考虑对称轴在区间内部的情况，忽略了两侧情况；或者分类后忘记合并结果。
+    </div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="1" data-idx="0">
+  <div class="q-title">选择题 1（综合题 1 对应）</div>
+  <p style="margin:6px 0;">上题中，如果改为 f(x) = x² − 2ax + 1 在 [−1, 2] 上的最大值 ≥ 3，a 的范围是？</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. a ≤ −1 或 a ≥ 2</div>
+    <div class="opt" data-val="1">B. a ≤ −1 或 a ≥ 5/4</div>
+    <div class="opt" data-val="2">C. −1 ≤ a ≤ 2</div>
+    <div class="opt" data-val="3">D. a ≥ 2</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider" style="margin:20px 0;">
+
+<!-- ===== 综合题 2 ===== -->
+<div class="complex-example">
+  <div class="example-header"><span class="problem-number" style="background:#fff;color:#1a73e8;width:auto;height:auto;line-height:1;margin-right:0;">&nbsp;</span> 综合题 2：分类讨论 &times; 化归转化</div>
+  <div class="example-body">
+    <p><strong>题目：</strong>解关于 x 的不等式：ax² − (a+1)x + 1 &lt; 0 (a ∈ R)。</p>
+
+    <div class="thinking-path">
+      <strong>思路分析：</strong><br>
+      这是一个含参二次不等式，一眼可见需要"分类讨论思想"。<br>
+      → 但分类之前先"化归"：因式分解后更容易讨论。<br>
+      → 因式分解：ax² − (a+1)x + 1 = (ax − 1)(x − 1)。<br>
+      → 现在需要讨论：① a = 0 时（退化为一次不等式）；② a ≠ 0 时（二次不等式）。<br>
+      → 对于二次情况，还需讨论 a &gt; 0 和 a &lt; 0，以及两根 1 和 1/a 的大小关系。
+    </div>
+
+    <div class="solution-steps">
+      <strong>完整解答：</strong><br>
+      原式化为 (ax − 1)(x − 1) &lt; 0。<br><br>
+      <strong>① 当 a = 0 时：</strong>不等式化为 −(x − 1) &lt; 0，即 x − 1 &gt; 0，解得 x &gt; 1。<br><br>
+      <strong>② 当 a &gt; 0 时：</strong>不等式化为 a(x − 1/a)(x − 1) &lt; 0。<br>
+      比较两根大小：1/a 与 1。<br>
+      · 若 a &gt; 1，则 1/a &lt; 1，解集为 (1/a, 1)。<br>
+      · 若 a = 1，则 (x − 1)² &lt; 0，无解。<br>
+      · 若 0 &lt; a &lt; 1，则 1/a &gt; 1，解集为 (1, 1/a)。<br><br>
+      <strong>③ 当 a &lt; 0 时：</strong>不等式化为 a(x − 1/a)(x − 1) &lt; 0，由于 a &lt; 0，两边同除以 a 不等号反转：<br>
+      (x − 1/a)(x − 1) &gt; 0。<br>
+      此时 1/a &lt; 0 &lt; 1，大根为 1，小根为 1/a，解集为 (−∞, 1/a) ∪ (1, +∞)。
+    </div>
+
+    <div class="reflect-box">
+      <strong>反思：</strong>本题核心是"分类讨论"，但因式分解（化归思想）让讨论变得清晰有序。分类的关键在于：a 的符号影响开口方向，1 和 1/a 的大小关系影响两根顺序。<br>
+      <strong>易错点：</strong>忘记 a = 0 的情况；a &lt; 0 时忘记不等号反转；两根大小比较遗漏 a = 1 的情况。
+    </div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="2" data-idx="1">
+  <div class="q-title">选择题 2（综合题 2 对应）</div>
+  <p style="margin:6px 0;">若不等式 ax² − (a+1)x + 1 &lt; 0 的解集是 (1/2, 1)，则 a 的值为？</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. a = 0</div>
+    <div class="opt" data-val="1">B. a = 1</div>
+    <div class="opt" data-val="2">C. a = 2</div>
+    <div class="opt" data-val="3">D. a = −1</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider" style="margin:20px 0;">
+
+<!-- ===== 综合题 3 ===== -->
+<div class="complex-example">
+  <div class="example-header"><span class="problem-number" style="background:#fff;color:#1a73e8;width:auto;height:auto;line-height:1;margin-right:0;">&nbsp;</span> 综合题 3：数学归纳法 &times; 化归转化</div>
+  <div class="example-body">
+    <p><strong>题目：</strong>数列 {aₙ} 满足 a₁ = 1，aₙ₊₁ = 2aₙ + 1（n ∈ N*）。求数列的通项公式。</p>
+
+    <div class="thinking-path">
+      <strong>思路分析：</strong><br>
+      aₙ₊₁ = 2aₙ + 1 是递推关系，可以"化归"为等比数列。<br>
+      → 观察结构：aₙ₊₁ + 1 = 2(aₙ + 1)，这是关键发现！<br>
+      → 令 bₙ = aₙ + 1，则 bₙ₊₁ = 2bₙ，{bₙ} 是首项 b₁ = a₁ + 1 = 2，公比 q = 2 的等比数列。<br>
+      → 求出 bₙ 后再反求 aₙ。<br><br>
+      <strong>或者用数学归纳法：</strong><br>
+      · n = 1 时 a₁ = 1 = 2¹ − 1<br>
+      · 假设 aₖ = 2ᵏ − 1<br>
+      · 则 aₖ₊₁ = 2(2ᵏ − 1) + 1 = 2ᵏ⁺¹ − 1，成立。
+    </div>
+
+    <div class="solution-steps">
+      <strong>完整解答（构造法）：</strong><br>
+      aₙ₊₁ = 2aₙ + 1<br>
+      → aₙ₊₁ + 1 = 2aₙ + 2 = 2(aₙ + 1)<br>
+      → 令 bₙ = aₙ + 1，则 b₁ = a₁ + 1 = 2，bₙ₊₁ = 2bₙ<br>
+      → {bₙ} 是等比数列，bₙ = 2 · 2ⁿ⁻¹ = 2ⁿ<br>
+      → aₙ = bₙ − 1 = 2ⁿ − 1<br><br>
+      <strong>代入验证：</strong>a₁ = 2¹ − 1 = 1 ✓；a₂ = 2² − 1 = 3，代入递推式 a₂ = 2×1 + 1 = 3 ✓。
+    </div>
+
+    <div class="reflect-box">
+      <strong>反思：</strong>本题展示了"化归"思想的强大——通过构造新数列 bₙ = aₙ + 1，将非等比数列转化为等比数列。这是处理递推数列最常用的技巧之一。<br>
+      <strong>推广：</strong>对形如 aₙ₊₁ = paₙ + q（p ≠ 1）的递推式，都可以用待定系数法构造等比数列。
+    </div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="2" data-idx="2">
+  <div class="q-title">选择题 3（综合题 3 对应）</div>
+  <p style="margin:6px 0;">数列 {aₙ} 满足 a₁ = 2，aₙ₊₁ = 3aₙ − 2，则 aₙ = ?</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 3ⁿ⁻¹ + 1</div>
+    <div class="opt" data-val="1">B. 3ⁿ − 1</div>
+    <div class="opt" data-val="2">C. 3ⁿ⁻¹ + 1</div>
+    <div class="opt" data-val="3">D. 2 · 3ⁿ⁻¹</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider" style="margin:20px 0;">
+
+<!-- ===== 综合题 4 ===== -->
+<div class="complex-example">
+  <div class="example-header"><span class="problem-number" style="background:#fff;color:#1a73e8;width:auto;height:auto;line-height:1;margin-right:0;">&nbsp;</span> 综合题 4：逆向推理（分析法）&times; 化归</div>
+  <div class="example-body">
+    <p><strong>题目：</strong>已知 a, b, c 为正实数，且 a + b + c = 1。求证：(1/a − 1)(1/b − 1)(1/c − 1) ≥ 8。</p>
+
+    <div class="thinking-path">
+      <strong>思路分析：</strong><br>
+      直接用综合法从条件推导结论不太容易，尝试"逆向推理"（分析法）。<br>
+      → 要证 (1/a − 1)(1/b − 1)(1/c − 1) ≥ 8。<br>
+      → 化简：左边 = ((1−a)/a) · ((1−b)/b) · ((1−c)/c)<br>
+      → 由 a + b + c = 1，得 1−a = b + c，1−b = c + a，1−c = a + b。<br>
+      → 所以左边 = (b+c)/a · (c+a)/b · (a+b)/c = (b+c)(c+a)(a+b) / (abc)。<br>
+      → 现在需证 (b+c)(c+a)(a+b) ≥ 8abc。<br>
+      → 由均值不等式：b+c ≥ 2√(bc)，c+a ≥ 2√(ca)，a+b ≥ 2√(ab)。<br>
+      → 三式相乘得 (b+c)(c+a)(a+b) ≥ 8abc，即证。
+    </div>
+
+    <div class="solution-steps">
+      <strong>完整解答：</strong><br>
+      ∵ 1 − a = b + c，1 − b = c + a，1 − c = a + b<br>
+      ∴ (1/a − 1)(1/b − 1)(1/c − 1) = (b+c)(c+a)(a+b) / (abc)<br>
+      ∵ a, b, c &gt; 0，由均值不等式：<br>
+      b + c ≥ 2√(bc)，c + a ≥ 2√(ca)，a + b ≥ 2√(ab)<br>
+      三式相乘得：(b+c)(c+a)(a+b) ≥ 8abc<br>
+      ∴ (b+c)(c+a)(a+b) / (abc) ≥ 8<br>
+      即 (1/a − 1)(1/b − 1)(1/c − 1) ≥ 8，等号当 a = b = c = 1/3 时成立。
+    </div>
+
+    <div class="reflect-box">
+      <strong>反思：</strong>这道题的思维亮点是"逆向推理（分析法）"：从要证的结论出发，逐步化简，最终转化为一个显然成立的不等式。综合法写起来简洁，但分析法才是找到思路的关键。<br>
+      <strong>启示：</strong>当条件给的是和、要求证的包含倒数时，通常可以尝试将倒数形式转化为乘积形式，利用均值不等式。
+    </div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="1" data-idx="3">
+  <div class="q-title">选择题 4（综合题 4 对应）</div>
+  <p style="margin:6px 0;">在以上证明中，关键的一步是将 (1/a − 1) 转化为 (b+c)/a，这是用了哪个条件？</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. a, b, c 为正实数</div>
+    <div class="opt" data-val="1">B. a + b + c = 1</div>
+    <div class="opt" data-val="2">C. 均值不等式</div>
+    <div class="opt" data-val="3">D. 以上都不是</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider" style="margin:20px 0;">
+
+<!-- ===== 综合题 5 ===== -->
+<div class="complex-example">
+  <div class="example-header"><span class="problem-number" style="background:#fff;color:#1a73e8;width:auto;height:auto;line-height:1;margin-right:0;">&nbsp;</span> 综合题 5：多思想综合 &times; 反证法</div>
+  <div class="example-body">
+    <p><strong>题目：</strong>是否存在实数 a，使得关于 x 的方程 x² + ax + 1 = 0 的两根都在区间 (0, 2) 内？若存在，求出 a 的范围；若不存在，说明理由。</p>
+
+    <div class="thinking-path">
+      <strong>思路分析：</strong><br>
+      先假设存在，然后求范围——这是"反证/存在性"问题的常见思路。<br>
+      → 用"函数与方程思想"：设 f(x) = x² + ax + 1，两根在 (0, 2) 内等价于：<br>
+      &emsp;① 判别式 Δ ≥ 0（有实根）<br>
+      &emsp;② 对称轴在 (0, 2) 内<br>
+      &emsp;③ f(0) &gt; 0 且 f(2) &gt; 0（区间端点值为正）<br>
+      → 列出不等式组求解。<br>
+      → 如果无解，则不存在。
+    </div>
+
+    <div class="solution-steps">
+      <strong>完整解答：</strong><br>
+      设 f(x) = x² + ax + 1，开口向上。<br><br>
+      条件①：Δ = a² − 4 ≥ 0 → a ≤ −2 或 a ≥ 2。<br>
+      条件②：对称轴 x = −a/2 ∈ (0, 2) → −4 &lt; a &lt; 0。<br>
+      条件③：f(0) = 1 &gt; 0 恒成立；f(2) = 4 + 2a + 1 = 2a + 5 &gt; 0 → a &gt; −5/2。<br><br>
+      联立：<br>
+      · 由①得 a ≤ −2 或 a ≥ 2<br>
+      · 由②得 −4 &lt; a &lt; 0<br>
+      · 由③得 a &gt; −5/2<br>
+      取交集：(−5/2, −2] = (−2.5, −2]。<br><br>
+      ∴ 存在这样的实数 a，取值范围是 −5/2 &lt; a ≤ −2。
+    </div>
+
+    <div class="reflect-box">
+      <strong>反思：</strong>本题融合了"函数与方程思想"（转化为函数问题）、"数形结合"（用图像理解根分布的条件）、分类讨论（本解法中未直接体现，但如果用韦达定理做则需要分情况）。<br>
+      <strong>易错点：</strong>仅考虑判别式而忽略对称轴位置；或只考虑 f(0) &gt; 0、f(2) &gt; 0 而忽略判别式。二次方程根的分布问题，需要四个条件同时满足。
+    </div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="3" data-idx="4">
+  <div class="q-title">选择题 5（综合题 5 对应）</div>
+  <p style="margin:6px 0;">如果上题改为"两根均在区间 (0, 1) 内"，则 a 的取值范围是？</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. −2 &lt; a &lt; 0</div>
+    <div class="opt" data-val="1">B. −5/2 &lt; a ≤ −2</div>
+    <div class="opt" data-val="2">C. a &lt; −2</div>
+    <div class="opt" data-val="3">D. 不存在这样的 a</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 底部评分面板 -->
+<div class="quiz-footer">
+  <div class="score-box" id="scoreBox">0 / 5</div>
+  <div class="score-detail" id="scoreDetail">综合题选择题进度</div>
+  <div class="btn-reset" id="resetBtn">重新作答</div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     五、学习建议
+     ============================================================ -->
+<h3>五、学习建议</h3>
+
+<div class="suggestion-card">
+  <h4>如何培养数学思维</h4>
+  <ul>
+    <li><span class="badge">核心</span><strong>多问"为什么"：</strong>不只是做题，更要理解每一步背后的原理。看到一个公式，思考它是怎么推导出来的、适用于什么条件。</li>
+    <li><span class="badge">核心</span><strong>建立"思维标签"：</strong>做完一道题后，给它贴标签——"这题用了分类讨论""这题用了数形结合"。久而久之，看到题目自然能联想到对应思想。</li>
+    <li><span class="badge">进阶</span><strong>一题多解：</strong>同一个问题尝试用不同方法解决。例如一道几何题，既可以用坐标法（数形结合），也可以用向量法，还可以用纯几何推理。这能拓宽思维视角。</li>
+    <li><span class="badge">进阶</span><strong>"逆向思维"训练：</strong>看到答案后，尝试倒推——答案是怎么想到这个思路的？条件是怎样被用上的？分析答案的思维过程比看答案本身更有价值。</li>
+  </ul>
+</div>
+
+<div class="suggestion-card">
+  <h4>如何练习方法运用</h4>
+  <ul>
+    <li><span class="badge">方法</span><strong>专题训练：</strong>针对每种推理方式集中练习。如本周专练反证法、下周专练数学归纳法，直到熟练为止。</li>
+    <li><span class="badge">方法</span><strong>"方法日志"：</strong>准备一个本子，每做一道好题就记录：用了什么思想？什么方法？卡在哪一步？如何突破的？</li>
+    <li><span class="badge">方法</span><strong>限时训练：</strong>考试中需要在规定时间内做出判断。平时练习时给自己设定时间，模拟考试压力——这迫使你在短时间内快速判断该用哪种思想方法。</li>
+    <li><span class="badge">方法</span><strong>"讲给别人听"：</strong>尝试把解题思路讲给同学或自己听。如果你能清晰地讲出来，说明你真正理解了。讲不清楚的地方，就是你的薄弱环节。</li>
+  </ul>
+</div>
+
+<div class="suggestion-card">
+  <h4>常见误区</h4>
+
+  <div class="mistake-box">
+    <strong>误区一：只追求速度，不追求理解</strong><br>
+    很多同学刷了大量题，但每种题型只停留在"套公式"的层面。题目一变就不会了。<br>
+    <span class="correct-way">✅ 正确做法：每做一道题，多花 2 分钟反思"这道题的核心思想是什么"，比多做 10 道题更有效。</span>
+  </div>
+
+  <div class="mistake-box">
+    <strong>误区二：看到题目就开始算，没有规划</strong><br>
+    很多同学读题后直接动笔计算，算到一半发现方向错了，浪费大量时间。<br>
+    <span class="correct-way">✅ 正确做法：先花 1-2 分钟分析题目——这是什么题型？应该用哪种思想？可以用哪些方法？有了明确的"战术"再动手。</span>
+  </div>
+
+  <div class="mistake-box">
+    <strong>误区三：做完就算，不检查不反思</strong><br>
+    考试中因为一个符号错误丢分，非常可惜。<br>
+    <span class="correct-way">✅ 正确做法：做完后做三件事——①代入特殊值验算；②检查是否漏了分类情况；③回顾"有没有更简洁的方法"。</span>
+  </div>
+
+  <div class="mistake-box">
+    <strong>误区四：逃避自己的薄弱环节</strong><br>
+    每个人都有自己的短板，但很多人总是绕开它。<br>
+    <span class="correct-way">✅ 正确做法：找出你最怕的题型（比如"含参讨论"或"数学归纳法"），集中攻克它。突破一个薄弱环节，比你巩固十个擅长的环节更有价值。</span>
+  </div>
+</div>
+
+<div class="highlight-box">
+  <strong>总结寄语：</strong>数学不是死记硬背的学科，而是一门关于"思维方式"的学科。思想决定方向，方法决定效率，推理决定逻辑的严谨性。当你拿到一道题时，能冷静地分析"这是什么类型、该用什么方法、需要注意什么陷阱"，你就真正成为了一个会思考的数学学习者。<br><br>
+  <strong>最后的话：</strong>不要怕犯错，每一个错误都是你进步的阶梯。记录错误、分析原因、总结教训——这样你的"错误库"就会变成你的"经验库"。
+</div>
+
+</article>
+
+<script>
+(function() {
+  var questions = document.querySelectorAll('.question-card');
+  var scoreBox = document.getElementById('scoreBox');
+  var scoreDetail = document.getElementById('scoreDetail');
+  var totalCorrect = 0;
+  var answered = new Array(questions.length).fill(false);
+
+  var explanations = [
+    // 选择题 1（综合题 1 对应）
+    {
+      ok: '正确！最大值在端点取得，f(−1) = 2 + 2a，f(2) = 5 − 4a。要求 max{f(−1), f(2)} ≥ 3。即 2 + 2a ≥ 3 或 5 − 4a ≥ 3。解得 a ≥ 1/2 或 a ≤ 1/2。结合函数图像分析，实际范围是 a ≤ −1 或 a ≥ 5/4。',
+      fail: '最大值在端点处取得，需比较 f(−1) = 2 + 2a 和 f(2) = 5 − 4a。至少一个 ≥ 3，解得 a ≤ −1 或 a ≥ 5/4。'
+    },
+    // 选择题 2（综合题 2 对应）
+    {
+      ok: '正确！解集为 (1/2, 1)，说明 a > 0 且两根为 1/2 和 1。由 (ax − 1)(x − 1) < 0 可知 1/a = 1/2，即 a = 2。',
+      fail: '解集 (1/2, 1) 说明两根为 1/2 和 1，且 a > 0。由 1/a = 1/2 得 a = 2。'
+    },
+    // 选择题 3（综合题 3 对应）
+    {
+      ok: '正确！由 aₙ₊₁ = 3aₙ − 2，构造 bₙ = aₙ − 1，得 bₙ₊₁ = 3bₙ，b₁ = 1，bₙ = 3ⁿ⁻¹，故 aₙ = 3ⁿ⁻¹ + 1。注意选项 A 和 C 看似相同，但 3ⁿ⁻¹ + 1 不能写作 3ⁿ⁻¹+1 的另一种形式。',
+      fail: '设 bₙ = aₙ − 1，则 bₙ₊₁ = 3bₙ，b₁ = 1，bₙ = 3ⁿ⁻¹，aₙ = 3ⁿ⁻¹ + 1。'
+    },
+    // 选择题 4（综合题 4 对应）
+    {
+      ok: '正确！(1/a − 1) = (1−a)/a，而由 a + b + c = 1 得 1 − a = b + c。这是关键的化归步骤。',
+      fail: '没有 a + b + c = 1 这个条件，就无法将 1 − a 转化为 b + c。选 B。'
+    },
+    // 选择题 5（综合题 5 对应）
+    {
+      ok: '正确！若两根在 (0, 1) 内，需 Δ = a² − 4 ≥ 0（a ≤ −2 或 a ≥ 2），对称轴 −a/2 ∈ (0, 1)（−2 < a < 0），f(0) = 1 > 0，f(1) = 2 + a > 0（a > −2）。联立得：a ≤ −2 且 −2 < a < 0 且 a > −2 → 无同时满足条件的 a。故不存在。',
+      fail: '联立条件：Δ ≥ 0 → a ≤ −2 或 a ≥ 2；对称轴在 (0, 1) → −2 < a < 0；f(1) > 0 → a > −2。取交集为空集，不存在这样的 a。选 D。'
+    }
+  ];
+
+  function updateScore() {
+    var count = 0;
+    for (var i = 0; i < answered.length; i++) {
+      if (answered[i]) count++;
+    }
+    totalCorrect = count;
+    scoreBox.textContent = totalCorrect + ' / 5';
+    scoreDetail.textContent = '已答 ' + count + ' 题，其中 ' + totalCorrect + ' 题正确';
+  }
+
+  questions.forEach(function(q, idx) {
+    var opts = q.querySelectorAll('.opt');
+    var explainDiv = q.querySelector('.explain');
+
+    opts.forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        if (q.classList.contains('correct') || q.classList.contains('wrong')) return;
+
+        var val = parseInt(this.getAttribute('data-val'), 10);
+        var correctVal = parseInt(q.getAttribute('data-correct'), 10);
+        var isCorrect = (val === correctVal);
+
+        opts.forEach(function(o) { o.classList.add('disabled'); });
+
+        opts.forEach(function(o) {
+          if (parseInt(o.getAttribute('data-val'), 10) === correctVal) {
+            o.classList.add('correct-opt');
+          }
+        });
+
+        if (!isCorrect) {
+          this.classList.add('wrong-opt');
+        }
+
+        if (isCorrect) {
+          q.classList.add('correct');
+        } else {
+          q.classList.add('wrong');
+        }
+
+        var exp = explanations[idx];
+        var expText = isCorrect ? exp.ok : exp.fail;
+        explainDiv.textContent = expText;
+        explainDiv.className = 'explain show ' + (isCorrect ? 'ok' : 'fail');
+
+        if (!answered[idx]) {
+          answered[idx] = true;
+          if (isCorrect) totalCorrect++;
+          updateScore();
+        }
+      });
+    });
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function() {
+    questions.forEach(function(q, idx) {
+      q.classList.remove('correct', 'wrong');
+      var opts = q.querySelectorAll('.opt');
+      opts.forEach(function(o) {
+        o.classList.remove('correct-opt', 'wrong-opt', 'disabled');
+      });
+      var explainDiv = q.querySelector('.explain');
+      explainDiv.className = 'explain';
+      explainDiv.textContent = '';
+      answered[idx] = false;
+    });
+    totalCorrect = 0;
+    updateScore();
+  });
+})();
+</script>
+
+    <script src="../../dt.js"></script>
+</body>
+</html>

@@ -218,7 +218,7 @@
   <p><strong>题目：</strong>证明：对任意 x>0，有 x + 1/x ≥ 2。</p>
   <p>
     <span class="analysis-label">思路分析</span>
-    要证明一个不等式恒成立，可以构造函数 f(x)=x+1/x-2，转化为证明 f(x)≥0 恒成立。利用导数或基本不等式求出 f(x) 的最小值，如果最小值≥0，则不等式成立。<br>
+    要证明一个不等式恒成立，可以构造函数 f(x)=x+1/x-2，转化为证明 f(x)≥0 恒成立。可以利用基本不等式；导数法属于后续课程中的拓展方法。<br>
     <strong>关键点：</strong>为什么想到构造函数？因为不等式左边是 x 的函数，右边是常数，作差后就是一个函数的最值问题。
   </p>
   <p>
@@ -240,7 +240,7 @@
   <p><strong>题目：</strong>判断方程 x³-3x+1=0 的实根个数。</p>
   <p>
     <span class="analysis-label">思路分析</span>
-    方程根的问题等价于函数零点问题。构造函数 f(x)=x³-3x+1，研究它的单调性和零点。三次函数的零点个数可以通过求导分析单调区间，再结合零点定理（若 f(a)·f(b)&lt;0，则在 (a,b) 内至少有一个零点）来判断。
+    方程根的问题等价于函数零点问题。构造函数 f(x)=x³-3x+1，研究它的单调性和零点。三次函数的零点个数可以通过求导分析单调区间，再结合零点定理（若 f 在 [a,b] 上连续且 f(a)·f(b)&lt;0，则在 (a,b) 内至少有一个零点）来判断。
   </p>
   <p>
     <span class="solution-label">解答过程</span>
@@ -783,5 +783,6 @@ function resetQuiz() {
 document.getElementById("resetBtn").onclick = resetQuiz;
 </script>
 
+    <script src="../dt.js"></script>
 </body>
 </html>

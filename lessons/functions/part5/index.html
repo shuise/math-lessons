@@ -171,6 +171,7 @@
   <tr><td>单调性 <span style="color:#888;">(Monotonicity)</span></td><td><span class="prop-tag increase">(0,&infin;) 递增</span></td><td><span class="prop-tag decrease">(0,&infin;) 递减</span></td></tr>
   <tr><td>图像趋势 <span style="color:#888;">(Trend)</span></td><td>从左到右上升 <span style="color:#888;">(Increasing left to right)</span></td><td>从左到右下降 <span style="color:#888;">(Decreasing left to right)</span></td></tr>
   <tr><td>x &rarr; 0<sup>+</sup></td><td>趋近于 -&infin; <span style="color:#888;">(Approaches -&infin;)</span></td><td>趋近于 +&infin; <span style="color:#888;">(Approaches +&infin;)</span></td></tr>
+  <tr><td>x &rarr; +&infin;</td><td>趋近于 +&infin; <span style="color:#888;">(Approaches +&infin;)</span></td><td>趋近于 -&infin; <span style="color:#888;">(Approaches -&infin;)</span></td></tr>
 </table>
 
 <div class="hint">
@@ -368,7 +369,7 @@
 
 <div class="example">
   <p><strong>傅里叶与三角函数的伟大发现 <span style="font-weight:normal;font-size:0.85em;color:#888;">(Fourier's Great Discovery)</span></strong></p>
-  <p>1807 年，法国数学家<strong>傅里叶</strong>向巴黎科学院提交了一篇研究热传导的论文，提出了一个惊人的观点：<strong>任何周期函数都可以写成一系列正弦和余弦函数的和</strong>。当时拉格朗日和拉普拉斯等大数学家对此持怀疑态度 &mdash;&mdash; 一个锯齿形的周期波怎么可能用光滑的正弦曲线拼出来？</p>
+  <p>1807 年，法国数学家<strong>傅里叶</strong>向巴黎科学院提交了一篇研究热传导的论文，提出了一个惊人的观点：<strong>许多满足适当条件的周期函数可以用正弦和余弦函数的级数表示或逼近</strong>。当时拉格朗日和拉普拉斯等大数学家对此持怀疑态度 &mdash;&mdash; 一个锯齿形的周期波怎么可能用光滑的正弦曲线拼出来？</p>
   <p>但傅里叶是对的。现在，傅里叶变换被广泛应用于图像压缩（JPEG）、音频编码（MP3）、信号处理、量子物理等几乎所有科技领域。三角函数也因此从几何工具，一跃成为理解整个物质世界周期现象的核心语言。</p>
 </div>
 </section>
@@ -442,7 +443,7 @@
 <div id="quiz-container"></div>
 
 <div style="text-align:center;margin:24px 0;">
-  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 100</div>
+  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 120</div>
   <br>
   <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #1a73e8;color:#1a73e8;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">&ocy; 重新答题</button>
 </div>
@@ -627,7 +628,7 @@ var questions = [
     type: "choice",
     tag: "comprehensive",
     tagLabel: "综合",
-    question: "已知二次函数 f(x) = x&sup2; &minus; 2ax + 3：<br>&nbsp;&nbsp;(1) 若 f(x) 是偶函数，求 a 的值<br>&nbsp;&nbsp;(2) 当 a = 1 时，求 f(x) 的最小值<br>&nbsp;&nbsp;下列选项正确的是（  ）",
+    question: "已知二次函数 f(x) = x&sup2; &minus; 2ax + 3：<br>&nbsp;&nbsp;(1) 若 f(x) 是偶函数，求 a 的值<br>&nbsp;&nbsp;(2) 当 a = 1 时，求 f(x) 的最小值<br>&nbsp;&nbsp;下列选项<strong>同时</strong>正确的是（  ）（(1)(2)均需正确）",
     opts: [
       "a = 0，最小值为 2",
       "a = 1，最小值为 2",
@@ -714,14 +715,14 @@ function updateScore() {
     }
   }
   totalScore = total;
-  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a" + total + " / 100";
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a" + total + " / 120";
 }
 
 function resetQuiz() {
   correctCount = 0;
   totalScore = 0;
   answered = new Array(questions.length).fill(-1);
-  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a0 / 100";
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a0 / 120";
   for (var i = 0; i < questions.length; i++) {
     var qDiv = document.getElementById("q" + i);
     qDiv.className = "quiz-question";
@@ -736,5 +737,6 @@ function resetQuiz() {
 document.getElementById("resetBtn").onclick = resetQuiz;
 render();
 </script>
+    <script src="../../dt.js"></script>
 </body>
 </html>

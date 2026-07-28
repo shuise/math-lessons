@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>立体几何</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  h3 { color: #2c3e50; margin: 28px 0 12px; font-size: 1.15em; }
+  h4 { color: #555; margin: 18px 0 8px; font-size: 1em; }
+  .formula-box { border: 2px solid #1a73e8; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #f0f7ff; }
+  .formula-box p { margin: 6px 0; text-align: center; font-size: 1.05em; }
+  .key-point { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* Quiz styles */
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .q-tag {
+    display: inline-block; padding: 2px 12px; border-radius: 12px;
+    font-size: 0.75em; margin-right: 8px; color: #fff;
+  }
+  .q-tag.concept { background: #1a73e8; }
+  .q-tag.calc { background: #e67e22; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none; margin: 0;
+  }
+  .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .explain.show { display: block; }
+  .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+  /* Score panel */
+  .score-panel {
+    text-align: center; padding: 16px; margin: 20px 0;
+    background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8;
+  }
+  .score-panel .score-num { font-size: 2em; font-weight: bold; color: #1a73e8; }
+  .score-panel .btn-reset {
+    margin-left: 16px; padding: 8px 24px; border: 2px solid #1a73e8;
+    color: #1a73e8; border-radius: 20px; background: #fff;
+    cursor: pointer; font-size: 0.95em; transition: 0.15s;
+  }
+  .score-panel .btn-reset:hover { background: #1a73e8; color: #fff; }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>立体几何</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">从二维到三维，研究空间图形的位置关系、度量计算与逻辑推理。</p>
+
+<!-- ============================== 1.1 空间直角坐标系 ============================== -->
+<section>
+<h3>1.1 空间直角坐标系</h3>
+
+<h4>定义</h4>
+<p>在空间中，取三条互相垂直且相交于一点 O 的数轴——<strong>x 轴</strong>（横轴）、<strong>y 轴</strong>（纵轴）、<strong>z 轴</strong>（竖轴），共同构成<strong>空间直角坐标系</strong>，记作 <em>Oxyz</em>。</p>
+
+<p>三条坐标轴两两确定的平面称为<strong>坐标平面</strong>：</p>
+<ul>
+  <li><strong>xOy 平面</strong>——由 x 轴和 y 轴确定（z = 0）</li>
+  <li><strong>yOz 平面</strong>——由 y 轴和 z 轴确定（x = 0）</li>
+  <li><strong>zOx 平面</strong>——由 z 轴和 x 轴确定（y = 0）</li>
+</ul>
+
+<h4>点的坐标表示</h4>
+<p>在空间直角坐标系中，任意一点 P 对应唯一的有序实数组 (x, y, z)，称为点 P 的<strong>坐标</strong>：</p>
+<ul>
+  <li>x——点 P 到 yOz 平面的有向距离</li>
+  <li>y——点 P 到 zOx 平面的有向距离</li>
+  <li>z——点 P 到 xOy 平面的有向距离</li>
+</ul>
+
+<h4>距离公式</h4>
+<div class="definition">
+  <p>空间中两点 P<sub>1</sub>(x<sub>1</sub>, y<sub>1</sub>, z<sub>1</sub>) 和 P<sub>2</sub>(x<sub>2</sub>, y<sub>2</sub>, z<sub>2</sub>) 的距离为：</p>
+  <p style="text-align:center;font-size:1.3em;font-weight:bold;margin:10px 0;">
+    |P<sub>1</sub>P<sub>2</sub>| = &radic;<span style="text-decoration:overline;">(x<sub>2</sub>&minus;x<sub>1</sub>)&sup2; + (y<sub>2</sub>&minus;y<sub>1</sub>)&sup2; + (z<sub>2</sub>&minus;z<sub>1</sub>)&sup2;</span>
+  </p>
+</div>
+
+        <!-- SVG 1.1: 空间直角坐标系 -->
+        <svg viewBox="0 0 400 340" style="display:block;margin:20px auto;max-width:100%;">
+          <!-- 坐标轴 -->
+          <line x1="100" y1="270" x2="340" y2="270" stroke="#333" stroke-width="2"/>
+          <polygon points="338,264 350,270 338,276" fill="#333"/>
+          <text x="345" y="262" font-family="serif" font-size="17" fill="#333" font-weight="bold">x</text>
+
+          <line x1="100" y1="270" x2="28" y2="186" stroke="#333" stroke-width="2"/>
+          <polygon points="30,184 24,194 36,190" fill="#333"/>
+          <text x="10" y="182" font-family="serif" font-size="17" fill="#333" font-weight="bold">y</text>
+
+          <line x1="100" y1="270" x2="100" y2="35" stroke="#333" stroke-width="2"/>
+          <polygon points="98,37 108,37 100,27" fill="#333"/>
+          <text x="102" y="32" font-family="serif" font-size="17" fill="#333" font-weight="bold">z</text>
+
+          <text x="82" y="290" font-family="serif" font-size="16" fill="#333" font-style="italic">O</text>
+
+          <!-- 长方体框架（虚线）P(3,2,4) -->
+          <line x1="100" y1="270" x2="205" y2="270" stroke="#1a73e8" stroke-dasharray="5,5" stroke-width="1.5"/>
+          <line x1="100" y1="270" x2="52" y2="222" stroke="#1a73e8" stroke-dasharray="5,5" stroke-width="1.5"/>
+          <line x1="100" y1="270" x2="100" y2="150" stroke="#1a73e8" stroke-dasharray="5,5" stroke-width="1.5"/>
+          <line x1="205" y1="270" x2="157" y2="222" stroke="#1a73e8" stroke-dasharray="5,5" stroke-width="1.5"/>
+          <line x1="205" y1="270" x2="205" y2="150" stroke="#1a73e8" stroke-dasharray="5,5" stroke-width="1.5"/>
+          <line x1="52" y1="222" x2="157" y2="222" stroke="#1a73e8" stroke-dasharray="5,5" stroke-width="1.5"/>
+          <line x1="52" y1="222" x2="52" y2="150" stroke="#1a73e8" stroke-dasharray="5,5" stroke-width="1.5"/>
+          <line x1="100" y1="150" x2="205" y2="150" stroke="#1a73e8" stroke-dasharray="5,5" stroke-width="1.5"/>
+          <line x1="100" y1="150" x2="52" y2="150" stroke="#1a73e8" stroke-dasharray="5,5" stroke-width="1.5"/>
+          <line x1="157" y1="222" x2="157" y2="102" stroke="#1a73e8" stroke-dasharray="5,5" stroke-width="1.5"/>
+          <line x1="205" y1="150" x2="157" y2="102" stroke="#1a73e8" stroke-dasharray="5,5" stroke-width="1.5"/>
+          <line x1="52" y1="150" x2="157" y2="102" stroke="#1a73e8" stroke-dasharray="5,5" stroke-width="1.5"/>
+
+          <!-- 点 P -->
+          <circle cx="157" cy="102" r="4.5" fill="#e74c3c"/>
+          <text x="165" y="98" font-family="serif" font-size="16" fill="#e74c3c" font-weight="bold">P(3,2,4)</text>
+
+          <!-- 刻度 -->
+          <line x1="205" y1="276" x2="205" y2="264" stroke="#555" stroke-width="1"/>
+          <text x="200" y="290" font-family="serif" font-size="14" fill="#555" text-anchor="middle">3</text>
+          <line x1="52" y1="228" x2="52" y2="216" stroke="#555" stroke-width="1"/>
+          <text x="48" y="212" font-family="serif" font-size="14" fill="#555" text-anchor="end">2</text>
+          <line x1="94" y1="150" x2="106" y2="150" stroke="#555" stroke-width="1"/>
+          <text x="118" y="154" font-family="serif" font-size="14" fill="#555">4</text>
+        </svg>
+
+<div class="example">
+  <p><strong>例：</strong>求点 A(1, &minus;2, 3) 与点 B(4, 2, &minus;1) 之间的距离。</p>
+  <p class="step"><strong>解：</strong>|AB| = &radic;<span style="text-decoration:overline;">(4&minus;1)&sup2; + (2&minus;(&minus;2))&sup2; + (&minus;1&minus;3)&sup2;</span></p>
+  <p class="step">= &radic;<span style="text-decoration:overline;">3&sup2; + 4&sup2; + (&minus;4)&sup2;</span> = &radic;<span style="text-decoration:overline;">9 + 16 + 16</span> = &radic;<span style="text-decoration:overline;">41</span></p>
+  <p class="answer">所以 |AB| = &radic;<span style="text-decoration:overline;">41</span>。</p>
+</div>
+</section>
+
+<!-- Q1 -->
+<div class="quiz-question" id="q1">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    空间直角坐标系中，点 P(2, &minus;3, 4) 关于 xOy 平面的对称点坐标是？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(1, 0)">A. (2, &minus;3, &minus;4)</div>
+    <div class="opt" onclick="checkChoice(1, 1)">B. (2, 3, 4)</div>
+    <div class="opt" onclick="checkChoice(1, 2)">C. (&minus;2, &minus;3, 4)</div>
+    <div class="opt" onclick="checkChoice(1, 3)">D. (2, &minus;3, 0)</div>
+  </div>
+  <div class="explain" id="explain1">
+    <strong>解析：</strong>关于 xOy 平面对称，x、y 坐标不变，z 坐标取相反数。所以对称点为 (2, &minus;3, &minus;4)。选 A。
+  </div>
+</div>
+
+<!-- ============================== 1.2 空间几何体的结构 ============================== -->
+<section>
+<h3>1.2 空间几何体的结构</h3>
+
+<h4>多面体</h4>
+<p>由若干个<strong>平面多边形</strong>围成的封闭几何体称为<strong>多面体</strong>。</p>
+
+<h4>棱柱</h4>
+<p><strong>棱柱</strong>：有两个面互相平行（底面），其余各面都是四边形，且每相邻两个四边形的公共边互相平行。</p>
+<ul>
+  <li>分类：三棱柱、四棱柱、五棱柱……</li>
+  <li>侧面都是平行四边形</li>
+  <li>侧棱互相平行且相等（直棱柱的侧棱垂直于底面）</li>
+</ul>
+
+<h4>棱锥</h4>
+<p><strong>棱锥</strong>：有一个面是多边形（底面），其余各面是有一个公共顶点的三角形。</p>
+<ul>
+  <li>分类：三棱锥（四面体）、四棱锥、五棱锥……</li>
+  <li>侧面都是三角形</li>
+</ul>
+
+<h4>棱台</h4>
+<p><strong>棱台</strong>：用一个平行于棱锥底面的平面去截棱锥，底面与截面之间的部分。</p>
+<ul>
+  <li>上下底面相似（对应边平行）</li>
+  <li>侧面是梯形</li>
+</ul>
+
+<h4>旋转体</h4>
+
+<h4>圆柱</h4>
+<p>以矩形的一边所在直线为旋转轴，其余三边旋转形成的曲面所围成的几何体。</p>
+
+<h4>圆锥</h4>
+<p>以直角三角形的一条直角边所在直线为旋转轴，其余两边旋转形成的曲面所围成的几何体。</p>
+
+<h4>圆台</h4>
+<p>用平行于圆锥底面的平面去截圆锥，底面与截面之间的部分。</p>
+
+<h4>球</h4>
+<p>以半圆的直径所在直线为旋转轴，半圆面旋转一周形成的几何体。</p>
+
+        <!-- SVG 1.2: 空间几何体的结构 -->
+        <svg viewBox="0 0 600 350" style="display:block;margin:20px auto;max-width:100%;">
+          <!-- Row 1: 棱柱、棱锥、棱台 -->
+          <polygon points="50,100 120,100 120,135 50,135" fill="rgba(66,133,244,0.2)" stroke="#4285f4" stroke-width="1.5"/>
+          <polygon points="65,70 135,70 135,105 65,105" fill="rgba(66,133,244,0.12)" stroke="#4285f4" stroke-width="1.5"/>
+          <line x1="50" y1="100" x2="65" y2="70" stroke="#4285f4" stroke-width="1.5"/>
+          <line x1="120" y1="100" x2="135" y2="70" stroke="#4285f4" stroke-width="1.5"/>
+          <line x1="120" y1="135" x2="135" y2="105" stroke="#4285f4" stroke-width="1.5"/>
+          <line x1="50" y1="135" x2="65" y2="105" stroke="#4285f4" stroke-width="1.5"/>
+          <line x1="65" y1="70" x2="135" y2="70" stroke="#4285f4" stroke-dasharray="4,4" stroke-width="1"/>
+          <line x1="65" y1="105" x2="135" y2="105" stroke="#4285f4" stroke-dasharray="4,4" stroke-width="1"/>
+          <text x="85" y="155" font-family="serif" font-size="15" fill="#4285f4" text-anchor="middle">棱柱</text>
+
+          <polygon points="230,125 300,125 320,105 250,105" fill="rgba(147,51,234,0.15)" stroke="#9334e6" stroke-width="1.5"/>
+          <line x1="230" y1="125" x2="275" y2="60" stroke="#9334e6" stroke-width="1.5"/>
+          <line x1="300" y1="125" x2="275" y2="60" stroke="#9334e6" stroke-width="1.5"/>
+          <line x1="250" y1="105" x2="275" y2="60" stroke="#9334e6" stroke-dasharray="4,4" stroke-width="1"/>
+          <line x1="320" y1="105" x2="275" y2="60" stroke="#9334e6" stroke-dasharray="4,4" stroke-width="1"/>
+          <circle cx="275" cy="60" r="2.5" fill="#9334e6"/>
+          <text x="275" y="155" font-family="serif" font-size="15" fill="#9334e6" text-anchor="middle">棱锥</text>
+
+          <polygon points="420,110 500,110 520,90 440,90" fill="rgba(103,58,183,0.15)" stroke="#673ab7" stroke-width="1.5"/>
+          <polygon points="435,70 490,70 505,55 450,55" fill="rgba(103,58,183,0.12)" stroke="#673ab7" stroke-width="1.5"/>
+          <line x1="420" y1="110" x2="435" y2="70" stroke="#673ab7" stroke-width="1.5"/>
+          <line x1="500" y1="110" x2="490" y2="70" stroke="#673ab7" stroke-width="1.5"/>
+          <line x1="440" y1="90" x2="450" y2="55" stroke="#673ab7" stroke-dasharray="4,4" stroke-width="1"/>
+          <line x1="520" y1="90" x2="505" y2="55" stroke="#673ab7" stroke-dasharray="4,4" stroke-width="1"/>
+          <text x="470" y="155" font-family="serif" font-size="15" fill="#673ab7" text-anchor="middle">棱台</text>
+
+          <!-- Row 2: 圆柱、圆锥、圆台 -->
+          <ellipse cx="85" cy="195" rx="38" ry="12" fill="rgba(52,168,83,0.15)" stroke="#34a853" stroke-width="1.5"/>
+          <ellipse cx="85" cy="240" rx="38" ry="12" fill="rgba(52,168,83,0.2)" stroke="#34a853" stroke-width="1.5"/>
+          <line x1="47" y1="195" x2="47" y2="240" stroke="#34a853" stroke-width="1.5"/>
+          <line x1="123" y1="195" x2="123" y2="240" stroke="#34a853" stroke-width="1.5"/>
+          <text x="85" y="265" font-family="serif" font-size="15" fill="#34a853" text-anchor="middle">圆柱</text>
+
+          <ellipse cx="275" cy="240" rx="35" ry="11" fill="rgba(52,168,83,0.2)" stroke="#34a853" stroke-width="1.5"/>
+          <line x1="240" y1="240" x2="275" y2="185" stroke="#34a853" stroke-width="1.5"/>
+          <line x1="310" y1="240" x2="275" y2="185" stroke="#34a853" stroke-width="1.5"/>
+          <text x="275" y="265" font-family="serif" font-size="15" fill="#34a853" text-anchor="middle">圆锥</text>
+
+          <ellipse cx="470" cy="195" rx="28" ry="9" fill="rgba(52,168,83,0.15)" stroke="#34a853" stroke-width="1.5"/>
+          <ellipse cx="470" cy="240" rx="40" ry="12" fill="rgba(52,168,83,0.2)" stroke="#34a853" stroke-width="1.5"/>
+          <line x1="442" y1="195" x2="430" y2="240" stroke="#34a853" stroke-width="1.5"/>
+          <line x1="498" y1="195" x2="510" y2="240" stroke="#34a853" stroke-width="1.5"/>
+          <text x="470" y="265" font-family="serif" font-size="15" fill="#34a853" text-anchor="middle">圆台</text>
+
+          <!-- Row 3: 球 -->
+          <circle cx="300" cy="315" r="32" fill="rgba(234,67,53,0.1)" stroke="#ea4335" stroke-width="1.5"/>
+          <ellipse cx="300" cy="315" rx="32" ry="10" fill="none" stroke="#ea4335" stroke-width="1" stroke-dasharray="4,4"/>
+          <text x="300" y="348" font-family="serif" font-size="15" fill="#ea4335" text-anchor="middle">球</text>
+        </svg>
+
+<div class="example">
+  <p><strong>例：</strong>判断下列说法是否正确：</p>
+  <p>(1) 棱柱的侧面一定是平行四边形。&emsp;<strong>正确</strong>（由棱柱定义）</p>
+  <p>(2) 棱锥的侧面可以是梯形。&emsp;<strong>错误</strong>（棱锥侧面是三角形）</p>
+  <p>(3) 用一个平面截圆锥，截面和底面之间的部分是圆台。&emsp;<strong>错误</strong>（需用平行于底面的平面）</p>
+</div>
+</section>
+
+<!-- Q2 -->
+<div class="quiz-question" id="q2">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    下列哪个几何体不是由平面多边形围成的？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(2, 0)">A. 棱柱</div>
+    <div class="opt" onclick="checkChoice(2, 1)">B. 棱锥</div>
+    <div class="opt" onclick="checkChoice(2, 2)">C. 圆柱</div>
+    <div class="opt" onclick="checkChoice(2, 3)">D. 棱台</div>
+  </div>
+  <div class="explain" id="explain2">
+    <strong>解析：</strong>圆柱是旋转体，由曲面（侧面）和两个平行的圆面（底面）围成，其侧面不是平面多边形。而棱柱、棱锥、棱台都是多面体，由平面多边形围成。选 C。
+  </div>
+</div>
+
+<!-- Q3 -->
+<div class="quiz-question" id="q3">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    棱柱的侧面一定是？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(3, 0)">A. 三角形</div>
+    <div class="opt" onclick="checkChoice(3, 1)">B. 平行四边形</div>
+    <div class="opt" onclick="checkChoice(3, 2)">C. 梯形</div>
+    <div class="opt" onclick="checkChoice(3, 3)">D. 矩形</div>
+  </div>
+  <div class="explain" id="explain3">
+    <strong>解析：</strong>由棱柱的定义，每相邻两个四边形的公共边互相平行，因此侧面都是平行四边形。直棱柱的侧面是矩形，但一般棱柱的侧面不一定为矩形。选 B。
+  </div>
+</div>
+
+<!-- ============================== 1.3 三视图和直观图 ============================== -->
+<section>
+<h3>1.3 空间几何体的三视图和直观图</h3>
+
+<h4>三视图</h4>
+<p>三视图是从三个不同方向观察同一个几何体得到的投影图：</p>
+<ul>
+  <li><strong>正视图</strong>（主视图）——从正前方观察</li>
+  <li><strong>侧视图</strong>（左视图）——从左方观察</li>
+  <li><strong>俯视图</strong>——从正上方观察</li>
+</ul>
+<p>三视图的绘制原则：<strong>长对正、高平齐、宽相等</strong>。</p>
+
+<h4>斜二测画法</h4>
+<p><strong>斜二测画法</strong>是画空间几何体直观图的一种常用方法：</p>
+<ol>
+  <li>在已知图形中取互相垂直的 x 轴和 y 轴，两轴交于点 O。画直观图时，把它们画成对应的 x' 轴和 y' 轴，两轴交于点 O'，使 &ang;x'O'y' = 45&deg;（或 135&deg;）。</li>
+  <li>已知图形中平行于 x 轴的线段，在直观图中保持原长度不变；平行于 y 轴的线段，长度变为原来的一半。</li>
+  <li>平行于 z 轴的线段（竖直线），在直观图中保持原长度不变且方向不变。</li>
+</ol>
+
+<div class="example">
+  <p><strong>例：</strong>用斜二测画法画一个边长为 2 的正方形的直观图。</p>
+  <p class="step"><strong>画法：</strong></p>
+  <p class="step">(1) 在原正方形 ABCD 中建立坐标系，A 为原点，AB 在 x 轴上，AD 在 y 轴上。</p>
+  <p class="step">(2) 画 x' 轴和 y' 轴，使 &ang;x'O'y' = 45&deg;。取 O'A' = 2（原长不变），取 O'D' = 1（y 轴方向减半）。</p>
+  <p class="step">(3) 过 D' 作 x' 轴的平行线，过 B' 作 y' 轴的平行线，交于 C'。</p>
+  <p class="step">(4) 连接 A'B'C'D' 即得直观图（是一个平行四边形）。</p>
+</div>
+
+        <!-- SVG 1.3-1: 三视图 -->
+        <svg viewBox="0 0 500 300" style="display:block;margin:15px auto;max-width:100%;">
+          <text x="100" y="25" font-family="serif" font-size="16" fill="#333" text-anchor="middle">正视图</text>
+          <rect x="30" y="40" width="140" height="100" fill="rgba(66,133,244,0.12)" stroke="#4285f4" stroke-width="2"/>
+          <polygon points="25,40 100,10 175,40" fill="rgba(66,133,244,0.08)" stroke="#4285f4" stroke-width="2"/>
+
+          <text x="350" y="25" font-family="serif" font-size="16" fill="#333" text-anchor="middle">侧视图</text>
+          <rect x="280" y="40" width="140" height="100" fill="rgba(66,133,244,0.12)" stroke="#4285f4" stroke-width="2"/>
+          <polygon points="275,40 350,10 425,40" fill="rgba(66,133,244,0.08)" stroke="#4285f4" stroke-width="2"/>
+
+          <text x="250" y="190" font-family="serif" font-size="16" fill="#333" text-anchor="middle">俯视图</text>
+          <rect x="180" y="200" width="140" height="90" fill="rgba(66,133,244,0.1)" stroke="#4285f4" stroke-width="2"/>
+          <line x1="180" y1="245" x2="320" y2="245" stroke="#4285f4" stroke-width="1.5" stroke-dasharray="5,5"/>
+        </svg>
+
+        <!-- SVG 1.3-2: 斜二测直观图 -->
+        <svg viewBox="0 0 400 300" style="display:block;margin:15px auto;max-width:100%;">
+          <text x="200" y="25" font-family="serif" font-size="16" fill="#333" text-anchor="middle">斜二测直观图</text>
+
+          <!-- 正面方形 -->
+          <rect x="110" y="80" width="150" height="120" fill="rgba(234,67,53,0.1)" stroke="#ea4335" stroke-width="2"/>
+
+          <!-- 正面屋顶三角形 -->
+          <polygon points="105,80 185,35 265,80" fill="rgba(234,67,53,0.06)" stroke="#ea4335" stroke-width="2"/>
+
+          <!-- 斜二测深度方向: 45°, 长度减半 -->
+          <!-- 深度d=70, 半长=35, 45°偏移 ≈ dx=25, dy=25 -->
+          <rect x="135" y="55" width="150" height="120" fill="rgba(234,67,53,0.04)" stroke="#ea4335" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+          <polygon points="130,55 210,10 290,55" fill="rgba(234,67,53,0.02)" stroke="#ea4335" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+          <line x1="260" y1="80" x2="285" y2="55" stroke="#ea4335" stroke-width="2"/>
+          <line x1="260" y1="200" x2="285" y2="175" stroke="#ea4335" stroke-width="2"/>
+          <line x1="265" y1="80" x2="290" y2="55" stroke="#ea4335" stroke-width="2"/>
+
+          <!-- 45° 角标注 -->
+          <path d="M 110 80 L 120 80 L 120 90" fill="none" stroke="#999" stroke-width="1"/>
+          <text x="125" y="73" font-family="serif" font-size="12" fill="#999">45&deg;</text>
+        </svg>
+
+</section>
+
+<!-- Q4 -->
+<div class="quiz-question" id="q4">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    在斜二测画法中，原图中垂直于 x 轴的线段，在直观图中与 x' 轴成多少度角？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(4, 0)">A. 30&deg; 或 60&deg;</div>
+    <div class="opt" onclick="checkChoice(4, 1)">B. 45&deg; 或 135&deg;</div>
+    <div class="opt" onclick="checkChoice(4, 2)">C. 90&deg;</div>
+    <div class="opt" onclick="checkChoice(4, 3)">D. 0&deg; 或 180&deg;</div>
+  </div>
+  <div class="explain" id="explain4">
+    <strong>解析：</strong>斜二测画法中，y' 轴与 x' 轴成 45&deg;（或 135&deg;），原图中垂直于 x 轴的线段平行于 y 轴，在直观图中对应 y' 轴方向，所以与 x' 轴成 45&deg; 或 135&deg;。选 B。
+  </div>
+</div>
+
+<!-- ============================== 1.4 表面积与体积 ============================== -->
+<section>
+<h3>1.4 空间几何体的表面积与体积</h3>
+
+<h4>柱体</h4>
+<div class="formula-box">
+  <p><strong>圆柱表面积：</strong>S = 2&pi;r&sup2; + 2&pi;rl = 2&pi;r(r + l)</p>
+  <p><strong>柱体体积：</strong>V = Sh（S 为底面积，h 为高）</p>
+  <p><strong>圆柱体积：</strong>V = &pi;r&sup2;h</p>
+</div>
+
+<h4>锥体</h4>
+<div class="formula-box">
+  <p><strong>圆锥表面积：</strong>S = &pi;r&sup2; + &pi;rl</p>
+  <p><strong>锥体体积：</strong>V = &frac13;Sh</p>
+  <p><strong>圆锥体积：</strong>V = &frac13;&pi;r&sup2;h</p>
+</div>
+
+<h4>台体</h4>
+<div class="formula-box">
+  <p><strong>圆台表面积：</strong>S = &pi;(r&sup2; + r'&sup2; + rl + r'l)</p>
+  <p><strong>台体体积：</strong>V = &frac13;(S' + &radic;<span style="text-decoration:overline;">S'S</span> + S)h</p>
+  <p><strong>圆台体积：</strong>V = &frac13;&pi;(r&sup2; + rr' + r'&sup2;)h</p>
+</div>
+
+<h4>球</h4>
+<div class="formula-box">
+  <p><strong>球的表面积：</strong>S = 4&pi;R&sup2;</p>
+  <p><strong>球的体积：</strong>V = &frac43;&pi;R&sup3;</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>已知圆锥的底面半径为 3，高为 4，求圆锥的表面积和体积。</p>
+  <p class="step"><strong>解：</strong>母线 l = &radic;<span style="text-decoration:overline;">r&sup2; + h&sup2;</span> = &radic;<span style="text-decoration:overline;">3&sup2; + 4&sup2;</span> = 5</p>
+  <p class="step">体积 V = &frac13;&pi;r&sup2;h = &frac13;&pi; &times; 9 &times; 4 = <strong>12&pi;</strong></p>
+  <p class="step">表面积 S = &pi;r&sup2; + &pi;rl = 9&pi; + 15&pi; = <strong>24&pi;</strong></p>
+</div>
+
+        <!-- SVG 1.4: 圆柱展开图 -->
+        <svg viewBox="0 0 500 350" style="display:block;margin:15px auto;max-width:100%;">
+          <text x="250" y="20" font-family="serif" font-size="16" fill="#333" text-anchor="middle">圆柱及展开图</text>
+
+          <!-- 左侧：立体圆柱 -->
+          <ellipse cx="120" cy="115" rx="55" ry="16" fill="rgba(66,133,244,0.12)" stroke="#4285f4" stroke-width="2"/>
+          <ellipse cx="120" cy="250" rx="55" ry="16" fill="rgba(66,133,244,0.15)" stroke="#4285f4" stroke-width="2"/>
+          <line x1="65" y1="115" x2="65" y2="250" stroke="#4285f4" stroke-width="2"/>
+          <line x1="175" y1="115" x2="175" y2="250" stroke="#4285f4" stroke-width="2"/>
+
+          <!-- 高 h 虚线 -->
+          <line x1="195" y1="115" x2="195" y2="250" stroke="#999" stroke-dasharray="5,5" stroke-width="1.5"/>
+          <text x="207" y="188" font-family="serif" font-size="15" fill="#666">h</text>
+
+          <!-- 半径 r 虚线 -->
+          <line x1="120" y1="250" x2="175" y2="250" stroke="#999" stroke-dasharray="5,5" stroke-width="1.5"/>
+          <text x="147" y="270" font-family="serif" font-size="15" fill="#666" text-anchor="middle">r</text>
+
+          <!-- 箭头 -->
+          <text x="230" y="185" font-family="serif" font-size="22" fill="#999" text-anchor="middle">→</text>
+
+          <!-- 右侧：展开图 -->
+          <!-- 上圆 -->
+          <ellipse cx="380" cy="75" rx="50" ry="50" fill="rgba(52,168,83,0.1)" stroke="#34a853" stroke-width="2"/>
+          <line x1="380" y1="75" x2="380" y2="25" stroke="#999" stroke-dasharray="5,5" stroke-width="1.5"/>
+          <line x1="380" y1="75" x2="430" y2="75" stroke="#999" stroke-dasharray="5,5" stroke-width="1.5"/>
+          <text x="382" y="22" font-family="serif" font-size="14" fill="#666">r</text>
+
+          <!-- 矩形（侧面） -->
+          <rect x="270" y="140" width="220" height="95" fill="rgba(52,168,83,0.08)" stroke="#34a853" stroke-width="2"/>
+          <line x1="270" y1="140" x2="258" y2="140" stroke="#999" stroke-dasharray="5,5" stroke-width="1"/>
+          <line x1="270" y1="235" x2="258" y2="235" stroke="#999" stroke-dasharray="5,5" stroke-width="1"/>
+          <text x="248" y="193" font-family="serif" font-size="15" fill="#666" text-anchor="end">h</text>
+          <line x1="270" y1="248" x2="490" y2="248" stroke="#999" stroke-dasharray="5,5" stroke-width="1.5"/>
+          <text x="380" y="266" font-family="serif" font-size="14" fill="#666" text-anchor="middle">2&pi;r</text>
+
+          <!-- 下圆 -->
+          <ellipse cx="380" cy="300" rx="50" ry="50" fill="rgba(52,168,83,0.1)" stroke="#34a853" stroke-width="2"/>
+        </svg>
+
+</section>
+
+<!-- Q5 -->
+<div class="quiz-question" id="q5">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    球的表面积公式是？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(5, 0)">A. 4&pi;R&sup2;</div>
+    <div class="opt" onclick="checkChoice(5, 1)">B. 4&pi;R&sup3;</div>
+    <div class="opt" onclick="checkChoice(5, 2)">C. &frac43;&pi;R&sup3;</div>
+    <div class="opt" onclick="checkChoice(5, 3)">D. 2&pi;R&sup2;</div>
+  </div>
+  <div class="explain" id="explain5">
+    <strong>解析：</strong>球的表面积公式为 S = 4&pi;R&sup2;，球的体积公式为 V = &frac43;&pi;R&sup3;。本题问的是表面积，选 A。
+  </div>
+</div>
+
+<!-- Q6 -->
+<div class="quiz-question" id="q6">
+  <div class="q-title">
+    <span class="q-tag calc">计算</span>
+    一个圆柱的底面半径为 2，高为 5，则它的体积是？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(6, 0)">A. 10&pi;</div>
+    <div class="opt" onclick="checkChoice(6, 1)">B. 20&pi;</div>
+    <div class="opt" onclick="checkChoice(6, 2)">C. 25&pi;</div>
+    <div class="opt" onclick="checkChoice(6, 3)">D. 40&pi;</div>
+  </div>
+  <div class="explain" id="explain6">
+    <strong>解析：</strong>圆柱体积 V = &pi;r&sup2;h = &pi; &times; 2&sup2; &times; 5 = 20&pi;。选 B。
+  </div>
+</div>
+
+<!-- ============================== 1.5 位置关系 ============================== -->
+<section>
+<h3>1.5 空间点、直线、平面之间的位置关系</h3>
+
+<h4>平面的基本性质（公理体系）</h4>
+<p>立体几何以以下 4 个公理为出发点：</p>
+
+<div class="key-point">
+  <p><strong>公理 1：</strong>如果一条直线上的两点在一个平面内，那么这条直线在此平面内。</p>
+  <p><strong>公理 2：</strong>过不在一条直线上的三点，有且只有一个平面。</p>
+  <p><strong>公理 3：</strong>如果两个不重合的平面有一个公共点，那么它们有且只有一条过该点的公共直线。</p>
+  <p><strong>公理 4：</strong>平行于同一条直线的两条直线互相平行。</p>
+</div>
+
+<h4>空间两条直线的位置关系</h4>
+<ul>
+  <li><strong>平行</strong>——在同一平面内且没有公共点</li>
+  <li><strong>相交</strong>——在同一平面内且有一个公共点</li>
+  <li><strong>异面</strong>——不同在任何一个平面内（既不平行也不相交）</li>
+</ul>
+
+<div class="example">
+  <p><strong>例：</strong>判断下列说法是否正确：</p>
+  <p>(1) 两条没有公共点的直线是平行直线。&emsp;<strong>错误</strong>（也可能是异面直线）</p>
+  <p>(2) 如果一条直线与两条平行直线都相交，那么这三条直线共面。&emsp;<strong>正确</strong></p>
+  <p>(3) 过直线外一点有且只有一条直线与这条直线平行。&emsp;<strong>正确</strong>（由公理 4 推出）</p>
+</div>
+
+        <!-- SVG 1.5-1: 公理1 示意图 -->
+        <svg viewBox="0 0 400 280" style="display:block;margin:15px auto;max-width:100%;">
+          <text x="200" y="25" font-family="serif" font-size="16" fill="#333" text-anchor="middle">公理1：两点在平面内 → 直线在平面内</text>
+
+          <!-- 平面 -->
+          <polygon points="60,170 340,170 300,70 100,70" fill="rgba(100,150,255,0.15)" stroke="#1a73e8" stroke-width="2"/>
+          <text x="200" y="125" font-family="serif" font-size="16" fill="#1a73e8" font-style="italic" text-anchor="middle">α</text>
+
+          <!-- 直线 -->
+          <line x1="50" y1="210" x2="350" y2="50" stroke="#e74c3c" stroke-width="2.5"/>
+
+          <!-- 两点 A、B -->
+          <circle cx="130" cy="154" r="4" fill="#e74c3c"/>
+          <text x="138" y="148" font-family="serif" font-size="15" fill="#e74c3c">A</text>
+          <circle cx="270" cy="92" r="4" fill="#e74c3c"/>
+          <text x="278" y="86" font-family="serif" font-size="15" fill="#e74c3c">B</text>
+        </svg>
+
+        <!-- SVG 1.5-2: 异面直线 -->
+        <svg viewBox="0 0 400 280" style="display:block;margin:15px auto;max-width:100%;">
+          <text x="200" y="25" font-family="serif" font-size="16" fill="#333" text-anchor="middle">异面直线</text>
+
+          <!-- 参考平面 -->
+          <polygon points="50,180 350,180 310,85 90,85" fill="rgba(100,150,255,0.12)" stroke="#1a73e8" stroke-width="1.5" stroke-dasharray="4,4"/>
+          <text x="200" y="138" font-family="serif" font-size="14" fill="#1a73e8" font-style="italic" text-anchor="middle">α</text>
+
+          <!-- 平面内直线 m -->
+          <line x1="80" y1="160" x2="320" y2="115" stroke="#e74c3c" stroke-width="2.5"/>
+          <text x="330" y="113" font-family="serif" font-size="15" fill="#e74c3c">m</text>
+
+          <!-- 平面外直线 l -->
+          <line x1="120" y1="50" x2="330" y2="150" stroke="#4285f4" stroke-width="2.5"/>
+          <text x="338" y="155" font-family="serif" font-size="15" fill="#4285f4">l</text>
+
+          <!-- 标注 -->
+          <text x="200" y="220" font-family="serif" font-size="13" fill="#999" text-anchor="middle">l 与 m 不相交、不平行 → 异面</text>
+        </svg>
+
+</section>
+
+<!-- Q7 -->
+<div class="quiz-question" id="q7">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    如果两条直线没有公共点，则这两条直线的位置关系是？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(7, 0)">A. 平行</div>
+    <div class="opt" onclick="checkChoice(7, 1)">B. 异面</div>
+    <div class="opt" onclick="checkChoice(7, 2)">C. 平行或异面</div>
+    <div class="opt" onclick="checkChoice(7, 3)">D. 相交</div>
+  </div>
+  <div class="explain" id="explain7">
+    <strong>解析：</strong>两条直线没有公共点，可能平行（共面且无交点），也可能异面（不同在任何平面内）。相交必有公共点。所以选 C。
+  </div>
+</div>
+
+<!-- ============================== 1.6 平行 ============================== -->
+<section>
+<h3>1.6 直线、平面平行的判定及其性质</h3>
+
+<h4>直线与平面平行</h4>
+<div class="key-point">
+  <p><strong>判定定理：</strong>平面外的一条直线与此平面内的一条直线平行，则该直线与此平面平行。</p>
+  <p style="text-align:center;">a &nsub; &alpha;，b &sub; &alpha;，a &par; b &rArr; a &par; &alpha;</p>
+</div>
+<div class="key-point">
+  <p><strong>性质定理：</strong>一条直线与一个平面平行，则过这条直线的任一平面与此平面的交线与该直线平行。</p>
+  <p style="text-align:center;">a &par; &alpha;，a &sub; &beta;，&alpha; &cap; &beta; = b &rArr; a &par; b</p>
+</div>
+
+<h4>平面与平面平行</h4>
+<div class="key-point">
+  <p><strong>判定定理：</strong>一个平面内的两条相交直线都平行于另一个平面，则这两个平面平行。</p>
+  <p style="text-align:center;">a &sub; &beta;，b &sub; &beta;，a &cap; b = O，a &par; &alpha;，b &par; &alpha; &rArr; &beta; &par; &alpha;</p>
+</div>
+<div class="key-point">
+  <p><strong>性质定理：</strong>如果两个平行平面同时和第三个平面相交，那么它们的交线平行。</p>
+  <p style="text-align:center;">&alpha; &par; &beta;，&alpha; &cap; &gamma; = a，&beta; &cap; &gamma; = b &rArr; a &par; b</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>如图，在正方体 ABCD-A<sub>1</sub>B<sub>1</sub>C<sub>1</sub>D<sub>1</sub> 中，E、F 分别为 AB、AD 的中点。求证：EF ∥ 平面 BCD<sub>1</sub>。</p>
+  <p class="step"><strong>证明：</strong>连接 BD。</p>
+  <p class="step">在 &triangle;ABD 中，E、F 分别为 AB、AD 的中点，</p>
+  <p class="step">所以 EF &par; BD（三角形中位线定理）。</p>
+  <p class="step">又因为 BD &sub; 平面 BCD<sub>1</sub>，而 EF &nsub; 平面 BCD<sub>1</sub>，</p>
+  <p class="step">由线面平行的判定定理，EF &par; 平面 BCD<sub>1</sub>。得证。</p>
+</div>
+
+        <!-- SVG 1.6: 平行关系 -->
+        <svg viewBox="0 0 500 350" style="display:block;margin:15px auto;max-width:100%;">
+          <text x="250" y="25" font-family="serif" font-size="16" fill="#333" text-anchor="middle">线面平行</text>
+
+          <!-- 平面 α -->
+          <polygon points="80,220 420,220 370,100 130,100" fill="rgba(100,150,255,0.15)" stroke="#1a73e8" stroke-width="2"/>
+          <text x="250" y="165" font-family="serif" font-size="18" fill="#1a73e8" font-style="italic" text-anchor="middle">α</text>
+
+          <!-- 平面内的直线 m -->
+          <line x1="120" y1="190" x2="380" y2="130" stroke="#e74c3c" stroke-width="2.5"/>
+          <text x="390" y="128" font-family="serif" font-size="16" fill="#e74c3c">m</text>
+
+          <!-- 平面外的直线 l，平行于 m -->
+          <line x1="60" y1="110" x2="330" y2="50" stroke="#4285f4" stroke-width="2.5"/>
+          <text x="340" y="48" font-family="serif" font-size="16" fill="#4285f4">l</text>
+
+          <!-- 平行箭头标记 -->
+          <line x1="170" y1="106" x2="185" y2="101" stroke="#4285f4" stroke-width="2"/>
+          <line x1="170" y1="113" x2="185" y2="108" stroke="#4285f4" stroke-width="2"/>
+          <line x1="215" y1="170" x2="230" y2="165" stroke="#e74c3c" stroke-width="2"/>
+          <line x1="215" y1="177" x2="230" y2="172" stroke="#e74c3c" stroke-width="2"/>
+
+          <!-- 判定定理文字 -->
+          <text x="250" y="290" font-family="serif" font-size="14" fill="#333" text-anchor="middle">判定：若 l ∥ m 且 m ⊂ α，l ⊄ α，则 l ∥ α</text>
+        </svg>
+
+</section>
+
+<!-- Q8 -->
+<div class="quiz-question" id="q8">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    若平面 &alpha; &par; 平面 &beta;，直线 a &sub; &alpha;，直线 b &sub; &beta;，则 a 与 b 的位置关系是？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(8, 0)">A. 平行</div>
+    <div class="opt" onclick="checkChoice(8, 1)">B. 异面</div>
+    <div class="opt" onclick="checkChoice(8, 2)">C. 平行或异面</div>
+    <div class="opt" onclick="checkChoice(8, 3)">D. 相交</div>
+  </div>
+  <div class="explain" id="explain8">
+    <strong>解析：</strong>两个平行平面内的直线没有公共点，但它们可能平行（如三棱柱中两侧棱）也可能异面（错开位置），但不会相交。选 C。
+  </div>
+</div>
+
+<!-- Q9 -->
+<div class="quiz-question" id="q9">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    线面平行的判定定理中，需要平面外的直线与平面内的什么直线平行？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(9, 0)">A. 任意一条直线</div>
+    <div class="opt" onclick="checkChoice(9, 1)">B. 一条直线</div>
+    <div class="opt" onclick="checkChoice(9, 2)">C. 两条相交直线</div>
+    <div class="opt" onclick="checkChoice(9, 3)">D. 无数条直线</div>
+  </div>
+  <div class="explain" id="explain9">
+    <strong>解析：</strong>线面平行的判定定理：平面外的一条直线与此平面内的一条直线平行，则该直线与此平面平行。只需平面内的一条直线即可。选 B。
+  </div>
+</div>
+
+<!-- ============================== 1.7 垂直 ============================== -->
+<section>
+<h3>1.7 直线、平面垂直的判定及其性质</h3>
+
+<h4>直线与平面垂直</h4>
+<div class="key-point">
+  <p><strong>判定定理：</strong>一条直线与一个平面内的两条相交直线都垂直，则该直线与此平面垂直。</p>
+  <p style="text-align:center;">l &perp; a，l &perp; b，a &sub; &alpha;，b &sub; &alpha;，a &cap; b = O &rArr; l &perp; &alpha;</p>
+</div>
+<div class="key-point">
+  <p><strong>性质定理：</strong>垂直于同一个平面的两条直线互相平行。</p>
+  <p style="text-align:center;">l &perp; &alpha;，m &perp; &alpha; &rArr; l &par; m</p>
+</div>
+
+<h4>平面与平面垂直</h4>
+<div class="key-point">
+  <p><strong>判定定理：</strong>一个平面过另一个平面的垂线，则这两个平面垂直。</p>
+  <p style="text-align:center;">l &perp; &alpha;，l &sub; &beta; &rArr; &beta; &perp; &alpha;</p>
+</div>
+<div class="key-point">
+  <p><strong>性质定理：</strong>两个平面垂直，则一个平面内垂直于交线的直线与另一个平面垂直。</p>
+  <p style="text-align:center;">&alpha; &perp; &beta;，&alpha; &cap; &beta; = l，a &sub; &beta;，a &perp; l &rArr; a &perp; &alpha;</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>在三棱锥 P-ABC 中，PA &perp; 平面 ABC，AB &perp; BC。求证：BC &perp; 平面 PAB。</p>
+  <p class="step"><strong>证明：</strong>因为 PA &perp; 平面 ABC，BC &sub; 平面 ABC，</p>
+  <p class="step">所以 PA &perp; BC（线面垂直的定义）。</p>
+  <p class="step">又因为 AB &perp; BC（已知），且 PA &cap; AB = A，</p>
+  <p class="step">所以 BC &perp; 平面 PAB（线面垂直的判定定理）。得证。</p>
+</div>
+
+        <!-- SVG 1.7: 垂直关系 -->
+        <svg viewBox="0 0 500 350" style="display:block;margin:15px auto;max-width:100%;">
+          <text x="250" y="25" font-family="serif" font-size="16" fill="#333" text-anchor="middle">线面垂直</text>
+
+          <!-- 平面 α -->
+          <polygon points="80,230 420,230 370,100 130,100" fill="rgba(100,150,255,0.15)" stroke="#1a73e8" stroke-width="2"/>
+          <text x="250" y="170" font-family="serif" font-size="18" fill="#1a73e8" font-style="italic" text-anchor="middle">α</text>
+
+          <!-- 平面内相交直线 m, n -->
+          <line x1="140" y1="200" x2="370" y2="130" stroke="#e74c3c" stroke-width="2"/>
+          <text x="380" y="128" font-family="serif" font-size="16" fill="#e74c3c">m</text>
+
+          <line x1="320" y1="210" x2="170" y2="120" stroke="#e67e22" stroke-width="2"/>
+          <text x="158" y="118" font-family="serif" font-size="16" fill="#e67e22">n</text>
+
+          <!-- 交点 O -->
+          <circle cx="255" cy="164" r="3" fill="#333"/>
+          <text x="262" y="158" font-family="serif" font-size="14" fill="#333">O</text>
+
+          <!-- 垂线 l -->
+          <line x1="255" y1="164" x2="255" y2="35" stroke="#4285f4" stroke-width="3"/>
+          <text x="257" y="30" font-family="serif" font-size="16" fill="#4285f4">l</text>
+
+          <!-- 直角小正方形 -->
+          <polyline points="245,164 245,152 257,152" fill="none" stroke="#4285f4" stroke-width="1.5"/>
+
+          <!-- 垂直符号 -->
+          <text x="262" y="170" font-family="serif" font-size="16" fill="#4285f4">⊥</text>
+
+          <!-- 说明文字 -->
+          <text x="250" y="290" font-family="serif" font-size="14" fill="#333" text-anchor="middle">l 垂直于平面内的任意直线</text>
+        </svg>
+
+</section>
+
+<!-- Q10 -->
+<div class="quiz-question" id="q10">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    下列哪个条件能判定直线 l &perp; 平面 &alpha;？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(10, 0)">A. l 垂直于 &alpha; 内的一条直线</div>
+    <div class="opt" onclick="checkChoice(10, 1)">B. l 垂直于 &alpha; 内的两条平行直线</div>
+    <div class="opt" onclick="checkChoice(10, 2)">C. l 垂直于 &alpha; 内的两条相交直线</div>
+    <div class="opt" onclick="checkChoice(10, 3)">D. l 平行于 &alpha; 的一条垂线</div>
+  </div>
+  <div class="explain" id="explain10">
+    <strong>解析：</strong>线面垂直的判定定理要求直线垂直于平面内的两条相交直线。只垂直于一条直线或两条平行直线都不足以保证线面垂直。选 C。
+  </div>
+</div>
+
+<!-- ============================== 得分面板 ============================== -->
+<section>
+<div class="score-panel">
+  <span style="font-size:1.2em;font-weight:bold;">得分：</span>
+  <span class="score-num" id="totalScore">0</span> / 10
+  <button class="btn-reset" onclick="resetAll()">重置全部</button>
+</div>
+</section>
+
+</article>
+
+<script>
+// ============================================================
+// 选择题交互
+// ============================================================
+var answered = {};
+
+function checkChoice(qid, idx) {
+  var answers = {1:0, 2:2, 3:1, 4:1, 5:0, 6:1, 7:2, 8:2, 9:1, 10:2};
+  if (answered[qid]) return;
+
+  var qDiv = document.getElementById("q" + qid);
+  var opts = qDiv.querySelectorAll(".opt");
+  var explain = document.getElementById("explain" + qid);
+
+  // Disable all options
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add("disabled");
+  }
+
+  var correct = answers[qid];
+  if (idx === correct) {
+    opts[idx].classList.add("correct-opt");
+    qDiv.classList.add("correct");
+    explain.className = "explain show ok";
+  } else {
+    opts[idx].classList.add("wrong-opt");
+    opts[correct].classList.add("correct-opt");
+    qDiv.classList.add("wrong");
+    explain.className = "explain show fail";
+  }
+
+  answered[qid] = true;
+  updateTotalScore();
+}
+
+function updateTotalScore() {
+  var answers = {1:0, 2:2, 3:1, 4:1, 5:0, 6:1, 7:2, 8:2, 9:1, 10:2};
+  var score = 0;
+  for (var i = 1; i <= 10; i++) {
+    if (answered[i]) {
+      var qDiv = document.getElementById("q" + i);
+      if (qDiv.classList.contains("correct")) {
+        score += scoreWeight(i);
+      }
+    }
+  }
+  document.getElementById("totalScore").textContent = score;
+}
+
+function scoreWeight(qid) {
+  return 1;
+}
+
+// ============================================================
+// 重置
+// ============================================================
+function resetAll() {
+  for (var i = 1; i <= 10; i++) {
+    var qDiv = document.getElementById("q" + i);
+    if (!qDiv) continue;
+    qDiv.className = "quiz-question";
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].className = "opt";
+    }
+    var explain = document.getElementById("explain" + i);
+    if (explain) explain.className = "explain";
+  }
+
+  answered = {};
+  document.getElementById("totalScore").textContent = "0";
+}
+</script>
+    <script src="../dt.js"></script>
+</body>
+</html>

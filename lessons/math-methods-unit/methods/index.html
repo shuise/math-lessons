@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数学方法（22种方法精讲）</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+/* ====== 方法标题 ====== */
+.method-header {
+  background: linear-gradient(135deg, #e8f0fe, #f0f7ff);
+  border-left: 5px solid #1a73e8;
+  padding: 14px 20px;
+  margin: 28px 0 6px;
+  border-radius: 0 10px 10px 0;
+}
+.method-header h3 {
+  margin: 0 0 4px;
+  color: #1a73e8;
+  font-size: 1.15em;
+  border-left: none;
+  padding-left: 0;
+}
+.method-header .method-desc {
+  margin: 4px 0 0;
+  color: #555;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+.method-header .method-desc strong { color: #1a73e8; }
+
+/* ====== 例子卡片 ====== */
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 10px;
+  margin: 12px 0 16px;
+}
+.example-card {
+  background: #f8faff;
+  border: 1px solid #e0e8f0;
+  border-radius: 8px;
+  padding: 12px 14px;
+  line-height: 1.7;
+  font-size: 0.95em;
+}
+.example-card .ex-title {
+  font-weight: bold;
+  color: #2c3e50;
+  font-size: 0.95em;
+  margin-bottom: 4px;
+}
+.example-card .ex-body {
+  color: #444;
+  margin: 4px 0;
+}
+.example-card .ex-body .math { color: #1a73e8; font-weight: 600; }
+.example-card .ex-body .highlight { background: #fff3e0; padding: 1px 4px; border-radius: 3px; }
+.example-card .ex-result { color: #2e7d32; font-weight: 600; margin-top: 2px; font-size: 0.93em; }
+.example-card .ex-step { color: #666; font-size: 0.92em; margin: 2px 0 0 12px; }
+
+/* ====== 交互式选择题 ====== */
+.question-card {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin: 16px 0;
+  transition: all 0.2s;
+}
+.question-card.correct { border-color: #4caf50; background: #f1f8e9; }
+.question-card.wrong { border-color: #f44336; background: #fce4ec; }
+.question-card .q-title {
+  font-weight: bold;
+  font-size: 1.03em;
+  margin-bottom: 8px;
+  color: #2c3e50;
+}
+.question-card .q-text { margin: 6px 0 10px; line-height: 1.7; color: #444; }
+.question-card .options { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.question-card .opt {
+  padding: 8px 14px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: #fafafa;
+  user-select: none;
+  line-height: 1.6;
+}
+.question-card .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+.question-card .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+.question-card .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+.question-card .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+.question-card .opt.disabled { pointer-events: none; opacity: 0.7; }
+.question-card .explain {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.93em;
+  display: none;
+  line-height: 1.7;
+}
+.question-card .explain.show { display: block; }
+.question-card .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+.question-card .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+/* ====== 分隔线 ====== */
+.section-divider {
+  border: none;
+  border-top: 3px solid #1a73e8;
+  margin: 40px 0;
+  opacity: 0.3;
+}
+
+/* ====== 分类标题 ====== */
+.category-title {
+  margin: 40px 0 20px;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #1a73e8, #1557b0);
+  color: #fff;
+  border-radius: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* ====== 综合题 ====== */
+.comprehensive-section {
+  margin: 30px 0 20px;
+  padding: 14px 18px;
+  background: #fff8e1;
+  border-left: 5px solid #ff8f00;
+  border-radius: 0 10px 10px 0;
+}
+.comprehensive-section .comp-title {
+  font-weight: bold;
+  color: #e65100;
+  font-size: 1.05em;
+}
+.comprehensive-section .comp-desc {
+  color: #666;
+  font-size: 0.93em;
+  margin: 4px 0 0;
+}
+
+/* ====== 评分面板 ====== */
+.quiz-footer {
+  text-align: center;
+  margin: 36px 0 20px;
+  padding-top: 24px;
+  border-top: 2px solid #e0e0e0;
+}
+.quiz-footer .score-box {
+  display: inline-block;
+  background: #1a73e8;
+  color: #fff;
+  padding: 14px 40px;
+  border-radius: 30px;
+  font-size: 1.4em;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.quiz-footer .score-detail {
+  margin: 10px 0 6px;
+  font-size: 0.9em;
+  color: #666;
+  line-height: 1.7;
+}
+.quiz-footer .btn-reset {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 10px 32px;
+  border: 2px solid #1a73e8;
+  color: #1a73e8;
+  border-radius: 24px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 1em;
+  transition: 0.15s;
+}
+.quiz-footer .btn-reset:hover { background: #1a73e8; color: #fff; }
+
+/* ====== 介绍文字 ====== */
+.intro-text {
+  color: #555;
+  font-size: 1.05em;
+  line-height: 1.8;
+  margin: 16px 0 24px;
+  padding: 14px 18px;
+  background: #f8faff;
+  border-radius: 10px;
+  border: 1px solid #e0e8f0;
+}
+
+/* ====== 小标签 ====== */
+.method-tag {
+  display: inline-block;
+  background: #e3f2fd;
+  color: #1a73e8;
+  font-size: 0.78em;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+</style>
+</head>
+<body>
+<article>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<h1>数学方法（22种方法精讲）</h1>
+<p class="intro-text">
+  数学方法是解题的"工具包"——每种方法都有特定的适用场景。<br>
+  以下按<strong>逻辑推理</strong>、<strong>代数变形</strong>、<strong>组合计数</strong>三大类系统学习 22 种常用方法。
+  每种方法配 5 个简明例子和 1 道交互式选择题，每类末尾有 1 道综合题。<br>
+  点击选项立刻反馈对错+显示解析。
+</p>
+
+<!-- ============================================================
+     第一类：逻辑推理方法
+     ============================================================ -->
+<div class="category-title">第一类 · 逻辑推理方法</div>
+
+<!-- 1. 反证法 -->
+<div class="method-header">
+  <h3>1. 反证法 <span class="method-tag">逻辑推理</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>直接证明困难时，假设结论不成立，推出与已知条件或公理矛盾，从而原结论成立。<br><strong>怎么用：</strong>否定结论 → 逻辑推导 → 得出矛盾 → 肯定原结论。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：证明 √2 是无理数</div>
+    <div class="ex-body">假设 √2 是有理数，设 √2 = p/q（既约分数）→ 2 = p²/q² → p² = 2q² → p 为偶数，设 p = 2k → 4k² = 2q² → q² = 2k² → q 也为偶数 → p, q 有公因子 2，与既约矛盾。</div>
+    <div class="ex-result">∴ √2 是无理数。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：质数有无穷多个</div>
+    <div class="ex-body">假设只有有限个质数：p₁, p₂, …, pₙ。构造 N = p₁p₂…pₙ + 1。N 不能被任何 pᵢ 整除，故 N 要么是质数要么有新的质因子，与"只有有限个"矛盾。</div>
+    <div class="ex-result">∴ 质数有无穷多个。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：若 a² 是偶数，则 a 是偶数</div>
+    <div class="ex-body">假设 a 是奇数，设 a = 2k+1 → a² = (2k+1)² = 4k²+4k+1 = 2(2k²+2k)+1，为奇数，与 a² 是偶数矛盾。</div>
+    <div class="ex-result">∴ a 必为偶数。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：三角形最多有一个直角</div>
+    <div class="ex-body">假设 △ABC 有两个直角，即 ∠A = 90° 且 ∠B = 90° → ∠A+∠B = 180° → ∠C = 0°，与三角形内角和为 180° 且 ∠C > 0° 矛盾。</div>
+    <div class="ex-result">∴ 三角形至多有一个直角。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：方程 x³ + x + 1 = 0 无有理根</div>
+    <div class="ex-body">假设有有理根 p/q（既约），代入得 p³/q³ + p/q + 1 = 0 → p³ + pq² + q³ = 0。若 p,q 均为奇数，左端奇数+奇数+奇数=奇数≠0；若一奇一偶，同理矛盾。</div>
+    <div class="ex-result">∴ 方程无有理根。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="0" data-idx="0">
+  <div class="q-title">反证法 · 选择题</div>
+  <div class="q-text">用反证法证明"若 a + b &gt; 10，则 a, b 中至少有一个大于 5"，假设应为：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. a ≤ 5 且 b ≤ 5</div>
+    <div class="opt" data-val="1">B. a ≤ 5 或 b ≤ 5</div>
+    <div class="opt" data-val="2">C. a &lt; 5 且 b &lt; 5</div>
+    <div class="opt" data-val="3">D. a &lt; 5 或 b &lt; 5</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 2. 分析法 -->
+<div class="method-header">
+  <h3>2. 分析法 <span class="method-tag">逻辑推理</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>结论复杂或不易直接推导时，从结论出发反向寻找充分条件。<br><strong>怎么用：</strong>要证 A，只需证 B（B⇒A）；要证 B，只需证 C……直到得到一个显然成立的条件。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：证明 a² + b² ≥ 2ab</div>
+    <div class="ex-body">要证 a² + b² ≥ 2ab，只需证 a² + b² − 2ab ≥ 0，即 (a−b)² ≥ 0。这是显然成立的。</div>
+    <div class="ex-result">∴ a² + b² ≥ 2ab 成立。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：若 x &gt; 0，求证 x + 1/x ≥ 2</div>
+    <div class="ex-body">要证 x + 1/x ≥ 2，只需证 x² + 1 ≥ 2x，即 x² − 2x + 1 ≥ 0，即 (x−1)² ≥ 0，显然成立。</div>
+    <div class="ex-result">∴ x + 1/x ≥ 2 成立（当 x=1 取等）。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：求证 √3 + √7 &lt; 2√5</div>
+    <div class="ex-body">要证 √3 + √7 &lt; 2√5，两边平方（均为正）：3+7+2√21 &lt; 20 → 2√21 &lt; 10 → √21 &lt; 5 → 21 &lt; 25，显然成立。</div>
+    <div class="ex-result">∴ √3 + √7 &lt; 2√5 成立。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：求证 √(a²+1) ≥ |a|</div>
+    <div class="ex-body">要证 √(a²+1) ≥ |a|，两边平方得 a²+1 ≥ a²，即 1 ≥ 0，显然成立。</div>
+    <div class="ex-result">∴ √(a²+1) ≥ |a| 恒成立。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：求证 (a²+b²)/2 ≥ ab</div>
+    <div class="ex-body">要证 (a²+b²)/2 ≥ ab，只需证 a²+b² ≥ 2ab，即 a²−2ab+b² ≥ 0，即 (a−b)² ≥ 0，成立。</div>
+    <div class="ex-result">∴ (a²+b²)/2 ≥ ab 成立。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="2" data-idx="1">
+  <div class="q-title">分析法 · 选择题</div>
+  <div class="q-text">分析法是从____出发，反向寻找____的证明方法。</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 条件，必要条件</div>
+    <div class="opt" data-val="1">B. 条件，充分必要条件</div>
+    <div class="opt" data-val="2">C. 结论，充分条件</div>
+    <div class="opt" data-val="3">D. 结论，必要条件</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 3. 综合法 -->
+<div class="method-header">
+  <h3>3. 综合法 <span class="method-tag">逻辑推理</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>条件明确、结构清晰时，从已知条件出发逐步推导出结论。<br><strong>怎么用：</strong>已知 A → 推出 B → 推出 C → … → 推出结论。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：已知 a &gt; 0, b &gt; 0，求证 (a+b)/2 ≥ √(ab)</div>
+    <div class="ex-body">由 (√a − √b)² ≥ 0 → a + b − 2√(ab) ≥ 0 → a + b ≥ 2√(ab) → (a+b)/2 ≥ √(ab)。</div>
+    <div class="ex-result">∴ 均值不等式成立。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：已知 x = 2，求 x² − 4x + 3 的值</div>
+    <div class="ex-body">由 x = 2，直接代入：x² − 4x + 3 = 2² − 4×2 + 3 = 4 − 8 + 3 = −1。</div>
+    <div class="ex-result">值为 −1。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：已知 a + b = 5, ab = 6，求 a² + b²</div>
+    <div class="ex-body">由公式 a²+b² = (a+b)² − 2ab = 5² − 2×6 = 25 − 12 = 13。</div>
+    <div class="ex-result">a² + b² = 13。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：若等差数列 aₙ 中 a₁=2, d=3，求 S₁₀</div>
+    <div class="ex-body">Sₙ = n[2a₁+(n−1)d]/2 = 10[4 + 9×3]/2 = 10×31/2 = 155。</div>
+    <div class="ex-result">S₁₀ = 155。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：已知 sinθ = 3/5, θ∈(0,π/2)，求 cosθ</div>
+    <div class="ex-body">由 sin²θ + cos²θ = 1 → cos²θ = 1 − (3/5)² = 1 − 9/25 = 16/25 → cosθ = 4/5（θ 在第一象限，取正）。</div>
+    <div class="ex-result">cosθ = 4/5。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="1" data-idx="2">
+  <div class="q-title">综合法 · 选择题</div>
+  <div class="q-text">综合法和分析法的主要区别是：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 综合法更复杂，分析法更简单</div>
+    <div class="opt" data-val="1">B. 综合法从已知到结论（正向），分析法从结论到已知（反向）</div>
+    <div class="opt" data-val="2">C. 综合法用于代数，分析法用于几何</div>
+    <div class="opt" data-val="3">D. 没有本质区别</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 4. 比较法 -->
+<div class="method-header">
+  <h3>4. 比较法 <span class="method-tag">逻辑推理</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>判断两个数或代数式的大小关系。<br><strong>怎么用：</strong>作差法：a−b &gt; 0 ⇔ a &gt; b；作商法：a/b &gt; 1（b&gt;0）⇔ a &gt; b。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：比较 2√3 和 3√2 的大小</div>
+    <div class="ex-body">作差：2√3 − 3√2 = √12 − √18。√12 &lt; √18，故 2√3 − 3√2 &lt; 0。</div>
+    <div class="ex-result">∴ 2√3 &lt; 3√2。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：比较 a² + 1 与 2a 的大小</div>
+    <div class="ex-body">作差：a² + 1 − 2a = (a−1)² ≥ 0，当 a=1 时取等。</div>
+    <div class="ex-result">∴ a² + 1 ≥ 2a。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：比较 log₂3 和 log₃2 的大小</div>
+    <div class="ex-body">log₂3 &gt; log₂2 = 1，log₃2 &lt; log₃3 = 1，作差：log₂3 − 1 &gt; 0，1 − log₃2 &gt; 0。</div>
+    <div class="ex-result">∴ log₂3 &gt; 1 &gt; log₃2。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：比较 3⁴ 和 4³ 的大小</div>
+    <div class="ex-body">作商：(3⁴)/(4³) = 81/64 &gt; 1。</div>
+    <div class="ex-result">∴ 3⁴ &gt; 4³。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：当 x &gt; 0 时，比较 x+1/x 与 2 的大小</div>
+    <div class="ex-body">作差：x + 1/x − 2 = (x² − 2x + 1)/x = (x−1)²/x ≥ 0（x&gt;0）。</div>
+    <div class="ex-result">∴ x + 1/x ≥ 2。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="3" data-idx="3">
+  <div class="q-title">比较法 · 选择题</div>
+  <div class="q-text">若 a, b 均正，用比较法判断 a 和 b 的大小关系时，作商法使用的前提是：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. a 和 b 都是整数</div>
+    <div class="opt" data-val="1">B. a 和 b 都不为零</div>
+    <div class="opt" data-val="2">C. a 和 b 都是正数且不为零</div>
+    <div class="opt" data-val="3">D. a 和 b 都是正数</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 5. 放缩法 -->
+<div class="method-header">
+  <h3>5. 放缩法 <span class="method-tag">逻辑推理</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>不等式证明或求值范围时，通过放大或缩小某一边来简化问题。<br><strong>怎么用：</strong>将式子中的某项放大或缩小（如丢弃正项、用更大/更小的值替换），再比较大小。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：证明 1/1² + 1/2² + … + 1/n² &lt; 2</div>
+    <div class="ex-body">1/k² &lt; 1/(k(k−1)) = 1/(k−1) − 1/k（k≥2）。原式 &lt; 1 + (1−1/2)+(1/2−1/3)+…+(1/(n−1)−1/n) = 2 − 1/n &lt; 2。</div>
+    <div class="ex-result">∴ 和总小于 2。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：证明 √(n²+1) &lt; n + 1/(2n)（n∈N⁺）</div>
+    <div class="ex-body">√(n²+1) &lt; √(n² + n + 1/4) = n + 1/2？放大：√(n²+1) &lt; √(n²+2n+1) = n+1，但更精确地，平方比较：(n+1/(2n))² − (n²+1) = 1/(4n²) &gt; 0。</div>
+    <div class="ex-result">∴ 不等式成立。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：求 √(17) 的整数部分</div>
+    <div class="ex-body">4²=16 &lt; 17 &lt; 5²=25，所以 4 &lt; √17 &lt; 5。</div>
+    <div class="ex-result">∴ √17 的整数部分为 4。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：证明 0.1 + 0.01 + 0.001 + … &lt; 1/9</div>
+    <div class="ex-body">0.1 + 0.01 + 0.001 + … = 0.111… = 1/9 精确值。将每个项放大：0.1 + 0.01 + … &lt; 0.2 + 0.02 + … = 2/9，但更精确地，这是等比数列求和 = 0.1/(1−0.1) = 1/9。</div>
+    <div class="ex-result">∴ S = 1/9，等于（这里作为放缩例子，实际是精确值）。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：证明 1/√1 + 1/√2 + … + 1/√n &gt; √n</div>
+    <div class="ex-body">1/√k &gt; 1/(√k + √(k−1)) = √k − √(k−1)。原式 &gt; (√1−0)+(√2−√1)+…+(√n−√(n−1)) = √n。</div>
+    <div class="ex-result">∴ 不等式成立。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="1" data-idx="4">
+  <div class="q-title">放缩法 · 选择题</div>
+  <div class="q-text">用放缩法证明不等式时，若需要证明 A &lt; B，通常应将 A：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 缩小</div>
+    <div class="opt" data-val="1">B. 放大</div>
+    <div class="opt" data-val="2">C. 先放大再缩小</div>
+    <div class="opt" data-val="3">D. 保持不变</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 6. 数学归纳法 -->
+<div class="method-header">
+  <h3>6. 数学归纳法 <span class="method-tag">逻辑推理</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>证明与自然数 n 有关的命题。<br><strong>怎么用：</strong>①验证 n=1（或起始值）成立；②假设 n=k 成立，证明 n=k+1 也成立；③由①②得对所有自然数都成立。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：证明 1+2+3+…+n = n(n+1)/2</div>
+    <div class="ex-body">n=1：左=1，右=1×2/2=1 ✓。假设 n=k 成立，n=k+1 时：1+…+k+(k+1) = k(k+1)/2 + (k+1) = (k+1)(k+2)/2 ✓。</div>
+    <div class="ex-result">∴ 公式对所有自然数成立。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：证明 1²+2²+…+n² = n(n+1)(2n+1)/6</div>
+    <div class="ex-body">n=1：左=1，右=1×2×3/6=1 ✓。假设 n=k 成立，n=k+1：左 = k(k+1)(2k+1)/6 + (k+1)² = (k+1)(k+2)(2k+3)/6 ✓。</div>
+    <div class="ex-result">∴ 平方和公式成立。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：证明 2ⁿ &gt; n（n∈N⁺）</div>
+    <div class="ex-body">n=1：2¹=2 &gt; 1 ✓。假设 2ᵏ &gt; k，则 2ᵏ⁺¹ = 2·2ᵏ &gt; 2k = k + k ≥ k + 1（k≥1）。</div>
+    <div class="ex-result">∴ 2ⁿ &gt; n 对所有自然数成立。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：证明 n! ≥ 2ⁿ⁻¹（n∈N⁺）</div>
+    <div class="ex-body">n=1：1! = 1 = 2⁰ ✓。假设 k! ≥ 2ᵏ⁻¹，则 (k+1)! = (k+1)·k! ≥ 2·2ᵏ⁻¹ = 2ᵏ（k≥1）。</div>
+    <div class="ex-result">∴ n! ≥ 2ⁿ⁻¹ 成立。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：证明 1 + 3 + 5 + … + (2n−1) = n²</div>
+    <div class="ex-body">n=1：1=1² ✓。假设 n=k 时 1+3+…+(2k−1)=k²，则 n=k+1：k² + (2k+1) = (k+1)² ✓。</div>
+    <div class="ex-result">∴ 前 n 个奇数之和为 n²。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="2" data-idx="5">
+  <div class="q-title">数学归纳法 · 选择题</div>
+  <div class="q-text">数学归纳法的两个步骤缺一不可。如果只验证了 n=1 成立但没有归纳递推，会犯什么错误？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 结论不正确，但验证步骤错了</div>
+    <div class="opt" data-val="1">B. 只能证明 n=1 成立，不能证明 n=2</div>
+    <div class="opt" data-val="2">C. 无法保证命题对所有自然数成立</div>
+    <div class="opt" data-val="3">D. 命题一定不正确</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 7. 同一法 -->
+<div class="method-header">
+  <h3>7. 同一法 <span class="method-tag">逻辑推理</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>要证明某个对象具有某种性质或唯一性时，构造一个具有该性质的对象，然后证明它就是原对象。<br><strong>怎么用：</strong>①构造满足结论的对象；②证明该对象就是原对象（同一性）。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：证明线段的中点是唯一的</div>
+    <div class="ex-body">设 AB 上有两个中点 M 和 N，则 AM = MB = AB/2，AN = NB = AB/2 → AM = AN → M 和 N 重合。</div>
+    <div class="ex-result">∴ 中点唯一。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：证明过直线外一点有且只有一条垂线</div>
+    <div class="ex-body">假设有两垂线 l₁, l₂ 都过 P 且垂直于直线 L，则 l₁∥l₂（垂直于同一直线），但二者都过 P → 重合。</div>
+    <div class="ex-result">∴ 垂线唯一。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：证明若 x² = y² 且 x, y &gt; 0，则 x = y</div>
+    <div class="ex-body">由 x² = y² 得 x² − y² = 0 → (x−y)(x+y) = 0。x+y &gt; 0，故 x−y = 0 → x = y。</div>
+    <div class="ex-result">∴ x = y。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：证明等差数列中若 aₘ = A, aₙ = A，则数列是常数列</div>
+    <div class="ex-body">设公差为 d，aₙ = aₘ + (n−m)d。由 aₙ = aₘ 得 (n−m)d = 0，m≠n ∴ d=0，数列为常数列。</div>
+    <div class="ex-result">∴ 公差为 0，数列为常数列。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：证明三角形的外心唯一</div>
+    <div class="ex-body">三角形三边中垂线交于一点 O，该点到三顶点距离相等。若有另一个 O' 也到三顶点等距，则 O' 也在各边中垂线上 → O' 与 O 重合。</div>
+    <div class="ex-result">∴ 外心唯一。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="0" data-idx="6">
+  <div class="q-title">同一法 · 选择题</div>
+  <div class="q-text">同一法常用于证明：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 唯一性或存在唯一性</div>
+    <div class="opt" data-val="1">B. 不等式关系</div>
+    <div class="opt" data-val="2">C. 数列的通项公式</div>
+    <div class="opt" data-val="3">D. 函数的单调性</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 第一类综合题 -->
+<div class="comprehensive-section">
+  <div class="comp-title">第一类综合题 · 逻辑推理</div>
+  <div class="comp-desc">综合应用反证法、分析法、综合法等逻辑推理方法</div>
+</div>
+<div class="question-card" data-correct="3" data-idx="7">
+  <div class="q-title">综合题 1/3</div>
+  <div class="q-text">要证明"√(ab) ≤ (a+b)/2（a, b &gt; 0）"，以下哪种证明思路使用的是分析法？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 由 (√a−√b)² ≥ 0 直接展开</div>
+    <div class="opt" data-val="1">B. 假设 √(ab) &gt; (a+b)/2，推出矛盾</div>
+    <div class="opt" data-val="2">C. 代入 a=1, b=4 验证</div>
+    <div class="opt" data-val="3">D. 要证 √(ab) ≤ (a+b)/2，只需证 2√(ab) ≤ a+b，即 a+b−2√(ab) ≥ 0，即 (√a−√b)² ≥ 0</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     第二类：代数变形方法
+     ============================================================ -->
+<div class="category-title">第二类 · 代数变形方法</div>
+
+<!-- 8. 待定系数法 -->
+<div class="method-header">
+  <h3>8. 待定系数法 <span class="method-tag">代数变形</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>已知结果的形式，但系数未知时。<br><strong>怎么用：</strong>设出含有待定系数的表达式，根据恒等条件列出方程组，解出系数。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：因式分解 x² − 5x + 6</div>
+    <div class="ex-body">设 x² − 5x + 6 = (x + a)(x + b) = x² + (a+b)x + ab。比较系数：a+b = −5, ab = 6 → a=−2, b=−3。</div>
+    <div class="ex-result">∴ x² − 5x + 6 = (x−2)(x−3)。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：把 x² + 2x + 3 配成 (x + a)² + b</div>
+    <div class="ex-body">设 (x + a)² + b = x² + 2ax + a² + b。比较系数：2a=2 → a=1；a²+b=3 → b=2。</div>
+    <div class="ex-result">∴ x² + 2x + 3 = (x+1)² + 2。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：求过 (0,1), (1,3), (2,7) 的二次函数</div>
+    <div class="ex-body">设 f(x)=ax²+bx+c。代入：c=1；a+b+1=3 → a+b=2；4a+2b+1=7 → 2a+b=3。解得 a=1, b=1, c=1。</div>
+    <div class="ex-result">∴ f(x) = x² + x + 1。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：将 1/(x²−1) 分解为部分分式</div>
+    <div class="ex-body">设 1/(x²−1) = A/(x−1) + B/(x+1)。通分：1 = A(x+1)+B(x−1)。令 x=1：1=2A→A=1/2；令 x=−1：1=−2B→B=−1/2。</div>
+    <div class="ex-result">∴ 1/(x²−1) = 1/[2(x−1)] − 1/[2(x+1)]。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：已知二次式 f(x)=x²+px+q，f(1)=0, f(2)=3，求 p, q</div>
+    <div class="ex-body">f(1)=1+p+q=0 → p+q=−1；f(2)=4+2p+q=3 → 2p+q=−1。相减得 p=0，代入得 q=−1。</div>
+    <div class="ex-result">∴ p=0, q=−1，f(x)=x²−1。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="1" data-idx="8">
+  <div class="q-title">待定系数法 · 选择题</div>
+  <div class="q-text">用待定系数法分解 x² − 3x + 2，设其为 (x + a)(x + b)，则 a, b 满足：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. a+b=3, ab=2</div>
+    <div class="opt" data-val="1">B. a+b=−3, ab=2</div>
+    <div class="opt" data-val="2">C. a+b=2, ab=−3</div>
+    <div class="opt" data-val="3">D. a+b=−2, ab=3</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 9. 换元法 -->
+<div class="method-header">
+  <h3>9. 换元法 <span class="method-tag">代数变形</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>式子结构复杂或存在重复模式时，引入新变量简化。<br><strong>怎么用：</strong>设 t = g(x)，将原式化为关于 t 的简单形式，解出 t 后再代回求 x。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：解方程 (x² − x)² − 4(x² − x) + 3 = 0</div>
+    <div class="ex-body">设 t = x² − x，则原式 = t² − 4t + 3 = 0 → (t−1)(t−3)=0 → t=1 或 t=3。x²−x=1 → x=(1±√5)/2；x²−x=3 → x=(1±√13)/2。</div>
+    <div class="ex-result">∴ 共 4 个解。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：求 ∫e²ˣ/(eˣ+1) dx</div>
+    <div class="ex-body">设 t = eˣ，则 dt = eˣdx，原式 = ∫t²/(t+1) · dt/t = ∫t/(t+1) dt = ∫(1 − 1/(t+1)) dt = t − ln|t+1| + C。</div>
+    <div class="ex-result">= eˣ − ln(eˣ+1) + C。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：解方程 2sin²x + 3sinx + 1 = 0</div>
+    <div class="ex-body">设 t = sinx，|t|≤1，则 2t² + 3t + 1 = 0 → (2t+1)(t+1)=0 → t=−1/2 或 t=−1。sinx=−1/2 → x=−π/6+2kπ 或 −5π/6+2kπ；sinx=−1 → x=−π/2+2kπ。</div>
+    <div class="ex-result">∴ x = −π/6+2kπ, −5π/6+2kπ, −π/2+2kπ。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：求函数 y = 2x + √(1−x²) 的值域</div>
+    <div class="ex-body">设 x = sinθ, θ∈[−π/2, π/2]，则 y = 2sinθ + cosθ = √5 sin(θ+φ)。最大 √5，最小 −√5。</div>
+    <div class="ex-result">∴ 值域为 [−√5, √5]。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：解方程 √(x+5) + √(x−3) = 4</div>
+    <div class="ex-body">设 t = √(x+5)，则 x = t²−5，√(x−3) = √(t²−8)。原式：t + √(t²−8) = 4 → √(t²−8) = 4−t → 平方得 t²−8 = 16−8t+t² → 8t=24 → t=3 → x=4。</div>
+    <div class="ex-result">∴ x = 4。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="2" data-idx="9">
+  <div class="q-title">换元法 · 选择题</div>
+  <div class="q-text">解方程 (x² + 1)² − 2(x² + 1) − 3 = 0，最自然的换元是：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. t = x</div>
+    <div class="opt" data-val="1">B. t = x²</div>
+    <div class="opt" data-val="2">C. t = x² + 1</div>
+    <div class="opt" data-val="3">D. t = (x² + 1)²</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 10. 配方法 -->
+<div class="method-header">
+  <h3>10. 配方法 <span class="method-tag">代数变形</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>二次三项式、二次函数、二次方程的最值或配方化简。<br><strong>怎么用：</strong>将 ax²+bx+c 配成 a(x + h)² + k 的形式。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：配方 x² − 6x + 11</div>
+    <div class="ex-body">x² − 6x + 11 = (x² − 6x + 9) + 2 = (x−3)² + 2。</div>
+    <div class="ex-result">顶点 (3, 2)，最小值为 2。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：配方 −2x² + 8x − 5</div>
+    <div class="ex-body">−2x² + 8x − 5 = −2(x² − 4x) −5 = −2(x² − 4x + 4) −5 + 8 = −2(x−2)² + 3。</div>
+    <div class="ex-result">顶点 (2, 3)，最大值为 3。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：求 x² + y² − 2x + 4y + 6 的最小值</div>
+    <div class="ex-body">原式 = (x²−2x+1) + (y²+4y+4) + 1 = (x−1)² + (y+2)² + 1 ≥ 1。</div>
+    <div class="ex-result">最小值为 1（x=1, y=−2 时）。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：解方程 3x² − 6x + 1 = 0</div>
+    <div class="ex-body">3(x² − 2x) + 1 = 0 → 3(x−1)² − 3 + 1 = 0 → 3(x−1)² = 2 → (x−1)² = 2/3 → x = 1 ± √(2/3)。</div>
+    <div class="ex-result">∴ x = 1 ± √6/3。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：分解因式 x⁴ + 4</div>
+    <div class="ex-body">x⁴ + 4 = x⁴ + 4x² + 4 − 4x² = (x²+2)² − (2x)² = (x²+2x+2)(x²−2x+2)。</div>
+    <div class="ex-result">∴ 分组后配方再平方差分解。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="1" data-idx="10">
+  <div class="q-title">配方法 · 选择题</div>
+  <div class="q-text">将 x² + 5x − 1 配方后结果是：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. (x+5/2)² − 21/4</div>
+    <div class="opt" data-val="1">B. (x+5/2)² − 29/4</div>
+    <div class="opt" data-val="2">C. (x+5/2)² − 25/4</div>
+    <div class="opt" data-val="3">D. (x+5)² − 26</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 11. 构造法 -->
+<div class="method-header">
+  <h3>11. 构造法 <span class="method-tag">代数变形</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>直接解题困难时，构造辅助函数、方程、图形或数列来间接解决问题。<br><strong>怎么用：</strong>根据问题特点构造新对象，将原问题转化为对新对象的分析。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：构造辅助函数证明不等式</div>
+    <div class="ex-body">证 x &gt; sinx（x &gt; 0）。构造 f(x)=x−sinx，f'(x)=1−cosx ≥ 0，f(0)=0，故 f(x) &gt; 0，即 x &gt; sinx。</div>
+    <div class="ex-result">∴ 不等式成立。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：构造方程求值</div>
+    <div class="ex-body">已知 a + 1/a = 3，求 a² + 1/a²。构造 t = a + 1/a = 3，a²+1/a² = (a+1/a)² − 2 = 9 − 2 = 7。</div>
+    <div class="ex-result">a² + 1/a² = 7。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：构造几何图形</div>
+    <div class="ex-body">求 √(x²+1) + √((x−3)²+4) 的最小值。构造两定点 (0,1) 和 (3,2)，"折线最短"原理，最小值=√(3²+1²)=√10。</div>
+    <div class="ex-result">最小值为 √10。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：构造数列求通项</div>
+    <div class="ex-body">已知 a₁=1, aₙ₊₁=2aₙ+1。构造 bₙ=aₙ+1，则 bₙ₊₁=aₙ₊₁+1=2aₙ+2=2bₙ，b₁=2，bₙ=2ⁿ，aₙ=2ⁿ−1。</div>
+    <div class="ex-result">aₙ = 2ⁿ − 1。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：构造判别式</div>
+    <div class="ex-body">证 a² + b² + c² ≥ ab + bc + ca。构造关于 x 的方程：x² − (a+b+c)x + (ab+bc+ca) = 0，其判别式 ≥ 0 → (a+b+c)² − 4(ab+bc+ca) ≥ 0 → a²+b²+c² ≥ ab+bc+ca。</div>
+    <div class="ex-result">∴ 不等式成立。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="3" data-idx="11">
+  <div class="q-title">构造法 · 选择题</div>
+  <div class="q-text">已知 a₁=2, aₙ₊₁=3aₙ+2，构造新数列 bₙ=aₙ+1，则 bₙ 是：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 等差数列</div>
+    <div class="opt" data-val="1">B. 常数列</div>
+    <div class="opt" data-val="2">C. 既等差又等比</div>
+    <div class="opt" data-val="3">D. 等比数列</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 12. 消元法 -->
+<div class="method-header">
+  <h3>12. 消元法 <span class="method-tag">代数变形</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>方程组或多个变量的问题中，通过消去部分变量减少未知数。<br><strong>怎么用：</strong>加减消元、代入消元、或利用恒等式消去某些变量。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：解方程组 x+y=5, x−y=1</div>
+    <div class="ex-body">两式相加：2x=6 → x=3；代入 x+y=5 → y=2。</div>
+    <div class="ex-result">∴ (x, y) = (3, 2)。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：解方程组 x²+y²=25, x+y=7</div>
+    <div class="ex-body">由 x+y=7 → y=7−x，代入：x²+(7−x)²=25 → 2x²−14x+24=0 → x²−7x+12=0 → x=3 或 x=4。对应 y=4 或 y=3。</div>
+    <div class="ex-result">∴ (3,4) 或 (4,3)。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：消去参数 t</div>
+    <div class="ex-body">参数方程 x = t+1, y = t²−2t。由 x=t+1 → t=x−1，代入：y=(x−1)²−2(x−1) = x²−4x+3。</div>
+    <div class="ex-result">普通方程：y = x² − 4x + 3。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：解三元一次方程组</div>
+    <div class="ex-body">x+y+z=6, 2x−y+z=3, x+2y−z=3。①+②消 z：3x=9→x=3；②+③：3x+y=6→y=−3；代入①：z=6。∴(3,−3,6)。</div>
+    <div class="ex-result">∴ (x, y, z) = (3, −3, 6)。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：消元求取值范围</div>
+    <div class="ex-body">已知 x+y=1，求 x²+y² 最小值。消去 y：x²+(1−x)² = 2x²−2x+1 = 2(x−1/2)² + 1/2 ≥ 1/2。</div>
+    <div class="ex-result">∴ x²+y² ≥ 1/2。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="0" data-idx="12">
+  <div class="q-title">消元法 · 选择题</div>
+  <div class="q-text">解方程组 2x+3y=7, 4x−y=1，第一步最方便的方法是：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 由第二个方程得 y=4x−1，代入第一个</div>
+    <div class="opt" data-val="1">B. 由第一个方程得 2x=7−3y，代入第二个</div>
+    <div class="opt" data-val="2">C. 两个方程直接相加</div>
+    <div class="opt" data-val="3">D. 第一个方程乘以 2 再减去第二个</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 13. 赋值法 -->
+<div class="method-header">
+  <h3>13. 赋值法 <span class="method-tag">代数变形</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>求解恒等式、找规律、验证猜想时，代入特殊值简化问题。<br><strong>怎么用：</strong>选取方便计算的特殊值（如 0, 1, −1 等）代入求解。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：求 (1+x)ⁿ 展开式系数和</div>
+    <div class="ex-body">令 x=1，得 (1+1)ⁿ = 2ⁿ，即所有系数之和为 2ⁿ。</div>
+    <div class="ex-result">系数和 = 2ⁿ。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：求 (1+x)ⁿ 奇数项系数和</div>
+    <div class="ex-body">令 x=1 得所有系数和 = 2ⁿ；令 x=−1 得 0 = 偶数项 − 奇数项。两式相加得奇数项 × 2 = 2ⁿ → 奇数项系数和 = 2ⁿ⁻¹。</div>
+    <div class="ex-result">奇数项系数和 = 2ⁿ⁻¹。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：判断恒等式 x³ − 1 = (x−1)(x²+x+1)</div>
+    <div class="ex-body">令 x=0：左=−1，右=(−1)(1)=−1 ✓；令 x=2：左=7，右=(1)(7)=7 ✓。两个特殊值验证相等。</div>
+    <div class="ex-result">恒等式成立。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：求二次函数 f(x) 满足 f(0)=1, f(1)=3, f(−1)=3</div>
+    <div class="ex-body">设 f(x)=ax²+bx+c。f(0)=c=1；f(1)=a+b+1=3 → a+b=2；f(−1)=a−b+1=3 → a−b=2。解得 a=2, b=0。</div>
+    <div class="ex-result">∴ f(x) = 2x² + 1。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：求 f(x) 满足 f(x+y)=f(x)+f(y) 的函数值</div>
+    <div class="ex-body">令 x=1, y=0：f(1)=f(1)+f(0) → f(0)=0。令 x=1, y=1：f(2)=2f(1)。赋值法探索线性函数性质。</div>
+    <div class="ex-result">f(0)=0, f(2)=2f(1)。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="1" data-idx="13">
+  <div class="q-title">赋值法 · 选择题</div>
+  <div class="q-text">若 (1+ax)⁵ 展开式中 x³ 的系数为 80，赋值法无法直接求解，应该用：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 令 x=1 求系数和</div>
+    <div class="opt" data-val="1">B. 二项式定理展开比较系数</div>
+    <div class="opt" data-val="2">C. 令 x=0 代入</div>
+    <div class="opt" data-val="3">D. 令 x=−1 求奇偶项差</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 14. 分离参数法 -->
+<div class="method-header">
+  <h3>14. 分离参数法 <span class="method-tag">代数变形</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>含参数的方程或不等式问题，需要研究参数对解的影响。<br><strong>怎么用：</strong>把参数与变量分开，使等式/不等式变为 f(x) &lt; g(a) 的形式。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：对任意 x∈[1, 3]，x²−2x+m &gt; 0 恒成立，求 m 范围</div>
+    <div class="ex-body">分离参数：m &gt; −x²+2x = −(x−1)²+1。x∈[1,3] 时，−(x−1)²+1 最大值为 1（x=1），最小值为 −3（x=3）。m &gt; 1。</div>
+    <div class="ex-result">∴ m &gt; 1。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：方程 x² − 2x = a 在 [0, 2] 上有解，求 a 范围</div>
+    <div class="ex-body">分离：a = x² − 2x = (x−1)² − 1。x∈[0,2] 时，a∈[−1, 0]。</div>
+    <div class="ex-result">∴ a ∈ [−1, 0]。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：不等式 x² + ax + 1 &gt; 0 对 x∈R 恒成立</div>
+    <div class="ex-body">分离参数法不直接适用（x² 项无参数）。用判别式：Δ = a² − 4 &lt; 0 → a∈(−2, 2)。</div>
+    <div class="ex-result">∴ a ∈ (−2, 2)。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：f(x)=x²−ax+1 在 [1, +∞) 递增，求 a 范围</div>
+    <div class="ex-body">对称轴 x = a/2 ≤ 1 → a ≤ 2。直接由二次函数性质得。</div>
+    <div class="ex-result">∴ a ≤ 2。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：方程 √(x+1) = 2x + a 有正根，求 a 范围</div>
+    <div class="ex-body">分离：a = √(x+1) − 2x（x &gt; 0）。令 t=√(x+1)，x=t²−1，a = t − 2(t²−1) = −2t²+t+2。t &gt; 1 时，a 递减，a ∈ (−∞, 1)。</div>
+    <div class="ex-result">∴ a &lt; 1。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="2" data-idx="14">
+  <div class="q-title">分离参数法 · 选择题</div>
+  <div class="q-text">分离参数法的核心思想是：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 把参数消去</div>
+    <div class="opt" data-val="1">B. 把参数看作变量</div>
+    <div class="opt" data-val="2">C. 把参数与变量分开，转化为函数最值问题</div>
+    <div class="opt" data-val="3">D. 把参数代入方程求解</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 15. 累加法 -->
+<div class="method-header">
+  <h3>15. 累加法 <span class="method-tag">代数变形</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>递推关系形如 aₙ₊₁ − aₙ = f(n) 时，求通项公式。<br><strong>怎么用：</strong>写出 a₂−a₁, a₃−a₂, …, aₙ−aₙ₋₁ 共 n−1 个等式，左右分别相加，消去中间项。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：a₁=1, aₙ₊₁−aₙ=2，求 aₙ</div>
+    <div class="ex-body">aₙ = a₁ + (a₂−a₁) + (a₃−a₂) + … + (aₙ−aₙ₋₁) = 1 + 2 + 2 + … + 2 = 1 + 2(n−1) = 2n−1。</div>
+    <div class="ex-result">∴ aₙ = 2n−1（等差数列）。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：a₁=1, aₙ₊₁−aₙ=2n，求 aₙ</div>
+    <div class="ex-body">aₙ = 1 + 2×1 + 2×2 + … + 2×(n−1) = 1 + 2[1+2+…+(n−1)] = 1 + 2·(n−1)n/2 = n²−n+1。</div>
+    <div class="ex-result">∴ aₙ = n² − n + 1。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：a₁=2, aₙ₊₁−aₙ=3ⁿ，求 aₙ</div>
+    <div class="ex-body">aₙ = 2 + 3¹ + 3² + … + 3ⁿ⁻¹ = 2 + 3(3ⁿ⁻¹−1)/(3−1) = 2 + (3ⁿ−3)/2 = (3ⁿ+1)/2。</div>
+    <div class="ex-result">∴ aₙ = (3ⁿ + 1)/2。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：a₁=0, aₙ₊₁−aₙ=1/(n(n+1))，求 aₙ</div>
+    <div class="ex-body">aₙ = Σ(1/k − 1/(k+1))（k=1 到 n−1）= 1 − 1/n = (n−1)/n。</div>
+    <div class="ex-result">∴ aₙ = (n−1)/n。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：数列前 n 项和 Sₙ= n²，求 aₙ</div>
+    <div class="ex-body">aₙ = Sₙ − Sₙ₋₁ = n² − (n−1)² = 2n−1（n≥2）。a₁=S₁=1，也满足。</div>
+    <div class="ex-result">∴ aₙ = 2n−1。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="0" data-idx="15">
+  <div class="q-title">累加法 · 选择题</div>
+  <div class="q-text">已知 a₁=1, aₙ₊₁−aₙ=3（常数），则 aₙ =</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 3n−2</div>
+    <div class="opt" data-val="1">B. 3n+1</div>
+    <div class="opt" data-val="2">C. 3n−1</div>
+    <div class="opt" data-val="3">D. 3n</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 16. 累乘法 -->
+<div class="method-header">
+  <h3>16. 累乘法 <span class="method-tag">代数变形</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>递推关系形如 aₙ₊₁/aₙ = f(n) 时，求通项公式。<br><strong>怎么用：</strong>写出 a₂/a₁, a₃/a₂, …, aₙ/aₙ₋₁ 共 n−1 个比值，左右分别相乘。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：a₁=2, aₙ₊₁/aₙ=3，求 aₙ</div>
+    <div class="ex-body">aₙ = a₁ × (a₂/a₁) × (a₃/a₂) × … × (aₙ/aₙ₋₁) = 2 × 3ⁿ⁻¹。</div>
+    <div class="ex-result">∴ aₙ = 2·3ⁿ⁻¹（等比数列）。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：a₁=1, aₙ₊₁/aₙ=n/(n+1)，求 aₙ</div>
+    <div class="ex-body">aₙ = 1 × (1/2) × (2/3) × (3/4) × … × ((n−1)/n) = 1/n。</div>
+    <div class="ex-result">∴ aₙ = 1/n。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：a₁=1, aₙ₊₁=2ⁿ·aₙ，求 aₙ</div>
+    <div class="ex-body">aₙ = 1 × 2¹ × 2² × … × 2ⁿ⁻¹ = 2^(1+2+…+(n−1)) = 2^(n(n−1)/2)。</div>
+    <div class="ex-result">∴ aₙ = 2^(n(n−1)/2)。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：a₁=2, aₙ₊₁/aₙ=(n+1)/n，求 aₙ</div>
+    <div class="ex-body">aₙ = 2 × (2/1) × (3/2) × … × (n/(n−1)) = 2n。</div>
+    <div class="ex-result">∴ aₙ = 2n。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：a₁=3, aₙ₊₁=naₙ，求 aₙ</div>
+    <div class="ex-body">aₙ = 3 × 1 × 2 × 3 × … × (n−1) = 3·(n−1)!。</div>
+    <div class="ex-result">∴ aₙ = 3·(n−1)!。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="1" data-idx="16">
+  <div class="q-title">累乘法 · 选择题</div>
+  <div class="q-text">已知 a₁=5, aₙ₊₁/aₙ=2，则 a₆ =</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 80</div>
+    <div class="opt" data-val="1">B. 160</div>
+    <div class="opt" data-val="2">C. 320</div>
+    <div class="opt" data-val="3">D. 64</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 17. 迭代法 -->
+<div class="method-header">
+  <h3>17. 迭代法 <span class="method-tag">代数变形</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>递推关系复杂或需要近似解时，通过反复代入递推公式逼近目标。<br><strong>怎么用：</strong>由 aₙ 反复代入递推式 aₙ = f(aₙ₋₁)，直到出现 a₁，或通过反复计算逼近方程根。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：求方程 x²=2 的正根（牛顿迭代）</div>
+    <div class="ex-body">取 x₀=1.5，xₙ₊₁ = (xₙ + 2/xₙ)/2。x₁=1.4167，x₂=1.4142，x₃=1.4142（已收敛到 √2）。</div>
+    <div class="ex-result">√2 ≈ 1.41421356。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：a₁=1, aₙ₊₁=2aₙ+1，迭代求 a₃</div>
+    <div class="ex-body">a₁=1 → a₂=2×1+1=3 → a₃=2×3+1=7 → a₄=2×7+1=15。</div>
+    <div class="ex-result">a₃=7，a₄=15。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：求 √3 的近似值（迭代）</div>
+    <div class="ex-body">取 x₀=2，xₙ₊₁ = (xₙ + 3/xₙ)/2。x₁=1.75，x₂=1.7321，x₃=1.73205。</div>
+    <div class="ex-result">√3 ≈ 1.73205。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：aₙ₊₁=√(aₙ+2)，a₁=1，求极限</div>
+    <div class="ex-body">迭代前几项：a₁=1, a₂=√3≈1.732, a₃=√(1.732+2)≈1.931, a₄≈1.983, a₅≈1.996。极限 L=2。</div>
+    <div class="ex-result">极限为 2。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：求 f(x)=x³−x−1=0 的近似根</div>
+    <div class="ex-body">取 x₀=1.5，xₙ₊₁ = xₙ − (xₙ³−xₙ−1)/(3xₙ²−1)。x₁=1.3478，x₂=1.3252，x₃=1.3247（已收敛）。</div>
+    <div class="ex-result">方程根 ≈ 1.3247。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="0" data-idx="17">
+  <div class="q-title">迭代法 · 选择题</div>
+  <div class="q-text">a₁=2, aₙ₊₁=aₙ/2 + 1/aₙ 迭代求 √2，第 2 次迭代结果 x₂ 最接近：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 1.4142</div>
+    <div class="opt" data-val="1">B. 1.5</div>
+    <div class="opt" data-val="2">C. 1.4167</div>
+    <div class="opt" data-val="3">D. 1.4</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     第二类综合题
+     ============================================================ -->
+<div class="comprehensive-section">
+  <div class="comp-title">第二类综合题 · 代数变形</div>
+  <div class="comp-desc">综合应用换元、配方、构造、消元、累加累乘等代数变形方法</div>
+</div>
+<div class="question-card" data-correct="2" data-idx="18">
+  <div class="q-title">综合题 2/3</div>
+  <div class="q-text">已知 a₁=1, aₙ₊₁=2aₙ+2ⁿ，求 aₙ 的通项公式。下列哪种方法最合适？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 直接用累乘法</div>
+    <div class="opt" data-val="1">B. 直接用累加法</div>
+    <div class="opt" data-val="2">C. 两边同除以 2ⁿ⁺¹，构造新数列</div>
+    <div class="opt" data-val="3">D. 用待定系数法设 aₙ=An·2ⁿ</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     第三类：组合计数方法
+     ============================================================ -->
+<div class="category-title">第三类 · 组合计数方法</div>
+
+<!-- 18. 捆绑法 -->
+<div class="method-header">
+  <h3>18. 捆绑法 <span class="method-tag">组合计数</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>排列组合问题中要求某些元素必须相邻时。<br><strong>怎么用：</strong>将必须相邻的元素捆绑成一个整体，先排整体再排内部。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：A,B,C,D,E 五人排队，A,B 必须相邻</div>
+    <div class="ex-body">将 A,B 捆绑为 1 个整体，与 C,D,E 共 4 个元素排列 = 4! = 24。A,B 内部可交换 = 2! = 2。</div>
+    <div class="ex-result">总计 24×2 = 48 种排法。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：3 男 2 女排成一排，女生必须相邻</div>
+    <div class="ex-body">2 女捆绑为 1 个整体，与 3 男共 4 个元素排 = 4! = 24。女生内部 2! = 2。</div>
+    <div class="ex-result">总计 24×2 = 48 种排法。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：6 本书排列，其中 3 本数学书必须放一起</div>
+    <div class="ex-body">3 本数学书捆绑为 1 个整体，与其余 3 本共 4 个元素排 = 4! = 24。数学书内部 3! = 6。</div>
+    <div class="ex-result">总计 24×6 = 144 种排法。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：4 个男生 4 个女生，男生必须相邻、女生必须相邻</div>
+    <div class="ex-body">男捆绑 + 女捆绑 = 2 个整体排列 = 2! = 2。男内部 4! = 24，女内部 4! = 24。</div>
+    <div class="ex-result">总计 2×24×24 = 1152 种。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：A,B,C,D,E 五人，A 必须站在 B 左边（不一定相邻）</div>
+    <div class="ex-body">所有排列 5! = 120，A 在 B 左和 A 在 B 右各一半。</div>
+    <div class="ex-result">总计 120/2 = 60 种。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="3" data-idx="19">
+  <div class="q-title">捆绑法 · 选择题</div>
+  <div class="q-text">4 本不同的语文书和 3 本不同的数学书，要求语文书必须相邻，排法数为：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 7!</div>
+    <div class="opt" data-val="1">B. 4! × 3!</div>
+    <div class="opt" data-val="2">C. 5! × 4!</div>
+    <div class="opt" data-val="3">D. 4! × 4!</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 19. 插空法 -->
+<div class="method-header">
+  <h3>19. 插空法 <span class="method-tag">组合计数</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>排列组合问题中要求某些元素不能相邻时。<br><strong>怎么用：</strong>先排没有限制的元素，在它们产生的空位中插入不能相邻的元素。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：A,B,C,D,E 五人，A,B 不能相邻</div>
+    <div class="ex-body">先排 C,D,E：3! = 6 种，产生 4 个空位（两端+中间），选 2 个空位放 A,B：P(4,2)=12。</div>
+    <div class="ex-result">总计 6×12 = 72 种。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：3 男 2 女排成一排，女生不相邻</div>
+    <div class="ex-body">先排 3 男：3! = 6，产生 4 个空位，选 2 个放女生：P(4,2) = 12。</div>
+    <div class="ex-result">总计 6×12 = 72 种。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：4 盏红灯 3 盏绿灯，红灯不相邻</div>
+    <div class="ex-body">先排 3 盏绿灯：1 种（相同），产生 4 个空位，放 4 盏红灯：C(4,4)=1。</div>
+    <div class="ex-result">总计 1 种（所有红灯必须插在绿灯之间）。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：5 个节目，新增 3 个不连续节目</div>
+    <div class="ex-body">原有 5 个节目排好：5! = 120，产生 6 个空位，选 3 个放新节目：P(6,3) = 120。</div>
+    <div class="ex-result">总计 120×120 = 14400 种。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：4 个男生 3 个女生，女生两两不相邻</div>
+    <div class="ex-body">先排 4 男：4! = 24，产生 5 个空位，选 3 个放女生：C(5,3)×3! = 10×6=60。</div>
+    <div class="ex-result">总计 24×60 = 1440 种。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="1" data-idx="20">
+  <div class="q-title">插空法 · 选择题</div>
+  <div class="q-text">5 个男生 3 个女生，女生不相邻的排法，第一步应：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 先排女生</div>
+    <div class="opt" data-val="1">B. 先排男生，再在空位中插入女生</div>
+    <div class="opt" data-val="2">C. 先捆绑女生</div>
+    <div class="opt" data-val="3">D. 先排列所有 8 人再去掉相邻情况</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 20. 隔板法 -->
+<div class="method-header">
+  <h3>20. 隔板法 <span class="method-tag">组合计数</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>相同物品分配给不同组（每组非空/可空）时。<br><strong>怎么用：</strong>将 n 个相同物品排成一排，在它们之间的 n−1 个空隙中插入 k−1 个隔板，分成 k 组。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：10 个相同苹果分给 3 人，每人至少一个</div>
+    <div class="ex-body">10 个苹果排一排，中间 9 个空隙，选 2 个位置放隔板：C(9,2) = 36。</div>
+    <div class="ex-result">共 36 种分法。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：8 个相同球放入 4 个盒子（可空）</div>
+    <div class="ex-body">先给每盒借 1 个球（虚拟），共 12 个球，中间 11 个空隙插 3 个隔板：C(11,3)=165。</div>
+    <div class="ex-result">共 165 种放法。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：x+y+z=12 的正整数解个数</div>
+    <div class="ex-body">12 个 1 排一排，11 个空插 2 个隔板：C(11,2) = 55。</div>
+    <div class="ex-result">共 55 组解。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：x+y+z=12 的非负整数解个数</div>
+    <div class="ex-body">化为 (x+1)+(y+1)+(z+1)=15，相当于 15 个 1 分 3 组（每组≥1）：C(14,2) = 91。</div>
+    <div class="ex-result">共 91 组解。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：7 个相同文具分给 4 个班，每班至少 2 个</div>
+    <div class="ex-body">先每班给 1 个，剩下 3 个分 4 班（可空）= C(3+4−1, 4−1) = C(6,3) = 20。</div>
+    <div class="ex-result">共 20 种分法。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="0" data-idx="21">
+  <div class="q-title">隔板法 · 选择题</div>
+  <div class="q-text">方程 x+y+z+w=10 的正整数解个数为：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. C(9,3) = 84</div>
+    <div class="opt" data-val="1">B. C(10,4) = 210</div>
+    <div class="opt" data-val="2">C. C(10,3) = 120</div>
+    <div class="opt" data-val="3">D. C(13,3) = 286</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 21. 局部调整法 -->
+<div class="method-header">
+  <h3>21. 局部调整法 <span class="method-tag">组合计数</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>变量有约束条件，需要求最值或证明极值性质时，通过逐步微调逼近最优。<br><strong>怎么用：</strong>保持约束不变，调整一对变量的取值，使目标函数单调变化，直到达到最值。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：a+b=10，求 ab 最大值</div>
+    <div class="ex-body">固定和，调 a,b 使乘积最大。由均值不等式或配方法：a=b=5时 ab=25 最大。也可局部调整：若 a≠b，将 (a,b) 调整为 (a−δ, b+δ)，和不变但积变大。</div>
+    <div class="ex-result">最大值为 25。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：a+b+c=12，求 abc 最大值</div>
+    <div class="ex-body">由对称性，当 a=b=c=4 时取最大。局部调整：若 a≠b，将 (a,b) 调整为 (a−δ, b+δ)，保持和不变但积会增大。</div>
+    <div class="ex-result">最大值为 4³=64。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：周长为定值的三角形，何时面积最大</div>
+    <div class="ex-body">固定周长 C，调整两边长使面积最大。当三边相等（等边三角形）时面积最大。</div>
+    <div class="ex-result">等边三角形面积最大。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：x²+y²=1，求 x+y 最值</div>
+    <div class="ex-body">由柯西不等式：(x+y)² ≤ 2(x²+y²)=2 → −√2 ≤ x+y ≤ √2。当 x=y=±1/√2 时取最值。</div>
+    <div class="ex-result">最大 √2，最小 −√2。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：n 个正数和为定值 S，求平方和的最小值</div>
+    <div class="ex-body">固定和，调整使各数相等时平方和最小。aᵢ=S/n 时平方和 = S²/n 最小。</div>
+    <div class="ex-result">最小值 S²/n。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="3" data-idx="22">
+  <div class="q-title">局部调整法 · 选择题</div>
+  <div class="q-text">局部调整法的本质是：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 将整体分为若干局部</div>
+    <div class="opt" data-val="1">B. 先求局部再求和</div>
+    <div class="opt" data-val="2">C. 把复杂问题局部化</div>
+    <div class="opt" data-val="3">D. 保持约束不变，在局部变动中寻找极值</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 22. 磨光法 -->
+<div class="method-header">
+  <h3>22. 磨光法 <span class="method-tag">组合计数</span></h3>
+  <div class="method-desc"><strong>什么时候用：</strong>寻找极端情况或简化条件时，逐步消去差异使问题变简单。<br><strong>怎么用：</strong>通过一系列不改变问题本质的变换，逐步"磨平"数据差异，最终得到简单情形。</div>
+</div>
+<div class="examples-grid">
+  <div class="example-card">
+    <div class="ex-title">例1：给定一组正数，求最小值可能的最大值</div>
+    <div class="ex-body">逐步将较大的数向较小的数"磨平"（如通过调整使差值减小），最终发现各数相等时达到平衡。</div>
+    <div class="ex-result">各数相等时取得极值。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例2：证明排序不等式</div>
+    <div class="ex-body">将乱序的数列通过相邻交换（磨光）逐步变成同序排列，每步交换不会减少和。</div>
+    <div class="ex-result">同序和 ≥ 乱序和 ≥ 逆序和。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例3：n 个正数和为 1，求乘积最大值</div>
+    <div class="ex-body">若不相等，取两个不等项调整使其相等，乘积增大。反复磨光，最终全部相等时乘积最大。</div>
+    <div class="ex-result">最大值为 (1/n)ⁿ。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例4：证明切比雪夫不等式</div>
+    <div class="ex-body">通过逐步调整（磨光法）可以证明：若 a₁≤a₂≤…≤aₙ, b₁≤b₂≤…≤bₙ，则 (∑aᵢbᵢ)/n ≥ (∑aᵢ)(∑bᵢ)/n²。</div>
+    <div class="ex-result">切比雪夫不等式成立。</div>
+  </div>
+  <div class="example-card">
+    <div class="ex-title">例5：给定周长求面积最大</div>
+    <div class="ex-body">固定周长，磨光法证明当边长相同时面积最大——将任意两边逐步调整至相等，面积单调递增。</div>
+    <div class="ex-result">正多边形面积最大。</div>
+  </div>
+</div>
+
+<div class="question-card" data-correct="2" data-idx="23">
+  <div class="q-title">磨光法 · 选择题</div>
+  <div class="q-text">磨光法和局部调整法的主要区别是：</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 没有本质区别</div>
+    <div class="opt" data-val="1">B. 磨光法用于代数，局部调整法用于几何</div>
+    <div class="opt" data-val="2">C. 磨光法逐步"磨平"差异趋于平均，局部调整法在约束下调整一对变量</div>
+    <div class="opt" data-val="3">D. 磨光法只能用于整数</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 第三类综合题 -->
+<div class="comprehensive-section">
+  <div class="comp-title">第三类综合题 · 组合计数</div>
+  <div class="comp-desc">综合应用捆绑、插空、隔板等组合计数方法</div>
+</div>
+<div class="question-card" data-correct="1" data-idx="24">
+  <div class="q-title">综合题 3/3</div>
+  <div class="q-text">4 个男生 3 个女生排成一排，要求女生不相邻且男生甲和乙必须相邻，有多少种排法？</div>
+  <div class="options">
+    <div class="opt" data-val="0">A. 480</div>
+    <div class="opt" data-val="1">B. 720</div>
+    <div class="opt" data-val="2">C. 960</div>
+    <div class="opt" data-val="3">D. 1440</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     底部评分面板
+     ============================================================ -->
+<div class="quiz-footer">
+  <div class="score-box" id="scoreBox">0 / 25</div>
+  <div class="score-detail" id="scoreDetail">逻辑推理 0/8 · 代数变形 0/11 · 组合计数 0/6</div>
+  <div class="btn-reset" id="resetBtn">重新作答</div>
+</div>
+
+</article>
+
+<script>
+(function() {
+  const questions = document.querySelectorAll('.question-card');
+  const scoreBox = document.getElementById('scoreBox');
+  const scoreDetail = document.getElementById('scoreDetail');
+  let totalCorrect = 0;
+  let answered = new Array(questions.length).fill(false);
+
+  const explanations = [
+    // 0: 反证法
+    { ok: '正确！反证法的假设是结论的否定。"至少有一个大于5"的否定是"全部都小于等于5"，即 a ≤ 5 且 b ≤ 5。', fail: '"至少有一个大于5"的反面是"没有一个大于5"，即全都不大于5，也就是 a ≤ 5 且 b ≤ 5。注意"且"不是"或"。' },
+    // 1: 分析法
+    { ok: '正确！分析法从结论出发，反向寻找使结论成立的充分条件。每一步都是"要证…只需证…"。', fail: '分析法是从结论出发，寻找充分条件（即"要证A，只需证B"中，B是A的充分条件）。' },
+    // 2: 综合法
+    { ok: '正确！综合法是正向推导：已知条件 → 中间结论 → 最终结论。分析法是反向追溯，二者方向相反。', fail: '综合法从已知条件出发正向推导到结论，分析法从结论反向找条件。方向是主要区别。' },
+    // 3: 比较法
+    { ok: '正确！作商法要求 a,b 同号（同为正或同为负）才能确定比值的正负。若 a,b 异号，正负一目了然，无需作商。', fail: '作商法比较大小需要 a/b 与 1 比较，前提是 b > 0，否则不等号方向会变化。' },
+    // 4: 放缩法
+    { ok: '正确！要证明 A 小于 B，需将 A 放大（放大后的值仍小于 B），或把 B 缩小（缩小后仍大于 A）。放 A 缩 B 是典型策略。', fail: '要证 A 小于 B，可以把 A 放大或把 B 缩小。若放缩后仍有放大版 A 小于 B，或 A 小于缩小版 B，则原不等式成立。' },
+    // 5: 数学归纳法
+    { ok: '正确！只验证 n=1 只能证明这一个命题成立，没有递推就无法推广到所有自然数，这正是数学归纳法的核心。', fail: '数学归纳法两个步骤缺一不可：验证基础 + 归纳递推。只有验证步骤只能证明 n=1 成立，无法递推。' },
+    // 6: 同一法
+    { ok: '正确！同一法专门用于证明唯一性或存在唯一性——构造一个满足条件的对象，再证明它就是原对象。', fail: '同一法适用于唯一性证明。不等式用比较法或放缩法，数列通项用归纳法或累加累乘法，单调性用导数或定义。' },
+    // 7: 第一类综合题
+    { ok: '正确！D 选项体现了分析法的典型思路：要证最终结论，只需证中间结论，不断追溯直到显然成立的条件。A 是综合法，B 是反证法，C 是特殊值法。', fail: '分析法的关键词是"要证…只需证…"，这是从结论反向寻找充分条件的典型表述。A 是综合法思路，B 是反证法。' },
+    // 8: 待定系数法
+    { ok: '正确！(x + a)(x + b) = x² + (a+b)x + ab。与 x² − 3x + 2 比较系数得 a+b=−3, ab=2。', fail: '展开 (x+a)(x+b) 得 x²+(a+b)x+ab。要让其等于 x²−3x+2，必须 a+b=−3, ab=2。' },
+    // 9: 换元法
+    { ok: '正确！设 t = x²+1，则原方程化为 t²−2t−3=0，解出 t 后再代回求 x，是最自然的换元方式。', fail: '观察重复出现的整体 x²+1，设 t = x²+1 即可将四次方程降为二次方程，是最直接的换元。' },
+    // 10: 配方法
+    { ok: '正确！x²+5x−1 = x²+5x+(5/2)² − (5/2)² − 1 = (x+5/2)² − 25/4 − 1 = (x+5/2)² − 29/4。', fail: '配方步骤：x²+5x−1 = [x²+5x+(5/2)²] − (5/2)² − 1 = (x+5/2)² − 25/4 − 4/4 = (x+5/2)² − 29/4。' },
+    // 11: 构造法
+    { ok: '正确！bₙ=aₙ+1，则 bₙ₊₁=aₙ₊₁+1 = (3aₙ+2)+1 = 3(aₙ+1) = 3bₙ，所以 bₙ 是公比为 3 的等比数列。', fail: '代入 aₙ₊₁=3aₙ+2 得 bₙ₊₁ = 3aₙ+3 = 3(aₙ+1) = 3bₙ，故 bₙ 是等比数列，b₁=3，bₙ=3ⁿ。' },
+    // 12: 消元法
+    { ok: '正确！第二个方程 y=4x−1 形式简单，直接代入第一个方程即可消去 y，是最简便的方法。', fail: '从 4x−y=1 得 y=4x−1，代入 2x+3y=7 得 2x+3(4x−1)=7 → 14x=10 → x=5/7。这种方法最直接。' },
+    // 13: 赋值法
+    { ok: '正确！赋值法适合求系数和或验证恒等式，要求特定项系数时需用二项式展开比较系数。', fail: '赋值法令 x=1 得所有系数和，令 x=−1 得奇偶项差，但求特定项系数需要用到二项式展开的通项公式。' },
+    // 14: 分离参数法
+    { ok: '正确！分离参数法的核心是将参数 a 与变量 x 分开到不等式两侧，转化为研究不含参数的函数的最值问题。', fail: '分离参数法 ≠ 消去参数，而是将参数 a 和变量 x 分到不等式两侧，使问题转化为求函数最值。' },
+    // 15: 累加法
+    { ok: '正确！aₙ₊₁−aₙ=3（常数），等差，aₙ = 1 + 3(n−1) = 3n−2。', fail: '由 aₙ₊₁−aₙ=3 知数列是等差数列，公差 d=3，a₁=1，所以 aₙ=1+3(n−1)=3n−2。' },
+    // 16: 累乘法
+    { ok: '正确！aₙ₊₁/aₙ=2（常数），等比，a₆ = 5 × 2⁵ = 5 × 32 = 160。', fail: '公比为 2 的等比数列，a₆ = a₁·q⁵ = 5 × 2⁵ = 5 × 32 = 160。' },
+    // 17: 迭代法
+    { ok: '正确！x₁=(2+2/2)/2=1.5, x₂=(1.5+2/1.5)/2=(1.5+1.3333)/2=1.4167, x₃=(1.4167+2/1.4167)/2≈1.4142。第2次迭代得 1.4167。', fail: 'x₁=1.5，x₂=(1.5+2/1.5)/2≈1.4167，x₃ 才到 1.4142。第2次结果最接近 1.4167。' },
+    // 18: 第二类综合题
+    { ok: '正确！递推式 aₙ₊₁=2aₙ+2ⁿ 两边同除以 2ⁿ⁺¹ 得 aₙ₊₁/2ⁿ⁺¹ = aₙ/2ⁿ + 1/2，令 bₙ=aₙ/2ⁿ 得 bₙ₊₁=bₙ+1/2，累加法可解。', fail: '两边同除以 2ⁿ⁺¹ 构造新数列是标准方法。两边同除以 2ⁿ 得 aₙ₊₁/2ⁿ = aₙ/2ⁿ⁻¹ + 1，令 bₙ=aₙ/2ⁿ⁻¹ 也可。' },
+    // 19: 捆绑法
+    { ok: '正确！4 本语文书捆绑为 1 个整体，与 3 本数学书共 4 个元素排 = 4!，语文书内部 4!，共 4!×4!。', fail: '语文捆绑为 1 个整体，与 3 本数学书共 4 个元素，排列 4! 种。语文书内部 4! 种。总计 4! × 4! = 576 种。' },
+    // 20: 插空法
+    { ok: '正确！不相邻问题用插空法：先排没限制的（男生），再在产生的空位中插入有约束的（女生）。', fail: '先排没有限制的男生（5个产生6个空位），再从6个空位中选3个放入女生，这样才能保证女生不相邻。' },
+    // 21: 隔板法
+    { ok: '正确！10 个 1 排一排，9 个空隙，插 3 个隔板分成 4 组（每组至少 1 个），C(9,3)=84。', fail: '正整数解即每组至少 1 个。10 个 1 之间 9 个空隙选 3 个放隔板，C(9,3)=84。' },
+    // 22: 局部调整法
+    { ok: '正确！局部调整法的核心是在保持约束条件不变的前提下，微调一对变量的值以逐步逼近极值。', fail: '局部调整法 ≠ 分割。它是在约束不变的前提下，对变量进行局部微调（如保持和不变调整两个数），使目标函数单调变化。' },
+    // 23: 磨光法
+    { ok: '正确！磨光法侧重于逐步"磨平"差异使数据趋于均衡，局部调整法侧重于在约束条件下调整一对变量（不一定趋于平均）。', fail: '磨光法反复作用使差异缩小（向平均数趋近），而局部调整法更一般——可以有多种调整方向，不仅限于磨平。' },
+    // 24: 第三类综合题
+    { ok: '正确！正确思路：先排 4 个男生，其中甲乙必须相邻。将甲乙捆绑为 1 个整体，与另 2 名男生共 3 个单元排列 = 3! × 2!（甲乙内部）= 12 种。4 个男生排好后产生 5 个空位（含两端），从中选 3 个放女生：C(5,3) × 3! = 10 × 6 = 60。总计 = 12 × 60 = 720 种。', fail: '捆绑 + 插空联合使用。先排男生（甲乙捆绑）：甲乙看为 1 个整体，与丙、丁共 3 个单元，排列 3!×2!=12 种。4 个男生排好产生 5 个空位，选 3 个放女生：C(5,3)×3!=60。总 = 12×60 = 720。注意：4 个男生排好产生的是 5 个空位而非 4 个。' }
+  ];
+
+  // 三段分类范围
+  const segmentNames = ['逻辑推理', '代数变形', '组合计数'];
+  const segmentRanges = [[0, 7], [8, 18], [19, 24]];
+
+  function updateScore() {
+    let count = 0;
+    for (let i = 0; i < answered.length; i++) {
+      if (answered[i]) count++;
+    }
+    totalCorrect = count;
+    scoreBox.textContent = totalCorrect + ' / 25';
+
+    let parts = [];
+    for (let s = 0; s < segmentRanges.length; s++) {
+      const [start, end] = segmentRanges[s];
+      let segCount = 0;
+      for (let i = start; i <= end; i++) {
+        if (answered[i]) segCount++;
+      }
+      parts.push(segmentNames[s] + ' ' + segCount + '/' + (end - start + 1));
+    }
+    scoreDetail.textContent = '各分类进度：' + parts.join(' · ');
+  }
+
+  questions.forEach(function(q, idx) {
+    const opts = q.querySelectorAll('.opt');
+    const explainDiv = q.querySelector('.explain');
+
+    opts.forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        if (q.classList.contains('correct') || q.classList.contains('wrong')) return;
+
+        const val = parseInt(this.getAttribute('data-val'), 10);
+        const correctVal = parseInt(q.getAttribute('data-correct'), 10);
+        const isCorrect = (val === correctVal);
+
+        opts.forEach(function(o) { o.classList.add('disabled'); });
+
+        opts.forEach(function(o) {
+          if (parseInt(o.getAttribute('data-val'), 10) === correctVal) {
+            o.classList.add('correct-opt');
+          }
+        });
+
+        if (!isCorrect) {
+          this.classList.add('wrong-opt');
+        }
+
+        if (isCorrect) {
+          q.classList.add('correct');
+        } else {
+          q.classList.add('wrong');
+        }
+
+        const exp = explanations[idx];
+        const expText = isCorrect ? exp.ok : exp.fail;
+        explainDiv.textContent = expText;
+        explainDiv.className = 'explain show ' + (isCorrect ? 'ok' : 'fail');
+
+        if (!answered[idx]) {
+          answered[idx] = true;
+          if (isCorrect) totalCorrect++;
+          updateScore();
+        }
+      });
+    });
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function() {
+    questions.forEach(function(q, idx) {
+      q.classList.remove('correct', 'wrong');
+      const opts = q.querySelectorAll('.opt');
+      opts.forEach(function(o) {
+        o.classList.remove('correct-opt', 'wrong-opt', 'disabled');
+      });
+      const explainDiv = q.querySelector('.explain');
+      explainDiv.className = 'explain';
+      explainDiv.textContent = '';
+      answered[idx] = false;
+    });
+    totalCorrect = 0;
+    updateScore();
+  });
+
+})();
+</script>
+
+    <script src="../../dt.js"></script>
+</body>
+</html>

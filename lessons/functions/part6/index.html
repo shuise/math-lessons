@@ -94,7 +94,7 @@
 <!-- ==================== 3. 幂函数 ==================== -->
 <div class="func-section">
   <h3><span class="func-cat cat-power">幂</span> y = x<sup>&alpha;</sup></h3>
-  <p class="desc"><strong>&alpha;</strong> 决定曲线形状：过定点 (1, 1)。&alpha;&gt;0 过 (0, 0) 且单调递增；&alpha;&lt;0 为双曲线一支。</p>
+  <p class="desc"><strong>&alpha;</strong> 决定曲线形状：在有意义的定义域内过定点 (1, 1)。对常见的 &alpha;=1,2,3,1/2,-1，可分别观察其定义域、单调性和图像；一般 &alpha; 的情形需要结合定义域讨论。</p>
   <p class="formula-label" id="power-label">y = x², y = x³, y = √x, y = x⁻¹</p>
   <div class="plot-wrap">
     <div id="plot-power" class="func-plot"></div>
@@ -125,7 +125,7 @@
 <div class="func-section">
   <h3><span class="func-cat cat-logarithmic">对数</span> y = log<sub>a</sub>x</h3>
   <p class="desc"><strong>a &gt; 1</strong> 递增，<strong>0 &lt; a &lt; 1</strong> 递减。恒过定点 (1, 0)，以 y 轴为渐近线。指数函数的反函数。</p>
-  <p class="formula-label" id="log-label">y = log₂x, y = log₁'₂x</p>
+  <p class="formula-label" id="log-label">y = log₂x, y = log<sub>1/2</sub>x</p>
   <div class="plot-wrap">
     <div id="plot-log" class="func-plot"></div>
   </div>
@@ -157,7 +157,7 @@
 
 </article>
 
-<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://d3js.org/d3.v7.min.js" onerror="document.querySelectorAll('.func-plot').forEach(function(el){ el.innerHTML='<p style=\"padding:24px;color:#b71c1c;text-align:center;\">图形组件加载失败，请联网后刷新页面。</p>'; });"></script>
 <script>
 (function() {
   'use strict';
@@ -447,5 +447,6 @@
   renderAll();
 })();
 </script>
+    <script src="../../dt.js"></script>
 </body>
 </html>

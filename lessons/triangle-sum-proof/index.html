@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三角形内角和定理的几何证明</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  .svg-wrap { text-align: center; margin: 20px 0; }
+  .svg-wrap svg { border: 1px solid #ddd; border-radius: 10px; background: #fcfcfc; max-width: 100%; }
+  .aux-desc { background: #f0f7ff; border-left: 4px solid #1a73e8; padding: 16px 20px; margin: 16px 0; border-radius: 0 8px 8px 0; font-size: 0.95em; }
+  .aux-desc strong { color: #1a73e8; }
+  .example { margin: 16px 0; }
+  .example p { margin: 6px 0; }
+  .example .step { margin: 4px 0 4px 20px; color: #555; }
+  .example .answer { color: #d32f2f; font-weight: bold; }
+
+  /* Quiz styles */
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag {
+    display: inline-block; padding: 2px 12px; border-radius: 12px;
+    font-size: 0.75em; margin-right: 8px; color: #fff; background: #1a73e8;
+  }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+  }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+  h3 { color: #2c3e50; margin: 24px 0 10px; font-size: 1.1em; }
+  .midline-label { font-size: 0.85em; fill: #666; }
+  .fold-arrow { fill: none; stroke: #e53935; stroke-width: 1.5; stroke-dasharray: 5,3; }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>三角形内角和定理的几何证明</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">三角形三个内角的和等于 180°。</p>
+
+<!-- ========================= 定理陈述 ========================= -->
+<section>
+<h2>一、定理陈述</h2>
+<p>任意 <strong>△ABC</strong> 的内角满足：</p>
+<div class="formula-box" style="text-align:center;font-size:1.3em;padding:16px;">
+  <strong>&ang;A + &ang;B + &ang;C = 180&deg;</strong>
+</div>
+<p>三角形内角和定理是欧氏几何中最基本也是最重要的定理之一。下面介绍三种经典的几何证明方法。</p>
+</section>
+
+<!-- ========================= 证明一 ========================= -->
+<section>
+<h2>二、证明一——过顶点作平行线法</h2>
+
+<div class="svg-wrap">
+<svg width="500" height="350" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+  <!-- Triangle ABC -->
+  <polygon points="100,290 250,60 420,290" fill="rgba(26,115,232,0.06)" stroke="#333" stroke-width="2"/>
+
+  <!-- Line DE ∥ AC through B -->
+  <line x1="30" y1="60" x2="470" y2="60" stroke="#e53935" stroke-width="1.5" stroke-dasharray="6,3"/>
+
+  <!-- Labels D and E -->
+  <text x="25" y="55" font-size="15" font-weight="bold" fill="#e53935" font-family="serif" font-style="italic">D</text>
+  <text x="472" y="55" font-size="15" font-weight="bold" fill="#e53935" font-family="serif" font-style="italic">E</text>
+
+  <!-- Vertex labels -->
+  <text x="78" y="310" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">A</text>
+  <text x="245" y="48" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">B</text>
+  <text x="420" y="310" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">C</text>
+
+  <!-- Parallel markers on DE (left side) -->
+  <line x1="55" y1="53" x2="65" y2="67" stroke="#e53935" stroke-width="1.5"/>
+  <line x1="70" y1="53" x2="80" y2="67" stroke="#e53935" stroke-width="1.5"/>
+  <!-- Parallel markers on AC -->
+  <line x1="140" y1="283" x2="150" y2="297" stroke="#e53935" stroke-width="1.5"/>
+  <line x1="155" y1="283" x2="165" y2="297" stroke="#e53935" stroke-width="1.5"/>
+
+  <!-- Parallel markers on DE (right side) -->
+  <line x1="415" y1="53" x2="425" y2="67" stroke="#e53935" stroke-width="1.5"/>
+  <line x1="430" y1="53" x2="440" y2="67" stroke="#e53935" stroke-width="1.5"/>
+  <!-- Parallel markers on AC (right) -->
+  <line x1="340" y1="283" x2="350" y2="297" stroke="#e53935" stroke-width="1.5"/>
+  <line x1="355" y1="283" x2="365" y2="297" stroke="#e53935" stroke-width="1.5"/>
+
+  <!-- Arrow markers for parallelism (→→) on DE -->
+  <polygon points="95,57 105,57 100,52" fill="#e53935"/>
+  <polygon points="110,63 120,63 115,68" fill="#e53935"/>
+  <!-- Arrow markers on AC -->
+  <polygon points="185,287 195,287 190,282" fill="#e53935"/>
+  <polygon points="200,293 210,293 205,298" fill="#e53935"/>
+
+  <!-- ===== ∠A arc ===== -->
+  <path d="M 130,290 A 30,30 0 0,0 116.38,264.86" fill="none" stroke="#e53935" stroke-width="2.5"/>
+  <text x="118" y="282" font-size="14" font-weight="bold" fill="#e53935" font-family="serif" font-style="italic">&ang;A</text>
+
+  <!-- ===== ∠C arc ===== -->
+  <path d="M 390,290 A 30,30 0 0,1 402.18,265.88" fill="none" stroke="#43a047" stroke-width="2.5"/>
+  <text x="380" y="278" font-size="14" font-weight="bold" fill="#43a047" font-family="serif" font-style="italic">&ang;C</text>
+
+  <!-- ===== ∠ABC arc (at B, interior) ===== -->
+  <path d="M 236.35,80.95 A 25,25 0 0,0 264.85,80.10" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+  <text x="237" y="74" font-size="13" font-weight="bold" fill="#1a73e8" font-family="serif" font-style="italic">&ang;B</text>
+
+  <!-- ===== ∠ABD arc (corresponding to ∠A, at B) ===== -->
+  <path d="M 236.35,80.95 A 25,25 0 0,1 225,60" fill="none" stroke="#e53935" stroke-width="2" stroke-dasharray="4,2"/>
+  <text x="218" y="78" font-size="12" fill="#e53935" font-family="serif" font-style="italic">&ang;ABD</text>
+
+  <!-- ===== ∠CBE arc (corresponding to ∠C, at B) ===== -->
+  <path d="M 264.85,80.10 A 25,25 0 0,1 275,60" fill="none" stroke="#43a047" stroke-width="2" stroke-dasharray="4,2"/>
+  <text x="276" y="72" font-size="12" fill="#43a047" font-family="serif" font-style="italic">&ang;CBE</text>
+
+  <!-- Mark that A→B→C with line -->
+  <line x1="250" y1="60" x2="225" y2="60" stroke="#e53935" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+  <line x1="250" y1="60" x2="275" y2="60" stroke="#43a047" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+
+  <!-- AB line -->
+  <line x1="100" y1="290" x2="250" y2="60" stroke="#333" stroke-width="2"/>
+  <!-- BC line -->
+  <line x1="250" y1="60" x2="420" y2="290" stroke="#333" stroke-width="2"/>
+
+  <!-- Small dots at vertices -->
+  <circle cx="100" cy="290" r="3" fill="#333"/>
+  <circle cx="250" cy="60" r="3" fill="#333"/>
+  <circle cx="420" cy="290" r="3" fill="#333"/>
+</svg>
+</div>
+
+<div class="aux-desc">
+  <strong>辅助线思路：</strong>"过点 B 作 DE ∥ AC"——这条辅助线的思路是：要将三个分散的角拼接到同一个顶点上。根据平行线的性质，&ang;A = &ang;ABD（同位角相等），&ang;C = &ang;CBE（同位角相等），而 &ang;ABD + &ang;ABC + &ang;CBE = 180°（平角定义），所以 &ang;A + &ang;B + &ang;C = 180°。添加平行线的目的是利用"同位角相等"将三个角转移到同一直线上。
+</div>
+
+<h3>分步推导</h3>
+<div class="example">
+  <p><strong>已知：</strong>在 △ABC 中，过顶点 B 作 DE ∥ AC。</p>
+  <p><strong>求证：</strong>&ang;A + &ang;B + &ang;C = 180°</p>
+  <p class="step"><strong>证明：</strong></p>
+  <p class="step">① ∵ DE ∥ AC（辅助线），</p>
+  <p class="step">&emsp;&emsp;∴ &ang;ABD = &ang;A（同位角相等）。</p>
+  <p class="step">&emsp;&emsp;∴ &ang;CBE = &ang;C（同位角相等）。</p>
+  <p class="step">② ∵ D、B、E 在同一直线上，</p>
+  <p class="step">&emsp;&emsp;∴ &ang;ABD + &ang;ABC + &ang;CBE = 180°（平角定义）。</p>
+  <p class="step">③ 将①代入②：&ang;A + &ang;B + &ang;C = 180°。</p>
+  <p class="answer">∴ 三角形内角和等于 180°。</p>
+</div>
+</section>
+
+<!-- ========================= 证明二 ========================= -->
+<section>
+<h2>三、证明二——过内部点作平行线法</h2>
+
+<div class="svg-wrap">
+<svg width="500" height="350" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+  <!-- Triangle ABC -->
+  <polygon points="100,290 250,60 420,290" fill="rgba(26,115,232,0.06)" stroke="#333" stroke-width="2"/>
+
+  <!-- Internal point P -->
+  <circle cx="257" cy="180" r="3" fill="#e65100"/>
+  <text x="250" y="172" font-size="15" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">P</text>
+
+  <!-- DE ∥ BC (through P) -->
+  <line x1="211.75" y1="118.65" x2="338.3" y2="290" stroke="#e53935" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="206" y="114" font-size="13" font-weight="bold" fill="#e53935" font-family="serif" font-style="italic">D</text>
+  <text x="340" y="307" font-size="13" font-weight="bold" fill="#e53935" font-family="serif" font-style="italic">E</text>
+
+  <!-- FG ∥ CA (horizontal through P) -->
+  <line x1="171.7" y1="180" x2="338.74" y2="180" stroke="#1a73e8" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="158" y="176" font-size="13" font-weight="bold" fill="#1a73e8" font-family="serif" font-style="italic">F</text>
+  <text x="340" y="176" font-size="13" font-weight="bold" fill="#1a73e8" font-family="serif" font-style="italic">G</text>
+
+  <!-- HI ∥ AB (through P) -->
+  <line x1="185.3" y1="290" x2="295.3" y2="121.29" stroke="#43a047" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="176" y="307" font-size="13" font-weight="bold" fill="#43a047" font-family="serif" font-style="italic">H</text>
+  <text x="296" y="116" font-size="13" font-weight="bold" fill="#43a047" font-family="serif" font-style="italic">I</text>
+
+  <!-- Parallel markers: DE ∥ BC -->
+  <line x1="260" y1="145" x2="268" y2="158" stroke="#e53935" stroke-width="1.5"/>
+  <line x1="273" y1="148" x2="281" y2="161" stroke="#e53935" stroke-width="1.5"/>
+  <line x1="290" y1="215" x2="298" y2="228" stroke="#e53935" stroke-width="1.5"/>
+  <line x1="306" y1="222" x2="314" y2="235" stroke="#e53935" stroke-width="1.5"/>
+
+  <!-- Parallel markers: FG ∥ CA (horizontal) -->
+  <line x1="210" y1="173" x2="220" y2="187" stroke="#1a73e8" stroke-width="1.5"/>
+  <line x1="225" y1="173" x2="235" y2="187" stroke="#1a73e8" stroke-width="1.5"/>
+  <line x1="100" y1="283" x2="110" y2="297" stroke="#1a73e8" stroke-width="1.5"/>
+  <line x1="115" y1="283" x2="125" y2="297" stroke="#1a73e8" stroke-width="1.5"/>
+
+  <!-- Parallel markers: HI ∥ AB -->
+  <line x1="230" y1="250" x2="240" y2="238" stroke="#43a047" stroke-width="1.5"/>
+  <line x1="243" y1="248" x2="253" y2="236" stroke="#43a047" stroke-width="1.5"/>
+  <line x1="210" y1="200" x2="220" y2="188" stroke="#43a047" stroke-width="1.5"/>
+  <line x1="222" y1="197" x2="232" y2="185" stroke="#43a047" stroke-width="1.5"/>
+
+  <!-- Angle arcs around P -->
+  <!-- Around P - three angles corresponding to A, B, C -->
+  <path d="M 257,195 A 15,15 0 0,1 242.5,186.5" fill="none" stroke="#e53935" stroke-width="2"/>
+  <path d="M 242.5,186.5 A 15,15 0 0,1 257,165" fill="none" stroke="#1a73e8" stroke-width="2"/>
+  <path d="M 257,165 A 15,15 0 0,1 270,182" fill="none" stroke="#43a047" stroke-width="2"/>
+  <path d="M 270,182 A 15,15 0 0,1 257,195" fill="none" stroke="#43a047" stroke-width="2"/>
+
+  <!-- Label angles at P -->
+  <text x="248" y="192" font-size="11" fill="#e53935" font-family="serif" font-style="italic">&ang;A</text>
+  <text x="246" y="170" font-size="11" fill="#1a73e8" font-family="serif" font-style="italic">&ang;B</text>
+  <text x="264" y="186" font-size="11" fill="#43a047" font-family="serif" font-style="italic">&ang;C</text>
+
+  <!-- Small dots at vertices -->
+  <circle cx="100" cy="290" r="3" fill="#333"/>
+  <circle cx="250" cy="60" r="3" fill="#333"/>
+  <circle cx="420" cy="290" r="3" fill="#333"/>
+  <text x="78" y="310" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">A</text>
+  <text x="245" y="48" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">B</text>
+  <text x="420" y="310" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">C</text>
+</svg>
+</div>
+
+<div class="aux-desc">
+  <strong>辅助线思路：</strong>"在内部取一点 P，分别作三边的平行线"——这种方法的巧妙之处在于将三角形"复制"并转化为一个完整的平面角。通过三组平行关系，利用同位角、内错角将原三角形的三个角转移到 P 点周围形成一个周角，每个内角等同于对应平行四边形的一角，从而更直观地展示了 180° 的结论。这种方法也常用于证明"任意凸多边形内角和 = (n−2)×180°"。
+</div>
+
+<h3>分步推导</h3>
+<div class="example">
+  <p><strong>已知：</strong>在 △ABC 中，内部取一点 P，DE ∥ BC、FG ∥ CA、HI ∥ AB。</p>
+  <p><strong>求证：</strong>&ang;A + &ang;B + &ang;C = 180°</p>
+  <p class="step"><strong>证明：</strong></p>
+  <p class="step">① ∵ DE ∥ BC（辅助线），</p>
+  <p class="step">&emsp;&emsp;∴ 在 P 点处，&ang;A 的同位角被转移到对应位置。</p>
+  <p class="step">② ∵ FG ∥ CA（辅助线），</p>
+  <p class="step">&emsp;&emsp;∴ 在 P 点处，&ang;B 的内错角被转移到对应位置。</p>
+  <p class="step">③ ∵ HI ∥ AB（辅助线），</p>
+  <p class="step">&emsp;&emsp;∴ 在 P 点处，&ang;C 的同位角被转移到对应位置。</p>
+  <p class="step">④ 三个角在 P 点处恰好拼成一个周角，即 &ang;A + &ang;B + &ang;C = 180°。</p>
+  <p class="answer">∴ 三角形内角和等于 180°。</p>
+</div>
+</section>
+
+<!-- ========================= 证明三 ========================= -->
+<section>
+<h2>四、证明三——折叠法</h2>
+
+<div class="svg-wrap">
+<svg width="500" height="350" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+  <!-- Triangle ABC -->
+  <polygon points="100,290 250,60 420,290" fill="rgba(26,115,232,0.06)" stroke="#333" stroke-width="2"/>
+
+  <!-- Midpoints -->
+  <!-- D: midpoint of AB -->
+  <circle cx="175" cy="175" r="3" fill="#e65100"/>
+  <text x="168" y="166" font-size="15" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">D</text>
+  <!-- E: midpoint of BC -->
+  <circle cx="335" cy="175" r="3" fill="#e65100"/>
+  <text x="336" y="166" font-size="15" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">E</text>
+  <!-- F: midpoint of AC -->
+  <circle cx="260" cy="290" r="3" fill="#e65100"/>
+  <text x="263" y="310" font-size="15" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">F</text>
+
+  <!-- Midlines (dashed) -->
+  <line x1="175" y1="175" x2="335" y2="175" stroke="#1a73e8" stroke-width="2" stroke-dasharray="8,4"/>
+  <line x1="175" y1="175" x2="260" y2="290" stroke="#1a73e8" stroke-width="2" stroke-dasharray="8,4"/>
+  <line x1="335" y1="175" x2="260" y2="290" stroke="#1a73e8" stroke-width="2" stroke-dasharray="8,4"/>
+
+  <!-- Vertex labels -->
+  <text x="78" y="310" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">A</text>
+  <text x="245" y="48" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">B</text>
+  <text x="420" y="310" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">C</text>
+
+  <!-- Angle arcs at A, B, C -->
+  <!-- ∠A -->
+  <path d="M 130,290 A 30,30 0 0,0 116.38,264.86" fill="none" stroke="#e53935" stroke-width="2.5"/>
+  <text x="118" y="282" font-size="14" font-weight="bold" fill="#e53935" font-family="serif" font-style="italic">&ang;A</text>
+  <!-- ∠B -->
+  <path d="M 236.35,80.95 A 25,25 0 0,0 264.85,80.10" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+  <text x="237" y="74" font-size="13" font-weight="bold" fill="#1a73e8" font-family="serif" font-style="italic">&ang;B</text>
+  <!-- ∠C -->
+  <path d="M 390,290 A 30,30 0 0,1 402.18,265.88" fill="none" stroke="#43a047" stroke-width="2.5"/>
+  <text x="380" y="278" font-size="14" font-weight="bold" fill="#43a047" font-family="serif" font-style="italic">&ang;C</text>
+
+  <!-- Fold arrows: from each vertex toward the center -->
+  <path d="M 100,290 Q 150,240 210,220" class="fold-arrow"/>
+  <polygon points="212,219 205,224 208,216" fill="#e53935"/>
+  <path d="M 250,60 Q 260,120 240,170" class="fold-arrow"/>
+  <polygon points="239,173 233,167 247,168" fill="#1a73e8"/>
+  <path d="M 420,290 Q 370,240 310,220" class="fold-arrow"/>
+  <polygon points="308,219 315,224 312,216" fill="#43a047"/>
+
+  <!-- Center convergence point -->
+  <circle cx="257" cy="213" r="4" fill="#e65100"/>
+
+  <!-- Midline labels -->
+  <text x="245" y="172" font-size="11" fill="#1a73e8" font-family="serif" font-style="italic">DE</text>
+  <text x="205" y="240" font-size="11" fill="#1a73e8" font-family="serif" font-style="italic">DF</text>
+  <text x="305" y="240" font-size="11" fill="#1a73e8" font-family="serif" font-style="italic">EF</text>
+
+  <!-- Small dots at vertices -->
+  <circle cx="100" cy="290" r="3" fill="#333"/>
+  <circle cx="250" cy="60" r="3" fill="#333"/>
+  <circle cx="420" cy="290" r="3" fill="#333"/>
+</svg>
+</div>
+
+<div class="aux-desc">
+  <strong>辅助线思路：</strong>"取三边中点并连线"——这条辅助线源于"折叠"的直观思路：三角形纸片的三个角能否折到一起形成一个平角？连接中点得到的中位线恰好将三角形分成 4 个小三角形，折叠后三个角汇聚于中心点，恰好形成一个平角 180°。这个证明虽然不如前两种严格，但非常直观，体现了从"动手操作"到"几何推理"的过渡。
+</div>
+
+<h3>分步推导</h3>
+<div class="example">
+  <p><strong>已知：</strong>在 △ABC 中，D、E、F 分别为 AB、BC、CA 的中点。</p>
+  <p><strong>求证：</strong>&ang;A + &ang;B + &ang;C = 180°</p>
+  <p class="step"><strong>证明（直观思路）：</strong></p>
+  <p class="step">① 连接 DE、EF、FD，得到三条中位线。</p>
+  <p class="step">② 由三角形中位线定理：DE ∥ AC，EF ∥ AB，FD ∥ BC。</p>
+  <p class="step">③ 将 △ADF、△BDE、△CEF 分别沿 DF、DE、EF 向中心折叠，</p>
+  <p class="step">&emsp;&emsp;则三个角 &ang;A、&ang;B、&ang;C 汇聚到点 P（△DEF 的重心）处。</p>
+  <p class="step">④ 汇聚后的三个角恰好拼成一个平角：&ang;A + &ang;B + &ang;C = 180°。</p>
+  <p class="answer">∴ 三角形内角和等于 180°。</p>
+  <p class="hint"><strong>说明：</strong>折叠法本质上依赖中位线的平行性质，理论基础与平行线法一致，但其"动手操作"的直观性使它在教学中具有独特价值。</p>
+</div>
+</section>
+
+<!-- ========================= 交互式测验 ========================= -->
+<section>
+<h2>五、互动问答</h2>
+<p style="color:#666;">点击选项提交答案，系统自动判分。</p>
+
+<div id="quiz-container"></div>
+
+<div style="text-align:center;margin:24px 0;">
+  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 3</div>
+  <br>
+  <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #1a73e8;color:#1a73e8;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">&ocy; 重新答题</button>
+</div>
+
+</article>
+
+<script>
+// ============================================================
+// 习题数据
+// ============================================================
+var questions = [
+  {
+    type: "choice",
+    tag: "选择",
+    question: "过顶点作平行线法中，用到了哪个角关系？",
+    opts: [
+      "内错角相等",
+      "同位角相等",
+      "对顶角相等",
+      "同旁内角互补"
+    ],
+    answer: 1,
+    explain: "过顶点 B 作 DE ∥ AC 后，∠ABD 与 ∠A 是同位角，∠CBE 与 ∠C 也是同位角。根据平行线的性质，同位角相等。"
+  },
+  {
+    type: "choice",
+    tag: "选择",
+    question: "内部点平行线法中，过内部点作平行线的目的是什么？",
+    opts: [
+      "构造平行四边形",
+      "将三个角转移到同一点",
+      "构造全等三角形",
+      "证明两组边相等"
+    ],
+    answer: 1,
+    explain: "过内部点作三边的平行线，利用三组平行关系将原三角形的三个角转移到内部点 P 周围，恰好拼成一个周角的一半（平角），从而证明内角和为 180°。"
+  },
+  {
+    type: "choice",
+    tag: "选择",
+    question: "三角形内角和的证明中，最常用的辅助线思路是？",
+    opts: [
+      "作高线",
+      "作中线",
+      "作平行线",
+      "作角平分线"
+    ],
+    answer: 2,
+    explain: '在三角形内角和定理的经典证明中，最核心的辅助线思路是\u201C作平行线\u201D\u2014\u2014无论是过顶点作平行线（证明一）还是过内部点作平行线（证明二），都利用了平行线的角关系来转移角度，将三个角合并到同一直线或同一点上。'
+  }
+];
+
+// ============================================================
+// 渲染与交互逻辑
+// ============================================================
+function render() {
+  var container = document.getElementById("quiz-container");
+  var html = "";
+  for (var i = 0; i < questions.length; i++) {
+    var q = questions[i];
+    var optsHtml = "";
+    for (var j = 0; j < q.opts.length; j++) {
+      optsHtml += '<div class="opt" data-q="' + i + '" data-idx="' + j + '">'
+        + String.fromCharCode(65 + j) + '. ' + q.opts[j] + '</div>';
+    }
+    html += '<div id="q' + i + '" class="quiz-question">'
+      + '<div class="q-title"><span class="q-tag">' + q.tag + '</span>' + q.question + '</div>'
+      + '<div class="options">' + optsHtml + '</div>'
+      + '<div class="explain" id="exp' + i + '">' + q.explain + '</div>'
+      + '</div>';
+  }
+  container.innerHTML = html;
+
+  // Bind click events
+  var opts = document.querySelectorAll(".opt");
+  for (var k = 0; k < opts.length; k++) {
+    opts[k].onclick = function() {
+      var qIdx = parseInt(this.getAttribute("data-q"));
+      var optIdx = parseInt(this.getAttribute("data-idx"));
+      checkAnswer(qIdx, optIdx);
+    };
+  }
+}
+
+function checkAnswer(qIdx, chosen) {
+  var qDiv = document.getElementById("q" + qIdx);
+  if (qDiv.classList.contains("correct") || qDiv.classList.contains("wrong")) return;
+
+  var correct = questions[qIdx].answer;
+  var opts = qDiv.querySelectorAll(".opt");
+
+  // Disable all options
+  for (var j = 0; j < opts.length; j++) {
+    opts[j].classList.add("disabled");
+    if (j === correct) opts[j].classList.add("correct-opt");
+    if (j === chosen && chosen !== correct) opts[j].classList.add("wrong-opt");
+  }
+
+  qDiv.classList.add(chosen === correct ? "correct" : "wrong");
+  document.getElementById("exp" + qIdx).classList.add("show");
+  if (chosen === correct) {
+    document.getElementById("exp" + qIdx).classList.add("ok");
+  } else {
+    document.getElementById("exp" + qIdx).classList.add("fail");
+  }
+
+  updateScore();
+}
+
+function updateScore() {
+  var total = 0;
+  for (var i = 0; i < questions.length; i++) {
+    var qDiv = document.getElementById("q" + i);
+    if (qDiv.classList.contains("correct")) total++;
+  }
+  document.getElementById("scoreDisplay").textContent = "得分：" + total + " / 3";
+}
+
+function resetQuiz() {
+  document.getElementById("scoreDisplay").textContent = "得分：0 / 3";
+  for (var i = 0; i < questions.length; i++) {
+    var qDiv = document.getElementById("q" + i);
+    qDiv.className = "quiz-question";
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].className = "opt";
+    }
+    var exp = document.getElementById("exp" + i);
+    exp.className = "explain";
+    exp.classList.remove("ok", "fail");
+  }
+}
+
+document.getElementById("resetBtn").onclick = resetQuiz;
+render();
+</script>
+    <script src="../dt.js"></script>
+</body>
+</html>

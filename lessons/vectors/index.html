@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>平面向量</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  h3 { color: #2c3e50; margin: 24px 0 10px; font-size: 1.1em; }
+  .formula { text-align: center; margin: 16px 0; padding: 12px; background: #f8f9fa; border-radius: 8px; font-size: 1.1em; }
+  .formula-box { border: 2px solid #1a73e8; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #f0f7ff; }
+  .formula-box p { margin: 6px 0; }
+  .note { background: #fff8e1; border-left: 4px solid #ffc107; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; font-size: 0.95em; }
+  .vec { font-weight: bold; }
+
+  /* Quiz styles */
+  .quiz-section { margin: 24px 0; }
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-tag {
+    display: inline-block; padding: 2px 12px; border-radius: 12px;
+    font-size: 0.75em; margin-right: 8px; color: #fff;
+  }
+  .q-tag.concept { background: #1a73e8; }
+  .q-tag.calc { background: #ff7043; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none; margin: 4px 0;
+  }
+  .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .explain.show { display: block; }
+  .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+  /* Score panel */
+  .score-panel {
+    text-align: center; padding: 16px; margin: 20px 0;
+    background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8;
+  }
+  .score-panel .score-num { font-size: 2em; font-weight: bold; color: #1a73e8; }
+  .score-panel .btn-reset {
+    display: inline-block; margin-left: 16px; padding: 6px 20px;
+    border: 2px solid #1a73e8; color: #1a73e8; border-radius: 16px;
+    background: #fff; cursor: pointer; font-size: 0.93em; transition: 0.15s;
+  }
+  .score-panel .btn-reset:hover { background: #1a73e8; color: #fff; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>平面向量</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">从"有向线段"到"坐标运算"——向量是连接代数与几何的桥梁。</p>
+
+<!-- ==================== 1.1 平面向量的有关概念 ==================== -->
+<section>
+<h2>一、平面向量的有关概念</h2>
+
+<h3>1.1 向量的定义</h3>
+<p><strong class="definition">向量</strong>（Vector）是既有<strong>大小</strong>又有<strong>方向</strong>的量。</p>
+<ul>
+  <li><strong>标量</strong>：只有大小没有方向的量（如长度、质量、温度）</li>
+  <li><strong>向量</strong>：同时具有大小和方向的量（如位移、速度、力）</li>
+</ul>
+
+<div class="formula-box">
+  <p><strong>向量的表示法：</strong></p>
+  <p>几何表示：用<strong>有向线段</strong>表示，记作 <b>AB</b>（A 为起点，B 为终点）</p>
+  <p>字母表示：<b>a</b>、<b>b</b>、<b>c</b> 等粗体字母，或 \(\vec{a}\)、\(\vec{b}\)</p>
+</div>
+
+<h3>1.2 与向量有关的基本概念</h3>
+
+<table>
+  <tr><th>名称</th><th>定义</th><th>记法</th></tr>
+  <tr>
+    <td><strong>模</strong></td>
+    <td>向量的大小（即长度）</td>
+    <td>|<b>AB</b>| 或 |<b>a</b>|</td>
+  </tr>
+  <tr>
+    <td><strong>零向量</strong></td>
+    <td>长度为 0 的向量，方向任意</td>
+    <td><b>0</b></td>
+  </tr>
+  <tr>
+    <td><strong>单位向量</strong></td>
+    <td>模为 1 的向量</td>
+    <td><b>e</b>（|<b>e</b>| = 1）</td>
+  </tr>
+  <tr>
+    <td><strong>平行向量</strong><br>（共线向量）</td>
+    <td>方向相同或相反的<strong>非零</strong>向量</td>
+    <td><b>a</b> ∥ <b>b</b></td>
+  </tr>
+  <tr>
+    <td><strong>相等向量</strong></td>
+    <td>大小相等、方向相同的向量（与起点无关）</td>
+    <td><b>a</b> = <b>b</b></td>
+  </tr>
+  <tr>
+    <td><strong>相反向量</strong></td>
+    <td>大小相等、方向相反的向量</td>
+    <td>−<b>a</b></td>
+  </tr>
+</table>
+
+<div class="note">
+  <strong>注意：</strong>
+  <ul>
+    <li>零向量与任何向量都<strong>平行</strong>（规定）</li>
+    <li>平行向量就是共线向量——因为向量可以自由平移，所有平行向量都可以移到同一条直线上</li>
+    <li>向量不能比较大小，但向量的<strong>模</strong>可以比较大小</li>
+  </ul>
+</div>
+
+<!-- SVG: 向量的有关概念示意图 -->
+<svg width="500" height="250" viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:16px auto;background:#fafafa;border-radius:8px;">
+  <defs>
+    <marker id="v1b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#1a73e8"/>
+    </marker>
+    <marker id="v1g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#2e7d32"/>
+    </marker>
+  </defs>
+  <!-- 有向线段 AB -->
+  <line x1="10" y1="190" x2="155" y2="45" stroke="#1a73e8" stroke-width="2.5" marker-end="url(#v1b)"/>
+  <circle cx="10" cy="190" r="3" fill="#1a73e8"/>
+  <text x="0" y="210" font-size="13" fill="#1a73e8" font-weight="bold" font-family="serif">A</text>
+  <circle cx="155" cy="45" r="3" fill="#1a73e8"/>
+  <text x="158" y="40" font-size="13" fill="#1a73e8" font-weight="bold" font-family="serif">B</text>
+  <text x="65" y="108" font-size="15" fill="#1a73e8" font-weight="bold" font-family="serif">AB</text>
+  <!-- 相等向量 CD（同向等长） -->
+  <line x1="300" y1="190" x2="445" y2="45" stroke="#1a73e8" stroke-width="2.5" marker-end="url(#v1b)"/>
+  <circle cx="300" cy="190" r="3" fill="#1a73e8"/>
+  <text x="290" y="210" font-size="13" fill="#1a73e8" font-weight="bold" font-family="serif">C</text>
+  <circle cx="445" cy="45" r="3" fill="#1a73e8"/>
+  <text x="448" y="40" font-size="13" fill="#1a73e8" font-weight="bold" font-family="serif">D</text>
+  <text x="360" y="108" font-size="15" fill="#1a73e8" font-weight="bold" font-family="serif">CD</text>
+  <!-- 零向量（用点表示） -->
+  <circle cx="250" cy="225" r="4" fill="#d32f2f"/>
+  <text x="260" y="230" font-size="13" fill="#d32f2f" font-weight="bold">零向量</text>
+  <!-- 单位向量 -->
+  <line x1="20" y1="35" x2="80" y2="35" stroke="#2e7d32" stroke-width="2.5" marker-end="url(#v1g)"/>
+  <text x="22" y="25" font-size="15" fill="#2e7d32" font-weight="bold" font-family="serif">e</text>
+  <text x="84" y="28" font-size="11" fill="#2e7d32">|e|=1</text>
+  <!-- 说明文字 -->
+  <text x="10" y="16" font-size="11" fill="#888">相 等 向 量 ： AB &nbsp;=&nbsp; CD</text>
+  <text x="230" y="16" font-size="11" fill="#888">单 位 向 量</text>
+</svg>
+
+<div class="example">
+  <p><strong>例 1：</strong>判断下列命题的真假：</p>
+  <p class="step">(1) 若 |<b>a</b>| = |<b>b</b>|，则 <b>a</b> = <b>b</b>。</p>
+  <p class="step">(2) 若 <b>a</b> = <b>b</b>，则 |<b>a</b>| = |<b>b</b>|。</p>
+  <p class="step">(3) 若 <b>a</b> ∥ <b>b</b>，则 <b>a</b> 与 <b>b</b> 的方向相同。</p>
+  <p class="step">(4) 零向量与任何向量都平行。</p>
+  <p class="answer">解：</p>
+  <p class="step">(1) <strong>假命题</strong>。模相等只说明大小相等，方向不一定相同。</p>
+  <p class="step">(2) <strong>真命题</strong>。相等向量的模必然相等。</p>
+  <p class="step">(3) <strong>假命题</strong>。平行向量的方向可以相同，也可以相反。</p>
+  <p class="step">(4) <strong>真命题</strong>。这是零向量的规定性质。</p>
+</div>
+
+<div class="example">
+  <p><strong>例 2：</strong>如图，在正六边形 ABCDEF 中，找出与 <b>AB</b> 相等的向量和相反的向量。</p>
+  <p class="step">相等向量（大小相等、方向相同）：<b>ED</b>、<b>FC</b>（需方向一致）</p>
+  <p class="step">相反向量（大小相等、方向相反）：<b>BA</b>、<b>DE</b>、<b>CF</b></p>
+  <p class="answer" style="color:#1a73e8;">注意：向量相等只关心大小和方向，与起点位置无关。</p>
+</div>
+</section>
+
+<!-- 互动选择题 1-2 -->
+<div class="quiz-section">
+<div class="quiz-question" id="q1">
+  <div class="q-title"><span class="q-tag concept">概念</span> 1. 下列命题中，正确的是？</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(1, 0)">A. 若 |<b>a</b>| = |<b>b</b>|，则 <b>a</b> = <b>b</b></div>
+    <div class="opt" onclick="checkChoice(1, 1)">B. 若 <b>a</b> = <b>b</b>，则 <b>a</b> 与 <b>b</b> 的方向相同</div>
+    <div class="opt" onclick="checkChoice(1, 2)">C. 零向量没有方向</div>
+    <div class="opt" onclick="checkChoice(1, 3)">D. 单位向量都相等</div>
+  </div>
+  <div class="explain" id="explain1"></div>
+</div>
+
+<div class="quiz-question" id="q2">
+  <div class="q-title"><span class="q-tag concept">概念</span> 2. 下列说法中，错误的是？</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(2, 0)">A. 零向量与任何向量都平行</div>
+    <div class="opt" onclick="checkChoice(2, 1)">B. 平行向量就是共线向量</div>
+    <div class="opt" onclick="checkChoice(2, 2)">C. 若两个向量互为相反向量，则它们的和为 <b>0</b></div>
+    <div class="opt" onclick="checkChoice(2, 3)">D. 若 <b>a</b> ∥ <b>b</b>，则 <b>a</b> 与 <b>b</b> 的方向相同</div>
+  </div>
+  <div class="explain" id="explain2"></div>
+</div>
+</div>
+
+<!-- ==================== 1.2 平面向量的线性运算 ==================== -->
+<section>
+<h2>二、平面向量的线性运算</h2>
+
+<h3>1.2 向量加法</h3>
+<p>向量加法遵循以下两种法则：</p>
+
+<div class="formula-box">
+  <p><strong>三角形法则：</strong>将向量 <b>b</b> 的起点放在 <b>a</b> 的终点上，则从 <b>a</b> 的起点指向 <b>b</b> 的终点的向量就是 <b>a</b> + <b>b</b>。</p>
+  <p style="margin-top:10px;"><strong>平行四边形法则：</strong>将 <b>a</b> 和 <b>b</b> 的起点重合，以 <b>a</b>、<b>b</b> 为邻边作平行四边形，则从公共起点出发的对角线向量就是 <b>a</b> + <b>b</b>。</p>
+</div>
+
+<!-- SVG: 向量加法——平行四边形法则 -->
+<svg width="500" height="280" viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:16px auto;background:#fafafa;border-radius:8px;">
+  <defs>
+    <marker id="v2b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#1a73e8"/>
+    </marker>
+    <marker id="v2r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#d32f2f"/>
+    </marker>
+    <marker id="v2g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#2e7d32"/>
+    </marker>
+  </defs>
+  <!-- 向量 a（蓝色） -->
+  <line x1="80" y1="200" x2="180" y2="70" stroke="#1a73e8" stroke-width="2.5" marker-end="url(#v2b)"/>
+  <!-- 向量 b（红色） -->
+  <line x1="80" y1="200" x2="260" y2="210" stroke="#d32f2f" stroke-width="2.5" marker-end="url(#v2r)"/>
+  <!-- 平行四边形上边（从 A 到 C） -->
+  <line x1="180" y1="70" x2="360" y2="80" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <!-- 平行四边形右边（从 B 到 C） -->
+  <line x1="260" y1="210" x2="360" y2="80" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <!-- 向量 a + b（绿色） -->
+  <line x1="80" y1="200" x2="360" y2="80" stroke="#2e7d32" stroke-width="3" marker-end="url(#v2g)"/>
+  <!-- 标注点 -->
+  <circle cx="80" cy="200" r="3" fill="#333"/>
+  <text x="70" y="220" font-size="14" fill="#333" font-weight="bold" font-family="serif">O</text>
+  <circle cx="180" cy="70" r="3" fill="#1a73e8"/>
+  <text x="183" y="64" font-size="14" fill="#1a73e8" font-weight="bold" font-family="serif">A</text>
+  <circle cx="260" cy="210" r="3" fill="#d32f2f"/>
+  <text x="263" y="228" font-size="14" fill="#d32f2f" font-weight="bold" font-family="serif">B</text>
+  <circle cx="360" cy="80" r="3" fill="#2e7d32"/>
+  <text x="363" y="74" font-size="14" fill="#2e7d32" font-weight="bold" font-family="serif">C</text>
+  <!-- 向量名称标注（在向量中部附近） -->
+  <text x="110" y="148" font-size="16" fill="#1a73e8" font-weight="bold" font-family="serif">a</text>
+  <text x="155" y="215" font-size="16" fill="#d32f2f" font-weight="bold" font-family="serif">b</text>
+  <text x="200" y="120" font-size="16" fill="#2e7d32" font-weight="bold" font-family="serif">a+b</text>
+  <!-- 图例 -->
+  <text x="10" y="16" font-size="11" fill="#888">平 行 四 边 形 法 则 ： a + b = AC</text>
+</svg>
+
+<div class="formula">
+  <b>a</b> + <b>b</b> = <b>b</b> + <b>a</b>（交换律）
+</div>
+<div class="formula">
+  (<b>a</b> + <b>b</b>) + <b>c</b> = <b>a</b> + (<b>b</b> + <b>c</b>)（结合律）
+</div>
+<div class="formula">
+  <b>a</b> + <b>0</b> = <b>a</b>（零向量性质）
+</div>
+
+<div class="example">
+  <p><strong>例 3：</strong>化简下列各式：</p>
+  <p class="step">(1) <b>AB</b> + <b>BC</b></p>
+  <p class="step">(2) <b>AB</b> + <b>BC</b> + <b>CA</b></p>
+  <p class="step">(3) <b>AB</b> + <b>BC</b> + <b>CD</b> + <b>DE</b></p>
+  <p class="answer">解：</p>
+  <p class="step">(1) <b>AB</b> + <b>BC</b> = <b>AC</b>（三角形法则）</p>
+  <p class="step">(2) <b>AB</b> + <b>BC</b> + <b>CA</b> = <b>AC</b> + <b>CA</b> = <b>0</b></p>
+  <p class="step">(3) <b>AB</b> + <b>BC</b> + <b>CD</b> + <b>DE</b> = <b>AE</b></p>
+</div>
+
+<h3>1.3 向量减法</h3>
+<p>向量减法可以转化为加法：<b>a</b> − <b>b</b> = <b>a</b> + (−<b>b</b>)。</p>
+
+<div class="formula-box">
+  <p><strong>减法法则：</strong>将 <b>a</b> 和 <b>b</b> 的起点重合，则从 <b>b</b> 的终点指向 <b>a</b> 的终点的向量就是 <b>a</b> − <b>b</b>。</p>
+</div>
+
+<!-- SVG: 向量减法示意图 -->
+<svg width="500" height="280" viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:16px auto;background:#fafafa;border-radius:8px;">
+  <defs>
+    <marker id="v3b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#1a73e8"/>
+    </marker>
+    <marker id="v3r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#d32f2f"/>
+    </marker>
+    <marker id="v3g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#2e7d32"/>
+    </marker>
+  </defs>
+  <!-- 向量 a（蓝色） -->
+  <line x1="80" y1="160" x2="220" y2="50" stroke="#1a73e8" stroke-width="2.5" marker-end="url(#v3b)"/>
+  <!-- 向量 b（红色） -->
+  <line x1="80" y1="160" x2="290" y2="200" stroke="#d32f2f" stroke-width="2.5" marker-end="url(#v3r)"/>
+  <!-- 向量 a - b（绿色）：从 b 的终点指向 a 的终点 -->
+  <line x1="290" y1="200" x2="220" y2="50" stroke="#2e7d32" stroke-width="2.5" marker-end="url(#v3g)"/>
+  <!-- 标注点 -->
+  <circle cx="80" cy="160" r="3" fill="#333"/>
+  <text x="70" y="180" font-size="14" fill="#333" font-weight="bold" font-family="serif">O</text>
+  <circle cx="220" cy="50" r="3" fill="#1a73e8"/>
+  <text x="223" y="44" font-size="14" fill="#1a73e8" font-weight="bold" font-family="serif">A</text>
+  <circle cx="290" cy="200" r="3" fill="#d32f2f"/>
+  <text x="293" y="218" font-size="14" fill="#d32f2f" font-weight="bold" font-family="serif">B</text>
+  <!-- 向量名称标注 -->
+  <text x="120" y="110" font-size="16" fill="#1a73e8" font-weight="bold" font-family="serif">a</text>
+  <text x="170" y="190" font-size="16" fill="#d32f2f" font-weight="bold" font-family="serif">b</text>
+  <text x="245" y="110" font-size="16" fill="#2e7d32" font-weight="bold" font-family="serif">a&#8722;b</text>
+  <!-- 说明文字 -->
+  <text x="10" y="16" font-size="11" fill="#888">减 法 法 则 ： a &#8722; b = BA &nbsp;（从 b 终点指向 a 终点）</text>
+</svg>
+
+<div class="formula">
+  <b>AB</b> − <b>AC</b> = <b>CB</b>
+</div>
+
+<h3>1.4 数乘向量</h3>
+<p>实数 &lambda; 与向量 <b>a</b> 的乘积是一个向量，记作 &lambda;<b>a</b>：</p>
+<ul>
+  <li>|&lambda;<b>a</b>| = |&lambda;| &middot; |<b>a</b>|</li>
+  <li>当 &lambda; &gt; 0 时，&lambda;<b>a</b> 与 <b>a</b> 方向相同</li>
+  <li>当 &lambda; &lt; 0 时，&lambda;<b>a</b> 与 <b>a</b> 方向相反</li>
+  <li>当 &lambda; = 0 时，&lambda;<b>a</b> = <b>0</b></li>
+</ul>
+
+<div class="formula">
+  &lambda;(<b>a</b> + <b>b</b>) = &lambda;<b>a</b> + &lambda;<b>b</b>（分配律）
+</div>
+
+<div class="example">
+  <p><strong>例 4：</strong>已知 <b>a</b>、<b>b</b> 是两个不共线的向量，化简：3(<b>a</b> + <b>b</b>) − 2(<b>a</b> − <b>b</b>)。</p>
+  <p class="step">3(<b>a</b> + <b>b</b>) − 2(<b>a</b> − <b>b</b>) = 3<b>a</b> + 3<b>b</b> − 2<b>a</b> + 2<b>b</b></p>
+  <p class="step">= (3 − 2)<b>a</b> + (3 + 2)<b>b</b></p>
+  <p class="answer">= <b>a</b> + 5<b>b</b></p>
+</div>
+</section>
+
+<!-- 互动选择题 3-4 -->
+<div class="quiz-section">
+<div class="quiz-question" id="q3">
+  <div class="q-title"><span class="q-tag concept">概念</span> 3. 在 &triangle;ABC 中，<b>AB</b> + <b>BC</b> + <b>CA</b> 等于？</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(3, 0)">A. <b>0</b></div>
+    <div class="opt" onclick="checkChoice(3, 1)">B. <b>AC</b></div>
+    <div class="opt" onclick="checkChoice(3, 2)">C. <b>CB</b></div>
+    <div class="opt" onclick="checkChoice(3, 3)">D. <b>BA</b></div>
+  </div>
+  <div class="explain" id="explain3"></div>
+</div>
+
+<div class="quiz-question" id="q4">
+  <div class="q-title"><span class="q-tag calc">计算</span> 4. 化简 2(<b>a</b> + 2<b>b</b>) − 3(<b>a</b> − <b>b</b>) 的结果是？</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(4, 0)">A. −<b>a</b> + 7<b>b</b></div>
+    <div class="opt" onclick="checkChoice(4, 1)">B. 5<b>a</b> + <b>b</b></div>
+    <div class="opt" onclick="checkChoice(4, 2)">C. −<b>a</b> + <b>b</b></div>
+    <div class="opt" onclick="checkChoice(4, 3)">D. <b>a</b> + 7<b>b</b></div>
+  </div>
+  <div class="explain" id="explain4"></div>
+</div>
+</div>
+
+<!-- ==================== 1.3 平面向量的基本定理及坐标表示 ==================== -->
+<section>
+<h2>三、平面向量的基本定理及坐标表示</h2>
+
+<h3>1.3 平面向量基本定理</h3>
+<p><strong class="definition">平面向量基本定理：</strong>如果 <b>e</b><sub>1</sub>、<b>e</b><sub>2</sub> 是同一平面内的两个<strong>不共线</strong>向量，那么对于这一平面内的任一向量 <b>a</b>，有且只有一对实数 &lambda;<sub>1</sub>、&lambda;<sub>2</sub>，使得：</p>
+<div class="formula-box">
+  <p><b>a</b> = &lambda;<sub>1</sub><b>e</b><sub>1</sub> + &lambda;<sub>2</sub><b>e</b><sub>2</sub></p>
+</div>
+<p>其中 <b>e</b><sub>1</sub>、<b>e</b><sub>2</sub> 称为一组<strong class="keyword">基底</strong>。</p>
+
+<!-- SVG: 平面向量的基本定理及坐标表示 -->
+<svg width="500" height="300" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:16px auto;background:#fafafa;border-radius:8px;">
+  <defs>
+    <marker id="v4arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#333"/>
+    </marker>
+    <marker id="v4b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#1a73e8"/>
+    </marker>
+    <marker id="v4g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#2e7d32"/>
+    </marker>
+  </defs>
+  <!-- 坐标系 -->
+  <!-- x 轴 -->
+  <line x1="60" y1="245" x2="470" y2="245" stroke="#333" stroke-width="1.5" marker-end="url(#v4arr)"/>
+  <!-- y 轴 -->
+  <line x1="60" y1="245" x2="60" y2="30" stroke="#333" stroke-width="1.5" marker-end="url(#v4arr)"/>
+  <!-- 轴标签 -->
+  <text x="465" y="260" font-size="14" fill="#333" font-weight="bold" font-family="serif">x</text>
+  <text x="48" y="30" font-size="14" fill="#333" font-weight="bold" font-family="serif">y</text>
+  <text x="52" y="260" font-size="14" fill="#333" font-weight="bold" font-family="serif">O</text>
+  <!-- 刻度 -->
+  <line x1="120" y1="248" x2="120" y2="242" stroke="#333" stroke-width="1"/>
+  <text x="115" y="262" font-size="11" fill="#555">1</text>
+  <line x1="180" y1="248" x2="180" y2="242" stroke="#333" stroke-width="1"/>
+  <text x="175" y="262" font-size="11" fill="#555">2</text>
+  <line x1="240" y1="248" x2="240" y2="242" stroke="#333" stroke-width="1"/>
+  <text x="235" y="262" font-size="11" fill="#555">3</text>
+  <line x1="300" y1="248" x2="300" y2="242" stroke="#333" stroke-width="1"/>
+  <text x="295" y="262" font-size="11" fill="#555">4</text>
+  <line x1="360" y1="248" x2="360" y2="242" stroke="#333" stroke-width="1"/>
+  <text x="355" y="262" font-size="11" fill="#555">5</text>
+  <line x1="420" y1="248" x2="420" y2="242" stroke="#333" stroke-width="1"/>
+  <text x="415" y="262" font-size="11" fill="#555">6</text>
+  <line x1="58" y1="185" x2="62" y2="185" stroke="#333" stroke-width="1"/>
+  <text x="36" y="189" font-size="11" fill="#555">1</text>
+  <line x1="58" y1="125" x2="62" y2="125" stroke="#333" stroke-width="1"/>
+  <text x="36" y="129" font-size="11" fill="#555">2</text>
+  <line x1="58" y1="65" x2="62" y2="65" stroke="#333" stroke-width="1"/>
+  <text x="36" y="69" font-size="11" fill="#555">3</text>
+  <!-- 基底向量 e₁（沿 x 轴，橙色/棕色） -->
+  <line x1="60" y1="245" x2="120" y2="245" stroke="#e65100" stroke-width="2.5" marker-end="url(#v4arr)"/>
+  <text x="80" y="240" font-size="14" fill="#e65100" font-weight="bold" font-family="serif">e&#8321;</text>
+  <!-- 基底向量 e₂（沿 y 轴，橙色/棕色） -->
+  <line x1="60" y1="245" x2="60" y2="185" stroke="#e65100" stroke-width="2.5" marker-end="url(#v4arr)"/>
+  <text x="38" y="210" font-size="14" fill="#e65100" font-weight="bold" font-family="serif">e&#8322;</text>
+  <!-- 向量 a = 3e₁ + 2e₂（蓝色） -->
+  <line x1="60" y1="245" x2="240" y2="125" stroke="#1a73e8" stroke-width="3" marker-end="url(#v4b)"/>
+  <text x="140" y="175" font-size="16" fill="#1a73e8" font-weight="bold" font-family="serif">a</text>
+  <!-- 虚线辅助线 -->
+  <line x1="240" y1="245" x2="240" y2="125" stroke="#999" stroke-width="1.2" stroke-dasharray="4,4"/>
+  <line x1="60" y1="125" x2="240" y2="125" stroke="#999" stroke-width="1.2" stroke-dasharray="4,4"/>
+  <!-- 坐标标注 -->
+  <text x="242" y="265" font-size="12" fill="#1a73e8" font-weight="bold">3</text>
+  <text x="28" y="130" font-size="12" fill="#1a73e8" font-weight="bold">2</text>
+  <text x="245" y="120" font-size="12" fill="#1a73e8" font-weight="bold" font-family="serif">(3,2)</text>
+  <!-- 直角标记 -->
+  <polyline points="60,125 64,125 64,129" fill="none" stroke="#999" stroke-width="1"/>
+</svg>
+
+<div class="note">
+  <strong>说明：</strong>基底不唯一，只要两个向量不共线即可。同一向量在不同基底下的表示不同。
+</div>
+
+<h3>1.4 正交分解与坐标表示</h3>
+<p>取两个<strong>互相垂直</strong>的单位向量作为基底——<b>i</b>（x 轴方向）和 <b>j</b>（y 轴方向），这种分解称为<strong class="keyword">正交分解</strong>。</p>
+
+<div class="formula-box">
+  <p>对于任意向量 <b>a</b>，存在唯一的有序实数对 (x, y)，使得：</p>
+  <p><b>a</b> = x<b>i</b> + y<b>j</b></p>
+  <p>(x, y) 称为向量 <b>a</b> 的<strong class="keyword">坐标</strong>，记作 <b>a</b> = (x, y)</p>
+</div>
+
+<h3>1.5 向量的坐标运算</h3>
+
+<table>
+  <tr><th>运算</th><th>坐标表示</th></tr>
+  <tr><td>加法</td><td><b>a</b> + <b>b</b> = (x<sub>1</sub> + x<sub>2</sub>, y<sub>1</sub> + y<sub>2</sub>)</td></tr>
+  <tr><td>减法</td><td><b>a</b> − <b>b</b> = (x<sub>1</sub> − x<sub>2</sub>, y<sub>1</sub> − y<sub>2</sub>)</td></tr>
+  <tr><td>数乘</td><td>&lambda;<b>a</b> = (&lambda;x, &lambda;y)</td></tr>
+  <tr><td>向量坐标</td><td>若 A(x<sub>1</sub>, y<sub>1</sub>)，B(x<sub>2</sub>, y<sub>2</sub>)，则 <b>AB</b> = (x<sub>2</sub> − x<sub>1</sub>, y<sub>2</sub> − y<sub>1</sub>)</td></tr>
+</table>
+
+<div class="example">
+  <p><strong>例 5：</strong>已知 <b>a</b> = (2, −1)，<b>b</b> = (−3, 4)，求：</p>
+  <p class="step">(1) <b>a</b> + <b>b</b></p>
+  <p class="step">(2) 2<b>a</b> − 3<b>b</b></p>
+  <p class="answer">解：</p>
+  <p class="step">(1) <b>a</b> + <b>b</b> = (2 + (−3), −1 + 4) = (−1, 3)</p>
+  <p class="step">(2) 2<b>a</b> − 3<b>b</b> = 2(2, −1) − 3(−3, 4) = (4, −2) − (−9, 12) = (4 + 9, −2 − 12) = (13, −14)</p>
+</div>
+
+<div class="example">
+  <p><strong>例 6：</strong>已知 A(1, 2)、B(3, 5)，求向量 <b>AB</b> 的坐标。</p>
+  <p class="step"><b>AB</b> = (3 − 1, 5 − 2) = (2, 3)</p>
+  <p class="answer" style="color:#1a73e8;">所以 <b>AB</b> = (2, 3)</p>
+</div>
+</section>
+
+<!-- 互动选择题 5 -->
+<div class="quiz-section">
+<div class="quiz-question" id="q5">
+  <div class="q-title"><span class="q-tag calc">计算</span> 5. 已知 <b>a</b> = (2, −1)，<b>b</b> = (1, 3)，则 <b>a</b> + <b>b</b> = ？</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(5, 0)">A. (3, 2)</div>
+    <div class="opt" onclick="checkChoice(5, 1)">B. (1, −4)</div>
+    <div class="opt" onclick="checkChoice(5, 2)">C. (2, 3)</div>
+    <div class="opt" onclick="checkChoice(5, 3)">D. (3, −2)</div>
+  </div>
+  <div class="explain" id="explain5"></div>
+</div>
+</div>
+
+<!-- ==================== 1.4 平面向量的数量积 ==================== -->
+<section>
+<h2>四、平面向量的数量积</h2>
+
+<h3>1.4 数量积的定义</h3>
+<p>已知两个非零向量 <b>a</b> 和 <b>b</b>，它们的夹角为 &theta;（0&deg; &le; &theta; &le; 180&deg;），那么：</p>
+<div class="formula-box">
+  <p><strong>数量积</strong>（也称<strong>点乘</strong>）：</p>
+  <p><b>a</b> &middot; <b>b</b> = |<b>a</b>| |<b>b</b>| cos &theta;</p>
+</div>
+
+<div class="note">
+  <strong>注意：</strong>两个向量的数量积是一个<strong>实数</strong>（标量），不是向量。因此数量积也称为"点积"或"内积"。
+</div>
+
+<h3>1.5 几何意义——投影</h3>
+<p><b>a</b> &middot; <b>b</b> 的几何意义：|<b>a</b>| 乘以 <b>b</b> 在 <b>a</b> 方向上的投影，或 |<b>b</b>| 乘以 <b>a</b> 在 <b>b</b> 方向上的投影。</p>
+<div class="formula">
+  <b>b</b> 在 <b>a</b> 方向上的投影为：|<b>b</b>| cos &theta;
+</div>
+
+<!-- SVG: 向量的数量积——夹角与投影 -->
+<svg width="500" height="300" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:16px auto;background:#fafafa;border-radius:8px;">
+  <defs>
+    <marker id="v5b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#1a73e8"/>
+    </marker>
+    <marker id="v5r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#d32f2f"/>
+    </marker>
+  </defs>
+  <!-- 向量 a（蓝色） -->
+  <line x1="80" y1="200" x2="290" y2="50" stroke="#1a73e8" stroke-width="3" marker-end="url(#v5b)"/>
+  <!-- 向量 b（红色） -->
+  <line x1="80" y1="200" x2="350" y2="130" stroke="#d32f2f" stroke-width="3" marker-end="url(#v5r)"/>
+  <!-- 夹角弧线 θ -->
+  <path d="M 118 178 A 40 40 0 0 0 108 157" fill="none" stroke="#333" stroke-width="1.5"/>
+  <text x="108" y="162" font-size="15" fill="#333" font-weight="bold" font-style="italic">θ</text>
+  <!-- 投影虚线（从 b 终点向 a 作垂线，垂足在 a 延长线上） -->
+  <line x1="350" y1="130" x2="292" y2="49" stroke="#d32f2f" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <!-- 投影标注 -->
+  <text x="355" y="108" font-size="12" fill="#d32f2f">投影</text>
+  <text x="295" y="88" font-size="12" fill="#d32f2f">|b|&middot;cos&theta;</text>
+  <!-- 直角标记 -->
+  <polyline points="292,57 300,49 294,43" fill="none" stroke="#d32f2f" stroke-width="1"/>
+  <!-- 起点标注 -->
+  <circle cx="80" cy="200" r="3" fill="#333"/>
+  <text x="70" y="220" font-size="14" fill="#333" font-weight="bold" font-family="serif">O</text>
+  <!-- 向量名称标注 -->
+  <text x="170" y="110" font-size="17" fill="#1a73e8" font-weight="bold" font-family="serif">a</text>
+  <text x="195" y="175" font-size="17" fill="#d32f2f" font-weight="bold" font-family="serif">b</text>
+  <!-- 图例 -->
+  <text x="10" y="16" font-size="11" fill="#888">a &middot; b = |a| |b| cos&theta;</text>
+</svg>
+
+<h3>1.6 数量积的性质</h3>
+<table>
+  <tr><th>性质</th><th>公式</th></tr>
+  <tr><td>垂直条件</td><td><b>a</b> &perp; <b>b</b> &hArr; <b>a</b> &middot; <b>b</b> = 0</td></tr>
+  <tr><td>同向时</td><td><b>a</b> &middot; <b>b</b> = |<b>a</b>| |<b>b</b>|（cos 0&deg; = 1）</td></tr>
+  <tr><td>反向时</td><td><b>a</b> &middot; <b>b</b> = −|<b>a</b>| |<b>b</b>|（cos 180&deg; = −1）</td></tr>
+  <tr><td>自身点乘</td><td><b>a</b> &middot; <b>a</b> = |<b>a</b>|&sup2;</td></tr>
+</table>
+
+<h3>1.7 运算律</h3>
+<ul>
+  <li><b>a</b> &middot; <b>b</b> = <b>b</b> &middot; <b>a</b>（交换律）</li>
+  <li>(&lambda;<b>a</b>) &middot; <b>b</b> = &lambda;(<b>a</b> &middot; <b>b</b>)（数乘结合律）</li>
+  <li>(<b>a</b> + <b>b</b>) &middot; <b>c</b> = <b>a</b> &middot; <b>c</b> + <b>b</b> &middot; <b>c</b>（分配律）</li>
+</ul>
+
+<h3>1.8 坐标表示下的数量积</h3>
+<p>设 <b>a</b> = (x<sub>1</sub>, y<sub>1</sub>)，<b>b</b> = (x<sub>2</sub>, y<sub>2</sub>)，则：</p>
+<div class="formula-box">
+  <p><b>a</b> &middot; <b>b</b> = x<sub>1</sub>x<sub>2</sub> + y<sub>1</sub>y<sub>2</sub></p>
+  <p>|<b>a</b>| = &radic;(x<sub>1</sub>&sup2; + y<sub>1</sub>&sup2;)</p>
+  <p>cos &theta; = (x<sub>1</sub>x<sub>2</sub> + y<sub>1</sub>y<sub>2</sub>) / (&radic;(x<sub>1</sub>&sup2; + y<sub>1</sub>&sup2;) &middot; &radic;(x<sub>2</sub>&sup2; + y<sub>2</sub>&sup2;))</p>
+  <p><b>a</b> &perp; <b>b</b> &hArr; x<sub>1</sub>x<sub>2</sub> + y<sub>1</sub>y<sub>2</sub> = 0</p>
+</div>
+
+<div class="example">
+  <p><strong>例 7：</strong>已知 |<b>a</b>| = 3，|<b>b</b>| = 4，<b>a</b> 与 <b>b</b> 的夹角 &theta; = 60&deg;，求 <b>a</b> &middot; <b>b</b>。</p>
+  <p class="step"><b>a</b> &middot; <b>b</b> = |<b>a</b>| |<b>b</b>| cos 60&deg; = 3 &times; 4 &times; &frac12; = 6</p>
+  <p class="answer" style="color:#1a73e8;">所以 <b>a</b> &middot; <b>b</b> = 6</p>
+</div>
+
+<div class="example">
+  <p><strong>例 8：</strong>已知 <b>a</b> = (1, 2)，<b>b</b> = (2, −1)，求 <b>a</b> &middot; <b>b</b> 以及 <b>a</b> 与 <b>b</b> 的夹角 &theta;。</p>
+  <p class="step"><b>a</b> &middot; <b>b</b> = 1 &times; 2 + 2 &times; (−1) = 2 − 2 = 0</p>
+  <p class="step">因为 <b>a</b> &middot; <b>b</b> = 0，所以 <b>a</b> &perp; <b>b</b></p>
+  <p class="step" style="color:#1a73e8;">即 &theta; = 90&deg;</p>
+</div>
+</section>
+
+<!-- 互动选择题 6-7 -->
+<div class="quiz-section">
+<div class="quiz-question" id="q6">
+  <div class="q-title"><span class="q-tag calc">计算</span> 6. 已知 |<b>a</b>| = 2，|<b>b</b>| = 3，<b>a</b> 与 <b>b</b> 的夹角为 60&deg;，则 <b>a</b> &middot; <b>b</b> = ？</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(6, 0)">A. 6</div>
+    <div class="opt" onclick="checkChoice(6, 1)">B. 3</div>
+    <div class="opt" onclick="checkChoice(6, 2)">C. 3&radic;3</div>
+    <div class="opt" onclick="checkChoice(6, 3)">D. 2&radic;3</div>
+  </div>
+  <div class="explain" id="explain6"></div>
+</div>
+
+<div class="quiz-question" id="q7">
+  <div class="q-title"><span class="q-tag calc">计算</span> 7. 已知 <b>a</b> = (2, 1)，<b>b</b> = (−1, 2)，则 <b>a</b> &middot; <b>b</b> = ？</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(7, 0)">A. 4</div>
+    <div class="opt" onclick="checkChoice(7, 1)">B. −4</div>
+    <div class="opt" onclick="checkChoice(7, 2)">C. 0</div>
+    <div class="opt" onclick="checkChoice(7, 3)">D. 5</div>
+  </div>
+  <div class="explain" id="explain7"></div>
+</div>
+</div>
+
+<!-- ==================== 1.5 平面向量应用举例 ==================== -->
+<section>
+<h2>五、平面向量应用举例</h2>
+
+<h3>1.5 向量在平面几何中的应用</h3>
+<p>向量是沟通代数与几何的桥梁，利用向量可以简洁地证明几何命题：</p>
+
+<div class="formula-box">
+  <p><strong>平行问题：</strong><b>a</b> ∥ <b>b</b> &hArr; <b>a</b> = &lambda;<b>b</b>（<b>b</b> &ne; <b>0</b>）</p>
+  <p><strong>垂直问题：</strong><b>a</b> &perp; <b>b</b> &hArr; <b>a</b> &middot; <b>b</b> = 0</p>
+  <p><strong>长度问题：</strong>|<b>AB</b>| = &radic;((x<sub>2</sub> − x<sub>1</sub>)&sup2; + (y<sub>2</sub> − y<sub>1</sub>)&sup2;)</p>
+</div>
+
+<div class="example">
+  <p><strong>例 9：</strong>用向量法证明：三角形中位线平行于第三边且等于第三边的一半。</p>
+  <p class="step">已知：在 &triangle;ABC 中，D、E 分别是 AB、AC 的中点。</p>
+  <p class="step">求证：DE ∥ BC，且 |<b>DE</b>| = &frac12;|<b>BC</b>|。</p>
+  <p class="answer">证明：</p>
+  <p class="step"><b>DE</b> = <b>AE</b> − <b>AD</b>（由向量减法）</p>
+  <p class="step">= &frac12;<b>AC</b> − &frac12;<b>AB</b>（D、E 是中点）</p>
+  <p class="step">= &frac12;(<b>AC</b> − <b>AB</b>)</p>
+  <p class="step">= &frac12;<b>BC</b></p>
+  <p class="step" style="color:#1a73e8;">所以 DE ∥ BC，且 |<b>DE</b>| = &frac12;|<b>BC</b>|。证毕。</p>
+</div>
+
+<div class="example">
+  <p><strong>例 10：</strong>证明：对角线互相垂直的平行四边形是菱形。</p>
+  <p class="step">已知：平行四边形 ABCD 中，AC &perp; BD。</p>
+  <p class="step">求证：ABCD 是菱形（即 |<b>AB</b>| = |<b>AD</b>|）。</p>
+  <p class="answer">证明：</p>
+  <p class="step">设 <b>AB</b> = <b>a</b>，<b>AD</b> = <b>b</b>，则 <b>AC</b> = <b>a</b> + <b>b</b>，<b>BD</b> = <b>b</b> − <b>a</b>。</p>
+  <p class="step">由 AC &perp; BD 得 (<b>a</b> + <b>b</b>) &middot; (<b>b</b> − <b>a</b>) = 0</p>
+  <p class="step">展开：<b>a</b> &middot; <b>b</b> − <b>a</b> &middot; <b>a</b> + <b>b</b> &middot; <b>b</b> − <b>b</b> &middot; <b>a</b> = 0</p>
+  <p class="step">−|<b>a</b>|&sup2; + |<b>b</b>|&sup2; = 0 &rArr; |<b>a</b>|&sup2; = |<b>b</b>|&sup2;</p>
+  <p class="step" style="color:#1a73e8;">所以 |<b>a</b>| = |<b>b</b>|，即邻边相等，ABCD 是菱形。证毕。</p>
+</div>
+
+<h3>1.6 向量在物理中的应用</h3>
+<p>向量在物理学中有广泛的应用，主要体现在：</p>
+
+<div class="formula-box">
+  <p><strong>力的合成与分解：</strong>遵循平行四边形法则</p>
+  <p><strong>速度的合成与分解：</strong>如船速与水速的合成</p>
+  <p><strong>功的计算：</strong>W = <b>F</b> &middot; <b>s</b> = |<b>F</b>||<b>s</b>| cos &theta;</p>
+</div>
+
+<!-- SVG: 向量在物理中的应用——力的分解示意图 -->
+<svg width="500" height="300" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:16px auto;background:#fafafa;border-radius:8px;">
+  <defs>
+    <marker id="v6b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#1a73e8"/>
+    </marker>
+    <marker id="v6r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#d32f2f"/>
+    </marker>
+    <marker id="v6g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#2e7d32"/>
+    </marker>
+  </defs>
+  <!-- 参考坐标系 -->
+  <line x1="40" y1="200" x2="460" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="130" y1="250" x2="130" y2="30" stroke="#ccc" stroke-width="1" stroke-dasharray="3,3"/>
+  <!-- 水平分力 Fx（红色） -->
+  <line x1="130" y1="200" x2="370" y2="200" stroke="#d32f2f" stroke-width="3" marker-end="url(#v6r)"/>
+  <!-- 垂直分力 Fy（绿色） -->
+  <line x1="370" y1="200" x2="370" y2="65" stroke="#2e7d32" stroke-width="3" marker-end="url(#v6g)"/>
+  <!-- 合力 F（蓝色） -->
+  <line x1="130" y1="200" x2="370" y2="65" stroke="#1a73e8" stroke-width="3.5" marker-end="url(#v6b)"/>
+  <!-- 角度弧线 -->
+  <path d="M 160 200 A 30 30 0 0 0 155 180" fill="none" stroke="#333" stroke-width="1.5"/>
+  <text x="145" y="183" font-size="14" fill="#333" font-weight="bold" font-style="italic">&theta;</text>
+  <!-- 直角标记 -->
+  <polyline points="370,200 364,200 364,194" fill="none" stroke="#555" stroke-width="1.5"/>
+  <!-- 标注（使用 tspan 实现下标） -->
+  <text x="230" y="195" font-size="16" fill="#d32f2f" font-weight="bold" font-family="serif">F<tspan dy="4" font-size="12">x</tspan></text>
+  <text x="375" y="130" font-size="16" fill="#2e7d32" font-weight="bold" font-family="serif">F<tspan dy="4" font-size="12">y</tspan></text>
+  <text x="225" y="115" font-size="18" fill="#1a73e8" font-weight="bold" font-family="serif">F</text>
+  <!-- 起点标注 -->
+  <circle cx="130" cy="200" r="3" fill="#333"/>
+  <text x="118" y="218" font-size="13" fill="#333" font-weight="bold" font-family="serif">O</text>
+  <!-- 图例 -->
+  <text x="10" y="16" font-size="11" fill="#888">力 的 正 交 分 解 ： F = F<tspan dy="4" font-size="10">x</tspan> + F<tspan dy="4" font-size="10">y</tspan></text>
+</svg>
+
+<div class="example">
+  <p><strong>例 11：</strong>一个物体受到两个力 <b>F</b><sub>1</sub> = (3, 4)N 和 <b>F</b><sub>2</sub> = (1, −2)N 的作用，求合力的大小。</p>
+  <p class="step">合力 <b>F</b> = <b>F</b><sub>1</sub> + <b>F</b><sub>2</sub> = (3 + 1, 4 + (−2)) = (4, 2)N</p>
+  <p class="step">合力的大小：|<b>F</b>| = &radic;(4&sup2; + 2&sup2;) = &radic;(16 + 4) = &radic;20 = 2&radic;5 N</p>
+  <p class="answer" style="color:#1a73e8;">合力大小为 2&radic;5 N，方向为 (4, 2)。</p>
+</div>
+
+<div class="example">
+  <p><strong>例 12：</strong>一船在静水中的速度为 5 km/h，河水流速为 3 km/h，若要垂直渡河（船头指向与河岸垂直），求船的实际速度大小和方向。</p>
+  <p class="step">设船速 <b>v</b><sub>船</sub> = (0, 5)，水速 <b>v</b><sub>水</sub> = (3, 0)</p>
+  <p class="step">实际速度 <b>v</b> = <b>v</b><sub>船</sub> + <b>v</b><sub>水</sub> = (3, 5)</p>
+  <p class="step">速度大小：|<b>v</b>| = &radic;(3&sup2; + 5&sup2;) = &radic;34 &asymp; 5.83 km/h</p>
+  <p class="step">方向：与河岸的夹角 &theta; 满足 tan &theta; = 5/3，&theta; &asymp; 59&deg;</p>
+  <p class="answer" style="color:#1a73e8;">实际速度大小约为 5.83 km/h，与河岸的夹角约为 59&deg;。</p>
+</div>
+</section>
+
+<!-- 互动选择题 8 -->
+<div class="quiz-section">
+<div class="quiz-question" id="q8">
+  <div class="q-title"><span class="q-tag concept">概念</span> 8. 用向量法证明三角形中位线定理时，主要用到了向量中的哪种运算？</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(8, 0)">A. 数量积运算</div>
+    <div class="opt" onclick="checkChoice(8, 1)">B. 向量加法与数乘运算</div>
+    <div class="opt" onclick="checkChoice(8, 2)">C. 向量的坐标运算</div>
+    <div class="opt" onclick="checkChoice(8, 3)">D. 向量的投影</div>
+  </div>
+  <div class="explain" id="explain8"></div>
+</div>
+</div>
+
+<!-- ==================== 得分面板 ==================== -->
+<section>
+<div class="score-panel">
+  得分：<span class="score-num" id="totalScore">0</span><span class="score-total"> / 8</span>
+  <button class="btn-reset" onclick="resetAll()">重置全部</button>
+</div>
+</section>
+
+</article>
+
+<script>
+// ============================================================
+// 选择题交互
+// ============================================================
+var answered = {};
+var totalScore = 0;
+
+var answers = {
+  1: 1, 2: 3, 3: 0, 4: 0, 5: 0, 6: 1, 7: 2, 8: 1
+};
+
+function scoreWeight(qid) {
+  return 1;
+}
+
+function checkChoice(qid, idx) {
+  if (answered[qid]) return;
+
+  var qDiv = document.getElementById("q" + qid);
+  var opts = qDiv.querySelectorAll(".opt");
+  var explain = document.getElementById("explain" + qid);
+
+  // Disable all options
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add("disabled");
+  }
+
+  var correct = answers[qid];
+  if (idx === correct) {
+    opts[idx].classList.add("correct-opt");
+    qDiv.classList.add("correct");
+    explain.className = "explain show ok";
+  } else {
+    opts[idx].classList.add("wrong-opt");
+    opts[correct].classList.add("correct-opt");
+    qDiv.classList.add("wrong");
+    explain.className = "explain show fail";
+  }
+
+  answered[qid] = true;
+  updateTotalScore();
+}
+
+function updateTotalScore() {
+  var score = 0;
+  for (var i = 1; i <= 8; i++) {
+    if (answered[i]) {
+      var qDiv = document.getElementById("q" + i);
+      if (qDiv.classList.contains("correct")) {
+        score += scoreWeight(i);
+      }
+    }
+  }
+  totalScore = score;
+  document.getElementById("totalScore").textContent = totalScore;
+}
+
+// ============================================================
+// 重置
+// ============================================================
+function resetAll() {
+  for (var i = 1; i <= 8; i++) {
+    var qDiv = document.getElementById("q" + i);
+    if (!qDiv) continue;
+    qDiv.className = "quiz-question";
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].className = "opt";
+    }
+    var explain = document.getElementById("explain" + i);
+    explain.className = "explain";
+  }
+
+  answered = {};
+  totalScore = 0;
+  document.getElementById("totalScore").textContent = "0";
+}
+</script>
+<script src="../dt.js"></script>
+</body>
+</html>

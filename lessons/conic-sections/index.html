@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>曲线和方程 — 圆锥曲线</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .quiz-question { background: #fff; border: 2px solid #e0e0e0; border-radius: 10px; padding: 18px 22px; margin: 16px 0; }
+    .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+    .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+    .q-tag { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 0.75em; margin-right: 8px; color: #fff; }
+    .q-tag.concept { background: #1a73e8; }
+    .opt { padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; background: #fafafa; user-select: none; margin: 4px 0; }
+    .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+    .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+    .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+    .opt.disabled { pointer-events: none; opacity: 0.7; }
+    .explain { margin-top: 10px; padding: 10px 14px; border-radius: 8px; font-size: 0.93em; display: none; }
+    .explain.show { display: block; }
+    .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+    .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+    .score-panel { text-align: center; padding: 16px; margin: 20px 0; background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8; }
+    .example { background: #fafafa; border-left: 4px solid #ff9800; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+    .example h4 { margin: 0 0 6px 0; color: #e65100; }
+    .katex { font-size: 1.05em; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+    th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: center; }
+    th { background: #e3f2fd; font-weight: bold; }
+    tr:nth-child(even) { background: #f5f5f5; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="../index.html">&larr; 返回课程列表</a>
+    <h1>曲线和方程 — 圆锥曲线</h1>
+
+    <!-- ==================== 1.1 曲线和方程 ==================== -->
+    <h3>1.1 曲线和方程</h3>
+    <p><strong>曲线的方程、方程的曲线的概念：</strong></p>
+    <p>在平面直角坐标系中，如果某曲线 C（看作点的集合或适合某种条件的点的轨迹）上的点与一个二元方程 \(f(x, y) = 0\) 的实数解建立了如下关系：</p>
+    <ul>
+      <li><strong>纯粹性：</strong>曲线上所有点的坐标都满足这个方程；</li>
+      <li><strong>完备性：</strong>以这个方程的解为坐标的点都在曲线上。</li>
+    </ul>
+    <p>那么，这个方程叫做曲线的方程，这条曲线叫做方程的曲线。</p>
+
+    <p><strong>求曲线方程的一般步骤：</strong></p>
+    <ol>
+      <li><strong>建系：</strong>建立适当的平面直角坐标系；</li>
+      <li><strong>设点：</strong>设曲线上任意一点 \(M(x, y)\)（即动点）；</li>
+      <li><strong>列式：</strong>写出适合条件 \(p(M)\) 的点的集合 \(P = \{M \mid p(M)\}\)，列出方程 \(f(x, y) = 0\)；</li>
+      <li><strong>化简：</strong>化方程 \(f(x, y) = 0\) 为最简形式；</li>
+      <li><strong>验证：</strong>验证化简后的方程的解为坐标的点是否都在曲线上（剔除多余解，补回遗漏解）。</li>
+    </ol>
+
+    <svg viewBox="0 0 450 300" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+      <rect width="450" height="300" fill="#fafafa" rx="8"/>
+      <!-- 坐标轴 -->
+      <line x1="30" y1="270" x2="420" y2="270" stroke="#333" stroke-width="1.5"/>
+      <line x1="30" y1="270" x2="30" y2="20" stroke="#333" stroke-width="1.5"/>
+      <polygon points="420,270 412,266 412,274" fill="#333"/>
+      <polygon points="30,20 26,28 34,28" fill="#333"/>
+      <text x="415" y="262" font-family="serif" font-size="14" fill="#333">x</text>
+      <text x="18" y="24" font-family="serif" font-size="14" fill="#333">y</text>
+      <text x="28" y="282" font-family="serif" font-size="12" fill="#666">O</text>
+      <!-- 曲线（抛物线形状） -->
+      <path d="M100,270 Q120,180 160,120 Q200,60 250,40 Q300,20 360,10" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+      <!-- 曲线上的点 P -->
+      <circle cx="200" cy="60" r="4" fill="#d32f2f"/>
+      <text x="200" y="50" font-family="serif" font-size="15" fill="#d32f2f" text-anchor="middle">P(x,y)</text>
+      <!-- P 到 x 轴垂线 -->
+      <line x1="200" y1="60" x2="200" y2="270" stroke="#999" stroke-width="1" stroke-dasharray="4,4"/>
+      <text x="200" y="285" font-family="serif" font-size="13" fill="#666" text-anchor="middle">x</text>
+      <!-- 曲线上另一个点 -->
+      <circle cx="300" cy="20" r="3" fill="#e65100"/>
+      <text x="300" y="12" font-family="serif" font-size="13" fill="#e65100" text-anchor="middle">Q</text>
+      <!-- 标注 -->
+      <text x="225" y="210" font-family="serif" font-size="14" fill="#1a73e8" font-style="italic">曲线 C : f(x,y)=0</text>
+      <text x="225" y="190" font-family="serif" font-size="12" fill="#666">曲线上点 &hArr; 满足方程</text>
+    </svg>
+
+    <div class="example">
+      <h4>例题 1.1</h4>
+      <p>已知点 \(A(-1, 0)\)、\(B(1, 0)\)，求到点 \(A\) 和点 \(B\) 的距离的平方和为 4 的点 \(M\) 的轨迹方程。</p>
+      <p><strong>解：</strong></p>
+      <ol>
+        <li><strong>建系：</strong>以线段 \(AB\) 所在直线为 \(x\) 轴，\(AB\) 的中点为原点建立直角坐标系（已给定）。</li>
+        <li><strong>设点：</strong>设 \(M(x, y)\) 为轨迹上任意一点。</li>
+        <li><strong>列式：</strong>\(|MA|^2 + |MB|^2 = 4\)，即 \([(x+1)^2 + y^2] + [(x-1)^2 + y^2] = 4\)。</li>
+        <li><strong>化简：</strong>\((x^2+2x+1+y^2) + (x^2-2x+1+y^2) = 4\)，整理得 \(2x^2 + 2y^2 + 2 = 4\)，即 \(x^2 + y^2 = 1\)。</li>
+        <li><strong>验证：</strong>以方程 \(x^2 + y^2 = 1\) 的解为坐标的点到 \(A\)、\(B\) 距离平方和均为 4，无需剔除。</li>
+      </ol>
+      <p>故点 \(M\) 的轨迹方程为 \(x^2 + y^2 = 1\)（单位圆）。</p>
+    </div>
+
+    <!-- Q1 -->
+    <div class="quiz-question" id="q1">
+      <p><span class="q-tag concept">概念</span><strong>Q1.</strong> 下列关于"曲线的方程"和"方程的曲线"的说法中，正确的是？</p>
+      <div class="opt" data-q="1" data-idx="0" onclick="checkChoice(1,0)">A. 只要曲线上的点都满足方程，该方程就是曲线的方程</div>
+      <div class="opt" data-q="1" data-idx="1" onclick="checkChoice(1,1)">B. 只要方程的解对应的点都在曲线上，该曲线就是方程的曲线</div>
+      <div class="opt" data-q="1" data-idx="2" onclick="checkChoice(1,2)">C. 必须同时满足纯粹性和完备性，即曲线上的点都满足方程且方程的解都在曲线上</div>
+      <div class="opt" data-q="1" data-idx="3" onclick="checkChoice(1,3)">D. 方程化简后无需验证，直接作为曲线方程即可</div>
+      <div class="explain" id="explain1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="quiz-question" id="q2">
+      <p><span class="q-tag concept">步骤</span><strong>Q2.</strong> 求曲线方程的一般步骤中，"列式"之后应当进行的是？</p>
+      <div class="opt" data-q="2" data-idx="0" onclick="checkChoice(2,0)">A. 建系</div>
+      <div class="opt" data-q="2" data-idx="1" onclick="checkChoice(2,1)">B. 设点</div>
+      <div class="opt" data-q="2" data-idx="2" onclick="checkChoice(2,2)">C. 化简</div>
+      <div class="opt" data-q="2" data-idx="3" onclick="checkChoice(2,3)">D. 验证</div>
+      <div class="explain" id="explain2"></div>
+    </div>
+
+    <!-- ==================== 1.2 椭圆 ==================== -->
+    <h3>1.2 椭圆</h3>
+    <p><strong>定义：</strong>平面内与两个定点 \(F_1\)、\(F_2\) 的距离之和等于常数（大于 \(|F_1F_2|\)）的点的轨迹叫做椭圆。这两个定点叫做椭圆的焦点，两焦点间的距离叫做椭圆的焦距。</p>
+
+    <p><strong>标准方程：</strong></p>
+    <ul>
+      <li>焦点在 \(x\) 轴上：\(\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1\)（\(a &gt; b &gt; 0\)），焦点 \(F_1(-c, 0)\)、\(F_2(c, 0)\)</li>
+      <li>焦点在 \(y\) 轴上：\(\dfrac{y^2}{a^2} + \dfrac{x^2}{b^2} = 1\)（\(a &gt; b &gt; 0\)），焦点 \(F_1(0, -c)\)、\(F_2(0, c)\)</li>
+    </ul>
+    <p>其中 \(a^2 = b^2 + c^2\)。</p>
+
+    <p><strong>性质：</strong></p>
+    <ul>
+      <li><strong>范围：</strong>\(-a \le x \le a\)，\(-b \le y \le b\)（焦点在 \(x\) 轴时）</li>
+      <li><strong>对称性：</strong>关于 \(x\) 轴、\(y\) 轴、原点对称</li>
+      <li><strong>顶点：</strong>\((\pm a, 0)\)、\((0, \pm b)\)（焦点在 \(x\) 轴时）</li>
+      <li><strong>离心率：</strong>\(e = \dfrac{c}{a}\)（\(0 &lt; e &lt; 1\)），刻画椭圆的扁平程度，\(e\) 越接近 0 椭圆越圆，\(e\) 越接近 1 椭圆越扁</li>
+    </ul>
+
+    <svg viewBox="0 0 500 350" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+      <rect width="500" height="350" fill="#fafafa" rx="8"/>
+      <!-- 坐标轴 -->
+      <line x1="30" y1="175" x2="470" y2="175" stroke="#333" stroke-width="1.5"/>
+      <line x1="250" y1="330" x2="250" y2="10" stroke="#333" stroke-width="1.5"/>
+      <polygon points="470,175 462,171 462,179" fill="#333"/>
+      <polygon points="250,10 246,18 254,18" fill="#333"/>
+      <text x="465" y="168" font-family="serif" font-size="14" fill="#333">x</text>
+      <text x="240" y="14" font-family="serif" font-size="14" fill="#333">y</text>
+      <text x="245" y="194" font-family="serif" font-size="13" fill="#666">O</text>
+      <!-- 椭圆 -->
+      <ellipse cx="250" cy="175" rx="170" ry="100" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+      <!-- 长轴端点 -->
+      <circle cx="80" cy="175" r="3.5" fill="#e65100"/><text x="75" y="195" font-family="serif" font-size="13" fill="#e65100">A₁(-a,0)</text>
+      <circle cx="420" cy="175" r="3.5" fill="#e65100"/><text x="420" y="195" font-family="serif" font-size="13" fill="#e65100" text-anchor="middle">A₂(a,0)</text>
+      <!-- 短轴端点 -->
+      <circle cx="250" cy="75" r="3.5" fill="#e65100"/><text x="265" y="72" font-family="serif" font-size="13" fill="#e65100">B₁(0,b)</text>
+      <circle cx="250" cy="275" r="3.5" fill="#e65100"/><text x="265" y="292" font-family="serif" font-size="13" fill="#e65100">B₂(0,-b)</text>
+      <!-- 焦点 -->
+      <circle cx="120" cy="175" r="5" fill="#d32f2f"/><text x="100" y="165" font-family="serif" font-size="13" fill="#d32f2f">F₁(-c,0)</text>
+      <circle cx="380" cy="175" r="5" fill="#d32f2f"/><text x="382" y="165" font-family="serif" font-size="13" fill="#d32f2f" text-anchor="start">F₂(c,0)</text>
+      <!-- 标注 2a / 2b -->
+      <line x1="80" y1="200" x2="420" y2="200" stroke="#2e7d32" stroke-width="1" stroke-dasharray="4,4"/>
+      <text x="250" y="215" font-family="serif" font-size="14" fill="#2e7d32" text-anchor="middle">2a（长轴）</text>
+      <line x1="270" y1="75" x2="270" y2="275" stroke="#e67e22" stroke-width="1" stroke-dasharray="4,4"/>
+      <text x="290" y="180" font-family="serif" font-size="14" fill="#e67e22">2b（短轴）</text>
+      <!-- 标注公式 -->
+      <text x="250" y="320" font-family="serif" font-size="16" fill="#1a73e8" text-anchor="middle">x²/a² + y²/b² = 1&#x2003;(a&gt;b&gt;0)</text>
+    </svg>
+
+    <div class="example">
+      <h4>例题 1.2</h4>
+      <p>已知椭圆的焦点在 \(x\) 轴上，焦距为 8，且椭圆经过点 \(P(0, 3)\)，求椭圆的标准方程。</p>
+      <p><strong>解：</strong>由题意可设椭圆方程为 \(\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1\)（\(a &gt; b &gt; 0\)）。</p>
+      <p>焦距为 \(8\)，即 \(2c = 8\)，故 \(c = 4\)。</p>
+      <p>椭圆过点 \(P(0, 3)\)，代入方程得 \(\dfrac{0}{a^2} + \dfrac{9}{b^2} = 1\)，解得 \(b^2 = 9\)。</p>
+      <p>由 \(a^2 = b^2 + c^2 = 9 + 16 = 25\)，得 \(a = 5\)。</p>
+      <p>故椭圆的标准方程为 \(\dfrac{x^2}{25} + \dfrac{y^2}{9} = 1\)。</p>
+    </div>
+
+    <svg viewBox="0 0 400 300" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="300" fill="#fafafa" rx="8"/>
+      <line x1="20" y1="150" x2="380" y2="150" stroke="#333" stroke-width="1"/>
+      <line x1="200" y1="280" x2="200" y2="10" stroke="#333" stroke-width="1"/>
+      <text x="375" y="145" font-family="serif" font-size="13" fill="#333">x</text>
+      <text x="190" y="14" font-family="serif" font-size="13" fill="#333">y</text>
+      <text x="200" y="164" font-family="serif" font-size="11" fill="#666" text-anchor="middle">O</text>
+      <!-- 椭圆 -->
+      <ellipse cx="200" cy="150" rx="140" ry="85" fill="none" stroke="#1a73e8" stroke-width="2"/>
+      <!-- 焦点 -->
+      <circle cx="90" cy="150" r="4" fill="#d32f2f"/><text x="82" y="140" font-family="serif" font-size="12" fill="#d32f2f" text-anchor="end">F₁</text>
+      <circle cx="310" cy="150" r="4" fill="#d32f2f"/><text x="318" y="140" font-family="serif" font-size="12" fill="#d32f2f">F₂</text>
+      <!-- 椭圆上一点 P -->
+      <circle cx="130" cy="107" r="4" fill="#e65100"/>
+      <text x="122" y="100" font-family="serif" font-size="13" fill="#e65100" text-anchor="end">P</text>
+      <!-- 连线 -->
+      <line x1="130" y1="107" x2="90" y2="150" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <line x1="130" y1="107" x2="310" y2="150" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <!-- 标注 PF1 + PF2 = 2a -->
+      <text x="200" y="270" font-family="serif" font-size="15" fill="#2e7d32" text-anchor="middle">PF₁ + PF₂ = 2a（常数）</text>
+      <!-- 标注 2a 长度 -->
+      <line x1="60" y1="130" x2="340" y2="130" stroke="#e67e22" stroke-width="1" stroke-dasharray="3,3"/>
+      <text x="200" y="125" font-family="serif" font-size="11" fill="#e67e22" text-anchor="middle">2a</text>
+    </svg>
+
+    <!-- Q3 -->
+    <div class="quiz-question" id="q3">
+      <p><span class="q-tag concept">椭圆</span><strong>Q3.</strong> 椭圆 \(\dfrac{x^2}{25} + \dfrac{y^2}{9} = 1\) 的离心率为？</p>
+      <div class="opt" data-q="3" data-idx="0" onclick="checkChoice(3,0)">A. \(\dfrac{3}{5}\)</div>
+      <div class="opt" data-q="3" data-idx="1" onclick="checkChoice(3,1)">B. \(\dfrac{4}{5}\)</div>
+      <div class="opt" data-q="3" data-idx="2" onclick="checkChoice(3,2)">C. \(\dfrac{5}{4}\)</div>
+      <div class="opt" data-q="3" data-idx="3" onclick="checkChoice(3,3)">D. \(\dfrac{5}{3}\)</div>
+      <div class="explain" id="explain3"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="quiz-question" id="q4">
+      <p><span class="q-tag concept">椭圆</span><strong>Q4.</strong> 椭圆 \(\dfrac{x^2}{16} + \dfrac{y^2}{7} = 1\) 的焦点坐标为？</p>
+      <div class="opt" data-q="4" data-idx="0" onclick="checkChoice(4,0)">A. \((\pm 3, 0)\)</div>
+      <div class="opt" data-q="4" data-idx="1" onclick="checkChoice(4,1)">B. \((\pm 4, 0)\)</div>
+      <div class="opt" data-q="4" data-idx="2" onclick="checkChoice(4,2)">C. \((0, \pm 3)\)</div>
+      <div class="opt" data-q="4" data-idx="3" onclick="checkChoice(4,3)">D. \((0, \pm \sqrt{7})\)</div>
+      <div class="explain" id="explain4"></div>
+    </div>
+
+    <!-- ==================== 1.3 双曲线 ==================== -->
+    <h3>1.3 双曲线</h3>
+    <p><strong>定义：</strong>平面内与两个定点 \(F_1\)、\(F_2\) 的距离之差的绝对值等于常数（小于 \(|F_1F_2|\)）的点的轨迹叫做双曲线。这两个定点叫做双曲线的焦点，两焦点间的距离叫做焦距。</p>
+
+    <p><strong>标准方程：</strong></p>
+    <ul>
+      <li>焦点在 \(x\) 轴上：\(\dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} = 1\)（\(a &gt; 0, b &gt; 0\)），焦点 \(F_1(-c, 0)\)、\(F_2(c, 0)\)</li>
+      <li>焦点在 \(y\) 轴上：\(\dfrac{y^2}{a^2} - \dfrac{x^2}{b^2} = 1\)（\(a &gt; 0, b &gt; 0\)），焦点 \(F_1(0, -c)\)、\(F_2(0, c)\)</li>
+    </ul>
+    <p>其中 \(c^2 = a^2 + b^2\)。</p>
+
+    <p><strong>性质：</strong></p>
+    <ul>
+      <li><strong>范围：</strong>\(x \le -a\) 或 \(x \ge a\)，\(y \in \R\)（焦点在 \(x\) 轴时）</li>
+      <li><strong>对称性：</strong>关于 \(x\) 轴、\(y\) 轴、原点对称</li>
+      <li><strong>顶点：</strong>\((\pm a, 0)\)（焦点在 \(x\) 轴时）</li>
+      <li><strong>渐近线：</strong>\(y = \pm \dfrac{b}{a}x\)（焦点在 \(x\) 轴时）</li>
+      <li><strong>离心率：</strong>\(e = \dfrac{c}{a}\)（\(e &gt; 1\)），刻画双曲线开口大小，\(e\) 越大开口越大</li>
+    </ul>
+
+    <svg viewBox="0 0 500 350" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+      <rect width="500" height="350" fill="#fafafa" rx="8"/>
+      <line x1="20" y1="175" x2="480" y2="175" stroke="#333" stroke-width="1.5"/>
+      <line x1="250" y1="340" x2="250" y2="10" stroke="#333" stroke-width="1.5"/>
+      <polygon points="480,175 472,171 472,179" fill="#333"/>
+      <polygon points="250,10 246,18 254,18" fill="#333"/>
+      <text x="475" y="168" font-family="serif" font-size="14" fill="#333">x</text>
+      <text x="240" y="14" font-family="serif" font-size="14" fill="#333">y</text>
+      <text x="240" y="194" font-family="serif" font-size="12" fill="#666">O</text>
+      <!-- 渐近线 -->
+      <line x1="50" y1="70" x2="450" y2="280" stroke="#ccc" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <line x1="50" y1="280" x2="450" y2="70" stroke="#ccc" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <!-- 双曲线左支 -->
+      <path d="M160,30 Q180,60 185,100 Q190,140 185,175 Q190,210 185,250 Q180,290 160,320" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+      <!-- 双曲线右支 -->
+      <path d="M340,30 Q320,60 315,100 Q310,140 315,175 Q310,210 315,250 Q320,290 340,320" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+      <!-- 顶点 -->
+      <circle cx="170" cy="175" r="3.5" fill="#e65100"/><text x="170" y="195" font-family="serif" font-size="13" fill="#e65100" text-anchor="middle">A₁(-a,0)</text>
+      <circle cx="330" cy="175" r="3.5" fill="#e65100"/><text x="330" y="195" font-family="serif" font-size="13" fill="#e65100" text-anchor="middle">A₂(a,0)</text>
+      <!-- 焦点 -->
+      <circle cx="90" cy="175" r="5" fill="#d32f2f"/><text x="75" y="165" font-family="serif" font-size="13" fill="#d32f2f">F₁(-c,0)</text>
+      <circle cx="410" cy="175" r="5" fill="#d32f2f"/><text x="412" y="165" font-family="serif" font-size="13" fill="#d32f2f">F₂(c,0)</text>
+      <!-- 标注 2a -->
+      <line x1="170" y1="200" x2="330" y2="200" stroke="#2e7d32" stroke-width="1" stroke-dasharray="4,4"/>
+      <text x="250" y="215" font-family="serif" font-size="14" fill="#2e7d32" text-anchor="middle">2a（实轴）</text>
+      <!-- 渐近线标注 -->
+      <text x="410" y="260" font-family="serif" font-size="13" fill="#999">y = (b/a)x</text>
+      <!-- 公式 -->
+      <text x="250" y="330" font-family="serif" font-size="16" fill="#1a73e8" text-anchor="middle">x²/a² - y²/b² = 1</text>
+    </svg>
+
+    <div class="example">
+      <h4>例题 1.3</h4>
+      <p>求双曲线 \(\dfrac{x^2}{9} - \dfrac{y^2}{16} = 1\) 的焦点坐标、渐近线方程和离心率。</p>
+      <p><strong>解：</strong>由方程得 \(a^2 = 9\)，\(b^2 = 16\)，故 \(a = 3\)，\(b = 4\)。</p>
+      <p>\(c^2 = a^2 + b^2 = 9 + 16 = 25\)，故 \(c = 5\)。</p>
+      <p>焦点坐标为 \((\pm 5, 0)\)。</p>
+      <p>渐近线方程为 \(y = \pm \dfrac{b}{a}x = \pm \dfrac{4}{3}x\)。</p>
+      <p>离心率 \(e = \dfrac{c}{a} = \dfrac{5}{3}\)。</p>
+    </div>
+
+    <svg viewBox="0 0 400 300" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="300" fill="#fafafa" rx="8"/>
+      <line x1="20" y1="150" x2="380" y2="150" stroke="#333" stroke-width="1"/>
+      <line x1="200" y1="280" x2="200" y2="10" stroke="#333" stroke-width="1"/>
+      <text x="375" y="145" font-family="serif" font-size="13" fill="#333">x</text>
+      <text x="190" y="14" font-family="serif" font-size="13" fill="#333">y</text>
+      <text x="195" y="164" font-family="serif" font-size="11" fill="#666" text-anchor="middle">O</text>
+      <!-- 双曲线右支 -->
+      <path d="M310,15 Q300,50 295,90 Q290,130 290,150 Q290,170 295,210 Q300,250 310,285" fill="none" stroke="#1a73e8" stroke-width="2"/>
+      <!-- 双曲线左支 -->
+      <path d="M90,15 Q100,50 105,90 Q110,130 110,150 Q110,170 105,210 Q100,250 90,285" fill="none" stroke="#1a73e8" stroke-width="2"/>
+      <!-- 焦点 -->
+      <circle cx="60" cy="150" r="4" fill="#d32f2f"/><text x="52" y="140" font-family="serif" font-size="12" fill="#d32f2f" text-anchor="end">F₁</text>
+      <circle cx="340" cy="150" r="4" fill="#d32f2f"/><text x="348" y="140" font-family="serif" font-size="12" fill="#d32f2f">F₂</text>
+      <!-- 右支上一点 P -->
+      <circle cx="310" cy="120" r="4" fill="#e65100"/>
+      <text x="318" y="115" font-family="serif" font-size="13" fill="#e65100">P</text>
+      <!-- PF1 和 PF2 -->
+      <line x1="310" y1="120" x2="60" y2="150" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <line x1="310" y1="120" x2="340" y2="150" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <!-- 标注公式 -->
+      <text x="200" y="270" font-family="serif" font-size="15" fill="#2e7d32" text-anchor="middle">|PF₁ - PF₂| = 2a（常数）</text>
+    </svg>
+
+    <!-- Q5 -->
+    <div class="quiz-question" id="q5">
+      <p><span class="q-tag concept">双曲线</span><strong>Q5.</strong> 双曲线 \(\dfrac{x^2}{4} - \dfrac{y^2}{5} = 1\) 的焦距为？</p>
+      <div class="opt" data-q="5" data-idx="0" onclick="checkChoice(5,0)">A. \(3\)</div>
+      <div class="opt" data-q="5" data-idx="1" onclick="checkChoice(5,1)">B. \(4\)</div>
+      <div class="opt" data-q="5" data-idx="2" onclick="checkChoice(5,2)">C. \(6\)</div>
+      <div class="opt" data-q="5" data-idx="3" onclick="checkChoice(5,3)">D. \(9\)</div>
+      <div class="explain" id="explain5"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="quiz-question" id="q6">
+      <p><span class="q-tag concept">双曲线</span><strong>Q6.</strong> 双曲线 \(\dfrac{y^2}{9} - \dfrac{x^2}{16} = 1\) 的渐近线方程为？</p>
+      <div class="opt" data-q="6" data-idx="0" onclick="checkChoice(6,0)">A. \(y = \pm \dfrac{4}{3}x\)</div>
+      <div class="opt" data-q="6" data-idx="1" onclick="checkChoice(6,1)">B. \(y = \pm \dfrac{3}{4}x\)</div>
+      <div class="opt" data-q="6" data-idx="2" onclick="checkChoice(6,2)">C. \(x = \pm \dfrac{4}{3}y\)</div>
+      <div class="opt" data-q="6" data-idx="3" onclick="checkChoice(6,3)">D. \(x = \pm \dfrac{3}{4}y\)</div>
+      <div class="explain" id="explain6"></div>
+    </div>
+
+    <!-- ==================== 1.4 抛物线 ==================== -->
+    <h3>1.4 抛物线</h3>
+    <p><strong>定义：</strong>平面内与一个定点 \(F\) 和一条定直线 \(l\)（\(F\) 不在 \(l\) 上）距离相等的点的轨迹叫做抛物线。点 \(F\) 叫做抛物线的焦点，直线 \(l\) 叫做抛物线的准线。</p>
+
+    <p><strong>标准方程的四种形式：</strong></p>
+    <table>
+      <tr>
+        <th>标准方程</th>
+        <th>焦点坐标</th>
+        <th>准线方程</th>
+        <th>开口方向</th>
+      </tr>
+      <tr>
+        <td>\(y^2 = 2px\)（\(p &gt; 0\)）</td>
+        <td>\(\left(\dfrac{p}{2}, 0\right)\)</td>
+        <td>\(x = -\dfrac{p}{2}\)</td>
+        <td>向右</td>
+      </tr>
+      <tr>
+        <td>\(y^2 = -2px\)（\(p &gt; 0\)）</td>
+        <td>\(\left(-\dfrac{p}{2}, 0\right)\)</td>
+        <td>\(x = \dfrac{p}{2}\)</td>
+        <td>向左</td>
+      </tr>
+      <tr>
+        <td>\(x^2 = 2py\)（\(p &gt; 0\)）</td>
+        <td>\(\left(0, \dfrac{p}{2}\right)\)</td>
+        <td>\(y = -\dfrac{p}{2}\)</td>
+        <td>向上</td>
+      </tr>
+      <tr>
+        <td>\(x^2 = -2py\)（\(p &gt; 0\)）</td>
+        <td>\(\left(0, -\dfrac{p}{2}\right)\)</td>
+        <td>\(y = \dfrac{p}{2}\)</td>
+        <td>向下</td>
+      </tr>
+    </table>
+
+    <p><strong>性质：</strong>抛物线只有一条对称轴，没有对称中心；离心率 \(e = 1\)（统一定义下的离心率）。</p>
+
+    <svg viewBox="0 0 500 350" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+      <rect width="500" height="350" fill="#fafafa" rx="8"/>
+      <line x1="30" y1="175" x2="470" y2="175" stroke="#333" stroke-width="1.5"/>
+      <line x1="250" y1="340" x2="250" y2="10" stroke="#333" stroke-width="1.5"/>
+      <polygon points="470,175 462,171 462,179" fill="#333"/>
+      <polygon points="250,10 246,18 254,18" fill="#333"/>
+      <text x="465" y="168" font-family="serif" font-size="14" fill="#333">x</text>
+      <text x="240" y="14" font-family="serif" font-size="14" fill="#333">y</text>
+      <text x="240" y="194" font-family="serif" font-size="12" fill="#666">O</text>
+      <!-- 抛物线 y²=2px -->
+      <path d="M250,175 Q300,120 330,80 Q360,40 420,10" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+      <path d="M250,175 Q300,230 330,270 Q360,310 420,340" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+      <!-- 焦点 F -->
+      <circle cx="300" cy="175" r="5" fill="#d32f2f"/>
+      <text x="300" y="165" font-family="serif" font-size="13" fill="#d32f2f" text-anchor="middle">F(p/2,0)</text>
+      <!-- 准线 -->
+      <line x1="200" y1="10" x2="200" y2="340" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <text x="200" y="16" font-family="serif" font-size="12" fill="#999" text-anchor="middle">x=-p/2</text>
+      <!-- 抛物线上一点 P -->
+      <circle cx="370" cy="130" r="4" fill="#e65100"/>
+      <text x="378" y="125" font-family="serif" font-size="13" fill="#e65100">P</text>
+      <!-- PF -->
+      <line x1="370" y1="130" x2="300" y2="175" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <!-- P 到准线 -->
+      <line x1="370" y1="130" x2="200" y2="130" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="285" y="155" font-family="serif" font-size="12" fill="#2e7d32">PF</text>
+      <text x="285" y="125" font-family="serif" font-size="12" fill="#2e7d32">PH</text>
+      <text x="285" y="138" font-family="serif" font-size="11" fill="#2e7d32">|</text>
+      <!-- PF = PH 标注 -->
+      <text x="330" y="200" font-family="serif" font-size="14" fill="#2e7d32">PF = PH</text>
+      <!-- 顶点 -->
+      <circle cx="250" cy="175" r="3" fill="#333"/>
+      <text x="242" y="195" font-family="serif" font-size="12" fill="#666">O</text>
+      <!-- 公式 -->
+      <text x="370" y="330" font-family="serif" font-size="15" fill="#1a73e8" text-anchor="middle">y² = 2px&#x2003;(p&gt;0)</text>
+    </svg>
+
+    <div class="example">
+      <h4>例题 1.4</h4>
+      <p>已知抛物线的顶点在原点，焦点在 \(x\) 轴的正半轴上，且抛物线经过点 \(P(2, 4)\)，求抛物线的标准方程、焦点坐标和准线方程。</p>
+      <p><strong>解：</strong>由题意设抛物线方程为 \(y^2 = 2px\)（\(p &gt; 0\)）。</p>
+      <p>将 \(P(2, 4)\) 代入得 \(16 = 4p\)，解得 \(p = 4\)。</p>
+      <p>抛物线的标准方程为 \(y^2 = 8x\)。</p>
+      <p>焦点坐标为 \((2, 0)\)，准线方程为 \(x = -2\)。</p>
+    </div>
+
+    <!-- Q7 -->
+    <div class="quiz-question" id="q7">
+      <p><span class="q-tag concept">抛物线</span><strong>Q7.</strong> 抛物线 \(x^2 = -8y\) 的焦点坐标是？</p>
+      <div class="opt" data-q="7" data-idx="0" onclick="checkChoice(7,0)">A. \((0, -2)\)</div>
+      <div class="opt" data-q="7" data-idx="1" onclick="checkChoice(7,1)">B. \((0, 2)\)</div>
+      <div class="opt" data-q="7" data-idx="2" onclick="checkChoice(7,2)">C. \((-2, 0)\)</div>
+      <div class="opt" data-q="7" data-idx="3" onclick="checkChoice(7,3)">D. \((2, 0)\)</div>
+      <div class="explain" id="explain7"></div>
+    </div>
+
+    <!-- ==================== 1.5 圆锥曲线的统一 定义 ==================== -->
+    <h3>1.5 圆锥曲线的统一 定义</h3>
+    <p><strong>统一定义（第二定义）：</strong>平面内到一个定点 \(F\)（焦点）的距离与到一条定直线 \(l\)（准线）的距离之比为常数 \(e\)（离心率）的点的轨迹叫做圆锥曲线。</p>
+    <ul>
+      <li>当 \(0 &lt; e &lt; 1\) 时，轨迹是椭圆；</li>
+      <li>当 \(e = 1\) 时，轨迹是抛物线；</li>
+      <li>当 \(e &gt; 1\) 时，轨迹是双曲线。</li>
+    </ul>
+
+    <p><strong>三种曲线的对比：</strong></p>
+    <table>
+      <tr>
+        <th>对比项</th>
+        <th>椭圆</th>
+        <th>双曲线</th>
+        <th>抛物线</th>
+      </tr>
+      <tr>
+        <td>定义（距离关系）</td>
+        <td>到两焦点距离之和为常数 \(2a\)</td>
+        <td>到两焦点距离之差的绝对值为常数 \(2a\)</td>
+        <td>到焦点与到准线距离相等</td>
+      </tr>
+      <tr>
+        <td>标准方程（焦点在 \(x\) 轴）</td>
+        <td>\(\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1\)</td>
+        <td>\(\dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} = 1\)</td>
+        <td>\(y^2 = 2px\)</td>
+      </tr>
+      <tr>
+        <td>离心率 \(e\) 范围</td>
+        <td>\(0 &lt; e &lt; 1\)</td>
+        <td>\(e &gt; 1\)</td>
+        <td>\(e = 1\)</td>
+      </tr>
+      <tr>
+        <td>\(a, b, c\) 关系</td>
+        <td>\(a^2 = b^2 + c^2\)</td>
+        <td>\(c^2 = a^2 + b^2\)</td>
+        <td>\(p\) 为焦点到准线距离</td>
+      </tr>
+      <tr>
+        <td>图像特征</td>
+        <td>封闭曲线</td>
+        <td>两支开放曲线，有渐近线</td>
+        <td>单支开放曲线</td>
+      </tr>
+    </table>
+
+    <svg viewBox="0 0 600 350" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+      <rect width="600" height="350" fill="#fafafa" rx="8"/>
+      <line x1="30" y1="175" x2="570" y2="175" stroke="#333" stroke-width="1.5"/>
+      <line x1="300" y1="340" x2="300" y2="10" stroke="#333" stroke-width="1.5"/>
+      <polygon points="570,175 562,171 562,179" fill="#333"/>
+      <polygon points="300,10 296,18 304,18" fill="#333"/>
+      <text x="565" y="168" font-family="serif" font-size="14" fill="#333">x</text>
+      <text x="290" y="14" font-family="serif" font-size="14" fill="#333">y</text>
+      <text x="290" y="194" font-family="serif" font-size="12" fill="#666">O</text>
+      <!-- 共同焦点 F -->
+      <circle cx="350" cy="175" r="5" fill="#d32f2f"/>
+      <text x="350" y="165" font-family="serif" font-size="13" fill="#d32f2f" text-anchor="middle">F</text>
+      <!-- 准线 -->
+      <line x1="230" y1="10" x2="230" y2="340" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <text x="230" y="16" font-family="serif" font-size="12" fill="#999" text-anchor="middle">l（准线）</text>
+      <!-- 椭圆 e<1（蓝色）焦点在 x=350, 准线在 x=230, 所以到焦点距离更短 -->
+      <ellipse cx="400" cy="175" rx="60" ry="40" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+      <text x="440" y="165" font-family="serif" font-size="13" fill="#1a73e8" text-anchor="middle">椭圆 e&lt;1</text>
+      <!-- 抛物线 e=1（绿色）-->
+      <path d="M300,175 Q340,100 370,60 Q400,20 480,5" fill="none" stroke="#2e7d32" stroke-width="2.5"/>
+      <path d="M300,175 Q340,250 370,290 Q400,330 480,345" fill="none" stroke="#2e7d32" stroke-width="2.5"/>
+      <text x="460" y="100" font-family="serif" font-size="13" fill="#2e7d32">抛物线 e=1</text>
+      <!-- 双曲线 e>1（红色）-->
+      <path d="M280,30 Q290,60 295,100 Q300,140 300,175" fill="none" stroke="#d32f2f" stroke-width="2.5"/>
+      <path d="M280,320 Q290,290 295,250 Q300,210 300,175" fill="none" stroke="#d32f2f" stroke-width="2.5"/>
+      <text x="260" y="70" font-family="serif" font-size="13" fill="#d32f2f" text-anchor="end">双曲线 e&gt;1</text>
+      <!-- 图例 -->
+      <rect x="420" y="290" width="150" height="50" fill="white" stroke="#ccc" rx="4"/>
+      <text x="430" y="308" font-family="serif" font-size="12" fill="#1a73e8">&#9608; 椭圆 (e&lt;1)</text>
+      <text x="430" y="324" font-family="serif" font-size="12" fill="#2e7d32">&#9608; 抛物线 (e=1)</text>
+      <text x="430" y="340" font-family="serif" font-size="12" fill="#d32f2f">&#9608; 双曲线 (e&gt;1)</text>
+      <!-- 统一定义标注 -->
+      <text x="300" y="340" font-family="serif" font-size="14" fill="#333" text-anchor="middle">到焦点距离 / 到准线距离 = e</text>
+    </svg>
+
+    <div class="example">
+      <h4>例题 1.5</h4>
+      <p>已知圆锥曲线的离心率 \(e = \dfrac{3}{2}\)，则该曲线是？</p>
+      <p><strong>解：</strong>由圆锥曲线的统一定义，离心率 \(e &gt; 1\) 时轨迹为双曲线。</p>
+      <p>因为 \(e = \dfrac{3}{2} &gt; 1\)，所以该曲线是双曲线。</p>
+    </div>
+
+    <!-- Q8 -->
+    <div class="quiz-question" id="q8">
+      <p><span class="q-tag concept">统一定义</span><strong>Q8.</strong> 根据圆锥曲线的统一定义，下列说法正确的是？</p>
+      <div class="opt" data-q="8" data-idx="0" onclick="checkChoice(8,0)">A. 椭圆、双曲线、抛物线的离心率都相等</div>
+      <div class="opt" data-q="8" data-idx="1" onclick="checkChoice(8,1)">B. 双曲线的离心率 \(e\) 满足 \(0 &lt; e &lt; 1\)</div>
+      <div class="opt" data-q="8" data-idx="2" onclick="checkChoice(8,2)">C. 统一定义中，\(e = 1\) 时轨迹为抛物线</div>
+      <div class="opt" data-q="8" data-idx="3" onclick="checkChoice(8,3)">D. 椭圆的离心率 \(e &gt; 1\)</div>
+      <div class="explain" id="explain8"></div>
+    </div>
+
+    <!-- ==================== 得分面板 ==================== -->
+    <div class="score-panel">
+      <h3>得分面板</h3>
+      <p style="font-size: 1.3em; margin: 10px 0;">
+        当前得分：<strong id="totalScore">0</strong> / <strong>8</strong>
+      </p>
+      <button onclick="resetAll()" style="padding: 8px 24px; font-size: 1em; border: none; border-radius: 6px; background: #1a73e8; color: #fff; cursor: pointer;">重置所有题目</button>
+    </div>
+
+  </div>
+
+  <script>
+    var answers = {
+      1: 2,
+      2: 2,
+      3: 1,
+      4: 0,
+      5: 2,
+      6: 1,
+      7: 0,
+      8: 2
+    };
+
+    var answered = {};
+    var correctCount = 0;
+
+    function checkChoice(qid, idx) {
+      if (answered[qid] !== undefined) return;
+
+      var el = document.getElementById('q' + qid);
+      var opts = el.querySelectorAll('.opt');
+      var explain = document.getElementById('explain' + qid);
+
+      answered[qid] = idx;
+
+      opts.forEach(function(opt, i) {
+        opt.classList.add('disabled');
+        if (i === answers[qid]) {
+          opt.classList.add('correct-opt');
+        } else if (i === idx) {
+          opt.classList.add('wrong-opt');
+        }
+      });
+
+      if (idx === answers[qid]) {
+        el.classList.add('correct');
+        explain.className = 'explain show ok';
+        explain.textContent = '回答正确！+1 分。';
+        correctCount++;
+      } else {
+        el.classList.add('wrong');
+        explain.className = 'explain show fail';
+        explain.textContent = '回答错误。正确答案已用绿色标出。';
+      }
+
+      updateTotalScore();
+    }
+
+    function updateTotalScore() {
+      document.getElementById('totalScore').textContent = correctCount;
+    }
+
+    function resetAll() {
+      answered = {};
+      correctCount = 0;
+      updateTotalScore();
+
+      var questions = document.querySelectorAll('.quiz-question');
+      questions.forEach(function(el) {
+        el.classList.remove('correct', 'wrong');
+        var opts = el.querySelectorAll('.opt');
+        opts.forEach(function(opt) {
+          opt.classList.remove('correct-opt', 'wrong-opt', 'disabled');
+        });
+      });
+
+      var explains = document.querySelectorAll('.explain');
+      explains.forEach(function(el) {
+        el.className = 'explain';
+        el.textContent = '';
+      });
+    }
+
+    function scoreWeight() {
+      return 1;
+    }
+  </script>
+    <script src="../dt.js"></script>
+</body>
+</html>

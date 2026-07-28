@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>勾股定理的几何证明</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  .svg-wrap { text-align: center; margin: 20px 0; }
+  .svg-wrap svg { border: 1px solid #ddd; border-radius: 10px; background: #fcfcfc; max-width: 100%; }
+  .aux-desc { background: #f0f7ff; border-left: 4px solid #1a73e8; padding: 16px 20px; margin: 16px 0; border-radius: 0 8px 8px 0; font-size: 0.95em; }
+  .aux-desc strong { color: #1a73e8; }
+  .example { margin: 16px 0; }
+  .example p { margin: 6px 0; }
+  .example .step { margin: 4px 0 4px 20px; color: #555; }
+  .example .answer { color: #d32f2f; font-weight: bold; }
+
+  /* Quiz styles */
+  .quiz-question { background: #fff; border: 2px solid #e0e0e0; border-radius: 10px; padding: 18px 22px; margin: 16px 0; }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .q-tag { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 0.75em; margin-right: 8px; color: #fff; }
+  .q-tag.concept { background: #1a73e8; }
+  .opt { padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; background: #fafafa; user-select: none; margin: 4px 0; }
+  .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .explain { margin-top: 10px; padding: 10px 14px; border-radius: 8px; font-size: 0.93em; display: none; }
+  .explain.show { display: block; }
+  .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+  .score-panel { text-align: center; padding: 16px; margin: 20px 0; background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8; }
+  h3 { color: #2c3e50; margin: 24px 0 10px; font-size: 1.1em; }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>勾股定理的几何证明</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">直角三角形两直角边的平方和等于斜边的平方。</p>
+
+<!-- ========================= 一、定理陈述 ========================= -->
+<section>
+<h2>一、定理陈述</h2>
+<p>在直角三角形 ABC 中，∠C = 90°，三边分别为 a、b、c（c 为斜边），则有：</p>
+<div class="formula-box" style="text-align:center;font-size:1.4em;padding:16px;">
+  <strong>a² + b² = c²</strong>
+</div>
+<p>勾股定理是平面几何中最为著名的定理之一，拥有超过三百种不同的证明方法。下面介绍三种经典的几何证明。</p>
+</section>
+
+<!-- ========================= 二、证明一——赵爽弦图法 ========================= -->
+<section>
+<h2>二、证明一——赵爽弦图法</h2>
+
+<div class="svg-wrap">
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer square -->
+  <polygon points="20,20 380,20 380,380 20,380" fill="none" stroke="#333" stroke-width="2"/>
+
+  <!-- 4 triangles (light blue) -->
+  <!-- Triangle 1: top-left -->
+  <polygon points="20,20 220,20 20,180" fill="rgba(26,115,232,0.12)" stroke="#1a73e8" stroke-width="1.5"/>
+  <!-- Triangle 2: top-right -->
+  <polygon points="380,20 220,20 380,220" fill="rgba(26,115,232,0.12)" stroke="#1a73e8" stroke-width="1.5"/>
+  <!-- Triangle 3: bottom-right -->
+  <polygon points="380,380 180,380 380,220" fill="rgba(26,115,232,0.12)" stroke="#1a73e8" stroke-width="1.5"/>
+  <!-- Triangle 4: bottom-left -->
+  <polygon points="20,380 180,380 20,180" fill="rgba(26,115,232,0.12)" stroke="#1a73e8" stroke-width="1.5"/>
+
+  <!-- Inner square (light orange) -->
+  <polygon points="180,180 220,180 220,220 180,220" fill="rgba(255,204,128,0.6)" stroke="#e65100" stroke-width="1.5"/>
+
+  <!-- Side labels: a -->
+  <text x="105" y="14" font-size="16" font-weight="bold" fill="#d32f2f" font-family="serif" font-style="italic">a</text>
+  <text x="10" y="105" font-size="16" font-weight="bold" fill="#d32f2f" font-family="serif" font-style="italic">a</text>
+  <text x="395" y="315" font-size="16" font-weight="bold" fill="#d32f2f" font-family="serif" font-style="italic">a</text>
+  <text x="285" y="394" font-size="16" font-weight="bold" fill="#d32f2f" font-family="serif" font-style="italic">a</text>
+
+  <!-- Side labels: b -->
+  <text x="295" y="14" font-size="16" font-weight="bold" fill="#2e7d32" font-family="serif" font-style="italic">b</text>
+  <text x="394" y="120" font-size="16" font-weight="bold" fill="#2e7d32" font-family="serif" font-style="italic">b</text>
+  <text x="95" y="394" font-size="16" font-weight="bold" fill="#2e7d32" font-family="serif" font-style="italic">b</text>
+  <text x="10" y="295" font-size="16" font-weight="bold" fill="#2e7d32" font-family="serif" font-style="italic">b</text>
+
+  <!-- Hypotenuse labels: c -->
+  <text x="105" y="105" font-size="16" font-weight="bold" fill="#1a73e8" font-family="serif" font-style="italic">c</text>
+  <text x="295" y="105" font-size="16" font-weight="bold" fill="#1a73e8" font-family="serif" font-style="italic">c</text>
+  <text x="295" y="305" font-size="16" font-weight="bold" fill="#1a73e8" font-family="serif" font-style="italic">c</text>
+  <text x="105" y="305" font-size="16" font-weight="bold" fill="#1a73e8" font-family="serif" font-style="italic">c</text>
+
+  <!-- Inner square label -->
+  <text x="188" y="206" font-size="11" fill="#e65100" font-family="serif" font-style="italic">|b-a|</text>
+
+  <!-- Right angle markers at outer corners -->
+  <polygon points="20,20 32,20 32,32 20,32" fill="#999" opacity="0.4"/>
+  <polygon points="380,20 368,20 368,32 380,32" fill="#999" opacity="0.4"/>
+  <polygon points="380,380 368,380 368,368 380,368" fill="#999" opacity="0.4"/>
+  <polygon points="20,380 32,380 32,368 20,368" fill="#999" opacity="0.4"/>
+</svg>
+</div>
+
+<div class="aux-desc">
+  <strong>辅助线思路：</strong>赵爽弦图通过将 4 个全等直角三角形拼入一个大正方形，大正方形的面积 = (a+b)² = 4×(ab/2) + c²，化简得 a²+b²=c²。这里的"辅助线"实际上是三角形的拼合排列方式——将斜边朝内排列，中间自然形成一个边长为 |b-a| 的正方形。
+</div>
+
+<h3>分步推导</h3>
+<div class="example">
+  <p><strong>已知：</strong>直角三角形 ABC，∠C = 90°，三边 a、b、c（c 为斜边）。</p>
+  <p><strong>求证：</strong>a² + b² = c²</p>
+  <p class="step"><strong>证明：</strong></p>
+  <p class="step">① 构造大正方形 ABCD，边长为 a+b。</p>
+  <p class="step">② 在大正方形内拼入 4 个全等的直角三角形（直角边 a、b），</p>
+  <p class="step">&emsp;&emsp;使斜边朝内，中间形成一个小正方形，边长为 |b-a|。</p>
+  <p class="step">③ 计算大正方形的面积：S = (a+b)²。</p>
+  <p class="step">④ 大正方形由 4 个三角形和内部以斜边 c 为边的正方形组成：</p>
+  <p class="step">&emsp;&emsp;S = 4 × (ab/2) + c² = 2ab + c²。</p>
+  <p class="step">⑤ ∴ (a+b)² = 2ab + c²，</p>
+  <p class="step">&emsp;&emsp;a² + 2ab + b² = 2ab + c²，</p>
+  <p class="step">&emsp;&emsp;∴ a² + b² = c²。</p>
+  <p class="answer">∴ 勾股定理成立。</p>
+</div>
+</section>
+
+<!-- ========================= 三、证明二——加菲尔德梯形法 ========================= -->
+<section>
+<h2>三、证明二——加菲尔德梯形法</h2>
+
+<div class="svg-wrap">
+<svg width="500" height="250" viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg">
+  <!-- Trapezoid D-A-B-E -->
+  <polygon points="50,100 50,200 280,200 280,70" fill="rgba(26,115,232,0.06)" stroke="#333" stroke-width="2"/>
+
+  <!-- Triangle 1: D-A-C (right at A) -->
+  <polygon points="50,100 50,200 180,200" fill="rgba(26,115,232,0.1)" stroke="#1a73e8" stroke-width="1.5"/>
+  <!-- Triangle 2: C-B-E (right at B) -->
+  <polygon points="180,200 280,200 280,70" fill="rgba(26,115,232,0.1)" stroke="#1a73e8" stroke-width="1.5"/>
+  <!-- Triangle 3: D-C-E -->
+  <polygon points="50,100 180,200 280,70" fill="rgba(255,204,128,0.3)" stroke="#e65100" stroke-width="1.5"/>
+
+  <!-- Labels: a, b -->
+  <text x="108" y="195" font-size="16" font-weight="bold" fill="#d32f2f" font-family="serif" font-style="italic">a</text>
+  <text x="220" y="195" font-size="16" font-weight="bold" fill="#2e7d32" font-family="serif" font-style="italic">b</text>
+
+  <!-- Vertical labels -->
+  <text x="36" y="155" font-size="16" font-weight="bold" fill="#2e7d32" font-family="serif" font-style="italic">b</text>
+  <text x="286" y="140" font-size="16" font-weight="bold" fill="#d32f2f" font-family="serif" font-style="italic">a</text>
+
+  <!-- Hypotenuse labels: c -->
+  <text x="100" y="138" font-size="16" font-weight="bold" fill="#1a73e8" font-family="serif" font-style="italic">c</text>
+  <text x="228" y="120" font-size="16" font-weight="bold" fill="#1a73e8" font-family="serif" font-style="italic">c</text>
+
+  <!-- Vertex labels -->
+  <text x="40" y="90" font-size="15" font-weight="bold" fill="#333" font-family="serif" font-style="italic">D</text>
+  <text x="40" y="218" font-size="15" font-weight="bold" fill="#333" font-family="serif" font-style="italic">A</text>
+  <text x="175" y="218" font-size="15" font-weight="bold" fill="#333" font-family="serif" font-style="italic">C</text>
+  <text x="280" y="218" font-size="15" font-weight="bold" fill="#333" font-family="serif" font-style="italic">B</text>
+  <text x="280" y="62" font-size="15" font-weight="bold" fill="#333" font-family="serif" font-style="italic">E</text>
+
+  <!-- Right angle at A -->
+  <polygon points="50,200 62,200 62,188 50,188" fill="#999" opacity="0.5"/>
+  <!-- Right angle at B -->
+  <polygon points="280,200 268,200 268,188 280,188" fill="#999" opacity="0.5"/>
+  <!-- Right angle at C -->
+  <polygon points="180,200 172,192 180,184 188,192" fill="#999" opacity="0.5"/>
+</svg>
+</div>
+
+<div class="aux-desc">
+  <strong>辅助线思路：</strong>加菲尔德梯形通过在一条直线上依次放置两个直角三角形（边长 a、b 夹直角），它们的斜边与第三个等腰直角三角形的斜边构成一个直角梯形。梯形面积 = (a+b)²/2 = 三个三角形面积之和。化简得 a²+b²=c²。关键在于将两个已知直角三角形拼接，使斜边两两相接构成另一个直角三角形，这种"凑面积"的思路是几何证明的核心技巧。
+</div>
+
+<h3>分步推导</h3>
+<div class="example">
+  <p><strong>已知：</strong>直角三角形两直角边为 a、b，斜边为 c。</p>
+  <p><strong>求证：</strong>a² + b² = c²</p>
+  <p class="step"><strong>证明：</strong></p>
+  <p class="step">① 在直线 AB 上依次排列两个直角三角形，</p>
+  <p class="step">&emsp;&emsp;△DAC（直角于 A）和 △CBE（直角于 B），</p>
+  <p class="step">&emsp;&emsp;其中 DA = b，AC = a，CB = b，BE = a。</p>
+  <p class="step">② 连接 D、C、E，形成第三个三角形。</p>
+  <p class="step">③ 四边形 D-A-B-E 是一个直角梯形，</p>
+  <p class="step">&emsp;&emsp;上底 DA = b，下底 BE = a，高 AB = a+b。</p>
+  <p class="step">&emsp;&emsp;梯形面积 S<sub>梯形</sub> = (a+b)(a+b)/2 = (a+b)²/2。</p>
+  <p class="step">④ 梯形由三个直角三角形组成：</p>
+  <p class="step">&emsp;&emsp;S<sub>梯形</sub> = S<sub>△DAC</sub> + S<sub>△CBE</sub> + S<sub>△DCE</sub></p>
+  <p class="step">&emsp;&emsp;&emsp;&emsp;= ab/2 + ab/2 + c²/2</p>
+  <p class="step">&emsp;&emsp;&emsp;&emsp;= ab + c²/2。</p>
+  <p class="step">⑤ ∴ (a+b)²/2 = ab + c²/2，</p>
+  <p class="step">&emsp;&emsp;(a+b)² = 2ab + c²，</p>
+  <p class="step">&emsp;&emsp;a² + 2ab + b² = 2ab + c²，</p>
+  <p class="step">&emsp;&emsp;∴ a² + b² = c²。</p>
+  <p class="answer">∴ 勾股定理成立。</p>
+</div>
+</section>
+
+<!-- ========================= 四、证明三——欧几里得《几何原本》证法 ========================= -->
+<section>
+<h2>四、证明三——欧几里得《几何原本》证法</h2>
+
+<div class="svg-wrap">
+<svg width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Triangle ABC (right at C) -->
+  <polygon points="200,220 280,280 200,280" fill="rgba(26,115,232,0.1)" stroke="#333" stroke-width="2"/>
+
+  <!-- Square ACDE (on AC, left) -->
+  <polygon points="200,220 200,280 140,280 140,220" fill="rgba(26,115,232,0.08)" stroke="#1a73e8" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+  <!-- Square BCGF (on BC, downward) -->
+  <polygon points="200,280 280,280 280,360 200,360" fill="rgba(46,125,50,0.08)" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+  <!-- Square ABHI (on AB, outward) -->
+  <polygon points="200,220 280,280 220,360 140,300" fill="rgba(211,47,47,0.06)" stroke="#d32f2f" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+  <!-- Perpendicular from C to AB, extended to IH -->
+  <!-- C(200,280) -> F(229,242) -> G(169,321) -->
+  <line x1="200" y1="280" x2="169" y2="321" stroke="#e65100" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <!-- Vertex labels -->
+  <text x="195" y="212" font-size="15" font-weight="bold" fill="#333" font-family="serif" font-style="italic">A</text>
+  <text x="282" y="284" font-size="15" font-weight="bold" fill="#333" font-family="serif" font-style="italic">B</text>
+  <text x="190" y="296" font-size="15" font-weight="bold" fill="#333" font-family="serif" font-style="italic">C</text>
+
+  <!-- Square labels on legs -->
+  <text x="147" y="255" font-size="13" fill="#1a73e8" font-family="serif" font-style="italic">D</text>
+  <text x="128" y="284" font-size="13" fill="#1a73e8" font-family="serif" font-style="italic">E</text>
+  <text x="195" y="375" font-size="13" fill="#2e7d32" font-family="serif" font-style="italic">F</text>
+  <text x="280" y="375" font-size="13" fill="#2e7d32" font-family="serif" font-style="italic">G</text>
+  <text x="218" y="365" font-size="13" fill="#d32f2f" font-family="serif" font-style="italic">H</text>
+  <text x="128" y="304" font-size="13" fill="#d32f2f" font-family="serif" font-style="italic">I</text>
+
+  <!-- Perpendicular foot labels -->
+  <text x="227" y="237" font-size="14" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">F</text>
+  <text x="152" y="320" font-size="14" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">G</text>
+
+  <!-- Side length labels -->
+  <text x="210" y="255" font-size="14" fill="#333" font-family="serif" font-style="italic">b</text>
+  <text x="238" y="296" font-size="14" fill="#333" font-family="serif" font-style="italic">a</text>
+
+  <!-- Right angle at C -->
+  <polygon points="200,280 215,280 215,265 200,265" fill="#999" opacity="0.5"/>
+
+  <!-- Perpendicular label -->
+  <text x="178" y="295" font-size="13" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">CF</text>
+</svg>
+</div>
+
+<div class="aux-desc">
+  <strong>辅助线思路：</strong>欧几里得证法"从直角顶点向斜边作垂线，并延长至大正方形的对边"，目的是将大正方形分割成两个矩形，通过证明每个矩形与对应的小正方形面积相等来得出结论。垂线 CF 是解题的关键——它将斜边上的正方形分成两个矩形，每个矩形的面积恰好等于一条直角边上的正方形面积。这条辅助线的思路来源于"要证明 a²+b²=c²，只需证明 c² 可以分解为 a² 和 b² 两部分"。
+</div>
+
+<h3>分步推导</h3>
+<div class="example">
+  <p><strong>已知：</strong>直角三角形 ABC，∠C = 90°，三边 a、b、c（c 为斜边）。</p>
+  <p>在三边上分别向外作正方形 ACDE、BCGF、ABHI。</p>
+  <p><strong>求证：</strong>a² + b² = c²</p>
+  <p class="step"><strong>证明（思路）：</strong></p>
+  <p class="step">① 从直角顶点 C 向斜边 AB 作垂线，垂足为 F，</p>
+  <p class="step">&emsp;&emsp;延长 CF 交 IH 于点 G。</p>
+  <p class="step">② 垂线 FG 将正方形 ABHI 分割成两个矩形 AIGF 和 BHGF。</p>
+  <p class="step">③ 可以证明：矩形 AIGF 的面积 = 正方形 ACDE 的面积 = b²，</p>
+  <p class="step">&emsp;&emsp;矩形 BHGF 的面积 = 正方形 BCGF 的面积 = a²。</p>
+  <p class="step">④ 由于矩形 AIGF + 矩形 BHGF = 正方形 ABHI = c²，</p>
+  <p class="step">&emsp;&emsp;∴ a² + b² = c²。</p>
+  <p class="answer">∴ 勾股定理成立。</p>
+</div>
+</section>
+
+<!-- ========================= 五、交互式测验 ========================= -->
+<section>
+<h2>五、互动问答</h2>
+<p style="color:#666;">点击选项提交答案，系统自动判分。</p>
+
+<div id="quiz-container"></div>
+
+<div class="score-panel">
+  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 3</div>
+  <br>
+  <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #1a73e8;color:#1a73e8;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">⊕ 重新答题</button>
+</div>
+
+</article>
+
+<script>
+var answers = {1:2, 2:1, 3:1};
+
+var questions = [
+  {
+    qid: 1,
+    tag: "概念",
+    question: "赵爽弦图中，中间小正方形的边长是？",
+    opts: ["a-b", "b-a", "|b-a|", "√(a²+b²)"],
+    answer: 2,
+    explain: "赵爽弦图中，大正方形边长为 a+b，4 个直角三角形直角边分别为 a、b，将它们拼入后中间自然形成一个边长为 |b-a| 的小正方形。"
+  },
+  {
+    qid: 2,
+    tag: "概念",
+    question: "加菲尔德证法利用了哪种核心思路？",
+    opts: ["相似三角形", "面积相等", "勾股定理", "三角函数"],
+    answer: 1,
+    explain: "加菲尔德证法通过计算梯形面积（(a+b)²/2）与三个三角形面积之和（ab + c²/2）相等，推导出 a²+b²=c²。核心思路是面积相等。"
+  },
+  {
+    qid: 3,
+    tag: "概念",
+    question: "欧几里得证法的关键辅助线是？",
+    opts: ["作角平分线", "从直角顶点向斜边作垂线", "作中位线", "作切线"],
+    answer: 1,
+    explain: "欧几里得证法从直角顶点 C 向斜边 AB 作垂线，并延长至大正方形的对边，将大正方形分割成两个矩形，从而将问题转化为面积关系的证明。"
+  }
+];
+
+function checkChoice(qid, idx) {
+  var qDiv = document.getElementById('q' + qid);
+  if (qDiv.classList.contains('correct') || qDiv.classList.contains('wrong')) return;
+
+  var correct = answers[qid];
+  var opts = qDiv.querySelectorAll('.opt');
+
+  for (var j = 0; j < opts.length; j++) {
+    opts[j].classList.add('disabled');
+    if (j === correct) opts[j].classList.add('correct-opt');
+    if (j === idx && idx !== correct) opts[j].classList.add('wrong-opt');
+  }
+
+  qDiv.classList.add(idx === correct ? 'correct' : 'wrong');
+  var exp = document.getElementById('exp' + qid);
+  exp.classList.add('show');
+  exp.classList.add(idx === correct ? 'ok' : 'fail');
+
+  updateTotalScore();
+}
+
+function updateTotalScore() {
+  var total = 0;
+  for (var i = 1; i <= 3; i++) {
+    var qDiv = document.getElementById('q' + i);
+    if (qDiv && qDiv.classList.contains('correct')) total += scoreWeight();
+  }
+  document.getElementById('scoreDisplay').textContent = '得分：' + total + ' / 3';
+}
+
+function scoreWeight() {
+  return 1;
+}
+
+function resetAll() {
+  document.getElementById('scoreDisplay').textContent = '得分：0 / 3';
+  for (var i = 1; i <= 3; i++) {
+    var qDiv = document.getElementById('q' + i);
+    if (!qDiv) continue;
+    qDiv.className = 'quiz-question';
+    var opts = qDiv.querySelectorAll('.opt');
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].className = 'opt';
+    }
+    var exp = document.getElementById('exp' + i);
+    if (exp) {
+      exp.className = 'explain';
+      exp.classList.remove('ok', 'fail');
+    }
+  }
+}
+
+function renderQuiz() {
+  var container = document.getElementById('quiz-container');
+  var html = '';
+  for (var i = 0; i < questions.length; i++) {
+    var q = questions[i];
+    var optsHtml = '';
+    for (var j = 0; j < q.opts.length; j++) {
+      optsHtml += '<div class="opt" data-qid="' + q.qid + '" data-idx="' + j + '">'
+        + String.fromCharCode(65 + j) + '. ' + q.opts[j] + '</div>';
+    }
+    html += '<div id="q' + q.qid + '" class="quiz-question">'
+      + '<div class="q-title"><span class="q-tag concept">' + q.tag + '</span>' + q.question + '</div>'
+      + '<div class="options">' + optsHtml + '</div>'
+      + '<div class="explain" id="exp' + q.qid + '">' + q.explain + '</div>'
+      + '</div>';
+  }
+  container.innerHTML = html;
+
+  var opts = document.querySelectorAll('.opt');
+  for (var k = 0; k < opts.length; k++) {
+    opts[k].onclick = function() {
+      var qid = parseInt(this.getAttribute('data-qid'));
+      var idx = parseInt(this.getAttribute('data-idx'));
+      checkChoice(qid, idx);
+    };
+  }
+}
+
+document.getElementById('resetBtn').onclick = resetAll;
+renderQuiz();
+</script>
+    <script src="../dt.js"></script>
+</body>
+</html>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数学思想（七大思想精讲）</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+/* 交互式选择题专用样式 */
+.question-card {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin: 16px 0;
+  transition: all 0.2s;
+}
+.question-card.correct { border-color: #4caf50; background: #f1f8e9; }
+.question-card.wrong { border-color: #f44336; background: #fce4ec; }
+.question-card .q-title {
+  font-weight: bold;
+  font-size: 1.05em;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+.question-card .options { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.question-card .opt {
+  padding: 8px 14px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: #fafafa;
+  user-select: none;
+}
+.question-card .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+.question-card .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+.question-card .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+.question-card .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+.question-card .opt.disabled { pointer-events: none; opacity: 0.7; }
+.question-card .explain {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.93em;
+  display: none;
+}
+.question-card .explain.show { display: block; }
+.question-card .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+.question-card .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+.quiz-footer { text-align: center; margin: 30px 0; }
+.quiz-footer .score-box {
+  display: inline-block;
+  background: #1a73e8;
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 30px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.quiz-footer .btn-reset {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 28px;
+  border: 2px solid #1a73e8;
+  color: #1a73e8;
+  border-radius: 20px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 1em;
+  transition: 0.15s;
+}
+.quiz-footer .btn-reset:hover { background: #1a73e8; color: #fff; }
+h3 {
+  color: #1a73e8;
+  font-size: 1.15em;
+  margin: 36px 0 6px;
+  padding-left: 10px;
+  border-left: 4px solid #1a73e8;
+}
+.essence {
+  background: #f3e5f5;
+  border-left: 4px solid #9c27b0;
+  padding: 10px 16px;
+  margin: 8px 0 16px;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.98em;
+  line-height: 1.8;
+  color: #555;
+}
+.essence strong { color: #7b1fa2; }
+.section-divider {
+  border: none;
+  border-top: 2px dashed #e0e0e0;
+  margin: 36px 0;
+}
+.score-detail { margin: 8px 0 4px; font-size: 0.9em; color: #666; }
+.intro-text {
+  color: #555;
+  font-size: 1.05em;
+  line-height: 1.8;
+  margin: 16px 0 24px;
+}
+</style>
+</head>
+<body>
+<article>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<h1>数学思想（七大思想精讲）</h1>
+<p class="intro-text">
+  数学思想是数学的灵魂——如果说知识点是砖瓦，数学思想就是建筑的框架。
+  掌握这 7 种核心思想，就拥有了解决数学问题的"思维工具箱"。
+  以下每道选择题选择一个正确答案，点击选项立刻反馈。
+</p>
+
+<!-- ============================================================
+     一、数形结合思想
+     ============================================================ -->
+<h3>一、数形结合思想</h3>
+<div class="essence"><strong>一句话本质：</strong>把数量关系转化为图形关系——用图形帮助理解代数问题，或用代数精确描述几何关系。</div>
+
+<div class="question-card" data-correct="2" data-idx="0">
+  <div class="q-title">题 1</div>
+  <p style="margin:6px 0;">方程 |x−2| + |x+1| = 5 的解的个数是？</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 0 个</div>
+    <div class="opt" data-val="1">B. 1 个</div>
+    <div class="opt" data-val="2">C. 2 个</div>
+    <div class="opt" data-val="3">D. 3 个</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<div class="question-card" data-correct="2" data-idx="1">
+  <div class="q-title">题 2</div>
+  <p style="margin:6px 0;">函数 f(x) = x² − 4x + 3 的图像与 x 轴的交点个数是？</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 0 个</div>
+    <div class="opt" data-val="1">B. 1 个</div>
+    <div class="opt" data-val="2">C. 2 个</div>
+    <div class="opt" data-val="3">D. 3 个</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<div class="question-card" data-correct="1" data-idx="2">
+  <div class="q-title">题 3</div>
+  <p style="margin:6px 0;">不等式 x² &lt; 2x + 3 的解集可用什么方法最直观地求出？</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 配方法</div>
+    <div class="opt" data-val="1">B. 二次函数图像法</div>
+    <div class="opt" data-val="2">C. 因式分解法</div>
+    <div class="opt" data-val="3">D. 换元法</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     二、分类讨论思想
+     ============================================================ -->
+<h3>二、分类讨论思想</h3>
+<div class="essence"><strong>一句话本质：</strong>当问题包含不确定因素（如参数）时，按不同情况分别讨论，化不确定为确定，再汇总结果。</div>
+
+<div class="question-card" data-correct="1" data-idx="3">
+  <div class="q-title">题 4</div>
+  <p style="margin:6px 0;">解关于 x 的不等式 ax &gt; 2（a ∈ R），下列说法正确的是：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 解集为 x &gt; 2/a</div>
+    <div class="opt" data-val="1">B. a &gt; 0 时 x &gt; 2/a；a &lt; 0 时 x &lt; 2/a；a = 0 时无解</div>
+    <div class="opt" data-val="2">C. a &gt; 0 时 x &lt; 2/a；a &lt; 0 时 x &gt; 2/a</div>
+    <div class="opt" data-val="3">D. 只要 a ≠ 0 就有解 x = 2/a</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<div class="question-card" data-correct="3" data-idx="4">
+  <div class="q-title">题 5</div>
+  <p style="margin:6px 0;">函数 f(x) = |x−1| + |x+2| 的最小值是？</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 0</div>
+    <div class="opt" data-val="1">B. 1</div>
+    <div class="opt" data-val="2">C. 2</div>
+    <div class="opt" data-val="3">D. 3</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<div class="question-card" data-correct="1" data-idx="5">
+  <div class="q-title">题 6</div>
+  <p style="margin:6px 0;">若二次函数 y = ax² + bx + c（a ≠ 0）在区间 [0, 1] 上单调递增，则下列条件正确的是：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. a &gt; 0 且对称轴 x = −b/(2a) ≥ 1</div>
+    <div class="opt" data-val="1">B. a &gt; 0 且对称轴 ≤ 0，或 a &lt; 0 且对称轴 ≥ 1</div>
+    <div class="opt" data-val="2">C. 对称轴 x = −b/(2a) = 1/2</div>
+    <div class="opt" data-val="3">D. a 的符号不影响单调性</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     三、函数与方程思想
+     ============================================================ -->
+<h3>三、函数与方程思想</h3>
+<div class="essence"><strong>一句话本质：</strong>用函数的视角研究变量关系（变化趋势、最值、图像），用方程的工具求解具体的未知量。</div>
+
+<div class="question-card" data-correct="0" data-idx="6">
+  <div class="q-title">题 7</div>
+  <p style="margin:6px 0;">函数 f(x) = x² − 2x − 3 的最小值是？</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. −4</div>
+    <div class="opt" data-val="1">B. −3</div>
+    <div class="opt" data-val="2">C. −2</div>
+    <div class="opt" data-val="3">D. 0</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<div class="question-card" data-correct="2" data-idx="7">
+  <div class="q-title">题 8</div>
+  <p style="margin:6px 0;">方程 2<sup>x</sup> = x² 的正实数根的个数是？</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 0 个</div>
+    <div class="opt" data-val="1">B. 1 个</div>
+    <div class="opt" data-val="2">C. 2 个</div>
+    <div class="opt" data-val="3">D. 3 个</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<div class="question-card" data-correct="2" data-idx="8">
+  <div class="q-title">题 9</div>
+  <p style="margin:6px 0;">若关于 x 的方程 x² − 2mx + 1 = 0 的两个根均在区间 (0, 2) 内，则实数 m 的取值范围是：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. m &gt; 0</div>
+    <div class="opt" data-val="1">B. m ≥ 1</div>
+    <div class="opt" data-val="2">C. 1 ≤ m &lt; 5/4</div>
+    <div class="opt" data-val="3">D. 1 &lt; m &lt; 2</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     四、化归与转化思想
+     ============================================================ -->
+<h3>四、化归与转化思想</h3>
+<div class="essence"><strong>一句话本质：</strong>把陌生问题转化为熟悉问题，把复杂问题转化为简单问题——数学中最重要的解题策略。</div>
+
+<div class="question-card" data-correct="2" data-idx="9">
+  <div class="q-title">题 10</div>
+  <p style="margin:6px 0;">解方程 log₂(x² − 1) = 1 + log₂(x − 1)，第一步应将方程转化为：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. x² − 1 = x − 1</div>
+    <div class="opt" data-val="1">B. x² − 1 = 2(x − 1)</div>
+    <div class="opt" data-val="2">C. x² − 1 = 2(x − 1) 且 x &gt; 1</div>
+    <div class="opt" data-val="3">D. x² − 1 = 1 + x − 1</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<div class="question-card" data-correct="1" data-idx="10">
+  <div class="q-title">题 11</div>
+  <p style="margin:6px 0;">在立体几何中，求异面直线所成角时，最常用的转化策略是：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 直接用勾股定理计算</div>
+    <div class="opt" data-val="1">B. 作平行线，将异面直线转化为相交直线</div>
+    <div class="opt" data-val="2">C. 测量空间实际角度</div>
+    <div class="opt" data-val="3">D. 将直线投影到同一平面</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<div class="question-card" data-correct="0" data-idx="11">
+  <div class="q-title">题 12</div>
+  <p style="margin:6px 0;">已知 sinθ + cosθ = 1/5，θ ∈ (0, π)，则 tanθ 的值为：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. −3/4</div>
+    <div class="opt" data-val="1">B. −4/3</div>
+    <div class="opt" data-val="2">C. 3/4</div>
+    <div class="opt" data-val="3">D. 4/3</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     五、特殊与一般的思想
+     ============================================================ -->
+<h3>五、特殊与一般的思想</h3>
+<div class="essence"><strong>一句话本质：</strong>从特殊情形中发现规律，再推广到一般结论；或反过来先用一般结论推导，再代入特殊值求解。</div>
+
+<div class="question-card" data-correct="0" data-idx="12">
+  <div class="q-title">题 13</div>
+  <p style="margin:6px 0;">观察数列：1, 3, 6, 10, 15, … 的第 n 项是：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. n(n+1)/2</div>
+    <div class="opt" data-val="1">B. n²</div>
+    <div class="opt" data-val="2">C. n(n−1)/2</div>
+    <div class="opt" data-val="3">D. 2n − 1</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<div class="question-card" data-correct="2" data-idx="13">
+  <div class="q-title">题 14</div>
+  <p style="margin:6px 0;">已知 (a+b)² = a² + 2ab + b²，类比可得 (a+b+c)² 展开式中 ab 项的系数是：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 1</div>
+    <div class="opt" data-val="1">B. 2</div>
+    <div class="opt" data-val="2">C. 3</div>
+    <div class="opt" data-val="3">D. 4</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<div class="question-card" data-correct="1" data-idx="14">
+  <div class="q-title">题 15</div>
+  <p style="margin:6px 0;">用数学归纳法证明 1 + 2 + 3 + … + n = n(n+1)/2 时，验证 n = 1 后，假设 n = k 成立，则 n = k+1 时需证明：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 1 + 2 + … + (k+1) = (k+1)(k+2)</div>
+    <div class="opt" data-val="1">B. 1 + 2 + … + (k+1) = (k+1)(k+2)/2</div>
+    <div class="opt" data-val="2">C. 1 + 2 + … + k = k(k+1)/2</div>
+    <div class="opt" data-val="3">D. 1 + 2 + … + (k+1) = k(k+1)/2 + 1</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     六、有限与无限的思想
+     ============================================================ -->
+<h3>六、有限与无限的思想</h3>
+<div class="essence"><strong>一句话本质：</strong>通过有限步骤理解无限过程——用极限思想处理无穷，从局部逼近整体。</div>
+
+<div class="question-card" data-correct="1" data-idx="15">
+  <div class="q-title">题 16</div>
+  <p style="margin:6px 0;">无限循环小数 0.999… 与 1 的大小关系是：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 0.999… &lt; 1</div>
+    <div class="opt" data-val="1">B. 0.999… = 1</div>
+    <div class="opt" data-val="2">C. 0.999… &gt; 1</div>
+    <div class="opt" data-val="3">D. 无法比较</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<div class="question-card" data-correct="0" data-idx="16">
+  <div class="q-title">题 17</div>
+  <p style="margin:6px 0;">数列 aₙ = (n+1)/n，当 n → ∞ 时 aₙ 的极限是：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 1</div>
+    <div class="opt" data-val="1">B. 2</div>
+    <div class="opt" data-val="2">C. ∞</div>
+    <div class="opt" data-val="3">D. 不存在</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<div class="question-card" data-correct="1" data-idx="17">
+  <div class="q-title">题 18</div>
+  <p style="margin:6px 0;">无穷等比数列 1, 1/3, 1/9, 1/27, … 的所有项之和为：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 1</div>
+    <div class="opt" data-val="1">B. 3/2</div>
+    <div class="opt" data-val="2">C. 2</div>
+    <div class="opt" data-val="3">D. 4/3</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================
+     七、或然与必然的思想
+     ============================================================ -->
+<h3>七、或然与必然的思想</h3>
+<div class="essence"><strong>一句话本质：</strong>在随机现象中寻找统计规律——单个事件不可预测，但大量重复后呈现出稳定的概率。</div>
+
+<div class="question-card" data-correct="0" data-idx="18">
+  <div class="q-title">题 19</div>
+  <p style="margin:6px 0;">同时掷两颗均匀的骰子，点数之和为 7 的概率是：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 1/6</div>
+    <div class="opt" data-val="1">B. 1/9</div>
+    <div class="opt" data-val="2">C. 1/12</div>
+    <div class="opt" data-val="3">D. 1/36</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<div class="question-card" data-correct="1" data-idx="19">
+  <div class="q-title">题 20</div>
+  <p style="margin:6px 0;">袋中有 3 个红球和 2 个白球，从中随机取 2 个球，则取到两个同色球的概率为：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 1/5</div>
+    <div class="opt" data-val="1">B. 2/5</div>
+    <div class="opt" data-val="2">C. 3/5</div>
+    <div class="opt" data-val="3">D. 4/5</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<div class="question-card" data-correct="2" data-idx="20">
+  <div class="q-title">题 21</div>
+  <p style="margin:6px 0;">大数定律的核心思想是：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 小概率事件在大量试验中一定不发生</div>
+    <div class="opt" data-val="1">B. 随机变量的取值总是等于其数学期望</div>
+    <div class="opt" data-val="2">C. 试验次数越多，事件的频率越接近其概率</div>
+    <div class="opt" data-val="3">D. 极大似然估计总是无偏的</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 底部评分面板 -->
+<div class="quiz-footer">
+  <div class="score-box" id="scoreBox">0 / 21</div>
+  <div class="score-detail" id="scoreDetail">各思想进度：数形结合 0/3 · 分类讨论 0/3 · 函数与方程 0/3 · 化归与转化 0/3 · 特殊与一般 0/3 · 有限与无限 0/3 · 或然与必然 0/3</div>
+  <div class="btn-reset" id="resetBtn">重新作答</div>
+</div>
+
+</article>
+
+<script>
+(function() {
+  const questions = document.querySelectorAll('.question-card');
+  const scoreBox = document.getElementById('scoreBox');
+  const scoreDetail = document.getElementById('scoreDetail');
+  let totalCorrect = 0;
+  let answered = new Array(questions.length).fill(false);
+
+  // 每题解析：索引依次对应 21 道题
+  const explanations = [
+    // 0-2: 数形结合
+    {
+      ok: '正确！|x−2| 表示 x 到 2 的距离，|x+1| 表示 x 到 −1 的距离。2 和 −1 相距 3，和为 5 意味着 x 在区间 [−1,2] 之外。x < −1 时得 x = −2；x > 2 时得 x = 3。共 2 个解。',
+      fail: '在数轴上，|x−2|+|x+1|=5 表示到 2 和 −1 的距离之和为 5。两点距 3，所以解在两侧各一个：x = −2 和 x = 3，共 2 个。'
+    },
+    {
+      ok: '正确！判别式 Δ = (−4)² − 4·1·3 = 16 − 12 = 4 > 0，所以抛物线与 x 轴有两个交点。也可配方：f(x) = (x−2)² − 1，顶点 (2, −1) 在 x 轴下方，开口向上，必有两个交点。',
+      fail: 'f(x) = x² − 4x + 3，Δ = b² − 4ac = 16 − 12 = 4 > 0，故与 x 轴有两个交点。从图形看，开口向上的抛物线顶点在 x 轴下方，必穿过 x 轴两次。'
+    },
+    {
+      ok: '正确！将不等式化为 x² − 2x − 3 < 0，画出开口向上的抛物线 y = x² − 2x − 3 的图像，观察 x 轴下方部分对应 x ∈ (−1, 3)，图像法最直观。',
+      fail: 'x² < 2x + 3 即 x² − 2x − 3 < 0，即 (x−3)(x+1) < 0。虽然也可代数求解，但画出二次函数图像，看 x 轴下方的部分，最为直观。'
+    },
+    // 3-5: 分类讨论
+    {
+      ok: '正确！a > 0 时除以正数不等号不变；a < 0 时除以负数不等号反转；a = 0 时 0 > 2 不成立，无解。这是不等式分类讨论的基础题。',
+      fail: '注意 a 的正负影响不等号方向，a = 0 时不等式退化为 0 > 2，不成立。所以必须分 a > 0、a = 0、a < 0 三类讨论。'
+    },
+    {
+      ok: '正确！当 x ∈ [−2, 1] 时，f(x) = (1−x) + (x+2) = 3；实际计算：x ≥ 1 时 f = 2x−1 ≥ 3；x ≤ −2 时 f = −2x−1 ≥ 3。最小值在中间段取得，为 3。',
+      fail: '用数轴距离理解：|x−1| + |x+2| 表示 x 到 1 和 −2 的距离之和。当 x 在 −2 和 1 之间时，距离之和恒为 3，这是最小值。'
+    },
+    {
+      ok: '正确！a > 0 时开口向上，对称轴 ≤ 0 则 [0,1] 在对称轴右侧，递增；a < 0 时开口向下，对称轴 ≥ 1 则 [0,1] 在对称轴左侧，也递增。两种情况都需讨论。',
+      fail: '二次函数单调性与开口方向和对称轴位置都有关。a > 0 时递增区间在对称轴右侧，a < 0 时递增区间在对称轴左侧，需分别讨论。'
+    },
+    // 6-8: 函数与方程
+    {
+      ok: '正确！f(x) = x² − 2x − 3 = (x−1)² − 4，当 x = 1 时取最小值 −4。也可用公式：最小值 = (4ac − b²)/(4a) = (4·1·(−3) − 4)/(4) = −16/4 = −4。',
+      fail: '配方得 f(x) = (x−1)² − 4，最小值为 −4（当 x = 1 时）。用顶点公式也可得相同结果。'
+    },
+    {
+      ok: '正确！分别画出 y = 2ˣ 和 y = x² 的图像，在 x > 0 的区域两图像在 x = 2 和 x = 4 处相交，故有 2 个正实数根。',
+      fail: '构造函数 f(x) = 2ˣ − x²，通过作 y = 2ˣ 与 y = x² 的图像，可看出 x > 0 时两个交点分别在 x = 2 和 x = 4 附近，共 2 个正根。'
+    },
+    {
+      ok: '正确！设 f(x)=x²−2mx+1，需满足：Δ=4m²−4 ≥ 0 → m ≤ −1 或 m ≥ 1；f(0)=1 > 0（恒成立）；f(2)=5−4m > 0 → m < 5/4；对称轴 0 < m < 2。综合得 1 ≤ m < 5/4。',
+      fail: '用函数思想分析：两根均在 (0,2) 内需要判别式 ≥ 0、f(0) > 0、f(2) > 0、对称轴在 (0,2) 内四条件联立。解得 1 ≤ m < 5/4。'
+    },
+    // 9-11: 化归与转化
+    {
+      ok: '正确！1 = log₂2，所以 log₂(x²−1) = log₂2 + log₂(x−1) = log₂(2(x−1))。但还要注意定义域：x²−1 > 0 且 x−1 > 0，即 x > 1。最终化为 x²−1 = 2(x−1) 且 x > 1。',
+      fail: '首先 1 = log₂2，然后用对数运算法则合并，同时注意对数定义域 x > 1。方程化为 x²−1 = 2(x−1) 且 x > 1。'
+    },
+    {
+      ok: '正确！通过平移其中一条直线作平行线，使两条异面直线相交，转化为求相交直线所成角——这是立体几何中最常用的化归策略。',
+      fail: '异面直线无法直接测量角度，通过作其中一条直线的平行线使之与另一条相交，就将陌生问题转化为熟悉的相交直线夹角问题。'
+    },
+    {
+      ok: '正确！sinθ+cosθ=1/5，两边平方得 1+sin2θ=1/25，sin2θ=−24/25。由 θ∈(0,π) 且 sinθ+cosθ>0 不成立可知 θ 在第二象限，tanθ<0。解方程可得 tanθ=−3/4。',
+      fail: '注意由 sinθ+cosθ=1/5 可知 cosθ<0（否则和会更大），θ 在第二象限。平方后得 sin2θ=−24/25，再化归为 tanθ 的方程求解，得 −3/4。'
+    },
+    // 12-14: 特殊与一般
+    {
+      ok: '正确！n=1 时 1=1×2/2=1 ✓；n=2 时 3=2×3/2=3 ✓；n=3 时 6=3×4/2=6 ✓。数列为三角形数，通项 aₙ = n(n+1)/2。',
+      fail: '从特殊值入手：a₁=1, a₂=3, a₃=6, a₄=10。代入各选项检验，只有 A 对所有 n 均成立。这是由特殊归纳一般的典型例子。'
+    },
+    {
+      ok: '正确！(a+b+c)² = a²+b²+c²+2ab+2ac+2bc，ab 项系数为 2。从 (a+b)² 到 (a+b+c)²，体现了从二元到多元的类比推广。',
+      fail: '(a+b+c)² = a²+b²+c²+2ab+2ac+2bc，其中 ab 项为 2ab，所以系数为 2。也可从组合意义理解：ab 来自 (a+b+c)×(a+b+c) 中选 a 和 b 的方式数。'
+    },
+    {
+      ok: '正确！归纳假设 n = k 时 1+2+…+k = k(k+1)/2，则 n = k+1 时左端 = k(k+1)/2 + (k+1) = (k+1)(k+2)/2，这正是要证明的结论。',
+      fail: '数学归纳法第二步：假设 n = k 成立，证明 n = k+1 时也成立。即证 1+2+…+(k+1) = (k+1)(k+2)/2。'
+    },
+    // 15-17: 有限与无限
+    {
+      ok: '正确！设 x = 0.999…，则 10x = 9.999…，两式相减得 9x = 9，所以 x = 1。或从极限角度：0.999… = 9/10 + 9/100 + … = 0.9/(1−0.1) = 1。',
+      fail: '0.999… 是无限递缩等比数列 0.9 + 0.09 + 0.009 + … 的和。用等比数列求和公式或方程法都可得到它精确等于 1。'
+    },
+    {
+      ok: '正确！aₙ = (n+1)/n = 1 + 1/n，当 n → ∞ 时 1/n → 0，所以极限为 1。从有限项看：n=1 时 a₁=2，n=10 时 a₁₀=1.1，n=100 时 a₁₀₀=1.01，趋近于 1。',
+      fail: 'aₙ = (n+1)/n = 1 + 1/n，n 越大 1/n 越接近 0，所以极限为 1。有限项计算也能看出趋近趋势。'
+    },
+    {
+      ok: '正确！首项 a₁ = 1，公比 r = 1/3，无穷等比级数和 S = a₁/(1−r) = 1/(1−1/3) = 3/2。',
+      fail: 'S = a₁/(1−r) = 1/(1−1/3) = 1/(2/3) = 3/2。从有限和 Sₙ 的表达式取极限也可得相同结果。'
+    },
+    // 18-20: 或然与必然
+    {
+      ok: '正确！两颗骰子共 6×6 = 36 种等可能结果。和为 7 的有：(1,6), (2,5), (3,4), (4,3), (5,2), (6,1)，共 6 种。所以概率 = 6/36 = 1/6。',
+      fail: '总样本点数 36，和为 7 的有 6 种（可枚举报出），概率 = 6/36 = 1/6。这是古典概型的基础题。'
+    },
+    {
+      ok: '正确！总取法 C(5,2) = 10。两个红球 C(3,2) = 3 种，两个白球 C(2,2) = 1 种。同色概率 = (3+1)/10 = 2/5。',
+      fail: '同色有两种情况：两红或两白。两红有 C(3,2)=3 种，两白有 C(2,2)=1 种，总取法 C(5,2)=10，概率 = 4/10 = 2/5。'
+    },
+    {
+      ok: '正确！大数定律表明，随着试验次数 n 的增加，事件发生的频率依概率收敛于其概率。这是从偶然中寻找必然的数学基础。',
+      fail: '大数定律的核心是频率的稳定性：试验次数越多，频率越接近概率。选项 A 错误（小概率事件也可能发生），B 错误（取值围绕期望波动），D 错误（极大似然估计的性质与大数定律不同）。'
+    }
+  ];
+
+  // 每道题所属的思想分段（共7段）
+  const segmentNames = ['数形结合', '分类讨论', '函数与方程', '化归与转化', '特殊与一般', '有限与无限', '或然与必然'];
+  const segmentRanges = [[0, 2], [3, 5], [6, 8], [9, 11], [12, 14], [15, 17], [18, 20]];
+
+  function updateScore() {
+    let count = 0;
+    for (let i = 0; i < answered.length; i++) {
+      if (answered[i]) count++;
+    }
+    totalCorrect = count;
+    scoreBox.textContent = totalCorrect + ' / 21';
+
+    // 分段进度
+    let parts = [];
+    for (let s = 0; s < segmentRanges.length; s++) {
+      const [start, end] = segmentRanges[s];
+      let segCount = 0;
+      for (let i = start; i <= end; i++) {
+        if (answered[i]) segCount++;
+      }
+      parts.push(segmentNames[s] + ' ' + segCount + '/3');
+    }
+    scoreDetail.textContent = '各思想进度：' + parts.join(' · ');
+  }
+
+  questions.forEach(function(q, idx) {
+    const opts = q.querySelectorAll('.opt');
+    const explainDiv = q.querySelector('.explain');
+
+    opts.forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        if (q.classList.contains('correct') || q.classList.contains('wrong')) return;
+
+        const val = parseInt(this.getAttribute('data-val'), 10);
+        const correctVal = parseInt(q.getAttribute('data-correct'), 10);
+        const isCorrect = (val === correctVal);
+
+        opts.forEach(function(o) { o.classList.add('disabled'); });
+
+        opts.forEach(function(o) {
+          if (parseInt(o.getAttribute('data-val'), 10) === correctVal) {
+            o.classList.add('correct-opt');
+          }
+        });
+
+        if (!isCorrect) {
+          this.classList.add('wrong-opt');
+        }
+
+        if (isCorrect) {
+          q.classList.add('correct');
+        } else {
+          q.classList.add('wrong');
+        }
+
+        const exp = explanations[idx];
+        const expText = isCorrect ? exp.ok : exp.fail;
+        explainDiv.textContent = expText;
+        explainDiv.className = 'explain show ' + (isCorrect ? 'ok' : 'fail');
+
+        if (!answered[idx]) {
+          answered[idx] = true;
+          if (isCorrect) totalCorrect++;
+          updateScore();
+        }
+      });
+    });
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function() {
+    questions.forEach(function(q, idx) {
+      q.classList.remove('correct', 'wrong');
+      const opts = q.querySelectorAll('.opt');
+      opts.forEach(function(o) {
+        o.classList.remove('correct-opt', 'wrong-opt', 'disabled');
+      });
+      const explainDiv = q.querySelector('.explain');
+      explainDiv.className = 'explain';
+      explainDiv.textContent = '';
+      answered[idx] = false;
+    });
+    totalCorrect = 0;
+    updateScore();
+  });
+
+})();
+</script>
+
+    <script src="../../dt.js"></script>
+</body>
+</html>

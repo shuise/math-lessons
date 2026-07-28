@@ -20,6 +20,17 @@
   .true-val { color: #2e7d32; font-weight: bold; }
   .false-val { color: #d32f2f; font-weight: bold; }
 
+  /* 难度标签 */
+  .diff-tag {
+    display: inline-block; padding: 1px 10px; border-radius: 10px;
+    font-size: 0.7em; margin-left: 6px; font-weight: normal; vertical-align: middle;
+  }
+  .diff-easy { background: #e8f5e9; color: #2e7d32; }
+  .diff-medium { background: #fff8e1; color: #f57f17; }
+  .diff-hard { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+  .diff-exam { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
+  .diff-olym { background: #fce4ec; color: #b71c1c; border: 1px solid #ef9a9a; }
+
   /* Quiz styles */
   .quiz-question {
     background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
@@ -33,7 +44,7 @@
     font-size: 0.75em; margin-right: 8px; color: #fff;
   }
   .q-tag.concept { background: #1a73e8; }
-  .q-tag.calc { background: #e67e22; }
+  .q-tag.comprehensive { background: #e67e22; }
   .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
   .quiz-question .opt {
     padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
@@ -52,47 +63,13 @@
   .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
   .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
 
-  /* Fill-in quiz styles */
-  .quiz-question .fill-input {
-    padding: 8px 12px; border: 2px solid #ddd; border-radius: 8px;
-    font-size: 1em; width: 120px; margin: 8px 0; outline: none; transition: border-color 0.2s;
-  }
-  .quiz-question .fill-input:focus { border-color: #1a73e8; }
-  .quiz-question .fill-input.correct-input { border-color: #4caf50; background: #e8f5e9; }
-  .quiz-question .fill-input.wrong-input { border-color: #f44336; background: #fce4ec; }
-  .quiz-question .btn-check {
-    padding: 6px 20px; border: 2px solid #1a73e8; color: #1a73e8;
-    border-radius: 16px; background: #fff; cursor: pointer; font-size: 0.93em;
-    margin-left: 8px; transition: 0.15s;
-  }
-  .quiz-question .btn-check:hover { background: #1a73e8; color: #fff; }
-  .quiz-question .btn-check:disabled { opacity: 0.5; cursor: not-allowed; }
-
-  /* Comprehensive exercise styles */
-  .comp-exercise {
-    background: #fff; border: 2px solid #1a73e8; border-radius: 10px;
-    padding: 20px 24px; margin: 20px 0; border-left: 6px solid #1a73e8;
-  }
-  .comp-exercise h4 { margin-top: 0; color: #1a73e8; }
-  .comp-exercise .answer-box {
-    margin-top: 12px; padding: 14px; background: #f0f7ff;
-    border-radius: 8px; display: none; border-left: 4px solid #1a73e8;
-  }
-  .comp-exercise .answer-box.show { display: block; }
-  .comp-exercise .btn-toggle {
-    display: inline-block; margin-top: 10px; padding: 6px 18px;
-    border: 2px solid #1a73e8; color: #1a73e8; border-radius: 16px;
-    background: #fff; cursor: pointer; font-size: 0.93em;
-    transition: 0.15s;
-  }
-  .comp-exercise .btn-toggle:hover { background: #1a73e8; color: #fff; }
-
   /* Score panel */
   .score-panel {
     text-align: center; padding: 16px; margin: 20px 0;
     background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8;
   }
   .score-panel .score-num { font-size: 2em; font-weight: bold; color: #1a73e8; }
+  .score-panel .score-total { font-size: 1.2em; color: #555; }
   .score-panel .btn-reset {
     margin-left: 16px; padding: 8px 24px; border: 2px solid #1a73e8;
     color: #1a73e8; border-radius: 20px; background: #fff;
@@ -104,10 +81,13 @@
   .logic-symbol { font-size: 1.2em; font-weight: bold; color: #1a73e8; }
   .negation { text-decoration: overline; }
   .rule-box {
-    background: #fff8e1; border: 2px solid #ffc107; border-radius: 10px;
+    background: #f0f7ff; border: 2px solid #1a73e8; border-radius: 10px;
     padding: 14px 18px; margin: 16px 0; text-align: center;
     font-size: 1.1em; font-weight: bold; color: #2c3e50;
   }
+
+  /* 子节序号 */
+  .subsec { color: #1a73e8; font-weight: bold; margin-right: 6px; }
 </style>
 </head>
 <body>
@@ -120,7 +100,7 @@
 <section>
 <h2>一、命题及其关系</h2>
 
-<h3>1. 命题的定义</h3>
+<h3><span class="subsec">1.1</span>命题的定义</h3>
 <p>在数学中，<span class="keyword">命题</span>是指<strong>可以判断真假的陈述句</strong>。一个句子必须同时满足两个条件才是命题：</p>
 <ul>
   <li><strong>是陈述句</strong>（不是疑问句、祈使句、感叹句）</li>
@@ -129,11 +109,11 @@
 
 <div class="example">
   <p><strong>例：判断下列句子是否为命题</strong></p>
-  <p class="step">① "3 &gt; 2" → <strong>是命题</strong>，是真命题。</p>
-  <p class="step">② "太阳从西边升起" → <strong>是命题</strong>，是假命题（有确定真值，只是为假）。</p>
-  <p class="step">③ "你好吗？" → <strong>不是命题</strong>，因为它是疑问句，无法判断真假。</p>
-  <p class="step">④ "x + 1 = 3" → <strong>不是命题</strong>，因为 x 不确定，无法判断真假（除非指定 x 的范围）。</p>
-  <p class="step">⑤ "请把门关上" → <strong>不是命题</strong>，祈使句，无真假。</p>
+  <p class="step">&cir; "3 &gt; 2" &rarr; <strong>是命题</strong>，是真命题。</p>
+  <p class="step">&cir; "太阳从西边升起" &rarr; <strong>是命题</strong>，是假命题（有确定真值，只是为假）。</p>
+  <p class="step">&cir; "你好吗？" &rarr; <strong>不是命题</strong>，因为它是疑问句，无法判断真假。</p>
+  <p class="step">&cir; "x + 1 = 3" &rarr; <strong>不是命题</strong>，因为 x 不确定，无法判断真假（除非指定 x 的范围）。</p>
+  <p class="step">&cir; "请把门关上" &rarr; <strong>不是命题</strong>，祈使句，无真假。</p>
 </div>
 
 <div class="hint">
@@ -146,42 +126,41 @@
   <p><strong>假命题</strong>：判断为假的命题。</p>
 </div>
 
-<!-- 知识点1 命题判断 -->
+<!-- 题1 命题判断 -->
 <div class="quiz-question" id="q1">
   <div class="q-title">
     <span class="q-tag concept">概念</span>
-    以下哪一个是命题？
+    以下哪个句子是命题？
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(1, 0)">A. 今天天气真好！</div>
-    <div class="opt" onclick="checkChoice(1, 1)">B. &radic;2 是无理数</div>
-    <div class="opt" onclick="checkChoice(1, 2)">C. 你会游泳吗？</div>
-    <div class="opt" onclick="checkChoice(1, 3)">D. 过来一下</div>
+    <div class="opt" onclick="checkChoice(1, 0)">A. 请安静</div>
+    <div class="opt" onclick="checkChoice(1, 1)">B. 今天的天气真好！</div>
+    <div class="opt" onclick="checkChoice(1, 2)">C. &radic;2 &gt; 1.4</div>
+    <div class="opt" onclick="checkChoice(1, 3)">D. 你会做这道题吗？</div>
   </div>
   <div class="explain" id="explain1">
-    <strong>解析：</strong>A 是感叹句，C 是疑问句，D 是祈使句，都不是命题。B 是陈述句且有确定真假（&radic;2 确实是无理数），所以 B 是命题，且是真命题。
+    <strong>解析：</strong>A 是祈使句，B 是感叹句，D 是疑问句，都不是命题。C 是陈述句且有确定真假（&radic;2 &asymp; 1.414，所以 &radic;2 &gt; 1.4 为真），是命题。
   </div>
 </div>
 
-<!-- 知识点2 真假判断 -->
+<!-- 题2 假命题判断（已修复：唯一确定答案） -->
 <div class="quiz-question" id="q2">
   <div class="q-title">
     <span class="q-tag concept">概念</span>
-    下列命题中，是假命题的是？
+    以下哪个是假命题？
   </div>
   <div class="options">
     <div class="opt" onclick="checkChoice(2, 0)">A. 2 是偶数</div>
     <div class="opt" onclick="checkChoice(2, 1)">B. 三角形的内角和是 180&deg;</div>
-    <div class="opt" onclick="checkChoice(2, 2)">C. 1 + 1 = 3</div>
-    <div class="opt" onclick="checkChoice(2, 3)">D. 所有的质数都是奇数</div>
+    <div class="opt" onclick="checkChoice(2, 2)">C. &radic;2 是有理数</div>
+    <div class="opt" onclick="checkChoice(2, 3)">D. 1 + 1 = 2</div>
   </div>
   <div class="explain" id="explain2">
-    <strong>解析：</strong>A 真（2 是偶数），B 真（三角形内角和 180&deg;），C 假（1+1=2&ne;3），但 C 虽是假命题仍是命题。D 假，因为 2 是质数但 2 是偶数。不过题目问"是假命题的"，C 和 D 都是假命题。但注意 D 中"所有的质数都是奇数"——2 是质数且是偶数，所以 D 是假命题。两个选项都是假命题，但按照最常见的考察，2 作为唯一的偶质数常被用来构造假命题，所以 D 是更典型的答案。实际上 C 也是假命题，但 D 更符合"概念理解"的考察目的。<br>
-    <strong>更正分析：</strong>C 明显是假命题（1+1=2），D 也是假命题（2 是质数但 2 是偶数）。我们选 D，因为这道题意在考察"2 是唯一的偶质数"这个知识点。
+    <strong>解析：</strong>A 真（2 是偶数），B 真（三角形内角和 180&deg;），C <strong>假</strong>（&radic;2 是无理数，不是有理数），D 真（1 + 1 = 2）。只有 C 是假命题。
   </div>
 </div>
 
-<h3>2. 四种命题</h3>
+<h3><span class="subsec">1.2</span>四种命题</h3>
 <p>给定一个<strong>原命题</strong>"若 p 则 q"，我们可以通过交换和否定得到另外三种命题形式：</p>
 
 <div class="definition">
@@ -199,11 +178,13 @@
   <p class="step"><strong>逆否命题：</strong>若 x &le; 1，则 x &le; 2。&emsp;（<span class="true-val">真</span>）</p>
 </div>
 
+<h3><span class="subsec">1.3</span>四种命题的相互关系</h3>
+
 <div class="key-point">
   <p><strong>关键结论：</strong></p>
-  <p>① 原命题与逆否命题<strong>等价</strong>（同真同假）。</p>
-  <p>② 逆命题与否命题<strong>等价</strong>（同真同假）。</p>
-  <p>③ 原命题为真时，逆命题<strong>不一定</strong>为真！需要举反例验证。</p>
+  <p>&cir; 原命题与逆否命题<strong>等价</strong>（同真同假）。</p>
+  <p>&cir; 逆命题与否命题<strong>等价</strong>（同真同假）。</p>
+  <p>&cir; 原命题为真时，逆命题<strong>不一定</strong>为真！需要举反例验证。</p>
 </div>
 
 <h4>四种命题的真假关系表</h4>
@@ -245,41 +226,67 @@
   </tr>
 </table>
 
-<!-- 知识点3 四种命题 -->
+<!-- 题3 四种命题识别 -->
 <div class="quiz-question" id="q3">
   <div class="q-title">
     <span class="q-tag concept">概念</span>
-    已知原命题"若一个数是 2，则它是质数"，以下说法正确的是？
+    已知原命题"若 x = 2，则 x&sup2; = 4"，下列说法正确的是？
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(3, 0)">A. 逆命题为"若一个数是质数，则它是 2"，是真命题</div>
-    <div class="opt" onclick="checkChoice(3, 1)">B. 否命题为"若一个数不是 2，则它不是质数"，是真命题</div>
-    <div class="opt" onclick="checkChoice(3, 2)">C. 逆否命题为"若一个数不是质数，则它不是 2"，是真命题</div>
-    <div class="opt" onclick="checkChoice(3, 3)">D. 以上都不对</div>
+    <div class="opt" onclick="checkChoice(3, 0)">A. 逆命题"若 x&sup2; = 4，则 x = 2"是真命题</div>
+    <div class="opt" onclick="checkChoice(3, 1)">B. 否命题"若 x &ne; 2，则 x&sup2; &ne; 4"是假命题</div>
+    <div class="opt" onclick="checkChoice(3, 2)">C. 逆否命题"若 x&sup2; &ne; 4，则 x &ne; 2"是假命题</div>
+    <div class="opt" onclick="checkChoice(3, 3)">D. 原命题"若 x = 2，则 x&sup2; = 4"是假命题</div>
   </div>
   <div class="explain" id="explain3">
-    <strong>解析：</strong>原命题"若一个数是 2，则它是质数"为真。<br>
-    A 错：逆命题"若一个数是质数，则它是 2"为假（反例：3 是质数但不是 2）。<br>
-    B 错：否命题"若一个数不是 2，则它不是质数"为假（反例：3 不是 2，但 3 是质数）。<br>
-    C 对：逆否命题"若一个数不是质数，则它不是 2"为真——如果它不是质数，那它肯定不是 2（因为 2 是质数）。<br>
-    所以选 C。这也验证了原命题与逆否命题等价。
+    <strong>解析：</strong>原命题"若x=2，则x&sup2;=4"为真。<br>
+    A 错：逆命题"若x&sup2;=4，则x=2"为假（反例：x=-2）。<br>
+    B <strong>对</strong>：否命题"若x&ne;2，则x&sup2;&ne;4"为假（反例：x=-2时x&ne;2但x&sup2;=4）。<br>
+    C 错：逆否命题"若x&sup2;&ne;4，则x&ne;2"为真（与原命题等价）。<br>
+    D 错：原命题"若x=2，则x&sup2;=4"为真，说它是假命题显然是错的。
   </div>
 </div>
 
+<h3><span class="subsec">1.4</span>充分条件与必要条件</h3>
+<p>给定命题"若 p 则 q"，我们还可以研究 p 和 q 之间的条件关系：</p>
+
+<div class="definition">
+  <p><strong>充分条件：</strong>若 p &rarr; q 为真，则称 p 是 q 的<strong>充分条件</strong>（有 p 就一定有 q）。</p>
+  <p><strong>必要条件：</strong>若 p &rarr; q 为真，则称 q 是 p 的<strong>必要条件</strong>（没有 q 就一定没有 p）。</p>
+  <p><strong>充要条件：</strong>若 p &rarr; q 和 q &rarr; p 同时为真，则称 p 是 q 的<strong>充要条件</strong>（p 与 q 等价）。</p>
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>判断"x &gt; 2"是"x &gt; 1"的什么条件？</p>
+  <p class="step"><strong>分析：</strong>若 x &gt; 2，则 x &gt; 1（真），所以 x &gt; 2 是 x &gt; 1 的<strong>充分条件</strong>。</p>
+  <p class="step">反过来，若 x &gt; 1，则 x &gt; 2（假，反例 x = 1.5），所以 x &gt; 2 <strong>不是</strong> x &gt; 1 的必要条件。</p>
+  <p class="step">综合：x &gt; 2 是 x &gt; 1 的<strong>充分不必要条件</strong>。</p>
+</div>
+
+<div class="hint">
+  <strong>记忆方法：</strong><br>
+  "充分"意味着条件<strong>足够</strong>推出结论（有它就够）。<br>
+  "必要"意味着结论<strong>需要</strong>这个条件（没它不行）。<br>
+  口诀：<strong>"小范围 &rArr; 大范围"</strong>——小范围是大范围的充分不必要条件。
+</div>
+
+<!-- 题4 充分必要条件 -->
 <div class="quiz-question" id="q4">
   <div class="q-title">
     <span class="q-tag concept">概念</span>
-    原命题"若 x = 1，则 x² = 1"为真命题，它的逆命题是____，该逆命题是____。
+    "x = 2"是"x&sup2; = 4"的什么条件？
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(4, 0)">A. "若 x² &ne; 1，则 x &ne; 1"，真命题</div>
-    <div class="opt" onclick="checkChoice(4, 1)">B. "若 x² = 1，则 x = 1"，假命题</div>
-    <div class="opt" onclick="checkChoice(4, 2)">C. "若 x² = 1，则 x = 1"，真命题</div>
-    <div class="opt" onclick="checkChoice(4, 3)">D. "若 x &ne; 1，则 x² &ne; 1"，假命题</div>
+    <div class="opt" onclick="checkChoice(4, 0)">A. 充分不必要条件</div>
+    <div class="opt" onclick="checkChoice(4, 1)">B. 必要不充分条件</div>
+    <div class="opt" onclick="checkChoice(4, 2)">C. 充要条件</div>
+    <div class="opt" onclick="checkChoice(4, 3)">D. 既不充分也不必要条件</div>
   </div>
   <div class="explain" id="explain4">
-    <strong>解析：</strong>原命题"若 x = 1，则 x² = 1"的逆命题是交换条件和结论，即"若 x² = 1，则 x = 1"。这是假命题，因为 x² = 1 时 x 可以是 1 或 -1（反例：x = -1）。选 B。<br>
-    注意：D 是否命题不是逆命题。
+    <strong>解析：</strong><br>
+    充分性：若 x = 2，则 x&sup2; = 4，成立 &rArr; 充分。<br>
+    必要性：若 x&sup2; = 4，则 x = 2，不成立（x = -2 也可）&rArr; 不必要。<br>
+    所以"x = 2"是"x&sup2; = 4"的<strong>充分不必要条件</strong>。选 A。
   </div>
 </div>
 
@@ -291,43 +298,43 @@
 
 <p>我们可以用逻辑联结词将简单命题组合成<strong>复合命题</strong>。高中数学中主要学习三个基本联结词：</p>
 
-<h3>1. p &and; q（且）</h3>
+<h3><span class="subsec">2.1</span>p &and; q（且）</h3>
 <div class="definition">
   <p><strong>p &and; q</strong> 读作"p 且 q"，只有当 <strong>p 和 q 同时为真</strong>时，p &and; q 才为真。</p>
 </div>
 
 <div class="example">
   <p><strong>例：</strong>"2 既是偶数又是质数"</p>
-  <p class="step"><strong>日常语言→符号化：</strong>设 p：2 是偶数（真），q：2 是质数（真）。则该句可表示为 p &and; q。</p>
+  <p class="step"><strong>日常语言&rarr;符号化：</strong>设 p：2 是偶数（真），q：2 是质数（真）。则该句可表示为 p &and; q。</p>
   <p class="step"><strong>真值判断：</strong>p 真且 q 真，所以 p &and; q 为 <span class="true-val">真</span>。</p>
   <p class="step">注意：2 是唯一的偶质数，所以"既是偶数又是质数"只有 2 满足。</p>
 </div>
 
-<h3>2. p &or; q（或）</h3>
+<h3><span class="subsec">2.2</span>p &or; q（或）</h3>
 <div class="definition">
   <p><strong>p &or; q</strong> 读作"p 或 q"，只要 <strong>p 和 q 至少一个为真</strong>，p &or; q 就为真。</p>
 </div>
 
 <div class="example">
   <p><strong>例：</strong>"x &ge; 0 或 x &le; 0"</p>
-  <p class="step"><strong>日常语言→符号化：</strong>设 p：x &ge; 0，q：x &le; 0。则该句可表示为 p &or; q。</p>
+  <p class="step"><strong>日常语言&rarr;符号化：</strong>设 p：x &ge; 0，q：x &le; 0。则该句可表示为 p &or; q。</p>
   <p class="step"><strong>真值判断：</strong>对于任意实数 x，要么 x &ge; 0（p 真），要么 x &le; 0（q 真），要么两者都真（x = 0）。</p>
   <p class="step">所以 p &or; q 对于 <strong>任意实数 x</strong> 都是 <span class="true-val">真</span>（恒真命题）。</p>
 </div>
 
-<h3>3. &#172;p（非）</h3>
+<h3><span class="subsec">2.3</span>&#172;p（非）</h3>
 <div class="definition">
   <p><strong>&#172;p</strong> 读作"非 p"或"p 的否定"，与 p 的<strong>真假相反</strong>。</p>
 </div>
 
 <div class="example">
   <p><strong>例：</strong>"3 &gt; 2"的否定</p>
-  <p class="step"><strong>日常语言→符号化：</strong>设 p：3 &gt; 2（真）。则 &#172;p 表示"3 &le; 2"。</p>
+  <p class="step"><strong>日常语言&rarr;符号化：</strong>设 p：3 &gt; 2（真）。则 &#172;p 表示"3 &le; 2"。</p>
   <p class="step"><strong>真值判断：</strong>p 为真，&#172;p 为 <span class="false-val">假</span>。</p>
   <p class="step">注意：&#172;(3 &gt; 2) 是 3 &le; 2，而不是 3 &lt; 2。"非"是对整个判断的否定。</p>
 </div>
 
-<h3>4. 真值表</h3>
+<h3><span class="subsec">2.4</span>真值表与复合命题判断</h3>
 <table class="truth-table">
   <tr>
     <th>p</th>
@@ -368,12 +375,12 @@
 
 <div class="hint">
   <strong>记忆口诀：</strong><br>
-  "且" —— <strong>一假必假</strong>（两个都真才真）<br>
-  "或" —— <strong>一真必真</strong>（两个都假才假）<br>
-  "非" —— <strong>真假相反</strong>
+  "且" &mdash;&mdash; <strong>一假必假</strong>（两个都真才真）<br>
+  "或" &mdash;&mdash; <strong>一真必真</strong>（两个都假才假）<br>
+  "非" &mdash;&mdash; <strong>真假相反</strong>
 </div>
 
-<h3>5. 复合命题真假的判断步骤</h3>
+<h4>复合命题真假判断步骤</h4>
 <div class="example">
   <p><strong>步骤：</strong></p>
   <p class="step"><strong>第一步：</strong>识别出复合命题中所有的<strong>简单命题</strong>（p、q 等）。</p>
@@ -388,50 +395,101 @@
   <p class="step"><strong>第三步：</strong>p &and; (&#172;q) = 真 &and; 真 = <span class="true-val">真</span>。</p>
 </div>
 
-<h3>6. 关于"或"的说明</h3>
-<p>在日常语言中，"或"有三种含义：</p>
+<h4>关于"或"的说明</h4>
+<p>在日常语言中，"或"有两种常见含义：</p>
 <ul>
-  <li><strong>相容或（可兼或）：</strong>p 和 q 可以同时成立。如"x &ge; 0 或 x &le; 0"，x = 0 时两者同时成立。高中数学中一般指这种。</li>
+  <li><strong>相容或（可兼或）：</strong>p 和 q 可以同时成立。如"x &ge; 0 或 x &le; 0"，x = 0 时两者同时成立。高中数学中的 p &or; q 特指这种。</li>
   <li><strong>排斥或（异或）：</strong>p 和 q 不能同时成立。如"明天我去北京或去上海"，不能同时去两地。</li>
-  <li><strong>近似或：</strong>如"大约 5 或 6 个人"表示不精确的数量。</li>
 </ul>
 <p>在高中数学中，<span class="keyword">p &or; q</span> 特指<strong>相容或</strong>（可兼或）。</p>
 
-<!-- 知识点5 逻辑联结词 -->
+<!-- 题5 联结词p∧q -->
 <div class="quiz-question" id="q5">
   <div class="q-title">
     <span class="q-tag concept">概念</span>
-    设 p：6 是偶数（真），q：6 是质数（假）。则以下哪个为真？
+    设 p：6 是偶数（真），q：6 是质数（假）。则 p &and; q 的真假是？
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(5, 0)">A. p &and; q</div>
-    <div class="opt" onclick="checkChoice(5, 1)">B. p &or; q</div>
-    <div class="opt" onclick="checkChoice(5, 2)">C. &#172;p</div>
-    <div class="opt" onclick="checkChoice(5, 3)">D. &#172;p &and; &#172;q</div>
+    <div class="opt" onclick="checkChoice(5, 0)">A. 真</div>
+    <div class="opt" onclick="checkChoice(5, 1)">B. 假</div>
+    <div class="opt" onclick="checkChoice(5, 2)">C. 无法判断</div>
+    <div class="opt" onclick="checkChoice(5, 3)">D. 有时真有时假</div>
   </div>
   <div class="explain" id="explain5">
-    <strong>解析：</strong>p 真，q 假。<br>
-    A：p &and; q = 真 &and; 假 = 假。<br>
-    B：p &or; q = 真 &or; 假 = <strong>真</strong>（"或"一真必真）。<br>
-    C：&#172;p = 非真 = 假。<br>
-    D：&#172;p &and; &#172;q = 假 &and; 真 = 假。<br>
-    所以选 B。
+    <strong>解析：</strong>p 真，q 假。根据"且"一假必假，p &and; q = 真 &and; 假 = <strong>假</strong>。选 B。
   </div>
 </div>
 
+<!-- 题6 复合命题真值 -->
 <div class="quiz-question" id="q6">
   <div class="q-title">
     <span class="q-tag concept">概念</span>
-    对于任意实数 x，命题"x &ge; 1 且 x &le; 0"的真假是？
+    设 p：2 &gt; 1（真），q：3 &le; 2（假）。则 &#172;p &or; q 的真假是？
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(6, 0)">A. 真命题，因为 x 可以同时满足</div>
-    <div class="opt" onclick="checkChoice(6, 1)">B. 假命题，因为没有实数能同时满足 x &ge; 1 和 x &le; 0</div>
-    <div class="opt" onclick="checkChoice(6, 2)">C. 有时真有时假</div>
-    <div class="opt" onclick="checkChoice(6, 3)">D. 是命题但不是真也不是假</div>
+    <div class="opt" onclick="checkChoice(6, 0)">A. 真</div>
+    <div class="opt" onclick="checkChoice(6, 1)">B. 假</div>
+    <div class="opt" onclick="checkChoice(6, 2)">C. 无法判断</div>
+    <div class="opt" onclick="checkChoice(6, 3)">D. 取决于具体数值</div>
   </div>
   <div class="explain" id="explain6">
-    <strong>解析：</strong>设 p：x &ge; 1，q：x &le; 0。"x &ge; 1 且 x &le; 0"即 p &and; q。没有任何实数能同时大于等于 1 且小于等于 0，所以 p 和 q 不可能同时为真。根据"且"一假必假，该命题恒为 <strong>假</strong>。选 B。
+    <strong>解析：</strong>p 真 &rArr; &#172;p 假。q 假。&#172;p &or; q = 假 &or; 假 = <strong>假</strong>（"或"两个都假才假）。选 B。
+  </div>
+</div>
+
+<!-- 题7 德·摩根律 -->
+<div class="quiz-question" id="q7">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    &#172;(p &and; q) 等价于？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(7, 0)">A. &#172;p &and; &#172;q</div>
+    <div class="opt" onclick="checkChoice(7, 1)">B. &#172;p &or; &#172;q</div>
+    <div class="opt" onclick="checkChoice(7, 2)">C. &#172;(p &or; q)</div>
+    <div class="opt" onclick="checkChoice(7, 3)">D. &#172;p &or; q</div>
+  </div>
+  <div class="explain" id="explain7">
+    <strong>解析：</strong>根据德&middot;摩根律，&#172;(p &and; q) &hArr; &#172;p &or; &#172;q。"且的否定是或的形式"。选 B。
+  </div>
+</div>
+
+<h3><span class="subsec">2.5</span>德&middot;摩根律</h3>
+<p>德&middot;摩根律描述了对复合命题取否定时，联结词如何变化：</p>
+
+<div class="formula-box">
+  <p>&#172;(p &and; q) &nbsp;&hArr;&nbsp; &#172;p &or; &#172;q</p>
+  <p>&#172;(p &or; q) &nbsp;&hArr;&nbsp; &#172;p &and; &#172;q</p>
+</div>
+
+<div class="hint">
+  <strong>记忆口诀：</strong><br>
+  "且的否定，变成或，各自取反"&mdash;&mdash; &#172;(p &and; q) = &#172;p &or; &#172;q<br>
+  "或的否定，变成且，各自取反"&mdash;&mdash; &#172;(p &or; q) = &#172;p &and; &#172;q
+</div>
+
+<div class="example">
+  <p><strong>例：</strong>命题"x &ge; 0 且 y &le; 0"的否定是什么？</p>
+  <p class="step">设 p：x &ge; 0，q：y &le; 0。原命题为 p &and; q。</p>
+  <p class="step">根据德&middot;摩根律：&#172;(p &and; q) = &#172;p &or; &#172;q = "x &lt; 0 <strong>或</strong> y &gt; 0"。</p>
+  <p class="step">注意：否定"且"时要变成"或"，而不是简单地保留"且"。</p>
+</div>
+
+<!-- 题8 德·摩根律应用 -->
+<div class="quiz-question" id="q8">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    命题"x &ge; 1 且 x &le; 3"的否定是？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(8, 0)">A. x &lt; 1 且 x &gt; 3</div>
+    <div class="opt" onclick="checkChoice(8, 1)">B. x &lt; 1 或 x &gt; 3</div>
+    <div class="opt" onclick="checkChoice(8, 2)">C. x &le; 1 或 x &ge; 3</div>
+    <div class="opt" onclick="checkChoice(8, 3)">D. x &lt; 1 或 x &le; 3</div>
+  </div>
+  <div class="explain" id="explain8">
+    <strong>解析：</strong>设 p：x &ge; 1，q：x &le; 3。原命题为 p &and; q。根据德&middot;摩根律，&#172;(p &and; q) = &#172;p &or; &#172;q = "x &lt; 1 或 x &gt; 3"。选 B。<br>
+    注意：&#172;(x &ge; 1) 是 x &lt; 1，不是 x &le; 1；&#172;(x &le; 3) 是 x &gt; 3，不是 x &ge; 3。
   </div>
 </div>
 
@@ -441,7 +499,7 @@
 <section>
 <h2>三、全称命题和特称命题</h2>
 
-<h3>1. 全称量词与全称命题</h3>
+<h3><span class="subsec">3.1</span>全称量词与全称命题</h3>
 <p><span class="keyword">全称量词</span>表示"所有的""任意一个""每一个"等含义，用符号 <span class="logic-symbol">&forall;</span>（倒写的 A，代表 All）表示。</p>
 
 <div class="definition">
@@ -452,19 +510,17 @@
 <div class="example">
   <p><strong>例 1：</strong>&forall;x &isin; R，x&sup2; &ge; 0</p>
   <p class="step"><strong>日常语言：</strong>"任何一个实数的平方都大于等于 0"</p>
-  <p class="step"><strong>符号化：</strong>&forall;x &isin; R，x&sup2; &ge; 0</p>
   <p class="step"><strong>真值判断：</strong><span class="true-val">真命题</span>。任何实数的平方确实非负。</p>
 </div>
 
 <div class="example">
   <p><strong>例 2：</strong>&forall;x &isin; R，x&sup2; &gt; 0</p>
   <p class="step"><strong>日常语言：</strong>"任何一个实数的平方都大于 0"</p>
-  <p class="step"><strong>符号化：</strong>&forall;x &isin; R，x&sup2; &gt; 0</p>
   <p class="step"><strong>真值判断：</strong><span class="false-val">假命题</span>。反例：x = 0 时，0&sup2; = 0，不大于 0。</p>
   <p class="step">要证明全称命题为假，只需找出<strong>一个反例</strong>。</p>
 </div>
 
-<h3>2. 存在量词与特称命题</h3>
+<h3><span class="subsec">3.2</span>存在量词与特称命题</h3>
 <p><span class="keyword">存在量词</span>表示"存在一个""至少有一个""有些"等含义，用符号 <span class="logic-symbol">&exist;</span>（反写的 E，代表 Exist）表示。</p>
 
 <div class="definition">
@@ -474,19 +530,17 @@
 <div class="example">
   <p><strong>例 1：</strong>&exist;x &isin; R，x&sup2; = 0</p>
   <p class="step"><strong>日常语言：</strong>"存在一个实数，它的平方等于 0"</p>
-  <p class="step"><strong>符号化：</strong>&exist;x &isin; R，x&sup2; = 0</p>
   <p class="step"><strong>真值判断：</strong><span class="true-val">真命题</span>。x = 0 就满足条件。</p>
 </div>
 
 <div class="example">
   <p><strong>例 2：</strong>&exist;x &isin; R，x&sup2; + 1 = 0</p>
   <p class="step"><strong>日常语言：</strong>"存在一个实数，它的平方加 1 等于 0"</p>
-  <p class="step"><strong>符号化：</strong>&exist;x &isin; R，x&sup2; + 1 = 0</p>
   <p class="step"><strong>真值判断：</strong><span class="false-val">假命题</span>。x&sup2; + 1 = 0 即 x&sup2; = -1，没有实数解。</p>
   <p class="step">要证明特称命题为假，需要说明<strong>所有元素</strong>都不满足条件。</p>
 </div>
 
-<h3>3. 全称命题的否定</h3>
+<h3><span class="subsec">3.3</span>含一个量词的命题的否定</h3>
 <p>全称命题的否定是一个特称命题：</p>
 
 <div class="formula-box">
@@ -495,13 +549,11 @@
 
 <div class="example">
   <p><strong>例：</strong>"所有人都是学生"的否定是什么？</p>
-  <p class="step"><strong>原命题：</strong>&forall;x（x 是人 &rarr; x 是学生）</p>
-  <p class="step"><strong>错误否定：</strong>"所有人都不是学生"（&forall;x，x 不是学生）——这不对！</p>
-  <p class="step"><strong>正确否定：</strong>"存在一个人不是学生"（&exist;x，x 是人且 x 不是学生）</p>
+  <p class="step"><strong>错误否定：</strong>"所有人都不是学生"&mdash;&mdash;这不对！</p>
+  <p class="step"><strong>正确否定：</strong>"存在一个人不是学生"</p>
   <p class="step">否定一个全称命题，不是否定结论本身，而是说<strong>"存在反例"</strong>。</p>
 </div>
 
-<h3>4. 特称命题的否定</h3>
 <p>特称命题的否定是一个全称命题：</p>
 
 <div class="formula-box">
@@ -510,223 +562,170 @@
 
 <div class="example">
   <p><strong>例：</strong>"有人会飞"的否定是什么？</p>
-  <p class="step"><strong>原命题：</strong>&exist;x（x 是人且 x 会飞）</p>
-  <p class="step"><strong>错误否定：</strong>"有人不会飞"——这不对！</p>
-  <p class="step"><strong>正确否定：</strong>"所有人都不会飞"（&forall;x，x 是人 &rarr; x 不会飞）</p>
+  <p class="step"><strong>错误否定：</strong>"有人不会飞"&mdash;&mdash;这不对！</p>
+  <p class="step"><strong>正确否定：</strong>"所有人都不会飞"</p>
   <p class="step">否定一个特称命题，等于说<strong>"所有个体都不满足条件"</strong>。</p>
 </div>
 
 <div class="rule-box">
-  <p>&#128221; 否定规则口诀：<span class="keyword">&forall; 变 &exist;，&exist; 变 &forall;，结论取否定</span></p>
+  <p><span style="font-size:0.9em;">&nbsp;</span> 否定规则口诀：<span class="keyword">&forall; 变 &exist;，&exist; 变 &forall;，结论取否定</span></p>
 </div>
 
-<!-- 知识点7 全称命题判断 -->
-<div class="quiz-question" id="q7">
+<!-- 题9 全称命题判断 -->
+<div class="quiz-question" id="q9">
   <div class="q-title">
     <span class="q-tag concept">概念</span>
-    判断全称命题"&forall;x &isin; R，x&sup2; - 2x + 1 &ge; 0"的真假。
+    全称命题"&forall;x &isin; R，x&sup2; &ge; 0"的真假是？
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(7, 0)">A. 真命题</div>
-    <div class="opt" onclick="checkChoice(7, 1)">B. 假命题</div>
-    <div class="opt" onclick="checkChoice(7, 2)">C. 有时真有时假</div>
-    <div class="opt" onclick="checkChoice(7, 3)">D. 不是命题</div>
+    <div class="opt" onclick="checkChoice(9, 0)">A. 真命题</div>
+    <div class="opt" onclick="checkChoice(9, 1)">B. 假命题</div>
+    <div class="opt" onclick="checkChoice(9, 2)">C. 有时真有时假</div>
+    <div class="opt" onclick="checkChoice(9, 3)">D. 不是命题</div>
   </div>
-  <div class="explain" id="explain7">
-    <strong>解析：</strong>x&sup2; - 2x + 1 = (x - 1)&sup2;。对于任意实数 x，(x - 1)&sup2; &ge; 0 恒成立。所以该全称命题为 <strong>真命题</strong>。选 A。
+  <div class="explain" id="explain9">
+    <strong>解析：</strong>任何实数的平方都非负，所以"&forall;x &isin; R，x&sup2; &ge; 0"为 <strong>真命题</strong>。选 A。
   </div>
 </div>
 
-<!-- 知识点8 全称命题的否定 -->
-<div class="quiz-question" id="q8">
+<!-- 题10 特称命题判断 -->
+<div class="quiz-question" id="q10">
+  <div class="q-title">
+    <span class="q-tag concept">概念</span>
+    特称命题"&exist;x &isin; R，x&sup2; + 1 = 0"的真假是？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(10, 0)">A. 真命题</div>
+    <div class="opt" onclick="checkChoice(10, 1)">B. 假命题</div>
+    <div class="opt" onclick="checkChoice(10, 2)">C. 无法判断</div>
+    <div class="opt" onclick="checkChoice(10, 3)">D. 是命题但无真假</div>
+  </div>
+  <div class="explain" id="explain10">
+    <strong>解析：</strong>x&sup2; + 1 = 0 即 x&sup2; = -1，没有实数解。所以"&exist;x &isin; R，x&sup2; + 1 = 0"为 <strong>假命题</strong>。选 B。
+  </div>
+</div>
+
+<!-- 题11 含量词命题的否定 -->
+<div class="quiz-question" id="q11">
   <div class="q-title">
     <span class="q-tag concept">概念</span>
     全称命题"&forall;x &isin; R，x&sup2; &gt; 0"的否定是？
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(8, 0)">A. &forall;x &isin; R，x&sup2; &le; 0</div>
-    <div class="opt" onclick="checkChoice(8, 1)">B. &exist;x &isin; R，x&sup2; &le; 0</div>
-    <div class="opt" onclick="checkChoice(8, 2)">C. &exist;x &isin; R，x&sup2; &gt; 0</div>
-    <div class="opt" onclick="checkChoice(8, 3)">D. &forall;x &isin; R，x&sup2; &lt; 0</div>
+    <div class="opt" onclick="checkChoice(11, 0)">A. &forall;x &isin; R，x&sup2; &le; 0</div>
+    <div class="opt" onclick="checkChoice(11, 1)">B. &exist;x &isin; R，x&sup2; &le; 0</div>
+    <div class="opt" onclick="checkChoice(11, 2)">C. &exist;x &isin; R，x&sup2; &gt; 0</div>
+    <div class="opt" onclick="checkChoice(11, 3)">D. &forall;x &isin; R，x&sup2; &lt; 0</div>
   </div>
-  <div class="explain" id="explain8">
-    <strong>解析：</strong>根据否定规则：&forall; 变 &exist;，结论取否定。<br>
-    原命题：&forall;x &isin; R，x&sup2; &gt; 0<br>
-    否定：&exist;x &isin; R，x&sup2; &le; 0<br>
-    实际上，x = 0 时 x&sup2; = 0 &le; 0，所以原命题是假命题，其否定是真命题。选 B。
-  </div>
-</div>
-
-<!-- 知识点9 特称命题的否定 -->
-<div class="quiz-question" id="q9">
-  <div class="q-title">
-    <span class="q-tag concept">概念</span>
-    特称命题"存在一个 x &isin; R，使得 x&sup2; + 2x + 2 = 0"的否定是？
-  </div>
-  <div class="options">
-    <div class="opt" onclick="checkChoice(9, 0)">A. 存在一个 x &isin; R，使得 x&sup2; + 2x + 2 &ne; 0</div>
-    <div class="opt" onclick="checkChoice(9, 1)">B. 对任意 x &isin; R，x&sup2; + 2x + 2 &ne; 0</div>
-    <div class="opt" onclick="checkChoice(9, 2)">C. 不存在 x &isin; R，使得 x&sup2; + 2x + 2 &ne; 0</div>
-    <div class="opt" onclick="checkChoice(9, 3)">D. 对任意 x &isin; R，x&sup2; + 2x + 2 = 0</div>
-  </div>
-  <div class="explain" id="explain9">
-    <strong>解析：</strong>根据否定规则：&exist; 变 &forall;，结论取否定。<br>
-    原命题：&exist;x &isin; R，x&sup2; + 2x + 2 = 0<br>
-    否定：&forall;x &isin; R，x&sup2; + 2x + 2 &ne; 0<br>
-    实际上 x&sup2; + 2x + 2 = (x+1)&sup2; + 1 &ge; 1，确实不可能为 0，所以原命题是假命题，其否定是真命题。选 B。
+  <div class="explain" id="explain11">
+    <strong>解析：</strong>根据规则：&forall; 变 &exist;，结论取否定。&#172;(&forall;x &isin; R，x&sup2; &gt; 0) &hArr; &exist;x &isin; R，x&sup2; &le; 0。选 B。
   </div>
 </div>
 
 </section>
 
-<!-- ============================== 综合练习 ============================== -->
+<!-- ============================== 四、综合练习 ============================== -->
 <section>
 <h2>四、综合练习</h2>
-<p>以下 5 道综合题覆盖了本节全部知识点，动手试试吧！</p>
+<p>以下 5 道综合题覆盖了本节全部知识点，覆盖了命题、联结词、量词及其综合应用。</p>
 
 <div class="score-panel">
-  得分：<span class="score-num" id="totalScore">0</span> / 50
+  得分：<span class="score-num" id="totalScore">0</span><span class="score-total"> / 21</span>
   <button class="btn-reset" onclick="resetAll()">重置全部</button>
 </div>
 
-<!-- 综合题1 -->
-<div class="comp-exercise" id="c1">
-  <h4>练习 1（10 分）— 命题判断与四种命题</h4>
-  <p>判断下列句子是否为命题。如果是，指出是真命题还是假命题：</p>
-  <p>(1) "&radic;2 是有理数"</p>
-  <p>(2) "请安静"</p>
-  <p>(3) "若一个四边形是正方形，则它的四条边相等"的逆否命题是否为真？</p>
-
-  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
-    <p>请回答 (1)：它是____（填"真命题"或"假命题"或"不是命题"）
-      <input class="fill-input" id="c1a1" type="text" placeholder="输入答案" style="width:130px;">
-      <button class="btn-check" onclick="checkFill('c1a1', '假命题')">检查</button></p>
-    <p>请回答 (2)：它是____（填"真命题"或"假命题"或"不是命题"）
-      <input class="fill-input" id="c1a2" type="text" placeholder="输入答案" style="width:130px;">
-      <button class="btn-check" onclick="checkFill('c1a2', '不是命题')">检查</button></p>
-    <p>请回答 (3)：逆否命题是____（填"真"或"假"）
-      <input class="fill-input" id="c1a3" type="text" placeholder="输入答案" style="width:100px;">
-      <button class="btn-check" onclick="checkFill('c1a3', '真')">检查</button></p>
+<!-- 综合题1 中级 -->
+<div class="quiz-question" id="q12">
+  <div class="q-title">
+    <span class="q-tag comprehensive">综合</span>
+    下列命题中，真命题是？<span class="diff-tag diff-medium">中级</span>
   </div>
-
-  <div class="answer-box" id="c1answer">
-    <strong>解析：</strong><br>
-    (1) "&radic;2 是有理数"——是<strong>陈述句</strong>且能判断真假，所以是命题。&radic;2 约等于 1.414…，不是有理数，所以是<strong>假命题</strong>。<br>
-    (2) "请安静"——是<strong>祈使句</strong>，不是陈述句，所以<strong>不是命题</strong>。<br>
-    (3) 原命题"若一个四边形是正方形，则它的四条边相等"是真命题。原命题与逆否命题等价，所以逆否命题也为<strong>真</strong>。
+  <div class="options">
+    <div class="opt" onclick="checkChoice(12, 0)">A. 若 x&sup2; = 1，则 x = 1</div>
+    <div class="opt" onclick="checkChoice(12, 1)">B. 若 x = 1，则 x&sup2; = 1</div>
+    <div class="opt" onclick="checkChoice(12, 2)">C. 若 x&sup2; &ne; 1，则 x &ne; 1</div>
+    <div class="opt" onclick="checkChoice(12, 3)">D. B 和 C 都是真命题</div>
   </div>
-  <button class="btn-toggle" onclick="toggleAnswer('c1answer')">显示解析</button>
+  <div class="explain" id="explain12">
+    <strong>解析：</strong>A 错：逆命题"若x&sup2;=1，则x=1"为假（x=-1也满足）。B 对：原命题"若x=1，则x&sup2;=1"为真。C 对：这是B的逆否命题，与原命题等价，为真。所以B和C都真，选D。
+  </div>
 </div>
 
-<!-- 综合题2 -->
-<div class="comp-exercise" id="c2">
-  <h4>练习 2（10 分）— 逻辑联结词</h4>
-  <p>设 p：甲是班长（真），q：甲是学习委员（假）。判断下列复合命题的真假：</p>
-  <p>(1) p &and; q</p>
-  <p>(2) p &or; q</p>
-  <p>(3) &#172;p &or; q</p>
-  <p>(4) &#172;(p &or; q)</p>
-
-  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
-    <p>(1) p &and; q 为：<input class="fill-input" id="c2a1" type="text" placeholder="真/假" style="width:80px;">
-      <button class="btn-check" onclick="checkFill('c2a1', '假')">检查</button></p>
-    <p>(2) p &or; q 为：<input class="fill-input" id="c2a2" type="text" placeholder="真/假" style="width:80px;">
-      <button class="btn-check" onclick="checkFill('c2a2', '真')">检查</button></p>
-    <p>(3) &#172;p &or; q 为：<input class="fill-input" id="c2a3" type="text" placeholder="真/假" style="width:80px;">
-      <button class="btn-check" onclick="checkFill('c2a3', '假')">检查</button></p>
-    <p>(4) &#172;(p &or; q) 为：<input class="fill-input" id="c2a4" type="text" placeholder="真/假" style="width:80px;">
-      <button class="btn-check" onclick="checkFill('c2a4', '假')">检查</button></p>
+<!-- 综合题2 中级 -->
+<div class="quiz-question" id="q13">
+  <div class="q-title">
+    <span class="q-tag comprehensive">综合</span>
+    已知 p：甲是班长（真），q：甲是学习委员（假）。下列复合命题中为真的是？<span class="diff-tag diff-medium">中级</span>
   </div>
-
-  <div class="answer-box" id="c2answer">
-    <strong>解析：</strong>p 真，q 假。<br>
-    (1) p &and; q = 真 &and; 假 = <strong>假</strong>（"且"一假必假）。<br>
-    (2) p &or; q = 真 &or; 假 = <strong>真</strong>（"或"一真必真）。<br>
-    (3) &#172;p &or; q = 假 &or; 假 = <strong>假</strong>。<br>
-    (4) &#172;(p &or; q) = &#172;(真) = <strong>假</strong>。也可用德·摩根律：&#172;(p &or; q) = &#172;p &and; &#172;q = 假 &and; 真 = 假。
+  <div class="options">
+    <div class="opt" onclick="checkChoice(13, 0)">A. p &and; q</div>
+    <div class="opt" onclick="checkChoice(13, 1)">B. p &or; q</div>
+    <div class="opt" onclick="checkChoice(13, 2)">C. &#172;p &and; &#172;q</div>
+    <div class="opt" onclick="checkChoice(13, 3)">D. &#172;(p &or; q)</div>
   </div>
-  <button class="btn-toggle" onclick="toggleAnswer('c2answer')">显示解析</button>
+  <div class="explain" id="explain13">
+    <strong>解析：</strong>p真q假。<br>
+    A：p&and;q = 真&and;假 = 假。<br>
+    B：p&or;q = 真&or;假 = <strong>真</strong>（"或"一真必真）。<br>
+    C：&#172;p&and;&#172;q = 假&and;真 = 假。<br>
+    D：&#172;(p&or;q) = &#172;真 = 假。<br>
+    所以选B。
+  </div>
 </div>
 
-<!-- 综合题3 -->
-<div class="comp-exercise" id="c3">
-  <h4>练习 3（10 分）— 全称命题与特称命题</h4>
-  <p>判断下列命题的真假：</p>
-  <p>(1) &forall;x &isin; R，|x| &ge; 0</p>
-  <p>(2) &exist;x &isin; R，x&sup2; &lt; 0</p>
-  <p>(3) &forall;x &isin; N，x &gt; 0</p>
-
-  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
-    <p>(1) 为：<input class="fill-input" id="c3a1" type="text" placeholder="真/假" style="width:80px;">
-      <button class="btn-check" onclick="checkFill('c3a1', '真')">检查</button></p>
-    <p>(2) 为：<input class="fill-input" id="c3a2" type="text" placeholder="真/假" style="width:80px;">
-      <button class="btn-check" onclick="checkFill('c3a2', '假')">检查</button></p>
-    <p>(3) 为：<input class="fill-input" id="c3a3" type="text" placeholder="真/假" style="width:80px;">
-      <button class="btn-check" onclick="checkFill('c3a3', '假')">检查</button></p>
+<!-- 综合题3 高考 -->
+<div class="quiz-question" id="q14">
+  <div class="q-title">
+    <span class="q-tag comprehensive">综合</span>
+    命题"&forall;x &isin; R，x&sup2; - 2x + 2 &gt; 0"的否定是？<span class="diff-tag diff-exam">高考难度</span>
   </div>
-
-  <div class="answer-box" id="c3answer">
-    <strong>解析：</strong><br>
-    (1) &forall;x &isin; R，|x| &ge; 0——<strong>真</strong>。任何实数的绝对值都非负。<br>
-    (2) &exist;x &isin; R，x&sup2; &lt; 0——<strong>假</strong>。任何实数的平方都大于等于 0，不存在平方小于 0 的实数。<br>
-    (3) &forall;x &isin; N，x &gt; 0——<strong>假</strong>。反例：x = 0 是自然数，但 0 不大于 0。（注意：自然数 N 通常包含 0）
+  <div class="options">
+    <div class="opt" onclick="checkChoice(14, 0)">A. &forall;x &isin; R，x&sup2; - 2x + 2 &le; 0</div>
+    <div class="opt" onclick="checkChoice(14, 1)">B. &exist;x &isin; R，x&sup2; - 2x + 2 &le; 0</div>
+    <div class="opt" onclick="checkChoice(14, 2)">C. &exist;x &isin; R，x&sup2; - 2x + 2 &gt; 0</div>
+    <div class="opt" onclick="checkChoice(14, 3)">D. &forall;x &isin; R，x&sup2; - 2x + 2 &lt; 0</div>
   </div>
-  <button class="btn-toggle" onclick="toggleAnswer('c3answer')">显示解析</button>
+  <div class="explain" id="explain14">
+    <strong>解析：</strong>&forall;变&exist;，&gt;变&le;。否定为&exist;x &isin; R，x&sup2; - 2x + 2 &le; 0。注意x&sup2;-2x+2=(x-1)&sup2;+1&ge;1&gt;0恒成立，原命题为真，所以否定为假。选B。
+  </div>
 </div>
 
-<!-- 综合题4 -->
-<div class="comp-exercise" id="c4">
-  <h4>练习 4（10 分）— 命题的否定</h4>
-  <p>写出下列命题的否定，并判断原命题的真假：</p>
-  <p>(1) &forall;x &isin; R，x&sup2; - 4x + 4 &gt; 0</p>
-  <p>(2) &exist;x &isin; R，x&sup2; = -1</p>
-
-  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
-    <p>(1) 的否定是"____x &isin; R，x&sup2; - 4x + 4 ____ 0"（填符号和关系）
-      <input class="fill-input" id="c4a1" type="text" placeholder="答案" style="width:100px;">
-      <button class="btn-check" onclick="checkFill('c4a1', '存在')">检查</button>
-      <input class="fill-input" id="c4a2" type="text" placeholder="符号" style="width:60px;">
-      <button class="btn-check" onclick="checkFill('c4a2', '≤')">检查</button></p>
-    <p>(2) 的否定是"____x &isin; R，x&sup2; ____ -1"（填符号和关系）
-      <input class="fill-input" id="c4a3" type="text" placeholder="答案" style="width:80px;">
-      <button class="btn-check" onclick="checkFill('c4a3', '任意')">检查</button>
-      <input class="fill-input" id="c4a4" type="text" placeholder="符号" style="width:60px;">
-      <button class="btn-check" onclick="checkFill('c4a4', '≠')">检查</button></p>
-    <p>原命题 (1) 是____：<input class="fill-input" id="c4a5" type="text" placeholder="真/假" style="width:80px;">
-      <button class="btn-check" onclick="checkFill('c4a5', '假')">检查</button></p>
+<!-- 综合题4 高考 -->
+<div class="quiz-question" id="q15">
+  <div class="q-title">
+    <span class="q-tag comprehensive">综合</span>
+    设命题 p：存在 x &isin; R，使得 x&sup2; + 2ax + 1 = 0 有实数解。若 p 为真命题，则实数 a 的取值范围是？<span class="diff-tag diff-exam">高考难度</span>
   </div>
-
-  <div class="answer-box" id="c4answer">
-    <strong>解析：</strong><br>
-    (1) 原命题：&forall;x &isin; R，x&sup2; - 4x + 4 &gt; 0。但 x&sup2; - 4x + 4 = (x-2)&sup2;，当 x = 2 时值为 0，不大于 0。所以原命题为<strong>假</strong>。<br>
-    &emsp;否定：&exist;x &isin; R，x&sup2; - 4x + 4 &le; 0（为真）。<br>
-    (2) 原命题：&exist;x &isin; R，x&sup2; = -1。没有实数平方为 -1，所以原命题为<strong>假</strong>。<br>
-    &emsp;否定：&forall;x &isin; R，x&sup2; &ne; -1（为真）。
+  <div class="options">
+    <div class="opt" onclick="checkChoice(15, 0)">A. a &le; -1 或 a &ge; 1</div>
+    <div class="opt" onclick="checkChoice(15, 1)">B. -1 &lt; a &lt; 1</div>
+    <div class="opt" onclick="checkChoice(15, 2)">C. a &lt; -1 或 a &gt; 1</div>
+    <div class="opt" onclick="checkChoice(15, 3)">D. -1 &le; a &le; 1</div>
   </div>
-  <button class="btn-toggle" onclick="toggleAnswer('c4answer')">显示解析</button>
+  <div class="explain" id="explain15">
+    <strong>解析：</strong>p："&exist;x &isin; R，x&sup2; + 2ax + 1 = 0有实数解"为真，即判别式 &Delta; &ge; 0。<br>
+    &Delta; = (2a)&sup2; - 4 = 4a&sup2; - 4 &ge; 0 &rArr; a&sup2; &ge; 1 &rArr; a &le; -1 <strong>或</strong> a &ge; 1。选A。注意B是"且"的关系，对应&Delta;&lt;0（无实数解）的情况。
+  </div>
 </div>
 
-<!-- 综合题5 -->
-<div class="comp-exercise" id="c5">
-  <h4>练习 5（10 分）— 综合应用</h4>
-  <p>已知命题 p：&forall;x &isin; R，x&sup2; + 2ax + 1 &gt; 0 是真命题，求实数 a 的取值范围。</p>
-
-  <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
-    <p>a 的取值范围是：<input class="fill-input" id="c5a1" type="text" placeholder="如 -1&lt;a&lt;1" style="width:150px;">
-      <button class="btn-check" onclick="checkFill('c5a1', '-1<a<1')">检查</button></p>
+<!-- 综合题5 奥数 -->
+<div class="quiz-question" id="q16">
+  <div class="q-title">
+    <span class="q-tag comprehensive">综合</span>
+    已知命题 p：&forall;x &isin; [0, 1]，x&sup2; - a &ge; 0；命题 q：&exist;x &isin; R，x&sup2; + 2ax + 1 = 0。若 p &and; q 为真命题，则实数 a 的取值范围是？<span class="diff-tag diff-olym">奥数</span>
   </div>
-
-  <div class="answer-box" id="c5answer">
+  <div class="options">
+    <div class="opt" onclick="checkChoice(16, 0)">A. a &le; -1</div>
+    <div class="opt" onclick="checkChoice(16, 1)">B. a &ge; 1</div>
+    <div class="opt" onclick="checkChoice(16, 2)">C. -1 &le; a &le; 0</div>
+    <div class="opt" onclick="checkChoice(16, 3)">D. a &le; -1 或 a &ge; 1</div>
+  </div>
+  <div class="explain" id="explain16">
     <strong>解析：</strong><br>
-    原命题："&forall;x &isin; R，x&sup2; + 2ax + 1 &gt; 0"为真，即二次函数 f(x) = x&sup2; + 2ax + 1 的图像恒在 x 轴上方。<br>
-    这要求二次函数的判别式 &Delta; &lt; 0。<br>
-    &Delta; = (2a)&sup2; - 4&times;1&times;1 = 4a&sup2; - 4 &lt; 0<br>
-    &rArr; a&sup2; - 1 &lt; 0<br>
-    &rArr; (a+1)(a-1) &lt; 0<br>
-    &rArr; <strong>-1 &lt; a &lt; 1</strong><br>
-    所以当 -1 &lt; a &lt; 1 时，该全称命题为真。
+    p为真：&forall;x&isin;[0,1]，x&sup2; - a &ge; 0 &rArr; a &le; x&sup2;在[0,1]上的最小值 &rArr; a &le; 0。<br>
+    q为真：&exist;x&isin;R，x&sup2; + 2ax + 1 = 0有实数解 &rArr; &Delta; = 4a&sup2; - 4 &ge; 0 &rArr; a &le; -1 或 a &ge; 1。<br>
+    p&and;q为真&rArr;a&le;0 且 (a&le;-1 或 a&ge;1) &rArr; <strong>a &le; -1</strong>。选A。
   </div>
-  <button class="btn-toggle" onclick="toggleAnswer('c5answer')">显示解析</button>
 </div>
 
 </section>
@@ -740,8 +739,18 @@
 var answered = {};
 var totalScore = 0;
 
+var answers = {
+  1: 2, 2: 2, 3: 1, 4: 0, 5: 1, 6: 1, 7: 1, 8: 1,
+  9: 0, 10: 1, 11: 1,
+  12: 3, 13: 1, 14: 1, 15: 0, 16: 0
+};
+
+// 每题分值：1-11 知识点题各 1 分，12-16 综合题各 2 分
+function scoreWeight(qid) {
+  return qid >= 12 ? 2 : 1;
+}
+
 function checkChoice(qid, idx) {
-  var answers = {1:1, 2:3, 3:2, 4:1, 5:1, 6:1, 7:0, 8:1, 9:1};
   if (answered[qid]) return;
 
   var qDiv = document.getElementById("q" + qid);
@@ -769,89 +778,25 @@ function checkChoice(qid, idx) {
   updateTotalScore();
 }
 
-// ============================================================
-// 填空题交互
-// ============================================================
-function checkFill(inputId, correctAnswer) {
-  var input = document.getElementById(inputId);
-  if (input.classList.contains("correct-input") || input.classList.contains("wrong-input")) return;
-
-  var val = input.value.trim();
-  var btn = input.nextElementSibling;
-
-  if (val === correctAnswer) {
-    input.className = "fill-input correct-input";
-  } else {
-    input.className = "fill-input wrong-input";
-  }
-
-  btn.disabled = true;
-  btn.style.opacity = "0.5";
-  updateTotalScore();
-}
-
 function updateTotalScore() {
-  // Count correct quiz questions (each worth 2 points, total 18)
-  var quizScore = 0;
-  for (var i = 1; i <= 9; i++) {
+  var score = 0;
+  for (var i = 1; i <= 16; i++) {
     if (answered[i]) {
       var qDiv = document.getElementById("q" + i);
       if (qDiv.classList.contains("correct")) {
-        quizScore += 2;
+        score += scoreWeight(i);
       }
     }
   }
-  if (quizScore > 18) quizScore = 18;
-
-  // Count correct fill-in answers (each exercise 10 points, sub-questions weighted equally)
-  var fillScore = 0;
-  var fillExercises = {
-    "c1": ["c1a1","c1a2","c1a3"],
-    "c2": ["c2a1","c2a2","c2a3","c2a4"],
-    "c3": ["c3a1","c3a2","c3a3"],
-    "c4": ["c4a1","c4a2","c4a3","c4a4","c4a5"],
-    "c5": ["c5a1"]
-  };
-
-  for (var ex in fillExercises) {
-    var ids = fillExercises[ex];
-    var allAnswered = true;
-    var correctCount = 0;
-    for (var j = 0; j < ids.length; j++) {
-      var inp = document.getElementById(ids[j]);
-      if (!inp || (!inp.classList.contains("correct-input") && !inp.classList.contains("wrong-input"))) {
-        allAnswered = false;
-        break;
-      }
-      if (inp.classList.contains("correct-input")) correctCount++;
-    }
-    if (allAnswered) {
-      // Score proportionally: each exercise worth 10 points
-      var perQ = Math.floor(10 / ids.length);
-      var score = correctCount * perQ;
-      if (correctCount === ids.length) score = 10;
-      fillScore += score;
-    }
-  }
-
-  totalScore = quizScore + fillScore;
+  totalScore = score;
   document.getElementById("totalScore").textContent = totalScore;
-}
-
-// ============================================================
-// 综合练习解析切换
-// ============================================================
-function toggleAnswer(id) {
-  var box = document.getElementById(id);
-  box.classList.toggle("show");
 }
 
 // ============================================================
 // 重置
 // ============================================================
 function resetAll() {
-  // Reset quiz questions
-  for (var i = 1; i <= 9; i++) {
+  for (var i = 1; i <= 16; i++) {
     var qDiv = document.getElementById("q" + i);
     if (!qDiv) continue;
     qDiv.className = "quiz-question";
@@ -863,31 +808,11 @@ function resetAll() {
     explain.className = "explain";
   }
 
-  // Reset fill inputs
-  var fillIds = ["c1a1","c1a2","c1a3","c2a1","c2a2","c2a3","c2a4","c3a1","c3a2","c3a3","c4a1","c4a2","c4a3","c4a4","c4a5","c5a1"];
-  for (var k = 0; k < fillIds.length; k++) {
-    var inp = document.getElementById(fillIds[k]);
-    if (inp) {
-      inp.className = "fill-input";
-      inp.value = "";
-      var btn = inp.nextElementSibling;
-      if (btn && btn.tagName === "BUTTON") {
-        btn.disabled = false;
-        btn.style.opacity = "1";
-      }
-    }
-  }
-
-  // Reset answer boxes
-  var answerBoxes = document.querySelectorAll(".answer-box");
-  for (var m = 0; m < answerBoxes.length; m++) {
-    answerBoxes[m].classList.remove("show");
-  }
-
   answered = {};
   totalScore = 0;
   document.getElementById("totalScore").textContent = "0";
 }
 </script>
+    <script src="../dt.js"></script>
 </body>
 </html>

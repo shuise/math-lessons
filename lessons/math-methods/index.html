@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数学方法</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  h3 { color: #2c3e50; margin: 28px 0 10px; font-size: 1.12em; }
+  .method-card {
+    background: #fafbfc; border: 1px solid #e8eaed; border-radius: 8px;
+    padding: 16px 20px; margin: 14px 0; transition: box-shadow 0.2s;
+  }
+  .method-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .method-card .method-name { font-size: 1.05em; font-weight: bold; color: #1a73e8; }
+  .method-card .method-desc { margin: 6px 0; color: #444; }
+  .method-card .example-text {
+    background: #f0f7ff; border-left: 3px solid #1a73e8;
+    padding: 10px 14px; margin: 8px 0 0; border-radius: 0 6px 6px 0;
+    font-size: 0.93em; color: #333;
+  }
+  .category-intro {
+    background: #e8f0fe; border-radius: 10px; padding: 14px 20px;
+    margin: 12px 0 18px; border-left: 5px solid #1a73e8;
+  }
+  .category-tag {
+    display: inline-block; padding: 3px 14px; border-radius: 14px;
+    font-size: 0.8em; color: #fff; font-weight: bold; margin-right: 6px;
+  }
+  .tag-logic { background: #5c6bc0; }
+  .tag-algebra { background: #e67e22; }
+  .tag-count { background: #00897b; }
+
+  /* Quiz styles */
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag {
+    display: inline-block; padding: 2px 12px; border-radius: 12px;
+    font-size: 0.75em; margin-right: 8px; color: #fff;
+  }
+  .q-tag.method-quiz { background: #5c6bc0; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+  }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+  /* Score panel */
+  .score-panel {
+    text-align: center; padding: 16px; margin: 24px 0;
+    background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8;
+  }
+  .score-panel .score-num { font-size: 2em; font-weight: bold; color: #1a73e8; }
+  .score-panel .btn-reset {
+    margin-left: 16px; padding: 8px 24px; border: 2px solid #1a73e8;
+    color: #1a73e8; border-radius: 20px; background: #fff;
+    cursor: pointer; font-size: 0.95em; transition: 0.15s;
+  }
+  .score-panel .btn-reset:hover { background: #1a73e8; color: #fff; }
+
+  .section-divider {
+    border: none; border-top: 2px dashed #d0d7de;
+    margin: 36px 0;
+  }
+  sup, sub { font-size: 0.75em; }
+</style>
+</head>
+<body>
+
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+
+<h1>数学方法</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">掌握高中数学中 22 种核心方法——理解"什么时候用、怎么用"，每个方法附 1 个简明例子。</p>
+
+<!-- ======================================================================== -->
+<!-- 第一类：逻辑推理方法 -->
+<!-- ======================================================================== -->
+<section>
+<h2><span class="category-tag tag-logic">第一类</span> 逻辑推理方法</h2>
+<div class="category-intro">
+  <strong>什么时候用：</strong>当需要从已知条件出发，证明某个结论或判断某个命题的真假时，逻辑推理类方法就是你的工具箱。它们不依赖复杂计算，而是靠<strong>推理结构</strong>自身的力量。
+</div>
+
+<!-- 1. 反证法 -->
+<div class="method-card">
+  <div class="method-name">1. 反证法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：先假设结论的<strong>反面</strong>成立，然后从这一假设出发推出与已知条件或公理矛盾的结论，从而证明原结论正确。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>直接证明困难，但否定结论后容易导出矛盾时。"正难则反"。</div>
+  <div class="example-text">
+    <strong>例：</strong>证明 √2 是无理数。<br>
+    <em>证：</em>假设 √2 是有理数，设 √2 = p/q（p,q 互质正整数），则 2 = p²/q² ⇒ p² = 2q²，故 p 为偶数。令 p = 2k，代入得 4k² = 2q² ⇒ q² = 2k²，故 q 也为偶数。p,q 均为偶数与互质矛盾。所以 √2 是无理数。
+  </div>
+</div>
+
+<!-- 2. 分析法 -->
+<div class="method-card">
+  <div class="method-name">2. 分析法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：从要证明的<strong>结论出发</strong>，反向寻找使结论成立的条件，直到找到一个显然成立的已知条件。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>结论的结构比已知条件更清晰，倒推更容易找到路径。</div>
+  <div class="example-text">
+    <strong>例：</strong>已知 a,b &gt; 0，证明 a + b &ge; 2√ab。<br>
+    <em>证：</em>要证 a + b &ge; 2√ab。因 a,b &gt; 0，两边平方等价于 (a+b)² &ge; 4ab，即 a² + 2ab + b² - 4ab &ge; 0 ⇒ a² - 2ab + b² &ge; 0 ⇒ (a-b)² &ge; 0，显然成立。所以原不等式成立。
+  </div>
+</div>
+
+<!-- 3. 综合法 -->
+<div class="method-card">
+  <div class="method-name">3. 综合法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：从<strong>已知条件出发</strong>，运用定理、公理、定义，逐步推导到要证明的结论。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>已知条件直接且充分，正向推理路径清晰时（与分析法的方向相反）。</div>
+  <div class="example-text">
+    <strong>例：</strong>已知 a,b &gt; 0，证明 a + b &ge; 2√ab。<br>
+    <em>证：</em>因为 (√a - √b)² &ge; 0，展开得 a + b - 2√ab &ge; 0，所以 a + b &ge; 2√ab。
+  </div>
+</div>
+
+<!-- 4. 比较法 -->
+<div class="method-card">
+  <div class="method-name">4. 比较法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：通过<strong>作差或作商</strong>比较两个量的大小或判断两个式子是否相等。作差看正负，作商看与 1 的关系。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>需要判断两个代数式的大小关系或等式是否成立时。</div>
+  <div class="example-text">
+    <strong>例：</strong>比较 a² + b² 与 2ab 的大小。<br>
+    <em>解：</em>作差：(a² + b²) - 2ab = a² - 2ab + b² = (a-b)² &ge; 0。所以 a² + b² &ge; 2ab，当且仅当 a = b 时取等号。
+  </div>
+</div>
+
+<!-- 5. 放缩法 -->
+<div class="method-card">
+  <div class="method-name">5. 放缩法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：为了证明一个不等式，<strong>放大或缩小</strong>其中的某些项，使不等式向目标方向靠近，最终转化为一个更容易证明的形式。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>要证明和式/积式的不等式，直接求和困难，但放缩后可裂项求和时。</div>
+  <div class="example-text">
+    <strong>例：</strong>证明 1/1² + 1/2² + ... + 1/n² &lt; 2。<br>
+    <em>证：</em>当 n &ge; 2 时，1/k² &lt; 1/[k(k-1)] = 1/(k-1) - 1/k。左边 &lt; 1 + (1-1/2) + (1/2-1/3) + ... + [1/(n-1)-1/n] = 2 - 1/n &lt; 2。得证。
+  </div>
+</div>
+
+<!-- 6. 数学归纳法 -->
+<div class="method-card">
+  <div class="method-name">6. 数学归纳法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：<strong>两步走</strong>——① 验证 n = 1（或初始值）时命题成立；② 假设 n = k 时成立，证明 n = k+1 也成立。两步缺一不可。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>证明与正整数 n 有关的命题（等式、不等式、整除性等）。</div>
+  <div class="example-text">
+    <strong>例：</strong>证明 1 + 3 + 5 + ... + (2n-1) = n²。<br>
+    <em>证：</em>① n = 1 时，左边 = 1，右边 = 1² = 1，成立。<br>
+    ② 假设 n = k 时成立，即 1+3+...+(2k-1) = k²。则 n = k+1 时，左边 = k² + (2k+1) = (k+1)²，亦成立。由数学归纳法，等式对一切正整数 n 成立。
+  </div>
+</div>
+
+<!-- 7. 同一法 -->
+<div class="method-card">
+  <div class="method-name">7. 同一法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：证明两个对象（点、线、图形等）具有某种<strong>唯一确定的性质</strong>，若它们都满足同一条件，则它们必为同一对象。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>需要证明"某点在某线上"、"三线共点"等几何问题，正向证明困难时。</div>
+  <div class="example-text">
+    <strong>例：</strong>证明三角形的三条中线交于一点（重心）。<br>
+    <em>证：</em>设中线 AD、BE 交于点 G，连接 CG 并延长交 AB 于 F'。需要证明 F' 是 AB 的中点。利用重心性质可证 CF' 为中线的唯一性，从而 F' = F，三线共点。
+  </div>
+</div>
+</section>
+
+<!-- 第一类选择题 -->
+<section>
+<h3>第一类·检测</h3>
+<p style="color:#666;font-size:0.93em;">下面 2 道题考查逻辑推理方法的理解。点击选项，立即反馈。</p>
+
+<div class="quiz-question" id="q1">
+  <div class="q-title">
+    <span class="q-tag method-quiz">逻辑推理</span>
+    要证明"质数有无穷多个"，最适合使用以下哪种方法？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(1, 0)">A. 数学归纳法</div>
+    <div class="opt" onclick="checkChoice(1, 1)">B. 反证法</div>
+    <div class="opt" onclick="checkChoice(1, 2)">C. 综合法</div>
+    <div class="opt" onclick="checkChoice(1, 3)">D. 比较法</div>
+  </div>
+  <div class="explain" id="explain1">
+    <strong>解析：</strong>选 <strong>B</strong>。假设质数只有有限个 p₁, p₂, ..., p<sub>k</sub>，构造 N = p₁p₂...p<sub>k</sub> + 1，N 不能被任何已知质数整除，故 N 要么是质数要么含新的质因子，与假设矛盾。这是反证法的经典应用（欧几里得证明）。"直接列举无穷个质数"行不通，正难则反。
+  </div>
+</div>
+
+<div class="quiz-question" id="q2">
+  <div class="q-title">
+    <span class="q-tag method-quiz">逻辑推理</span>
+    求证"n&sup3; - n 能被 6 整除（n 为正整数）"，以下步骤中反映的是哪种方法？<br>
+    ① n = 1 时，1&sup3; - 1 = 0，能被 6 整除。<br>
+    ② 假设 n = k 时 k&sup3; - k 能被 6 整除。<br>
+    ③ n = k+1 时，(k+1)&sup3; - (k+1) = k&sup3; + 3k² + 2k = (k&sup3; - k) + 3k(k+1)，由假设和 3k(k+1) 能被 6 整除，得证。
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(2, 0)">A. 分析法</div>
+    <div class="opt" onclick="checkChoice(2, 1)">B. 放缩法</div>
+    <div class="opt" onclick="checkChoice(2, 2)">C. 数学归纳法</div>
+    <div class="opt" onclick="checkChoice(2, 3)">D. 同一法</div>
+  </div>
+  <div class="explain" id="explain2">
+    <strong>解析：</strong>选 <strong>C</strong>。这个过程清晰展示了数学归纳法的两个步骤：① 验证 n = 1 成立（奠基）；② 假设 n = k 成立，推导 n = k+1 成立（归纳递推）。两步缺一不可。
+  </div>
+</div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ======================================================================== -->
+<!-- 第二类：代数变形方法 -->
+<!-- ======================================================================== -->
+<section>
+<h2><span class="category-tag tag-algebra">第二类</span> 代数变形方法</h2>
+<div class="category-intro">
+  <strong>什么时候用：</strong>当题目涉及代数式、方程、函数，需要<strong>变换形式</strong>来简化问题时，代数变形方法是最常用的工具。它们通过恒等变形将复杂问题化为标准形式。
+</div>
+
+<!-- 8. 待定系数法 -->
+<div class="method-card">
+  <div class="method-name">8. 待定系数法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：先根据问题形式<strong>设出含有未知系数的表达式</strong>，然后利用已知条件列出方程组，解出这些系数。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>已知函数类型（二次函数、多项式等）或分解因式时，求具体系数。</div>
+  <div class="example-text">
+    <strong>例：</strong>已知 f(x) 是二次函数，f(0) = 1，f(1) = 2，f(2) = 5，求 f(x)。<br>
+    <em>解：</em>设 f(x) = ax² + bx + c。由 f(0) = 1 得 c = 1；由 f(1) = 2 得 a + b + 1 = 2 ⇒ a + b = 1；由 f(2) = 5 得 4a + 2b + 1 = 5 ⇒ 2a + b = 2。解得 a = 1，b = 0。所以 f(x) = x² + 1。
+  </div>
+</div>
+
+<!-- 9. 换元法 -->
+<div class="method-card">
+  <div class="method-name">9. 换元法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：引入<strong>新的变量替换</strong>原表达式中的复杂部分，使结构简化，求解后再代回原变量。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>表达式中有重复出现的复杂子结构，或根式、分式使问题复杂时。</div>
+  <div class="example-text">
+    <strong>例：</strong>解方程 (x² + 1)² - 3(x² + 1) + 2 = 0。<br>
+    <em>解：</em>令 t = x² + 1（&ge; 1），则原方程化为 t² - 3t + 2 = 0 ⇒ (t-1)(t-2) = 0 ⇒ t = 1 或 2。代回：x² + 1 = 1 ⇒ x = 0；x² + 1 = 2 ⇒ x = &plusmn;1。所以解为 x = 0 或 x = &plusmn;1。
+  </div>
+</div>
+
+<!-- 10. 配方法 -->
+<div class="method-card">
+  <div class="method-name">10. 配方法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：通过<strong>添加和减去适当的项</strong>，将二次表达式配成完全平方形式 (x + a)² + b，从而简化问题。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>二次函数求最值、解二次方程、二次不等式、化简二次曲线方程时。</div>
+  <div class="example-text">
+    <strong>例：</strong>求 y = x² - 4x + 3 的最值。<br>
+    <em>解：</em>y = x² - 4x + 4 - 1 = (x-2)² - 1。因为 (x-2)² &ge; 0，所以 y &ge; -1。当 x = 2 时取得最小值 -1，无最大值。
+  </div>
+</div>
+
+<!-- 11. 构造法 -->
+<div class="method-card">
+  <div class="method-name">11. 构造法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：根据问题的特点，有意识地<strong>构造一个辅助对象</strong>（函数、方程、数列、图形等），利用辅助对象的性质来解决原问题。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>直接求解困难，但问题形式暗示可以构造某个已知模型时。</div>
+  <div class="example-text">
+    <strong>例：</strong>求证 1 + 1/4 + 1/9 + ... + 1/n² &lt; 2。<br>
+    <em>证：</em>构造函数 f(x) = 1 + 1/2² + ... + 1/n²。利用放缩：1/k² &lt; 1/(k-1) - 1/k（k &ge; 2），则 f(n) &lt; 1 + (1-1/n) = 2 - 1/n &lt; 2。也可以构造定积分放缩。构造函数是放缩法的一种高级形式。
+  </div>
+</div>
+
+<!-- 12. 消元法 -->
+<div class="method-card">
+  <div class="method-name">12. 消元法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：通过代入、加减等方法<strong>减少未知数的个数</strong>，将多元问题转化为一元问题求解。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>方程组或含多个变量的等式/不等式问题。</div>
+  <div class="example-text">
+    <strong>例：</strong>解方程组 { x + y = 5, x - y = 1 }。<br>
+    <em>解：</em>两式相加得 2x = 6 ⇒ x = 3；两式相减得 2y = 4 ⇒ y = 2。所以解为 x = 3，y = 2。
+  </div>
+</div>
+
+<!-- 13. 赋值法 -->
+<div class="method-card">
+  <div class="method-name">13. 赋值法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：对变量<strong>赋予特定的值</strong>（如 0、1、-1 等），利用特殊情形推断一般结论，常用于求系数和、恒等式证明。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>多项式恒等式、数列求和、二项式展开中求特定系数之和时。</div>
+  <div class="example-text">
+    <strong>例：</strong>已知 f(x) = ax&sup3; + bx² + cx + d，求所有系数之和。<br>
+    <em>解：</em>令 x = 1，则 f(1) = a + b + c + d。所以所有系数之和就是 f(1)。赋值法将求系数和转化为求函数值。
+  </div>
+</div>
+
+<!-- 14. 分离参数法 -->
+<div class="method-card">
+  <div class="method-name">14. 分离参数法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：将<strong>参数与变量分开</strong>到等式或不等式的两边，使一边只含变量，另一边只含参数，从而转化为函数值域问题。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>已知方程或不等式在某个范围内有解/恒成立，求参数的取值范围。</div>
+  <div class="example-text">
+    <strong>例：</strong>方程 x² - 2ax + 1 = 0 在 [0,2] 上有解，求 a。<br>
+    <em>解：</em>分离 a：由 x² - 2ax + 1 = 0 得 a = (x²+1)/(2x) = x/2 + 1/(2x)（x &ne; 0）。x = 0 时，1=0 无解。求 f(x) = x/2 + 1/(2x) 在 (0,2] 的值域。由均值不等式，f(x) &ge; 1，无上界。所以 a &ge; 1。
+  </div>
+</div>
+
+<!-- 15. 累加法 -->
+<div class="method-card">
+  <div class="method-name">15. 累加法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：对于形如 a<sub>n+1</sub> - a<sub>n</sub> = f(n) 的递推式，将 n = 1 到 n-1 的各式<strong>逐项相加</strong>，消去中间项得到 a<sub>n</sub> 的通项公式。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>递推关系是相邻项之差为一个关于 n 的函数时。</div>
+  <div class="example-text">
+    <strong>例：</strong>a₁ = 1，a<sub>n+1</sub> = a<sub>n</sub> + 2n，求 a<sub>n</sub>。<br>
+    <em>解：</em>由 a₂ - a₁ = 2&times;1，a₃ - a₂ = 2&times;2，...，a<sub>n</sub> - a<sub>n-1</sub> = 2(n-1)。累加得 a<sub>n</sub> - a₁ = 2[1+2+...+(n-1)] = n(n-1)。所以 a<sub>n</sub> = n² - n + 1。
+  </div>
+</div>
+
+<!-- 16. 累乘法 -->
+<div class="method-card">
+  <div class="method-name">16. 累乘法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：对于形如 a<sub>n+1</sub> / a<sub>n</sub> = g(n) 的递推式，将 n = 1 到 n-1 的各式<strong>逐项相乘</strong>，消去中间项得到 a<sub>n</sub> 的通项公式。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>递推关系是相邻项之比为一个关于 n 的函数时。</div>
+  <div class="example-text">
+    <strong>例：</strong>a₁ = 1，a<sub>n+1</sub> = a<sub>n</sub> &middot; 2<sup>n</sup>，求 a<sub>n</sub>。<br>
+    <em>解：</em>由 a₂/a₁ = 2¹，a₃/a₂ = 2²，...，a<sub>n</sub>/a<sub>n-1</sub> = 2<sup>n-1</sup>。累乘得 a<sub>n</sub>/a₁ = 2¹&middot;2²&middot;...&middot;2<sup>n-1</sup> = 2<sup>1+2+...+(n-1)</sup> = 2<sup>n(n-1)/2</sup>。所以 a<sub>n</sub> = 2<sup>n(n-1)/2</sup>。
+  </div>
+</div>
+
+<!-- 17. 迭代法 -->
+<div class="method-card">
+  <div class="method-name">17. 迭代法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：对同一个操作<strong>反复应用</strong>，每次计算的结果作为下一次的输入，逐步逼近目标值。常用于数值计算和递推数列。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>求方程的近似根、求平方根、递推数列求极限等。</div>
+  <div class="example-text">
+    <strong>例：</strong>用迭代法求 √a（牛顿迭代公式）。<br>
+    <em>解：</em>取 x₀ &gt; 0，迭代公式 x<sub>n+1</sub> = (x<sub>n</sub> + a/x<sub>n</sub>)/2。例如求 √2，取 x₀ = 1：x₁ = (1+2/1)/2 = 1.5；x₂ = (1.5+2/1.5)/2 &asymp; 1.4167；x₃ &asymp; 1.4142，已精确到小数点后 4 位。收敛非常快。
+  </div>
+</div>
+</section>
+
+<!-- 第二类选择题 -->
+<section>
+<h3>第二类·检测</h3>
+<p style="color:#666;font-size:0.93em;">下面 2 道题考查代数变形方法的理解。点击选项，立即反馈。</p>
+
+<div class="quiz-question" id="q3">
+  <div class="q-title">
+    <span class="q-tag method-quiz">代数变形</span>
+    已知 a₁ = 2，a<sub>n+1</sub> = a<sub>n</sub> + 2n + 1，求 a<sub>n</sub>。以下哪种方法最合适？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(3, 0)">A. 累乘法</div>
+    <div class="opt" onclick="checkChoice(3, 1)">B. 累加法</div>
+    <div class="opt" onclick="checkChoice(3, 2)">C. 配方法</div>
+    <div class="opt" onclick="checkChoice(3, 3)">D. 待定系数法</div>
+  </div>
+  <div class="explain" id="explain3">
+    <strong>解析：</strong>选 <strong>B</strong>。递推式为 a<sub>n+1</sub> - a<sub>n</sub> = 2n + 1，是相邻项之差为 n 的函数，典型的累加法模型。将 a₂-a₁, a₃-a₂, ..., a<sub>n</sub>-a<sub>n-1</sub> 累加即可求出 a<sub>n</sub>。累乘法适用于相邻项之比为函数的情况。
+  </div>
+</div>
+
+<div class="quiz-question" id="q4">
+  <div class="q-title">
+    <span class="q-tag method-quiz">代数变形</span>
+    解方程 2x⁴ - 5x² + 2 = 0，最合理的思路是？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(4, 0)">A. 直接因式分解四次式</div>
+    <div class="opt" onclick="checkChoice(4, 1)">B. 令 t = x²，将方程化为 2t² - 5t + 2 = 0（换元法）</div>
+    <div class="opt" onclick="checkChoice(4, 2)">C. 用配方法配成完全平方</div>
+    <div class="opt" onclick="checkChoice(4, 3)">D. 用消元法减少未知数</div>
+  </div>
+  <div class="explain" id="explain4">
+    <strong>解析：</strong>选 <strong>B</strong>。方程中只含 x² 和 x⁴，令 t = x²（t &ge; 0），则原方程化为 2t² - 5t + 2 = 0。解出 t = 2 或 t = 1/2，再代回得 x = &plusmn;√2 或 x = &plusmn;√(1/2) = &plusmn;√2/2。换元法将四次方程降为二次，大幅简化计算。
+  </div>
+</div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ======================================================================== -->
+<!-- 第三类：组合计数方法 -->
+<!-- ======================================================================== -->
+<section>
+<h2><span class="category-tag tag-count">第三类</span> 组合计数方法</h2>
+<div class="category-intro">
+  <strong>什么时候用：</strong>当需要计算"有多少种方式"完成一件事，涉及排列、组合、分配问题时，组合计数方法提供了一套系统的思路。关键是要判断"顺序是否重要"、"元素是否相同"。
+</div>
+
+<!-- 18. 捆绑法 -->
+<div class="method-card">
+  <div class="method-name">18. 捆绑法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：将<strong>必须相邻的元素捆绑成一个整体</strong>，先把这个整体与其他元素排列，再考虑整体内部元素的排列。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>排列问题中要求某些元素必须相邻（在一起）时。</div>
+  <div class="example-text">
+    <strong>例：</strong>A、B、C、D、E 五人排成一排，要求 A、B 相邻，有多少种排法？<br>
+    <em>解：</em>将 A、B 捆绑为一个整体 X，则 X、C、D、E 共 4 个元素排列，有 P(4,4) = 24 种。X 内部 A、B 可交换顺序，有 2 种。总数 = 24 &times; 2 = <strong>48 种</strong>。
+  </div>
+</div>
+
+<!-- 19. 插空法 -->
+<div class="method-card">
+  <div class="method-name">19. 插空法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：先排好<strong>没有特殊要求的元素</strong>，再在它们之间的空隙（包括两端）中插入要求不相邻的元素。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>排列问题中要求某些元素互不相邻（不能在一起）时。</div>
+  <div class="example-text">
+    <strong>例：</strong>A、B、C、D、E 五人排成一排，要求 A、B 不相邻，有多少种排法？<br>
+    <em>解：</em>先排 C、D、E 共 3 人，有 P(3,3) = 6 种（产生 4 个空隙：_C_D_E_）。从 4 个空隙中选 2 个插入 A、B，有 P(4,2) = 12 种。总数 = 6 &times; 12 = <strong>72 种</strong>。
+  </div>
+</div>
+
+<!-- 20. 隔板法 -->
+<div class="method-card">
+  <div class="method-name">20. 隔板法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：将 n 个<strong>相同的物品</strong>分成 k 组（每组非空），在 n 个物品之间的 n-1 个空隙中<strong>插入 k-1 个隔板</strong>，每组物品数由隔板位置决定。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>将相同物品分给不同的人/组，每组至少一个（或允许空组）时。</div>
+  <div class="example-text">
+    <strong>例：</strong>10 个相同的球放入 3 个不同的盒子，每个盒子非空，有多少种放法？<br>
+    <em>解：</em>10 个球排成一列，之间有 9 个空隙。插入 2 个隔板（分成 3 组），每组对应一个盒子。方法数 = C(9,2) = <strong>36 种</strong>。
+  </div>
+</div>
+
+<!-- 21. 局部调整法 -->
+<div class="method-card">
+  <div class="method-name">21. 局部调整法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：从一个<strong>可行的初始方案</strong>出发，通过逐步微调（改变局部），使目标函数不断优化，最终达到最优或找到规律。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>线性规划最优解、资源分配优化、贪心策略证明等。</div>
+  <div class="example-text">
+    <strong>例：</strong>某工厂生产 A、B 两种产品，每件 A 利润 40 元、耗时 2 小时，每件 B 利润 30 元、耗时 1 小时，每天总工时不超过 8 小时，A 每天最多 3 件，求最大利润。<br>
+    <em>解：</em>先试方案：只做 A：3 件利润 120 元（用 6 小时）；剩余 2 小时做 2 件 B，利润 +60 元。总利润 = 180 元。调整：做 2 件 A（4 小时，80 元），做 4 件 B（4 小时，120 元），总利润 = 200 元。逐步尝试找到最优。
+  </div>
+</div>
+
+<!-- 22. 磨光法 -->
+<div class="method-card">
+  <div class="method-name">22. 磨光法</div>
+  <div class="method-desc"><span class="definition">核心思想</span>：反复<strong>简化问题结构</strong>，通过各种恒等变形、对称化、规范化操作，逐步"打磨"掉复杂部分，直到问题呈现出清晰规律。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>复杂表达式化简、寻找规律、对称性利用等。常用于竞赛数学。</div>
+  <div class="example-text">
+    <strong>例：</strong>化简 1/(1&times;2) + 1/(2&times;3) + 1/(3&times;4) + ... + 1/[n(n+1)]。<br>
+    <em>解：</em>注意到 1/[k(k+1)] = 1/k - 1/(k+1)（裂项变形）。反复应用这一变形：原式 = (1-1/2)+(1/2-1/3)+...+[1/n-1/(n+1)] = 1 - 1/(n+1) = n/(n+1)。"磨光"即逐步简化到最简形式。
+  </div>
+</div>
+</section>
+
+<!-- 第三类选择题 -->
+<section>
+<h3>第三类·检测</h3>
+<p style="color:#666;font-size:0.93em;">下面 2 道题考查组合计数方法的应用。点击选项，立即反馈。</p>
+
+<div class="quiz-question" id="q5">
+  <div class="q-title">
+    <span class="q-tag method-quiz">组合计数</span>
+    6 本相同的练习册分给 3 个学生，每人至少 1 本，有多少种不同的分法？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(5, 0)">A. C(6,3) = 20 种</div>
+    <div class="opt" onclick="checkChoice(5, 1)">B. C(5,2) = 10 种</div>
+    <div class="opt" onclick="checkChoice(5, 2)">C. P(6,3) = 120 种</div>
+    <div class="opt" onclick="checkChoice(5, 3)">D. 3⁶ = 729 种</div>
+  </div>
+  <div class="explain" id="explain5">
+    <strong>解析：</strong>选 <strong>B</strong>。6 本相同的书排成一列，之间有 5 个空隙，插入 2 个隔板分成 3 组（每人一组）。这是隔板法的标准模型：C(5,2) = 10 种。注意：物品相同，顺序不重要，不能用排列。选 A 是 C(6,3) 不对，应是 C(5,2)。选 D 是每个学生可选任意本（每人 6 种选择），但忽略了"相同物品"。
+  </div>
+</div>
+
+<div class="quiz-question" id="q6">
+  <div class="q-title">
+    <span class="q-tag method-quiz">组合计数</span>
+    3 个男生和 2 个女生排成一排，要求女生不相邻，有多少种排法？
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(6, 0)">A. 120 种</div>
+    <div class="opt" onclick="checkChoice(6, 1)">B. 72 种</div>
+    <div class="opt" onclick="checkChoice(6, 2)">C. 48 种</div>
+    <div class="opt" onclick="checkChoice(6, 3)">D. 36 种</div>
+  </div>
+  <div class="explain" id="explain6">
+    <strong>解析：</strong>选 <strong>B</strong>。先排 3 个男生，有 P(3,3) = 6 种（产生 4 个空隙：_男_男_男_）。从 4 个空隙中选 2 个插入 2 个女生，有 P(4,2) = 12 种。总数 = 6 &times; 12 = <strong>72 种</strong>。这是插空法的典型应用。注意 C 选项 48 是捆绑法的结果（女生相邻），与题目要求相反。
+  </div>
+</div>
+</section>
+
+<!-- ============================== 评分面板 ============================== -->
+<section>
+<div class="score-panel">
+  正确题数：<span class="score-num" id="totalScore">0</span> / 6
+  <button class="btn-reset" onclick="resetAll()">重置</button>
+</div>
+</section>
+
+</article>
+
+<script>
+// ============================================================
+// 选择题交互
+// ============================================================
+var answered = {};
+var correctCount = 0;
+
+function checkChoice(qid, idx) {
+  // Answers: q1=B(1), q2=C(2), q3=B(1), q4=B(1), q5=B(1), q6=B(1)
+  var answers = {1:1, 2:2, 3:1, 4:1, 5:1, 6:1};
+  if (answered[qid]) return;
+
+  var qDiv = document.getElementById("q" + qid);
+  var opts = qDiv.querySelectorAll(".opt");
+  var explain = document.getElementById("explain" + qid);
+
+  // Disable all options
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add("disabled");
+  }
+
+  var correct = answers[qid];
+  if (idx === correct) {
+    opts[idx].classList.add("correct-opt");
+    qDiv.classList.add("correct");
+    explain.className = "explain show ok";
+    correctCount++;
+  } else {
+    opts[idx].classList.add("wrong-opt");
+    opts[correct].classList.add("correct-opt");
+    qDiv.classList.add("wrong");
+    explain.className = "explain show fail";
+  }
+
+  answered[qid] = true;
+  updateScore();
+}
+
+function updateScore() {
+  document.getElementById("totalScore").textContent = correctCount;
+}
+
+// ============================================================
+// 重置
+// ============================================================
+function resetAll() {
+  for (var i = 1; i <= 6; i++) {
+    var qDiv = document.getElementById("q" + i);
+    if (!qDiv) continue;
+    qDiv.className = "quiz-question";
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].className = "opt";
+    }
+    var explain = document.getElementById("explain" + i);
+    explain.className = "explain";
+  }
+
+  answered = {};
+  correctCount = 0;
+  document.getElementById("totalScore").textContent = "0";
+}
+</script>
+    <script src="../dt.js"></script>
+</body>
+</html>

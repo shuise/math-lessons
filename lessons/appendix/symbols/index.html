@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数学符号速查表</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+  .symbol-table th:first-child {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+  }
+  .symbol-table td:first-child {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    font-size: 2.5em;
+    white-space: nowrap;
+    min-width: 200px;
+  }
+  .symbol-table th,
+  .symbol-table td {
+    text-align: center;
+  }
+  .symbol-table td:nth-child(2),
+  .symbol-table td:nth-child(3) {
+    text-align: left;
+  }
+  .symbol-table td:nth-child(4) {
+    text-align: left;
+  }
+  .symbol-table tr:nth-child(even) {
+    background: #f5f7fa;
+  }
+  .symbol-table tr:nth-child(odd) {
+    background: #fff;
+  }
+  .category-section {
+    margin: 48px 0;
+  }
+  .category-section h2 {
+    border-bottom: 2px solid #1a73e8;
+    padding-bottom: 8px;
+    border-left: none;
+    padding-left: 0;
+  }
+  .category-section:first-of-type {
+    margin-top: 32px;
+  }
+  article {
+    background:#fff;border-radius:12px;padding:36px 40px;box-shadow:0 2px 12px rgba(0,0,0,0.06);overflow-wrap:break-word;word-wrap:break-word;overflow-x:hidden;
+  }
+  .page-desc {
+    color: #555;
+    font-size: 1em;
+    line-height: 1.8;
+    margin: 16px 0 32px;
+  }
+  .symbol-table td:first-child .sym-sub {
+    font-family: 'Courier New', Courier, monospace;
+  }
+  .symbol-table col.sym-col { width: 10%; }
+  .symbol-table col.cn-col { width: 15%; }
+  .symbol-table col.en-col { width: 22%; }
+  .symbol-table col.desc-col { width: 53%; }
+</style>
+</head>
+<body>
+<article>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<h1>数学符号速查表</h1>
+<p class="page-desc">本课件体系中出现的主要数学符号，按类别分组整理。每个符号给出其中文名称、英文名称及含义说明，方便快速查阅。</p>
+
+<div class="category-section">
+<h2>1.1 集合论符号</h2>
+<table class="symbol-table">
+<colgroup>
+  <col class="sym-col">
+  <col class="cn-col">
+  <col class="en-col">
+  <col class="desc-col">
+</colgroup>
+<thead>
+<tr><th>符号</th><th>中文名称</th><th>英文名称</th><th>含义说明</th></tr>
+</thead>
+<tbody>
+<tr><td>&isin;</td><td>属于</td><td>belongs to</td><td>元素属于某个集合，如 a &isin; A</td></tr>
+<tr><td>&notin;</td><td>不属于</td><td>does not belong to</td><td>元素不属于某个集合</td></tr>
+<tr><td>&sube;</td><td>子集</td><td>subset</td><td>A &sube; B 表示 A 的所有元素都在 B 中</td></tr>
+<tr><td>&sub;</td><td>真子集</td><td>proper subset</td><td>A &sub; B 表示 A &sube; B 且 A &ne; B</td></tr>
+<tr><td>&supe;</td><td>包含</td><td>superset</td><td>A &supe; B 表示 B &sube; A</td></tr>
+<tr><td>&cup;</td><td>并集</td><td>union</td><td>A &cup; B 表示属于 A 或属于 B 的元素</td></tr>
+<tr><td>&cap;</td><td>交集</td><td>intersection</td><td>A &cap; B 表示同时属于 A 和 B 的元素</td></tr>
+<tr><td>&empty;</td><td>空集</td><td>empty set</td><td>不含任何元素的集合</td></tr>
+<tr><td>&compfn;</td><td>补集</td><td>complement</td><td>&compfn;<sub>U</sub>A 表示 U 中不在 A 中的元素</td></tr>
+<tr><td>&oplus;</td><td>对称差</td><td>symmetric difference</td><td>A &oplus; B = (A-B) &cup; (B-A)</td></tr>
+<tr><td>&#8469;</td><td>自然数集</td><td>natural numbers</td><td>&#8469; = {0, 1, 2, 3, ...}</td></tr>
+<tr><td>&#8484;</td><td>整数集</td><td>integers</td><td>&#8484; = {..., -2, -1, 0, 1, 2, ...}</td></tr>
+<tr><td>&#8474;</td><td>有理数集</td><td>rational numbers</td><td>可表示为 p/q (q&ne;0) 的数</td></tr>
+<tr><td>&#8477;</td><td>实数集</td><td>real numbers</td><td>包括有理数和无理数</td></tr>
+<tr><td>&#8450;</td><td>复数集</td><td>complex numbers</td><td>形如 a + bi 的数</td></tr>
+<tr><td>&alefsym;<sub>0</sub></td><td>阿列夫零</td><td>aleph-null</td><td>可数无穷基数</td></tr>
+<tr><td>&alefsym;<sub>1</sub></td><td>阿列夫一</td><td>aleph-one</td><td>连续统基数</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="category-section">
+<h2>1.2 逻辑符号</h2>
+<table class="symbol-table">
+<colgroup>
+  <col class="sym-col">
+  <col class="cn-col">
+  <col class="en-col">
+  <col class="desc-col">
+</colgroup>
+<thead>
+<tr><th>符号</th><th>中文名称</th><th>英文名称</th><th>含义说明</th></tr>
+</thead>
+<tbody>
+<tr><td>&forall;</td><td>全称量词</td><td>universal quantifier</td><td>"对任意"、"对所有"</td></tr>
+<tr><td>&exist;</td><td>存在量词</td><td>existential quantifier</td><td>"存在"、"至少有一个"</td></tr>
+<tr><td>&not;</td><td>非（否定）</td><td>negation</td><td>&not;p 表示命题 p 的否定</td></tr>
+<tr><td>&and;</td><td>且（合取）</td><td>conjunction</td><td>p &and; q 表示 p 和 q 同时为真</td></tr>
+<tr><td>&or;</td><td>或（析取）</td><td>disjunction</td><td>p &or; q 表示 p 或 q 至少一个为真</td></tr>
+<tr><td>&rarr;</td><td>蕴含</td><td>implication</td><td>p &rarr; q 表示"若 p 则 q"</td></tr>
+<tr><td>&harr;</td><td>等价</td><td>equivalence</td><td>p &harr; q 表示 p 与 q 同真同假</td></tr>
+<tr><td>&rArr;</td><td>推出</td><td>implies</td><td>A &rArr; B 表示由 A 可推出 B</td></tr>
+<tr><td>&hArr;</td><td>等价于</td><td>equivalent to</td><td>A &hArr; B 表示 A 与 B 等价</td></tr>
+<tr><td>&there4;</td><td>因此</td><td>therefore</td><td>用于推理中引出结论</td></tr>
+<tr><td>&because;</td><td>因为</td><td>because</td><td>用于推理中说明原因</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="category-section">
+<h2>1.3 关系运算符</h2>
+<table class="symbol-table">
+<colgroup>
+  <col class="sym-col">
+  <col class="cn-col">
+  <col class="en-col">
+  <col class="desc-col">
+</colgroup>
+<thead>
+<tr><th>符号</th><th>中文名称</th><th>英文名称</th><th>含义说明</th></tr>
+</thead>
+<tbody>
+<tr><td>=</td><td>等于</td><td>equals</td><td>左右两边相等</td></tr>
+<tr><td>&ne;</td><td>不等于</td><td>not equal</td><td>左右两边不相等</td></tr>
+<tr><td>&lt;</td><td>小于</td><td>less than</td><td>左边的数小于右边的数</td></tr>
+<tr><td>&gt;</td><td>大于</td><td>greater than</td><td>左边的数大于右边的数</td></tr>
+<tr><td>&le;</td><td>小于或等于</td><td>less than or equal</td><td>左边的数不超过右边的数</td></tr>
+<tr><td>&ge;</td><td>大于或等于</td><td>greater than or equal</td><td>左边的数不小于右边的数</td></tr>
+<tr><td>&asymp;</td><td>约等于</td><td>approximately equal</td><td>近似相等</td></tr>
+<tr><td>&prop;</td><td>正比于</td><td>proportional to</td><td>两个量成正比关系</td></tr>
+<tr><td>&equiv;</td><td>恒等于</td><td>identically equal</td><td>恒等成立</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="category-section">
+<h2>1.4 运算符号</h2>
+<table class="symbol-table">
+<colgroup>
+  <col class="sym-col">
+  <col class="cn-col">
+  <col class="en-col">
+  <col class="desc-col">
+</colgroup>
+<thead>
+<tr><th>符号</th><th>中文名称</th><th>英文名称</th><th>含义说明</th></tr>
+</thead>
+<tbody>
+<tr><td>+</td><td>加</td><td>plus / addition</td><td>加法运算</td></tr>
+<tr><td>&minus;</td><td>减 / 负号</td><td>minus / subtraction</td><td>减法运算或负数</td></tr>
+<tr><td>&times;</td><td>乘</td><td>times / multiplication</td><td>乘法运算</td></tr>
+<tr><td>&middot;</td><td>点乘</td><td>dot / multiplication</td><td>乘法（尤其向量点积）</td></tr>
+<tr><td>&divide;</td><td>除</td><td>divided by</td><td>除法运算</td></tr>
+<tr><td>&plusmn;</td><td>正或负</td><td>plus or minus</td><td>表示可取正号或负号</td></tr>
+<tr><td>&radic;</td><td>平方根</td><td>square root</td><td>&radic;a 表示 a 的非负平方根</td></tr>
+<tr><td>&sup3;&radic;</td><td>立方根</td><td>cube root</td><td>&sup3;&radic;a 表示 a 的立方根</td></tr>
+<tr><td>!</td><td>阶乘</td><td>factorial</td><td>n! = 1&times;2&times;3&times;...&times;n</td></tr>
+<tr><td>%</td><td>百分号</td><td>percent</td><td>表示百分之几</td></tr>
+<tr><td>|x|</td><td>绝对值</td><td>absolute value</td><td>数轴上点到原点的距离</td></tr>
+<tr><td>&sup2;</td><td>平方</td><td>squared</td><td>一个数的二次方</td></tr>
+<tr><td>&sup3;</td><td>立方</td><td>cubed</td><td>一个数的三次方</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="category-section">
+<h2>1.5 希腊字母</h2>
+<table class="symbol-table">
+<colgroup>
+  <col class="sym-col">
+  <col class="cn-col">
+  <col class="en-col">
+  <col class="desc-col">
+</colgroup>
+<thead>
+<tr><th>符号</th><th>中文名称</th><th>英文名称</th><th>含义说明</th></tr>
+</thead>
+<tbody>
+<tr><td>&pi;</td><td>圆周率</td><td>pi</td><td>圆周率 &asymp; 3.14159</td></tr>
+<tr><td>&alpha;</td><td>阿尔法</td><td>alpha</td><td>幂指数、角度、系数</td></tr>
+<tr><td>&beta;</td><td>贝塔</td><td>beta</td><td>角度、系数</td></tr>
+<tr><td>&gamma;</td><td>伽马</td><td>gamma</td><td>角度</td></tr>
+<tr><td>&Delta;</td><td>德尔塔</td><td>delta</td><td>判别式 &Delta; = b&sup2;&minus;4ac；增量</td></tr>
+<tr><td>&theta;</td><td>西塔</td><td>theta</td><td>角度</td></tr>
+<tr><td>&phi;</td><td>斐</td><td>phi</td><td>初相、黄金分割比</td></tr>
+<tr><td>&omega;</td><td>欧米伽</td><td>omega</td><td>角频率</td></tr>
+<tr><td>&sigma;</td><td>西格玛</td><td>sigma</td><td>标准差</td></tr>
+<tr><td>&mu;</td><td>缪</td><td>mu</td><td>均值、总体期望</td></tr>
+<tr><td>&chi;</td><td>卡</td><td>chi</td><td>卡方统计量 &chi;&sup2;</td></tr>
+<tr><td>&Sigma;</td><td>大西格玛</td><td>Sigma</td><td>求和符号 &sum;</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="category-section">
+<h2>1.6 几何符号</h2>
+<table class="symbol-table">
+<colgroup>
+  <col class="sym-col">
+  <col class="cn-col">
+  <col class="en-col">
+  <col class="desc-col">
+</colgroup>
+<thead>
+<tr><th>符号</th><th>中文名称</th><th>英文名称</th><th>含义说明</th></tr>
+</thead>
+<tbody>
+<tr><td>&ang;</td><td>角</td><td>angle</td><td>&ang;A 表示以 A 为顶点的角</td></tr>
+<tr><td>&#9651;</td><td>三角形</td><td>triangle</td><td>&#9651;ABC 表示三角形 ABC</td></tr>
+<tr><td>&perp;</td><td>垂直</td><td>perpendicular</td><td>a &perp; b 表示 a 垂直于 b</td></tr>
+<tr><td>&par;</td><td>平行</td><td>parallel</td><td>a &par; b 表示 a 平行于 b</td></tr>
+<tr><td>&deg;</td><td>度</td><td>degree</td><td>角度单位，如 90&deg;</td></tr>
+<tr><td>&sim;</td><td>相似</td><td>similar</td><td>&#9651;ABC &sim; &#9651;DEF 表示两三角形相似</td></tr>
+<tr><td>&cong;</td><td>全等</td><td>congruent</td><td>两个图形大小形状完全相同</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="category-section">
+<h2>1.7 函数与微积分符号</h2>
+<table class="symbol-table">
+<colgroup>
+  <col class="sym-col">
+  <col class="cn-col">
+  <col class="en-col">
+  <col class="desc-col">
+</colgroup>
+<thead>
+<tr><th>符号</th><th>中文名称</th><th>英文名称</th><th>含义说明</th></tr>
+</thead>
+<tbody>
+<tr><td>f(x)</td><td>函数值</td><td>function value</td><td>函数 f 在 x 处的取值</td></tr>
+<tr><td>f<sup>&minus;1</sup>(x)</td><td>反函数</td><td>inverse function</td><td>函数 f 的反函数</td></tr>
+<tr><td>f&prime;(x)</td><td>导数</td><td>derivative</td><td>函数在 x 处的变化率</td></tr>
+<tr><td>lim</td><td>极限</td><td>limit</td><td>函数在某点的趋近值</td></tr>
+<tr><td>&int;</td><td>积分</td><td>integral</td><td>曲线下的面积</td></tr>
+<tr><td>&sum;</td><td>求和</td><td>summation</td><td>对一系列数求和</td></tr>
+<tr><td>&infin;</td><td>无穷</td><td>infinity</td><td>无穷大</td></tr>
+<tr><td>e</td><td>自然常数</td><td>Euler's number</td><td>e &asymp; 2.71828</td></tr>
+<tr><td>log<sub>a</sub></td><td>对数</td><td>logarithm</td><td>以 a 为底的对数</td></tr>
+<tr><td>ln</td><td>自然对数</td><td>natural log</td><td>以 e 为底的对数</td></tr>
+<tr><td>lg</td><td>常用对数</td><td>common logarithm</td><td>以 10 为底的对数</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="category-section">
+<h2>1.8 三角函数符号</h2>
+<table class="symbol-table">
+<colgroup>
+  <col class="sym-col">
+  <col class="cn-col">
+  <col class="en-col">
+  <col class="desc-col">
+</colgroup>
+<thead>
+<tr><th>符号</th><th>中文名称</th><th>英文名称</th><th>含义说明</th></tr>
+</thead>
+<tbody>
+<tr><td>sin</td><td>正弦</td><td>sine</td><td>对边/斜边</td></tr>
+<tr><td>cos</td><td>余弦</td><td>cosine</td><td>邻边/斜边</td></tr>
+<tr><td>tan</td><td>正切</td><td>tangent</td><td>对边/邻边</td></tr>
+<tr><td>cot</td><td>余切</td><td>cotangent</td><td>邻边/对边</td></tr>
+<tr><td>sec</td><td>正割</td><td>secant</td><td>1/cos</td></tr>
+<tr><td>csc</td><td>余割</td><td>cosecant</td><td>1/sin</td></tr>
+<tr><td>arcsin</td><td>反正弦</td><td>arcsine</td><td>sin 的反函数</td></tr>
+<tr><td>arccos</td><td>反余弦</td><td>arccosine</td><td>cos 的反函数</td></tr>
+<tr><td>arctan</td><td>反正切</td><td>arctangent</td><td>tan 的反函数</td></tr>
+<tr><td>rad</td><td>弧度</td><td>radian</td><td>弧度制角度单位</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="category-section">
+<h2>1.9 概率与统计符号</h2>
+<table class="symbol-table">
+<colgroup>
+  <col class="sym-col">
+  <col class="cn-col">
+  <col class="en-col">
+  <col class="desc-col">
+</colgroup>
+<thead>
+<tr><th>符号</th><th>中文名称</th><th>英文名称</th><th>含义说明</th></tr>
+</thead>
+<tbody>
+<tr><td>P(A)</td><td>概率</td><td>probability</td><td>事件 A 发生的概率</td></tr>
+<tr><td>E(X)</td><td>期望</td><td>expected value</td><td>随机变量 X 的数学期望</td></tr>
+<tr><td>D(X)</td><td>方差</td><td>variance</td><td>随机变量 X 的方差</td></tr>
+<tr><td>&sigma;</td><td>标准差</td><td>standard deviation</td><td>方差的平方根</td></tr>
+<tr><td>X&#772;</td><td>样本均值</td><td>sample mean</td><td>样本的平均值</td></tr>
+<tr><td>&#375;</td><td>预测值</td><td>predicted value</td><td>回归模型的预测值</td></tr>
+<tr><td>&sim;</td><td>服从于</td><td>distributed as</td><td>X &sim; N(&mu;, &sigma;&sup2;) 表示正态分布</td></tr>
+<tr><td>C(n,k)</td><td>组合数</td><td>combination</td><td>从 n 个中取 k 个的组合数</td></tr>
+<tr><td>&chi;&sup2;</td><td>卡方</td><td>chi-square</td><td>卡方检验统计量</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="category-section">
+<h2>1.10 其他常用符号</h2>
+<table class="symbol-table">
+<colgroup>
+  <col class="sym-col">
+  <col class="cn-col">
+  <col class="en-col">
+  <col class="desc-col">
+</colgroup>
+<thead>
+<tr><th>符号</th><th>中文名称</th><th>英文名称</th><th>含义说明</th></tr>
+</thead>
+<tbody>
+<tr><td>i</td><td>虚数单位</td><td>imaginary unit</td><td>i&sup2; = &minus;1</td></tr>
+<tr><td>&hellip;</td><td>省略号</td><td>ellipsis</td><td>表示省略的部分</td></tr>
+<tr><td>&rArr;</td><td>推出</td><td>implies</td><td>逻辑推理</td></tr>
+<tr><td>&hArr;</td><td>等价于</td><td>if and only if</td><td>互为充分必要条件</td></tr>
+<tr><td>&uarr;</td><td>单调递增</td><td>increasing</td><td>函数值随自变量增加而增加</td></tr>
+<tr><td>&darr;</td><td>单调递减</td><td>decreasing</td><td>函数值随自变量增加而减少</td></tr>
+</tbody>
+</table>
+</div>
+
+</article>
+<script src="../../dt.js"></script>
+</body>
+</html>

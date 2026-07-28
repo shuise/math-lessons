@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数学思想</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+/* 交互式习题专用样式 */
+.quiz-question {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin: 16px 0;
+  transition: all 0.2s;
+}
+.quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+.quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+.quiz-question .q-title {
+  font-weight: bold;
+  font-size: 1.05em;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+.quiz-question .options { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.quiz-question .opt {
+  padding: 8px 14px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: #fafafa;
+  user-select: none;
+}
+.quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+.quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+.quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+.quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+.quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+.quiz-question .explain {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.93em;
+  display: none;
+}
+.quiz-question .explain.show { display: block; }
+.quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+.quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+.quiz-footer { text-align: center; margin: 30px 0; }
+.quiz-footer .score-box {
+  display: inline-block;
+  background: #1a73e8;
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 30px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.quiz-footer .btn-reset {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 28px;
+  border: 2px solid #1a73e8;
+  color: #1a73e8;
+  border-radius: 20px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 1em;
+  transition: 0.15s;
+}
+.quiz-footer .btn-reset:hover { background: #1a73e8; color: #fff; }
+.essence {
+  background: #f3e5f5;
+  border-left: 4px solid #9c27b0;
+  padding: 12px 18px;
+  margin: 12px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 1.02em;
+  line-height: 1.8;
+}
+.essence strong { color: #7b1fa2; }
+.section-divider {
+  border: none;
+  border-top: 2px dashed #e0e0e0;
+  margin: 36px 0;
+}
+.score-item { margin: 4px 0; font-size: 0.95em; color: #555; }
+</style>
+</head>
+<body>
+<article>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<h1>数学思想</h1>
+<p style="color:#555;font-size:1.05em;line-height:1.8;">
+  数学思想是数学的灵魂。如果说知识点是砖瓦，数学思想就是建筑的框架。
+  掌握这 7 种核心思想，你就拥有了解决数学问题的"思维工具箱"。
+</p>
+
+<!-- 一、数形结合思想 -->
+<h2>一、数形结合思想</h2>
+<div class="essence"><strong>一句话本质：</strong>把数量关系转化为图形关系——用图形帮助理解代数问题，或用代数精确描述几何关系。</div>
+
+<div class="example">
+  <p><strong>经典例题：</strong>求方程 |x−1| + |x−2| = 3 的解。</p>
+  <p><strong>思路：</strong>|x−1| 表示 x 到 1 的距离，|x−2| 表示 x 到 2 的距离。问题转化为：数轴上到 1 和 2 的距离之和为 3 的点。</p>
+  <p class="step">① 当 x 在 1 和 2 之间时，距离之和 = 1，不等于 3，无解。</p>
+  <p class="step">② 当 x &lt; 1 时，距离之和 = (1−x) + (2−x) = 3 − 2x，令其等于 3，得 x = 0。</p>
+  <p class="step">③ 当 x &gt; 2 时，距离之和 = (x−1) + (x−2) = 2x − 3，令其等于 3，得 x = 3。</p>
+  <p><span class="answer">答案：</span>x = 0 或 x = 3。</p>
+  <p class="tip">💡 数轴上的距离让绝对值方程变得直观，这就是以形助数的力量。</p>
+</div>
+
+<div class="quiz-question" data-correct="2" data-idx="0">
+  <div class="q-title">互动习题 1</div>
+  <p style="margin:6px 0;">方程 |x − 2| = 3 的解是：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. x = 5</div>
+    <div class="opt" data-val="1">B. x = −1</div>
+    <div class="opt" data-val="2">C. x = 5 或 x = −1</div>
+    <div class="opt" data-val="3">D. x = 2</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- 二、分类讨论思想 -->
+<h2>二、分类讨论思想</h2>
+<div class="essence"><strong>一句话本质：</strong>当问题包含不确定因素（如参数）时，按不同情况分别讨论，化不确定为确定，再汇总结果。</div>
+
+<div class="example">
+  <p><strong>经典例题：</strong>解关于 x 的不等式 ax &gt; 2，其中 a 为参数。</p>
+  <p><strong>思路：</strong>a 的正负决定不等号方向是否改变，需要分类讨论。</p>
+  <p class="step">① 当 a &gt; 0 时：两边同除以正数 a，不等号方向不变，得 x &gt; 2/a。</p>
+  <p class="step">② 当 a = 0 时：原不等式化为 0 &gt; 2，不成立，无解。</p>
+  <p class="step">③ 当 a &lt; 0 时：两边同除以负数 a，不等号方向反转，得 x &lt; 2/a。</p>
+  <p><span class="answer">答案：</span>a &gt; 0 时 x &gt; 2/a；a = 0 时无解；a &lt; 0 时 x &lt; 2/a。</p>
+  <p class="tip">💡 分类讨论的关键是找到"分界点"——使条件发生质变的参数值。</p>
+</div>
+
+<div class="quiz-question" data-correct="1" data-idx="1">
+  <div class="q-title">互动习题 2</div>
+  <p style="margin:6px 0;">关于 x 的方程 ax = 1，当 a 为实数时，解的情况是：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 解总是 x = 1/a</div>
+    <div class="opt" data-val="1">B. a ≠ 0 时 x = 1/a，a = 0 时无解</div>
+    <div class="opt" data-val="2">C. 无论 a 取何值都无解</div>
+    <div class="opt" data-val="3">D. a = 0 时有无数解</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- 三、函数与方程思想 -->
+<h2>三、函数与方程思想</h2>
+<div class="essence"><strong>一句话本质：</strong>用函数的视角研究变量关系（变化趋势、最值、图像），用方程的工具求解具体的未知量。</div>
+
+<div class="example">
+  <p><strong>经典例题：</strong>已知方程 x² − 2ax + 4 = 0 有两个正根，求 a 的取值范围。</p>
+  <p><strong>思路：</strong>将方程转化为二次函数 f(x) = x² − 2ax + 4，用图像分析根的条件。</p>
+  <p class="step">① 判别式 Δ = 4a² − 16 ≥ 0 ⇒ a ≤ −2 或 a ≥ 2。</p>
+  <p class="step">② 对称轴 x = a &gt; 0（两根为正，对称轴必须在 y 轴右侧）⇒ a &gt; 0。</p>
+  <p class="step">③ f(0) = 4 &gt; 0 恒成立（开口向上，f(0) &gt; 0 确保 0 在两根之外）。</p>
+  <p class="step">④ 综合①②③，得 <strong>a ≥ 2</strong>。</p>
+  <p><span class="answer">答案：</span>a ≥ 2。</p>
+  <p class="tip">💡 将方程问题转化为函数图像问题，使根的分布一目了然。</p>
+</div>
+
+<div class="quiz-question" data-correct="0" data-idx="2">
+  <div class="q-title">互动习题 3</div>
+  <p style="margin:6px 0;">方程 x² − 2x + 1 = 0 的判别式 &Delta; 等于：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 0</div>
+    <div class="opt" data-val="1">B. 4</div>
+    <div class="opt" data-val="2">C. −4</div>
+    <div class="opt" data-val="3">D. 2</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- 四、化归与转化思想 -->
+<h2>四、化归与转化思想</h2>
+<div class="essence"><strong>一句话本质：</strong>把陌生问题转化为熟悉问题，把复杂问题转化为简单问题——数学中最重要的解题策略。</div>
+
+<div class="example">
+  <p><strong>经典例题：</strong>解方程 2<sup>2x</sup> − 3·2<sup>x</sup> + 2 = 0。</p>
+  <p><strong>思路：</strong>指数形式陌生，但令 t = 2<sup>x</sup> 就可化为熟悉的一元二次方程。</p>
+  <p class="step">① 令 t = 2<sup>x</sup>（t &gt; 0），则 2<sup>2x</sup> = (2<sup>x</sup>)² = t²。</p>
+  <p class="step">② 原方程化为 t² − 3t + 2 = 0。</p>
+  <p class="step">③ 因式分解得 (t − 1)(t − 2) = 0，所以 t = 1 或 t = 2。</p>
+  <p class="step">④ 代回：2<sup>x</sup> = 1 ⇒ x = 0；2<sup>x</sup> = 2 ⇒ x = 1。</p>
+  <p><span class="answer">答案：</span>x = 0 或 x = 1。</p>
+  <p class="tip">💡 换元法是化归思想的典型应用——把"不认识"的化成"认识"的。</p>
+</div>
+
+<div class="quiz-question" data-correct="0" data-idx="3">
+  <div class="q-title">互动习题 4</div>
+  <p style="margin:6px 0;">解方程 4<sup>x</sup> − 5·2<sup>x</sup> + 4 = 0，令 t = 2<sup>x</sup>，则 t 满足的方程是：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. t² − 5t + 4 = 0</div>
+    <div class="opt" data-val="1">B. 2t² − 5t + 4 = 0</div>
+    <div class="opt" data-val="2">C. t² − 10t + 4 = 0</div>
+    <div class="opt" data-val="3">D. 4t² − 5t + 4 = 0</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- 五、特殊与一般的思想 -->
+<h2>五、特殊与一般的思想</h2>
+<div class="essence"><strong>一句话本质：</strong>从特殊情形中发现规律，再推广到一般结论；或反过来先用一般结论推导，再代入特殊值求解。</div>
+
+<div class="example">
+  <p><strong>经典例题：</strong>求 S<sub>n</sub> = 1² + 2² + 3² + … + n² 的通项公式。</p>
+  <p><strong>思路：</strong>先计算 n 较小时的数值，观察规律，提出猜想，再用数学归纳法证明。</p>
+  <p class="step">① 计算特殊值：</p>
+  <p class="step">n = 1：S₁ = 1² = 1</p>
+  <p class="step">n = 2：S₂ = 1² + 2² = 5</p>
+  <p class="step">n = 3：S₃ = 1² + 2² + 3² = 14</p>
+  <p class="step">n = 4：S₄ = 1² + 2² + 3² + 4² = 30</p>
+  <p class="step">② 猜想 S<sub>n</sub> = n(n+1)(2n+1)/6。</p>
+  <p class="step">③ 验证：n = 1 ⇒ 1×2×3/6 = 1 ✓；n = 2 ⇒ 2×3×5/6 = 5 ✓</p>
+  <p><span class="answer">答案：</span>S<sub>n</sub> = n(n+1)(2n+1)/6。</p>
+  <p class="tip">💡 由特殊到一般是发现数学公式的常用路径。</p>
+</div>
+
+<div class="quiz-question" data-correct="0" data-idx="4">
+  <div class="q-title">互动习题 5</div>
+  <p style="margin:6px 0;">观察：1 = 1²，1 + 3 = 2²，1 + 3 + 5 = 3²，则 1 + 3 + 5 + … + (2n−1) = ？</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. n²</div>
+    <div class="opt" data-val="1">B. 2n²</div>
+    <div class="opt" data-val="2">C. n(n+1)/2</div>
+    <div class="opt" data-val="3">D. n² + 1</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- 六、有限与无限的思想 -->
+<h2>六、有限与无限的思想</h2>
+<div class="essence"><strong>一句话本质：</strong>通过有限步骤理解无限过程——用极限思想处理无穷，从局部逼近整体。</div>
+
+<div class="example">
+  <p><strong>经典例题：</strong>求无穷级数 1/2 + 1/4 + 1/8 + 1/16 + … 的和。</p>
+  <p><strong>思路：</strong>用一个正方形面积 = 1 来直观理解。逐次取一半，剩余部分越来越小。</p>
+  <p class="step">① 取一个面积为 1 的正方形。</p>
+  <p class="step">② 第一次取一半（1/2），剩下 1/2。</p>
+  <p class="step">③ 第二次取剩下的一半（1/4），剩下 1/4。</p>
+  <p class="step">④ 如此继续，取走的部分总和：1/2 + 1/4 + 1/8 + …</p>
+  <p class="step">⑤ 随着取走的次数增加，剩下的部分趋近于 0，所以取走的总和趋近于 1。</p>
+  <p><span class="answer">答案：</span>和为 1。</p>
+  <p class="tip">💡 从有限次分割中看到无限逼近的趋势，这就是极限思想的核心。</p>
+</div>
+
+<div class="quiz-question" data-correct="1" data-idx="5">
+  <div class="q-title">互动习题 6</div>
+  <p style="margin:6px 0;">无穷级数 1/3 + 1/9 + 1/27 + … 的和是：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 1</div>
+    <div class="opt" data-val="1">B. 1/2</div>
+    <div class="opt" data-val="2">C. 2/3</div>
+    <div class="opt" data-val="3">D. 3/2</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<hr class="section-divider">
+
+<!-- 七、或然与必然的思想 -->
+<h2>七、或然与必然的思想</h2>
+<div class="essence"><strong>一句话本质：</strong>在随机现象中寻找统计规律——单个事件不可预测，但大量重复后呈现出稳定的概率。</div>
+
+<div class="example">
+  <p><strong>经典例题：</strong>抛一枚均匀硬币 100 次，正面朝上的次数大约是多少？</p>
+  <p><strong>思路：</strong>利用大数定律——试验次数越多，频率越趋近概率。</p>
+  <p class="step">① 单次抛硬币，正面概率 P = 1/2。</p>
+  <p class="step">② 根据大数定律，当抛掷次数 n 很大时，正面出现的频率接近 1/2。</p>
+  <p class="step">③ 所以抛 100 次，预期正面次数 ≈ 100 × 1/2 = 50 次。</p>
+  <p class="step">④ 实际结果可能在 50 次附近波动（比如 45~55 次都很正常），但偏离越大的可能性越小。</p>
+  <p><span class="answer">答案：</span>大约 50 次。</p>
+  <p class="tip">💡 或然（随机）中蕴含着必然（概率）——这是统计思维的核心。</p>
+</div>
+
+<div class="quiz-question" data-correct="1" data-idx="6">
+  <div class="q-title">互动习题 7</div>
+  <p style="margin:6px 0;">掷一颗均匀的骰子 600 次，数字"6"朝上的次数最可能接近：</p>
+  <div class="options">
+    <div class="opt" data-val="0">A. 50</div>
+    <div class="opt" data-val="1">B. 100</div>
+    <div class="opt" data-val="2">C. 200</div>
+    <div class="opt" data-val="3">D. 600</div>
+  </div>
+  <div class="explain"></div>
+</div>
+
+<!-- 底部评分 -->
+<div class="quiz-footer">
+  <div class="score-box" id="scoreBox">0 / 7</div>
+  <div style="margin-top:8px;color:#888;font-size:0.9em;">点击选项即可作答，每道题都答对后上方会更新</div>
+  <div class="btn-reset" id="resetBtn">重新作答</div>
+</div>
+
+</article>
+
+<script>
+(function() {
+  const questions = document.querySelectorAll('.quiz-question');
+  const scoreBox = document.getElementById('scoreBox');
+  let totalCorrect = 0;
+  let answered = new Array(questions.length).fill(false);
+
+  // 每题对应解析文本
+  const explanations = [
+    { ok: '正确！|x−2| = 3 表示 x 到 2 的距离为 3，数轴上距离 2 为 3 的点有两个：5 和 −1。', fail: '|x−2| = 3 表示 x 到 2 的距离为 3。数轴上看，2 左边 3 个单位是 −1，右边 3 个单位是 5，所以有两个解。' },
+    { ok: '正确！a ≠ 0 时两边同除以 a 得 x = 1/a；a = 0 时 0 = 1 不成立，无解。', fail: '注意 a = 0 的情况——此时方程变为 0 = 1，不成立。所以必须分 a ≠ 0 和 a = 0 两种情况讨论。' },
+    { ok: '正确！二次方程 x² − 2x + 1 = (x−1)² = 0，判别式 Δ = (−2)² − 4·1·1 = 0。', fail: '判别式 Δ = b² − 4ac = (−2)² − 4·1·1 = 4 − 4 = 0。' },
+    { ok: '正确！4ˣ = (2²)ˣ = (2ˣ)² = t²，所以原方程化为 t² − 5t + 4 = 0。', fail: '注意 4ˣ = (2²)ˣ = (2ˣ)² = t²，所以方程变为 t² − 5t + 4 = 0。' },
+    { ok: '正确！前 n 个连续奇数的和等于 n²，这是特殊到一般思想的经典结论。', fail: '计算 n=2 时：1+3=4=2²；n=3 时：1+3+5=9=3²；推广得 n²。' },
+    { ok: '正确！首项 a₁ = 1/3，公比 r = 1/3，和 S = a₁/(1−r) = (1/3)/(2/3) = 1/2。', fail: '等比级数求和公式：S = a₁/(1−r) = (1/3)/(1−1/3) = (1/3)/(2/3) = 1/2。' },
+    { ok: '正确！骰子每个面概率为 1/6，600 × 1/6 = 100，根据大数定律，实际次数接近 100。', fail: '骰子有 6 个面，"6"朝上的概率为 1/6。600 × 1/6 = 100，大数定律告诉我们实际次数应接近这个值。' }
+  ];
+
+  function updateScore() {
+    let count = 0;
+    for (let i = 0; i < answered.length; i++) {
+      if (answered[i]) count++;
+    }
+    totalCorrect = count;
+    scoreBox.textContent = totalCorrect + ' / 7';
+  }
+
+  questions.forEach(function(q, idx) {
+    const opts = q.querySelectorAll('.opt');
+    const explainDiv = q.querySelector('.explain');
+
+    opts.forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        // 如果已经回答过，忽略再次点击
+        if (q.classList.contains('correct') || q.classList.contains('wrong')) return;
+
+        const val = parseInt(this.getAttribute('data-val'), 10);
+        const correctVal = parseInt(q.getAttribute('data-correct'), 10);
+        const isCorrect = (val === correctVal);
+
+        // 禁用所有选项
+        opts.forEach(function(o) { o.classList.add('disabled'); });
+
+        // 标记正确选项
+        opts.forEach(function(o) {
+          if (parseInt(o.getAttribute('data-val'), 10) === correctVal) {
+            o.classList.add('correct-opt');
+          }
+        });
+
+        // 如果选错，标记错误选项
+        if (!isCorrect) {
+          this.classList.add('wrong-opt');
+        }
+
+        // 标记题目状态
+        if (isCorrect) {
+          q.classList.add('correct');
+        } else {
+          q.classList.add('wrong');
+        }
+
+        // 显示解析
+        const exp = explanations[idx];
+        const expText = isCorrect ? exp.ok : exp.fail;
+        explainDiv.textContent = expText;
+        explainDiv.className = 'explain show ' + (isCorrect ? 'ok' : 'fail');
+
+        // 更新答题状态
+        if (!answered[idx]) {
+          answered[idx] = true;
+          if (isCorrect) totalCorrect++;
+          updateScore();
+        } else if (isCorrect && q.classList.contains('wrong')) {
+          // 如果之前选错现在改不了，但我们需要确保score计数正确
+        }
+      });
+    });
+  });
+
+  // 重置
+  document.getElementById('resetBtn').addEventListener('click', function() {
+    questions.forEach(function(q, idx) {
+      q.classList.remove('correct', 'wrong');
+      const opts = q.querySelectorAll('.opt');
+      opts.forEach(function(o) {
+        o.classList.remove('correct-opt', 'wrong-opt', 'disabled');
+      });
+      const explainDiv = q.querySelector('.explain');
+      explainDiv.className = 'explain';
+      explainDiv.textContent = '';
+      answered[idx] = false;
+    });
+    totalCorrect = 0;
+    updateScore();
+  });
+
+})();
+</script>
+
+    <script src="../dt.js"></script>
+</body>
+</html>

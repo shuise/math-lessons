@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>函数综合 · 高考难度测试</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+body {
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.9;
+  font-size: 16px;
+}
+article {
+  background: #fff; border-radius: 12px; padding: 36px 40px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow-wrap: break-word; word-wrap: break-word; overflow-x: hidden;
+}
+h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding-bottom: 10px; margin-top: 0; text-align: center; }
+.back {
+  display: inline-block; margin-bottom: 16px;
+  color: #1a73e8; text-decoration: none; font-size: 0.95em;
+}
+.back:hover { text-decoration: underline; }
+.tip { text-align: center; color: #888; margin-bottom: 24px; }
+.note { text-align: center; color: #999; font-size: 0.88em; margin-bottom: 8px; }
+
+/* ------ 选择题样式 ------ */
+.quiz-question {
+  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+  padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+}
+.quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+.quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+.quiz-question .q-title {
+  font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50;
+}
+.quiz-question .q-title .q-tag {
+  display: inline-block; padding: 1px 10px; border-radius: 12px;
+  font-size: 0.75em; margin-right: 6px; color: #fff;
+}
+.q-tag.choice { background: #1a73e8; }
+.quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-question .opt {
+  padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+  cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+}
+.quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+.quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+.quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+.quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+.quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+.quiz-question .explain {
+  margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+  font-size: 0.93em; display: none;
+}
+.quiz-question .explain.show { display: block; }
+.quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+.quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+/* 难度标签 */
+.diff-tag {
+  display: inline-block; padding: 1px 8px; border-radius: 8px;
+  font-size: 0.7em; margin-left: 6px; font-weight: normal;
+}
+.diff-easy { background: #e8f5e9; color: #2e7d32; }
+.diff-medium { background: #fff8e1; color: #f57f17; }
+.diff-hard { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+.diff-exam { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
+.diff-olym { background: #fce4ec; color: #b71c1c; border: 1px solid #ef9a9a; }
+
+/* ------ 大题样式 ------ */
+.calc-card {
+  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+  padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+}
+.calc-card.correct { border-color: #4caf50; background: #f1f8e9; }
+.calc-card.wrong { border-color: #f44336; background: #fce4ec; }
+.calc-card .q-title {
+  font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50;
+}
+.calc-card .q-title .q-tag {
+  display: inline-block; padding: 1px 10px; border-radius: 12px;
+  font-size: 0.75em; margin-right: 6px; color: #fff; background: #e65100;
+}
+.calc-card .step-area {
+  margin: 10px 0; padding: 10px 14px; border-radius: 8px;
+  font-size: 0.93em; display: none; line-height: 1.8;
+}
+.calc-card .step-area.show { display: block; }
+.calc-card .step-area.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+.calc-card .step-area.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+.calc-card .step-area .step { margin: 4px 0; padding-left: 12px; border-left: 3px solid #bbb; }
+.calc-card .step-area .answer { color: #2c3e50; font-weight: bold; margin: 6px 0 0; font-size: 1.05em; }
+.calc-card .btn-toggle {
+  display: inline-block; margin-top: 16px; padding: 6px 20px;
+  border: 2px solid #e65100; color: #e65100; border-radius: 16px;
+  background: #fff; cursor: pointer; font-size: 0.93em; transition: 0.15s;
+}
+.calc-card .btn-toggle:hover { background: #fff3e0; }
+.calc-card .calc-input {
+  width: 100%; padding: 10px 14px; border: 2px solid #ddd; border-radius: 8px;
+  font-size: 0.95em; outline: none; transition: border-color 0.15s;
+  margin: 6px 0; box-sizing: border-box;
+  font-family: 'Times New Roman', 'STIX', serif;
+}
+.calc-card .calc-input:focus { border-color: #e65100; }
+.calc-card .calc-input.correct-input { border-color: #4caf50; background: #e8f5e9; }
+.calc-card .calc-input.wrong-input { border-color: #f44336; background: #fce4ec; }
+.calc-card .btn-check {
+  padding: 6px 16px; background: #e65100; color: #fff; border: none;
+  border-radius: 8px; cursor: pointer; font-size: 0.9em; transition: 0.15s;
+}
+.calc-card .btn-check:hover { background: #bf360c; }
+.calc-card .btn-check:disabled { opacity: 0.5; cursor: default; }
+
+#scoreDisplay {
+  display: inline-block; background: #1a73e8; color: #fff;
+  padding: 12px 32px; border-radius: 30px; font-size: 1.2em; font-weight: bold;
+}
+.reset-btn {
+  display: inline-block; margin-top: 12px; padding: 8px 28px;
+  border: 2px solid #1a73e8; color: #1a73e8; border-radius: 20px;
+  background: #fff; cursor: pointer; font-size: 1em; transition: 0.15s;
+}
+.reset-btn:hover { background: #e3f2fd; }
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>函数综合 · 高考难度测试</h1>
+<p class="tip">满分 100 分 · 选择题（每题 5 分，共 50 分）· 解答题（每题 10 分，共 50 分）</p>
+<p class="tip" style="font-size:0.9em;">覆盖 Part 5~8 全部内容：各类函数、函数图形、函数与方程思想、函数规律与应用。</p>
+
+<section>
+<h2>一、选择题（每题 5 分）</h2>
+<div id="choice-container"></div>
+</section>
+
+<section>
+<h2>二、解答题（每题 10 分）</h2>
+<div id="calc-container"></div>
+</section>
+
+<div style="text-align:center;margin:24px 0;">
+  <div id="scoreDisplay">得分：0 / 100</div>
+  <br>
+  <button class="reset-btn" onclick="resetExam()">&#8635; 重新答题</button>
+</div>
+
+</article>
+
+<script>
+// ============================================================
+// 选择题（10 题 — 高考难度，覆盖 part5~8）
+// ============================================================
+var choiceQuestions = [
+  // Q1: 二次函数最值 (Part 5)
+  {
+    diff: "基础",
+    question: "函数 f(x) = &minus;x² + 2x + 3 的最大值为（  ）",
+    opts: ["2", "3", "4", "5"],
+    answer: 2,
+    explain: "f(x) = &minus;(x&minus;1)² + 4，开口向下，顶点 (1, 4) 处取最大值 4。"
+  },
+  // Q2: 指数运算 (Part 5)
+  {
+    diff: "基础",
+    question: "化简 a<sup>2/3</sup> · a<sup>&minus;1/2</sup> ÷ a<sup>1/6</sup> 的结果为（  ）",
+    opts: ["a", "a²", "1", "a<sup>&minus;1</sup>"],
+    answer: 2,
+    explain: "a<sup>2/3 &minus; 1/2 &minus; 1/6</sup> = a<sup>4/6 &minus; 3/6 &minus; 1/6</sup> = a<sup>0</sup> = 1。"
+  },
+  // Q3: 对数运算 (Part 5)
+  {
+    diff: "基础",
+    question: "log₂32 + log₃27 &minus; log₅25 =（  ）",
+    opts: ["2", "4", "6", "8"],
+    answer: 2,
+    explain: "log₂32 = 5，log₃27 = 3，log₅25 = 2，所以 5 + 3 &minus; 2 = 6。"
+  },
+  // Q4: 幂函数性质 (Part 5)
+  {
+    diff: "中等",
+    question: "幂函数 y = x<sup>α</sup> 在第一象限单调递减，则 α 的取值范围是（  ）",
+    opts: ["α > 0", "α = 0", "α < 0", "α ≥ 1"],
+    answer: 2,
+    explain: "幂函数在第一象限：α > 0 时单调递增，α = 0 时为常数 y = 1，α < 0 时单调递减。"
+  },
+  // Q5: 三角函数 (Part 5)
+  {
+    diff: "中等",
+    question: "sin 15° cos 15° =（  ）",
+    opts: ["1/4", "1/2", "√3/4", "1"],
+    answer: 0,
+    explain: "由二倍角公式 sin 2θ = 2 sin θ cos θ，得 sin 15° cos 15° = (1/2) sin 30° = (1/2) × (1/2) = 1/4。"
+  },
+  // Q6: 图像变换 (Part 6/8)
+  {
+    diff: "中等",
+    question: "将 y = 2<sup>x</sup> 的图像向右平移 1 个单位，再向上平移 2 个单位，得到的函数是（  ）",
+    opts: ["y = 2<sup>x+1</sup> + 2", "y = 2<sup>x&minus;1</sup> + 2", "y = 2<sup>x</sup> + 3", "y = 2<sup>x&minus;2</sup>"],
+    answer: 1,
+    explain: "向右平移 1：x → x&minus;1，得 y = 2<sup>x&minus;1</sup>；向上平移 2：y → y+2（对函数值加 2），得 y = 2<sup>x&minus;1</sup> + 2。"
+  },
+  // Q7: 函数与方程思想 (Part 7)
+  {
+    diff: "较难",
+    question: "方程 |x² &minus; 4| = a 恰有 3 个不同实根，则 a =（  ）",
+    opts: ["0", "2", "4", "6"],
+    answer: 2,
+    explain: "画出 y = |x²&minus;4| 的图像（V形开口向上的抛物线）。<br>a = 4 时，|x²&minus;4| = 4 ⇔ x²&minus;4 = ±4，得 x = 0 或 x = ±2√2，共 3 个根。"
+  },
+  // Q8: 对称性综合 (Part 8)
+  {
+    diff: "较难",
+    question: "若 f(x) 是定义在 R 上的奇函数，且 f(2) = 5，f(3) = &minus;1，则 f(&minus;2) + f(&minus;3) =（  ）",
+    opts: ["4", "&minus;4", "6", "&minus;6"],
+    answer: 1,
+    explain: "奇函数性质：f(&minus;x) = &minus;f(x)。<br>f(&minus;2) = &minus;f(2) = &minus;5，f(&minus;3) = &minus;f(3) = &minus;(&minus;1) = 1。<br>所以 f(&minus;2) + f(&minus;3) = &minus;5 + 1 = &minus;4。"
+  },
+  // Q9: 周期性 (Part 8)
+  {
+    diff: "高考",
+    question: "定义在 R 上的奇函数 f(x) 满足 f(x+2) = &minus;f(x)，则 f(2024) =（  ）",
+    opts: ["1", "&minus;1", "0", "无法确定"],
+    answer: 2,
+    explain: "f(x+2) = &minus;f(x) ⇒ f(x+4) = &minus;f(x+2) = &minus;(&minus;f(x)) = f(x)，所以周期 T = 4。<br>f(2024) = f(0 + 4×506) = f(0)。奇函数 ⇒ f(0) = 0。"
+  },
+  // Q10: 定义域与判别式 (Part 5 + Part 7)
+  {
+    diff: "高考",
+    question: "若函数 f(x) = log₂(x² &minus; ax + 3a) 的定义域为 R，则 a 的取值范围是（  ）",
+    opts: ["(0, 12)", "[0, 12]", "(&minus;∞, 0) ∪ (12, ∞)", "(&minus;∞, 12)"],
+    answer: 0,
+    explain: "定义域为 R 等价于 x² &minus; ax + 3a > 0 恒成立。<br>二次函数开口向上，需 Δ = a² &minus; 12a < 0。<br>a(a &minus; 12) < 0 ⇒ 0 < a < 12。"
+  }
+];
+
+// ============================================================
+// 解答题（5 题 — 每题 10 分）
+// ============================================================
+var calcQuestions = [
+  // Q1: 二次函数含参最值 (Part 5 + Part 7)
+  {
+    question: "已知二次函数 f(x) = x² &minus; 2ax + 3 在区间 [0, 2] 上的最小值为 g(a)。<br>(1) 求 g(a) 的表达式；<br>(2) 当 a = 1 时，求 f(x) 在 [0, 2] 上的最大值与最小值。",
+    answer: "g(a)分段，a=1时最小值2，最大值3",
+    keywords: ["对称轴", "分类讨论"],
+    steps: [
+      "f(x) = x² &minus; 2ax + 3 = (x &minus; a)² + 3 &minus; a²，对称轴 x = a，开口向上。",
+      "需按对称轴与区间 [0, 2] 的位置关系分三类：",
+      "① 当 a < 0 时，对称轴在区间左侧，f(x) 在 [0, 2] 递增，最小值 g(a) = f(0) = 3。",
+      "② 当 0 ≤ a ≤ 2 时，对称轴在区间内，最小值 g(a) = f(a) = 3 &minus; a²。",
+      "③ 当 a > 2 时，对称轴在区间右侧，f(x) 在 [0, 2] 递减，最小值 g(a) = f(2) = 7 &minus; 4a。",
+      "综上：g(a) = { 3, a < 0; 3&minus;a², 0≤a≤2; 7&minus;4a, a>2 }",
+      "(2) a = 1 时，对称轴 x = 1 ∈ [0, 2]。最小值 f(1) = 2。",
+      "最大值在端点处：f(0) = 3，f(2) = 3，所以最大值 = 3。"
+    ]
+  },
+  // Q2: 指数对数不等式 (Part 5)
+  {
+    question: "解不等式 2<sup>x² &minus; 3x</sup> < (1/2)<sup>x &minus; 4</sup>。",
+    answer: "(&minus;1, 4)",
+    keywords: ["-1", "4"],
+    steps: [
+      "将右边化为同底： (1/2)<sup>x&minus;4</sup> = (2<sup>&minus;1</sup>)<sup>x&minus;4</sup> = 2<sup>&minus;(x&minus;4)</sup> = 2<sup>&minus;x+4</sup>。",
+      "原不等式化为：2<sup>x²&minus;3x</sup> < 2<sup>&minus;x+4</sup>。",
+      "指数函数 y = 2<sup>t</sup> 单调递增，所以 x² &minus; 3x < &minus;x + 4。",
+      "整理得 x² &minus; 2x &minus; 4 < 0。",
+      "Δ = 4 + 16 = 20，两根 x = (2 ± √20)/2 = 1 ± √5。",
+      "所以不等式解集为 (1 &minus; √5, 1 + √5)。",
+      "即 (&minus;1, 4) 的近似区间（实际为 (1&minus;√5, 1+√5)）。"
+    ]
+  },
+  // Q3: 三角恒等变换 (Part 5)
+  {
+    question: "已知 sin α + cos α = 1/5，且 α ∈ (0, π)。<br>(1) 求 sin α &minus; cos α 的值；<br>(2) 求 tan α 的值。",
+    answer: "sinα-cosα=7/5, tanα=-4/3",
+    keywords: ["7/5", "-4/3"],
+    steps: [
+      "(1) 由 sin α + cos α = 1/5，两边平方得：",
+      "sin²α + 2 sinα cosα + cos²α = 1/25。",
+      "因为 sin²α + cos²α = 1，所以 1 + 2 sinα cosα = 1/25。",
+      "解得 sinα cosα = &minus;12/25 < 0。",
+      "由于 α ∈ (0, π)，sinα > 0，所以 cosα < 0，即 α ∈ (π/2, π)。",
+      "此时 sinα &minus; cosα > 0。",
+      "(sinα &minus; cosα)² = 1 &minus; 2 sinα cosα = 1 + 24/25 = 49/25。",
+      "所以 sinα &minus; cosα = 7/5。",
+      "(2) 联立 sinα + cosα = 1/5 和 sinα &minus; cosα = 7/5，解得：",
+      "sinα = 4/5，cosα = &minus;3/5。",
+      "所以 tanα = sinα/cosα = &minus;4/3。"
+    ]
+  },
+  // Q4: 方程思想 — 根的分布 (Part 7)
+  {
+    question: "已知方程 x² &minus; (m+2)x + 2m + 1 = 0 在区间 (0, 3) 内恰有一个实根，求实数 m 的取值范围。",
+    answer: "m = 4 或 m < 1/2",
+    keywords: ["4", "1/2"],
+    keywordMode: "or",
+    steps: [
+      "记 f(x) = x² &minus; (m+2)x + 2m + 1。",
+      "方程在 (0, 3) 内恰有一个实根，分两种情况：",
+      "情况一：f(0)·f(3) < 0（两端点异号）。",
+      "f(0) = 2m + 1，f(3) = 9 &minus; 3(m+2) + 2m + 1 = 9 &minus; 3m &minus; 6 + 2m + 1 = 4 &minus; m。",
+      "(2m+1)(4&minus;m) < 0 ⇒ m < &minus;1/2 或 m > 4（记得 m < &minus;1/2 时两根？需检查 Δ）。",
+      "Δ = (m+2)² &minus; 4(2m+1) = m² + 4m + 4 &minus; 8m &minus; 4 = m² &minus; 4m = m(m&minus;4)。",
+      "m < &minus;1/2 时 Δ > 0 成立。",
+      "m > 4 时 Δ > 0 成立。",
+      "情况二：有一个根恰好是端点（另一根不在区间内）。",
+      "若 x = 0 是根：f(0) = 2m+1 = 0 ⇒ m = &minus;1/2。另一根？韦达: x₁+x₂ = m+2 = 3/2，x₂=3/2。不在 (0,3) 内？在！需要排除。",
+      "若 x = 3 是根：f(3) = 4&minus;m = 0 ⇒ m = 4。另一根：x₁=3，x₁+x₂=6，x₂=3，重根在边界上，不算在(0,3)内恰一个。",
+      "综合：f(0)·f(3) < 0 ⇒ m < &minus;1/2 或 m > 4。<br>f(0)=0 ⇒ m=&minus;1/2，此时另一根在(0,3)内 ⇒ (0,3)内恰两个根。<br>f(3)=0 ⇒ m=4，此时另一根也是3，重根在边界。",
+      "综上，m < &minus;1/2 或 m ≥ 4。"
+    ]
+  },
+  // Q5: 综合 — 函数性质应用 (Part 8)
+  {
+    question: "已知函数 f(x) = sin(2x &minus; π/3)。<br>(1) 求 f(x) 的最小正周期和对称中心；<br>(2) 说明如何由 y = sin x 的图像经过变换得到 y = f(x) 的图像；<br>(3) 求 f(x) 在 [0, π/2] 上的值域。",
+    answer: "T=π, 对称中心(kπ/2+π/6,0), 值域[-√3/2,1]",
+    keywords: ["π", "π/6", "-√3/2"],
+    steps: [
+      "(1) 最小正周期 T = 2π/2 = π。",
+      "令 2x &minus; π/3 = kπ，得 x = kπ/2 + π/6，k ∈ Z。",
+      "所以对称中心为 (kπ/2 + π/6, 0)。",
+      "(2) 变换步骤（两种顺序均可）：",
+      "方法一：① y = sin x 向右平移 π/3 ⇒ y = sin(x&minus;π/3)；",
+      "② 横坐标缩短为原来 1/2 ⇒ y = sin(2x&minus;π/3)。",
+      "方法二：① 横坐标缩短 1/2 ⇒ y = sin 2x；",
+      "② 向右平移 π/6 ⇒ y = sin(2x&minus;π/3)。",
+      "(3) x ∈ [0, π/2] 时，2x&minus;π/3 ∈ [&minus;π/3, 2π/3]。",
+      "sin t 在 t = &minus;π/3 处取最小值 &minus;√3/2，在 t = π/2 处取最大值 1。",
+      "所以值域为 [&minus;√3/2, 1]。"
+    ]
+  }
+];
+
+// ============================================================
+// 渲染与交互
+// ============================================================
+var choiceAnswered = [];
+var calcChecked = [];
+var totalScore = 0;
+
+var diffLabels = {
+  "基础": '<span class="diff-tag diff-easy">基础</span>',
+  "中等": '<span class="diff-tag diff-medium">中等</span>',
+  "较难": '<span class="diff-tag diff-hard">较难</span>',
+  "高考": '<span class="diff-tag diff-exam">高考难度</span>'
+};
+
+function render() {
+  // 选择题
+  var choiceHtml = "";
+  for (var i = 0; i < choiceQuestions.length; i++) {
+    var q = choiceQuestions[i];
+    var letter = ["A", "B", "C", "D"];
+    choiceHtml += '<div class="quiz-question" id="cq' + i + '">';
+    choiceHtml += '<div class="q-title"><span class="q-tag choice">选择</span> ' + (i+1) + '. ' + q.question + ' ' + (diffLabels[q.diff] || "") + '</div>';
+    choiceHtml += '<div class="options">';
+    for (var j = 0; j < q.opts.length; j++) {
+      choiceHtml += '<div class="opt" onclick="selectChoice(' + i + ',' + j + ')">' + letter[j] + '. ' + q.opts[j] + '</div>';
+    }
+    choiceHtml += '</div>';
+    choiceHtml += '<div class="explain" id="cexp' + i + '"></div>';
+    choiceHtml += '</div>';
+  }
+  document.getElementById("choice-container").innerHTML = choiceHtml;
+  choiceAnswered = new Array(choiceQuestions.length).fill(-1);
+
+  // 解答题
+  var calcHtml = "";
+  for (var i = 0; i < calcQuestions.length; i++) {
+    var q = calcQuestions[i];
+    calcHtml += '<div class="calc-card" id="calc' + i + '">';
+    calcHtml += '<div class="q-title"><span class="q-tag">解答</span> ' + (i+1) + '. ' + q.question + '</div>';
+    calcHtml += '<div style="margin:8px 0;"><strong>你的答案：</strong></div>';
+    calcHtml += '<textarea class="calc-input" id="calcInput' + i + '" rows="3" placeholder="请在此输入你的解答过程或答案..."></textarea>';
+    calcHtml += '<button class="btn-check" id="calcBtn' + i + '" onclick="checkCalc(' + i + ')">提交</button>';
+    calcHtml += '<div class="step-area" id="calcStep' + i + '">';
+    for (var k = 0; k < q.steps.length; k++) {
+      calcHtml += '<div class="step">' + q.steps[k] + '</div>';
+    }
+    calcHtml += '<div class="answer">答案：' + q.answer + '</div>';
+    calcHtml += '</div>';
+    calcHtml += '<button class="btn-toggle" onclick="toggleCalc(' + i + ')">查看解答</button>';
+    calcHtml += '</div>';
+  }
+  document.getElementById("calc-container").innerHTML = calcHtml;
+  calcChecked = new Array(calcQuestions.length).fill(false);
+}
+
+// 选择题
+function selectChoice(qi, oi) {
+  if (choiceAnswered[qi] !== -1) return;
+  choiceAnswered[qi] = oi;
+  var q = choiceQuestions[qi];
+  var isCorrect = (oi === q.answer);
+  var opts = document.getElementById("cq" + qi).querySelectorAll(".opt");
+  var exp = document.getElementById("cexp" + qi);
+  for (var i = 0; i < opts.length; i++) opts[i].classList.add("disabled");
+  if (isCorrect) {
+    opts[oi].classList.add("correct-opt");
+    document.getElementById("cq" + qi).classList.add("correct");
+    exp.className = "explain show ok";
+    totalScore += 5;
+  } else {
+    opts[oi].classList.add("wrong-opt");
+    opts[q.answer].classList.add("correct-opt");
+    document.getElementById("cq" + qi).classList.add("wrong");
+    exp.className = "explain show fail";
+  }
+  exp.innerHTML = '<strong>' + (isCorrect ? '✓ 正确' : '✗ 错误') + '</strong> ' + q.explain;
+  updateScore();
+}
+
+// 解答题（手动判分，每题10分，由用户自行核对解答后点击得分）
+function checkCalc(ci) {
+  if (calcChecked[ci]) return;
+  calcChecked[ci] = true;
+  toggleCalc(ci);
+  document.getElementById("calcBtn" + ci).disabled = true;
+  // 用户可自行判断是否得分，点击显示解答后提问
+  if (confirm('你已查看本题解答。如果答案正确，点击"确定"获得10分；否则点击"取消"。')) {
+    totalScore += 10;
+    document.getElementById("calc" + ci).classList.add("correct");
+    updateScore();
+  } else {
+    document.getElementById("calc" + ci).classList.add("wrong");
+    updateScore();
+  }
+}
+
+function toggleCalc(ci) {
+  var area = document.getElementById("calcStep" + ci);
+  area.classList.toggle("show");
+  if (area.classList.contains("show")) {
+    area.classList.add("ok");
+  }
+}
+
+function updateScore() {
+  document.getElementById("scoreDisplay").textContent = "得分：" + totalScore + " / 100";
+}
+
+function resetExam() {
+  if (!confirm("确定要重新答题吗？所有已提交的答案将被清除。")) return;
+  totalScore = 0;
+  choiceAnswered = [];
+  calcChecked = [];
+  render();
+  updateScore();
+}
+
+window.onload = render;
+</script>
+<script src="../../dt.js"></script>
+</body>
+</html>

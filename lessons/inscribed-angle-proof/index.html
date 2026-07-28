@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>圆周角定理的几何证明</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  .svg-wrap { text-align: center; margin: 20px 0; }
+  .svg-wrap svg { border: 1px solid #ddd; border-radius: 10px; background: #fcfcfc; max-width: 100%; }
+  .aux-desc { background: #f0f7ff; border-left: 4px solid #1a73e8; padding: 16px 20px; margin: 16px 0; border-radius: 0 8px 8px 0; font-size: 0.95em; }
+  .aux-desc strong { color: #1a73e8; }
+  .example { margin: 16px 0; }
+  .example p { margin: 6px 0; }
+  .example .step { margin: 4px 0 4px 20px; color: #555; }
+  .example .answer { color: #d32f2f; font-weight: bold; }
+  .formula-box { text-align: center; font-size: 1.2em; padding: 16px; background: #f8f9fa; border-radius: 8px; margin: 12px 0; }
+
+  /* Quiz styles */
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag {
+    display: inline-block; padding: 2px 12px; border-radius: 12px;
+    font-size: 0.75em; margin-right: 8px; color: #fff; background: #1a73e8;
+  }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+  }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain { margin-top: 10px; padding: 10px 14px; border-radius: 8px; font-size: 0.93em; display: none; }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+  .score-panel { text-align: center; margin: 24px 0; }
+  h3 { color: #2c3e50; margin: 24px 0 10px; font-size: 1.1em; }
+</style>
+</head>
+<body>
+<article>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<h1>圆周角定理的几何证明</h1>
+<p class="tip" style="text-align:center;font-size:1.05em;">同弧所对的圆周角相等，且等于圆心角的一半。</p>
+
+<!-- ========================= 定理陈述 ========================= -->
+<section>
+<h2>一、定理陈述</h2>
+<p>圆 O 中，同弧 AB 所对的圆周角 &ang;ACB = &ang;ADB（C、D 在圆上）。圆心角 &ang;AOB = 2&ang;ACB。</p>
+<div class="formula-box">
+  <strong>&ang;AOB = 2 &times; &ang;ACB</strong>
+</div>
+<p>圆周角定理是圆的重要性质之一，它揭示了同弧所对的圆周角与圆心角之间的数量关系。下面通过三种情形来证明这一定理。</p>
+</section>
+
+<!-- ========================= 证明一 ========================= -->
+<section>
+<h2>二、证明一——圆心在圆周角一边上</h2>
+
+<div class="svg-wrap">
+<svg width="500" height="450" viewBox="0 0 500 450" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circle -->
+  <circle cx="250" cy="230" r="150" fill="rgba(26,115,232,0.04)" stroke="#333" stroke-width="2"/>
+
+  <!-- Point C (left), O (center), A (right) - collinear horizontal -->
+  <!-- CA is the horizontal diameter -->
+
+  <!-- Triangle CA and CB -->
+  <line x1="100" y1="230" x2="400" y2="230" stroke="#333" stroke-width="2"/>
+  <line x1="100" y1="230" x2="276" y2="82" stroke="#333" stroke-width="2"/>
+  <line x1="400" y1="230" x2="276" y2="82" stroke="#333" stroke-width="2" stroke-dasharray="6,3"/>
+
+  <!-- Radius OB (auxiliary line) -->
+  <line x1="250" y1="230" x2="276" y2="82" stroke="#1a73e8" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Vertex labels -->
+  <text x="80" y="248" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">C</text>
+  <text x="400" y="248" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">A</text>
+  <text x="278" y="68" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">B</text>
+
+  <!-- Center O dot -->
+  <circle cx="250" cy="230" r="4" fill="#333"/>
+  <text x="244" y="224" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">O</text>
+
+  <!-- Isosceles triangle marks on OC and OB -->
+  <!-- OC: horizontal from O(250,230) to C(100,230), marks at midpoint ~(175,230) -->
+  <line x1="175" y1="224" x2="175" y2="236" stroke="#1a73e8" stroke-width="2"/>
+  <line x1="183" y1="224" x2="183" y2="236" stroke="#1a73e8" stroke-width="2"/>
+  <!-- OB: from O(250,230) to B(276,82), mid ~(263,156), perpendicular dir ~(0.985,0.173) -->
+  <line x1="258" y1="152" x2="268" y2="157" stroke="#1a73e8" stroke-width="2"/>
+  <line x1="260" y1="160" x2="270" y2="165" stroke="#1a73e8" stroke-width="2"/>
+
+  <!-- ===== ∠ACB arc (inscribed angle, at C) ===== -->
+  <!-- CA direction: right; CB direction: to B(276,82) from C(100,230) -->
+  <path d="M 130,230 A 30,30 0 0,1 125.5,208.8" fill="none" stroke="#e53935" stroke-width="2.5"/>
+  <text x="120" y="212" font-size="14" font-weight="bold" fill="#e53935" font-family="serif" font-style="italic">&ang;ACB</text>
+
+  <!-- ===== ∠AOB arc (central angle, at O) ===== -->
+  <!-- OA direction: right; OB direction: to B(276,82) from O(250,230) -->
+  <path d="M 275,230 A 25,25 0 0,1 254.3,205.4" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+  <text x="266" y="208" font-size="14" font-weight="bold" fill="#1a73e8" font-family="serif" font-style="italic">&ang;AOB</text>
+
+  <!-- Small dots at vertices -->
+  <circle cx="100" cy="230" r="3" fill="#333"/>
+  <circle cx="400" cy="230" r="3" fill="#333"/>
+  <circle cx="276" cy="82" r="3" fill="#333"/>
+</svg>
+</div>
+
+<div class="aux-desc">
+  <strong>辅助线思路：</strong>当圆心在圆周角一边上时，连接 O 与另一端点 B 得到辅助线 OB。因为 OA=OB=OC=半径，所以 △OCB 是等腰三角形，&ang;OCB=&ang;OBC。再由三角形外角定理 &ang;AOB=&ang;OCB+&ang;OBC=2&ang;OCB=2&ang;ACB。这条辅助线的思路是"利用等腰三角形和外角定理将圆周角与圆心角联系起来"。
+</div>
+
+<h3>分步推导</h3>
+<div class="example">
+  <p><strong>已知：</strong>在 ⊙O 中，圆心 O 在 &ang;ACB 的边 CA 上。</p>
+  <p><strong>求证：</strong>&ang;AOB = 2&ang;ACB</p>
+  <p class="step"><strong>证明：</strong></p>
+  <p class="step">① 连接 OB（辅助线）。</p>
+  <p class="step">② ∵ OA = OB = OC = r（同圆半径相等），</p>
+  <p class="step">&emsp;&emsp;∴ △OCB 是等腰三角形，&ang;OCB = &ang;OBC。</p>
+  <p class="step">③ 在 △OCB 中，由三角形外角定理：</p>
+  <p class="step">&emsp;&emsp;&ang;AOB = &ang;OCB + &ang;OBC（&ang;AOB 是 △OCB 的外角）。</p>
+  <p class="step">④ ∴ &ang;AOB = &ang;OCB + &ang;OBC = 2&ang;OCB = 2&ang;ACB。</p>
+  <p class="answer">∴ 圆心角等于圆周角的两倍。</p>
+</div>
+</section>
+
+<!-- ========================= 证明二 ========================= -->
+<section>
+<h2>三、证明二——圆心在圆周角内部</h2>
+
+<div class="svg-wrap">
+<svg width="500" height="450" viewBox="0 0 500 450" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circle -->
+  <circle cx="250" cy="230" r="150" fill="rgba(26,115,232,0.04)" stroke="#333" stroke-width="2"/>
+
+  <!-- Triangle ACB -->
+  <line x1="360" y1="200" x2="110" y2="140" stroke="#333" stroke-width="2"/>
+  <line x1="360" y1="200" x2="110" y2="350" stroke="#333" stroke-width="2"/>
+  <line x1="110" y1="140" x2="110" y2="350" stroke="#333" stroke-width="1.5" stroke-dasharray="6,3"/>
+
+  <!-- CO extended to D (dashed auxiliary line) -->
+  <line x1="360" y1="200" x2="250" y2="230" stroke="#e65100" stroke-width="2"/>
+  <line x1="250" y1="230" x2="105" y2="270" stroke="#e65100" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <!-- Radii OA, OB, OD -->
+  <line x1="250" y1="230" x2="110" y2="140" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="250" y1="230" x2="110" y2="350" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="250" y1="230" x2="105" y2="270" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- Vertex labels -->
+  <text x="368" y="198" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">C</text>
+  <text x="90" y="134" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">A</text>
+  <text x="90" y="370" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">B</text>
+  <text x="106" y="286" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">D</text>
+
+  <!-- Center O dot -->
+  <circle cx="250" cy="230" r="4" fill="#333"/>
+  <text x="244" y="224" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">O</text>
+
+  <!-- ===== ∠ACB arc at C ===== -->
+  <!-- CA direction: from C(360,200) to A(110,140) = (-250,-60), angle ~ -166.7° -->
+  <!-- CD direction: from C(360,200) to D(105,270) = (-255,70), angle ~ 164.6° -->
+  <!-- CB direction: from C(360,200) to B(110,350) = (-250,150), angle ~ 149.0° -->
+  <!-- ∠ACD between CA and CD: from -166.7° to 164.6° (going CCW) or equivalently from 193.3° to 164.6° (going CW) -->
+  <!-- ∠DCB between CD and CB: from 164.6° to 149.0° -->
+  <path d="M 343,185 A 20,20 0 0,1 341.5,218.5" fill="none" stroke="#e53935" stroke-width="2"/>
+  <text x="344" y="214" font-size="13" font-weight="bold" fill="#e53935" font-family="serif" font-style="italic">&ang;ACD</text>
+
+  <path d="M 341.5,218.5 A 20,20 0 0,1 347,222" fill="none" stroke="#1a73e8" stroke-width="2"/>
+  <text x="344" y="234" font-size="13" font-weight="bold" fill="#1a73e8" font-family="serif" font-style="italic">&ang;DCB</text>
+
+  <!-- ===== ∠AOD arc at O (corresponding to ∠ACD) ===== -->
+  <!-- OA dir: (110-250,140-230)=(-140,-90), OD dir: (105-250,270-230)=(-145,40) -->
+  <path d="M 236.5,236.5 A 15,15 0 0,1 236,242" fill="none" stroke="#e53935" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="226" y="248" font-size="11" fill="#e53935" font-family="serif" font-style="italic">&ang;AOD</text>
+
+  <!-- ===== ∠DOB arc at O (corresponding to ∠DCB) ===== -->
+  <!-- OD dir: (-145,40), OB dir: (110-250,350-230)=(-140,120) -->
+  <path d="M 236,242 A 15,15 0 0,1 239,248" fill="none" stroke="#1a73e8" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="234" y="260" font-size="11" fill="#1a73e8" font-family="serif" font-style="italic">&ang;DOB</text>
+
+  <!-- Angle labels ∠1=∠2 -->
+  <text x="334" y="194" font-size="15" font-weight="bold" fill="#e53935" font-family="serif">&ang;1</text>
+
+  <!-- Small dots at vertices -->
+  <circle cx="360" cy="200" r="3" fill="#333"/>
+  <circle cx="110" cy="140" r="3" fill="#333"/>
+  <circle cx="110" cy="350" r="3" fill="#333"/>
+  <circle cx="105" cy="270" r="3" fill="#333"/>
+</svg>
+</div>
+
+<div class="aux-desc">
+  <strong>辅助线思路：</strong>"连接 CO 并延长交圆于 D"——这条辅助线的目的是将"圆心在内部"的情形转化为"圆心在一边上"的已知情形。因为 &ang;ACB = &ang;ACD + &ang;DCB，而 &ang;ACD 和 &ang;DCB 分别是圆心在边上的情况，可分别应用证明一的结论：&ang;AOD=2&ang;ACD，&ang;DOB=2&ang;DCB，相加得 &ang;AOB=2&ang;ACB。关键技巧是"通过作直径将复杂情形拆分为已证情形"。
+</div>
+
+<h3>分步推导</h3>
+<div class="example">
+  <p><strong>已知：</strong>在 ⊙O 中，圆心 O 在 &ang;ACB 的内部。</p>
+  <p><strong>求证：</strong>&ang;AOB = 2&ang;ACB</p>
+  <p class="step"><strong>证明：</strong></p>
+  <p class="step">① 连接 CO 并延长交圆于 D（辅助线）。</p>
+  <p class="step">② 对于 &ang;ACD，圆心 O 在其边 CD 上，由证明一可得：</p>
+  <p class="step">&emsp;&emsp;&ang;AOD = 2&ang;ACD。</p>
+  <p class="step">③ 对于 &ang;DCB，圆心 O 在其边 CD 上，由证明一可得：</p>
+  <p class="step">&emsp;&emsp;&ang;DOB = 2&ang;DCB。</p>
+  <p class="step">④ 两式相加：</p>
+  <p class="step">&emsp;&emsp;&ang;AOD + &ang;DOB = 2(&ang;ACD + &ang;DCB)，</p>
+  <p class="step">&emsp;&emsp;即 &ang;AOB = 2&ang;ACB。</p>
+  <p class="answer">∴ 圆心角等于圆周角的两倍。</p>
+</div>
+</section>
+
+<!-- ========================= 证明三 ========================= -->
+<section>
+<h2>四、证明三——圆心在圆周角外部</h2>
+
+<div class="svg-wrap">
+<svg width="500" height="450" viewBox="0 0 500 450" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circle -->
+  <circle cx="250" cy="230" r="150" fill="rgba(26,115,232,0.04)" stroke="#333" stroke-width="2"/>
+
+  <!-- Triangle ACB -->
+  <line x1="300" y1="100" x2="110" y2="180" stroke="#333" stroke-width="2"/>
+  <line x1="300" y1="100" x2="110" y2="360" stroke="#333" stroke-width="2"/>
+  <line x1="110" y1="180" x2="110" y2="360" stroke="#333" stroke-width="1.5" stroke-dasharray="6,3"/>
+
+  <!-- CO extended to D (dashed auxiliary line) -->
+  <line x1="300" y1="100" x2="250" y2="230" stroke="#e65100" stroke-width="2"/>
+  <line x1="250" y1="230" x2="196" y2="370" stroke="#e65100" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <!-- Radii OA, OB, OD -->
+  <line x1="250" y1="230" x2="110" y2="180" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="250" y1="230" x2="110" y2="360" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="250" y1="230" x2="196" y2="370" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- Vertex labels -->
+  <text x="304" y="94" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">C</text>
+  <text x="90" y="176" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">A</text>
+  <text x="90" y="380" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">B</text>
+  <text x="190" y="388" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">D</text>
+
+  <!-- Center O dot -->
+  <circle cx="250" cy="230" r="4" fill="#333"/>
+  <text x="244" y="224" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">O</text>
+
+  <!-- ===== ∠ACB arc at C ===== -->
+  <!-- CA dir: from C to A = (-190,80), angle ~ 157.2° -->
+  <!-- CB dir: from C to B = (-190,260), angle ~ 126.1° -->
+  <!-- ∠ACB goes from 157.2° to 126.1° (clockwise) -->
+  <path d="M 283,118 A 20,20 0 0,1 288.5,108" fill="none" stroke="#e53935" stroke-width="2.5"/>
+  <text x="282" y="108" font-size="14" font-weight="bold" fill="#e53935" font-family="serif" font-style="italic">&ang;ACB</text>
+
+  <!-- ===== ∠ACD arc at C (between CA and CD) ===== -->
+  <!-- CD dir: from C to D = (-104,270) -->
+  <path d="M 283,118 A 18,18 0 0,1 282,120" fill="none" stroke="#1a73e8" stroke-width="1.5"/>
+  <text x="276" y="130" font-size="12" fill="#1a73e8" font-family="serif" font-style="italic">&ang;ACD</text>
+
+  <!-- ===== ∠BCD arc at C (between CB and CD) ===== -->
+  <path d="M 282,120 A 18,18 0 0,1 287,137" fill="none" stroke="#43a047" stroke-width="1.5"/>
+  <text x="280" y="148" font-size="12" fill="#43a047" font-family="serif" font-style="italic">&ang;BCD</text>
+
+  <!-- ===== ∠AOD arc at O ===== -->
+  <path d="M 238,238 A 12,12 0 0,1 237,240" fill="none" stroke="#1a73e8" stroke-width="1.5" stroke-dasharray="3,2"/>
+
+  <!-- ===== ∠BOD arc at O ===== -->
+  <path d="M 237,240 A 12,12 0 0,1 239,244" fill="none" stroke="#43a047" stroke-width="1.5" stroke-dasharray="3,2"/>
+
+  <!-- Small dots at vertices -->
+  <circle cx="300" cy="100" r="3" fill="#333"/>
+  <circle cx="110" cy="180" r="3" fill="#333"/>
+  <circle cx="110" cy="360" r="3" fill="#333"/>
+  <circle cx="196" cy="370" r="3" fill="#333"/>
+</svg>
+</div>
+
+<div class="aux-desc">
+  <strong>辅助线思路：</strong>同样通过"连接 CO 并延长交圆于 D"，将外部情形转化为圆心在边上的情形，用角差代替角和的推导：&ang;AOB = &ang;AOD &minus; &ang;BOD = 2&ang;ACD &minus; 2&ang;BCD = 2(&ang;ACD &minus; &ang;BCD) = 2&ang;ACB。
+</div>
+
+<h3>分步推导</h3>
+<div class="example">
+  <p><strong>已知：</strong>在 ⊙O 中，圆心 O 在 &ang;ACB 的外部。</p>
+  <p><strong>求证：</strong>&ang;AOB = 2&ang;ACB</p>
+  <p class="step"><strong>证明：</strong></p>
+  <p class="step">① 连接 CO 并延长交圆于 D（辅助线）。</p>
+  <p class="step">② 对于 &ang;ACD，圆心 O 在其边 CD 上，由证明一可得：</p>
+  <p class="step">&emsp;&emsp;&ang;AOD = 2&ang;ACD。</p>
+  <p class="step">③ 对于 &ang;BCD，圆心 O 在其边 CD 上，由证明一可得：</p>
+  <p class="step">&emsp;&emsp;&ang;BOD = 2&ang;BCD。</p>
+  <p class="step">④ 两式相减：</p>
+  <p class="step">&emsp;&emsp;&ang;AOD &minus; &ang;BOD = 2(&ang;ACD &minus; &ang;BCD)，</p>
+  <p class="step">&emsp;&emsp;即 &ang;AOB = 2&ang;ACB。</p>
+  <p class="answer">∴ 圆心角等于圆周角的两倍。</p>
+</div>
+</section>
+
+<!-- ========================= 交互式测验 ========================= -->
+<section>
+<h2>五、互动问答</h2>
+<p style="color:#666;">点击选项提交答案，系统自动判分。</p>
+
+<div id="quiz-container"></div>
+
+<div class="score-panel">
+  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 3</div>
+  <br>
+  <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #1a73e8;color:#1a73e8;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">&ocy; 重新答题</button>
+</div>
+
+</article>
+
+<script>
+// ============================================================
+// 习题数据
+// ============================================================
+var questions = [
+  {
+    type: "choice",
+    tag: "选择",
+    question: "同弧所对的圆周角与圆心角的关系是？",
+    opts: [
+      "圆周角 = 圆心角",
+      "圆心角 = 2 &times; 圆周角",
+      "圆周角 = 2 &times; 圆心角",
+      "无关系"
+    ],
+    answer: 1,
+    explain: "圆周角定理指出：同弧所对的圆心角等于圆周角的两倍，即 &ang;AOB = 2&ang;ACB。"
+  },
+  {
+    type: "choice",
+    tag: "选择",
+    question: "证明\u201C圆心在圆周角外部\u201D时添加的辅助线是？",
+    opts: [
+      "作高线",
+      "作角平分线",
+      "连接 CO 延长交圆",
+      "作切线"
+    ],
+    answer: 2,
+    explain: "当圆心在圆周角外部时，辅助线是\u201C连接 CO 并延长交圆于 D\u201D，将外部情形转化为圆心在边上的已知情形。"
+  },
+  {
+    type: "choice",
+    tag: "选择",
+    question: "证明三情形的核心思路是什么？",
+    opts: [
+      "全等三角形",
+      "相似三角形",
+      "转化为已证简单情形",
+      "反证法"
+    ],
+    answer: 2,
+    explain: "三种情形的证明都遵循同一个思路：添加辅助线将复杂情形（圆心在内部或外部）转化为已证明的简单情形（圆心在一边上），体现了数学中\u201C化归\u201D的重要思想。"
+  }
+];
+
+// ============================================================
+// 渲染与交互逻辑
+// ============================================================
+var answers = {1:1, 2:2, 3:2};
+
+function scoreWeight() { return 1; }
+
+function render() {
+  var container = document.getElementById("quiz-container");
+  var html = "";
+  for (var i = 0; i < questions.length; i++) {
+    var q = questions[i];
+    var optsHtml = "";
+    for (var j = 0; j < q.opts.length; j++) {
+      optsHtml += '<div class="opt" data-q="' + i + '" data-idx="' + j + '">'
+        + String.fromCharCode(65 + j) + '. ' + q.opts[j] + '</div>';
+    }
+    html += '<div id="q' + i + '" class="quiz-question">'
+      + '<div class="q-title"><span class="q-tag">' + q.tag + '</span>' + q.question + '</div>'
+      + '<div class="options">' + optsHtml + '</div>'
+      + '<div class="explain" id="exp' + i + '">' + q.explain + '</div>'
+      + '</div>';
+  }
+  container.innerHTML = html;
+
+  // Bind click events
+  var opts = document.querySelectorAll(".opt");
+  for (var k = 0; k < opts.length; k++) {
+    opts[k].onclick = function() {
+      var qIdx = parseInt(this.getAttribute("data-q"));
+      var optIdx = parseInt(this.getAttribute("data-idx"));
+      checkChoice(qIdx, optIdx);
+    };
+  }
+}
+
+function checkChoice(qIdx, chosen) {
+  var qDiv = document.getElementById("q" + qIdx);
+  if (qDiv.classList.contains("correct") || qDiv.classList.contains("wrong")) return;
+
+  var correct = questions[qIdx].answer;
+  var opts = qDiv.querySelectorAll(".opt");
+
+  // Disable all options and mark correct/wrong
+  for (var j = 0; j < opts.length; j++) {
+    opts[j].classList.add("disabled");
+    if (j === correct) opts[j].classList.add("correct-opt");
+    if (j === chosen && chosen !== correct) opts[j].classList.add("wrong-opt");
+  }
+
+  qDiv.classList.add(chosen === correct ? "correct" : "wrong");
+  var exp = document.getElementById("exp" + qIdx);
+  exp.classList.add("show");
+  exp.classList.add(chosen === correct ? "ok" : "fail");
+
+  updateTotalScore();
+}
+
+function updateTotalScore() {
+  var total = 0;
+  for (var i = 0; i < questions.length; i++) {
+    var qDiv = document.getElementById("q" + i);
+    if (qDiv.classList.contains("correct")) total++;
+  }
+  document.getElementById("scoreDisplay").textContent = "得分：" + total + " / 3";
+}
+
+function resetAll() {
+  document.getElementById("scoreDisplay").textContent = "得分：0 / 3";
+  for (var i = 0; i < questions.length; i++) {
+    var qDiv = document.getElementById("q" + i);
+    qDiv.className = "quiz-question";
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].className = "opt";
+    }
+    var exp = document.getElementById("exp" + i);
+    exp.className = "explain";
+    exp.classList.remove("ok", "fail");
+  }
+}
+
+document.getElementById("resetBtn").onclick = resetAll;
+render();
+</script>
+    <script src="../dt.js"></script>
+</body>
+</html>

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数形结合 — 10 个经典实例</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  h3 { color: #2c3e50; margin: 28px 0 12px; }
+  h4 { color: #1a73e8; margin: 18px 0 8px; }
+  .num-instance {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 20px 0; transition: all 0.2s;
+  }
+  .num-instance h4 { margin-top: 0; color: #1a73e8; }
+  .num-instance .tag {
+    display: inline-block; padding: 2px 10px; border-radius: 10px;
+    font-size: 0.75em; margin-right: 8px; color: #fff; background: #e65100;
+  }
+  .method-box {
+    background: #f0f7ff; border-left: 4px solid #1a73e8;
+    padding: 14px 18px; margin: 12px 0; border-radius: 0 8px 8px 0;
+  }
+  .method-box p { margin: 4px 0; }
+  /* Quiz styles */
+  .quiz-question {
+    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+  }
+  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-tag { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 0.75em; margin-right: 8px; color: #fff; background: #1a73e8; }
+  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-question .opt {
+    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+  }
+  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+  .quiz-question .explain {
+    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.93em; display: none;
+  }
+  .quiz-question .explain.show { display: block; }
+  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+  .score-panel {
+    text-align: center; padding: 16px; margin: 20px 0;
+    background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8;
+  }
+  .score-panel .score-num { font-size: 2em; font-weight: bold; color: #1a73e8; }
+  .score-panel .btn-reset {
+    margin-left: 16px; padding: 8px 24px; border: 2px solid #1a73e8;
+    color: #1a73e8; border-radius: 20px; background: #fff;
+    cursor: pointer; font-size: 0.95em; transition: 0.15s;
+  }
+  .score-panel .btn-reset:hover { background: #1a73e8; color: #fff; }
+  .fun-icon { font-size: 1.3em; margin-right: 6px; }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>数形结合 — 10 个经典实例</h1>
+<p class="tip" style="text-align:center;font-size:1.1em;">
+  数形结合——"数"与"形"相互转化，以形助数、以数解形，是数学中最基本的思想方法之一。
+</p>
+<div class="score-panel">
+  得分：<span class="score-num" id="totalScoreTop">0 / 10</span>
+  <button class="btn-reset" onclick="resetAll()">重置</button>
+</div>
+
+<!-- ========== 实例 1 ========== -->
+<div class="num-instance">
+  <h4><span class="tag">实例 1</span> 二次函数的图像与性质</h4>
+  <p><strong>问题：</strong>已知二次函数 \(f(x) = x^2 - 4x + 3\)，求其最小值，并判断 \(f(x) > 0\) 的解集。</p>
+  <svg viewBox="0 0 500 300" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+    <rect width="500" height="300" fill="#fafafa" rx="8"/>
+    <line x1="30" y1="260" x2="470" y2="260" stroke="#333" stroke-width="1.5"/>
+    <line x1="250" y1="280" x2="250" y2="20" stroke="#333" stroke-width="1.5"/>
+    <polygon points="470,260 462,256 462,264" fill="#333"/>
+    <polygon points="250,20 246,28 254,28" fill="#333"/>
+    <text x="465" y="254" font-family="serif" font-size="14" fill="#333">x</text>
+    <text x="240" y="24" font-family="serif" font-size="14" fill="#333">y</text>
+    <text x="240" y="278" font-family="serif" font-size="12" fill="#666">O</text>
+    <path d="M50,250 Q100,100 250,30 Q400,100 450,250" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+    <circle cx="250" cy="30" r="4" fill="#d32f2f"/>
+    <text x="250" y="20" font-family="serif" font-size="13" fill="#d32f2f" text-anchor="middle">(2,-1)</text>
+    <circle cx="90" cy="260" r="3" fill="#e65100"/>
+    <text x="90" y="278" font-family="serif" font-size="12" fill="#e65100" text-anchor="middle">(1,0)</text>
+    <circle cx="410" cy="260" r="3" fill="#e65100"/>
+    <text x="410" y="278" font-family="serif" font-size="12" fill="#e65100" text-anchor="middle">(3,0)</text>
+    <text x="250" y="290" font-family="serif" font-size="14" fill="#333" text-anchor="middle">y = x² - 4x + 3 = (x-1)(x-3)</text>
+  </svg>
+  <div class="method-box">
+    <p><strong>数→形：</strong>配方得 \(f(x) = (x-2)^2 - 1\)，抛物线开口向上，顶点 (2,-1)，零点 x=1 和 x=3。</p>
+    <p><strong>形→数：</strong>由图像知最小值 = -1，\(f(x) > 0\) 的解集为 \((-\infty,1) \cup (3,\infty)\)。</p>
+    <p><strong>本原：</strong>二次函数的<strong>图像（抛物线）</strong>直观展示对称性、最值和零点，将代数表达式转化为几何直观。</p>
+  </div>
+  <div class="quiz-question" id="q1">
+    <div class="q-title"><span class="q-tag">题 1</span> 二次函数 \(f(x)=x^2-2x-3\) 的最小值是？</div>
+    <div class="options">
+      <div class="opt" onclick="checkChoice(1, 0)">A. 0</div>
+      <div class="opt" onclick="checkChoice(1, 1)">B. -3</div>
+      <div class="opt" onclick="checkChoice(1, 2)">C. -4</div>
+      <div class="opt" onclick="checkChoice(1, 3)">D. -1</div>
+    </div>
+    <div class="explain" id="explain1"><strong>解析：</strong>配方得 \(f(x)=(x-1)^2-4\)，所以最小值为 -4。选 C。</div>
+  </div>
+</div>
+
+<!-- ========== 实例 2 ========== -->
+<div class="num-instance">
+  <h4><span class="tag">实例 2</span> 利用单位圆研究三角函数</h4>
+  <p><strong>问题：</strong>求 \(\sin\theta\)、\(\cos\theta\) 的值域和周期性，判断 \(\sin\theta > \frac{1}{2}\) 的解集。</p>
+  <svg viewBox="0 0 500 300" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+    <rect width="500" height="300" fill="#fafafa" rx="8"/>
+    <circle cx="200" cy="150" r="100" fill="none" stroke="#333" stroke-width="1.5"/>
+    <line x1="100" y1="150" x2="300" y2="150" stroke="#333" stroke-width="1"/>
+    <line x1="200" y1="50" x2="200" y2="250" stroke="#333" stroke-width="1"/>
+    <text x="305" y="155" font-family="serif" font-size="13" fill="#333">x</text>
+    <text x="195" y="48" font-family="serif" font-size="13" fill="#333">y</text>
+    <text x="190" y="168" font-family="serif" font-size="11" fill="#666">O</text>
+    <!-- 角度线 -->
+    <line x1="200" y1="150" x2="250" y2="63" stroke="#d32f2f" stroke-width="2"/>
+    <!-- 弧 -->
+    <path d="M230,150 A30,30 0 0,1 246,123" fill="none" stroke="#e65100" stroke-width="1.5"/>
+    <text x="240" y="145" font-family="serif" font-size="12" fill="#e65100">θ</text>
+    <!-- sin 线段 -->
+    <line x1="250" y1="63" x2="200" y2="63" stroke="#1a73e8" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="225" y="58" font-family="serif" font-size="11" fill="#1a73e8">sinθ</text>
+    <!-- cos 线段 -->
+    <line x1="200" y1="63" x2="200" y2="150" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="160" y="105" font-family="serif" font-size="11" fill="#2e7d32">cosθ</text>
+    <!-- 圆上交点 -->
+    <circle cx="250" cy="63" r="3" fill="#d32f2f"/>
+    <text x="258" y="60" font-family="serif" font-size="12" fill="#d32f2f">P</text>
+    <text x="200" y="285" font-family="serif" font-size="12" fill="#666" text-anchor="middle">单位圆中 sinθ = y, cosθ = x</text>
+  </svg>
+  <div class="method-box">
+    <p><strong>数→形：</strong>单位圆上点 \(P(\cos\theta, \sin\theta)\) 随 \(\theta\) 旋转。</p>
+    <p><strong>形→数：</strong>纵坐标范围 [-1,1] → \(\sin\theta \in [-1,1]\)；\(\theta = 30^\circ\) 时 \(\sin\theta = 0.5\)，由图像看出 \(\sin\theta > 0.5\) 的解在 \(30^\circ < \theta < 150^\circ\) 内。</p>
+    <p><strong>本原：</strong>单位圆将抽象的三角函数<strong>可视化</strong>为点的坐标，周期性来自旋转一周回到原点。</p>
+  </div>
+  <div class="quiz-question" id="q2">
+    <div class="q-title"><span class="q-tag">题 2</span> \(\cos\theta > 0\) 的解集是（0~360°）？</div>
+    <div class="options">
+      <div class="opt" onclick="checkChoice(2, 0)">A. 0°~90°</div>
+      <div class="opt" onclick="checkChoice(2, 1)">B. 0°~180°</div>
+      <div class="opt" onclick="checkChoice(2, 2)">C. 0°~90° 和 270°~360°</div>
+      <div class="opt" onclick="checkChoice(2, 3)">D. 90°~270°</div>
+    </div>
+    <div class="explain" id="explain2"><strong>解析：</strong>cosθ>0 即 x>0，对应单位圆右半平面，所以 θ∈(0°,90°)∪(270°,360°)。选 C。</div>
+  </div>
+</div>
+
+<!-- ========== 实例 3 ========== -->
+<div class="num-instance">
+  <h4><span class="tag">实例 3</span> 利用数轴研究绝对值不等式</h4>
+  <p><strong>问题：</strong>解不等式 \(|x-1| + |x-3| \le 4\)。</p>
+  <svg viewBox="0 0 500 180" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+    <rect width="500" height="180" fill="#fafafa" rx="8"/>
+    <line x1="30" y1="90" x2="470" y2="90" stroke="#333" stroke-width="2"/>
+    <polygon points="470,90 462,85 462,95" fill="#333"/>
+    <text x="470" y="80" font-family="serif" font-size="13" fill="#333">x</text>
+    <!-- 刻度 -->
+    <line x1="70" y1="85" x2="70" y2="95" stroke="#333" stroke-width="1"/><text x="70" y="112" font-family="serif" font-size="12" fill="#333" text-anchor="middle">0</text>
+    <line x1="170" y1="85" x2="170" y2="95" stroke="#333" stroke-width="1"/><text x="170" y="112" font-family="serif" font-size="12" fill="#333" text-anchor="middle">1</text>
+    <line x1="270" y1="85" x2="270" y2="95" stroke="#333" stroke-width="1"/><text x="270" y="112" font-family="serif" font-size="12" fill="#333" text-anchor="middle">3</text>
+    <line x1="370" y1="85" x2="370" y2="95" stroke="#333" stroke-width="1"/><text x="370" y="112" font-family="serif" font-size="12" fill="#333" text-anchor="middle">4</line>
+    <!-- 区间标注 -->
+    <line x1="70" y1="80" x2="370" y2="80" stroke="#1a73e8" stroke-width="3"/>
+    <text x="220" y="72" font-family="serif" font-size="13" fill="#1a73e8" text-anchor="middle">|x-1| + |x-3| ≤ 4</text>
+    <!-- 距离标注 -->
+    <line x1="170" y1="130" x2="270" y2="130" stroke="#2e7d32" stroke-width="1.5"/>
+    <text x="220" y="148" font-family="serif" font-size="11" fill="#2e7d32" text-anchor="middle">距离=2（始终）</text>
+    <text x="220" y="165" font-family="serif" font-size="12" fill="#666" text-anchor="middle">x 到 1 和 3 的距离之和 &le; 4</text>
+  </svg>
+  <div class="method-box">
+    <p><strong>数→形：</strong>\(|x-1|+|x-3|\) 表示数轴上点 x 到点 1 和点 3 的距离之和。</p>
+    <p><strong>形→数：</strong>点 1 和点 3 相距 2，所以当 x 在 [1,3] 之间时，和为定值 2；当 x 在两端之外超过一定范围时和 >4。</p>
+    <p>利用对称性：距离和最大 4，从区间中点向两侧延伸，解得 \(x \in [0,4]\)。</p>
+    <p><strong>本原：</strong>将绝对值<strong>几何化</strong>为数轴上的距离，使不等式变成直观的"两点到定点距离和"问题。</p>
+  </div>
+  <div class="quiz-question" id="q3">
+    <div class="q-title"><span class="q-tag">题 3</span> \(|x-2| \le 3\) 在数轴上表示的是？</div>
+    <div class="options">
+      <div class="opt" onclick="checkChoice(3, 0)">A. x 到 2 的距离 ≤ 3</div>
+      <div class="opt" onclick="checkChoice(3, 1)">B. x 到 3 的距离 ≤ 2</div>
+      <div class="opt" onclick="checkChoice(3, 2)">C. x 到 -2 的距离 ≤ 3</div>
+      <div class="opt" onclick="checkChoice(3, 3)">D. x 到 1 的距离 ≤ 3</div>
+    </div>
+    <div class="explain" id="explain3"><strong>解析：</strong>\(|x-2|\) 表示点 x 到 2 的距离，≤3 说明距离不超过 3。选 A。</div>
+  </div>
+</div>
+
+<!-- ========== 实例 4 ========== -->
+<div class="num-instance">
+  <h4><span class="tag">实例 4</span> 利用图像研究方程根的分布</h4>
+  <p><strong>问题：</strong>讨论方程 \(x^3 - 3x + 1 = 0\) 的实根个数和大致位置。</p>
+  <svg viewBox="0 0 500 300" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+    <rect width="500" height="300" fill="#fafafa" rx="8"/>
+    <line x1="30" y1="150" x2="470" y2="150" stroke="#333" stroke-width="1.5"/>
+    <line x1="250" y1="280" x2="250" y2="20" stroke="#333" stroke-width="1.5"/>
+    <polygon points="470,150 462,146 462,154" fill="#333"/>
+    <polygon points="250,20 246,28 254,28" fill="#333"/>
+    <text x="465" y="144" font-family="serif" font-size="14" fill="#333">x</text>
+    <text x="240" y="24" font-family="serif" font-size="14" fill="#333">y</text>
+    <text x="240" y="168" font-family="serif" font-size="12" fill="#666">O</text>
+    <!-- 三次函数曲线 y=x^3-3x+1 -->
+    <path d="M50,270 Q100,260 130,220 Q160,100 200,60 Q230,30 250,80 Q280,160 320,200 Q360,230 430,220 Q460,215 470,210" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+    <!-- 与 x 轴交点 -->
+    <circle cx="185" cy="150" r="4" fill="#d32f2f"/>
+    <text x="185" y="140" font-family="serif" font-size="11" fill="#d32f2f" text-anchor="middle">x₁</text>
+    <circle cx="255" cy="150" r="4" fill="#d32f2f"/>
+    <text x="255" y="140" font-family="serif" font-size="11" fill="#d32f2f" text-anchor="middle">x₂</text>
+    <circle cx="370" cy="150" r="4" fill="#d32f2f"/>
+    <text x="370" y="140" font-family="serif" font-size="11" fill="#d32f2f" text-anchor="middle">x₃</text>
+    <text x="250" y="290" font-family="serif" font-size="13" fill="#333" text-anchor="middle">y = x³ - 3x + 1</text>
+  </svg>
+  <div class="method-box">
+    <p><strong>数→形：</strong>将方程 \(x^3 - 3x + 1 = 0\) 看作函数 \(y = x^3 - 3x + 1\) 与 x 轴的交点。</p>
+    <p><strong>形→数：</strong>由图像看出三次曲线与 x 轴有 3 个交点，分别位于 (-2,0)、(-0.5, 1)、(1.5, 2) 区间。</p>
+    <p>结合介值定理和导数分析极值点 \(x=\pm 1\)，\(f(-1)=3\)，\(f(1)=-1\)，正负交替→3 个实根。</p>
+    <p><strong>本原：</strong>方程的根对应图像的<strong>零点</strong>，曲线的起伏直观揭示了根的个数和大致位置。</p>
+  </div>
+  <div class="quiz-question" id="q4">
+    <div class="q-title"><span class="q-tag">题 4</span> 方程 \(x^3 - 3x + 1 = 0\) 有几个实根？</div>
+    <div class="options">
+      <div class="opt" onclick="checkChoice(4, 0)">A. 0 个</div>
+      <div class="opt" onclick="checkChoice(4, 1)">B. 1 个</div>
+      <div class="opt" onclick="checkChoice(4, 2)">C. 2 个</div>
+      <div class="opt" onclick="checkChoice(4, 3)">D. 3 个</div>
+    </div>
+    <div class="explain" id="explain4"><strong>解析：</strong>图像与 x 轴交于 3 点，故选 D。极值分析也可确认。</div>
+  </div>
+</div>
+
+<!-- ========== 实例 5 ========== -->
+<div class="num-instance">
+  <h4><span class="tag">实例 5</span> 利用斜率研究最值问题</h4>
+  <p><strong>问题：</strong>求函数 \(y = \frac{x + 2}{x - 1}\) 的值域。</p>
+  <svg viewBox="0 0 500 300" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+    <rect width="500" height="300" fill="#fafafa" rx="8"/>
+    <line x1="20" y1="150" x2="480" y2="150" stroke="#333" stroke-width="1.5"/>
+    <line x1="250" y1="280" x2="250" y2="20" stroke="#333" stroke-width="1.5"/>
+    <polygon points="480,150 472,146 472,154" fill="#333"/>
+    <polygon points="250,20 246,28 254,28" fill="#333"/>
+    <text x="475" y="144" font-family="serif" font-size="14" fill="#333">x</text>
+    <text x="240" y="24" font-family="serif" font-size="14" fill="#333">y</text>
+    <!-- 渐进线 -->
+    <line x1="170" y1="280" x2="170" y2="20" stroke="#999" stroke-width="1" stroke-dasharray="5,5"/>
+    <text x="170" y="16" font-family="serif" font-size="11" fill="#999" text-anchor="middle">x=1</text>
+    <line x1="20" y1="130" x2="480" y2="130" stroke="#999" stroke-width="1" stroke-dasharray="5,5"/>
+    <text x="20" y="125" font-family="serif" font-size="11" fill="#999">y=1</text>
+    <!-- 双曲线 -->
+    <path d="M60,50 Q80,65 100,90 Q120,110 140,125 Q155,135 165,138" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+    <path d="M175,170 Q180,175 195,190 Q220,215 260,240 Q300,255 350,265 Q400,270 460,275" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+    <!-- 两个点 -->
+    <circle cx="125" cy="115" r="3" fill="#d32f2f"/>
+    <circle cx="300" cy="250" r="3" fill="#d32f2f"/>
+    <text x="250" y="290" font-family="serif" font-size="13" fill="#333" text-anchor="middle">y = (x+2)/(x-1)</text>
+  </svg>
+  <div class="method-box">
+    <p><strong>数→形：</strong>将 \(y = \frac{x+2}{x-1}\) 改写为 \(y = 1 + \frac{3}{x-1}\)，是反比例函数平移形式。</p>
+    <p><strong>形→数：</strong>图像有两条渐近线：x=1（垂直）和 y=1（水平）。函数在每一支上单调。</p>
+    <p>由图像知值域为 \((-\infty, 1) \cup (1, \infty)\)，即 y ≠ 1。</p>
+    <p><strong>本原：</strong>分式函数的图像是<strong>双曲线</strong>，渐近线直接揭示了函数的"禁区"——值域中的不可达值。</p>
+  </div>
+  <div class="quiz-question" id="q5">
+    <div class="q-title"><span class="q-tag">题 5</span> 函数 \(y = \frac{1}{x}\) 的值域是？</div>
+    <div class="options">
+      <div class="opt" onclick="checkChoice(5, 0)">A. 全体实数</div>
+      <div class="opt" onclick="checkChoice(5, 1)">B. (-∞,0)∪(0,∞)</div>
+      <div class="opt" onclick="checkChoice(5, 2)">C. (0,∞)</div>
+      <div class="opt" onclick="checkChoice(5, 3)">D. (-∞,∞)</div>
+    </div>
+    <div class="explain" id="explain5"><strong>解析：</strong>由反比例函数图像知 y≠0，所以值域为(-∞,0)∪(0,∞)。选 B。</div>
+  </div>
+</div>
+
+<!-- ========== 实例 6 ========== -->
+<div class="num-instance">
+  <h4><span class="tag">实例 6</span> 利用距离公式研究最值</h4>
+  <p><strong>问题：</strong>求点 \(A(2,1)\) 到直线 \(y = x + 3\) 的最短距离。</p>
+  <svg viewBox="0 0 500 300" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+    <rect width="500" height="300" fill="#fafafa" rx="8"/>
+    <line x1="20" y1="200" x2="480" y2="200" stroke="#333" stroke-width="1.5"/>
+    <line x1="250" y1="280" x2="250" y2="10" stroke="#333" stroke-width="1.5"/>
+    <polygon points="480,200 472,196 472,204" fill="#333"/>
+    <polygon points="250,10 246,18 254,18" fill="#333"/>
+    <text x="475" y="194" font-family="serif" font-size="14" fill="#333">x</text>
+    <text x="240" y="14" font-family="serif" font-size="14" fill="#333">y</text>
+    <text x="240" y="218" font-family="serif" font-size="12" fill="#666">O</text>
+    <!-- 直线 y=x+3 -->
+    <line x1="40" y1="60" x2="460" y2="280" stroke="#e65100" stroke-width="2.5"/>
+    <text x="440" y="280" font-family="serif" font-size="12" fill="#e65100">y=x+3</text>
+    <!-- 点 A -->
+    <circle cx="130" cy="160" r="5" fill="#d32f2f"/>
+    <text x="130" y="145" font-family="serif" font-size="13" fill="#d32f2f" text-anchor="middle">A(2,1)</text>
+    <!-- 垂线 -->
+    <line x1="130" y1="160" x2="240" y2="270" stroke="#1a73e8" stroke-width="2" stroke-dasharray="5,3"/>
+    <!-- 垂足 H -->
+    <circle cx="240" cy="270" r="4" fill="#1a73e8"/>
+    <text x="248" y="280" font-family="serif" font-size="12" fill="#1a73e8">H</text>
+    <!-- 直角标记 -->
+    <polygon points="195,225 205,235 215,225 205,215" fill="none" stroke="#1a73e8" stroke-width="1"/>
+    <text x="185" y="225" font-family="serif" font-size="13" fill="#1a73e8" transform="rotate(-30,185,225)">d=?</text>
+  </svg>
+  <div class="method-box">
+    <p><strong>数→形：</strong>点到直线的距离公式 \(d = \frac{|Ax_0+By_0+C|}{\sqrt{A^2+B^2}}\)。</p>
+    <p><strong>形→数：</strong>过 A 作已知直线的垂线，垂足为 H，AH 的长度就是最短距离。</p>
+    <p>计算：直线化为 \(x - y + 3 = 0\)，\(d = \frac{|2-1+3|}{\sqrt{1^2+(-1)^2}} = \frac{4}{\sqrt{2}} = 2\sqrt{2}\)。</p>
+    <p><strong>本原：</strong>点到直线的最短距离即<strong>垂线段长度</strong>，将代数公式与几何垂直关系对应。</p>
+  </div>
+  <div class="quiz-question" id="q6">
+    <div class="q-title"><span class="q-tag">题 6</span> 原点到直线 \(y = x + 1\) 的距离是？</div>
+    <div class="options">
+      <div class="opt" onclick="checkChoice(6, 0)">A. 1</div>
+      <div class="opt" onclick="checkChoice(6, 1)">B. \(\sqrt{2}/2\)</div>
+      <div class="opt" onclick="checkChoice(6, 2)">C. 2</div>
+      <div class="opt" onclick="checkChoice(6, 3)">D. \(\sqrt{2}\)</div>
+    </div>
+    <div class="explain" id="explain6"><strong>解析：</strong>直线化为 x-y+1=0，代入公式 \(d=\frac{|0-0+1|}{\sqrt{1+1}}=\frac{1}{\sqrt{2}}=\frac{\sqrt{2}}{2}\)。选 B。</div>
+  </div>
+</div>
+
+<!-- ========== 实例 7 ========== -->
+<div class="num-instance">
+  <h4><span class="tag">实例 7</span> 利用 Venn 图研究集合运算</h4>
+  <p><strong>问题：</strong>某班 50 人，喜欢数学的 30 人，喜欢物理的 25 人，两门都喜欢的 15 人，求只喜欢一门的人数。</p>
+  <svg viewBox="0 0 450 300" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+    <rect width="450" height="300" fill="#fafafa" rx="8"/>
+    <!-- 外围矩形 - 全集 -->
+    <rect x="40" y="20" width="370" height="260" fill="none" stroke="#333" stroke-width="2" rx="10"/>
+    <text x="420" y="36" font-family="serif" font-size="13" fill="#333" text-anchor="end">全集 U=50</text>
+    <!-- 左圆 - 数学 -->
+    <ellipse cx="185" cy="150" rx="100" ry="110" fill="rgba(26,115,232,0.15)" stroke="#1a73e8" stroke-width="2.5"/>
+    <text x="140" y="70" font-family="serif" font-size="15" fill="#1a73e8">数学 30</text>
+    <!-- 右圆 - 物理 -->
+    <ellipse cx="265" cy="150" rx="100" ry="110" fill="rgba(46,125,50,0.15)" stroke="#2e7d32" stroke-width="2.5"/>
+    <text x="310" y="70" font-family="serif" font-size="15" fill="#2e7d32">物理 25</text>
+    <!-- 交集 -->
+    <text x="225" y="150" font-family="serif" font-size="18" fill="#d32f2f" text-anchor="middle">15</text>
+    <!-- 只数学 -->
+    <text x="155" y="160" font-family="serif" font-size="15" fill="#1a73e8" text-anchor="middle">15</text>
+    <!-- 只物理 -->
+    <text x="295" y="160" font-family="serif" font-size="15" fill="#2e7d32" text-anchor="middle">10</text>
+    <!-- 都不喜欢 -->
+    <text x="380" y="260" font-family="serif" font-size="13" fill="#999" text-anchor="end">都不喜欢: 10</text>
+    <text x="225" y="290" font-family="serif" font-size="13" fill="#666" text-anchor="middle">只喜欢一门 = 15 + 10 = 25 人</text>
+  </svg>
+  <div class="method-box">
+    <p><strong>数→形：</strong>用矩形表示全班，两个圆分别表示"喜欢数学"和"喜欢物理"的集合。</p>
+    <p><strong>形→数：</strong> |A|=30, |B|=25, |A∩B|=15。|A∪B| = 30+25-15 = 40。</p>
+    <p>只喜欢数学 = 30-15 = 15，只喜欢物理 = 25-15 = 10，只喜欢一门 = 15+10 = 25。</p>
+    <p><strong>本原：</strong>Venn 图将集合关系<strong>可视化</strong>，交并补一目了然，是数形结合在集合论中的经典应用。</p>
+  </div>
+  <div class="quiz-question" id="q7">
+    <div class="q-title"><span class="q-tag">题 7</span> 上例中两门都不喜欢的有多少人？</div>
+    <div class="options">
+      <div class="opt" onclick="checkChoice(7, 0)">A. 5</div>
+      <div class="opt" onclick="checkChoice(7, 1)">B. 10</div>
+      <div class="opt" onclick="checkChoice(7, 2)">C. 15</div>
+      <div class="opt" onclick="checkChoice(7, 3)">D. 20</div>
+    </div>
+    <div class="explain" id="explain7"><strong>解析：</strong>全班 50 - |A∪B| 40 = 10 人两门都不喜欢。选 B。</div>
+  </div>
+</div>
+
+<!-- ========== 实例 8 ========== -->
+<div class="num-instance">
+  <h4><span class="tag">实例 8</span> 函数图像研究单调性与奇偶性</h4>
+  <p><strong>问题：</strong>判断 \(f(x) = x^3\) 的单调性和奇偶性。</p>
+  <svg viewBox="0 0 500 300" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+    <rect width="500" height="300" fill="#fafafa" rx="8"/>
+    <line x1="40" y1="150" x2="460" y2="150" stroke="#333" stroke-width="1.5"/>
+    <line x1="250" y1="280" x2="250" y2="20" stroke="#333" stroke-width="1.5"/>
+    <polygon points="460,150 452,146 452,154" fill="#333"/>
+    <polygon points="250,20 246,28 254,28" fill="#333"/>
+    <text x="455" y="144" font-family="serif" font-size="14" fill="#333">x</text>
+    <text x="240" y="24" font-family="serif" font-size="14" fill="#333">y</text>
+    <text x="240" y="168" font-family="serif" font-size="12" fill="#666">O</text>
+    <!-- y=x³ -->
+    <path d="M60,274 Q100,260 150,240 Q200,210 240,160 Q260,130 290,90 Q330,50 400,30 Q440,25 460,24" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+    <!-- 对称点 -->
+    <circle cx="130" cy="232" r="3" fill="#d32f2f"/>
+    <circle cx="370" cy="68" r="3" fill="#d32f2f"/>
+    <line x1="130" y1="232" x2="370" y2="68" stroke="#999" stroke-width="1" stroke-dasharray="4,4"/>
+    <text x="130" y="248" font-family="serif" font-size="11" fill="#d32f2f" text-anchor="middle">(x,y)</text>
+    <text x="370" y="60" font-family="serif" font-size="11" fill="#d32f2f" text-anchor="middle">(-x,-y)</text>
+    <text x="250" y="290" font-family="serif" font-size="13" fill="#333" text-anchor="middle">y = x³ 关于原点对称，奇数函数，R 上单调递增</text>
+  </svg>
+  <div class="method-box">
+    <p><strong>数→形：</strong>画出 \(y = x^3\) 的图像，观察是否关于 y 轴或原点对称，以及增减趋势。</p>
+    <p><strong>形→数：</strong>图像关于原点对称 → 奇函数 \(f(-x) = -f(x)\)；图像始终上升 → 在 R 上单调递增。</p>
+    <p>同理，\(y=x^2\) 的图像关于 y 轴对称 → 偶函数；\(y=2^x\) 的图像始终上升 → 单调递增。</p>
+    <p><strong>本原：</strong>函数的<strong>对称性</strong>和<strong>单调性</strong>在图像上可直接"看见"，无需代值计算。</p>
+  </div>
+  <div class="quiz-question" id="q8">
+    <div class="q-title"><span class="q-tag">题 8</span> 以下哪个函数关于 y 轴对称？</div>
+    <div class="options">
+      <div class="opt" onclick="checkChoice(8, 0)">A. \(f(x)=x^3\)</div>
+      <div class="opt" onclick="checkChoice(8, 1)">B. \(f(x)=|x|\)</div>
+      <div class="opt" onclick="checkChoice(8, 2)">C. \(f(x)=2^x\)</div>
+      <div class="opt" onclick="checkChoice(8, 3)">D. \(f(x)=\log_2 x\)</div>
+    </div>
+    <div class="explain" id="explain8"><strong>解析：</strong>|x| 的图像关于 y 轴对称，是偶函数。选 B。</div>
+  </div>
+</div>
+
+<!-- ========== 实例 9 ========== -->
+<div class="num-instance">
+  <h4><span class="tag">实例 9</span> 利用线性规划求最值</h4>
+  <p><strong>问题：</strong>已知约束条件 \(\begin{cases}x+y \le 4\\ x \ge 0, y \ge 0\end{cases}\)，求 \(z = 2x + y\) 的最大值。</p>
+  <svg viewBox="0 0 500 300" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+    <rect width="500" height="300" fill="#fafafa" rx="8"/>
+    <line x1="60" y1="240" x2="460" y2="240" stroke="#333" stroke-width="1.5"/>
+    <line x1="60" y1="240" x2="60" y2="30" stroke="#333" stroke-width="1.5"/>
+    <polygon points="460,240 452,236 452,244" fill="#333"/>
+    <polygon points="60,30 56,38 64,38" fill="#333"/>
+    <text x="455" y="234" font-family="serif" font-size="14" fill="#333">x</text>
+    <text x="48" y="34" font-family="serif" font-size="14" fill="#333">y</text>
+    <text x="50" y="258" font-family="serif" font-size="12" fill="#666">O</text>
+    <!-- 可行域 -->
+    <polygon points="60,240 460,240 220,60 60,60" fill="rgba(26,115,232,0.15)" stroke="#1a73e8" stroke-width="2"/>
+    <!-- x+y=4 -->
+    <line x1="60" y1="220" x2="460" y2="20" stroke="#d32f2f" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="440" y="22" font-family="serif" font-size="12" fill="#d32f2f">x+y=4</text>
+    <!-- 标注 -->
+    <text x="260" y="100" font-family="serif" font-size="12" fill="#1a73e8">可行域</text>
+    <circle cx="220" cy="60" r="4" fill="#d32f2f"/>
+    <text x="230" y="55" font-family="serif" font-size="12" fill="#d32f2f">最优解(4,0)</text>
+    <text x="60" y="60" r="3" fill="#d32f2f"/>
+    <text x="70" y="55" font-family="serif" font-size="11" fill="#666">(0,0)</text>
+    <text x="250" y="290" font-family="serif" font-size="13" fill="#333" text-anchor="middle">x+y≤4, x≥0, y≥0, z=2x+y</text>
+  </svg>
+  <div class="method-box">
+    <p><strong>数→形：</strong>约束条件在平面上围成一个三角形区域（可行域），目标函数 \(z=2x+y\) 是一族平行线。</p>
+    <p><strong>形→数：</strong>在可行域内移动目标函数直线，当它经过区域顶点时取最值。</p>
+    <p>三个顶点：(0,0)→z=0、(4,0)→z=8、(0,4)→z=4。最大值在 (4,0) 处，z_max=8。</p>
+    <p><strong>本原：</strong>线性规划的本质是<strong>在凸多边形上求线性函数最值</strong>，图像让可行域和最优解一目了然。</p>
+  </div>
+  <div class="quiz-question" id="q9">
+    <div class="q-title"><span class="q-tag">题 9</span> 上例中 z 的最小值是？</div>
+    <div class="options">
+      <div class="opt" onclick="checkChoice(9, 0)">A. 0</div>
+      <div class="opt" onclick="checkChoice(9, 1)">B. 4</div>
+      <div class="opt" onclick="checkChoice(9, 2)">C. 8</div>
+      <div class="opt" onclick="checkChoice(9, 3)">D. 2</div>
+    </div>
+    <div class="explain" id="explain9"><strong>解析：</strong>在原点 (0,0) 处 z=0，这是最小值。选 A。</div>
+  </div>
+</div>
+
+<!-- ========== 实例 10 ========== -->
+<div class="num-instance">
+  <h4><span class="tag">实例 10</span> 利用复数与向量</h4>
+  <p><strong>问题：</strong>复数 \(z = 1 + i\) 在复平面上对应的点是什么？求 \(|z|\) 和幅角。</p>
+  <svg viewBox="0 0 480 300" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
+    <rect width="480" height="300" fill="#fafafa" rx="8"/>
+    <line x1="40" y1="240" x2="450" y2="240" stroke="#333" stroke-width="1.5"/>
+    <line x1="40" y1="240" x2="40" y2="30" stroke="#333" stroke-width="1.5"/>
+    <polygon points="450,240 442,236 442,244" fill="#333"/>
+    <polygon points="40,30 36,38 44,38" fill="#333"/>
+    <text x="445" y="234" font-family="serif" font-size="14" fill="#333">实轴</text>
+    <text x="28" y="34" font-family="serif" font-size="14" fill="#333">虚轴</text>
+    <text x="30" y="258" font-family="serif" font-size="12" fill="#666">O</text>
+    <!-- 箭头 0→z -->
+    <line x1="40" y1="240" x2="200" y2="120" stroke="#1a73e8" stroke-width="3"/>
+    <polygon points="205,115 187,120 195,132" fill="#1a73e8"/>
+    <!-- 点 z -->
+    <circle cx="200" cy="120" r="5" fill="#d32f2f"/>
+    <text x="208" y="115" font-family="serif" font-size="14" fill="#d32f2f">z = 1+i</text>
+    <!-- 虚线投影 -->
+    <line x1="200" y1="120" x2="200" y2="240" stroke="#999" stroke-width="1" stroke-dasharray="4,4"/>
+    <line x1="200" y1="120" x2="40" y2="120" stroke="#999" stroke-width="1" stroke-dasharray="4,4"/>
+    <!-- 标注 -->
+    <text x="110" y="255" font-family="serif" font-size="12" fill="#666" text-anchor="middle">1</text>
+    <text x="30" y="175" font-family="serif" font-size="12" fill="#666">1</text>
+    <line x1="95" y1="235" x2="105" y2="235" stroke="#333" stroke-width="1"/>
+    <line x1="35" y1="180" x2="45" y2="180" stroke="#333" stroke-width="1"/>
+    <!-- 弧 -->
+    <path d="M90,240 A50,50 0 0,1 120,195" fill="none" stroke="#e65100" stroke-width="1.5"/>
+    <text x="105" y="210" font-family="serif" font-size="12" fill="#e65100">θ</text>
+    <!-- 模的标注 -->
+    <text x="140" y="200" font-family="serif" font-size="13" fill="#2e7d32">|z| = √2</text>
+    <text x="100" y="285" font-family="serif" font-size="13" fill="#333" text-anchor="middle">复数 z = a+bi ↔ 复平面上的点 (a,b) ↔ 向量</text>
+  </svg>
+  <div class="method-box">
+    <p><strong>数→形：</strong>复数 \(z = a + bi\) 对应复平面上的点 \((a, b)\)，模 \(|z| = \sqrt{a^2+b^2}\) 是点到原点的距离。</p>
+    <p><strong>形→数：</strong>\(z=1+i\) 对应点 (1,1)。\(|z| = \sqrt{1^2+1^2} = \sqrt{2}\)。幅角 \(\theta = 45^\circ\)。</p>
+    <p>复数的加法对应向量加法，乘法对应旋转缩放——复数运算是二维向量的代数化。</p>
+    <p><strong>本原：</strong>复数<strong>代数代数是向量的坐标表示</strong>，复平面使抽象的"虚数"有了几何直观。</p>
+  </div>
+  <div class="quiz-question" id="q10">
+    <div class="q-title"><span class="q-tag">题 10</span> 复数 \(z = i\) 在复平面上的位置是？</div>
+    <div class="options">
+      <div class="opt" onclick="checkChoice(10, 0)">A. (1,0)</div>
+      <div class="opt" onclick="checkChoice(10, 1)">B. (0,1)</div>
+      <div class="opt" onclick="checkChoice(10, 2)">C. (1,1)</div>
+      <div class="opt" onclick="checkChoice(10, 3)">D. (-1,0)</div>
+    </div>
+    <div class="explain" id="explain10"><strong>解析：</strong>\(z=i=0+1i\)，实部=0，虚部=1，所以对应点 (0,1)。选 B。</div>
+  </div>
+</div>
+
+<div class="score-panel">
+  得分：<span class="score-num" id="totalScoreBottom">0 / 10</span>
+  <button class="btn-reset" onclick="resetAll()">重置</button>
+</div>
+
+</article>
+<script src="../dt.js"></script>
+<script>
+var answered = {};
+var score = 0;
+var answers = {1:2, 2:2, 3:0, 4:3, 5:1, 6:1, 7:1, 8:1, 9:0, 10:1};
+
+function checkChoice(qid, idx) {
+  if (answered[qid]) return;
+  var opts = document.getElementById("q" + qid).querySelectorAll(".opt");
+  var explain = document.getElementById("explain" + qid);
+  for (var i = 0; i < opts.length; i++) opts[i].classList.add("disabled");
+  if (idx === answers[qid]) {
+    opts[idx].classList.add("correct-opt");
+    document.getElementById("q" + qid).classList.add("correct");
+    explain.className = "explain show ok";
+    score += 1;
+  } else {
+    opts[idx].classList.add("wrong-opt");
+    opts[answers[qid]].classList.add("correct-opt");
+    document.getElementById("q" + qid).classList.add("wrong");
+    explain.className = "explain show fail";
+  }
+  answered[qid] = true;
+  document.getElementById("totalScoreTop").textContent = score + " / 10";
+  document.getElementById("totalScoreBottom").textContent = score + " / 10";
+}
+
+function resetAll() {
+  answered = {}; score = 0;
+  document.getElementById("totalScoreTop").textContent = "0 / 10";
+  document.getElementById("totalScoreBottom").textContent = "0 / 10";
+  for (var q = 1; q <= 10; q++) {
+    var qDiv = document.getElementById("q" + q);
+    qDiv.classList.remove("correct", "wrong");
+    var opts = qDiv.querySelectorAll(".opt");
+    for (var i = 0; i < opts.length; i++) opts[i].classList.remove("correct-opt", "wrong-opt", "disabled");
+    document.getElementById("explain" + q).className = "explain";
+  }
+}
+</script>
+</body>
+</html>
