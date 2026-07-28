@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../lib/logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>平面向量</title>
 <link rel="stylesheet" href="../style.css">
@@ -164,8 +165,8 @@
   <text x="448" y="40" font-size="13" fill="#1a73e8" font-weight="bold" font-family="serif">D</text>
   <text x="360" y="108" font-size="15" fill="#1a73e8" font-weight="bold" font-family="serif">CD</text>
   <!-- 零向量（用点表示） -->
-  <circle cx="250" cy="225" r="4" fill="#d32f2f"/>
-  <text x="260" y="230" font-size="13" fill="#d32f2f" font-weight="bold">零向量</text>
+  <circle cx="250" cy="225" r="4" fill="#e65100"/>
+  <text x="260" y="230" font-size="13" fill="#e65100" font-weight="bold">零向量</text>
   <!-- 单位向量 -->
   <line x1="20" y1="35" x2="80" y2="35" stroke="#2e7d32" stroke-width="2.5" marker-end="url(#v1g)"/>
   <text x="22" y="25" font-size="15" fill="#2e7d32" font-weight="bold" font-family="serif">e</text>
@@ -198,7 +199,7 @@
         <path d="M0,0 L10,5 L0,10 Z" fill="#1a73e8"/>
       </marker>
       <marker id="hex-opp" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-        <path d="M0,0 L10,5 L0,10 Z" fill="#d32f2f"/>
+        <path d="M0,0 L10,5 L0,10 Z" fill="#e65100"/>
       </marker>
     </defs>
     <!-- 六边形边框 -->
@@ -226,12 +227,12 @@
     <!-- 向量 ED（蓝色箭头，与 AB 同向等长） -->
     <line x1="210" y1="199" x2="173" y2="135" stroke="#1a73e8" stroke-width="2.5" marker-end="url(#hex-arr)"/>
     <!-- 向量 BA（红色箭头，与 AB 相反） -->
-    <line x1="290" y1="61" x2="327" y2="125" stroke="#d32f2f" stroke-width="2" marker-end="url(#hex-opp)"/>
+    <line x1="290" y1="61" x2="327" y2="125" stroke="#e65100" stroke-width="2" marker-end="url(#hex-opp)"/>
     <!-- 向量 DE（红色箭头，与 AB 相反） -->
-    <line x1="170" y1="130" x2="207" y2="194" stroke="#d32f2f" stroke-width="2" marker-end="url(#hex-opp)"/>
+    <line x1="170" y1="130" x2="207" y2="194" stroke="#e65100" stroke-width="2" marker-end="url(#hex-opp)"/>
     <!-- 图例 -->
     <text x="10" y="18" font-size="12" fill="#1a73e8" font-weight="bold">AB = ED</text>
-    <text x="10" y="36" font-size="12" fill="#d32f2f" font-weight="bold">BA、DE 与 AB 相反</text>
+    <text x="10" y="36" font-size="12" fill="#e65100" font-weight="bold">BA、DE 与 AB 相反</text>
   </svg>
 
   <p class="step">相等向量（大小相等、方向相同）：<b>ED</b></p>
@@ -284,7 +285,7 @@
       <path d="M0,0 L10,5 L0,10 Z" fill="#1a73e8"/>
     </marker>
     <marker id="v2r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0,0 L10,5 L0,10 Z" fill="#d32f2f"/>
+      <path d="M0,0 L10,5 L0,10 Z" fill="#e65100"/>
     </marker>
     <marker id="v2g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,0 L10,5 L0,10 Z" fill="#2e7d32"/>
@@ -293,7 +294,7 @@
   <!-- 向量 a（蓝色） -->
   <line x1="80" y1="200" x2="180" y2="70" stroke="#1a73e8" stroke-width="2.5" marker-end="url(#v2b)"/>
   <!-- 向量 b（红色） -->
-  <line x1="80" y1="200" x2="260" y2="210" stroke="#d32f2f" stroke-width="2.5" marker-end="url(#v2r)"/>
+  <line x1="80" y1="200" x2="260" y2="210" stroke="#e65100" stroke-width="2.5" marker-end="url(#v2r)"/>
   <!-- 平行四边形上边（从 A 到 C） -->
   <line x1="180" y1="70" x2="360" y2="80" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
   <!-- 平行四边形右边（从 B 到 C） -->
@@ -305,13 +306,13 @@
   <text x="70" y="220" font-size="14" fill="#333" font-weight="bold" font-family="serif">O</text>
   <circle cx="180" cy="70" r="3" fill="#1a73e8"/>
   <text x="183" y="64" font-size="14" fill="#1a73e8" font-weight="bold" font-family="serif">A</text>
-  <circle cx="260" cy="210" r="3" fill="#d32f2f"/>
-  <text x="263" y="228" font-size="14" fill="#d32f2f" font-weight="bold" font-family="serif">B</text>
+  <circle cx="260" cy="210" r="3" fill="#e65100"/>
+  <text x="263" y="228" font-size="14" fill="#e65100" font-weight="bold" font-family="serif">B</text>
   <circle cx="360" cy="80" r="3" fill="#2e7d32"/>
   <text x="363" y="74" font-size="14" fill="#2e7d32" font-weight="bold" font-family="serif">C</text>
   <!-- 向量名称标注（在向量中部附近） -->
   <text x="110" y="148" font-size="16" fill="#1a73e8" font-weight="bold" font-family="serif">a</text>
-  <text x="155" y="215" font-size="16" fill="#d32f2f" font-weight="bold" font-family="serif">b</text>
+  <text x="155" y="215" font-size="16" fill="#e65100" font-weight="bold" font-family="serif">b</text>
   <text x="200" y="120" font-size="16" fill="#2e7d32" font-weight="bold" font-family="serif">a+b</text>
   <!-- 图例 -->
   <text x="10" y="16" font-size="11" fill="#888">平 行 四 边 形 法 则 ： a + b = AC</text>
@@ -352,7 +353,7 @@
       <path d="M0,0 L10,5 L0,10 Z" fill="#1a73e8"/>
     </marker>
     <marker id="v3r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0,0 L10,5 L0,10 Z" fill="#d32f2f"/>
+      <path d="M0,0 L10,5 L0,10 Z" fill="#e65100"/>
     </marker>
     <marker id="v3g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,0 L10,5 L0,10 Z" fill="#2e7d32"/>
@@ -361,7 +362,7 @@
   <!-- 向量 a（蓝色） -->
   <line x1="80" y1="160" x2="220" y2="50" stroke="#1a73e8" stroke-width="2.5" marker-end="url(#v3b)"/>
   <!-- 向量 b（红色） -->
-  <line x1="80" y1="160" x2="290" y2="200" stroke="#d32f2f" stroke-width="2.5" marker-end="url(#v3r)"/>
+  <line x1="80" y1="160" x2="290" y2="200" stroke="#e65100" stroke-width="2.5" marker-end="url(#v3r)"/>
   <!-- 向量 a - b（绿色）：从 b 的终点指向 a 的终点 -->
   <line x1="290" y1="200" x2="220" y2="50" stroke="#2e7d32" stroke-width="2.5" marker-end="url(#v3g)"/>
   <!-- 标注点 -->
@@ -369,11 +370,11 @@
   <text x="70" y="180" font-size="14" fill="#333" font-weight="bold" font-family="serif">O</text>
   <circle cx="220" cy="50" r="3" fill="#1a73e8"/>
   <text x="223" y="44" font-size="14" fill="#1a73e8" font-weight="bold" font-family="serif">A</text>
-  <circle cx="290" cy="200" r="3" fill="#d32f2f"/>
-  <text x="293" y="218" font-size="14" fill="#d32f2f" font-weight="bold" font-family="serif">B</text>
+  <circle cx="290" cy="200" r="3" fill="#e65100"/>
+  <text x="293" y="218" font-size="14" fill="#e65100" font-weight="bold" font-family="serif">B</text>
   <!-- 向量名称标注 -->
   <text x="120" y="110" font-size="16" fill="#1a73e8" font-weight="bold" font-family="serif">a</text>
-  <text x="170" y="190" font-size="16" fill="#d32f2f" font-weight="bold" font-family="serif">b</text>
+  <text x="170" y="190" font-size="16" fill="#e65100" font-weight="bold" font-family="serif">b</text>
   <text x="245" y="110" font-size="16" fill="#2e7d32" font-weight="bold" font-family="serif">a&#8722;b</text>
   <!-- 说明文字 -->
   <text x="10" y="16" font-size="11" fill="#888">减 法 法 则 ： a &#8722; b = BA &nbsp;（从 b 终点指向 a 终点）</text>
@@ -582,29 +583,29 @@
       <path d="M0,0 L10,5 L0,10 Z" fill="#1a73e8"/>
     </marker>
     <marker id="v5r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0,0 L10,5 L0,10 Z" fill="#d32f2f"/>
+      <path d="M0,0 L10,5 L0,10 Z" fill="#e65100"/>
     </marker>
   </defs>
   <!-- 向量 a（蓝色） -->
   <line x1="80" y1="200" x2="290" y2="50" stroke="#1a73e8" stroke-width="3" marker-end="url(#v5b)"/>
   <!-- 向量 b（红色） -->
-  <line x1="80" y1="200" x2="350" y2="130" stroke="#d32f2f" stroke-width="3" marker-end="url(#v5r)"/>
+  <line x1="80" y1="200" x2="350" y2="130" stroke="#e65100" stroke-width="3" marker-end="url(#v5r)"/>
   <!-- 夹角弧线 θ -->
   <path d="M 118 178 A 40 40 0 0 0 108 157" fill="none" stroke="#333" stroke-width="1.5"/>
   <text x="108" y="162" font-size="15" fill="#333" font-weight="bold" font-style="italic">θ</text>
   <!-- 投影虚线（从 b 终点向 a 作垂线，垂足在 a 延长线上） -->
-  <line x1="350" y1="130" x2="292" y2="49" stroke="#d32f2f" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <line x1="350" y1="130" x2="292" y2="49" stroke="#e65100" stroke-width="1.5" stroke-dasharray="6,4"/>
   <!-- 投影标注 -->
-  <text x="355" y="108" font-size="12" fill="#d32f2f">投影</text>
-  <text x="295" y="88" font-size="12" fill="#d32f2f">|b|&middot;cos&theta;</text>
+  <text x="355" y="108" font-size="12" fill="#e65100">投影</text>
+  <text x="295" y="88" font-size="12" fill="#e65100">|b|&middot;cos&theta;</text>
   <!-- 直角标记 -->
-  <polyline points="292,57 300,49 294,43" fill="none" stroke="#d32f2f" stroke-width="1"/>
+  <polyline points="292,57 300,49 294,43" fill="none" stroke="#e65100" stroke-width="1"/>
   <!-- 起点标注 -->
   <circle cx="80" cy="200" r="3" fill="#333"/>
   <text x="70" y="220" font-size="14" fill="#333" font-weight="bold" font-family="serif">O</text>
   <!-- 向量名称标注 -->
   <text x="170" y="110" font-size="17" fill="#1a73e8" font-weight="bold" font-family="serif">a</text>
-  <text x="195" y="175" font-size="17" fill="#d32f2f" font-weight="bold" font-family="serif">b</text>
+  <text x="195" y="175" font-size="17" fill="#e65100" font-weight="bold" font-family="serif">b</text>
   <!-- 图例 -->
   <text x="10" y="16" font-size="11" fill="#888">a &middot; b = |a| |b| cos&theta;</text>
 </svg>
@@ -726,7 +727,7 @@
       <path d="M0,0 L10,5 L0,10 Z" fill="#1a73e8"/>
     </marker>
     <marker id="v6r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0,0 L10,5 L0,10 Z" fill="#d32f2f"/>
+      <path d="M0,0 L10,5 L0,10 Z" fill="#e65100"/>
     </marker>
     <marker id="v6g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,0 L10,5 L0,10 Z" fill="#2e7d32"/>
@@ -736,7 +737,7 @@
   <line x1="40" y1="200" x2="460" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="3,3"/>
   <line x1="130" y1="250" x2="130" y2="30" stroke="#ccc" stroke-width="1" stroke-dasharray="3,3"/>
   <!-- 水平分力 Fx（红色） -->
-  <line x1="130" y1="200" x2="370" y2="200" stroke="#d32f2f" stroke-width="3" marker-end="url(#v6r)"/>
+  <line x1="130" y1="200" x2="370" y2="200" stroke="#e65100" stroke-width="3" marker-end="url(#v6r)"/>
   <!-- 垂直分力 Fy（绿色） -->
   <line x1="370" y1="200" x2="370" y2="65" stroke="#2e7d32" stroke-width="3" marker-end="url(#v6g)"/>
   <!-- 合力 F（蓝色） -->
@@ -747,7 +748,7 @@
   <!-- 直角标记 -->
   <polyline points="370,200 364,200 364,194" fill="none" stroke="#555" stroke-width="1.5"/>
   <!-- 标注（使用 tspan 实现下标） -->
-  <text x="230" y="195" font-size="16" fill="#d32f2f" font-weight="bold" font-family="serif">F<tspan dy="4" font-size="12">x</tspan></text>
+  <text x="230" y="195" font-size="16" fill="#e65100" font-weight="bold" font-family="serif">F<tspan dy="4" font-size="12">x</tspan></text>
   <text x="375" y="130" font-size="16" fill="#2e7d32" font-weight="bold" font-family="serif">F<tspan dy="4" font-size="12">y</tspan></text>
   <text x="225" y="115" font-size="18" fill="#1a73e8" font-weight="bold" font-family="serif">F</text>
   <!-- 起点标注 -->

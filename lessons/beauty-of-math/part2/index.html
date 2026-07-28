@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../../lib/logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>数学之美 · 有趣的函数及图形</title>
 <link rel="stylesheet" href="../../style.css">
@@ -334,7 +335,7 @@ const funcs = [
     color: '#6a1b9a', label: 'D(x)', delay: 600 },
   // 5. 正态分布 y = e^{-x^2}
   { id: 'g5', fn: x => Math.exp(-x*x), xd: [-3,3], yd: [0,1.1],
-    color: '#c62828', label: 'y = e^{-x^2}', delay: 800 },
+    color: '#e65100', label: 'y = e^{-x^2}', delay: 800 },
   // 6. 悬链线 y = cosh(x)
   { id: 'g6', fn: x => (Math.exp(x) + Math.exp(-x))/2, xd: [-3,3], yd: [0,11],
     color: '#f57c00', label: 'y = cosh(x)', delay: 1000 },
@@ -352,7 +353,7 @@ const funcs = [
     color: '#4e342e', label: 'y = x - [x]', delay: 1800 },
   // 11. 心形曲线 (参数方程)
   { id: 'g11', fn: null, isHeart: true, xd: [-18,18], yd: [-18,14],
-    color: '#d32f2f', label: 'Heart', delay: 2000, tableId: 'heart-table' },
+    color: '#e65100', label: 'Heart', delay: 2000, tableId: 'heart-table' },
   // 12. 玫瑰形曲线 (极坐标)
   { id: 'g12', fn: null, isRose: true, xd: [-8,8], yd: [-8,8],
     color: '#e91e63', label: 'Rose', delay: 2200, tableId: 'rose-table' },

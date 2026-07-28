@@ -1,5 +1,12 @@
 # 数学课程 
 
 
-1. 由 shuise + deepseek + chatgpt 构建。
-2. https://fe.bluetech.top/lessons/
+在线地址： https://fe.bluetech.top/lessons/
+
+
+## 其他说明
+
+1. 基于高中课本内容由 deepseek 生成，由 chatgpt 检查错误并修复
+2. 顺序和课本不一致，打散后重新组合，并加入了一些超越课本的知识
+3. 增加了部分奥数题，做极限测试
+4. 函数图形基于 d3 生成

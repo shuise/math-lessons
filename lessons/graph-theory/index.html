@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../lib/logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>图论基础 — 顶点、边与结构</title>
 <link rel="stylesheet" href="../style.css">
@@ -323,17 +324,17 @@
     <line x1="146" y1="100" x2="54" y2="100" stroke="#1a73e8" stroke-width="1.5"/>
     <!-- 非连通图 -->
     <text x="300" y="20" text-anchor="middle" font-size="15" fill="#2c3e50" font-weight="bold">非连通图</text>
-    <circle cx="240" cy="100" r="14" fill="#fce4ec" stroke="#f44336" stroke-width="2"/>
-    <text x="240" y="106" text-anchor="middle" font-size="12" fill="#c62828" font-weight="bold">a</text>
-    <circle cx="290" cy="60" r="14" fill="#fce4ec" stroke="#f44336" stroke-width="2"/>
-    <text x="290" y="66" text-anchor="middle" font-size="12" fill="#c62828" font-weight="bold">b</text>
-    <circle cx="340" cy="100" r="14" fill="#fce4ec" stroke="#f44336" stroke-width="2"/>
-    <text x="340" y="106" text-anchor="middle" font-size="12" fill="#c62828" font-weight="bold">c</text>
-    <line x1="254" y1="100" x2="276" y2="74" stroke="#f44336" stroke-width="1.5"/>
-    <line x1="304" y1="74" x2="326" y2="86" stroke="#f44336" stroke-width="1.5"/>
+    <circle cx="240" cy="100" r="14" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+    <text x="240" y="106" text-anchor="middle" font-size="12" fill="#e65100" font-weight="bold">a</text>
+    <circle cx="290" cy="60" r="14" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+    <text x="290" y="66" text-anchor="middle" font-size="12" fill="#e65100" font-weight="bold">b</text>
+    <circle cx="340" cy="100" r="14" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+    <text x="340" y="106" text-anchor="middle" font-size="12" fill="#e65100" font-weight="bold">c</text>
+    <line x1="254" y1="100" x2="276" y2="74" stroke="#e65100" stroke-width="1.5"/>
+    <line x1="304" y1="74" x2="326" y2="86" stroke="#e65100" stroke-width="1.5"/>
     <!-- 孤立的 d -->
-    <circle cx="290" cy="140" r="14" fill="#fce4ec" stroke="#f44336" stroke-width="2"/>
-    <text x="290" y="146" text-anchor="middle" font-size="12" fill="#c62828" font-weight="bold">d</text>
+    <circle cx="290" cy="140" r="14" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+    <text x="290" y="146" text-anchor="middle" font-size="12" fill="#e65100" font-weight="bold">d</text>
   </svg>
 </div>
 <div class="graph-caption">左图是连通的（任意两点都有路径）；右图不连通（d 与 a、b、c 之间没有路径）</div>
@@ -589,15 +590,15 @@
 
     <!-- 非二分图 -->
     <text x="300" y="20" text-anchor="middle" font-size="15" fill="#2c3e50" font-weight="bold">非二分图</text>
-    <circle cx="270" cy="80" r="14" fill="#fce4ec" stroke="#f44336" stroke-width="2"/>
-    <text x="270" y="86" text-anchor="middle" font-size="11" fill="#c62828" font-weight="bold">a</text>
-    <circle cx="310" cy="50" r="14" fill="#fce4ec" stroke="#f44336" stroke-width="2"/>
-    <text x="310" y="56" text-anchor="middle" font-size="11" fill="#c62828" font-weight="bold">b</text>
-    <circle cx="350" cy="80" r="14" fill="#fce4ec" stroke="#f44336" stroke-width="2"/>
-    <text x="350" y="86" text-anchor="middle" font-size="11" fill="#c62828" font-weight="bold">c</text>
-    <line x1="284" y1="80" x2="296" y2="64" stroke="#f44336" stroke-width="1.5"/>
-    <line x1="324" y1="64" x2="336" y2="80" stroke="#f44336" stroke-width="1.5"/>
-    <line x1="284" y1="80" x2="336" y2="80" stroke="#f44336" stroke-width="1.5"/>
+    <circle cx="270" cy="80" r="14" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+    <text x="270" y="86" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">a</text>
+    <circle cx="310" cy="50" r="14" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+    <text x="310" y="56" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">b</text>
+    <circle cx="350" cy="80" r="14" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+    <text x="350" y="86" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">c</text>
+    <line x1="284" y1="80" x2="296" y2="64" stroke="#e65100" stroke-width="1.5"/>
+    <line x1="324" y1="64" x2="336" y2="80" stroke="#e65100" stroke-width="1.5"/>
+    <line x1="284" y1="80" x2="336" y2="80" stroke="#e65100" stroke-width="1.5"/>
   </svg>
 </div>
 <div class="graph-caption">左：二分图（所有边连接 U 和 W 两部分）；右：三角形 K<sub>3</sub> 不是二分图（含奇环）</div>
@@ -660,8 +661,8 @@
   <div class="graph-svg">
     <svg width="300" height="160" viewBox="0 0 300 160">
       <text x="150" y="20" text-anchor="middle" font-size="14" fill="#2c3e50" font-weight="bold">这个图需要几种颜色？</text>
-      <circle cx="60" cy="70" r="16" fill="#ffcdd2" stroke="#e53935" stroke-width="2"/>
-      <text x="60" y="76" text-anchor="middle" font-size="12" fill="#c62828" font-weight="bold">A</text>
+      <circle cx="60" cy="70" r="16" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+      <text x="60" y="76" text-anchor="middle" font-size="12" fill="#e65100" font-weight="bold">A</text>
       <circle cx="150" cy="40" r="16" fill="#bbdefb" stroke="#1a73e8" stroke-width="2"/>
       <text x="150" y="46" text-anchor="middle" font-size="12" fill="#0d47a1" font-weight="bold">B</text>
       <circle cx="240" cy="70" r="16" fill="#c8e6c9" stroke="#43a047" stroke-width="2"/>

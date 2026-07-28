@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../lib/logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>sin(α±β) 公式的几何证明</title>
 <link rel="stylesheet" href="../style.css">
@@ -345,6 +346,183 @@ function resetQuiz() {
 
 document.getElementById("resetBtn").onclick = resetQuiz;
 render();
+
+// ============================================================
+// Canvas 交互式绘图
+// ============================================================
+var canvas = document.getElementById('proofCanvas');
+var ctx = canvas.getContext('2d');
+
+function degToRad(d) { return d * Math.PI / 180; }
+function radToDeg(r) { return r * 180 / Math.PI; }
+
+function drawProof(alphaDeg, betaDeg) {
+  var W = canvas.width, H = canvas.height;
+  var cx = W / 2, cy = H / 2;
+  var R = Math.min(cx, cy) - 60; // unit circle radius
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.save();
+
+  // --- coordinate axes ---
+  ctx.strokeStyle = '#bbb';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(20, cy); ctx.lineTo(W - 20, cy);
+  ctx.moveTo(cx, 20); ctx.lineTo(cx, H - 20);
+  ctx.stroke();
+
+  // axis labels
+  ctx.fillStyle = '#888';
+  ctx.font = '13px sans-serif';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  ctx.fillText('x', W - 25, cy + 6);
+  ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+  ctx.fillText('y', cx - 8, 22);
+
+  // --- unit circle ---
+  ctx.strokeStyle = '#e0e0e0';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.arc(cx, cy, R, 0, 2 * Math.PI);
+  ctx.stroke();
+
+  // tick marks at 0°, 90°, 180°, 270°
+  var ticks = [0, 90, 180, 270];
+  ctx.fillStyle = '#aaa';
+  ctx.font = '11px sans-serif';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  ticks.forEach(function(deg) {
+    var rad = degToRad(deg);
+    var tx = cx + R * Math.cos(rad);
+    var ty = cy - R * Math.sin(rad);
+    ctx.fillStyle = '#ccc';
+    ctx.beginPath();
+    ctx.arc(tx, ty, 3, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.fillStyle = '#999';
+    if (deg === 0) { ctx.textAlign = 'left'; ctx.textBaseline = 'top'; ctx.fillText('0°', tx + 6, ty - 4); }
+    else if (deg === 90) { ctx.textAlign = 'center'; ctx.textBaseline = 'bottom'; ctx.fillText('90°', tx, ty - 6); }
+    else if (deg === 180) { ctx.textAlign = 'right'; ctx.textBaseline = 'top'; ctx.fillText('180°', tx - 6, ty - 4); }
+    else if (deg === 270) { ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.fillText('270°', tx, ty + 6); }
+  });
+
+  // --- convert angles ---
+  // α from positive x-axis counter-clockwise
+  var alphaRad = degToRad(alphaDeg);
+  var betaRad = degToRad(betaDeg);
+  // Ensure α > β for angle between them to be positive
+  var diffRad = Math.abs(alphaRad - betaRad);
+
+  // Points: P at α, Q at β
+  var px = cx + R * Math.cos(alphaRad);
+  var py = cy - R * Math.sin(alphaRad);
+  var qx = cx + R * Math.cos(betaRad);
+  var qy = cy - R * Math.sin(betaRad);
+
+  // --- draw vectors ---
+  function drawVec(x, y, color, label) {
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    // arrowhead
+    var angle = Math.atan2(cy - y, cx - x);
+    var headLen = 12;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + headLen * Math.cos(angle - 0.35), y + headLen * Math.sin(angle - 0.35));
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + headLen * Math.cos(angle + 0.35), y + headLen * Math.sin(angle + 0.35));
+    ctx.stroke();
+    // point
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    // label
+    ctx.fillStyle = color;
+    ctx.font = 'bold 15px serif';
+    ctx.textAlign = 'left'; ctx.textBaseline = 'bottom';
+    ctx.fillText(label, x + 8, y - 4);
+  }
+
+  drawVec(px, py, '#1565c0', 'P(cos α, sin α)');
+  drawVec(qx, qy, '#2e7d32', 'Q(cos β, sin β)');
+
+  // --- angle arc between OP and OQ ---
+  ctx.strokeStyle = '#e65100';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  // draw arc from smaller angle to larger angle
+  // canvas y-axis is inverted so use -angle
+  var a1 = -betaRad, a2 = -alphaRad;
+  ctx.arc(cx, cy, R * 0.25, Math.min(a1, a2), Math.max(a1, a2));
+  ctx.stroke();
+
+  // --- angle label ---
+  var midAngle = (alphaRad + betaRad) / 2;
+  var labelR = R * 0.32;
+  ctx.fillStyle = '#e65100';
+  ctx.font = 'bold 14px serif';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
+  ctx.fillText('|α−β|', cx + labelR * Math.cos(midAngle), cy - labelR * Math.sin(midAngle));
+
+  // --- coordinate projections ---
+  ctx.setLineDash([4, 4]);
+  ctx.lineWidth = 1;
+  // P projections
+  ctx.strokeStyle = '#1565c0';
+  ctx.beginPath();
+  ctx.moveTo(px, py); ctx.lineTo(px, cy);
+  ctx.moveTo(px, py); ctx.lineTo(cx, py);
+  ctx.stroke();
+  // Q projections
+  ctx.strokeStyle = '#2e7d32';
+  ctx.beginPath();
+  ctx.moveTo(qx, qy); ctx.lineTo(qx, cy);
+  ctx.moveTo(qx, qy); ctx.lineTo(cx, qy);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // --- display values ---
+  ctx.fillStyle = '#333';
+  ctx.font = '14px sans-serif';
+  ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+  ctx.fillText('α = ' + alphaDeg.toFixed(0) + '°', 16, 16);
+  ctx.fillText('β = ' + betaDeg.toFixed(0) + '°', 16, 36);
+  ctx.fillStyle = '#1565c0';
+  ctx.fillText('P = (cos α, sin α) = (' + Math.cos(alphaRad).toFixed(3) + ', ' + Math.sin(alphaRad).toFixed(3) + ')', 16, 60);
+  ctx.fillStyle = '#2e7d32';
+  ctx.fillText('Q = (cos β, sin β) = (' + Math.cos(betaRad).toFixed(3) + ', ' + Math.sin(betaRad).toFixed(3) + ')', 16, 80);
+  ctx.fillStyle = '#e65100';
+  ctx.fillText('cos(α−β) = cosα·cosβ + sinα·sinβ = ' + (Math.cos(alphaRad)*Math.cos(betaRad) + Math.sin(alphaRad)*Math.sin(betaRad)).toFixed(4), 16, 104);
+
+  ctx.restore();
+}
+
+// --- slider event handlers ---
+var sliderA = document.getElementById('sliderA');
+var sliderB = document.getElementById('sliderB');
+var valA = document.getElementById('valA');
+var valB = document.getElementById('valB');
+
+function onSlide() {
+  var a = parseFloat(sliderA.value);
+  var b = parseFloat(sliderB.value);
+  valA.textContent = a.toFixed(0) + '°';
+  valB.textContent = b.toFixed(0) + '°';
+  drawProof(a, b);
+}
+
+sliderA.oninput = onSlide;
+sliderB.oninput = onSlide;
+onSlide();
 </script>
     <script src="../dt.js"></script>
 </body>

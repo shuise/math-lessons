@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../../lib/logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>常见函数图形 — 交互式动画</title>
 <link rel="stylesheet" href="../../style.css">
@@ -100,7 +101,7 @@
     <div id="plot-power" class="func-plot"></div>
   </div>
   <div class="legend-row">
-    <span class="legend-item"><span class="legend-swatch" style="background:#e53935;"></span> y = x²</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:#e65100;"></span> y = x²</span>
     <span class="legend-item"><span class="legend-swatch" style="background:#fb8c00;"></span> y = x³</span>
     <span class="legend-item"><span class="legend-swatch" style="background:#43a047;"></span> y = √x</span>
     <span class="legend-item"><span class="legend-swatch" style="background:#1e88e5;"></span> y = x⁻¹</span>
@@ -149,7 +150,7 @@
     <button class="btn-replay" data-replay="trig">&#9654; 重播动画</button>
   </div>
   <div class="legend-row">
-    <span class="legend-item"><span class="legend-swatch" style="background:#e53935;"></span> y = sin x</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:#e65100;"></span> y = sin x</span>
     <span class="legend-item"><span class="legend-swatch" style="background:#1e88e5;"></span> y = cos x</span>
     <span class="legend-item"><span class="legend-swatch" style="background:#43a047;"></span> y = tan x</span>
   </div>
@@ -166,7 +167,7 @@
   var M = { top: 16, right: 16, bottom: 28, left: 38 };
   var IW = W - M.left - M.right;
   var IH = H - M.top - M.bottom;
-  var COLORS = ['#e53935','#fb8c00','#43a047','#1e88e5','#8e24aa','#00acc1'];
+  var COLORS = ['#e65100','#fb8c00','#43a047','#1e88e5','#8e24aa','#00acc1'];
   var SAMPLES = 300;
 
   // 安全求值，处理渐近线和定义域边界
@@ -304,7 +305,7 @@
 
   function renderLinear(k, b) {
     animCache['linear'] = drawChart('plot-linear', [
-      { fn: k + ' * x + ' + b, color: '#e53935' }
+      { fn: k + ' * x + ' + b, color: '#e65100' }
     ], [-6, 6], [-5, 5]);
     animatePaths(animCache['linear']);
   }
@@ -318,7 +319,7 @@
 
   function renderPower() {
     var fns = [
-      { fn: 'x * x', color: '#e53935' },
+      { fn: 'x * x', color: '#e65100' },
       { fn: 'x * x * x', color: '#fb8c00' },
       { fn: 'sqrt(x)', color: '#43a047' },
       { fn: '1 / x', color: '#1e88e5' }
@@ -348,7 +349,7 @@
   function renderTrig(amp, freq) {
     var a = amp, w = freq;
     animCache['trig'] = drawChart('plot-trig', [
-      { fn: a + ' * sin(' + w + ' * x)', color: '#e53935' },
+      { fn: a + ' * sin(' + w + ' * x)', color: '#e65100' },
       { fn: a + ' * cos(' + w + ' * x)', color: '#1e88e5' },
       { fn: a + ' * tan(' + w + ' * x)', color: '#43a047' }
     ], [-6.5, 6.5], [-4, 4]);
