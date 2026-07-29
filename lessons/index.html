@@ -8,9 +8,21 @@
 <link rel="stylesheet" href="style.css">
 <style>
   * {margin:0}
-  .stage {  padding: 10px; margin: 20px 0 50px;}
-  .stage h2 { color: #1a73e8; padding-bottom: 8px; margin-top: 0; border-left: none; padding-left: 0; }
+  .stage {  padding: 10px; margin: 20px 0 50px; scroll-margin-top: 20px; }
+  .stage h2 { color: #1a73e8; padding-bottom: 8px; margin-top: 0; border-left: none; padding-left: 0; cursor: pointer; user-select: none; }
+  .stage.collapsed .course-list { display: none; }
   .stage.primary h2 { color: #e67e22; border-color: #e67e22; }
+  /* 导航菜单 */
+  .menu {
+    display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+    margin: 20px 0 10px; padding: 8px; background: #f0f4f8; border-radius: 10px;
+  }
+  .menu-item {
+    padding: 6px 14px; border-radius: 16px; font-size: 0.85em;
+    color: #333; text-decoration: none; transition: all 0.15s;
+    background: #fff; border: 1px solid #ddd;
+  }
+  .menu-item:hover { background: #1a73e8; color: #fff; border-color: #1a73e8; }
   .course-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; padding: 0; list-style: none; }
   .course-item { background: #fff; border-radius: 8px; padding: 18px; border: 1px solid #e9ecef; transition: transform 0.2s, box-shadow 0.2s; }
   .course-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
@@ -37,7 +49,22 @@
 <img class="site-logo" src="lib/logo.png" alt="数学课程 Logo">
 <h1>高中数学课程</h1>
 
-<div class="stage">
+<!-- 版块导航菜单 -->
+<div class="menu">
+  <a href="#stage-set" class="menu-item">集合论</a>
+  <a href="#stage-func" class="menu-item">函数</a>
+  <a href="#stage-logic" class="menu-item">逻辑</a>
+  <a href="#stage-math-method" class="menu-item">数学思想与方法</a>
+  <a href="#stage-comb" class="menu-item">组合数学</a>
+  <a href="#stage-cplx" class="menu-item">复数与平面向量</a>
+  <a href="#stage-nt" class="menu-item">初等数论与图论</a>
+  <a href="#stage-geo" class="menu-item">几何</a>
+  <a href="#stage-quiz" class="menu-item">测验专区</a>
+  <a href="#stage-proof" class="menu-item">公式证明</a>
+  <a href="#stage-appendix" class="menu-item">附录</a>
+</div>
+
+<div class="stage" id="stage-set">
   <h2 style="color:#e67e22;">集合论</h2>
   <ul class="course-list">
     <li class="course-item" style="border-left: 3px solid #e67e22;">
@@ -49,7 +76,7 @@
   </ul>
 </div>
 
-<div class="stage">
+<div class="stage" id="stage-func">
   <h2 style="color:#9c27b0;">函数</h2>
   <ul class="course-list">
     <li class="course-item" style="border-left: 3px solid #9c27b0;">
@@ -109,7 +136,7 @@
   </ul>
 </div>
 
-<div class="stage">
+<div class="stage" id="stage-logic">
   <h2 style="color:#9c27b0;">逻辑</h2>
   <ul class="course-list">
     <li class="course-item" style="border-left: 3px solid #1976d2;">
@@ -128,7 +155,7 @@
 </div>
 
 
-<div class="stage">
+<div class="stage" id="stage-math-method">
   <h2 style="color:#e65100;">数学思想与方法</h2>
   <ul class="course-list">
     <li class="course-item" style="border-left: 3px solid #e65100;">
@@ -164,7 +191,7 @@
   </ul>
 </div>
 
-<div class="stage">
+<div class="stage" id="stage-comb">
   <h2 style="color:#9c27b0;">组合数学</h2>
   <ul class="course-list">
     <li class="course-item" style="border-left: 3px solid #1976d2;">
@@ -188,7 +215,7 @@
   </ul>
 </div>
 
-<div class="stage">
+<div class="stage" id="stage-cplx">
   <h2 style="color:#9c27b0;">复数与平面向量</h2>
   <ul class="course-list">
     <li class="course-item" style="border-left: 3px solid #1976d2;">
@@ -218,7 +245,7 @@
   </ul>
 </div>
 
-<div class="stage">
+<div class="stage" id="stage-nt">
   <h2 style="color:#9c27b0;">初等数论与图论</h2>
   <ul class="course-list">
     <li class="course-item" style="border-left: 3px solid #1976d2;">
@@ -242,7 +269,7 @@
   </ul>
 </div>
 
-<div class="stage">
+<div class="stage" id="stage-geo">
   <h2 style="color:#9c27b0;">几何</h2>
   <ul class="course-list">
     <li class="course-item" style="border-left: 3px solid #1976d2;">
@@ -266,7 +293,7 @@
   </ul>
 </div>
 
-<div class="stage" style="margin-top: 30px;">
+<div class="stage" id="stage-quiz" style="margin-top: 30px;">
   <h2>🧪 测验专区</h2>
   <ul class="course-list">
     <li class="course-item">
@@ -308,7 +335,7 @@
   </ul>
 </div>
 
-<div class="stage">
+<div class="stage" id="stage-proof">
   <h2 style="color:#9c27b0;">公式证明</h2>
   <ul class="course-list">
     <li class="course-item" style="border-left: 3px solid #9c27b0;">
@@ -350,7 +377,7 @@
   </ul>
 </div>
 
-<div class="stage">
+<div class="stage" id="stage-appendix">
   <h2 style="color:#607d8b;">附录</h2>
   <ul class="course-list">
     <li class="course-item" style="border-left: 3px solid #607d8b;">
