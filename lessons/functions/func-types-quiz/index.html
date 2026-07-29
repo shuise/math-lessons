@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../../lib/logo.png?version=1.0.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>函数类型与反函数 · 习题集</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+body {
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.9;
+  font-size: 16px;
+}
+article {
+  background: #fff; border-radius: 12px; padding: 36px 40px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow-wrap: break-word; word-wrap: break-word; overflow-x: hidden;
+}
+h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #9c27b0; padding-bottom: 10px; margin-top: 0; text-align: center; }
+.back {
+  display: inline-block; margin-bottom: 16px;
+  color: #1a73e8; text-decoration: none; font-size: 0.95em;
+}
+.back:hover { text-decoration: underline; }
+.tip { text-align: center; color: #888; margin-bottom: 8px; }
+.note { text-align: center; color: #999; font-size: 0.88em; margin-bottom: 24px; }
+
+/* 题目样式 */
+.quiz-question {
+  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+  padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+}
+.quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+.quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+.quiz-question .q-title {
+  font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50;
+}
+.quiz-question .q-title .q-tag {
+  display: inline-block; padding: 1px 10px; border-radius: 12px;
+  font-size: 0.75em; margin-right: 6px; color: #fff;
+}
+.q-tag.judge { background: #e65100; }
+.q-tag.choice { background: #1a73e8; }
+
+.quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-question .opt {
+  padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+  cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+}
+.quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+.quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+.quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+.quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+
+.quiz-question .explain {
+  margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+  font-size: 0.93em; display: none;
+}
+.quiz-question .explain.show { display: block; }
+.quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+
+/* 查看答案按钮 */
+.btn-toggle-ans {
+  margin-top: 10px; padding: 6px 18px; border: 2px solid #1a73e8;
+  color: #1a73e8; border-radius: 16px; background: #fff;
+  cursor: pointer; font-size: 0.88em; transition: 0.15s; user-select: none;
+}
+.btn-toggle-ans:hover { background: #e3f2fd; }
+.btn-toggle-ans.showing { background: #e8f5e9; border-color: #4caf50; color: #4caf50; }
+
+.score-box {
+  display: inline-block; background: #9c27b0; color: #fff;
+  padding: 12px 32px; border-radius: 30px; font-size: 1.2em; font-weight: bold;
+}
+.reset-btn {
+  display: inline-block; margin-top: 12px; padding: 8px 28px;
+  border: 2px solid #9c27b0; color: #9c27b0; border-radius: 20px;
+  background: #fff; cursor: pointer; font-size: 1em; transition: 0.15s;
+}
+.reset-btn:hover { background: #f3e5f5; }
+.quiz-footer { text-align: center; margin: 30px 0; }
+
+.diff-tag {
+  display: inline-block; padding: 1px 8px; border-radius: 8px;
+  font-size: 0.7em; margin-left: 6px; font-weight: normal;
+}
+.diff-easy { background: #e8f5e9; color: #2e7d32; }
+.diff-medium { background: #fff8e1; color: #f57f17; }
+.diff-hard { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>函数类型与反函数 · 习题集</h1>
+<p class="tip">满分 200 分 · 判断题（每题 4 分，共 80 分）· 选择题（每题 6 分，共 120 分）</p>
+<p class="note">考察范围：二次函数、幂函数、指数函数、对数函数、三角函数的性质与图像 · 反函数的概念与性质</p>
+
+<div id="quiz-container"></div>
+
+<div class="quiz-footer">
+  <div class="score-box" id="scoreDisplay">得分：0 / 200</div>
+  <br>
+  <button class="reset-btn" onclick="resetQuiz()">&#8635; 重新答题</button>
+</div>
+
+</article>
+
+<script>
+// ============================================================
+// 习题数据：40 题（20 判断 + 20 选择）
+// ============================================================
+var questions = [
+  // ===== 判断题 1-10 =====
+  {
+    type: "judge",
+    diff: "基础",
+    question: "指数函数 y = a<sup>x</sup>（a &gt; 0，a &ne; 1）的图像恒过定点 (0, 1)。",
+    opts: ["正确", "错误"],
+    answer: 0,
+    explain: "正确。当 x = 0 时，a⁰ = 1，所以所有指数函数的图像都经过 (0, 1)。"
+  },
+  {
+    type: "judge",
+    diff: "基础",
+    question: "函数 f(x) = x² 在整个实数集 R 上存在反函数。",
+    opts: ["正确", "错误"],
+    answer: 1,
+    explain: "错误。f(x) = x² 不是一一映射——如 f(2)=4 且 f(-2)=4，一个 y 对应两个 x。若要构造反函数需限制定义域（如 x ≥ 0 的反函数为 y = √x）。"
+  },
+  {
+    type: "judge",
+    diff: "基础",
+    question: "对数函数 y = log<sub>a</sub>x（a &gt; 0，a &ne; 1）的定义域为 (0, +∞)，值域为 R。",
+    opts: ["正确", "错误"],
+    answer: 0,
+    explain: "正确。对数函数的真数必须为正，故定义域 (0,+∞)；当 x → 0⁺ 时 y → -∞（a>1）或 +∞（0<a<1），当 x → +∞ 时反向趋近，因此值域为全体实数 R。"
+  },
+  {
+    type: "judge",
+    diff: "基础",
+    question: "函数 f(x) = 3x + 2 与 g(x) = (x − 2)/3 互为反函数。",
+    opts: ["正确", "错误"],
+    answer: 0,
+    explain: "正确。由 y = 3x+2 解出 x = (y−2)/3，即 f⁻¹(x) = (x−2)/3。验证复合：f(g(x)) = 3·(x−2)/3 + 2 = x，g(f(x)) = (3x+2−2)/3 = x。"
+  },
+  {
+    type: "judge",
+    diff: "基础",
+    question: "正弦函数 y = sin x 是奇函数，最小正周期为 2π。",
+    opts: ["正确", "错误"],
+    answer: 0,
+    explain: "正确。sin(−x) = −sin x，故为奇函数。sin(x+2π) = sin x，最小正周期 2π。"
+  },
+  {
+    type: "judge",
+    diff: "中等",
+    question: "正切函数 y = tan x 的定义域为 R。",
+    opts: ["正确", "错误"],
+    answer: 1,
+    explain: "错误。tan x = sin x / cos x，当 cos x = 0 时无定义，即 x = π/2 + kπ（k ∈ Z）时不可取，定义域为 {x | x ≠ π/2 + kπ}。"
+  },
+  {
+    type: "judge",
+    diff: "中等",
+    question: "幂函数 y = x<sup>α</sup> 的图像都经过点 (1, 1)。",
+    opts: ["正确", "错误"],
+    answer: 0,
+    explain: "正确。对任意实数 α，1<sup>α</sup> = 1 恒成立，所以所有幂函数的图像都过 (1, 1)。"
+  },
+  {
+    type: "judge",
+    diff: "中等",
+    question: "若一个函数在定义域内严格单调，则它一定有反函数。",
+    opts: ["正确", "错误"],
+    answer: 0,
+    explain: "正确。严格单调的函数一定是一一映射（单射+满射到其值域），因此存在反函数。对高中阶段接触的连续函数，这是最常用的判断条件。"
+  },
+  {
+    type: "judge",
+    diff: "较难",
+    question: "函数 y = (½)<sup>x</sup> 在 R 上单调递增。",
+    opts: ["正确", "错误"],
+    answer: 1,
+    explain: "错误。底数 ½ ∈ (0,1)，指数函数 y = (½)<sup>x</sup> 在 R 上单调递减。可以从 (½)<sup>1</sup> = 0.5 > (½)² = 0.25 验证——x 增大时函数值反而减小。"
+  },
+  {
+    type: "judge",
+    diff: "较难",
+    question: "余弦函数 y = cos x 是偶函数。",
+    opts: ["正确", "错误"],
+    answer: 0,
+    explain: "正确。cos(−x) = cos x，图像关于 y 轴对称，满足偶函数定义。"
+  },
+
+  // ===== 选择题 11-20 =====
+  {
+    type: "choice",
+    diff: "基础",
+    question: "指数函数 y = a<sup>x</sup>（a &gt; 1）的值域是（  ）",
+    opts: ["(0, +∞)", "R", "(−∞, 0)", "[0, +∞)"],
+    answer: 0,
+    explain: "指数函数的值域为 (0, +∞)——无论 x 取何值，a<sup>x</sup> 始终为正，且可以无限趋近于 0 或无限增大。"
+  },
+  {
+    type: "choice",
+    diff: "中等",
+    question: "函数 f(x) = x² + 1（x ≥ 0）的反函数是（  ）",
+    opts: ["f⁻¹(x) = √(x−1)，x ≥ 1", "f⁻¹(x) = ±√(x−1)，x ≥ 1", "f⁻¹(x) = √(x−1)，x ≥ 0", "f⁻¹(x) = x² − 1，x ≥ 0"],
+    answer: 0,
+    explain: "由 y = x²+1 得 x² = y−1，因 x ≥ 0，取 x = √(y−1)。原函数值域为 [1, +∞)，故反函数定义域为 x ≥ 1。"
+  },
+  {
+    type: "choice",
+    diff: "中等",
+    question: "下列哪个函数的图像关于 y 轴对称？（  ）",
+    opts: ["y = x³", "y = cos x", "y = 2<sup>x</sup>", "y = log₂x"],
+    answer: 1,
+    explain: "关于 y 轴对称的函数是偶函数。cos x 满足 cos(−x)=cos x，是偶函数。x³ 是奇函数，2<sup>x</sup> 和 log₂x 既非奇也非偶。"
+  },
+  {
+    type: "choice",
+    diff: "中等",
+    question: "当 a &gt; 1 时，指数函数 y = a<sup>x</sup> 与对数函数 y = log<sub>a</sub>x 的单调性分别为（  ）",
+    opts: ["都递增", "都递减", "指数递增，对数递减", "指数递减，对数递增"],
+    answer: 0,
+    explain: "当 a > 1 时，y = a<sup>x</sup> 在 R 上严格递增，y = log<sub>a</sub>x 在 (0,+∞) 上严格递增。两者互为反函数，单调性一致。"
+  },
+  {
+    type: "choice",
+    diff: "中等",
+    question: "函数 y = 2<sup>x</sup> + 1 的反函数是（  ）",
+    opts: ["y = log₂(x − 1)", "y = log₂(x + 1)", "y = log₂x + 1", "y = 2<sup>x−1</sup>"],
+    answer: 0,
+    explain: "由 y = 2<sup>x</sup> + 1 → 2<sup>x</sup> = y − 1 → x = log₂(y−1)。原函数值域为 (1, +∞)，故反函数 y = log₂(x−1)，定义域 x > 1。"
+  },
+  {
+    type: "choice",
+    diff: "较难",
+    question: "函数 y = A sin(ωx + φ)（A &gt; 0，ω &gt; 0）的最小正周期是（  ）",
+    opts: ["2π", "π", "2π/ω", "|ω|"],
+    answer: 2,
+    explain: "标准正弦函数 y = sin x 的周期为 2π。当 x 变为 ωx 时，周期被压缩/拉伸为原来的 1/ω，故 y = A sin(ωx+φ) 的周期为 2π/ω。"
+  },
+  {
+    type: "choice",
+    diff: "较难",
+    question: "下列幂函数中，在 (0, +∞) 上单调递减的是（  ）",
+    opts: ["y = x²", "y = x<sup>½</sup>", "y = x<sup>−1</sup>", "y = x³"],
+    answer: 2,
+    explain: "当 α < 0 时，幂函数 y = x<sup>α</sup> 在 (0, +∞) 上单调递减。x<sup>−1</sup> = 1/x，α = −1 < 0，递减。x²、x<sup>½</sup>、x³ 的 α 均为正，在 (0,+∞) 上递增。"
+  },
+  {
+    type: "choice",
+    diff: "中等",
+    question: "函数 f(x) = log₂x 与 g(x) = 2<sup>x</sup> 之间的关系是（  ）",
+    opts: ["互为反函数", "是同一个函数", "没有关系", "互为倒数"],
+    answer: 0,
+    explain: "y = log₂x 与 y = 2<sup>x</sup> 互为反函数。验证复合：2<sup>log₂x</sup> = x（x > 0），log₂(2<sup>x</sup>) = x（x ∈ R）。图像关于 y = x 对称。"
+  },
+  {
+    type: "choice",
+    diff: "较难",
+    question: "下列函数中，既是奇函数又在 R 上单调递增的是（  ）",
+    opts: ["y = x³", "y = sin x", "y = 1/x", "y = 2<sup>x</sup>"],
+    answer: 0,
+    explain: "y = x³ 是奇函数（(−x)³ = −x³），且在 R 上严格递增。sin x 是奇函数但在 R 上不单调（振荡）。1/x 是奇函数但定义域不含 0，且在 (-∞,0) 和 (0,+∞) 分别递减。2<sup>x</sup> 既非奇也非偶。"
+  },
+  {
+    type: "choice",
+    diff: "中等",
+    question: "二次函数 y = x² − 2x + 3 的顶点坐标为（  ）",
+    opts: ["(1, 2)", "(2, 3)", "(−1, 2)", "(1, 3)"],
+    answer: 0,
+    explain: "配方法：y = x² − 2x + 3 = (x−1)² + 2，顶点坐标为 (1, 2)。也可由顶点公式 x = −b/(2a) = 2/2 = 1，代入得 y = 1 − 2 + 3 = 2。"
+  },
+  // ===== 判断题 11-20 =====
+  {
+    type: "judge",
+    diff: "基础",
+    question: "函数 y = √x 的定义域为 [0, +∞)。",
+    opts: ["正确", "错误"],
+    answer: 0,
+    explain: "正确。偶次根号下的被开方数必须非负，故 x ≥ 0。所以定义域为 [0, +∞)。"
+  },
+  {
+    type: "judge",
+    diff: "基础",
+    question: "指数函数 y = a<sup>x</sup>（a &gt; 1）的图像从左到右上升。",
+    opts: ["正确", "错误"],
+    answer: 0,
+    explain: "正确。当 a > 1 时，a<sup>x</sup> 在 R 上严格递增，图像从左到右上升。"
+  },
+  {
+    type: "judge",
+    diff: "基础",
+    question: "函数 y = x³ 是奇函数。",
+    opts: ["正确", "错误"],
+    answer: 0,
+    explain: "正确。f(−x) = (−x)³ = −x³ = −f(x)，图像关于原点对称，满足奇函数定义。"
+  },
+  {
+    type: "judge",
+    diff: "中等",
+    question: "对数函数 y = log<sub>a</sub>x（0 &lt; a &lt; 1）在 (0, +∞) 上严格递增。",
+    opts: ["正确", "错误"],
+    answer: 1,
+    explain: "错误。当 0 < a < 1 时，对数函数 y = log<sub>a</sub>x 在 (0, +∞) 上严格递减。可验证：log<sub>½</sub>2 = −1 < log<sub>½</sub>1 = 0，x 增大时 y 减小。"
+  },
+  {
+    type: "judge",
+    diff: "中等",
+    question: "函数 f(x) = x 的反函数是它本身。",
+    opts: ["正确", "错误"],
+    answer: 0,
+    explain: "正确。由 y = x 解出 x = y，即 f⁻¹(x) = x。图像 y = x 的对称轴就是它自身。"
+  },
+  {
+    type: "judge",
+    diff: "中等",
+    question: "幂函数 y = x⁰ 的图像是过 (0, 1) 的水平直线 y = 1（x ≠ 0）。",
+    opts: ["正确", "错误"],
+    answer: 0,
+    explain: "正确。对任意 x ≠ 0，x⁰ = 1，故图像为水平线 y = 1（挖去 x = 0 的点，因 0⁰ 无定义）。"
+  },
+  {
+    type: "judge",
+    diff: "较难",
+    question: "函数 y = 2<sup>x</sup> 与 y = (½)<sup>x</sup> 的图像关于 y 轴对称。",
+    opts: ["正确", "错误"],
+    answer: 0,
+    explain: "正确。验证：(½)<sup>x</sup> = 2<sup>−x</sup>，而 f(−x) = 2<sup>−x</sup> 正是 f(x)=2<sup>x</sup> 关于 y 轴的对称，所以两者互为对称。"
+  },
+  {
+    type: "judge",
+    diff: "较难",
+    question: "函数 y = cos x 的图像关于原点对称。",
+    opts: ["正确", "错误"],
+    answer: 1,
+    explain: "错误。cos x 是偶函数，cos(−x) = cos x，图像关于 y 轴对称，不关于原点对称。关于原点对称的是奇函数 sin x。"
+  },
+  {
+    type: "judge",
+    diff: "较难",
+    question: "二次函数 y = x² − 4x + 5 的最小值为 1。",
+    opts: ["正确", "错误"],
+    answer: 0,
+    explain: "正确。配方法：y = (x−2)² + 1，开口向上，当 x = 2 时取最小值 1。也可由顶点公式验证。"
+  },
+  {
+    type: "judge",
+    diff: "较难",
+    question: "若 f(x) 与 g(x) 互为反函数，则必有 f(g(x)) = x 对 g(x) 定义域内的所有 x 成立。",
+    opts: ["正确", "错误"],
+    answer: 0,
+    explain: "正确。这是反函数的复合性质：f(f⁻¹(x)) = x 对反函数定义域内所有 x 成立。验证：3·((x−2)/3)+2 = x，log₂(2<sup>x</sup>) = x。"
+  },
+  // ===== 选择题 21-30 =====
+  {
+    type: "choice",
+    diff: "基础",
+    question: "函数 y = √(x−1) 的定义域是（  ）",
+    opts: ["x ≥ 1", "x &gt; 1", "x ≥ 0", "x &gt; 0"],
+    answer: 0,
+    explain: "偶次根号下被开方数非负：x−1 ≥ 0 → x ≥ 1。"
+  },
+  {
+    type: "choice",
+    diff: "基础",
+    question: "下列函数中，在 (0, +∞) 上单调递增的是（  ）",
+    opts: ["y = (½)<sup>x</sup>", "y = x<sup>−1</sup>", "y = x²", "y = log<sub>½</sub>x"],
+    answer: 2,
+    explain: "x² 在 (0,+∞) 上递增。(½)<sup>x</sup> 递减，x⁻¹=1/x 递减，log<sub>½</sub>x 递减。"
+  },
+  {
+    type: "choice",
+    diff: "中等",
+    question: "函数 f(x) = e<sup>x</sup> 的反函数是（  ）",
+    opts: ["f⁻¹(x) = ln x", "f⁻¹(x) = e<sup>−x</sup>", "f⁻¹(x) = log₂x", "f⁻¹(x) = x<sup>e</sup>"],
+    answer: 0,
+    explain: "由 y = e<sup>x</sup> 得 x = ln y，故反函数为 f⁻¹(x) = ln x，定义域 x > 0。"
+  },
+  {
+    type: "choice",
+    diff: "中等",
+    question: "已知 f(x) 是奇函数，且 f(2) = 5，则 f(−2) =（  ）",
+    opts: ["5", "−5", "0", "不能确定"],
+    answer: 1,
+    explain: "奇函数定义：f(−x) = −f(x)。所以 f(−2) = −f(2) = −5。"
+  },
+  {
+    type: "choice",
+    diff: "中等",
+    question: "函数 y = 3 sin(2x) 的最小正周期是（  ）",
+    opts: ["2π", "π", "π/2", "4π"],
+    answer: 1,
+    explain: "y = A sin(ωx+φ) 的周期 T = 2π/|ω|。此处 ω = 2，故 T = 2π/2 = π。振幅 A = 3 不影响周期。"
+  },
+  {
+    type: "choice",
+    diff: "中等",
+    question: "函数 y = x + 1 的反函数是（  ）",
+    opts: ["y = x − 1", "y = 1 − x", "y = x + 1", "y = −x − 1"],
+    answer: 0,
+    explain: "y = x + 1 → x = y − 1，交换 x,y 得 f⁻¹(x) = x − 1。"
+  },
+  {
+    type: "choice",
+    diff: "较难",
+    question: "已知 f(x) = x² − 2x 在 (−∞, a] 上有反函数，则 a 的最大值为（  ）",
+    opts: ["0", "1", "2", "−1"],
+    answer: 1,
+    explain: "二次函数 f(x) = (x−1)² − 1 的对称轴为 x = 1。在 (−∞,1] 上单调递减，是一一映射。超过 1 则包含递增部分，不再单调。故 a 最大为 1。"
+  },
+  {
+    type: "choice",
+    diff: "较难",
+    question: "幂函数 y = x<sup>1/3</sup> 的图像（  ）",
+    opts: ["关于原点对称", "关于 y 轴对称", "关于 x 轴对称", "无对称性"],
+    answer: 0,
+    explain: "y = x<sup>1/3</sup> = ∛x 是奇函数：∛(−x) = −∛x，故图像关于原点对称。"
+  },
+  {
+    type: "choice",
+    diff: "较难",
+    question: "函数 y = log₂(x−1) + 2 的图像恒过定点（  ）",
+    opts: ["(1, 2)", "(2, 2)", "(1, 0)", "(2, 0)"],
+    answer: 1,
+    explain: "对数函数 y = log₂x 恒过 (1, 0)。经过平移：x−1=1 → x=2，log₂1=0，y=0+2=2。故恒过 (2, 2)。"
+  },
+  {
+    type: "choice",
+    diff: "较难",
+    question: "方程 x³ + 1 = 0 的实数解个数为（  ）",
+    opts: ["0", "1", "2", "3"],
+    answer: 1,
+    explain: "x³ + 1 = 0 → x³ = −1 → x = −1。幂函数 y = x³ 是 R 上严格递增的奇函数，任意值有唯一原像，故仅一个实数解。"
+  }
+];
+
+// ============================================================
+// 渲染与交互
+// ============================================================
+function render() {
+  var labels = ["A", "B", "C", "D"];
+  var html = "";
+  for (var i = 0; i < questions.length; i++) {
+    var q = questions[i];
+    var tagType = q.type === "judge" ? "judge" : "choice";
+    var tagName = q.type === "judge" ? "判断" : "选择";
+    var diffHtml = q.diff ? '<span class="diff-tag diff-' + q.diff + '">' + q.diff + '</span>' : "";
+    html += '<div class="quiz-question" id="q' + i + '">';
+    html += '<div class="q-title"><span class="q-tag ' + tagType + '">' + tagName + '</span> ' + (i+1) + '. ' + q.question + ' ' + diffHtml + '</div>';
+    html += '<div class="options">';
+    for (var j = 0; j < q.opts.length; j++) {
+      var letter = q.type === "choice" ? labels[j] + ". " : "";
+      html += '<div class="opt" onclick="selectOpt(' + i + ',' + j + ')">' + letter + q.opts[j] + '</div>';
+    }
+    html += '</div>';
+    html += '<button class="btn-toggle-ans" data-q="' + i + '" onclick="toggleAnswer(' + i + ')">查看答案</button>';
+    html += '<div class="explain" id="exp' + i + '"></div>';
+    html += '</div>';
+  }
+  document.getElementById("quiz-container").innerHTML = html;
+}
+
+function selectOpt(qIdx, chosen) {
+  var q = questions[qIdx];
+  var parent = document.getElementById("q" + qIdx);
+  var opts = parent.getElementsByClassName("opt");
+  var exp = document.getElementById("exp" + qIdx);
+  // 清除上一次的对错标记
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.remove("selected", "correct-opt", "wrong-opt");
+  }
+  // 标注当前选择并即时反馈
+  opts[chosen].classList.add("selected");
+  parent.dataset.chosen = chosen;
+  var isCorrect = (chosen === q.answer);
+  if (isCorrect) {
+    opts[chosen].classList.add("correct-opt");
+    parent.classList.remove("correct", "wrong");
+    parent.classList.add("correct");
+  } else {
+    opts[chosen].classList.add("wrong-opt");
+    parent.classList.remove("correct", "wrong");
+    parent.classList.add("wrong");
+  }
+  // 如果正显示答案，自动收起
+  if (exp.classList.contains("show")) {
+    exp.classList.remove("show");
+    var btn = parent.querySelector(".btn-toggle-ans");
+    btn.classList.remove("showing");
+    btn.textContent = "查看答案";
+  }
+  updateScore();
+}
+
+function toggleAnswer(qIdx) {
+  var q = questions[qIdx];
+  var parent = document.getElementById("q" + qIdx);
+  var btn = parent.querySelector(".btn-toggle-ans");
+  var exp = document.getElementById("exp" + qIdx);
+  var isShowing = exp.classList.contains("show");
+  if (isShowing) {
+    exp.classList.remove("show");
+    btn.classList.remove("showing");
+    btn.textContent = "查看答案";
+  } else {
+    var chosen = parseInt(parent.dataset.chosen);
+    if (isNaN(chosen)) return;
+    exp.className = "explain show ok";
+    exp.innerHTML = "<strong>正确答案：</strong>" + q.opts[q.answer] + "<br><strong>解析：</strong>" + q.explain;
+    btn.classList.add("showing");
+    btn.textContent = "隐藏答案";
+  }
+}
+
+function updateScore() {
+  var score = 0;
+  for (var i = 0; i < questions.length; i++) {
+    var parent = document.getElementById("q" + i);
+    if (parent && parent.classList.contains("correct")) {
+      score += (questions[i].type === "judge" ? 4 : 6);
+    }
+  }
+  document.getElementById("scoreDisplay").textContent = "得分：" + score + " / 200";
+}
+
+function resetQuiz() {
+  if (!confirm("确定要重新答题吗？")) return;
+  render();
+  updateScore();
+}
+
+window.onload = function() {
+  render();
+  updateScore();
+};
+</script>
+<script src="../../dt.js"></script>
+</body>
+</html>

@@ -162,7 +162,25 @@
   border-radius: 0 8px 8px 0;
   font-size: 0.95em;
 }
+.geo-fig { text-align: center; margin: 12px 0; }
+.geo-fig figcaption { font-size: 0.85em; color: #666; margin-top: 4px; }
+.geo-fig svg { max-width: 100%; border-radius: 8px; background: #fafafa; border: 1px solid #eee; display: block; margin: 0 auto; }
+.btn-toggle-ans {
+  margin-top: 10px;
+  padding: 6px 18px;
+  border: 2px solid #1a73e8;
+  color: #1a73e8;
+  border-radius: 16px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.88em;
+  transition: 0.15s;
+  user-select: none;
+}
+.btn-toggle-ans:hover { background: #e3f2fd; }
+.btn-toggle-ans.showing { background: #e8f5e9; border-color: #4caf50; color: #4caf50; }
 </style>
+<script src="../lib/d3.v7.min.js"></script>
 </head>
 <body>
 
@@ -256,6 +274,8 @@
   <p class="step">点 (1,2) 翻折到 (-1,2)，点 (2,0) 翻折到 (-2,0)。</p>
 </div>
 
+<div class="geo-fig" id="d3-symmetry"></div>
+
 <div class="summary-box">
   <strong>对称性小结：</strong>偶函数 f(x)=f(-x) ⇔ 关于 y 轴对称；奇函数 f(-x)=-f(x) ⇔ 关于原点对称。<br>
   推广：关于 x=a 对称 &rArr; f(a+x)=f(a-x)；关于 (a,b) 对称 &rArr; f(a+x)+f(a-x)=2b。<br>
@@ -273,6 +293,7 @@
     <div class="opt" onclick="selectOpt(0,2)">C. f(x) = 2x</div>
     <div class="opt" onclick="selectOpt(0,3)">D. f(x) = x³ + 1</div>
   </div>
+  <button class="btn-toggle-ans" data-q="0" onclick="toggleAnswer(0)">查看答案</button>
   <div class="explain" id="exp0"></div>
 </div>
 
@@ -284,6 +305,7 @@
     <div class="opt" onclick="selectOpt(1,2)">C. x = -2</div>
     <div class="opt" onclick="selectOpt(1,3)">D. y = 2</div>
   </div>
+  <button class="btn-toggle-ans" data-q="1" onclick="toggleAnswer(1)">查看答案</button>
   <div class="explain" id="exp1"></div>
 </div>
 
@@ -373,6 +395,7 @@
     <div class="opt" onclick="selectOpt(2,2)">C. 1</div>
     <div class="opt" onclick="selectOpt(2,3)">D. 8</div>
   </div>
+  <button class="btn-toggle-ans" data-q="2" onclick="toggleAnswer(2)">查看答案</button>
   <div class="explain" id="exp2"></div>
 </div>
 
@@ -384,6 +407,7 @@
     <div class="opt" onclick="selectOpt(3,2)">C. 5</div>
     <div class="opt" onclick="selectOpt(3,3)">D. 不能确定</div>
   </div>
+  <button class="btn-toggle-ans" data-q="3" onclick="toggleAnswer(3)">查看答案</button>
   <div class="explain" id="exp3"></div>
 </div>
 
@@ -445,6 +469,8 @@
   <p class="step">结果：图像形似 "W" 形，三个最低点变为 (0, 1)，与 x 轴交于 x = &plusmn;1。</p>
 </div>
 
+<div class="geo-fig" id="d3-abs-x2"></div>
+
 <div class="summary-box">
   <strong>图像变换小结：</strong>所有变换都可以从表达式解读——括号内的变换影响 x（左右平移、横向伸缩、关于 y 轴对称），括号外的变换影响 y（上下平移、纵向伸缩、关于 x 轴对称）。绝对值变换 f(|x|) 和 |f(x)| 本质上是对称变换的组合。
 </div>
@@ -460,6 +486,7 @@
     <div class="opt" onclick="selectOpt(4,2)">C. y = (x-3)² - 2</div>
     <div class="opt" onclick="selectOpt(4,3)">D. y = (x+3)² + 2</div>
   </div>
+  <button class="btn-toggle-ans" data-q="4" onclick="toggleAnswer(4)">查看答案</button>
   <div class="explain" id="exp4"></div>
 </div>
 
@@ -471,6 +498,7 @@
     <div class="opt" onclick="selectOpt(5,2)">C. 2</div>
     <div class="opt" onclick="selectOpt(5,3)">D. 4</div>
   </div>
+  <button class="btn-toggle-ans" data-q="5" onclick="toggleAnswer(5)">查看答案</button>
   <div class="explain" id="exp5"></div>
 </div>
 
@@ -556,6 +584,7 @@
     <div class="opt" onclick="selectOpt(6,2)">C. 0</div>
     <div class="opt" onclick="selectOpt(6,3)">D. 不能确定</div>
   </div>
+  <button class="btn-toggle-ans" data-q="6" onclick="toggleAnswer(6)">查看答案</button>
   <div class="explain" id="exp6"></div>
 </div>
 
@@ -567,6 +596,7 @@
     <div class="opt" onclick="selectOpt(7,2)">C. (-&infin;, -3) &cup; (3, +&infin;)</div>
     <div class="opt" onclick="selectOpt(7,3)">D. (-3, 3)</div>
   </div>
+  <button class="btn-toggle-ans" data-q="7" onclick="toggleAnswer(7)">查看答案</button>
   <div class="explain" id="exp7"></div>
 </div>
 
@@ -607,6 +637,8 @@
   <p class="step">两图像交于点 (-1, 1) 和 (3, 9)。在 -1 < x < 3 范围内，抛物线在直线下方，即 x² < 2x + 3。</p>
   <p class="answer">解集：(-1, 3)</p>
 </div>
+
+<div class="geo-fig" id="d3-ineq"></div>
 
 <h3>5.3 重要解题方法</h3>
 
@@ -654,6 +686,7 @@
     <div class="opt" onclick="selectOpt(8,2)">C. 拐点</div>
     <div class="opt" onclick="selectOpt(8,3)">D. 对称轴</div>
   </div>
+  <button class="btn-toggle-ans" data-q="8" onclick="toggleAnswer(8)">查看答案</button>
   <div class="explain" id="exp8"></div>
 </div>
 
@@ -665,6 +698,7 @@
     <div class="opt" onclick="selectOpt(9,2)">C. 值域</div>
     <div class="opt" onclick="selectOpt(9,3)">D. 定义域</div>
   </div>
+  <button class="btn-toggle-ans" data-q="9" onclick="toggleAnswer(9)">查看答案</button>
   <div class="explain" id="exp9"></div>
 </div>
 
@@ -685,6 +719,7 @@
     <div class="opt" onclick="selectOpt(10,2)">C. (-&infin;, -2) &cup; (2, +&infin;)</div>
     <div class="opt" onclick="selectOpt(10,3)">D. (-&infin;, -2) &cup; (0, 2)</div>
   </div>
+  <button class="btn-toggle-ans" data-q="10" onclick="toggleAnswer(10)">查看答案</button>
   <div class="explain" id="exp10"></div>
 </div>
 
@@ -696,6 +731,7 @@
     <div class="opt" onclick="selectOpt(11,2)">C. 0</div>
     <div class="opt" onclick="selectOpt(11,3)">D. 3</div>
   </div>
+  <button class="btn-toggle-ans" data-q="11" onclick="toggleAnswer(11)">查看答案</button>
   <div class="explain" id="exp11"></div>
 </div>
 
@@ -707,6 +743,7 @@
     <div class="opt" onclick="selectOpt(12,2)">C. y = 2(x-1)² - 3</div>
     <div class="opt" onclick="selectOpt(12,3)">D. y = 2x² - 1</div>
   </div>
+  <button class="btn-toggle-ans" data-q="12" onclick="toggleAnswer(12)">查看答案</button>
   <div class="explain" id="exp12"></div>
 </div>
 
@@ -718,6 +755,7 @@
     <div class="opt" onclick="selectOpt(13,2)">C. 非奇非偶函数</div>
     <div class="opt" onclick="selectOpt(13,3)">D. 既是奇函数又是偶函数</div>
   </div>
+  <button class="btn-toggle-ans" data-q="13" onclick="toggleAnswer(13)">查看答案</button>
   <div class="explain" id="exp13"></div>
 </div>
 
@@ -729,8 +767,11 @@
     <div class="opt" onclick="selectOpt(14,2)">C. 0 < m < 3</div>
     <div class="opt" onclick="selectOpt(14,3)">D. m = 1</div>
   </div>
+  <button class="btn-toggle-ans" data-q="14" onclick="toggleAnswer(14)">查看答案</button>
   <div class="explain" id="exp14"></div>
 </div>
+
+<div class="geo-fig" id="d3-abs-quad2"></div>
 
 <!-- 底部 -->
 <div class="quiz-footer">
@@ -854,29 +895,51 @@ function selectOpt(qIdx, chosen) {
   var parent = document.getElementById("q" + qIdx);
   var opts = parent.getElementsByClassName("opt");
   var expDiv = document.getElementById("exp" + qIdx);
-
-  if (opts[0].classList.contains("disabled")) return;
-
+  // 清除之前的选中和对错状态
   for (var i = 0; i < opts.length; i++) {
-    opts[i].classList.add("disabled");
+    opts[i].classList.remove("selected", "correct-opt", "wrong-opt");
   }
-
+  // 标注当前选中并立即告知对错
   opts[chosen].classList.add("selected");
-
+  parent.dataset.chosen = chosen;
   var correctIdx = q.answer;
   var isCorrect = chosen === correctIdx;
-
-  opts[correctIdx].classList.add("correct-opt");
-  if (!isCorrect) {
+  if (isCorrect) {
+    opts[chosen].classList.add("correct-opt");
+  } else {
     opts[chosen].classList.add("wrong-opt");
   }
-
-  expDiv.className = "explain show " + (isCorrect ? "ok" : "fail");
-  expDiv.innerHTML = (isCorrect ? "&#9989; 正确！" : "&#10060; 错误。") + " " + q.explain;
-
+  parent.classList.remove("correct", "wrong");
   parent.classList.add(isCorrect ? "correct" : "wrong");
-
   updateScore();
+  // 如果正显示解析，收起
+  var btn = parent.querySelector(".btn-toggle-ans");
+  if (btn && expDiv.classList.contains("show")) {
+    expDiv.classList.remove("show");
+    btn.classList.remove("showing");
+    btn.textContent = "查看答案";
+  }
+}
+
+function toggleAnswer(qIdx) {
+  var q = questions[qIdx];
+  var parent = document.getElementById("q" + qIdx);
+  var btn = parent.querySelector(".btn-toggle-ans");
+  var expDiv = document.getElementById("exp" + qIdx);
+  var isShowing = expDiv.classList.contains("show");
+  if (isShowing) {
+    expDiv.classList.remove("show");
+    btn.classList.remove("showing");
+    btn.textContent = "查看答案";
+  } else {
+    var chosen = parseInt(parent.dataset.chosen);
+    if (isNaN(chosen)) return;
+    // 仅显示正确答案和解析，不判卷
+    expDiv.className = "explain show ok";
+    expDiv.innerHTML = "<strong>正确答案：</strong>" + q.opts[q.answer] + "<br><strong>解析：</strong>" + q.explain;
+    btn.classList.add("showing");
+    btn.textContent = "隐藏答案";
+  }
 }
 
 function updateScore() {
@@ -893,6 +956,7 @@ function resetQuiz() {
   for (var i = 0; i < questions.length; i++) {
     var parent = document.getElementById("q" + i);
     parent.className = "quiz-question";
+    parent.dataset.chosen = "";
     var opts = parent.getElementsByClassName("opt");
     for (var j = 0; j < opts.length; j++) {
       opts[j].className = "opt";
@@ -901,10 +965,209 @@ function resetQuiz() {
     exp.className = "explain";
     exp.innerHTML = "";
   }
+  document.querySelectorAll(".btn-toggle-ans").forEach(function(b) {
+    b.textContent = "查看答案";
+    b.classList.remove("showing");
+  });
   document.getElementById("scoreDisplay").textContent = "得分：0 / " + questions.length;
 }
 
 document.getElementById("resetBtn").onclick = resetQuiz;
+</script>
+
+<script>
+(function() {
+
+  // ===== 图1：对称性画图 =====
+  (function() {
+    var container = document.getElementById("d3-symmetry");
+    if (!container) return;
+    var W = 360, H = 250, margin = {top: 20, right: 20, bottom: 30, left: 30};
+    var svg = d3.select(container).append("svg")
+      .attr("width", W).attr("height", H)
+      .style("display","block").style("margin","0 auto").style("background","#fafafa")
+      .style("border","1px solid #eee").style("border-radius","8px");
+    // x:[-2.5,2.5], y:[-0.5,2.5]
+    var xS = d3.scaleLinear().domain([-2.5,2.5]).range([margin.left, W-margin.right]);
+    var yS = d3.scaleLinear().domain([-0.5,2.8]).range([H-margin.bottom, margin.top]);
+    var g = svg.append("g");
+    // 坐标轴
+    g.append("line").attr("x1",xS(-2.5)).attr("x2",xS(2.5)).attr("y1",yS(0)).attr("y2",yS(0)).attr("stroke","#999").attr("stroke-width",1.2);
+    g.append("line").attr("x1",xS(0)).attr("x2",xS(0)).attr("y1",yS(2.8)).attr("y2",yS(-0.5)).attr("stroke","#999").attr("stroke-width",1.2);
+    // 刻度
+    [-2,-1,0,1,2].forEach(function(v) {
+      g.append("text").attr("x",xS(v)).attr("y",yS(0)+16).attr("text-anchor","middle").attr("font-size",10).attr("fill","#666").text(v);
+    });
+    // 右侧抛物线弧: y = -(x-1)²/2 + 2, x∈[0,2]
+    var ptsR = [];
+    for (var x=0; x<=2; x+=0.02) {
+      var y = -(x-1)*(x-1)*2 + 2;
+      if (y<0) y=0;
+      ptsR.push({x:x, y:y});
+    }
+    var lineGen = d3.line().x(function(d){return xS(d.x);}).y(function(d){return yS(d.y);});
+    g.append("path").datum(ptsR).attr("d",lineGen).attr("fill","none").attr("stroke","#1a73e8").attr("stroke-width",2.5);
+    // 左侧对称镜像: x∈[-2,0]
+    var ptsL = [];
+    for (var x=0; x>=-2; x-=0.02) {
+      var y = -(Math.abs(x)-1)*(Math.abs(x)-1)*2 + 2;
+      if (y<0) y=0;
+      ptsL.push({x:x, y:y});
+    }
+    g.append("path").datum(ptsL).attr("d",lineGen).attr("fill","none").attr("stroke","#e74c3c").attr("stroke-width",2.5).attr("stroke-dasharray","6,3");
+    // 关键点
+    var pts = [[0,0,"(0,0)"],[1,2,"(1,2)"],[2,0,"(2,0)"],[-1,2,"(-1,2)"],[-2,0,"(-2,0)"]];
+    pts.forEach(function(p) {
+      g.append("circle").attr("cx",xS(p[0])).attr("cy",yS(p[1])).attr("r",3.5).attr("fill","#c62828");
+      g.append("text").attr("x",xS(p[0])+6).attr("y",yS(p[1])-4).attr("font-size",10).attr("fill","#c62828").text(p[2]);
+    });
+    // 图例
+    g.append("line").attr("x1",xS(-2.3)).attr("x2",xS(-1.8)).attr("y1",yS(2.5)).attr("y2",yS(2.5)).attr("stroke","#1a73e8").attr("stroke-width",2.5);
+    g.append("text").attr("x",xS(-1.6)).attr("y",yS(2.5)+4).attr("font-size",10).attr("fill","#555").text("x≥0 部分");
+    g.append("line").attr("x1",xS(-2.3)).attr("x2",xS(-1.8)).attr("y1",yS(2.2)).attr("y2",yS(2.2)).attr("stroke","#e74c3c").attr("stroke-width",2.5).attr("stroke-dasharray","6,3");
+    g.append("text").attr("x",xS(-1.6)).attr("y",yS(2.2)+4).attr("font-size",10).attr("fill","#555").text("对称镜像");
+    var cap = document.createElement("figcaption");
+    cap.textContent = "图：偶函数 f(x) 在 x≥0 部分的抛物线弧沿 y 轴翻折得到完整图像";
+    container.appendChild(cap);
+  })();
+
+  // ===== 图2：y = |x²-1| =====
+  (function() {
+    var container = document.getElementById("d3-abs-x2");
+    if (!container) return;
+    var W = 360, H = 300, margin = {top: 20, right: 20, bottom: 30, left: 30};
+    var svg = d3.select(container).append("svg")
+      .attr("width",W).attr("height",H)
+      .style("display","block").style("margin","0 auto").style("background","#fafafa")
+      .style("border","1px solid #eee").style("border-radius","8px");
+    var xS = d3.scaleLinear().domain([-2.5,2.5]).range([margin.left,W-margin.right]);
+    var yS = d3.scaleLinear().domain([-1.5,3]).range([H-margin.bottom,margin.top]);
+    var g = svg.append("g");
+    g.append("line").attr("x1",xS(-2.5)).attr("x2",xS(2.5)).attr("y1",yS(0)).attr("y2",yS(0)).attr("stroke","#999").attr("stroke-width",1.2);
+    g.append("line").attr("x1",xS(0)).attr("x2",xS(0)).attr("y1",yS(3)).attr("y2",yS(-1.5)).attr("stroke","#999").attr("stroke-width",1.2);
+    [-2,-1,0,1,2].forEach(function(v) {
+      g.append("text").attr("x",xS(v)).attr("y",yS(0)+16).attr("text-anchor","middle").attr("font-size",10).attr("fill","#666").text(v);
+    });
+    [1,2].forEach(function(v) {
+      g.append("text").attr("x",xS(0)-8).attr("y",yS(v)+4).attr("text-anchor","end").attr("font-size",10).attr("fill","#666").text(v);
+    });
+    var lineGen = d3.line().x(function(d){return xS(d.x);}).y(function(d){return yS(d.y);});
+    // 虚线: y=x²-1
+    var pts = [];
+    for (var x=-2.3; x<=2.3; x+=0.03) { pts.push({x:x, y:x*x-1}); }
+    g.append("path").datum(pts).attr("d",lineGen).attr("fill","none").attr("stroke","#2196f3").attr("stroke-width",1.5).attr("stroke-dasharray","5,4");
+    // 实线: y=|x²-1|
+    var absPts = pts.map(function(d){return {x:d.x, y:Math.abs(d.y)};});
+    g.append("path").datum(absPts).attr("d",lineGen).attr("fill","none").attr("stroke","#e74c3c").attr("stroke-width",2.5);
+    // 关键点
+    g.append("circle").attr("cx",xS(0)).attr("cy",yS(1)).attr("r",3).attr("fill","#e74c3c");
+    g.append("text").attr("x",xS(0)+6).attr("y",yS(1)-4).attr("font-size",10).attr("fill","#e74c3c").text("(0,1)");
+    g.append("circle").attr("cx",xS(-1)).attr("cy",yS(0)).attr("r",3).attr("fill","#333");
+    g.append("text").attr("x",xS(-1)-6).attr("y",yS(0)-6).attr("font-size",10).attr("fill","#333").attr("text-anchor","end").text("(-1,0)");
+    g.append("circle").attr("cx",xS(1)).attr("cy",yS(0)).attr("r",3).attr("fill","#333");
+    g.append("text").attr("x",xS(1)+6).attr("y",yS(0)-6).attr("font-size",10).attr("fill","#333").text("(1,0)");
+    // 图例
+    g.append("line").attr("x1",xS(-2.3)).attr("x2",xS(-1.8)).attr("y1",yS(2.5)).attr("y2",yS(2.5)).attr("stroke","#2196f3").attr("stroke-width",1.5).attr("stroke-dasharray","5,4");
+    g.append("text").attr("x",xS(-1.6)).attr("y",yS(2.5)+4).attr("font-size",10).attr("fill","#555").text("y=x²-1");
+    g.append("line").attr("x1",xS(-2.3)).attr("x2",xS(-1.8)).attr("y1",yS(2.2)).attr("y2",yS(2.2)).attr("stroke","#e74c3c").attr("stroke-width",2.5);
+    g.append("text").attr("x",xS(-1.6)).attr("y",yS(2.2)+4).attr("font-size",10).attr("fill","#555").text("y=|x²-1|");
+    var cap = document.createElement("figcaption");
+    cap.textContent = "图：y=|x²-1| 的 W 形图像，左侧抛物线翻折到上方";
+    container.appendChild(cap);
+  })();
+
+  // ===== 图3：x² < 2x+3 =====
+  (function() {
+    var container = document.getElementById("d3-ineq");
+    if (!container) return;
+    var W = 420, H = 330, margin = {top: 20, right: 30, bottom: 30, left: 30};
+    var svg = d3.select(container).append("svg")
+      .attr("width",W).attr("height",H)
+      .style("display","block").style("margin","0 auto").style("background","#fafafa")
+      .style("border","1px solid #eee").style("border-radius","8px");
+    var xS = d3.scaleLinear().domain([-2.5,4]).range([margin.left,W-margin.right]);
+    var yS = d3.scaleLinear().domain([-1,11]).range([H-margin.bottom,margin.top]);
+    var g = svg.append("g");
+    // 高亮区间 -1<x<3
+    g.append("rect").attr("x",xS(-1)).attr("width",xS(3)-xS(-1)).attr("y",margin.top).attr("height",H-margin.top-margin.bottom)
+      .attr("fill","#fff3e0").attr("opacity",0.4);
+    g.append("text").attr("x",xS(1)).attr("y",yS(9)).attr("text-anchor","middle").attr("font-size",12).attr("fill","#e65100").attr("font-weight","bold").text("x² < 2x+3");
+    // 坐标轴
+    g.append("line").attr("x1",xS(-2.5)).attr("x2",xS(4)).attr("y1",yS(0)).attr("y2",yS(0)).attr("stroke","#999").attr("stroke-width",1.2);
+    g.append("line").attr("x1",xS(0)).attr("x2",xS(0)).attr("y1",yS(11)).attr("y2",yS(-1)).attr("stroke","#999").attr("stroke-width",1.2);
+    [-2,-1,0,1,2,3,4].forEach(function(v) {
+      g.append("text").attr("x",xS(v)).attr("y",yS(0)+16).attr("text-anchor","middle").attr("font-size",10).attr("fill","#666").text(v);
+    });
+    [2,4,6,8].forEach(function(v) {
+      g.append("text").attr("x",xS(0)-8).attr("y",yS(v)+4).attr("text-anchor","end").attr("font-size",10).attr("fill","#666").text(v);
+    });
+    var lineGen = d3.line().x(function(d){return xS(d.x);}).y(function(d){return yS(d.y);});
+    // y=x²
+    var ptsP = [];
+    for (var x=-2.3; x<=3.8; x+=0.03) { ptsP.push({x:x, y:x*x}); }
+    g.append("path").datum(ptsP).attr("d",lineGen).attr("fill","none").attr("stroke","#1a73e8").attr("stroke-width",2.5);
+    // y=2x+3
+    var ptsL = [{x:-2.3, y:2*(-2.3)+3}, {x:3.8, y:2*3.8+3}];
+    g.append("path").datum(ptsL).attr("d",lineGen).attr("fill","none").attr("stroke","#e74c3c").attr("stroke-width",2);
+    // 交点
+    g.append("circle").attr("cx",xS(-1)).attr("cy",yS(1)).attr("r",4).attr("fill","#c62828");
+    g.append("text").attr("x",xS(-1)-6).attr("y",yS(1)-8).attr("text-anchor","end").attr("font-size",10).attr("fill","#c62828").text("(-1,1)");
+    g.append("circle").attr("cx",xS(3)).attr("cy",yS(9)).attr("r",4).attr("fill","#c62828");
+    g.append("text").attr("x",xS(3)+6).attr("y",yS(9)-8).attr("font-size",10).attr("fill","#c62828").text("(3,9)");
+    // 图例
+    g.append("line").attr("x1",xS(-2)).attr("x2",xS(-1.3)).attr("y1",yS(10)).attr("y2",yS(10)).attr("stroke","#1a73e8").attr("stroke-width",2.5);
+    g.append("text").attr("x",xS(-1)).attr("y",yS(10)+4).attr("font-size",10).attr("fill","#555").text("y=x²");
+    g.append("line").attr("x1",xS(-2)).attr("x2",xS(-1.3)).attr("y1",yS(9.3)).attr("y2",yS(9.3)).attr("stroke","#e74c3c").attr("stroke-width",2);
+    g.append("text").attr("x",xS(-1)).attr("y",yS(9.3)+4).attr("font-size",10).attr("fill","#555").text("y=2x+3");
+    var cap = document.createElement("figcaption");
+    cap.textContent = "图：抛物线 y=x² 在直线 y=2x+3 下方的部分对应不等式解集 (-1,3)";
+    container.appendChild(cap);
+  })();
+
+  // ===== 图4：|x²-4x+3| = m =====
+  (function() {
+    var container = document.getElementById("d3-abs-quad2");
+    if (!container) return;
+    var W = 360, H = 300, margin = {top: 20, right: 30, bottom: 30, left: 30};
+    var svg = d3.select(container).append("svg")
+      .attr("width",W).attr("height",H)
+      .style("display","block").style("margin","0 auto").style("background","#fafafa")
+      .style("border","1px solid #eee").style("border-radius","8px");
+    var xS = d3.scaleLinear().domain([-0.5,4.5]).range([margin.left,W-margin.right]);
+    var yS = d3.scaleLinear().domain([-0.5,3.5]).range([H-margin.bottom,margin.top]);
+    var g = svg.append("g");
+    g.append("line").attr("x1",xS(-0.5)).attr("x2",xS(4.5)).attr("y1",yS(0)).attr("y2",yS(0)).attr("stroke","#999").attr("stroke-width",1.2);
+    g.append("line").attr("x1",xS(0)).attr("x2",xS(0)).attr("y1",yS(3.5)).attr("y2",yS(-0.5)).attr("stroke","#999").attr("stroke-width",1.2);
+    [0,1,2,3,4].forEach(function(v) {
+      g.append("text").attr("x",xS(v)).attr("y",yS(0)+16).attr("text-anchor","middle").attr("font-size",10).attr("fill","#666").text(v);
+    });
+    [1,2,3].forEach(function(v) {
+      g.append("text").attr("x",xS(0)-8).attr("y",yS(v)+4).attr("text-anchor","end").attr("font-size",10).attr("fill","#666").text(v);
+    });
+    var lineGen = d3.line().x(function(d){return xS(d.x);}).y(function(d){return yS(d.y);});
+    // W 形
+    var pts = [];
+    for (var x=-0.3; x<=4.3; x+=0.03) {
+      var y = Math.abs(x*x - 4*x + 3);
+      pts.push({x:x, y:y});
+    }
+    g.append("path").datum(pts).attr("d",lineGen).attr("fill","none").attr("stroke","#1a73e8").attr("stroke-width",2.5);
+    // 水平线 y=m (0<m<1)
+    g.append("line").attr("x1",xS(-0.3)).attr("x2",xS(4.3)).attr("y1",yS(0.5)).attr("y2",yS(0.5)).attr("stroke","#e91e63").attr("stroke-width",1.5).attr("stroke-dasharray","4,3");
+    g.append("text").attr("x",xS(4.2)).attr("y",yS(0.5)-4).attr("font-size",11).attr("fill","#e91e63").attr("font-weight","bold").text("y=m (0<m<1)");
+    // 关键点
+    g.append("circle").attr("cx",xS(2)).attr("cy",yS(1)).attr("r",3).attr("fill","#e74c3c");
+    g.append("text").attr("x",xS(2)+6).attr("y",yS(1)-4).attr("font-size",10).attr("fill","#e74c3c").text("(2,1)");
+    g.append("circle").attr("cx",xS(1)).attr("cy",yS(0)).attr("r",3).attr("fill","#333");
+    g.append("text").attr("x",xS(1)).attr("y",yS(0)-8).attr("text-anchor","middle").attr("font-size",10).attr("fill","#333").text("x=1");
+    g.append("circle").attr("cx",xS(3)).attr("cy",yS(0)).attr("r",3).attr("fill","#333");
+    g.append("text").attr("x",xS(3)).attr("y",yS(0)-8).attr("text-anchor","middle").attr("font-size",10).attr("fill","#333").text("x=3");
+    var cap = document.createElement("figcaption");
+    cap.textContent = "图：y=|x²-4x+3| 与 y=m (0<m<1) 有 4 个交点，即方程有 4 个不同实根";
+    container.appendChild(cap);
+  })();
+
+})();
 </script>
 
     <script src="../dt.js"></script>

@@ -120,6 +120,15 @@ h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding
 .calc-card .btn-check:hover { background: #bf360c; }
 .calc-card .btn-check:disabled { opacity: 0.5; cursor: default; }
 
+/* 查看答案按钮 */
+.btn-toggle-ans {
+  margin-top: 10px; padding: 6px 18px; border: 2px solid #1a73e8;
+  color: #1a73e8; border-radius: 16px; background: #fff;
+  cursor: pointer; font-size: 0.88em; transition: 0.15s; user-select: none;
+}
+.btn-toggle-ans:hover { background: #e3f2fd; }
+.btn-toggle-ans.showing { background: #e8f5e9; border-color: #4caf50; color: #4caf50; }
+
 #scoreDisplay {
   display: inline-block; background: #1a73e8; color: #fff;
   padding: 12px 32px; border-radius: 30px; font-size: 1.2em; font-weight: bold;
@@ -368,6 +377,7 @@ function render() {
       choiceHtml += '<div class="opt" onclick="selectChoice(' + i + ',' + j + ')">' + letter[j] + '. ' + q.opts[j] + '</div>';
     }
     choiceHtml += '</div>';
+    choiceHtml += '<button class="btn-toggle-ans" data-q="' + i + '" onclick="toggleChoiceAnswer(' + i + ')">查看答案</button>';
     choiceHtml += '<div class="explain" id="cexp' + i + '"></div>';
     choiceHtml += '</div>';
   }
@@ -396,28 +406,57 @@ function render() {
   calcChecked = new Array(calcQuestions.length).fill(false);
 }
 
-// 选择题
+// 选择题（可重新选择，即时反馈不暴露正确答案）
 function selectChoice(qi, oi) {
-  if (choiceAnswered[qi] !== -1) return;
-  choiceAnswered[qi] = oi;
   var q = choiceQuestions[qi];
-  var isCorrect = (oi === q.answer);
-  var opts = document.getElementById("cq" + qi).querySelectorAll(".opt");
+  var parent = document.getElementById("cq" + qi);
+  var opts = parent.getElementsByClassName("opt");
   var exp = document.getElementById("cexp" + qi);
-  for (var i = 0; i < opts.length; i++) opts[i].classList.add("disabled");
+  // 清除上一次的对错标记
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.remove("selected", "correct-opt", "wrong-opt");
+  }
+  // 标注当前选择并即时反馈
+  opts[oi].classList.add("selected");
+  parent.dataset.chosen = oi;
+  var isCorrect = (oi === q.answer);
   if (isCorrect) {
     opts[oi].classList.add("correct-opt");
-    document.getElementById("cq" + qi).classList.add("correct");
-    exp.className = "explain show ok";
-    totalScore += 5;
+    parent.classList.remove("correct", "wrong");
+    parent.classList.add("correct");
   } else {
     opts[oi].classList.add("wrong-opt");
-    opts[q.answer].classList.add("correct-opt");
-    document.getElementById("cq" + qi).classList.add("wrong");
-    exp.className = "explain show fail";
+    parent.classList.remove("correct", "wrong");
+    parent.classList.add("wrong");
   }
-  exp.innerHTML = '<strong>' + (isCorrect ? '✓ 正确' : '✗ 错误') + '</strong> ' + q.explain;
+  // 如果正显示答案，自动收起
+  if (exp.classList.contains("show")) {
+    exp.classList.remove("show");
+    var btn = parent.querySelector(".btn-toggle-ans");
+    btn.classList.remove("showing");
+    btn.textContent = "查看答案";
+  }
   updateScore();
+}
+
+function toggleChoiceAnswer(qi) {
+  var q = choiceQuestions[qi];
+  var parent = document.getElementById("cq" + qi);
+  var btn = parent.querySelector(".btn-toggle-ans");
+  var exp = document.getElementById("cexp" + qi);
+  var isShowing = exp.classList.contains("show");
+  if (isShowing) {
+    exp.classList.remove("show");
+    btn.classList.remove("showing");
+    btn.textContent = "查看答案";
+  } else {
+    var chosen = parseInt(parent.dataset.chosen);
+    if (isNaN(chosen)) return;
+    exp.className = "explain show ok";
+    exp.innerHTML = "<strong>正确答案：</strong>" + q.opts[q.answer] + "<br><strong>解析：</strong>" + q.explain;
+    btn.classList.add("showing");
+    btn.textContent = "隐藏答案";
+  }
 }
 
 // 解答题（手动判分，每题10分，由用户自行核对解答后点击得分）
@@ -446,7 +485,14 @@ function toggleCalc(ci) {
 }
 
 function updateScore() {
-  document.getElementById("scoreDisplay").textContent = "得分：" + totalScore + " / 100";
+  var choiceScore = 0;
+  for (var i = 0; i < choiceQuestions.length; i++) {
+    var parent = document.getElementById("cq" + i);
+    if (parent && parent.classList.contains("correct")) {
+      choiceScore += 5;
+    }
+  }
+  document.getElementById("scoreDisplay").textContent = "得分：" + (choiceScore + totalScore) + " / 100";
 }
 
 function resetExam() {
