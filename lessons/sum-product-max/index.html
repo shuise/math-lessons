@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="../lib/logo.png">
+<link rel="icon" type="image/png" href="../lib/logo.png?version=1.0.0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>和定积最大定理的证明</title>
 <link rel="stylesheet" href="../style.css">
@@ -351,6 +351,193 @@
 </article>
 
 <script>
+// ============================================================
+// 交互式 Canvas 可视化
+// ============================================================
+var canvas = document.getElementById("rectCanvas");
+var ctx = canvas.getContext("2d");
+var W = 500, H = 340;
+
+var sliderS = document.getElementById("sliderS");
+var sliderA = document.getElementById("sliderA");
+var valS = document.getElementById("valS");
+var valA = document.getElementById("valA");
+var statA = document.getElementById("statA");
+var statB = document.getElementById("statB");
+var statProd = document.getElementById("statProd");
+var statMax = document.getElementById("statMax");
+var statDiff = document.getElementById("statDiff");
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  var S = parseFloat(sliderS.value);
+  var a = parseFloat(sliderA.value);
+  var b = S - a;
+  if (b < 0) { a = S; b = 0; sliderA.value = S; }
+  var prod = a * b;
+  var maxProd = (S/2) * (S/2);
+  var diff = maxProd - prod;
+
+  // 更新文字
+  valS.textContent = S.toFixed(1);
+  valA.textContent = a.toFixed(1);
+  statA.textContent = a.toFixed(1);
+  statB.textContent = b.toFixed(1);
+  statProd.textContent = prod.toFixed(1);
+  statMax.textContent = maxProd.toFixed(1);
+  statDiff.textContent = diff.toFixed(1);
+
+  // 限制 a 的范围
+  sliderA.max = S - 0.1;
+
+  // ---- 左半：矩形可视化 ----
+  var left = 50, top = 30;
+  var rectW = 180, rectH = 260;
+
+  // 缩放比例
+  var maxDim = Math.max(S, 1);
+  var scaleX = rectW / maxDim;
+  var scaleY = rectH / maxDim;
+
+  var rw = a * scaleX;
+  var rh = b * scaleY;
+
+  // 矩形
+  ctx.fillStyle = "rgba(26, 115, 232, 0.15)";
+  ctx.fillRect(left + (rectW - rw), top + (rectH - rh), rw, rh);
+  ctx.strokeStyle = "#1a73e8";
+  ctx.lineWidth = 2;
+  ctx.strokeRect(left + (rectW - rw), top + (rectH - rh), rw, rh);
+
+  // 标签 a, b
+  ctx.fillStyle = "#1a73e8";
+  ctx.font = "bold 14px 'Times New Roman', serif";
+  ctx.textAlign = "center";
+  ctx.fillText("a = " + a.toFixed(1), left + (rectW - rw/2), top + rectH + 20);
+  ctx.save();
+  ctx.translate(left - 24, top + (rectH - rh/2));
+  ctx.rotate(-Math.PI/2);
+  ctx.fillText("b = " + b.toFixed(1), 0, 0);
+  ctx.restore();
+
+  // 面积文字在矩形内部
+  ctx.fillStyle = "#1565c0";
+  ctx.font = "bold 16px 'Times New Roman', serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText("ab = " + prod.toFixed(1), left + rectW/2, top + rectH/2);
+  ctx.textBaseline = "alphabetic";
+
+  // 边框标注
+  ctx.strokeStyle = "#ddd";
+  ctx.lineWidth = 1;
+  ctx.strokeRect(left, top, rectW, rectH);
+
+  // ---- 右半：抛物线 ----
+  var plotLeft = 300, plotTop = 20;
+  var plotW = 180, plotH = 280;
+
+  // 坐标系
+  ctx.strokeStyle = "#ccc";
+  ctx.lineWidth = 1;
+  ctx.strokeRect(plotLeft, plotTop, plotW, plotH);
+
+  // 横轴（a 轴）
+  ctx.strokeStyle = "#999";
+  ctx.lineWidth = 1;
+  var aAxisY = plotTop + plotH - 10;
+  ctx.beginPath();
+  ctx.moveTo(plotLeft, aAxisY);
+  ctx.lineTo(plotLeft + plotW, aAxisY);
+  ctx.stroke();
+  ctx.fillStyle = "#999";
+  ctx.font = "11px sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText("a", plotLeft + plotW - 6, aAxisY - 6);
+  ctx.fillText("0", plotLeft + 10, aAxisY + 14);
+  ctx.fillText("S", plotLeft + plotW - 10, aAxisY + 14);
+
+  // 纵轴（ab 轴）
+  ctx.strokeStyle = "#999";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(plotLeft + 10, plotTop);
+  ctx.lineTo(plotLeft + 10, plotTop + plotH);
+  ctx.stroke();
+  ctx.textAlign = "right";
+  ctx.fillText("ab", plotLeft + 6, plotTop + 12);
+
+  // 绘制抛物线 ab = a*(S-a)
+  ctx.strokeStyle = "#1a73e8";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  var maxAb = maxProd;
+  var vScale = (plotH - 30) / (maxAb * 1.15 || 1);
+  var hScale = plotW / (S || 1);
+  var first = true;
+  for (var x = 0.01; x <= S - 0.01; x += S / 100) {
+    var y = x * (S - x);
+    var px = plotLeft + 10 + x * hScale;
+    var py = aAxisY - y * vScale;
+    if (first) { ctx.moveTo(px, py); first = false; }
+    else { ctx.lineTo(px, py); }
+  }
+  ctx.stroke();
+
+  // 标记最大值点 (S/2, maxProd)
+  var maxPX = plotLeft + 10 + (S/2) * hScale;
+  var maxPY = aAxisY - maxProd * vScale;
+  ctx.fillStyle = "#e65100";
+  ctx.beginPath();
+  ctx.arc(maxPX, maxPY, 5, 0, 2 * Math.PI);
+  ctx.fill();
+  ctx.fillStyle = "#e65100";
+  ctx.font = "bold 11px sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText("最大值", maxPX, maxPY - 10);
+  ctx.fillText("(" + (S/2).toFixed(1) + ", " + maxProd.toFixed(1) + ")", maxPX, maxPY + 18);
+
+  // 标记当前点 (a, ab)
+  var curPX = plotLeft + 10 + a * hScale;
+  var curPY = aAxisY - prod * vScale;
+  ctx.fillStyle = "#c62828";
+  ctx.beginPath();
+  ctx.arc(curPX, curPY, 5, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // 从当前点到横轴的虚线
+  ctx.setLineDash([3, 3]);
+  ctx.strokeStyle = "#c62828";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(curPX, curPY);
+  ctx.lineTo(curPX, aAxisY);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // 当前点坐标标注
+  ctx.fillStyle = "#c62828";
+  ctx.font = "bold 11px sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText("(" + a.toFixed(1) + ", " + prod.toFixed(1) + ")", curPX, curPY - 10);
+}
+
+sliderS.oninput = function() {
+  var S = parseFloat(this.value);
+  var a = parseFloat(sliderA.value);
+  if (a >= S) { sliderA.value = S - 0.1; }
+  draw();
+};
+sliderA.oninput = function() {
+  var S = parseFloat(sliderS.value);
+  var a = parseFloat(this.value);
+  if (a >= S) { this.value = S - 0.1; }
+  draw();
+};
+
+draw();
+
 // ============================================================
 // 习题数据
 // ============================================================
