@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../lib/logo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图像变换规律（平移/伸缩/翻转）</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  .controls { background: #f0f4ff; border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+  .control-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 8px 0; }
+  .control-row label { font-weight: bold; min-width: 80px; font-size: 0.95em; }
+  .btn-group { display: flex; flex-wrap: wrap; gap: 6px; }
+  .btn-func, .btn-trans { padding: 5px 14px; border: 2px solid #ccc; border-radius: 16px; background: #fff; cursor: pointer; font-size: 0.9em; transition: 0.15s; }
+  .btn-func:hover, .btn-trans:hover { border-color: #1a73e8; color: #1a73e8; }
+  .btn-func.active, .btn-trans.active { background: #1a73e8; color: #fff; border-color: #1a73e8; }
+  .slider-row { display: flex; align-items: center; gap: 12px; }
+  .slider-row input[type="range"] { flex: 1; max-width: 200px; }
+  .slider-row .val { min-width: 50px; color: #1a73e8; font-weight: bold; font-family: 'Times New Roman', serif; }
+  .btn-animate { padding: 6px 20px; border: 2px solid #e65100; color: #e65100; border-radius: 18px; background: #fff; cursor: pointer; font-size: 0.95em; transition: 0.15s; font-weight: bold; }
+  .btn-animate:hover { background: #fff3e0; }
+  .btn-animate:disabled { opacity: 0.4; cursor: default; }
+  .btn-animate.running { background: #e65100; color: #fff; }
+  #graph { text-align: center; margin: 12px 0; }
+  #graph svg { border: 1px solid #ddd; border-radius: 10px; background: #fcfcfc; max-width: 100%; }
+  .analysis-box { background: #fff; border: 2px solid #e0e0e0; border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+  .analysis-box h3 { margin: 0 0 10px; color: #2c3e50; font-size: 1.05em; }
+  .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .analysis-card { background: #f8f9fa; border-radius: 8px; padding: 12px 14px; border-left: 4px solid #1a73e8; }
+  .analysis-card.orig { border-left-color: #2196f3; }
+  .analysis-card.trans { border-left-color: #e53935; }
+  .analysis-card h4 { margin: 0 0 6px; font-size: 0.95em; }
+  .analysis-card h4 span { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 0.75em; color: #fff; margin-right: 4px; }
+  .analysis-card .prop { display: flex; justify-content: space-between; padding: 3px 0; font-size: 0.9em; border-bottom: 1px solid #eee; }
+  .analysis-card .prop:last-child { border-bottom: none; }
+  .analysis-card .prop .key { color: #555; }
+  .analysis-card .prop .val { font-weight: bold; color: #333; }
+  .legend { display: flex; justify-content: center; gap: 24px; margin: 8px 0; font-size: 0.9em; }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-line { width: 24px; height: 3px; border-radius: 2px; }
+  .legend-line.orig { background: #2196f3; }
+  .legend-line.trans { background: #e53935; }
+  .legend-line.anim { background: #e65100; border: 1px dashed #e65100; height: 0; }
+  .desc-text { background: #f5f5f5; border-left: 4px solid #1a73e8; padding: 10px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; font-size: 0.95em; line-height: 1.8; }
+  .trans-formula { text-align: center; font-size: 1.2em; padding: 8px; margin: 10px 0; background: #e3f2fd; border-radius: 8px; font-family: 'Times New Roman', serif; }
+  .speed-group { display: flex; align-items: center; gap: 8px; }
+  .speed-group label { font-size: 0.85em; color: #666; min-width: auto; }
+  /* 多选变换的独立参数滑块 */
+  .param-area { display: none; flex-wrap: wrap; gap: 6px 16px; margin: 6px 0 4px 90px; }
+  .param-area.visible { display: flex; }
+  .param-item { display: flex; align-items: center; gap: 6px; }
+  .param-item label { font-size: 0.85em; min-width: 20px; font-weight: bold; color: #555; }
+  .param-item input[type="range"] { width: 160px; }
+  .param-item .val { min-width: 36px; font-size: 0.85em; color: #1a73e8; font-weight: bold; font-family: 'Times New Roman', serif; }
+  .param-item .tag { font-size: 0.75em; color: #e53935; background: #ffebee; padding: 0 6px; border-radius: 8px; }
+  .active-list { font-size: 0.85em; color: #666; margin: 4px 0 0 90px; min-height: 20px; }
+  @media (max-width: 700px) { .analysis-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>图像变换规律（平移 / 伸缩 / 翻转）</h1>
+<p class="tip" style="text-align:center;color:#666;">选择基函数与变换类型，拖动滑块或点击「播放动画」观察图像变化过程。</p>
+
+<!-- ===== 控制面板 ===== -->
+<div class="controls">
+  <div class="control-row">
+    <label>基函数：</label>
+    <div class="btn-group" id="funcBtns">
+      <button class="btn-func active" data-fn="x2">f(x) = x²</button>
+      <button class="btn-func" data-fn="sin">f(x) = sin x</button>
+      <button class="btn-func" data-fn="abs">f(x) = |x|</button>
+      <button class="btn-func" data-fn="exp">f(x) = 2<sup>x</sup></button>
+    </div>
+  </div>
+  <div class="control-row">
+    <label>变换类型<br><span style="font-weight:normal;font-size:0.78em;color:#888;">（多选）</span></label>
+    <div class="btn-group" id="transBtns">
+      <button class="btn-trans" data-tr="hshift">水平平移</button>
+      <button class="btn-trans" data-tr="vshift">垂直平移</button>
+      <button class="btn-trans" data-tr="hscale">水平伸缩</button>
+      <button class="btn-trans" data-tr="vscale">垂直伸缩</button>
+      <button class="btn-trans" data-tr="xflip">关于 x 轴翻转</button>
+      <button class="btn-trans" data-tr="yflip">关于 y 轴翻转</button>
+    </div>
+  </div>
+  <!-- 各变换的独立参数滑块 -->
+  <div class="param-area" id="paramArea_hshift">
+    <div class="param-item"><label>h</label><input type="range" class="p-slider" data-tr="hshift" min="-5" max="5" step="0.1" value="2"><span class="val">2</span><span class="tag">水平平移</span></div>
+  </div>
+  <div class="param-area" id="paramArea_vshift">
+    <div class="param-item"><label>k</label><input type="range" class="p-slider" data-tr="vshift" min="-5" max="5" step="0.1" value="2"><span class="val">2</span><span class="tag">垂直平移</span></div>
+  </div>
+  <div class="param-area" id="paramArea_hscale">
+    <div class="param-item"><label>a</label><input type="range" class="p-slider" data-tr="hscale" min="-3" max="3" step="0.1" value="2"><span class="val">2</span><span class="tag">水平伸缩</span></div>
+  </div>
+  <div class="param-area" id="paramArea_vscale">
+    <div class="param-item"><label>a</label><input type="range" class="p-slider" data-tr="vscale" min="-3" max="3" step="0.1" value="2"><span class="val">2</span><span class="tag">垂直伸缩</span></div>
+  </div>
+  <div class="active-list" id="activeList">当前无变换</div>
+  <div class="control-row" style="justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:6px;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="btn-animate" id="btnPlay">▶ 播放动画</button>
+      <button class="btn-animate" id="btnReset" style="border-color:#888;color:#888;">⟲ 重置</button>
+    </div>
+    <div class="speed-group">
+      <label>速度：</label>
+      <input type="range" id="speedSlider" min="0.5" max="3" step="0.5" value="1" style="width:80px;">
+      <span id="speedVal" style="font-size:0.85em;color:#666;">1×</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 公式展示 ===== -->
+<div class="trans-formula" id="formulaDisplay">y = f(x − h)</div>
+
+<!-- ===== 图例 ===== -->
+<div class="legend">
+  <div class="legend-item"><span class="legend-line orig"></span> 原函数</div>
+  <div class="legend-item"><span class="legend-line trans"></span> 变换后</div>
+  <div class="legend-item"><span class="legend-line anim"></span> 动画过渡</div>
+</div>
+
+<!-- ===== SVG 画布 ===== -->
+<div id="graph"><svg id="svgCanvas" viewBox="0 0 800 520"></svg></div>
+
+<!-- ===== 分析面板 ===== -->
+<div class="analysis-box">
+  <h3>性质对比分析</h3>
+  <div class="analysis-grid">
+    <div class="analysis-card orig">
+      <h4><span style="background:#2196f3;">原函数</span> <span id="origName">y = x²</span></h4>
+      <div id="origProps"></div>
+    </div>
+    <div class="analysis-card trans">
+      <h4><span style="background:#e53935;">变换后</span> <span id="transName">y = (x−h)²</span></h4>
+      <div id="transProps"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 分步讲解 ===== -->
+<div class="desc-text" id="descText">
+  <strong>水平平移</strong>：y = f(x) → y = f(x−h)。当 h > 0 时图像向右平移 h 个单位；h < 0 时向左平移 |h| 个单位。<br>
+  <strong>性质变化</strong>：定义域整体平移 h，值域不变；单调区间平移 h；对称轴平移 h；奇偶性一般被破坏（除非 h=0）。
+</div>
+
+</article>
+
+<script src="../lib/d3.v7.min.js"></script>
+<script>
+var svg = d3.select("#svgCanvas"),
+    margin = {top: 20, right: 20, bottom: 30, left: 40},
+    W = 800, H = 520,
+    plotW = W - margin.left - margin.right,
+    plotH = H - margin.top - margin.bottom,
+    xScale = d3.scaleLinear().domain([-8, 8]).range([0, plotW]),
+    yScale = d3.scaleLinear().domain([-5, 5]).range([plotH, 0]),
+    g = svg.append("g").attr("transform", "translate("+margin.left+","+margin.top+")");
+
+// 当前状态
+var curFunc = "x2",
+    animating = false, animId = null,
+    activeTrans = {},              // 多选记录 {hshift:true, ...}
+    initialActive = {},           // 初始状态（空）
+    initialParams = {};           // 初始参数
+
+// ===== 坐标轴 =====
+function drawGrid() {
+  g.selectAll("g.layer").remove();
+  var lg = g.append("g").attr("class","layer");
+  var xTicks = d3.range(-8, 9, 1), yTicks = d3.range(-5, 6, 1);
+  lg.selectAll(".hgrid").data(yTicks).enter().append("line")
+    .attr("class","hgrid").attr("x1",0).attr("x2",plotW)
+    .attr("y1",function(d){return yScale(d);}).attr("y2",function(d){return yScale(d);})
+    .attr("stroke","#eee").attr("stroke-width",0.5);
+  lg.selectAll(".vgrid").data(xTicks).enter().append("line")
+    .attr("class","vgrid").attr("y1",0).attr("y2",plotH)
+    .attr("x1",function(d){return xScale(d);}).attr("x2",function(d){return xScale(d);})
+    .attr("stroke","#eee").attr("stroke-width",0.5);
+  lg.append("line").attr("x1",0).attr("x2",plotW).attr("y1",yScale(0)).attr("y2",yScale(0))
+    .attr("stroke","#999").attr("stroke-width",1.5);
+  lg.append("line").attr("x1",xScale(0)).attr("x2",xScale(0)).attr("y1",0).attr("y2",plotH)
+    .attr("stroke","#999").attr("stroke-width",1.5);
+  lg.selectAll(".xtick").data(xTicks).enter().append("text")
+    .attr("x",function(d){return xScale(d);}).attr("y",yScale(0)+18)
+    .attr("text-anchor","middle").attr("fill","#888").attr("font-size","11px")
+    .text(function(d){return d===0?"":d;});
+  lg.selectAll(".ytick").data(yTicks).enter().append("text")
+    .attr("x",xScale(0)-10).attr("y",function(d){return yScale(d)+4;})
+    .attr("text-anchor","end").attr("fill","#888").attr("font-size","11px")
+    .text(function(d){return d===0?"":d;});
+  lg.append("text").attr("x",plotW-4).attr("y",yScale(0)-8).attr("text-anchor","end")
+    .attr("fill","#888").attr("font-size","12px").text("x");
+  lg.append("text").attr("x",xScale(0)+10).attr("y",8).attr("fill","#888")
+    .attr("font-size","12px").text("y");
+  lg.append("text").attr("x",xScale(0)-8).attr("y",yScale(0)+18)
+    .attr("fill","#888").attr("font-size","12px").text("O");
+}
+drawGrid();
+
+// ===== 基函数 =====
+var funcs = {
+  x2: { name:"y = x²", fn:function(x){return x*x;}, domain:"R", range:"[0, +∞)", parity:"偶函数", mono:"(−∞,0]递减，[0,+∞)递增" },
+  sin:{ name:"y = sin x", fn:function(x){return Math.sin(x);}, domain:"R", range:"[−1,1]", parity:"奇函数", mono:"周期2π，先增后减" },
+  abs:{ name:"y = |x|", fn:function(x){return Math.abs(x);}, domain:"R", range:"[0, +∞)", parity:"偶函数", mono:"(−∞,0]递减，[0,+∞)递增" },
+  exp:{ name:"y = 2<sup>x</sup>", fn:function(x){return Math.pow(2,x);}, domain:"R", range:"(0, +∞)", parity:"非奇非偶", mono:"R上递增" }
+};
+
+// ===== 复合变换生成 =====
+function composeGen(fnName) {
+  var f = funcs[fnName].fn;
+  return function(x) {
+    // 内层：x → B(x-H)
+    var inner = x;
+    if (activeTrans.hshift) inner -= getP("hshift");
+    var B = 1;
+    if (activeTrans.yflip) B = -1;
+    if (activeTrans.hscale) B *= getP("hscale");
+    inner *= B;
+    // 应用 f
+    var val = f(inner);
+    // 外层：A·val + K
+    var A = 1;
+    if (activeTrans.xflip) A = -1;
+    if (activeTrans.vscale) A *= getP("vscale");
+    val *= A;
+    if (activeTrans.vshift) val += getP("vshift");
+    return val;
+  };
+}
+
+function getP(key) { return parseFloat(document.querySelector(".p-slider[data-tr='"+key+"']").value) || 0; }
+
+// ===== 路径绘制 =====
+function drawCurve(className, genFn, color, dash) {
+  g.selectAll("path."+className).remove();
+  var data = [];
+  for (var x = -8; x <= 8; x += 0.02) {
+    var y = genFn(x);
+    if (isFinite(y) && Math.abs(y) <= 50) data.push({x:x, y:y});
+  }
+  if (data.length < 2) return;
+  var line = d3.line().x(function(d){return xScale(d.x);}).y(function(d){return yScale(d.y);});
+  g.append("path").datum(data).attr("class",className)
+    .attr("d", line).attr("fill","none").attr("stroke",color)
+    .attr("stroke-width", dash?2.5:3).attr("stroke-dasharray", dash?"6,4":"none")
+    .attr("opacity", dash?0.7:1);
+}
+
+// ===== 更新 =====
+function update() {
+  if (animating) return;
+  var baseFn = funcs[curFunc].fn;
+  drawCurve("cbase", baseFn, "#2196f3", false);
+  // 复合变换
+  if (hasActive()) {
+    drawCurve("ccomp", composeGen(curFunc), "#e53935", false);
+  } else {
+    g.selectAll("path.ccomp").remove();
+  }
+  updateFormula();
+  updateActiveList();
+  updateAnalysis();
+}
+
+function hasActive() {
+  for (var k in activeTrans) if (activeTrans[k]) return true;
+  return false;
+}
+
+// ===== 公式与描述 =====
+var transLabels = {
+  hshift:"水平平移", vshift:"垂直平移", hscale:"水平伸缩",
+  vscale:"垂直伸缩", xflip:"关于x轴翻转", yflip:"关于y轴翻转"
+};
+var transDescs = {
+  hshift:"y = f(x−h)。h>0 右移，h<0 左移。定义域平移 h；值域不变；单调区间平移 h；对称性破坏（除非 h=0）。",
+  vshift:"y = f(x)+k。k>0 上移，k<0 下移。定义域不变；值域平移 k；单调区间不变；偶函数仍是偶函数。",
+  hscale:"y = f(ax)，a>0。0<a<1 水平拉伸，a>1 水平压缩。定义域缩放 1/a；值域不变。",
+  vscale:"y = a·f(x)，a>0。0<a<1 垂直压缩，a>1 垂直拉伸。定义域不变；值域缩放 a 倍。",
+  xflip:"y = −f(x)。关于 x 轴对称翻转。定义域不变；值域变相反数；单调性反转；奇偶性不变。",
+  yflip:"y = f(−x)。关于 y 轴对称翻转。定义域不变；值域不变；偶函数仍为偶函数。"
+};
+
+function updateFormula() {
+  var parts = [], p = {};
+  document.querySelectorAll(".p-slider").forEach(function(s){ p[s.dataset.tr] = parseFloat(s.value); });
+  var html = "y = ";
+  if (activeTrans.xflip) html += "−";
+  html += funcs[curFunc].name.replace("y = ","");
+  // 内层
+  var innerStr = "x";
+  if (activeTrans.hshift) innerStr = "(x−"+p.hshift+")";
+  if (activeTrans.hscale || activeTrans.yflip) {
+    var B = (activeTrans.yflip?"−":"") + (activeTrans.hscale ? Math.abs(p.hscale) : "");
+    if (B === "−") B = "−1";
+    innerStr = B+"·"+innerStr;
+  }
+  // 外层
+  if (activeTrans.vscale && p.vscale !== 1) html = (activeTrans.xflip?"−":"") + Math.abs(p.vscale) + "·" + html;
+  if (innerStr !== "x") html = html.replace("x", innerStr);
+  if (activeTrans.vshift) html += "+"+p.vshift;
+  document.getElementById("formulaDisplay").innerHTML = html;
+  // 描述
+  var activeKeys = Object.keys(activeTrans).filter(function(k){return activeTrans[k];});
+  var desc = activeKeys.length ? activeKeys.map(function(k){return transDescs[k];}).join("<br><br>") : "当前无变换，图像即为基函数本身。";
+  document.getElementById("descText").innerHTML = desc;
+}
+
+function updateActiveList() {
+  var active = Object.keys(activeTrans).filter(function(k){return activeTrans[k];});
+  document.getElementById("activeList").textContent = active.length ? "已选变换：" + active.map(function(k){return transLabels[k];}).join(" + ") : "当前无变换";
+}
+
+// ===== 分析面板 =====
+function updateAnalysis() {
+  var bp = funcs[curFunc];
+  document.getElementById("origName").innerHTML = bp.name;
+  var activeKeys = Object.keys(activeTrans).filter(function(k){return activeTrans[k];});
+  document.getElementById("transName").innerHTML = activeKeys.length ? activeKeys.map(function(k){return transLabels[k];}).join(" + ") : "（无变换）";
+  var pHtml = function(p) {
+    return '<div class="prop"><span class="key">定义域</span><span class="val">'+p.domain+'</span></div>'+
+           '<div class="prop"><span class="key">值域</span><span class="val">'+p.range+'</span></div>'+
+           '<div class="prop"><span class="key">奇偶性</span><span class="val">'+p.parity+'</span></div>'+
+           '<div class="prop"><span class="key">单调性</span><span class="val">'+p.mono+'</span></div>';
+  };
+  document.getElementById("origProps").innerHTML = pHtml(bp);
+  // 变换后的分析（简化版）
+  var tp = {domain:bp.domain, range:bp.range, parity:bp.parity, mono:bp.mono};
+  if (activeTrans.hshift) tp.domain = "R（平移）";
+  if (activeTrans.vshift) tp.range = bp.range + "（平移）";
+  if (activeTrans.xflip || activeTrans.vscale) tp.range = bp.range + "（变化）";
+  if (activeTrans.hshift && !activeTrans.yflip) tp.parity = "非奇非偶（对称破坏）";
+  if (activeTrans.yflip && bp.parity.indexOf("奇")>=0) tp.parity = "奇函数（保留）";
+  if (activeTrans.yflip && bp.parity.indexOf("偶")>=0) tp.parity = "偶函数（保留）";
+  if (activeTrans.xflip) tp.mono = "单调性反转";
+  if (activeTrans.hshift) tp.mono = bp.mono + "（平移）";
+  document.getElementById("transProps").innerHTML = pHtml(tp);
+}
+
+// ===== 动画 =====
+function startAnimation() {
+  if (animating) { stopAnimation(); return; }
+  // 先重置
+  resetToIdentity();
+  var btn = document.getElementById("btnPlay");
+  animating = true;
+  btn.textContent = "⏹ 停止";
+  btn.classList.add("running");
+
+  var sliders = [];
+  document.querySelectorAll(".p-slider").forEach(function(s){
+    if (activeTrans[s.dataset.tr]) {
+      sliders.push({el:s, start:parseFloat(s.value), target:-parseFloat(s.value)});
+    }
+  });
+  // 如果没有参数变换但有 flip，模拟一个循环
+  if (!sliders.length && hasActive()) {
+    animating = false;
+    btn.textContent = "▶ 播放动画";
+    btn.classList.remove("running");
+    return;
+  }
+  if (!sliders.length) { animating = false; btn.textContent = "▶ 播放动画"; btn.classList.remove("running"); return; }
+
+  var duration = 2000 / parseFloat(document.getElementById("speedSlider").value);
+  var startTime = null;
+
+  function step(ts) {
+    if (!startTime) startTime = ts;
+    var progress = Math.min((ts - startTime) / duration, 1);
+    var eased = progress < 0.5 ? 2*progress*progress : 1 - Math.pow(-2*progress+2, 2)/2;
+    sliders.forEach(function(s){
+      var v = s.start + (s.target - s.start) * eased;
+      v = Math.round(v*10)/10;
+      // clamp
+      var min = parseFloat(s.el.min), max = parseFloat(s.el.max);
+      v = Math.max(min, Math.min(max, v));
+      s.el.value = v;
+      s.el.nextElementSibling.textContent = v;
+    });
+    // 避免中断动画嵌套
+    var animCopy = animating;
+    animating = false;
+    update();
+    animating = animCopy;
+    if (progress < 1 && animating) {
+      animId = requestAnimationFrame(step);
+    } else {
+      animating = false;
+      btn.textContent = "▶ 播放动画";
+      btn.classList.remove("running");
+      // 自动反向
+      if (animCopy) {
+        setTimeout(function(){ if (!animating) startAnimation(); }, 600);
+      }
+    }
+  }
+  animId = requestAnimationFrame(step);
+}
+
+function stopAnimation() {
+  if (animId) { cancelAnimationFrame(animId); animId = null; }
+  animating = false;
+  document.getElementById("btnPlay").textContent = "▶ 播放动画";
+  document.getElementById("btnPlay").classList.remove("running");
+}
+
+// 重置到恒等状态（参数归零/归1）
+function resetToIdentity() {
+  document.querySelectorAll(".p-slider").forEach(function(s){
+    if (s.dataset.tr === "hshift" || s.dataset.tr === "vshift") { s.value = 0; s.nextElementSibling.textContent = "0"; }
+    else { s.value = 1; s.nextElementSibling.textContent = "1"; }
+  });
+  update();
+}
+
+// 重置到初始状态（页面刚打开时）
+function resetView() {
+  stopAnimation();
+  // 清除所有变换
+  Object.keys(activeTrans).forEach(function(k){ activeTrans[k] = false; });
+  document.querySelectorAll(".btn-trans").forEach(function(b){ b.classList.remove("active"); });
+  document.querySelectorAll(".param-area").forEach(function(p){ p.classList.remove("visible"); });
+  document.getElementById("paramSlider") && (document.getElementById("paramSlider").value = 0);
+  resetToIdentity();
+  // 恢复基函数
+  curFunc = "x2";
+  document.querySelectorAll(".btn-func").forEach(function(b){ b.classList.remove("active"); });
+  document.querySelector(".btn-func[data-fn='x2']").classList.add("active");
+  update();
+}
+
+// ===== 事件绑定 =====
+// 基函数
+document.querySelectorAll(".btn-func").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    if (animating) stopAnimation();
+    // 清除所有变换选择和参数滑块
+    Object.keys(activeTrans).forEach(function(k){ activeTrans[k] = false; });
+    document.querySelectorAll(".btn-trans").forEach(function(b){ b.classList.remove("active"); });
+    document.querySelectorAll(".param-area").forEach(function(p){ p.classList.remove("visible"); });
+    // 参数归零/归1
+    document.querySelectorAll(".p-slider").forEach(function(s){
+      if (s.dataset.tr === "hshift" || s.dataset.tr === "vshift") { s.value = 0; s.nextElementSibling.textContent = "0"; }
+      else { s.value = 1; s.nextElementSibling.textContent = "1"; }
+    });
+    document.querySelectorAll(".btn-func").forEach(function(b){b.classList.remove("active");});
+    this.classList.add("active");
+    curFunc = this.dataset.fn;
+    update();
+  });
+});
+// 变换类型（多选 toggle）
+document.querySelectorAll(".btn-trans").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    if (animating) stopAnimation();
+    var tr = this.dataset.tr;
+    activeTrans[tr] = !activeTrans[tr];
+    this.classList.toggle("active");
+    // 显示/隐藏对应的参数滑块区域
+    var pa = document.getElementById("paramArea_"+tr);
+    if (pa) pa.classList.toggle("visible");
+    update();
+  });
+});
+// 参数滑块
+document.querySelectorAll(".p-slider").forEach(function(slider){
+  slider.addEventListener("input", function(){
+    if (animating) stopAnimation();
+    this.nextElementSibling.textContent = parseFloat(this.value);
+    update();
+  });
+});
+document.getElementById("btnPlay").addEventListener("click", startAnimation);
+document.getElementById("btnReset").addEventListener("click", resetView);
+document.getElementById("speedSlider").addEventListener("input", function(){
+  document.getElementById("speedVal").textContent = this.value + "×";
+});
+
+// ===== 初始 =====
+update();
+</script>
+<script src="../dt.js"></script>
+</body>
+</html>

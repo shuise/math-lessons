@@ -664,10 +664,8 @@
     构造函数 f(x) = x + 1/x - 2，证明 f(x) ≥ 0 恒成立。问题转化为求函数 f(x) 的最小值。
   </p>
   <p><span class="solution-label">解答过程</span></p>
-  <p class="step">令 f(x) = x + 1/x - 2（x > 0），f'(x) = 1 - 1/x²。</p>
-  <p class="step">令 f'(x) = 0，得 x = 1。当 0 < x < 1 时 f'(x) < 0，f(x) 递减；x > 1 时 f'(x) > 0，f(x) 递增。</p>
-  <p class="step">所以 f(x) 在 x = 1 处取最小值 f(1) = 1 + 1 - 2 = 0。</p>
-  <p class="step">故对任意 x > 0，f(x) ≥ 0，即 x + 1/x ≥ 2。证毕。</p>
+  <p class="step">令 f(x) = x + 1/x - 2（x > 0）。由基本不等式，x + 1/x ≥ 2√(x·1/x) = 2，</p>
+  <p class="step">所以 f(x) = x + 1/x - 2 ≥ 0，即 x + 1/x ≥ 2（当且仅当 x=1 时取等号）。证毕。</p>
 </div>
 
 <div class="summary-box">
@@ -681,9 +679,9 @@
 <div class="quiz-question" id="q8">
   <div class="q-title"><span class="q-tag choice">选择题</span> 9. 方程 x² - 3x + 2 = 0 的根对应于函数 y = x² - 3x + 2 的：</div>
   <div class="options">
-    <div class="opt" onclick="selectOpt(8,0)">A. 极值点</div>
+    <div class="opt" onclick="selectOpt(8,0)">A. 顶点</div>
     <div class="opt" onclick="selectOpt(8,1)">B. 零点</div>
-    <div class="opt" onclick="selectOpt(8,2)">C. 拐点</div>
+    <div class="opt" onclick="selectOpt(8,2)">C. 与 y 轴交点</div>
     <div class="opt" onclick="selectOpt(8,3)">D. 对称轴</div>
   </div>
   <button class="btn-toggle-ans" data-q="8" onclick="toggleAnswer(8)">查看答案</button>
@@ -842,7 +840,7 @@ var questions = [
   {
     type: "choice",
     question: "方程 x² - 3x + 2 = 0 的根对应于函数 y = x² - 3x + 2 的：",
-    opts: ["极值点", "零点", "拐点", "对称轴"],
+    opts: ["顶点", "零点", "与 y 轴交点", "对称轴"],
     answer: 1,
     explain: "方程 f(x)=0 的根就是函数 y=f(x) 的零点（即函数图像与 x 轴交点的横坐标）。x²-3x+2=(x-1)(x-2)=0 的根 x=1,2 就是函数 y=x²-3x+2 的零点。"
   },
