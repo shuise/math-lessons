@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../../lib/logo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三角函数测试卷</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+body { font-family: -apple-system,'Helvetica Neue','PingFang SC','Microsoft YaHei',sans-serif; max-width: 900px; margin: 0 auto; padding: 24px; background: #f5f7fa; color: #333; line-height: 1.9; font-size: 16px; }
+article { background: #fff; border-radius: 12px; padding: 36px 40px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); overflow-wrap: break-word; word-wrap: break-word; }
+h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding-bottom: 10px; margin-top: 0; text-align: center; }
+h2 { color: #2c3e50; margin: 32px 0 6px; border-left: 4px solid #1a73e8; padding-left: 12px; }
+h3 { color: #555; margin: 22px 0 8px; }
+.back { display: inline-block; margin-bottom: 16px; color: #1a73e8; text-decoration: none; font-size: 0.95em; }
+.back:hover { text-decoration: underline; }
+.tip { text-align: center; color: #888; margin-bottom: 4px; }
+.section-desc { text-align: center; color: #999; font-size: 0.9em; margin-bottom: 16px; }
+
+/* 题卡 */
+.question-card {
+  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+  padding: 16px 20px; margin: 12px 0; transition: all 0.2s;
+}
+.question-card.correct { border-color: #4caf50; background: #f1f8e9; }
+.question-card.wrong { border-color: #f44336; background: #fce4ec; }
+.question-card .q-title { font-weight: bold; font-size: 0.98em; margin-bottom: 10px; color: #2c3e50; }
+.question-card .q-title .q-tag {
+  display: inline-block; padding: 1px 10px; border-radius: 12px;
+  font-size: 0.72em; margin-right: 6px; color: #fff;
+}
+.q-tag.judge { background: #e65100; }
+.q-tag.choice { background: #1a73e8; }
+.q-tag.calc { background: #9c27b0; }
+.q-tag.proof { background: #00695c; }
+.question-card .options { display: flex; flex-direction: column; gap: 6px; }
+.question-card .opt {
+  padding: 7px 12px; border: 2px solid #ddd; border-radius: 8px;
+  cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none; font-size: 0.93em;
+}
+.question-card .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+.question-card .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+.question-card .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+.question-card .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+.question-card .opt.disabled { pointer-events: none; opacity: 0.75; }
+.question-card .explain { margin-top: 8px; padding: 8px 12px; border-radius: 8px; font-size: 0.9em; display: none; line-height: 1.8; }
+.question-card .explain.show { display: block; }
+.question-card .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+.question-card .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+
+/* 计算题 */
+.fill-area { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.fill-input {
+  width: 220px; padding: 8px 12px; border: 2px solid #ddd; border-radius: 8px;
+  font-size: 0.95em; outline: none; box-sizing: border-box;
+  font-family: 'Times New Roman', serif;
+}
+.fill-input:focus { border-color: #9c27b0; }
+.fill-input.correct-input { border-color: #4caf50; background: #e8f5e9; }
+.fill-input.wrong-input { border-color: #f44336; background: #fce4ec; }
+.btn-check {
+  padding: 6px 18px; background: #9c27b0; color: #fff; border: none;
+  border-radius: 8px; cursor: pointer; font-size: 0.9em; transition: 0.15s;
+}
+.btn-check:hover { background: #7b1fa2; }
+.btn-check:disabled { opacity: 0.5; cursor: default; }
+
+/* 证明题 */
+.proof-area { margin: 6px 0; }
+.proof-textarea {
+  width: 100%; padding: 10px 14px; border: 2px solid #ddd; border-radius: 8px;
+  font-size: 0.93em; outline: none; box-sizing: border-box; line-height: 1.7;
+  font-family: 'Times New Roman', serif; min-height: 72px;
+}
+.proof-textarea:focus { border-color: #00695c; }
+.proof-textarea.correct-input { border-color: #4caf50; background: #e8f5e9; }
+.proof-textarea.wrong-input { border-color: #f44336; background: #fce4ec; }
+.btn-show-answer {
+  margin-left: 10px; padding: 6px 18px; border: 2px solid #00695c; color: #00695c;
+  border-radius: 8px; background: #fff; cursor: pointer; font-size: 0.9em; transition: 0.15s;
+}
+.btn-show-answer:hover { background: #e0f2f1; }
+.step-area {
+  display: none; margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+  background: #f8f9fa; border-left: 4px solid #1a73e8; line-height: 1.8; font-size: 0.92em;
+}
+.step-area.visible { display: block; }
+.step-area .step { margin: 4px 0; padding-left: 12px; border-left: 3px solid #bbb; }
+.step-area .answer { color: #2c3e50; font-weight: bold; margin: 8px 0 0; font-size: 1em; }
+
+/* 得分面板 */
+.score-panel { text-align: center; padding: 16px; margin: 20px 0; background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8; }
+.score-panel .score-num { font-size: 2em; font-weight: bold; color: #1a73e8; }
+.score-panel .btn-reset { margin-left: 16px; padding: 8px 24px; border: 2px solid #1a73e8; color: #1a73e8; border-radius: 20px; background: #fff; cursor: pointer; font-size: 0.95em; transition: 0.15s; }
+.score-panel .btn-reset:hover { background: #1a73e8; color: #fff; }
+
+/* 底部链接 */
+.footer-links {
+  margin-top: 30px; padding: 16px 20px; background: #fff3e0; border-left: 4px solid #e65100;
+  border-radius: 0 10px 10px 0; line-height: 2;
+}
+.footer-links a { color: #e65100; font-weight: bold; text-decoration: none; }
+.footer-links a:hover { text-decoration: underline; }
+
+/* ===== 公式速查气泡 ===== */
+.formula-float-btn {
+  position: fixed; right: 22px; bottom: 22px; z-index: 9999;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: #1a73e8; color: #fff; border: none; cursor: pointer;
+  font-size: 13px; font-weight: bold; box-shadow: 0 4px 16px rgba(26,115,232,0.45);
+  transition: transform 0.2s; line-height: 1.3;
+}
+.formula-float-btn:hover { transform: scale(1.08); }
+.formula-panel {
+  position: fixed; right: 96px; bottom: 112px; z-index: 9998;
+  width: 500px; max-height: calc(100vh - 48px); overflow-y: auto;
+  background: #fff; border-radius: 14px; box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+  border: 1px solid #e0e0e0; display: none; padding: 10px 14px; font-size: 0.83em;
+  line-height: 1.45; box-sizing: border-box;
+}
+.formula-panel.visible { display: block; }
+.formula-panel h4 { margin: 6px 0 2px; color: #1a73e8; border-bottom: 1px solid #e3f2fd; padding-bottom: 2px; font-size: 0.95em; }
+.formula-panel h4:first-child { margin-top: 0; }
+.formula-panel .f { text-align: center; margin: 2px 0; font-family: 'Times New Roman', 'STIX', serif; font-size: 0.95em; }
+.formula-panel table { width: 100%; border-collapse: collapse; margin: 3px 0; font-size: 0.88em; }
+.formula-panel th, .formula-panel td { border: 1px solid #e0e0e0; padding: 1px 4px; text-align: center; }
+.formula-panel th { background: #e3f2fd; color: #1565c0; }
+.formula-panel .close-btn {
+  position: absolute; top: 5px; right: 8px; border: none; background: none;
+  font-size: 1.1em; color: #888; cursor: pointer; line-height: 1;
+}
+.formula-panel .close-btn:hover { color: #333; }
+
+@media (max-width: 640px) { article { padding: 20px 16px; } .formula-panel { right: 14px; left: 14px; width: auto; font-size: 0.8em; } }
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>三角函数测试卷</h1>
+<p class="tip">满分 100 分 · 面向高一新生（初中数学基础较好）</p>
+
+<div class="score-panel">
+  得分：<span class="score-num" id="scoreDisplay">0</span> / 100
+  <button class="btn-reset" onclick="resetExam()">&#8635; 重新答题</button>
+</div>
+
+<h2>第一部分：基础概念考核（40 分）</h2>
+<p class="section-desc">20 判断题 + 20 选择题 · 每题 1 分 · 重点考查三角函数概念与公式的记忆</p>
+<div id="part1"></div>
+
+<h2>第二部分：公式的理解（60 分）</h2>
+
+<h3>一、计算题（15 题 × 2 分 = 30 分）</h3>
+<p class="section-desc">输入最终结果并点「确认」，考查对公式的灵活运用</p>
+<div id="calcArea"></div>
+
+<h3>二、证明题（5 题 × 6 分 = 30 分）</h3>
+<p class="section-desc">写出关键推导步骤后点「提交」，提交后自动展开参考答案供对照</p>
+<div id="proofArea"></div>
+
+<div class="footer-links">
+  <strong>相关课程：</strong><br>
+  <a href="../../sine-addition-proof/index.html">&rarr; sin(α±β) 公式的几何证明</a>（利用旋转与面积直观推导两角和差公式）<br>
+  <a href="../../numerical-graphical/index.html">&rarr; 数形结合：三角函数单位圆与图像</a><br>
+  <a href="../../index.html">&larr; 返回课程列表</a>
+</div>
+
+</article>
+
+<!-- ===== 公式速查气泡 ===== -->
+<button class="formula-float-btn" onclick="toggleFormula()">公式<br>速查</button>
+<div class="formula-panel" id="formulaPanel">
+  <button class="close-btn" onclick="toggleFormula()">&times;</button>
+
+  <h4>特殊角的三角函数值</h4>
+  <table>
+    <tr><th>角度</th><th>0°</th><th>30°</th><th>45°</th><th>60°</th><th>90°</th></tr>
+    <tr><td>弧度</td><td>0</td><td>π/6</td><td>π/4</td><td>π/3</td><td>π/2</td></tr>
+    <tr><td>sin</td><td>0</td><td>1/2</td><td>√2/2</td><td>√3/2</td><td>1</td></tr>
+    <tr><td>cos</td><td>1</td><td>√3/2</td><td>√2/2</td><td>1/2</td><td>0</td></tr>
+    <tr><td>tan</td><td>0</td><td>√3/3</td><td>1</td><td>√3</td><td>—</td></tr>
+  </table>
+
+  <h4>同角三角函数关系</h4>
+  <p class="f">sin²α + cos²α = 1　·　tan α = sin α / cos α（cos α ≠ 0）</p>
+  <p class="f">1 + tan²α = 1 / cos²α</p>
+
+  <h4>诱导公式（奇变偶不变，符号看象限）</h4>
+  <p class="f">sin(−α) = −sin α　cos(−α) = cos α　sin(π−α) = sin α　cos(π−α) = −cos α</p>
+  <p class="f">sin(π+α) = −sin α　cos(π+α) = −cos α　sin(π/2−α) = cos α　cos(π/2−α) = sin α</p>
+
+  <h4>两角和与差</h4>
+  <p class="f">sin(α±β) = sinα·cosβ ± cosα·sinβ　cos(α±β) = cosα·cosβ ∓ sinα·sinβ</p>
+  <p class="f">tan(α±β) = (tanα±tanβ) / (1∓tanα·tanβ)</p>
+
+  <h4>二倍角公式</h4>
+  <p class="f">sin 2α = 2 sinα·cosα　tan 2α = 2 tanα / (1−tan²α)</p>
+  <p class="f">cos 2α = cos²α − sin²α = 2cos²α − 1 = 1 − 2sin²α</p>
+
+  <h4>辅助角公式</h4>
+  <p class="f">a·sin x + b·cos x = √(a²+b²) · sin(x + φ)</p>
+
+  <h4>函数基本性质</h4>
+  <p class="f">y = sin x：奇函数，周期 2π，值域 [−1, 1]　</p>
+  <p class="f">y = cos x：偶函数，周期 2π，值域 [−1, 1]</p>
+  <p class="f">y = tan x：奇函数，周期 π，定义域 x ≠ π/2 + kπ</p>
+</div>
+
+<script>
+// ============================================================
+// 三角函数测试卷
+// 第一部分：20 判断 + 20 选择（每题 1 分，共 40 分）
+// 第二部分：15 计算（每题 2 分）+ 5 证明（每题 6 分，共 60 分）
+// 满分 100 分
+// ============================================================
+
+var judgeQs = [
+  {q:"sin 30° = 1/2。", ans:0, exp:"正确。sin 30° = 1/2 是特殊角三角函数值。"},
+  {q:"cos 60° = √3/2。", ans:1, exp:"错误。cos 60° = 1/2，√3/2 是 sin 60° 的值。"},
+  {q:"tan 45° = 1。", ans:0, exp:"正确。tan 45° = 1。"},
+  {q:"对任意角 α，都有 sin²α + cos²α = 1。", ans:0, exp:"正确。同角三角函数的平方关系恒成立。"},
+  {q:"sin(π/2 − α) = cos α。", ans:0, exp:"正确。这是互余诱导公式。"},
+  {q:"tan 90° 有意义。", ans:1, exp:"错误。cos 90° = 0，tan 90° = sin90°/cos90° 分母为零，无意义。"},
+  {q:"正弦函数 y = sin x 的最小正周期为 2π。", ans:0, exp:"正确。sin(x + 2π) = sin x，且不存在更小的正周期。"},
+  {q:"cos(−α) = −cos α。", ans:1, exp:"错误。余弦函数是偶函数，cos(−α) = cos α。"},
+  {q:"在 (0, π/2) 内，sin α 随 α 的增大而增大。", ans:0, exp:"正确。正弦函数在第一象限单调递增。"},
+  {q:"tan α = sin α / cos α（当 cos α ≠ 0 时）成立。", ans:0, exp:"正确。这是正切函数的定义式（商数关系）。"},
+  {q:"sin(π + α) = sin α。", ans:1, exp:"错误。sin(π + α) = −sin α。"},
+  {q:"第一象限角一定是锐角。", ans:1, exp:"错误。锐角是 0°~90° 的角，而第一象限角可以大于 90° 或为负角（如 390°、−330° 都在第一象限）。"},
+  {q:"若 sin α > 0，则 α 是第一或第二象限角。", ans:0, exp:"正确。sin α = 纵坐标 > 0，终边落在第一或第二象限。"},
+  {q:"终边相同的两个角一定相等。", ans:1, exp:"错误。终边相同的角相差 2π 的整数倍，如 30° 与 390° 终边相同但不相等。"},
+  {q:"180° 等于 π 弧度。", ans:0, exp:"正确。180° = π rad，这是弧度制的基本换算关系。"},
+  {q:"函数 y = cos x 是偶函数。", ans:0, exp:"正确。cos(−x) = cos x，图像关于 y 轴对称。"},
+  {q:"sin 2α = 2 sin α。", ans:1, exp:"错误。二倍角公式为 sin 2α = 2 sin α cos α。"},
+  {q:"函数 y = sin x 的值域为 [−1, 1]。", ans:0, exp:"正确。正弦函数的有界性，最大值为 1，最小值为 −1。"},
+  {q:"函数 y = tan x 的最小正周期为 2π。", ans:1, exp:"错误。tan(x + π) = tan x，最小正周期为 π。"},
+  {q:"正弦、余弦、正切函数都是周期函数。", ans:0, exp:"正确。它们都存在正周期，是周期函数。"}
+];
+
+var choiceQs = [
+  {q:"sin 30° = （　）", opts:["1/2","√3/2","√2/2","1"], ans:0, exp:"sin 30° = 1/2。"},
+  {q:"cos 120° = （　）", opts:["1/2","−1/2","√3/2","−√3/2"], ans:1, exp:"cos 120° = cos(180°−60°) = −cos 60° = −1/2。"},
+  {q:"tan 135° = （　）", opts:["1","−1","√3","−√3"], ans:1, exp:"tan 135° = tan(180°−45°) = −tan 45° = −1。"},
+  {q:"sin² 45° + cos² 45° = （　）", opts:["1/2","√2/2","1","2"], ans:2, exp:"由同角平方关系 sin²45° + cos²45° = 1。"},
+  {q:"函数 y = sin x 的最小正周期是（　）", opts:["π","2π","π/2","4π"], ans:1, exp:"y = sin x 的最小正周期为 2π。"},
+  {q:"函数 y = cos x 的最大值是（　）", opts:["1/2","1","√3/2","2"], ans:1, exp:"cos x ∈ [−1, 1]，最大值为 1。"},
+  {q:"90° 等于（　）弧度", opts:["π/2","π","2π/3","π/3"], ans:0, exp:"180° = π，所以 90° = π/2。"},
+  {q:"sin(π/2 − α) = （　）", opts:["sin α","cos α","−sin α","−cos α"], ans:1, exp:"互余诱导公式：sin(π/2 − α) = cos α。"},
+  {q:"cos(π + α) = （　）", opts:["cos α","−cos α","sin α","−sin α"], ans:1, exp:"cos(π + α) = −cos α。"},
+  {q:"tan 60° = （　）", opts:["√3/3","1","√3","2"], ans:2, exp:"tan 60° = √3。"},
+  {q:"函数 y = 2 sin x 的最大值是（　）", opts:["1","2","1/2","3"], ans:1, exp:"sin x ≤ 1，故 2sin x ≤ 2，最大值为 2。"},
+  {q:"若 sin α = 1/2 且 α 为锐角，则 α = （　）", opts:["60°","30°","45°","90°"], ans:1, exp:"sin 30° = 1/2，且 30° 为锐角。"},
+  {q:"sin(π − α) = （　）", opts:["−sin α","cos α","sin α","−cos α"], ans:2, exp:"诱导公式：sin(π − α) = sin α。"},
+  {q:"y = sin x 图像的一条对称轴是（　）", opts:["x = 0","x = π","x = π/2","x = π/4"], ans:2, exp:"y = sin x 的对称轴为 x = π/2 + kπ，取 k = 0 得 x = π/2。"},
+  {q:"在单位圆中，角 α 的余弦值等于（　）", opts:["终边与单位圆交点的横坐标","终边与单位圆交点的纵坐标","圆的半径","弧长"], ans:0, exp:"cos α = 交点横坐标，sin α = 交点纵坐标。"},
+  {q:"sin 0 = （　）", opts:["1","0","−1","1/2"], ans:1, exp:"sin 0 = 0。"},
+  {q:"cos π = （　）", opts:["1","0","−1","1/2"], ans:2, exp:"cos π = cos 180° = −1。"},
+  {q:"函数 y = tan x 的定义域是（　）", opts:["全体实数 R","x ≠ kπ","x ≠ π/2 + kπ","x ≠ π/4 + kπ"], ans:2, exp:"tan x = sin x / cos x，需 cos x ≠ 0，即 x ≠ π/2 + kπ。"},
+  {q:"函数 y = sin 2x 的最小正周期是（　）", opts:["2π","π","π/2","4π"], ans:1, exp:"T = 2π/|ω| = 2π/2 = π。"},
+  {q:"与 30° 终边相同的角是（　）", opts:["−30°","390°","330°","60°"], ans:1, exp:"390° = 30° + 360°，终边与 30° 相同。"}
+];
+
+var calcQs = [
+  {q:"计算 sin 30° · cos 60° + tan 45° 的值。", answer:"5/4", exp:"sin30°=1/2，cos60°=1/2，tan45°=1，故 1/2×1/2 + 1 = 1/4 + 1 = 5/4。"},
+  {q:"化简 cos² 30° + sin² 30°。", answer:"1", exp:"由同角平方关系 sin²α + cos²α = 1，直接得 1。"},
+  {q:"用二倍角公式计算 sin 15° · cos 15°。", answer:"1/4", exp:"sin2α = 2sinαcosα，故 sin15°cos15° = (1/2)sin30° = (1/2)×(1/2) = 1/4。"},
+  {q:"用两角和公式求 sin 75° 的值。", answer:"(√6+√2)/4", exp:"sin75° = sin(45°+30°) = sin45°cos30° + cos45°sin30° = (√2/2)(√3/2) + (√2/2)(1/2) = (√6+√2)/4。"},
+  {q:"求 cos 105° 的值。", answer:"(√2-√6)/4", exp:"cos105° = cos(60°+45°) = cos60°cos45° − sin60°sin45° = (1/2)(√2/2) − (√3/2)(√2/2) = (√2−√6)/4。"},
+  {q:"求 tan 15° 的值。", answer:"2-√3", exp:"tan15° = tan(45°−30°) = (tan45°−tan30°)/(1+tan45°tan30°) = (1−√3/3)/(1+√3/3) = (3−√3)/(3+√3) = 2−√3。"},
+  {q:"化简 sin(π − α)（α 为锐角）。", answer:"sin α", exp:"诱导公式：sin(π − α) = sin α。"},
+  {q:"计算 cos 240°。", answer:"-1/2", exp:"cos240° = cos(180°+60°) = −cos60° = −1/2。"},
+  {q:"计算 sin 150° + cos 120°。", answer:"0", exp:"sin150° = sin(180°−30°) = sin30° = 1/2；cos120° = −1/2；和为 1/2 + (−1/2) = 0。"},
+  {q:"已知 sin α = 3/5，α ∈ (0, π/2)，求 cos α。", answer:"4/5", exp:"cos²α = 1 − sin²α = 1 − 9/25 = 16/25，α 为锐角取正，cos α = 4/5。"},
+  {q:"已知 sin α = 3/5，α ∈ (0, π/2)，求 sin 2α。", answer:"24/25", exp:"由 sin α = 3/5、cos α = 4/5，sin2α = 2sinαcosα = 2×(3/5)×(4/5) = 24/25。"},
+  {q:"计算 1 + tan² 45°。", answer:"2", exp:"tan45° = 1，故 1 + tan²45° = 1 + 1 = 2（也可用 1 + tan²α = 1/cos²α 验证）。"},
+  {q:"求 sin² 10° + sin² 80° 的值。", answer:"1", exp:"sin80° = cos10°（互余），故原式 = sin²10° + cos²10° = 1。"},
+  {q:"已知 cos α = 1/2，α ∈ (0, π)，求 α（用弧度表示）。", answer:"π/3", exp:"cos α = 1/2，在 (0, π) 内 α = π/3（即 60°）。"},
+  {q:"计算 sin 45° · cos 45°。", answer:"1/2", exp:"sin45°cos45° = (√2/2)(√2/2) = 1/2（或由 sin2α = 2sinαcosα 得原式 = (1/2)sin90° = 1/2）。"}
+];
+
+var proofQs = [
+  {q:"证明同角关系：sin² α + cos² α = 1（提示：利用单位圆或直角三角形）。",
+   answer:"在单位圆中 sinα = y，cosα = x，由 x² + y² = 1 得 sin²α + cos²α = 1。",
+   keywords:["sin²α+cos²α=1"],
+   keywordMode:"or",
+   steps:[
+     "以原点为圆心作单位圆，角 α 的终边与单位圆交于点 P(cosα, sinα)。",
+     "记 P 的坐标为 (x, y)，则 x = cosα，y = sinα。",
+     "由勾股定理，x² + y² = 1。",
+     "代入得 cos²α + sin²α = 1，即 sin²α + cos²α = 1。"
+   ]},
+  {q:"由两角和的余弦公式 cos(α + β) = cosαcosβ − sinαsinβ，证明二倍角公式 cos 2α = cos²α − sin²α，并写出另外两种等价形式。",
+   answer:"令 β = α，得 cos 2α = cos²α − sin²α = 2cos²α − 1 = 1 − 2sin²α。",
+   keywords:["cos(α+α)","cos²α-sin²α"],
+   keywordMode:"and",
+   steps:[
+     "在公式 cos(α + β) = cosαcosβ − sinαsinβ 中，令 β = α。",
+     "得 cos(α + α) = cosαcosα − sinαsinα。",
+     "即 cos 2α = cos²α − sin²α。",
+     "由 sin²α = 1 − cos²α，得 cos 2α = cos²α − (1 − cos²α) = 2cos²α − 1。",
+     "由 cos²α = 1 − sin²α，得 cos 2α = (1 − sin²α) − sin²α = 1 − 2sin²α。",
+     "综上：cos 2α = cos²α − sin²α = 2cos²α − 1 = 1 − 2sin²α。"
+   ]},
+  {q:"利用单位圆的对称性，证明诱导公式 sin(π − α) = sin α。",
+   answer:"点 P(cosα, sinα) 关于 y 轴对称得 P′(−cosα, sinα)，对应角为 π − α，故 sin(π − α) = sinα。",
+   keywords:["sin(π-α)=sinα"],
+   keywordMode:"or",
+   steps:[
+     "设角 α 的终边与单位圆交于 P(cosα, sinα)。",
+     "角 π − α 的终边与单位圆交于点 P′。",
+     "P′ 是 P 关于 y 轴的对称点，坐标为 (−cosα, sinα)。",
+     "因此 P′ 的纵坐标为 sinα，即 sin(π − α) = sin α。"
+   ]},
+  {q:"证明两角和的正切公式：tan(α + β) = (tanα + tanβ) / (1 − tanα·tanβ)（其中 cosα·cosβ ≠ 0）。",
+   answer:"tan(α+β) = sin(α+β)/cos(α+β) = (sinαcosβ+cosαsinβ)/(cosαcosβ−sinαsinβ)，分子分母同除以 cosαcosβ 得结论。",
+   keywords:["tanα+tanβ","1-tanαtanβ"],
+   keywordMode:"and",
+   steps:[
+     "由定义：tan(α + β) = sin(α + β) / cos(α + β)。",
+     "代入两角和公式：sin(α+β) = sinαcosβ + cosαsinβ，cos(α+β) = cosαcosβ − sinαsinβ。",
+     "分子分母同时除以 cosα·cosβ（≠ 0）：",
+     "分子 → sinα/cosα + sinβ/cosβ = tanα + tanβ；",
+     "分母 → 1 − tanα·tanβ。",
+     "故 tan(α + β) = (tanα + tanβ) / (1 − tanα·tanβ)。"
+   ]},
+  {q:"在 △ABC 中，证明 sin(A + B) = sin C。",
+   answer:"由 A + B + C = π 得 A + B = π − C，故 sin(A+B) = sin(π − C) = sin C。",
+   keywords:["sin(A+B)","sinC"],
+   keywordMode:"and",
+   steps:[
+     "三角形内角和：A + B + C = π。",
+     "移项得 A + B = π − C。",
+     "两边取正弦：sin(A + B) = sin(π − C)。",
+     "由诱导公式 sin(π − C) = sin C。",
+     "故 sin(A + B) = sin C。"
+   ]}
+];
+
+// ============================================================
+// 渲染与交互
+// ============================================================
+var answered = [];   // judge/choice: 所选选项; calc/proof: 1 对 0 错
+var S = {judgePts:1, choicePts:1, calcPts:2, proofPts:6};
+
+function render() {
+  var html = "";
+  // 判断题（0-19）
+  for (var i = 0; i < judgeQs.length; i++) {
+    html += renderSingle({type:"judge", num:i+1, q:judgeQs[i]});
+  }
+  // 选择题（20-39）
+  for (var i = 0; i < choiceQs.length; i++) {
+    html += renderSingle({type:"choice", num:20+i+1, q:choiceQs[i]});
+  }
+  document.getElementById("part1").innerHTML = html;
+
+  var calcHtml = "";
+  for (var i = 0; i < calcQs.length; i++) {
+    calcHtml += renderSingle({type:"calc", num:40+i+1, q:calcQs[i]});
+  }
+  document.getElementById("calcArea").innerHTML = calcHtml;
+
+  var proofHtml = "";
+  for (var i = 0; i < proofQs.length; i++) {
+    proofHtml += renderSingle({type:"proof", num:55+i+1, q:proofQs[i]});
+  }
+  document.getElementById("proofArea").innerHTML = proofHtml;
+
+  answered = new Array(20 + 20 + 15 + 5).fill(-1);
+  updateScore();
+}
+
+function renderSingle(it) {
+  var q = it.q, id, tagHtml, tagCls;
+  if (it.type === "judge") { tagHtml = '<span class="q-tag judge">判断</span>'; }
+  else if (it.type === "choice") { tagHtml = '<span class="q-tag choice">选择</span>'; }
+  else if (it.type === "calc") { tagHtml = '<span class="q-tag calc">计算</span>'; }
+  else { tagHtml = '<span class="q-tag proof">证明</span>'; }
+
+  var idx = it.num - 1;
+  var html = '<div class="question-card" id="q' + idx + '">';
+  html += '<div class="q-title">' + tagHtml + ' ' + it.num + '. ' + q.q + '</div>';
+
+  if (it.type === "judge" || it.type === "choice") {
+    var labels = ["A","B","C","D"];
+    html += '<div class="options">';
+    if (it.type === "judge") {
+      html += '<div class="opt" onclick="selectOpt(' + idx + ',0)">√ 正确</div>';
+      html += '<div class="opt" onclick="selectOpt(' + idx + ',1)">× 错误</div>';
+    } else {
+      for (var j = 0; j < q.opts.length; j++) {
+        html += '<div class="opt" onclick="selectOpt(' + idx + ',' + j + ')">' + labels[j] + '. ' + q.opts[j] + '</div>';
+      }
+    }
+    html += '</div>';
+  } else if (it.type === "calc") {
+    html += '<div class="fill-area">';
+    html += '<input class="fill-input" id="input' + idx + '" type="text" placeholder="输入答案..." onkeydown="if(event.key===\'Enter\')checkCalc(' + idx + ')">';
+    html += '<button class="btn-check" id="btn' + idx + '" onclick="checkCalc(' + idx + ')">确认</button>';
+    html += '</div>';
+  } else {
+    html += '<div class="proof-area">';
+    html += '<textarea class="proof-textarea" id="input' + idx + '" rows="4" placeholder="请在此输入关键推导步骤..."></textarea>';
+    html += '<div style="margin-top:8px;">';
+    html += '<button class="btn-check" id="btn' + idx + '" onclick="checkProof(' + idx + ')">提交</button>';
+    html += '<button class="btn-show-answer" onclick="toggleSteps(' + idx + ')">▼ 查看参考答案</button>';
+    html += '</div>';
+    html += '<div class="step-area" id="steps' + idx + '">';
+    for (var k = 0; k < q.steps.length; k++) {
+      html += '<div class="step">' + q.steps[k] + '</div>';
+    }
+    html += '<div class="answer">答案：' + q.answer + '</div>';
+    html += '</div>';
+    html += '</div>';
+  }
+
+  html += '<div class="explain" id="exp' + idx + '"></div>';
+  html += '</div>';
+  return html;
+}
+
+// 判断/选择题：即时反馈
+function selectOpt(qi, oi) {
+  if (answered[qi] !== -1) return;
+  answered[qi] = oi;
+  var q = (qi < 20) ? judgeQs[qi] : choiceQs[qi - 20];
+  var isCorrect = (oi === q.ans);
+  var card = document.getElementById("q" + qi);
+  var opts = card.querySelectorAll(".opt");
+  for (var i = 0; i < opts.length; i++) opts[i].classList.add("disabled");
+  opts[q.ans].classList.add("correct-opt");
+  if (!isCorrect) opts[oi].classList.add("wrong-opt");
+  else opts[oi].classList.add("selected");
+  card.classList.add(isCorrect ? "correct" : "wrong");
+  var exp = document.getElementById("exp" + qi);
+  exp.innerHTML = (isCorrect ? "✓ " : "✗ ") + q.exp;
+  exp.className = "explain show " + (isCorrect ? "ok" : "fail");
+  updateScore();
+}
+
+// 计算题：答案匹配
+function checkCalc(qi) {
+  if (answered[qi] !== -1) return;
+  var input = document.getElementById("input" + qi);
+  var q = calcQs[qi - 40];
+  var norm = function(s){ return s.replace(/\u2212/g,"-").replace(/\s+/g,""); };
+  var user = norm(input.value.trim());
+  var ans = norm(q.answer);
+  var isCorrect = (user !== "" && (user === ans || user.indexOf(ans) !== -1));
+  answered[qi] = isCorrect ? 1 : 0;
+  input.disabled = true;
+  document.getElementById("btn" + qi).disabled = true;
+  input.classList.add(isCorrect ? "correct-input" : "wrong-input");
+  var card = document.getElementById("q" + qi);
+  card.classList.add(isCorrect ? "correct" : "wrong");
+  var exp = document.getElementById("exp" + qi);
+  exp.innerHTML = (isCorrect ? "✓ 正确！" : "✗ 正确答案：" + q.answer + "。") + q.exp;
+  exp.className = "explain show " + (isCorrect ? "ok" : "fail");
+  updateScore();
+}
+
+// 证明题：关键词匹配 + 参考答案
+function checkProof(qi) {
+  if (answered[qi] !== -1) return;
+  var input = document.getElementById("input" + qi);
+  var q = proofQs[qi - 55];
+  var user = input.value.trim();
+  var matchCount = 0;
+  if (q.keywords && q.keywords.length > 0) {
+    for (var k = 0; k < q.keywords.length; k++) {
+      if (user.indexOf(q.keywords[k]) !== -1) matchCount++;
+    }
+  }
+  var isCorrect = (q.keywordMode === "or") ? (matchCount >= 1) : (matchCount >= q.keywords.length);
+  answered[qi] = isCorrect ? 1 : 0;
+  input.disabled = true;
+  document.getElementById("btn" + qi).disabled = true;
+  input.classList.add(isCorrect ? "correct-input" : "wrong-input");
+  var card = document.getElementById("q" + qi);
+  card.classList.add(isCorrect ? "correct" : "wrong");
+  var stepArea = document.getElementById("steps" + qi);
+  if (stepArea) stepArea.classList.add("visible");
+  var exp = document.getElementById("exp" + qi);
+  exp.innerHTML = (isCorrect ? "✓ 推导方向正确！" : "✗ 参考答案见下方，请对照核对自己的推导。");
+  exp.className = "explain show " + (isCorrect ? "ok" : "fail");
+  updateScore();
+}
+
+function toggleSteps(qi) {
+  var stepArea = document.getElementById("steps" + qi);
+  if (stepArea) stepArea.classList.toggle("visible");
+}
+
+// 计分
+function updateScore() {
+  var total = 0;
+  // 判断 0-19（每题1分）
+  for (var i = 0; i < 20; i++) {
+    if (answered[i] === judgeQs[i].ans) total += S.judgePts;
+  }
+  // 选择 20-39（每题1分）
+  for (var i = 0; i < 20; i++) {
+    if (answered[20 + i] === choiceQs[i].ans) total += S.choicePts;
+  }
+  // 计算 40-54（每题2分）
+  for (var i = 0; i < 15; i++) {
+    if (answered[40 + i] === 1) total += S.calcPts;
+  }
+  // 证明 55-59（每题6分）
+  for (var i = 0; i < 5; i++) {
+    if (answered[55 + i] === 1) total += S.proofPts;
+  }
+  document.getElementById("scoreDisplay").textContent = total;
+}
+
+function resetExam() {
+  answered = new Array(60).fill(-1);
+  render();
+}
+
+// 公式速查气泡
+function toggleFormula() {
+  var panel = document.getElementById("formulaPanel");
+  panel.classList.toggle("visible");
+}
+
+window.onload = render;
+</script>
+</body>
+</html>

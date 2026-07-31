@@ -41,6 +41,8 @@
   .legend-line.orig { background: #2196f3; }
   .legend-line.trans { background: #e53935; }
   .legend-line.anim { background: #e65100; border: 1px dashed #e65100; height: 0; }
+  .legend-line.refaxis { background: transparent; height: 0; border-top: 1.5px dashed #9c27b0; }
+  .legend-line.reflect { background: #9c27b0; }
   .desc-text { background: #f5f5f5; border-left: 4px solid #1a73e8; padding: 10px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; font-size: 0.95em; line-height: 1.8; }
   .trans-formula { text-align: center; font-size: 1.2em; padding: 8px; margin: 10px 0; background: #e3f2fd; border-radius: 8px; font-family: 'Times New Roman', serif; }
   .speed-group { display: flex; align-items: center; gap: 8px; }
@@ -72,6 +74,7 @@
       <button class="btn-func" data-fn="sin">f(x) = sin x</button>
       <button class="btn-func" data-fn="abs">f(x) = |x|</button>
       <button class="btn-func" data-fn="exp">f(x) = 2<sup>x</sup></button>
+      <button class="btn-func" data-fn="log">f(x) = log₂ x</button>
     </div>
   </div>
   <div class="control-row">
@@ -83,6 +86,7 @@
       <button class="btn-trans" data-tr="vscale">垂直伸缩</button>
       <button class="btn-trans" data-tr="xflip">关于 x 轴翻转</button>
       <button class="btn-trans" data-tr="yflip">关于 y 轴翻转</button>
+      <button class="btn-trans" data-tr="yxflip">关于 y=x 翻转</button>
     </div>
   </div>
   <!-- 各变换的独立参数滑块 -->
@@ -120,6 +124,8 @@
   <div class="legend-item"><span class="legend-line orig"></span> 原函数</div>
   <div class="legend-item"><span class="legend-line trans"></span> 变换后</div>
   <div class="legend-item"><span class="legend-line anim"></span> 动画过渡</div>
+  <div class="legend-item"><span class="legend-line refaxis"></span> y=x</div>
+  <div class="legend-item"><span class="legend-line reflect"></span> 关于 y=x 对称</div>
 </div>
 
 <!-- ===== SVG 画布 ===== -->
@@ -205,7 +211,8 @@ var funcs = {
   x2: { name:"y = x²", fn:function(x){return x*x;}, domain:"R", range:"[0, +∞)", parity:"偶函数", mono:"(−∞,0]递减，[0,+∞)递增" },
   sin:{ name:"y = sin x", fn:function(x){return Math.sin(x);}, domain:"R", range:"[−1,1]", parity:"奇函数", mono:"周期2π，先增后减" },
   abs:{ name:"y = |x|", fn:function(x){return Math.abs(x);}, domain:"R", range:"[0, +∞)", parity:"偶函数", mono:"(−∞,0]递减，[0,+∞)递增" },
-  exp:{ name:"y = 2<sup>x</sup>", fn:function(x){return Math.pow(2,x);}, domain:"R", range:"(0, +∞)", parity:"非奇非偶", mono:"R上递增" }
+  exp:{ name:"y = 2<sup>x</sup>", fn:function(x){return Math.pow(2,x);}, domain:"R", range:"(0, +∞)", parity:"非奇非偶", mono:"R上递增" },
+  log:{ name:"y = log₂ x", fn:function(x){return x>0?Math.log2(x):NaN;}, domain:"(0, +∞)", range:"R", parity:"非奇非偶", mono:"(0,+∞)递增" }
 };
 
 // ===== 复合变换生成 =====
@@ -249,6 +256,28 @@ function drawCurve(className, genFn, color, dash) {
     .attr("opacity", dash?0.7:1);
 }
 
+// 关于 y=x 对称翻转绘图
+function drawReflected(className, genFn, color, dash) {
+  g.selectAll("path."+className).remove();
+  var data = [];
+  for (var x = -8; x <= 8; x += 0.02) {
+    var y = genFn(x);
+    if (isFinite(y) && Math.abs(y) <= 50) {
+      var rx = y, ry = x;
+      if (Math.abs(rx) <= 8 && Math.abs(ry) <= 5) {
+        data.push({x: rx, y: ry});
+      }
+    }
+  }
+  data.sort(function(a,b){ return a.x - b.x; });
+  if (data.length < 2) return;
+  var line = d3.line().x(function(d){return xScale(d.x);}).y(function(d){return yScale(d.y);});
+  g.append("path").datum(data).attr("class",className)
+    .attr("d", line).attr("fill","none").attr("stroke",color)
+    .attr("stroke-width", dash?2.5:3).attr("stroke-dasharray", dash?"6,4":"none")
+    .attr("opacity", dash?0.7:1);
+}
+
 // ===== 更新 =====
 function update() {
   if (animating) return;
@@ -260,10 +289,31 @@ function update() {
   } else {
     g.selectAll("path.ccomp").remove();
   }
+  // 关于 y=x 对称翻转
+  if (activeTrans.yxflip) {
+    var fn = hasActive() ? composeGen(curFunc) : baseFn;
+    drawReflected("creflect", fn, "#9c27b0", false);
+    // y=x 参考线
+    drawYXLline();
+  } else {
+    g.selectAll("path.creflect").remove();
+    removeYXLline();
+  }
   updateFormula();
   updateActiveList();
   updateAnalysis();
 }
+
+// y=x 参考线绘制/移除
+function drawYXLline() {
+  g.selectAll("line.yxline").remove();
+  g.append("line").attr("class","yxline")
+    .attr("x1", xScale(-5)).attr("x2", xScale(5))
+    .attr("y1", yScale(-5)).attr("y2", yScale(5))
+    .attr("stroke", "#9c27b0").attr("stroke-width", 1.5).attr("stroke-dasharray", "5,5")
+    .attr("opacity", 0.6);
+}
+function removeYXLline() { g.selectAll("line.yxline").remove(); }
 
 function hasActive() {
   for (var k in activeTrans) if (activeTrans[k]) return true;
@@ -273,7 +323,8 @@ function hasActive() {
 // ===== 公式与描述 =====
 var transLabels = {
   hshift:"水平平移", vshift:"垂直平移", hscale:"水平伸缩",
-  vscale:"垂直伸缩", xflip:"关于x轴翻转", yflip:"关于y轴翻转"
+  vscale:"垂直伸缩", xflip:"关于x轴翻转", yflip:"关于y轴翻转",
+  yxflip:"关于y=x翻转"
 };
 var transDescs = {
   hshift:"y = f(x−h)。h>0 右移，h<0 左移。定义域平移 h；值域不变；单调区间平移 h；对称性破坏（除非 h=0）。",
@@ -281,7 +332,8 @@ var transDescs = {
   hscale:"y = f(ax)，a>0。0<a<1 水平拉伸，a>1 水平压缩。定义域缩放 1/a；值域不变。",
   vscale:"y = a·f(x)，a>0。0<a<1 垂直压缩，a>1 垂直拉伸。定义域不变；值域缩放 a 倍。",
   xflip:"y = −f(x)。关于 x 轴对称翻转。定义域不变；值域变相反数；单调性反转；奇偶性不变。",
-  yflip:"y = f(−x)。关于 y 轴对称翻转。定义域不变；值域不变；偶函数仍为偶函数。"
+  yflip:"y = f(−x)。关于 y 轴对称翻转。定义域不变；值域不变；偶函数仍为偶函数。",
+  yxflip:"关于 y=x 对称翻转（即反函数图像）。原图像上每一点 (x,y) 映射为 (y,x)。定义域与值域互换。若原函数单调，则对称后的图像仍然为一个函数图像。"
 };
 
 function updateFormula() {
@@ -302,6 +354,7 @@ function updateFormula() {
   if (activeTrans.vscale && p.vscale !== 1) html = (activeTrans.xflip?"−":"") + Math.abs(p.vscale) + "·" + html;
   if (innerStr !== "x") html = html.replace("x", innerStr);
   if (activeTrans.vshift) html += "+"+p.vshift;
+  if (activeTrans.yxflip) html += '（关于 <span style="color:#9c27b0;font-weight:bold;">y=x</span> 对称）';
   document.getElementById("formulaDisplay").innerHTML = html;
   // 描述
   var activeKeys = Object.keys(activeTrans).filter(function(k){return activeTrans[k];});
@@ -337,6 +390,7 @@ function updateAnalysis() {
   if (activeTrans.yflip && bp.parity.indexOf("偶")>=0) tp.parity = "偶函数（保留）";
   if (activeTrans.xflip) tp.mono = "单调性反转";
   if (activeTrans.hshift) tp.mono = bp.mono + "（平移）";
+  if (activeTrans.yxflip) { tp.domain = bp.range; tp.range = bp.domain; }
   document.getElementById("transProps").innerHTML = pHtml(tp);
 }
 

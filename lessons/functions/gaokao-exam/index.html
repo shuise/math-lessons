@@ -276,16 +276,15 @@ var calcQuestions = [
   // Q2: 指数对数不等式 (Part 5)
   {
     question: "解不等式 2<sup>x² &minus; 3x</sup> < (1/2)<sup>x &minus; 4</sup>。",
-    answer: "(&minus;1, 4)",
-    keywords: ["-1", "4"],
+    answer: "(1 &minus; √5, 1 + √5)",
+    keywords: ["1-√5", "1+√5"],
     steps: [
       "将右边化为同底： (1/2)<sup>x&minus;4</sup> = (2<sup>&minus;1</sup>)<sup>x&minus;4</sup> = 2<sup>&minus;(x&minus;4)</sup> = 2<sup>&minus;x+4</sup>。",
       "原不等式化为：2<sup>x²&minus;3x</sup> < 2<sup>&minus;x+4</sup>。",
       "指数函数 y = 2<sup>t</sup> 单调递增，所以 x² &minus; 3x < &minus;x + 4。",
       "整理得 x² &minus; 2x &minus; 4 < 0。",
       "Δ = 4 + 16 = 20，两根 x = (2 ± √20)/2 = 1 ± √5。",
-      "所以不等式解集为 (1 &minus; √5, 1 + √5)。",
-      "即 (&minus;1, 4) 的近似区间（实际为 (1&minus;√5, 1+√5)）。"
+      "所以不等式解集为 (1 &minus; √5, 1 + √5)，即约 (&minus;1.24, 3.24)。"
     ]
   },
   // Q3: 三角恒等变换 (Part 5)

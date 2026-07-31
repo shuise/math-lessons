@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../../lib/logo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>函数整体测试卷</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+body { font-family: -apple-system,'Helvetica Neue','PingFang SC','Microsoft YaHei',sans-serif; max-width: 900px; margin: 0 auto; padding: 24px; background: #f5f7fa; color: #333; line-height: 1.9; font-size: 16px; }
+article { background: #fff; border-radius: 12px; padding: 36px 40px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); overflow-wrap: break-word; word-wrap: break-word; }
+h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding-bottom: 10px; margin-top: 0; text-align: center; }
+.back { display: inline-block; margin-bottom: 16px; color: #1a73e8; text-decoration: none; font-size: 0.95em; }
+.back:hover { text-decoration: underline; }
+.tip { text-align: center; color: #888; margin-bottom: 4px; }
+/* 考试遮罩 */
+.exam-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999;
+  background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center;
+}
+.exam-overlay.hidden { display: none; }
+.overlay-card {
+  background: #fff; border-radius: 16px; padding: 36px 44px; max-width: 560px;
+  width: 90%; box-shadow: 0 8px 40px rgba(0,0,0,0.2); text-align: center;
+}
+.overlay-card h2 { color: #2c3e50; margin: 0 0 8px; font-size: 1.5em; }
+.overlay-card .rules { text-align: left; margin: 18px 0; padding: 14px 18px; background: #f8f9fa; border-radius: 10px; font-size: 0.93em; line-height: 1.9; }
+.overlay-card .rules li { margin: 4px 0; }
+.overlay-card .start-btn {
+  padding: 12px 48px; background: #1a73e8; color: #fff; border: none; border-radius: 30px;
+  font-size: 1.1em; cursor: pointer; transition: 0.15s; font-weight: bold;
+}
+.overlay-card .start-btn:hover { background: #1557b0; }
+/* 计时条 */
+.timer-bar {
+  text-align: center; padding: 10px 0; border-bottom: 2px solid #e0e0e0;
+  font-size: 1.1em; font-weight: bold; display: none;
+  position: sticky; top: 0; background: #fff; z-index: 100;
+}
+.timer-bar .time { color: #1a73e8; font-family: 'Courier New', monospace; font-size: 1.3em; margin-left: 6px; }
+.timer-bar .time.warning { color: #f44336; animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.5;} }
+.submit-area { text-align: center; margin: 30px 0; display: none; }
+.submit-btn { padding: 14px 48px; background: #e65100; color: #fff; border: none; border-radius: 30px; font-size: 1.2em; cursor: pointer; transition: 0.15s; font-weight: bold; }
+.submit-btn:hover { background: #bf360c; }
+.submit-btn:disabled { opacity: 0.4; cursor: default; }
+.exam-content { display: none; }
+/* 题目样式 */
+.quiz-question {
+  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+  padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+}
+.quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+.quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+.quiz-question .q-title { font-weight: bold; font-size: 1em; margin-bottom: 10px; color: #2c3e50; }
+.quiz-question .q-title .q-tag { display: inline-block; padding: 1px 10px; border-radius: 12px; font-size: 0.72em; margin-right: 6px; color: #fff; }
+.q-tag.judge { background: #e65100; }
+.q-tag.choice { background: #1a73e8; }
+.q-tag.calc { background: #9c27b0; }
+.q-tag.proof { background: #00695c; }
+.q-tag.gaokao { background: #d32f2f; }
+.quiz-question .options { display: flex; flex-direction: column; gap: 6px; }
+.quiz-question .opt {
+  padding: 7px 12px; border: 2px solid #ddd; border-radius: 8px;
+  cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none; font-size: 0.95em;
+}
+.quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+.quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
+.quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+.quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+.quiz-question .opt.disabled { pointer-events: none; opacity: 0.75; }
+.quiz-question .explain { margin-top: 10px; padding: 10px 14px; border-radius: 8px; font-size: 0.9em; display: none; }
+.quiz-question .explain.show { display: block; }
+.quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+.quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+/* 计算/证明输入 */
+.fill-input {
+  width: 240px; padding: 8px 12px; border: 2px solid #ddd; border-radius: 8px;
+  font-size: 0.95em; outline: none; box-sizing: border-box; font-family: 'Times New Roman', serif;
+}
+.fill-input:focus { border-color: #9c27b0; }
+.fill-input.correct-input { border-color: #4caf50; background: #e8f5e9; }
+.fill-input.wrong-input { border-color: #f44336; background: #fce4ec; }
+.proof-textarea {
+  width: 100%; padding: 10px 14px; border: 2px solid #ddd; border-radius: 8px;
+  font-size: 0.93em; outline: none; box-sizing: border-box; line-height: 1.7;
+  font-family: 'Times New Roman', serif; min-height: 80px;
+}
+.proof-textarea:focus { border-color: #00695c; }
+.proof-textarea.correct-input { border-color: #4caf50; background: #e8f5e9; }
+.proof-textarea.wrong-input { border-color: #f44336; background: #fce4ec; }
+.step-area {
+  display: none; margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+  background: #f8f9fa; border-left: 4px solid #1a73e8; line-height: 1.8; font-size: 0.92em;
+}
+.step-area.visible { display: block; }
+.step-area .step { margin: 4px 0; padding-left: 12px; border-left: 3px solid #bbb; }
+/* 进度计数 */
+.progress-info { text-align: center; color: #888; font-size: 0.88em; margin-bottom: 10px; }
+/* 成绩弹层 */
+.result-modal {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9998;
+  background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center;
+}
+.result-modal.visible { display: flex; }
+.result-modal .modal-card {
+  background: #fff; border-radius: 16px; padding: 32px 40px; max-width: 560px;
+  width: 92%; box-shadow: 0 8px 40px rgba(0,0,0,0.2); text-align: center; max-height: 90vh;
+  display: flex; flex-direction: column;
+}
+.result-modal .modal-card h2 { color: #2c3e50; margin: 0 0 4px; font-size: 1.3em; }
+.result-modal .modal-card .big-score { font-size: 2.8em; color: #1a73e8; font-weight: bold; margin: 8px 0; }
+.result-modal .modal-card .big-score.pass { color: #4caf50; }
+.result-modal .modal-card .big-score.fail { color: #f44336; }
+.result-modal .modal-card .score-detail { color: #888; font-size: 0.9em; margin-bottom: 10px; }
+/* 分析报告 */
+.analysis-box {
+  text-align: left; background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 10px;
+  padding: 14px 18px; margin: 10px 0; font-size: 0.9em; line-height: 1.9;
+  overflow-y: auto; flex: 1; max-height: 40vh;
+}
+.analysis-box p { margin: 8px 0; text-indent: 2em; }
+.analysis-box strong { color: #1a73e8; }
+.modal-btn { padding: 10px 32px; border-radius: 30px; font-size: 1em; cursor: pointer; transition: 0.15s; font-weight: bold; border: none; margin: 6px; }
+.modal-btn.primary { background: #1a73e8; color: #fff; }
+.modal-btn.primary:hover { background: #1557b0; }
+.modal-btn.secondary { background: #fff; color: #555; border: 2px solid #ccc; }
+.modal-btn.secondary:hover { background: #f5f5f5; }
+/* 修改模式 */
+.correction-btn { margin-top: 14px; padding: 10px 36px; background: #1a73e8; color: #fff; border: none; border-radius: 30px; font-size: 1.05em; cursor: pointer; transition: 0.15s; font-weight: bold; }
+.correction-btn:hover { background: #1557b0; }
+.correction-mode .quiz-question.correct { display: none; }
+.correction-mode .timer-bar { display: none !important; }
+.correction-mode .submit-area { display: none !important; }
+.correction-mode .quiz-footer { display: none !important; }
+.correction-header {
+  text-align: center; padding: 12px 0; background: #fff3e0; border-radius: 10px;
+  margin-bottom: 16px; font-size: 0.95em; color: #e65100; display: none;
+}
+.correction-header.visible { display: block; }
+.correction-header .back-to-score {
+  padding: 4px 16px; border: 2px solid #e65100; color: #e65100; border-radius: 16px;
+  background: #fff; cursor: pointer; font-size: 0.85em; margin-left: 12px;
+}
+@media (max-width: 640px) { article { padding: 20px 16px; } .overlay-card { padding: 24px 20px; } .fill-input { width: 100%; } }
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>函数整体测试卷</h1>
+<p class="tip">高一新生学完函数后的整体验收 · 满分 150 分 · 时长 60 分钟</p>
+
+<!-- ===== 考试遮罩 ===== -->
+<div class="exam-overlay" id="examOverlay">
+  <div class="overlay-card">
+    <h2>📝 函数整体测试</h2>
+    <div class="rules">
+      <strong>考试规则：</strong>
+      <ul style="margin:6px 0 0;padding-left:20px;">
+        <li>本卷共 <strong>53 题</strong>，满分 <strong>150 分</strong>，限时 <strong>60 分钟</strong>，超时自动交卷</li>
+        <li>题型与分值：判断题 20 题 × 2 分、选择题 20 题 × 2 分、计算题 10 题 × 4 分、证明题 3 题 × 10 分</li>
+        <li>选择题/判断题点击选项作答；计算题在输入框中填写结果；证明题在文本框写出关键步骤</li>
+        <li>提交后系统自动判卷，并生成 <strong>成绩分析报告</strong>（500-800 字），指出薄弱环节与改进建议</li>
+        <li>点击下方按钮开始考试</li>
+      </ul>
+    </div>
+    <button class="start-btn" onclick="startExam()">开始考试</button>
+  </div>
+</div>
+
+<!-- ===== 计时条 ===== -->
+<div class="timer-bar" id="timerBar">
+  剩余时间：<span class="time" id="timerDisplay">60:00</span>
+  <span style="margin-left:12px;font-weight:normal;color:#888;font-size:0.85em;" id="answeredCount">已答：0 / 53</span>
+</div>
+
+<!-- ===== 题目 ===== -->
+<div class="exam-content" id="examContent">
+<div class="correction-header" id="correctionHeader">
+  修改模式 — 仅显示错误/未作答的题目
+  <button class="back-to-score" onclick="backToScore()">返回成绩</button>
+</div>
+<div id="quiz-container"></div>
+
+<div class="submit-area" id="submitArea">
+  <button class="submit-btn" id="submitBtn" onclick="submitExam()">提交试卷</button>
+</div>
+
+</article>
+
+<!-- ===== 成绩弹层（含分析报告） ===== -->
+<div class="result-modal" id="resultModal">
+  <div class="modal-card">
+    <h2>📝 测验结果</h2>
+    <div class="big-score" id="bigScore">0</div>
+    <div class="score-detail" id="scoreDetail">满分 150 分</div>
+    <div class="analysis-box" id="analysisBox"></div>
+    <div>
+      <button class="modal-btn primary" onclick="showCorrection()">✏ 修改错题</button>
+      <button class="modal-btn secondary" onclick="location.reload()">重新考试</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// 函数整体测试卷（满分 150 分）
+// 20 判断 × 2 + 20 选择 × 2 + 10 计算 × 4 + 3 证明 × 10
+// 难度：适中为主，末尾设置高考级难题
+// ============================================================
+
+var judgeQs = [
+  {topic:"定义域值域", q:"函数 f(x) = 1/x 的定义域是 {x | x ≠ 0}。", ans:0, exp:"正确。分母 x ≠ 0，定义域为所有非零实数。"},
+  {topic:"定义域值域", q:"函数 y = √x 的值域为 [0, +∞)。", ans:0, exp:"正确。√x ≥ 0 对 x ≥ 0 恒成立，值域为 [0, +∞)。"},
+  {topic:"奇偶性", q:"偶函数的图像关于原点对称。", ans:1, exp:"错误。偶函数满足 f(−x)=f(x)，图像关于 y 轴对称；关于原点对称的是奇函数。"},
+  {topic:"单调性", q:"函数 f(x) = x² 在整个实数集 R 上单调递减。", ans:1, exp:"错误。x² 在 (−∞,0] 上递减、在 [0,+∞) 上递增，在 R 上整体不单调。"},
+  {topic:"奇偶性", q:"奇函数一定经过原点 (0,0)。", ans:1, exp:"错误。x=0 不一定在定义域内，例如 f(x)=1/x 是奇函数但不经过原点。"},
+  {topic:"二次函数", q:"二次函数 y = ax²+bx+c（a>0）的顶点是最小值点。", ans:0, exp:"正确。a>0 时开口向上，顶点处取得最小值。"},
+  {topic:"指数对数", q:"指数函数 y = 2^x 的值域为 (0, +∞)。", ans:0, exp:"正确。对任意实数 x，2^x > 0 恒成立，且可趋于 0 与 +∞，故值域为 (0,+∞)。"},
+  {topic:"指数对数", q:"对数函数 y = log₂x 在 (0, +∞) 上单调递增。", ans:0, exp:"正确。底数 2 > 1，对数函数在定义域上严格递增。"},
+  {topic:"反函数", q:"函数 y = 2^x 与 y = log₃x 互为反函数。", ans:1, exp:"错误。2^x 的反函数是 y = log₂x（底数必须一致），与 log₃x 不是反函数。"},
+  {topic:"幂函数", q:"幂函数 y = x^α 的图像都经过点 (1, 1)。", ans:0, exp:"正确。对任意实数 α，1^α = 1 恒成立，所有幂函数都过 (1,1)。"},
+  {topic:"三角函数", q:"常数函数 y = 1 是周期函数。", ans:0, exp:"正确。对任意非零常数 T，f(x+T)=1=f(x)，但注意它没有最小正周期。"},
+  {topic:"指数对数", q:"指数函数 y = (½)^x 在 R 上单调递增。", ans:1, exp:"错误。底数 ½ ∈ (0,1)，y = (½)^x 在 R 上单调递减。"},
+  {topic:"三角函数", q:"正弦函数 y = sin x 在 [0, π] 上单调递增。", ans:1, exp:"错误。sin x 在 [0, π/2] 上递增，在 [π/2, π] 上递减。"},
+  {topic:"奇偶性", q:"若奇函数 f(x) 在 x = 0 处有定义，则 f(0) = 0。", ans:0, exp:"正确。由 f(−x)=−f(x)，令 x=0 得 f(0)=−f(0)，即 2f(0)=0，故 f(0)=0。"},
+  {topic:"图像变换", q:"y = 2^x 与 y = (½)^x 的图像关于 y 轴对称。", ans:0, exp:"正确。(½)^x = 2^(−x) = f(−x)，即两图像关于 y 轴对称。"},
+  {topic:"单调性", q:"函数 y = |x−1| 的单调递减区间为 (−∞, 1]。", ans:0, exp:"正确。y = |x−1| 在 (−∞,1] 上递减、在 [1,+∞) 上递增。"},
+  {topic:"函数概念", q:"两个函数的定义域和对应关系相同，则它们是同一个函数。", ans:0, exp:"正确。定义域和对应关系确定值域，故二者相同即为同一函数。"},
+  {topic:"函数概念", q:"分段函数在分段点处只能取一个函数值。", ans:0, exp:"正确。分段函数虽然不同区间用不同表达式，但每个 x 仍只对应唯一的 y。"},
+  {topic:"定义域值域", q:"函数 y = 1/x 的值域为 R。", ans:1, exp:"错误。y = 1/x 的值域是 {y | y ≠ 0}，0 取不到。"},
+  {topic:"反函数", q:"函数 y = log₂x 与 y = 2^x 互为反函数，图像关于 y = x 对称。", ans:0, exp:"正确。指数函数与同底对数函数互为反函数，图像关于直线 y = x 对称。"}
+];
+
+var choiceQs = [
+  {topic:"定义域值域", q:"函数 y = √(x−2) 的定义域是（　）", opts:["x ≥ 2","x > 2","x ≥ 0","x > 0"], ans:0, exp:"偶次根号下非负：x−2 ≥ 0 → x ≥ 2。"},
+  {topic:"定义域值域", q:"函数 y = log₂(x−1) 的定义域是（　）", opts:["x > 1","x ≥ 1","x > 0","x ≥ 0"], ans:0, exp:"真数必须为正：x−1 > 0 → x > 1。"},
+  {topic:"单调性", q:"在 (0, +∞) 上单调递增的函数是（　）", opts:["y = 1/x","y = (½)^x","y = x²","y = log½x"], ans:2, exp:"x² 在 (0,+∞) 上递增；1/x、(½)^x、log½x 均递减。"},
+  {topic:"奇偶性", q:"下列函数中，既是奇函数又在 R 上递增的是（　）", opts:["y = x³","y = sin x","y = 1/x","y = x²"], ans:0, exp:"x³ 是奇函数且在 R 上严格递增；sin x 是奇函数但不单调；1/x 定义域不含 0；x² 是偶函数。"},
+  {topic:"二次函数", q:"函数 f(x) = x² − 2x + 3 的顶点坐标是（　）", opts:["(1, 2)","(−1, 2)","(1, 3)","(2, 3)"], ans:0, exp:"配方：f(x) = (x−1)² + 2，顶点为 (1, 2)。"},
+  {topic:"反函数", q:"函数 y = 2x + 1 的反函数是（　）", opts:["y = (x−1)/2","y = 2x − 1","y = (x+1)/2","y = x/2 + 1"], ans:0, exp:"y = 2x+1 → x = (y−1)/2，交换 x、y 得 y = (x−1)/2。"},
+  {topic:"指数对数", q:"指数函数 y = 3^x 的值域是（　）", opts:["(0, +∞)","R","[0, +∞)","(−∞, +∞)"], ans:0, exp:"指数函数恒大于 0，值域为 (0, +∞)。"},
+  {topic:"指数对数", q:"函数 y = log₃(x+2) 恒过的定点是（　）", opts:["(−1, 0)","(1, 0)","(3, 0)","(0, 1)"], ans:0, exp:"log₃x 过 (1,0)，平移后 x+2=1 → x=−1，故过定点 (−1, 0)。"},
+  {topic:"三角函数", q:"函数 y = 2 sin(3x) 的最小正周期是（　）", opts:["2π/3","2π","π","π/3"], ans:0, exp:"T = 2π/|ω| = 2π/3。"},
+  {topic:"零点方程", q:"二次函数 y = x² − 4x + 3 的零点个数是（　）", opts:["2","1","0","3"], ans:0, exp:"Δ = 16−12 = 4 > 0，方程有两个不同实根 x=1、x=3，零点数为 2。"},
+  {topic:"幂函数", q:"幂函数 y = x^(−1) 在 (0, +∞) 上的单调性是（　）", opts:["递减","递增","先减后增","先增后减"], ans:0, exp:"x^(−1) = 1/x，指数 α = −1 < 0，在 (0,+∞) 上严格递减。"},
+  {topic:"奇偶性", q:"已知奇函数 f(x) 满足 f(2) = 5，则 f(−2) =（　）", opts:["−5","5","0","无法确定"], ans:0, exp:"f(−x) = −f(x)，所以 f(−2) = −f(2) = −5。"},
+  {topic:"二次函数", q:"函数 y = 2 − x² 的最大值是（　）", opts:["2","1","0","4"], ans:0, exp:"x² ≥ 0，故 y = 2 − x² ≤ 2，当 x = 0 时取最大值 2。"},
+  {topic:"图像变换", q:"把 y = sin x 的图像上所有点的纵坐标变为原来的 2 倍，得到的函数是（　）", opts:["y = 2 sin x","y = sin 2x","y = sin x + 2","y = sin(x/2)"], ans:0, exp:"纵坐标伸缩 2 倍：y → 2y，即得 y = 2 sin x。"},
+  {topic:"反函数", q:"函数 f(x) = x² + 1（x ≥ 0）的反函数是（　）", opts:["f⁻¹(x) = √(x−1)，x ≥ 1","f⁻¹(x) = √(x−1)，x ≥ 0","f⁻¹(x) = x² − 1，x ≥ 0","f⁻¹(x) = ±√(x−1)"], ans:0, exp:"y = x²+1 → x = √(y−1)（因 x≥0 取正）。原函数值域 [1,+∞)，故反函数定义域 x ≥ 1。"},
+  {topic:"零点方程", q:"方程 x³ − 8 = 0 的实数解个数为（　）", opts:["1","2","3","0"], ans:0, exp:"x³ = 8 → x = 2。x³ 在 R 上严格递增，每个值有唯一原像，故只有 1 个实数解。"},
+  {topic:"单调性", q:"函数 y = |x+1| 的单调递减区间是（　）", opts:["(−∞, −1]","[−1, +∞)","(−∞, 1]","[1, +∞)"], ans:0, exp:"y = |x+1| 在 (−∞,−1] 上递减、在 [−1,+∞) 上递增。"},
+  {topic:"奇偶性", diff:"gaokao", q:"（高考）定义在 R 上的奇函数 f(x)，当 x > 0 时 f(x) = x² − 2x，则 x < 0 时 f(x) =（　）", opts:["−x² − 2x","x² + 2x","−x² + 2x","x² − 2x"], ans:0, exp:"x<0 时 −x>0，f(x) = −f(−x) = −[(−x)²−2(−x)] = −(x²+2x) = −x²−2x。"},
+  {topic:"综合应用", diff:"gaokao", q:"（高考）函数 f(x) = |x−1| + |x−2| 的最小值是（　）", opts:["0","1","2","3"], ans:1, exp:"由绝对值三角不等式 |x−1|+|x−2| ≥ |(x−1)−(x−2)| = 1，当 1 ≤ x ≤ 2 时取等号，最小值为 1。"},
+  {topic:"奇偶性", diff:"gaokao", q:"（高考）若函数 f(x) = a·2^x + 1 是奇函数，则 a =（　）", opts:["−1","0","1","2"], ans:0, exp:"奇函数且定义域为 R，则 f(0) = 0，即 a·1 + 1 = 0，解得 a = −1。"}
+];
+var calcQs = [
+  {topic:"二次函数", q:"求二次函数 f(x) = x² − 2x + 3 的最小值。", ans:["2"], exp:"配方 f(x) = (x−1)² + 2，当 x = 1 时最小值为 2。"},
+  {topic:"函数概念", q:"已知 f(x) = 3x + 1，求 f(f(1))。", ans:["13"], exp:"f(1) = 4，f(f(1)) = f(4) = 13。"},
+  {topic:"指数对数", q:"计算 log₂8 + log₃9。", ans:["5"], exp:"log₂8 = 3，log₃9 = 2，和为 5。"},
+  {topic:"指数对数", q:"计算 log₅125。", ans:["3"], exp:"5³ = 125，故 log₅125 = 3。"},
+  {topic:"奇偶性", q:"已知 f(x) 为奇函数且 f(3) = 7，求 f(−3)。", ans:["-7"], exp:"f(−3) = −f(3) = −7。"},
+  {topic:"二次函数", q:"求函数 y = −x² + 4x 的最大值。", ans:["4"], exp:"配方 y = −(x−2)² + 4，当 x = 2 时最大值为 4。"},
+  {topic:"三角函数", q:"计算 sin 30° + cos 60° + tan 45°。", ans:["2"], exp:"sin30° = 1/2，cos60° = 1/2，tan45° = 1，和为 2。"},
+  {topic:"定义域值域", q:"求函数 y = √(x−3) 的定义域（用区间表示）。", ans:["[3,+∞)","[3,∞)","3,+∞)","x>=3"], exp:"x − 3 ≥ 0 → x ≥ 3，即 [3, +∞)。"},
+  {topic:"单调性", diff:"gaokao", q:"（高考）若函数 f(x) = x² − ax 在 [1, +∞) 上单调递增，求 a 的取值范围。", ans:["a<=2","(-∞,2]","<=2"], exp:"对称轴 x = a/2，须在区间左侧或落在左端点：a/2 ≤ 1 → a ≤ 2。"},
+  {topic:"综合应用", diff:"gaokao", q:"（高考）求函数 f(x) = 2^x + 2^(−x) 的最小值。", ans:["2"], exp:"由均值不等式 2^x + 2^(−x) ≥ 2√(2^x·2^(−x)) = 2，当 x = 0 时取等号。"}
+];
+
+var proofQs = [
+  {topic:"单调性", q:"用单调性的定义证明：函数 f(x) = 2x + 1 在 R 上单调递增。",
+   answer:"任取 x₁ < x₂，f(x₁) − f(x₂) = 2x₁ + 1 − (2x₂ + 1) = 2(x₁ − x₂) < 0，即 f(x₁) < f(x₂)，故 f(x) 在 R 上单调递增。",
+   keywords:["f(x1)−f(x2)","递增"], keywordMode:"and",
+   steps:["任取 x₁, x₂ ∈ R，且 x₁ < x₂。","作差：f(x₁) − f(x₂) = 2x₁ + 1 − 2x₂ − 1 = 2(x₁ − x₂)。","因为 x₁ < x₂，所以 x₁ − x₂ < 0，故 2(x₁ − x₂) < 0，即 f(x₁) < f(x₂)。","由定义知 f(x) 在 R 上单调递增。"]},
+  {topic:"单调性", q:"用单调性的定义证明：函数 f(x) = 1/x 在 (0, +∞) 上单调递减。",
+   answer:"任取 0 < x₁ < x₂，f(x₁) − f(x₂) = 1/x₁ − 1/x₂ = (x₂ − x₁)/(x₁x₂) > 0，即 f(x₁) > f(x₂)，故 f(x) 在 (0, +∞) 上单调递减。",
+   keywords:["f(x1)−f(x2)","递减"], keywordMode:"and",
+   steps:["任取 x₁, x₂ ∈ (0, +∞)，且 x₁ < x₂。","作差：f(x₁) − f(x₂) = 1/x₁ − 1/x₂ = (x₂ − x₁)/(x₁·x₂)。","因为 x₂ > x₁ > 0，分子 x₂ − x₁ > 0、分母 x₁x₂ > 0，故 f(x₁) − f(x₂) > 0，即 f(x₁) > f(x₂)。","由定义知 f(x) 在 (0, +∞) 上单调递减。"]},
+  {topic:"单调性", diff:"gaokao", q:"（高考）用单调性的定义证明：函数 f(x) = x³ 在 R 上单调递增（提示：对 f(x₁) − f(x₂) 作因式分解）。",
+   answer:"任取 x₁ < x₂，f(x₁) − f(x₂) = x₁³ − x₂³ = (x₁ − x₂)(x₁² + x₁x₂ + x₂²)。其中 x₁² + x₁x₂ + x₂² = (x₁ + x₂/2)² + 3x₂²/4 ≥ 0（等号仅当 x₁ = x₂ = 0，与 x₁ < x₂ 矛盾，故恒正），又 x₁ − x₂ < 0，故 f(x₁) < f(x₂)，f(x) 在 R 上单调递增。",
+   keywords:["f(x1)−f(x2)","(x1−x2)","递增"], keywordMode:"and",
+   steps:["任取 x₁, x₂ ∈ R，且 x₁ < x₂。","作差并因式分解：f(x₁) − f(x₂) = x₁³ − x₂³ = (x₁ − x₂)(x₁² + x₁x₂ + x₂²)。","判断符号：x₁ − x₂ < 0；而 x₁² + x₁x₂ + x₂² = (x₁ + x₂/2)² + (3/4)x₂² > 0（x₁ ≠ x₂ 时恒正）。","故 f(x₁) − f(x₂) < 0，即 f(x₁) < f(x₂)。","由定义知 f(x) 在 R 上单调递增。"]}
+];
+// ============================================================
+// 合并题目并按题型分配分值
+// ============================================================
+var qs = [];
+var PTS = [];
+judgeQs.forEach(function(q){qs.push(q); PTS.push(2);});
+choiceQs.forEach(function(q){qs.push(q); PTS.push(2);});
+calcQs.forEach(function(q){qs.push(q); PTS.push(4);});
+proofQs.forEach(function(q){qs.push(q); PTS.push(10);});
+var TOTAL = 150;
+
+function qtype(i) {
+  if (i < 20) return "judge";
+  if (i < 40) return "choice";
+  if (i < 50) return "calc";
+  return "proof";
+}
+function qtag(i) {
+  var t = qtype(i);
+  var map = {judge:"判断", choice:"选择", calc:"计算", proof:"证明"};
+  var name = map[t];
+  if (qs[i].diff === "gaokao") return '<span class="q-tag gaokao">高考 ' + name + '</span>';
+  return '<span class="q-tag ' + t + '">' + name + '</span>';
+}
+
+// ============================================================
+// 考试流程
+// ============================================================
+var EXAM_SEC = 60 * 60;
+var timeLeft = EXAM_SEC, examStarted = false, examSubmitted = false, timerInterval = null;
+
+function startExam() {
+  document.getElementById("examOverlay").classList.add("hidden");
+  document.getElementById("examContent").style.display = "block";
+  document.getElementById("timerBar").style.display = "block";
+  document.getElementById("submitArea").style.display = "block";
+  examStarted = true; timeLeft = EXAM_SEC; examSubmitted = false;
+  render();
+  updateTimer();
+  timerInterval = setInterval(function(){
+    timeLeft--;
+    updateTimer();
+    if (timeLeft <= 0) { clearInterval(timerInterval); submitExam(); }
+  }, 1000);
+}
+
+function updateTimer() {
+  var m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+  var el = document.getElementById("timerDisplay");
+  el.textContent = m + ":" + (s < 10 ? "0" : "") + s;
+  if (timeLeft <= 300) el.classList.add("warning");
+  else el.classList.remove("warning");
+}
+
+// ============================================================
+// 渲染
+// ============================================================
+function render() {
+  var labels = ["A", "B", "C", "D"];
+  var html = "";
+  for (var i = 0; i < qs.length; i++) {
+    var t = qtype(i), q = qs[i];
+    html += '<div class="quiz-question" id="q' + i + '">';
+    html += '<div class="q-title">' + qtag(i) + ' ' + (i + 1) + '. ' + q.q + '</div>';
+    if (t === "judge" || t === "choice") {
+      html += '<div class="options">';
+      if (t === "judge") {
+        html += '<div class="opt" onclick="selectOpt(' + i + ',0)">√ 正确</div>';
+        html += '<div class="opt" onclick="selectOpt(' + i + ',1)">× 错误</div>';
+      } else {
+        for (var j = 0; j < q.opts.length; j++) {
+          html += '<div class="opt" onclick="selectOpt(' + i + ',' + j + ')">' + labels[j] + '. ' + q.opts[j] + '</div>';
+        }
+      }
+      html += '</div>';
+    } else if (t === "calc") {
+      html += '<div><input class="fill-input" id="input' + i + '" type="text" placeholder="填写最终结果..." oninput="updateAnsweredCount()"></div>';
+    } else {
+      html += '<div><textarea class="proof-textarea" id="input' + i + '" rows="3" placeholder="请写出关键推导步骤..." oninput="updateAnsweredCount()"></textarea></div>';
+      html += '<div class="step-area" id="steps' + i + '">';
+      for (var k = 0; k < q.steps.length; k++) html += '<div class="step">' + q.steps[k] + '</div>';
+      html += '</div>';
+    }
+    html += '<div class="explain" id="exp' + i + '"></div>';
+    html += '</div>';
+  }
+  document.getElementById("quiz-container").innerHTML = html;
+}
+
+function selectOpt(qIdx, chosen) {
+  if (examSubmitted) return;
+  var parent = document.getElementById("q" + qIdx);
+  var opts = parent.getElementsByClassName("opt");
+  for (var i = 0; i < opts.length; i++) opts[i].classList.remove("selected");
+  opts[chosen].classList.add("selected");
+  parent.dataset.chosen = chosen;
+  updateAnsweredCount();
+}
+
+function updateAnsweredCount() {
+  var answered = 0;
+  for (var i = 0; i < qs.length; i++) {
+    var t = qtype(i);
+    if (t === "judge" || t === "choice") {
+      var parent = document.getElementById("q" + i);
+      if (parent && parent.dataset.chosen !== undefined) answered++;
+    } else {
+      var el = document.getElementById("input" + i);
+      if (el && el.value.trim() !== "") answered++;
+    }
+  }
+  document.getElementById("answeredCount").textContent = "已答：" + answered + " / 53";
+}
+
+// ============================================================
+// 答案判定
+// ============================================================
+function normStr(s) {
+  return s
+    .replace(/\u2212/g, "-").replace(/－/g, "-")
+    .replace(/≤/g, "<=").replace(/≥/g, ">=")
+    .replace(/（/g, "(").replace(/）/g, ")")
+    .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g, function(c){return "0123456789"[c.charCodeAt(0) - 0x2070];})
+    .replace(/[₀₁₂₃₄₅₆₇₈₉]/g, function(c){return "0123456789"[c.charCodeAt(0) - 0x2080];})
+    .replace(/[²³⁴⁵⁶⁷⁸⁹]/g, function(c){return "23456789"["²³⁴⁵⁶⁷⁸⁹".indexOf(c)];})
+    .replace(/\s+/g, "");
+}
+
+function calcMatch(user, q) {
+  var u = normStr(user);
+  if (u === "") return false;
+  for (var i = 0; i < q.ans.length; i++) {
+    var a = normStr(q.ans[i]);
+    if (a.length <= 2) { if (u === a) return true; }
+    else if (u.indexOf(a) !== -1) return true;
+  }
+  return false;
+}
+
+function proofScore(q, text) {
+  var u = normStr(text);
+  var matched = 0;
+  for (var k = 0; k < q.keywords.length; k++) {
+    if (u.indexOf(normStr(q.keywords[k])) !== -1) matched++;
+  }
+  if (q.keywordMode === "or") return matched > 0 ? 10 : 0;
+  if (matched >= q.keywords.length) return 10;
+  return Math.round(matched / q.keywords.length * 10);
+}
+
+// ============================================================
+// 交卷判卷
+// ============================================================
+function submitExam() {
+  if (examSubmitted) return;
+  examSubmitted = true;
+  clearInterval(timerInterval);
+  var btn = document.getElementById("submitBtn");
+  btn.disabled = true; btn.textContent = "已交卷";
+
+  var stats = {judge:0, choice:0, calc:0, proof:0, unanswered:0, unansweredPts:0, topicWrong:{}};
+
+  function record(q, earned, pts, noAnswer) {
+    if (noAnswer) { stats.unanswered++; stats.unansweredPts += pts; }
+    var lost = pts - earned;
+    if (lost > 0) stats.topicWrong[q.topic] = (stats.topicWrong[q.topic] || 0) + lost;
+  }
+
+  for (var i = 0; i < qs.length; i++) {
+    var q = qs[i], t = qtype(i);
+    var parent = document.getElementById("q" + i);
+    var exp = document.getElementById("exp" + i);
+    var isCorrect = false, earned = 0;
+
+    if (t === "judge" || t === "choice") {
+      var opts = parent.getElementsByClassName("opt");
+      for (var j = 0; j < opts.length; j++) opts[j].classList.add("disabled");
+      var chosen = parseInt(parent.dataset.chosen);
+      var noAnswer = isNaN(chosen);
+      if (!noAnswer) {
+        isCorrect = (chosen === q.ans);
+        if (isCorrect) { earned = PTS[i]; opts[chosen].classList.add("correct-opt"); parent.classList.add("correct"); }
+        else { opts[chosen].classList.add("wrong-opt"); opts[q.ans].classList.add("correct-opt"); parent.classList.add("wrong"); }
+      } else {
+        opts[q.ans].classList.add("correct-opt"); parent.classList.add("wrong");
+      }
+      exp.className = "explain show " + (isCorrect ? "ok" : "fail");
+      exp.innerHTML = (noAnswer ? "<strong>未作答。正确答案：</strong>" : "<strong>正确答案：</strong>")
+        + (t === "judge" ? (q.ans === 0 ? "正确" : "错误") : q.opts[q.ans])
+        + "<br><strong>解析：</strong>" + q.exp;
+      stats[t] += earned;
+      record(q, earned, PTS[i], noAnswer);
+    } else if (t === "calc") {
+      var input = document.getElementById("input" + i);
+      input.disabled = true;
+      var val = input.value.trim();
+      var noAnswer = (val === "");
+      if (!noAnswer) {
+        isCorrect = calcMatch(val, q);
+        if (isCorrect) { earned = PTS[i]; input.classList.add("correct-input"); parent.classList.add("correct"); }
+        else { input.classList.add("wrong-input"); parent.classList.add("wrong"); }
+      } else { parent.classList.add("wrong"); }
+      exp.className = "explain show " + (isCorrect ? "ok" : "fail");
+      exp.innerHTML = (noAnswer ? "<strong>未作答。</strong>" : (isCorrect ? "✓ 回答正确。" : "<strong>正确答案：</strong>" + q.ans[0] + "<br>"))
+        + "<strong>解析：</strong>" + q.exp;
+      stats.calc += earned;
+      record(q, earned, PTS[i], noAnswer);
+    } else {
+      var ta = document.getElementById("input" + i);
+      ta.disabled = true;
+      var text = ta.value.trim();
+      var stepArea = document.getElementById("steps" + i);
+      if (stepArea) stepArea.classList.add("visible");
+      var noAnswer = (text === "");
+      if (!noAnswer) {
+        earned = proofScore(q, text);
+        isCorrect = (earned >= 10);
+        if (isCorrect) { ta.classList.add("correct-input"); parent.classList.add("correct"); }
+        else { ta.classList.add("wrong-input"); parent.classList.add("wrong"); }
+      } else { parent.classList.add("wrong"); }
+      exp.className = "explain show " + (isCorrect ? "ok" : "fail");
+      exp.innerHTML = (noAnswer ? "<strong>未作答。</strong>" : (isCorrect ? "✓ 推导方向正确。" : "参考答案见下方，请对照核对。"))
+        + "<br><strong>关键步骤：</strong>" + q.answer;
+      stats.proof += earned;
+      record(q, earned, PTS[i], noAnswer);
+    }
+  }
+
+  var total = stats.judge + stats.choice + stats.calc + stats.proof;
+  document.getElementById("bigScore").textContent = total + " / 150";
+  document.getElementById("bigScore").className = "big-score" + (total >= 90 ? " pass" : " fail");
+  document.getElementById("scoreDetail").textContent =
+    "判断 " + stats.judge + "/40 · 选择 " + stats.choice + "/40 · 计算 " + stats.calc + "/40 · 证明 " + stats.proof + "/30";
+  var paras = buildReport(stats);
+  document.getElementById("analysisBox").innerHTML = "<p>" + paras.join("</p><p>") + "</p>";
+  document.getElementById("resultModal").classList.add("visible");
+}
+
+// ============================================================
+// 成绩分析报告（500-800 字）
+// ============================================================
+var TOPIC_ADVICE = {
+  "定义域值域": "定义域要记住三类限制：分母不为零、偶次根号下非负、对数真数大于零；求值域要熟悉配方、分离常数、利用单调性等方法，两者都是后续所有函数问题的前提。",
+  "单调性": "单调性是函数的核心主线，务必熟练掌握定义法证明的完整流程（任取、作差、变形、定号、下结论），并注意单调区间须用规范的开闭区间写法。",
+  "奇偶性": "判断奇偶性必须先检查定义域是否关于原点对称，再比较 f(−x) 与 f(x) 的关系；熟记常见函数（幂、三角、绝对值、常数）的奇偶性结论。",
+  "二次函数": "二次函数要熟练运用配方法求顶点与最值，结合图像直观分析对称轴、单调区间与零点，重点练习“区间定对称轴动、对称轴定区间动”两类最值问题。",
+  "指数对数": "指数与对数要熟记运算法则、换底公式和恒等式，特别注意底数对单调性的影响（a>1 递增、0<a<1 递减），并会进行指数式与对数式的互化。",
+  "反函数": "反函数要抓住三点：原函数与反函数的定义域、值域互换；图像关于直线 y=x 对称；互为反函数的两个函数底数必须相同。",
+  "幂函数": "幂函数要掌握图像恒过点 (1,1)，以及指数 α 的正负、大小对图像形状和单调区间的影响，注意与二次函数、反比例函数的联系。",
+  "三角函数": "三角函数要记忆特殊角的函数值、周期公式 T=2π/|ω|、单调区间与奇偶性，并理解伸缩、平移等图像变换与解析式变化的对应关系。",
+  "零点方程": "零点与方程根问题常用判别式与数形结合（图像交点个数）处理，注意重根、端点取等与区间内根个数的判断，作图要准确。",
+  "图像变换": "图像变换要分清纵横方向：f(x)→af(x) 为纵伸缩、f(x)→f(ax) 为横伸缩、f(x)→f(x+h) 为左右平移，方向容易弄反，需要多画图验证。",
+  "函数概念": "函数概念题要抓住“变量之间唯一对应”的本质，理解三要素（定义域、对应关系、值域），并会求分段函数与复合函数的值。",
+  "综合应用": "高考级综合题往往同时考查多个知识点，建议养成“先画图、再列式、最后验证”的习惯，善用数形结合、赋值法与绝对值不等式等工具。"
+};
+
+function buildReport(stats) {
+  var total = stats.judge + stats.choice + stats.calc + stats.proof;
+  var pct = Math.round(total / TOTAL * 100);
+  var paras = [];
+
+  // 1 总评
+  var level;
+  if (total >= 120) level = "整体掌握扎实，已达到优秀水平，说明函数知识体系构建良好，请继续保持，并尝试更高难度的综合题。";
+  else if (total >= 105) level = "整体水平良好，主干知识基本掌握，但部分细节、技巧与综合运用还需要打磨。";
+  else if (total >= 90) level = "总分达到及格线（90 分），基础概念基本过关，但在综合运用与难题处理上仍需加强。";
+  else level = "总分尚未达到及格线（90 分），说明函数部分的基础概念和方法存在明显漏洞，建议回归课本逐章复习，并配合基础题反复巩固。";
+  paras.push("【总评】本次测验满分 150 分，你获得 " + total + " 分，得分率约 " + pct + "%。" + level);
+
+  // 2 题型得分
+  var concept = stats.judge + stats.choice;
+  var conceptPct = Math.round(concept / 80 * 100);
+  var calcPct = Math.round(stats.calc / 40 * 100);
+  var proofPct = Math.round(stats.proof / 30 * 100);
+  var weakest = "概念题", weakestPct = conceptPct;
+  if (calcPct < weakestPct) { weakest = "计算题"; weakestPct = calcPct; }
+  if (proofPct < weakestPct) { weakest = "证明题"; weakestPct = proofPct; }
+  paras.push("【题型得分】概念题（20 判断 + 20 选择）满分 80 分，你得 " + concept + " 分（得分率 " + conceptPct + "%）；计算题满分 40 分，你得 " + stats.calc + " 分（得分率 " + calcPct + "%）；证明题满分 30 分，你得 " + stats.proof + " 分（得分率 " + proofPct + "%）。其中得分率最低的是「" + weakest + "」，这是你最需要优先补强的环节。");
+
+  // 3 薄弱知识点
+  var topics = Object.keys(stats.topicWrong).sort(function(a, b){return stats.topicWrong[b] - stats.topicWrong[a];});
+  if (topics.length > 0) {
+    var top3 = topics.slice(0, 3);
+    paras.push("【薄弱知识点】根据错题统计，失分主要集中在" + top3.map(function(t){return "「" + t + "」";}).join("、") + "等知识点上。这些点往往是函数学习中承上启下的关键，建议对照课本例题逐一复盘，弄清出错原因究竟是概念不清、方法不当还是计算失误。");
+  } else {
+    paras.push("【薄弱知识点】本次测验基础题目全部正确，说明概念掌握得很扎实，可以继续向更深更难的综合题发起挑战。");
+  }
+
+  // 4 改进建议
+  var adviceList = [];
+  if (topics.length > 0) {
+    topics.slice(0, 3).forEach(function(t){ adviceList.push(TOPIC_ADVICE[t] || TOPIC_ADVICE["综合应用"]); });
+  }
+  if (adviceList.length >= 2) {
+    paras.push("【改进建议】针对你的薄弱环节给出建议：① " + adviceList[0] + " ② " + adviceList[1] + " ③ 建议将本次错题整理进错题本，标注错误原因（概念不清/方法不当/计算失误），一周后重做同类题加以巩固。");
+  } else if (adviceList.length === 1) {
+    paras.push("【改进建议】针对你的薄弱环节给出建议：① " + adviceList[0] + " ② 建议将本次错题整理进错题本，标注错误原因（概念不清/方法不当/计算失误），一周后重做同类题加以巩固。");
+  } else {
+    paras.push("【改进建议】继续保持目前的复习节奏，可增加每日一题的综合训练，进一步锻炼分析问题与规范书写的能力。");
+  }
+
+  // 5 考场表现
+  if (stats.unanswered > 0) {
+    paras.push("【考场表现】本次共有 " + stats.unanswered + " 题未作答，直接损失约 " + stats.unansweredPts + " 分。考试时应先快速通览全卷，优先完成有把握的题目，把该拿的分数稳稳拿到手，再回头攻克难题。");
+  } else {
+    paras.push("【考场表现】你在规定时间内完成了全部题目的作答，时间安排合理，值得肯定；若仍有富余时间，建议对计算题与证明题进行复查，减少低级失误。");
+  }
+
+  // 6 小结
+  paras.push("【小结】函数的本质是变量之间的对应关系，只要抓住定义域、单调性、奇偶性这几条主线，后续的指数、对数、三角函数都能融会贯通。学习没有捷径但有方法——重视错题复盘，坚持每章小结，把每一道错题都变成进步的阶梯，你的函数功底一定会越来越扎实，也为后续学习几何、数列等内容打下坚实的基础。加油！");
+
+  return paras;
+}
+
+// ============================================================
+// 修改模式
+// ============================================================
+function showCorrection() {
+  document.getElementById("resultModal").classList.remove("visible");
+  document.getElementById("examContent").classList.add("correction-mode");
+  document.getElementById("correctionHeader").classList.add("visible");
+  var firstWrong = document.querySelector(".quiz-question.wrong");
+  if (firstWrong) firstWrong.scrollIntoView({behavior: "smooth", block: "center"});
+}
+
+function backToScore() {
+  document.getElementById("examContent").classList.remove("correction-mode");
+  document.getElementById("correctionHeader").classList.remove("visible");
+  document.getElementById("resultModal").classList.add("visible");
+}
+
+</script>
+</body>
+</html>

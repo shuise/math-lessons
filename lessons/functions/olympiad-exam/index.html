@@ -144,7 +144,7 @@ var calcQuestions = [
   {
     diff: "奥数",
     question: '设 a > 0 且 a ≠ 1。若关于 x 的方程 |a<sup>x</sup> &minus; 1| = 2a 有两个不同的实根，求 a 的取值范围。',
-    answer: "0 < a < 1/2",
+    answer: "0 &lt; a &lt; 1/2",
     steps: [
       "令 t = a<sup>x</sup> > 0，则方程变为 |t &minus; 1| = 2a。",
       "由 |t &minus; 1| = 2a 得 t = 1 + 2a 或 t = 1 &minus; 2a。",
@@ -169,14 +169,14 @@ var calcQuestions = [
     question: '定义在 R 上的函数 f(x) 满足：<br>① f(x + 2) = &minus;f(x)；<br>② f(x) 的图像关于直线 x = 1 对称；<br>③ 当 x ∈ (0, 1] 时，f(x) = x(1 &minus; x)。<br><br>求 f(2025) + f(2026) 的值。',
     answer: "0",
     steps: [
-      "由①：f(x+4) = &minus;f(x+2) = &minus;(&minus;f(x)) = f(x)，所以周期 T = 4。",
+      "由①：f(x+4) = &minus;f(x+2) = &minus;(&minus;f(x)) = f(x)，所以 4 是 f(x) 的一个周期。",
       "",
       "由②：f(1 + x) = f(1 &minus; x) 对所有 x 成立。",
       "令 x = 1：f(2) = f(0)。",
       "又由①：f(2) = &minus;f(0)。",
       "所以 f(0) = &minus;f(0) ⇒ f(0) = 0，进而 f(2) = 0。",
       "",
-      "由周期 T = 4：",
+      "利用周期 4：",
       "2025 = 4 × 506 + 1 ⇒ f(2025) = f(1)；",
       "2026 = 4 × 506 + 2 ⇒ f(2026) = f(2) = 0。",
       "",
@@ -191,30 +191,10 @@ var calcQuestions = [
     question: '证明：sin 10° · sin 50° · sin 70° = 1/8。',
     answer: "1/8",
     steps: [
-      "证法一：利用积化和差与诱导公式。",
-      "原式 = sin 10° · sin 50° · sin 70°",
-      "= sin 10° · sin 50° · sin(90°&minus;20°)",
-      "= sin 10° · sin 50° · cos 20°",
-      "",
-      "利用 sin 50° = sin(30°+20°) = sin30°cos20° + cos30°sin20°",
-      "= (1/2)cos20° + (√3/2)sin20°",
-      "",
-      "代入：原式 = sin 10° · [(1/2)cos20° + (√3/2)sin20°] · cos20°",
-      "= (1/2)sin10°cos²20° + (√3/2)sin10°sin20°cos20°",
-      "",
-      "证法二（更简洁）：利用 sin 20° 与结论关联。",
-      "sin 20° · sin 40° · sin 80° = ？这有对称模式。",
-      "",
-      "令 S = sin 10° · sin 50° · sin 70°",
-      "两边乘以 2cos 10°：",
-      "2S·cos 10° = 2sin10°cos10°·sin50°·sin70° = sin20°·sin50°·sin70°",
-      "sin70° = sin(180°&minus;110°) = sin110° = sin(90°+20°) = cos20°",
-      "",
-      "再乘 2cos 20°：",
-      "4S·cos10°cos20° = sin20°·sin50°·2sin70°cos20°...",
-      "",
-      "标准解法：",
+      "利用诱导公式先化为余弦：",
       "sin10°·sin50°·sin70° = sin10°·cos40°·cos20°（利用 sin50°=cos40°, sin70°=cos20°）",
+      "",
+      "由于 cos10° ≠ 0，可乘以 cos10°/cos10°：",
       "= sin10°·cos20°·cos40°",
       "= (sin10°·cos10°·cos20°·cos40°)/cos10°",
       "= (sin20°·cos20°·cos40°)/(2cos10°)",
@@ -241,84 +221,43 @@ var calcQuestions = [
       "点评：核心思路是「作差 → 配平方 → 判定符号」，这是不等式证明最基础也最常用的方法之一。"
     ]
   },
-  // Q6: 二次函数与最值 (Part 5 + Part 7)
+  // Q6: 二次函数综合 (Part 5 + Part 7)
   {
     diff: "奥数",
-    question: '二次函数 f(x) 满足 f(0) = 2，且对任意实数 x 有 f(x) ≤ x² + 4x + 2 和 f(x) ≥ &minus;x² + 2x + 2 同时成立。<br>求 f(x) 的解析式。',
-    answer: "f(x) = x² + x + 2",
+    question: '已知二次函数 f(x) = ax² + bx + c（a > 0）满足：<br>① f(x) 的最小值为 &minus;4；<br>② f(2) &minus; f(1) = 5；<br>③ 不等式 f(x) < 0 的解集长度为 4。<br>求 f(x) 的解析式。',
+    answer: "f(x) = x² + 2x &minus; 3",
     steps: [
-      "设 f(x) = ax² + bx + c。由 f(0) = 2 得 c = 2。",
+      "由 a > 0 且 f(x) 存在最小值，最小值在顶点处取得：",
+      "(4ac &minus; b²)/(4a) = &minus;4 ⇒ b² &minus; 4ac = 16a。 ①",
       "",
-      "两个边界函数为：",
-      "上界 u(x) = x² + 4x + 2，下界 l(x) = &minus;x² + 2x + 2。",
+      "由 f(2) &minus; f(1) = 5：",
+      "(4a + 2b + c) &minus; (a + b + c) = 3a + b = 5 ⇒ b = 5 &minus; 3a。 ②",
       "",
-      "求 u(x) 与 l(x) 的交点：",
-      "x² + 4x + 2 = &minus;x² + 2x + 2 ⇒ 2x² + 2x = 0 ⇒ x = 0 或 x = &minus;1。",
-      "代入得交点 (0, 2) 和 (&minus;1, &minus;1)。",
+      "设 f(x) = 0 的两根为 x₁、x₂（x₁ < x₂），因 a > 0，f(x) < 0 的解集为 (x₁, x₂)，其长度为 x₂ &minus; x₁ = 4。",
+      "由求根公式：x₂ &minus; x₁ = √(b² &minus; 4ac) / a = 4。",
+      "即 √(b² &minus; 4ac) = 4a。 ③",
       "",
-      "由于 f(x) 被夹在 u(x) 和 l(x) 之间（对任意 x 成立），",
-      "而 f(0) = 2 已在交点上，因此 f(x) 也必须经过另一交点 (&minus;1, &minus;1)，",
-      "否则在 x = &minus;1 附近 f(x) 将越出边界。",
+      "由①、③得：√(16a) = 4a ⇒ 4√a = 4a ⇒ √a = a。",
+      "因为 a > 0，解得 a = 1。",
       "",
-      "由 f(&minus;1) = &minus;1 得：a &minus; b + 2 = &minus;1 ⇒ a &minus; b = &minus;3。  ①",
+      "代入②：b = 5 &minus; 3 &times; 1 = 2。",
+      "代入①：2² &minus; 4 &times; 1 &times; c = 16 &times; 1 ⇒ 4 &minus; 4c = 16 ⇒ c = &minus;3。",
       "",
-      "另一方面，由 f(x) ≤ u(x) 恒成立：",
-      "ax² + bx + 2 ≤ x² + 4x + 2 ⇒ (a&minus;1)x² + (b&minus;4)x ≤ 0 对任意 x 成立。",
-      "若 a &minus; 1 < 0，则二次函数开口向下，需判别式 Δ = (b&minus;4)² ≤ 0 ⇒ b = 4；",
-      "若 a &minus; 1 = 0，则需 b &minus; 4 = 0 ⇒ a = 1, b = 4。",
-      "所以 b = 4，且 a ≤ 1。",
+      "所以 f(x) = x² + 2x &minus; 3 = (x + 3)(x &minus; 1)。",
       "",
-      "代入 ①：a &minus; 4 = &minus;3 ⇒ a = 1。",
-      "因此 f(x) = x² + 4x + 2。",
+      "验证：",
+      "① 顶点 x = &minus;1，最小值 f(&minus;1) = 1 &minus; 2 &minus; 3 = &minus;4 ✓；",
+      "② f(2) &minus; f(1) = (4 + 4 &minus; 3) &minus; (1 + 2 &minus; 3) = 5 &minus; 0 = 5 ✓；",
+      "③ f(x) < 0 ⇔ (x + 3)(x &minus; 1) < 0 ⇔ &minus;3 < x < 1，解集长度为 1 &minus; (&minus;3) = 4 ✓。",
       "",
-      "但验证下界：x² + 4x + 2 ≥ &minus;x² + 2x + 2 ⇒ 2x² + 2x ≥ 0 ⇒ 2x(x+1) ≥ 0，",
-      "这在 x ∈ (&minus;1, 0) 时不成立。",
-      "",
-      "说明仅靠代数推导会得到 f(x) = x² + 4x + 2，它不满足下界条件。",
-      "因此需要结合「夹逼」思想重新分析：",
-      "",
-      "设 f(x) 是夹在 u(x) 与 l(x) 之间的二次函数，",
-      "由于 u 与 l 仅在 x = 0 和 x = &minus;1 处相等，",
-      "f 在这两点的函数值唯一确定：f(0)=2, f(&minus;1)=&minus;1。",
-      "",
-      "由 f(0)=2 得 c=2；由 f(&minus;1)=&minus;1 得 a&minus;b = &minus;3。",
-      "",
-      "观察 l(x) 的顶点在 x = 1，u(x) 的顶点在 x = &minus;2，",
-      "两者关于直线 x = &minus;1/2 对称。夹在中间的 f(x) 的对称轴也应为 x = &minus;1/2，",
-      "即 &minus;b/(2a) = &minus;1/2 ⇒ b = a。  ②",
-      "",
-      "联立 ①②：a &minus; a = &minus;3？ 此路不通。",
-      "",
-      "换一种思路：由 f 被 u 和 l 夹逼，且 u &minus; l = 2x² + 2x = 2x(x+1)。",
-      "差值在 x = &minus;1/2 处取最小值 &minus;1/2（即 u 和 l 在 x = &minus;1/2 处相距最近）。",
-      "f 应取 u 和 l 的某种加权平均，使整体偏差最小。",
-      "取 f(x) 为 u(x) 与 l(x) 的算术平均：",
-      "f(x) = [u(x) + l(x)]/2 = [(x²+4x+2) + (&minus;x²+2x+2)]/2 = (6x+4)/2 = 3x+2。",
-      "但这是一次函数，不是二次函数。",
-      "",
-      "考虑二次项系数的折中：u 的二次项系数为 1，l 的二次项系数为 &minus;1，",
-      "取折中得 a = 0，此时 f(x) = bx+2，由 f(&minus;1)=&minus;1 得 b = 3，即 f(x)=3x+2。",
-      "这仍然是一次函数。",
-      "",
-      "由于原题要求 f 为二次函数，且已知答案唯一，",
-      "通过分析并与标准答案对照，满足条件的二次函数为：",
-      "f(x) = x² + x + 2。",
-      "",
-      "验证：对任意 x，",
-      "f(x) &minus; u(x) = (x²+x+2) &minus; (x²+4x+2) = &minus;3x，仅当 x ≥ 0 时成立；",
-      "f(x) &minus; l(x) = (x²+x+2) &minus; (&minus;x²+2x+2) = 2x² &minus; x，仅当 x ≤ 0 或 x ≥ 1/2 时成立。",
-      "",
-      "本题严格来说需要两不等式同时恒成立，",
-      "其解为 f(x) 必过两交点且满足整体约束，最终唯一确定为 f(x) = x² + x + 2。",
-      "（注：题目中两个边界抛物线在 x = 0 和 x = &minus;1 处相交，",
-      "二次函数要全程介于两者之间，只有 x² + x + 2 能最大限度满足条件。）"
+      "点评：本题综合了顶点公式、函数值之差与韦达定理/求根公式的应用，关键是建立三个方程（①最小值、②函数值差、③根距）并求解。"
     ]
   },
   // Q7: 对数与三角综合 (Part 5)
   {
     diff: "奥数",
     question: '已知 f(x) = ln(sin x + cos x)。<br>(1) 求 f(x) 的定义域；<br>(2) 求 f(x) 的单调递增区间。',
-    answer: "定义域(2kπ-π/4, 2kπ+3π/4)，递增区间(2kπ-π/4, 2kπ+π/4)",
+    answer: "定义域(2kπ-π/4, 2kπ+3π/4)，递增区间(2kπ-π/4, 2kπ+π/4]，k∈Z",
     steps: [
       "(1) 定义域：sin x + cos x > 0。",
       "sin x + cos x = √2 sin(x + π/4)。",
@@ -326,63 +265,48 @@ var calcQuestions = [
       "即 2kπ &minus; π/4 < x < 2kπ + 3π/4。",
       "所以定义域为 (2kπ &minus; π/4, 2kπ + 3π/4)，k ∈ Z。",
       "",
-      "(2) f\'(x) = (cos x &minus; sin x)/(sin x + cos x) = √2 cos(x + π/4) / [√2 sin(x + π/4)] = cot(x + π/4)。",
-      "f\'(x) > 0 ⇔ cot(x + π/4) > 0 ⇔ tan(x + π/4) > 0",
-      "⇔ kπ < x + π/4 < kπ + π/2，k ∈ Z。",
-      "⇔ kπ &minus; π/4 < x < kπ + π/4。",
-      "",
-      "与定义域取交集：",
-      "在定义域 (2kπ &minus; π/4, 2kπ + 3π/4) 内，",
-      "递增区间为 (2kπ &minus; π/4, 2kπ + π/4)，k ∈ Z。"
+      "(2) 对每个 k ∈ Z，在上述定义域内令 t = x + π/4，则 2kπ < t < 2kπ + π。",
+      "自然对数函数在 (0, +∞) 上严格递增，因此 f(x) 的单调性与 sin t 在该区间内的单调性相同。",
+      "sin t 在 (2kπ, 2kπ + π/2] 上严格递增，在 [2kπ + π/2, 2kπ + π) 上严格递减。",
+      "所以 f(x) 的最大单调递增区间为 (2kπ &minus; π/4, 2kπ + π/4]，k ∈ Z。"
     ]
   },
   // Q8: 图像变换与方程 (Part 6 + Part 8)
   {
     diff: "奥数",
     question: '讨论方程 |x² &minus; 4| &minus; kx + 1 = 0 的实根个数随实数 k 的变化。',
-    answer: "k<-2时2个, k=-2时3个, -2<k<2时4个, k=2时3个, k>2时2个",
+    answer: "k &lt; &minus;1/2 时 2 个；k = &minus;1/2 时 1 个；&minus;1/2 &lt; k &lt; 1/2 时 0 个；k = 1/2 时 1 个；k &gt; 1/2 时 2 个",
     steps: [
       "移项得 |x² &minus; 4| = kx &minus; 1。",
       "令 f(x) = |x² &minus; 4|，g(x) = kx &minus; 1。",
       "实根个数即两个图像交点的个数。",
       "",
-      "f(x) = |x² &minus; 4| = { x²&minus;4, x≤&minus;2 或 x≥2；4&minus;x², &minus;2<x<2 }",
+      "f(x) 的图像为 W 形曲线，分三段：",
+      "① x ≥ 2：y = x²&minus;4（右支，开口向上）；",
+      "② &minus;2 < x < 2：y = 4&minus;x²（中段，开口向下，最高点 (0,4)）；",
+      "③ x ≤ &minus;2：y = x²&minus;4（左支）。",
       "g(x) 是过定点 (0, &minus;1) 的直线，斜率为 k。",
       "",
-      "关键位置：直线与 f(x) 相切时。",
-      "① 右侧 x ≥ 2：f(x) = x²&minus;4，f\'(x) = 2x。",
-      "设切点 (t, t²&minus;4)，t ≥ 2。切线方程：y = 2t(x&minus;t) + t²&minus;4 = 2tx &minus; t²&minus;4。",
-      "过 (0, &minus;1)：&minus;1 = &minus;t²&minus;4 ⇒ t² = &minus;3，无解。说明右支无切线过(0,&minus;1)。",
+      "【右支 x ≥ 2】联立 x²&minus;4 = kx&minus;1，得 h(x) = x² &minus; kx &minus; 3 = 0。",
+      "h(x) 的两根异号，正根不小于 2 当且仅当 h(2) = 1 &minus; 2k ≤ 0，即 k ≥ 1/2。",
+      "故右支在 k ≥ 1/2 时恰有 1 个交点，否则没有交点。",
       "",
-      "② 中间段 &minus;2 < x < 2：f(x) = 4&minus;x²，f\'(x) = &minus;2x。",
-      "设切点 (t, 4&minus;t²)，&minus;2 < t < 2。切线：y = &minus;2t(x&minus;t) + 4&minus;t² = &minus;2tx + 2t² + 4。",
-      "过 (0, &minus;1)：&minus;1 = 2t² + 4 ⇒ 2t² = &minus;5，无解。",
+      "【左支 x ≤ &minus;2】仍考察 h(x) = x² &minus; kx &minus; 3。负根不大于 &minus;2 当且仅当 h(&minus;2) = 1 + 2k ≤ 0，即 k ≤ &minus;1/2。",
+      "故左支在 k ≤ &minus;1/2 时恰有 1 个交点，否则没有交点。",
       "",
-      "③ 左侧 x ≤ &minus;2：f(x) = x²&minus;4，f\'(x) = 2x。",
-      "同样无解。",
+      "【中段 &minus;2 < x < 2】联立 4&minus;x² = kx&minus;1，得 p(x) = x² + kx &minus; 5 = 0。",
+      "p(x) 的两根异号。由 p(0) = &minus;5 < 0 可知：正根在 (0, 2) 内当且仅当 p(2) = 2k &minus; 1 > 0，即 k > 1/2；负根在 (&minus;2, 0) 内当且仅当 p(&minus;2) = &minus;2k &minus; 1 > 0，即 k < &minus;1/2。",
+      "故中段交点：k > 1/2 时 1 个，k < &minus;1/2 时 1 个，&minus;1/2 ≤ k ≤ 1/2 时 0 个。",
       "",
-      "实际上，关键位置在直线经过顶点 (&minus;2, 0) 和 (2, 0) 时。",
-      "当直线过 (&minus;2, 0)：0 = k(&minus;2) &minus; 1 ⇒ k = &minus;1/2。",
-      "当直线过 (2, 0)：0 = k·2 &minus; 1 ⇒ k = 1/2。",
+      "综合（k = ±1/2 时直线分别经过折点 (±2, 0)，端点只计一次）：",
+      "k < &minus;1/2：左支 1 个 + 中段 1 个 = 2 个；",
+      "k = &minus;1/2：1 个（x = &minus;2）；",
+      "&minus;1/2 < k < 1/2：0 个；",
+      "k = 1/2：1 个（x = 2）；",
+      "k > 1/2：右支 1 个 + 中段 1 个 = 2 个。",
       "",
-      "当直线过 (0, &minus;1) 和 (&minus;2, 0)：斜率 = (&minus;1&minus;0)/(0+2) = &minus;1/2。",
-      "当直线过 (0, &minus;1) 和 (2, 0)：斜率 = (&minus;1&minus;0)/(0&minus;2) = 1/2。",
-      "",
-      "还需考虑与 f(x)=4&minus;x² 相切的情况。",
-      "联立 y = kx&minus;1 与 y = 4&minus;x²，x ∈ (&minus;2, 2)：",
-      "kx&minus;1 = 4&minus;x² ⇒ x² + kx &minus; 5 = 0。",
-      "Δ = k² + 20 > 0，总有两交点，但需 x ∈ (&minus;2, 2)。",
-      "",
-      "再考虑与两侧 f(x)=x²&minus;4 的交点：",
-      "kx&minus;1 = x²&minus;4 ⇒ x² &minus; kx &minus; 3 = 0。",
-      "Δ = k² + 12 > 0，总有两交点，但需 x ≤ &minus;2 或 x ≥ 2。",
-      "",
-      "综合以上分析与数值验证，结论为：",
-      "k < &minus;2：2 个实根；",
-      "k = &minus;2：3 个实根；",
-      "&minus;2 < k < 2：4 个实根；",
-      "k = 2：3 个实根；",
-      "k > 2：2 个实根。"
+      "验证（k = 2）：|x²&minus;4| = 2x&minus;1。",
+      "右支：x²&minus;4 = 2x&minus;1 ⇒ x = 3 ✓；中段：4&minus;x² = 2x&minus;1 ⇒ x = &minus;1+√6 ≈ 1.45 ✓。共 2 个实根。"
     ]
   },
   // Q9: 分式函数值域与参数 (Part 5 + Part 7)
@@ -395,45 +319,39 @@ var calcQuestions = [
       "",
       "令 g(x) = ax/(x² + 1)，则 f(x) = 1 + g(x)。",
       "",
-      "求 g(x) 的值域。当 a = 0 时，g(x) ≡ 0，值域为 {1}，n&minus;m = 0 ≠ 1。",
+      "求 g(x) 的值域。当 a = 0 时，g(x) ≡ 0，g 的值域为 {0}，从而 f 的值域为 {1}，不满足 n&minus;m = 1。",
       "当 a ≠ 0 时，g(x) 是奇函数，最大值与最小值互为相反数。",
       "",
       "设 g(x) 的最大值为 M，则最小值为 &minus;M，f 的值域为 [1&minus;M, 1+M]。",
       "所以 n &minus; m = 2M = 1 ⇒ M = 1/2。",
       "",
-      "求 g(x) 的最大值：|g(x)| = |ax|/(x²+1)。",
-      "当 a > 0 时，只需考虑 x > 0 部分。",
-      "|g(x)| = a|x|/(x²+1)。令 t = |x| ≥ 0，h(t) = at/(t²+1)。",
-      "h\'(t) = a(t²+1 &minus; 2t²)/(t²+1)² = a(1&minus;t²)/(t²+1)²。",
-      "令 h\'(t) = 0 ⇒ t = 1。",
-      "最大值 h(1) = a·1/(1+1) = a/2。",
-      "令 a/2 = M = 1/2 ⇒ a = 1。",
-      "",
-      "当 a < 0 时，同理 M = |a|/2 = 1/2 ⇒ |a| = 1 ⇒ a = &minus;1。",
+      "由 (|x| &minus; 1)² ≥ 0，得 x² + 1 ≥ 2|x|，所以 |x|/(x²+1) ≤ 1/2，等号在 |x| = 1 时成立。",
+      "因此 |g(x)| = |a|·|x|/(x²+1) ≤ |a|/2，且最大值 M = |a|/2。",
+      "由 M = 1/2 得 |a| = 1。",
       "",
       "综上，a = 1 或 a = &minus;1。",
       "",
       "验证：a = 1 时，g(x) = x/(x²+1)，最大值 1/2（x=1时），最小值 &minus;1/2（x=&minus;1时），",
       "值域 [1/2, 3/2]，差值 1 ✓。",
-      "a = &minus;1 时同理。",
+      "a = &minus;1 时同理，值域为 [1/2, 3/2]，差值仍为 1 ✓。",
       "",
-      "（注：初稿有误，修正后 a = ±1，差值均为 1。）"
+      "点评：核心是将分式拆为常数 1 与奇函数部分之和，利用奇函数值域的对称性将 n &minus; m = 1 转化为最大值问题，再对 |g(x)| 求最值即可。"
     ]
   },
   // Q10: 函数思想 — 根的存在性与个数 (Part 7)
   {
     diff: "奥数",
-    question: '证明方程 x⁵ &minus; 5x + 1 = 0 在区间 (0, 1) 内至少有一个根，且在该区间内最多有两个根。',
-    answer: "存在性用零点定理，最多两个用代数方法分析单调性",
+    question: '证明方程 x⁵ &minus; 5x + 1 = 0 在区间 (0, 1) 内恰有一个实根。',
+    answer: "在区间 (0, 1) 内恰有一个实根",
     steps: [
       "令 F(x) = x⁵ &minus; 5x + 1，x ∈ [0, 1]。",
       "",
       "第一步：证明至少有一个根。",
       "F(0) = 1 > 0，F(1) = 1 &minus; 5 + 1 = &minus;3 < 0。",
-      "由零点定理（连续函数端点值异号），存在 c ∈ (0, 1) 使 F(c) = 0。",
+      "F(x) 是多项式函数，在 [0, 1] 上连续。由零点定理，存在 c ∈ (0, 1) 使 F(c) = 0。",
       "所以方程在 (0, 1) 内至少有一个根。",
       "",
-      "第二步：证明最多有两个根。",
+      "第二步：证明至多有一个根。",
       "任取 (0, 1) 内两点 x₁ < x₂，考察差值：",
       "F(x₁) − F(x₂) = (x₁⁵ − x₂⁵) − 5(x₁ − x₂)",
       "= (x₁ − x₂)[(x₁⁴ + x₁³x₂ + x₁²x₂² + x₁x₂³ + x₂⁴) − 5]。",
@@ -443,11 +361,7 @@ var calcQuestions = [
       "即 F(x) 在 (0, 1) 上严格单调递减。",
       "",
       "单调递减的函数在区间内至多只有一个零点，",
-      "结合第一步已证存在一个零点，",
-      "所以方程在 (0, 1) 内<strong>恰有一个根</strong>。",
-      "",
-      '注意：问题中"最多有两个根"自动满足（1 ≤ 2），',
-      "实际上由于单调性，在 (0, 1) 内严格只有一个根。"
+      "结合第一步已证存在一个零点，所以方程在 (0, 1) 内<strong>恰有一个实根</strong>。"
     ]
   }
 ];
@@ -477,7 +391,7 @@ function render() {
     }
     calcHtml += '<div class="answer">答案：' + q.answer + '</div>';
     calcHtml += '</div>';
-    calcHtml += '<button class="btn-toggle" onclick="toggleCalc(' + i + ')">查看解答</button>';
+    calcHtml += '<button class="btn-toggle" id="calcToggle' + i + '" onclick="toggleCalc(' + i + ')">查看解答</button>';
     calcHtml += '</div>';
   }
   document.getElementById("calc-container").innerHTML = calcHtml;
@@ -486,25 +400,40 @@ function render() {
 
 function checkCalc(ci) {
   if (calcChecked[ci]) return;
+  var input = document.getElementById("calcInput" + ci);
+  if (!input.value.trim()) {
+    alert("请先输入本题的关键结论或解答过程。");
+    input.focus();
+    return;
+  }
   calcChecked[ci] = true;
-  toggleCalc(ci);
+  showCalc(ci);
   document.getElementById("calcBtn" + ci).disabled = true;
   if (confirm('你已查看本题解答。如果答案正确，点击"确定"获得6分；否则点击"取消"。')) {
     totalScore += 6;
     document.getElementById("calc" + ci).classList.add("correct");
+    input.classList.add("correct-input");
     updateScore();
   } else {
     document.getElementById("calc" + ci).classList.add("wrong");
+    input.classList.add("wrong-input");
     updateScore();
   }
 }
 
+function showCalc(ci) {
+  var area = document.getElementById("calcStep" + ci);
+  var btn = document.getElementById("calcToggle" + ci);
+  area.classList.add("show", "ok");
+  btn.textContent = "隐藏解答";
+}
+
 function toggleCalc(ci) {
   var area = document.getElementById("calcStep" + ci);
-  area.classList.toggle("show");
-  if (area.classList.contains("show")) {
-    area.classList.add("ok");
-  }
+  var btn = document.getElementById("calcToggle" + ci);
+  var isShowing = area.classList.toggle("show");
+  area.classList.toggle("ok", isShowing);
+  btn.textContent = isShowing ? "隐藏解答" : "查看解答";
 }
 
 function updateScore() {

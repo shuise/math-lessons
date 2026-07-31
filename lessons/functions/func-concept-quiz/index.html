@@ -141,10 +141,10 @@ article { overflow-x: visible; }
       <strong>考试规则：</strong>
       <ul style="margin:6px 0 0;padding-left:20px;">
         <li>本卷共 <strong>60 题</strong>，满分 <strong>60 分</strong>，每题 1 分</li>
-        <li>限时 <strong>15 分钟</strong>，超时自动交卷</li>
+        <li>限时 <strong>20 分钟</strong>，超时自动交卷</li>
         <li>题型：判断题（30 题）、选择题（20 题）、多选题（10 题）</li>
         <li>多选题须全部选对才得分，多选、少选、错选均不得分</li>
-        <li>15 分钟内可点击「交卷」查看成绩</li>
+        <li>20 分钟内可点击「交卷」查看成绩</li>
         <li>点击下方按钮开始考试</li>
       </ul>
     </div>
@@ -154,7 +154,7 @@ article { overflow-x: visible; }
 
 <!-- ===== 计时条 ===== -->
 <div class="timer-bar" id="timerBar">
-  剩余时间：<span class="time" id="timerDisplay">15:00</span>
+  剩余时间：<span class="time" id="timerDisplay">20:00</span>
   <span style="margin-left:12px;font-weight:normal;color:#888;font-size:0.85em;" id="answeredCount">已答：0 / 60</span>
 </div>
 
@@ -219,7 +219,7 @@ var questions = [
   {type:"judge",q:"二次函数 y = −x² + 2x 的最大值为 0。",opts:["正确","错误"],ans:1,exp:"错误。配方法：y = −(x−1)² + 1，开口向下，当 x=1 时取最大值 1。"},
   {type:"judge",q:"幂函数 y = x^(1/2) 的定义域为 [0, +∞)。",opts:["正确","错误"],ans:0,exp:"正确。½ 次方即 √x，偶次根号下非负，故定义域为 [0, +∞)。"},
   {type:"judge",q:"函数 y = sin x 在 [0, π] 上单调递增。",opts:["正确","错误"],ans:1,exp:"错误。y = sin x 在 [0, π/2] 递增，在 [π/2, π] 递减。"},
-  {type:"judge",q:"对数函数 y = logₐx（0<a<1）的图像从左到右下降。",opts:["正确","错误"],ans:0,exp:"正确。0<a<1 时，对数函数在 (0,+∞) 上严格递减，图像从左到右下降。"},
+  {type:"judge",q:"对数函数 y = logₐx（0&lt;a&lt;1）的图像从左到右下降。",opts:["正确","错误"],ans:0,exp:"正确。0&lt;a&lt;1 时，对数函数在 (0,+∞) 上严格递减，图像从左到右下降。"},
   {type:"judge",q:"函数 y = cos x 是偶函数，图像关于 y 轴对称。",opts:["正确","错误"],ans:0,exp:"正确。cos(−x) = cos x，满足偶函数定义。"},
   {type:"judge",q:"若 f(x) 是奇函数且在 x=0 处有定义，则 f(0) = 0。",opts:["正确","错误"],ans:0,exp:"正确。奇函数定义 f(−x) = −f(x)，令 x=0 得 f(0) = −f(0) → 2f(0)=0 → f(0)=0。"},
   {type:"judge",q:"函数 y = |x−1| 的单调递减区间为 (−∞, 1]。",opts:["正确","错误"],ans:0,exp:"正确。y = |x−1| 在 (−∞,1] 上递减，在 [1,+∞) 上递增。"},
@@ -272,14 +272,14 @@ multiQs.forEach(function(q){questions.push(q);});
 // ============================================================
 // 考试逻辑
 // ============================================================
-var timeLeft = 15 * 60, examStarted = false, examSubmitted = false, timerInterval = null;
+var timeLeft = 20 * 60, examStarted = false, examSubmitted = false, timerInterval = null;
 
 function startExam() {
   document.getElementById("examOverlay").classList.add("hidden");
   document.getElementById("examContent").style.display = "block";
   document.getElementById("timerBar").style.display = "block";
   document.getElementById("submitArea").style.display = "block";
-  examStarted = true; timeLeft = 15 * 60; examSubmitted = false;
+  examStarted = true; timeLeft = 20 * 60; examSubmitted = false;
   render();
   updateTimer();
   timerInterval = setInterval(function(){
