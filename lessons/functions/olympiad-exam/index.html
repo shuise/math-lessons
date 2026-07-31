@@ -59,6 +59,18 @@ h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #e65100; padding
   background: #fff; cursor: pointer; font-size: 0.93em; transition: 0.15s;
 }
 .calc-card .btn-toggle:hover { background: #fce4ec; }
+.calc-card .btn-hint {
+  display: inline-block; margin-top: 16px; margin-left: 1em; margin-right: 1em; padding: 6px 20px;
+  border: 2px solid #1a73e8; color: #1a73e8; border-radius: 16px;
+  background: #fff; cursor: pointer; font-size: 0.93em; transition: 0.15s;
+}
+.calc-card .btn-hint:hover { background: #e8f0fe; }
+.calc-card .hint-area {
+  margin: 10px 0; padding: 10px 14px; border-radius: 8px;
+  font-size: 0.93em; display: none; line-height: 1.8;
+  background: #e8f0fe; border-left: 4px solid #1a73e8;
+}
+.calc-card .hint-area.show { display: block; }
 .calc-card .calc-input {
   width: 100%; padding: 10px 14px; border: 2px solid #ddd; border-radius: 8px;
   font-size: 0.95em; outline: none; transition: border-color 0.15s;
@@ -81,6 +93,11 @@ h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #e65100; padding
   font-size: 0.7em; margin-left: 6px; font-weight: normal;
 }
 .diff-olym { background: #fce4ec; color: #e65100; border: 1px solid #ef9a9a; }
+.graph-figure { max-width: 560px; margin: 12px auto; padding: 8px; background: #fffaf6; border: 1px solid #f2c7ad; border-radius: 8px; }
+.graph-figure svg { display: block; width: 100%; height: auto; }
+.graph-figure .scan-line { transform-origin: 180px 215px; animation: scanSlope 5s ease-in-out infinite alternate; }
+@keyframes scanSlope { from { transform: rotate(28deg); } to { transform: rotate(-28deg); } }
+@media (prefers-reduced-motion: reduce) { .graph-figure .scan-line { animation: none; } }
 
 #scoreDisplay {
   display: inline-block; background: #e65100; color: #fff;
@@ -123,6 +140,7 @@ var calcQuestions = [
   {
     diff: "奥数",
     question: '已知定义在 R 上的函数 f(x) 满足：<br>① 对任意 x, y ∈ R，f(x+y) = f(x) + f(y)；<br>② f(1) = 2；<br>③ 当 x > 0 时，f(x) > 0。<br><br>(1) 证明 f(x) 是奇函数；<br>(2) 解不等式 f(x² &minus; 3x) < f(4)。',
+    hint: '① 抽象函数题没有解析式可用，突破口只有"赋值法"：代入特殊值挖掘 f 的性质。要证奇函数，目标是 f(&minus;x) = &minus;f(x)，先令 y = 0 求出 f(0) = 0，再令 y = &minus;x 即可，这是这类题的固定套路。<br>② 解含 f 的不等式，f 没有解析式无法直接算，只能借助"单调性"把 f 去掉。为什么能想到单调？条件③ 恰好保证 x₂ &minus; x₁ > 0 时 f(x₂) &minus; f(x₁) = f(x₂ &minus; x₁) > 0，这就是为证明 f 严格递增准备的原料，抓差的正负即可。',
     answer: "(&minus;1, 4)",
     steps: [
       "(1) 奇函数证明：",
@@ -144,6 +162,7 @@ var calcQuestions = [
   {
     diff: "奥数",
     question: '设 a > 0 且 a ≠ 1。若关于 x 的方程 |a<sup>x</sup> &minus; 1| = 2a 有两个不同的实根，求 a 的取值范围。',
+    hint: '① 直接分析带指数的绝对值方程很困难，先换元 t = a<sup>x</sup>（t > 0）把问题降维成关于 t 的普通绝对值方程 |t &minus; 1| = 2a。为什么换元？a<sup>x</sup> 的值域恰好是全体正数，换元后每个 t 对应唯一一个 x，根的个数不会丢失。<br>② |t &minus; 1| = 2a 拆出两个候选 t 值（1 + 2a 和 1 &minus; 2a）后，只需逐个检查"是否为正、是否对应不同的 x"，题目条件"两个不同实根"就被翻译成了对 a 的代数要求，再分区间讨论即可。',
     answer: "0 &lt; a &lt; 1/2",
     steps: [
       "令 t = a<sup>x</sup> > 0，则方程变为 |t &minus; 1| = 2a。",
@@ -167,6 +186,7 @@ var calcQuestions = [
   {
     diff: "奥数",
     question: '定义在 R 上的函数 f(x) 满足：<br>① f(x + 2) = &minus;f(x)；<br>② f(x) 的图像关于直线 x = 1 对称；<br>③ 当 x ∈ (0, 1] 时，f(x) = x(1 &minus; x)。<br><br>求 f(2025) + f(2026) 的值。',
+    hint: '① 求 f(2025)，数字大得不可能直接代，方向必然是"找周期"把大数化小。条件① f(x + 2) = &minus;f(x) 就是周期的入口：连用两次得 f(x + 4) = f(x)，周期为 4，再把 2025、2026 除以 4 看余数即可。<br>② 还差 f(1)、f(2) 两个值：f(1) 直接由③代入；f(2) 是难点——同时利用对称性 f(2) = f(0) 与递推式 f(2) = &minus;f(0) 联立，两式迫使 f(0) = 0。为什么能想到双管齐下？"对称 + 递推同时作用在一个点"是抽象函数求值的经典配合。',
     answer: "0",
     steps: [
       "由①：f(x+4) = &minus;f(x+2) = &minus;(&minus;f(x)) = f(x)，所以 4 是 f(x) 的一个周期。",
@@ -189,6 +209,7 @@ var calcQuestions = [
   {
     diff: "奥数",
     question: '证明：sin 10° · sin 50° · sin 70° = 1/8。',
+    hint: '① 先把角往"倍角链"上凑：由诱导公式 sin50° = cos40°、sin70° = cos20°，原式化为 sin10° · cos20° · cos40°，三个角 10°、20°、40° 恰好是 2 倍关系。<br>② 看到成倍角的连乘积，优先想到倍角公式 sin2x = 2sinx·cosx，它能"两两消化"乘积：现在还缺一个 cos10° 才能配成完整的链，于是补乘 cos10°/cos10°（cos10° ≠ 0，值不变），依次配出 sin20°、sin40°、sin80°，最后与分母的 cos10° 相约。为什么有效？补乘分子分母同乘一个非零量是恒等变形，"配凑"让倍角公式能够一路用到底。',
     answer: "1/8",
     steps: [
       "利用诱导公式先化为余弦：",
@@ -206,6 +227,7 @@ var calcQuestions = [
   {
     diff: "奥数",
     question: '已知 a、b、c 均为正实数，证明：a² + b² + c² ≥ ab + bc + ca，并指出等号成立的条件。',
+    hint: '① 求证左边 ≥ 右边，且式子关于 a、b、c 完全对称，首选"作差法"：把右边移到左边，问题就化为证明差式 ≥ 0，这是不等式证明最基础、最直接的策略。<br>② 差式中恰好有三对"平方项与交叉项"（a² 与 ab、b² 与 bc、c² 与 ca），两两一组恰好能配成 (a &minus; b)² 这种完全平方式。为什么想到配方？因为平方和恒非负，只要把差值写成若干完全平方之和，符号一目了然，等号条件也直接看每个平方何时同时为 0。',
     answer: "作差比较法，配成完全平方式",
     steps: [
       "思路：要证明左边 ≥ 右边，可将右边移到左边，设法配方成非负形式。",
@@ -225,6 +247,7 @@ var calcQuestions = [
   {
     diff: "奥数",
     question: '已知二次函数 f(x) = ax² + bx + c（a > 0）满足：<br>① f(x) 的最小值为 &minus;4；<br>② f(2) &minus; f(1) = 5；<br>③ 不等式 f(x) < 0 的解集长度为 4。<br>求 f(x) 的解析式。',
+    hint: '① 求 a、b、c 三个未知数需要三个独立方程，题目恰好给了三条信息，关键是"把每条信息翻译成可计算的式子"：最小值 → 顶点纵坐标 (4ac &minus; b²)/4a；f(2) &minus; f(1) → 代入作差得 3a + b = 5；解集长度 → 两根之差 |x₁ &minus; x₂| = √Δ / a。<br>② 为什么这样翻译？因为每条条件都指向一个可以直接计算的量，三个方程解三个未知数，思路自然清晰。注意"解集长度"本质就是两根之差的绝对值，由判别式给出，不需要把根真的解出来。',
     answer: "f(x) = x² + 2x &minus; 3",
     steps: [
       "由 a > 0 且 f(x) 存在最小值，最小值在顶点处取得：",
@@ -257,6 +280,7 @@ var calcQuestions = [
   {
     diff: "奥数",
     question: '已知 f(x) = ln(sin x + cos x)。<br>(1) 求 f(x) 的定义域；<br>(2) 求 f(x) 的单调递增区间。',
+    hint: '① 定义域由"真数大于 0"决定：sin x + cos x > 0。两项正弦和不好直接分析，用辅助角公式合成 √2·sin(x + π/4)，问题就退化为"正弦函数在哪里为正"，这是"正弦 + 余弦"为定形式的标准处理。<br>② 单调性用复合函数的思想：ln 在定义域上严格递增，外层的增函数不会改变内层函数的单调方向，所以 f 的增减完全由 sin(x + π/4) 决定，只需求 sin 的单调区间再换回 x 即可。为什么能这样拆？因为外层 ln 是严格增的"单向阀门"，t 增则 ln t 增。',
     answer: "定义域(2kπ-π/4, 2kπ+3π/4)，递增区间(2kπ-π/4, 2kπ+π/4]，k∈Z",
     steps: [
       "(1) 定义域：sin x + cos x > 0。",
@@ -274,7 +298,9 @@ var calcQuestions = [
   // Q8: 图像变换与方程 (Part 6 + Part 8)
   {
     diff: "奥数",
+    diagram: "parameter-line",
     question: '讨论方程 |x² &minus; 4| &minus; kx + 1 = 0 的实根个数随实数 k 的变化。',
+    hint: '① 方程含参数 k，直接做代数分类会很繁琐。移项得 |x² &minus; 4| = kx &minus; 1：左边是确定的"W 形"曲线，右边是过定点 (0, &minus;1) 的直线族，实根个数 = 两图像交点的个数。这是"方程 ⇔ 图像交点"的数形结合思想。<br>② 为什么可操作？|x² &minus; 4| 分三段后每段都是二次曲线，与直线的交点可以用判别式和端点值精确判定；让斜率 k 从负到正"扫过"，交点个数只在临界位置发生变化，按区间分类即可。注意 k = ±1/2 时直线恰好经过折点 (±2, 0)，端点要避免重复计数。',
     answer: "k &lt; &minus;1/2 时 2 个；k = &minus;1/2 时 1 个；&minus;1/2 &lt; k &lt; 1/2 时 0 个；k = 1/2 时 1 个；k &gt; 1/2 时 2 个",
     steps: [
       "移项得 |x² &minus; 4| = kx &minus; 1。",
@@ -313,6 +339,7 @@ var calcQuestions = [
   {
     diff: "奥数",
     question: '已知函数 f(x) = (x² + ax + 1)/(x² + 1) 的值域为 [m, n]，且 n &minus; m = 1。<br>求实数 a 的值。',
+    hint: '① 分子分母都含 x² 项，先拆分：f(x) = 1 + ax/(x² + 1)，把"常数"与"变量部分"分离。为什么拆？加常数只把值域整体平移，不改变宽度 n &minus; m，于是只需研究 g(x) = ax/(x² + 1) 的最值。<br>② g(x) 是奇函数，值域关于原点对称：若最大值是 M，最小值就是 &minus;M，所以 n &minus; m = 2M = 1，问题转化为"求 g 的最大值"。求 M 走不等式路线：由 (|x| &minus; 1)² ≥ 0 得 x² + 1 ≥ 2|x|，一步给出 |x|/(x²+1) ≤ 1/2。为什么这条路走得通？奇对称把"宽度"换成"最值"，不等式直接封住上界。',
     answer: "a = ±1",
     steps: [
       "f(x) = (x² + ax + 1)/(x² + 1) = 1 + ax/(x² + 1)。",
@@ -342,6 +369,7 @@ var calcQuestions = [
   {
     diff: "奥数",
     question: '证明方程 x⁵ &minus; 5x + 1 = 0 在区间 (0, 1) 内恰有一个实根。',
+    hint: '① "恰有一个实根"要拆成两件事分别处理：至少有一个（存在性）+ 至多有一个（唯一性），这是证明"恰有"类结论的固定套路。<br>② 存在性用零点定理：只要找到两个端点函数值异号（F(0) = 1 > 0、F(1) = &minus;3 < 0），连续的多项式函数就必在中间穿过 x 轴。<br>③ 唯一性用单调性：证明 F 在 (0, 1) 上严格单调递减，单调函数与 x 轴至多有一个交点。怎么证递减？作差后提出公因式 (x₁ &minus; x₂)，剩余因式是五项之和，在 (0, 1) 内每项都小于 1，总和一定小于 5，符号立刻确定。为什么这两步够用？"存在 + 唯一"合起来就是"恰有一个"。',
     answer: "在区间 (0, 1) 内恰有一个实根",
     steps: [
       "令 F(x) = x⁵ &minus; 5x + 1，x ∈ [0, 1]。",
@@ -378,9 +406,11 @@ function render() {
     var q = calcQuestions[i];
     calcHtml += '<div class="calc-card" id="calc' + i + '">';
     calcHtml += '<div class="q-title"><span class="q-tag">奥数</span> ' + (i+1) + '. ' + q.question + ' <span class="diff-tag diff-olym">奥数</span></div>';
+    if (q.diagram) calcHtml += renderGraphDiagram();
     calcHtml += '<div style="margin:8px 0;"><strong>你的解答：</strong></div>';
     calcHtml += '<textarea class="calc-input" id="calcInput' + i + '" rows="3" placeholder="请在草稿纸上推演后在此输入关键结论..."></textarea>';
     calcHtml += '<button class="btn-check" id="calcBtn' + i + '" onclick="checkCalc(' + i + ')">提交</button>';
+    calcHtml += '<div class="hint-area" id="calcHint' + i + '">' + q.hint + '</div>';
     calcHtml += '<div class="step-area" id="calcStep' + i + '">';
     for (var k = 0; k < q.steps.length; k++) {
       if (q.steps[k] === "") {
@@ -391,11 +421,26 @@ function render() {
     }
     calcHtml += '<div class="answer">答案：' + q.answer + '</div>';
     calcHtml += '</div>';
+    calcHtml += '<button class="btn-hint" id="calcHintBtn' + i + '" onclick="toggleHint(' + i + ')">思路分析</button>';
     calcHtml += '<button class="btn-toggle" id="calcToggle' + i + '" onclick="toggleCalc(' + i + ')">查看解答</button>';
     calcHtml += '</div>';
   }
   document.getElementById("calc-container").innerHTML = calcHtml;
   calcChecked = new Array(calcQuestions.length).fill(false);
+}
+
+function renderGraphDiagram() {
+  return '<div class="graph-figure" role="img" aria-label="曲线 y 等于 x 平方减 4 的绝对值，以及绕定点 0 负 1 转动的直线 y 等于 kx 减 1">' +
+    '<svg viewBox="0 0 360 235">' +
+    '<line x1="24" y1="190" x2="340" y2="190" stroke="#8c98a4"/><line x1="180" y1="18" x2="180" y2="226" stroke="#8c98a4"/>' +
+    '<text x="344" y="194" font-size="12">x</text><text x="185" y="18" font-size="12">y</text>' +
+    '<path d="M54 94 Q72 145 90 190 Q135 90 180 90 Q225 90 270 190 Q288 145 306 94" fill="none" stroke="#1a73e8" stroke-width="3"/>' +
+    '<circle cx="90" cy="190" r="4" fill="#1a73e8"/><circle cx="270" cy="190" r="4" fill="#1a73e8"/>' +
+    '<text x="70" y="207" font-size="12">(−2, 0)</text><text x="274" y="207" font-size="12">(2, 0)</text>' +
+    '<line class="scan-line" x1="35" y1="215" x2="325" y2="215" stroke="#e65100" stroke-width="3"/>' +
+    '<circle cx="180" cy="215" r="5" fill="#e65100"/><text x="188" y="228" font-size="12" fill="#b53d00">定点 (0, −1)</text>' +
+    '<text x="230" y="42" font-size="12" fill="#1a73e8">y = |x² − 4|</text><text x="44" y="40" font-size="12" fill="#b53d00">y = kx − 1</text>' +
+    '</svg></div>';
 }
 
 function checkCalc(ci) {
@@ -426,6 +471,13 @@ function showCalc(ci) {
   var btn = document.getElementById("calcToggle" + ci);
   area.classList.add("show", "ok");
   btn.textContent = "隐藏解答";
+}
+
+function toggleHint(ci) {
+  var area = document.getElementById("calcHint" + ci);
+  var btn = document.getElementById("calcHintBtn" + ci);
+  var isShowing = area.classList.toggle("show");
+  btn.textContent = isShowing ? "收起思路" : "思路分析";
 }
 
 function toggleCalc(ci) {

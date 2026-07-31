@@ -6,6 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>逻辑 — 综合题推导</title>
 <link rel="stylesheet" href="../../style.css">
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)'], ['$', '$']],
+      displayMath: [['\\[', '\\]'], ['$$', '$$']]
+    },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 <style>
   h2 { margin: 36px 0 16px; padding-bottom: 8px; border-bottom: 2px solid #1a73e8; }
   h3 { color: #2c3e50; margin: 28px 0 12px; }
@@ -223,7 +233,7 @@
     <div class="opt" onclick="checkChoice(7, 0)">A. \(a \ge 4\)</div>
     <div class="opt" onclick="checkChoice(7, 1)">B. \(a \le \frac{7}{2}\)</div>
     <div class="opt" onclick="checkChoice(7, 2)">C. \(a < 4\)</div>
-    <div class="opt" onclick="checkChoice(7, 3)">D. \(a \le 2\sqrt{3}\)</div>
+    <div class="opt" onclick="checkChoice(7, 3)">D. \(a < 2\sqrt{3}\)</div>
   </div>
   <div class="explain" id="explain7">
     <strong>推导步骤：</strong><br>
@@ -336,28 +346,28 @@
 <div class="quiz-question" id="q12">
   <div class="q-title">
     <span class="q-tag multi">综合</span>
-    已知 p：∀x ∈ [0,1]，\(a \ge e^x\)，q：∃x ∈ R，\(x^2 + 4x + a = 0\)。若 p ∨ q 为真，p ∧ q 为假，求 a 的取值范围。<span class="diff-tag diff-hard">较难</span>
+    已知 p：∀x ∈ [0,1]，\(a \ge x^2+1\)，q：∃x ∈ R，\(x^2 + 4x + a = 0\)。若 p ∨ q 为真，p ∧ q 为假，求 a 的取值范围。<span class="diff-tag diff-hard">较难</span>
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(12, 0)">A. a ≥ e</div>
+    <div class="opt" onclick="checkChoice(12, 0)">A. a ≥ 2</div>
     <div class="opt" onclick="checkChoice(12, 1)">B. a < 4</div>
-    <div class="opt" onclick="checkChoice(12, 2)">C. a < 4 且 a < e</div>
-    <div class="opt" onclick="checkChoice(12, 3)">D. a > 4 或 a < e</div>
+    <div class="opt" onclick="checkChoice(12, 2)">C. a < 2</div>
+    <div class="opt" onclick="checkChoice(12, 3)">D. a > 4 或 a < 2</div>
   </div>
   <div class="explain" id="explain12">
     <strong>推导步骤：</strong><br>
-    <strong>第一步：</strong>p 为真 ⇔ a ≥ e^x 在 [0,1] 上恒成立 ⇔ a ≥ max(e^x) = e¹ = e。所以 p 真时 a ≥ e。<br>
+    <strong>第一步：</strong>p 为真 ⇔ a ≥ x²+1 在 [0,1] 上恒成立 ⇔ a ≥ max(x²+1) = 2。所以 p 真时 a ≥ 2。<br>
     <strong>第二步：</strong>q 为真 ⇔ x² + 4x + a = 0 有实根 ⇔ Δ = 16 - 4a ≥ 0 ⇔ a ≤ 4。<br>
     <strong>第三步：</strong>p ∨ q 为真且 p ∧ q 为假，说明 p 和 q 一真一假。<br>
-    <strong>情况一：</strong>p 真 q 假。则 a ≥ e 且 a > 4，即 a > 4。<br>
-    <strong>情况二：</strong>p 假 q 真。则 a < e 且 a ≤ 4，即 a < e。<br>
-    <strong>综合：a > 4 或 a < e。</strong><br>
-    四个选项中 D 选项 "a > 4 或 a < e" 正确。<strong>选 D。</strong>
+    <strong>情况一：</strong>p 真 q 假。则 a ≥ 2 且 a > 4，即 a > 4。<br>
+    <strong>情况二：</strong>p 假 q 真。则 a < 2 且 a ≤ 4，即 a < 2。<br>
+    <strong>综合：a > 4 或 a < 2。</strong><br>
+    四个选项中 D 选项 "a > 4 或 a < 2" 正确。<strong>选 D。</strong>
   </div>
 </div>
 
 <!-- ========== 侦探推理 1 ========== -->
-<h2>五、侦探推理题</h2>
+<h2>侦探推理题</h2>
 
 <div class="quiz-question" id="q13">
   <div class="q-title">
@@ -366,7 +376,7 @@
     张三说："是李四干的"<br>
     李四说："我没干"<br>
     王五说："我也没干"<br>
-    已知三人中<strong>只有一人说了真话</strong>。谁是盗窃犯？<span class="diff-tag diff-medium">中等</span>
+    已知三人中<strong>只有一人说了真话</strong>，且只有一人是盗窃犯。谁是盗窃犯？<span class="diff-tag diff-medium">中等</span>
   </div>
   <div class="options">
     <div class="opt" onclick="checkChoice(13, 0)">A. 张三</div>
@@ -392,7 +402,7 @@
     甲说："第一名是乙"<br>
     乙说："第一名是丙"<br>
     丙说："甲得了第一名"<br>
-    丁说："不是我"<br>
+    丁说："甲得了第一名"<br>
     已知四人中<strong>恰有两人说了真话</strong>，一人是第一名。谁是第一名？<span class="diff-tag diff-hard">较难</span>
   </div>
   <div class="options">
@@ -403,17 +413,13 @@
   </div>
   <div class="explain" id="explain14">
     <strong>推导步骤：</strong><br>
-    记命题：P_{甲}="乙第一"，P_{乙}="丙第一"，P_{丙}="甲第一"，P_{丁}="丁不是第一"。<br>
-    <strong>假设甲是第一：</strong>P_{甲}假(乙不是第一)，P_{乙}假(丙不是第一)，P_{丙}真(甲第一)，P_{丁}真(丁不是第一)。2真2假✓。<br>
-    <strong>假设乙是第一：</strong>P_{甲}真，P_{乙}假，P_{丙}假，P_{丁}真。3真1假✗。<br>
-    <strong>假设丙是第一：</strong>P_{甲}假，P_{乙}真，P_{丙}假，P_{丁}真。2真2假。但P_{丁}="不是丁"为真→丁不是第一(ok)。P_{乙}真→丙第一✓。此时甲假、乙真、丙假、丁真。但P_{丙}="甲第一"为假→甲不是第一(ok)。但是否有任何矛盾？P_{乙}="丙第一"为真，丙确实是第一。P_{丙}="甲第一"为假，甲不是第一。P_{甲}="乙第一"为假，乙不是第一。P_{丁}="丁不是第一"为真，丁不是第一。似乎也成立！<br>
-    等等！如果丙是第一，那么P_{乙}真→丙第一(✓)，P_{甲}假→乙不是第一(✓)，P_{丙}假→甲不是第一(✓)，P_{丁}真→丁不是第一(✓)。两人说真话(乙和丁)。那就有两个答案？<br>
-    <strong>重新检查：</strong>假设丙是第一时，P_{乙}="丙第一"为真，P_{丁}="不是我"→丁不是第一，因为丙是第一所以丁确实不是第一→真。所以乙真、丁真。P_{甲}假、P_{丙}假。2真2假。同样成立！<br>
-    <strong>等等，让我重新检查假设甲：</strong>甲是第一，则P_{丙}="甲第一"真，P_{丁}="不是我"→丁不是第一，因为甲是第一所以真。P_{甲}="乙第一"假，P_{乙}="丙第一"假。也是2真2假。<br>
-    <strong>题设补充：</strong>实际上，此题的准确条件是第一名是<strong>唯一</strong>的，且"恰有两人说真话"。当甲或丙是第一时都满足两人说真话。但注意P_{丁}的真假——若丙是第一，丁说"不是我"确实为真。两解共存说明需要额外条件。现补充条件：<strong>第一名恰好被一个人猜中。</strong><br>
-    - 若甲第一：只有丙猜对(甲)。1人猜中✓<br>
-    - 若丙第一：乙猜对(丙)且丁说真话(不是丁)。丁的陈述不是"猜谁第一"，而是说"不是我"，所以这个人不参与"猜中"计数。但P_{丁}的真值不影响"猜中第一名"的人数。<br>
-    经过严格推理，<strong>甲是第一</strong>是唯一的满足条件。选 A。</div>
+    记命题：P<sub>甲</sub>="乙第一"，P<sub>乙</sub>="丙第一"，P<sub>丙</sub>="甲第一"，P<sub>丁</sub>="甲第一"。<br>
+    <strong>假设甲是第一：</strong>P<sub>甲</sub>假（乙不是第一），P<sub>乙</sub>假（丙不是第一），P<sub>丙</sub>真（甲第一），P<sub>丁</sub>真（甲第一）。恰有 2 真 ✓<br>
+    <strong>假设乙是第一：</strong>P<sub>甲</sub>真，P<sub>乙</sub>假，P<sub>丙</sub>假，P<sub>丁</sub>假。只有 1 真 ✗<br>
+    <strong>假设丙是第一：</strong>P<sub>甲</sub>假，P<sub>乙</sub>真，P<sub>丙</sub>假，P<sub>丁</sub>假。只有 1 真 ✗<br>
+    <strong>假设丁是第一：</strong>四人陈述全为假，0 真 ✗<br>
+    <strong>唯一解：甲是第一。选 A。</strong>
+  </div>
 </div>
 
 <!-- ========== 侦探推理 3 ========== -->
@@ -449,7 +455,7 @@
     <span class="q-tag multi">侦探</span>
     逻辑岛上，骑士总是说真话，无赖总是说假话。三人对话：<br>
     A说："B是骑士"<br>
-    B说："我们三人中恰有一个是无赖"<br>
+    B说："我们三人中至少有一个是无赖"<br>
     C说："A是无赖"<br>
     以下判断正确的是？<span class="diff-tag diff-hard">较难</span>
   </div>
@@ -461,9 +467,9 @@
   </div>
   <div class="explain" id="explain16">
     <strong>推导步骤：</strong><br>
-    <strong>假设C是骑士：</strong>C说"A是无赖"真 &rarr; A是无赖。A说"B是骑士"假 &rarr; B是无赖。B说"恰有一个无赖"假 &rarr; 实际有0或2+个无赖。A无赖、B无赖、C骑士 &rarr; 2个无赖，B的话为假 ✓<br>
-    <strong>验证其他假设：</strong>若C是无赖，C说"A是无赖"假 &rarr; A是骑士。A说"B是骑士"真 &rarr; B是骑士。三人全是骑士，但C是无赖，矛盾。<br>
-    <strong>唯一解：A无赖、B无赖、C骑士。选D。</strong>
+    <strong>假设 C 是无赖：</strong>C 说"A 是无赖"为假 &rarr; A 是骑士。A 说"B 是骑士"为真 &rarr; B 是骑士。B 说"三人中至少有一个是无赖"——无赖只有 C 一个，为真，与 B 是骑士一致 ✓<br>
+    <strong>验证其他情形：</strong>若 C 是骑士，C 说"A 是无赖"为真 &rarr; A 是无赖，A 说"B 是骑士"为假 &rarr; B 是无赖，于是 B 说"至少有一个是无赖"为真——无赖说真话，矛盾 ✗<br>
+    <strong>唯一解：A 骑士、B 骑士、C 无赖。选 C。</strong>
   </div>
 </div>
 
@@ -502,7 +508,7 @@
     小兰说："我没做"<br>
     小刚说："小兰说的是假话"<br>
     小强说："反正不是我做的"<br>
-    已知四人中<strong>只有一人说了真话</strong>。是谁做的？<span class="diff-tag diff-medium">中等</span>
+    已知四人中<strong>只有一人说了真话</strong>，且只有一人做了这件事。是谁做的？<span class="diff-tag diff-medium">中等</span>
   </div>
   <div class="options">
     <div class="opt" onclick="checkChoice(18, 0)">A. 小美</div>
@@ -527,7 +533,7 @@
 <script>
 var answered = {};
 var score = 0;
-var answers = {1:3, 2:2, 3:0, 4:0, 5:0, 6:0, 7:3, 8:1, 9:1, 10:3, 11:3, 12:3, 13:2, 14:0, 15:1, 16:3, 17:2, 18:3};
+var answers = {1:3, 2:2, 3:0, 4:0, 5:0, 6:0, 7:3, 8:1, 9:1, 10:3, 11:3, 12:3, 13:2, 14:0, 15:1, 16:2, 17:2, 18:3};
 var totalQ = Object.keys(answers).length;
 
 function checkChoice(qid, idx) {

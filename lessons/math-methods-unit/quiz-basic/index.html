@@ -86,11 +86,14 @@
   font-size: 0.95em;
   color: #555;
 }
+.quiz-info .info-item { min-width: 0; max-width: 100%; }
 .quiz-info .info-item strong { color: #1a73e8; }
 .quiz-info .difficulty-bar {
   display: inline-flex;
+  flex-wrap: wrap;
   gap: 6px;
   align-items: center;
+  max-width: 100%;
 }
 .quiz-info .diff-block {
   display: inline-block;
@@ -101,6 +104,11 @@
 .quiz-info .diff-block.easy { background: #4caf50; }
 .quiz-info .diff-block.mid { background: #ff9800; }
 .quiz-info .diff-block.hard { background: #e65100; }
+@media (max-width: 640px) {
+  .quiz-info { padding: 12px 14px; gap: 8px 16px; }
+  .quiz-info .difficulty-bar { display: flex; margin-top: 6px; }
+  .quiz-info .diff-block { width: 36px; }
+}
 
 /* ====== 评分面板 ====== */
 .quiz-footer {
@@ -191,15 +199,15 @@
 
 <div class="quiz-info">
   <span class="info-item"><strong>总分：</strong>200 分</span>
-  <span class="info-item"><strong>时间：</strong>25 分钟</span>
+  <span class="info-item"><strong>建议用时：</strong>45 分钟</span>
   <span class="info-item"><strong>题型：</strong>40 道选择题</span>
   <span class="info-item"><strong>考察：</strong>概念掌握和基础工具方法使用</span>
   <span class="info-item">
     <strong>难度分布：</strong>
     <span class="difficulty-bar">
-      <span class="diff-block easy"></span> 基础 30%
-      <span class="diff-block mid" style="margin-left:8px;"></span> 中级 40%
-      <span class="diff-block hard" style="margin-left:8px;"></span> 高等 30%
+      <span class="diff-block easy"></span> 基础 42.5%
+      <span class="diff-block mid" style="margin-left:8px;"></span> 中级 37.5%
+      <span class="diff-block hard" style="margin-left:8px;"></span> 提高 20%
     </span>
   </span>
 </div>
@@ -558,7 +566,7 @@
 
 <!-- Q27 -->
 <div class="question-card" data-correct="0" data-idx="26">
-  <div class="q-title"><span class="q-number">27</span>迭代法 <span class="diff-tag hard">高等</span></div>
+  <div class="q-title"><span class="q-number">27</span>迭代法 <span class="diff-tag hard">提高</span></div>
   <div class="q-text">a₁ = 2，aₙ₊₁ = (aₙ + 2/aₙ) / 2，该迭代格式用于求哪个数的近似值？</div>
   <div class="options">
     <div class="opt" data-val="0">A. √2</div>
@@ -630,12 +638,12 @@
 
 <!-- Q32 -->
 <div class="question-card" data-correct="2" data-idx="31">
-  <div class="q-title"><span class="q-number">32</span>归纳推理 <span class="diff-tag mid">中级</span></div>
+  <div class="q-title"><span class="q-number">32</span>数学归纳法 <span class="diff-tag mid">中级</span></div>
   <div class="q-text">"先验证 n = 1 时 1 = 1² 成立；假设 n = k 时 1+3+…+(2k−1) = k² 成立，则 n = k+1 时左端 = k² + (2k+1) = (k+1)²，也成立。故对所有正整数 n 恒成立。" 这段推理属于？</div>
   <div class="options">
     <div class="opt" data-val="0">A. 类比推理</div>
     <div class="opt" data-val="1">B. 逆向推理</div>
-    <div class="opt" data-val="2">C. 归纳推理（数学归纳法）</div>
+    <div class="opt" data-val="2">C. 数学归纳法</div>
     <div class="opt" data-val="3">D. 反证推理</div>
   </div>
   <div class="explain"></div>
@@ -656,7 +664,7 @@
 
 <!-- Q34 -->
 <div class="question-card" data-correct="0" data-idx="33">
-  <div class="q-title"><span class="q-number">34</span>综合运用推理 <span class="diff-tag hard">高等</span></div>
+  <div class="q-title"><span class="q-number">34</span>综合运用推理 <span class="diff-tag hard">提高</span></div>
   <div class="q-text">一道复杂的证明题中，先用分析法找到思路（要证啥→需啥条件），再用综合法书写过程（由已知→结论）。这体现了：</div>
   <div class="options">
     <div class="opt" data-val="0">A. 多种推理方式的综合运用</div>
@@ -676,7 +684,7 @@
 
 <!-- Q35 -->
 <div class="question-card" data-correct="1" data-idx="34">
-  <div class="q-title"><span class="q-number">35</span>综合情境 <span class="diff-tag hard">高等</span></div>
+  <div class="q-title"><span class="q-number">35</span>综合情境 <span class="diff-tag hard">提高</span></div>
   <div class="q-text">已知函数 f(x) = x² − 2mx + 1 在区间 [−1, 2] 上的最小值 ≥ 0，求 m 的范围。解决此问题最核心的思路组合是？</div>
   <div class="options">
     <div class="opt" data-val="0">A. 仅用判别式法</div>
@@ -689,7 +697,7 @@
 
 <!-- Q36 -->
 <div class="question-card" data-correct="0" data-idx="35">
-  <div class="q-title"><span class="q-number">36</span>综合情境 <span class="diff-tag hard">高等</span></div>
+  <div class="q-title"><span class="q-number">36</span>综合情境 <span class="diff-tag hard">提高</span></div>
   <div class="q-text">解关于 x 的不等式 ax² − (a+1)x + 1 &lt; 0（a ∈ R），应先采用什么策略？</div>
   <div class="options">
     <div class="opt" data-val="0">A. 先因式分解，再分 a = 0、a &gt; 0、a &lt; 0 讨论</div>
@@ -702,7 +710,7 @@
 
 <!-- Q37 -->
 <div class="question-card" data-correct="2" data-idx="36">
-  <div class="q-title"><span class="q-number">37</span>综合情境 <span class="diff-tag hard">高等</span></div>
+  <div class="q-title"><span class="q-number">37</span>综合情境 <span class="diff-tag hard">提高</span></div>
   <div class="q-text">已知 a, b, c 为正实数且 a + b + c = 1，求证 (1/a − 1)(1/b − 1)(1/c − 1) ≥ 8。以下分析思路正确的是？</div>
   <div class="options">
     <div class="opt" data-val="0">A. 直接展开左边，代入 a + b + c = 1 化简</div>
@@ -715,7 +723,7 @@
 
 <!-- Q38 -->
 <div class="question-card" data-correct="3" data-idx="37">
-  <div class="q-title"><span class="q-number">38</span>综合情境 <span class="diff-tag hard">高等</span></div>
+  <div class="q-title"><span class="q-number">38</span>综合情境 <span class="diff-tag hard">提高</span></div>
   <div class="q-text">数列 {aₙ} 满足 a₁ = 1，aₙ₊₁ = 3aₙ + 2ⁿ，求通项公式。以下哪种方法组合最合适？</div>
   <div class="options">
     <div class="opt" data-val="0">A. 直接用累加法</div>
@@ -728,7 +736,7 @@
 
 <!-- Q39 -->
 <div class="question-card" data-correct="0" data-idx="38">
-  <div class="q-title"><span class="q-number">39</span>综合情境 <span class="diff-tag hard">高等</span></div>
+  <div class="q-title"><span class="q-number">39</span>综合情境 <span class="diff-tag hard">提高</span></div>
   <div class="q-text">求函数 y = x + √(1 − x²) 的值域，以下哪种方法最恰当？</div>
   <div class="options">
     <div class="opt" data-val="0">A. 三角换元：设 x = sinθ，转化为三角函数最值</div>
@@ -741,7 +749,7 @@
 
 <!-- Q40 -->
 <div class="question-card" data-correct="2" data-idx="39">
-  <div class="q-title"><span class="q-number">40</span>综合情境 <span class="diff-tag hard">高等</span></div>
+  <div class="q-title"><span class="q-number">40</span>综合情境 <span class="diff-tag hard">提高</span></div>
   <div class="q-text">4 个男生和 3 个女生排成一排，要求女生互不相邻，且男生甲、乙必须相邻。解决此问题需要联合使用的方法是？</div>
   <div class="options">
     <div class="opt" data-val="0">A. 仅用捆绑法</div>
@@ -812,7 +820,7 @@
     // Q16 (15)
     { ok: '正确！前 k 个奇数和为 k²，第 k+1 个奇数是 2(k+1)−1 = 2k+1，所以 n = k+1 时左端应加上 2k+1。', fail: '第 k+1 个奇数的表达式为 2(k+1)−1 = 2k+1。这是数学归纳法递推步骤的关键。' },
     // Q17 (16)
-    { ok: '正确！同一法专门用于唯一性证明——构造一个满足条件的对象，再证明它就是原对象，常用于证明中点唯一、垂线唯一等。', fail: '同一法的核心应用场景是唯一性或存在唯一性的证明。不等式用比较法，单调性用导数，数列通项用累加累乘或归纳法。' },
+    { ok: '正确！同一法专门用于唯一性证明——构造一个满足条件的对象，再证明它就是原对象，常用于证明中点唯一、垂线唯一等。', fail: '同一法的核心应用场景是唯一性或存在唯一性的证明。不等式常用比较法，单调性可用定义或函数图像研究，数列通项可用累加、累乘或归纳法。' },
     // Q18 (17)
     { ok: '正确！(x + a)(x + b) = x² + (a+b)x + ab，比较系数得 a+b = −5, ab = 6，解得 a = −2, b = −3。', fail: '展开 (x+a)(x+b) 得 x² + (a+b)x + ab。与 x² − 5x + 6 比较，一次项系数 a+b = −5，常数项 ab = 6。注意 a+b 是负的。' },
     // Q19 (18)
@@ -844,7 +852,7 @@
     // Q31 (30)
     { ok: '正确！假设结论的反面（√2是有理数），推导出矛盾（p、q均为偶数与既约矛盾），从而肯定原结论成立——这是反证法的标准结构。', fail: '反证法的三步骤：否定结论 → 逻辑推导 → 得到矛盾。本题"假设…有矛盾"的完整结构正是反证法。' },
     // Q32 (31)
-    { ok: '正确！先验证基础步 n=1，再假设 n=k 成立递推到 n=k+1——这是数学归纳法（归纳推理）的完整结构。', fail: '数学归纳法是一种从特殊到一般的严格推理方式。它包含两个关键步骤：验证基础步 + 归纳递推步，缺一不可。' },
+    { ok: '正确！先验证基础步 n=1，再假设 n=k 成立并推出 n=k+1 成立，这是数学归纳法的完整结构。它是严格的演绎证明，不是只凭若干特例作猜想的归纳推理。', fail: '这段证明包含“验证基础步 + 归纳递推步”，属于数学归纳法。数学归纳法能给出严格证明，不能与根据有限特例猜测一般规律的归纳推理混同。' },
     // Q33 (32)
     { ok: '正确！从二元的展开公式出发，类比推广到三元的展开形式，属于类比推理。类比是从特殊到特殊的推理。', fail: '类比推理是根据两个对象在某些方面的相似，推断它们在其它方面也可能相似。从 (a+b)² 到 (a+b+c)² 就是典型的类比推广。' },
     // Q34 (33)
@@ -858,9 +866,9 @@
     // Q37 (36)
     { ok: '正确！用分析法从结论反推，将左边化归为 (b+c)(c+a)(a+b)/(abc)，再用均值不等式证明。这是逆向推理 + 化归的经典配合。', fail: '直接展开很复杂。正确的思路是：用分析法从结论出发，将 (1/a−1) 转化为 (b+c)/a（利用 a+b+c=1），然后转化为乘积形式用均值不等式。' },
     // Q38 (37)
-    { ok: '正确！aₙ₊₁ = 3aₙ + 2ⁿ 需先构造新数列（化归思想），再结合累加法或待定系数法求解。单一方法不足以解决此类递推。', fail: '这种"线性递推 + 指数项"的形式，需要先通过构造（如两边同除以 2ⁿ⁺¹）化归为等差数列或等比数列，再求解。' },
+    { ok: '正确！aₙ₊₁ = 3aₙ + 2ⁿ 需先构造新数列（化归思想），再结合累加法或待定系数法求解。令 bₙ=aₙ/3ⁿ，可把递推化为 bₙ₊₁=bₙ+(1/3)(2/3)ⁿ。', fail: '这种“线性递推 + 指数项”的形式可先构造新数列。两边同除以 3ⁿ⁺¹，令 bₙ=aₙ/3ⁿ，得到 bₙ₊₁=bₙ+(1/3)(2/3)ⁿ，再对这个等比型增量累加。' },
     // Q39 (38)
-    { ok: '正确！含 √(1−x²) 的表达式，三角换元 x = sinθ 是最佳选择，化归为三角函数 y = sinθ + cosθ = √2 sin(θ+π/4)，值域轻松可得。', fail: '三角换元将代数问题化归为三角函数问题，是处理含 √(1−x²) 形式的标准方法。两边平方可能引入增根，求导较繁琐。' },
+    { ok: '正确！令 x=sinθ，θ∈[−π/2,π/2]，则 √(1−x²)=cosθ≥0，y=sinθ+cosθ。最大值为 √2，最小值在 θ=−π/2 时为 −1，所以值域是 [−1,√2]。', fail: '三角换元能保留根式的非负条件：令 x=sinθ 时必须取 θ∈[−π/2,π/2]，于是 cosθ≥0。由 y=sinθ+cosθ 可得值域 [−1,√2]，不能直接套完整周期得到 [−√2,√2]。' },
     // Q40 (39)
     { ok: '正确！先捆绑（甲乙相邻）将他们视为一个整体，再插空（女生不相邻）处理限制条件。两种计数方法联合使用解决复合约束问题。', fail: '题目包含两类约束：①甲乙相邻→用捆绑法；②女生不相邻→用插空法。两种方法需联合使用，先处理相邻再处理不相邻。' }
   ];
@@ -873,7 +881,7 @@
   function updateScore() {
     let count = 0;
     for (let i = 0; i < answered.length; i++) {
-      if (answered[i]) count++;
+      if (answered[i] === true) count++;
     }
     totalCorrect = count;
     scoreBox.textContent = (totalCorrect * SCORE_PER_Q) + ' / ' + TOTAL_SCORE;
@@ -883,7 +891,7 @@
       const [start, end] = segmentRanges[s];
       let segCount = 0;
       for (let i = start; i <= end; i++) {
-        if (answered[i]) segCount++;
+        if (answered[i] === true) segCount++;
       }
       parts.push(segmentNames[s] + ' ' + (segCount * SCORE_PER_Q) + '/' + segmentScores[s]);
     }
@@ -925,11 +933,8 @@
         explainDiv.textContent = expText;
         explainDiv.className = 'explain show ' + (isCorrect ? 'ok' : 'fail');
 
-        if (!answered[idx]) {
-          answered[idx] = true;
-          if (isCorrect) totalCorrect++;
-          updateScore();
-        }
+        answered[idx] = isCorrect;
+        updateScore();
       });
     });
   });

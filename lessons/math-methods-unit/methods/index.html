@@ -59,6 +59,18 @@
 .example-card .ex-body .highlight { background: #fff3e0; padding: 1px 4px; border-radius: 3px; }
 .example-card .ex-result { color: #2e7d32; font-weight: 600; margin-top: 2px; font-size: 0.93em; }
 .example-card .ex-step { color: #666; font-size: 0.92em; margin: 2px 0 0 12px; }
+.method-figure { margin-top: 10px; border-top: 1px solid #e4e7eb; padding-top: 8px; }
+.method-figure svg { display: block; width: 100%; height: auto; max-height: 210px; }
+.method-figure .route {
+  animation: highlight-route 1.8s ease-in-out infinite;
+}
+.method-figure .focus-point { transform-box: fill-box; transform-origin: center; animation: focus-point 1.4s ease-in-out infinite; }
+@keyframes highlight-route { 50% { stroke-width: 5; opacity: 0.72; } }
+@keyframes focus-point { 50% { transform: scale(1.45); } }
+@media (prefers-reduced-motion: reduce) {
+  .method-figure .route { animation: none; }
+  .method-figure .focus-point { animation: none; }
+}
 
 /* ====== 交互式选择题 ====== */
 .question-card {
@@ -213,7 +225,7 @@
 <h1>数学方法（22种方法精讲）</h1>
 <p class="intro-text">
   数学方法是解题的"工具包"——每种方法都有特定的适用场景。<br>
-  以下按<strong>逻辑推理</strong>、<strong>代数变形</strong>、<strong>组合计数</strong>三大类系统学习 22 种常用方法。
+  以下按<strong>逻辑推理</strong>、<strong>代数变形</strong>、<strong>组合计数与优化</strong>三大类系统学习 22 种常用方法。
   每种方法配 5 个简明例子和 1 道交互式选择题，每类末尾有 1 道综合题。<br>
   点击选项立刻反馈对错+显示解析。
 </p>
@@ -393,11 +405,11 @@
 
 <div class="question-card" data-correct="3" data-idx="3">
   <div class="q-title">比较法 · 选择题</div>
-  <div class="q-text">若 a, b 均正，用比较法判断 a 和 b 的大小关系时，作商法使用的前提是：</div>
+  <div class="q-text">用作商法比较 a 和 b 的大小，并依据 a/b 与 1 的大小直接作出判断，最基本的前提是：</div>
   <div class="options">
     <div class="opt" data-val="0">A. a 和 b 都是整数</div>
     <div class="opt" data-val="1">B. a 和 b 都不为零</div>
-    <div class="opt" data-val="2">C. a 和 b 都是正数且不为零</div>
+    <div class="opt" data-val="2">C. a 和 b 同号且都不为零</div>
     <div class="opt" data-val="3">D. a 和 b 都是正数</div>
   </div>
   <div class="explain"></div>
@@ -411,12 +423,12 @@
 <div class="examples-grid">
   <div class="example-card">
     <div class="ex-title">例1：证明 1/1² + 1/2² + … + 1/n² &lt; 2</div>
-    <div class="ex-body">1/k² &lt; 1/(k(k−1)) = 1/(k−1) − 1/k（k≥2）。原式 &lt; 1 + (1−1/2)+(1/2−1/3)+…+(1/(n−1)−1/n) = 2 − 1/n &lt; 2。</div>
+    <div class="ex-body">n=1 时结论显然。n≥2 时，对 k≥2 有 1/k² &lt; 1/[k(k−1)] = 1/(k−1) − 1/k。因此原式 &lt; 1 + (1−1/2)+(1/2−1/3)+…+[1/(n−1)−1/n] = 2 − 1/n &lt; 2。</div>
     <div class="ex-result">∴ 和总小于 2。</div>
   </div>
   <div class="example-card">
     <div class="ex-title">例2：证明 √(n²+1) &lt; n + 1/(2n)（n∈N⁺）</div>
-    <div class="ex-body">√(n²+1) &lt; √(n² + n + 1/4) = n + 1/2？放大：√(n²+1) &lt; √(n²+2n+1) = n+1，但更精确地，平方比较：(n+1/(2n))² − (n²+1) = 1/(4n²) &gt; 0。</div>
+    <div class="ex-body">两边都为正，可平方比较：(n+1/(2n))² − (n²+1) = 1/(4n²) &gt; 0。因此右边严格大于左边。</div>
     <div class="ex-result">∴ 不等式成立。</div>
   </div>
   <div class="example-card">
@@ -425,13 +437,13 @@
     <div class="ex-result">∴ √17 的整数部分为 4。</div>
   </div>
   <div class="example-card">
-    <div class="ex-title">例4：证明 0.1 + 0.01 + 0.001 + … &lt; 1/9</div>
-    <div class="ex-body">0.1 + 0.01 + 0.001 + … = 0.111… = 1/9 精确值。将每个项放大：0.1 + 0.01 + … &lt; 0.2 + 0.02 + … = 2/9，但更精确地，这是等比数列求和 = 0.1/(1−0.1) = 1/9。</div>
-    <div class="ex-result">∴ S = 1/9，等于（这里作为放缩例子，实际是精确值）。</div>
+    <div class="ex-title">例4：证明 1/2 + 1/4 + … + 1/2ⁿ &lt; 1（n∈N⁺）</div>
+    <div class="ex-body">把有限和放大为对应的无限等比级数：1/2 + 1/4 + … + 1/2ⁿ &lt; 1/2 + 1/4 + … = (1/2)/(1−1/2) = 1。</div>
+    <div class="ex-result">∴ 对任意正整数 n，原有限和小于 1。</div>
   </div>
   <div class="example-card">
-    <div class="ex-title">例5：证明 1/√1 + 1/√2 + … + 1/√n &gt; √n</div>
-    <div class="ex-body">1/√k &gt; 1/(√k + √(k−1)) = √k − √(k−1)。原式 &gt; (√1−0)+(√2−√1)+…+(√n−√(n−1)) = √n。</div>
+    <div class="ex-title">例5：证明 1/√1 + 1/√2 + … + 1/√n &gt; √n（n≥2）</div>
+    <div class="ex-body">k≥2 时，1/√k &gt; 1/[√k + √(k−1)] = √k − √(k−1)。首项 1=√1−0，其余各项严格放缩后相加，得到原式 &gt; (√1−0)+(√2−√1)+…+[√n−√(n−1)] = √n。</div>
     <div class="ex-result">∴ 不等式成立。</div>
   </div>
 </div>
@@ -619,9 +631,9 @@
     <div class="ex-result">∴ 共 4 个解。</div>
   </div>
   <div class="example-card">
-    <div class="ex-title">例2：求 ∫e²ˣ/(eˣ+1) dx</div>
-    <div class="ex-body">设 t = eˣ，则 dt = eˣdx，原式 = ∫t²/(t+1) · dt/t = ∫t/(t+1) dt = ∫(1 − 1/(t+1)) dt = t − ln|t+1| + C。</div>
-    <div class="ex-result">= eˣ − ln(eˣ+1) + C。</div>
+    <div class="ex-title">例2：解方程 x⁴ − 5x² + 4 = 0</div>
+    <div class="ex-body">设 t=x²（t≥0），原方程化为 t²−5t+4=0，即 (t−1)(t−4)=0，所以 t=1 或 t=4。代回得 x²=1 或 x²=4。</div>
+    <div class="ex-result">∴ x = ±1 或 x = ±2。</div>
   </div>
   <div class="example-card">
     <div class="ex-title">例3：解方程 2sin²x + 3sinx + 1 = 0</div>
@@ -630,8 +642,8 @@
   </div>
   <div class="example-card">
     <div class="ex-title">例4：求函数 y = 2x + √(1−x²) 的值域</div>
-    <div class="ex-body">设 x = sinθ, θ∈[−π/2, π/2]，则 y = 2sinθ + cosθ = √5 sin(θ+φ)。最大 √5，最小 −√5。</div>
-    <div class="ex-result">∴ 值域为 [−√5, √5]。</div>
+    <div class="ex-body">设 x = sinθ，θ∈[−π/2, π/2]，则 √(1−x²)=cosθ≥0，y=2sinθ+cosθ。最大值 √5 可在区间内取得；最小值出现在 θ=−π/2，此时 y=−2。</div>
+    <div class="ex-result">∴ 值域为 [−2, √5]。</div>
   </div>
   <div class="example-card">
     <div class="ex-title">例5：解方程 √(x+5) + √(x−3) = 4</div>
@@ -704,9 +716,9 @@
 </div>
 <div class="examples-grid">
   <div class="example-card">
-    <div class="ex-title">例1：构造辅助函数证明不等式</div>
-    <div class="ex-body">证 x &gt; sinx（x &gt; 0）。构造 f(x)=x−sinx，f'(x)=1−cosx ≥ 0，f(0)=0，故 f(x) &gt; 0，即 x &gt; sinx。</div>
-    <div class="ex-result">∴ 不等式成立。</div>
+    <div class="ex-title">例1：构造完全平方式求最值</div>
+    <div class="ex-body">已知正实数 x+y=6，求 xy 的最大值。构造非负式 (x−y)²≥0，展开得 (x+y)²−4xy≥0，所以 36−4xy≥0。</div>
+    <div class="ex-result">∴ xy≤9，当 x=y=3 时取等号。</div>
   </div>
   <div class="example-card">
     <div class="ex-title">例2：构造方程求值</div>
@@ -715,8 +727,25 @@
   </div>
   <div class="example-card">
     <div class="ex-title">例3：构造几何图形</div>
-    <div class="ex-body">求 √(x²+1) + √((x−3)²+4) 的最小值。构造两定点 (0,1) 和 (3,2)，"折线最短"原理，最小值=√(3²+1²)=√10。</div>
-    <div class="ex-result">最小值为 √10。</div>
+    <div class="ex-body">求 √(x²+1) + √((x−3)²+4) 的最小值。构造点 A(0,1)、B(3,2)，则原式为 x 轴上点 P(x,0) 到 A、B 的距离和。作 B 关于 x 轴的对称点 B'(3,−2)，则 PA+PB = PA+PB' ≥ AB' = √(3²+3²) = 3√2，当 P 为 AB' 与 x 轴交点（x=1）时取等。</div>
+    <div class="method-figure">
+      <svg viewBox="0 0 360 200" role="img" aria-label="点B关于x轴对称到B撇，折线路径转化为直线路径">
+        <line x1="24" y1="90" x2="338" y2="90" stroke="#667085" stroke-width="2"/>
+        <polygon points="338,90 329,85 329,95" fill="#667085"/>
+        <text x="330" y="80" font-size="13" fill="#475467">x</text>
+        <line x1="60" y1="22" x2="60" y2="184" stroke="#98a2b3" stroke-width="1.5"/>
+        <line x1="300" y1="10" x2="300" y2="170" stroke="#98a2b3" stroke-width="1.5" stroke-dasharray="5 5"/>
+        <line x1="60" y1="50" x2="140" y2="90" stroke="#f59e0b" stroke-width="3"/>
+        <line x1="140" y1="90" x2="300" y2="10" stroke="#f59e0b" stroke-width="3"/>
+        <line class="route" x1="60" y1="50" x2="300" y2="170" stroke="#1976d2" stroke-width="4"/>
+        <circle cx="60" cy="50" r="5" fill="#1f2937"/><text x="38" y="43" font-size="13">A(0,1)</text>
+        <circle cx="300" cy="10" r="5" fill="#1f2937"/><text x="305" y="18" font-size="13">B(3,2)</text>
+        <circle cx="300" cy="170" r="5" fill="#1976d2"/><text x="305" y="176" font-size="13">B'(3,−2)</text>
+        <circle class="focus-point" cx="140" cy="90" r="6" fill="#d92d20"/><text x="126" y="112" font-size="13">P(1,0)</text>
+        <text x="174" y="190" font-size="12" fill="#475467">将折线 PA+PB 拉直为 AB'</text>
+      </svg>
+    </div>
+    <div class="ex-result">最小值为 3√2。</div>
   </div>
   <div class="example-card">
     <div class="ex-title">例4：构造数列求通项</div>
@@ -724,8 +753,8 @@
     <div class="ex-result">aₙ = 2ⁿ − 1。</div>
   </div>
   <div class="example-card">
-    <div class="ex-title">例5：构造判别式</div>
-    <div class="ex-body">证 a² + b² + c² ≥ ab + bc + ca。构造关于 x 的方程：x² − (a+b+c)x + (ab+bc+ca) = 0，其判别式 ≥ 0 → (a+b+c)² − 4(ab+bc+ca) ≥ 0 → a²+b²+c² ≥ ab+bc+ca。</div>
+    <div class="ex-title">例5：构造完全平方式</div>
+    <div class="ex-body">证 a² + b² + c² ≥ ab + bc + ca。作差配方：a²+b²+c²−ab−bc−ca = 1/2[(a−b)²+(b−c)²+(c−a)²] ≥ 0。把待证式配凑成三个完全平方式之和（构造法思想），结论显然。</div>
     <div class="ex-result">∴ 不等式成立。</div>
   </div>
 </div>
@@ -765,8 +794,8 @@
   </div>
   <div class="example-card">
     <div class="ex-title">例4：解三元一次方程组</div>
-    <div class="ex-body">x+y+z=6, 2x−y+z=3, x+2y−z=3。①+②消 z：3x=9→x=3；②+③：3x+y=6→y=−3；代入①：z=6。∴(3,−3,6)。</div>
-    <div class="ex-result">∴ (x, y, z) = (3, −3, 6)。</div>
+    <div class="ex-body">x+y+z=6, x−y+z=4, x+y−z=2。①+②消 y：2x+2z=10 → x+z=5；②+③：2x=6 → x=3；代入 x+z=5 → z=2；代入①：3+y+2=6 → y=1。∴(3,1,2)。</div>
+    <div class="ex-result">∴ (x, y, z) = (3, 1, 2)。</div>
   </div>
   <div class="example-card">
     <div class="ex-title">例5：消元求取值范围</div>
@@ -790,7 +819,7 @@
 <!-- 13. 赋值法 -->
 <div class="method-header">
   <h3>13. 赋值法 <span class="method-tag">代数变形</span></h3>
-  <div class="method-desc"><strong>什么时候用：</strong>求解恒等式、找规律、验证猜想时，代入特殊值简化问题。<br><strong>怎么用：</strong>选取方便计算的特殊值（如 0, 1, −1 等）代入求解。</div>
+  <div class="method-desc"><strong>什么时候用：</strong>利用已知恒等式求参数、求展开式系数和、发现规律或初步检验猜想时。<br><strong>怎么用：</strong>选取方便计算的特殊值（如 0, 1, −1 等）代入；注意少量特殊值只能检验猜想，不能单独证明恒等式。</div>
 </div>
 <div class="examples-grid">
   <div class="example-card">
@@ -804,9 +833,9 @@
     <div class="ex-result">奇数项系数和 = 2ⁿ⁻¹。</div>
   </div>
   <div class="example-card">
-    <div class="ex-title">例3：判断恒等式 x³ − 1 = (x−1)(x²+x+1)</div>
-    <div class="ex-body">令 x=0：左=−1，右=(−1)(1)=−1 ✓；令 x=2：左=7，右=(1)(7)=7 ✓。两个特殊值验证相等。</div>
-    <div class="ex-result">恒等式成立。</div>
+    <div class="ex-title">例3：已知恒等式 x²+px+q=(x−1)(x+2)，求 p、q</div>
+    <div class="ex-body">令 x=0，得 q=(−1)×2=−2；再令 x=1，得 1+p+q=0，代入 q=−2 得 p=1。这里“恒等式”已由题设保证，赋特殊值可以求待定系数。</div>
+    <div class="ex-result">∴ p=1，q=−2。</div>
   </div>
   <div class="example-card">
     <div class="ex-title">例4：求二次函数 f(x) 满足 f(0)=1, f(1)=3, f(−1)=3</div>
@@ -994,15 +1023,15 @@
     <div class="ex-result">极限为 2。</div>
   </div>
   <div class="example-card">
-    <div class="ex-title">例5：求 f(x)=x³−x−1=0 的近似根</div>
-    <div class="ex-body">取 x₀=1.5，xₙ₊₁ = xₙ − (xₙ³−xₙ−1)/(3xₙ²−1)。x₁=1.3478，x₂=1.3252，x₃=1.3247（已收敛）。</div>
-    <div class="ex-result">方程根 ≈ 1.3247。</div>
+    <div class="ex-title">例5：用迭代逼近方程 x²−x−1=0 的正根</div>
+    <div class="ex-body">方程可化为 x=1+1/x。取 x₀=1，按 xₙ₊₁=1+1/xₙ 计算：x₁=2，x₂=1.5，x₃≈1.6667，x₄=1.6，x₅=1.625，数值逐步稳定在约 1.618。</div>
+    <div class="ex-result">正根约为 1.618；这里只展示数值逼近，严格收敛性需另行证明。</div>
   </div>
 </div>
 
 <div class="question-card" data-correct="2" data-idx="17">
   <div class="q-title">迭代法 · 选择题</div>
-  <div class="q-text">a₁=2, aₙ₊₁=aₙ/2 + 1/aₙ 迭代求 √2，第 2 次迭代结果 x₂ 最接近：</div>
+  <div class="q-text">取 x₀=2，按 xₙ₊₁=xₙ/2 + 1/xₙ 迭代求 √2，第 2 次迭代结果 x₂ 最接近：</div>
   <div class="options">
     <div class="opt" data-val="0">A. 1.4142</div>
     <div class="opt" data-val="1">B. 1.5</div>
@@ -1036,9 +1065,9 @@
 <hr class="section-divider">
 
 <!-- ============================================================
-     第三类：组合计数方法
+     第三类：组合计数与优化方法
      ============================================================ -->
-<div class="category-title">第三类 · 组合计数方法</div>
+<div class="category-title">第三类 · 组合计数与优化方法</div>
 
 <!-- 18. 捆绑法 -->
 <div class="method-header">
@@ -1157,7 +1186,7 @@
     <div class="ex-result">共 91 组解。</div>
   </div>
   <div class="example-card">
-    <div class="ex-title">例5：7 个相同文具分给 4 个班，每班至少 2 个</div>
+    <div class="ex-title">例5：7 个相同文具分给 4 个班，每班至少 1 个</div>
     <div class="ex-body">先每班给 1 个，剩下 3 个分 4 班（可空）= C(3+4−1, 4−1) = C(6,3) = 20。</div>
     <div class="ex-result">共 20 种分法。</div>
   </div>
@@ -1177,23 +1206,23 @@
 
 <!-- 21. 局部调整法 -->
 <div class="method-header">
-  <h3>21. 局部调整法 <span class="method-tag">组合计数</span></h3>
+  <h3>21. 局部调整法 <span class="method-tag">极值优化</span></h3>
   <div class="method-desc"><strong>什么时候用：</strong>变量有约束条件，需要求最值或证明极值性质时，通过逐步微调逼近最优。<br><strong>怎么用：</strong>保持约束不变，调整一对变量的取值，使目标函数单调变化，直到达到最值。</div>
 </div>
 <div class="examples-grid">
   <div class="example-card">
-    <div class="ex-title">例1：a+b=10，求 ab 最大值</div>
-    <div class="ex-body">固定和，调 a,b 使乘积最大。由均值不等式或配方法：a=b=5时 ab=25 最大。也可局部调整：若 a≠b，将 (a,b) 调整为 (a−δ, b+δ)，和不变但积变大。</div>
+    <div class="ex-title">例1：正实数 a+b=10，求 ab 最大值</div>
+    <div class="ex-body">若 a≠b，把这一对数同时调整为平均数 5，和保持不变，而新旧乘积之差为 25−ab=(a−b)²/4&gt;0。因此不相等时仍能增大乘积，只有 a=b=5 时达到最大。</div>
     <div class="ex-result">最大值为 25。</div>
   </div>
   <div class="example-card">
-    <div class="ex-title">例2：a+b+c=12，求 abc 最大值</div>
-    <div class="ex-body">由对称性，当 a=b=c=4 时取最大。局部调整：若 a≠b，将 (a,b) 调整为 (a−δ, b+δ)，保持和不变但积会增大。</div>
+    <div class="ex-title">例2：正实数 a+b+c=12，求 abc 最大值</div>
+    <div class="ex-body">若 a≠b，用它们的平均数替换 a、b，a+b 与 c 不变，而 ab 增大，所以 abc 增大。反复对不相等的两项作此调整，极值只能在 a=b=c=4 时取得。</div>
     <div class="ex-result">最大值为 4³=64。</div>
   </div>
   <div class="example-card">
     <div class="ex-title">例3：周长为定值的三角形，何时面积最大</div>
-    <div class="ex-body">固定周长 C，调整两边长使面积最大。当三边相等（等边三角形）时面积最大。</div>
+    <div class="ex-body">设半周长 s 固定。由海伦公式 S²=s(s−a)(s−b)(s−c)，且三个正数 s−a、s−b、s−c 的和为 s。逐步把不相等的两项调成平均数，乘积增大，最终三项相等。</div>
     <div class="ex-result">等边三角形面积最大。</div>
   </div>
   <div class="example-card">
@@ -1222,19 +1251,19 @@
 
 <!-- 22. 磨光法 -->
 <div class="method-header">
-  <h3>22. 磨光法 <span class="method-tag">组合计数</span></h3>
+  <h3>22. 磨光法 <span class="method-tag">极值优化</span></h3>
   <div class="method-desc"><strong>什么时候用：</strong>寻找极端情况或简化条件时，逐步消去差异使问题变简单。<br><strong>怎么用：</strong>通过一系列不改变问题本质的变换，逐步"磨平"数据差异，最终得到简单情形。</div>
 </div>
 <div class="examples-grid">
   <div class="example-card">
-    <div class="ex-title">例1：给定一组正数，求最小值可能的最大值</div>
-    <div class="ex-body">逐步将较大的数向较小的数"磨平"（如通过调整使差值减小），最终发现各数相等时达到平衡。</div>
-    <div class="ex-result">各数相等时取得极值。</div>
+    <div class="ex-title">例1：n 个正数之和为 S，求最小项的最大值</div>
+    <div class="ex-body">最小项不可能超过平均数 S/n；否则每一项都大于 S/n，总和会大于 S。把所有数磨平为 S/n 时，最小项恰好等于 S/n。</div>
+    <div class="ex-result">最小项的最大值为 S/n，各项相等时取得。</div>
   </div>
   <div class="example-card">
-    <div class="ex-title">例2：证明排序不等式</div>
-    <div class="ex-body">将乱序的数列通过相邻交换（磨光）逐步变成同序排列，每步交换不会减少和。</div>
-    <div class="ex-result">同序和 ≥ 乱序和 ≥ 逆序和。</div>
+    <div class="ex-title">例2：理解排序不等式</div>
+    <div class="ex-body">若 a₁≤…≤aₙ、b₁≤…≤bₙ，把任意错序配对通过相邻交换逐步改成同序配对，每次交换都不减小乘积和；改成逆序配对时乘积和最小。</div>
+    <div class="ex-result">同序乘积和最大，逆序乘积和最小。</div>
   </div>
   <div class="example-card">
     <div class="ex-title">例3：n 个正数和为 1，求乘积最大值</div>
@@ -1247,9 +1276,9 @@
     <div class="ex-result">切比雪夫不等式成立。</div>
   </div>
   <div class="example-card">
-    <div class="ex-title">例5：给定周长求面积最大</div>
-    <div class="ex-body">固定周长，磨光法证明当边长相同时面积最大——将任意两边逐步调整至相等，面积单调递增。</div>
-    <div class="ex-result">正多边形面积最大。</div>
+    <div class="ex-title">例5：固定边数 n 的凸多边形周长给定，何时面积最大</div>
+    <div class="ex-body">在边数固定且多边形为凸多边形的前提下，逐步调整不相等的边和角，使图形趋于等边、等角而不减小面积。</div>
+    <div class="ex-result">正 n 边形面积最大；若不固定边数，不能直接下此结论。</div>
   </div>
 </div>
 
@@ -1289,7 +1318,7 @@
      ============================================================ -->
 <div class="quiz-footer">
   <div class="score-box" id="scoreBox">0 / 25</div>
-  <div class="score-detail" id="scoreDetail">逻辑推理 0/8 · 代数变形 0/11 · 组合计数 0/6</div>
+  <div class="score-detail" id="scoreDetail">逻辑推理 0/8 · 代数变形 0/11 · 组合与优化 0/6</div>
   <div class="btn-reset" id="resetBtn">重新作答</div>
 </div>
 
@@ -1311,13 +1340,13 @@
     // 2: 综合法
     { ok: '正确！综合法是正向推导：已知条件 → 中间结论 → 最终结论。分析法是反向追溯，二者方向相反。', fail: '综合法从已知条件出发正向推导到结论，分析法从结论反向找条件。方向是主要区别。' },
     // 3: 比较法
-    { ok: '正确！作商法要求 a,b 同号（同为正或同为负）才能确定比值的正负。若 a,b 异号，正负一目了然，无需作商。', fail: '作商法比较大小需要 a/b 与 1 比较，前提是 b > 0，否则不等号方向会变化。' },
+    { ok: '正确！要由 a/b 与 1 的大小直接判断 a 与 b 的大小，需要 b>0；教材中的作商比较通常要求 a、b 都为正数。仅“同号”不够，例如 a=−2、b=−1 时 a/b=2>1，但 a<b。', fail: '把 a/b 与 1 比较后再乘回 b，只有 b>0 时不等号方向不变。因此常用前提是 a、b 都为正数，选 D；同为负数时不能照搬该结论。' },
     // 4: 放缩法
     { ok: '正确！要证明 A 小于 B，需将 A 放大（放大后的值仍小于 B），或把 B 缩小（缩小后仍大于 A）。放 A 缩 B 是典型策略。', fail: '要证 A 小于 B，可以把 A 放大或把 B 缩小。若放缩后仍有放大版 A 小于 B，或 A 小于缩小版 B，则原不等式成立。' },
     // 5: 数学归纳法
     { ok: '正确！只验证 n=1 只能证明这一个命题成立，没有递推就无法推广到所有自然数，这正是数学归纳法的核心。', fail: '数学归纳法两个步骤缺一不可：验证基础 + 归纳递推。只有验证步骤只能证明 n=1 成立，无法递推。' },
     // 6: 同一法
-    { ok: '正确！同一法专门用于证明唯一性或存在唯一性——构造一个满足条件的对象，再证明它就是原对象。', fail: '同一法适用于唯一性证明。不等式用比较法或放缩法，数列通项用归纳法或累加累乘法，单调性用导数或定义。' },
+    { ok: '正确！同一法专门用于证明唯一性或存在唯一性——构造一个满足条件的对象，再证明它就是原对象。', fail: '同一法适用于唯一性证明。不等式常用比较法或放缩法，数列通项可用归纳法或累加累乘法，单调性可用定义或函数图像研究。' },
     // 7: 第一类综合题
     { ok: '正确！D 选项体现了分析法的典型思路：要证最终结论，只需证中间结论，不断追溯直到显然成立的条件。A 是综合法，B 是反证法，C 是特殊值法。', fail: '分析法的关键词是"要证…只需证…"，这是从结论反向寻找充分条件的典型表述。A 是综合法思路，B 是反证法。' },
     // 8: 待定系数法
@@ -1331,7 +1360,7 @@
     // 12: 消元法
     { ok: '正确！第二个方程 y=4x−1 形式简单，直接代入第一个方程即可消去 y，是最简便的方法。', fail: '从 4x−y=1 得 y=4x−1，代入 2x+3y=7 得 2x+3(4x−1)=7 → 14x=10 → x=5/7。这种方法最直接。' },
     // 13: 赋值法
-    { ok: '正确！赋值法适合求系数和或验证恒等式，要求特定项系数时需用二项式展开比较系数。', fail: '赋值法令 x=1 得所有系数和，令 x=−1 得奇偶项差，但求特定项系数需要用到二项式展开的通项公式。' },
+    { ok: '正确！赋值法适合求系数和或利用已知恒等式求参数；要求某个特定项的系数时，需用二项式展开比较系数。少量赋值也不能单独证明恒等式。', fail: '令 x=1 可求所有系数和，令 x=−1 可求奇偶次幂系数之差，但求特定项系数需要二项式展开的通项公式。少量特殊值只能检验，不能代替恒等式证明。' },
     // 14: 分离参数法
     { ok: '正确！分离参数法的核心是将参数 a 与变量 x 分开到不等式两侧，转化为研究不含参数的函数的最值问题。', fail: '分离参数法 ≠ 消去参数，而是将参数 a 和变量 x 分到不等式两侧，使问题转化为求函数最值。' },
     // 15: 累加法
@@ -1357,13 +1386,13 @@
   ];
 
   // 三段分类范围
-  const segmentNames = ['逻辑推理', '代数变形', '组合计数'];
+  const segmentNames = ['逻辑推理', '代数变形', '组合与优化'];
   const segmentRanges = [[0, 7], [8, 18], [19, 24]];
 
   function updateScore() {
     let count = 0;
     for (let i = 0; i < answered.length; i++) {
-      if (answered[i]) count++;
+      if (answered[i] === true) count++;
     }
     totalCorrect = count;
     scoreBox.textContent = totalCorrect + ' / 25';
@@ -1373,11 +1402,11 @@
       const [start, end] = segmentRanges[s];
       let segCount = 0;
       for (let i = start; i <= end; i++) {
-        if (answered[i]) segCount++;
+        if (answered[i] === true) segCount++;
       }
       parts.push(segmentNames[s] + ' ' + segCount + '/' + (end - start + 1));
     }
-    scoreDetail.textContent = '各分类进度：' + parts.join(' · ');
+    scoreDetail.textContent = '各分类得分：' + parts.join(' · ');
   }
 
   questions.forEach(function(q, idx) {
@@ -1415,11 +1444,8 @@
         explainDiv.textContent = expText;
         explainDiv.className = 'explain show ' + (isCorrect ? 'ok' : 'fail');
 
-        if (!answered[idx]) {
-          answered[idx] = true;
-          if (isCorrect) totalCorrect++;
-          updateScore();
-        }
+        answered[idx] = isCorrect;
+        updateScore();
       });
     });
   });

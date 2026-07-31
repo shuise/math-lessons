@@ -87,6 +87,13 @@ h3 { color: #555; margin: 22px 0 8px; }
 .step-area.visible { display: block; }
 .step-area .step { margin: 4px 0; padding-left: 12px; border-left: 3px solid #bbb; }
 .step-area .answer { color: #2c3e50; font-weight: bold; margin: 8px 0 0; font-size: 1em; }
+.concept-figure { max-width: 360px; margin: 10px auto 14px; padding: 8px; background: #f8fbff; border: 1px solid #cfe3fa; border-radius: 8px; }
+.concept-figure svg { display: block; width: 100%; height: auto; }
+.concept-figure .draw-line { stroke-dasharray: 260; stroke-dashoffset: 260; animation: drawLine 1.8s ease forwards; }
+.concept-figure .pulse-point { transform-box: fill-box; transform-origin: center; animation: pulsePoint 1.6s ease-in-out infinite; }
+@keyframes drawLine { to { stroke-dashoffset: 0; } }
+@keyframes pulsePoint { 0%,100% { transform: scale(1); } 50% { transform: scale(1.35); } }
+@media (prefers-reduced-motion: reduce) { .concept-figure .draw-line { animation: none; stroke-dashoffset: 0; } .concept-figure .pulse-point { animation: none; } }
 
 /* 得分面板 */
 .score-panel { text-align: center; padding: 16px; margin: 20px 0; background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8; }
@@ -139,6 +146,7 @@ h3 { color: #555; margin: 22px 0 8px; }
 <article>
 <h1>三角函数测试卷</h1>
 <p class="tip">满分 100 分 · 面向高一新生（初中数学基础较好）</p>
+<p class="tip" style="font-size:0.88em;">判断、选择、计算题自动判分；证明题按关键步骤初评，提交后请对照评分要点复核</p>
 
 <div class="score-panel">
   得分：<span class="score-num" id="scoreDisplay">0</span> / 100
@@ -192,7 +200,7 @@ h3 { color: #555; margin: 22px 0 8px; }
 
   <h4>两角和与差</h4>
   <p class="f">sin(α±β) = sinα·cosβ ± cosα·sinβ　cos(α±β) = cosα·cosβ ∓ sinα·sinβ</p>
-  <p class="f">tan(α±β) = (tanα±tanβ) / (1∓tanα·tanβ)</p>
+  <p class="f">tan(α±β) = (tanα±tanβ) / (1∓tanα·tanβ)（各正切有定义且分母不为 0）</p>
 
   <h4>二倍角公式</h4>
   <p class="f">sin 2α = 2 sinα·cosα　tan 2α = 2 tanα / (1−tan²α)</p>
@@ -228,7 +236,7 @@ var judgeQs = [
   {q:"tan α = sin α / cos α（当 cos α ≠ 0 时）成立。", ans:0, exp:"正确。这是正切函数的定义式（商数关系）。"},
   {q:"sin(π + α) = sin α。", ans:1, exp:"错误。sin(π + α) = −sin α。"},
   {q:"第一象限角一定是锐角。", ans:1, exp:"错误。锐角是 0°~90° 的角，而第一象限角可以大于 90° 或为负角（如 390°、−330° 都在第一象限）。"},
-  {q:"若 sin α > 0，则 α 是第一或第二象限角。", ans:0, exp:"正确。sin α = 纵坐标 > 0，终边落在第一或第二象限。"},
+  {q:"若 sin α > 0，则 α 一定是第一或第二象限角。", ans:1, exp:"错误。sin α > 0 时终边在上半平面，也可能落在 y 轴正半轴上（如 α = π/2），此时不是象限角。"},
   {q:"终边相同的两个角一定相等。", ans:1, exp:"错误。终边相同的角相差 2π 的整数倍，如 30° 与 390° 终边相同但不相等。"},
   {q:"180° 等于 π 弧度。", ans:0, exp:"正确。180° = π rad，这是弧度制的基本换算关系。"},
   {q:"函数 y = cos x 是偶函数。", ans:0, exp:"正确。cos(−x) = cos x，图像关于 y 轴对称。"},
@@ -280,10 +288,11 @@ var calcQs = [
 ];
 
 var proofQs = [
-  {q:"证明同角关系：sin² α + cos² α = 1（提示：利用单位圆或直角三角形）。",
+  {q:"利用单位圆证明同角关系：sin² α + cos² α = 1。",
+   diagram:"unit",
    answer:"在单位圆中 sinα = y，cosα = x，由 x² + y² = 1 得 sin²α + cos²α = 1。",
-   keywords:["sin²α+cos²α=1"],
-   keywordMode:"or",
+   keywords:["单位圆","x²+y²=1","sin²α+cos²α=1"],
+   keywordMode:"and",
    steps:[
      "以原点为圆心作单位圆，角 α 的终边与单位圆交于点 P(cosα, sinα)。",
      "记 P 的坐标为 (x, y)，则 x = cosα，y = sinα。",
@@ -292,7 +301,7 @@ var proofQs = [
    ]},
   {q:"由两角和的余弦公式 cos(α + β) = cosαcosβ − sinαsinβ，证明二倍角公式 cos 2α = cos²α − sin²α，并写出另外两种等价形式。",
    answer:"令 β = α，得 cos 2α = cos²α − sin²α = 2cos²α − 1 = 1 − 2sin²α。",
-   keywords:["cos(α+α)","cos²α-sin²α"],
+   keywords:["cos(α+α)","cos²α-sin²α","2cos²α-1","1-2sin²α"],
    keywordMode:"and",
    steps:[
      "在公式 cos(α + β) = cosαcosβ − sinαsinβ 中，令 β = α。",
@@ -303,30 +312,31 @@ var proofQs = [
      "综上：cos 2α = cos²α − sin²α = 2cos²α − 1 = 1 − 2sin²α。"
    ]},
   {q:"利用单位圆的对称性，证明诱导公式 sin(π − α) = sin α。",
+   diagram:"reflect",
    answer:"点 P(cosα, sinα) 关于 y 轴对称得 P′(−cosα, sinα)，对应角为 π − α，故 sin(π − α) = sinα。",
-   keywords:["sin(π-α)=sinα"],
-   keywordMode:"or",
+   keywords:["关于y轴","纵坐标","sin(π-α)=sinα"],
+   keywordMode:"and",
    steps:[
      "设角 α 的终边与单位圆交于 P(cosα, sinα)。",
      "角 π − α 的终边与单位圆交于点 P′。",
      "P′ 是 P 关于 y 轴的对称点，坐标为 (−cosα, sinα)。",
      "因此 P′ 的纵坐标为 sinα，即 sin(π − α) = sin α。"
    ]},
-  {q:"证明两角和的正切公式：tan(α + β) = (tanα + tanβ) / (1 − tanα·tanβ)（其中 cosα·cosβ ≠ 0）。",
+  {q:"证明两角和的正切公式：tan(α + β) = (tanα + tanβ) / (1 − tanα·tanβ)（其中 cosα·cosβ·cos(α+β) ≠ 0）。",
    answer:"tan(α+β) = sin(α+β)/cos(α+β) = (sinαcosβ+cosαsinβ)/(cosαcosβ−sinαsinβ)，分子分母同除以 cosαcosβ 得结论。",
-   keywords:["tanα+tanβ","1-tanαtanβ"],
+   keywords:["sin(α+β)/cos(α+β)","cosαcosβ","tanα+tanβ","1-tanαtanβ"],
    keywordMode:"and",
    steps:[
      "由定义：tan(α + β) = sin(α + β) / cos(α + β)。",
      "代入两角和公式：sin(α+β) = sinαcosβ + cosαsinβ，cos(α+β) = cosαcosβ − sinαsinβ。",
-     "分子分母同时除以 cosα·cosβ（≠ 0）：",
+     "因为 cosα·cosβ ≠ 0，分子分母同时除以 cosα·cosβ：",
      "分子 → sinα/cosα + sinβ/cosβ = tanα + tanβ；",
      "分母 → 1 − tanα·tanβ。",
-     "故 tan(α + β) = (tanα + tanβ) / (1 − tanα·tanβ)。"
+     "又因 cos(α+β) ≠ 0，等价地 1−tanα·tanβ ≠ 0，故 tan(α + β) = (tanα + tanβ) / (1 − tanα·tanβ)。"
    ]},
   {q:"在 △ABC 中，证明 sin(A + B) = sin C。",
    answer:"由 A + B + C = π 得 A + B = π − C，故 sin(A+B) = sin(π − C) = sin C。",
-   keywords:["sin(A+B)","sinC"],
+   keywords:["A+B=π-C","sin(π-C)","sinC"],
    keywordMode:"and",
    steps:[
      "三角形内角和：A + B + C = π。",
@@ -381,6 +391,7 @@ function renderSingle(it) {
   var idx = it.num - 1;
   var html = '<div class="question-card" id="q' + idx + '">';
   html += '<div class="q-title">' + tagHtml + ' ' + it.num + '. ' + q.q + '</div>';
+  if (q.diagram) html += renderConceptDiagram(q.diagram);
 
   if (it.type === "judge" || it.type === "choice") {
     var labels = ["A","B","C","D"];
@@ -420,6 +431,25 @@ function renderSingle(it) {
   return html;
 }
 
+function renderConceptDiagram(kind) {
+  var common = '<line x1="24" y1="100" x2="236" y2="100" stroke="#9aa7b2"/><line x1="130" y1="12" x2="130" y2="188" stroke="#9aa7b2"/><circle cx="130" cy="100" r="70" fill="none" stroke="#1a73e8" stroke-width="2"/><text x="239" y="104" font-size="12">x</text><text x="134" y="15" font-size="12">y</text>';
+  if (kind === "unit") {
+    return '<div class="concept-figure" role="img" aria-label="单位圆中点 P 的横坐标为 cos α，纵坐标为 sin α">' +
+      '<svg viewBox="0 0 260 200">' + common +
+      '<line class="draw-line" x1="130" y1="100" x2="180" y2="50" stroke="#e65100" stroke-width="3"/>' +
+      '<line class="draw-line" x1="180" y1="50" x2="180" y2="100" stroke="#00695c" stroke-width="2" stroke-dasharray="5 4"/>' +
+      '<circle class="pulse-point" cx="180" cy="50" r="5" fill="#e65100"/><text x="185" y="46" font-size="12">P(cos α, sin α)</text>' +
+      '<text x="150" y="116" font-size="12" fill="#1a73e8">cos α</text><text x="184" y="78" font-size="12" fill="#00695c">sin α</text>' +
+      '</svg></div>';
+  }
+  return '<div class="concept-figure" role="img" aria-label="点 P 关于 y 轴对称到 P 撇，纵坐标不变">' +
+    '<svg viewBox="0 0 260 200">' + common +
+    '<line class="draw-line" x1="80" y1="50" x2="180" y2="50" stroke="#00695c" stroke-width="2" stroke-dasharray="6 4"/>' +
+    '<circle class="pulse-point" cx="180" cy="50" r="5" fill="#e65100"/><circle class="pulse-point" cx="80" cy="50" r="5" fill="#1a73e8"/>' +
+    '<text x="185" y="46" font-size="12">P</text><text x="62" y="46" font-size="12">P′</text><text x="92" y="42" font-size="12" fill="#00695c">纵坐标同为 sin α</text>' +
+    '</svg></div>';
+}
+
 // 判断/选择题：即时反馈
 function selectOpt(qi, oi) {
   if (answered[qi] !== -1) return;
@@ -439,15 +469,18 @@ function selectOpt(qi, oi) {
   updateScore();
 }
 
-// 计算题：答案匹配
+function normalizeText(s) {
+  return s.replace(/\u2212/g,"-").replace(/－/g,"-").replace(/\s+/g,"");
+}
+
+// 计算题：按预设的等价格式进行严格匹配
 function checkCalc(qi) {
   if (answered[qi] !== -1) return;
   var input = document.getElementById("input" + qi);
   var q = calcQs[qi - 40];
-  var norm = function(s){ return s.replace(/\u2212/g,"-").replace(/\s+/g,""); };
-  var user = norm(input.value.trim());
-  var ans = norm(q.answer);
-  var isCorrect = (user !== "" && (user === ans || user.indexOf(ans) !== -1));
+  var user = normalizeText(input.value.trim());
+  var accepted = (q.answers || [q.answer]).map(normalizeText);
+  var isCorrect = (user !== "" && accepted.indexOf(user) !== -1);
   answered[qi] = isCorrect ? 1 : 0;
   input.disabled = true;
   document.getElementById("btn" + qi).disabled = true;
@@ -465,11 +498,11 @@ function checkProof(qi) {
   if (answered[qi] !== -1) return;
   var input = document.getElementById("input" + qi);
   var q = proofQs[qi - 55];
-  var user = input.value.trim();
+  var user = normalizeText(input.value.trim());
   var matchCount = 0;
   if (q.keywords && q.keywords.length > 0) {
     for (var k = 0; k < q.keywords.length; k++) {
-      if (user.indexOf(q.keywords[k]) !== -1) matchCount++;
+      if (user.indexOf(normalizeText(q.keywords[k])) !== -1) matchCount++;
     }
   }
   var isCorrect = (q.keywordMode === "or") ? (matchCount >= 1) : (matchCount >= q.keywords.length);
@@ -482,7 +515,7 @@ function checkProof(qi) {
   var stepArea = document.getElementById("steps" + qi);
   if (stepArea) stepArea.classList.add("visible");
   var exp = document.getElementById("exp" + qi);
-  exp.innerHTML = (isCorrect ? "✓ 推导方向正确！" : "✗ 参考答案见下方，请对照核对自己的推导。");
+  exp.innerHTML = (isCorrect ? "✓ 关键词初评：关键步骤完整，请再对照下方评分要点复核。" : "✗ 关键词初评：步骤可能不完整；参考答案见下方，请对照核对。");
   exp.className = "explain show " + (isCorrect ? "ok" : "fail");
   updateScore();
 }

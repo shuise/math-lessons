@@ -161,7 +161,7 @@ h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding
         <li>本卷共 <strong>53 题</strong>，满分 <strong>150 分</strong>，限时 <strong>60 分钟</strong>，超时自动交卷</li>
         <li>题型与分值：判断题 20 题 × 2 分、选择题 20 题 × 2 分、计算题 10 题 × 4 分、证明题 3 题 × 10 分</li>
         <li>选择题/判断题点击选项作答；计算题在输入框中填写结果；证明题在文本框写出关键步骤</li>
-        <li>提交后系统自动判卷，并生成 <strong>成绩分析报告</strong>（500-800 字），指出薄弱环节与改进建议</li>
+        <li>提交后客观题自动判卷；证明题按关键步骤初评并给出评分依据，需自行复核；同时生成 <strong>成绩分析报告</strong>（500-800 字）</li>
         <li>点击下方按钮开始考试</li>
       </ul>
     </div>
@@ -217,7 +217,7 @@ var judgeQs = [
   {topic:"单调性", q:"函数 f(x) = x² 在整个实数集 R 上单调递减。", ans:1, exp:"错误。x² 在 (−∞,0] 上递减、在 [0,+∞) 上递增，在 R 上整体不单调。"},
   {topic:"奇偶性", q:"奇函数一定经过原点 (0,0)。", ans:1, exp:"错误。x=0 不一定在定义域内，例如 f(x)=1/x 是奇函数但不经过原点。"},
   {topic:"二次函数", q:"二次函数 y = ax²+bx+c（a>0）的顶点是最小值点。", ans:0, exp:"正确。a>0 时开口向上，顶点处取得最小值。"},
-  {topic:"指数对数", q:"指数函数 y = 2^x 的值域为 (0, +∞)。", ans:0, exp:"正确。对任意实数 x，2^x > 0 恒成立，且可趋于 0 与 +∞，故值域为 (0,+∞)。"},
+  {topic:"指数对数", q:"指数函数 y = 2^x 的值域为 (0, +∞)。", ans:0, exp:"正确。对任意实数 x，2^x > 0 恒成立，且可无限接近 0 或无限增大，故值域为 (0,+∞)。"},
   {topic:"指数对数", q:"对数函数 y = log₂x 在 (0, +∞) 上单调递增。", ans:0, exp:"正确。底数 2 > 1，对数函数在定义域上严格递增。"},
   {topic:"反函数", q:"函数 y = 2^x 与 y = log₃x 互为反函数。", ans:1, exp:"错误。2^x 的反函数是 y = log₂x（底数必须一致），与 log₃x 不是反函数。"},
   {topic:"幂函数", q:"幂函数 y = x^α 的图像都经过点 (1, 1)。", ans:0, exp:"正确。对任意实数 α，1^α = 1 恒成立，所有幂函数都过 (1,1)。"},
@@ -253,7 +253,7 @@ var choiceQs = [
   {topic:"单调性", q:"函数 y = |x+1| 的单调递减区间是（　）", opts:["(−∞, −1]","[−1, +∞)","(−∞, 1]","[1, +∞)"], ans:0, exp:"y = |x+1| 在 (−∞,−1] 上递减、在 [−1,+∞) 上递增。"},
   {topic:"奇偶性", diff:"gaokao", q:"（高考）定义在 R 上的奇函数 f(x)，当 x > 0 时 f(x) = x² − 2x，则 x < 0 时 f(x) =（　）", opts:["−x² − 2x","x² + 2x","−x² + 2x","x² − 2x"], ans:0, exp:"x<0 时 −x>0，f(x) = −f(−x) = −[(−x)²−2(−x)] = −(x²+2x) = −x²−2x。"},
   {topic:"综合应用", diff:"gaokao", q:"（高考）函数 f(x) = |x−1| + |x−2| 的最小值是（　）", opts:["0","1","2","3"], ans:1, exp:"由绝对值三角不等式 |x−1|+|x−2| ≥ |(x−1)−(x−2)| = 1，当 1 ≤ x ≤ 2 时取等号，最小值为 1。"},
-  {topic:"奇偶性", diff:"gaokao", q:"（高考）若函数 f(x) = a·2^x + 1 是奇函数，则 a =（　）", opts:["−1","0","1","2"], ans:0, exp:"奇函数且定义域为 R，则 f(0) = 0，即 a·1 + 1 = 0，解得 a = −1。"}
+  {topic:"奇偶性", diff:"gaokao", q:"（高考）若函数 f(x) = a·2^x + 2^(−x) 是奇函数，则 a =（　）", opts:["−1","0","1","2"], ans:0, exp:"奇函数要求 f(−x)=−f(x)。比较 2^x 与 2^(−x) 的系数，得 a=−1；此时 f(x)=2^(−x)−2^x，确为奇函数。"}
 ];
 var calcQs = [
   {topic:"二次函数", q:"求二次函数 f(x) = x² − 2x + 3 的最小值。", ans:["2"], exp:"配方 f(x) = (x−1)² + 2，当 x = 1 时最小值为 2。"},
@@ -294,9 +294,9 @@ proofQs.forEach(function(q){qs.push(q); PTS.push(10);});
 var TOTAL = 150;
 
 function qtype(i) {
-  if (i < 20) return "judge";
-  if (i < 40) return "choice";
-  if (i < 50) return "calc";
+  if (i < judgeQs.length) return "judge";
+  if (i < judgeQs.length + choiceQs.length) return "choice";
+  if (i < judgeQs.length + choiceQs.length + calcQs.length) return "calc";
   return "proof";
 }
 function qtag(i) {
@@ -404,9 +404,8 @@ function normStr(s) {
     .replace(/\u2212/g, "-").replace(/－/g, "-")
     .replace(/≤/g, "<=").replace(/≥/g, ">=")
     .replace(/（/g, "(").replace(/）/g, ")")
-    .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g, function(c){return "0123456789"[c.charCodeAt(0) - 0x2070];})
+    .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g, function(c){return {"⁰":"0","¹":"1","²":"2","³":"3","⁴":"4","⁵":"5","⁶":"6","⁷":"7","⁸":"8","⁹":"9"}[c];})
     .replace(/[₀₁₂₃₄₅₆₇₈₉]/g, function(c){return "0123456789"[c.charCodeAt(0) - 0x2080];})
-    .replace(/[²³⁴⁵⁶⁷⁸⁹]/g, function(c){return "23456789"["²³⁴⁵⁶⁷⁸⁹".indexOf(c)];})
     .replace(/\s+/g, "");
 }
 
@@ -416,7 +415,7 @@ function calcMatch(user, q) {
   for (var i = 0; i < q.ans.length; i++) {
     var a = normStr(q.ans[i]);
     if (a.length <= 2) { if (u === a) return true; }
-    else if (u.indexOf(a) !== -1) return true;
+    else if (u === a) return true;
   }
   return false;
 }
@@ -514,7 +513,7 @@ function submitExam() {
   document.getElementById("bigScore").textContent = total + " / 150";
   document.getElementById("bigScore").className = "big-score" + (total >= 90 ? " pass" : " fail");
   document.getElementById("scoreDetail").textContent =
-    "判断 " + stats.judge + "/40 · 选择 " + stats.choice + "/40 · 计算 " + stats.calc + "/40 · 证明 " + stats.proof + "/30";
+    "判断 " + stats.judge + "/40 · 选择 " + stats.choice + "/40 · 计算 " + stats.calc + "/40 · 证明初评 " + stats.proof + "/30";
   var paras = buildReport(stats);
   document.getElementById("analysisBox").innerHTML = "<p>" + paras.join("</p><p>") + "</p>";
   document.getElementById("resultModal").classList.add("visible");

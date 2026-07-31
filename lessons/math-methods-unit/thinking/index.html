@@ -234,7 +234,7 @@ h3 {
 
 <div class="question-card" data-correct="2" data-idx="8">
   <div class="q-title">题 9</div>
-  <p style="margin:6px 0;">若关于 x 的方程 x² − 2mx + 1 = 0 的两个根均在区间 (0, 2) 内，则实数 m 的取值范围是：</p>
+  <p style="margin:6px 0;">若关于 x 的方程 x² − 2mx + 1 = 0 的两个实根（可重合）均在区间 (0, 2) 内，则实数 m 的取值范围是：</p>
   <div class="options">
     <div class="opt" data-val="0">A. m &gt; 0</div>
     <div class="opt" data-val="1">B. m ≥ 1</div>
@@ -423,7 +423,7 @@ h3 {
 <!-- 底部评分面板 -->
 <div class="quiz-footer">
   <div class="score-box" id="scoreBox">0 / 21</div>
-  <div class="score-detail" id="scoreDetail">各思想进度：数形结合 0/3 · 分类讨论 0/3 · 函数与方程 0/3 · 化归与转化 0/3 · 特殊与一般 0/3 · 有限与无限 0/3 · 或然与必然 0/3</div>
+  <div class="score-detail" id="scoreDetail">各思想得分：数形结合 0/3 · 分类讨论 0/3 · 函数与方程 0/3 · 化归与转化 0/3 · 特殊与一般 0/3 · 有限与无限 0/3 · 或然与必然 0/3</div>
   <div class="btn-reset" id="resetBtn">重新作答</div>
 </div>
 
@@ -488,8 +488,8 @@ h3 {
       fail: '异面直线无法直接测量角度，通过作其中一条直线的平行线使之与另一条相交，就将陌生问题转化为熟悉的相交直线夹角问题。'
     },
     {
-      ok: '正确！sinθ+cosθ=1/5，两边平方得 1+sin2θ=1/25，sin2θ=−24/25。由 θ∈(0,π) 且 sinθ+cosθ>0 不成立可知 θ 在第二象限，tanθ<0。解方程可得 tanθ=−3/4。',
-      fail: '注意由 sinθ+cosθ=1/5 可知 cosθ<0（否则和会更大），θ 在第二象限。平方后得 sin2θ=−24/25，再化归为 tanθ 的方程求解，得 −3/4。'
+      ok: '正确！sinθ+cosθ=1/5，两边平方得 1+sin2θ=1/25，即 sin2θ=−24/25<0，故 θ 在第二象限。设 tanθ=t（t<0），由 sinθ+cosθ>0 知 |tanθ|>1，即 t<−1。由 (sinθ+cosθ)²=(t+1)²/(t²+1)=1/25 解得 12t²+25t+12=0，t=−3/4 或 t=−4/3，舍去 t=−3/4（>−1），故 tanθ=−4/3。',
+      fail: '由 sinθ+cosθ=1/5>0 且 sin2θ=−24/25<0，可知 θ 为第二象限角且 tanθ<−1。设 tanθ=t 代入 (sinθ+cosθ)²=1/25 得 t=−3/4 或 t=−4/3，舍去 −3/4（tanθ>−1），得 tanθ=−4/3。'
     },
     // 12-14: 特殊与一般
     {
@@ -539,7 +539,7 @@ h3 {
   function updateScore() {
     let count = 0;
     for (let i = 0; i < answered.length; i++) {
-      if (answered[i]) count++;
+      if (answered[i] === true) count++;
     }
     totalCorrect = count;
     scoreBox.textContent = totalCorrect + ' / 21';
@@ -550,11 +550,11 @@ h3 {
       const [start, end] = segmentRanges[s];
       let segCount = 0;
       for (let i = start; i <= end; i++) {
-        if (answered[i]) segCount++;
+        if (answered[i] === true) segCount++;
       }
       parts.push(segmentNames[s] + ' ' + segCount + '/3');
     }
-    scoreDetail.textContent = '各思想进度：' + parts.join(' · ');
+    scoreDetail.textContent = '各思想得分：' + parts.join(' · ');
   }
 
   questions.forEach(function(q, idx) {
@@ -592,11 +592,8 @@ h3 {
         explainDiv.textContent = expText;
         explainDiv.className = 'explain show ' + (isCorrect ? 'ok' : 'fail');
 
-        if (!answered[idx]) {
-          answered[idx] = true;
-          if (isCorrect) totalCorrect++;
-          updateScore();
-        }
+        answered[idx] = isCorrect;
+        updateScore();
       });
     });
   });

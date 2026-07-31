@@ -68,6 +68,18 @@ h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding
 .quiz-question .explain.show { display: block; }
 .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
 .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+.exam-diagram { margin: 10px 0 12px; padding: 8px 0; border-top: 1px solid #e4e7eb; border-bottom: 1px solid #e4e7eb; }
+.exam-diagram svg { display: block; width: 100%; height: auto; max-height: 240px; }
+.exam-diagram .draw-shape {
+  animation: highlight-shape 1.8s ease-in-out infinite;
+}
+.exam-diagram .key-mark { transform-box: fill-box; transform-origin: center; animation: key-mark 1.4s ease-in-out infinite; }
+@keyframes highlight-shape { 50% { stroke-width: 5; opacity: 0.72; } }
+@keyframes key-mark { 50% { transform: scale(1.45); } }
+@media (prefers-reduced-motion: reduce) {
+  .exam-diagram .draw-shape { animation: none; }
+  .exam-diagram .key-mark { animation: none; }
+}
 
 /* ------ 填空题样式 ------ */
 .fill-card {
@@ -130,14 +142,34 @@ h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding
   background: #fff; cursor: pointer; font-size: 1em; transition: 0.15s;
 }
 .reset-btn:hover { background: #e3f2fd; }
+
+/* ------ 思路分析按钮与面板 ------ */
+.btn-think {
+  margin-top: 10px; padding: 6px 18px;
+  border: 2px solid #9c27b0; color: #9c27b0;
+  border-radius: 16px; background: #fff;
+  cursor: pointer; font-size: 0.88em; transition: 0.15s; user-select: none;
+}
+.btn-think:hover { background: #f3e5f5; }
+.btn-think.open { background: #9c27b0; color: #fff; }
+.think-panel {
+  display: none; margin-top: 10px; padding: 10px 14px;
+  border-radius: 8px; font-size: 0.93em; line-height: 1.8;
+  background: #f3e5f5; border-left: 4px solid #9c27b0;
+}
+.think-panel.show { display: block; }
+.think-panel .analysis-label {
+  display: inline-block; background: #9c27b0; color: #fff;
+  padding: 1px 8px; border-radius: 4px; font-size: 0.82em; margin-right: 6px;
+}
 </style>
 </head>
 <body>
 <a class="back" href="../../index.html">&larr; 返回课程列表</a>
 <article>
 <h1>综合考验</h1>
-<p class="tip">总分 100 分 · 时间 30 分钟 · 高考难度 60% + 奥数难度 40%</p>
-<p class="tip" style="font-size:0.9em;">选择题点击选项提交答案，填空题填写后点击"确认"提交。</p>
+<p class="tip">总分 100 分 · 建议用时 30 分钟 · 高考难度 60% + 奥数难度 40%</p>
+<p class="tip" style="font-size:0.9em;">选择题点击选项提交答案，填空题填写后点击"确认"提交。每题的「思路分析」按钮只给解题思路、不给答案，先自己想再看。</p>
 
 <!-- ==================== 第一部分：选择题 ==================== -->
 <section>
@@ -171,84 +203,98 @@ var choiceQuestions = [
     question: "已知函数 f(x) = x³ - 3x + 1，则方程 f(x) = 0 在 [-2, 2] 上的实数根个数为（  ）",
     opts: ["1 个", "2 个", "3 个", "4 个"],
     answer: 2,
-    explain: "f(-2) = -8 + 6 + 1 = -1 &lt; 0，f(-1) = -1 + 3 + 1 = 3 &gt; 0，f(1) = 1 - 3 + 1 = -1 &lt; 0，f(2) = 8 - 6 + 1 = 3 &gt; 0。由零点定理，f(x) 在 (-2,-1)、(-1,1)、(1,2) 上各有一个零点，共 3 个实数根。"
+    explain: "f(-2) = -8 + 6 + 1 = -1 &lt; 0，f(-1) = -1 + 3 + 1 = 3 &gt; 0，f(1) = 1 - 3 + 1 = -1 &lt; 0，f(2) = 8 - 6 + 1 = 3 &gt; 0。由零点定理，三个互不相交的区间 (-2,-1)、(-1,1)、(1,2) 内各至少有一个零点；三次方程至多有 3 个实数根，所以恰有 3 个。",
+    think: "判断方程的实根个数，先把方程问题转化为函数零点问题：令 f(x)=x³-3x+1，用零点定理（连续函数在变号区间内必有零点）检验区间端点的函数值符号。为什么可行？f 在闭区间上连续，符号每变一次就锁定一个根，而三次函数至多 3 个根，找到几个变号区间就能确定根的个数。"
   },
   {
     diff: "高考",
     question: "函数 f(x) = ln(x² - 2x + 2) 的值域是（  ）",
     opts: ["[0, +∞)", "(0, +∞)", "(-∞, +∞)", "[ln2, +∞)"],
     answer: 0,
-    explain: "令 t = x² - 2x + 2 = (x-1)² + 1 ≥ 1。所以 t ∈ [1, +∞)。y = ln t 在 [1, +∞) 上单调递增，且 ln1 = 0，所以值域为 [0, +∞)。"
+    explain: "令 t = x² - 2x + 2 = (x-1)² + 1 ≥ 1。所以 t ∈ [1, +∞)。y = ln t 在 [1, +∞) 上单调递增，且 ln1 = 0，所以值域为 [0, +∞)。",
+    think: "复合函数求值域，用「由内到外」的剥离策略：先看内层 t=x²-2x+2，配方成 (x-1)²+1，得到它的范围 t≥1；再看外层 y=ln t 在 t≥1 上单调递增，把 t 的范围逐层映射到 y。为什么有效？内层的值域就是外层函数的定义域，层层传递即可。"
   },
   {
     diff: "高考",
     question: "等差数列 {aₙ} 中，a₁ + a₃ + a₅ = 12，则 a₃ =（  ）",
     opts: ["2", "3", "4", "6"],
     answer: 2,
-    explain: "由等差数列性质，a₁ + a₃ + a₅ = a₁ + (a₁ + 2d) + (a₁ + 4d) = 3a₁ + 6d = 3(a₁ + 2d) = 3a₃ = 12，所以 a₃ = 4。"
+    explain: "由等差数列性质，a₁ + a₃ + a₅ = a₁ + (a₁ + 2d) + (a₁ + 4d) = 3a₁ + 6d = 3(a₁ + 2d) = 3a₃ = 12，所以 a₃ = 4。",
+    think: "等差数列的问题优先用「等差中项」：下标和为定值的若干项之间有对称关系。把 a₁、a₅ 都用 a₃ 和公差 d 表示，代入后 d 恰好抵消，三项和就是 3a₃。为什么能想到？等差中项是相邻项的对称中心，用它做桥梁最省力。"
   },
   {
     diff: "高考",
     question: "等比数列 {aₙ} 中，a₂ = 2，a₅ = 16，则公比 q =（  ）",
     opts: ["±2", "2", "±4", "4"],
     answer: 1,
-    explain: "a₅ = a₂ · q³，即 16 = 2q³，得 q³ = 8，所以 q = 2（实数范围内 q > 0 也可取）。"
+    explain: "a₅ = a₂ · q³，即 16 = 2q³，得 q³ = 8，所以 q = 2（实数范围内 q > 0 也可取）。",
+    think: "已知等比数列的两项求公比，不必列方程组，直接「作比消去首项」：两项下标相差 3，它们的比就是 q³，再开立方。为什么可以？等比数列 aₙ=a₁·qⁿ⁻¹，作比时首项 a₁ 约去，只剩公比的幂。"
   },
   {
     diff: "高考",
-    question: "从 1, 2, 3, 4, 5 中任取两个不同的数，其和为偶数的概率为（  ）",
-    opts: ["1/5", "2/5", "3/5", "4/5"],
+    question: "定义在 R 上的偶函数 f(x) 在 [0, +∞) 上单调递减，且 f(-2) = 3，则满足 f(x) ≤ 3 的 x 的取值范围是（  ）",
+    opts: ["[-2, 2]", "(-∞, -2] ∪ [2, +∞)", "(-2, 2)", "[2, +∞)"],
     answer: 1,
-    explain: "和为偶数 → 两数同奇或同偶。奇数有 1,3,5 共 3 个，C(3,2)=3 种取法；偶数有 2,4 共 2 个，C(2,2)=1 种取法。总取法 C(5,2)=10。所以概率 = (3+1)/10 = 2/5。"
+    explain: "由偶函数性质 f(x) = f(|x|)，且 f(-2) = f(2) = 3。在 [0, +∞) 上单调递减，所以 f(|x|) ≤ f(2) ⟺ |x| ≥ 2，即 x ≤ -2 或 x ≥ 2。",
+    think: "解抽象函数不等式，先利用偶函数对称性把自变量化到同一单调区间：f(x)=f(|x|)。再由单调递减把函数值比较翻译为自变量比较——值小对应的自变量反而大，所以 f(|x|) ≤ f(2) ⟺ |x| ≥ 2。为什么能翻转？单调函数在函数值与自变量之间一一对应，比较方向可以互换（递减时反向）。"
   },
   {
     diff: "高考",
-    question: "一枚硬币抛 3 次，恰好出现 2 次正面向上的概率为（  ）",
-    opts: ["1/8", "3/8", "1/2", "5/8"],
-    answer: 1,
-    explain: "总共有 2³ = 8 种等可能结果。恰好 2 次正面向上即从 3 次中选择 2 次为正面，有 C(3,2)=3 种。所以概率 = 3/8。"
+    question: "函数 f(x) = √(1 - x²) + lg(x + 1) 的定义域为（  ）",
+    opts: ["(-1, 1]", "[-1, 1]", "[-1, 1)", "(-1, 1)"],
+    answer: 0,
+    explain: "根号内 1 - x² ≥ 0，得 -1 ≤ x ≤ 1；lg(x+1) 的真数 x + 1 > 0，得 x > -1。取交集得 (-1, 1]。",
+    think: "求函数定义域，就是「列限制、取交集」：根号要求被开方数非负（1 - x² ≥ 0），对数要求真数大于 0（x + 1 > 0），一个 x 必须同时满足所有部分。为什么端点要小心？x = -1 时真数为 0、对数无意义，所以 -1 端取开区间，1 端可取闭区间。"
   },
   {
     diff: "高考",
     question: "在 △ABC 中，角 A、B、C 对边分别为 a、b、c。若 a² + b² = c² + ab，则角 C =（  ）",
+    diagram: "triangle",
     opts: ["30°", "45°", "60°", "90°"],
     answer: 2,
-    explain: "由余弦定理：cos C = (a² + b² - c²) / (2ab) = ab / (2ab) = 1/2。所以 C = 60°。"
+    explain: "由余弦定理：cos C = (a² + b² - c²) / (2ab) = ab / (2ab) = 1/2。所以 C = 60°。",
+    think: "已知三边关系求角，条件里已经出现 a²+b²-c² 的结构，直接联想余弦定理 cos C=(a²+b²-c²)/(2ab)。把题设变形出 a²+b²-c²=ab 整体代入，分母约去即得 cos C。关键：见边的关系式就往余弦定理的标准形式凑。"
   },
   {
     diff: "高考",
     question: "圆 x² + y² - 2x + 4y = 0 的圆心坐标是（  ）",
+    diagram: "circle",
     opts: ["(1, -2)", "(-1, 2)", "(1, 2)", "(-1, -2)"],
     answer: 0,
-    explain: "配方：(x² - 2x + 1) + (y² + 4y + 4) = 5，即 (x - 1)² + (y + 2)² = 5。所以圆心为 (1, -2)。"
+    explain: "配方：(x² - 2x + 1) + (y² + 4y + 4) = 5，即 (x - 1)² + (y + 2)² = 5。所以圆心为 (1, -2)。",
+    think: "圆的方程化为标准式 (x-a)²+(y-b)²=r² 就能直接读出圆心。题目给的是二元二次一般式，处理手段是「配方」：x²-2x 配成 (x-1)²，y²+4y 配成 (y+2)²，常数项相应调整。为什么想到配方？标准式与圆心、半径一一对应。"
   },
   {
     diff: "高考",
     question: "已知 x > 0，y > 0，且 x + y = 4，则 xy 的最大值为（  ）",
     opts: ["2", "4", "8", "16"],
     answer: 1,
-    explain: "由基本不等式：√(xy) ≤ (x + y)/2 = 2，所以 xy ≤ 4。当且仅当 x = y = 2 时取等号。"
+    explain: "由基本不等式：√(xy) ≤ (x + y)/2 = 2，所以 xy ≤ 4。当且仅当 x = y = 2 时取等号。",
+    think: "两个正数和为定值、求积的最大值，这是基本不等式的典型场景：x+y 固定时，xy ≤ ((x+y)/2)²，等号在 x=y 时取得。为什么成立？均值不等式 √(xy) ≤ (x+y)/2，两边平方即得。看到「和定」，直接锁定均值不等式。"
   },
   {
     diff: "高考",
     question: "不等式 |x - 1| + |x + 2| ≤ 5 的解集为（  ）",
     opts: ["[-3, 2]", "[-2, 4]", "[-1, 3]", "[-4, 1]"],
     answer: 0,
-    explain: "分三段讨论：<br>x &lt; -2 时：-(x-1)-(x+2) ≤ 5 → -2x ≤ 6 → x ≥ -3，得 [-3, -2)；<br>-2 ≤ x ≤ 1 时：-(x-1)+(x+2) = 3 ≤ 5 恒成立，得 [-2, 1]；<br>x &gt; 1 时：(x-1)+(x+2) ≤ 5 → 2x ≤ 4 → x ≤ 2，得 (1, 2]。<br>综上，解集为 [-3, 2]。"
+    explain: "分三段讨论：<br>x &lt; -2 时：-(x-1)-(x+2) ≤ 5 → -2x ≤ 6 → x ≥ -3，得 [-3, -2)；<br>-2 ≤ x ≤ 1 时：-(x-1)+(x+2) = 3 ≤ 5 恒成立，得 [-2, 1]；<br>x &gt; 1 时：(x-1)+(x+2) ≤ 5 → 2x ≤ 4 → x ≤ 2，得 (1, 2]。<br>综上，解集为 [-3, 2]。",
+    think: "含绝对值之和的不等式，用「零点分段法」：令每个绝对值内的式子为 0，得分界点，把数轴分成三段。每一段内绝对值符号确定，去掉绝对值变成普通不等式分别求解，最后合并各段解集。为什么有效？分段后绝对值化为一次式，问题直接降维。"
   },
   {
     diff: "高考",
     question: "已知 f(x) 是定义在 R 上的奇函数，当 x > 0 时 f(x) = x² - 2x，则 f(-1) =（  ）",
     opts: ["-1", "0", "1", "3"],
     answer: 2,
-    explain: "奇函数满足 f(-x) = -f(x)。所以 f(-1) = -f(1) = -(1² - 2×1) = -(-1) = 1。"
+    explain: "奇函数满足 f(-x) = -f(x)。所以 f(-1) = -f(1) = -(1² - 2×1) = -(-1) = 1。",
+    think: "自变量是负的，不在已知解析式的作用范围内，突破口是奇函数性质 f(-x)=-f(x)：把负自变量的问题「搬」到正区间，先算 f(1) 再取相反数。为什么能想到？奇偶性就是连接对称区间上函数值的桥梁。"
   },
   {
     diff: "高考",
     question: "若函数 f(x) = ax² + bx + c 满足 f(1) = 0，f(2) = 0，f(0) = 2，则 f(x) 的表达式为（  ）",
     opts: ["x² - 3x + 2", "x² + 3x + 2", "-x² - 3x + 2", "x² - 3x - 2"],
     answer: 0,
-    explain: "由 f(0) = 2 得 c = 2。由 f(1) = a + b + 2 = 0，f(2) = 4a + 2b + 2 = 0。解得 a = 1，b = -3。所以 f(x) = x² - 3x + 2。"
+    explain: "由 f(0) = 2 得 c = 2。由 f(1) = a + b + 2 = 0，f(2) = 4a + 2b + 2 = 0。解得 a = 1，b = -3。所以 f(x) = x² - 3x + 2。",
+    think: "确定二次函数解析式用「待定系数法」：设 f(x)=ax²+bx+c，把三个条件分别代入，得到关于 a、b、c 的方程组。先由 f(0)=2 直接得 c，再解出 a、b。为什么可行？二次函数有 3 个待定系数，恰好需要 3 个独立条件。"
   },
 
   // ========== 奥数难度 Q13~Q14 ==========
@@ -257,14 +303,16 @@ var choiceQuestions = [
     question: "集合 S = {1, 2, ..., 10} 的子集 A 满足：若 a ∈ A 则 a + 1 ∉ A。求满足条件的 A 的个数为（  ）",
     opts: ["89", "144", "233", "256"],
     answer: 1,
-    explain: "问题等价于从 1~10 中选数，相邻数字不能同时选。设 f(n) 为 {1,...,n} 中满足条件的子集数。f(1)=2（选/不选 1），f(2)=3（∅,{1},{2}）。递推：考虑 n，若选 n 则不能选 n-1，f(n) = f(n-2) + f(n-1)。得 f(10)=144。这正是斐波那契数列 F₁₂。"
+    explain: "问题等价于从 1~10 中选数，相邻数字不能同时选。设 f(n) 为 {1,...,n} 中满足条件的子集数。f(1)=2（选/不选 1），f(2)=3（∅,{1},{2}）。递推：考虑 n，若选 n 则不能选 n-1，f(n) = f(n-2) + f(n-1)。得 f(10)=144。这正是斐波那契数列 F₁₂。",
+    think: "相邻两数不能同时入选，属于「局部限制的计数问题」，最优策略是从小规模归纳递推。设 f(n) 为 {1,…,n} 中满足条件的子集个数，对 n 分类：不选 n 有 f(n-1) 种，选 n 则 n-1 必不选、有 f(n-2) 种，得递推式后从小到大算。为什么递推？直接枚举子集数量太大，递推把大问题化归成小问题。"
   },
   {
     diff: "奥数",
     question: "方程 x + y + z = 10 的正整数解有多少组？（  ）",
     opts: ["28", "36", "45", "84"],
     answer: 1,
-    explain: "将 10 个 1 排成一排，中间有 9 个空隙，插入 2 个隔板分成 3 份，对应 x、y、z 的值。所以解数为 C(9, 2) = 36 组。这是经典的隔板法（插板法）应用。"
+    explain: "将 10 个 1 排成一排，中间有 9 个空隙，插入 2 个隔板分成 3 份，对应 x、y、z 的值。所以解数为 C(9, 2) = 36 组。这是经典的隔板法（插板法）应用。",
+    think: "求正整数解组数，本质是把整数「切分」成若干份。用隔板法：把 10 看成 10 个 1 排成一排，中间有 9 个空隙，插入 2 个隔板就分成 3 份，对应 x、y、z。为什么可行？每份至少一个 1，正好对应在空隙中放隔板，一一对应不重不漏。"
   }
 ];
 
@@ -277,42 +325,48 @@ var fillQuestions = [
     question: "1 到 2025 中，既不是 2 的倍数也不是 3 的倍数的整数共有 ___ 个。",
     answer: "675",
     answerType: "number",
-    explain: "总数 2025。2 的倍数有 ⌊2025/2⌋ = 1012 个，3 的倍数有 ⌊2025/3⌋ = 675 个，6 的倍数有 ⌊2025/6⌋ = 337 个。由容斥原理，既不是 2 也不是 3 的倍数：2025 - 1012 - 675 + 337 = 675。"
+    explain: "总数 2025。2 的倍数有 ⌊2025/2⌋ = 1012 个，3 的倍数有 ⌊2025/3⌋ = 675 个，6 的倍数有 ⌊2025/6⌋ = 337 个。由容斥原理，既不是 2 也不是 3 的倍数：2025 - 1012 - 675 + 337 = 675。",
+    think: "统计「既不属于 A 也不属于 B」的个数，用容斥原理：总数 − |A| − |B| + |A∩B|。这里 A 是 2 的倍数、B 是 3 的倍数，A∩B 是 6 的倍数，分别用取整除法 [n/2]、[n/3]、[n/6] 算出个数。为什么加回交集？同时是 2 和 3 的倍数被减了两次，要补回来。"
   },
   {
     diff: "奥数",
     question: "将 11 个相同的小球放入 3 个不同的盒子，每个盒子至少一个，有 ___ 种不同放法。",
     answer: "45",
     answerType: "number",
-    explain: "隔板法：11 个小球排成一排，中间有 10 个空隙，插入 2 个隔板分成 3 份（对应 3 个盒子）。所以放法数为 C(10, 2) = 45。"
+    explain: "隔板法：11 个小球排成一排，中间有 10 个空隙，插入 2 个隔板分成 3 份（对应 3 个盒子）。所以放法数为 C(10, 2) = 45。",
+    think: "相同物品分给不同盒子且每盒至少一个，直接用隔板法：11 个小球排成一排，10 个空隙中选 2 个放隔板，分成 3 份。为什么与放法一一对应？隔板的位置决定每份（每盒）几个，且「每份至少一个」恰好对应隔板不能放在两端。"
   },
   {
     diff: "奥数",
     question: "已知 a₁ = 1，aₙ₊₁ = 2aₙ + 1，则 a₁₀ = ___。",
     answer: "1023",
     answerType: "number",
-    explain: "aₙ₊₁ + 1 = 2(aₙ + 1)，所以 {aₙ + 1} 是以 a₁ + 1 = 2 为首项、2 为公比的等比数列。aₙ + 1 = 2·2ⁿ⁻¹ = 2ⁿ，故 aₙ = 2ⁿ - 1。所以 a₁₀ = 2¹⁰ - 1 = 1024 - 1 = 1023。"
+    explain: "aₙ₊₁ + 1 = 2(aₙ + 1)，所以 {aₙ + 1} 是以 a₁ + 1 = 2 为首项、2 为公比的等比数列。aₙ + 1 = 2·2ⁿ⁻¹ = 2ⁿ，故 aₙ = 2ⁿ - 1。所以 a₁₀ = 2¹⁰ - 1 = 1024 - 1 = 1023。",
+    think: "一阶线性递推 aₙ₊₁=paₙ+q 的标准套路是「构造等比数列」：设 aₙ₊₁+λ=2(aₙ+λ)，展开对比系数求出 λ=1，于是 {aₙ+1} 是等比数列，通项公式立得，再代入 n=10。为什么构造 +λ？加上常数能把递推式配成标准等比形式，把常数项吸收掉。"
   },
   {
     diff: "奥数",
     question: "求值：1×2 + 2×3 + 3×4 + ... + 10×11 = ___。",
     answer: "440",
     answerType: "number",
-    explain: "Σ_{k=1}^{10} k(k+1) = Σ(k² + k) = Σk² + Σk = (10×11×21)/6 + (10×11)/2 = 385 + 55 = 440。"
+    explain: "Σ_{k=1}^{10} k(k+1) = Σ(k² + k) = Σk² + Σk = (10×11×21)/6 + (10×11)/2 = 385 + 55 = 440。",
+    think: "和式中每一项 k(k+1) 既非等差也非等比，但可以「拆项」化为熟悉结构：k(k+1)=k²+k，于是原式变成 Σk² 与 Σk 两部分，分别套用平方和公式和等差数列求和公式。为什么想到拆？不认识的求和结构，先变形成标准公式的线性组合。"
   },
   {
     diff: "奥数",
     question: "求值：1/(1×2) + 1/(2×3) + 1/(3×4) + ... + 1/(99×100) = ___。",
     answer: "99/100",
     answerType: "string",
-    explain: "裂项相消：1/(k(k+1)) = 1/k - 1/(k+1)。原式 = (1 - 1/2) + (1/2 - 1/3) + ... + (1/99 - 1/100) = 1 - 1/100 = 99/100。"
+    explain: "裂项相消：1/(k(k+1)) = 1/k - 1/(k+1)。原式 = (1 - 1/2) + (1/2 - 1/3) + ... + (1/99 - 1/100) = 1 - 1/100 = 99/100。",
+    think: "分母为相邻整数乘积的分数和，第一反应是「裂项相消」：1/(k(k+1))=1/k−1/(k+1)。展开后相邻项互为相反数、中间全部抵消，只剩首尾两项。为什么有效？裂项后大量项消去，繁琐的和式瞬间变简单。"
   },
   {
     diff: "奥数",
     question: "用 0、1、2、3、4 组成无重复数字且能被 3 整除的四位数，共有 ___ 个。",
     answer: "36",
     answerType: "number",
-    explain: "能被 3 整除的条件：各位数字之和能被 3 整除。5 个数字中选 4 个，共有 5 种选法：<br>{0,1,2,3} 和=6 ✓，千位不能为 0，有 3×3×2×1=18 个；<br>{0,2,3,4} 和=9 ✓，同样有 18 个；<br>其余三种组合和不能被 3 整除。总计 18+18=36 个。"
+    explain: "能被 3 整除的条件：各位数字之和能被 3 整除。5 个数字中选 4 个，共有 5 种选法：<br>{0,1,2,3} 和=6 ✓，千位不能为 0，有 3×3×2×1=18 个；<br>{0,2,3,4} 和=9 ✓，同样有 18 个；<br>其余三种组合和不能被 3 整除。总计 18+18=36 个。",
+    think: "排列组合与整除特征结合：先用「被 3 整除 ⟺ 各位数字和是 3 的倍数」筛选出能用的数字组合，再对每种组合排顺序，特别注意 0 不能放在千位。为什么先筛组合？整除条件只由数字和决定，先定用哪些数字、再排顺序，避免分类混乱。"
   }
 ];
 
@@ -328,6 +382,28 @@ var diffLabels = {
   "奥数": '<span class="diff-tag diff-olym">&#11088; 奥数</span>'
 };
 
+function renderDiagram(type) {
+  if (type === "triangle") {
+    return '<div class="exam-diagram"><svg viewBox="0 0 360 210" role="img" aria-label="三角形ABC及角C和三条对边标记">' +
+      '<path class="draw-shape" d="M48 174 L312 174 L190 34 Z" fill="none" stroke="#1976d2" stroke-width="4" stroke-linejoin="round"/>' +
+      '<path d="M169 58 A32 32 0 0 1 215 62" fill="none" stroke="#d92d20" stroke-width="3"/>' +
+      '<circle class="key-mark" cx="190" cy="34" r="6" fill="#d92d20"/>' +
+      '<text x="29" y="191" font-size="15">A</text><text x="318" y="191" font-size="15">B</text><text x="184" y="25" font-size="15">C</text>' +
+      '<text x="246" y="94" font-size="15" fill="#475467">a</text><text x="113" y="94" font-size="15" fill="#475467">b</text><text x="177" y="197" font-size="15" fill="#475467">c</text>' +
+      '<text x="202" y="72" font-size="13" fill="#d92d20">角 C</text></svg></div>';
+  }
+  if (type === "circle") {
+    return '<div class="exam-diagram"><svg viewBox="0 0 360 235" role="img" aria-label="坐标系中圆心为1负2的圆">' +
+      '<line x1="24" y1="70" x2="336" y2="70" stroke="#667085" stroke-width="2"/><polygon points="336,70 327,65 327,75" fill="#667085"/>' +
+      '<line x1="160" y1="18" x2="160" y2="224" stroke="#667085" stroke-width="2"/><polygon points="160,18 155,27 165,27" fill="#667085"/>' +
+      '<circle class="draw-shape" cx="195" cy="140" r="78" fill="none" stroke="#1976d2" stroke-width="4"/>' +
+      '<line x1="160" y1="140" x2="195" y2="140" stroke="#98a2b3" stroke-dasharray="5 5"/><line x1="195" y1="70" x2="195" y2="140" stroke="#98a2b3" stroke-dasharray="5 5"/>' +
+      '<circle class="key-mark" cx="195" cy="140" r="6" fill="#d92d20"/><text x="205" y="158" font-size="14">O(1,−2)</text>' +
+      '<text x="326" y="59" font-size="13">x</text><text x="171" y="25" font-size="13">y</text></svg></div>';
+  }
+  return "";
+}
+
 function render() {
   // 渲染选择题
   var choiceHtml = "";
@@ -336,11 +412,14 @@ function render() {
     var letter = ["A", "B", "C", "D"];
     choiceHtml += '<div class="quiz-question" id="cq' + i + '">';
     choiceHtml += '<div class="q-title"><span class="q-tag choice">选择</span> ' + (i+1) + '. ' + q.question + ' ' + (diffLabels[q.diff] || "") + '</div>';
+    if (q.diagram) choiceHtml += renderDiagram(q.diagram);
     choiceHtml += '<div class="options">';
     for (var j = 0; j < q.opts.length; j++) {
       choiceHtml += '<div class="opt" onclick="selectChoice(' + i + ',' + j + ')">' + letter[j] + '. ' + q.opts[j] + '</div>';
     }
     choiceHtml += '</div>';
+    choiceHtml += '<button class="btn-think" id="cthinkBtn' + i + '" onclick="toggleThink(0,' + i + ')">思路分析</button>';
+    choiceHtml += '<div class="think-panel" id="cthink' + i + '"><span class="analysis-label">思路分析</span>' + q.think + '</div>';
     choiceHtml += '<div class="explain" id="cexp' + i + '"></div>';
     choiceHtml += '</div>';
   }
@@ -358,6 +437,8 @@ function render() {
     fillHtml += '<input class="fill-input" id="fInput' + i + '" type="text" placeholder="请输入答案...">';
     fillHtml += '<button class="btn-check" id="fBtn' + i + '" onclick="checkFill(' + i + ')">确认</button>';
     fillHtml += '</div>';
+    fillHtml += '<button class="btn-think" id="fthinkBtn' + i + '" onclick="toggleThink(1,' + i + ')">思路分析</button>';
+    fillHtml += '<div class="think-panel" id="fthink' + i + '"><span class="analysis-label">思路分析</span>' + q.think + '</div>';
     fillHtml += '<div class="explain" id="fexp' + i + '"></div>';
     fillHtml += '</div>';
   }
@@ -395,6 +476,18 @@ function selectChoice(qi, oi) {
 // ============================================================
 // 填空题交互
 // ============================================================
+function parseMathNumber(value) {
+  var normalized = value.trim().replace(/[−﹣]/g, "-");
+  if (/^[+-]?(?:\d+(?:\.\d+)?|\.\d+)$/.test(normalized)) {
+    return Number(normalized);
+  }
+  var fraction = /^([+-]?\d+)\/([+-]?\d+)$/.exec(normalized);
+  if (fraction && Number(fraction[2]) !== 0) {
+    return Number(fraction[1]) / Number(fraction[2]);
+  }
+  return NaN;
+}
+
 function checkFill(qi) {
   if (fillChecked[qi]) return;
   fillChecked[qi] = true;
@@ -403,15 +496,12 @@ function checkFill(qi) {
   var userAnswer = input.value.trim();
   var isCorrect = false;
 
-  if (q.answerType === "number") {
-    // 数字答案：直接比较数值
-    var userNum = parseFloat(userAnswer);
-    var ansNum = parseFloat(q.answer);
-    if (!isNaN(userNum) && !isNaN(ansNum)) {
-      isCorrect = (Math.abs(userNum - ansNum) < 0.0001);
-    }
+  var userNum = parseMathNumber(userAnswer);
+  var ansNum = parseMathNumber(q.answer);
+  if (!isNaN(userNum) && !isNaN(ansNum)) {
+    isCorrect = (Math.abs(userNum - ansNum) < 0.0001);
   } else {
-    // 字符串答案（如集合、分数等）：归一化后比较
+    // 非数值答案按去空格后的完整字符串比较，避免只读取前缀。
     var normalizedUser = userAnswer.replace(/\s+/g, "");
     var normalizedAns = q.answer.replace(/\s+/g, "");
     isCorrect = (normalizedUser === normalizedAns);
@@ -434,6 +524,18 @@ function checkFill(qi) {
   expDiv.className = "explain show " + (isCorrect ? "ok" : "fail");
 
   updateScore();
+}
+
+// ============================================================
+// 思路分析
+// ============================================================
+function toggleThink(type, qi) {
+  var panel = document.getElementById((type === 0 ? "cthink" : "fthink") + qi);
+  var btn = document.getElementById((type === 0 ? "cthinkBtn" : "fthinkBtn") + qi);
+  if (!panel || !btn) return;
+  var show = !panel.classList.contains("show");
+  panel.classList.toggle("show", show);
+  btn.classList.toggle("open", show);
 }
 
 // ============================================================
@@ -479,6 +581,10 @@ function resetExam() {
       }
       document.getElementById("cexp" + i).className = "explain";
     }
+    var tPanel = document.getElementById("cthink" + i);
+    if (tPanel) tPanel.classList.remove("show");
+    var tBtn = document.getElementById("cthinkBtn" + i);
+    if (tBtn) tBtn.classList.remove("open");
   }
 
   for (var i = 0; i < fillQuestions.length; i++) {
@@ -492,6 +598,10 @@ function resetExam() {
       document.getElementById("fBtn" + i).disabled = false;
       document.getElementById("fexp" + i).className = "explain";
     }
+    var tPanel = document.getElementById("fthink" + i);
+    if (tPanel) tPanel.classList.remove("show");
+    var tBtn = document.getElementById("fthinkBtn" + i);
+    if (tBtn) tBtn.classList.remove("open");
   }
 }
 
