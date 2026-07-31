@@ -90,20 +90,20 @@
   <p><strong>问题：</strong>已知二次函数 \(f(x) = x^2 - 4x + 3\)，求其最小值，并判断 \(f(x) > 0\) 的解集。</p>
   <svg viewBox="0 0 500 300" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
     <rect width="500" height="300" fill="#fafafa" rx="8"/>
-    <line x1="30" y1="260" x2="470" y2="260" stroke="#333" stroke-width="1.5"/>
-    <line x1="250" y1="280" x2="250" y2="20" stroke="#333" stroke-width="1.5"/>
-    <polygon points="470,260 462,256 462,264" fill="#333"/>
-    <polygon points="250,20 246,28 254,28" fill="#333"/>
-    <text x="465" y="254" font-family="serif" font-size="14" fill="#333">x</text>
-    <text x="240" y="24" font-family="serif" font-size="14" fill="#333">y</text>
-    <text x="240" y="278" font-family="serif" font-size="12" fill="#666">O</text>
-    <path d="M50,260 Q100,100 250,30 Q400,100 450,260" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
-    <circle cx="250" cy="30" r="4" fill="#e65100"/>
-    <text x="250" y="20" font-family="serif" font-size="13" fill="#e65100" text-anchor="middle">(2,-1)</text>
-    <circle cx="50" cy="260" r="3" fill="#e65100"/>
-    <text x="50" y="278" font-family="serif" font-size="12" fill="#e65100" text-anchor="middle">(1,0)</text>
-    <circle cx="450" cy="260" r="3" fill="#e65100"/>
-    <text x="450" y="278" font-family="serif" font-size="12" fill="#e65100" text-anchor="middle">(3,0)</text>
+    <line x1="30" y1="140" x2="480" y2="140" stroke="#333" stroke-width="1.5"/>
+    <line x1="150" y1="280" x2="150" y2="20" stroke="#333" stroke-width="1.5"/>
+    <polygon points="480,140 472,136 472,144" fill="#333"/>
+    <polygon points="150,20 146,28 154,28" fill="#333"/>
+    <text x="475" y="134" font-family="serif" font-size="14" fill="#333">x</text>
+    <text x="140" y="24" font-family="serif" font-size="14" fill="#333">y</text>
+    <text x="138" y="158" font-family="serif" font-size="12" fill="#666">O</text>
+    <path d="M150,35 Q310,315 470,35" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+    <circle cx="310" cy="175" r="4" fill="#e65100"/>
+    <text x="310" y="198" font-family="serif" font-size="13" fill="#e65100" text-anchor="middle">(2,-1)</text>
+    <circle cx="230" cy="140" r="3" fill="#e65100"/>
+    <text x="230" y="132" font-family="serif" font-size="12" fill="#e65100" text-anchor="middle">(1,0)</text>
+    <circle cx="390" cy="140" r="3" fill="#e65100"/>
+    <text x="390" y="132" font-family="serif" font-size="12" fill="#e65100" text-anchor="middle">(3,0)</text>
     <text x="250" y="290" font-family="serif" font-size="14" fill="#333" text-anchor="middle">y = x² - 4x + 3 = (x-1)(x-3)</text>
   </svg>
   <div class="method-box">
@@ -126,7 +126,7 @@
 <!-- ========== 实例 2 ========== -->
 <div class="num-instance">
   <h4><span class="tag">实例 2</span> 利用单位圆研究三角函数</h4>
-  <p><strong>问题：</strong>求 \(\sin\theta\)、\(\cos\theta\) 的值域和周期性，判断 \(\sin\theta > \frac{1}{2}\) 的解集。</p>
+  <p><strong>问题：</strong>求 \(\sin\theta\)、\(\cos\theta\) 的值域和周期性，并在一周 \(0^\circ\le\theta&lt;360^\circ\) 内解不等式 \(\sin\theta > \frac{1}{2}\)。</p>
   <svg viewBox="0 0 500 300" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
     <rect width="500" height="300" fill="#fafafa" rx="8"/>
     <circle cx="200" cy="150" r="100" fill="none" stroke="#333" stroke-width="1.5"/>
@@ -153,18 +153,18 @@
   </svg>
   <div class="method-box">
     <p><strong>数→形：</strong>单位圆上点 \(P(\cos\theta, \sin\theta)\) 随 \(\theta\) 旋转。</p>
-    <p><strong>形→数：</strong>纵坐标范围 [-1,1] → \(\sin\theta \in [-1,1]\)；\(\theta = 30^\circ\) 时 \(\sin\theta = 0.5\)，由图像看出 \(\sin\theta > 0.5\) 的解在 \(30^\circ < \theta < 150^\circ\) 内。</p>
-    <p><strong>本原：</strong>单位圆将抽象的三角函数<strong>可视化</strong>为点的坐标，周期性来自旋转一周回到原点。</p>
+    <p><strong>形→数：</strong>横、纵坐标范围都是 [-1,1]，所以正弦、余弦值域均为 [-1,1]。一周内 \(\sin\theta > 1/2\) 的解为 \(30^\circ&lt;\theta&lt;150^\circ\)；一般解为 \(30^\circ+360^\circ k&lt;\theta&lt;150^\circ+360^\circ k\)，\(k\in\mathbb Z\)。</p>
+    <p><strong>本原：</strong>单位圆将抽象的三角函数<strong>可视化</strong>为点的坐标；旋转一周回到原位置，因此正弦、余弦的最小正周期都是 360&deg;（即 \(2\pi\)）。</p>
   </div>
   <div class="quiz-question" id="q2">
-    <div class="q-title"><span class="q-tag">题 2</span> \(\cos\theta > 0\) 的解集是（0~360°）？</div>
+    <div class="q-title"><span class="q-tag">题 2</span> 在 \(0^\circ\le\theta&lt;360^\circ\) 内，\(\cos\theta > 0\) 的解集是？</div>
     <div class="options">
       <div class="opt" onclick="checkChoice(2, 0)">A. 0°~90°</div>
       <div class="opt" onclick="checkChoice(2, 1)">B. 0°~180°</div>
-      <div class="opt" onclick="checkChoice(2, 2)">C. 0°~90° 和 270°~360°</div>
+      <div class="opt" onclick="checkChoice(2, 2)">C. [0°,90°) &cup; (270°,360°)</div>
       <div class="opt" onclick="checkChoice(2, 3)">D. 90°~270°</div>
     </div>
-    <div class="explain" id="explain2"><strong>解析：</strong>cosθ>0 即 x>0，对应单位圆右半平面，所以 θ∈(0°,90°)∪(270°,360°)。选 C。</div>
+    <div class="explain" id="explain2"><strong>解析：</strong>cosθ&gt;0 即横坐标 x&gt;0，对应单位圆右半平面。0&deg; 应包含，90&deg;、270&deg; 处余弦为 0 应排除，而 360&deg; 不在给定区间内，所以选 C。</div>
   </div>
 </div>
 
@@ -193,7 +193,7 @@
   <div class="method-box">
     <p><strong>数→形：</strong>\(|x-1|+|x-3|\) 表示数轴上点 x 到点 1 和点 3 的距离之和。</p>
     <p><strong>形→数：</strong>点 1 和点 3 相距 2，所以当 x 在 [1,3] 之间时，和为定值 2；当 x 在两端之外超过一定范围时和 >4。</p>
-    <p>利用对称性：距离和最大 4，从区间中点向两侧延伸，解得 \(x \in [0,4]\)。</p>
+    <p>以区间中点 2 为中心向两侧延伸；当距离和恰为 4 时得到边界 x=0、x=4，因此解集为 \(x \in [0,4]\)。注意该距离和在整条数轴上没有最大值。</p>
     <p><strong>本原：</strong>将绝对值<strong>几何化</strong>为数轴上的距离，使不等式变成直观的"两点到定点距离和"问题。</p>
   </div>
   <div class="quiz-question" id="q3">
@@ -222,20 +222,17 @@
     <text x="240" y="24" font-family="serif" font-size="14" fill="#333">y</text>
     <text x="240" y="168" font-family="serif" font-size="12" fill="#666">O</text>
     <!-- 三次函数曲线 y=x^3-3x+1 -->
-    <path d="M50,270 Q100,260 130,220 Q160,100 200,60 Q230,30 250,80 Q280,160 320,200 Q360,230 430,220 Q460,215 470,210" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+    <path d="M66,278 C100,190 125,60 170,60 C220,60 280,180 330,180 C380,180 410,45 434,22" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
     <!-- 与 x 轴交点 -->
-    <circle cx="185" cy="150" r="4" fill="#e65100"/>
-    <text x="185" y="140" font-family="serif" font-size="11" fill="#e65100" text-anchor="middle">x₁</text>
-    <circle cx="255" cy="150" r="4" fill="#e65100"/>
-    <text x="255" y="140" font-family="serif" font-size="11" fill="#e65100" text-anchor="middle">x₂</text>
-    <circle cx="370" cy="150" r="4" fill="#e65100"/>
-    <text x="370" y="140" font-family="serif" font-size="11" fill="#e65100" text-anchor="middle">x₃</text>
+    <circle cx="100" cy="150" r="4" fill="#e65100"/><text x="100" y="140" font-family="serif" font-size="11" fill="#e65100" text-anchor="middle">x₁</text>
+    <circle cx="278" cy="150" r="4" fill="#e65100"/><text x="278" y="140" font-family="serif" font-size="11" fill="#e65100" text-anchor="middle">x₂</text>
+    <circle cx="373" cy="150" r="4" fill="#e65100"/><text x="373" y="140" font-family="serif" font-size="11" fill="#e65100" text-anchor="middle">x₃</text>
     <text x="250" y="290" font-family="serif" font-size="13" fill="#333" text-anchor="middle">y = x³ - 3x + 1</text>
   </svg>
   <div class="method-box">
     <p><strong>数→形：</strong>将方程 \(x^3 - 3x + 1 = 0\) 看作函数 \(y = x^3 - 3x + 1\) 与 x 轴的交点。</p>
-    <p><strong>形→数：</strong>由图像看出三次曲线与 x 轴有 3 个交点，分别位于 (-2,0)、(-0.5, 1)、(1.5, 2) 区间。</p>
-    <p>结合介值定理和导数分析极值点 \(x=\pm 1\)，\(f(-1)=3\)，\(f(1)=-1\)，正负交替→3 个实根。</p>
+    <p><strong>形→数：</strong>由图像看出三次曲线与 x 轴有 3 个交点，分别位于 (-2,-1)、(0,1)、(1,2) 内。</p>
+    <p>不用导数也可核验：f(-2)=-1、f(-1)=3，f(0)=1、f(1)=-1，f(1)=-1、f(2)=3。连续图像在三个区间内各穿过一次 x 轴；三次方程至多有 3 个实根，所以恰有 3 个。</p>
     <p><strong>本原：</strong>方程的根对应图像的<strong>零点</strong>，曲线的起伏直观揭示了根的个数和大致位置。</p>
   </div>
   <div class="quiz-question" id="q4">
@@ -246,51 +243,41 @@
       <div class="opt" onclick="checkChoice(4, 2)">C. 2 个</div>
       <div class="opt" onclick="checkChoice(4, 3)">D. 3 个</div>
     </div>
-    <div class="explain" id="explain4"><strong>解析：</strong>图像与 x 轴交于 3 点，故选 D。极值分析也可确认。</div>
+    <div class="explain" id="explain4"><strong>解析：</strong>图像与 x 轴交于 3 点；也可用三个区间内函数值异号来核验。因此选 D。</div>
   </div>
 </div>
 
 <!-- ========== 实例 5 ========== -->
 <div class="num-instance">
   <h4><span class="tag">实例 5</span> 利用斜率研究最值问题</h4>
-  <p><strong>问题：</strong>求函数 \(y = \frac{x + 2}{x - 1}\) 的值域。</p>
+  <p><strong>问题：</strong>点 \(Q(x,x^2)\) 在抛物线 \(y=x^2\) 上运动（\(x&gt;0\)），求直线 \(PQ\) 的斜率最小值，其中 \(P(0,-1)\)。</p>
   <svg viewBox="0 0 500 300" style="display:block;margin:12px auto;background:#fafafa;border-radius:8px;" xmlns="http://www.w3.org/2000/svg">
     <rect width="500" height="300" fill="#fafafa" rx="8"/>
-    <line x1="20" y1="150" x2="480" y2="150" stroke="#333" stroke-width="1.5"/>
-    <line x1="250" y1="280" x2="250" y2="20" stroke="#333" stroke-width="1.5"/>
-    <polygon points="480,150 472,146 472,154" fill="#333"/>
-    <polygon points="250,20 246,28 254,28" fill="#333"/>
-    <text x="475" y="144" font-family="serif" font-size="14" fill="#333">x</text>
-    <text x="240" y="24" font-family="serif" font-size="14" fill="#333">y</text>
-    <!-- 渐进线 -->
-    <line x1="170" y1="280" x2="170" y2="20" stroke="#999" stroke-width="1" stroke-dasharray="5,5"/>
-    <text x="170" y="16" font-family="serif" font-size="11" fill="#999" text-anchor="middle">x=1</text>
-    <line x1="20" y1="130" x2="480" y2="130" stroke="#999" stroke-width="1" stroke-dasharray="5,5"/>
-    <text x="20" y="125" font-family="serif" font-size="11" fill="#999">y=1</text>
-    <!-- 双曲线 y = 1 + 3/(x-1)：左支 (x<1) 在 y=1 下方、靠近 x=1 处趋于 -∞ -->
-    <path d="M20,172 Q 60,180 100,200 Q 130,225 150,270 Q 158,300 163,380" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
-    <!-- 右支 (x>1) 在 y=1 上方、靠近 x=1 处趋于 +∞ -->
-    <path d="M178,-250 Q 190,-120 210,-10 Q 230,40 270,72 Q 330,95 400,105 Q 450,110 480,112" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
-    <!-- 两个点 -->
-    <circle cx="125" cy="227" r="3" fill="#e65100"/>
-    <circle cx="300" cy="83" r="3" fill="#e65100"/>
-    <text x="250" y="290" font-family="serif" font-size="13" fill="#333" text-anchor="middle">y = (x+2)/(x-1)</text>
+    <line x1="35" y1="235" x2="475" y2="235" stroke="#333" stroke-width="1.5"/>
+    <line x1="125" y1="280" x2="125" y2="20" stroke="#333" stroke-width="1.5"/>
+    <polygon points="475,235 467,231 467,239" fill="#333"/><polygon points="125,20 121,28 129,28" fill="#333"/>
+    <text x="470" y="229" font-size="14">x</text><text x="115" y="24" font-size="14">y</text>
+    <polyline points="45,195 61,209.4 77,220.6 93,228.6 109,233.4 125,235 141,233.4 157,228.6 173,220.6 189,209.4 205,195 221,177.4 237,156.6 253,132.6 269,105.4 285,75 301,41.4" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+    <line x1="125" y1="275" x2="380" y2="20" stroke="#e65100" stroke-width="2" stroke-dasharray="7,4"/>
+    <circle cx="125" cy="275" r="5" fill="#e65100"/><text x="136" y="272" font-size="13" fill="#e65100">P(0,-1)</text>
+    <circle cx="205" cy="195" r="5" fill="#2e7d32"/><text x="212" y="188" font-size="13" fill="#2e7d32">Q(1,1)</text>
+    <text x="320" y="58" font-size="13" fill="#e65100">临界直线 y=2x-1</text>
+    <text x="250" y="292" font-size="13" fill="#333" text-anchor="middle">斜率最小时，直线与抛物线只有一个公共点</text>
   </svg>
   <div class="method-box">
-    <p><strong>数→形：</strong>将 \(y = \frac{x+2}{x-1}\) 改写为 \(y = 1 + \frac{3}{x-1}\)，是反比例函数平移形式。</p>
-    <p><strong>形→数：</strong>图像有两条渐近线：x=1（垂直）和 y=1（水平）。函数在每一支上单调。</p>
-    <p>由图像知值域为 \((-\infty, 1) \cup (1, \infty)\)，即 y ≠ 1。</p>
-    <p><strong>本原：</strong>分式函数的图像是<strong>双曲线</strong>，渐近线直接揭示了函数的"禁区"——值域中的不可达值。</p>
+    <p><strong>数→形：</strong>把斜率写成 \(k=\frac{x^2-(-1)}{x-0}=x+\frac1x\)。对 \(x&gt;0\)，由均值不等式知 \(k\ge2\)，等号在 x=1 时成立。</p>
+    <p><strong>形→数：</strong>从 P 出发旋转直线；与抛物线有两个交点时还可继续转动，临界位置只与抛物线有一个公共点 Q(1,1)，此时斜率最小为 2。</p>
+    <p><strong>本原：</strong>斜率把“直线转动到临界位置”的几何过程转化为 \(x+1/x\) 的代数最值，图形同时解释了等号为何在 Q(1,1) 处取得。</p>
   </div>
   <div class="quiz-question" id="q5">
-    <div class="q-title"><span class="q-tag">题 5</span> 函数 \(y = \frac{1}{x}\) 的值域是？</div>
+    <div class="q-title"><span class="q-tag">题 5</span> 若 P(0,-4)，Q(x,x²)（x&gt;0），则直线 PQ 的斜率最小值是？</div>
     <div class="options">
-      <div class="opt" onclick="checkChoice(5, 0)">A. 全体实数</div>
-      <div class="opt" onclick="checkChoice(5, 1)">B. (-∞,0)∪(0,∞)</div>
-      <div class="opt" onclick="checkChoice(5, 2)">C. (0,∞)</div>
-      <div class="opt" onclick="checkChoice(5, 3)">D. (-∞,∞)</div>
+      <div class="opt" onclick="checkChoice(5, 0)">A. 2</div>
+      <div class="opt" onclick="checkChoice(5, 1)">B. 3</div>
+      <div class="opt" onclick="checkChoice(5, 2)">C. 4</div>
+      <div class="opt" onclick="checkChoice(5, 3)">D. 5</div>
     </div>
-    <div class="explain" id="explain5"><strong>解析：</strong>由反比例函数图像知 y≠0，所以值域为(-∞,0)∪(0,∞)。选 B。</div>
+    <div class="explain" id="explain5"><strong>解析：</strong>k=(x²+4)/x=x+4/x&ge;2√(x·4/x)=4，当 x=2 时取等号。选 C。</div>
   </div>
 </div>
 
@@ -504,8 +491,8 @@
   <div class="method-box">
     <p><strong>数→形：</strong>复数 \(z = a + bi\) 对应复平面上的点 \((a, b)\)，模 \(|z| = \sqrt{a^2+b^2}\) 是点到原点的距离。</p>
     <p><strong>形→数：</strong>\(z=1+i\) 对应点 (1,1)。\(|z| = \sqrt{1^2+1^2} = \sqrt{2}\)。幅角 \(\theta = 45^\circ\)。</p>
-    <p>复数的加法对应向量加法，乘法对应旋转缩放——复数运算是二维向量的代数化。</p>
-    <p><strong>本原：</strong>复数<strong>代数是向量的坐标表示</strong>，复平面使抽象的"虚数"有了几何直观。</p>
+    <p>复数的加法对应向量加法；复数乘法还带来向量通常没有定义的“旋转并缩放”运算。</p>
+    <p><strong>本原：</strong>固定平面直角坐标系后，复数与二维向量共享坐标、加法和实数倍结构；复平面使抽象的“虚数”有了几何直观。</p>
   </div>
   <div class="quiz-question" id="q10">
     <div class="q-title"><span class="q-tag">题 10</span> 复数 \(z = i\) 在复平面上的位置是？</div>
@@ -529,7 +516,7 @@
 <script>
 var answered = {};
 var score = 0;
-var answers = {1:2, 2:2, 3:0, 4:3, 5:1, 6:1, 7:1, 8:1, 9:0, 10:1};
+var answers = {1:2, 2:2, 3:0, 4:3, 5:2, 6:1, 7:1, 8:1, 9:0, 10:1};
 
 function checkChoice(qid, idx) {
   if (answered[qid]) return;

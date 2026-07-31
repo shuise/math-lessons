@@ -106,7 +106,7 @@
   </tr>
   <tr>
     <td><strong>零向量</strong></td>
-    <td>长度为 0 的向量，方向任意</td>
+    <td>长度为 0 的向量，没有确定的方向</td>
     <td><b>0</b></td>
   </tr>
   <tr>
@@ -116,7 +116,7 @@
   </tr>
   <tr>
     <td><strong>平行向量</strong><br>（共线向量）</td>
-    <td>方向相同或相反的<strong>非零</strong>向量</td>
+    <td>两个非零向量方向相同或相反时称为平行；另规定零向量与任一向量平行</td>
     <td><b>a</b> ∥ <b>b</b></td>
   </tr>
   <tr>
@@ -134,7 +134,7 @@
 <div class="note">
   <strong>注意：</strong>
   <ul>
-    <li>零向量与任何向量都<strong>平行</strong>（规定）</li>
+    <li>零向量没有确定方向；为使共线关系和数乘关系保持统一，规定零向量与任何向量都<strong>平行</strong></li>
     <li>平行向量就是共线向量——因为向量可以自由平移，所有平行向量都可以移到同一条直线上</li>
     <li>向量不能比较大小，但向量的<strong>模</strong>可以比较大小</li>
   </ul>
@@ -315,7 +315,7 @@
   <text x="155" y="215" font-size="16" fill="#e65100" font-weight="bold" font-family="serif">b</text>
   <text x="200" y="120" font-size="16" fill="#2e7d32" font-weight="bold" font-family="serif">a+b</text>
   <!-- 图例 -->
-  <text x="10" y="16" font-size="11" fill="#888">平 行 四 边 形 法 则 ： a + b = AC</text>
+  <text x="10" y="16" font-size="11" fill="#888">平 行 四 边 形 法 则 ： a + b = OC</text>
 </svg>
 
 <div class="formula">
@@ -613,7 +613,7 @@
 <h3>4.3 数量积的性质</h3>
 <table>
   <tr><th>性质</th><th>公式</th></tr>
-  <tr><td>垂直条件</td><td><b>a</b> &perp; <b>b</b> &hArr; <b>a</b> &middot; <b>b</b> = 0</td></tr>
+  <tr><td>垂直条件</td><td>当 <b>a</b>、<b>b</b> 均非零时，<b>a</b> &perp; <b>b</b> &hArr; <b>a</b> &middot; <b>b</b> = 0</td></tr>
   <tr><td>同向时</td><td><b>a</b> &middot; <b>b</b> = |<b>a</b>| |<b>b</b>|（cos 0&deg; = 1）</td></tr>
   <tr><td>反向时</td><td><b>a</b> &middot; <b>b</b> = −|<b>a</b>| |<b>b</b>|（cos 180&deg; = −1）</td></tr>
   <tr><td>自身点乘</td><td><b>a</b> &middot; <b>a</b> = |<b>a</b>|&sup2;</td></tr>
@@ -632,7 +632,7 @@
   <p><b>a</b> &middot; <b>b</b> = x<sub>1</sub>x<sub>2</sub> + y<sub>1</sub>y<sub>2</sub></p>
   <p>|<b>a</b>| = &radic;(x<sub>1</sub>&sup2; + y<sub>1</sub>&sup2;)</p>
   <p>cos &theta; = (x<sub>1</sub>x<sub>2</sub> + y<sub>1</sub>y<sub>2</sub>) / (&radic;(x<sub>1</sub>&sup2; + y<sub>1</sub>&sup2;) &middot; &radic;(x<sub>2</sub>&sup2; + y<sub>2</sub>&sup2;))</p>
-  <p><b>a</b> &perp; <b>b</b> &hArr; x<sub>1</sub>x<sub>2</sub> + y<sub>1</sub>y<sub>2</sub> = 0</p>
+  <p>当 <b>a</b>、<b>b</b> 均非零时，<b>a</b> &perp; <b>b</b> &hArr; x<sub>1</sub>x<sub>2</sub> + y<sub>1</sub>y<sub>2</sub> = 0</p>
 </div>
 
 <div class="example">
@@ -762,7 +762,7 @@
   <p><strong>例 11：</strong>一个物体受到两个力 <b>F</b><sub>1</sub> = (3, 4)N 和 <b>F</b><sub>2</sub> = (1, −2)N 的作用，求合力的大小。</p>
   <p class="step">合力 <b>F</b> = <b>F</b><sub>1</sub> + <b>F</b><sub>2</sub> = (3 + 1, 4 + (−2)) = (4, 2)N</p>
   <p class="step">合力的大小：|<b>F</b>| = &radic;(4&sup2; + 2&sup2;) = &radic;(16 + 4) = &radic;20 = 2&radic;5 N</p>
-  <p class="answer" style="color:#1a73e8;">合力大小为 2&radic;5 N，方向为 (4, 2)。</p>
+  <p class="answer" style="color:#1a73e8;">合力大小为 2&radic;5 N，方向沿向量 (4, 2)，即与 x 轴正方向夹角 arctan(1/2) &asymp; 26.6&deg;。</p>
 </div>
 
 <div class="example">

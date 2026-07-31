@@ -42,7 +42,7 @@ h3 { color: #1557b0; font-size: 1.15em; margin: 28px 0 12px; padding-left: 8px; 
 <h3>1.1 直线的倾斜角与斜率</h3>
 
 <section>
-<p><strong>倾斜角的定义：</strong>当直线 <em>l</em> 与 <em>x</em> 轴相交时，取 <em>x</em> 轴作为基准，<em>x</em> 轴正向与直线 <em>l</em> 向上方向之间所成的角 <strong>&alpha;</strong> 叫做直线 <em>l</em> 的倾斜角。倾斜角的取值范围为 <strong>0&deg; &le; &alpha; &lt; 180&deg;</strong>。</p>
+<p><strong>倾斜角的定义：</strong>当直线 <em>l</em> 与 <em>x</em> 轴相交时，以交点为顶点，<em>x</em> 轴正向绕交点逆时针旋转到与直线 <em>l</em> 重合时所得的最小非负角 <strong>&alpha;</strong>，叫做直线 <em>l</em> 的倾斜角；当 <em>l</em> 与 <em>x</em> 轴平行或重合时，规定 &alpha; = 0&deg;。因此 <strong>0&deg; &le; &alpha; &lt; 180&deg;</strong>。</p>
 
 <p><strong>斜率的定义：</strong>当 &alpha; &ne; 90&deg; 时，倾斜角 &alpha; 的正切值叫做直线的斜率，记作 <strong>k = tan &alpha;</strong>。当 &alpha; = 90&deg; 时，直线斜率不存在。</p>
 
@@ -235,7 +235,7 @@ h3 { color: #1557b0; font-size: 1.15em; margin: 28px 0 12px; padding-left: 8px; 
 
 <!-- Q4 直线的方程 -->
 <div class="quiz-question" id="q4">
-  <p><span class="q-tag concept">概念</span><strong>第 4 题：</strong>下列哪种形式不能表示斜率不存在的直线？</p>
+  <p><span class="q-tag concept">概念</span><strong>第 4 题：</strong>下列哪种形式能够表示任意直线，包括斜率不存在的竖直直线？</p>
   <div class="opt" data-q="q4" data-idx="0">A. 一般式 Ax + By + C = 0</div>
   <div class="opt" data-q="q4" data-idx="1">B. 点斜式 y &minus; y<sub>0</sub> = k(x &minus; x<sub>0</sub>)</div>
   <div class="opt" data-q="q4" data-idx="2">C. 两点式</div>
@@ -546,11 +546,51 @@ h3 { color: #1557b0; font-size: 1.15em; margin: 28px 0 12px; padding-left: 8px; 
 </section>
 
 <!-- ============================================================ -->
+<!-- 1.6 空间直角坐标系 -->
+<!-- ============================================================ -->
+<h3>1.6 空间直角坐标系</h3>
+
+<section>
+<p><strong>定义：</strong>在空间中，过同一点 O 作三条两两垂直的数轴 x 轴、y 轴、z 轴，就建立了空间直角坐标系 Oxyz。点 P 对应唯一有序实数组 <strong>P(x, y, z)</strong>；三个坐标的次序不能交换。</p>
+<p><strong>坐标面：</strong>xOy、yOz、zOx 分别由两条坐标轴确定。点在 xOy 平面上当且仅当 z = 0；另外两个坐标面的判定同理。</p>
+
+<div class="example">
+  <p><strong>空间两点距离：</strong>P<sub>1</sub>(x<sub>1</sub>, y<sub>1</sub>, z<sub>1</sub>)、P<sub>2</sub>(x<sub>2</sub>, y<sub>2</sub>, z<sub>2</sub>) 之间</p>
+  <p><strong>|P<sub>1</sub>P<sub>2</sub>| = &radic;[(x<sub>2</sub> &minus; x<sub>1</sub>)&sup2; + (y<sub>2</sub> &minus; y<sub>1</sub>)&sup2; + (z<sub>2</sub> &minus; z<sub>1</sub>)&sup2;]</strong></p>
+  <p>它是平面距离公式增加一个 z 方向差所得；由三次勾股定理即可理解。</p>
+</div>
+
+<svg viewBox="0 0 500 320" style="display:block;margin:15px auto;max-width:100%;background:#fff;border:1px solid #e0e0e0;border-radius:8px;" aria-label="空间直角坐标系与点 P 的三个坐标分量">
+  <line x1="235" y1="245" x2="455" y2="245" stroke="#333" stroke-width="2"/><polygon points="455,245 445,240 445,250" fill="#333"/>
+  <line x1="235" y1="245" x2="80" y2="295" stroke="#333" stroke-width="2"/><polygon points="80,295 91,286 94,296" fill="#333"/>
+  <line x1="235" y1="245" x2="235" y2="35" stroke="#333" stroke-width="2"/><polygon points="235,35 230,46 240,46" fill="#333"/>
+  <text x="462" y="250" font-size="16">x</text><text x="64" y="307" font-size="16">y</text><text x="245" y="38" font-size="16">z</text><text x="218" y="263" font-size="14">O</text>
+  <polygon points="235,245 385,245 305,271 155,271" fill="rgba(66,133,244,.08)" stroke="#90caf9"/>
+  <line x1="235" y1="245" x2="315" y2="188" stroke="#43a047" stroke-width="2" stroke-dasharray="5,4"/>
+  <line x1="315" y1="188" x2="315" y2="105" stroke="#fb8c00" stroke-width="2" stroke-dasharray="5,4"/>
+  <circle cx="315" cy="105" r="5" fill="#e65100"/><text x="325" y="100" font-size="15" fill="#e65100">P(x, y, z)</text>
+  <text x="325" y="205" font-size="13" fill="#666">投影到 xOy 平面</text>
+</svg>
+
+<div class="quiz-question" id="q9">
+  <p><span class="q-tag concept">空间坐标</span><strong>第 9 题：</strong>点 P(2, &minus;3, 0) 位于哪个坐标面上？</p>
+  <div class="opt" data-q="q9" data-idx="0">A. xOy 平面</div><div class="opt" data-q="q9" data-idx="1">B. yOz 平面</div><div class="opt" data-q="q9" data-idx="2">C. zOx 平面</div><div class="opt" data-q="q9" data-idx="3">D. 不在任何坐标面上</div>
+  <div class="explain" id="exp9"></div>
+</div>
+
+<div class="quiz-question" id="q10">
+  <p><span class="q-tag concept">计算</span><strong>第 10 题：</strong>A(1, 2, 3)、B(4, 6, 3) 两点间的距离是？</p>
+  <div class="opt" data-q="q10" data-idx="0">A. 3</div><div class="opt" data-q="q10" data-idx="1">B. 4</div><div class="opt" data-q="q10" data-idx="2">C. 5</div><div class="opt" data-q="q10" data-idx="3">D. 7</div>
+  <div class="explain" id="exp10"></div>
+</div>
+</section>
+
+<!-- ============================================================ -->
 <!-- 得分面板 -->
 <!-- ============================================================ -->
 <div class="score-panel">
   <p><strong>&#x1f3af; 课程测验总分</strong></p>
-  <div class="score-text" id="scoreDisplay">0 / 8</div>
+  <div class="score-text" id="scoreDisplay">0 / 10</div>
   <div class="btn-reset" id="resetBtn">重新作答</div>
 </div>
 
@@ -559,16 +599,18 @@ h3 { color: #1557b0; font-size: 1.15em; margin: 28px 0 12px; padding-left: 8px; 
 <!-- ============================================================ -->
 <script>
 (function() {
-  // 8 道题的正确答案索引
+  // 10 道题的正确答案索引
   const answers = {
     q1: 1, // 120°→k=-√3
     q2: 2, // P(2,3)和Q(2,-1)，x坐标相同→α=90°
     q3: 1, // 2x-3y+6=0→x截距-3，y截距2
-    q4: 1, // 点斜式不能表示斜率不存在的直线
+    q4: 0, // 一般式可以表示任意直线
     q5: 0, // |3+8-1|/√(1²+2²)=10/√5=2√5
     q6: 0,
     q7: 0,
-    q8: 2 // 圆心(1,-2)到直线3x+4y-5=0距离d=2 < r=5，相交
+    q8: 2, // 圆心(1,-2)到直线3x+4y-5=0距离d=2 < r=5，相交
+    q9: 0,
+    q10: 2
   };
 
   // 解析
@@ -576,14 +618,16 @@ h3 { color: #1557b0; font-size: 1.15em; margin: 28px 0 12px; padding-left: 8px; 
     q1: { ok: '正确！tan 120&deg; = tan(180&deg; &minus; 60&deg;) = &minus;tan 60&deg; = &minus;&radic;3。', fail: '不对。k = tan 120&deg; = &minus;tan 60&deg; = &minus;&radic;3。当倾斜角为钝角时，斜率为负值。' },
     q2: { ok: '正确！P 和 Q 的横坐标相同（x = 2），因此直线垂直于 x 轴，倾斜角为 90&deg;，斜率不存在。', fail: '不对。因为两点的 x 坐标相同，直线与 x 轴垂直，倾斜角应为 90&deg;，此时斜率不存在。' },
     q3: { ok: '正确！令 y = 0，得 2x + 6 = 0 &rArr; x = &minus;3，即 x 截距为 &minus;3；令 x = 0，得 &minus;3y + 6 = 0 &rArr; y = 2，即 y 截距为 2。', fail: '不对。x 截距是令 y = 0 解出的 x 值，y 截距是令 x = 0 解出的 y 值。重新计算一下代入后的结果。' },
-    q4: { ok: '正确！点斜式要求斜率 k 存在，无法表示斜率不存在（即 &alpha; = 90&deg;）的竖直直线。一般式、两点式、截距式均可。', fail: '不对。点斜式 y &minus; y₀ = k(x &minus; x₀) 中 k 必须是有限值，因此不能表示竖直直线。' },
+    q4: { ok: '正确！一般式 Ax + By + C = 0（A、B 不同时为 0）可以表示任意直线；取 B = 0 就得到竖直直线。', fail: '不对。点斜式要求斜率存在；本课给出的两点式还要求两个横坐标不同；截距式要求两个非零截距。只有一般式覆盖任意直线。' },
     q5: { ok: '正确！d = |3 + 2&times;4 &minus; 1| / &radic;(1&sup2; + 2&sup2;) = |10| / &radic;5 = 10/&radic;5 = 2&radic;5。', fail: '不对。套用点到直线的距离公式 d = |Ax₀ + By₀ + C| / &radic;(A&sup2; + B&sup2;)，仔细计算分子和分母的值。' },
     q6: { ok: '正确！d = |2 &minus; (&minus;8)| / &radic;(3&sup2; + 4&sup2;) = 10 / 5 = 2。', fail: '不对。平行线距离公式 d = |C₁ &minus; C₂| / &radic;(A&sup2; + B&sup2;)。注意 C₂ = &minus;8，所以 |2 &minus; (&minus;8)| = 10。' },
     q7: { ok: '正确！配方得 (x &minus; 3)&sup2; + (y + 2)&sup2; = 4，因此圆心为 (3, &minus;2)，半径 r = 2。', fail: '不对。将一般式配方：(x&sup2; &minus; 6x + 9) + (y&sup2; + 4y + 4) = &minus;9 + 9 + 4，即 (x &minus; 3)&sup2; + (y + 2)&sup2; = 4。' },
-    q8: { ok: '正确！圆心 C(1, &minus;2) 到直线 3x + 4y &minus; 5 = 0 的距离 d = |3 &minus; 8 &minus; 5| / 5 = 2，半径 r = 5，d &lt; r，所以直线与圆相交。', fail: '不对。先计算圆心到直线的距离 d = |3&times;1 + 4&times;(&minus;2) &minus; 5| / &radic;(3&sup2; + 4&sup2;) = |3 &minus; 8 &minus; 5| / 5 = 2，因为 d = 2 &lt; r = 5，所以直线与圆相交。' }
+    q8: { ok: '正确！圆心 C(1, &minus;2) 到直线 3x + 4y &minus; 5 = 0 的距离 d = |3 &minus; 8 &minus; 5| / 5 = 2，半径 r = 5，d &lt; r，所以直线与圆相交。', fail: '不对。先计算圆心到直线的距离 d = |3&times;1 + 4&times;(&minus;2) &minus; 5| / &radic;(3&sup2; + 4&sup2;) = |3 &minus; 8 &minus; 5| / 5 = 2，因为 d = 2 &lt; r = 5，所以直线与圆相交。' },
+    q9: { ok: '正确！点的 z 坐标为 0，所以点 P 位于 xOy 平面上。', fail: '不对。空间坐标中，z = 0 是点位于 xOy 平面的充要条件。' },
+    q10: { ok: '正确！|AB| = &radic;[(4&minus;1)&sup2; + (6&minus;2)&sup2; + (3&minus;3)&sup2;] = &radic;25 = 5。', fail: '不对。三个坐标差分别是 3、4、0，距离为 &radic;(3&sup2;+4&sup2;+0&sup2;) = 5。' }
   };
 
-  const totalQ = 8;
+  const totalQ = 10;
 
   function checkChoice(qid, idx) {
     return answers[qid] === idx;

@@ -124,14 +124,14 @@
 <h3>为什么要抽样？</h3>
 <p>假设你想知道全校 2000 名学生的平均身高，你会怎么做？如果挨个测量每一个人，工作量太大，而且有些同学可能当天不在学校。更现实的做法是：<strong>从全校学生中选出一部分人（一个样本）来测量，然后用样本的平均身高去估计全校的平均身高</strong>。</p>
 
-<p>但这里有一个关键问题：<strong>怎么选"这一部分人"？</strong>如果只选篮球队员，估计值会偏高；如果只选田径队的，可能又偏低。我们需要一种方法，让每个人被选中的机会<strong>均等</strong>，这样样本才能代表总体。这就是<strong>随机抽样</strong>的思想。</p>
+<p>但这里有一个关键问题：<strong>怎么选"这一部分人"？</strong>如果只选篮球队员，估计值会偏高；如果只选田径队员，估计值也可能偏离总体。我们需要按预先设计的随机规则抽取样本，避免研究者凭主观挑选。这就是<strong>随机抽样</strong>的思想。</p>
 
 <div class="definition">
-  <p><strong>随机抽样</strong>：从总体中按照某种规则抽取一部分个体作为样本，使得每个个体被抽中的概率相等，从而样本能够较好地反映总体的特征。</p>
+  <p><strong>随机抽样</strong>：按照包含随机机制的规则从总体中抽取一部分个体作为样本。抽取规则必须事先明确，使入样概率可以说明；随机抽样能减少人为选择偏差，但不能保证某一次样本一定完全代表总体。</p>
 </div>
 
 <h3>1. 简单随机抽样</h3>
-<p>这是最基本的抽样方法——<strong>每个个体被抽中的概率完全相同</strong>。适用于总体不太大的情况（比如全校 2000 人以内）。</p>
+<p>这是最基本的抽样方法——从总体中逐个抽取，且<strong>每个个体被抽中的概率相同</strong>。抽签法适合总体较小的情形；使用随机数或计算机时，也可以处理较大的总体。</p>
 
 <p>常用两种方式：</p>
 <ul>
@@ -268,11 +268,11 @@
 <div class="example">
   <p><strong>用上面的身高数据计算：</strong></p>
   <p class="step">均值 x̄ = (155+158+160+162+163+165+165+166+167+168+168+169+170+170+171+172+173+174+175+178) &divide; 20</p>
-  <p class="step">= 3356 &divide; 20 = <strong>167.8 cm</strong></p>
+  <p class="step">= 3349 &divide; 20 = <strong>167.45 cm</strong></p>
   <p class="step">中位数：第 10 个（168）和第 11 个（168）的平均数 = <strong>168 cm</strong></p>
   <p class="step">众数：165、168、170 都出现了 2 次（最多）→ <strong>165, 168, 170</strong></p>
-  <p class="step">方差 s<sup>2</sup> &asymp; <strong>33.56</strong>，标准差 s &asymp; <strong>5.79 cm</strong></p>
-  <p class="step"><strong>结论：</strong>样本平均身高约 167.8cm，标准差约 5.79cm，说明大部分人的身高在 167.8 &plusmn; 5.79 范围内。</p>
+  <p class="step">方差 s<sup>2</sup> &asymp; <strong>32.75 cm<sup>2</sup></strong>，标准差 s &asymp; <strong>5.72 cm</strong></p>
+  <p class="step"><strong>结论：</strong>样本平均身高为 167.45 cm，标准差约 5.72 cm，说明数据相对均值的典型偏离量约为 5.72 cm。仅凭均值和标准差，不能断定某个固定比例的数据必然落在 x̄ &plusmn; s 内。</p>
 </div>
 
 <div class="hint">
@@ -371,6 +371,9 @@
   <p class="step">a = 19.5 - 3.11 &times; 3.5 &asymp; 19.5 - 10.89 = <strong>8.61</strong></p>
   <p class="step"><strong>回归方程：ŷ = 8.61 + 3.11x</strong></p>
   <p class="step"><strong>含义：</strong>广告费每增加 1 万元，销售额平均增加约 3.11 万元。</p>
+</div>
+<div class="hint">
+  <strong>相关不等于因果：</strong>这条回归直线描述样本中的线性关联，不能仅凭它断言增加广告费一定导致销售额上升；季节、价格等其他变量也可能同时影响二者。超出观测范围作预测也要谨慎。
 </div>
 </section>
 
@@ -555,7 +558,7 @@
     <p>(1) 均值 = <input class="fill-input" id="c2a1" type="text" style="width:60px;" placeholder="数字">，中位数 = <input class="fill-input" id="c2a2" type="text" style="width:60px;" placeholder="数字">
       <button class="btn-check" onclick="checkFillPair('c2a1','c2a2',80.5,81)">检查</button></p>
     <p>(2) 方差 = <input class="fill-input" id="c2a3" type="text" style="width:70px;" placeholder="保留1位小数">
-      <button class="btn-check" onclick="checkFill('c2a3', 82.3)">检查</button></p>
+      <button class="btn-check" onclick="checkFill('c2a3', 80.9)">检查</button></p>
   </div>
 
   <div class="answer-box" id="c2answer">
@@ -564,7 +567,7 @@
     &emsp;中位数 = (80+82)/2 = <strong>81 分</strong>。<br>
     (2) 方差 s<sup>2</sup> = [(65-80.5)<sup>2</sup>+(70-80.5)<sup>2</sup>+...+(95-80.5)<sup>2</sup>] / 10<br>
     &emsp;= (240.25+110.25+72.25+6.25+0.25+2.25+20.25+56.25+90.25+210.25)/10<br>
-    &emsp;= 808.5/10 = <strong>82.3</strong>（保留一位小数）。
+    &emsp;= 808.5/10 = 80.85 &asymp; <strong>80.9</strong>（保留一位小数）。
   </div>
   <button class="btn-toggle" onclick="toggleAnswer('c2answer')">显示解析</button>
 </div>
@@ -640,7 +643,7 @@
   <p>体重均值 ȳ = 58kg，标准差 s<sub>y</sub> = 8kg</p>
   <p>现有甲同学身高 170cm，乙同学身高 160cm。</p>
   <p>(1) 甲同学的身高在样本中大约处于什么水平？（用标准差解释）</p>
-  <p>(2) 通常认为：样本中约 95% 的数据落在 (x̄-2s, x̄+2s) 范围内。那么身高的 95% 范围是多少？</p>
+  <p>(2) 若身高分布近似正态，则约 95% 的数据落在 (x̄-2s, x̄+2s) 范围内。按此模型估计身高的 95% 范围是多少？</p>
 
   <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
     <p>(1) 甲的身高比均值高 <input class="fill-input" id="c5a1" type="text" style="width:60px;" placeholder="数字"> 个标准差</p>
@@ -652,7 +655,7 @@
   <div class="answer-box" id="c5answer">
     <strong>解析：</strong><br>
     (1) 甲的身高减去均值：170 - 165 = 5cm，比均值高 5cm。5 &divide; 6 &asymp; <strong>0.83 个标准差</strong>，属于正常偏高。<br>
-    (2) 95% 范围 = (165 - 2&times;6, 165 + 2&times;6) = (165-12, 165+12) = <strong>(153, 177) cm</strong>。<br>
+    (2) 在身高分布近似正态的前提下，约 95% 的范围 = (165 - 2&times;6, 165 + 2&times;6) = <strong>(153, 177) cm</strong>。<br>
     &emsp;乙的身高 160cm 也在这个范围内。
   </div>
   <button class="btn-toggle" onclick="toggleAnswer('c5answer')">显示解析</button>
@@ -742,6 +745,7 @@ var totalScore = 0;
 
 function checkChoice(qid, idx) {
   var answers = {1:2, 2:0, 3:2, 4:1, 5:1, 6:1, 7:2, 8:1};
+  var choicePoints = {1:3, 2:3, 3:3, 4:3, 5:3, 6:4, 7:4, 8:2};
   if (answered[qid]) return;
 
   var qDiv = document.getElementById("q" + qid);
@@ -757,7 +761,7 @@ function checkChoice(qid, idx) {
     opts[idx].classList.add("correct-opt");
     qDiv.classList.add("correct");
     explain.className = "explain show ok";
-    totalScore += (qid <= 4 ? 5 : 6);
+    totalScore += choicePoints[qid];
   } else {
     opts[idx].classList.add("wrong-opt");
     opts[correct].classList.add("correct-opt");
@@ -783,12 +787,14 @@ function checkFill(inputId, correctAnswer) {
 
   // Allow multiple correct answers for text inputs (e.g., "分层抽样")
   if (typeof correctAnswer === 'string') {
-    if (val === correctAnswer) {
+    if (val.replace(/法$/, '') === correctAnswer.replace(/法$/, '')) {
       isCorrect = true;
     }
   } else {
-    var numVal = parseFloat(val);
-    if (!isNaN(numVal) && Math.abs(numVal - correctAnswer) < 0.1) {
+    var numVal = /^[-+]?\d+(?:\.\d+)?$/.test(val) ? Number(val) : NaN;
+    var decimals = (String(correctAnswer).split('.')[1] || '').length;
+    var tolerance = decimals ? 0.5 * Math.pow(10, -decimals) : 1e-9;
+    if (!isNaN(numVal) && Math.abs(numVal - correctAnswer) < tolerance + 1e-12) {
       isCorrect = true;
     }
   }
@@ -816,17 +822,23 @@ function checkFillPair(id1, id2, ans1, ans2) {
   if (in1.classList.contains("correct-input") || in1.classList.contains("wrong-input")) return;
   if (in2.classList.contains("correct-input") || in2.classList.contains("wrong-input")) return;
 
-  var v1 = parseFloat(in1.value.trim());
-  var v2 = parseFloat(in2.value.trim());
+  var raw1 = in1.value.trim();
+  var raw2 = in2.value.trim();
+  var v1 = /^[-+]?\d+(?:\.\d+)?$/.test(raw1) ? Number(raw1) : NaN;
+  var v2 = /^[-+]?\d+(?:\.\d+)?$/.test(raw2) ? Number(raw2) : NaN;
   var btn = in2.nextElementSibling;
+  var d1 = (String(ans1).split('.')[1] || '').length;
+  var d2 = (String(ans2).split('.')[1] || '').length;
+  var t1 = d1 ? 0.5 * Math.pow(10, -d1) : 1e-9;
+  var t2 = d2 ? 0.5 * Math.pow(10, -d2) : 1e-9;
 
-  if (!isNaN(v1) && Math.abs(v1 - ans1) < 0.1) {
+  if (!isNaN(v1) && Math.abs(v1 - ans1) < t1 + 1e-12) {
     in1.className = "fill-input correct-input";
   } else {
     in1.className = "fill-input wrong-input";
   }
 
-  if (!isNaN(v2) && Math.abs(v2 - ans2) < 0.1) {
+  if (!isNaN(v2) && Math.abs(v2 - ans2) < t2 + 1e-12) {
     in2.className = "fill-input correct-input";
   } else {
     in2.className = "fill-input wrong-input";
@@ -849,16 +861,15 @@ function checkFillPair(id1, id2, ans1, ans2) {
 
 function updateTotalScore() {
   var quizScore = 0;
+  var choicePoints = {1:3, 2:3, 3:3, 4:3, 5:3, 6:4, 7:4, 8:2};
   for (var i = 1; i <= 8; i++) {
     if (answered[i]) {
       var qDiv = document.getElementById("q" + i);
       if (qDiv && qDiv.classList.contains("correct")) {
-        quizScore += (i <= 4 ? 5 : 6);
+        quizScore += choicePoints[i];
       }
     }
   }
-  // Quiz total = 5*4 + 6*4 = 44, cap at 25 for quiz section (proportionate)
-  if (quizScore > 25) quizScore = 25;
 
   // Count fill-in answers
   var fillScore = 0;

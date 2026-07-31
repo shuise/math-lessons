@@ -48,6 +48,8 @@
   h3 { color: #2c3e50; margin: 24px 0 10px; font-size: 1.1em; }
   .midline-label { font-size: 0.85em; fill: #666; }
   .fold-arrow { fill: none; stroke: #e65100; stroke-width: 1.5; stroke-dasharray: 5,3; }
+  @keyframes foldFlow { to { stroke-dashoffset: -16; } }
+  .fold-arrow { animation: foldFlow 1.4s linear infinite; }
 </style>
 </head>
 <body>
@@ -261,21 +263,22 @@
   <!-- Triangle ABC -->
   <polygon points="100,290 250,60 420,290" fill="rgba(26,115,232,0.06)" stroke="#333" stroke-width="2"/>
 
-  <!-- Midpoints -->
+  <!-- D、E are side midpoints; H is the altitude foot -->
   <!-- D: midpoint of AB -->
   <circle cx="175" cy="175" r="3" fill="#e65100"/>
   <text x="168" y="166" font-size="15" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">D</text>
   <!-- E: midpoint of BC -->
   <circle cx="335" cy="175" r="3" fill="#e65100"/>
   <text x="336" y="166" font-size="15" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">E</text>
-  <!-- F: midpoint of AC -->
-  <circle cx="260" cy="290" r="3" fill="#e65100"/>
-  <text x="263" y="310" font-size="15" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">F</text>
+  <circle cx="250" cy="290" r="4" fill="#e65100"/>
+  <text x="246" y="313" font-size="15" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">H</text>
+  <circle cx="175" cy="290" r="3" fill="#e65100"/><text x="168" y="310" font-size="14" fill="#e65100">F</text>
+  <circle cx="335" cy="290" r="3" fill="#e65100"/><text x="337" y="310" font-size="14" fill="#e65100">G</text>
 
-  <!-- Midlines (dashed) -->
+  <!-- Three fold creases -->
   <line x1="175" y1="175" x2="335" y2="175" stroke="#1a73e8" stroke-width="2" stroke-dasharray="8,4"/>
-  <line x1="175" y1="175" x2="260" y2="290" stroke="#1a73e8" stroke-width="2" stroke-dasharray="8,4"/>
-  <line x1="335" y1="175" x2="260" y2="290" stroke="#1a73e8" stroke-width="2" stroke-dasharray="8,4"/>
+  <line x1="175" y1="175" x2="175" y2="290" stroke="#1a73e8" stroke-width="2" stroke-dasharray="8,4"/>
+  <line x1="335" y1="175" x2="335" y2="290" stroke="#1a73e8" stroke-width="2" stroke-dasharray="8,4"/>
 
   <!-- Vertex labels -->
   <text x="78" y="310" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">A</text>
@@ -293,21 +296,15 @@
   <path d="M 390,290 A 30,30 0 0,1 402.18,265.88" fill="none" stroke="#43a047" stroke-width="2.5"/>
   <text x="380" y="278" font-size="14" font-weight="bold" fill="#43a047" font-family="serif" font-style="italic">&ang;C</text>
 
-  <!-- Fold arrows: from each vertex toward the center -->
-  <path d="M 100,290 Q 150,240 210,220" class="fold-arrow"/>
-  <polygon points="212,219 205,224 208,216" fill="#e65100"/>
-  <path d="M 250,60 Q 260,120 240,170" class="fold-arrow"/>
-  <polygon points="239,173 233,167 247,168" fill="#1a73e8"/>
-  <path d="M 420,290 Q 370,240 310,220" class="fold-arrow"/>
-  <polygon points="308,219 315,224 312,216" fill="#43a047"/>
+  <!-- Fold arrows: B, A, C all map to H -->
+  <path d="M 250,60 Q 280,170 250,285" class="fold-arrow"/><polygon points="250,289 244,279 256,279" fill="#e65100"/>
+  <path d="M 100,290 Q 175,250 245,290" class="fold-arrow"/><polygon points="249,290 239,284 240,296" fill="#e65100"/>
+  <path d="M 420,290 Q 335,250 255,290" class="fold-arrow"/><polygon points="251,290 261,284 260,296" fill="#e65100"/>
 
-  <!-- Center convergence point -->
-  <circle cx="257" cy="213" r="4" fill="#e65100"/>
-
-  <!-- Midline labels -->
-  <text x="245" y="172" font-size="11" fill="#1a73e8" font-family="serif" font-style="italic">DE</text>
-  <text x="205" y="240" font-size="11" fill="#1a73e8" font-family="serif" font-style="italic">DF</text>
-  <text x="305" y="240" font-size="11" fill="#1a73e8" font-family="serif" font-style="italic">EF</text>
+  <!-- Crease labels -->
+  <text x="255" y="172" font-size="11" fill="#1a73e8">DE：B→H</text>
+  <text x="160" y="235" font-size="11" fill="#1a73e8">DF：A→H</text>
+  <text x="340" y="235" font-size="11" fill="#1a73e8">EG：C→H</text>
 
   <!-- Small dots at vertices -->
   <circle cx="100" cy="290" r="3" fill="#333"/>
@@ -317,21 +314,20 @@
 </div>
 
 <div class="aux-desc">
-  <strong>辅助线思路：</strong>"取三边中点并连线"——这条辅助线源于"折叠"的直观思路：三角形纸片的三个角能否折到一起形成一个平角？连接中点得到的中位线恰好将三角形分成 4 个小三角形，折叠后三个角汇聚于中心点，恰好形成一个平角 180°。这个证明虽然不如前两种严格，但非常直观，体现了从"动手操作"到"几何推理"的过渡。
+  <strong>辅助线思路：</strong>图中以锐角三角形为例，作高 BH，D、E 分别为 AB、BC 的中点。DE 是 BH 的垂直平分线，所以沿 DE 折叠可使 B 与 H 重合。再分别沿 AH、CH 的垂直平分线 DF、EG 折叠，A、C 也与 H 重合；三个角便沿直线 AC 排成一个平角。
 </div>
 
 <h3>分步推导</h3>
 <div class="example">
-  <p><strong>已知：</strong>在 △ABC 中，D、E、F 分别为 AB、BC、CA 的中点。</p>
+  <p><strong>已知：</strong>在锐角 △ABC 中，BH &perp; AC 于 H；D、E 分别为 AB、BC 的中点，F、G 分别为 AH、HC 的中点。</p>
   <p><strong>求证：</strong>&ang;A + &ang;B + &ang;C = 180°</p>
-  <p class="step"><strong>证明（直观思路）：</strong></p>
-  <p class="step">① 连接 DE、EF、FD，得到三条中位线。</p>
-  <p class="step">② 由三角形中位线定理：DE ∥ AC，EF ∥ AB，FD ∥ BC。</p>
-  <p class="step">③ 将 △ADF、△BDE、△CEF 分别沿 DF、DE、EF 向中心折叠，</p>
-  <p class="step">&emsp;&emsp;则三个角 &ang;A、&ang;B、&ang;C 汇聚到点 P（△DEF 的重心）处。</p>
-  <p class="step">④ 汇聚后的三个角恰好拼成一个平角：&ang;A + &ang;B + &ang;C = 180°。</p>
+  <p class="step"><strong>折叠验证：</strong></p>
+  <p class="step">① 连接 DE。由中位线定理 DE &par; AC，所以 DE &perp; BH；又 D、E 位于两腰中点处，DE 经过 BH 的中点。因此 DE 是 BH 的垂直平分线。</p>
+  <p class="step">② 沿 DE 折叠，顶点 B 与 H 重合，&ang;B 被搬到 H 点上方。</p>
+  <p class="step">③ DF、EG 分别是 AH、CH 的垂直平分线。沿 DF、EG 折叠，A、C 都与 H 重合，&ang;A、&ang;C 也被搬到 H。</p>
+  <p class="step">④ 三个角在直线 AC 的同一侧无缝拼成平角，所以 &ang;A + &ang;B + &ang;C = 180°。</p>
   <p class="answer">∴ 三角形内角和等于 180°。</p>
-  <p class="hint"><strong>说明：</strong>折叠法本质上依赖中位线的平行性质，理论基础与平行线法一致，但其"动手操作"的直观性使它在教学中具有独特价值。</p>
+  <p class="hint"><strong>说明：</strong>此图便于实际折纸验证；任意三角形的严格证明仍由前两种平行线法覆盖，钝角情形可在边的延长线上作相同的角转移。</p>
 </div>
 </section>
 

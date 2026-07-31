@@ -164,26 +164,26 @@
 <div class="graph-svg">
   <svg width="420" height="160" viewBox="0 0 420 160">
     <!-- K3 -->
-    <text x="105" y="20" text-anchor="middle" font-size="15" fill="#2c3e50" font-weight="bold">K<sub>3</sub>（三角形）</text>
+    <text x="105" y="20" text-anchor="middle" font-size="15" fill="#2c3e50" font-weight="bold">K₃（三角形）</text>
     <circle cx="105" cy="50" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-    <text x="105" y="56" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>1</sub></text>
+    <text x="105" y="56" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v₁</text>
     <circle cx="60" cy="130" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-    <text x="60" y="136" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>2</sub></text>
+    <text x="60" y="136" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v₂</text>
     <circle cx="150" cy="130" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-    <text x="150" y="136" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>3</sub></text>
+    <text x="150" y="136" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v₃</text>
     <line x1="105" y1="64" x2="67" y2="118" stroke="#4caf50" stroke-width="1.5"/>
     <line x1="105" y1="64" x2="143" y2="118" stroke="#4caf50" stroke-width="1.5"/>
     <line x1="74" y1="130" x2="136" y2="130" stroke="#4caf50" stroke-width="1.5"/>
     <!-- K4 -->
-    <text x="315" y="20" text-anchor="middle" font-size="15" fill="#2c3e50" font-weight="bold">K<sub>4</sub></text>
+    <text x="315" y="20" text-anchor="middle" font-size="15" fill="#2c3e50" font-weight="bold">K₄</text>
     <circle cx="280" cy="50" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-    <text x="280" y="56" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>1</sub></text>
+    <text x="280" y="56" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v₁</text>
     <circle cx="240" cy="130" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-    <text x="240" y="136" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>2</sub></text>
+    <text x="240" y="136" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v₂</text>
     <circle cx="350" cy="130" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-    <text x="350" y="136" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>3</sub></text>
+    <text x="350" y="136" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v₃</text>
     <circle cx="315" cy="80" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-    <text x="315" y="86" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>4</sub></text>
+    <text x="315" y="86" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v₄</text>
     <!-- 边：v1 到 v2, v3, v4 -->
     <line x1="271" y1="62" x2="247" y2="118" stroke="#4caf50" stroke-width="1.5"/>
     <line x1="289" y1="62" x2="343" y2="118" stroke="#4caf50" stroke-width="1.5"/>
@@ -195,7 +195,7 @@
     <line x1="343" y1="120" x2="322" y2="90" stroke="#4caf50" stroke-width="1.5"/>
   </svg>
 </div>
-<div class="graph-caption">完全图 K<sub>3</sub>（3 个顶点，3 条边）和 K<sub>4</sub>（4 个顶点，6 条边）</div>
+<div class="graph-caption">完全图 K₃（3 个顶点，3 条边）和 K₄（4 个顶点，6 条边）</div>
 
 <div class="key-point">
   <p><strong>边数公式：</strong>完全图 K<sub>n</sub> 的边数为</p>
@@ -211,12 +211,12 @@
   </div>
   <div class="options">
     <div class="opt" onclick="checkChoice(1, 0)">A. 包含一条自环（顶点连向自身）的图</div>
-    <div class="opt" onclick="checkChoice(1, 1)">B. 三角形 K<sub>3</sub>（3 个顶点、3 条边）</div>
+    <div class="opt" onclick="checkChoice(1, 1)">B. 三角形 K₃（3 个顶点、3 条边）</div>
     <div class="opt" onclick="checkChoice(1, 2)">C. 有 4 个顶点且任意两点之间都有一条边的图</div>
-    <div class="opt" onclick="checkChoice(1, 3)">D. 五边形回路 C<sub>5</sub>（5 个顶点、5 条边）</div>
+    <div class="opt" onclick="checkChoice(1, 3)">D. 五边形回路 C₅（5 个顶点、5 条边）</div>
   </div>
   <div class="explain" id="explain1">
-    <strong>解析：</strong>简单图不允许自环和重边。包含自环的图不是简单图。B 描述的是三角形 K<sub>3</sub>，C 描述的是完全图 K<sub>4</sub>，它们都是简单图。选 <strong>A</strong>。
+    <strong>解析：</strong>简单图不允许自环和重边。包含自环的图不是简单图。B 描述的是三角形 K₃，C 描述的是完全图 K₄，它们都是简单图。选 <strong>A</strong>。
   </div>
 </div>
 
@@ -227,7 +227,7 @@
 <h3>先看一个问题</h3>
 <div class="example">
   <p><strong>问题：</strong>在一个有 5 位同学的群聊中，如果每两个人之间恰好发过一次私信，那么总共发了多少条私信？所有同学收发私信的总次数是多少？</p>
-  <p class="step"><strong>思考：</strong>把每位同学看作顶点，一次私信看作连接两个顶点的一条边。5 个顶点两两相连，就是完全图 K<sub>5</sub>，共有 C(5,2) = 10 条边（10 条私信）。</p>
+  <p class="step"><strong>思考：</strong>把每位同学看作顶点，一次私信看作连接两个顶点的一条边。5 个顶点两两相连，就是完全图 K₅，共有 C(5,2) = 10 条边（10 条私信）。</p>
   <p class="step">每位同学与另外 4 位都发过私信，所以每位同学的"度数"是 4。所有同学的度数之和 = 5 &times; 4 = 20，恰好等于边数 10 的两倍。</p>
 </div>
 
@@ -251,15 +251,15 @@
   <div class="graph-svg">
     <svg width="300" height="180" viewBox="0 0 300 180">
       <circle cx="60" cy="40" r="16" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
-      <text x="60" y="46" text-anchor="middle" font-size="13" fill="#1a73e8" font-weight="bold">v<sub>1</sub></text>
+      <text x="60" y="46" text-anchor="middle" font-size="13" fill="#1a73e8" font-weight="bold">v₁</text>
       <circle cx="200" cy="40" r="16" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
-      <text x="200" y="46" text-anchor="middle" font-size="13" fill="#1a73e8" font-weight="bold">v<sub>2</sub></text>
+      <text x="200" y="46" text-anchor="middle" font-size="13" fill="#1a73e8" font-weight="bold">v₂</text>
       <circle cx="30" cy="130" r="16" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
-      <text x="30" y="136" text-anchor="middle" font-size="13" fill="#1a73e8" font-weight="bold">v<sub>3</sub></text>
+      <text x="30" y="136" text-anchor="middle" font-size="13" fill="#1a73e8" font-weight="bold">v₃</text>
       <circle cx="150" cy="150" r="16" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
-      <text x="150" y="156" text-anchor="middle" font-size="13" fill="#1a73e8" font-weight="bold">v<sub>4</sub></text>
+      <text x="150" y="156" text-anchor="middle" font-size="13" fill="#1a73e8" font-weight="bold">v₄</text>
       <circle cx="250" cy="130" r="16" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
-      <text x="250" y="136" text-anchor="middle" font-size="13" fill="#1a73e8" font-weight="bold">v<sub>5</sub></text>
+      <text x="250" y="136" text-anchor="middle" font-size="13" fill="#1a73e8" font-weight="bold">v₅</text>
       <line x1="76" y1="40" x2="184" y2="40" stroke="#1a73e8" stroke-width="1.5"/>
       <line x1="60" y1="56" x2="40" y2="115" stroke="#1a73e8" stroke-width="1.5"/>
       <line x1="200" y1="56" x2="240" y2="115" stroke="#1a73e8" stroke-width="1.5"/>
@@ -268,11 +268,11 @@
       <line x1="200" y1="56" x2="160" y2="135" stroke="#1a73e8" stroke-width="1.5"/>
     </svg>
   </div>
-  <p class="step">d(v<sub>1</sub>) = 2（连 v<sub>2</sub> 和 v<sub>3</sub>）</p>
-  <p class="step">d(v<sub>2</sub>) = 3（连 v<sub>1</sub>、v<sub>4</sub>、v<sub>5</sub>）</p>
-  <p class="step">d(v<sub>3</sub>) = 2（连 v<sub>1</sub>、v<sub>4</sub>）</p>
-  <p class="step">d(v<sub>4</sub>) = 3（连 v<sub>2</sub>、v<sub>3</sub>、v<sub>5</sub>）</p>
-  <p class="step">d(v<sub>5</sub>) = 2（连 v<sub>2</sub>、v<sub>4</sub>）</p>
+  <p class="step">d(v₁) = 2（连 v₂ 和 v₃）</p>
+  <p class="step">d(v₂) = 3（连 v₁、v₄、v₅）</p>
+  <p class="step">d(v₃) = 2（连 v₁、v₄）</p>
+  <p class="step">d(v₄) = 3（连 v₂、v₃、v₅）</p>
+  <p class="step">d(v₅) = 2（连 v₂、v₄）</p>
   <p class="step">度数之和 = 2 + 3 + 2 + 3 + 2 = <strong>12</strong>，边数 = <strong>6</strong>，验证：12 = 2 &times; 6 &#10003;</p>
 </div>
 </section>
@@ -300,13 +300,15 @@
 
 <h3>基本概念</h3>
 <ul>
-  <li><strong>路径（Path）：</strong>一个顶点序列 v<sub>1</sub>, v<sub>2</sub>, ..., v<sub>k</sub>，其中相邻顶点之间都有边连接，且顶点互不相同。路径的长度是路径中边的数目。</li>
-  <li><strong>回路（Cycle）：</strong>起点和终点相同且中间顶点互不相同的路径（即 v<sub>1</sub> = v<sub>k</sub>，其他顶点互异）。</li>
+  <li><strong>途径（Walk）：</strong>一个顶点序列 v₁, v₂, ..., v<sub>k</sub>，其中相邻顶点之间都有边连接；顶点和边都可以重复。</li>
+  <li><strong>边迹（Trail）：</strong>不重复经过边的途径，顶点可以重复。欧拉通路属于边迹。</li>
+  <li><strong>路径（Path）：</strong>顶点互不相同的途径。路径的长度是其中边的数目。</li>
+  <li><strong>回路（Cycle）：</strong>首尾顶点相同、除首尾外其他顶点互不相同的闭合途径。</li>
   <li><strong>连通图（Connected Graph）：</strong>图中任意两个顶点之间都存在一条路径。</li>
 </ul>
 
 <div class="example">
-  <p><strong>例：</strong>在下图中，从 v<sub>1</sub> 到 v<sub>4</sub> 有一条路径：v<sub>1</sub> &rarr; v<sub>2</sub> &rarr; v<sub>3</sub> &rarr; v<sub>4</sub>（长度为 3）。图中还有一个回路：v<sub>1</sub> &rarr; v<sub>2</sub> &rarr; v<sub>3</sub> &rarr; v<sub>1</sub>（长度为 3 的三角形回路）。</p>
+  <p><strong>例：</strong>在下图中，从 v₁ 到 v₄ 有一条路径：v₁ &rarr; v₂ &rarr; v₃ &rarr; v₄（长度为 3）。图中还有一个回路：v₁ &rarr; v₂ &rarr; v₃ &rarr; v₁（长度为 3 的三角形回路）。</p>
 </div>
 
 <div class="graph-svg">
@@ -314,11 +316,11 @@
     <!-- 连通图 -->
     <text x="100" y="20" text-anchor="middle" font-size="15" fill="#2c3e50" font-weight="bold">连通图</text>
     <circle cx="40" cy="100" r="14" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
-    <text x="40" y="106" text-anchor="middle" font-size="12" fill="#1a73e8" font-weight="bold">v<sub>1</sub></text>
+    <text x="40" y="106" text-anchor="middle" font-size="12" fill="#1a73e8" font-weight="bold">v₁</text>
     <circle cx="100" cy="50" r="14" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
-    <text x="100" y="56" text-anchor="middle" font-size="12" fill="#1a73e8" font-weight="bold">v<sub>2</sub></text>
+    <text x="100" y="56" text-anchor="middle" font-size="12" fill="#1a73e8" font-weight="bold">v₂</text>
     <circle cx="160" cy="100" r="14" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
-    <text x="160" y="106" text-anchor="middle" font-size="12" fill="#1a73e8" font-weight="bold">v<sub>3</sub></text>
+    <text x="160" y="106" text-anchor="middle" font-size="12" fill="#1a73e8" font-weight="bold">v₃</text>
     <line x1="54" y1="100" x2="86" y2="64" stroke="#1a73e8" stroke-width="1.5"/>
     <line x1="114" y1="64" x2="146" y2="86" stroke="#1a73e8" stroke-width="1.5"/>
     <line x1="146" y1="100" x2="54" y2="100" stroke="#1a73e8" stroke-width="1.5"/>
@@ -352,7 +354,7 @@
 <div class="quiz-question" id="q3">
   <div class="q-title">
     <span class="q-tag concept">概念</span>
-    一个图有 6 个顶点：v<sub>1</sub>&ndash;v<sub>2</sub>、v<sub>2</sub>&ndash;v<sub>3</sub>、v<sub>3</sub>&ndash;v<sub>4</sub>、v<sub>4</sub>&ndash;v<sub>5</sub>、v<sub>5</sub>&ndash;v<sub>6</sub> 之间有边，其他顶点之间没有边。这个图是连通的吗？
+    一个图有 6 个顶点：v₁&ndash;v₂、v₂&ndash;v₃、v₃&ndash;v₄、v₄&ndash;v₅、v₅&ndash;v₆ 之间有边，其他顶点之间没有边。这个图是连通的吗？
   </div>
   <div class="options">
     <div class="opt" onclick="checkChoice(3, 0)">A. 是连通的</div>
@@ -361,7 +363,7 @@
     <div class="opt" onclick="checkChoice(3, 3)">D. 无法判断</div>
   </div>
   <div class="explain" id="explain3">
-    <strong>解析：</strong>顶点排列成一条链 v<sub>1</sub>&ndash;v<sub>2</sub>&ndash;v<sub>3</sub>&ndash;v<sub>4</sub>&ndash;v<sub>5</sub>&ndash;v<sub>6</sub>。虽然形状像一条线，但任意两个顶点之间都可以沿着这条链找到路径，所以它是连通的。选 <strong>A</strong>。
+    <strong>解析：</strong>顶点排列成一条链 v₁&ndash;v₂&ndash;v₃&ndash;v₄&ndash;v₅&ndash;v₆。虽然形状像一条线，但任意两个顶点之间都可以沿着这条链找到路径，所以它是连通的。选 <strong>A</strong>。
   </div>
 </div>
 
@@ -371,7 +373,7 @@
 
 <h3>先看一个问题</h3>
 <div class="example">
-  <p><strong>问题：</strong>一个公司有 6 个部门，需要铺设网络线缆将它们连接起来。要求任意两个部门之间都能通信（直接或间接），但希望线缆总长度尽可能短。最少需要多少条线缆？</p>
+  <p><strong>问题：</strong>一个公司有 6 个部门，需要铺设网络线缆将它们连接起来。要求任意两个部门之间都能通信（直接或间接），先忽略各条线缆长度的差异，最少需要多少条线缆？</p>
   <p class="step"><strong>思考：</strong>如果 6 个部门两两相连，需要 C(6,2) = 15 条线缆，但很多是多余的。实际上，我们只需要 5 条线缆，将它们连接成一种特殊的图——<strong>树</strong>。</p>
 </div>
 
@@ -396,19 +398,19 @@
   <div class="graph-svg">
     <svg width="320" height="180" viewBox="0 0 320 180">
       <circle cx="160" cy="20" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-      <text x="160" y="26" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>1</sub></text>
+      <text x="160" y="26" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v₁</text>
       <circle cx="60" cy="80" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-      <text x="60" y="86" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>2</sub></text>
+      <text x="60" y="86" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v₂</text>
       <circle cx="260" cy="80" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-      <text x="260" y="86" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>3</sub></text>
+      <text x="260" y="86" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v₃</text>
       <circle cx="30" cy="150" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-      <text x="30" y="156" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>4</sub></text>
+      <text x="30" y="156" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v₄</text>
       <circle cx="90" cy="150" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-      <text x="90" y="156" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>5</sub></text>
+      <text x="90" y="156" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v₅</text>
       <circle cx="220" cy="150" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-      <text x="220" y="156" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>6</sub></text>
+      <text x="220" y="156" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v₆</text>
       <circle cx="300" cy="150" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-      <text x="300" y="156" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v<sub>7</sub></text>
+      <text x="300" y="156" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">v₇</text>
       <line x1="150" y1="32" x2="72" y2="68" stroke="#4caf50" stroke-width="1.5"/>
       <line x1="170" y1="32" x2="248" y2="68" stroke="#4caf50" stroke-width="1.5"/>
       <line x1="60" y1="94" x2="36" y2="138" stroke="#4caf50" stroke-width="1.5"/>
@@ -508,13 +510,13 @@
     <svg width="200" height="140" viewBox="0 0 200 140">
       <text x="100" y="18" text-anchor="middle" font-size="13" fill="#4caf50" font-weight="bold">欧拉图示例</text>
       <circle cx="60" cy="70" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-      <text x="60" y="76" text-anchor="middle" font-size="11" fill="#2e7d32" font-weight="bold">v<sub>1</sub></text>
+      <text x="60" y="76" text-anchor="middle" font-size="11" fill="#2e7d32" font-weight="bold">v₁</text>
       <circle cx="140" cy="70" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-      <text x="140" y="76" text-anchor="middle" font-size="11" fill="#2e7d32" font-weight="bold">v<sub>2</sub></text>
+      <text x="140" y="76" text-anchor="middle" font-size="11" fill="#2e7d32" font-weight="bold">v₂</text>
       <circle cx="60" cy="110" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-      <text x="60" y="116" text-anchor="middle" font-size="11" fill="#2e7d32" font-weight="bold">v<sub>3</sub></text>
+      <text x="60" y="116" text-anchor="middle" font-size="11" fill="#2e7d32" font-weight="bold">v₃</text>
       <circle cx="140" cy="110" r="14" fill="#c8e6c9" stroke="#4caf50" stroke-width="2"/>
-      <text x="140" y="116" text-anchor="middle" font-size="11" fill="#2e7d32" font-weight="bold">v<sub>4</sub></text>
+      <text x="140" y="116" text-anchor="middle" font-size="11" fill="#2e7d32" font-weight="bold">v₄</text>
       <line x1="74" y1="70" x2="126" y2="70" stroke="#4caf50" stroke-width="1.5"/>
       <line x1="60" y1="84" x2="60" y2="96" stroke="#4caf50" stroke-width="1.5"/>
       <line x1="140" y1="84" x2="140" y2="96" stroke="#4caf50" stroke-width="1.5"/>
@@ -539,10 +541,10 @@
     <div class="opt" onclick="checkChoice(5, 0)">A. 有 4 个顶点，度数分别为 3、3、1、1 的连通图</div>
     <div class="opt" onclick="checkChoice(5, 1)">B. 有 4 个顶点，度数分别为 2、2、2、2 的连通图</div>
     <div class="opt" onclick="checkChoice(5, 2)">C. 有 5 个顶点，度数分别为 1、1、2、2、2 的连通图</div>
-    <div class="opt" onclick="checkChoice(5, 3)">D. 有 3 个顶点，度数分别为 2、2、1 的连通图</div>
+    <div class="opt" onclick="checkChoice(5, 3)">D. 有 3 个顶点，度数分别为 2、1、1 的连通图</div>
   </div>
   <div class="explain" id="explain5">
-    <strong>解析：</strong>欧拉回路要求所有顶点的度数均为偶数。A 有奇数度顶点（1,1,3,3）；C 有奇数度顶点（1,1）；D 有奇数度顶点（1）。只有 B 全为偶数（2,2,2,2），是欧拉图。选 <strong>B</strong>。
+    <strong>解析：</strong>欧拉回路要求所有非孤立顶点属于同一连通分量且度数均为偶数。A 有 4 个奇度顶点；C 和 D 各有 2 个奇度顶点，只可能有欧拉通路而没有欧拉回路。只有 B 全为偶数且连通，是欧拉图。选 <strong>B</strong>。
   </div>
 </div>
 
@@ -566,20 +568,20 @@
     <!-- 二分图 -->
     <text x="100" y="20" text-anchor="middle" font-size="15" fill="#2c3e50" font-weight="bold">二分图</text>
     <circle cx="50" cy="60" r="14" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
-    <text x="50" y="66" text-anchor="middle" font-size="11" fill="#1a73e8" font-weight="bold">U<sub>1</sub></text>
+    <text x="50" y="66" text-anchor="middle" font-size="11" fill="#1a73e8" font-weight="bold">U₁</text>
     <circle cx="50" cy="110" r="14" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
-    <text x="50" y="116" text-anchor="middle" font-size="11" fill="#1a73e8" font-weight="bold">U<sub>2</sub></text>
+    <text x="50" y="116" text-anchor="middle" font-size="11" fill="#1a73e8" font-weight="bold">U₂</text>
     <circle cx="50" cy="150" r="14" fill="#e3f2fd" stroke="#1a73e8" stroke-width="2"/>
-    <text x="50" y="156" text-anchor="middle" font-size="11" fill="#1a73e8" font-weight="bold">U<sub>3</sub></text>
+    <text x="50" y="156" text-anchor="middle" font-size="11" fill="#1a73e8" font-weight="bold">U₃</text>
 
     <circle cx="200" cy="60" r="14" fill="#fff9c4" stroke="#f57f17" stroke-width="2"/>
-    <text x="200" y="66" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">W<sub>1</sub></text>
+    <text x="200" y="66" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">W₁</text>
     <circle cx="200" cy="95" r="14" fill="#fff9c4" stroke="#f57f17" stroke-width="2"/>
-    <text x="200" y="101" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">W<sub>2</sub></text>
+    <text x="200" y="101" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">W₂</text>
     <circle cx="200" cy="130" r="14" fill="#fff9c4" stroke="#f57f17" stroke-width="2"/>
-    <text x="200" y="136" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">W<sub>3</sub></text>
+    <text x="200" y="136" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">W₃</text>
     <circle cx="200" cy="160" r="14" fill="#fff9c4" stroke="#f57f17" stroke-width="2"/>
-    <text x="200" y="166" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">W<sub>4</sub></text>
+    <text x="200" y="166" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">W₄</text>
 
     <line x1="64" y1="60" x2="186" y2="60" stroke="#1a73e8" stroke-width="1.2"/>
     <line x1="64" y1="60" x2="186" y2="95" stroke="#1a73e8" stroke-width="1.2"/>
@@ -601,7 +603,7 @@
     <line x1="284" y1="80" x2="336" y2="80" stroke="#e65100" stroke-width="1.5"/>
   </svg>
 </div>
-<div class="graph-caption">左：二分图（所有边连接 U 和 W 两部分）；右：三角形 K<sub>3</sub> 不是二分图（含奇环）</div>
+<div class="graph-caption">左：二分图（所有边连接 U 和 W 两部分）；右：三角形 K₃ 不是二分图（含奇环）</div>
 
 <h3>判定定理</h3>
 <div class="key-point">
@@ -652,7 +654,7 @@
 </div>
 
 <div class="key-point">
-  <p><strong>四色定理（Four Color Theorem）：</strong>任何平面地图（即可以画在平面上且边不相交的图）都可以用最多 <strong>4</strong> 种颜色染色，使得相邻区域颜色不同。</p>
+  <p><strong>四色定理（Four Color Theorem）：</strong>任何平面地图都可以用最多 <strong>4</strong> 种颜色给区域染色，使共享一段边界的区域颜色不同（只在一点接触不算相邻）。等价地，任何平面图的顶点都可以用至多 4 种颜色正常染色。</p>
   <p style="font-size:0.9em;color:#666;">这是数学史上著名的定理——1852 年提出，直到 1976 年才首次由计算机辅助证明，也是第一个借助计算机证明的重要数学定理。</p>
 </div>
 
@@ -667,20 +669,20 @@
       <text x="150" y="46" text-anchor="middle" font-size="12" fill="#0d47a1" font-weight="bold">B</text>
       <circle cx="240" cy="70" r="16" fill="#c8e6c9" stroke="#43a047" stroke-width="2"/>
       <text x="240" y="76" text-anchor="middle" font-size="12" fill="#1b5e20" font-weight="bold">C</text>
-      <circle cx="100" cy="130" r="16" fill="#fff9c4" stroke="#fdd835" stroke-width="2"/>
-      <text x="100" y="136" text-anchor="middle" font-size="12" fill="#f57f17" font-weight="bold">D</text>
-      <circle cx="200" cy="130" r="16" fill="#e1bee7" stroke="#8e24aa" stroke-width="2"/>
-      <text x="200" y="136" text-anchor="middle" font-size="12" fill="#4a148c" font-weight="bold">E</text>
+      <circle cx="100" cy="130" r="16" fill="#c8e6c9" stroke="#43a047" stroke-width="2"/>
+      <text x="100" y="136" text-anchor="middle" font-size="12" fill="#1b5e20" font-weight="bold">D</text>
+      <circle cx="200" cy="130" r="16" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+      <text x="200" y="136" text-anchor="middle" font-size="12" fill="#e65100" font-weight="bold">E</text>
       <line x1="76" y1="70" x2="134" y2="54" stroke="#333" stroke-width="1.5"/>
       <line x1="166" y1="54" x2="224" y2="70" stroke="#333" stroke-width="1.5"/>
       <line x1="60" y1="86" x2="90" y2="116" stroke="#333" stroke-width="1.5"/>
       <line x1="240" y1="86" x2="210" y2="116" stroke="#333" stroke-width="1.5"/>
       <line x1="114" y1="130" x2="186" y2="130" stroke="#333" stroke-width="1.5"/>
-      <line x1="150" y1="56" x2="150" y2="130" stroke="#333" stroke-width="1.5"/>
+      <line x1="140" y1="53" x2="110" y2="117" stroke="#333" stroke-width="1.5"/>
     </svg>
   </div>
   <p class="step">图中 A、B、D 两两相连（形成一个三角形），因此至少需要 <strong>3</strong> 种颜色（A=红, B=蓝, D=绿）。</p>
-  <p class="step">D 与 A、B、E 相邻，E 与 C、D 相邻。3 种颜色可以完成整张图的染色（例如 C=绿, D=绿, E=红）。</p>
+  <p class="step">3 种颜色可以完成整张图的染色：例如 A=橙、B=蓝、D=绿；C=绿（与 D 不相邻），E=橙（与 A 不相邻）。</p>
   <p class="step">所以色数 &chi;(G) = <strong>3</strong>。</p>
 </div>
 
@@ -692,7 +694,7 @@
   <tr><th>图的结构</th><th>色数</th><th>说明</th></tr>
   <tr><td>空图（无边）</td><td>1</td><td>所有顶点可涂同色</td></tr>
   <tr><td>二分图（含边）</td><td>2</td><td>两部分各涂一色；无边图的色数为 1</td></tr>
-  <tr><td>奇环（如 C<sub>5</sub>）</td><td>3</td><td>奇数长度回路需要 3 色</td></tr>
+  <tr><td>奇环（如 C₅）</td><td>3</td><td>奇数长度回路需要 3 色</td></tr>
   <tr><td>完全图 K<sub>n</sub></td><td>n</td><td>每个顶点必须颜色不同</td></tr>
   <tr><td>平面图</td><td>&le; 4</td><td>四色定理保证</td></tr>
 </table>
@@ -702,7 +704,7 @@
 <div class="quiz-question" id="q7">
   <div class="q-title">
     <span class="q-tag calc">计算</span>
-    一个完全图 K<sub>5</sub>（5 个顶点两两相连）的色数是多少？
+    一个完全图 K₅（5 个顶点两两相连）的色数是多少？
   </div>
   <div class="options">
     <div class="opt" onclick="checkChoice(7, 0)">A. 5</div>
@@ -711,7 +713,7 @@
     <div class="opt" onclick="checkChoice(7, 3)">D. 2</div>
   </div>
   <div class="explain" id="explain7">
-    <strong>解析：</strong>完全图 K<sub>n</sub> 中任意两个顶点都相邻，每个顶点必须颜色不同，所以色数 = n。K<sub>5</sub> 的色数为 <strong>5</strong>。选 <strong>A</strong>。
+    <strong>解析：</strong>完全图 K<sub>n</sub> 中任意两个顶点都相邻，每个顶点必须颜色不同，所以色数 = n。K₅ 的色数为 <strong>5</strong>。选 <strong>A</strong>。
   </div>
 </div>
 

@@ -128,7 +128,7 @@
 <article>
 <a class="back" href="../index.html">&larr; 返回课程列表</a>
 <h1>3. 复数与平面向量</h1>
-<p class="tip" style="text-align:center;font-size:1.05em;">复数与平面向量之间存在着深刻的对应关系——<strong>乘以虚数单位 i 就是逆时针旋转 90 度</strong>。</p>
+<p class="tip" style="text-align:center;font-size:1.05em;">复数与平面向量之间存在自然对应——对非零复数而言，<strong>乘以虚数单位 i 就是将对应向量逆时针旋转 90 度</strong>；零向量在这一变换下仍为零向量。</p>
 
 <!-- ===== 一、复数与向量的一一对应 ===== -->
 <h2>一、复数与向量的一一对应</h2>
@@ -299,7 +299,7 @@
     z₁ &middot; z₂ = r₁r₂ [ cos(&theta;₁ + &theta;₂) + i sin(&theta;₁ + &theta;₂) ]
   </p>
   <p style="text-align:center;font-size:0.95em;color:#666;margin-top:6px;">
-    <strong>模相乘</strong>（伸缩因子 r₁r₂），<strong>辐角相加</strong>（旋转角度 &theta;₁ + &theta;₂）
+    乘积的模为 <strong>r₁r₂</strong>；把 z₂ 乘到 z₁ 上时，z₁ 按因子 <strong>r₂</strong> 伸缩，并逆时针旋转 &theta;₂
   </p>
 </div>
 
@@ -358,6 +358,8 @@ var scale = 55;               // 每单位长度像素
 
 var a = 3.0, b = 2.0;         // 当前复数 z = a + bi
 var extraRot = 0;             // 额外旋转次数（0 表示未旋转，1 表示乘了 i，2 表示乘了 i²，3 表示乘了 i³）
+var transientAngle = null;    // 按钮触发动画时的连续旋转角
+var animationFrame = 0;
 
 function toScreen(x, y) {
   return [ox + x * scale, oy - y * scale];
@@ -436,7 +438,7 @@ function draw() {
 
     if (ca === 0 && cb === 0) continue;
 
-    var isActive = (r === rot);
+    var isActive = transientAngle === null && (r === rot);
     var [px, py] = toScreen(ca, cb);
 
     // 向量线
@@ -466,6 +468,26 @@ function draw() {
     ctx.font = (isActive ? "bold " : "") + "13px sans-serif";
     ctx.textAlign = "left";
     ctx.fillText(labels[r] + " (" + (ca >= 0 ? " " : "") + ca.toFixed(1) + ", " + (cb >= 0 ? " " : "") + cb.toFixed(1) + ")", px + (isActive ? 8 : 6), py - (isActive ? 8 : 6));
+  }
+
+  // 动画期间叠加一根连续转动的实线向量，突出“乘以 i 就是旋转”。
+  if (transientAngle !== null && (a !== 0 || b !== 0)) {
+    var movingA = a * Math.cos(transientAngle) - b * Math.sin(transientAngle);
+    var movingB = a * Math.sin(transientAngle) + b * Math.cos(transientAngle);
+    var [movingX, movingY] = toScreen(movingA, movingB);
+    var movingDirection = Math.atan2(oy - movingY, movingX - ox);
+    ctx.strokeStyle = "#ff8f00";
+    ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(movingX, movingY); ctx.stroke();
+    ctx.fillStyle = "#ff8f00";
+    ctx.beginPath();
+    ctx.moveTo(movingX, movingY);
+    ctx.lineTo(movingX - 11 * Math.cos(movingDirection - 0.4), movingY + 11 * Math.sin(movingDirection - 0.4));
+    ctx.lineTo(movingX - 11 * Math.cos(movingDirection + 0.4), movingY + 11 * Math.sin(movingDirection + 0.4));
+    ctx.fill();
+    ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillText("旋转中", movingX + 8, movingY - 8);
   }
 
   // --- 单位圆（参考） ---
@@ -501,38 +523,66 @@ function draw() {
 
 // --- 事件绑定 ---
 document.getElementById("sliderA").oninput = function() {
+  cancelAnimationFrame(animationFrame);
+  transientAngle = null;
   a = parseFloat(this.value);
   extraRot = 0;
   draw();
 };
 document.getElementById("sliderB").oninput = function() {
+  cancelAnimationFrame(animationFrame);
+  transientAngle = null;
   b = parseFloat(this.value);
   extraRot = 0;
   draw();
 };
 
+function animateRotation(quarterTurns) {
+  cancelAnimationFrame(animationFrame);
+  var startAngle = extraRot * Math.PI / 2;
+  var endAngle = startAngle + quarterTurns * Math.PI / 2;
+  var duration = quarterTurns === 1 ? 480 : 720;
+  var startedAt = performance.now();
+
+  function frame(now) {
+    var progress = Math.min(1, (now - startedAt) / duration);
+    var eased = 1 - Math.pow(1 - progress, 3);
+    transientAngle = startAngle + (endAngle - startAngle) * eased;
+    draw();
+    if (progress < 1) {
+      animationFrame = requestAnimationFrame(frame);
+    } else {
+      transientAngle = null;
+      extraRot = (extraRot + quarterTurns) % 4;
+      draw();
+    }
+  }
+
+  animationFrame = requestAnimationFrame(frame);
+}
+
 document.getElementById("btnMulI").onclick = function() {
-  // 乘以 i: (a+bi)i = -b + ai
-  extraRot = (extraRot + 1) % 4;
-  draw();
+  animateRotation(1);
 };
 
 document.getElementById("btnMulI2").onclick = function() {
-  // 乘以 i² = -1: (a+bi)(-1) = -a - bi
-  extraRot = (extraRot + 2) % 4;
-  draw();
+  animateRotation(2);
 };
 
 document.getElementById("btnReset").onclick = function() {
+  cancelAnimationFrame(animationFrame);
+  transientAngle = null;
   extraRot = 0;
   draw();
 };
 
 // 画布点击：根据点击位置设置新向量
 canvas.onclick = function(e) {
+  cancelAnimationFrame(animationFrame);
+  transientAngle = null;
   var rect = canvas.getBoundingClientRect();
-  var mx = e.clientX - rect.left;
-  var my = e.clientY - rect.top;
+  var mx = (e.clientX - rect.left) * canvas.width / rect.width;
+  var my = (e.clientY - rect.top) * canvas.height / rect.height;
   var sx = (mx - ox) / scale;
   var sy = (oy - my) / scale;
   sx = Math.round(sx * 10) / 10;

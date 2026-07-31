@@ -9,6 +9,8 @@
 <style>
   .svg-wrap { text-align: center; margin: 20px 0; }
   .svg-wrap svg { border: 1px solid #ddd; border-radius: 10px; background: #fcfcfc; max-width: 100%; }
+  @keyframes guideFlow { to { stroke-dashoffset: -20; } }
+  .animated-guide { animation: guideFlow 1.5s linear infinite; }
   .aux-desc { background: #f0f7ff; border-left: 4px solid #1a73e8; padding: 16px 20px; margin: 16px 0; border-radius: 0 8px 8px 0; font-size: 0.95em; }
   .aux-desc strong { color: #1a73e8; }
   .example { margin: 16px 0; }
@@ -70,8 +72,8 @@
   <!-- Triangle 4: bottom-left -->
   <polygon points="20,380 180,380 20,180" fill="rgba(26,115,232,0.12)" stroke="#1a73e8" stroke-width="1.5"/>
 
-  <!-- Inner square (light orange) -->
-  <polygon points="180,180 220,180 220,220 180,220" fill="rgba(255,204,128,0.6)" stroke="#e65100" stroke-width="1.5"/>
+  <!-- Inner square: its four sides are the four hypotenuses c -->
+  <polygon points="220,20 380,220 180,380 20,180" fill="rgba(255,204,128,0.35)" stroke="#e65100" stroke-width="2"/>
 
   <!-- Side labels: a -->
   <text x="105" y="14" font-size="16" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">a</text>
@@ -92,7 +94,7 @@
   <text x="105" y="305" font-size="16" font-weight="bold" fill="#1a73e8" font-family="serif" font-style="italic">c</text>
 
   <!-- Inner square label -->
-  <text x="188" y="206" font-size="11" fill="#e65100" font-family="serif" font-style="italic">|b-a|</text>
+  <text x="200" y="205" font-size="16" text-anchor="middle" fill="#e65100" font-family="serif" font-style="italic">面积 c²</text>
 
   <!-- Right angle markers at outer corners -->
   <polygon points="20,20 32,20 32,32 20,32" fill="#999" opacity="0.4"/>
@@ -103,7 +105,7 @@
 </div>
 
 <div class="aux-desc">
-  <strong>辅助线思路：</strong>赵爽弦图通过将 4 个全等直角三角形拼入一个大正方形，大正方形的面积 = (a+b)² = 4×(ab/2) + c²，化简得 a²+b²=c²。这里的"辅助线"实际上是三角形的拼合排列方式——将斜边朝内排列，中间自然形成一个边长为 |b-a| 的正方形。
+  <strong>辅助线思路：</strong>赵爽弦图通过将 4 个全等直角三角形拼入一个边长为 a+b 的大正方形。四条斜边 c 首尾相接；由于直角三角形的两个锐角互余，相邻斜边夹角为 90&deg;，所以中间确为边长 c 的正方形。比较两种面积表达即可得到结论。
 </div>
 
 <h3>分步推导</h3>
@@ -113,7 +115,7 @@
   <p class="step"><strong>证明：</strong></p>
   <p class="step">① 构造大正方形 ABCD，边长为 a+b。</p>
   <p class="step">② 在大正方形内拼入 4 个全等的直角三角形（直角边 a、b），</p>
-  <p class="step">&emsp;&emsp;使斜边朝内，中间形成一个小正方形，边长为 |b-a|。</p>
+  <p class="step">&emsp;&emsp;使斜边朝内，中间形成一个边长为 c 的正方形。</p>
   <p class="step">③ 计算大正方形的面积：S = (a+b)²。</p>
   <p class="step">④ 大正方形由 4 个三角形和内部以斜边 c 为边的正方形组成：</p>
   <p class="step">&emsp;&emsp;S = 4 × (ab/2) + c² = 2ab + c²。</p>
@@ -202,79 +204,40 @@
 
 <div class="svg-wrap">
 <svg width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
-  <!-- Triangle ABC (right at C) -->
-  <polygon points="200,220 280,280 200,280" fill="rgba(26,115,232,0.1)" stroke="#333" stroke-width="2"/>
-
-  <!-- Square ACDE (on AC, left) -->
-  <polygon points="200,220 200,280 140,280 140,220" fill="rgba(26,115,232,0.08)" stroke="#1a73e8" stroke-width="1.5" stroke-dasharray="5,3"/>
-
-  <!-- Square BCGF (on BC, downward) -->
-  <polygon points="200,280 280,280 280,360 200,360" fill="rgba(46,125,50,0.08)" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="5,3"/>
-
-  <!-- Square ABHI (on AB, outward) -->
-  <polygon points="200,220 280,280 220,360 140,300" fill="rgba(211,47,47,0.06)" stroke="#e65100" stroke-width="1.5" stroke-dasharray="5,3"/>
-
-  <!-- Perpendicular from C to AB, extended to IH -->
-  <!-- C(200,280) -> F(229,242) -> G(169,321) -->
-  <line x1="200" y1="280" x2="169" y2="321" stroke="#e65100" stroke-width="2" stroke-dasharray="6,4"/>
-
-  <!-- Vertex labels -->
-  <text x="195" y="212" font-size="15" font-weight="bold" fill="#333" font-family="serif" font-style="italic">A</text>
-  <text x="282" y="284" font-size="15" font-weight="bold" fill="#333" font-family="serif" font-style="italic">B</text>
-  <text x="190" y="296" font-size="15" font-weight="bold" fill="#333" font-family="serif" font-style="italic">C</text>
-
-  <!-- Square labels on legs -->
-  <text x="147" y="255" font-size="13" fill="#1a73e8" font-family="serif" font-style="italic">D</text>
-  <text x="128" y="284" font-size="13" fill="#1a73e8" font-family="serif" font-style="italic">E</text>
-  <text x="195" y="375" font-size="13" fill="#2e7d32" font-family="serif" font-style="italic">F</text>
-  <text x="280" y="375" font-size="13" fill="#2e7d32" font-family="serif" font-style="italic">G</text>
-  <text x="218" y="365" font-size="13" fill="#e65100" font-family="serif" font-style="italic">H</text>
-  <text x="128" y="304" font-size="13" fill="#e65100" font-family="serif" font-style="italic">I</text>
-
-  <!-- Perpendicular foot labels -->
-  <text x="227" y="237" font-size="14" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">M</text>
-  <text x="152" y="320" font-size="14" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">N</text>
-
-  <!-- Side length labels -->
-  <text x="210" y="255" font-size="14" fill="#333" font-family="serif" font-style="italic">b</text>
-  <text x="238" y="296" font-size="14" fill="#333" font-family="serif" font-style="italic">a</text>
-
-  <!-- Right angle at C -->
-  <polygon points="200,280 215,280 215,265 200,265" fill="#999" opacity="0.5"/>
-
-  <!-- Perpendicular label -->
-  <text x="178" y="295" font-size="13" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">CM</text>
+  <!-- Right triangle ACB: AC=b, CB=a, AB=c -->
+  <polygon points="180,140 280,140 280,215" fill="rgba(26,115,232,0.1)" stroke="#333" stroke-width="2"/>
+  <!-- Squares on the three sides, all constructed outside the triangle -->
+  <polygon points="180,140 280,140 280,40 180,40" fill="rgba(26,115,232,0.12)" stroke="#1a73e8" stroke-width="2"/>
+  <polygon points="280,140 280,215 355,215 355,140" fill="rgba(46,125,50,0.12)" stroke="#2e7d32" stroke-width="2"/>
+  <polygon points="180,140 280,215 205,315 105,240" fill="rgba(211,47,47,0.09)" stroke="#e65100" stroke-width="2"/>
+  <!-- Altitude CM, extended to N, splits the square on AB into two rectangles -->
+  <line class="animated-guide" x1="280" y1="140" x2="169" y2="288" stroke="#e65100" stroke-width="2.5" stroke-dasharray="7,5"/>
+  <text x="169" y="132" font-size="15" font-weight="bold">A</text><text x="285" y="230" font-size="15" font-weight="bold">B</text><text x="289" y="137" font-size="15" font-weight="bold">C</text>
+  <circle cx="244" cy="188" r="3.5" fill="#e65100"/><text x="232" y="184" font-size="14" fill="#e65100">M</text>
+  <circle cx="169" cy="288" r="3.5" fill="#e65100"/><text x="151" y="304" font-size="14" fill="#e65100">N</text>
+  <text x="225" y="132" font-size="14" fill="#333">b</text><text x="288" y="180" font-size="14" fill="#333">a</text><text x="225" y="190" font-size="14" fill="#333">c</text>
+  <text x="230" y="90" font-size="18" text-anchor="middle" fill="#1a73e8">b²</text><text x="319" y="183" font-size="18" text-anchor="middle" fill="#2e7d32">a²</text><text x="185" y="250" font-size="18" text-anchor="middle" fill="#e65100">c²</text>
+  <polyline points="268,140 268,152 280,152" fill="none" stroke="#777" stroke-width="1.5"/>
 </svg>
 </div>
 
 <div class="aux-desc">
-  <strong>辅助线思路：</strong>欧几里得证法"从直角顶点向斜边作垂线，并延长至大正方形的对边"，目的是将大正方形分割成两个矩形，通过证明每个矩形与对应的小正方形面积相等来得出结论。垂线 CM 是解题的关键——它将斜边上的正方形分成两个矩形，每个矩形的面积恰好等于一条直角边上的正方形面积。这条辅助线的思路来源于"要证明 a²+b²=c²，只需证明 c² 可以分解为 a² 和 b² 两部分"。
+  <strong>辅助线思路：</strong>从直角顶点 C 向斜边 AB 作高 CM，并延长到斜边上正方形的对边。相似三角形给出 AC²=AB&middot;AM、BC²=AB&middot;BM；右边正是斜边正方形中两个矩形的面积。辅助线把“边的平方”转化为“同高矩形的面积”。
 </div>
 
 <h3>分步推导</h3>
 <div class="example">
   <p><strong>已知：</strong>直角三角形 ABC，∠C = 90°，三边 a、b、c（c 为斜边）。</p>
-  <p>在三边上分别向外作正方形 ACDE、BCGF、ABHI。</p>
+  <p>在三边上分别向三角形外部作正方形。</p>
   <p><strong>求证：</strong>a² + b² = c²</p>
   <p class="step"><strong>证明（思路）：</strong></p>
-  <p class="step">① 从直角顶点 C 向斜边 AB 作垂线，垂足为 M，</p>
-  <p class="step">&emsp;&emsp;延长 CM 交 IH 于点 N。</p>
-  <p class="step">② 垂线 MN 将正方形 ABHI 分割成两个矩形 AIMN 和 BHMN。</p>
-  <p class="step">③ 连接 CE、AH。证明矩形 AIMN 的面积 = 正方形 ACDE 的面积：</p>
-  <p class="step">&emsp;&emsp;在 △CAE 和 △HAB 中：</p>
-  <p class="step">&emsp;&emsp;&emsp;CA = HA（正方形 ACDE 和 ABHI 均为同边长的正方形），</p>
-  <p class="step">&emsp;&emsp;&emsp;AE = AB（同为正方形边长），</p>
-  <p class="step">&emsp;&emsp;&emsp;∠CAE = ∠CAB + 90° = ∠HAB（∠HAB = ∠CAB + 90°），</p>
-  <p class="step">&emsp;&emsp;∴ △CAE ≅ △HAB（SAS），故 S<sub>△CAE</sub> = S<sub>△HAB</sub>。</p>
-  <p class="step">&emsp;&emsp;又 ∵ △CAE 与正方形 ACDE 同底（AE）等高（AC），</p>
-  <p class="step">&emsp;&emsp;&emsp;∴ S<sub>正方形ACDE</sub> = 2 × S<sub>△CAE</sub>。</p>
-  <p class="step">&emsp;&emsp;∵ △HAB 与矩形 AIMN 同底（AH）等高（AI），</p>
-  <p class="step">&emsp;&emsp;&emsp;∴ S<sub>矩形AIMN</sub> = 2 × S<sub>△HAB</sub>。</p>
-  <p class="step">&emsp;&emsp;∴ S<sub>矩形AIMN</sub> = S<sub>正方形ACDE</sub> = b²。</p>
-  <p class="step">④ 同理，连接 CG、BH，可证 △CBG ≅ △HBN，</p>
-  <p class="step">&emsp;&emsp;进而得到 S<sub>矩形BHMN</sub> = S<sub>正方形BCGF</sub> = a²。</p>
-  <p class="step">⑤ 由于矩形 AIMN + 矩形 BHMN = 正方形 ABHI = c²，</p>
-  <p class="step">&emsp;&emsp;∴ a² + b² = c²。</p>
+  <p class="step">① 从直角顶点 C 向斜边 AB 作垂线，垂足为 M，并把 CM 延长到斜边上正方形的对边。</p>
+  <p class="step">② 在 △ACM 与 △ABC 中，∠AMC=∠ACB=90&deg;，且 ∠CAM=∠CAB，所以 △ACM∽△ABC。</p>
+  <p class="step">&emsp;&emsp;由对应边成比例，AC/AB=AM/AC，故 <strong>AC²=AB&middot;AM</strong>。</p>
+  <p class="step">③ 同理，△BCM∽△BAC，所以 BC/BA=BM/BC，故 <strong>BC²=AB&middot;BM</strong>。</p>
+  <p class="step">④ AB&middot;AM 与 AB&middot;BM 分别是斜边正方形中两个矩形的面积；它们的和为</p>
+  <p class="step">&emsp;&emsp;AB&middot;AM+AB&middot;BM=AB(AM+BM)=AB²。</p>
+  <p class="step">⑤ 因而 AC²+BC²=AB²，即 <strong>a²+b²=c²</strong>。</p>
   <p class="answer">∴ 勾股定理成立。</p>
 </div>
 </section>
@@ -295,16 +258,16 @@
 </article>
 
 <script>
-var answers = {1:2, 2:1, 3:1, 4:0, 5:1};
+var answers = {1:3, 2:1, 3:1, 4:1, 5:2};
 
 var questions = [
   {
     qid: 1,
     tag: "概念",
-    question: "赵爽弦图中，中间小正方形的边长是？",
+    question: "本页赵爽弦图中，中间正方形的边长是？",
     opts: ["a-b", "b-a", "|b-a|", "√(a²+b²)"],
-    answer: 2,
-    explain: "赵爽弦图中，大正方形边长为 a+b，4 个直角三角形直角边分别为 a、b，将它们拼入后中间自然形成一个边长为 |b-a| 的小正方形。"
+    answer: 3,
+    explain: "四个三角形的斜边 c 首尾相接构成中间正方形，所以其边长为 c=√(a²+b²)。"
   },
   {
     qid: 2,
@@ -325,10 +288,10 @@ var questions = [
   {
     qid: 4,
     tag: "推理",
-    question: "欧几里得证法中，△CAE ≅ △HAB 的依据是？",
-    opts: ["SSS（三边相等）", "SAS（两边夹角）", "ASA（两角夹边）", "AAS（两角一对边）"],
+    question: "欧几里得证法中，由 △ACM∽△ABC 可以推出哪一关系？",
+    opts: ["AC²=CM·AB", "AC²=AM·AB", "BC²=AM·AB", "AB²=AM·BM"],
     answer: 1,
-    explain: "CA = HA（正方形边相等）、AE = AB（正方形边相等）、∠CAE = ∠CAB + 90° = ∠HAB，满足 SAS（两边及其夹角对应相等）。"
+    explain: "由相似关系 AC/AB=AM/AC，交叉相乘得到 AC²=AM·AB；这正是直角边正方形与对应矩形的面积相等。"
   },
   {
     qid: 5,

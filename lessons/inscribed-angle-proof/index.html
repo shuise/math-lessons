@@ -45,6 +45,8 @@
   .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
   .score-panel { text-align: center; margin: 24px 0; }
   h3 { color: #2c3e50; margin: 24px 0 10px; font-size: 1.1em; }
+  @keyframes guideFlow { to { stroke-dashoffset: -18; } }
+  .animated-guide { animation: guideFlow 1.5s linear infinite; }
 </style>
 </head>
 <body>
@@ -56,7 +58,8 @@
 <!-- ========================= 定理陈述 ========================= -->
 <section>
 <h2>一、定理陈述</h2>
-<p>圆 O 中，同弧 AB 所对的圆周角 &ang;ACB = &ang;ADB（C、D 在圆上）。圆心角 &ang;AOB = 2&ang;ACB。</p>
+<p><strong>圆周角</strong>是顶点在圆上、两边分别与圆还有另一个交点的角。&ang;ACB 所对的弧，是不含顶点 C 的弧 AB；与它对应的圆心角 &ang;AOB 也必须对着同一条弧（必要时取大于 180&deg; 的优角）。</p>
+<p>圆 O 中，同弧 AB 所对的圆周角相等；若 C、D 位于弦 AB 的同一侧，则 &ang;ACB = &ang;ADB。对应的圆心角满足 &ang;AOB = 2&ang;ACB；若 C、D 位于弦 AB 两侧，两个圆周角所对的是两条互补的弧，因而两角互补而不相等。</p>
 <div class="formula-box">
   <strong>&ang;AOB = 2 &times; &ang;ACB</strong>
 </div>
@@ -81,7 +84,7 @@
   <line x1="400" y1="230" x2="276" y2="82" stroke="#333" stroke-width="2" stroke-dasharray="6,3"/>
 
   <!-- Radius OB (auxiliary line) -->
-  <line x1="250" y1="230" x2="276" y2="82" stroke="#1a73e8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line class="animated-guide" x1="250" y1="230" x2="276" y2="82" stroke="#1a73e8" stroke-width="1.5" stroke-dasharray="4,3"/>
 
   <!-- Vertex labels -->
   <text x="80" y="248" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">C</text>
@@ -146,24 +149,23 @@
   <circle cx="250" cy="230" r="150" fill="rgba(26,115,232,0.04)" stroke="#333" stroke-width="2"/>
 
   <!-- Triangle ACB -->
-  <line x1="360" y1="200" x2="110" y2="140" stroke="#333" stroke-width="2"/>
-  <line x1="360" y1="200" x2="110" y2="350" stroke="#333" stroke-width="2"/>
-  <line x1="110" y1="140" x2="110" y2="350" stroke="#333" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <line x1="400" y1="230" x2="135" y2="134" stroke="#333" stroke-width="2"/>
+  <line x1="400" y1="230" x2="135" y2="326" stroke="#333" stroke-width="2"/>
+  <line x1="135" y1="134" x2="135" y2="326" stroke="#333" stroke-width="1.5" stroke-dasharray="6,3"/>
 
   <!-- CO extended to D (dashed auxiliary line) -->
-  <line x1="360" y1="200" x2="250" y2="230" stroke="#e65100" stroke-width="2"/>
-  <line x1="250" y1="230" x2="105" y2="270" stroke="#e65100" stroke-width="2" stroke-dasharray="6,4"/>
+  <line class="animated-guide" x1="400" y1="230" x2="250" y2="230" stroke="#e65100" stroke-width="2" stroke-dasharray="6,4"/>
+  <line class="animated-guide" x1="250" y1="230" x2="100" y2="230" stroke="#e65100" stroke-width="2" stroke-dasharray="6,4"/>
 
   <!-- Radii OA, OB, OD -->
-  <line x1="250" y1="230" x2="110" y2="140" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="250" y1="230" x2="110" y2="350" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="250" y1="230" x2="105" y2="270" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="250" y1="230" x2="135" y2="134" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="250" y1="230" x2="135" y2="326" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
 
   <!-- Vertex labels -->
-  <text x="368" y="198" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">C</text>
-  <text x="90" y="134" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">A</text>
-  <text x="90" y="370" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">B</text>
-  <text x="106" y="286" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">D</text>
+  <text x="408" y="234" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">C</text>
+  <text x="116" y="128" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">A</text>
+  <text x="116" y="346" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">B</text>
+  <text x="82" y="248" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">D</text>
 
   <!-- Center O dot -->
   <circle cx="250" cy="230" r="4" fill="#333"/>
@@ -175,30 +177,29 @@
   <!-- CB direction: from C(360,200) to B(110,350) = (-250,150), angle ~ 149.0° -->
   <!-- ∠ACD between CA and CD: from -166.7° to 164.6° (going CCW) or equivalently from 193.3° to 164.6° (going CW) -->
   <!-- ∠DCB between CD and CB: from 164.6° to 149.0° -->
-  <path d="M 343,185 A 20,20 0 0,1 341.5,218.5" fill="none" stroke="#e65100" stroke-width="2"/>
-  <text x="344" y="214" font-size="13" font-weight="bold" fill="#e65100" font-family="serif" font-style="italic">&ang;ACD</text>
-
-  <path d="M 341.5,218.5 A 20,20 0 0,1 347,222" fill="none" stroke="#1a73e8" stroke-width="2"/>
-  <text x="344" y="234" font-size="13" font-weight="bold" fill="#1a73e8" font-family="serif" font-style="italic">&ang;DCB</text>
+  <path d="M 376,221 A 26,26 0 0,1 374,230" fill="none" stroke="#e65100" stroke-width="2"/>
+  <text x="350" y="218" font-size="13" font-weight="bold" fill="#e65100">&ang;ACD</text>
+  <path d="M 374,230 A 26,26 0 0,1 376,239" fill="none" stroke="#1a73e8" stroke-width="2"/>
+  <text x="350" y="250" font-size="13" font-weight="bold" fill="#1a73e8">&ang;DCB</text>
 
   <!-- ===== ∠AOD arc at O (corresponding to ∠ACD) ===== -->
   <!-- OA dir: (110-250,140-230)=(-140,-90), OD dir: (105-250,270-230)=(-145,40) -->
-  <path d="M 236.5,236.5 A 15,15 0 0,1 236,242" fill="none" stroke="#e65100" stroke-width="1.5" stroke-dasharray="3,2"/>
-  <text x="226" y="248" font-size="11" fill="#e65100" font-family="serif" font-style="italic">&ang;AOD</text>
+  <path d="M 235,217 A 20,20 0 0,1 230,230" fill="none" stroke="#e65100" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="210" y="212" font-size="11" fill="#e65100">&ang;AOD</text>
 
   <!-- ===== ∠DOB arc at O (corresponding to ∠DCB) ===== -->
   <!-- OD dir: (-145,40), OB dir: (110-250,350-230)=(-140,120) -->
-  <path d="M 236,242 A 15,15 0 0,1 239,248" fill="none" stroke="#1a73e8" stroke-width="1.5" stroke-dasharray="3,2"/>
-  <text x="234" y="260" font-size="11" fill="#1a73e8" font-family="serif" font-style="italic">&ang;DOB</text>
+  <path d="M 230,230 A 20,20 0 0,1 235,243" fill="none" stroke="#1a73e8" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="210" y="256" font-size="11" fill="#1a73e8">&ang;DOB</text>
 
   <!-- Angle labels ∠1=∠2 -->
-  <text x="334" y="194" font-size="15" font-weight="bold" fill="#e65100" font-family="serif">&ang;1</text>
+  <text x="365" y="228" font-size="15" font-weight="bold" fill="#e65100" font-family="serif">&ang;ACB</text>
 
   <!-- Small dots at vertices -->
-  <circle cx="360" cy="200" r="3" fill="#333"/>
-  <circle cx="110" cy="140" r="3" fill="#333"/>
-  <circle cx="110" cy="350" r="3" fill="#333"/>
-  <circle cx="105" cy="270" r="3" fill="#333"/>
+  <circle cx="400" cy="230" r="3" fill="#333"/>
+  <circle cx="135" cy="134" r="3" fill="#333"/>
+  <circle cx="135" cy="326" r="3" fill="#333"/>
+  <circle cx="100" cy="230" r="3" fill="#333"/>
 </svg>
 </div>
 
@@ -233,24 +234,23 @@
   <circle cx="250" cy="230" r="150" fill="rgba(26,115,232,0.04)" stroke="#333" stroke-width="2"/>
 
   <!-- Triangle ACB -->
-  <line x1="300" y1="100" x2="110" y2="180" stroke="#333" stroke-width="2"/>
-  <line x1="300" y1="100" x2="110" y2="360" stroke="#333" stroke-width="2"/>
-  <line x1="110" y1="180" x2="110" y2="360" stroke="#333" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <line x1="325" y1="100" x2="120" y2="155" stroke="#333" stroke-width="2"/>
+  <line x1="325" y1="100" x2="120" y2="305" stroke="#333" stroke-width="2"/>
+  <line x1="120" y1="155" x2="120" y2="305" stroke="#333" stroke-width="1.5" stroke-dasharray="6,3"/>
 
   <!-- CO extended to D (dashed auxiliary line) -->
-  <line x1="300" y1="100" x2="250" y2="230" stroke="#e65100" stroke-width="2"/>
-  <line x1="250" y1="230" x2="196" y2="370" stroke="#e65100" stroke-width="2" stroke-dasharray="6,4"/>
+  <line class="animated-guide" x1="325" y1="100" x2="250" y2="230" stroke="#e65100" stroke-width="2" stroke-dasharray="6,4"/>
+  <line class="animated-guide" x1="250" y1="230" x2="175" y2="360" stroke="#e65100" stroke-width="2" stroke-dasharray="6,4"/>
 
   <!-- Radii OA, OB, OD -->
-  <line x1="250" y1="230" x2="110" y2="180" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="250" y1="230" x2="110" y2="360" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
-  <line x1="250" y1="230" x2="196" y2="370" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="250" y1="230" x2="120" y2="155" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="250" y1="230" x2="120" y2="305" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
 
   <!-- Vertex labels -->
-  <text x="304" y="94" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">C</text>
-  <text x="90" y="176" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">A</text>
-  <text x="90" y="380" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">B</text>
-  <text x="190" y="388" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">D</text>
+  <text x="330" y="93" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">C</text>
+  <text x="101" y="150" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">A</text>
+  <text x="101" y="325" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">B</text>
+  <text x="168" y="380" font-size="17" font-weight="bold" fill="#333" font-family="serif" font-style="italic">D</text>
 
   <!-- Center O dot -->
   <circle cx="250" cy="230" r="4" fill="#333"/>
@@ -279,10 +279,10 @@
   <path d="M 237,240 A 12,12 0 0,1 239,244" fill="none" stroke="#43a047" stroke-width="1.5" stroke-dasharray="3,2"/>
 
   <!-- Small dots at vertices -->
-  <circle cx="300" cy="100" r="3" fill="#333"/>
-  <circle cx="110" cy="180" r="3" fill="#333"/>
-  <circle cx="110" cy="360" r="3" fill="#333"/>
-  <circle cx="196" cy="370" r="3" fill="#333"/>
+  <circle cx="325" cy="100" r="3" fill="#333"/>
+  <circle cx="120" cy="155" r="3" fill="#333"/>
+  <circle cx="120" cy="305" r="3" fill="#333"/>
+  <circle cx="175" cy="360" r="3" fill="#333"/>
 </svg>
 </div>
 
@@ -360,7 +360,7 @@
 
 <h3>应用</h3>
 <ul>
-  <li>判断三点是否共圆：若 &ang;ACB = 90°，则 A、B、C 三点共圆，且 AB 为直径。</li>
+  <li>确定直径圆：若 &ang;ACB = 90°，则 C 在以 AB 为直径的圆上（A、B、C 不共线）。</li>
   <li>在直角三角形中，斜边中点即为外接圆圆心。</li>
   <li>常用于证明线段垂直或构造直角三角形。</li>
 </ul>

@@ -120,17 +120,16 @@
 
 <div class="proof-step">
   <p><strong>第一步：在单位圆上标记关键点</strong></p>
-  <p>考虑单位圆（半径为 1）。在圆上标记三个点：</p>
+  <p>考虑单位圆（半径为 1）。在圆上标记两个点：</p>
   <ul>
     <li>点 P 在角度 &alpha; 处：<strong>P = (cos &alpha;, sin &alpha;)</strong></li>
     <li>点 Q 在角度 &beta; 处：<strong>Q = (cos &beta;, sin &beta;)</strong></li>
-    <li>点 R 在角度 (&alpha; &minus; &beta;) 处：<strong>R = (cos(&alpha;&minus;&beta;), sin(&alpha;&minus;&beta;))</strong></li>
   </ul>
 </div>
 
 <div class="proof-step">
   <p><strong>第二步：向量 OP 与 OQ 的夹角</strong></p>
-  <p>从原点到 P 和 Q 的向量分别为 OP 和 OQ。它们之间的夹角正是 <strong>|&alpha; &minus; &beta;|</strong>。</p>
+  <p>从原点到 P 和 Q 的向量分别为 OP 和 OQ。它们之间的小夹角记为 &theta;。当 |&alpha;&minus;&beta;|&le;&pi; 时，&theta;=|&alpha;&minus;&beta;|；当角度差更大时，&theta;=2&pi;&minus;|&alpha;&minus;&beta;|。两种情况下都有 <strong>cos &theta; = cos(&alpha;&minus;&beta;)</strong>。</p>
   <p class="formula">&ang;(OP, OQ) = |&alpha; &minus; &beta;|</p>
 </div>
 
@@ -250,7 +249,7 @@ var questions = [
       "&radic;3/2",
       "1"
     ],
-    answer: 0,
+    answer: 1,
     explain: "sin(60&deg; &minus; 30&deg;) = sin 30&deg; = 1/2。代入公式验证：sin60&deg;cos30&deg; &minus; cos60&deg;sin30&deg; = (&radic;3/2)(&radic;3/2) &minus; (1/2)(1/2) = 3/4 &minus; 1/4 = 1/2。"
   },
   {
@@ -412,7 +411,8 @@ function drawProof(alphaDeg, betaDeg) {
   var alphaRad = degToRad(alphaDeg);
   var betaRad = degToRad(betaDeg);
   // Ensure α > β for angle between them to be positive
-  var diffRad = Math.abs(alphaRad - betaRad);
+  var rawDiff = Math.abs(alphaRad - betaRad);
+  var diffRad = Math.min(rawDiff, 2 * Math.PI - rawDiff);
 
   // Points: P at α, Q at β
   var px = cx + R * Math.cos(alphaRad);

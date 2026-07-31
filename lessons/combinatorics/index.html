@@ -486,9 +486,9 @@
 <div class="comp-exercise" id="c1">
   <h4>练习 1（10 分）</h4>
   <p>某班有 10 名班干部候选人。<strong>（注意区分分类/分步）</strong></p>
-  <p>(1) 从中选 1 人担任班长，有多少种选法？</p>
-  <p>(2) 从中选 1 人担任班长、1 人担任副班长（不可兼任），有多少种选法？</p>
-  <p>(3) 从中选 3 人组成一个学习小组（无职务），有多少种选法？</p>
+  <p>(1) 从中选 1 人担任班长，有多少种选法？（3 分）</p>
+  <p>(2) 从中选 1 人担任班长、1 人担任副班长（不可兼任），有多少种选法？（3 分）</p>
+  <p>(3) 从中选 3 人组成一个学习小组（无职务），有多少种选法？（4 分）</p>
 
   <div class="quiz-question" style="border:none;padding:0;margin:8px 0;background:transparent;">
     <p>请回答 (1) 的答案：<input class="fill-input" id="c1a1" type="text" placeholder="数字">
@@ -501,7 +501,7 @@
 
   <div class="answer-box" id="c1answer">
     <strong>解析：</strong><br>
-    (1) 从 10 人中选 1 人当班长，是<strong>分类</strong>（选任意一人即可），有 10 种选法。<br>
+    (1) 班长可以是 10 名候选人中的任意一人，因此直接计数得 10 种选法。若逐人分类，也可看成 10 个互斥且无遗漏的单元素类别。<br>
     (2) 先选班长（10 种）再选副班长（剩下 9 种），是<strong>分步排列</strong>，P(10,2) = 10 &times; 9 = 90 种。<br>
     (3) 选 3 人组成小组，<strong>顺序不重要</strong>，是组合问题，C(10,3) = 120 种。
   </div>
@@ -647,7 +647,8 @@ function checkFill(inputId, correctAnswer) {
   var input = document.getElementById(inputId);
   if (input.classList.contains("correct-input") || input.classList.contains("wrong-input")) return;
 
-  var val = parseInt(input.value.trim());
+  var raw = input.value.trim();
+  var val = /^[-+]?\d+(?:\.\d+)?$/.test(raw) ? Number(raw) : NaN;
   var btn = input.nextElementSibling;
   var compDiv = input.closest(".comp-exercise");
   var allFilled = true;
@@ -711,38 +712,29 @@ function updateTotalScore() {
 
   // Count correct fill-in answers (each fill worth proportion of 50)
   var fillScore = 0;
-  var fillMap = {"c1a1":10, "c1a2":90, "c1a3":120, "c2a1":60, "c2a2":24, "c3a1":31, "c4a1":24, "c5a1":1560};
-  // Each exercise is 10 points, sub-questions weighted equally
+  // Each exercise is 10 points; the weights below make every subtotal explicit.
   var fillExercises = {
-    "c1": ["c1a1","c1a2","c1a3"],
-    "c2": ["c2a1","c2a2"],
-    "c3": ["c3a1"],
-    "c4": ["c4a1"],
-    "c5": ["c5a1"]
+    "c1": {ids:["c1a1","c1a2","c1a3"], points:[3,3,4]},
+    "c2": {ids:["c2a1","c2a2"], points:[5,5]},
+    "c3": {ids:["c3a1"], points:[10]},
+    "c4": {ids:["c4a1"], points:[10]},
+    "c5": {ids:["c5a1"], points:[10]}
   };
 
   for (var ex in fillExercises) {
-    var ids = fillExercises[ex];
+    var ids = fillExercises[ex].ids;
+    var pointValues = fillExercises[ex].points;
     var allAnswered = true;
-    var correctCount = 0;
+    var exerciseScore = 0;
     for (var j = 0; j < ids.length; j++) {
       var inp = document.getElementById(ids[j]);
       if (!inp || (!inp.classList.contains("correct-input") && !inp.classList.contains("wrong-input"))) {
         allAnswered = false;
         break;
       }
-      if (inp.classList.contains("correct-input")) correctCount++;
+      if (inp.classList.contains("correct-input")) exerciseScore += pointValues[j];
     }
-    if (allAnswered) {
-      // Correct proportion of each exercise's 10 points
-      var perQ = Math.floor(10 / ids.length);
-      var remainder = 10 - perQ * ids.length;
-      var score = correctCount * perQ;
-      // Bonus: if all correct, full 10 points; if some correct, add remainder
-      if (correctCount === ids.length) score = 10;
-      else if (correctCount > 0) score += Math.min(remainder, correctCount);
-      fillScore += score;
-    }
+    if (allAnswered) fillScore += exerciseScore;
   }
 
   totalScore = quizScore + fillScore;

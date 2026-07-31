@@ -135,7 +135,7 @@
 <a class="back" href="../index.html">&larr; 返回课程列表</a>
 <article>
 <h1>复数</h1>
-<p class="tip" style="text-align:center;font-size:1.1em;">从"没有解"到"有解"——虚数 i 的引入让一切方程都有了答案。</p>
+<p class="tip" style="text-align:center;font-size:1.1em;">从“没有实数解”到“有复数解”——虚数单位 i 扩展了数系；代数基本定理进一步说明，每个非常数复系数多项式在复数范围内都有根。</p>
 
 <!-- ==================== 一、为什么要引入复数 ==================== -->
 <section>
@@ -239,7 +239,7 @@
 <p>我们定义<strong class="keyword">虚数单位</strong> i 满足：</p>
 <div class="formula-box">
   <p><strong>i² = −1</strong></p>
-  <p>于是 &#x221A;(−1) = i，更一般地，对于任意正实数 a，&#x221A;(−a) = i&#x221A;a</p>
+  <p>约定负实数的主平方根 &#x221A;(−1) = i。更一般地，对正实数 a，主平方根 &#x221A;(−a) = i&#x221A;a；方程 x² = −a 的两个解则是 x = &plusmn;i&#x221A;a。</p>
 </div>
 
 <div class="example">
@@ -264,6 +264,9 @@
   <p>z₂ = −1 + 4i：实部 Re(z₂) = −1，虚部 Im(z₂) = 4</p>
   <p>z₃ = 5（即 5 + 0i）：实部 5，虚部 0 &rArr; <strong>纯实数</strong></p>
   <p>z₄ = 3i（即 0 + 3i）：实部 0，虚部 3 &rArr; <strong>纯虚数</strong></p>
+</div>
+<div class="hint">
+  <strong>分类边界：</strong>当 b = 0 时，a + bi 是实数；当 a = 0 且 b &ne; 0 时，它是纯虚数。0 的实部和虚部都为 0，属于实数，但通常不称为纯虚数。
 </div>
 
 <h3>2.3 复数相等</h3>
@@ -459,7 +462,7 @@
 
 <div class="formula-box">
   <p><strong>(a + bi) / (c + di) = (a + bi)(c − di) / (c² + d²)</strong></p>
-  <p>其中 c − di 是 c + di 的共轭复数</p>
+  <p>其中 c − di 是 c + di 的共轭复数，且除数 c + di &ne; 0（即 c、d 不同时为 0）</p>
 </div>
 
 <div class="example">
@@ -556,8 +559,8 @@
   <tr><td>z + z̄</td><td>z + z̄ = 2a（实数）</td></tr>
   <tr><td>z − z̄</td><td>z − z̄ = 2bi（纯虚数或 0）</td></tr>
   <tr><td>共轭的共轭</td><td>(z̄)̄ = z</td></tr>
-  <tr><td>和的共轭</td><td>z₁ + z₂ = z̄₁ + z̄₂</td></tr>
-  <tr><td>积的共轭</td><td>z₁ &middot; z₂ = z̄₁ &middot; z̄₂</td></tr>
+  <tr><td>和的共轭</td><td>(z₁ + z₂) 的共轭 = z̄₁ + z̄₂</td></tr>
+  <tr><td>积的共轭</td><td>(z₁ &middot; z₂) 的共轭 = z̄₁ &middot; z̄₂</td></tr>
 </table>
 
 <div class="hint">
@@ -602,7 +605,7 @@
 <h2>六、复数的三角形式（简要介绍）</h2>
 
 <h3>6.1 从直角坐标到极坐标</h3>
-<p>在复平面上，复数 z = a + bi 也可以用<strong>极坐标</strong>表示：</p>
+<p>在复平面上，非零复数 z = a + bi 也可以用<strong>极坐标</strong>表示：</p>
 <ul>
   <li>r = |z| = &#x221A;(a² + b²)——到原点的距离（模）</li>
   <li>&theta; 为从正实轴到向量 OP 的夹角，称为<strong class="keyword">辐角</strong>（Argument）</li>
@@ -610,7 +613,7 @@
 
 <div class="formula-box">
   <p><strong>z = r(cos &theta; + i sin &theta;)</strong></p>
-  <p>其中 r = |z|，&theta; 是辐角</p>
+  <p>其中 r = |z| &gt; 0，&theta; 是辐角；同一非零复数的辐角相差 2k&pi;（k 为整数）。0 没有确定的辐角。</p>
   <p>a = r cos &theta;，b = r sin &theta;</p>
 </div>
 
@@ -626,7 +629,7 @@
 <div class="formula-box">
   <p><strong>乘法：</strong>r₁(cos &theta;₁ + i sin &theta;₁) &middot; r₂(cos &theta;₂ + i sin &theta;₂)</p>
   <p><strong>= r₁r₂[cos(&theta;₁ + &theta;₂) + i sin(&theta;₁ + &theta;₂)]</strong></p>
-  <p style="margin-top:10px;"><strong>除法：</strong>r₁(cos &theta;₁ + i sin &theta;₁) / r₂(cos &theta;₂ + i sin &theta;₂)</p>
+  <p style="margin-top:10px;"><strong>除法：</strong>r₁(cos &theta;₁ + i sin &theta;₁) / r₂(cos &theta;₂ + i sin &theta;₂)，其中 r₂ &gt; 0</p>
   <p><strong>= (r₁/r₂)[cos(&theta;₁ − &theta;₂) + i sin(&theta;₁ − &theta;₂)]</strong></p>
 </div>
 
@@ -764,7 +767,7 @@ var quizQuestions = [
   { answer: 1, explain: "正确的扩展顺序是：自然数 → 整数 → 有理数 → 实数 → 复数。每一步都是为了解决上一级数系中某些方程无解的问题。" },
   { answer: 1, explain: "z = −3 + 5i，实部 Re = −3，虚部 Im = 5（注意虚部是实数 5，不是 5i）。" },
   { answer: 3, explain: "由复数相等：2x − 1 = 5 → 2x = 6 → x = 3；3y + 2 = −1 → 3y = −3 → y = −1。" },
-  { answer: 1, explain: "纯虚数是指实部为 0 的复数。0 + 3i 的实部为 0，是纯虚数。2 + 0i 是实数。" },
+  { answer: 1, explain: "纯虚数是指实部为 0、虚部不为 0 的复数。0 + 3i 满足条件，是纯虚数；2 + 0i 是实数。" },
   { answer: 1, explain: "|−5 + 12i| = √((−5)² + 12²) = √(25 + 144) = √169 = 13。" },
   { answer: 3, explain: "2 − 3i 对应点 (2, −3)，横坐标为正、纵坐标为负，位于第四象限。" },
   { answer: 0, explain: "(3 + 2i) + (−1 + 4i) = (3 − 1) + (2 + 4)i = 2 + 6i。" },

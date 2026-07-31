@@ -181,8 +181,8 @@
 <div class="key-point">
   <p><strong>频率 vs 概率：</strong></p>
   <p>频率 = 事件发生的次数 / 总试验次数（是一个<strong>实际值</strong>，随试验变化）</p>
-  <p>概率 = 事件发生的固有可能性（是一个<strong>理论值</strong>，固定不变）</p>
-  <p>大数定律告诉我们：随着试验次数 n 增大，频率趋近于概率。</p>
+  <p>概率 = 在给定随机模型下对事件可能性大小的度量（同一模型下是<strong>确定的理论值</strong>）</p>
+  <p>大数定律告诉我们：随着独立重复试验次数 n 增大，频率有稳定在概率附近的趋势，但不保证每增加一次试验都更接近概率。</p>
 </div>
 </section>
 
@@ -211,11 +211,11 @@
   <div class="options">
     <div class="opt" onclick="checkChoice(2, 0)">A. 频率就是概率</div>
     <div class="opt" onclick="checkChoice(2, 1)">B. 抛 10 次硬币正面出现 6 次，说明正面概率是 0.6</div>
-    <div class="opt" onclick="checkChoice(2, 2)">C. 随着试验次数增加，频率会越来越接近概率</div>
+    <div class="opt" onclick="checkChoice(2, 2)">C. 独立重复试验次数很大时，频率有稳定在概率附近的趋势</div>
     <div class="opt" onclick="checkChoice(2, 3)">D. 概率会随着试验次数变化</div>
   </div>
   <div class="explain" id="explain2">
-    <strong>解析：</strong>频率随试验变化，概率是固定值。大数定律说明当试验次数足够多时，频率趋近于概率。选 C。
+    <strong>解析：</strong>频率随试验变化，概率由给定模型确定。大数定律说明独立重复试验次数很大时，频率有稳定在概率附近的趋势，并不表示它会逐次单调靠近概率。选 C。
   </div>
 </div>
 
@@ -315,7 +315,7 @@
 </div>
 
 <h3>引出几何概型</h3>
-<p>当试验的可能结果是无穷多个（比如线段上的点、平面上的区域），且每个结果等可能时，我们用<strong>几何概型</strong>（Geometric Probability Model）。</p>
+<p>当样本空间是线段、平面区域或空间区域，并且随机点相对于长度、面积或体积<strong>均匀分布</strong>时，可以建立<strong>几何概型</strong>（Geometric Probability Model）。连续模型中单个点的概率通常为 0，因此不能把“每个点等可能”理解成给每个点分配同一个正概率。</p>
 
 <div class="definition">
   <p><strong>几何概型</strong>：如果随机试验的样本空间 &Omega; 是一个可度量的几何区域（长度、面积、体积等），且样本点均匀分布（等可能），则事件 A 的概率为：</p>
@@ -326,7 +326,7 @@
 </div>
 
 <div class="hint">
-  <strong>古典 vs 几何：</strong>古典概型数"个数"，几何概型量"大小"。根本区别在于样本空间是<strong>有限</strong>还是<strong>无限</strong>。
+  <strong>古典 vs 几何：</strong>古典概型对有限个等可能样本点数“个数”；几何概型对连续区域按均匀分布量“长度、面积或体积”。样本空间无限并不自动意味着几何概型，还必须说明相应的均匀分布模型。
 </div>
 
 <h3>更多例子</h3>
@@ -470,7 +470,7 @@
 
 <h3>引出随机变量</h3>
 <div class="definition">
-  <p><strong>随机变量</strong>：把随机试验的结果用实数表示的变量。通常用大写字母 X, Y, Z 等表示。</p>
+  <p><strong>随机变量</strong>：定义在样本空间上的实值函数，它把每个试验结果对应到一个实数。通常用大写字母 X, Y, Z 等表示。</p>
   <p><strong>离散型随机变量</strong>：取值可以一一列举（有限个或可数无限个）的随机变量。</p>
   <p>掷骰子的点数 X 是离散型的（取值 1~6）；"掷到正面朝上所需次数"也是离散型的（可取 1, 2, 3, ...）。</p>
 </div>
@@ -714,7 +714,7 @@
 <div class="definition">
   <p><strong>正态分布</strong>：如果随机变量 X 的概率密度函数为</p>
   <p style="text-align:center;font-size:1.1em;margin:10px 0;">
-    f(x) = <span style="font-size:1.2em;">1</span> / (&sigma;&radic;<span style="border-top:1px solid #333;">2&pi;</span>) &middot; e<sup>&minus;(x&minus;&mu;)&sup2; / (2&sigma;&sup2;)</sup>
+    f(x) = [1 / (&sigma;&radic;(2&pi;))] &middot; e<sup>&minus;(x&minus;&mu;)&sup2; / (2&sigma;&sup2;)</sup>，&sigma; &gt; 0
   </p>
   <p style="text-align:center;">则称 X 服从正态分布，记作 X ~ N(&mu;, &sigma;&sup2;)。</p>
 </div>
@@ -786,7 +786,7 @@
 <p>以下 5 道综合题覆盖了本节全部知识点，动手试试吧！</p>
 
 <div class="score-panel">
-  得分：<span class="score-num" id="totalScore">0</span> / 50
+  得分：<span class="score-num" id="totalScore">0</span> / 100
   <button class="btn-reset" onclick="resetAll()">重置全部</button>
 </div>
 
@@ -961,6 +961,7 @@ var totalScore = 0;
 
 function checkChoice(qid, idx) {
   var answers = {1:1, 2:2, 3:1, 4:0, 5:2, 6:1, 7:1, 8:1, 9:1, 10:2, 11:0, 12:0, 13:2, 14:0, 15:2, 16:0};
+  var choicePoints = {1:3, 2:3, 3:3, 4:3, 5:3, 6:3, 7:3, 8:3, 9:3, 10:3, 11:3, 12:3, 13:3, 14:3, 15:4, 16:4};
   if (answered[qid]) return;
 
   var qDiv = document.getElementById("q" + qid);
@@ -976,6 +977,7 @@ function checkChoice(qid, idx) {
     opts[idx].classList.add("correct-opt");
     qDiv.classList.add("correct");
     explain.className = "explain show ok";
+    totalScore += choicePoints[qid];
   } else {
     opts[idx].classList.add("wrong-opt");
     opts[correct].classList.add("correct-opt");
@@ -997,7 +999,7 @@ function checkFill(inputId, correctAnswer) {
   var val = input.value.trim();
   var btn = input.nextElementSibling;
 
-  if (val === correctAnswer) {
+  if (answersEquivalent(val, correctAnswer)) {
     input.className = "fill-input correct-input";
   } else {
     input.className = "fill-input wrong-input";
@@ -1020,7 +1022,7 @@ function checkFillTuple(exId, inputIds, correctAnswers) {
       continue;
     }
     var val = inp.value.trim();
-    if (val === correctAnswers[i]) {
+    if (answersEquivalent(val, correctAnswers[i])) {
       inp.className = "fill-input correct-input";
     } else {
       inp.className = "fill-input wrong-input";
@@ -1034,46 +1036,61 @@ function checkFillTuple(exId, inputIds, correctAnswers) {
   updateTotalScore();
 }
 
+function answersEquivalent(value, expected) {
+  var val = value.replace(/\s+/g, '');
+  var target = String(expected).replace(/\s+/g, '');
+  if (target === '几何') return val === '几何' || val === '几何概型';
+  if (val === target) return true;
+
+  function numericValue(text) {
+    var percent = text.endsWith('%');
+    var body = percent ? text.slice(0, -1) : text;
+    if (/^[-+]?\d+(?:\.\d+)?$/.test(body)) {
+      return Number(body) / (percent ? 100 : 1);
+    }
+    var match = body.match(/^([-+]?\d+)\/([1-9]\d*)$/);
+    return match ? Number(match[1]) / Number(match[2]) : NaN;
+  }
+
+  var actualNumber = numericValue(val);
+  var expectedNumber = numericValue(target);
+  return !isNaN(actualNumber) && !isNaN(expectedNumber) && Math.abs(actualNumber - expectedNumber) < 1e-9;
+}
+
 function updateTotalScore() {
   var quizScore = 0;
+  var choicePoints = {1:3, 2:3, 3:3, 4:3, 5:3, 6:3, 7:3, 8:3, 9:3, 10:3, 11:3, 12:3, 13:3, 14:3, 15:4, 16:4};
   for (var i = 1; i <= 16; i++) {
     if (answered[i]) {
       var qDiv = document.getElementById("q" + i);
       if (qDiv && qDiv.classList.contains("correct")) {
-        quizScore++;
+        quizScore += choicePoints[i];
       }
     }
   }
 
   var fillExercises = [
-    { id: "c1", inputs: ["c1a1","c1a2"] },
-    { id: "c2", inputs: ["c2a1","c2a2","c2a3","c2a4","c2a5"] },
-    { id: "c3", inputs: ["c3a0","c3a1","c3a2"] },
-    { id: "c4", inputs: ["c4a1","c4a2"] },
-    { id: "c5", inputs: ["c5a1","c5a2"] }
+    { id: "c1", inputs: ["c1a1","c1a2"], points: [5,5] },
+    { id: "c2", inputs: ["c2a1","c2a2","c2a3","c2a4","c2a5"], points: [2,2,2,2,2] },
+    { id: "c3", inputs: ["c3a0","c3a1","c3a2"], points: [2,4,4] },
+    { id: "c4", inputs: ["c4a1","c4a2"], points: [5,5] },
+    { id: "c5", inputs: ["c5a1","c5a2"], points: [5,5] }
   ];
 
   var fillScore = 0;
   for (var e = 0; e < fillExercises.length; e++) {
     var ids = fillExercises[e].inputs;
     var allAnswered = true;
-    var correctCount = 0;
+    var exerciseScore = 0;
     for (var j = 0; j < ids.length; j++) {
       var inp = document.getElementById(ids[j]);
       if (!inp || (!inp.classList.contains("correct-input") && !inp.classList.contains("wrong-input"))) {
         allAnswered = false;
         break;
       }
-      if (inp.classList.contains("correct-input")) correctCount++;
+      if (inp.classList.contains("correct-input")) exerciseScore += fillExercises[e].points[j];
     }
-    if (allAnswered && ids.length > 0) {
-      if (correctCount === ids.length) {
-        fillScore += 10;
-      } else {
-        var perQ = Math.floor(10 / ids.length);
-        fillScore += correctCount * perQ;
-      }
-    }
+    if (allAnswered) fillScore += exerciseScore;
   }
 
   totalScore = quizScore + fillScore;
