@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../../lib/logo.png?version=1.0.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>针对性强化训练</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+body {
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.9;
+  font-size: 16px;
+}
+article {
+  background: #fff; border-radius: 12px; padding: 36px 40px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow-wrap: break-word; word-wrap: break-word; overflow-x: hidden;
+}
+h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding-bottom: 10px; margin-top: 0; text-align: center; }
+.back {
+  display: inline-block; margin-bottom: 16px;
+  color: #1a73e8; text-decoration: none; font-size: 0.95em;
+}
+.back:hover { text-decoration: underline; }
+.tip { text-align: center; color: #888; margin-bottom: 12px; }
+.tip-strong { text-align: center; color: #e65100; font-weight: bold; margin: 4px 0 16px; font-size: 0.95em; }
+
+/* 顶部信息栏 */
+.quiz-info {
+  display: flex; flex-wrap: wrap; gap: 10px 28px;
+  margin: 14px 0 24px; padding: 12px 18px;
+  background: #f8faff; border-radius: 10px;
+  border: 1px solid #e0e8f0; font-size: 0.93em; color: #555;
+}
+.quiz-info .info-item strong { color: #1a73e8; }
+
+/* 段标题 */
+.part-header {
+  margin: 34px 0 18px; padding: 13px 20px;
+  background: linear-gradient(135deg, #1a73e8, #1557b0);
+  color: #fff; border-radius: 10px;
+  font-size: 1.12em; font-weight: bold; letter-spacing: 1px;
+}
+.part-header.part-proof { background: linear-gradient(135deg, #9c27b0, #6a1b9a); }
+
+/* 大题卡片 */
+.calc-card {
+  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+  padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
+}
+.calc-card:hover { border-color: #b0bec5; }
+.calc-card .q-title {
+  font-weight: bold; font-size: 1.05em; margin-bottom: 8px; color: #2c3e50;
+}
+.calc-card .q-title .q-tag {
+  display: inline-block; padding: 1px 10px; border-radius: 12px;
+  font-size: 0.75em; margin-right: 8px; color: #fff; background: #e65100;
+}
+.calc-card .q-title .q-tag.proof { background: #9c27b0; }
+.calc-card .q-title .q-kw {
+  display: inline-block; padding: 1px 10px; border-radius: 12px;
+  font-size: 0.72em; margin-left: 6px; font-weight: normal;
+  background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9;
+}
+.calc-card .q-text {
+  margin: 6px 0 10px; line-height: 1.8; color: #444;
+  font-size: 1.0em;
+}
+.calc-card .btn-row { margin-top: 12px; }
+.calc-card .btn-hint {
+  display: inline-block; padding: 6px 20px;
+  border: 2px solid #1a73e8; color: #1a73e8; border-radius: 16px;
+  background: #fff; cursor: pointer; font-size: 0.92em; transition: 0.15s;
+  user-select: none;
+}
+.calc-card .btn-hint:hover { background: #e8f0fe; }
+.calc-card .btn-hint.open { background: #1a73e8; color: #fff; }
+.calc-card .btn-answer {
+  display: inline-block; margin-left: 1em; padding: 6px 20px;
+  border: 2px solid #2e7d32; color: #2e7d32; border-radius: 16px;
+  background: #fff; cursor: pointer; font-size: 0.92em; transition: 0.15s;
+  user-select: none;
+}
+.calc-card .btn-answer:hover { background: #e8f5e9; }
+.calc-card .btn-answer.open { background: #2e7d32; color: #fff; }
+
+.calc-card .hint-area {
+  margin: 12px 0 0; padding: 12px 16px; border-radius: 8px;
+  font-size: 0.95em; display: none; line-height: 1.9;
+  background: #e8f0fe; border-left: 4px solid #1a73e8;
+}
+.calc-card .hint-area.show { display: block; }
+.calc-card .answer-area {
+  margin: 12px 0 0; padding: 12px 16px; border-radius: 8px;
+  font-size: 0.95em; display: none; line-height: 1.9;
+  background: #f1f8e9; border-left: 4px solid #2e7d32;
+}
+.calc-card .answer-area.show { display: block; }
+.calc-card .panel-label {
+  display: inline-block; background: #1a73e8; color: #fff;
+  padding: 1px 10px; border-radius: 4px; font-size: 0.8em; margin-right: 8px;
+}
+.calc-card .panel-label.ans { background: #2e7d32; }
+.calc-card .hint-area .step, .calc-card .answer-area .step { margin: 4px 0; padding-left: 10px; }
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>针对性强化训练</h1>
+<p class="tip">共 20 道综合性大题 · 15 计算 + 5 证明 · 每题建议 3-5 分钟</p>
+
+<div class="quiz-info">
+  1. 标注题号，两题之间用横线间隔 <br>
+  2. 步骤严谨，完整，使用的公理，定义，公式都必须做说明 <br>
+  3. 书写要确保 AI 可以正确识别，不能识别按错误处理。<br>
+  4. 可查看提示，可求助 AI：画图，解释题目或思路梳理。  
+</div>
+
+<div id="list"></div>
+</article>
+
+<script>
+var problems = [
+  {
+    part: "calc", kw: "对数 · 单调性",
+    q: "已知函数 f(x) = log<sub>2</sub>[(a - 1)x + 1] 在区间 [1, 2] 上单调递增，求实数 a 的取值范围。",
+    hint: "复合函数单调性用「同增异减」：外层 y = log₂u 单调递增，只需内层 u = (a-1)x + 1 在 [1, 2] 上恒正且单调递增。恒正用区间端点值检查，递增看一次项系数 a - 1 的符号。",
+    ans: "外层 log₂u 在 (0, +∞) 上单调递增。内层 u(x) = (a - 1)x + 1 在 [1, 2] 上须恒正且单调递增。<br>① 内层单调递增 ⟺ a - 1 &gt; 0，即 a &gt; 1。<br>② 内层恒正：只需 u(1) = a &gt; 0 且 u(2) = 2a - 1 &gt; 0，即 a &gt; 1/2。<br>综合 ①②，得 a &gt; 1。<br><b>∴ a ∈ (1, +∞)。</b>"
+  },
+  {
+    part: "calc", kw: "指数 · 奇偶性 · 单调性",
+    q: "已知函数 f(x) = (2<sup>x</sup> - a·2<sup>-x</sup>) / 2 是定义在 R 上的奇函数。(1) 求 a 的值；(2) 用定义法判断并证明 f(x) 在 R 上的单调性。",
+    hint: "(1) 奇函数在 x = 0 处有定义，则必有 f(0) = 0，直接解出 a。(2) 定义法证明单调性：任取 x₁ &lt; x₂，作差 f(x₁) - f(x₂)，通分后提公因式 (2<sup>x₁</sup> - 2<sup>x₂</sup>)，再利用指数函数 2<sup>x</sup> 的单调性对剩余因子定号。",
+    ans: "(1) 由 f(0) = 0，得 (1 - a) / 2 = 0，所以 a = 1。<br>(2) 此时 f(x) = (2<sup>x</sup> - 2<sup>-x</sup>) / 2。任取 x₁ &lt; x₂，则<br>f(x₁) - f(x₂) = (2<sup>x₁</sup> - 2<sup>x₂</sup> + 2<sup>-x₂</sup> - 2<sup>-x₁</sup>) / 2<br>= (2<sup>x₁</sup> - 2<sup>x₂</sup>)·(1/2 + 1 / 2<sup>x₁+x₂+1</sup>)。<br>因为 x₁ &lt; x₂，所以 2<sup>x₁</sup> - 2<sup>x₂</sup> &lt; 0；而括号内的因子恒大于 0。<br>故 f(x₁) - f(x₂) &lt; 0，即 f(x₁) &lt; f(x₂)。<br><b>∴ f(x) 在 R 上单调递增。</b>"
+  },
+  {
+    part: "calc", kw: "指数 · 换元法",
+    q: "解方程 4<sup>x</sup> - 2<sup>x+1</sup> - 8 = 0。",
+    hint: "把 4<sup>x</sup> 化为 (2<sup>x</sup>)²、2<sup>x+1</sup> 化为 2·2<sup>x</sup>，换元 t = 2<sup>x</sup>（t &gt; 0）化为一元二次方程；注意指数函数恒为正，要舍去负根。",
+    ans: "原方程可化为 (2<sup>x</sup>)² - 2·2<sup>x</sup> - 8 = 0。<br>令 t = 2<sup>x</sup>（t &gt; 0），得 t² - 2t - 8 = 0，即 (t - 4)(t + 2) = 0。<br>所以 t = 4 或 t = -2（舍去，因为 t &gt; 0）。<br>由 2<sup>x</sup> = 4，得 x = 2。<br><b>∴ 原方程的解为 x = 2。</b>"
+  },
+  {
+    part: "calc", kw: "对数 · 不等式 · 单调性",
+    q: "解不等式 log<sub>2</sub>(x² - 2x - 3) &gt; 1。",
+    hint: "先求定义域（真数大于 0）；底数 2 &gt; 1，对数函数单调递增，可以「脱去」对数直接比较真数；解出二次不等式后再与定义域取交集。",
+    ans: "定义域：x² - 2x - 3 &gt; 0，即 (x - 3)(x + 1) &gt; 0，得 x &lt; -1 或 x &gt; 3。<br>因为 y = log₂t 单调递增，原不等式 ⟺ x² - 2x - 3 &gt; 2，即 x² - 2x - 5 &gt; 0。<br>解得 x &lt; 1 - √6 或 x &gt; 1 + √6。<br>与定义域取交集（1 - √6 ≈ -1.45 &lt; -1，1 + √6 ≈ 3.45 &gt; 3），交集不改变解集。<br><b>∴ 解集为 (-∞, 1 - √6) ∪ (1 + √6, +∞)。</b>"
+  },
+  {
+    part: "calc", kw: "对数 · 换底公式",
+    q: "计算 log₂3·log₃4·log₄5·…·log₃₁3₂ 的值。",
+    hint: "联想换底公式 log_a b·log_b c = log_a c：相邻两项的「底」与「真数」首尾相接，整个乘积可以逐项约分。",
+    ans: "由换底公式 log_a b·log_b c = log_a c，逐项合并：<br>log₂3·log₃4·log₄5·…·log₃₁3₂ = log₂32。<br>因为 32 = 2⁵，所以 log₂32 = 5。<br><b>∴ 原式 = 5。</b>"
+  },
+  {
+    part: "calc", kw: "指数对数 · 比较大小",
+    q: "设 a = log₀.₃0.5，b = log₂0.3，c = 2<sup>0.3</sup>，试比较 a、b、c 的大小，并说明理由。",
+    hint: "用 0 和 1 两个「中间值」分组：指数式 2<sup>0.3</sup> 与 1 比较；两个对数分别与 0、1 比较——注意底数小于 1 的对数函数单调递减，比较时不等号方向要反过来。",
+    ans: "c = 2<sup>0.3</sup> &gt; 2⁰ = 1。<br>b = log₂0.3 &lt; log₂1 = 0，所以 b &lt; 0。<br>对于 a：底 0.3 ∈ (0, 1)，y = log₀.₃x 单调递减。因为 0.3 &lt; 0.5 &lt; 1，所以 log₀.₃1 = 0 &lt; a &lt; log₀.₃0.3 = 1，即 0 &lt; a &lt; 1。<br>综上：<b>b &lt; a &lt; c。</b>"
+  },
+  {
+    part: "calc", kw: "对数 · 二次函数 · 值域",
+    q: "已知函数 f(x) = log₂(x² + ax + a + 1) 的值域为 R，求实数 a 的取值范围。",
+    hint: "「值域为 R」等价于内层二次函数能取遍所有正数——即其最小值不超过 0（判别式 Δ ≥ 0）。注意与「定义域为 R」（Δ &lt; 0）的情形相区别。",
+    ans: "设 u(x) = x² + ax + a + 1（开口向上）。<br>f(x) 的值域为 R ⟺ u(x) 能取遍 (0, +∞) 的一切正值 ⟺ u(x) 的最小值 ≤ 0 ⟺ Δ = a² - 4(a + 1) ≥ 0。<br>即 a² - 4a - 4 ≥ 0，解得 a ≤ 2 - 2√2 或 a ≥ 2 + 2√2。<br><b>∴ a ∈ (-∞, 2 - 2√2] ∪ [2 + 2√2, +∞)。</b>"
+  },
+  {
+    part: "calc", kw: "三角函数 · 同角关系",
+    q: "已知 sinα - cosα = 1/5，且 α ∈ (0, π)。(1) 求 sinαcosα 的值；(2) 求 tanα 的值。",
+    hint: "对 sinα - cosα 两边平方即可得 sinαcosα；再由 (sinα + cosα)² = 1 + 2sinαcosα 求出 sinα + cosα（符号由 α 所在象限判断）；联立解得 sinα、cosα 后作商得 tanα。",
+    ans: "(1) 两边平方：(sinα - cosα)² = 1/25，即 1 - 2sinαcosα = 1/25，所以 sinαcosα = 12/25。<br>(2) 因为 α ∈ (0, π)，sinα &gt; 0；又 sinαcosα &gt; 0，所以 cosα &gt; 0，α 在第一象限，故 sinα + cosα &gt; 0。<br>(sinα + cosα)² = 1 + 2sinαcosα = 1 + 24/25 = 49/25，所以 sinα + cosα = 7/5。<br>联立 sinα - cosα = 1/5，解得 sinα = 4/5，cosα = 3/5。<br><b>∴ tanα = (4/5) / (3/5) = 4/3。</b>"
+  },
+  {
+    part: "calc", kw: "三角函数 · 倍角 · 辅助角",
+    q: "已知函数 f(x) = √3 sinxcosx - sin²x + 1/2。(1) 求 f(x) 的最小正周期；(2) 求 f(x) 的最大值及取得最大值时 x 的集合。",
+    hint: "先用二倍角公式把 sinxcosx 化为 (1/2)sin2x、用降幂公式把 sin²x 化为 (1 - cos2x)/2，再用辅助角公式把结果合一为 A·sin(2x + φ)，周期与最值一目了然。",
+    ans: "f(x) = (√3/2)sin2x + (1/2)cos2x = sin(2x + π/6)。<br>(1) 最小正周期 T = 2π/2 = π。<br>(2) 最大值 f(x)max = 1，此时 2x + π/6 = π/2 + 2kπ（k ∈ Z），解得 x = π/6 + kπ（k ∈ Z）。<br><b>∴ 最大值 1，x 的集合为 {x | x = π/6 + kπ，k ∈ Z}。</b>"
+  },
+  {
+    part: "calc", kw: "三角函数 · 倍角 · 象限判断",
+    q: "已知 cos2x = 5/13，且 x ∈ (0, π/2)，求 sinx 的值。",
+    hint: "已知倍角的余弦求单角的正弦，用降幂公式 cos2x = 1 - 2sin²x 直接解出 sin²x，再由 x 所在的象限确定 sinx 的符号。",
+    ans: "由 cos2x = 1 - 2sin²x，得 1 - 2sin²x = 5/13，即 2sin²x = 8/13，sin²x = 4/13。<br>因为 x ∈ (0, π/2)，sinx &gt; 0，所以 sinx = 2√13/13。<br><b>∴ sinx = 2√13/13。</b>"
+  },
+  {
+    part: "calc", kw: "抽象函数 · 奇偶性 · 单调性",
+    q: "定义在 R 上的函数 f(x) 满足对任意 x、y 都有 f(x + y) = f(x) + f(y)，且当 x &gt; 0 时 f(x) &lt; 0，f(1) = -1。(1) 判断 f(x) 的奇偶性并证明；(2) 判断 f(x) 在 R 上的单调性并证明；(3) 求 f(x) 在 [-3, 3] 上的最大值与最小值。",
+    hint: "抽象函数用「赋值法」：令 x = y = 0 求 f(0)，令 y = -x 证奇偶性；把 f(x₂) - f(x₁) 利用加法性质化为 f(x₂ - x₁)，由 x &gt; 0 时 f(x) &lt; 0 定号证单调；最值在单调区间的端点取得。",
+    ans: "(1) 令 x = y = 0，得 f(0) = 2f(0)，故 f(0) = 0。令 y = -x，得 f(x) + f(-x) = f(0) = 0，即 f(-x) = -f(x)，所以 f(x) 为奇函数。<br>(2) 任取 x₁ &lt; x₂，则 x₂ - x₁ &gt; 0，f(x₂) - f(x₁) = f(x₂ - x₁) &lt; 0，即 f(x₂) &lt; f(x₁)，所以 f(x) 在 R 上单调递减。<br>(3) f(x) 在 [-3, 3] 上单调递减，故最大值为 f(-3)，最小值为 f(3)。<br>f(3) = 3f(1) = -3，f(-3) = -f(3) = 3。<br><b>∴ 最大值 3，最小值 -3。</b>"
+  },
+  {
+    part: "calc", kw: "奇偶性 · 指数对数",
+    q: "已知 f(x) 是定义在 R 上的奇函数，当 x &gt; 0 时 f(x) = 2<sup>x</sup> + log₂(x + 1)。(1) 求 f(x) 的解析式；(2) 求 f(-2) 的值。",
+    hint: "奇函数求解析式：x &lt; 0 时用 -x &gt; 0 代入已知式，再取相反数；f(0) = 0 要单独写出。求值可先把负自变量通过 f(-x) = -f(x) 转到正区间。",
+    ans: "(1) 当 x &lt; 0 时，-x &gt; 0，f(-x) = 2<sup>-x</sup> + log₂(1 - x)。由 f(x) = -f(-x)，得 f(x) = -2<sup>-x</sup> - log₂(1 - x)。<br>又 f(0) = 0。所以<br>f(x) = 2<sup>x</sup> + log₂(x + 1)（x &gt; 0）；f(x) = 0（x = 0）；f(x) = -2<sup>-x</sup> - log₂(1 - x)（x &lt; 0）。<br>(2) f(-2) = -f(2) = -(2² + log₂3) = -4 - log₂3。<br><b>∴ f(-2) = -4 - log₂3。</b>"
+  },
+  {
+    part: "calc", kw: "三角函数 · 齐次式",
+    q: "已知 tanα = 2，求下列各式的值：(1) (sinα + 2cosα) / (3sinα - cosα)；(2) sin²α - cos²α。",
+    hint: "(1) 分子分母次数相同，属「齐次式」，同除以 cosα 化为只含 tanα 的式子；(2) 把分母看作 1 = sin²α + cos²α，构造关于 tanα 的齐次分式。",
+    ans: "(1) 分子分母同除以 cosα（cosα ≠ 0）：<br>原式 = (tanα + 2) / (3tanα - 1) = (2 + 2) / (6 - 1) = 4/5。<br>(2) sin²α - cos²α = (sin²α - cos²α) / (sin²α + cos²α) = (tan²α - 1) / (tan²α + 1) = (4 - 1) / (4 + 1) = 3/5。<br><b>∴ (1) = 4/5，(2) = 3/5。</b>"
+  },
+  {
+    part: "calc", kw: "指数 · 奇偶性 · 值域",
+    q: "已知函数 f(x) = a - 2 / (2<sup>x</sup> + 1) 是定义在 R 上的奇函数。(1) 求 a 的值；(2) 求 f(x) 的值域。",
+    hint: "(1) 奇函数且定义域含 0，则 f(0) = 0，直接求 a。(2) 由 2<sup>x</sup> &gt; 0 出发逐步推：2<sup>x</sup> + 1、1/(2<sup>x</sup>+1)、-2/(2<sup>x</sup>+1)、最后 a - 2/(2<sup>x</sup>+1) 的范围。",
+    ans: "(1) f(0) = a - 1 = 0，所以 a = 1，f(x) = 1 - 2/(2<sup>x</sup> + 1)。<br>(2) 因为 2<sup>x</sup> &gt; 0，所以 2<sup>x</sup> + 1 &gt; 1，0 &lt; 2/(2<sup>x</sup> + 1) &lt; 2，故 -2 &lt; -2/(2<sup>x</sup> + 1) &lt; 0。<br>因此 -1 &lt; 1 - 2/(2<sup>x</sup> + 1) &lt; 1。<br><b>∴ f(x) 的值域为 (-1, 1)。</b>"
+  },
+  {
+    part: "calc", kw: "对数 · 复合函数单调性",
+    q: "已知函数 f(x) = log_a(ax² - x)（a &gt; 0 且 a ≠ 1）在区间 [2, 4] 上单调递增，求实数 a 的取值范围。",
+    hint: "复合函数「同增异减」：先保证内层 u = ax² - x 在 [2, 4] 上恒正（用区间端点检查），再按 a &gt; 1 与 0 &lt; a &lt; 1 两类讨论内层单调性与外层配合；注意 0 &lt; a &lt; 1 一类可能和恒正条件矛盾。",
+    ans: "设 u(x) = ax² - x，则 u′(x) = 2ax - 1。<br>① 若 a &gt; 1（外层递增），需内层在 [2, 4] 上递增且恒正：u′(x) ≥ 4a - 1 &gt; 0 恒成立；u(2) = 4a - 2 &gt; 0，即 a &gt; 1/2。所以 a &gt; 1 均符合。<br>② 若 0 &lt; a &lt; 1（外层递减），需内层递减：u′(4) = 8a - 1 &lt; 0，即 a &lt; 1/8。但恒正要求 u(2) = 4a - 2 &gt; 0，即 a &gt; 1/2，与 a &lt; 1/8 矛盾，无解。<br>综合：<b>a ∈ (1, +∞)。</b>"
+  },
+  {
+    part: "proof", kw: "单调性 · 定义法证明",
+    q: "用定义法证明：函数 f(x) = x + 1/x 在 (0, 1) 上单调递减，在 (1, +∞) 上单调递增。",
+    hint: "任取 x₁ &lt; x₂，作差 f(x₁) - f(x₂)，通分后提公因式 (x₁ - x₂)，剩余因子 (x₁x₂ - 1)/(x₁x₂) 由 x₁、x₂ 所在区间定号，最后下结论。",
+    ans: "任取 x₁ &lt; x₂，则<br>f(x₁) - f(x₂) = (x₁ - x₂) + (1/x₁ - 1/x₂) = (x₁ - x₂)(x₁x₂ - 1)/(x₁x₂)。<br>① x₁、x₂ ∈ (0, 1)：x₁ - x₂ &lt; 0，x₁x₂ - 1 &lt; 0，x₁x₂ &gt; 0，所以 f(x₁) - f(x₂) &gt; 0，即 f(x₁) &gt; f(x₂)，f(x) 在 (0, 1) 上单调递减。<br>② x₁、x₂ ∈ (1, +∞)：x₁ - x₂ &lt; 0，x₁x₂ - 1 &gt; 0，所以 f(x₁) - f(x₂) &lt; 0，即 f(x₁) &lt; f(x₂)，f(x) 在 (1, +∞) 上单调递增。证毕。"
+  },
+  {
+    part: "proof", kw: "奇偶性 · 对数运算",
+    q: "证明：函数 f(x) = lg(x + √(x² + 1)) 是奇函数，并求 f(a) + f(-a) 的值。",
+    hint: "奇函数证明分两步：先证定义域关于原点对称（这里 x + √(x² + 1) &gt; 0 恒成立），再计算 f(x) + f(-x)——把两个对数合并，利用对数运算性质与平方差公式化简。",
+    ans: "因为 √(x² + 1) &gt; |x| ≥ -x，所以 x + √(x² + 1) &gt; 0 恒成立，定义域为 R，关于原点对称。<br>f(x) + f(-x) = lg(x + √(x² + 1)) + lg(-x + √(x² + 1))<br>= lg[(x + √(x² + 1))(-x + √(x² + 1))] = lg[(x² + 1) - x²] = lg1 = 0。<br>所以 f(-x) = -f(x)，f(x) 是奇函数，因此 f(a) + f(-a) = 0。"
+  },
+  {
+    part: "proof", kw: "指数 · 均值不等式",
+    q: "证明：对任意 x ∈ R，都有 2<sup>x</sup> + 2<sup>-x</sup> ≥ 2，并指出等号成立的条件。",
+    hint: "2<sup>x</sup> 与 2<sup>-x</sup> 都是正数且互为倒数（乘积为 1），对两个正数用均值不等式即可；等号成立条件为两数相等。",
+    ans: "因为 2<sup>x</sup> &gt; 0，2<sup>-x</sup> &gt; 0，且 2<sup>x</sup>·2<sup>-x</sup> = 1。<br>由均值不等式：2<sup>x</sup> + 2<sup>-x</sup> ≥ 2√(2<sup>x</sup>·2<sup>-x</sup>) = 2。<br>当且仅当 2<sup>x</sup> = 2<sup>-x</sup>，即 x = 0 时取等号。证毕。"
+  },
+  {
+    part: "proof", kw: "三角函数 · 两角和正切",
+    q: "已知 α + β = π/4，证明：(1 + tanα)(1 + tanβ) = 2。",
+    hint: "把 (1 + tanα)(1 + tanβ) 展开，得到 tanα + tanβ + tanαtanβ 的结构；由两角和正切公式 tan(α + β) = 1 恰好能给出这个结构的值。",
+    ans: "因为 α + β = π/4，所以 tan(α + β) = 1。<br>由两角和正切公式：tan(α + β) = (tanα + tanβ) / (1 - tanαtanβ) = 1，<br>故 tanα + tanβ = 1 - tanαtanβ，即 tanα + tanβ + tanαtanβ = 1。<br>于是 (1 + tanα)(1 + tanβ) = 1 + (tanα + tanβ + tanαtanβ) = 1 + 1 = 2。证毕。"
+  },
+  {
+    part: "proof", kw: "抽象函数 · 单调性",
+    q: "定义在 R 上的函数 f(x) 满足对任意 x、y 都有 f(x + y) = f(x)·f(y)，且当 x &gt; 0 时 f(x) &gt; 1，f(1) = 2。(1) 证明：对任意 x ∈ R，f(x) &gt; 0；(2) 证明：f(x) 在 R 上单调递增；(3) 解不等式 f(x²) &lt; f(2x + 3)。",
+    hint: "(1) 用「裂半」技巧 f(x) = f(x/2 + x/2) = [f(x/2)]² ≥ 0，再用反证法排除等于 0 的情形；(2) 把 f(x₂) 写成 f(x₂ - x₁)·f(x₁)，由 f(x₂ - x₁) &gt; 1 比较大小；(3) 由单调递增把不等式「脱去」f，解一元二次不等式。",
+    ans: "(1) f(x) = f(x/2 + x/2) = [f(x/2)]² ≥ 0。若存在 x₀ 使 f(x₀) = 0，则 f(1) = f(1 - x₀)·f(x₀) = 0，与 f(1) = 2 矛盾。<br>所以对任意 x ∈ R，f(x) &gt; 0。<br>(2) 任取 x₁ &lt; x₂，则 x₂ - x₁ &gt; 0，f(x₂ - x₁) &gt; 1。<br>f(x₂) = f(x₁ + (x₂ - x₁)) = f(x₁)·f(x₂ - x₁) &gt; f(x₁)·1 = f(x₁)，所以 f(x) 在 R 上单调递增。<br>(3) 由单调递增，f(x²) &lt; f(2x + 3) ⟺ x² &lt; 2x + 3，即 x² - 2x - 3 &lt; 0，(x - 3)(x + 1) &lt; 0。<br><b>∴ 不等式的解集为 (-1, 3)。</b>"
+  }
+];
+
+function render() {
+  var container = document.getElementById("list");
+  var html = "";
+  var current = null;
+  var calcNo = 0, proofNo = 0;
+  for (var i = 0; i < problems.length; i++) {
+    var p = problems[i];
+    if (p.part !== current) {
+      current = p.part;
+      if (current === "calc") {
+        html += '<div class="part-header">第一部分 · 计算题（15 题）</div>';
+      } else {
+        html += '<div class="part-header part-proof">第二部分 · 证明题（5 题）</div>';
+      }
+    }
+    var no = (current === "calc") ? (++calcNo) : (++proofNo);
+    var tagClass = (current === "calc") ? "q-tag" : "q-tag proof";
+    html += '<div class="calc-card" id="card' + i + '">';
+    html += '<div class="q-title"><span class="' + tagClass + '">' + (current === "calc" ? "计算题" : "证明题") + '</span>第 ' + no + ' 题<span class="q-kw">' + p.kw + '</span></div>';
+    html += '<div class="q-text">' + p.q + '</div>';
+    html += '<div class="btn-row">';
+    html += '<button class="btn-hint" id="hintBtn' + i + '" onclick="toggleHint(' + i + ')">分析提示</button>';
+    html += '<button class="btn-answer" id="ansBtn' + i + '" onclick="toggleAnswer(' + i + ')">正确答案</button>';
+    html += '</div>';
+    html += '<div class="hint-area" id="hint' + i + '"><span class="panel-label">分析提示</span>' + p.hint + '</div>';
+    html += '<div class="answer-area" id="ans' + i + '"><span class="panel-label ans">正确答案</span>' + p.ans + '</div>';
+    html += '</div>';
+  }
+  container.innerHTML = html;
+}
+
+function toggleHint(i) {
+  var area = document.getElementById("hint" + i);
+  var btn = document.getElementById("hintBtn" + i);
+  if (!area || !btn) return;
+  var show = !area.classList.contains("show");
+  area.classList.toggle("show", show);
+  btn.classList.toggle("open", show);
+}
+
+function toggleAnswer(i) {
+  var area = document.getElementById("ans" + i);
+  var btn = document.getElementById("ansBtn" + i);
+  if (!area || !btn) return;
+  var show = !area.classList.contains("show");
+  area.classList.toggle("show", show);
+  btn.classList.toggle("open", show);
+}
+
+render();
+</script>
+</body>
+</html>
