@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../../lib/logo.png?version=1.0.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>思维训练课 · 科学、逻辑与批判性思维</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+body {
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.9;
+  font-size: 16px;
+}
+article {
+  background: #fff; border-radius: 12px; padding: 32px 40px 48px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow-wrap: break-word; word-wrap: break-word; overflow-x: hidden;
+}
+h1 { color: #2c3e50; font-size: 1.7em; border-bottom: 3px solid #9c27b0; padding-bottom: 10px; margin-top: 0; text-align: center; }
+.back {
+  display: inline-block; margin-bottom: 16px;
+  color: #1a73e8; text-decoration: none; font-size: 0.95em;
+}
+.back:hover { text-decoration: underline; }
+.tip { text-align: center; color: #777; margin-bottom: 10px; }
+
+/* ====== 课程信息栏 ====== */
+.course-meta {
+  display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: center;
+  margin: 14px 0 22px; padding: 12px 18px;
+  background: #f8faff; border-radius: 10px; border: 1px solid #e0e8f0;
+  font-size: 0.93em; color: #555;
+}
+.course-meta strong { color: #9c27b0; }
+
+/* ====== 顶部导航条 ====== */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(6px);
+  border: 1px solid #e0e0e0; border-radius: 12px;
+  padding: 8px 12px; margin: 0 0 20px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.topbar .tb-label { font-size: 0.8em; color: #888; margin-right: 4px; white-space: nowrap; }
+.topbar a.chip {
+  text-decoration: none; font-size: 0.8em; color: #555;
+  padding: 4px 12px; border-radius: 14px; border: 1px solid #ddd;
+  background: #fff; white-space: nowrap; transition: 0.15s;
+}
+.topbar a.chip:hover { border-color: #9c27b0; color: #9c27b0; }
+.topbar a.chip.active { background: #9c27b0; color: #fff; border-color: #9c27b0; }
+.topbar a.chip .tm { opacity: 0.75; font-size: 0.9em; }
+.topbar .tb-progress { margin-left: auto; font-size: 0.8em; color: #9c27b0; font-weight: bold; white-space: nowrap; }
+
+/* ====== 分节卡片 ====== */
+section.sec {
+  border: 2px solid #e0e0e0; border-radius: 12px;
+  margin: 22px 0; padding: 20px 26px; scroll-margin-top: 64px;
+}
+section.sec.c-open { border-left: 6px solid #607d8b; }
+section.sec.c-1 { border-left: 6px solid #1a73e8; }
+section.sec.c-2 { border-left: 6px solid #e65100; }
+section.sec.c-3 { border-left: 6px solid #f57f17; }
+section.sec.c-4 { border-left: 6px solid #9c27b0; }
+section.sec.c-5 { border-left: 6px solid #00897b; }
+section.sec.c-6 { border-left: 6px solid #3949ab; }
+section.sec.c-sum { border-left: 6px solid #6d4c41; }
+.sec-head {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px; margin-bottom: 12px;
+}
+.sec-head h2 { margin: 0; font-size: 1.22em; color: #2c3e50; }
+.sec-head .time-badge {
+  display: inline-block; background: #9c27b0; color: #fff;
+  padding: 2px 12px; border-radius: 12px; font-size: 0.8em; font-weight: bold;
+}
+.sec-head .subtitle { width: 100%; color: #777; font-size: 0.92em; margin: 0; }
+.sec h3 { color: #2c3e50; margin: 20px 0 8px; font-size: 1.05em; }
+.sec p { margin: 8px 0; }
+.sec ul, .sec ol { margin: 8px 0; padding-left: 26px; }
+
+/* ====== 引言 / 名言 ====== */
+.quote-box {
+  background: #fafafa; border-left: 4px solid #bbb; border-radius: 0 8px 8px 0;
+  padding: 12px 16px; margin: 14px 0; color: #555; font-style: italic;
+}
+.quote-box .qsrc { display: block; text-align: right; font-size: 0.85em; color: #999; margin-top: 6px; font-style: normal; }
+
+/* ====== 知识卡片 ====== */
+.kw-card {
+  background: #f0f7ff; border: 1px solid #bbdefb; border-radius: 10px;
+  padding: 12px 16px; margin: 12px 0; font-size: 0.95em;
+}
+.kw-card .kw-tag {
+  display: inline-block; background: #1a73e8; color: #fff;
+  padding: 1px 10px; border-radius: 10px; font-size: 0.78em; margin-right: 8px;
+}
+
+/* ====== 案例卡片 ====== */
+.case-card {
+  background: #f8faff; border: 1px solid #e0e8f0; border-radius: 10px;
+  padding: 12px 16px; margin: 10px 0; font-size: 0.95em;
+}
+.case-card .case-title { font-weight: bold; color: #1a73e8; }
+.case-card .case-title.warn { color: #e65100; }
+
+/* ====== 互动讨论 ====== */
+.interact {
+  background: #fff8e1; border: 2px solid #ffc107; border-radius: 10px;
+  padding: 14px 18px; margin: 16px 0;
+}
+.interact .it-title { font-weight: bold; color: #e65100; font-size: 0.98em; margin-bottom: 6px; }
+.interact ul { margin: 4px 0; }
+.interact .btn-ref {
+  margin-top: 10px; padding: 4px 16px; border: 2px solid #e65100; color: #e65100;
+  border-radius: 14px; background: #fff; cursor: pointer; font-size: 0.85em; transition: 0.15s;
+}
+.interact .btn-ref:hover { background: #fff3e0; }
+.interact .btn-ref.open { background: #e65100; color: #fff; }
+.interact .ref-box {
+  display: none; margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+  background: #fff; border-left: 4px solid #e65100; font-size: 0.9em; line-height: 1.8;
+}
+.interact .ref-box.show { display: block; }
+
+/* ====== 谬误列表 ====== */
+.fallacy-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+@media (max-width: 680px) { .fallacy-list { grid-template-columns: 1fr; } }
+.fallacy-item {
+  background: #fbe9e7; border: 1px solid #ffcdd2; border-radius: 8px;
+  padding: 10px 14px; font-size: 0.92em;
+}
+.fallacy-item b { color: #c62828; display: block; margin-bottom: 4px; }
+
+/* ====== 表格 ====== */
+.sec table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.93em; }
+.sec th, .sec td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+.sec th { background: #f0f7ff; color: #2c3e50; }
+
+/* ====== 结尾 ====== */
+.end-box {
+  background: #f3e5f5; border: 2px solid #ce93d8; border-radius: 10px;
+  padding: 16px 20px; margin: 16px 0;
+}
+.end-box ol { margin: 6px 0; }
+.foot-note { text-align: center; color: #aaa; font-size: 0.85em; margin-top: 26px; }
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>思维训练课<br><small style="font-size:0.55em;color:#888;">科学 · 逻辑 · 批判性思维 —— 一堂发散讨论课</small></h1>
+<p class="tip">本课不考试、不判分，只负责「把脑子打开」——边讲边聊，随时举手。</p>
+
+<div class="course-meta">
+  <span><strong>对象：</strong>高中学生</span>
+  <span><strong>总时长：</strong>60 分钟（含互动）</span>
+  <span><strong>形式：</strong>讲授 + 开放讨论</span>
+</div>
+
+<!-- ====== 顶部导航 ====== -->
+<nav class="topbar" id="topbar">
+  <span class="tb-label">课堂导航</span>
+  <a class="chip active" href="#sec-open" data-time="3">开场 <span class="tm">3′</span></a>
+  <a class="chip" href="#sec-1" data-time="12">一讲·何为科学 <span class="tm">12′</span></a>
+  <a class="chip" href="#sec-2" data-time="10">二讲·科学推理 <span class="tm">10′</span></a>
+  <a class="chip" href="#sec-3" data-time="8">三讲·批判性思维 <span class="tm">8′</span></a>
+  <a class="chip" href="#sec-4" data-time="8">四讲·创新性思维 <span class="tm">8′</span></a>
+  <a class="chip" href="#sec-5" data-time="4">五讲·经济学思维 <span class="tm">4′</span></a>
+  <a class="chip" href="#sec-6" data-time="10">六讲·数理逻辑 <span class="tm">10′</span></a>
+  <a class="chip" href="#sec-sum" data-time="5">总结 <span class="tm">5′</span></a>
+  <span class="tb-progress" id="tbProgress">开场 · 0/60 分钟</span>
+</nav>
+
+<!-- ============================================================
+     开场
+     ============================================================ -->
+<section class="sec c-open" id="sec-open">
+  <div class="sec-head">
+    <h2>开场：为什么需要逻辑？</h2>
+    <span class="time-badge">3 分钟</span>
+  </div>
+  <div class="quote-box">
+    科学时代的任何一个人，几乎不知道科学的本性是什么。这不仅包括那些通过周刊意识到科学的人，而且也包括哲学家和科学家本身在内。
+  </div>
+  <p><b>引入问题：</b>你相信星座运势吗？你相信「努力就会成功」吗？这两个问题的答案，藏着逻辑的第一课。</p>
+  <p><b>一句话预告：</b>今天我们要学会的不是「想什么」，而是「怎么想」。</p>
+  <div class="interact">
+    <div class="it-title">开场破冰（讨论 1 分钟）</div>
+    <p style="margin:4px 0;">每人说一件「自己曾经深信不疑、后来发现站不住脚」的事。不用讲道理，先讲故事。</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     第一讲
+     ============================================================ -->
+<section class="sec c-1" id="sec-1">
+  <div class="sec-head">
+    <h2>第一讲 · 何为科学？—— 科学与伪科学的界限</h2>
+    <span class="time-badge">12 分钟</span>
+    <p class="subtitle">目标：学会用「可证伪性」给一句话做体检</p>
+  </div>
+
+  <h3>1.1 必然正确与套套逻辑</h3>
+  <p>有些话永远正确，但等于没说。例如：「单身汉是未婚男子」——必然正确，因为「未婚男子」就是「单身汉」的定义。</p>
+  <div class="kw-card">
+    <span class="kw-tag">关键词</span><b>套套逻辑</b>：永远不被事实反驳，也因此不提供任何信息。
+  </div>
+  <div class="case-card">
+    <span class="case-title">案例：「努力就会成功」</span>
+    <p>如果「成功」被定义为「努力的结果」，这句话就成了套套逻辑——无法反驳，也无法指导行动。</p>
+    <p><b>思考：</b>怎样把这句话改造成可检验的命题？——「努力的学生平均成绩高于不努力的学生」，这就变成可检验的了。</p>
+  </div>
+
+  <h3>1.2 可证伪性 —— 科学与伪科学的界限</h3>
+  <p>波普尔：一个理论要想成为科学，必须具有<b>可证伪性</b>。称一个理论是可证伪的，并不是说它是错的，而是说它允许自己被事实推翻。</p>
+  <div class="case-card">
+    <span class="case-title warn">案例一：弗洛伊德的精神分析</span>
+    <p>无论是推人下河的人，还是救人牺牲的人，弗洛伊德学派都能给出解释（前者精神抑郁，后者精神升华）。理论与任何事实都相容，因此<b>不可证伪</b>，不是科学。</p>
+  </div>
+  <div class="case-card">
+    <span class="case-title">正面案例：爱因斯坦的相对论</span>
+    <p>相对论预测了光在引力下弯曲——如果实验没测到，理论就被推翻。这就是可证伪的科学理论。</p>
+  </div>
+
+  <h3>1.3 形式逻辑与实证科学</h3>
+  <ul>
+    <li><b>形式逻辑</b>：推理的「语法」——前提正确且推理形式正确，结论必真（如三段论）。</li>
+    <li><b>实证科学</b>：用经验证据检验命题。伽利略第一次用数学语言描述物理世界，开启了实证科学时代。</li>
+  </ul>
+  <div class="kw-card">
+    <span class="kw-tag">一句话</span><b>逻辑保证推理形式正确，实证保证前提真实</b>。二者缺一不可。
+  </div>
+
+  <div class="interact">
+    <div class="it-title">互动讨论（1 分钟）</div>
+    <p>判断下面的说法，是「套套逻辑」还是「可检验命题」：</p>
+    <ol style="margin:4px 0;">
+      <li>「凡考高分的人，必然考得比别人好。」</li>
+      <li>「吃辣的人更容易出汗。」</li>
+    </ol>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：①「考高分」已经包含「比别人考得好」之意，是套套逻辑——永远正确但零信息；②「更容易出汗」可以被实验检验，是可检验命题，值得争论的是样本与对照组的设计。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第二讲
+     ============================================================ -->
+<section class="sec c-2" id="sec-2">
+  <div class="sec-head">
+    <h2>第二讲 · 科学推理 —— 因果与归纳</h2>
+    <span class="time-badge">10 分钟</span>
+    <p class="subtitle">目标：别把「一起发生」当成「一个导致另一个」</p>
+  </div>
+
+  <h3>2.1 因果性与相关性</h3>
+  <p><b>相关性</b>：两件事同时发生。<b>因果性</b>：一件事导致另一件事。两者经常被混淆。</p>
+  <div class="case-card">
+    <span class="case-title">经典案例：冰激凌与溺水</span>
+    <p>冰激凌销量上升与溺水人数上升高度相关——但冰激凌不导致溺水，背后是「夏天到了」这个共同原因。</p>
+  </div>
+  <div class="case-card">
+    <span class="case-title">高中生活案例：玩手机与成绩</span>
+    <p>玩手机时间与成绩负相关——是手机导致成绩差，还是成绩差的人更想玩手机（反向因果）？</p>
+  </div>
+  <div class="kw-card">
+    <span class="kw-tag">三步法</span>判断因果的三个步骤：
+    <ol style="margin:4px 0;">
+      <li>是否存在相关性？</li>
+      <li>时间顺序是否正确（原因在先）？</li>
+      <li>有没有第三变量同时解释两者？</li>
+    </ol>
+  </div>
+
+  <h3>2.2 归纳推理与休谟问题</h3>
+  <p>归纳：从个别到一般——「过去太阳每天升起，所以明天也会升起」。</p>
+  <div class="kw-card">
+    <span class="kw-tag">休谟问题</span><b>用「归纳过去管用」来证明「归纳可靠」，本身就是归纳推理</b>——这是循环论证，逻辑上无法自洽。
+  </div>
+  <div class="quote-box">
+    哈哈哈，用讲理的方式是无法与不讲理沟通的，鸡同鸭讲。
+  </div>
+  <p><b>启示：</b>科学结论永远是「暂时正确」的，随时可能被新证据修正。</p>
+
+  <div class="interact">
+    <div class="it-title">互动讨论（2 分钟）</div>
+    <p>「某校统计发现，每天喝牛奶的学生比不喝牛奶的学生平均高 3 厘米。」——这是因果关系吗？请找出可能的第三变量。</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：这最多说明相关，不能推出因果。可能的第三变量：家庭经济条件、整体营养水平、运动习惯、遗传身高；也可能是反向因果——个子高的家庭更重视营养。用「三步法」逐条检验。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第三讲
+     ============================================================ -->
+<section class="sec c-3" id="sec-3">
+  <div class="sec-head">
+    <h2>第三讲 · 批判性思维 —— 学会质疑</h2>
+    <span class="time-badge">8 分钟</span>
+    <p class="subtitle">目标：先问证据，再下结论</p>
+  </div>
+
+  <h3>3.1 质疑假设</h3>
+  <p>科学哲学的部分工作，就是去质疑科学家认为理所当然的假设。批判性思维对我们同样如此。</p>
+  <div class="kw-card">
+    <span class="kw-tag">四问</span>拿到任何主张，依次问：
+    <ol style="margin:4px 0;">
+      <li>这是什么主张？</li>
+      <li>支持它的证据是什么？</li>
+      <li>证据是如何得出的？</li>
+      <li>有没有其他解释？</li>
+    </ol>
+  </div>
+
+  <h3>3.2 识别常见谬误</h3>
+  <div class="fallacy-list">
+    <div class="fallacy-item"><b>诉诸权威</b>「专家说好，所以好。」——专家也会错，要看论证而非头衔。</div>
+    <div class="fallacy-item"><b>以偏概全</b>「我认识的两个学文科的都找不到工作。」——样本太小，不足为凭。</div>
+    <div class="fallacy-item"><b>滑坡谬误</b>「今天不背单词，明天就会挂科，后天就会退学。」——每一步之间的联系需要论证。</div>
+    <div class="fallacy-item"><b>人身攻击</b>「他说得不对，因为他成绩差。」——驳人不如驳理。</div>
+    <div class="fallacy-item"><b>虚假两难</b>「不考好大学，这辈子就完了。」——除了 A 和 B，往往还有 C。</div>
+  </div>
+
+  <h3>3.3 最佳说明的推理（IBE）</h3>
+  <p>在多个解释中，选那个最能解释现象、最简单、依赖最少假设的。</p>
+  <div class="case-card">
+    <span class="case-title">案例：黑板擦不见了</span>
+    <p>是被偷了，还是被隔壁班借走了，还是老师自己收起来了？用 IBE 判断哪个解释最合理——通常「被借走/收起来」比「被偷」依赖更少的离奇假设。</p>
+  </div>
+
+  <div class="interact">
+    <div class="it-title">互动讨论（1 分钟）</div>
+    <p>找一条你最近看到的广告或网络言论，用上面的方法找出它的逻辑漏洞（诉诸权威 / 以偏概全 / 滑坡 / 虚假两难……）。</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：广告里常见的「专家推荐」「限时特价错过就没了」「用了都说好（配几个用户照片）」分别对应诉诸权威、虚假两难、以偏概全。把主张拆成「证据 + 推理」两步检查，漏洞大多藏在这两步之间。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第四讲
+     ============================================================ -->
+<section class="sec c-4" id="sec-4">
+  <div class="sec-head">
+    <h2>第四讲 · 创新性思维 —— 范式转换</h2>
+    <span class="time-badge">8 分钟</span>
+    <p class="subtitle">目标：换一套框架看问题</p>
+  </div>
+
+  <h3>4.1 范式与范式转换</h3>
+  <p>库恩：科学不是直线累积，而是由「范式」（基本信念 + 研究方法）主导，偶尔发生革命性转换。</p>
+  <div class="case-card">
+    <span class="case-title">案例：牛顿力学 → 爱因斯坦相对论</span>
+    <p>这不只是「修改了几个公式」，而是换了一套看世界的框架。</p>
+  </div>
+  <div class="kw-card">
+    <span class="kw-tag">不可通约</span>两种范式下，同一句话含义不同。如「物体的质量取决于速度」，在牛顿和爱因斯坦那里是两句话。
+  </div>
+
+  <h3>4.2 从批判到创新</h3>
+  <p>批判性思维发现旧框架的问题，创新性思维构建新框架。</p>
+  <div class="kw-card">
+    <span class="kw-tag">创新三步</span>
+    <ol style="margin:4px 0;">
+      <li><b>发现异常</b>——旧框架解释不了的现象</li>
+      <li><b>大胆设想</b>——新的解释</li>
+      <li><b>小心检验</b>——用证据验证</li>
+    </ol>
+  </div>
+  <div class="case-card">
+    <span class="case-title">高中案例：数学题的「范式转换」</span>
+    <p>一道数学题用常规方法解不出时，换一个思路（画图、列方程、反证法），往往就是范式转换的微型版。</p>
+  </div>
+
+  <h3>4.3 真理是相对的吗？</h3>
+  <p>关键问题：<b>「真理是相对于范式而言的」——这句话本身是客观为真，还是相对为真？</b></p>
+  <p>答案是：这句话本身要求一个客观标准，否则它连自己都无法成立。</p>
+  <div class="quote-box">
+    感觉走入死胡同了，怀疑论往往也是这么推导的。
+  </div>
+
+  <div class="interact">
+    <div class="it-title">互动讨论（1 分钟）</div>
+    <p>举一个「以前大家都认为理所当然，后来被推翻」的例子（如地球是宇宙中心、燃素说）。</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：地心说→日心说、燃素说→氧化说、牛顿力学→相对论、绝对时空→弯曲时空。追问一句：这些例子中的「被推翻」，是靠什么标准完成的？——答案是证据。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第五讲
+     ============================================================ -->
+<section class="sec c-5" id="sec-5">
+  <div class="sec-head">
+    <h2>第五讲 · 经济学的思维方式</h2>
+    <span class="time-badge">4 分钟</span>
+    <p class="subtitle">目标：一切选择都有成本</p>
+  </div>
+
+  <h3>5.1 机会成本</h3>
+  <p>做一件事的成本，是你为此放弃的最好的另一件事。</p>
+  <div class="case-card">
+    <span class="case-title">案例：刷手机 2 小时</span>
+    <p>它的「成本」，是这 2 小时本可以用来学习、运动或休息的价值。</p>
+  </div>
+
+  <h3>5.2 激励与边际</h3>
+  <ul>
+    <li><b>激励</b>：人会对激励做出反应——价格、奖励、后果都会改变行为。</li>
+    <li><b>边际思维</b>：不问「值不值得」，问「多做一个单位还值不值」。多学 10 分钟值不值？多刷一条视频值不值？</li>
+  </ul>
+
+  <h3>5.3 沉没成本</h3>
+  <p>已经付出的、无法收回的成本，不应影响现在的决策。</p>
+  <div class="case-card">
+    <span class="case-title">案例：电影很烂，但「票都买了」</span>
+    <p>继续看完，是沉没成本谬误。正确做法：及时止损。</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     第六讲
+     ============================================================ -->
+<section class="sec c-6" id="sec-6">
+  <div class="sec-head">
+    <h2>第六讲 · 数理逻辑</h2>
+    <span class="time-badge">10 分钟</span>
+    <p class="subtitle">目标：用符号与规则，把「推理」变成可以检验的计算</p>
+  </div>
+
+  <h3>6.1 命题与真值表</h3>
+  <p><b>命题</b>：能判断真假的陈述句。「今天下雨」是命题，「快跑！」不是，「你几点到？」也不是。</p>
+  <div class="kw-card">
+    <span class="kw-tag">联结词</span><b>且（∧）、或（∨）、非（¬）、如果……那么（→）</b>——把简单命题组合成复合命题的基本工具。真值表把所有可能情况列出来，推理的对错一目了然。
+  </div>
+  <div class="case-card">
+    <span class="case-title">案例：地面湿了，能推出下雨吗？</span>
+    <p>「如果下雨，地面会湿」成立，但看到地面湿并不能推出下雨——洒水车、露水、洗菜泼的水都可以。这就是<b>肯定后件</b>谬误：把「p→q」当成「q→p」。用真值表一眼就能看穿。</p>
+  </div>
+
+  <h3>6.2 有效推理规则</h3>
+  <div class="kw-card">
+    <span class="kw-tag">两条规则</span>
+    <b>肯定前件</b>：若 p→q 且 p，则 q——最常用的推理；<b>否定后件</b>：若 p→q 且 ¬q，则 ¬p——反证法的逻辑内核。
+  </div>
+  <div class="case-card">
+    <span class="case-title">案例：侦探式的否定后件</span>
+    <p>监控拍到嫌疑人在现场（p→q），嫌疑人坚称「我根本没去过现场」（¬q）→ 那监控要么说谎、要么拍错了（¬p）。从「没结果」反推「没原因」，这就是否定后件。</p>
+  </div>
+  <p>补充一句：<b>三段论</b>——所有 A 是 B，所有 B 是 C，则所有 A 是 C。这是最古老的推理骨架。</p>
+
+  <h3>6.3 从自然语言到符号</h3>
+  <p>自然语言有歧义：「和」在不同语境里是「且」还是「或」？「除非」到底表示什么条件？把一句话翻译成符号，歧义和漏洞就显形了。</p>
+  <div class="case-card">
+    <span class="case-title">案例：广告语「不买就后悔」</span>
+    <p>写成符号是「¬买 → 后悔」。它只约束没买的人，对「买了的人」没有任何承诺；再取逆否命题——「不后悔 → 买了」——它其实等于说「只要你不后悔，你就一定买了」，这显然不是广告想说的，但逻辑上两者完全等价。翻译成符号，你会发现广告语比听起来「空」得多。</p>
+  </div>
+  <div class="kw-card">
+    <span class="kw-tag">量词</span>∀ 表示「所有」，∃ 表示「存在」。「所有人都会犯错」与「存在一个人不会犯错」互为否定（¬∀x = ∃x¬）。把日常语言里的「一定」「总有」翻译成量词，争论会少一半。
+  </div>
+
+  <div class="interact">
+    <div class="it-title">互动讨论（2 分钟）</div>
+    <p>找一句日常口头禅（如「吃得苦中苦，方为人上人」），把它翻译成「如果 p 那么 q」，再检查：这句话到底承诺了什么？是不是把 q→p 包装成了 p→q？</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：「吃得苦中苦，方为人上人」字面是 q→p（人上人 → 吃苦），却被很多人当成 p→q（吃苦 → 人上人）来用，方向偷换了。翻译成符号后，可检验的承诺只剩「若有人上人，则他吃过苦」——那已经算不上什么许诺了。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     总结
+     ============================================================ -->
+<section class="sec c-sum" id="sec-sum">
+  <div class="sec-head">
+    <h2>总结 · 把八种思维串成一条线</h2>
+    <span class="time-badge">5 分钟</span>
+  </div>
+
+  <table>
+    <tr><th style="width:44px;">#</th><th>思维工具</th><th>一句话</th></tr>
+    <tr><td>1</td><td>套套逻辑与可证伪</td><td>不能反驳的话，等于没说</td></tr>
+    <tr><td>2</td><td>因果与相关</td><td>一起出现 ≠ 一个导致另一个</td></tr>
+    <tr><td>3</td><td>形式逻辑与实证</td><td>推理要合逻辑，前提要经检验</td></tr>
+    <tr><td>4</td><td>批判性思维</td><td>先问证据，再下结论</td></tr>
+    <tr><td>5</td><td>创新性思维</td><td>换一套框架看问题</td></tr>
+    <tr><td>6</td><td>何为科学</td><td>科学与伪科学的界限是可证伪性</td></tr>
+    <tr><td>7</td><td>经济学思维</td><td>一切选择都有成本</td></tr>
+    <tr><td>8</td><td>数理逻辑</td><td>用符号与规则，让推理可检验</td></tr>
+  </table>
+
+  <div class="end-box">
+    <b>留给大家的两个问题</b>（课后继续想，下次课可以接着聊）：
+    <ol style="margin:6px 0;">
+      <li>找出生活中一条「听起来很有道理，其实是套套逻辑」的话。</li>
+      <li>找出一个你曾以为有因果关系、其实只是相关性的例子。</li>
+    </ol>
+  </div>
+
+  <div class="interact">
+    <div class="it-title">收尾（1 分钟）</div>
+    <p>今天没有标准答案，只有更好的问题。你记住的、或想反驳的一句话是什么？</p>
+  </div>
+</section>
+
+<p class="foot-note">本节为发散讨论课 · 全程 60 分钟 · 无试题、无评分</p>
+</article>
+
+<script>
+// 参考要点展开/收起
+function toggleRef(btn) {
+  var box = btn.nextElementSibling;
+  var show = !box.classList.contains("show");
+  box.classList.toggle("show", show);
+  btn.classList.toggle("open", show);
+  btn.textContent = show ? "收起参考要点" : "展开参考要点";
+}
+
+// 导航滚动监听：高亮当前小节 + 累计时间
+var secs = Array.prototype.slice.call(document.querySelectorAll("section.sec"));
+var chips = Array.prototype.slice.call(document.querySelectorAll(".topbar a.chip"));
+var times = {}; // 每个小节结束时的累计时间
+var cum = 0;
+var names = ["开场", "第一讲", "第二讲", "第三讲", "第四讲", "第五讲", "第六讲", "总结"];
+for (var i = 0; i < secs.length; i++) {
+  cum += parseInt(chips[i].getAttribute("data-time"), 10);
+  times[secs[i].id] = { cum: cum, name: names[i] };
+}
+
+function onScroll() {
+  var pos = window.pageYOffset + 70;
+  var cur = secs[0];
+  for (var i = 0; i < secs.length; i++) {
+    if (secs[i].offsetTop <= pos) cur = secs[i];
+  }
+  var id = cur.id;
+  for (var j = 0; j < chips.length; j++) {
+    chips[j].classList.toggle("active", chips[j].getAttribute("href") === "#" + id);
+  }
+  var info = times[id];
+  document.getElementById("tbProgress").textContent = (info ? info.name + " · " + info.cum + "/60 分钟" : "");
+}
+window.addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+</script>
+</body>
+</html>
+
+
+
