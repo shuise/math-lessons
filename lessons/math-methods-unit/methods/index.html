@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/png" href="../../lib/logo.png?version=1.0.0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>数学方法（22种方法精讲）</title>
+<title>数学方法（17种方法精讲）</title>
 <link rel="stylesheet" href="../../style.css">
 <style>
 /* ====== 方法标题 ====== */
@@ -29,6 +29,38 @@
   line-height: 1.6;
 }
 .method-header .method-desc strong { color: #1a73e8; }
+
+/* ====== 问题空间引导 ====== */
+.problem-space {
+  background: #fef9e7;
+  border: 1px solid #f5d78e;
+  border-left: 5px solid #f39c12;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+  line-height: 1.8;
+  font-size: 0.95em;
+}
+.problem-space .ps-title {
+  font-weight: bold;
+  color: #e67e22;
+  font-size: 1.02em;
+  margin-bottom: 6px;
+}
+.problem-space p { margin: 6px 0; color: #555; }
+.problem-space .ps-steps { margin: 8px 0; }
+.problem-space .ps-step { margin: 5px 0 5px 14px; color: #555; }
+.problem-space .ps-step strong { color: #c06a1a; }
+.problem-space .ps-demo {
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: #fffdf5;
+  border: 1px dashed #e8c97f;
+  border-radius: 8px;
+  color: #444;
+}
+.problem-space .ps-demo-title { font-weight: bold; color: #2c3e50; margin-bottom: 4px; }
+.problem-space .ps-demo-body em { color: #d35400; font-style: normal; font-weight: 600; }
 
 /* ====== 例子卡片 ====== */
 .examples-grid {
@@ -222,11 +254,11 @@
 <body>
 <article>
 <a class="back" href="../../index.html">&larr; 返回课程列表</a>
-<h1>数学方法（22种方法精讲）</h1>
+<h1>数学方法（17种方法精讲）</h1>
 <p class="intro-text">
   数学方法是解题的"工具包"——每种方法都有特定的适用场景。<br>
-  以下按<strong>逻辑推理</strong>、<strong>代数变形</strong>、<strong>组合计数与优化</strong>三大类系统学习 22 种常用方法。
-  每种方法配 5 个简明例子和 1 道交互式选择题，每类末尾有 1 道综合题。<br>
+  以下按<strong>逻辑推理</strong>、<strong>代数变形</strong>两大类系统学习 17 种常用方法，
+  每种方法配 5 个简明例子和 1 道交互式选择题。<br>
   点击选项立刻反馈对错+显示解析。
 </p>
 
@@ -284,6 +316,24 @@
 <div class="method-header">
   <h3>2. 分析法 <span class="method-tag">逻辑推理</span></h3>
   <div class="method-desc"><strong>什么时候用：</strong>结论复杂或不易直接推导时，从结论出发反向寻找充分条件。<br><strong>怎么用：</strong>要证 A，只需证 B（B⇒A）；要证 B，只需证 C……直到得到一个显然成立的条件。</div>
+</div>
+<div class="problem-space">
+  <div class="ps-title">问题空间：分析法怎么帮你找思路？</div>
+  <p>把一道题想象成一次<strong>在空间中寻路</strong>：<strong>初始状态</strong>是已知条件，<strong>目标状态</strong>是所求结论，中间的每一步都是在执行某个<strong>允许的操作</strong>（公式、恒等变形、定义代入……）。找不到思路，往往不是"不会公式"，而是没想清楚"现在站在哪、下一步该往哪走"。分析法的价值，就是让你<strong>从终点倒着找路</strong>。</p>
+  <div class="ps-steps">
+    <div class="ps-step"><strong>① 框定空间</strong>——用符号写下起点和终点：已知是什么，要证/要求的是什么。</div>
+    <div class="ps-step"><strong>② 罗列操作</strong>——把可能用到的"动作"列出来：平方、移项、配方、放缩、换元、通分、因式分解……动作清单越全，寻路时越不容易卡住。</div>
+    <div class="ps-step"><strong>③ 从终点反向走</strong>——不断问自己："要得到结论，最后一步最可能做什么？" 得到子目标后再往前推；遇到岔路就选一条试探，发现走不通就<strong>回退换路</strong>，而不是死磕。</div>
+  </div>
+  <div class="ps-demo">
+    <div class="ps-demo-title">示范：求证 a² + b² + 1 ≥ ab + a + b（a, b ∈ R）</div>
+    <div class="ps-demo-body">
+      <strong>反向搜索：</strong>要证原不等式，等价于证明 a² + b² + 1 − ab − a − b ≥ 0。<br>
+      <strong>尝试 1（岔路）：</strong>想直接用基本不等式 a²+b² ≥ 2ab——代入后问题变成证 ab + 1 ≥ a + b，即 (a−1)(b−1) ≥ 0；但这并非对所有实数 a, b 成立（如 a = 2, b = 1/2 时左边为负）→ <em>此路不通，回退。</em><br>
+      <strong>回退换路：</strong>先两边乘 2 再整体分组：2a²+2b²+2−2ab−2a−2b = (a−b)² + (a−1)² + (b−1)²。<br>
+      <strong>到达终点：</strong>三个平方和 ≥ 0 显然成立，问题得证。
+    </div>
+  </div>
 </div>
 <div class="examples-grid">
   <div class="example-card">
@@ -1041,284 +1091,13 @@
   <div class="explain"></div>
 </div>
 
-<hr class="section-divider">
-
-<!-- ============================================================
-     第二类综合题
-     ============================================================ -->
-<div class="comprehensive-section">
-  <div class="comp-title">第二类综合题 · 代数变形</div>
-  <div class="comp-desc">综合应用换元、配方、构造、消元、累加累乘等代数变形方法</div>
-</div>
-<div class="question-card" data-correct="2" data-idx="18">
-  <div class="q-title">综合题 2/3</div>
-  <div class="q-text">已知 a₁=1, aₙ₊₁=2aₙ+2ⁿ，求 aₙ 的通项公式。下列哪种方法最合适？</div>
-  <div class="options">
-    <div class="opt" data-val="0">A. 直接用累乘法</div>
-    <div class="opt" data-val="1">B. 直接用累加法</div>
-    <div class="opt" data-val="2">C. 两边同除以 2ⁿ⁺¹，构造新数列</div>
-    <div class="opt" data-val="3">D. 用待定系数法设 aₙ=An·2ⁿ</div>
-  </div>
-  <div class="explain"></div>
-</div>
-
-<hr class="section-divider">
-
-<!-- ============================================================
-     第三类：组合计数与优化方法
-     ============================================================ -->
-<div class="category-title">第三类 · 组合计数与优化方法</div>
-
-<!-- 18. 捆绑法 -->
-<div class="method-header">
-  <h3>18. 捆绑法 <span class="method-tag">组合计数</span></h3>
-  <div class="method-desc"><strong>什么时候用：</strong>排列组合问题中要求某些元素必须相邻时。<br><strong>怎么用：</strong>将必须相邻的元素捆绑成一个整体，先排整体再排内部。</div>
-</div>
-<div class="examples-grid">
-  <div class="example-card">
-    <div class="ex-title">例1：A,B,C,D,E 五人排队，A,B 必须相邻</div>
-    <div class="ex-body">将 A,B 捆绑为 1 个整体，与 C,D,E 共 4 个元素排列 = 4! = 24。A,B 内部可交换 = 2! = 2。</div>
-    <div class="ex-result">总计 24×2 = 48 种排法。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例2：3 男 2 女排成一排，女生必须相邻</div>
-    <div class="ex-body">2 女捆绑为 1 个整体，与 3 男共 4 个元素排 = 4! = 24。女生内部 2! = 2。</div>
-    <div class="ex-result">总计 24×2 = 48 种排法。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例3：6 本书排列，其中 3 本数学书必须放一起</div>
-    <div class="ex-body">3 本数学书捆绑为 1 个整体，与其余 3 本共 4 个元素排 = 4! = 24。数学书内部 3! = 6。</div>
-    <div class="ex-result">总计 24×6 = 144 种排法。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例4：4 个男生 4 个女生，男生必须相邻、女生必须相邻</div>
-    <div class="ex-body">男捆绑 + 女捆绑 = 2 个整体排列 = 2! = 2。男内部 4! = 24，女内部 4! = 24。</div>
-    <div class="ex-result">总计 2×24×24 = 1152 种。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例5：A,B,C,D,E 五人，A 必须站在 B 左边（不一定相邻）</div>
-    <div class="ex-body">所有排列 5! = 120，A 在 B 左和 A 在 B 右各一半。</div>
-    <div class="ex-result">总计 120/2 = 60 种。</div>
-  </div>
-</div>
-
-<div class="question-card" data-correct="3" data-idx="19">
-  <div class="q-title">捆绑法 · 选择题</div>
-  <div class="q-text">4 本不同的语文书和 3 本不同的数学书，要求语文书必须相邻，排法数为：</div>
-  <div class="options">
-    <div class="opt" data-val="0">A. 7!</div>
-    <div class="opt" data-val="1">B. 4! × 3!</div>
-    <div class="opt" data-val="2">C. 5! × 4!</div>
-    <div class="opt" data-val="3">D. 4! × 4!</div>
-  </div>
-  <div class="explain"></div>
-</div>
-
-<!-- 19. 插空法 -->
-<div class="method-header">
-  <h3>19. 插空法 <span class="method-tag">组合计数</span></h3>
-  <div class="method-desc"><strong>什么时候用：</strong>排列组合问题中要求某些元素不能相邻时。<br><strong>怎么用：</strong>先排没有限制的元素，在它们产生的空位中插入不能相邻的元素。</div>
-</div>
-<div class="examples-grid">
-  <div class="example-card">
-    <div class="ex-title">例1：A,B,C,D,E 五人，A,B 不能相邻</div>
-    <div class="ex-body">先排 C,D,E：3! = 6 种，产生 4 个空位（两端+中间），选 2 个空位放 A,B：P(4,2)=12。</div>
-    <div class="ex-result">总计 6×12 = 72 种。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例2：3 男 2 女排成一排，女生不相邻</div>
-    <div class="ex-body">先排 3 男：3! = 6，产生 4 个空位，选 2 个放女生：P(4,2) = 12。</div>
-    <div class="ex-result">总计 6×12 = 72 种。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例3：4 盏红灯 3 盏绿灯，红灯不相邻</div>
-    <div class="ex-body">先排 3 盏绿灯：1 种（相同），产生 4 个空位，放 4 盏红灯：C(4,4)=1。</div>
-    <div class="ex-result">总计 1 种（所有红灯必须插在绿灯之间）。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例4：5 个节目，新增 3 个不连续节目</div>
-    <div class="ex-body">原有 5 个节目排好：5! = 120，产生 6 个空位，选 3 个放新节目：P(6,3) = 120。</div>
-    <div class="ex-result">总计 120×120 = 14400 种。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例5：4 个男生 3 个女生，女生两两不相邻</div>
-    <div class="ex-body">先排 4 男：4! = 24，产生 5 个空位，选 3 个放女生：C(5,3)×3! = 10×6=60。</div>
-    <div class="ex-result">总计 24×60 = 1440 种。</div>
-  </div>
-</div>
-
-<div class="question-card" data-correct="1" data-idx="20">
-  <div class="q-title">插空法 · 选择题</div>
-  <div class="q-text">5 个男生 3 个女生，女生不相邻的排法，第一步应：</div>
-  <div class="options">
-    <div class="opt" data-val="0">A. 先排女生</div>
-    <div class="opt" data-val="1">B. 先排男生，再在空位中插入女生</div>
-    <div class="opt" data-val="2">C. 先捆绑女生</div>
-    <div class="opt" data-val="3">D. 先排列所有 8 人再去掉相邻情况</div>
-  </div>
-  <div class="explain"></div>
-</div>
-
-<!-- 20. 隔板法 -->
-<div class="method-header">
-  <h3>20. 隔板法 <span class="method-tag">组合计数</span></h3>
-  <div class="method-desc"><strong>什么时候用：</strong>相同物品分配给不同组（每组非空/可空）时。<br><strong>怎么用：</strong>将 n 个相同物品排成一排，在它们之间的 n−1 个空隙中插入 k−1 个隔板，分成 k 组。</div>
-</div>
-<div class="examples-grid">
-  <div class="example-card">
-    <div class="ex-title">例1：10 个相同苹果分给 3 人，每人至少一个</div>
-    <div class="ex-body">10 个苹果排一排，中间 9 个空隙，选 2 个位置放隔板：C(9,2) = 36。</div>
-    <div class="ex-result">共 36 种分法。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例2：8 个相同球放入 4 个盒子（可空）</div>
-    <div class="ex-body">先给每盒借 1 个球（虚拟），共 12 个球，中间 11 个空隙插 3 个隔板：C(11,3)=165。</div>
-    <div class="ex-result">共 165 种放法。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例3：x+y+z=12 的正整数解个数</div>
-    <div class="ex-body">12 个 1 排一排，11 个空插 2 个隔板：C(11,2) = 55。</div>
-    <div class="ex-result">共 55 组解。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例4：x+y+z=12 的非负整数解个数</div>
-    <div class="ex-body">化为 (x+1)+(y+1)+(z+1)=15，相当于 15 个 1 分 3 组（每组≥1）：C(14,2) = 91。</div>
-    <div class="ex-result">共 91 组解。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例5：7 个相同文具分给 4 个班，每班至少 1 个</div>
-    <div class="ex-body">先每班给 1 个，剩下 3 个分 4 班（可空）= C(3+4−1, 4−1) = C(6,3) = 20。</div>
-    <div class="ex-result">共 20 种分法。</div>
-  </div>
-</div>
-
-<div class="question-card" data-correct="0" data-idx="21">
-  <div class="q-title">隔板法 · 选择题</div>
-  <div class="q-text">方程 x+y+z+w=10 的正整数解个数为：</div>
-  <div class="options">
-    <div class="opt" data-val="0">A. C(9,3) = 84</div>
-    <div class="opt" data-val="1">B. C(10,4) = 210</div>
-    <div class="opt" data-val="2">C. C(10,3) = 120</div>
-    <div class="opt" data-val="3">D. C(13,3) = 286</div>
-  </div>
-  <div class="explain"></div>
-</div>
-
-<!-- 21. 局部调整法 -->
-<div class="method-header">
-  <h3>21. 局部调整法 <span class="method-tag">极值优化</span></h3>
-  <div class="method-desc"><strong>什么时候用：</strong>变量有约束条件，需要求最值或证明极值性质时，通过逐步微调逼近最优。<br><strong>怎么用：</strong>保持约束不变，调整一对变量的取值，使目标函数单调变化，直到达到最值。</div>
-</div>
-<div class="examples-grid">
-  <div class="example-card">
-    <div class="ex-title">例1：正实数 a+b=10，求 ab 最大值</div>
-    <div class="ex-body">若 a≠b，把这一对数同时调整为平均数 5，和保持不变，而新旧乘积之差为 25−ab=(a−b)²/4&gt;0。因此不相等时仍能增大乘积，只有 a=b=5 时达到最大。</div>
-    <div class="ex-result">最大值为 25。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例2：正实数 a+b+c=12，求 abc 最大值</div>
-    <div class="ex-body">若 a≠b，用它们的平均数替换 a、b，a+b 与 c 不变，而 ab 增大，所以 abc 增大。反复对不相等的两项作此调整，极值只能在 a=b=c=4 时取得。</div>
-    <div class="ex-result">最大值为 4³=64。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例3：周长为定值的三角形，何时面积最大</div>
-    <div class="ex-body">设半周长 s 固定。由海伦公式 S²=s(s−a)(s−b)(s−c)，且三个正数 s−a、s−b、s−c 的和为 s。逐步把不相等的两项调成平均数，乘积增大，最终三项相等。</div>
-    <div class="ex-result">等边三角形面积最大。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例4：x²+y²=1，求 x+y 最值</div>
-    <div class="ex-body">由柯西不等式：(x+y)² ≤ 2(x²+y²)=2 → −√2 ≤ x+y ≤ √2。当 x=y=±1/√2 时取最值。</div>
-    <div class="ex-result">最大 √2，最小 −√2。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例5：n 个正数和为定值 S，求平方和的最小值</div>
-    <div class="ex-body">固定和，调整使各数相等时平方和最小。aᵢ=S/n 时平方和 = S²/n 最小。</div>
-    <div class="ex-result">最小值 S²/n。</div>
-  </div>
-</div>
-
-<div class="question-card" data-correct="3" data-idx="22">
-  <div class="q-title">局部调整法 · 选择题</div>
-  <div class="q-text">局部调整法的本质是：</div>
-  <div class="options">
-    <div class="opt" data-val="0">A. 将整体分为若干局部</div>
-    <div class="opt" data-val="1">B. 先求局部再求和</div>
-    <div class="opt" data-val="2">C. 把复杂问题局部化</div>
-    <div class="opt" data-val="3">D. 保持约束不变，在局部变动中寻找极值</div>
-  </div>
-  <div class="explain"></div>
-</div>
-
-<!-- 22. 磨光法 -->
-<div class="method-header">
-  <h3>22. 磨光法 <span class="method-tag">极值优化</span></h3>
-  <div class="method-desc"><strong>什么时候用：</strong>寻找极端情况或简化条件时，逐步消去差异使问题变简单。<br><strong>怎么用：</strong>通过一系列不改变问题本质的变换，逐步"磨平"数据差异，最终得到简单情形。</div>
-</div>
-<div class="examples-grid">
-  <div class="example-card">
-    <div class="ex-title">例1：n 个正数之和为 S，求最小项的最大值</div>
-    <div class="ex-body">最小项不可能超过平均数 S/n；否则每一项都大于 S/n，总和会大于 S。把所有数磨平为 S/n 时，最小项恰好等于 S/n。</div>
-    <div class="ex-result">最小项的最大值为 S/n，各项相等时取得。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例2：理解排序不等式</div>
-    <div class="ex-body">若 a₁≤…≤aₙ、b₁≤…≤bₙ，把任意错序配对通过相邻交换逐步改成同序配对，每次交换都不减小乘积和；改成逆序配对时乘积和最小。</div>
-    <div class="ex-result">同序乘积和最大，逆序乘积和最小。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例3：n 个正数和为 1，求乘积最大值</div>
-    <div class="ex-body">若不相等，取两个不等项调整使其相等，乘积增大。反复磨光，最终全部相等时乘积最大。</div>
-    <div class="ex-result">最大值为 (1/n)ⁿ。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例4：证明切比雪夫不等式</div>
-    <div class="ex-body">通过逐步调整（磨光法）可以证明：若 a₁≤a₂≤…≤aₙ, b₁≤b₂≤…≤bₙ，则 (∑aᵢbᵢ)/n ≥ (∑aᵢ)(∑bᵢ)/n²。</div>
-    <div class="ex-result">切比雪夫不等式成立。</div>
-  </div>
-  <div class="example-card">
-    <div class="ex-title">例5：固定边数 n 的凸多边形周长给定，何时面积最大</div>
-    <div class="ex-body">在边数固定且多边形为凸多边形的前提下，逐步调整不相等的边和角，使图形趋于等边、等角而不减小面积。</div>
-    <div class="ex-result">正 n 边形面积最大；若不固定边数，不能直接下此结论。</div>
-  </div>
-</div>
-
-<div class="question-card" data-correct="2" data-idx="23">
-  <div class="q-title">磨光法 · 选择题</div>
-  <div class="q-text">磨光法和局部调整法的主要区别是：</div>
-  <div class="options">
-    <div class="opt" data-val="0">A. 没有本质区别</div>
-    <div class="opt" data-val="1">B. 磨光法用于代数，局部调整法用于几何</div>
-    <div class="opt" data-val="2">C. 磨光法逐步"磨平"差异趋于平均，局部调整法在约束下调整一对变量</div>
-    <div class="opt" data-val="3">D. 磨光法只能用于整数</div>
-  </div>
-  <div class="explain"></div>
-</div>
-
-<!-- 第三类综合题 -->
-<div class="comprehensive-section">
-  <div class="comp-title">第三类综合题 · 组合计数</div>
-  <div class="comp-desc">综合应用捆绑、插空、隔板等组合计数方法</div>
-</div>
-<div class="question-card" data-correct="1" data-idx="24">
-  <div class="q-title">综合题 3/3</div>
-  <div class="q-text">4 个男生 3 个女生排成一排，要求女生不相邻且男生甲和乙必须相邻，有多少种排法？</div>
-  <div class="options">
-    <div class="opt" data-val="0">A. 480</div>
-    <div class="opt" data-val="1">B. 720</div>
-    <div class="opt" data-val="2">C. 960</div>
-    <div class="opt" data-val="3">D. 1440</div>
-  </div>
-  <div class="explain"></div>
-</div>
-
-<hr class="section-divider">
 
 <!-- ============================================================
      底部评分面板
      ============================================================ -->
 <div class="quiz-footer">
-  <div class="score-box" id="scoreBox">0 / 25</div>
-  <div class="score-detail" id="scoreDetail">逻辑推理 0/8 · 代数变形 0/11 · 组合与优化 0/6</div>
+  <div class="score-box" id="scoreBox">0 / 18</div>
+  <div class="score-detail" id="scoreDetail">逻辑推理 0/8 · 代数变形 0/10</div>
   <div class="btn-reset" id="resetBtn">重新作答</div>
 </div>
 
@@ -1368,26 +1147,12 @@
     // 16: 累乘法
     { ok: '正确！aₙ₊₁/aₙ=2（常数），等比，a₆ = 5 × 2⁵ = 5 × 32 = 160。', fail: '公比为 2 的等比数列，a₆ = a₁·q⁵ = 5 × 2⁵ = 5 × 32 = 160。' },
     // 17: 迭代法
-    { ok: '正确！x₁=(2+2/2)/2=1.5, x₂=(1.5+2/1.5)/2=(1.5+1.3333)/2=1.4167, x₃=(1.4167+2/1.4167)/2≈1.4142。第2次迭代得 1.4167。', fail: 'x₁=1.5，x₂=(1.5+2/1.5)/2≈1.4167，x₃ 才到 1.4142。第2次结果最接近 1.4167。' },
-    // 18: 第二类综合题
-    { ok: '正确！递推式 aₙ₊₁=2aₙ+2ⁿ 两边同除以 2ⁿ⁺¹ 得 aₙ₊₁/2ⁿ⁺¹ = aₙ/2ⁿ + 1/2，令 bₙ=aₙ/2ⁿ 得 bₙ₊₁=bₙ+1/2，累加法可解。', fail: '两边同除以 2ⁿ⁺¹ 构造新数列是标准方法。两边同除以 2ⁿ 得 aₙ₊₁/2ⁿ = aₙ/2ⁿ⁻¹ + 1，令 bₙ=aₙ/2ⁿ⁻¹ 也可。' },
-    // 19: 捆绑法
-    { ok: '正确！4 本语文书捆绑为 1 个整体，与 3 本数学书共 4 个元素排 = 4!，语文书内部 4!，共 4!×4!。', fail: '语文捆绑为 1 个整体，与 3 本数学书共 4 个元素，排列 4! 种。语文书内部 4! 种。总计 4! × 4! = 576 种。' },
-    // 20: 插空法
-    { ok: '正确！不相邻问题用插空法：先排没限制的（男生），再在产生的空位中插入有约束的（女生）。', fail: '先排没有限制的男生（5个产生6个空位），再从6个空位中选3个放入女生，这样才能保证女生不相邻。' },
-    // 21: 隔板法
-    { ok: '正确！10 个 1 排一排，9 个空隙，插 3 个隔板分成 4 组（每组至少 1 个），C(9,3)=84。', fail: '正整数解即每组至少 1 个。10 个 1 之间 9 个空隙选 3 个放隔板，C(9,3)=84。' },
-    // 22: 局部调整法
-    { ok: '正确！局部调整法的核心是在保持约束条件不变的前提下，微调一对变量的值以逐步逼近极值。', fail: '局部调整法 ≠ 分割。它是在约束不变的前提下，对变量进行局部微调（如保持和不变调整两个数），使目标函数单调变化。' },
-    // 23: 磨光法
-    { ok: '正确！磨光法侧重于逐步"磨平"差异使数据趋于均衡，局部调整法侧重于在约束条件下调整一对变量（不一定趋于平均）。', fail: '磨光法反复作用使差异缩小（向平均数趋近），而局部调整法更一般——可以有多种调整方向，不仅限于磨平。' },
-    // 24: 第三类综合题
-    { ok: '正确！正确思路：先排 4 个男生，其中甲乙必须相邻。将甲乙捆绑为 1 个整体，与另 2 名男生共 3 个单元排列 = 3! × 2!（甲乙内部）= 12 种。4 个男生排好后产生 5 个空位（含两端），从中选 3 个放女生：C(5,3) × 3! = 10 × 6 = 60。总计 = 12 × 60 = 720 种。', fail: '捆绑 + 插空联合使用。先排男生（甲乙捆绑）：甲乙看为 1 个整体，与丙、丁共 3 个单元，排列 3!×2!=12 种。4 个男生排好产生 5 个空位，选 3 个放女生：C(5,3)×3!=60。总 = 12×60 = 720。注意：4 个男生排好产生的是 5 个空位而非 4 个。' }
+    { ok: '正确！x₁=(2+2/2)/2=1.5, x₂=(1.5+2/1.5)/2=(1.5+1.3333)/2=1.4167, x₃=(1.4167+2/1.4167)/2≈1.4142。第2次迭代得 1.4167。', fail: 'x₁=1.5，x₂=(1.5+2/1.5)/2≈1.4167，x₃ 才到 1.4142。第2次结果最接近 1.4167。' }
   ];
 
-  // 三段分类范围
-  const segmentNames = ['逻辑推理', '代数变形', '组合与优化'];
-  const segmentRanges = [[0, 7], [8, 18], [19, 24]];
+  // 两段分类范围
+  const segmentNames = ['逻辑推理', '代数变形'];
+  const segmentRanges = [[0, 7], [8, 17]];
 
   function updateScore() {
     let count = 0;
@@ -1395,7 +1160,7 @@
       if (answered[i] === true) count++;
     }
     totalCorrect = count;
-    scoreBox.textContent = totalCorrect + ' / 25';
+    scoreBox.textContent = totalCorrect + ' / 18';
 
     let parts = [];
     for (let s = 0; s < segmentRanges.length; s++) {

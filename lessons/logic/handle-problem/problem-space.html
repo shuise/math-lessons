@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../../lib/logo.png?version=1.0.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>问题空间——解题的底层视角</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+body {
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.9;
+  font-size: 16px;
+}
+article {
+  background: #fff; border-radius: 12px; padding: 32px 40px 48px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow-wrap: break-word; word-wrap: break-word; overflow-x: hidden;
+}
+h1 { color: #2c3e50; font-size: 1.7em; border-bottom: 3px solid #e65100; padding-bottom: 10px; margin-top: 0; text-align: center; }
+h2 { color: #e65100; font-size: 1.25em; margin: 34px 0 12px; border-left: 4px solid #e65100; padding-left: 10px; }
+h3 { color: #bf360c; margin: 22px 0 8px; font-size: 1.05em; }
+.back {
+  display: inline-block; margin-bottom: 16px;
+  color: #1a73e8; text-decoration: none; font-size: 0.95em;
+}
+.back:hover { text-decoration: underline; }
+p { margin: 10px 0; }
+ul, ol { margin: 10px 0; padding-left: 26px; }
+li { margin: 5px 0; }
+strong { color: #c62828; }
+
+/* 引用块 */
+blockquote {
+  background: #fff8e1; border-left: 5px solid #ffb74d;
+  border-radius: 0 8px 8px 0; padding: 12px 18px; margin: 14px 0;
+  color: #6d4c41; font-style: italic; line-height: 1.9;
+}
+
+/* 表格 */
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.95em; }
+th, td { border: 1px solid #e0e0e0; padding: 8px 14px; text-align: left; }
+th { background: #f0f7ff; color: #2c3e50; }
+tr:nth-child(even) td { background: #fafafa; }
+
+/* 案例强调 */
+.case-line {
+  background: #fef9e7; border: 1px dashed #ffcc80; border-radius: 8px;
+  padding: 10px 16px; margin: 12px 0; color: #6d4c41;
+}
+</style>
+</head>
+<body>
+<article>
+<a class="back" href="index.html">&larr; 返回《如何处理难题？》</a>
+<h1>问题空间</h1>
+
+<h2>什么是问题空间？</h2>
+<p><strong>问题空间</strong>，简单说，就是把一个不能直接解决的问题分解，匹配所有已知技能，从而逐步接近进而解决问题。其背后的思路是：将复杂的问题分解成简单的子问题，逐个解决，进而达到整体解决。</p>
+<blockquote>说起来容易，做起来当然会难很多了。不同的分解方式，不同的知识储备，不同的灵感来源……有时感觉完全无路可走，甚至只是徒劳地原地打转。</blockquote>
+<p>问题空间理论来自纽厄尔与西蒙（Newell &amp; Simon）对人类问题解决的研究，它通常包含三个要素：</p>
+<ul>
+  <li><strong>初始状态</strong>：你现在在哪里（问题是什么样）</li>
+  <li><strong>目标状态</strong>：你要去哪里（答案是什么样）</li>
+  <li><strong>操作符</strong>：你有哪些可用的动作（已知的方法、公式、技能）</li>
+</ul>
+<p>一次"解题"，就是在问题空间中从初始状态出发，不断用操作符做状态转移，最终抵达目标状态的搜索过程。</p>
+
+<h2>真正的难题不在分解</h2>
+<p>在任何情况下，麻烦都不在于问题分解本身可能导致错误——它可以说是最好的技术。真正的难题比这个更深刻：</p>
+<blockquote>
+  我们怎样才能确切地知道，一定是在朝着一条定理前进？而不是在毫无意义的空转？<br><br>
+  我们是在一个什么样的"空间"中观察问题呢？在已经选好的空间中，用哪种行动来缩短问题和目标之间的"距离"？
+</blockquote>
+<p>这三个问题，才是问题空间理论的核心：</p>
+<ol>
+  <li><strong>选对空间</strong>：同一个问题，换一个角度看（空间），难度完全不同。比如几何题硬算不如添加辅助线。</li>
+  <li><strong>验证方向</strong>：如何判断当前走的路通向目标，而不是在原地打转？</li>
+  <li><strong>缩短距离</strong>：每一步操作，是否真的拉近了你与目标的距离？</li>
+</ol>
+<p>有学者提出，可以用问题分解技术反过来解决这个问题：<strong>我们需要时不时的"后退几步"，看看正在发生什么，并根据观察结果重新调整方向</strong>，以完成手边的任务。</p>
+
+<h2>三个实战方法</h2>
+<p>知识库中的<strong>「思考的方法：联想、倒推与去条件」</strong>给出了三个可操作的工具：</p>
+
+<h3>1. 联想</h3>
+<p>遇到问题，先回忆解决过的与之类似的问题。</p>
+<ul>
+  <li>计算立方体的对角线 → 从矩形对角线延伸</li>
+  <li>小数的加法 → 从整数加法拓展</li>
+</ul>
+<p>案例（X 射线治疗肿瘤实验）：先让被试阅读"军队从几个方向同时小规模攻击，击溃防守严密的堡垒"的军事材料，然后解决"医生如何用高强度 X 射线杀死肿瘤而不伤及周围组织"的问题。结果是：</p>
+<table>
+  <tr><th>情况</th><th>想出答案的比例</th></tr>
+  <tr><td>没读过军事例子</td><td>10%</td></tr>
+  <tr><td>读过但未提示</td><td>30%</td></tr>
+  <tr><td>读过且被提醒</td><td>75%</td></tr>
+</table>
+<p class="case-line"><strong>联想——特别是被点拨后的联想——能极大提高突破的概率。</strong></p>
+
+<h3>2. 倒推</h3>
+<p>从目标反推当前应该做什么。</p>
+<p>经典例子（波利亚《怎样解题》）：用 9 升桶和 4 升桶在河里取 6 升水，要求步骤最少。</p>
+<ul>
+  <li>目标：9 升桶里装 6 升 → 意味着 9 − 3 = 6，需要小桶里有 3 升</li>
+  <li>而 4 − 1 = 3，需要小桶里只有 1 升</li>
+  <li>1 升怎么来？9 − 4 − 4 = 1</li>
+</ul>
+<p>从目标倒着推，路径立刻清晰。</p>
+
+<h3>3. 去条件法</h3>
+<p>问题条件多，越具体，但也越容易被过多条件捆绑住手脚。去条件法通过移除条件解放思维，先推出中间结果，再加回条件。</p>
+<p>例子（《怎样解题》）：已知线段 BC，求点 A，满足 ∠BAC = α，且 A 到 BC 的距离为 h。</p>
+<ul>
+  <li>去掉第二个条件：满足 ∠BAC = α 的所有点，是弦 BC 对应的弧</li>
+  <li>去掉第一个条件：满足距离为 h 的所有点，是距 BC 为 h 的两条平行线</li>
+  <li>叠加两个结果：弧与两条平行线的交点即为答案</li>
+</ul>
+
+<h2>何时后退？</h2>
+<p>技能练得越熟，越容易形成<strong>思维惯性</strong>：遇到问题下意识用熟悉的方法，对了很快，不对就钻进牛角尖。解决的办法有两个：</p>
+<ol>
+  <li>问题难以解决时，<strong>适当后退</strong>，从更大层面纵观全局，重新选择解决路径</li>
+  <li>保持思维活跃，反复交叉锻炼相对立的方法，充分理解每种方法的前置条件、使用环境与局限</li>
+</ol>
+<blockquote>保持通向你所储存经验的路径是很重要的。</blockquote>
+
+</article>
+</body>
+</html>

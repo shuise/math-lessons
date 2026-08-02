@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../../lib/logo.png?version=1.0.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>如何处理难题？——六步解题法</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+body {
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.9;
+  font-size: 16px;
+}
+article {
+  background: #fff; border-radius: 12px; padding: 32px 40px 48px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow-wrap: break-word; word-wrap: break-word; overflow-x: hidden;
+}
+h1 { color: #2c3e50; font-size: 1.7em; border-bottom: 3px solid #e65100; padding-bottom: 10px; margin-top: 0; text-align: center; }
+h2 { color: #e65100; font-size: 1.25em; margin: 34px 0 12px; border-left: 4px solid #e65100; padding-left: 10px; }
+.back {
+  display: inline-block; margin-bottom: 16px;
+  color: #1a73e8; text-decoration: none; font-size: 0.95em;
+}
+.back:hover { text-decoration: underline; }
+.tip { text-align: center; color: #888; margin-bottom: 14px; }
+
+/* ====== 六步法总览 ====== */
+.steps-overview {
+  background: linear-gradient(135deg, #fff8f0, #fff3e0);
+  border: 2px solid #ffb74d;
+  border-radius: 12px;
+  padding: 18px 22px 14px;
+  margin: 18px 0 10px;
+}
+.steps-overview .so-title {
+  font-weight: bold; color: #e65100; font-size: 1.1em; margin-bottom: 10px;
+}
+.steps-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px;
+}
+.step-card {
+  background: #fff; border: 1px solid #ffe0b2; border-radius: 8px;
+  padding: 10px 14px; display: flex; gap: 10px; align-items: flex-start;
+  line-height: 1.7;
+}
+.step-card .st-num {
+  flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%;
+  background: #e65100; color: #fff; font-weight: bold;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9em; margin-top: 2px;
+}
+.step-card .st-name { font-weight: bold; color: #bf360c; }
+.step-card .st-desc { color: #555; font-size: 0.93em; }
+.method-note {
+  background: #e8f0fe; border-left: 5px solid #1a73e8;
+  border-radius: 0 8px 8px 0; padding: 12px 18px; margin: 14px 0 26px;
+  color: #444; font-size: 0.97em;
+}
+.method-note strong { color: #1a73e8; }
+.method-note a.ps-link {
+  color: #1a73e8; font-weight: 700; text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.method-note a.ps-link:hover { background: #d2e3fc; border-radius: 4px; }
+
+/* ====== 例题卡片 ====== */
+.example {
+  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+  padding: 18px 22px; margin: 18px 0;
+}
+.example .ex-head {
+  display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center;
+  margin-bottom: 10px;
+}
+.example .ex-no {
+  display: inline-block; background: #e65100; color: #fff;
+  padding: 3px 14px; border-radius: 14px; font-weight: bold; font-size: 0.95em;
+}
+.example .ex-method {
+  display: inline-block; background: #fff3e0; color: #bf360c;
+  border: 1px solid #ffb74d; padding: 2px 12px; border-radius: 12px;
+  font-size: 0.82em;
+}
+.example .ex-problem {
+  background: #fafafa; border: 1px dashed #bdbdbd; border-radius: 8px;
+  padding: 10px 14px; margin: 8px 0 12px; color: #2c3e50; line-height: 1.9;
+}
+.example .ex-problem strong { color: #e65100; }
+
+/* ====== 展开按钮 ====== */
+.toggle-btn {
+  display: inline-block; margin: 2px 0 12px; padding: 6px 20px;
+  background: #fff; color: #e65100; border: 2px solid #e65100;
+  border-radius: 16px; font-size: 0.9em; font-weight: 600;
+  cursor: pointer; transition: all 0.15s;
+}
+.toggle-btn:hover { background: #fff3e0; }
+.toggle-btn.open { background: #e65100; color: #fff; }
+
+/* ====== 六步步骤（默认隐藏，点击按钮后展开） ====== */
+.ex-steps { display: none; flex-direction: column; gap: 8px; }
+.example.show .ex-steps { display: flex; }
+.st {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: #f8faff; border-left: 4px solid #1a73e8;
+  border-radius: 0 6px 6px 0; padding: 8px 14px;
+}
+.st .st-num {
+  flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%;
+  background: #1a73e8; color: #fff; font-weight: bold;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85em; margin-top: 3px;
+}
+.st .st-body { color: #444; }
+.st .st-body .st-name { font-weight: bold; color: #174ea6; }
+.st .st-body em { color: #c62828; font-style: normal; font-weight: 600; }
+.st.st-analysis { background: #fef9e7; border-left-color: #f39c12; }
+.st.st-analysis .st-num { background: #f39c12; }
+.st.st-analysis .st-body .st-name { color: #c06a1a; }
+.st.st-deduce { background: #e8f5e9; border-left-color: #4caf50; }
+.st.st-deduce .st-num { background: #4caf50; }
+.st.st-deduce .st-body .st-name { color: #2e7d32; }
+
+/* ====== "为什么" 高亮 ====== */
+.why {
+  display: inline-block; background: #fff3e0; border: 1px solid #ffb74d;
+  border-radius: 4px; padding: 0 6px; color: #bf360c; font-weight: 700;
+  font-size: 0.9em; margin: 0 2px;
+}
+.st .st-body .why-ans { color: #bf360c; font-weight: 600; }
+
+/* ====== 结论（默认隐藏） ====== */
+.example .ex-result {
+  display: none;
+  margin-top: 12px; padding: 10px 14px; background: #fff8e1;
+  border: 1px dashed #ffcc80; border-radius: 8px; color: #bf360c;
+  font-weight: 600;
+}
+.example.show .ex-result { display: block; }
+.example .ex-result .ans { color: #e65100; }
+
+/* 结语 */
+.final-word {
+  background: #f3e5f5; border-left: 5px solid #9c27b0;
+  border-radius: 0 8px 8px 0; padding: 12px 18px; margin: 26px 0 6px;
+  color: #555; line-height: 1.9;
+}
+.final-word strong { color: #6a1b9a; }
+</style>
+</head>
+<body>
+<article>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<h1>如何处理难题？——六步解题法</h1>
+<p class="tip">遇到"不会做"的题，先别慌——不是你不会，而是还没找到路。每道题的答案与分析过程都默认隐藏：<strong>先自己按六步走一遍，再点击「查看分析过程」对照</strong>，重点看每一步背后的"为什么"。</p>
+
+<!-- ============================================================
+     解题六步法（总览）
+     ============================================================ -->
+<div class="steps-overview">
+  <div class="so-title">解题六步法（每一道题都按这个顺序分析）</div>
+  <div class="steps-grid">
+    <div class="step-card"><span class="st-num">1</span><div><div class="st-name">明确问题</div><div class="st-desc">罗列已知条件，确认最终目标。</div></div></div>
+    <div class="step-card"><span class="st-num">2</span><div><div class="st-name">文字与符号转化</div><div class="st-desc">把题目中的文字、图形翻译成数学符号与表达式。</div></div></div>
+    <div class="step-card"><span class="st-num">3</span><div><div class="st-name">提取知识点</div><div class="st-desc">识别本题要考察的定义、公式、定理、方法。</div></div></div>
+    <div class="step-card"><span class="st-num">4</span><div><div class="st-name">问题分析</div><div class="st-desc">从已知到目标，再从目标到已知，分析出可能的解决思路（一系列步骤）。</div></div></div>
+    <div class="step-card"><span class="st-num">5</span><div><div class="st-name">补充假设</div><div class="st-desc">如有需要补充假设，确保所有的步骤可以表达为数学表达式。</div></div></div>
+    <div class="step-card"><span class="st-num">6</span><div><div class="st-name">数学推导</div><div class="st-desc">按照思路一步步推导，写出完整过程，最后作答。</div></div></div>
+  </div>
+</div>
+
+<div class="method-note">
+  <strong>通用方法库：</strong>归纳法、数形结合、逻辑推理、分段讨论、反证法、换元法、构造法、化归法……<br><br>
+  <strong>分析思路：</strong>把每道题看作一次<a href="problem-space.html" class="ps-link">问题空间</a>中的寻路——起点是已知，终点是目标，每一步都是执行一个"允许的操作"。寻路可以正着走，也可以<strong>反向推导</strong>：从已知向目标顺推（综合法），或从目标向已知逆推（分析法，即六步法第 4 步"再从目标到已知"），两头同时推进、中间会合往往更快。走到岔路就试探，走不通就回退换路。<br><br>
+  <strong>阅读方法：</strong>展开每道题后，橙色高亮的<span class="why">为什么…？</span>是每一步推导的"动机"，后面的<b>粗体解释</b>就是答案——做题时多问自己"为什么这么做"，思路才留得住。
+</div>
+
+<!-- ============================================================
+     例题 1
+     ============================================================ -->
+<div class="example">
+  <div class="ex-head"><span class="ex-no">例题 1</span><span class="ex-method">化归（构造）· 数学归纳法</span></div>
+  <div class="ex-problem"><strong>题目：</strong>已知 a₁ = 1，aₙ₊₁ = aₙ / (1 + 2aₙ)（n ≥ 1），求数列 {aₙ} 的通项公式，并证明你的结论。</div>
+  <button class="toggle-btn" type="button">查看分析过程</button>
+  <div class="ex-steps">
+    <div class="st"><span class="st-num">1</span><div class="st-body"><span class="st-name">明确问题：</span>已知首项 a₁ = 1 与递推关系 aₙ₊₁ = aₙ/(1 + 2aₙ)；目标：求出 aₙ 关于 n 的表达式并证明。</div></div>
+    <div class="st"><span class="st-num">2</span><div class="st-body"><span class="st-name">文字与符号转化：</span>递推式两边同时取倒数，得 1/aₙ₊₁ = (1 + 2aₙ)/aₙ = 1/aₙ + 2。<span class="why">为什么想到取倒数？</span><span class="why-ans">分子的 aₙ 被"关"在分母 (1 + 2aₙ) 里，直接看不出规律；一取倒数，右侧变成 1/aₙ + 2——"比值式"立刻变成"连加式"，而连加正是等差数列的特征。</span></div></div>
+    <div class="st"><span class="st-num">3</span><div class="st-body"><span class="st-name">提取知识点：</span>等差数列的定义与通项公式；化归思想（把陌生的"分式递推"化为熟悉的"线性递推"）。</div></div>
+    <div class="st st-analysis"><span class="st-num">4</span><div class="st-body"><span class="st-name">问题分析：</span>从已知到目标——递推式既不是等差也不是等比，直接求通项困难；再从目标回推——若想套用等差数列通项公式，就需要某个"新数列"满足 bₙ₊₁ − bₙ = 常数，取倒数后恰好出现 1/aₙ₊₁ = 1/aₙ + 2。<span class="why">为什么选倒数而不选别的变形？</span><span class="why-ans">因为递推式右侧分母恰是"1 + 2aₙ"，是 aₙ 的一次式；任何"一次式在分母"的结构，取倒数后分子分母一除，都会化简成常数 + 原项的倒数，这是此类分式递推的"标准动作"。</span>思路：令 bₙ = 1/aₙ，转化为等差数列问题。</div></div>
+    <div class="st"><span class="st-num">5</span><div class="st-body"><span class="st-name">补充假设：</span>取倒数要求 aₙ ≠ 0。<span class="why">为什么必须保证 aₙ ≠ 0？</span><span class="why-ans">取倒数就是在除以 aₙ，分母为 0 时运算无意义；而且只有 aₙ ≠ 0，bₙ = 1/aₙ 才定义得出来。</span>由 a₁ = 1 且递推式中分子分母均为正，可归纳证明 aₙ &gt; 0 恒成立，取倒数合法。</div></div>
+    <div class="st st-deduce"><span class="st-num">6</span><div class="st-body"><span class="st-name">数学推导：</span>b₁ = 1；bₙ₊₁ = bₙ + 2，故 {bₙ} 是首项 1、公差 2 的等差数列，bₙ = 1 + 2(n−1) = 2n − 1，所以 aₙ = 1/(2n − 1)。<span class="why">为什么还要归纳验证？</span><span class="why-ans">通项是"猜"出来的，验证 n = 1 成立、假设 n = k 成立推出 n = k+1 成立，才能确认它对一切 n 都对。</span>n = 1 时 a₁ = 1 成立；设 aₖ = 1/(2k−1)，则 aₖ₊₁ = [1/(2k−1)] / [1 + 2/(2k−1)] = 1/(2k+1)，对一切 n 成立。</div></div>
+  </div>
+  <div class="ex-result">结论：<span class="ans">aₙ = 1/(2n − 1)</span>。</div>
+</div>
+
+<!-- ============================================================
+     例题 2
+     ============================================================ -->
+<div class="example">
+  <div class="ex-head"><span class="ex-no">例题 2</span><span class="ex-method">分段讨论 · 数形结合</span></div>
+  <div class="ex-problem"><strong>题目：</strong>解不等式 |x − 2| + |x + 1| &gt; 5。</div>
+  <button class="toggle-btn" type="button">查看分析过程</button>
+  <div class="ex-steps">
+    <div class="st"><span class="st-num">1</span><div class="st-body"><span class="st-name">明确问题：</span>未知量为 x；目标：求出满足不等式的所有 x，即解集。</div></div>
+    <div class="st"><span class="st-num">2</span><div class="st-body"><span class="st-name">文字与符号转化：</span>|x−2| 表示 x 到 2 的距离，|x+1| 表示 x 到 −1 的距离；问题变为"数轴上到 2 与 −1 两点距离之和大于 5 的点"。</div></div>
+    <div class="st"><span class="st-num">3</span><div class="st-body"><span class="st-name">提取知识点：</span>绝对值的几何意义与代数定义；去绝对值需按分界点分段；分段函数图像。</div></div>
+    <div class="st st-analysis"><span class="st-num">4</span><div class="st-body"><span class="st-name">问题分析：</span>从已知到目标——绝对值内的符号由 x 与分界点 −1、2 的相对位置决定，把数轴分成 x &lt; −1、−1 ≤ x ≤ 2、x &gt; 2 三段。<span class="why">为什么分界点是 −1 和 2？</span><span class="why-ans">绝对值 |x − a| 的"符号分界"就在 x = a：只有在这两点之间，绝对值内的式子才会改变正负，所以以它们为界把数轴切开，每段上绝对值都能直接去掉。</span>再从目标回推——每一段上不等式化为普通不等式，解出后与该段范围取交集，最后三段并起来；数轴直观上：两定点相距 3，距离和大于 5 的点必然在两定点之外的两侧。</div></div>
+    <div class="st"><span class="st-num">5</span><div class="st-body"><span class="st-name">补充假设：</span>无（严格不等号不涉及取等点的归属问题）。</div></div>
+    <div class="st st-deduce"><span class="st-num">6</span><div class="st-body"><span class="st-name">数学推导：</span>① x &lt; −1：(2−x) + (−x−1) &gt; 5 → −2x + 1 &gt; 5 → x &lt; −2，与 x &lt; −1 交集为 x &lt; −2；② −1 ≤ x ≤ 2：(2−x) + (x+1) = 3，3 &gt; 5 不成立，无解；③ x &gt; 2：(x−2) + (x+1) = 2x − 1 &gt; 5 → x &gt; 3，与 x &gt; 2 交集为 x &gt; 3。<span class="why">为什么最后要取三段解集的并集？</span><span class="why-ans">三段把全体实数划成了互不重叠的三份，每一段内解出的 x 都是原不等式的解，任何满足条件的 x 必落在其中一段，所以三段结果合起来（并集）就是完整解集。</span>三段并集即解集。</div></div>
+  </div>
+  <div class="ex-result">结论：<span class="ans">x ∈ (−∞, −2) ∪ (3, +∞)</span>。</div>
+</div>
+
+<!-- ============================================================
+     例题 3
+     ============================================================ -->
+<div class="example">
+  <div class="ex-head"><span class="ex-no">例题 3</span><span class="ex-method">均值不等式（一题两法）</span></div>
+  <div class="ex-problem"><strong>题目：</strong>已知 a, b, c &gt; 0 且 a + b + c = 1，证明：1/a + 1/b + 1/c ≥ 9。</div>
+  <button class="toggle-btn" type="button">查看分析过程</button>
+  <div class="ex-steps">
+    <div class="st"><span class="st-num">1</span><div class="st-body"><span class="st-name">明确问题：</span>已知三正数之和为 1；目标：证明其倒数之和 ≥ 9，并指出取等条件。</div></div>
+    <div class="st"><span class="st-num">2</span><div class="st-body"><span class="st-name">文字与符号转化：</span>目标记为 1/a + 1/b + 1/c ≥ 9；留意 (a+b+c)(1/a + 1/b + 1/c) 展开后的结构（可利用 a+b+c = 1）。</div></div>
+    <div class="st"><span class="st-num">3</span><div class="st-body"><span class="st-name">提取知识点：</span>均值不等式：二元 a + b ≥ 2√(ab)、三元 a + b + c ≥ 3∛(abc)（a, b, c &gt; 0），及其取等条件。</div></div>
+    <div class="st st-analysis"><span class="st-num">4</span><div class="st-body"><span class="st-name">问题分析：</span>从已知到目标——目标是"倒数之和 ≥ 9"，已知是"和 = 1"，两边信息对不上，需要一座桥；先从目标回推——若用三元均值不等式，1/a + 1/b + 1/c ≥ 3∛(1/(abc))，只差控制 abc 的上界；而 abc ≤ ((a+b+c)/3)³ = 1/27 正是三元均值的"逆向"用法。<span class="why">为什么一上来就想到均值不等式？</span><span class="why-ans">目标式是"和 ≥ 常数"，均值不等式天生给出"和 ≥ 几何平均"的下界；题里 a, b, c &gt; 0、和为 1 的条件又完全符合它的使用前提——把 1/a、1/b、1/c 看作三个正数，直接套三元均值即可。</span>另一条配凑路：展开 (a+b+c)(1/a+1/b+1/c)，用二元均值把每对"互为倒数"的项配对（见推导方法二）。</div></div>
+    <div class="st"><span class="st-num">5</span><div class="st-body"><span class="st-name">补充假设：</span>a, b, c &gt; 0 是均值不等式的前提。<span class="why">为什么必须要求各项为正？</span><span class="why-ans">"算术平均 ≥ 几何平均"只对非负实数成立，负数会破坏取等与方向（例如 a = −1, b = c = 1 时和仍为 1，但 1/a + 1/b + 1/c = 1 &lt; 9）；题目已给出正数条件，直接可用。</span></div></div>
+    <div class="st st-deduce"><span class="st-num">6</span><div class="st-body"><span class="st-name">数学推导：</span>方法一（三元均值）：1/a + 1/b + 1/c ≥ 3∛(1/(abc))；又 abc ≤ ((a+b+c)/3)³ = (1/3)³ = 1/27，故 1/(abc) ≥ 27，于是 1/a + 1/b + 1/c ≥ 3∛27 = 9。方法二（配凑）：(a+b+c)(1/a+1/b+1/c) = 3 + (a/b + b/a) + (a/c + c/a) + (b/c + c/b) ≥ 3 + 2 + 2 + 2 = 9（每组 x + 1/x ≥ 2），而 a+b+c = 1，故 1/a+1/b+1/c ≥ 9。<span class="why">为什么取等条件是 a = b = c = 1/3？</span><span class="why-ans">方法一取等要求两处同时成立：abc 达到最大值（a = b = c）且 1/a = 1/b = 1/c（也即 a = b = c），由和为 1 得 a = b = c = 1/3；方法二要求 a/b = b/a、a/c = c/a、b/c = c/b，同样推出 a = b = c = 1/3——两法取等条件一致。</span></div></div>
+  </div>
+  <div class="ex-result">结论：<span class="ans">1/a + 1/b + 1/c ≥ 9 成立，等号当且仅当 a = b = c = 1/3</span>。</div>
+</div>
+
+<!-- ============================================================
+     例题 4
+     ============================================================ -->
+<div class="example">
+  <div class="ex-head"><span class="ex-no">例题 4</span><span class="ex-method">反证法 · 整除性质（逻辑推理）</span></div>
+  <div class="ex-problem"><strong>题目：</strong>证明：√3 是无理数。</div>
+  <button class="toggle-btn" type="button">查看分析过程</button>
+  <div class="ex-steps">
+    <div class="st"><span class="st-num">1</span><div class="st-body"><span class="st-name">明确问题：</span>要证明 √3 不能表示成两个整数之比，即不存在既约分数 p/q 等于 √3。</div></div>
+    <div class="st"><span class="st-num">2</span><div class="st-body"><span class="st-name">文字与符号转化：</span>假设 √3 = p/q（p, q 互质的正整数），两边平方得 p² = 3q²。</div></div>
+    <div class="st"><span class="st-num">3</span><div class="st-body"><span class="st-name">提取知识点：</span>既约分数、质数的整除性质（若质数 p | m²，则 p | m）、反证法。</div></div>
+    <div class="st st-analysis"><span class="st-num">4</span><div class="st-body"><span class="st-name">问题分析：</span>从已知到目标——直接证明无理数很困难，改证"假设有理"会导出矛盾。<span class="why">为什么用反证法？</span><span class="why-ans">"无理数"是一个否定性定义（不能写成整数之比），要证明"不存在"某种写法，正面枚举永远枚举不完；反证法假设它"存在"，再逼出矛盾，一劳永逸。</span>再从目标回推——矛盾应来自"p, q 都含因子 3"，这与互质矛盾；由 p² = 3q² 出发，用 3 是质数这一性质一步步推出 3 | p 与 3 | q。</div></div>
+    <div class="st"><span class="st-num">5</span><div class="st-body"><span class="st-name">补充假设：</span>任何有理数均可写成既约分数 p/q（p, q 互质），这是反证的前提。</div></div>
+    <div class="st st-deduce"><span class="st-num">6</span><div class="st-body"><span class="st-name">数学推导：</span>由 p² = 3q²，得 3 | p²；因 3 是质数，由整除性质得 3 | p，设 p = 3k，则 9k² = 3q² → q² = 3k²，同理 3 | q。<span class="why">为什么由 3 | p² 就能推出 3 | p？</span><span class="why-ans">3 是质数：若 p 不含因子 3，则 p² 也不可能含因子 3（质因子只能来自 p 本身）。把 3 换成合数 4 就不行（2² 含 4 的因子 4？不，2²=4 恰被 4 整除，但 2 不被 4 整除）——所以"质数"这个条件是整条推理的命根子。</span>于是 p, q 有公因数 3，与 (p, q) = 1 矛盾。假设不成立。</div></div>
+  </div>
+  <div class="ex-result">结论：<span class="ans">√3 是无理数</span>。</div>
+</div>
+
+<!-- ============================================================
+     例题 5
+     ============================================================ -->
+<div class="example">
+  <div class="ex-head"><span class="ex-no">例题 5</span><span class="ex-method">换元 · 数形结合 · 分段讨论</span></div>
+  <div class="ex-problem"><strong>题目：</strong>讨论关于 x 的方程 x² − 2|x| = a 的实根个数，其中 a 为实数。</div>
+  <button class="toggle-btn" type="button">查看分析过程</button>
+  <div class="ex-steps">
+    <div class="st"><span class="st-num">1</span><div class="st-body"><span class="st-name">明确问题：</span>参数 a；目标：按 a 的不同取值，分别确定方程的实根个数。</div></div>
+    <div class="st"><span class="st-num">2</span><div class="st-body"><span class="st-name">文字与符号转化：</span>令 t = |x| ≥ 0，方程化为 t² − 2t = a，即 (t−1)² = a + 1；每个正 t 对应两个 x（x = ±t），t = 0 对应一个 x = 0。</div></div>
+    <div class="st"><span class="st-num">3</span><div class="st-body"><span class="st-name">提取知识点：</span>换元法、二次函数图像与值域、参数分类讨论。</div></div>
+    <div class="st st-analysis"><span class="st-num">4</span><div class="st-body"><span class="st-name">问题分析：</span>从已知到目标——先确定"t 的非负解有几个"，再换算成 x 的个数；再从目标回推——t 的解的个数取决于水平线 y = a 与抛物线 f(t) = (t−1)² − 1（t ≥ 0）的交点个数。<span class="why">为什么要把方程看成"水平线与抛物线的交点"？</span><span class="why-ans">方程的实根个数 = 左右两边函数图像交点的个数。y = a 是一条水平线，它上下移动扫过抛物线，交点数一目了然，比代数硬解分类更直观、不易漏。</span>画图可知分界点是 a = −1（抛物线最小值）与 a = 0（t = 0 是否取到）。</div></div>
+    <div class="st"><span class="st-num">5</span><div class="st-body"><span class="st-name">补充假设：</span>t = |x| ≥ 0 是隐含条件，t 的取值必须非负。<span class="why">为什么 t 要限制非负？</span><span class="why-ans">t 被定义为 |x|，天生 ≥ 0；如果解出 t &lt; 0，它在"x 的世界"里没有对应物，必须舍弃——这正是"补充假设"要防的坑。</span></div></div>
+    <div class="st st-deduce"><span class="st-num">6</span><div class="st-body"><span class="st-name">数学推导：</span>由 (t−1)² = a+1 得 t = 1 ± √(a+1)。① a &lt; −1：无实数 t，实根 0 个；② a = −1：t = 1（二重），x = ±1，实根 2 个；③ −1 &lt; a &lt; 0：t₁ = 1−√(a+1) ∈ (0,1)、t₂ = 1+√(a+1) ∈ (1,2)，均正且不同，各对应两个 x，实根 4 个；④ a = 0：t = 0 与 t = 2，对应 x = 0、x = ±2，实根 3 个；⑤ a &gt; 0：仅 t = 1+√(a+1) &gt; 0（另一个为负舍去），实根 2 个。</div></div>
+  </div>
+  <div class="ex-result">结论：<span class="ans">a &lt; −1 时 0 个；a = −1 时 2 个；−1 &lt; a &lt; 0 时 4 个；a = 0 时 3 个；a &gt; 0 时 2 个</span>。</div>
+</div>
+
+<!-- ============================================================
+     例题 6
+     ============================================================ -->
+<div class="example">
+  <div class="ex-head"><span class="ex-no">例题 6</span><span class="ex-method">整除性质（逻辑推理）· 分类计数</span></div>
+  <div class="ex-problem"><strong>题目：</strong>用数字 1, 2, 3, 4, 5, 6 组成没有重复数字的四位数，其中能被 3 整除的共有多少个？</div>
+  <button class="toggle-btn" type="button">查看分析过程</button>
+  <div class="ex-steps">
+    <div class="st"><span class="st-num">1</span><div class="st-body"><span class="st-name">明确问题：</span>从 6 个数字中选出 4 个排成不重复的四位数；目标：其中能被 3 整除的个数。</div></div>
+    <div class="st"><span class="st-num">2</span><div class="st-body"><span class="st-name">文字与符号转化：</span>能被 3 整除 ⟺ 各位数字之和能被 3 整除。数字按模 3 余数分类：余 0：{3, 6}；余 1：{1, 4}；余 2：{2, 5}。</div></div>
+    <div class="st"><span class="st-num">3</span><div class="st-body"><span class="st-name">提取知识点：</span>3 的整除判定特征、分类计数原理与分步计数原理、排列数。</div></div>
+    <div class="st st-analysis"><span class="st-num">4</span><div class="st-body"><span class="st-name">问题分析：</span>从已知到目标——先选"数字组合"再排顺序；再从目标回推——若从三类中分别取 k₁, k₂, k₃ 个（k₁+k₂+k₃ = 4，各不超过 2），数字和 ≡ k₂ + 2k₃ (mod 3)，要求其 ≡ 0。<span class="why">为什么按"除以 3 的余数"分类？</span><span class="why-ans">能被 3 整除只看各位数字之和除以 3 的余数，而每个数字对余数的贡献只看它自己模 3 的余数：余 0 加 0、余 1 加 1、余 2 加 2（≡ −1）。把 6 个数字归成 3 个"同余类"，选数字的枚举量从 15 种组合骤减到几十种。(k₁, k₂, k₃) 组合个位数的枚举量。</span>枚举所有满足条件的 (k₁, k₂, k₃) 即可。</div></div>
+    <div class="st"><span class="st-num">5</span><div class="st-body"><span class="st-name">补充假设：</span>所选 4 个数字互不相同（由分类中"每类至多取 2 个且类内数字不同"自动保证）。</div></div>
+    <div class="st st-deduce"><span class="st-num">6</span><div class="st-body"><span class="st-name">数学推导：</span>可行取法：① (k₁,k₂,k₃) = (2,1,1)：C(2,2)·C(2,1)·C(2,1) = 4 组；② (0,2,2)：C(2,0)·C(2,2)·C(2,2) = 1 组；其余取法（如 (2,2,0)、(2,0,2)、(1,1,2)、(1,2,1) 等）余数和均不为 0，舍去。<span class="why">为什么每组数字组合都要乘 4!？</span><span class="why-ans">同一组 4 个数字可以排成 4! 种不同顺序的四位数，而这些四位数数字和相同，都能被 3 整除——"选数字"决定能否整除，"排顺序"决定有多少个。</span>共 5 组数字组合，每组 4! = 24 种排列，总数为 5 × 24 = 120。</div></div>
+  </div>
+  <div class="ex-result">结论：<span class="ans">共 120 个</span>。</div>
+</div>
+
+<!-- ============================================================
+     例题 7
+     ============================================================ -->
+<div class="example">
+  <div class="ex-head"><span class="ex-no">例题 7</span><span class="ex-method">数学归纳法 · 单调有界（逻辑推理）</span></div>
+  <div class="ex-problem"><strong>题目：</strong>已知 a₁ = 2，aₙ₊₁ = (aₙ + 2/aₙ)/2。证明数列 {aₙ} 收敛，并求其极限。</div>
+  <button class="toggle-btn" type="button">查看分析过程</button>
+  <div class="ex-steps">
+    <div class="st"><span class="st-num">1</span><div class="st-body"><span class="st-name">明确问题：</span>已知首项与递推公式；目标：证明收敛（极限存在）并求出极限值 L。</div></div>
+    <div class="st"><span class="st-num">2</span><div class="st-body"><span class="st-name">文字与符号转化：</span>递推式是"aₙ 与 2/aₙ 的算术平均"，即牛顿迭代求 √2 的形式。</div></div>
+    <div class="st"><span class="st-num">3</span><div class="st-body"><span class="st-name">提取知识点：</span>均值不等式（x + y ≥ 2√(xy)）、单调有界定理、不动点方程（极限代入法）。</div></div>
+    <div class="st st-analysis"><span class="st-num">4</span><div class="st-body"><span class="st-name">问题分析：</span>从已知到目标——要证收敛，须先证"有界 + 单调"；由均值不等式可证 aₙ ≥ √2（n ≥ 2），再作差证单调递减；再从目标回推——若极限 L 存在，对递推式两边取极限得 L = (L + 2/L)/2，解出 L。<span class="why">为什么收敛要先证"单调 + 有界"？</span><span class="why-ans">单调有界定理说：单调且有界的数列必收敛——这是证明"极限存在"的通用免检通道，不用预先知道极限是多少。</span></div></div>
+    <div class="st"><span class="st-num">5</span><div class="st-body"><span class="st-name">补充假设：</span>由 a₁ = 2 &gt; 0 与均值不等式可归纳得 aₙ &gt; 0（保证 2/aₙ 有意义）；单调有界定理保证极限存在，取极限合法。<span class="why">为什么取极限前必须先证收敛？</span><span class="why-ans">"对递推式两边取极限"默认了极限存在；如果数列发散，等式取极限毫无意义。所以顺序必须是：先证收敛，再代极限求值——反过来就犯了循环论证。</span></div></div>
+    <div class="st st-deduce"><span class="st-num">6</span><div class="st-body"><span class="st-name">数学推导：</span>① 有界性（归纳）：a₁ = 2 &gt; 0；若 aₙ &gt; 0，aₙ₊₁ = (aₙ + 2/aₙ)/2 ≥ √(aₙ·2/aₙ) = √2，故 n ≥ 2 时 aₙ ≥ √2。<span class="why">为什么用均值不等式来证有界？</span><span class="why-ans">递推式恰好是 (aₙ + 2/aₙ)/2 的形式，而"两正数和的算术平均 ≥ 几何平均"立即可给出 aₙ₊₁ ≥ √2——下界一次到位，不用猜。</span>② 单调性：aₙ₊₁ − aₙ = (2 − aₙ²)/(2aₙ) ≤ 0（因 aₙ ≥ √2），故 n ≥ 2 时 {aₙ} 单调递减且有下界 √2，收敛。③ 设 lim aₙ = L ≥ √2，对递推式取极限：L = (L + 2/L)/2 → L² = 2 → L = √2。</div></div>
+  </div>
+  <div class="ex-result">结论：<span class="ans">数列收敛，lim aₙ = √2</span>。</div>
+</div>
+
+<!-- ============================================================
+     例题 8
+     ============================================================ -->
+<div class="example">
+  <div class="ex-head"><span class="ex-no">例题 8</span><span class="ex-method">三角换元 · 几何相切（一题两法）</span></div>
+  <div class="ex-problem"><strong>题目：</strong>点 P(x, y) 在圆 x² + y² = 4 上运动，求 2x + y 的最大值与最小值。</div>
+  <button class="toggle-btn" type="button">查看分析过程</button>
+  <div class="ex-steps">
+    <div class="st"><span class="st-num">1</span><div class="st-body"><span class="st-name">明确问题：</span>约束条件 x² + y² = 4；目标：线性式 2x + y 的最值。</div></div>
+    <div class="st"><span class="st-num">2</span><div class="st-body"><span class="st-name">文字与符号转化：</span>圆的参数方程 x = 2cosθ，y = 2sinθ；或把 2x + y = c 看作一族平行直线。</div></div>
+    <div class="st"><span class="st-num">3</span><div class="st-body"><span class="st-name">提取知识点：</span>三角换元与辅助角公式（asinθ + bcosθ = √(a²+b²)·sin(θ+φ)）；直线与圆的位置关系（相切 ⟺ 圆心到直线的距离 = 半径）。</div></div>
+    <div class="st st-analysis"><span class="st-num">4</span><div class="st-body"><span class="st-name">问题分析：</span>从已知到目标——x、y 被 x² + y² = 4 拴在一起，直接求 2x + y 是"二元最值"，先降成"一元"：用圆的参数方程 x = 2cosθ、y = 2sinθ 代入，2x + y 就变成关于 θ 的三角函数；再从目标回推——只要用辅助角公式把 a sinθ + b cosθ 合并成 √(a²+b²) sin(θ+φ)，最大值立刻是 √(a²+b²)。<span class="why">为什么还要再看"几何相切"这条路？</span><span class="why-ans">2x + y = c 是一族互相平行的直线，c 越大直线越往右上移；圆必须"碰到"直线才有可行点，所以最值就出现在"刚碰上"的临界瞬间——此时圆心到直线的距离恰好等于半径。几何直观与代数推导互相印证，还能当验算。</span></div></div>
+    <div class="st"><span class="st-num">5</span><div class="st-body"><span class="st-name">补充假设：</span>圆上每点唯一对应一个 θ ∈ [0, 2π)；几何法中 c 取 ±2√5 时直线恰与圆相切。<span class="why">为什么换元要取遍 [0, 2π)？</span><span class="why-ans">参数 θ 走完一个完整周期，x = 2cosθ、y = 2sinθ 恰好把圆周上的点一个不漏地覆盖一遍——换元前后的取值范围完全一致，这样求出的最值才不会漏点或凭空多出端点。</span></div></div>
+    <div class="st st-deduce"><span class="st-num">6</span><div class="st-body"><span class="st-name">数学推导：</span>方法一（三角换元）：2x + y = 4cosθ + 2sinθ = √(4²+2²)·sin(θ + φ) = 2√5·sin(θ + φ)，故最大值为 2√5、最小值为 −2√5。方法二（几何）：直线 2x + y = c 与圆 x² + y² = 4 相切时，圆心 (0, 0) 到直线的距离等于半径 2：|c|/√(2²+1²) = 2 → |c| = 2√5，即 c = ±2√5。<span class="why">为什么两种方法结果一致？</span><span class="why-ans">换元法里 sin(θ + φ) = ±1 时取极值，几何法里直线与圆相切时取极值——两种"临界状态"描述的是同一件事：2x + y 恰好抵到约束的边界。殊途同归，正好互相印证。</span></div></div>
+  </div>
+  <div class="ex-result">结论：<span class="ans">最大值为 2√5，最小值为 −2√5</span>。</div>
+</div>
+
+<!-- ============================================================
+     例题 9
+     ============================================================ -->
+<div class="example">
+  <div class="ex-head"><span class="ex-no">例题 9</span><span class="ex-method">分离参数 · 函数最值（数形结合）</span></div>
+  <div class="ex-problem"><strong>题目：</strong>若对任意 x ∈ [1, 2]，不等式 x² − ax + 1 &gt; 0 恒成立，求实数 a 的取值范围。</div>
+  <button class="toggle-btn" type="button">查看分析过程</button>
+  <div class="ex-steps">
+    <div class="st"><span class="st-num">1</span><div class="st-body"><span class="st-name">明确问题：</span>参数 a；目标：使不等式在区间 [1, 2] 上恒成立的 a 的范围。</div></div>
+    <div class="st"><span class="st-num">2</span><div class="st-body"><span class="st-name">文字与符号转化：</span>x ∈ [1, 2] 恒为正，两边同除以 x：不等式化为 a &lt; x + 1/x 对一切 x ∈ [1, 2] 恒成立。</div></div>
+    <div class="st"><span class="st-num">3</span><div class="st-body"><span class="st-name">提取知识点：</span>分离参数法、恒成立问题转化（a &lt; g(x) 恒成立 ⟺ a 小于 g(x) 的最小值）、对勾函数单调性。</div></div>
+    <div class="st st-analysis"><span class="st-num">4</span><div class="st-body"><span class="st-name">问题分析：</span>从已知到目标——把参数 a 分离到不等式一侧；再从目标回推——只要算出 g(x) = x + 1/x 在 [1, 2] 上的最小值，a 小于它即可。<span class="why">为什么"恒成立"要取最小值？</span><span class="why-ans">a 必须比 g(x) 的"每一次取值"都小，所以只要比它的最小值还小就行——最"危险"的那个 x 决定 a 的上限。</span>对勾函数在 x ≥ 1 上单调递增，最小值在 x = 1 处取得。</div></div>
+    <div class="st"><span class="st-num">5</span><div class="st-body"><span class="st-name">补充假设：</span>不等式是严格大于，边界值 a = 2 须单独检验是否使某点取等。<span class="why">为什么单独检验 a = 2？</span><span class="why-ans">推导给出 a &lt; 2 这个"开区间"，但端点 a = 2 恰好可能让某处取等号而破坏"严格大于"——端点常常是陷阱，必须代回原式验证。</span></div></div>
+    <div class="st st-deduce"><span class="st-num">6</span><div class="st-body"><span class="st-name">数学推导：</span>g(x) = x + 1/x，对 x ≥ 1 有 g'(x) = 1 − 1/x² ≥ 0，故 g 在 [1, 2] 上递增，min = g(1) = 2。所以 a &lt; 2。检验 a = 2：原式化为 x² − 2x + 1 = (x−1)²，在 x = 1 处等于 0，不满足 &gt; 0，故排除 a = 2。</div></div>
+  </div>
+  <div class="ex-result">结论：<span class="ans">a &lt; 2，即 a ∈ (−∞, 2)</span>。</div>
+</div>
+
+<!-- ============================================================
+     例题 10
+     ============================================================ -->
+<div class="example">
+  <div class="ex-head"><span class="ex-no">例题 10</span><span class="ex-method">逻辑推理（周期·奇偶）· 赋值代入</span></div>
+  <div class="ex-problem"><strong>题目：</strong>设 f(x) 是定义在 R 上的奇函数，且对任意 x ∈ R 有 f(x + 2) = f(x)。若 f(1) = 2，求 f(2023) + f(2024) 的值。</div>
+  <button class="toggle-btn" type="button">查看分析过程</button>
+  <div class="ex-steps">
+    <div class="st"><span class="st-num">1</span><div class="st-body"><span class="st-name">明确问题：</span>已知奇函数、周期 2、f(1) = 2；目标：两个特定点函数值之和。</div></div>
+    <div class="st"><span class="st-num">2</span><div class="st-body"><span class="st-name">文字与符号转化：</span>f(x+2) = f(x) 说明 2 是周期；奇函数在 R 上有定义 ⟹ f(0) = 0；2023 ≡ 1 (mod 2)，2024 ≡ 0 (mod 2)。</div></div>
+    <div class="st"><span class="st-num">3</span><div class="st-body"><span class="st-name">提取知识点：</span>周期函数定义（f(x+T) = f(x) 则 T 为周期）、奇函数性质 f(−x) = −f(x) 且 f(0) = 0、同余归约。</div></div>
+    <div class="st st-analysis"><span class="st-num">4</span><div class="st-body"><span class="st-name">问题分析：</span>从已知到目标——自变量很大，利用周期把它"折叠"到已知点；再从目标回推——f(2023) 应折叠到 f(1)，f(2024) 应折叠到 f(0)。<span class="why">为什么能把 2023、2024"折叠"成小数字？</span><span class="why-ans">周期是 2，意味着函数值每过 2 个单位重复一次，所以任何自变量只要同余（mod 2），函数值就相同；2023 ≡ 1、2024 ≡ 0 (mod 2)，于是问题立刻缩小到只需知道 f(1) 和 f(0)。</span>思路：反复利用 f(x+2) = f(x) 得 f(x + 2k) = f(x)（k ∈ Z）。</div></div>
+    <div class="st"><span class="st-num">5</span><div class="st-body"><span class="st-name">补充假设：</span>由 f(x+2) = f(x) 归纳得对任意整数 k，f(x + 2k) = f(x)。</div></div>
+    <div class="st st-deduce"><span class="st-num">6</span><div class="st-body"><span class="st-name">数学推导：</span>2023 = 1 + 2×1011 → f(2023) = f(1) = 2；2024 = 0 + 2×1012 → f(2024) = f(0)。又因 f 是定义在 R 上的奇函数，f(0) = −f(0) → f(0) = 0。<span class="why">为什么奇函数一定有 f(0) = 0？</span><span class="why-ans">在 f(−x) = −f(x) 中代入 x = 0：f(0) = −f(0)，移项得 2f(0) = 0，所以 f(0) = 0——这是奇函数"送"的免费信息。</span>故 f(2023) + f(2024) = 2 + 0 = 2。</div></div>
+  </div>
+  <div class="ex-result">结论：<span class="ans">值为 2</span>。</div>
+</div>
+
+<!-- ============================================================
+     例题 11
+     ============================================================ -->
+<div class="example">
+  <div class="ex-head"><span class="ex-no">例题 11</span><span class="ex-method">换元 · 均值不等式 · 判别式法（一题两法）</span></div>
+  <div class="ex-problem"><strong>题目：</strong>求函数 y = (x² + 2)/(x − 1)（x &gt; 1）的最小值。</div>
+  <button class="toggle-btn" type="button">查看分析过程</button>
+  <div class="ex-steps">
+    <div class="st"><span class="st-num">1</span><div class="st-body"><span class="st-name">明确问题：</span>定义域 x &gt; 1；目标：函数的最小值及取得最小值的 x。</div></div>
+    <div class="st"><span class="st-num">2</span><div class="st-body"><span class="st-name">文字与符号转化：</span>令 t = x − 1 &gt; 0，则 x = t + 1，y = ((t+1)² + 2)/t = t + 2 + 3/t。</div></div>
+    <div class="st"><span class="st-num">3</span><div class="st-body"><span class="st-name">提取知识点：</span>换元法、均值不等式（t &gt; 0 时 t + 3/t ≥ 2√3）、等号成立条件。</div></div>
+    <div class="st st-analysis"><span class="st-num">4</span><div class="st-body"><span class="st-name">问题分析：</span>从已知到目标——分式不易直接用均值，换元拆项成"t + 3/t + 2"的标准型；再从目标回推——t 与 3/t 均为正，均值不等式给出下界 2√3，只差检查能否取等。<span class="why">为什么换元成 t = x − 1？</span><span class="why-ans">分母是 x − 1，分子却是 x²——"分子次数比分母高"无法直接均值；令 t = x − 1 把"绕开 1 的怪位置"搬回原点，分式立刻拆成 t + 2 + 3/t，其中 t 和 3/t 恰好是均值不等式的黄金搭档。</span></div></div>
+    <div class="st"><span class="st-num">5</span><div class="st-body"><span class="st-name">补充假设：</span>t &gt; 0 满足均值不等式的使用条件；等号要求 t = 3/t，取正根 t = √3。</div></div>
+    <div class="st st-deduce"><span class="st-num">6</span><div class="st-body"><span class="st-name">数学推导：</span>y = t + 3/t + 2 ≥ 2√(t·3/t) + 2 = 2 + 2√3；当 t = √3，即 x = 1 + √3 时取等。另一方法（判别式）：y(x−1) = x²+2 → x² − yx + (y+2) = 0 有实数根，Δ = y² − 4(y+2) ≥ 0 → y ≥ 2+2√3 或 y ≤ 2−2√3（负值舍去），与均值法一致。<span class="why">为什么判别式法也能求最值？</span><span class="why-ans">把 y 当参数、x 当未知数：函数能取到某值 y ⟺ 方程有实数解 ⟺ 判别式 ≥ 0。Δ ≥ 0 解出的 y 范围就是值域，下界即最小值——"最值问题"被翻译成"方程有解问题"。</span></div></div>
+  </div>
+  <div class="ex-result">结论：<span class="ans">最小值为 2 + 2√3，在 x = 1 + √3 处取得</span>。</div>
+</div>
+
+<!-- ============================================================
+     例题 12
+     ============================================================ -->
+<div class="example">
+  <div class="ex-head"><span class="ex-no">例题 12</span><span class="ex-method">数学归纳法 · 数形结合</span></div>
+  <div class="ex-problem"><strong>题目：</strong>平面内 n 条直线，任意两条不平行、任意三条不共点，求这 n 条直线把平面分成的区域数 f(n)。</div>
+  <button class="toggle-btn" type="button">查看分析过程</button>
+  <div class="ex-steps">
+    <div class="st"><span class="st-num">1</span><div class="st-body"><span class="st-name">明确问题：</span>n 条直线处于一般位置（两两不平行、三三不共点）；目标：区域数 f(n) 的表达式。</div></div>
+    <div class="st"><span class="st-num">2</span><div class="st-body"><span class="st-name">文字与符号转化：</span>设第 k 条直线与已有 k−1 条直线相交于 k−1 个不同点，被这些交点分成 k 段。</div></div>
+    <div class="st"><span class="st-num">3</span><div class="st-body"><span class="st-name">提取知识点：</span>数学归纳法、递推关系 f(k) = f(k−1) + k、等差数列求和。</div></div>
+    <div class="st st-analysis"><span class="st-num">4</span><div class="st-body"><span class="st-name">问题分析：</span>从已知到目标——直接数 n 条直线的分区数很困难，先观察"增加一条直线会多分出几个区域"；再从目标回推——第 k 条直线的 k 段各把一个区域一分为二，所以 f(k) = f(k−1) + k。<span class="why">为什么从"多一条直线"入手而不是直接数？</span><span class="why-ans">n 很大时直接画图数不清，但"每次加一条线"的变化量很容易把握：新直线被切成 k 段，每段恰好把一个已有区域劈成两半，区域净增 k——把"求总量"转化成"求增量"，再累加，这是递推思想的起点。</span>先画小 n（1、2、3 条）验证规律，再累加求和。</div></div>
+    <div class="st"><span class="st-num">5</span><div class="st-body"><span class="st-name">补充假设：</span>一般位置条件保证第 k 条直线恰被分成 k 段（交点互不重合），这是递推成立的前提。<span class="why">为什么"一般位置"这么关键？</span><span class="why-ans">若两条直线平行，新直线少一个交点就少一段，区域增量变小；若三线共点，多条直线会在同一点汇合，段数被"合并"——这两种"退化"情况都会破坏递推式，所以题目特意排除它们。</span></div></div>
+    <div class="st st-deduce"><span class="st-num">6</span><div class="st-body"><span class="st-name">数学推导：</span>f(1) = 2；第 k 条直线新增 k 段 → 新增 k 个区域，故 f(k) = f(k−1) + k。累加：f(n) = f(1) + (2 + 3 + … + n) = 2 + (n−1)(n+2)/2 = n(n+1)/2 + 1。检验：n = 2 得 4（两相交直线分 4 区 ✓）；n = 3 得 7（三条两两相交不共点直线分 7 区 ✓）。</div></div>
+  </div>
+  <div class="ex-result">结论：<span class="ans">f(n) = n(n+1)/2 + 1</span>。</div>
+</div>
+
+<!-- ============================================================
+     结语
+     ============================================================ -->
+<div class="final-word">
+  <strong>小结：</strong>12 道例题覆盖了数列、不等式、数论、函数与方程、计数、逻辑推理等常见难题类型，也展示了归纳法、数形结合、分段讨论、反证法、换元、构造、化归等方法的配合使用。<br>
+  请记住：<strong>难题不是"一步到位"，而是六步走出来的</strong>。先明确问题，再符号化，然后提取知识点，接着用问题空间的眼光"从终点倒着找路"，必要时补假设，最后把每一步写成干净的数学推导。每一步都问自己一句"为什么这么做"，想通了，思路自然就出来了。
+</div>
+
+</article>
+<script>
+  // 每题「查看分析过程」按钮：点击展开/收起分析步骤与结论
+  document.querySelectorAll('.toggle-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var example = btn.closest('.example');
+      if (example.classList.contains('show')) {
+        example.classList.remove('show');
+        btn.classList.remove('open');
+        btn.textContent = '查看分析过程';
+      } else {
+        example.classList.add('show');
+        btn.classList.add('open');
+        btn.textContent = '收起分析过程';
+      }
+    });
+  });
+</script>
+</body>
+</html>
