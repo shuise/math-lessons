@@ -50,6 +50,13 @@
   .quiz-question .q-tag { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 0.75em; margin-right: 8px; color: #fff; background: #1a73e8; }
   .q-tag.comprehensive { background: #e65100; }
   .q-tag.multi { background: #6a1b9a; }
+  .q-tag.condition { background: #00897b; }
+  .q-tag.quant { background: #3949ab; }
+  .q-tag.compound { background: #ad1457; }
+  .q-tag.deduce { background: #e65100; }
+  .q-tag.induce { background: #2e7d32; }
+  .q-tag.proof { background: #c62828; }
+  .q-tag.daily { background: #5d4037; }
   .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
   .quiz-question .opt {
     padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
@@ -96,7 +103,7 @@
 <p class="tip" style="text-align:center;font-size:1.1em;">综合运用命题关系、联结词和量词知识，通过多步推理解决复杂逻辑问题。</p>
 
 <div class="score-panel">
-  得分：<span class="score-num" id="totalScore">0 / 18</span>
+  得分：<span class="score-num" id="totalScore">0 / 45</span>
   <button class="btn-reset" onclick="resetAll()">重置</button>
 </div>
 
@@ -203,19 +210,40 @@
   </div>
 </div>
 
-<!-- ========== 综合题 6 ========== -->
+<!-- ========== 德摩根 1 ========== -->
 <div class="quiz-question" id="q6">
+  <div class="q-title">
+    <span class="q-tag compound">复合</span>
+    设 U 为全集，A、B 是 U 的子集。命题 p："x ∈ A 或 x ∈ B"，则 ¬p 等价于？<span class="diff-tag diff-medium">中等</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(6, 0)">A. x ∈ A ∩ B</div>
+    <div class="opt" onclick="checkChoice(6, 1)">B. x ∈ A ∪ B</div>
+    <div class="opt" onclick="checkChoice(6, 2)">C. x ∉ A 且 x ∉ B（即 x 属于 A∪B 的补集）</div>
+    <div class="opt" onclick="checkChoice(6, 3)">D. x ∉ A 或 x ∉ B</div>
+  </div>
+  <div class="explain" id="explain6">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>"x ∈ A 或 x ∈ B"写作 \(x \in A \lor x \in B\)，即 x ∈ A∪B。<br>
+    <strong>第二步：</strong>取否定并套用德摩根律：\(\lnot(x \in A \lor x \in B) \Leftrightarrow x \notin A \land x \notin B\)。"或"的否定要变成"且"。<br>
+    <strong>第三步：</strong>x 既不在 A 又不在 B，正是 A∪B 的补集中的元素。<strong>选 C。</strong><br>
+    常见误区：D 只是对"且"的否定而非对"或"的否定。
+  </div>
+</div>
+
+<!-- ========== 综合题 6 ========== -->
+<div class="quiz-question" id="q7">
   <div class="q-title">
     <span class="q-tag multi">综合</span>
     命题 p："∃x ∈ R，\(x^2 - x + 1 = 0\)"，命题 q："∀x ∈ R，\(x^2 \ge 0\)"。则 p ∨ q 和 p ∧ q 的真假分别是？<span class="diff-tag diff-easy">基础</span>
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(6, 0)">A. p∨q 真，p∧q 假</div>
-    <div class="opt" onclick="checkChoice(6, 1)">B. p∨q 假，p∧q 假</div>
-    <div class="opt" onclick="checkChoice(6, 2)">C. p∨q 真，p∧q 真</div>
-    <div class="opt" onclick="checkChoice(6, 3)">D. p∨q 假，p∧q 真</div>
+    <div class="opt" onclick="checkChoice(7, 0)">A. p∨q 真，p∧q 假</div>
+    <div class="opt" onclick="checkChoice(7, 1)">B. p∨q 假，p∧q 假</div>
+    <div class="opt" onclick="checkChoice(7, 2)">C. p∨q 真，p∧q 真</div>
+    <div class="opt" onclick="checkChoice(7, 3)">D. p∨q 假，p∧q 真</div>
   </div>
-  <div class="explain" id="explain6">
+  <div class="explain" id="explain7">
     <strong>推导步骤：</strong><br>
     <strong>第一步：</strong>判断 p 的真假。\(x^2 - x + 1\) 的判别式 Δ = 1 - 4 = -3 < 0，方程无实数解。所以 p 是<strong>假命题</strong>。<br>
     <strong>第二步：</strong>判断 q 的真假。任何实数平方都非负，所以 q 是<strong>真命题</strong>。<br>
@@ -224,18 +252,18 @@
 </div>
 
 <!-- ========== 综合题 7 ========== -->
-<div class="quiz-question" id="q7">
+<div class="quiz-question" id="q8">
   <div class="q-title">
     <span class="q-tag multi">综合</span>
     若"∃x ∈ [1,2]，\(x^2 - ax + 3 \le 0\)"为假命题，则 a 的取值范围是？<span class="diff-tag diff-hard">较难</span>
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(7, 0)">A. \(a \ge 4\)</div>
-    <div class="opt" onclick="checkChoice(7, 1)">B. \(a \le \frac{7}{2}\)</div>
-    <div class="opt" onclick="checkChoice(7, 2)">C. \(a < 4\)</div>
-    <div class="opt" onclick="checkChoice(7, 3)">D. \(a < 2\sqrt{3}\)</div>
+    <div class="opt" onclick="checkChoice(8, 0)">A. \(a \ge 4\)</div>
+    <div class="opt" onclick="checkChoice(8, 1)">B. \(a \le \frac{7}{2}\)</div>
+    <div class="opt" onclick="checkChoice(8, 2)">C. \(a < 4\)</div>
+    <div class="opt" onclick="checkChoice(8, 3)">D. \(a < 2\sqrt{3}\)</div>
   </div>
-  <div class="explain" id="explain7">
+  <div class="explain" id="explain8">
     <strong>推导步骤：</strong><br>
     <strong>第一步：</strong>特称命题为假 ⇔ 全称命题"∀x ∈ [1,2] \(x^2 - ax + 3 > 0\)"为真。<br>
     <strong>第二步：</strong>分离参数。\(x^2 - ax + 3 > 0\) ⇔ \(ax < x^2 + 3\)。<br>
@@ -246,7 +274,7 @@
 </div>
 
 <!-- ========== 综合题 8 ========== -->
-<div class="quiz-question" id="q8">
+<div class="quiz-question" id="q9">
   <div class="q-title">
     <span class="q-tag multi">综合</span>
     下列命题中，真命题的个数是？<br>
@@ -256,12 +284,12 @@
     ④ ∃x ∈ R，\(\sin x = 2\)<span class="diff-tag diff-easy">基础</span>
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(8, 0)">A. 1 个</div>
-    <div class="opt" onclick="checkChoice(8, 1)">B. 2 个</div>
-    <div class="opt" onclick="checkChoice(8, 2)">C. 3 个</div>
-    <div class="opt" onclick="checkChoice(8, 3)">D. 4 个</div>
+    <div class="opt" onclick="checkChoice(9, 0)">A. 1 个</div>
+    <div class="opt" onclick="checkChoice(9, 1)">B. 2 个</div>
+    <div class="opt" onclick="checkChoice(9, 2)">C. 3 个</div>
+    <div class="opt" onclick="checkChoice(9, 3)">D. 4 个</div>
   </div>
-  <div class="explain" id="explain8">
+  <div class="explain" id="explain9">
     <strong>推导步骤：</strong><br>
     <strong>判断①：</strong>\(x^2 \ge x\) ⇔ \(x(x-1) \ge 0\)。当 x ∈ (0,1) 时 \(x^2 < x\)，反例 x=0.5。所以①<strong>假</strong>。<br>
     <strong>判断②：</strong>由①的分析，确实存在 x ∈ (0,1) 使 \(x^2 < x\)（如 x=0.5）。所以②<strong>真</strong>。<br>
@@ -272,18 +300,18 @@
 </div>
 
 <!-- ========== 综合题 9 ========== -->
-<div class="quiz-question" id="q9">
+<div class="quiz-question" id="q10">
   <div class="q-title">
     <span class="q-tag multi">综合</span>
     命题 p：∀x ∈ R，\(ax^2 + ax + 1 > 0\) 为真。则 a 的取值范围是？<span class="diff-tag diff-hard">较难</span>
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(9, 0)">A. 0 < a < 4</div>
-    <div class="opt" onclick="checkChoice(9, 1)">B. 0 ≤ a < 4</div>
-    <div class="opt" onclick="checkChoice(9, 2)">C. a < 4 或 a > 0</div>
-    <div class="opt" onclick="checkChoice(9, 3)">D. 0 ≤ a ≤ 4</div>
+    <div class="opt" onclick="checkChoice(10, 0)">A. 0 < a < 4</div>
+    <div class="opt" onclick="checkChoice(10, 1)">B. 0 ≤ a < 4</div>
+    <div class="opt" onclick="checkChoice(10, 2)">C. a < 4 或 a > 0</div>
+    <div class="opt" onclick="checkChoice(10, 3)">D. 0 ≤ a ≤ 4</div>
   </div>
-  <div class="explain" id="explain9">
+  <div class="explain" id="explain10">
     <strong>推导步骤：</strong><br>
     <strong>第一步：</strong>讨论二次项系数 a = 0 的情况。当 a = 0 时，命题变为 1 > 0，恒为真。所以 a = 0 符合。<br>
     <strong>第二步：</strong>当 a ≠ 0 时，需二次函数开口向上且判别式 < 0。<br>
@@ -294,18 +322,18 @@
 </div>
 
 <!-- ========== 综合题 10 ========== -->
-<div class="quiz-question" id="q10">
+<div class="quiz-question" id="q11">
   <div class="q-title">
     <span class="q-tag multi">综合</span>
     已知命题 p："∃x ∈ R，\(x^2 + 2x + m \le 0\)"为真，q："∀x ∈ R，\(mx^2 + mx + 1 > 0\)"为假，求 m 的取值范围。<span class="diff-tag diff-hard">较难</span>
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(10, 0)">A. m ≤ 1</div>
-    <div class="opt" onclick="checkChoice(10, 1)">B. m ≥ 0 或 m < 0</div>
-    <div class="opt" onclick="checkChoice(10, 2)">C. m ≤ 0 或 m ≥ 4</div>
-    <div class="opt" onclick="checkChoice(10, 3)">D. m < 0</div>
+    <div class="opt" onclick="checkChoice(11, 0)">A. m ≤ 1</div>
+    <div class="opt" onclick="checkChoice(11, 1)">B. m ≥ 0 或 m < 0</div>
+    <div class="opt" onclick="checkChoice(11, 2)">C. m ≤ 0 或 m ≥ 4</div>
+    <div class="opt" onclick="checkChoice(11, 3)">D. m < 0</div>
   </div>
-  <div class="explain" id="explain10">
+  <div class="explain" id="explain11">
     <strong>推导步骤：</strong><br>
     <strong>第一步：</strong>p 为真 ⇔ 存在 x 使 \(x^2 + 2x + m \le 0\) ⇔ 最小值 ≤ 0。<br>
     \(x^2 + 2x + m = (x+1)^2 + (m-1)\)，最小值 m-1 ≤ 0 ⇔ m ≤ 1。<br>
@@ -320,18 +348,18 @@
 </div>
 
 <!-- ========== 综合题 11 ========== -->
-<div class="quiz-question" id="q11">
+<div class="quiz-question" id="q12">
   <div class="q-title">
     <span class="q-tag multi">综合</span>
     设 a、b、c 是非零实数，判断命题："若 a > b，则 ac² > bc²"的四种命题中真命题个数。<span class="diff-tag diff-medium">中等</span>
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(11, 0)">A. 0 个</div>
-    <div class="opt" onclick="checkChoice(11, 1)">B. 1 个</div>
-    <div class="opt" onclick="checkChoice(11, 2)">C. 2 个</div>
-    <div class="opt" onclick="checkChoice(11, 3)">D. 4 个</div>
+    <div class="opt" onclick="checkChoice(12, 0)">A. 0 个</div>
+    <div class="opt" onclick="checkChoice(12, 1)">B. 1 个</div>
+    <div class="opt" onclick="checkChoice(12, 2)">C. 2 个</div>
+    <div class="opt" onclick="checkChoice(12, 3)">D. 4 个</div>
   </div>
-  <div class="explain" id="explain11">
+  <div class="explain" id="explain12">
     <strong>推导步骤：</strong><br>
     <strong>第一步：</strong>原命题"若 a > b，则 ac² > bc²"。因为 c ≠ 0，所以 c² > 0。不等式两边乘正数，不等号方向不变。所以原命题为<strong>真</strong>。<br>
     <strong>第二步：</strong>逆命题"若 ac² > bc²，则 a > b"。c² > 0，两边除以正数得 a > b。逆命题<strong>真</strong>。<br>
@@ -343,18 +371,18 @@
 </div>
 
 <!-- ========== 综合题 12 ========== -->
-<div class="quiz-question" id="q12">
+<div class="quiz-question" id="q13">
   <div class="q-title">
     <span class="q-tag multi">综合</span>
     已知 p：∀x ∈ [0,1]，\(a \ge x^2+1\)，q：∃x ∈ R，\(x^2 + 4x + a = 0\)。若 p ∨ q 为真，p ∧ q 为假，求 a 的取值范围。<span class="diff-tag diff-hard">较难</span>
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(12, 0)">A. a ≥ 2</div>
-    <div class="opt" onclick="checkChoice(12, 1)">B. a < 4</div>
-    <div class="opt" onclick="checkChoice(12, 2)">C. a < 2</div>
-    <div class="opt" onclick="checkChoice(12, 3)">D. a > 4 或 a < 2</div>
+    <div class="opt" onclick="checkChoice(13, 0)">A. a ≥ 2</div>
+    <div class="opt" onclick="checkChoice(13, 1)">B. a < 4</div>
+    <div class="opt" onclick="checkChoice(13, 2)">C. a < 2</div>
+    <div class="opt" onclick="checkChoice(13, 3)">D. a > 4 或 a < 2</div>
   </div>
-  <div class="explain" id="explain12">
+  <div class="explain" id="explain13">
     <strong>推导步骤：</strong><br>
     <strong>第一步：</strong>p 为真 ⇔ a ≥ x²+1 在 [0,1] 上恒成立 ⇔ a ≥ max(x²+1) = 2。所以 p 真时 a ≥ 2。<br>
     <strong>第二步：</strong>q 为真 ⇔ x² + 4x + a = 0 有实根 ⇔ Δ = 16 - 4a ≥ 0 ⇔ a ≤ 4。<br>
@@ -366,10 +394,31 @@
   </div>
 </div>
 
+<!-- ========== 德摩根 2 ========== -->
+<div class="quiz-question" id="q14">
+  <div class="q-title">
+    <span class="q-tag compound">复合</span>
+    已知复合命题 \(\lnot(p \land q)\) 为<strong>假命题</strong>，则可推出？<span class="diff-tag diff-medium">中等</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(14, 0)">A. p、q 至少一个为假</div>
+    <div class="opt" onclick="checkChoice(14, 1)">B. p、q 都为真</div>
+    <div class="opt" onclick="checkChoice(14, 2)">C. p、q 都为假</div>
+    <div class="opt" onclick="checkChoice(14, 3)">D. p 假且 q 真</div>
+  </div>
+  <div class="explain" id="explain14">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>¬(p ∧ q) 为假，说明 p ∧ q 为真（双重否定）。<br>
+    <strong>第二步：</strong>由合取的真值表，p ∧ q 为真当且仅当 p、q 都为真。<br>
+    <strong>第三步：</strong>用德摩根律交叉验证：¬(p∧q) ≡ ¬p∨¬q，它为假说明 ¬p 假且 ¬q 假，即 p 真、q 真。<strong>选 B。</strong><br>
+    常见误区：A 是对 ¬(p∧q) 为真的描述，方向正好相反。
+  </div>
+</div>
+
 <!-- ========== 侦探推理 1 ========== -->
 <h2>侦探推理题</h2>
 
-<div class="quiz-question" id="q13">
+<div class="quiz-question" id="q15">
   <div class="q-title">
     <span class="q-tag multi">侦探</span>
     珠宝店被盗，警方锁定张三、李四、王五三人。他们的陈述如下：<br>
@@ -379,12 +428,12 @@
     已知三人中<strong>只有一人说了真话</strong>，且只有一人是盗窃犯。谁是盗窃犯？<span class="diff-tag diff-medium">中等</span>
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(13, 0)">A. 张三</div>
-    <div class="opt" onclick="checkChoice(13, 1)">B. 李四</div>
-    <div class="opt" onclick="checkChoice(13, 2)">C. 王五</div>
-    <div class="opt" onclick="checkChoice(13, 3)">D. 无法确定</div>
+    <div class="opt" onclick="checkChoice(15, 0)">A. 张三</div>
+    <div class="opt" onclick="checkChoice(15, 1)">B. 李四</div>
+    <div class="opt" onclick="checkChoice(15, 2)">C. 王五</div>
+    <div class="opt" onclick="checkChoice(15, 3)">D. 无法确定</div>
   </div>
-  <div class="explain" id="explain13">
+  <div class="explain" id="explain15">
     <strong>推导步骤：</strong><br>
     用 P、Q、R 表示三人陈述：P="李四干的"，Q="我没干(李四)"，R="我也没干(王五)"。<br>
     <strong>情况一：</strong>假设张三真。则李四干的。李四假→李四干的(矛盾？不，Q假="我没干"假→李四干了，一致)。王五假→"我也没干"假→王五也干了。但只能一人作案，矛盾。<br>
@@ -395,7 +444,7 @@
 </div>
 
 <!-- ========== 侦探推理 2 ========== -->
-<div class="quiz-question" id="q14">
+<div class="quiz-question" id="q16">
   <div class="q-title">
     <span class="q-tag multi">侦探</span>
     数学竞赛后，甲、乙、丙、丁讨论谁得了第一名：<br>
@@ -406,12 +455,12 @@
     已知四人中<strong>恰有两人说了真话</strong>，一人是第一名。谁是第一名？<span class="diff-tag diff-hard">较难</span>
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(14, 0)">A. 甲</div>
-    <div class="opt" onclick="checkChoice(14, 1)">B. 乙</div>
-    <div class="opt" onclick="checkChoice(14, 2)">C. 丙</div>
-    <div class="opt" onclick="checkChoice(14, 3)">D. 丁</div>
+    <div class="opt" onclick="checkChoice(16, 0)">A. 甲</div>
+    <div class="opt" onclick="checkChoice(16, 1)">B. 乙</div>
+    <div class="opt" onclick="checkChoice(16, 2)">C. 丙</div>
+    <div class="opt" onclick="checkChoice(16, 3)">D. 丁</div>
   </div>
-  <div class="explain" id="explain14">
+  <div class="explain" id="explain16">
     <strong>推导步骤：</strong><br>
     记命题：P<sub>甲</sub>="乙第一"，P<sub>乙</sub>="丙第一"，P<sub>丙</sub>="甲第一"，P<sub>丁</sub>="甲第一"。<br>
     <strong>假设甲是第一：</strong>P<sub>甲</sub>假（乙不是第一），P<sub>乙</sub>假（丙不是第一），P<sub>丙</sub>真（甲第一），P<sub>丁</sub>真（甲第一）。恰有 2 真 ✓<br>
@@ -423,7 +472,7 @@
 </div>
 
 <!-- ========== 侦探推理 3 ========== -->
-<div class="quiz-question" id="q15">
+<div class="quiz-question" id="q17">
   <div class="q-title">
     <span class="q-tag multi">侦探</span>
     一起案件中，警察询问了四名嫌疑人：<br>
@@ -434,12 +483,12 @@
     已知只有一人说真话，谁是说实话的人？<span class="diff-tag diff-hard">较难</span>
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(15, 0)">A. A</div>
-    <div class="opt" onclick="checkChoice(15, 1)">B. B</div>
-    <div class="opt" onclick="checkChoice(15, 2)">C. C</div>
-    <div class="opt" onclick="checkChoice(15, 3)">D. D</div>
+    <div class="opt" onclick="checkChoice(17, 0)">A. A</div>
+    <div class="opt" onclick="checkChoice(17, 1)">B. B</div>
+    <div class="opt" onclick="checkChoice(17, 2)">C. C</div>
+    <div class="opt" onclick="checkChoice(17, 3)">D. D</div>
   </div>
-  <div class="explain" id="explain15">
+  <div class="explain" id="explain17">
     <strong>推导步骤：</strong><br>
     用 T/F 表示每人是否说真话。陈述：A="B假"，B="C假"，C="A假且B假"，D="C真"。<br>
     <strong>假设A真：</strong>则B假。B假→"C假"是假→C真。C真→"A假且B假"为真→A假且B假。但A真与A假矛盾。✗<br>
@@ -450,7 +499,7 @@
 </div>
 
 <!-- ========== 侦探推理 4 ========== -->
-<div class="quiz-question" id="q16">
+<div class="quiz-question" id="q18">
   <div class="q-title">
     <span class="q-tag multi">侦探</span>
     逻辑岛上，骑士总是说真话，无赖总是说假话。三人对话：<br>
@@ -460,12 +509,12 @@
     以下判断正确的是？<span class="diff-tag diff-hard">较难</span>
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(16, 0)">A. A骑士，B无赖，C骑士</div>
-    <div class="opt" onclick="checkChoice(16, 1)">B. A无赖，B骑士，C无赖</div>
-    <div class="opt" onclick="checkChoice(16, 2)">C. A骑士，B骑士，C无赖</div>
-    <div class="opt" onclick="checkChoice(16, 3)">D. A无赖，B无赖，C骑士</div>
+    <div class="opt" onclick="checkChoice(18, 0)">A. A骑士，B无赖，C骑士</div>
+    <div class="opt" onclick="checkChoice(18, 1)">B. A无赖，B骑士，C无赖</div>
+    <div class="opt" onclick="checkChoice(18, 2)">C. A骑士，B骑士，C无赖</div>
+    <div class="opt" onclick="checkChoice(18, 3)">D. A无赖，B无赖，C骑士</div>
   </div>
-  <div class="explain" id="explain16">
+  <div class="explain" id="explain18">
     <strong>推导步骤：</strong><br>
     <strong>假设 C 是无赖：</strong>C 说"A 是无赖"为假 &rarr; A 是骑士。A 说"B 是骑士"为真 &rarr; B 是骑士。B 说"三人中至少有一个是无赖"——无赖只有 C 一个，为真，与 B 是骑士一致 ✓<br>
     <strong>验证其他情形：</strong>若 C 是骑士，C 说"A 是无赖"为真 &rarr; A 是无赖，A 说"B 是骑士"为假 &rarr; B 是无赖，于是 B 说"至少有一个是无赖"为真——无赖说真话，矛盾 ✗<br>
@@ -474,7 +523,7 @@
 </div>
 
 <!-- ========== 侦探推理 5 ========== -->
-<div class="quiz-question" id="q17">
+<div class="quiz-question" id="q19">
   <div class="q-title">
     <span class="q-tag multi">侦探</span>
     俱乐部门口贴着告示："凡进入本俱乐部者，要么只说真话，要么只说假话。"三人对话：<br>
@@ -484,12 +533,12 @@
     谁是说真话的人？<span class="diff-tag diff-hard">较难</span>
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(17, 0)">A. 只有甲</div>
-    <div class="opt" onclick="checkChoice(17, 1)">B. 只有乙</div>
-    <div class="opt" onclick="checkChoice(17, 2)">C. 只有丙</div>
-    <div class="opt" onclick="checkChoice(17, 3)">D. 甲和丙</div>
+    <div class="opt" onclick="checkChoice(19, 0)">A. 只有甲</div>
+    <div class="opt" onclick="checkChoice(19, 1)">B. 只有乙</div>
+    <div class="opt" onclick="checkChoice(19, 2)">C. 只有丙</div>
+    <div class="opt" onclick="checkChoice(19, 3)">D. 甲和丙</div>
   </div>
-  <div class="explain" id="explain17">
+  <div class="explain" id="explain19">
     <strong>推导步骤：</strong><br>
     <strong>假设甲真：</strong>&rarr; 乙和丙都真。乙真&rarr;"甲和丙都假"真&rarr;甲假、丙假。甲既真又假矛盾。✗<br>
     <strong>假设乙真：</strong>&rarr; 甲假、丙假。丙假&rarr;"甲和乙至少一个假"假&rarr;甲和乙都真。但甲假，矛盾。✗<br>
@@ -500,7 +549,7 @@
 </div>
 
 <!-- ========== 侦探推理 6 ========== -->
-<div class="quiz-question" id="q18">
+<div class="quiz-question" id="q20">
   <div class="q-title">
     <span class="q-tag multi">侦探</span>
     教室里发生了一件事，老师调查四个学生：<br>
@@ -511,12 +560,12 @@
     已知四人中<strong>只有一人说了真话</strong>，且只有一人做了这件事。是谁做的？<span class="diff-tag diff-medium">中等</span>
   </div>
   <div class="options">
-    <div class="opt" onclick="checkChoice(18, 0)">A. 小美</div>
-    <div class="opt" onclick="checkChoice(18, 1)">B. 小兰</div>
-    <div class="opt" onclick="checkChoice(18, 2)">C. 小刚</div>
-    <div class="opt" onclick="checkChoice(18, 3)">D. 小强</div>
+    <div class="opt" onclick="checkChoice(20, 0)">A. 小美</div>
+    <div class="opt" onclick="checkChoice(20, 1)">B. 小兰</div>
+    <div class="opt" onclick="checkChoice(20, 2)">C. 小刚</div>
+    <div class="opt" onclick="checkChoice(20, 3)">D. 小强</div>
   </div>
-  <div class="explain" id="explain18">
+  <div class="explain" id="explain20">
     <strong>推导步骤：</strong><br>
     用 P 表示"是小兰做的"。小美说P，小兰说&not;P，小刚说"小兰假"即P，小强说"不是我做的"。<br>
     <strong>枚举假设谁做的：</strong><br>
@@ -528,12 +577,544 @@
   </div>
 </div>
 
+<!-- ========== 题型拓展 ========== -->
+<h2>题型拓展</h2>
+
+<!-- ========== 德摩根 3 ========== -->
+<div class="quiz-question" id="q21">
+  <div class="q-title">
+    <span class="q-tag compound">复合</span>
+    命题"并非（张三会来 且 李四会来 且 王五会来）"等价于？<span class="diff-tag diff-hard">较难</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(21, 0)">A. 张三、李四、王五都不会来</div>
+    <div class="opt" onclick="checkChoice(21, 1)">B. 至多有两人会来</div>
+    <div class="opt" onclick="checkChoice(21, 2)">C. 三人中至少两人不会来</div>
+    <div class="opt" onclick="checkChoice(21, 3)">D. 三人中至少有一人不会来</div>
+  </div>
+  <div class="explain" id="explain21">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>记 Z = "张三会来"、L = "李四会来"、W = "王五会来"，命题写作 ¬(Z ∧ L ∧ W)。<br>
+    <strong>第二步：</strong>德摩根律可推广到任意有限项：\(\lnot(Z \land L \land W) \Leftrightarrow \lnot Z \lor \lnot L \lor \lnot W\)。<br>
+    <strong>第三步：</strong>¬Z ∨ ¬L ∨ ¬W 的意思是"至少有一人不会来"；只要三人中有一人缺席，"三人全来"就被否定。<strong>选 D。</strong><br>
+    常见误区：A"三人都不来"对应 ¬Z∧¬L∧¬W，比德摩根给出的结果强得多，二者并不等价。
+  </div>
+</div>
+
+<!-- ========== 拓展 1：充分必要条件 ========== -->
+<div class="quiz-question" id="q22">
+  <div class="q-title">
+    <span class="q-tag condition">条件</span>
+    已知 p：\(x &gt; 1\)，q：\(x^2 &gt; 1\)，则 p 是 q 的什么条件？<span class="diff-tag diff-medium">中等</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(22, 0)">A. 必要不充分条件</div>
+    <div class="opt" onclick="checkChoice(22, 1)">B. 充分不必要条件</div>
+    <div class="opt" onclick="checkChoice(22, 2)">C. 充要条件</div>
+    <div class="opt" onclick="checkChoice(22, 3)">D. 既不充分也不必要</div>
+  </div>
+  <div class="explain" id="explain22">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>判断充分性。x &gt; 1 时，x² &gt; 1 显然成立，所以 p &rarr; q 为真。<br>
+    <strong>第二步：</strong>判断必要性。x² &gt; 1 解得 x &gt; 1 或 x &lt; -1，例如 x = -2 满足 q 却不满足 p，所以 q ↛ p。<br>
+    <strong>第三步：</strong>p &rarr; q 真而 q ↛ p 假，p 是 q 的充分不必要条件。<strong>选 B。</strong>
+  </div>
+</div>
+
+<!-- ========== 拓展 2：量词命题的否定 ========== -->
+<div class="quiz-question" id="q23">
+  <div class="q-title">
+    <span class="q-tag quant">量词</span>
+    命题"\(\exists x \in R,\ x^2 + 1 = 0\)"的否定是？<span class="diff-tag diff-easy">基础</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(23, 0)">A. \(\exists x \in R,\ x^2 + 1 \ne 0\)</div>
+    <div class="opt" onclick="checkChoice(23, 1)">B. \(\forall x \in R,\ x^2 + 1 \ne 0\)</div>
+    <div class="opt" onclick="checkChoice(23, 2)">C. \(\forall x \in R,\ x^2 + 1 = 0\)</div>
+    <div class="opt" onclick="checkChoice(23, 3)">D. 该命题没有否定形式</div>
+  </div>
+  <div class="explain" id="explain23">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>特称命题 \(\exists x \in R,\ P(x)\) 的否定是全称命题 \(\forall x \in R,\ \lnot P(x)\)。<br>
+    <strong>第二步：</strong>量词 \(\exists\) 变 \(\forall\)，同时结论 \(x^2 + 1 = 0\) 取反为 \(x^2 + 1 \ne 0\)。<br>
+    <strong>第三步：</strong>否定为 \(\forall x \in R,\ x^2 + 1 \ne 0\)。<strong>选 B。</strong>
+  </div>
+</div>
+
+<!-- ========== 拓展 3：复合命题真假 ========== -->
+<div class="quiz-question" id="q24">
+  <div class="q-title">
+    <span class="q-tag compound">复合</span>
+    已知 p 是假命题、q 是真命题，则复合命题 \(( \lnot p \to q) \lor (p \land \lnot q)\) 的真假是？<span class="diff-tag diff-medium">中等</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(24, 0)">A. 假命题</div>
+    <div class="opt" onclick="checkChoice(24, 1)">B. 无法确定</div>
+    <div class="opt" onclick="checkChoice(24, 2)">C. 真命题</div>
+    <div class="opt" onclick="checkChoice(24, 3)">D. 与 p、q 的具体取值有关</div>
+  </div>
+  <div class="explain" id="explain24">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>由 p 假、q 真，得 ¬p 真、¬q 假。<br>
+    <strong>第二步：</strong>计算 ¬p &rarr; q = 真 &rarr; 真 = 真（蕴含只有"前真后假"才假）。<br>
+    <strong>第三步：</strong>计算 p ∧ ¬q = 假 ∧ 假 = 假。<br>
+    <strong>第四步：</strong>(¬p &rarr; q) ∨ (p ∧ ¬q) = 真 ∨ 假 = 真。<strong>选 C。</strong>
+  </div>
+</div>
+
+<!-- ========== 拓展 4：反证法 ========== -->
+<div class="quiz-question" id="q25">
+  <div class="q-title">
+    <span class="q-tag proof">证明</span>
+    用反证法证明"√2 是无理数"时，第一步应假设？<span class="diff-tag diff-medium">中等</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(25, 0)">A. √2 是有理数</div>
+    <div class="opt" onclick="checkChoice(25, 1)">B. √2 是整数</div>
+    <div class="opt" onclick="checkChoice(25, 2)">C. √2 是无理数</div>
+    <div class="opt" onclick="checkChoice(25, 3)">D. √2 是分数</div>
+  </div>
+  <div class="explain" id="explain25">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>反证法的第一步是假设结论的反面成立。原结论是"√2 是无理数"，其反面是"√2 是有理数"。<br>
+    <strong>第二步：</strong>于是设 √2 = p/q（p、q 互质的正整数），两边平方推出 p² = 2q²。<br>
+    <strong>第三步：</strong>由质数整除性质推出 p、q 都是 2 的倍数，与互质矛盾，故假设不成立，√2 是无理数。<strong>选 A。</strong>
+  </div>
+</div>
+
+<!-- ========== 拓展 5：三段论 ========== -->
+<div class="quiz-question" id="q26">
+  <div class="q-title">
+    <span class="q-tag deduce">演绎</span>
+    推理："所有金属都能导电；铜是金属；所以铜能导电。"这个三段论推理？<span class="diff-tag diff-medium">中等</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(26, 0)">A. 无效，中项不周延</div>
+    <div class="opt" onclick="checkChoice(26, 1)">B. 无效，四词项错误</div>
+    <div class="opt" onclick="checkChoice(26, 2)">C. 无法判断其有效性</div>
+    <div class="opt" onclick="checkChoice(26, 3)">D. 有效</div>
+  </div>
+  <div class="explain" id="explain26">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>识别三段论结构。大前提"所有金属都能导电"，小前提"铜是金属"，结论"铜能导电"。<br>
+    <strong>第二步：</strong>中项是"金属"，在大前提中周延（全称主项），满足"中项至少周延一次"的规则。<br>
+    <strong>第三步：</strong>形式为 AAA-1，是有效三段论。结论必然为真。<strong>选 D。</strong>
+  </div>
+</div>
+
+<!-- ========== 拓展 6：归纳与类比 ========== -->
+<div class="quiz-question" id="q27">
+  <div class="q-title">
+    <span class="q-tag induce">归纳</span>
+    下列推理属于<strong>归纳推理</strong>的是？<span class="diff-tag diff-easy">基础</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(27, 0)">A. 由"铜能导电、铁能导电、银能导电"推出"所有金属都能导电"</div>
+    <div class="opt" onclick="checkChoice(27, 1)">B. 由圆的性质类比猜测球的性质</div>
+    <div class="opt" onclick="checkChoice(27, 2)">C. 由"所有三角形内角和为 180°"推出"这个三角形内角和为 180°"</div>
+    <div class="opt" onclick="checkChoice(27, 3)">D. 以上都不是归纳推理</div>
+  </div>
+  <div class="explain" id="explain27">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>归纳推理是由特殊到一般的推理。<br>
+    <strong>第二步：</strong>A 由个别金属导电推出"所有金属导电"这一般结论，是归纳推理。<br>
+    <strong>第三步：</strong>B 是类比推理（特殊到特殊）；C 是演绎推理（一般到特殊）。<strong>选 A。</strong>
+  </div>
+</div>
+
+<!-- ========== 拓展 7：全称命题否定 ========== -->
+<div class="quiz-question" id="q28">
+  <div class="q-title">
+    <span class="q-tag quant">量词</span>
+    命题"班里所有同学都参加了运动会"的否定是？<span class="diff-tag diff-medium">中等</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(28, 0)">A. 班里所有同学都没有参加运动会</div>
+    <div class="opt" onclick="checkChoice(28, 1)">B. 班里至少有一名同学没有参加运动会</div>
+    <div class="opt" onclick="checkChoice(28, 2)">C. 班里没有人参加运动会</div>
+    <div class="opt" onclick="checkChoice(28, 3)">D. 该命题没有否定形式</div>
+  </div>
+  <div class="explain" id="explain28">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>全称命题"∀x，P(x)"的否定是"∃x，¬P(x)"。<br>
+    <strong>第二步：</strong>"所有同学都参加"取否定后量词变"存在"，结论取反为"没有参加"。<br>
+    <strong>第三步：</strong>否定为"至少有一名同学没有参加运动会"。只需一个人没参加即可推翻"所有都参加"。<strong>选 B。</strong>
+  </div>
+</div>
+
+<!-- ========== 拓展 8：逻辑基本规律 ========== -->
+<div class="quiz-question" id="q29">
+  <div class="q-title">
+    <span class="q-tag daily">规律</span>
+    有人说："这个图形既是三角形，又不是三角形。"这种说法违反了逻辑基本规律中的？<span class="diff-tag diff-medium">中等</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(29, 0)">A. 矛盾律</div>
+    <div class="opt" onclick="checkChoice(29, 1)">B. 排中律</div>
+    <div class="opt" onclick="checkChoice(29, 2)">C. 同一律</div>
+    <div class="opt" onclick="checkChoice(29, 3)">D. 充足理由律</div>
+  </div>
+  <div class="explain" id="explain29">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>矛盾律：在同一思维过程中，互相否定的两个判断不能同真，即"P 且 ¬P"必假。<br>
+    <strong>第二步：</strong>"是三角形"与"不是三角形"是互相否定的两个判断，同时肯定它们，违反矛盾律。<br>
+    <strong>第三步：</strong>排中律针对"不能同假"（必有一真），与本题"同时肯定"不同。<strong>选 A。</strong>
+  </div>
+</div>
+
+<!-- ========== 拓展 9：假言推理链 ========== -->
+<div class="quiz-question" id="q30">
+  <div class="q-title">
+    <span class="q-tag deduce">演绎</span>
+    已知 \(p \to q\)、\(q \to r\)、\(r \to s\) 均为真，且 \(s\) 为假，则可推出？<span class="diff-tag diff-medium">中等</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(30, 0)">A. p 为真</div>
+    <div class="opt" onclick="checkChoice(30, 1)">B. p 为假</div>
+    <div class="opt" onclick="checkChoice(30, 2)">C. q 为真</div>
+    <div class="opt" onclick="checkChoice(30, 3)">D. 无法确定</div>
+  </div>
+  <div class="explain" id="explain30">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>由传递性，p &rarr; q &rarr; r &rarr; s，即 p &rarr; s。<br>
+    <strong>第二步：</strong>一个蕴含命题与其逆否命题等价：p &rarr; s 等价于 ¬s &rarr; ¬p。<br>
+    <strong>第三步：</strong>已知 s 假，即 ¬s 真，故 ¬p 真，p 为假。<strong>选 B。</strong>
+  </div>
+</div>
+
+<!-- ========== 德摩根 4 ========== -->
+<div class="quiz-question" id="q31">
+  <div class="q-title">
+    <span class="q-tag compound">复合</span>
+    化简命题 \(\lnot(\lnot p \land \lnot q)\) 的结果是？<span class="diff-tag diff-hard">较难</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(31, 0)">A. \(p \land q\)</div>
+    <div class="opt" onclick="checkChoice(31, 1)">B. \(\lnot p \lor \lnot q\)</div>
+    <div class="opt" onclick="checkChoice(31, 2)">C. \(p \lor q\)</div>
+    <div class="opt" onclick="checkChoice(31, 3)">D. \(\lnot(p \lor q)\)</div>
+  </div>
+  <div class="explain" id="explain31">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>对整体 ¬(¬p ∧ ¬q) 套用德摩根律：\(\lnot(\lnot p \land \lnot q) \Leftrightarrow \lnot(\lnot p) \lor \lnot(\lnot q)\)。"且"变"或"，两个部分各取否定。<br>
+    <strong>第二步：</strong>双重否定消去：¬(¬p) = p，¬(¬q) = q。<br>
+    <strong>第三步：</strong>结果为 p ∨ q。<strong>选 C。</strong><br>
+    直观理解：¬(¬p∧¬q) 说的是"并非 p、q 都假"，即 p、q 至少一个为真。
+  </div>
+</div>
+
+<!-- ========== 拓展 10：德摩根律 ========== -->
+<div class="quiz-question" id="q32">
+  <div class="q-title">
+    <span class="q-tag compound">复合</span>
+    命题 \(\lnot(p \lor q)\) 与 \(\lnot p \land \lnot q\) 的关系是？<span class="diff-tag diff-medium">中等</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(32, 0)">A. 逻辑等价（同真同假）</div>
+    <div class="opt" onclick="checkChoice(32, 1)">B. 互为矛盾</div>
+    <div class="opt" onclick="checkChoice(32, 2)">C. 只有 p、q 都为真时才等价</div>
+    <div class="opt" onclick="checkChoice(32, 3)">D. 没有确定关系</div>
+  </div>
+  <div class="explain" id="explain32">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>列出真值表。p∨q 仅在 p、q 全假时为假。<br>
+    <strong>第二步：</strong>¬(p∨q) 仅在 p、q 全假时为真；而 ¬p∧¬q 也恰在 p 假且 q 假时为真。<br>
+    <strong>第三步：</strong>两者真值表完全相同，是德摩根律 \(\lnot(p \lor q) \Leftrightarrow \lnot p \land \lnot q\)。<strong>选 A。</strong>
+  </div>
+</div>
+
+<!-- ========== 拓展 11：日常语言逻辑 ========== -->
+<div class="quiz-question" id="q33">
+  <div class="q-title">
+    <span class="q-tag daily">日常</span>
+    命题"除非你努力学习，否则你不会通过考试"等价于？<span class="diff-tag diff-medium">中等</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(33, 0)">A. 通过考试是努力学习的充分条件</div>
+    <div class="opt" onclick="checkChoice(33, 1)">B. 努力学习是通过考试的充分条件</div>
+    <div class="opt" onclick="checkChoice(33, 2)">C. 通过考试与努力学习互为充要条件</div>
+    <div class="opt" onclick="checkChoice(33, 3)">D. 无法推出任何条件关系</div>
+  </div>
+  <div class="explain" id="explain33">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>记 T = "你努力学习"，P = "你通过考试"。"除非 T，否则 ¬P"的逻辑形式是 ¬T &rarr; ¬P。<br>
+    <strong>第二步：</strong>逆否命题与原命题等价：¬T &rarr; ¬P 等价于 P &rarr; T。<br>
+    <strong>第三步：</strong>P &rarr; T 即"通过考试 &rArr; 努力学习"，通过考试是努力学习的充分条件。<strong>选 A。</strong>
+  </div>
+</div>
+
+<!-- ========== 拓展 12：集合与条件 ========== -->
+<div class="quiz-question" id="q34">
+  <div class="q-title">
+    <span class="q-tag condition">条件</span>
+    已知集合 A = {x | x &gt; 2}，B = {x | x &gt; 1}，则"x ∈ A"是"x ∈ B"的什么条件？<span class="diff-tag diff-medium">中等</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(34, 0)">A. 必要不充分条件</div>
+    <div class="opt" onclick="checkChoice(34, 1)">B. 充分不必要条件</div>
+    <div class="opt" onclick="checkChoice(34, 2)">C. 充要条件</div>
+    <div class="opt" onclick="checkChoice(34, 3)">D. 既不充分也不必要</div>
+  </div>
+  <div class="explain" id="explain34">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>A ⊂ B，即 A 是 B 的真子集。<br>
+    <strong>第二步：</strong>x &gt; 2 时必有 x &gt; 1，所以 x ∈ A &rarr; x ∈ B 为真（充分）。<br>
+    <strong>第三步：</strong>x ∈ B 不一定有 x ∈ A（如 x = 1.5），所以 x ∈ B ↛ x ∈ A。<br>
+    <strong>第四步：</strong>充分不必要。<strong>选 B。</strong>
+  </div>
+</div>
+
+<!-- ========== 挑战题 ========== -->
+<h2>挑战题</h2>
+
+<!-- ========== 挑战 1 ========== -->
+<div class="quiz-question" id="q35">
+  <div class="q-title">
+    <span class="q-tag multi">侦探</span>
+    四人中有一人打碎了花瓶。审问后陈述如下：<br>
+    A 说："B 或 C 干的"<br>
+    B 说："我没干"<br>
+    C 说："A 说的是真话"<br>
+    D 说："A 是清白的"<br>
+    已知恰有两人说真话，谁打碎了花瓶？<span class="diff-tag diff-hard">较难</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(35, 0)">A. A</div>
+    <div class="opt" onclick="checkChoice(35, 1)">B. B</div>
+    <div class="opt" onclick="checkChoice(35, 2)">C. C</div>
+    <div class="opt" onclick="checkChoice(35, 3)">D. D</div>
+  </div>
+  <div class="explain" id="explain35">
+    <strong>推导步骤：</strong>逐一假设作案者。<br>
+    <strong>假设 A 干的：</strong>A说"B或C"假；B说"我没干"真；C说"A真话"假；D说"A清白"假 &rarr; 1 真 ✗<br>
+    <strong>假设 B 干的：</strong>A真；B假；C说"A真话"真；D说"A清白"真 &rarr; 3 真 ✗<br>
+    <strong>假设 C 干的：</strong>A真；B真；C真；D真 &rarr; 4 真 ✗<br>
+    <strong>假设 D 干的：</strong>A说"B或C"假；B说"我没干"真；C说"A真话"假；D说"A清白"真 &rarr; <strong>恰 2 真</strong> ✓<br>
+    <strong>唯一解：D 干的。选 D。</strong>
+  </div>
+</div>
+
+<!-- ========== 挑战 2 ========== -->
+<div class="quiz-question" id="q36">
+  <div class="q-title">
+    <span class="q-tag quant">量词</span>
+    命题"\(\exists x \in R,\ x^2 + ax + 1 &lt; 0\)"为真，则 a 的取值范围是？<span class="diff-tag diff-hard">较难</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(36, 0)">A. \(-2 &lt; a &lt; 2\)</div>
+    <div class="opt" onclick="checkChoice(36, 1)">B. 全体实数</div>
+    <div class="opt" onclick="checkChoice(36, 2)">C. \(a \ge 2\) 或 \(a \le -2\)</div>
+    <div class="opt" onclick="checkChoice(36, 3)">D. \(a &gt; 2\) 或 \(a &lt; -2\)</div>
+  </div>
+  <div class="explain" id="explain36">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>\(f(x) = x^2 + ax + 1\) 开口向上，存在 x 使 f(x) &lt; 0，等价于 f(x) 的最小值 &lt; 0。<br>
+    <strong>第二步：</strong>开口向上的二次函数能取到负值，等价于判别式 Δ &gt; 0（与 x 轴有两个交点）。<br>
+    <strong>第三步：</strong>Δ = a² - 4 &gt; 0 &rArr; a &gt; 2 或 a &lt; -2。<strong>选 D。</strong><br>
+    注意：Δ = 0 时最小值恰为 0，不满足 &lt; 0，故取严格不等号。
+  </div>
+</div>
+
+<!-- ========== 挑战 3 ========== -->
+<div class="quiz-question" id="q37">
+  <div class="q-title">
+    <span class="q-tag multi">侦探</span>
+    逻辑岛上，骑士说真话、无赖说假话。三人对话：<br>
+    甲说："乙是无赖"<br>
+    乙说："甲和丙是同一类人"<br>
+    丙说："乙是骑士"<br>
+    问：三人中骑士有几个？<span class="diff-tag diff-hard">较难</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(37, 0)">A. 0 个</div>
+    <div class="opt" onclick="checkChoice(37, 1)">B. 1 个</div>
+    <div class="opt" onclick="checkChoice(37, 2)">C. 2 个</div>
+    <div class="opt" onclick="checkChoice(37, 3)">D. 3 个</div>
+  </div>
+  <div class="explain" id="explain37">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>甲说"乙无赖"，丙说"乙骑士"，两句话必一真一假（乙要么骑士要么无赖），所以甲、丙恰好一个骑士一个无赖。<br>
+    <strong>假设甲真：</strong>乙无赖。丙说"乙骑士"为假 &rarr; 丙无赖。乙说"甲和丙同类"——甲骑、丙无赖不同类，乙的话为假，与"乙无赖"一致 ✓。得：甲骑、乙无赖、丙无赖，骑士 1 个。<br>
+    <strong>假设甲假：</strong>乙骑士。丙说"乙骑士"为真 &rarr; 丙骑士。乙说"甲和丙同类"——甲无赖、丙骑士不同类，乙说假话，与"乙骑士"矛盾 ✗。<br>
+    <strong>唯一解：骑士 1 个。选 B。</strong>
+  </div>
+</div>
+
+<!-- ========== 挑战 4 ========== -->
+<div class="quiz-question" id="q38">
+  <div class="q-title">
+    <span class="q-tag compound">复合</span>
+    与命题 \(\lnot(p \lor q)\) 等价的命题是？<span class="diff-tag diff-hard">较难</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(38, 0)">A. \(\lnot p \lor \lnot q\)</div>
+    <div class="opt" onclick="checkChoice(38, 1)">B. \(p \land q\)</div>
+    <div class="opt" onclick="checkChoice(38, 2)">C. \(\lnot(p \to q)\)</div>
+    <div class="opt" onclick="checkChoice(38, 3)">D. \(\lnot p \land \lnot q\)</div>
+  </div>
+  <div class="explain" id="explain38">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>由德摩根律，\(\lnot(p \lor q) \Leftrightarrow \lnot p \land \lnot q\)。<br>
+    <strong>第二步：</strong>逐项验证：A 是 \(\lnot p \lor \lnot q\)，是 \(\lnot(p \land q)\) 而非 \(\lnot(p \lor q)\)；B 是 p∧q，与原命题互为矛盾；C 的 ¬(p&rarr;q) = p∧¬q，不符。<br>
+    <strong>第三步：</strong>只有 D \(\lnot p \land \lnot q\) 等价。<strong>选 D。</strong>
+  </div>
+</div>
+
+<!-- ========== 挑战 5 ========== -->
+<div class="quiz-question" id="q39">
+  <div class="q-title">
+    <span class="q-tag quant">量词</span>
+    命题"\(\forall x \in R,\ x^2 - ax + a &gt; 0\) 恒成立"为<strong>假命题</strong>，则 a 的取值范围是？<span class="diff-tag diff-hard">较难</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(39, 0)">A. \(0 &lt; a &lt; 4\)</div>
+    <div class="opt" onclick="checkChoice(39, 1)">B. \(a &lt; 0\) 或 \(a &gt; 4\)</div>
+    <div class="opt" onclick="checkChoice(39, 2)">C. \(0 \le a \le 4\)</div>
+    <div class="opt" onclick="checkChoice(39, 3)">D. \(a \le 0\) 或 \(a \ge 4\)</div>
+  </div>
+  <div class="explain" id="explain39">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>先求命题为真的条件。\(x^2 - ax + a &gt; 0\) 对一切 x 恒成立，二次项系数为正，需判别式 Δ &lt; 0。<br>
+    <strong>第二步：</strong>Δ = a² - 4a &lt; 0 &rArr; 0 &lt; a &lt; 4。即命题为真时 a ∈ (0, 4)。<br>
+    <strong>第三步：</strong>命题为假，取补集：a ≤ 0 或 a ≥ 4。<strong>选 D。</strong>
+  </div>
+</div>
+
+<!-- ========== 德摩根 5 ========== -->
+<div class="quiz-question" id="q40">
+  <div class="q-title">
+    <span class="q-tag compound">复合</span>
+    命题"没有人既会唱歌又会跳舞"的否定是？<span class="diff-tag diff-hard">较难</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(40, 0)">A. 有人既会唱歌又会跳舞</div>
+    <div class="opt" onclick="checkChoice(40, 1)">B. 所有人都既不会唱歌也不会跳舞</div>
+    <div class="opt" onclick="checkChoice(40, 2)">C. 有人既不会唱歌也不会跳舞</div>
+    <div class="opt" onclick="checkChoice(40, 3)">D. 所有人都只会唱歌或只会跳舞</div>
+  </div>
+  <div class="explain" id="explain40">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>记 S(x) = "x 会唱歌"、D(x) = "x 会跳舞"。原命题写作 \(\forall x\,\lnot(S(x) \land D(x))\)（没有一个人同时会两者）。<br>
+    <strong>第二步：</strong>对其取否定：\(\lnot \forall x\,\lnot(S(x) \land D(x)) \Leftrightarrow \exists x\,(S(x) \land D(x))\)。量词"∀→∃"，同时内层去掉外层的否定（这里用到德摩根思想：否定下移、联结词取反）。<br>
+    <strong>第三步：</strong>"没有人"的反面是"至少一人"，内部"既会唱歌又会跳舞"保持不变。<strong>选 A。</strong><br>
+    常见误区：B 错在把量词也否定错了；实际只要存在一个"又会唱歌又会跳舞"的人，原命题就被推翻。
+  </div>
+</div>
+
+<!-- ========== 挑战 6 ========== -->
+<div class="quiz-question" id="q41">
+  <div class="q-title">
+    <span class="q-tag deduce">演绎</span>
+    推理："马有四条腿；餐桌有四条腿；所以马是餐桌。"此推理的错误是？<span class="diff-tag diff-hard">较难</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(41, 0)">A. 这是有效推理</div>
+    <div class="opt" onclick="checkChoice(41, 1)">B. 中项不周延</div>
+    <div class="opt" onclick="checkChoice(41, 2)">C. 四词项错误</div>
+    <div class="opt" onclick="checkChoice(41, 3)">D. 大项不当扩大</div>
+  </div>
+  <div class="explain" id="explain41">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>找出三段论结构。"马有四条腿"、"餐桌有四条腿"两个前提的谓项都是"有四条腿"，它是中项。<br>
+    <strong>第二步：</strong>两个前提都是肯定命题，中项都处在谓项位置。肯定命题的谓项不周延，所以中项两次都不周延。<br>
+    <strong>第三步：</strong>三段论规则要求"中项至少周延一次"，此处违反，属于中项不周延的错误。<strong>选 B。</strong>
+  </div>
+</div>
+
+<!-- ========== 挑战 7 ========== -->
+<div class="quiz-question" id="q42">
+  <div class="q-title">
+    <span class="q-tag multi">侦探</span>
+    甲说："乙说的是真话"<br>
+    乙说："丙说的是假话"<br>
+    丙说："甲说的是假话"<br>
+    已知三人中<strong>恰有两人说真话</strong>，则说真话的是？<span class="diff-tag diff-hard">较难</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(42, 0)">A. 甲和乙</div>
+    <div class="opt" onclick="checkChoice(42, 1)">B. 甲和丙</div>
+    <div class="opt" onclick="checkChoice(42, 2)">C. 乙和丙</div>
+    <div class="opt" onclick="checkChoice(42, 3)">D. 只有甲</div>
+  </div>
+  <div class="explain" id="explain42">
+    <strong>推导步骤：</strong>记 T/F 表示说真话/假话。<br>
+    <strong>试 甲真、乙真、丙假：</strong>甲说"乙真"✓；乙说"丙假"✓；丙说"甲假"——甲真，丙的话是假话 ✓。恰两真，一致 ✓。<br>
+    <strong>试 甲真、乙假、丙真：</strong>乙说"丙假"——丙真，乙的话为假 ✓；丙说"甲假"——甲真，丙的话为假，但丙应为真 ✗。<br>
+    <strong>试 甲假、乙真、丙真：</strong>甲说"乙真"——乙真，甲的话为真，但甲应为假 ✗。<br>
+    <strong>试 甲假、乙假、丙真：</strong>甲说"乙真"——乙假，甲话假 ✓；乙说"丙假"——丙真，乙话假 ✓；丙说"甲假"——甲假，丙话真 ✓。但此时只有丙 1 人说真话，不满足"恰两人" ✗。<br>
+    <strong>唯一解：甲和乙说真话。选 A。</strong>
+  </div>
+</div>
+
+<!-- ========== 挑战 8 ========== -->
+<div class="quiz-question" id="q43">
+  <div class="q-title">
+    <span class="q-tag proof">证明</span>
+    用数学归纳法证明 \(1 + 2 + \cdots + n = \frac{n(n+1)}{2}\) 时，"归纳奠基"应验证？<span class="diff-tag diff-hard">较难</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(43, 0)">A. \(n = 1\) 时等式成立</div>
+    <div class="opt" onclick="checkChoice(43, 1)">B. 假设 \(n = k\) 时等式成立</div>
+    <div class="opt" onclick="checkChoice(43, 2)">C. 由 \(n = k\) 成立推出 \(n = k+1\) 成立</div>
+    <div class="opt" onclick="checkChoice(43, 3)">D. 以上都属于归纳奠基</div>
+  </div>
+  <div class="explain" id="explain43">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>数学归纳法分两步：归纳奠基与归纳递推。<br>
+    <strong>第二步：</strong>归纳奠基验证命题对初始值 n = 1 成立：左 = 1，右 = 1·2/2 = 1，成立。<br>
+    <strong>第三步：</strong>B 是归纳假设、C 是归纳递推，都不属于"奠基"。<strong>选 A。</strong>
+  </div>
+</div>
+
+<!-- ========== 挑战 9 ========== -->
+<div class="quiz-question" id="q44">
+  <div class="q-title">
+    <span class="q-tag condition">条件</span>
+    已知 p：\(|x - 2| &lt; 1\)，q：\(x^2 - 4x + 3 &lt; 0\)，则 p 是 q 的什么条件？<span class="diff-tag diff-hard">较难</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(44, 0)">A. 充分不必要条件</div>
+    <div class="opt" onclick="checkChoice(44, 1)">B. 必要不充分条件</div>
+    <div class="opt" onclick="checkChoice(44, 2)">C. 充要条件</div>
+    <div class="opt" onclick="checkChoice(44, 3)">D. 既不充分也不必要</div>
+  </div>
+  <div class="explain" id="explain44">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>解 p：|x - 2| &lt; 1 &rArr; -1 &lt; x - 2 &lt; 1 &rArr; 1 &lt; x &lt; 3。<br>
+    <strong>第二步：</strong>解 q：x² - 4x + 3 = (x - 1)(x - 3) &lt; 0 &rArr; 1 &lt; x &lt; 3。<br>
+    <strong>第三步：</strong>p 与 q 的解集完全相同，p &rarr; q 且 q &rarr; p 都成立，互为充要条件。<strong>选 C。</strong>
+  </div>
+</div>
+
+<!-- ========== 挑战 10 ========== -->
+<div class="quiz-question" id="q45">
+  <div class="q-title">
+    <span class="q-tag multi">侦探</span>
+    逻辑岛上，骑士说真话、无赖说假话。甲对乙说：<br>
+    "如果我是骑士，那么你是无赖。"<br>
+    以下判断正确的是？<span class="diff-tag diff-hard">较难</span>
+  </div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice(45, 0)">A. 甲是骑士，乙是无赖</div>
+    <div class="opt" onclick="checkChoice(45, 1)">B. 甲是无赖，乙是骑士</div>
+    <div class="opt" onclick="checkChoice(45, 2)">C. 甲、乙都是骑士</div>
+    <div class="opt" onclick="checkChoice(45, 3)">D. 甲、乙都是无赖</div>
+  </div>
+  <div class="explain" id="explain45">
+    <strong>推导步骤：</strong><br>
+    <strong>第一步：</strong>记 P = "甲是骑士"，Q = "乙是无赖"。甲的话是 P &rarr; Q。<br>
+    <strong>假设甲是无赖（P 假）：</strong>甲说的话应为假，即 P &rarr; Q 为假，需 P 真且 Q 假——与 P 假矛盾。所以甲不可能是无赖。<br>
+    <strong>第二步：</strong>故甲是骑士（P 真），甲的话为真：Q 真，乙是无赖。<br>
+    <strong>第三步：</strong>甲骑士、乙无赖，且相互一致。<strong>选 A。</strong>
+  </div>
+</div>
+
 </article>
 <script src="../../dt.js"></script>
 <script>
 var answered = {};
 var score = 0;
-var answers = {1:3, 2:2, 3:0, 4:0, 5:0, 6:0, 7:3, 8:1, 9:1, 10:3, 11:3, 12:3, 13:2, 14:0, 15:1, 16:2, 17:2, 18:3};
+var answers = {1:3, 2:2, 3:0, 4:0, 5:0, 6:2, 7:0, 8:3, 9:1, 10:1, 11:3, 12:3, 13:3, 14:1, 15:2, 16:0, 17:1, 18:2, 19:2, 20:3, 21:3, 22:1, 23:1, 24:2, 25:0, 26:3, 27:0, 28:1, 29:0, 30:1, 31:2, 32:0, 33:0, 34:1, 35:3, 36:3, 37:1, 38:3, 39:3, 40:0, 41:1, 42:0, 43:0, 44:2, 45:0};
 var totalQ = Object.keys(answers).length;
 
 function checkChoice(qid, idx) {

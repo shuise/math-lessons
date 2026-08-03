@@ -341,43 +341,96 @@
 </div>
 
 <h3><span class="subsec">2.4</span>真值表与复合命题判断</h3>
-<table class="truth-table">
-  <tr>
-    <th>p</th>
-    <th>q</th>
-    <th>p &and; q</th>
-    <th>p &or; q</th>
-    <th>&#172;p</th>
-  </tr>
-  <tr>
-    <td class="true-val">真</td>
-    <td class="true-val">真</td>
-    <td class="true-val">真</td>
-    <td class="true-val">真</td>
-    <td class="false-val">假</td>
-  </tr>
-  <tr>
-    <td class="true-val">真</td>
-    <td class="false-val">假</td>
-    <td class="false-val">假</td>
-    <td class="true-val">真</td>
-    <td class="false-val">假</td>
-  </tr>
-  <tr>
-    <td class="false-val">假</td>
-    <td class="true-val">真</td>
-    <td class="false-val">假</td>
-    <td class="true-val">真</td>
-    <td class="true-val">真</td>
-  </tr>
-  <tr>
-    <td class="false-val">假</td>
-    <td class="false-val">假</td>
-    <td class="false-val">假</td>
-    <td class="false-val">假</td>
-    <td class="true-val">真</td>
-  </tr>
-</table>
+<div>
+  <div>
+    <p style="text-align:center;font-weight:bold;margin:6px 0;">用"真 / 假"表示</p>
+    <table class="truth-table">
+      <tr>
+        <th>p</th>
+        <th>q</th>
+        <th>p &and; q</th>
+        <th>p &or; q</th>
+        <th>&#172;p</th>
+      </tr>
+      <tr>
+        <td class="true-val">真</td>
+        <td class="true-val">真</td>
+        <td class="true-val">真</td>
+        <td class="true-val">真</td>
+        <td class="false-val">假</td>
+      </tr>
+      <tr>
+        <td class="true-val">真</td>
+        <td class="false-val">假</td>
+        <td class="false-val">假</td>
+        <td class="true-val">真</td>
+        <td class="false-val">假</td>
+      </tr>
+      <tr>
+        <td class="false-val">假</td>
+        <td class="true-val">真</td>
+        <td class="false-val">假</td>
+        <td class="true-val">真</td>
+        <td class="true-val">真</td>
+      </tr>
+      <tr>
+        <td class="false-val">假</td>
+        <td class="false-val">假</td>
+        <td class="false-val">假</td>
+        <td class="false-val">假</td>
+        <td class="true-val">真</td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <p style="text-align:center;font-weight:bold;margin:6px 0;">用"1 / 0"表示（四则运算）</p>
+    <table class="truth-table">
+      <tr>
+        <th>p</th>
+        <th>q</th>
+        <th>p &times; q<br><span style="font-weight:normal;">(= p &and; q)</span></th>
+        <th>p + q &minus; p &times; q<br><span style="font-weight:normal;">(= p &or; q)</span></th>
+        <th>1 &minus; p<br><span style="font-weight:normal;">(= &#172;p)</span></th>
+      </tr>
+      <tr>
+        <td class="true-val">1</td>
+        <td class="true-val">1</td>
+        <td class="true-val">1 &times; 1 = 1</td>
+        <td class="true-val">1 + 1 &minus; 1 = 1</td>
+        <td class="false-val">1 &minus; 1 = 0</td>
+      </tr>
+      <tr>
+        <td class="true-val">1</td>
+        <td class="false-val">0</td>
+        <td class="false-val">1 &times; 0 = 0</td>
+        <td class="true-val">1 + 0 &minus; 0 = 1</td>
+        <td class="false-val">1 &minus; 1 = 0</td>
+      </tr>
+      <tr>
+        <td class="false-val">0</td>
+        <td class="true-val">1</td>
+        <td class="false-val">0 &times; 1 = 0</td>
+        <td class="true-val">0 + 1 &minus; 0 = 1</td>
+        <td class="true-val">1 &minus; 0 = 1</td>
+      </tr>
+      <tr>
+        <td class="false-val">0</td>
+        <td class="false-val">0</td>
+        <td class="false-val">0 &times; 0 = 0</td>
+        <td class="false-val">0 + 0 &minus; 0 = 0</td>
+        <td class="true-val">1 &minus; 0 = 1</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="hint">
+  <strong>为什么可以用 1、0 与四则运算表达？（布尔代数的算术化）</strong>把"真"记作 1、"假"记作 0，三种逻辑运算就变成了简单的算术：<br>
+  &cir; <strong>&#172;p = 1 &minus; p</strong> &mdash;&mdash; 非：真(1)取反变假(0)、假(0)取反变真(1)，正是"用 1 去减"。<br>
+  &cir; <strong>p &and; q = p &times; q</strong> &mdash;&mdash; 且：乘法只有当 p、q 都为 1 时才得 1，其余全为 0，与"一假必假"完全吻合。<br>
+  &cir; <strong>p &or; q = p + q &minus; p &times; q</strong> &mdash;&mdash; 或：加法已覆盖"至少一个为真"，但当 p、q 都真时 1 + 1 = 2，把重叠部分多算了一次，所以要再减掉 p &times; q。<br>
+  <strong>对照验证：</strong>把上方左右两表逐行对比 &mdash;&mdash;"真/假"表的每一行，与"1/0"表对应行算出的结果完全相同（例如 p、q 都真时：p &and; q = 真 = 1 &times; 1 = 1）。
+</div>
 
 <div class="hint">
   <strong>记忆口诀：</strong><br>
