@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../../lib/logo.png?version=1.0.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>谚语与名句中的数学逻辑</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+body {
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.9;
+  font-size: 16px;
+}
+article {
+  background: #fff; border-radius: 12px; padding: 32px 40px 48px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow-wrap: break-word; word-wrap: break-word;
+}
+h1 { color: #2c3e50; font-size: 1.7em; border-bottom: 3px solid #e65100; padding-bottom: 10px; margin-top: 0; text-align: center; }
+.back {
+  display: inline-block; margin-bottom: 16px;
+  color: #1a73e8; text-decoration: none; font-size: 0.95em;
+}
+.back:hover { text-decoration: underline; }
+.tip { text-align: center; color: #777; margin-bottom: 10px; }
+
+/* ====== 课程信息栏 ====== */
+.course-meta {
+  display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: center;
+  margin: 14px 0 22px; padding: 12px 18px;
+  background: #f8faff; border-radius: 10px; border: 1px solid #e0e8f0;
+  font-size: 0.93em; color: #555;
+}
+.course-meta strong { color: #e65100; }
+
+/* ====== 顶部导航条 ====== */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(6px);
+  border: 1px solid #e0e0e0; border-radius: 12px;
+  padding: 8px 12px; margin: 0 0 20px;
+  display: flex; flex-wrap: nowrap; align-items: center; gap: 6px;
+  overflow-x: auto; scrollbar-width: thin;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.topbar .tb-label { font-size: 0.8em; color: #888; margin-right: 4px; white-space: nowrap; }
+.topbar a.chip {
+  text-decoration: none; font-size: 0.8em; color: #555;
+  padding: 4px 12px; border-radius: 14px; border: 1px solid #ddd;
+  background: #fff; white-space: nowrap; transition: 0.15s;
+}
+.topbar a.chip:hover { border-color: #e65100; color: #e65100; }
+.topbar a.chip.active { background: #e65100; color: #fff; border-color: #e65100; }
+.topbar a.chip .tm { opacity: 0.75; font-size: 0.9em; }
+.topbar .tb-progress { margin-left: auto; font-size: 0.8em; color: #e65100; font-weight: bold; white-space: nowrap; flex: 0 0 auto; }
+
+/* ====== 分节卡片 ====== */
+section.sec {
+  border: 2px solid #e0e0e0; border-radius: 12px;
+  margin: 22px 0; padding: 20px 26px; scroll-margin-top: 64px;
+}
+section.sec.c-open { border-left: 6px solid #607d8b; }
+section.sec.c-1 { border-left: 6px solid #e65100; }
+section.sec.c-2 { border-left: 6px solid #9c27b0; }
+section.sec.c-3 { border-left: 6px solid #00897b; }
+section.sec.c-4 { border-left: 6px solid #3949ab; }
+section.sec.c-5 { border-left: 6px solid #f57f17; }
+section.sec.c-6 { border-left: 6px solid #2e7d32; }
+section.sec.c-7 { border-left: 6px solid #6d4c41; }
+section.sec.c-sum { border-left: 6px solid #e65100; }
+.sec-head {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px; margin-bottom: 12px;
+}
+.sec-head h2 { margin: 0; font-size: 1.22em; color: #2c3e50; }
+.sec-head .time-badge {
+  display: inline-block; background: #e65100; color: #fff;
+  padding: 2px 12px; border-radius: 12px; font-size: 0.8em; font-weight: bold;
+}
+.sec-head .subtitle { width: 100%; color: #777; font-size: 0.92em; margin: 0; }
+.sec h3 { color: #2c3e50; margin: 20px 0 8px; font-size: 1.05em; }
+.sec p { margin: 8px 0; }
+.sec ul, .sec ol { margin: 8px 0; padding-left: 26px; }
+
+/* ====== 引言 / 名言 ====== */
+.quote-box {
+  background: #fafafa; border-left: 4px solid #bbb; border-radius: 0 8px 8px 0;
+  padding: 12px 16px; margin: 14px 0; color: #555; font-style: italic;
+}
+.quote-box .qsrc { display: block; text-align: right; font-size: 0.85em; color: #999; margin-top: 6px; font-style: normal; }
+
+/* ====== 知识卡片 ====== */
+.kw-card {
+  background: #f0f7ff; border: 1px solid #bbdefb; border-radius: 10px;
+  padding: 12px 16px; margin: 12px 0; font-size: 0.95em;
+}
+.kw-card .kw-tag {
+  display: inline-block; background: #e65100; color: #fff;
+  padding: 1px 10px; border-radius: 10px; font-size: 0.78em; margin-right: 8px;
+}
+
+/* ====== 谚语卡片（先猜后揭示） ====== */
+.saying-card {
+  background: #f8faff; border: 1px solid #e0e8f0; border-radius: 10px;
+  padding: 12px 16px; margin: 10px 0; font-size: 0.95em;
+}
+.saying-card .saying-text {
+  font-weight: bold; color: #2c3e50; font-size: 1.02em;
+}
+.saying-card .saying-text .translation {
+  display: block; margin-top: 2px; color: #777; font-size: 0.88em; font-weight: normal;
+}
+.saying-card.optional { border-style: dashed; background: #fafafa; }
+.optional-tag {
+  display: inline-block; margin-right: 8px; padding: 0 8px; border-radius: 8px;
+  background: #eee; color: #666; font-size: 0.75em; font-weight: normal;
+}
+.saying-card .btn-ref {
+  margin-top: 8px; padding: 3px 14px; border: 2px solid #e65100; color: #e65100;
+  border-radius: 14px; background: #fff; cursor: pointer; font-size: 0.82em; transition: 0.15s;
+}
+.saying-card .btn-ref:hover { background: #fff3e0; }
+.saying-card .btn-ref.open { background: #e65100; color: #fff; }
+.saying-card .ref-box {
+  display: none; margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+  background: #fff; border-left: 4px solid #e65100; font-size: 0.9em; line-height: 1.8;
+}
+.saying-card .ref-box.show { display: block; }
+
+/* ====== 互动讨论 ====== */
+.interact {
+  background: #fff8e1; border: 2px solid #ffc107; border-radius: 10px;
+  padding: 14px 18px; margin: 16px 0;
+}
+.interact .it-title { font-weight: bold; color: #e65100; font-size: 0.98em; margin-bottom: 6px; }
+.interact ul { margin: 4px 0; }
+.interact .btn-ref {
+  margin-top: 10px; padding: 4px 16px; border: 2px solid #e65100; color: #e65100;
+  border-radius: 14px; background: #fff; cursor: pointer; font-size: 0.85em; transition: 0.15s;
+}
+.interact .btn-ref:hover { background: #fff3e0; }
+.interact .btn-ref.open { background: #e65100; color: #fff; }
+.interact .ref-box {
+  display: none; margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+  background: #fff; border-left: 4px solid #e65100; font-size: 0.9em; line-height: 1.8;
+}
+.interact .ref-box.show { display: block; }
+
+/* ====== 表格 ====== */
+.sec table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.93em; }
+.sec th, .sec td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+.sec th { background: #fff3e0; color: #bf360c; }
+.table-scroll { overflow-x: auto; }
+.table-scroll table { min-width: 620px; }
+
+/* ====== 结尾 ====== */
+.end-box {
+  background: #fff3e0; border: 2px solid #e65100; border-radius: 10px;
+  padding: 16px 20px; margin: 16px 0;
+}
+.foot-note { text-align: center; color: #aaa; font-size: 0.85em; margin-top: 26px; }
+
+@media (max-width: 640px) {
+  body { padding: 12px; font-size: 15px; }
+  article { padding: 24px 16px 36px; border-radius: 8px; }
+  h1 { font-size: 1.45em; }
+  .course-meta { padding: 10px 12px; gap: 8px 16px; }
+  .topbar { border-radius: 8px; padding: 7px 8px; }
+  .topbar .tb-label { display: none; }
+  section.sec { padding: 16px 14px; scroll-margin-top: 58px; }
+  .sec-head h2 { font-size: 1.12em; }
+  .saying-card, .interact { padding: 12px; }
+}
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>谚语与名句中的数学逻辑<br><small style="font-size:0.55em;color:#888;">先猜一猜，再检验——一句老话能支持多强的结论？</small></h1>
+<p class="tip">本课是「猜一猜」逻辑课：每句谚语先只给你看原文，<b>先自己猜它藏了什么逻辑，再点按钮揭示</b>。猜错没关系，猜的过程才是重点。</p>
+
+<div class="course-meta">
+  <span><strong>对象：</strong>高中学生</span>
+  <span><strong>总时长：</strong>60 分钟（含互动）</span>
+  <span><strong>形式：</strong>讲授 + 猜谜式互动</span>
+  <span><strong>衔接：</strong>《逻辑—命题与量词》《经济学的思维方式》《选择与决策》</span>
+</div>
+
+<!-- ====== 顶部导航 ====== -->
+<nav class="topbar" id="topbar">
+  <span class="tb-label">课堂导航</span>
+  <a class="chip active" href="#sec-open" data-time="4">开场 <span class="tm">4′</span></a>
+  <a class="chip" href="#sec-1" data-time="8">一·条件与必要 <span class="tm">8′</span></a>
+  <a class="chip" href="#sec-2" data-time="8">二·矛盾与反证 <span class="tm">8′</span></a>
+  <a class="chip" href="#sec-3" data-time="6">三·集合与分类 <span class="tm">6′</span></a>
+  <a class="chip" href="#sec-4" data-time="8">四·博弈与选择 <span class="tm">8′</span></a>
+  <a class="chip" href="#sec-5" data-time="6">五·概率与统计 <span class="tm">6′</span></a>
+  <a class="chip" href="#sec-6" data-time="8">六·极限与累积 <span class="tm">8′</span></a>
+  <a class="chip" href="#sec-7" data-time="6">七·英文谚语 <span class="tm">6′</span></a>
+  <a class="chip" href="#sec-sum" data-time="6">总结 <span class="tm">6′</span></a>
+  <span class="tb-progress" id="tbProgress">开场 · 0/60 分钟</span>
+</nav>
+
+<!-- ============================================================
+     开场
+     ============================================================ -->
+<section class="sec c-open" id="sec-open">
+  <div class="sec-head">
+    <h2>开场：老祖宗的话里，藏着数学</h2>
+    <span class="time-badge">4 分钟</span>
+  </div>
+  <p>「皮之不存，毛将焉附」「塞翁失马」「三个和尚没水喝」——这些熟悉的话可以启发我们寻找条件、集合、概率或决策结构，但它们不是自动成立的数学定理。</p>
+  <div class="kw-card">
+    <span class="kw-tag">本课玩法</span>把每一句谚语当作一道逻辑题。先猜它可能涉及条件、矛盾、集合、决策、概率还是极限，再点「揭示逻辑」核对。本课包含 6 类中文谚语和 1 组简单英文谚语。
+  </div>
+  <div class="kw-card">
+    <span class="kw-tag">重要边界</span><b>形式有效，不等于内容真实。</b>课件中的符号化只是对句式的简化模型。现实谚语常省略适用范围和背景条件，所以还要追问：变量是什么？结论对谁成立？有没有反例？标有“选学”的卡片供课后继续探索，不计入课堂核心时间。
+  </div>
+  <div class="interact">
+    <div class="it-title">开场热身（讨论 1 分钟）</div>
+    <p>三句先猜猜看：① 塞翁失马，焉知非福？② 三个和尚没水喝？③ 一尺之棰，日取其半，万世不竭？它们分别可能属于哪类逻辑？</p>
+    <button class="btn-ref" data-close="先看提示" onclick="toggleRef(this)">先看提示</button>
+    <div class="ref-box">提示（不剧透）：①「非福」——否定命题就一定是假吗？② 三个人反而比一个人差——激励问题；③ 无限细分——一个古老的极限思想。答案在后面各节揭晓。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第一类 · 条件与必要条件
+     ============================================================ -->
+<section class="sec c-1" id="sec-1">
+  <div class="sec-head">
+    <h2>第一类 · 条件与必要条件</h2>
+    <span class="time-badge">8 分钟</span>
+    <p class="subtitle">目标：用「充分 / 必要」给谚语做体检</p>
+  </div>
+
+  <div class="saying-card">
+    <div class="saying-text">「皮之不存，毛将焉附」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>必要条件：</b>皮是毛的前提——「毛存在」推出「皮存在」不可逆，但「皮不在」推出「毛不在」。逻辑形式：p → q，与它的逆否命题 ¬q → ¬p 等价（这正是逻辑课学的「逆否等价」）。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「覆巢之下，安有完卵」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>必要条件：</b>整体被破坏，个体必受影响。个体完好 → 整体完好（逆否视角）；整体被毁 → 个体难全（正推）。说明「个体安全」以「整体安全」为必要条件。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「不入虎穴，焉得虎子」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>必要条件：</b>「得虎子」→「入虎穴」（想要结果必须先冒风险）。反过来说「不入虎穴」→「不得虎子」——冒险不是充分条件，但确实是必要条件。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「人无远虑，必有近忧」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>条件命题：</b>无远虑 → 近忧（p → q）。注意它没有说「有远虑 → 无近忧」——有远虑也不一定没有近忧，条件是单向的。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「知己知彼，百战不殆」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>充分条件：</b>知己且知彼 → 百战不殆（p ∧ q → r）。但反过来「百战不殆」不一定「知己知彼」——别的因素也可能导致不殆。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「学而不思则罔，思而不学则殆」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>两个必要条件缺一不可（与逻辑）：</b>「学」且「思」都做到，才不会「罔且殆」；缺任何一个，结论都站不住。等价于「罔」∨「殆」时，至少有一个没做到。</div>
+  </div>
+
+  <div class="kw-card">
+    <span class="kw-tag">小结</span>同一句谚语里，「充分」「必要」常常混着出现：<b>充分条件承诺「只要这样就够」，必要条件承诺「没有这样就不行」</b>。读谚语时先分清它是「够了」还是「必须」。
+  </div>
+  <div class="interact">
+    <div class="it-title">生活案例（1 分钟）</div>
+    <p>「要想考好，必须平时积累」——这里的「平时积累」是充分还是必要条件？「只要刷够题就能考好」呢？两句的分量一样吗？</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：第一句是必要条件——不积累肯定不行，但积累也未必考好；第二句声称充分条件——把话说满了，一句反例（刷题但心态崩了）就能推翻。必要的话更稳妥，充分的话更有力也更脆弱。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第二类 · 归谬与反证
+     ============================================================ -->
+<section class="sec c-2" id="sec-2">
+  <div class="sec-head">
+    <h2>第二类 · 归谬与反证</h2>
+    <span class="time-badge">8 分钟</span>
+    <p class="subtitle">目标：看懂「矛盾」与「假设反例」两种思维</p>
+  </div>
+
+  <div class="saying-card">
+    <div class="saying-text">「自相矛盾」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>逻辑矛盾：</b>同时主张 p 与 ¬p（「吾盾之坚，物莫能陷」且「吾矛之利，于物无不陷」）。在逻辑里，p ∧ ¬p 恒为假——一个人的话不可能「句句为真」，只要他自相矛盾，他的整个论证就崩塌。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「此地无银三百两」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>反证法思维：</b>越急于否认，越暴露存在。「此地无银三百两，隔壁王二不曾偷」——把「没有」强调过头，反而让人必然推出「有」。反证法也一样：先假设反面成立，很快推出荒谬，于是反面不成立。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「城门失火，殃及池鱼」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>因果链的传递（演绎推理）：</b>A → B → C：城门失火 → 取水救火 → 池水干 → 鱼遭殃。链条每一步都必须成立，结论才成立——这就是演绎推理「前提为真且形式有效则结论必真」的日常版。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「覆水难收」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>沉没成本不可逆：</b>已经发生的无法收回，与《经济学的思维方式》《选择与决策》里的「沉没成本」一致——继续决策只能往前看，不能指望泼出去的水回来。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「塞翁失马，焉知非福」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>否定命题未必为假（信息不完备）：</b>「失马是祸」这个判断，在信息不全时不能简单成立；「非福」≠「福」，否定命题的真假需要证据。这与「祸不单行」一样提醒我们：别急着对不确定的事下确定结论。</div>
+  </div>
+
+  <div class="kw-card">
+    <span class="kw-tag">小结</span>反证法的骨架：<b>要证 p，先假设 ¬p，推出矛盾，于是 ¬p 错、p 对。</b>「自相矛盾」「此地无银」都是这个结构的生活倒影——矛盾出现的那一刻，就是结论倒塌的那一刻。
+  </div>
+  <div class="interact">
+    <div class="it-title">生活案例（1 分钟）</div>
+    <p>「老师说我上课没睡觉——因为我没睡着，所以肯定没睡」这句「证明」错在哪？用反证法结构说说。</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：「没睡着」不等于「没睡」，要证「没睡」得假设「睡了」推出矛盾；而「没睡着」本身不足以推出「没睡」——偷换了否定对象。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第三类 · 集合与分类
+     ============================================================ -->
+<section class="sec c-3" id="sec-3">
+  <div class="sec-head">
+    <h2>第三类 · 集合与分类</h2>
+    <span class="time-badge">6 分钟</span>
+    <p class="subtitle">目标：分清「元素」与「集合」、名义与实质</p>
+  </div>
+
+  <div class="saying-card">
+    <div class="saying-text">「物以类聚，人以群分」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>分类与聚类：</b>把对象按属性划分成集合（类），同一类的成员共享特征。数学里「集合」「子集」的划分逻辑，就是这句谚语的严格化。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「白马非马」（公孙龙）</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>元素 ≠ 集合：</b>白马是「马」这个集合的一个元素，但「白马」这个集合与「马」这个集合并不相等。「白马非马」的合理内核，正是集合论里「元素与集合是不同层次」的直觉。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「挂羊头卖狗肉」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>名义分类与实际归属不一致：</b>招牌（名义）说它是「羊肉铺」，实际（实质）卖的是狗肉——名义归属 ≠ 实际归属。分类要看判断标准，不能只看名称。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「五十步笑百步」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>同类比较，相对量的差异：</b>五十步与百步都在「逃兵」这一类里，只是程度不同——把「五十步」和「百步」放回同一集合后，差异只是量，不是质。</div>
+  </div>
+
+  <div class="kw-card">
+    <span class="kw-tag">小结</span>集合思维三问：<b>它属于哪个集合？它是元素还是集合？名称和实际归属一致吗？</b>——这三问能拆穿很多诡辩。
+  </div>
+</section>
+
+<!-- ============================================================
+     第四类 · 博弈与选择
+     ============================================================ -->
+<section class="sec c-4" id="sec-4">
+  <div class="sec-head">
+    <h2>第四类 · 博弈与选择</h2>
+    <span class="time-badge">8 分钟</span>
+    <p class="subtitle">目标：看懂合作、搭便车与偏好排序</p>
+  </div>
+
+  <div class="saying-card">
+    <div class="saying-text">「鹬蚌相争，渔翁得利」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>囚徒困境：</b>双方只顾自己缠斗（非合作），结果两败俱伤，让第三方得利。若双方能合作停战，反而都更好——博弈论中最经典的「非合作均衡未必是全局最优」。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「三个和尚没水喝」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>搭便车 / 边际激励失效：</b>每个人想「反正有人去挑水」，责任分散，激励不足，结果没人行动。人越多并不自动越好——<b>激励结构</b>比人数更重要（呼应《经济学的思维方式》第四讲）。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「三个臭皮匠，顶个诸葛亮」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>与上面对立——群体决策能否奏效取决于结构：</b>同样「三个人」，结构不同结论相反。分工合作（信息互补）时 1+1+1 &gt; 3；搭便车（激励缺失）时 1+1+1 &lt; 1。关键在制度，不在人数。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「宁为鸡头，不为凤尾」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>偏好排序，非传递性偏好：</b>「鸡头 &gt; 凤尾」是一种偏好排序，而且它可能不满足传递性（在 A 群体当第一 vs 在 B 群体当垫底）——偏好未必总是可排序的，决策时得明确比较标准。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「两害相权取其轻」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>决策：比较期望损失：</b>没有零损失选项时，选期望损失最小的——把每个选项的「损失 × 概率」算一算再比（呼应《选择与决策》的期望值思维）。</div>
+  </div>
+
+  <div class="kw-card">
+    <span class="kw-tag">小结</span>博弈与决策的核心不是「谁对谁错」，而是<b>结构决定了结果</b>：合作还是不合作、激励到位还是缺位、标准明确还是模糊。
+  </div>
+  <div class="interact">
+    <div class="it-title">生活案例（1 分钟）</div>
+    <p>小组作业里「三个和尚没水喝」怎么破？用「激励」或「结构」说一个具体办法。</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：把任务拆分到人（明确分工）、把贡献可见化（轮流汇报自己的部分）、建立互评机制——都是调整「结构」让搭便车变难。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第五类 · 概率与统计
+     ============================================================ -->
+<section class="sec c-5" id="sec-5">
+  <div class="sec-head">
+    <h2>第五类 · 概率与统计</h2>
+    <span class="time-badge">6 分钟</span>
+    <p class="subtitle">目标：用概率的眼光读「俗语」</p>
+  </div>
+
+  <div class="saying-card">
+    <div class="saying-text">「不怕一万，就怕万一」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>小概率事件也不能忽略（尾部风险）：</b>概率小不等于不发生。风险 = 概率 × 损失：万一的概率很小，但损失巨大时，仍然值得防范（呼应《选择与决策》第三讲「尾部风险」）。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「天上不会掉馅饼」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>概率为 0 的期望：</b>「掉馅饼」的发生概率 ≈ 0，期望值 ≈ 0——别把它算进决策。见到「稳赚不赔」「保证收益」的承诺，先想想这个馅饼的概率是多少。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「天下没有免费的午餐」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>机会成本恒存在：</b>任何获得都伴随放弃（《经济学的思维方式》的开场命题）。免费只是不付钱，代价藏在别处（时间、隐私、未来机会）。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「祸不单行」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>常常是确认偏误 / 记忆偏差的错觉：</b>坏事发生时，你会更留意「最近坏事多」，而好事连串时你不会念叨「福必双至」——记忆有偏向，「祸不单行」多半是统计错觉。</div>
+  </div>
+
+  <div class="kw-card">
+    <span class="kw-tag">小结</span>概率思维三问：<b>概率多大？损失多大？有没有记忆偏差在骗我？</b>
+  </div>
+</section>
+
+<!-- ============================================================
+     第六类 · 极限与累积
+     ============================================================ -->
+<section class="sec c-6" id="sec-6">
+  <div class="sec-head">
+    <h2>第六类 · 极限与累积</h2>
+    <span class="time-badge">8 分钟</span>
+    <p class="subtitle">目标：从「无限」与「累积」看数学结构</p>
+  </div>
+
+  <div class="saying-card">
+    <div class="saying-text">「一尺之棰，日取其半，万世不竭」（庄子）</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>无限细分、极限概念：</b>1 → 1/2 → 1/4 → … 每一步都剩一半，永不为零——长度趋向 0 但永远不是 0，这是极限思想最早的汉语表达之一（呼应数学思想「有限与无限」）。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「不积跬步，无以至千里」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>累积求和（级数收敛）：</b>千里 = 无数小步之和。当每步贡献小而稳定时，总和可以很大——但前提是「步」方向一致、持续累积（求和过程必须收敛）。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「九层之台，起于累土」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>递归与累积：</b>九层台 = 从一层开始逐层叠加，每一步都建立在「已有结果」之上——递归结构：f(n) = f(n−1) + 一层。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「锲而不舍，金石可镂」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>重复操作、迭代：</b>把同一个操作反复执行（迭代），微小作用也能累积成质变——迭代是数学与算法最基础的结构。</div>
+  </div>
+  <div class="saying-card">
+    <div class="saying-text">「差之毫厘，谬以千里」</div>
+    <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
+    <div class="ref-box"><b>误差传播、蝴蝶效应：</b>初始误差微小，经过多次迭代放大，结果天差地别——这正是非线性系统「对初值敏感」的直觉（呼应「一尺之棰」的反面：那里误差衰减，这里误差放大）。</div>
+  </div>
+
+  <div class="kw-card">
+    <span class="kw-tag">小结</span>累积类谚语讲的是同一件事的两面：<b>累积可以成大事（收敛），也可以放大错误（发散）</b>——关键看每一步的方向与误差。
+  </div>
+  <div class="interact">
+    <div class="it-title">生活案例（1 分钟）</div>
+    <p>「每天背 10 个单词」是累积还是「差之毫厘」？什么条件下它会变成后者？</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：持续同方向累积就是「跬步千里」；但如果背了就忘、又不断换教材（方向乱、误差大），投入就悄悄放大成「谬以千里」——累积的前提是方向一致与及时复习。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第七类 · 西方名句
+     ============================================================ -->
+<section class="sec c-7" id="sec-7">
+  <div class="sec-head">
+    <h2>第七类 · 西方名句</h2>
+    <span class="time-badge">6 分钟</span>
+    <p class="subtitle">目标：名句背后同样是数学结构</p>
+  </div>
+
+  <div class="quote-box">
+    一切可以简单化的事物，都应该简单化，但不能更简单。
+    <span class="qsrc">——爱因斯坦（最简原则，奥卡姆剃刀）</span>
+  </div>
+  <div class="kw-card"><span class="kw-tag">解读</span>简单到「不能再删任何一条仍然成立」——这就像数学里「最少假设」：一个模型越简单、假设越少，越不容易为「强行自圆其说」而失真。</div>
+
+  <div class="quote-box">
+    重复做同一件事，却期待不同的结果，这就是疯狂。
+    <span class="qsrc">——爱因斯坦（归纳逻辑失效）</span>
+  </div>
+  <div class="kw-card"><span class="kw-tag">解读</span>同样的输入 + 同样的操作 = 同样的输出；要得到不同结果，必须改变操作（或改变条件）——这正是「确定性系统」与「归纳推理」的逻辑。</div>
+
+  <div class="quote-box">
+    我思故我在。
+    <span class="qsrc">——笛卡尔（演绎推理的起点）</span>
+  </div>
+  <div class="kw-card"><span class="kw-tag">解读</span>从「我在怀疑」这个唯一不可再怀疑的前提，推出「我存在」——演绎推理需要找到不可动摇的起点（公理），这就是公理化的雏形。</div>
+
+  <div class="quote-box">
+    飞矢不动 / 阿喀琉斯追不上乌龟。
+    <span class="qsrc">——芝诺（极限悖论）</span>
+  </div>
+  <div class="kw-card"><span class="kw-tag">解读</span>把运动无限切成小段，每一段都「到不了」——与「一尺之棰」同一根极限思想的藤，两千多年前西方和东方几乎同时碰到了它。</div>
+
+  <div class="quote-box">
+    数学是唯一不欺骗我们的科学。
+    <span class="qsrc">——笛卡尔</span>
+  </div>
+  <div class="kw-card"><span class="kw-tag">解读</span>数学结论的必然性来自「前提 + 有效推理」——只要前提成立、推理无误，结论就真。数学不依赖立场，所以「不欺骗」。</div>
+
+  <div class="quote-box">
+    上帝创造了整数，其余都是人的工作。
+    <span class="qsrc">——克罗内克</span>
+  </div>
+  <div class="kw-card"><span class="kw-tag">解读</span>整数是数学的「地基」，实数、复数、集合……都是在这块地基上由人建构的——数学知识是「定义 + 推理」的累积结构。</div>
+
+  <div class="quote-box">
+    数学中没有一无所用的真理。
+    <span class="qsrc">——罗素</span>
+  </div>
+  <div class="kw-card"><span class="kw-tag">解读</span>数学命题一旦被严格证明，就永远为真，并且在未来的某个分支可能派上用场——真理的「储备价值」正是数学的特点（呼应「真理不会过期」的逻辑性质）。</div>
+</section>
+
+<!-- ============================================================
+     总结
+     ============================================================ -->
+<section class="sec c-sum" id="sec-sum">
+  <div class="sec-head">
+    <h2>总结 · 谚语 = 压缩的逻辑</h2>
+    <span class="time-badge">6 分钟</span>
+  </div>
+
+  <table>
+    <tr><th style="width:64px;">类型</th><th>代表谚语</th><th>核心结构</th></tr>
+    <tr><td>条件与必要</td><td>皮之不存、不入虎穴</td><td>充分 / 必要 / 逆否等价</td></tr>
+    <tr><td>归谬与反证</td><td>自相矛盾、此地无银</td><td>p ∧ ¬p；假设反例推矛盾</td></tr>
+    <tr><td>集合与分类</td><td>白马非马、五十步笑百步</td><td>元素 ≠ 集合；名义 ≠ 实质</td></tr>
+    <tr><td>博弈与选择</td><td>鹬蚌相争、三个和尚</td><td>囚徒困境、搭便车、激励结构</td></tr>
+    <tr><td>概率与统计</td><td>不怕一万、祸不单行</td><td>尾部风险、期望、记忆偏差</td></tr>
+    <tr><td>极限与累积</td><td>一尺之棰、不积跬步</td><td>极限、级数、递归、迭代、误差传播</td></tr>
+    <tr><td>西方名句</td><td>奥卡姆剃刀、芝诺悖论</td><td>最简原则、公理化、极限思想</td></tr>
+  </table>
+
+  <div class="interact">
+    <div class="it-title">出口检测（猜一猜，独立完成 2 分钟）</div>
+    <p>下面三句没学过的新谚语，猜它们属于哪一类逻辑：<br>
+    ① 「磨刀不误砍柴工」<br>
+    ② 「一朝被蛇咬，十年怕井绳」<br>
+    ③ 「冰冻三尺，非一日之寒」</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：① 条件/决策——「先磨刀」是投入时间换取更高效率，机会成本与边际思维（《选择与决策》）；② 概率与统计——把一次被咬（小样本）泛化成「所有绳子都危险」，是以偏概全、可得性偏差；③ 极限与累积——「三尺」是由无数个「一日之寒」累积而成，累积结构。猜对类别即可，不必完全一致。</div>
+  </div>
+
+  <div class="end-box"><b>最后一句：</b>谚语是压缩过的逻辑，逻辑是展开后的谚语——下次再听到一句老话，先问一句：它藏着哪种数学结构？</div>
+</section>
+
+<p class="foot-note">本节为思维训练课 · 全程 60 分钟 · 无计分测试，含形成性检测</p>
+</article>
+
+<script>
+// 参考要点展开/收起（谚语卡片与互动讨论共用）
+function toggleRef(btn) {
+  var box = btn.nextElementSibling;
+  var show = !box.classList.contains("show");
+  box.classList.toggle("show", show);
+  btn.classList.toggle("open", show);
+  var inCard = btn.closest(".saying-card");
+  btn.textContent = show
+    ? (inCard ? "收起" : "收起参考要点")
+    : (inCard ? "揭示逻辑" : (btn.getAttribute("data-close") || "展开参考要点"));
+}
+
+// 导航滚动监听：高亮当前小节 + 累计时间
+var secs = Array.prototype.slice.call(document.querySelectorAll("section.sec"));
+var chips = Array.prototype.slice.call(document.querySelectorAll(".topbar a.chip"));
+var topbar = document.getElementById("topbar");
+var times = {};
+var cum = 0;
+var lastId = "";
+var names = ["开场", "一·条件与必要", "二·归谬与反证", "三·集合与分类", "四·博弈与选择", "五·概率与统计", "六·极限与累积", "七·西方名句", "总结"];
+for (var i = 0; i < secs.length; i++) {
+  var start = cum;
+  cum += parseInt(chips[i].getAttribute("data-time"), 10);
+  times[secs[i].id] = { start: start, end: cum, name: names[i] };
+}
+
+function onScroll() {
+  var pos = window.pageYOffset + 70;
+  var cur = secs[0];
+  for (var i = 0; i < secs.length; i++) {
+    if (secs[i].offsetTop <= pos) cur = secs[i];
+  }
+  var id = cur.id;
+  for (var j = 0; j < chips.length; j++) {
+    chips[j].classList.toggle("active", chips[j].getAttribute("href") === "#" + id);
+  }
+  if (id !== lastId && topbar.scrollWidth > topbar.clientWidth) {
+    var activeChip = document.querySelector('.topbar a.chip[href="#' + id + '"]');
+    if (activeChip) {
+      topbar.scrollLeft = Math.max(0, activeChip.offsetLeft - (topbar.clientWidth - activeChip.offsetWidth) / 2);
+    }
+  }
+  lastId = id;
+  var info = times[id];
+  document.getElementById("tbProgress").textContent = (info ? info.name + " · " + info.start + "-" + info.end + "/60 分钟" : "");
+}
+window.addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+</script>
+</body>
+</html>

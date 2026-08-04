@@ -47,6 +47,7 @@
   .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
   .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
   .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question .q-no { display: inline-block; min-width: 2em; color: #e65100; font-weight: bold; margin-right: 4px; }
   .quiz-question .q-tag { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 0.75em; margin-right: 8px; color: #fff; background: #1a73e8; }
   .q-tag.comprehensive { background: #e65100; }
   .q-tag.multi { background: #6a1b9a; }
@@ -109,7 +110,7 @@
 
 <!-- ========== 综合题 1 ========== -->
 <div class="quiz-question" id="q1">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">1.</span>
     <span class="q-tag multi">综合</span>
     已知 p：\(|x-1| \ge 2\)，q：\(x \in [3,5]\)，则&not;p 是 q 的什么条件？<span class="diff-tag diff-medium">中等</span>
   </div>
@@ -129,7 +130,7 @@
 
 <!-- ========== 综合题 2 ========== -->
 <div class="quiz-question" id="q2">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">2.</span>
     <span class="q-tag multi">综合</span>
     已知命题 p："若 x > 0，则 y > 0"，q："若 y > 0，则 z > 0"，则"若 x ≤ 0，则 z ≤ 0"是？<span class="diff-tag diff-hard">较难</span>
   </div>
@@ -149,7 +150,7 @@
 
 <!-- ========== 综合题 3 ========== -->
 <div class="quiz-question" id="q3">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">3.</span>
     <span class="q-tag multi">综合</span>
     判断复合命题的真假：\((2 > 1) \land \lnot(3 \le 2) \to (4 < 5)\)<span class="diff-tag diff-easy">基础</span>
   </div>
@@ -170,7 +171,7 @@
 
 <!-- ========== 综合题 4 ========== -->
 <div class="quiz-question" id="q4">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">4.</span>
     <span class="q-tag multi">综合</span>
     已知 p：\(x^2 - 5x + 6 > 0\)，q：\(x > 3\)。则&not;p 是&not;q 的什么条件？<span class="diff-tag diff-medium">中等</span>
   </div>
@@ -191,7 +192,7 @@
 
 <!-- ========== 综合题 5 ========== -->
 <div class="quiz-question" id="q5">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">5.</span>
     <span class="q-tag multi">综合</span>
     已知 p：∀x ∈ R，\(x^2 + 2x + a > 0\) 为真，求 a 的取值范围。<span class="diff-tag diff-hard">较难</span>
   </div>
@@ -212,7 +213,7 @@
 
 <!-- ========== 德摩根 1 ========== -->
 <div class="quiz-question" id="q6">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">6.</span>
     <span class="q-tag compound">复合</span>
     设 U 为全集，A、B 是 U 的子集。命题 p："x ∈ A 或 x ∈ B"，则 ¬p 等价于？<span class="diff-tag diff-medium">中等</span>
   </div>
@@ -233,7 +234,7 @@
 
 <!-- ========== 综合题 6 ========== -->
 <div class="quiz-question" id="q7">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">7.</span>
     <span class="q-tag multi">综合</span>
     命题 p："∃x ∈ R，\(x^2 - x + 1 = 0\)"，命题 q："∀x ∈ R，\(x^2 \ge 0\)"。则 p ∨ q 和 p ∧ q 的真假分别是？<span class="diff-tag diff-easy">基础</span>
   </div>
@@ -253,7 +254,7 @@
 
 <!-- ========== 综合题 7 ========== -->
 <div class="quiz-question" id="q8">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">8.</span>
     <span class="q-tag multi">综合</span>
     若"∃x ∈ [1,2]，\(x^2 - ax + 3 \le 0\)"为假命题，则 a 的取值范围是？<span class="diff-tag diff-hard">较难</span>
   </div>
@@ -275,7 +276,7 @@
 
 <!-- ========== 综合题 8 ========== -->
 <div class="quiz-question" id="q9">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">9.</span>
     <span class="q-tag multi">综合</span>
     下列命题中，真命题的个数是？<br>
     ① ∀x ∈ R，\(x^2 \ge x\)<br>
@@ -301,7 +302,7 @@
 
 <!-- ========== 综合题 9 ========== -->
 <div class="quiz-question" id="q10">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">10.</span>
     <span class="q-tag multi">综合</span>
     命题 p：∀x ∈ R，\(ax^2 + ax + 1 > 0\) 为真。则 a 的取值范围是？<span class="diff-tag diff-hard">较难</span>
   </div>
@@ -323,7 +324,7 @@
 
 <!-- ========== 综合题 10 ========== -->
 <div class="quiz-question" id="q11">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">11.</span>
     <span class="q-tag multi">综合</span>
     已知命题 p："∃x ∈ R，\(x^2 + 2x + m \le 0\)"为真，q："∀x ∈ R，\(mx^2 + mx + 1 > 0\)"为假，求 m 的取值范围。<span class="diff-tag diff-hard">较难</span>
   </div>
@@ -349,7 +350,7 @@
 
 <!-- ========== 综合题 11 ========== -->
 <div class="quiz-question" id="q12">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">12.</span>
     <span class="q-tag multi">综合</span>
     设 a、b、c 是非零实数，判断命题："若 a > b，则 ac² > bc²"的四种命题中真命题个数。<span class="diff-tag diff-medium">中等</span>
   </div>
@@ -372,7 +373,7 @@
 
 <!-- ========== 综合题 12 ========== -->
 <div class="quiz-question" id="q13">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">13.</span>
     <span class="q-tag multi">综合</span>
     已知 p：∀x ∈ [0,1]，\(a \ge x^2+1\)，q：∃x ∈ R，\(x^2 + 4x + a = 0\)。若 p ∨ q 为真，p ∧ q 为假，求 a 的取值范围。<span class="diff-tag diff-hard">较难</span>
   </div>
@@ -396,7 +397,7 @@
 
 <!-- ========== 德摩根 2 ========== -->
 <div class="quiz-question" id="q14">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">14.</span>
     <span class="q-tag compound">复合</span>
     已知复合命题 \(\lnot(p \land q)\) 为<strong>假命题</strong>，则可推出？<span class="diff-tag diff-medium">中等</span>
   </div>
@@ -419,7 +420,7 @@
 <h2>侦探推理题</h2>
 
 <div class="quiz-question" id="q15">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">15.</span>
     <span class="q-tag multi">侦探</span>
     珠宝店被盗，警方锁定张三、李四、王五三人。他们的陈述如下：<br>
     张三说："是李四干的"<br>
@@ -445,7 +446,7 @@
 
 <!-- ========== 侦探推理 2 ========== -->
 <div class="quiz-question" id="q16">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">16.</span>
     <span class="q-tag multi">侦探</span>
     数学竞赛后，甲、乙、丙、丁讨论谁得了第一名：<br>
     甲说："第一名是乙"<br>
@@ -473,7 +474,7 @@
 
 <!-- ========== 侦探推理 3 ========== -->
 <div class="quiz-question" id="q17">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">17.</span>
     <span class="q-tag multi">侦探</span>
     一起案件中，警察询问了四名嫌疑人：<br>
     A说："B在说谎"<br>
@@ -500,7 +501,7 @@
 
 <!-- ========== 侦探推理 4 ========== -->
 <div class="quiz-question" id="q18">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">18.</span>
     <span class="q-tag multi">侦探</span>
     逻辑岛上，骑士总是说真话，无赖总是说假话。三人对话：<br>
     A说："B是骑士"<br>
@@ -524,7 +525,7 @@
 
 <!-- ========== 侦探推理 5 ========== -->
 <div class="quiz-question" id="q19">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">19.</span>
     <span class="q-tag multi">侦探</span>
     俱乐部门口贴着告示："凡进入本俱乐部者，要么只说真话，要么只说假话。"三人对话：<br>
     甲说："乙和丙都是说真话的人"<br>
@@ -550,7 +551,7 @@
 
 <!-- ========== 侦探推理 6 ========== -->
 <div class="quiz-question" id="q20">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">20.</span>
     <span class="q-tag multi">侦探</span>
     教室里发生了一件事，老师调查四个学生：<br>
     小美说："是小兰做的"<br>
@@ -582,7 +583,7 @@
 
 <!-- ========== 德摩根 3 ========== -->
 <div class="quiz-question" id="q21">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">21.</span>
     <span class="q-tag compound">复合</span>
     命题"并非（张三会来 且 李四会来 且 王五会来）"等价于？<span class="diff-tag diff-hard">较难</span>
   </div>
@@ -603,7 +604,7 @@
 
 <!-- ========== 拓展 1：充分必要条件 ========== -->
 <div class="quiz-question" id="q22">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">22.</span>
     <span class="q-tag condition">条件</span>
     已知 p：\(x &gt; 1\)，q：\(x^2 &gt; 1\)，则 p 是 q 的什么条件？<span class="diff-tag diff-medium">中等</span>
   </div>
@@ -623,7 +624,7 @@
 
 <!-- ========== 拓展 2：量词命题的否定 ========== -->
 <div class="quiz-question" id="q23">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">23.</span>
     <span class="q-tag quant">量词</span>
     命题"\(\exists x \in R,\ x^2 + 1 = 0\)"的否定是？<span class="diff-tag diff-easy">基础</span>
   </div>
@@ -643,7 +644,7 @@
 
 <!-- ========== 拓展 3：复合命题真假 ========== -->
 <div class="quiz-question" id="q24">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">24.</span>
     <span class="q-tag compound">复合</span>
     已知 p 是假命题、q 是真命题，则复合命题 \(( \lnot p \to q) \lor (p \land \lnot q)\) 的真假是？<span class="diff-tag diff-medium">中等</span>
   </div>
@@ -664,7 +665,7 @@
 
 <!-- ========== 拓展 4：反证法 ========== -->
 <div class="quiz-question" id="q25">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">25.</span>
     <span class="q-tag proof">证明</span>
     用反证法证明"√2 是无理数"时，第一步应假设？<span class="diff-tag diff-medium">中等</span>
   </div>
@@ -684,7 +685,7 @@
 
 <!-- ========== 拓展 5：三段论 ========== -->
 <div class="quiz-question" id="q26">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">26.</span>
     <span class="q-tag deduce">演绎</span>
     推理："所有金属都能导电；铜是金属；所以铜能导电。"这个三段论推理？<span class="diff-tag diff-medium">中等</span>
   </div>
@@ -704,7 +705,7 @@
 
 <!-- ========== 拓展 6：归纳与类比 ========== -->
 <div class="quiz-question" id="q27">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">27.</span>
     <span class="q-tag induce">归纳</span>
     下列推理属于<strong>归纳推理</strong>的是？<span class="diff-tag diff-easy">基础</span>
   </div>
@@ -724,7 +725,7 @@
 
 <!-- ========== 拓展 7：全称命题否定 ========== -->
 <div class="quiz-question" id="q28">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">28.</span>
     <span class="q-tag quant">量词</span>
     命题"班里所有同学都参加了运动会"的否定是？<span class="diff-tag diff-medium">中等</span>
   </div>
@@ -744,7 +745,7 @@
 
 <!-- ========== 拓展 8：逻辑基本规律 ========== -->
 <div class="quiz-question" id="q29">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">29.</span>
     <span class="q-tag daily">规律</span>
     有人说："这个图形既是三角形，又不是三角形。"这种说法违反了逻辑基本规律中的？<span class="diff-tag diff-medium">中等</span>
   </div>
@@ -764,7 +765,7 @@
 
 <!-- ========== 拓展 9：假言推理链 ========== -->
 <div class="quiz-question" id="q30">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">30.</span>
     <span class="q-tag deduce">演绎</span>
     已知 \(p \to q\)、\(q \to r\)、\(r \to s\) 均为真，且 \(s\) 为假，则可推出？<span class="diff-tag diff-medium">中等</span>
   </div>
@@ -784,7 +785,7 @@
 
 <!-- ========== 德摩根 4 ========== -->
 <div class="quiz-question" id="q31">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">31.</span>
     <span class="q-tag compound">复合</span>
     化简命题 \(\lnot(\lnot p \land \lnot q)\) 的结果是？<span class="diff-tag diff-hard">较难</span>
   </div>
@@ -805,7 +806,7 @@
 
 <!-- ========== 拓展 10：德摩根律 ========== -->
 <div class="quiz-question" id="q32">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">32.</span>
     <span class="q-tag compound">复合</span>
     命题 \(\lnot(p \lor q)\) 与 \(\lnot p \land \lnot q\) 的关系是？<span class="diff-tag diff-medium">中等</span>
   </div>
@@ -825,7 +826,7 @@
 
 <!-- ========== 拓展 11：日常语言逻辑 ========== -->
 <div class="quiz-question" id="q33">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">33.</span>
     <span class="q-tag daily">日常</span>
     命题"除非你努力学习，否则你不会通过考试"等价于？<span class="diff-tag diff-medium">中等</span>
   </div>
@@ -845,7 +846,7 @@
 
 <!-- ========== 拓展 12：集合与条件 ========== -->
 <div class="quiz-question" id="q34">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">34.</span>
     <span class="q-tag condition">条件</span>
     已知集合 A = {x | x &gt; 2}，B = {x | x &gt; 1}，则"x ∈ A"是"x ∈ B"的什么条件？<span class="diff-tag diff-medium">中等</span>
   </div>
@@ -869,7 +870,7 @@
 
 <!-- ========== 挑战 1 ========== -->
 <div class="quiz-question" id="q35">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">35.</span>
     <span class="q-tag multi">侦探</span>
     四人中有一人打碎了花瓶。审问后陈述如下：<br>
     A 说："B 或 C 干的"<br>
@@ -896,7 +897,7 @@
 
 <!-- ========== 挑战 2 ========== -->
 <div class="quiz-question" id="q36">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">36.</span>
     <span class="q-tag quant">量词</span>
     命题"\(\exists x \in R,\ x^2 + ax + 1 &lt; 0\)"为真，则 a 的取值范围是？<span class="diff-tag diff-hard">较难</span>
   </div>
@@ -917,7 +918,7 @@
 
 <!-- ========== 挑战 3 ========== -->
 <div class="quiz-question" id="q37">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">37.</span>
     <span class="q-tag multi">侦探</span>
     逻辑岛上，骑士说真话、无赖说假话。三人对话：<br>
     甲说："乙是无赖"<br>
@@ -942,7 +943,7 @@
 
 <!-- ========== 挑战 4 ========== -->
 <div class="quiz-question" id="q38">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">38.</span>
     <span class="q-tag compound">复合</span>
     与命题 \(\lnot(p \lor q)\) 等价的命题是？<span class="diff-tag diff-hard">较难</span>
   </div>
@@ -962,7 +963,7 @@
 
 <!-- ========== 挑战 5 ========== -->
 <div class="quiz-question" id="q39">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">39.</span>
     <span class="q-tag quant">量词</span>
     命题"\(\forall x \in R,\ x^2 - ax + a &gt; 0\) 恒成立"为<strong>假命题</strong>，则 a 的取值范围是？<span class="diff-tag diff-hard">较难</span>
   </div>
@@ -982,7 +983,7 @@
 
 <!-- ========== 德摩根 5 ========== -->
 <div class="quiz-question" id="q40">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">40.</span>
     <span class="q-tag compound">复合</span>
     命题"没有人既会唱歌又会跳舞"的否定是？<span class="diff-tag diff-hard">较难</span>
   </div>
@@ -1003,7 +1004,7 @@
 
 <!-- ========== 挑战 6 ========== -->
 <div class="quiz-question" id="q41">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">41.</span>
     <span class="q-tag deduce">演绎</span>
     推理："马有四条腿；餐桌有四条腿；所以马是餐桌。"此推理的错误是？<span class="diff-tag diff-hard">较难</span>
   </div>
@@ -1023,7 +1024,7 @@
 
 <!-- ========== 挑战 7 ========== -->
 <div class="quiz-question" id="q42">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">42.</span>
     <span class="q-tag multi">侦探</span>
     甲说："乙说的是真话"<br>
     乙说："丙说的是假话"<br>
@@ -1048,7 +1049,7 @@
 
 <!-- ========== 挑战 8 ========== -->
 <div class="quiz-question" id="q43">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">43.</span>
     <span class="q-tag proof">证明</span>
     用数学归纳法证明 \(1 + 2 + \cdots + n = \frac{n(n+1)}{2}\) 时，"归纳奠基"应验证？<span class="diff-tag diff-hard">较难</span>
   </div>
@@ -1068,7 +1069,7 @@
 
 <!-- ========== 挑战 9 ========== -->
 <div class="quiz-question" id="q44">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">44.</span>
     <span class="q-tag condition">条件</span>
     已知 p：\(|x - 2| &lt; 1\)，q：\(x^2 - 4x + 3 &lt; 0\)，则 p 是 q 的什么条件？<span class="diff-tag diff-hard">较难</span>
   </div>
@@ -1088,7 +1089,7 @@
 
 <!-- ========== 挑战 10 ========== -->
 <div class="quiz-question" id="q45">
-  <div class="q-title">
+  <div class="q-title"><span class="q-no">45.</span>
     <span class="q-tag multi">侦探</span>
     逻辑岛上，骑士说真话、无赖说假话。甲对乙说：<br>
     "如果我是骑士，那么你是无赖。"<br>

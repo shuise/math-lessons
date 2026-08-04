@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../../lib/logo.png?version=1.0.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>选择与决策</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+body {
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.9;
+  font-size: 16px;
+}
+article {
+  background: #fff; border-radius: 12px; padding: 32px 40px 48px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow-wrap: break-word; word-wrap: break-word; overflow-x: hidden;
+}
+h1 { color: #2c3e50; font-size: 1.7em; border-bottom: 3px solid #3949ab; padding-bottom: 10px; margin-top: 0; text-align: center; }
+.back {
+  display: inline-block; margin-bottom: 16px;
+  color: #1a73e8; text-decoration: none; font-size: 0.95em;
+}
+.back:hover { text-decoration: underline; }
+.tip { text-align: center; color: #777; margin-bottom: 10px; }
+
+/* ====== 课程信息栏 ====== */
+.course-meta {
+  display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: center;
+  margin: 14px 0 22px; padding: 12px 18px;
+  background: #f8faff; border-radius: 10px; border: 1px solid #e0e8f0;
+  font-size: 0.93em; color: #555;
+}
+.course-meta strong { color: #3949ab; }
+
+/* ====== 顶部导航条 ====== */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(6px);
+  border: 1px solid #e0e0e0; border-radius: 12px;
+  padding: 8px 12px; margin: 0 0 20px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.topbar .tb-label { font-size: 0.8em; color: #888; margin-right: 4px; white-space: nowrap; }
+.topbar a.chip {
+  text-decoration: none; font-size: 0.8em; color: #555;
+  padding: 4px 12px; border-radius: 14px; border: 1px solid #ddd;
+  background: #fff; white-space: nowrap; transition: 0.15s;
+}
+.topbar a.chip:hover { border-color: #3949ab; color: #3949ab; }
+.topbar a.chip.active { background: #3949ab; color: #fff; border-color: #3949ab; }
+.topbar a.chip .tm { opacity: 0.75; font-size: 0.9em; }
+.topbar .tb-progress { margin-left: auto; font-size: 0.8em; color: #3949ab; font-weight: bold; white-space: nowrap; }
+
+/* ====== 分节卡片 ====== */
+section.sec {
+  border: 2px solid #e0e0e0; border-radius: 12px;
+  margin: 22px 0; padding: 20px 26px; scroll-margin-top: 64px;
+}
+section.sec.c-open { border-left: 6px solid #607d8b; }
+section.sec.c-1 { border-left: 6px solid #3949ab; }
+section.sec.c-2 { border-left: 6px solid #e65100; }
+section.sec.c-3 { border-left: 6px solid #f57f17; }
+section.sec.c-4 { border-left: 6px solid #9c27b0; }
+section.sec.c-5 { border-left: 6px solid #00897b; }
+section.sec.c-6 { border-left: 6px solid #2e7d32; }
+section.sec.c-7 { border-left: 6px solid #6d4c41; }
+section.sec.c-sum { border-left: 6px solid #3949ab; }
+.sec-head {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px; margin-bottom: 12px;
+}
+.sec-head h2 { margin: 0; font-size: 1.22em; color: #2c3e50; }
+.sec-head .time-badge {
+  display: inline-block; background: #3949ab; color: #fff;
+  padding: 2px 12px; border-radius: 12px; font-size: 0.8em; font-weight: bold;
+}
+.sec-head .subtitle { width: 100%; color: #777; font-size: 0.92em; margin: 0; }
+.sec h3 { color: #2c3e50; margin: 20px 0 8px; font-size: 1.05em; }
+.sec p { margin: 8px 0; }
+.sec ul, .sec ol { margin: 8px 0; padding-left: 26px; }
+
+/* ====== 引言 / 名言 ====== */
+.quote-box {
+  background: #fafafa; border-left: 4px solid #bbb; border-radius: 0 8px 8px 0;
+  padding: 12px 16px; margin: 14px 0; color: #555; font-style: italic;
+}
+.quote-box .qsrc { display: block; text-align: right; font-size: 0.85em; color: #999; margin-top: 6px; font-style: normal; }
+
+/* ====== 知识卡片 ====== */
+.kw-card {
+  background: #f0f7ff; border: 1px solid #bbdefb; border-radius: 10px;
+  padding: 12px 16px; margin: 12px 0; font-size: 0.95em;
+}
+.kw-card .kw-tag {
+  display: inline-block; background: #3949ab; color: #fff;
+  padding: 1px 10px; border-radius: 10px; font-size: 0.78em; margin-right: 8px;
+}
+
+/* ====== 案例卡片 ====== */
+.case-card {
+  background: #f8faff; border: 1px solid #e0e8f0; border-radius: 10px;
+  padding: 12px 16px; margin: 10px 0; font-size: 0.95em;
+}
+.case-card .case-title { font-weight: bold; color: #3949ab; }
+.case-card .case-title.warn { color: #e65100; }
+
+/* ====== 互动讨论 ====== */
+.interact {
+  background: #fff8e1; border: 2px solid #ffc107; border-radius: 10px;
+  padding: 14px 18px; margin: 16px 0;
+}
+.interact .it-title { font-weight: bold; color: #e65100; font-size: 0.98em; margin-bottom: 6px; }
+.interact ul { margin: 4px 0; }
+.interact .btn-ref {
+  margin-top: 10px; padding: 4px 16px; border: 2px solid #e65100; color: #e65100;
+  border-radius: 14px; background: #fff; cursor: pointer; font-size: 0.85em; transition: 0.15s;
+}
+.interact .btn-ref:hover { background: #fff3e0; }
+.interact .btn-ref.open { background: #e65100; color: #fff; }
+.interact .ref-box {
+  display: none; margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+  background: #fff; border-left: 4px solid #e65100; font-size: 0.9em; line-height: 1.8;
+}
+.interact .ref-box.show { display: block; }
+
+/* ====== 表格 ====== */
+.sec table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.93em; }
+.sec th, .sec td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+.sec th { background: #e8eaf6; color: #1a237e; }
+
+/* ====== 结尾 ====== */
+.end-box {
+  background: #e8eaf6; border: 2px solid #3949ab; border-radius: 10px;
+  padding: 16px 20px; margin: 16px 0;
+}
+.foot-note { text-align: center; color: #aaa; font-size: 0.85em; margin-top: 26px; }
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>选择与决策<br><small style="font-size:0.55em;color:#888;">人无法避免选择，但可以学会如何选择 —— 一堂决策思维课</small></h1>
+<p class="tip">本课不考试、不判分——它只负责让你在下次「纠结」的时候，手里多几件趁手的工具。</p>
+
+<div class="course-meta">
+  <span><strong>对象：</strong>高中学生</span>
+  <span><strong>总时长：</strong>60 分钟（含互动）</span>
+  <span><strong>形式：</strong>讲授 + 开放讨论</span>
+  <span><strong>核心参考：</strong>《经济学的思维方式》《原则》《思考的方法》</span>
+</div>
+
+<!-- ====== 顶部导航 ====== -->
+<nav class="topbar" id="topbar">
+  <span class="tb-label">课堂导航</span>
+  <a class="chip active" href="#sec-open" data-time="4">开场 <span class="tm">4′</span></a>
+  <a class="chip" href="#sec-1" data-time="7">一讲·决策五要素 <span class="tm">7′</span></a>
+  <a class="chip" href="#sec-2" data-time="7">二讲·成本视角 <span class="tm">7′</span></a>
+  <a class="chip" href="#sec-3" data-time="7">三讲·期望值 <span class="tm">7′</span></a>
+  <a class="chip" href="#sec-4" data-time="7">四讲·认知偏误 <span class="tm">7′</span></a>
+  <a class="chip" href="#sec-5" data-time="7">五讲·框架效应 <span class="tm">7′</span></a>
+  <a class="chip" href="#sec-6" data-time="7">六讲·快慢思考 <span class="tm">7′</span></a>
+  <a class="chip" href="#sec-7" data-time="7">七讲·原则与决策 <span class="tm">7′</span></a>
+  <a class="chip" href="#sec-sum" data-time="7">总结 <span class="tm">7′</span></a>
+  <span class="tb-progress" id="tbProgress">开场 · 0/60 分钟</span>
+</nav>
+
+<!-- ============================================================
+     开场
+     ============================================================ -->
+<section class="sec c-open" id="sec-open">
+  <div class="sec-head">
+    <h2>开场：选择无处不在</h2>
+    <span class="time-badge">4 分钟</span>
+  </div>
+  <p>从早上「吃什么」到高考「报什么专业」，人一生都在做选择。你以为「不做选择」就安全了吗？</p>
+  <div class="quote-box">
+    唯一毋庸置疑的是，你可以选择如何看待它。——大卫·福斯特·华莱士
+  </div>
+  <div class="kw-card">
+    <span class="kw-tag">关键洞察</span><b>不做选择，本身就是一种选择</b>——你选择了让默认选项替你决定。早餐店、APP 的默认选项、父母替你填的志愿……「不选」也是一种被动的选择。
+  </div>
+  <div class="quote-box">
+    思想的默认设置是自我中心：一切经验都以「我」为绝对中心。学会选择，就是从默认设置中醒过来。
+  </div>
+  <div class="interact">
+    <div class="it-title">开场破冰（讨论 1 分钟）</div>
+    <p>说一个你最近「因为不想选，干脆没选」的例子。当时是默认选项替你做了决定吗？</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     第一讲 · 决策的五要素
+     ============================================================ -->
+<section class="sec c-1" id="sec-1">
+  <div class="sec-head">
+    <h2>第一讲 · 决策的五要素</h2>
+    <span class="time-badge">7 分钟</span>
+    <p class="subtitle">目标：任何决策都能拆成五块，拆开就不慌了</p>
+  </div>
+
+  <p>任何决策都可以拆解为五个部分：</p>
+  <ol>
+    <li><b>目标</b>：我到底想要什么？——说不清目标，就谈不上选择。</li>
+    <li><b>选项</b>：我有哪些可行方案？——没有选项，就没有选择。</li>
+    <li><b>信息</b>：每个选项会带来什么后果？——信息越全，选择越稳。</li>
+    <li><b>标准</b>：用什么尺度比较选项？——分数？快乐？风险？</li>
+    <li><b>结果</b>：选择之后，我如何承担后果？</li>
+  </ol>
+  <div class="kw-card">
+    <span class="kw-tag">使用时机</span>纠结时，把这张清单掏出来，逐项写答案。写不出的那几项，往往就是真正卡住你的地方——<b>多数「纠结」不是选项太少，而是标准不清。</b>
+  </div>
+  <div class="quote-box">
+    在计算成本时，正确的立场不是往后看……正确的立场是往前看。
+    <span class="qsrc">——《经济学的思维方式》</span>
+  </div>
+  <div class="interact">
+    <div class="it-title">练习（3 分钟）</div>
+    <p>用五要素拆解「周末去补课还是去打球」这个选择：目标是什么？选项有哪些？信息缺什么？用什么标准比？结果谁承担？</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：目标——提升成绩 vs 放松身心（可能都想要，需要排序）；选项——补课/打球/打球两小时再补课；信息——补课讲什么、对自己的帮助多大；标准——「哪个对长远更值」而不是「哪个当下更爽」；结果——考砸了自己承担，放松过头也是自己承担。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第二讲 · 成本视角
+     ============================================================ -->
+<section class="sec c-2" id="sec-2">
+  <div class="sec-head">
+    <h2>第二讲 · 成本视角 —— 机会成本与沉没成本</h2>
+    <span class="time-badge">7 分钟</span>
+    <p class="subtitle">目标：学会「往前看」地算账</p>
+  </div>
+
+  <h3>2.1 机会成本</h3>
+  <div class="kw-card">
+    <span class="kw-tag">定义</span><b>成本是某人放弃的机会的价值。</b>看一场电影的「成本」不是票钱，而是这 2 小时本来能做的事。真正的成本，是「下一个最佳选择」的价值。
+  </div>
+
+  <h3>2.2 沉没成本谬误</h3>
+  <div class="kw-card">
+    <span class="kw-tag">定义</span><b>过去的投入无法收回，不该影响现在的决定。</b>
+  </div>
+  <ul>
+    <li>电影很烂但票已买 → 继续看完是双输（损失了钱，又损失了时间）。</li>
+    <li>追剧追到第 30 集觉得没意思 → 停下来比硬撑更理性。</li>
+    <li>错误地坚持一个方向，往往是因为「已经投入太多」——但投入越多，越该果断止损。</li>
+  </ul>
+  <div class="quote-box">
+    沉没成本：已经付出、不可收回的成本。边际成本是行为的结果，它也应该是行为的指南。
+    <span class="qsrc">——《经济学的思维方式》</span>
+  </div>
+
+  <h3>2.3 决策中的「两块糖」</h3>
+  <div class="case-card">
+    <span class="case-title">案例：自己买的糖 vs 别人送的糖</span>
+    <p>同样一块糖，自己买来吃，与别人送的，哪一块更甜？大多数人会说「送的更甜」——因为「免费」激活了愉悦感。</p>
+    <p>这提示我们：<b>同样的选择，因情境不同而体验不同。</b>决策不只看「得到什么」，还看「怎么得到」。</p>
+  </div>
+  <div class="interact">
+    <div class="it-title">互动讨论（2 分钟）</div>
+    <p>「我已经报了补课班，钱都交了，不去太亏」——这句话里，哪些是沉没成本？正确的下一步该怎么想？</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：交了的钱是沉没成本，收不回来；「去不去」应只看「去了能学到什么 vs 用这时间去做什么」，而不是为了回本。若课程确实有价值就去，若只是「舍不得钱」硬去，反而两头亏。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第三讲 · 期望值
+     ============================================================ -->
+<section class="sec c-3" id="sec-3">
+  <div class="sec-head">
+    <h2>第三讲 · 期望值 —— 把不确定性变成数字</h2>
+    <span class="time-badge">7 分钟</span>
+    <p class="subtitle">目标：算平均，更看最坏能不能承受</p>
+  </div>
+
+  <div class="kw-card">
+    <span class="kw-tag">公式</span>当结果不确定时，理性决策靠<b>期望值</b>：<b>期望值 = 每个结果的概率 × 该结果的价值，全部加起来。</b>
+  </div>
+  <div class="case-card">
+    <span class="case-title">案例：掷硬币</span>
+    <p>掷硬币，正面赢 100 元，反面输 50 元。期望值 = 0.5 × 100 + 0.5 × (−50) = 25 元 → 平均来看值得参与。</p>
+  </div>
+  <div class="kw-card">
+    <span class="kw-tag">但期望值不是全部</span>一个期望值 +25 元、但要赌上全部身家的游戏，理性的人往往不玩——因为损失的可能不是钱，而是「翻身的资格」。<b>决策不仅要算期望值，还要看最坏结果能不能承受。</b>
+  </div>
+  <div class="quote-box">
+    决策理论提醒我们：不仅要考虑平均结果，还要考虑尾部风险。
+  </div>
+  <div class="case-card">
+    <span class="case-title">案例：选科与「热门专业」</span>
+    <p>某个「热门专业」平均就业不错（期望值高），但如果市场突变，自己恰好没赶上（尾部风险），最坏结果自己扛得住吗？选它之前，先问最坏情况。</p>
+  </div>
+  <div class="interact">
+    <div class="it-title">互动讨论（2 分钟）</div>
+    <p>作业有两种完成方式：A 稳妥拿 85 分，B 赌一把可能 100 分也可能 60 分。什么情况下选 B 合理？什么情况下选 B 是冒险？</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：若「最坏 60 分」完全可承受（比如只是普通测验），B 的期望值更高就值得赌；若这是决定升学的大考，「60 分」的尾部风险无法承受，就该选 A。期望值告诉你平均，承受力告诉你敢不敢玩。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第四讲 · 认知偏误
+     ============================================================ -->
+<section class="sec c-4" id="sec-4">
+  <div class="sec-head">
+    <h2>第四讲 · 认知偏误 —— 大脑的快捷方式也会出错</h2>
+    <span class="time-badge">7 分钟</span>
+    <p class="subtitle">目标：识别五种最常骗你的「快捷方式」</p>
+  </div>
+
+  <p>大脑为了节省能量，会用「快捷方式」（启发式）做判断。快捷方式多数时候好用，但会<b>系统性出错</b>：</p>
+  <table>
+    <tr><th>偏误</th><th>定义</th><th>例子</th></tr>
+    <tr><td>锚定效应</td><td>先出现的信息绑架判断</td><td>先看到「原价 1000，现价 199」，就觉得便宜</td></tr>
+    <tr><td>确认偏误</td><td>只相信支持自己观点的证据</td><td>觉得自己某科好，就只留意考得好的那次</td></tr>
+    <tr><td>幸存者偏差</td><td>只看到成功者，忽略失败者</td><td>只看到辍学创业成功的比尔·盖茨</td></tr>
+    <tr><td>从众效应</td><td>跟着多数人走</td><td>「全班都报文科，我也报」</td></tr>
+    <tr><td>可得性偏差</td><td>越容易想起的事越觉得常见</td><td>刚看过坠机新闻，就觉得飞机危险</td></tr>
+  </table>
+  <div class="kw-card">
+    <span class="kw-tag">一句话</span><b>识别偏误不是为了「证明自己对」，而是为了「发现自己错」。</b>凡是「我觉得」「大家都说」的判断，都值得再问一句：证据呢？
+  </div>
+  <div class="case-card">
+    <span class="case-title warn">警惕「别人说」</span>
+    <p>确认偏误最大的来源，是「我以为大家都这么认为」——其实可能只是你只听了支持这个看法的人说话。把「大家」换成具体名字，看看是不是真的所有人都这么说。</p>
+  </div>
+  <div class="interact">
+    <div class="it-title">互动讨论（2 分钟）</div>
+    <p>挑一种偏误，说一个你在自己身上见过的例子（比如「只记得考好的那次」）。说出来，下次它再出现时你就能认出它。</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：无标准答案。重点是训练「元认知」——在情绪升起、立刻下结论之前，暂停一秒问自己：这是事实，还是我的快捷方式在说话？</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第五讲 · 框架效应
+     ============================================================ -->
+<section class="sec c-5" id="sec-5">
+  <div class="sec-head">
+    <h2>第五讲 · 框架效应 —— 怎么说，决定怎么选</h2>
+    <span class="time-badge">7 分钟</span>
+    <p class="subtitle">目标：看穿「换一种说法」的操纵</p>
+  </div>
+
+  <div class="case-card">
+    <span class="case-title">案例：同一台手术的两种说法</span>
+    <p>一项手术，「手术后一个月内死亡率 10%」与「手术后一个月内存活率 90%」——说的是一件事，绝大多数人听了前者拒绝手术，听了后者同意手术。</p>
+  </div>
+  <div class="kw-card">
+    <span class="kw-tag">原因</span>为什么？因为<b>损失比收益更扎心</b>。心理学称之为「损失厌恶」：丢 100 元的痛苦，大约需要赚 250 元才能抵消。同样的事实，用「损失」框架说出来，就格外有分量。
+  </div>
+  <p><b>启示：</b></p>
+  <ol>
+    <li>别人会利用框架影响你的选择（广告、谈判、政见宣传）。</li>
+    <li>自己决策时，主动换框架看同一件事：问「反过来想，我还选这个吗？」</li>
+    <li>被推销时，把「打折省了多少」换成「为了省 20 元，我多冒了什么风险」。</li>
+  </ol>
+  <div class="interact">
+    <div class="it-title">互动讨论（2 分钟）</div>
+    <p>同一句话的两种框架：「这场考试你有 60% 的概率通过」 vs 「这场考试你有 40% 的概率不通过」。你会怎么回答「要不要复习」？你的答案变了吗？</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：事实相同、情绪不同——前者让人安心、后者让人紧张。若两种说法让你得出不同行动，说明你被框架影响了；把「通过率/不通过率」都列出来，再做决定。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第六讲 · 快思考与慢思考
+     ============================================================ -->
+<section class="sec c-6" id="sec-6">
+  <div class="sec-head">
+    <h2>第六讲 · 快思考与慢思考 —— 直觉与理性的分工</h2>
+    <span class="time-badge">7 分钟</span>
+    <p class="subtitle">目标：知道什么时候该「慢下来」</p>
+  </div>
+
+  <p>人的大脑有两套系统：</p>
+  <table>
+    <tr><th></th><th>系统 1（快）</th><th>系统 2（慢）</th></tr>
+    <tr><td><b>特点</b></td><td>自动、直觉、快</td><td>主动、分析、慢</td></tr>
+    <tr><td><b>例子</b></td><td>「1+1=2」、认人脸</td><td>算 37 × 24、权衡利弊</td></tr>
+    <tr><td><b>优点</b></td><td>省能量、反应快</td><td>更可靠、更深入</td></tr>
+    <tr><td><b>风险</b></td><td>被偏误利用</td><td>太累、启动慢</td></tr>
+  </table>
+  <div class="kw-card">
+    <span class="kw-tag">使用规则</span><b>重要决策要用系统 2。</b>系统 1 会告诉你「报这个专业肯定好」（因为名字听起来响）；系统 2 才追问：课程学什么？就业去向？我适合吗？
+  </div>
+  <div class="quote-box">
+    学会思考的真正含义，是学会如何掌控自己的思考方式和思考内容。这意味着有足够的意识去选择关注什么。
+  </div>
+  <div class="interact">
+    <div class="it-title">互动讨论（1 分钟）</div>
+    <p>举一个你「用系统 1 秒答、后来发现错了」的例子（比如：一美元 7 天翻一倍，多少天能到 100 万？——先直觉报一个数）。</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：直觉会低估指数增长——1 美元每天翻倍，约 27 天就超过 1 亿。此题的启发：越「快」的答案，遇到「增长、概率、权衡」越要启动系统 2 复核。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第七讲 · 原则与决策
+     ============================================================ -->
+<section class="sec c-7" id="sec-7">
+  <div class="sec-head">
+    <h2>第七讲 · 原则与决策 —— 用原则减少决策疲劳</h2>
+    <span class="time-badge">7 分钟</span>
+    <p class="subtitle">目标：把高频小决策自动化，把注意力留给大事</p>
+  </div>
+
+  <p>好决策不靠每次都「重新想」，而靠<b>提前定好原则</b>。</p>
+  <div class="quote-box">
+    大是大非的事情一定要先声明，划定边界。原则应该从小事做起，开始时原则要少，轻松愉快地开始，逐渐强化。
+    <span class="qsrc">——《原则》</span>
+  </div>
+  <ul>
+    <li>达利欧在《原则》中强调：决策要「明确目标 + 客观机制 + 群体智慧」，并定期复盘。</li>
+    <li><b>原则的作用</b>：把高频的小决策自动化，把省下的注意力留给真正重要的决策。</li>
+    <li><b>原则要少、要能执行</b>：从容易坚持的小原则开始，逐渐强化。</li>
+  </ul>
+  <div class="kw-card">
+    <span class="kw-tag">给高中生的三条决策原则（示例）</span>
+    <ol style="margin:4px 0;">
+      <li>学习上的选择，优先选「长线收益 &gt; 短期快感」的。</li>
+      <li>情绪激动时不做重要决定（先睡一觉）。</li>
+      <li>涉及未来的大选择（选科、志愿），问三个人：父母、老师、有经验的学长。</li>
+    </ol>
+  </div>
+  <div class="interact">
+    <div class="it-title">课后任务（布置）</div>
+    <p>定一条你自己的个人决策原则，写下来，坚持两周——两周后回看，它帮你省掉了哪些纠结？</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：原则越具体越好，例如「晚上十点后不碰手机」「犹豫超过一天的事，列五要素清单再决定」。评价原则好不好，就看它能否在你「懒得想」的时候替你守住底线。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     总结
+     ============================================================ -->
+<section class="sec c-sum" id="sec-sum">
+  <div class="sec-head">
+    <h2>总结 · 把选择变成方法</h2>
+    <span class="time-badge">7 分钟</span>
+  </div>
+
+  <table>
+    <tr><th style="width:44px;">#</th><th>思维工具</th><th>一句话</th></tr>
+    <tr><td>1</td><td>决策五要素</td><td>目标不清，选择必乱</td></tr>
+    <tr><td>2</td><td>机会成本</td><td>选 A 的代价是放弃 B</td></tr>
+    <tr><td>3</td><td>沉没成本</td><td>过去的投入，别绑架现在</td></tr>
+    <tr><td>4</td><td>期望值</td><td>算平均，更看最坏能不能承受</td></tr>
+    <tr><td>5</td><td>认知偏误</td><td>大脑的快捷方式也会骗人</td></tr>
+    <tr><td>6</td><td>框架效应</td><td>换一种说法，答案就变</td></tr>
+    <tr><td>7</td><td>快慢思考</td><td>重要的事，用慢系统</td></tr>
+    <tr><td>8</td><td>决策原则</td><td>提前定规则，减少疲劳决策</td></tr>
+  </table>
+
+  <div class="interact">
+    <div class="it-title">课后思考（回家独立完成）</div>
+    <ol style="margin:4px 0;">
+      <li>用决策五要素分析你最近做过的一个选择。</li>
+      <li>找一条被「锚定」的广告：它先给了你什么参照？</li>
+      <li>你身边有没有「沉没成本」绑架决策的例子？</li>
+      <li>定一条你的个人决策原则，写下来，坚持两周。</li>
+    </ol>
+  </div>
+
+  <div class="end-box"><b>最后一句：</b>人无法避免选择，但可以学会如何选择——把工具装进口袋，剩下的，交给你的判断。</div>
+</section>
+
+<p class="foot-note">本节为思维训练课 · 全程 60 分钟 · 无计分测试，含形成性检测</p>
+</article>
+
+<script>
+// 参考要点展开/收起
+function toggleRef(btn) {
+  var box = btn.nextElementSibling;
+  var show = !box.classList.contains("show");
+  box.classList.toggle("show", show);
+  btn.classList.toggle("open", show);
+  btn.textContent = show ? "收起参考要点" : "展开参考要点";
+}
+
+// 导航滚动监听：高亮当前小节 + 累计时间
+var secs = Array.prototype.slice.call(document.querySelectorAll("section.sec"));
+var chips = Array.prototype.slice.call(document.querySelectorAll(".topbar a.chip"));
+var topbar = document.getElementById("topbar");
+var times = {};
+var cum = 0;
+var lastId = "";
+var names = ["开场", "第一讲", "第二讲", "第三讲", "第四讲", "第五讲", "第六讲", "第七讲", "总结"];
+for (var i = 0; i < secs.length; i++) {
+  var start = cum;
+  cum += parseInt(chips[i].getAttribute("data-time"), 10);
+  times[secs[i].id] = { start: start, end: cum, name: names[i] };
+}
+
+function onScroll() {
+  var pos = window.pageYOffset + 70;
+  var cur = secs[0];
+  for (var i = 0; i < secs.length; i++) {
+    if (secs[i].offsetTop <= pos) cur = secs[i];
+  }
+  var id = cur.id;
+  for (var j = 0; j < chips.length; j++) {
+    chips[j].classList.toggle("active", chips[j].getAttribute("href") === "#" + id);
+  }
+  if (id !== lastId && topbar.scrollWidth > topbar.clientWidth) {
+    var activeChip = document.querySelector('.topbar a.chip[href="#' + id + '"]');
+    if (activeChip) {
+      topbar.scrollLeft = Math.max(0, activeChip.offsetLeft - (topbar.clientWidth - activeChip.offsetWidth) / 2);
+    }
+  }
+  lastId = id;
+  var info = times[id];
+  document.getElementById("tbProgress").textContent = (info ? info.name + " · " + info.start + "-" + info.end + "/60 分钟" : "");
+}
+window.addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+</script>
+</body>
+</html>

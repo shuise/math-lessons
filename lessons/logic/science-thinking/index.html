@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/png" href="../../lib/logo.png?version=1.0.0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>思维训练课 · 科学、逻辑与批判性思维</title>
+<title>理性认识世界 · 证据、推理与判断</title>
 <link rel="stylesheet" href="../../style.css">
 <style>
 body {
@@ -45,11 +45,13 @@ h1 { color: #2c3e50; font-size: 1.7em; border-bottom: 3px solid #9c27b0; padding
   background: rgba(255,255,255,0.96); backdrop-filter: blur(6px);
   border: 1px solid #e0e0e0; border-radius: 12px;
   padding: 8px 12px; margin: 0 0 20px;
-  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  display: flex; flex-wrap: nowrap; align-items: center; gap: 6px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin;
   box-shadow: 0 2px 10px rgba(0,0,0,0.06);
 }
-.topbar .tb-label { font-size: 0.8em; color: #888; margin-right: 4px; white-space: nowrap; }
+.topbar .tb-label { flex: 0 0 auto; font-size: 0.8em; color: #888; margin-right: 4px; white-space: nowrap; }
 .topbar a.chip {
+  flex: 0 0 auto;
   text-decoration: none; font-size: 0.8em; color: #555;
   padding: 4px 12px; border-radius: 14px; border: 1px solid #ddd;
   background: #fff; white-space: nowrap; transition: 0.15s;
@@ -57,7 +59,7 @@ h1 { color: #2c3e50; font-size: 1.7em; border-bottom: 3px solid #9c27b0; padding
 .topbar a.chip:hover { border-color: #9c27b0; color: #9c27b0; }
 .topbar a.chip.active { background: #9c27b0; color: #fff; border-color: #9c27b0; }
 .topbar a.chip .tm { opacity: 0.75; font-size: 0.9em; }
-.topbar .tb-progress { margin-left: auto; font-size: 0.8em; color: #9c27b0; font-weight: bold; white-space: nowrap; }
+.topbar .tb-progress { flex: 0 0 auto; margin-left: 6px; font-size: 0.8em; color: #9c27b0; font-weight: bold; white-space: nowrap; }
 
 /* ====== 分节卡片 ====== */
 section.sec {
@@ -139,6 +141,21 @@ section.sec.c-sum { border-left: 6px solid #6d4c41; }
 }
 .fallacy-item b { color: #c62828; display: block; margin-bottom: 4px; }
 
+/* ====== 选学拓展 ====== */
+.extension {
+  margin: 14px 0; padding: 8px 14px;
+  background: #fafafa; border: 1px dashed #b0bec5; border-radius: 8px;
+}
+.extension summary { cursor: pointer; color: #546e7a; font-weight: bold; }
+.extension[open] summary { margin-bottom: 8px; }
+.data-example {
+  margin: 14px 0; padding: 2px 0 2px 14px;
+  border-left: 4px solid #ef6c00;
+}
+.data-example h4 { margin: 0 0 6px; color: #bf360c; font-size: 0.98em; }
+.data-example p { margin: 5px 0; }
+.data-example .judgement { color: #37474f; }
+
 /* ====== 表格 ====== */
 .sec table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.93em; }
 .sec th, .sec td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
@@ -151,31 +168,50 @@ section.sec.c-sum { border-left: 6px solid #6d4c41; }
 }
 .end-box ol { margin: 6px 0; }
 .foot-note { text-align: center; color: #aaa; font-size: 0.85em; margin-top: 26px; }
+@media (max-width: 680px) {
+  body { padding: 12px; font-size: 15px; }
+  article { padding: 22px 16px 34px; border-radius: 8px; }
+  h1 { font-size: 1.45em; }
+  section.sec { padding: 16px 14px; }
+  .topbar { top: 0; border-radius: 8px; }
+  .topbar .tb-label { display: none; }
+  .topbar .tb-progress { width: auto; margin-left: 6px; }
+  .sec th, .sec td { padding: 7px 8px; }
+}
 </style>
 </head>
 <body>
 <a class="back" href="../../index.html">&larr; 返回课程列表</a>
 <article>
-<h1>思维训练课<br><small style="font-size:0.55em;color:#888;">科学 · 逻辑 · 批判性思维 —— 一堂发散讨论课</small></h1>
-<p class="tip">本课不考试、不判分，只负责「把脑子打开」——边讲边聊，随时举手。</p>
+<h1>理性认识世界<br><small style="font-size:0.55em;color:#888;">证据 · 推理 · 判断 —— 给高一学生的思维训练课</small></h1>
+<p class="tip">理性不是怀疑一切，而是让判断与证据相称，并愿意根据新证据调整判断。</p>
 
 <div class="course-meta">
-  <span><strong>对象：</strong>高中学生</span>
-  <span><strong>总时长：</strong>60 分钟（含互动）</span>
-  <span><strong>形式：</strong>讲授 + 开放讨论</span>
+  <span><strong>对象：</strong>高一学生（已学集合与函数基础）</span>
+  <span><strong>核心时长：</strong>60 分钟（含互动，折叠拓展另计）</span>
+  <span><strong>形式：</strong>贯穿案例 + 讨论 + 当堂检测</span>
+</div>
+
+<div class="kw-card">
+  <span class="kw-tag">学习目标</span>学完本课，你应当能够：
+  <ol style="margin:4px 0;">
+    <li>分清描述性事实主张、因果性事实主张和价值判断；</li>
+    <li>检查数字的来源、口径、样本和比较基准；</li>
+    <li>区分相关与因果，并指出可能的其他解释；</li>
+    <li>根据证据强弱表达不同程度的确信，并说明什么证据会改变自己的判断。</li>
+  </ol>
 </div>
 
 <!-- ====== 顶部导航 ====== -->
 <nav class="topbar" id="topbar">
   <span class="tb-label">课堂导航</span>
-  <a class="chip active" href="#sec-open" data-time="3">开场 <span class="tm">3′</span></a>
-  <a class="chip" href="#sec-1" data-time="10">一讲·数字与统计 <span class="tm">10′</span></a>
-  <a class="chip" href="#sec-2" data-time="12">二讲·何为科学 <span class="tm">12′</span></a>
-  <a class="chip" href="#sec-3" data-time="10">三讲·科学推理 <span class="tm">10′</span></a>
-  <a class="chip" href="#sec-4" data-time="8">四讲·批判性思维 <span class="tm">8′</span></a>
-  <a class="chip" href="#sec-5" data-time="8">五讲·创新性思维 <span class="tm">8′</span></a>
-  <a class="chip" href="#sec-6" data-time="4">六讲·经济学思维 <span class="tm">4′</span></a>
-  <a class="chip" href="#sec-sum" data-time="5">总结 <span class="tm">5′</span></a>
+  <a class="chip active" href="#sec-open" data-time="4">开场 <span class="tm">4′</span></a>
+  <a class="chip" href="#sec-1" data-time="9">一讲·主张与证据 <span class="tm">9′</span></a>
+  <a class="chip" href="#sec-2" data-time="12">二讲·数字体检 <span class="tm">12′</span></a>
+  <a class="chip" href="#sec-3" data-time="14">三讲·相关与因果 <span class="tm">14′</span></a>
+  <a class="chip" href="#sec-4" data-time="11">四讲·科学判断 <span class="tm">11′</span></a>
+  <a class="chip" href="#sec-5" data-time="7">五讲·理性决策 <span class="tm">7′</span></a>
+  <a class="chip" href="#sec-sum" data-time="3">总结 <span class="tm">3′</span></a>
   <span class="tb-progress" id="tbProgress">开场 · 0/60 分钟</span>
 </nav>
 
@@ -184,364 +220,336 @@ section.sec.c-sum { border-left: 6px solid #6d4c41; }
      ============================================================ -->
 <section class="sec c-open" id="sec-open">
   <div class="sec-head">
-    <h2>开场：为什么需要逻辑？</h2>
-    <span class="time-badge">3 分钟</span>
+    <h2>开场：一句「有数据」的广告就可信吗？</h2>
+    <span class="time-badge">4 分钟</span>
   </div>
-  <div class="quote-box">
-    科学时代的任何一个人，几乎不知道科学的本性是什么。这不仅包括那些通过周刊意识到科学的人，而且也包括哲学家和科学家本身在内。
+  <div class="case-card">
+    <span class="case-title">贯穿全课的材料</span>
+    <p>某学习软件广告称：「高一学生使用本软件 4 周后，数学成绩平均提高 30%，效果已被多所学校验证。」</p>
   </div>
-  <p><b>引入：</b>今天我们不背公式、不发试卷，来拆解你的大脑——看看你是怎么被广告骗的、被伪科学套路说服的。</p>
-  <p><b>一句话预告：</b>今天我们要学会的不是「想什么」，而是「怎么想」。顺序是这样：先建工具（数字与统计），再用工具看科学（可证伪性），接着回到生活（批判、创新与决策）。</p>
   <div class="interact">
-    <div class="it-title">开场破冰（讨论 1 分钟）</div>
-    <p style="margin:4px 0;">每人说一件「自己曾经深信不疑、后来发现站不住脚」的事。不用讲道理，先讲故事。</p>
+    <div class="it-title">先做判断（个人 20 秒，同桌交流 40 秒）</div>
+    <p>如果 0 表示「完全不能相信」，10 表示「几乎可以确定」，你现在给这句话几分？还缺少哪一条关键信息？</p>
+  </div>
+  <div class="kw-card">
+    <span class="kw-tag">全课四问</span>面对任何主张，先问：
+    <ol style="margin:4px 0;">
+      <li><b>主张是什么？</b>它说得足够明确吗？</li>
+      <li><b>证据是什么？</b>证据来自哪里？</li>
+      <li><b>推理成立吗？</b>证据能够支持多强的结论？</li>
+      <li><b>还有别的解释吗？</b>什么新证据会改变判断？</li>
+    </ol>
   </div>
 </section>
 
 <!-- ============================================================
-     第一讲 · 数字与统计
+     第一讲 · 主张与证据
      ============================================================ -->
 <section class="sec c-1" id="sec-1">
   <div class="sec-head">
-    <h2>第一讲 · 数字与统计 —— 用数字看世界</h2>
-    <span class="time-badge">10 分钟</span>
-    <p class="subtitle">目标：先学会给数字「体检」——来源、口径、样本</p>
+    <h2>第一讲 · 先把话说清楚 —— 主张与证据</h2>
+    <span class="time-badge">9 分钟</span>
+    <p class="subtitle">目标：先判断一句话在说什么，再讨论它是真是假</p>
   </div>
 
-  <h3>1.1 数字理性的起点：先问数字从哪来</h3>
-  <p>感觉会骗人：同一碗面，饿了觉得好吃，饱了觉得一般。数字存在的意义，就是让「谁对谁错」可以裁决——但它也常常被人操纵。</p>
-  <div class="quote-box">
-    世界上有三种谎言：谎言、该死的谎言，以及统计数字。
+  <h3>1.1 三类常见主张</h3>
+  <table>
+    <tr><th>类型</th><th>核心问题</th><th>例子</th></tr>
+    <tr><td><b>描述性事实主张</b></td><td>它对现状的描述是否与实际相符？</td><td>「本次测验 40 人中有 35 人达到 60 分。」</td></tr>
+    <tr><td><b>因果性事实主张</b></td><td>不同干预是否会使结果的平均水平或发生概率不同？</td><td>「使用软件使学生的成绩提高了。」</td></tr>
+    <tr><td><b>价值判断</b></td><td>评价标准是什么？</td><td>「这个班考得不错。」</td></tr>
+  </table>
+  <p>描述性主张和因果性主张都属于<b>事实性主张</b>，都需要证据；因果性主张还要比较不同条件，并排除其他合理解释。只有在证据确认事实性主张符合实际后，才能称为<b>已核实的事实</b>。价值判断不等于随便说，它也需要公开评价标准和理由。</p>
+
+  <h3>1.2 定义性陈述与经验性主张</h3>
+  <div class="case-card">
+    <p><b>定义性陈述：</b>「所有单身汉都未婚。」它因词义而成立，能帮助我们明确概念，但没有告诉我们现实中有多少单身汉。</p>
+    <p><b>经验性主张：</b>「连续使用某软件 4 周的高一学生，数学成绩平均提高。」它可能为真，也可能为假，需要观察或实验。</p>
   </div>
   <div class="kw-card">
-    <span class="kw-tag">给数字做体检</span>拿到任何数字，先问三个问题：
-    <ol style="margin:4px 0;">
-      <li><b>从哪来？</b>谁统计的？怎么统计的？</li>
-      <li><b>怎么算？</b>口径统一吗？是平均数还是百分比？</li>
-      <li><b>代表谁？</b>样本有代表性吗？</li>
-    </ol>
-  </div>
-  <div class="case-card">
-    <span class="case-title">案例：牙膏广告的「临床验证」</span>
-    <p>「经临床验证，本品有效率 90%」——谁做的验证？有没有对照组？样本多少人？数字也许是真的，但「怎么来的」决定它值不值得信。</p>
+    <span class="kw-tag">可检验</span>可检验不是「已经正确」，而是说我们能够说明：观察到什么会增强信心，观察到什么会降低信心。
   </div>
 
-  <h3>1.2 口径的陷阱：平均数与百分比</h3>
+  <h3>1.3 把模糊的话改得可以检验</h3>
+  <p>「努力就会成功」中的「努力」「成功」「谁」「多长时间」都不明确。可以改为：</p>
   <div class="case-card">
-    <span class="case-title">案例：一个班的「平均年薪」</span>
-    <p>30 人的班，1 人身家 1 亿，29 人年薪 10 万——平均年薪 340 多万。这个「平均」有误导性：它被一个极端值拉高了。<b>中位数</b>（排在中间那个人的收入）才是 10 万。</p>
+    <p>「在同年级且期初成绩相近的学生中，连续 4 周每周完成 5 次规定练习者，在统一测验中的平均进步分是否高于未达到这一练习频率者？」</p>
   </div>
-  <div class="case-card">
-    <span class="case-title">案例：「涨了 2 个百分点」还是「涨了 2%」？</span>
-    <p>支持率从 4% 涨到 6%：提高了 <b>2 个百分点</b>；但如果写「增长了 50%」，也没错——那是相对原来的 4% 算的。同一个变化，换一种口径，听起来威力完全不同。</p>
-  </div>
-  <div class="case-card">
-    <span class="case-title">案例：销量「暴增 200%」</span>
-    <p>上个月卖 3 件，这个月卖 9 件——确实是 200%。<b>小基数</b>会把增长放大到吓人。看百分比之前，先看基数。</p>
-  </div>
-  <div class="kw-card">
-    <span class="kw-tag">一句话</span><b>看平均先看分布，看百分比先看基数，百分点 ≠ 百分比。</b>
-  </div>
-
-  <h3>1.3 样本的代表性：数字代表谁</h3>
-  <div class="case-card">
-    <span class="case-title">案例：电话调查的支持率</span>
-    <p>「72% 的市民支持 XX 政策」——这份电话调查只打给了愿意接电话的人：上班的不接、年轻人不接、没座机的接不到。样本歪了，数字再精确也失真。</p>
-  </div>
-  <div class="case-card">
-    <span class="case-title">案例：校门口的那 3 个朋友</span>
-    <p>「我认识的 3 个同学都不补课」——3 个人代表不了全校。样本太小、太偏，结论就只是故事。</p>
-  </div>
-  <div class="kw-card">
-    <span class="kw-tag">抽样</span>科学的方法是<b>随机抽样</b>：每个人都有同等概率被选中，样本才能代表全体。挑着问、碰巧遇到，都会悄悄带偏结论。（至于「一起发生 ≠ 谁导致谁」的因果问题，第三讲再展开。）
-  </div>
-
-  <h3>1.4 恐惧与数字：可怕 ≠ 危险</h3>
-  <p>人们害怕的东西，往往不是最危险的东西——因为恐惧来自「画面感」，而不是来自数字。数字的作用，就是帮我们把恐惧校准成真实的风险。</p>
-  <div class="case-card">
-    <span class="case-title">案例：坐飞机 vs 开车</span>
-    <p>飞机失事会刷屏，车祸每天发生却上不了新闻。按「每 10 亿公里死亡人数」算，汽车的风险通常是飞机的 20 倍以上。飞机之所以「可怕」，是因为失事的画面太生动、太容易被想起。</p>
-  </div>
-  <div class="case-card">
-    <span class="case-title">案例：病毒感染，先看基数</span>
-    <p>一种病毒的「致死率 2%」听起来不高，但乘以庞大的感染基数，死亡人数就会很大；反过来，致死率很高的病如果感染基数极小，实际风险也有限。判断真实风险，要算 <b>概率 × 基数</b>，而不是只看一个百分比。</p>
-  </div>
-  <div class="case-card">
-    <span class="case-title">案例：鲨鱼 vs 椰子</span>
-    <p>每年被鲨鱼咬死的人屈指可数，而被掉落椰子砸死的人数与之相当甚至更多——但从没人怕椰子。危险程度由数字决定，恐惧程度却由画面决定。</p>
-  </div>
-  <div class="kw-card">
-    <span class="kw-tag">可得性启发</span>越容易被想起的事，越容易被高估。新闻偏爱「罕见而惨烈」，我们的恐惧于是被带偏。把「感觉」换成「每十万人多少例」，情绪就稳住了。
-  </div>
+  <p>改写后可以调查，但它首先检验的是<b>练习完成情况与进步分之间的关系</b>；要证明因果，还要继续改进研究设计。</p>
 
   <div class="interact">
-    <div class="it-title">互动讨论（2 分钟）</div>
-    <p>广告说「10 位牙医中有 9 位推荐我们品牌」——用「来源 / 口径 / 样本」三问，拆穿它的数字感。</p>
+    <div class="it-title">分类练习（2 分钟）</div>
+    <p>分别判断「使用 4 周后平均提高 30%」「这个软件很好」「软件使学生提高了成绩」属于哪一类主张，并说出每句话还缺少什么信息。</p>
     <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
-    <div class="ref-box">参考：①来源：这 10 位牙医是谁请来问的？调查由谁赞助？②口径：「推荐」怎么定义？有没有对比基线？③样本：哪 10 位？什么科？怎么选的？——三问一问，广告的数字感立刻缩水。</div>
+    <div class="ref-box">参考：第一句是描述性事实主张，需明确样本、测验和「30%」的算法；第二句是价值判断，需说明「好」的标准；第三句是因果性事实主张，需要对照研究并排除其他原因。</div>
   </div>
 </section>
 
 <!-- ============================================================
-     第二讲 · 何为科学
+     第二讲 · 数字体检
      ============================================================ -->
 <section class="sec c-2" id="sec-2">
   <div class="sec-head">
-    <h2>第二讲 · 何为科学？—— 科学与伪科学的界限</h2>
+    <h2>第二讲 · 数字体检 —— 数字不会自动说真话</h2>
     <span class="time-badge">12 分钟</span>
-    <p class="subtitle">目标：学会用「可证伪性」给一句话做体检</p>
+    <p class="subtitle">目标：检查来源、口径、样本、比较和不确定性</p>
   </div>
 
-  <h3>2.1 必然正确与套套逻辑</h3>
-  <p>有些话永远正确，但等于没说。例如：「单身汉是未婚男子」——必然正确，因为「未婚男子」就是「单身汉」的定义。</p>
+  <h3>2.1 数字的五项检查</h3>
   <div class="kw-card">
-    <span class="kw-tag">关键词</span><b>套套逻辑</b>：永远不被事实反驳，也因此不提供任何信息。
-  </div>
-  <div class="case-card">
-    <span class="case-title">案例：「努力就会成功」</span>
-    <p>如果「成功」被定义为「努力的结果」，这句话就成了套套逻辑——无法反驳，也无法指导行动。</p>
-    <p><b>思考：</b>怎样把这句话改造成可检验的命题？——「努力的学生平均成绩高于不努力的学生」，这就变成可检验的了。</p>
-  </div>
-
-  <h3>2.2 可证伪性 —— 科学与伪科学的界限</h3>
-  <p>波普尔：一个理论要想成为科学，必须具有<b>可证伪性</b>。称一个理论是可证伪的，并不是说它是错的，而是说它允许自己被事实推翻。</p>
-  <div class="case-card">
-    <span class="case-title warn">案例一：弗洛伊德的精神分析</span>
-    <p>无论是推人下河的人，还是救人牺牲的人，弗洛伊德学派都能给出解释（前者精神压抑，后者精神升华）。理论与任何事实都相容，因此<b>不可证伪</b>，不是科学。</p>
-  </div>
-  <div class="case-card">
-    <span class="case-title">正面案例：爱因斯坦的相对论</span>
-    <p>相对论预测了光在引力下弯曲——如果实验没测到，理论就被推翻。这就是可证伪的科学理论。</p>
+    <span class="kw-tag">数据五问</span>
+    <ol style="margin:4px 0;">
+      <li><b>来源：</b>谁收集的？原始记录能否核查？是否存在利益关系？</li>
+      <li><b>口径：</b>测量了什么？单位、时间范围和定义是否一致？</li>
+      <li><b>样本：</b>研究了谁？这些人如何被选中？</li>
+      <li><b>比较：</b>和谁比、和什么时候比？有没有合适的对照？</li>
+      <li><b>不确定性：</b>样本有多大？结果是否可能只是随机波动？</li>
+    </ol>
   </div>
 
-  <h3>2.3 形式逻辑与实证科学</h3>
-  <ul>
-    <li><b>形式逻辑</b>：推理的「语法」——前提正确且推理形式正确，结论必真（如三段论）。</li>
-    <li><b>实证科学</b>：用经验证据检验命题。伽利略第一次用数学语言描述物理世界，开启了实证科学时代。</li>
-  </ul>
+  <h3>2.2 平均数、百分比与基数</h3>
+  <div class="case-card">
+    <span class="case-title">平均数会被极端值拉动</span>
+    <p>30 人中，1 人年收入 1 亿元，29 人年收入 10 万元。平均年收入是 343 万元，中位数却是 10 万元。两者都算对了，但回答的是不同问题。</p>
+  </div>
+  <div class="case-card">
+    <span class="case-title">百分点不等于百分比</span>
+    <p>某比例从 4% 变为 6%，可以说「增加 2 个百分点」，也可以说「相对原来增加 50%」。看到百分比时，必须同时寻找原来的基数。</p>
+  </div>
+  <div class="case-card">
+    <span class="case-title">回到「成绩提高 30%」</span>
+    <p>若平均分从 50 分变为 65 分，这是增加 15 分，也是相对原分数增加 30%。只给「30%」而不给原始分数，会放大表达的冲击力。</p>
+  </div>
+  <p><b>平均数描述的是群体，不是每一个人。</b>「平均提高 30%」不等于每名学生都提高 30%，还要查看个人变化的分布。</p>
+
+  <h3>2.3 随机抽样有帮助，但不提供保证</h3>
+  <p>简单随机抽样让抽样框中的每个个体有相同机会被选中，可以降低人为挑选造成的偏差。但样本能否较好反映总体，还取决于抽样框是否完整、样本量、无应答情况以及是否需要分层或加权。</p>
   <div class="kw-card">
-    <span class="kw-tag">一句话</span><b>逻辑保证推理形式正确，实证保证前提真实</b>。二者缺一不可。
+    <span class="kw-tag">样本量</span>「10 人中有 9 人同意」与「1000 人中有 900 人同意」比例相同，但后者通常更稳定。样本再大，如果只选愿意参加的人，也可能产生系统偏差。
   </div>
+
+  <details class="extension">
+    <summary>2.4 选学拓展：比较风险要使用同一把尺</summary>
+    <p>「每人」「每次」「每公里」是不同的分母，回答不同问题。某事件发生的条件概率描述个体在给定条件下的风险；用概率乘以相应人数，可以估计群体中的事件数量。二者不能混称为同一种「实际风险」。</p>
+  </details>
+
+  <details class="extension">
+    <summary>2.5 选学拓展：常见数据统计误区（5 例，约 8 分钟）</summary>
+    <p>下面各例中的计算未必错误，真正的问题常常是：数字所能支持的结论，被说得过强了。建议先读材料、自己判断，再看分析；课堂时间有限时可选讲 2 至 3 例，其余留作课后自查。</p>
+
+    <div class="data-example">
+      <h4>误区一：把有偏样本当作全体</h4>
+      <p><b>材料：</b>软件只向连续使用满 4 周的用户弹出问卷，100 名回复者中有 90 人认为软件有帮助。广告据此称：「90% 的学生认可本软件。」</p>
+      <p><b>问题：</b>持续使用者本来就可能更认可软件，提前停用者又没有被询问；主动回复的人也可能与未回复者不同。</p>
+      <p class="judgement"><b>正确判断：</b>90% 只是在这 100 名回复者中的比例。若要推断全体用户，需要先明确总体，再从总体中取得更有代表性的样本。</p>
+    </div>
+
+    <div class="data-example">
+      <h4>误区二：用平均数代替多数人的情况</h4>
+      <p><b>材料：</b>5 名学生的进步分依次为 −4、−2、0、6、40 分，平均进步 8 分。广告据此称：「学生通常能提高 8 分。」</p>
+      <p><b>问题：</b>平均数被 40 分这个较大值明显拉高，不能代表多数人的变化。</p>
+      <p class="judgement"><b>正确判断：</b>(−4−2+0+6+40)÷5=8，计算没有错；但中位数是 0 分，只有 2 人进步。应同时查看中位数、每个人的变化和数据分布。</p>
+    </div>
+
+    <div class="data-example">
+      <h4>误区三：混淆人数与比例</h4>
+      <p><b>材料：</b>某月 1000 名用户中有 20 人投诉；次月 3000 名用户中有 30 人投诉。有人说：「投诉人数增加了 50%，用户体验变差了。」</p>
+      <p><b>问题：</b>投诉人数确实增加了 50%，但用户总数也变了，只看人数不能判断投诉发生的频繁程度。</p>
+      <p class="judgement"><b>正确判断：</b>投诉用户比例由 20÷1000=2% 降为 30÷3000=1%，下降 1 个百分点，相对下降 50%。人数与比例回答不同问题，二者都应报告。</p>
+    </div>
+
+    <div class="data-example">
+      <h4>误区四：利用截断坐标轴夸大差异</h4>
+      <p><b>材料：</b>两组平均分分别为 72 分和 75 分。柱状图纵轴从 70 分开始，两根柱的可见高度便是 2 和 5，看起来后一组是前一组的 2.5 倍。</p>
+      <p><b>问题：</b>2.5 倍只是截断后可见柱高之比，不是两组成绩之比；图形放大了 3 分差异带来的视觉冲击。</p>
+      <p class="judgement"><b>正确判断：</b>两组实际相差 3 分。截断坐标轴可以帮助观察小变化，但必须醒目标明；用柱长表示数值大小时，通常应从 0 开始，避免用柱长比例误导读者。</p>
+    </div>
+
+    <div class="data-example">
+      <h4>误区五：只挑选有利结果</h4>
+      <p><b>材料：</b>5 所学校各有 40 名学生参加测试，各校平均进步分依次为 8、6、1、0、−5 分。广告只展示前两所学校，并称：「多所学校验证，平均提高 7 分。」</p>
+      <p><b>问题：</b>只报告最有利的两所学校，隐藏了其余结果，这叫作选择性报告。</p>
+      <p class="judgement"><b>正确判断：</b>因为各校人数相同，全部 200 名学生的平均进步为 (8+6+1+0−5)÷5=2 分。研究应报告事先确定的全部样本和指标；而且仅有前后变化，仍不足以证明软件造成了这 2 分进步。</p>
+    </div>
+
+    <div class="kw-card">
+      <span class="kw-tag">共同规律</span>看到醒目的数字，不只问「算得对不对」，还要问：它描述的是谁、采用什么口径、遗漏了什么，以及结论是否超过数据真正能支持的范围。
+    </div>
+  </details>
 
   <div class="interact">
-    <div class="it-title">互动讨论（1 分钟）</div>
-    <p>判断下面的说法，是「套套逻辑」还是「可检验命题」：</p>
-    <ol style="margin:4px 0;">
-      <li>「凡考高分的人，必然考得比别人好。」</li>
-      <li>「吃辣的人更容易出汗。」</li>
-    </ol>
+    <div class="it-title">给广告做数据体检（2 分钟）</div>
+    <p>针对「使用 4 周后平均提高 30%」，按数据五问各提出一个需要补充的问题。</p>
     <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
-    <div class="ref-box">参考：①「考高分」已经包含「比别人考得好」之意，是套套逻辑——永远正确但零信息；②「更容易出汗」可以被实验检验，是可检验命题，值得争论的是样本与对照组的设计。</div>
+    <div class="ref-box">参考：谁资助并收集数据？「提高 30%」怎样计算？调查了哪些学校、多少学生、如何选人？与未使用者还是与自己的前测比较？结果在不同班级是否稳定？在回答这些问题前，只能说广告提供了一个待核查的主张。</div>
   </div>
 </section>
 
 <!-- ============================================================
-     第三讲 · 科学推理
+     第三讲 · 相关与因果
      ============================================================ -->
 <section class="sec c-3" id="sec-3">
   <div class="sec-head">
-    <h2>第三讲 · 科学推理 —— 因果与归纳</h2>
-    <span class="time-badge">10 分钟</span>
-    <p class="subtitle">目标：别把「一起发生」当成「一个导致另一个」</p>
+    <h2>第三讲 · 从相关到因果 —— 结论不能走得比证据更远</h2>
+    <span class="time-badge">14 分钟</span>
+    <p class="subtitle">目标：识别混淆变量、反向因果，并设计更强的检验</p>
   </div>
 
-  <h3>3.1 因果性与相关性</h3>
-  <p><b>相关性</b>：两件事同时发生。<b>因果性</b>：一件事导致另一件事。两者经常被混淆。</p>
+  <h3>3.1 两个不同的问题</h3>
+  <p>在本课讨论的<b>统计相关关系</b>中，一个变量不能由另一个变量精确确定，但一个变量变化时，另一个变量的取值或分布仍呈现系统性变化；相关可以为正、为负，也可以存在时间滞后。<b>因果影响</b>是指：在明确的人群和条件下，与不改变因素 <i>X</i> 或使它处于另一状态相比，对 <i>X</i> 采取不同干预会使结果 <i>Y</i> 的平均水平或发生概率产生系统性差异。</p>
   <div class="case-card">
-    <span class="case-title">经典案例：冰激凌与溺水</span>
-    <p>冰激凌销量上升与溺水人数上升高度相关——但冰激凌不导致溺水，背后是「夏天到了」这个共同原因。「气温」就是典型的<b>混淆变量</b>：没有控制它，相关就被误读成了因果。</p>
+    <span class="case-title">假设观察到一组数据</span>
+    <p>自愿使用软件的学生平均进步 8 分，未使用者平均进步 3 分。这说明「是否使用」与「进步分」在这个样本中有关联，但还不能直接说明软件造成了 5 分的差异。</p>
   </div>
-  <div class="case-card">
-    <span class="case-title">高中生活案例：玩手机与成绩</span>
-    <p>玩手机时间与成绩负相关——是手机导致成绩差，还是成绩差的人更想玩手机（反向因果）？</p>
-  </div>
+
+  <h3>3.2 审查因果主张的三问</h3>
   <div class="kw-card">
-    <span class="kw-tag">三步法</span>判断因果的三个步骤：
+    <span class="kw-tag">因果三问</span>
     <ol style="margin:4px 0;">
-      <li>是否存在相关性？</li>
-      <li>时间顺序是否正确（原因在先）？</li>
-      <li>有没有第三变量同时解释两者？</li>
+      <li><b>确有稳定关联吗？</b>差异是否可能来自偶然波动或测量方式？</li>
+      <li><b>时间顺序正确吗？</b>被认为的原因是否先于结果？</li>
+      <li><b>还有其他解释吗？</b>是否存在混淆变量、选择偏差或反向因果？</li>
     </ol>
   </div>
-  <div class="kw-card">
-    <span class="kw-tag">科学实验的武器</span><b>控制变量法</b>：一次只改变一个因素、其余保持不变，才能确定「谁导致谁」；<b>双盲试验</b>：被试和实验者都不知道谁在实验组，排除主观期望的干扰——这是生物、物理实验里你天天用、却值得上升到思维层面的工具。
+  <div class="case-card">
+    <p><b>可能的混淆变量：</b>使用者原本更自律、参加了额外补习、所在班级教师不同，或期初成绩不同。</p>
+    <p><b>可能的选择方向：</b>特别想提高成绩的学生更愿意主动使用软件。此时「动机」同时影响使用行为和成绩变化。</p>
   </div>
 
-  <h3>3.2 归纳推理与休谟问题</h3>
-  <p>归纳：从个别到一般——「过去太阳每天升起，所以明天也会升起」。</p>
+  <p><b>注意：</b>三问只能帮助我们发现问题。即使暂时没有找到其他解释，也不等于因果关系已经得到证明。</p>
+
+  <h3>3.3 怎样获得更强的因果证据</h3>
+  <table>
+    <tr><th>设计要点</th><th>在学习软件研究中的做法</th></tr>
+    <tr><td>随机分组</td><td>在自愿参加且条件合适的学生中，随机分配使用方式，降低原有差异造成的偏差。</td></tr>
+    <tr><td>合理对照</td><td>两组学习时间相同，一组使用软件，一组使用普通练习材料。</td></tr>
+    <tr><td>统一测量</td><td>使用相同前测、后测和评分标准，比较两组的平均进步分。</td></tr>
+    <tr><td>足够样本与重复</td><td>在不同班级重复研究，并报告差异大小和不确定性。</td></tr>
+    <tr><td>减少主观偏差</td><td>学生很难不知道自己是否使用软件，但阅卷者可以不知道试卷来自哪一组。</td></tr>
+  </table>
   <div class="kw-card">
-    <span class="kw-tag">休谟问题</span><b>用「归纳过去管用」来证明「归纳可靠」，本身就是归纳推理</b>——这是循环论证，逻辑上无法自洽。
+    <span class="kw-tag">证据强度</span>随机对照通常能提供更强的因果证据，但也不是自动正确；执行偏差、样本流失、测量误差和研究适用范围仍需检查。不能随机实验时，可以结合长期观察、自然实验、作用机制和多项独立研究。
   </div>
-  <p><b>启示：</b>科学结论永远是「暂时正确」的，随时可能被新证据修正。</p>
+
+  <details class="extension">
+    <summary>3.4 选学拓展：因果背后的哲学问题（约 5 分钟）</summary>
+
+    <p><b>先分清两类问题：</b>世界中是否存在产生结果的因果结构，以及我们凭什么确认某个因素是原因。前者讨论世界本身，后者讨论证据和认识；本节主要讨论后者。</p>
+
+    <p><b>1. 因果问题包含一个无法直接看到的比较。</b>小林使用软件 4 周后提高了 8 分，这是实际发生的结果。要问「软件使他提高了多少」，还要与「同一时期其他相关条件保持可比，但他没有使用软件时会得到多少分」比较。这个没有实际发生、却用于比较的结果叫作<b>反事实结果</b>。</p>
+    <p>同一个人在同一时期不可能既使用又不使用软件，所以个体的两个结果无法同时观察。随机分组不能保证两组学生完全相同，但分组由随机机制决定，研究者不能系统地把基础更好的学生放进某一组；样本较大时，两组通常会更可比，从而估计两种干预下的<b>平均因果影响</b>。</p>
+
+    <p><b>2. 反复出现的先后关系，本身还不是完整的因果说明。</b>闹钟可能连续许多天都在日出前响，但改变或关闭闹钟并不会改变日出。休谟提出的经典提醒是：即使事件 <i>A</i> 总在事件 <i>B</i> 之前出现，我们直接观察到的仍是重复的先后与共同变化，而不是由观察本身保证的「逻辑必然联系」。这不是说因果关系不存在，也不是说科学不能研究因果；它提醒我们，不能仅凭「每次都是先 <i>A</i> 后 <i>B</i>」就结束论证。</p>
+
+    <p><b>3. 干预证据与机制证据可以互相加强。</b>随机对照研究在问：「有计划地改变软件使用方式，成绩分布是否随之改变？」进一步检查学习记录和不同题型，还可以研究可能的作用路径：「使用软件 → 增加针对性练习 → 掌握相应知识 → 测验成绩提高。」一个听起来顺畅的机制故事不能代替证据；一次实验观察到差异，也不表示已经弄清全部机制。</p>
+
+    <p><b>4. 因果结论通常有条件，也带有不确定性。</b>「使用软件的学生平均多提高 5 分」不表示每名学生都恰好多提高 5 分；在自愿参加的高一学生中得到的结果，也不一定适用于所有年级、所有软件和所有教学环境。严谨的因果结论应说明<b>对谁、在什么条件下、采用何种干预、与什么比较、结果怎样变化</b>，并允许新证据增强、限制或修正原有判断。</p>
+
+    <div class="kw-card">
+      <span class="kw-tag">核心认识</span>因果判断不是寻找脱离条件的「绝对必然性」，而是借助明确的反事实比较、合适的干预设计、可信的作用机制和可重复的证据，判断某种改变会在什么条件下使结果产生怎样的差异。
+    </div>
+  </details>
 
   <div class="interact">
-    <div class="it-title">互动讨论（2 分钟）</div>
-    <p>「某校统计发现，每天喝牛奶的学生比不喝牛奶的学生平均高 3 厘米。」——这是因果关系吗？请找出可能的第三变量。</p>
+    <div class="it-title">改进研究（3 分钟）</div>
+    <p>找出观察性比较中的两个其他解释，再提出一项能增强因果证据的设计。</p>
     <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
-    <div class="ref-box">参考：这最多说明相关，不能推出因果。可能的第三变量：家庭经济条件、整体营养水平、运动习惯、遗传身高；也可能是反向因果——个子高的家庭更重视营养。用「三步法」逐条检验。</div>
+    <div class="ref-box">参考：动机、原有基础、补习、教师差异都可能同时影响使用选择和成绩。可以在条件相近且自愿参加的学生中随机分组，控制学习时间，统一前后测，并在多个班级重复。</div>
   </div>
 </section>
 
 <!-- ============================================================
-     第四讲 · 批判性思维
+     第四讲 · 科学判断
      ============================================================ -->
 <section class="sec c-4" id="sec-4">
   <div class="sec-head">
-    <h2>第四讲 · 批判性思维 —— 拆解信息墙</h2>
-    <span class="time-badge">8 分钟</span>
-    <p class="subtitle">目标：先问证据，再下结论</p>
+    <h2>第四讲 · 科学判断 —— 可检验、可修正、有边界</h2>
+    <span class="time-badge">11 分钟</span>
+    <p class="subtitle">目标：理解科学结论为何可靠，又为何保留修正空间</p>
   </div>
 
-  <h3>4.1 质疑假设</h3>
-  <p>科学哲学的部分工作，就是去质疑科学家认为理所当然的假设。批判性思维对我们同样如此。</p>
+  <h3>4.1 可检验性是一项重要要求</h3>
+  <p>波普尔强调：科学理论应当承担被证据反驳的风险。这里的重点不是给所有知识划一条唯一边界，而是要求经验性主张说清楚：什么结果会使我们降低对它的信心。</p>
   <div class="kw-card">
-    <span class="kw-tag">四问</span>拿到任何主张，依次问：
-    <ol style="margin:4px 0;">
-      <li>这是什么主张？</li>
-      <li>支持它的证据是什么？</li>
-      <li>证据是如何得出的？</li>
-      <li>有没有其他解释？</li>
-    </ol>
+    <span class="kw-tag">可检验版本</span>「对研究范围内的高一学生，连续使用软件 4 周，在学习时间相同的条件下，实验组的平均进步分比对照组至少高 5 分。」若多次高质量研究都没有观察到这一差异，我们就应降低信心或修改主张。
+  </div>
+  <div class="case-card">
+    <span class="case-title warn">不能这样保护主张</span>
+    <p>「如果成绩没有提高，说明你没有真正使用，或者这种方法只对相信它的人有效。」如果任何结果都能被事后解释，主张就没有承担检验风险，经验内容很弱。</p>
   </div>
 
-  <h3>4.2 区分观点、事实与故事</h3>
-  <p>同样一句话，可能是事实、观点或故事——三者的证据要求和可信度完全不同。先看三类各是什么：</p>
-  <div class="kw-card">
-    <span class="kw-tag">事实</span><b>可以被证实或证伪的客观陈述。</b>温度计、记录、第三方证据都能检验。「今天气温 32°C」就是事实。
-  </div>
-  <div class="kw-card">
-    <span class="kw-tag">观点</span><b>个人判断与偏好，没有客观对错。</b>换一个人可能给出不同答案。「今天热死了」——「热」是感受，不是数据。
-  </div>
-  <div class="kw-card">
-    <span class="kw-tag">故事</span><b>把人物、动机、情节串起来的叙事。</b>讲得通 ≠ 是真的，要单独验证。「热成这样是因为空调开太足」——这是解释，不是事实。
-  </div>
+  <h3>4.2 逻辑检查推理，证据检查前提</h3>
+  <p>在演绎推理中，<b>前提为真且推理有效</b>，结论才必然为真。逻辑可以检查结论是否由前提推出，却不能仅凭形式保证经验前提真实；观察和实验也只能在一定条件与误差范围内支持前提。</p>
   <div class="case-card">
-    <span class="case-title">例1：关于天气</span>
-    <p><b>事实</b>：「今天气温 32°C」——温度计可查。</p>
-    <p><b>观点</b>：「今天热死了」——「太」是感受，不是数据。</p>
-    <p><b>故事</b>：「热成这样是因为空调开太足，把大家都冻坏了」——把「热」归因到「空调」，是未经证实的解释。</p>
-  </div>
-  <div class="case-card">
-    <span class="case-title">例2：关于成绩</span>
-    <p><b>事实</b>：「这次测验 40 人里有 35 人及格」——名单和分数可核对。</p>
-    <p><b>观点</b>：「这个班成绩不错」——「不错」是评价标准。</p>
-    <p><b>故事</b>：「考得好是因为换了班主任，新老师会抓重点」——听起来合理，但只是叙事。</p>
-  </div>
-  <div class="case-card">
-    <span class="case-title">例3：关于同学</span>
-    <p><b>事实</b>：「同学 A 上课玩手机被老师发现」——有人看见。</p>
-    <p><b>观点</b>：「A 太不自律了」——贴标签。</p>
-    <p><b>故事</b>：「A 是最近家里出事才分心」——动机是猜的，可能真也可能假。</p>
-  </div>
-  <div class="kw-card">
-    <span class="kw-tag">信号词</span>看到<b>数据、日期、可查证</b>，先按「事实」检验；看到<b>「我认为」「最好」「应该」「太…了」</b>，大概率是观点；看到<b>人物动机、情节、因果推断</b>，多半是故事——把它降级为「待验证的解释」。
+    <span class="case-title">一个常见的无效推理</span>
+    <p>「如果下雨，操场会湿；操场湿了；所以一定下过雨。」形式是「如果 p，那么 q；q；所以 p」，结论并不必然成立，因为洒水也会使操场变湿。同样，看到学生成绩提高，不能仅凭这一结果断定软件是原因。</p>
   </div>
 
-  <h3>4.3 识别常见谬误</h3>
-  <div class="fallacy-list">
-    <div class="fallacy-item"><b>诉诸权威</b>「专家说好，所以好。」——专家也会错，要看论证而非头衔。</div>
-    <div class="fallacy-item"><b>以偏概全</b>「我认识的两个学文科的都找不到工作。」——样本太小，不足为凭。</div>
-    <div class="fallacy-item"><b>滑坡谬误</b>「今天不背单词，明天就会挂科，后天就会退学。」——每一步之间的联系需要论证。</div>
-    <div class="fallacy-item"><b>人身攻击</b>「他说得不对，因为他成绩差。」——驳人不如驳理。</div>
-    <div class="fallacy-item"><b>虚假两难</b>「不考好大学，这辈子就完了。」——除了 A 和 B，往往还有 C。</div>
-    <div class="fallacy-item"><b>幸存者偏差</b>「没上大学也成了大企业家！」——看得见的都是幸存者，看不到的失败者早已沉没。</div>
-    <div class="fallacy-item"><b>确认偏误</b>「星座总说得很准！」——人只记得预测准的，自动忽略预测不准的；人总爱寻找支持自己想法的证据。</div>
-  </div>
-  <div class="case-card">
-    <span class="case-title">案例：二战战机的弹孔</span>
-    <p>军方统计返航战机，想加固弹孔最多的部位——但返航的都是<b>幸存者</b>：被打中要害（如发动机）的战机都坠毁了，根本回不来。真正该加固的是弹孔最少的发动机部位。看得见的是幸存者，看不见的已经沉没。</p>
-  </div>
+  <details class="extension">
+    <summary>选学拓展：三种常用推理</summary>
+    <table>
+      <tr><th>推理方式</th><th>作用</th><th>应当注意</th></tr>
+      <tr><td><b>演绎</b></td><td>由前提推出必然结论</td><td>检查前提是否为真、形式是否有效</td></tr>
+      <tr><td><b>归纳</b></td><td>由样本概括总体或预测未来</td><td>结论有强弱，不具有演绎必然性</td></tr>
+      <tr><td><b>最佳解释推理</b></td><td>比较多个可能解释</td><td>比较证据契合、解释范围、可检验预测与简洁性，结论仍是暂定的</td></tr>
+    </table>
+  </details>
 
-  <h3>4.4 最佳说明的推理（IBE）</h3>
-  <p>在多个解释中，选那个最能解释现象、最简单、依赖最少假设的。</p>
-  <div class="case-card">
-    <span class="case-title">案例：黑板擦不见了</span>
-    <p>是被偷了，还是被隔壁班借走了，还是老师自己收起来了？用 IBE 判断哪个解释最合理——通常「被借走/收起来」比「被偷」依赖更少的离奇假设。</p>
+  <h3>4.4 科学结论不是只有「信」或「不信」</h3>
+  <p>一次小样本观察可以提供初步线索；设计良好、结果稳定的多项独立研究能带来更高信心。科学共同体依据现有证据<b>暂时接受</b>结论，并明确适用范围，而不是宣布它「暂时为真」。一次异常结果通常也不会立刻推翻理论，需要检查仪器、方法和辅助假设，并重复检验。</p>
+  <div class="kw-card">
+    <span class="kw-tag">科学态度</span><b>结论有强弱，模型有边界，判断可更新。</b>可检验性很重要，可靠测量、可重复性、预测能力和不同证据相互印证也同样重要。
   </div>
 
   <div class="interact">
-    <div class="it-title">互动讨论（1 分钟）</div>
-    <p>找一条你最近看到的广告或网络言论，用上面的方法找出它的逻辑漏洞（诉诸权威 / 以偏概全 / 滑坡 / 虚假两难 / 幸存者偏差……）。</p>
+    <div class="it-title">更新判断（2 分钟）</div>
+    <p>第一次只有一个班的自愿使用数据；后来出现多个学校的随机对照研究，结果方向一致。你的可信度评分应怎样变化？还要保留哪些限制？</p>
     <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
-    <div class="ref-box">参考：广告里常见的「专家推荐」「限时特价错过就没了」「用了都说好（配几个用户照片）」分别对应诉诸权威、虚假两难、以偏概全；「xx 也成功」则常藏幸存者偏差。把主张拆成「证据 + 推理」两步检查，漏洞大多藏在这两步之间。</div>
+    <div class="ref-box">参考：可信度应提高，因为选择偏差减小且结果得到独立重复；但仍要检查样本是否适用于自己、效果大小、研究执行质量、是否存在未发表的相反结果，以及长期效果是否持续。</div>
   </div>
 </section>
 
 <!-- ============================================================
-     第五讲 · 创新性思维
+     第五讲 · 理性决策
      ============================================================ -->
 <section class="sec c-5" id="sec-5">
   <div class="sec-head">
-    <h2>第五讲 · 创新性思维 —— 范式转换</h2>
-    <span class="time-badge">8 分钟</span>
-    <p class="subtitle">目标：换一套框架看问题</p>
+    <h2>第五讲 · 从判断到行动 —— 理性决策</h2>
+    <span class="time-badge">7 分钟</span>
+    <p class="subtitle">目标：合理使用专家意见，在不确定条件下比较收益与成本</p>
   </div>
 
-  <h3>5.1 范式与范式转换</h3>
-  <p>库恩：科学不是直线累积，而是由「范式」（基本信念 + 研究方法）主导，偶尔发生革命性转换。</p>
-  <div class="case-card">
-    <span class="case-title">案例：牛顿力学 → 爱因斯坦相对论</span>
-    <p>这不只是「修改了几个公式」，而是换了一套看世界的框架。</p>
-  </div>
+  <h3>5.1 专家意见是证据，但不是终点</h3>
+  <p>我们不可能亲自验证所有知识，合理依赖相关领域专家并不是谬误。判断专家意见时，可以检查：</p>
   <div class="kw-card">
-    <span class="kw-tag">不可通约</span>两种范式下，同一句话含义不同。如「物体的质量取决于速度」，在牛顿和爱因斯坦那里是两句话。
+    <span class="kw-tag">专家四问</span>专业领域是否相关？是否给出可检查的证据？同行研究总体是否一致？是否披露赞助和利益关系？个别权威的头衔不能代替完整证据。
   </div>
 
-  <h3>5.2 从批判到创新</h3>
-  <p>批判性思维发现旧框架的问题，创新性思维构建新框架——批判是「破」，创新是「立」。</p>
-  <div class="kw-card">
-    <span class="kw-tag">创新三步</span>
-    <ol style="margin:4px 0;">
-      <li><b>发现异常</b>——旧框架解释不了的现象</li>
-      <li><b>大胆设想</b>——新的解释</li>
-      <li><b>小心检验</b>——用证据验证</li>
-    </ol>
-  </div>
+  <details class="extension">
+    <summary>选学拓展：四种常见的判断陷阱</summary>
+    <div class="fallacy-list">
+      <div class="fallacy-item"><b>以偏概全</b>用少数熟人或个案推断所有人，结论超过了样本能支持的范围。</div>
+      <div class="fallacy-item"><b>确认偏误</b>只寻找支持原有看法的证据，忽略或降低相反证据的重要性。</div>
+      <div class="fallacy-item"><b>虚假两难</b>把多种可能压缩成非此即彼，例如「不用这个软件就一定会落后」。</div>
+      <div class="fallacy-item"><b>人身攻击</b>用说话者的身份或成绩代替对其证据和推理的检查。</div>
+    </div>
+  </details>
+
+  <h3>5.3 判断与行动不是同一个问题</h3>
   <div class="case-card">
-    <span class="case-title">高中案例：数学题的「范式转换」</span>
-    <p>一道数学题用常规方法解不出时，换一个思路（画图、列方程、反证法），往往就是范式转换的微型版。</p>
+    <span class="case-title">同样的概率，可以产生不同的合理行动</span>
+    <p>如果下雨概率为 40%，是否带伞还取决于淋雨的损失、带伞的麻烦和是否容易找到避雨处。理性行动不仅看概率，还比较行动后果。</p>
   </div>
-
-  <h3>5.3 真理是相对的吗？</h3>
-  <p>关键问题：<b>「真理是相对于范式而言的」——这句话本身是客观为真，还是相对为真？</b></p>
-  <p>用<b>悖论反噬</b>来拆解：如果「所有真理都是相对的」这句话为真，那它自己就是一条「绝对真理」——自相矛盾；如果它本身也只是相对的，那就等于承认还存在着不相对的标准，「相对」才得以成立。两种读法，这句话都推翻了自己。</p>
-
-  <div class="interact">
-    <div class="it-title">互动讨论（1 分钟）</div>
-    <p>举一个「以前大家都认为理所当然，后来被推翻」的例子（如地球是宇宙中心、燃素说）。</p>
-    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
-    <div class="ref-box">参考：地心说→日心说、燃素说→氧化说、牛顿力学→相对论、绝对时空→弯曲时空。追问一句：这些例子中的「被推翻」，是靠什么标准完成的？——答案是证据。</div>
-  </div>
-</section>
-
-<!-- ============================================================
-     第六讲 · 经济学思维
-     ============================================================ -->
-<section class="sec c-6" id="sec-6">
-  <div class="sec-head">
-    <h2>第六讲 · 经济学思维 —— 选择的理性</h2>
-    <span class="time-badge">4 分钟</span>
-    <p class="subtitle">目标：一切选择都有成本</p>
-  </div>
-
-  <h3>6.1 机会成本</h3>
-  <p>做一件事的成本，是你为此放弃的最好的另一件事。</p>
-  <div class="case-card">
-    <span class="case-title">案例：刷手机 2 小时</span>
-    <p>它的「成本」，是这 2 小时本可以用来学习、运动或休息的价值。</p>
-  </div>
-
-  <h3>6.2 激励与边际</h3>
   <ul>
-    <li><b>激励</b>：人会对激励做出反应——价格、奖励、后果都会改变行为。</li>
-    <li><b>边际思维</b>：不问「值不值得」，问「多做一个单位还值不值」。多学 10 分钟值不值？多刷一条视频值不值？</li>
+    <li><b>机会成本：</b>选择某方案时，所放弃的最佳替代方案的价值。</li>
   </ul>
-
-  <h3>6.3 沉没成本</h3>
-  <p>已经付出的、无法收回的成本，不应影响现在的决策。</p>
+  <details class="extension">
+    <summary>选学拓展：不要让沉没成本绑架下一步</summary>
+    <p><b>沉没成本</b>是已经发生且无法收回的成本。决定下一步时，应比较未来的收益和成本，而不是只因「已经投入很多」就继续。</p>
+  </details>
   <div class="case-card">
-    <span class="case-title">案例：电影很烂，但「票都买了」</span>
-    <p>继续看完，是沉没成本谬误。正确做法：及时止损。</p>
+    <span class="case-title">是否购买学习软件？</span>
+    <p>先根据证据估计它对自己可能有多大帮助，再比较价格、时间和最佳替代学习方式。若已经购买，是否继续使用仍应看未来效果；如果继续使用确有收益，就不是沉没成本谬误。</p>
   </div>
 </section>
 
@@ -550,37 +558,35 @@ section.sec.c-sum { border-left: 6px solid #6d4c41; }
      ============================================================ -->
 <section class="sec c-sum" id="sec-sum">
   <div class="sec-head">
-    <h2>总结 · 把八种思维串成一条线</h2>
-    <span class="time-badge">5 分钟</span>
+    <h2>总结 · 一条可以反复使用的判断链</h2>
+    <span class="time-badge">3 分钟</span>
   </div>
 
   <table>
-    <tr><th style="width:44px;">#</th><th>思维工具</th><th>一句话</th></tr>
-    <tr><td>1</td><td>数字素养（数字与统计）</td><td>看数字先问来源、口径、样本</td></tr>
-    <tr><td>2</td><td>可证伪性</td><td>不能反驳的话，等于没说</td></tr>
-    <tr><td>3</td><td>形式逻辑与实证</td><td>推理要合逻辑，前提要经检验</td></tr>
-    <tr><td>4</td><td>因果鉴别</td><td>一起出现 ≠ 一个导致另一个</td></tr>
-    <tr><td>5</td><td>休谟归纳</td><td>归纳无法自我证明，结论随时可修正</td></tr>
-    <tr><td>6</td><td>批判鉴真</td><td>先问证据，再下结论</td></tr>
-    <tr><td>7</td><td>范式创新</td><td>换一套框架看问题</td></tr>
-    <tr><td>8</td><td>经济决策</td><td>一切选择都有成本</td></tr>
+    <tr><th style="width:44px;">#</th><th>步骤</th><th>核心问题</th></tr>
+    <tr><td>1</td><td>澄清主张</td><td>它是描述性事实主张、因果性事实主张，还是价值判断？</td></tr>
+    <tr><td>2</td><td>检查证据</td><td>来源、口径、样本、比较和不确定性怎样？</td></tr>
+    <tr><td>3</td><td>检查推理</td><td>证据支持相关还是因果？还有其他解释吗？</td></tr>
+    <tr><td>4</td><td>调整信心</td><td>目前能下多强的结论？什么证据会改变判断？</td></tr>
+    <tr><td>5</td><td>选择行动</td><td>在不确定性下，收益、风险和机会成本怎样？</td></tr>
   </table>
 
-  <div class="end-box">
-    <b>留给大家的两个问题</b>（课后继续想，下次课可以接着聊）：
-    <ol style="margin:6px 0;">
-      <li>找出生活中一条「听起来很有道理，其实是套套逻辑」的话。</li>
-      <li>找出一个你曾以为有因果关系、其实只是相关性的例子。</li>
+  <div class="interact">
+    <div class="it-title">退出检测（独立完成 2 分钟）</div>
+    <p>仍然面对开场广告，请完成三件事：</p>
+    <ol style="margin:4px 0;">
+      <li>指出「平均提高 30%」中的一个口径问题；</li>
+      <li>指出观察性比较中的一个可能混淆变量；</li>
+      <li>写出一条会明显提高或降低你对广告信心的新证据。</li>
     </ol>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：①需要知道原始平均分和计算方法：「提高 30%」是相对原始平均分提高 30%，还是把「提高 30 分」误写成了「提高 30%」；②学习动机、原有基础、教师、补习等都可能混淆；③多个学校预先设计、执行良好的随机对照研究若重复得到相近结果，会提高信心，反之会降低信心。答案不要求完全相同，但必须说明证据如何影响判断。</div>
   </div>
 
-  <div class="interact">
-    <div class="it-title">收尾（1 分钟）</div>
-    <p>今天没有标准答案，只有更好的问题。你记住的、或想反驳的一句话是什么？</p>
-  </div>
+  <div class="end-box"><b>最后一句：</b>理性的人不保证永远正确，但能够说明「我为什么这样判断」，也知道「什么证据会让我改变判断」。</div>
 </section>
 
-<p class="foot-note">本节为发散讨论课 · 全程 60 分钟 · 无试题、无评分</p>
+<p class="foot-note">本节为思维训练课 · 核心课 60 分钟 · 折叠拓展可用于加课或课后阅读 · 无计分测试，含形成性检测</p>
 </article>
 
 <script>
@@ -596,12 +602,15 @@ function toggleRef(btn) {
 // 导航滚动监听：高亮当前小节 + 累计时间
 var secs = Array.prototype.slice.call(document.querySelectorAll("section.sec"));
 var chips = Array.prototype.slice.call(document.querySelectorAll(".topbar a.chip"));
-var times = {}; // 每个小节结束时的累计时间
+var topbar = document.getElementById("topbar");
+var times = {}; // 每个小节的起止时间
 var cum = 0;
-var names = ["开场", "第一讲", "第二讲", "第三讲", "第四讲", "第五讲", "第六讲", "总结"];
+var lastId = "";
+var names = ["开场", "第一讲", "第二讲", "第三讲", "第四讲", "第五讲", "总结"];
 for (var i = 0; i < secs.length; i++) {
+  var start = cum;
   cum += parseInt(chips[i].getAttribute("data-time"), 10);
-  times[secs[i].id] = { cum: cum, name: names[i] };
+  times[secs[i].id] = { start: start, end: cum, name: names[i] };
 }
 
 function onScroll() {
@@ -614,14 +623,18 @@ function onScroll() {
   for (var j = 0; j < chips.length; j++) {
     chips[j].classList.toggle("active", chips[j].getAttribute("href") === "#" + id);
   }
+  if (id !== lastId && topbar.scrollWidth > topbar.clientWidth) {
+    var activeChip = document.querySelector('.topbar a.chip[href="#' + id + '"]');
+    if (activeChip) {
+      topbar.scrollLeft = Math.max(0, activeChip.offsetLeft - (topbar.clientWidth - activeChip.offsetWidth) / 2);
+    }
+  }
+  lastId = id;
   var info = times[id];
-  document.getElementById("tbProgress").textContent = (info ? info.name + " · " + info.cum + "/60 分钟" : "");
+  document.getElementById("tbProgress").textContent = (info ? info.name + " · " + info.start + "-" + info.end + "/60 分钟" : "");
 }
 window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
 </script>
 </body>
 </html>
-
-
-

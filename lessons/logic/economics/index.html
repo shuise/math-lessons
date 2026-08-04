@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../../lib/logo.png?version=1.0.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>经济学的思维方式</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+body {
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.9;
+  font-size: 16px;
+}
+article {
+  background: #fff; border-radius: 12px; padding: 32px 40px 48px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow-wrap: break-word; word-wrap: break-word; overflow-x: hidden;
+}
+h1 { color: #2c3e50; font-size: 1.7em; border-bottom: 3px solid #00897b; padding-bottom: 10px; margin-top: 0; text-align: center; }
+.back {
+  display: inline-block; margin-bottom: 16px;
+  color: #1a73e8; text-decoration: none; font-size: 0.95em;
+}
+.back:hover { text-decoration: underline; }
+.tip { text-align: center; color: #777; margin-bottom: 10px; }
+
+/* ====== 课程信息栏 ====== */
+.course-meta {
+  display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: center;
+  margin: 14px 0 22px; padding: 12px 18px;
+  background: #f8faff; border-radius: 10px; border: 1px solid #e0e8f0;
+  font-size: 0.93em; color: #555;
+}
+.course-meta strong { color: #00897b; }
+
+/* ====== 顶部导航条 ====== */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(6px);
+  border: 1px solid #e0e0e0; border-radius: 12px;
+  padding: 8px 12px; margin: 0 0 20px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.topbar .tb-label { font-size: 0.8em; color: #888; margin-right: 4px; white-space: nowrap; }
+.topbar a.chip {
+  text-decoration: none; font-size: 0.8em; color: #555;
+  padding: 4px 12px; border-radius: 14px; border: 1px solid #ddd;
+  background: #fff; white-space: nowrap; transition: 0.15s;
+}
+.topbar a.chip:hover { border-color: #00897b; color: #00897b; }
+.topbar a.chip.active { background: #00897b; color: #fff; border-color: #00897b; }
+.topbar a.chip .tm { opacity: 0.75; font-size: 0.9em; }
+.topbar .tb-progress { margin-left: auto; font-size: 0.8em; color: #00897b; font-weight: bold; white-space: nowrap; }
+
+/* ====== 分节卡片 ====== */
+section.sec {
+  border: 2px solid #e0e0e0; border-radius: 12px;
+  margin: 22px 0; padding: 20px 26px; scroll-margin-top: 64px;
+}
+section.sec.c-open { border-left: 6px solid #607d8b; }
+section.sec.c-1 { border-left: 6px solid #00897b; }
+section.sec.c-2 { border-left: 6px solid #e65100; }
+section.sec.c-3 { border-left: 6px solid #f57f17; }
+section.sec.c-4 { border-left: 6px solid #9c27b0; }
+section.sec.c-5 { border-left: 6px solid #3949ab; }
+section.sec.c-6 { border-left: 6px solid #2e7d32; }
+section.sec.c-7 { border-left: 6px solid #6d4c41; }
+section.sec.c-sum { border-left: 6px solid #00897b; }
+.sec-head {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px; margin-bottom: 12px;
+}
+.sec-head h2 { margin: 0; font-size: 1.22em; color: #2c3e50; }
+.sec-head .time-badge {
+  display: inline-block; background: #00897b; color: #fff;
+  padding: 2px 12px; border-radius: 12px; font-size: 0.8em; font-weight: bold;
+}
+.sec-head .subtitle { width: 100%; color: #777; font-size: 0.92em; margin: 0; }
+.sec h3 { color: #2c3e50; margin: 20px 0 8px; font-size: 1.05em; }
+.sec p { margin: 8px 0; }
+.sec ul, .sec ol { margin: 8px 0; padding-left: 26px; }
+
+/* ====== 引言 / 名言 ====== */
+.quote-box {
+  background: #fafafa; border-left: 4px solid #bbb; border-radius: 0 8px 8px 0;
+  padding: 12px 16px; margin: 14px 0; color: #555; font-style: italic;
+}
+.quote-box .qsrc { display: block; text-align: right; font-size: 0.85em; color: #999; margin-top: 6px; font-style: normal; }
+
+/* ====== 知识卡片 ====== */
+.kw-card {
+  background: #f0f7ff; border: 1px solid #bbdefb; border-radius: 10px;
+  padding: 12px 16px; margin: 12px 0; font-size: 0.95em;
+}
+.kw-card .kw-tag {
+  display: inline-block; background: #00897b; color: #fff;
+  padding: 1px 10px; border-radius: 10px; font-size: 0.78em; margin-right: 8px;
+}
+
+/* ====== 案例卡片 ====== */
+.case-card {
+  background: #f8faff; border: 1px solid #e0e8f0; border-radius: 10px;
+  padding: 12px 16px; margin: 10px 0; font-size: 0.95em;
+}
+.case-card .case-title { font-weight: bold; color: #00897b; }
+.case-card .case-title.warn { color: #e65100; }
+
+/* ====== 互动讨论 ====== */
+.interact {
+  background: #fff8e1; border: 2px solid #ffc107; border-radius: 10px;
+  padding: 14px 18px; margin: 16px 0;
+}
+.interact .it-title { font-weight: bold; color: #e65100; font-size: 0.98em; margin-bottom: 6px; }
+.interact ul { margin: 4px 0; }
+.interact .btn-ref {
+  margin-top: 10px; padding: 4px 16px; border: 2px solid #e65100; color: #e65100;
+  border-radius: 14px; background: #fff; cursor: pointer; font-size: 0.85em; transition: 0.15s;
+}
+.interact .btn-ref:hover { background: #fff3e0; }
+.interact .btn-ref.open { background: #e65100; color: #fff; }
+.interact .ref-box {
+  display: none; margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+  background: #fff; border-left: 4px solid #e65100; font-size: 0.9em; line-height: 1.8;
+}
+.interact .ref-box.show { display: block; }
+
+/* ====== 表格 ====== */
+.sec table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.93em; }
+.sec th, .sec td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+.sec th { background: #e0f2f1; color: #004d40; }
+
+/* ====== 结尾 ====== */
+.end-box {
+  background: #e0f2f1; border: 2px solid #00897b; border-radius: 10px;
+  padding: 16px 20px; margin: 16px 0;
+}
+.foot-note { text-align: center; color: #aaa; font-size: 0.85em; margin-top: 26px; }
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>经济学的思维方式<br><small style="font-size:0.55em;color:#888;">一门研究「选择」的思维课 —— 世界上没有免费的午餐</small></h1>
+<p class="tip">本课不背公式、不画曲线考卷，只负责把经济学的「看问题的角度」装进你的脑子——边讲边聊，随时举手。</p>
+
+<div class="course-meta">
+  <span><strong>对象：</strong>高中学生</span>
+  <span><strong>总时长：</strong>60 分钟（含互动）</span>
+  <span><strong>形式：</strong>讲授 + 开放讨论</span>
+  <span><strong>核心参考：</strong>保罗·海恩《经济学的思维方式》</span>
+</div>
+
+<!-- ====== 顶部导航 ====== -->
+<nav class="topbar" id="topbar">
+  <span class="tb-label">课堂导航</span>
+  <a class="chip active" href="#sec-open" data-time="4">开场 <span class="tm">4′</span></a>
+  <a class="chip" href="#sec-1" data-time="7">一讲·成本与选择 <span class="tm">7′</span></a>
+  <a class="chip" href="#sec-2" data-time="7">二讲·边际思维 <span class="tm">7′</span></a>
+  <a class="chip" href="#sec-3" data-time="7">三讲·需求法则 <span class="tm">7′</span></a>
+  <a class="chip" href="#sec-4" data-time="7">四讲·激励 <span class="tm">7′</span></a>
+  <a class="chip" href="#sec-5" data-time="7">五讲·稀缺与分配 <span class="tm">7′</span></a>
+  <a class="chip" href="#sec-6" data-time="7">六讲·交易与专业化 <span class="tm">7′</span></a>
+  <a class="chip" href="#sec-7" data-time="7">七讲·效率争议 <span class="tm">7′</span></a>
+  <a class="chip" href="#sec-sum" data-time="7">总结 <span class="tm">7′</span></a>
+  <span class="tb-progress" id="tbProgress">开场 · 0/60 分钟</span>
+</nav>
+
+<!-- ============================================================
+     开场
+     ============================================================ -->
+<section class="sec c-open" id="sec-open">
+  <div class="sec-head">
+    <h2>开场：什么是经济学的思维方式？</h2>
+    <span class="time-badge">4 分钟</span>
+  </div>
+  <div class="quote-box">
+    经济学理论并不是假设人人自私、物质至上、目光短浅。一切都取决于人们把什么东西看作收益和成本，以及把什么样的价值观与收益和成本联系在一起。
+  </div>
+  <p><b>一句话回答：</b>经济学不研究钱，它研究<b>选择</b>。只要资源是稀缺的，人就必须选择；只要选择，就有成本——这就是「世界上没有免费的午餐」的含义。</p>
+  <div class="kw-card">
+    <span class="kw-tag">关键概念</span><b>财富就是人们认为有价值的任何东西。</b>经济增长并不在于生产更多的东西，而在于生产更多的财富——同样一杯水，在沙漠里和在家门口，价值完全不同。
+  </div>
+  <div class="interact">
+    <div class="it-title">开场破冰（讨论 1 分钟）</div>
+    <p>说出你今天做过的、自己都没意识到的「选择」——从早饭到怎么来上学。再想想：这些选择让你放弃了什么？</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     第一讲 · 成本与选择
+     ============================================================ -->
+<section class="sec c-1" id="sec-1">
+  <div class="sec-head">
+    <h2>第一讲 · 成本与选择 —— 成本是放弃的机会</h2>
+    <span class="time-badge">7 分钟</span>
+    <p class="subtitle">目标：学会用「机会成本」与「沉没成本」看穿日常选择</p>
+  </div>
+
+  <h3>1.1 机会成本</h3>
+  <div class="kw-card">
+    <span class="kw-tag">定义</span><b>成本是某人放弃的机会的价值。</b>成本不是「花掉的钱」，而是「为了得到它，你放弃了什么」。
+  </div>
+  <div class="case-card">
+    <span class="case-title">案例：一场电影的成本</span>
+    <p>看一场电影的「成本」，不是你花的票钱，而是你用这 2 小时本来可以做的其他事——比如复习、打球、陪家人。票钱是「会计成本」，放弃的时间才是「经济成本」。</p>
+  </div>
+  <div class="kw-card">
+    <span class="kw-tag">思考工具</span>谈成本时先要问两个问题：<b>这是谁的成本？针对谁的决策？</b>对甲是成本的事，对乙可能完全不是——成本永远站在「决策者」的立场上看。
+  </div>
+
+  <h3>1.2 沉没成本</h3>
+  <div class="quote-box">
+    在计算成本时，正确的立场不是往后看——过去的都是沉没成本，不可恢复；正确的立场是往前看，等待当下的机会。
+  </div>
+  <ul>
+    <li><b>沉没成本</b>：已经付出、无法收回的成本。它不该影响你现在的决定。</li>
+    <li>电影很烂，票已买——钱回不来了。继续坐着看，只会再损失 2 小时。<b>及时离开才是理性。</b></li>
+    <li><b>边际成本是行为的结果，它也应该是行为的指南。</b>决定「要不要继续」，只看「继续下去」带来的新收益和新成本。</li>
+  </ul>
+  <div class="quote-box">
+    只有行为才有成本，「事物」本身没有成本。
+    <span class="qsrc">——《经济学的思维方式》</span>
+  </div>
+
+  <h3>1.3 经典的「一块钱去哪儿了」问题</h3>
+  <div class="case-card">
+    <span class="case-title">案例：旅馆的 29 元</span>
+    <p>三个人住旅馆，房价 30 元，每人付 10 元。前台发现特价 25 元，派服务员退 5 元。服务员私吞 2 元，退给每人 1 元。</p>
+    <p>于是：每人实际付 9 元，3 × 9 = 27，加上服务员藏起的 2 元 = 29。<b>还有 1 元呢？</b></p>
+  </div>
+  <div class="kw-card">
+    <span class="kw-tag">陷阱解析</span>27 元里<b>已经包含</b>了给服务员的那 2 元。正确算式是：25 元房费 + 2 元私吞 = 27 元（这是客人付出去的钱），而 30 元 = 27 元客人实付 + 3 元退回。加法对象选错了，答案自然对不上——<b>算账之前，先弄清楚每笔钱属于谁、流向哪里。</b>
+  </div>
+  <div class="interact">
+    <div class="it-title">互动讨论（2 分钟）</div>
+    <p>用「机会成本」和「沉没成本」分析：① 你已经写了一半的作文，发现方向错了，要不要换题重写？② 「这本练习册我买了，总得做完」——这话哪里有问题？</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：① 已写的半篇是沉没成本，关键是「换题 vs 硬写完」哪个未来收益更大；② 「买了」是沉没成本，做不做完应看剩余题目的边际收益是否值得时间，而不是为了「回本」硬做。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第二讲 · 边际思维
+     ============================================================ -->
+<section class="sec c-2" id="sec-2">
+  <div class="sec-head">
+    <h2>第二讲 · 边际思维 —— 别问要不要，问「再做一个单位」</h2>
+    <span class="time-badge">7 分钟</span>
+    <p class="subtitle">目标：把「非此即彼」的问题，换成「多与少」的问题</p>
+  </div>
+
+  <div class="quote-box">
+    经济学的思维方式拒绝用非此即彼的方式想问题，而是注意边际收益和边际成本。
+  </div>
+  <p>几乎没有人真的面对「要不要玩手机」这种全有全无的问题——你面对的是「<b>再玩 10 分钟</b>」还是「<b>现在放下</b>」。</p>
+  <ul>
+    <li>不问「要不要玩手机」，问「<b>多玩 10 分钟</b>，多得到多少快乐，多失去多少睡眠」。快乐是边际收益，睡眠是边际成本。</li>
+    <li>不问「要不要学习」，问「<b>再学 20 分钟</b>，边际收益还值不值」——头 20 分钟和累到极点的第 5 个 20 分钟，收益完全不同。</li>
+  </ul>
+  <div class="case-card">
+    <span class="case-title">案例：极端情况下的替代</span>
+    <p>当胰岛素价格逐渐上涨时，人们会认为祷告是一种越来越有吸引力的「替代方式」——这句话听着刺耳，但它的意思很冷静：<b>当某样东西越来越贵，人们会不断寻找替代品，哪怕替代品看起来「不经济」。</b>边际变化会改变所有人的选择。</p>
+  </div>
+  <div class="kw-card">
+    <span class="kw-tag">一句话</span><b>决策单位是「再一个单位」，而不是「要么全部、要么全不」。</b>把大问题切成一小步一小步看，答案往往更清楚。
+  </div>
+  <div class="interact">
+    <div class="it-title">互动讨论（1 分钟）</div>
+    <p>把下面两句话翻译成「边际」问题：① 「我今晚要不要熬夜复习？」 ② 「我要不要继续刷这道难题？」</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：① 「再熬 30 分钟」多记住什么、明天多损失什么；② 「再想 10 分钟」想出来的概率 vs 这 10 分钟拿来检查别的题的收益。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第三讲 · 需求法则
+     ============================================================ -->
+<section class="sec c-3" id="sec-3">
+  <div class="sec-head">
+    <h2>第三讲 · 需求法则 —— 价格与需求量</h2>
+    <span class="time-badge">7 分钟</span>
+    <p class="subtitle">目标：看懂「需求曲线」与「短缺 / 过剩」是怎么回事</p>
+  </div>
+
+  <h3>3.1 需求曲线总是向下倾斜</h3>
+  <div class="kw-card">
+    <span class="kw-tag">需求法则</span><b>价格越低，需求量越大。</b>需求曲线在任何地方都是向下倾斜的——不存在向上倾斜的需求曲线。贵一点，就少买一点；便宜一点，就多买一点，仅此而已。
+  </div>
+  <p>同样是你自己：奶茶 15 元你一周喝 2 杯，涨到 30 元你可能改喝矿泉水——<b>「需求量」随「价格」变化</b>，这就是需求曲线向下。</p>
+  <div class="kw-card">
+    <span class="kw-tag">易错点</span>时刻警惕区分：<b>需求（供给）的变化</b> vs <b>需求量（供给量）的变化</b>。价格变动引起的是「需求量」沿曲线移动；而收入、口味、替代品价格变化，才会让整条需求曲线平移。
+  </div>
+
+  <h3>3.2 短缺与过剩</h3>
+  <table>
+    <tr><th>概念</th><th>定义（在某一价格下）</th><th>价格会怎样</th></tr>
+    <tr><td><b>短缺</b></td><td>需求量大于供给量</td><td>价格会上升</td></tr>
+    <tr><td><b>过剩</b></td><td>供给量大于需求量</td><td>价格会下降</td></tr>
+  </table>
+  <div class="kw-card">
+    <span class="kw-tag">关键</span><b>短缺和过剩都是「某一价格下」的状态，不是总量问题。</b>限价导致「供不应求」的抢购，是人为把价格压在均衡之下造成的；自由价格会自动向「既无短缺也无过剩」的位置调整。
+  </div>
+  <div class="case-card">
+    <span class="case-title">案例：演唱会门票</span>
+    <p>官方票价被压得很低，开售即「秒空」，黄牛高价倒卖——这不是票「不够」，而是<b>价格定低了</b>，需求量超过了供给量。若价格自由上涨，抢票长队和溢价自然消失。</p>
+  </div>
+  <div class="interact">
+    <div class="it-title">互动讨论（1 分钟）</div>
+    <p>「今年大家都爱喝某款茶，价格没变，销量涨了」——这是需求变化还是需求量变化？为什么？</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：价格没变而销量增加，是「需求」变化——口味（偏好）这个非价格因素让整条需求曲线右移，不是沿曲线移动。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第四讲 · 激励
+     ============================================================ -->
+<section class="sec c-4" id="sec-4">
+  <div class="sec-head">
+    <h2>第四讲 · 激励 —— 规则诱导行为</h2>
+    <span class="time-badge">7 分钟</span>
+    <p class="subtitle">目标：用「它诱导大家怎么做」来判断规则好不好</p>
+  </div>
+
+  <div class="kw-card">
+    <span class="kw-tag">核心命题</span><b>任何法律都是一个激励机制，都在诱导人的事前行为。</b>一个好的法律应该诱导所有利益相关者选择合理的行为，而不是只约束一部分人的行为。
+  </div>
+  <div class="case-card">
+    <span class="case-title">案例：禁烟令 vs 高烟草税</span>
+    <p><b>禁烟令</b>管的是「事后惩罚」——已经抽了，罚你；<b>高烟草税</b>管的是「事前行为」——还没抽，先让抽烟变贵，减少有人开始抽。判断一条规则好不好，先问：<b>它会诱导大家怎么做？</b></p>
+  </div>
+  <div class="case-card">
+    <span class="case-title">案例：迟到的「罚款」</span>
+    <p>幼儿园规定迟到罚款，迟到的家长反而变多了——因为罚款让「迟到」成了一件「花钱买服务」的事，愧疚感消失了。<b>激励的方向，常常和你以为的相反。</b></p>
+  </div>
+  <div class="kw-card">
+    <span class="kw-tag">思考工具</span>评价任何制度、规定、班规、法律，都先问三个问题：① 它奖励了什么？② 它惩罚了什么？③ 聪明的人会怎么利用它？——答案往往和你设想的「本来意图」不一样。
+  </div>
+  <div class="interact">
+    <div class="it-title">互动讨论（2 分钟）</div>
+    <p>老师为了提高作业质量规定「错一题罚抄十遍」。这条规则诱导了哪些行为？有人会「聪明地」怎么应对？有没有更好的规则？</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：可能诱导「抄十遍太累，干脆少写不交」或「把答案抄对应付检查」；更好的规则是让「做对」本身有收益，比如讲题给他人听、错题重做一遍讲清原因。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第五讲 · 稀缺与分配
+     ============================================================ -->
+<section class="sec c-5" id="sec-5">
+  <div class="sec-head">
+    <h2>第五讲 · 稀缺与分配 —— 怎么分，各有代价</h2>
+    <span class="time-badge">7 分钟</span>
+    <p class="subtitle">目标：知道每种分配方式都「没有免费的午餐」</p>
+  </div>
+
+  <p>稀缺品必须分配，而分配方式有四种主要选项，<b>每种都有优点，也都有严重缺点</b>：</p>
+  <table>
+    <tr><th>方式</th><th>优点</th><th>缺点</th></tr>
+    <tr><td>价格（支付意愿）</td><td>鼓励生产、导向最需要的人</td><td>穷人买不起</td></tr>
+    <tr><td>先来先得（排队）</td><td>看似公平</td><td>大量时间浪费在排队</td></tr>
+    <tr><td>抽签</td><td>完全公平、无人有特殊要求权</td><td>忽略愿望与条件的多样性</td></tr>
+    <tr><td>平均分配</td><td>人人有份</td><td>难分割、每份价值太低</td></tr>
+  </table>
+  <div class="quote-box">
+    用收过路费的办法测试开车人的支付意愿，我们很快就会发现，人们「需要」的道路空间远远少于他们嘴上要求的数量。
+  </div>
+  <div class="kw-card">
+    <span class="kw-tag">好钢用在刀刃上</span>如果使用资源的人用不着支付资源最佳用途的全额机会成本，资源的使用就会比较随意和粗心——<b>免费的资源，总被浪费。</b>
+  </div>
+  <div class="case-card">
+    <span class="case-title">案例：食堂的大锅菜</span>
+    <p>免费不限量的食堂，大家往往「多拿少食」造成浪费；一旦按量计价，浪费立刻减少——不是大家变坏了或变好了，而是<b>激励变了</b>。</p>
+  </div>
+  <div class="interact">
+    <div class="it-title">互动讨论（2 分钟）</div>
+    <p>学校图书馆座位有限，用「先来先得」总是有人占座睡觉。用四种分配方式各想一个方案，讨论各自的代价。</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：①价格——按小时收费，穷人/自习少的人吃亏；②排队——有人凌晨就来占座，时间成本高；③抽签——热门时段靠运气，需求强度被忽略；④平均——每人每周固定几小时，不灵活。没有零成本方案，只能权衡。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第六讲 · 交易与专业化
+     ============================================================ -->
+<section class="sec c-6" id="sec-6">
+  <div class="sec-head">
+    <h2>第六讲 · 交易与专业化 —— 制度让人发挥比较优势</h2>
+    <span class="time-badge">7 分钟</span>
+    <p class="subtitle">目标：理解为什么「能自由交易」比「找更懂行的人」更重要</p>
+  </div>
+
+  <div class="kw-card">
+    <span class="kw-tag">三因素</span><b>经济发展有三个因素在起作用：人、资源和制度。</b>其中最关键的前提是——以低成本交易商品和交换想法的可能性。如果人们无法进行交易，就不会有专业化。
+  </div>
+  <ul>
+    <li><b>比较优势</b>：各人做自己相对最擅长的事，再通过交易互换——整体产出反而大于人人都「样样自己做」。</li>
+    <li><b>制度的作用</b>：形成更有效的游戏规则，鼓励人们发现自己的比较优势，使有限的知识、信息和资源得到最有效的利用。</li>
+  </ul>
+  <div class="quote-box">
+    医生和中间人都是真正的财富生产者，因为他们给我们创造了更多令人满意的选择机会。
+    <span class="qsrc">——《经济学的思维方式》</span>
+  </div>
+  <div class="case-card">
+    <span class="case-title warn">案例：前苏联计划经济的教训</span>
+    <p>前苏联试图由中央计划者决定「生产什么、怎么生产」。它崩溃的原因不是「找更懂行的人来规划经济」找得不够好，而是<b>没有形成让每个人发挥比较优势的制度</b>——没有人被激励去发现和传递真实的信息。</p>
+  </div>
+  <div class="interact">
+    <div class="it-title">互动讨论（1 分钟）</div>
+    <p>为什么说「能低成本交易」是专业化的前提？如果把班里所有同学都要求「各科都要第一名」，整体成绩会变好吗？</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：不能交易时，每个人只能自给自足，没人敢只擅长一件事；如果大家各自发挥比较优势（有人擅长数学、有人擅长文科）再互助，整体进步更大——前提是「互助」的交易成本足够低。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第七讲 · 效率争议的本质
+     ============================================================ -->
+<section class="sec c-7" id="sec-7">
+  <div class="sec-head">
+    <h2>第七讲 · 效率争议的本质 —— 到底谁有权决策？</h2>
+    <span class="time-badge">7 分钟</span>
+    <p class="subtitle">目标：看清「效率之争」背后往往是「权利之争」</p>
+  </div>
+
+  <div class="kw-card">
+    <span class="kw-tag">核心命题</span><b>社会对于某个特定项目相对效率的争议，往往是对某种东西是相对有价值还是相对没价值的争议。</b>问题不在于「哪一个确实效率更高」，而是<b>谁有权做出某个特定的决策</b>。
+  </div>
+  <ul>
+    <li>对「过程是否有效率」的争议，经常就是对<b>游戏规则</b>的争议、对<b>谁拥有什么权利</b>的争议。</li>
+    <li>争论「这块地该建公园还是商场」，表面争效率，实际争的是「这块地对谁更有价值、谁有权决定它的用途」。</li>
+  </ul>
+  <div class="quote-box">
+    经济学推理偏重负面结论：造成最大破坏的不是无知，知道比不知道更糟糕。
+    <span class="qsrc">——弗兰克·奈特</span>
+  </div>
+  <p><b>为什么「知道比不知道更糟糕」？</b>因为「半懂不懂」的人最自信——自认为掌握了效率最优解，于是强行替别人做决定，剥夺了别人基于自己信息选择的权利。承认自己信息有限，反而是更可靠的开端。</p>
+  <div class="interact">
+    <div class="it-title">互动讨论（2 分钟）</div>
+    <p>家长认为「学理科更有前途」，替你决定选科；老师认为「你该多做题少打球」。这些「替你做决定」的争议，表面争的是「哪个效率高」，实质争的是什么？</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：实质是「谁有权决定你的时间与未来如何分配」的权利之争。家长、老师掌握更多经验信息，但你的偏好和独特处境也只有你自己知道——这也是为什么好决策要「多方信息 + 自己拍板」。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     总结
+     ============================================================ -->
+<section class="sec c-sum" id="sec-sum">
+  <div class="sec-head">
+    <h2>总结 · 八件思维工具</h2>
+    <span class="time-badge">7 分钟</span>
+  </div>
+
+  <table>
+    <tr><th style="width:44px;">#</th><th>思维工具</th><th>一句话</th></tr>
+    <tr><td>1</td><td>没有免费午餐</td><td>一切选择都有成本</td></tr>
+    <tr><td>2</td><td>机会成本</td><td>成本 = 你放弃的最优选择</td></tr>
+    <tr><td>3</td><td>沉没成本</td><td>过去的投入不该影响现在的决定</td></tr>
+    <tr><td>4</td><td>边际思维</td><td>想「再做一个单位」，别想「要不要做」</td></tr>
+    <tr><td>5</td><td>需求法则</td><td>价格与需求量反向变动</td></tr>
+    <tr><td>6</td><td>激励</td><td>规则诱导行为，先想它诱导了什么</td></tr>
+    <tr><td>7</td><td>稀缺分配</td><td>每种分配方式都有代价</td></tr>
+    <tr><td>8</td><td>交易与专业化</td><td>制度让人发挥比较优势</td></tr>
+  </table>
+
+  <div class="end-box"><b>最后一句：</b>经济学不告诉你「该选什么」，它只帮你把「选择的代价」看清楚——剩下的决定权，永远在你手里。</div>
+</section>
+
+<p class="foot-note">本节为思维训练课 · 全程 60 分钟 · 无计分测试，含形成性检测</p>
+</article>
+
+<script>
+// 参考要点展开/收起
+function toggleRef(btn) {
+  var box = btn.nextElementSibling;
+  var show = !box.classList.contains("show");
+  box.classList.toggle("show", show);
+  btn.classList.toggle("open", show);
+  btn.textContent = show ? "收起参考要点" : "展开参考要点";
+}
+
+// 导航滚动监听：高亮当前小节 + 累计时间
+var secs = Array.prototype.slice.call(document.querySelectorAll("section.sec"));
+var chips = Array.prototype.slice.call(document.querySelectorAll(".topbar a.chip"));
+var topbar = document.getElementById("topbar");
+var times = {};
+var cum = 0;
+var lastId = "";
+var names = ["开场", "第一讲", "第二讲", "第三讲", "第四讲", "第五讲", "第六讲", "第七讲", "总结"];
+for (var i = 0; i < secs.length; i++) {
+  var start = cum;
+  cum += parseInt(chips[i].getAttribute("data-time"), 10);
+  times[secs[i].id] = { start: start, end: cum, name: names[i] };
+}
+
+function onScroll() {
+  var pos = window.pageYOffset + 70;
+  var cur = secs[0];
+  for (var i = 0; i < secs.length; i++) {
+    if (secs[i].offsetTop <= pos) cur = secs[i];
+  }
+  var id = cur.id;
+  for (var j = 0; j < chips.length; j++) {
+    chips[j].classList.toggle("active", chips[j].getAttribute("href") === "#" + id);
+  }
+  if (id !== lastId && topbar.scrollWidth > topbar.clientWidth) {
+    var activeChip = document.querySelector('.topbar a.chip[href="#' + id + '"]');
+    if (activeChip) {
+      topbar.scrollLeft = Math.max(0, activeChip.offsetLeft - (topbar.clientWidth - activeChip.offsetWidth) / 2);
+    }
+  }
+  lastId = id;
+  var info = times[id];
+  document.getElementById("tbProgress").textContent = (info ? info.name + " · " + info.start + "-" + info.end + "/60 分钟" : "");
+}
+window.addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+</script>
+</body>
+</html>
