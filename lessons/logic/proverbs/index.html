@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/png" href="../../lib/logo.png?version=1.0.0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>谚语与名句中的数学逻辑</title>
+<title>谚语与名句中的逻辑</title>
 <link rel="stylesheet" href="../../style.css">
 <style>
 body {
@@ -45,12 +45,12 @@ h1 { color: #2c3e50; font-size: 1.7em; border-bottom: 3px solid #e65100; padding
   background: rgba(255,255,255,0.96); backdrop-filter: blur(6px);
   border: 1px solid #e0e0e0; border-radius: 12px;
   padding: 8px 12px; margin: 0 0 20px;
-  display: flex; flex-wrap: nowrap; align-items: center; gap: 6px;
-  overflow-x: auto; scrollbar-width: thin;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.06);
 }
 .topbar .tb-label { font-size: 0.8em; color: #888; margin-right: 4px; white-space: nowrap; }
 .topbar a.chip {
+  flex: 0 0 auto;
   text-decoration: none; font-size: 0.8em; color: #555;
   padding: 4px 12px; border-radius: 14px; border: 1px solid #ddd;
   background: #fff; white-space: nowrap; transition: 0.15s;
@@ -205,12 +205,12 @@ section.sec.c-sum { border-left: 6px solid #e65100; }
      ============================================================ -->
 <section class="sec c-open" id="sec-open">
   <div class="sec-head">
-    <h2>开场：老祖宗的话里，藏着数学逻辑</h2>
+    <h2>开场：老祖宗的话里，藏着逻辑</h2>
     <span class="time-badge">4 分钟</span>
   </div>
   <p>「皮之不存，毛将焉附」「塞翁失马」「三个和尚没水喝」——这些熟悉的话可以启发我们寻找条件、集合、概率或决策结构，但它们不是自动成立的数学定理。</p>
   <div class="kw-card">
-    <span class="kw-tag">本课玩法</span>把每一句谚语当作一道逻辑题。先猜它可能涉及条件、矛盾、集合、决策、概率还是极限，再点「揭示逻辑」核对。本课包含 6 类中文谚语和 1 组简单英文谚语。
+    <span class="kw-tag">本课玩法</span>把每一句谚语当作一道逻辑题。先猜它可能涉及条件、矛盾、集合、决策、概率还是极限，再点「揭示逻辑」核对。本课包含 7 类中文谚语和 1 组西方名句。
   </div>
   <div class="kw-card">
     <span class="kw-tag">重要边界</span><b>形式有效，不等于内容真实。</b>课件中的符号化只是对句式的简化模型。现实谚语常省略适用范围和背景条件，所以还要追问：变量是什么？结论对谁成立？有没有反例？标有“选学”的卡片供课后继续探索，不计入课堂核心时间。
@@ -236,7 +236,7 @@ section.sec.c-sum { border-left: 6px solid #e65100; }
   <div class="saying-card">
     <div class="saying-text">「皮之不存，毛将焉附」</div>
     <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
-    <div class="ref-box"><b>必要条件：</b>皮是毛的前提——「毛存在」推出「皮存在」不可逆，但「皮不在」推出「毛不在」。逻辑形式：p → q，与它的逆否命题 ¬q → ¬p 等价（这正是逻辑课学的「逆否等价」）。</div>
+    <div class="ref-box"><b>必要条件：</b>皮是毛的前提——设 p =「皮在」、q =「毛在」，则 q → p（毛在推出皮在，不可逆），其逆否 ¬p → ¬q（皮不在推出毛不在）与之等价（这正是逻辑课学的「逆否等价」）。</div>
   </div>
   <div class="saying-card">
     <div class="saying-text">「覆巢之下，安有完卵」</div>
@@ -261,7 +261,7 @@ section.sec.c-sum { border-left: 6px solid #e65100; }
   <div class="saying-card">
     <div class="saying-text">「学而不思则罔，思而不学则殆」</div>
     <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
-    <div class="ref-box"><b>两个必要条件缺一不可（与逻辑）：</b>「学」且「思」都做到，才不会「罔且殆」；缺任何一个，结论都站不住。等价于「罔」∨「殆」时，至少有一个没做到。</div>
+    <div class="ref-box"><b>两个条件句、互为前提：</b>「学而不思则罔」= 学且不思 → 罔；「思而不学则殆」= 思且不学 → 殆。想避开「罔」，在「学」时就要「思」；想避开「殆」，在「思」时就要「学」——学与思互为必要条件。注意方向：原句只给了「充分」方向，不能反过来说「罔 ⇒ 不思」——罔也可能由别的原因造成。</div>
   </div>
 
   <div class="kw-card">
@@ -293,7 +293,7 @@ section.sec.c-sum { border-left: 6px solid #e65100; }
   <div class="saying-card">
     <div class="saying-text">「此地无银三百两」</div>
     <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
-    <div class="ref-box"><b>反证法思维：</b>越急于否认，越暴露存在。「此地无银三百两，隔壁王二不曾偷」——把「没有」强调过头，反而让人必然推出「有」。反证法也一样：先假设反面成立，很快推出荒谬，于是反面不成立。</div>
+    <div class="ref-box"><b>行为泄露信息（与反证法类比）：</b>越急于否认，越暴露存在。「此地无银三百两，隔壁王二不曾偷」——「不偷」的声明反而把「偷」的信息送上了门。逻辑上它不是严格的反证法，但骨架相似：反证法是先假设反面（¬p）成立，推出荒谬，于是 ¬p 不成立、p 成立——两者都是「从否定中挖出肯定」。</div>
   </div>
   <div class="saying-card">
     <div class="saying-text">「城门失火，殃及池鱼」</div>
@@ -340,7 +340,7 @@ section.sec.c-sum { border-left: 6px solid #e65100; }
   <div class="saying-card">
     <div class="saying-text">「白马非马」（公孙龙）</div>
     <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
-    <div class="ref-box"><b>元素 ≠ 集合：</b>白马是「马」这个集合的一个元素，但「白马」这个集合与「马」这个集合并不相等。「白马非马」的合理内核，正是集合论里「元素与集合是不同层次」的直觉。</div>
+    <div class="ref-box"><b>子集 ≠ 全集：</b>「白马」是「马」的一个子集（白马 ⊆ 马），子集不等于全集（白马 ≠ 马）——公孙龙说「白马非马」，合理内核是：概念「白马」与概念「马」内涵不同，「白马类」⊊「马类」，是两个不同层次的集合。若论个体：一匹具体的白马既是「白马」集合的元素，也是「马」集合的元素。</div>
   </div>
   <div class="saying-card">
     <div class="saying-text">「挂羊头卖狗肉」</div>
@@ -386,7 +386,7 @@ section.sec.c-sum { border-left: 6px solid #e65100; }
   <div class="saying-card">
     <div class="saying-text">「宁为鸡头，不为凤尾」</div>
     <button class="btn-ref" onclick="toggleRef(this)">揭示逻辑</button>
-    <div class="ref-box"><b>偏好排序，非传递性偏好：</b>「鸡头 &gt; 凤尾」是一种偏好排序，而且它可能不满足传递性（在 A 群体当第一 vs 在 B 群体当垫底）——偏好未必总是可排序的，决策时得明确比较标准。</div>
+    <div class="ref-box"><b>偏好排序与参照系：</b>「鸡头 &gt; 凤尾」是一个偏好判断——在小群体里当第一，优于在大群体里当末位。它提示：同一个「我」放进不同参照群体，排序就不同。决策前要问：我比较的标准是「头衔地位」还是「平台机会」？标准不同，结论相反。</div>
   </div>
   <div class="saying-card">
     <div class="saying-text">「两害相权取其轻」</div>
@@ -746,7 +746,6 @@ function toggleRef(btn) {
 // 导航滚动监听：高亮当前小节 + 累计时间
 var secs = Array.prototype.slice.call(document.querySelectorAll("section.sec"));
 var chips = Array.prototype.slice.call(document.querySelectorAll(".topbar a.chip"));
-var topbar = document.getElementById("topbar");
 var times = {};
 var cum = 0;
 var lastId = "";
@@ -766,12 +765,6 @@ function onScroll() {
   var id = cur.id;
   for (var j = 0; j < chips.length; j++) {
     chips[j].classList.toggle("active", chips[j].getAttribute("href") === "#" + id);
-  }
-  if (id !== lastId && topbar.scrollWidth > topbar.clientWidth) {
-    var activeChip = document.querySelector('.topbar a.chip[href="#' + id + '"]');
-    if (activeChip) {
-      topbar.scrollLeft = Math.max(0, activeChip.offsetLeft - (topbar.clientWidth - activeChip.offsetWidth) / 2);
-    }
   }
   lastId = id;
   var info = times[id];
