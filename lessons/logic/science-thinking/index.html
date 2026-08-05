@@ -11,15 +11,13 @@ body {
   font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   max-width: 920px;
   margin: 0 auto;
-  padding: 24px;
   background: #f5f7fa;
   color: #333;
   line-height: 1.9;
   font-size: 16px;
 }
 article {
-  background: #fff; border-radius: 12px; padding: 32px 40px 48px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border-radius: 12px; padding: 0px;
   overflow-wrap: break-word; word-wrap: break-word; overflow-x: hidden;
 }
 h1 { color: #2c3e50; font-size: 1.7em; border-bottom: 3px solid #9c27b0; padding-bottom: 10px; margin-top: 0; text-align: center; }
@@ -45,8 +43,7 @@ h1 { color: #2c3e50; font-size: 1.7em; border-bottom: 3px solid #9c27b0; padding
   background: rgba(255,255,255,0.96); backdrop-filter: blur(6px);
   border: 1px solid #e0e0e0; border-radius: 12px;
   padding: 8px 12px; margin: 0 0 20px;
-  display: flex; flex-wrap: nowrap; align-items: center; gap: 6px;
-  overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.06);
 }
 .topbar .tb-label { flex: 0 0 auto; font-size: 0.8em; color: #888; margin-right: 4px; white-space: nowrap; }
@@ -63,8 +60,9 @@ h1 { color: #2c3e50; font-size: 1.7em; border-bottom: 3px solid #9c27b0; padding
 
 /* ====== 分节卡片 ====== */
 section.sec {
+  background: #fff;
   border: 2px solid #e0e0e0; border-radius: 12px;
-  margin: 22px 0; padding: 20px 26px; scroll-margin-top: 64px;
+  margin: 22px 0; padding: 15px; scroll-margin-top: 64px;
 }
 section.sec.c-open { border-left: 6px solid #607d8b; }
 section.sec.c-1 { border-left: 6px solid #1a73e8; }
@@ -104,6 +102,7 @@ section.sec.c-sum { border-left: 6px solid #6d4c41; }
   display: inline-block; background: #1a73e8; color: #fff;
   padding: 1px 10px; border-radius: 10px; font-size: 0.78em; margin-right: 8px;
 }
+.kw-card ol, .interact ol { margin: 4px 0; }
 
 /* ====== 案例卡片 ====== */
 .case-card {
@@ -148,6 +147,7 @@ section.sec.c-sum { border-left: 6px solid #6d4c41; }
 }
 .extension summary { cursor: pointer; color: #546e7a; font-weight: bold; }
 .extension[open] summary { margin-bottom: 8px; }
+.extension[open] { padding-bottom: 14px; background: #f4f6f8; }
 .data-example {
   margin: 14px 0; padding: 2px 0 2px 14px;
   border-left: 4px solid #ef6c00;
@@ -169,8 +169,8 @@ section.sec.c-sum { border-left: 6px solid #6d4c41; }
 .end-box ol { margin: 6px 0; }
 .foot-note { text-align: center; color: #aaa; font-size: 0.85em; margin-top: 26px; }
 @media (max-width: 680px) {
-  body { padding: 12px; font-size: 15px; }
-  article { padding: 22px 16px 34px; border-radius: 8px; }
+  body { padding: 12px 0; font-size: 15px; }
+  article { padding: 22px 0px 34px; border-radius: 8px; }
   h1 { font-size: 1.45em; }
   section.sec { padding: 16px 14px; }
   .topbar { top: 0; border-radius: 8px; }
@@ -194,7 +194,7 @@ section.sec.c-sum { border-left: 6px solid #6d4c41; }
 
 <div class="kw-card">
   <span class="kw-tag">学习目标</span>学完本课，你应当能够：
-  <ol style="margin:4px 0;">
+  <ol>
     <li>分清描述性事实主张、因果性事实主张和价值判断；</li>
     <li>检查数字的来源、口径、样本和比较基准；</li>
     <li>区分相关与因果，并指出可能的其他解释；</li>
@@ -233,7 +233,7 @@ section.sec.c-sum { border-left: 6px solid #6d4c41; }
   </div>
   <div class="kw-card">
     <span class="kw-tag">全课四问</span>面对任何主张，先问：
-    <ol style="margin:4px 0;">
+    <ol>
       <li><b>主张是什么？</b>它说得足够明确吗？</li>
       <li><b>证据是什么？</b>证据来自哪里？</li>
       <li><b>推理成立吗？</b>证据能够支持多强的结论？</li>
@@ -256,10 +256,10 @@ section.sec.c-sum { border-left: 6px solid #6d4c41; }
   <table>
     <tr><th>类型</th><th>核心问题</th><th>例子</th></tr>
     <tr><td><b>描述性事实主张</b></td><td>它对现状的描述是否与实际相符？</td><td>「本次测验 40 人中有 35 人达到 60 分。」</td></tr>
-    <tr><td><b>因果性事实主张</b></td><td>不同干预是否会使结果的平均水平或发生概率不同？</td><td>「使用软件使学生的成绩提高了。」</td></tr>
+    <tr><td><b>因果性事实主张</b></td><td>某个因素（原因）的变化，是否会导致另一个因素（结果）发生改变？</td><td>「使用软件使学生的成绩提高了。」</td></tr>
     <tr><td><b>价值判断</b></td><td>评价标准是什么？</td><td>「这个班考得不错。」</td></tr>
   </table>
-  <p>描述性主张和因果性主张都属于<b>事实性主张</b>，都需要证据；因果性主张还要比较不同条件，并排除其他合理解释。只有在证据确认事实性主张符合实际后，才能称为<b>已核实的事实</b>。价值判断不等于随便说，它也需要公开评价标准和理由。</p>
+  <p>描述性主张和因果性主张都属于<b>事实性主张</b>，都需要证据。<b>因果性主张断言「某个因素的变化导致了另一个因素改变」；要检验它，不能只看结果本身，还要比较不同条件（用了与没用、不同用法），并排除其他合理解释。</b>只有在证据确认事实性主张符合实际后，才能称为<b>已核实的事实</b>。价值判断不等于随便说，它也需要公开评价标准和理由。</p>
 
   <h3>1.2 定义性陈述与经验性主张</h3>
   <div class="case-card">
@@ -298,7 +298,7 @@ section.sec.c-sum { border-left: 6px solid #6d4c41; }
   <h3>2.1 数字的五项检查</h3>
   <div class="kw-card">
     <span class="kw-tag">数据五问</span>
-    <ol style="margin:4px 0;">
+    <ol>
       <li><b>来源：</b>谁收集的？原始记录能否核查？是否存在利益关系？</li>
       <li><b>口径：</b>测量了什么？单位、时间范围和定义是否一致？</li>
       <li><b>样本：</b>研究了谁？这些人如何被选中？</li>
@@ -355,14 +355,14 @@ section.sec.c-sum { border-left: 6px solid #6d4c41; }
       <h4>误区三：混淆人数与比例</h4>
       <p><b>材料：</b>某月 1000 名用户中有 20 人投诉；次月 3000 名用户中有 30 人投诉。有人说：「投诉人数增加了 50%，用户体验变差了。」</p>
       <p><b>问题：</b>投诉人数确实增加了 50%，但用户总数也变了，只看人数不能判断投诉发生的频繁程度。</p>
-      <p class="judgement"><b>正确判断：</b>投诉用户比例由 20÷1000=2% 降为 30÷3000=1%，下降 1 个百分点，相对下降 50%。人数与比例回答不同问题，二者都应报告。</p>
+      <p class="judgement"><b>正确判断：</b>投诉用户比例由 20÷1000=2% 降为 30÷3000=1%。注意两种说法：<b>下降了 1 个百分点</b>（这是绝对差），或<b>相比上月的 2% 下降了 50%</b>（这是相对变化）——两者都对，但回答的是不同问题；人数与比例也应分开报告。</p>
     </div>
 
     <div class="data-example">
       <h4>误区四：利用截断坐标轴夸大差异</h4>
       <p><b>材料：</b>两组平均分分别为 72 分和 75 分。柱状图纵轴从 70 分开始，两根柱的可见高度便是 2 和 5，看起来后一组是前一组的 2.5 倍。</p>
       <p><b>问题：</b>2.5 倍只是截断后可见柱高之比，不是两组成绩之比；图形放大了 3 分差异带来的视觉冲击。</p>
-      <p class="judgement"><b>正确判断：</b>两组实际相差 3 分。截断坐标轴可以帮助观察小变化，但必须醒目标明；用柱长表示数值大小时，通常应从 0 开始，避免用柱长比例误导读者。</p>
+      <p class="judgement"><b>正确判断：</b>两组实际相差 3 分。截断坐标轴可以帮助观察小变化，但必须醒目标明。注意并非所有图表都必须从 0 开始——观察体温波动或股价走势时，截断纵轴是常见且合理的做法；但当柱长用于比较总量或均值的大小时，纵轴应从 0 开始，否则柱长比例会误导读者。</p>
     </div>
 
     <div class="data-example">
@@ -405,7 +405,7 @@ section.sec.c-sum { border-left: 6px solid #6d4c41; }
   <h3>3.2 审查因果主张的三问</h3>
   <div class="kw-card">
     <span class="kw-tag">因果三问</span>
-    <ol style="margin:4px 0;">
+    <ol>
       <li><b>确有稳定关联吗？</b>差异是否可能来自偶然波动或测量方式？</li>
       <li><b>时间顺序正确吗？</b>被认为的原因是否先于结果？</li>
       <li><b>还有其他解释吗？</b>是否存在混淆变量、选择偏差或反向因果？</li>
@@ -496,7 +496,7 @@ section.sec.c-sum { border-left: 6px solid #6d4c41; }
   </details>
 
   <h3>4.4 科学结论不是只有「信」或「不信」</h3>
-  <p>一次小样本观察可以提供初步线索；设计良好、结果稳定的多项独立研究能带来更高信心。科学共同体依据现有证据<b>暂时接受</b>结论，并明确适用范围，而不是宣布它「暂时为真」。一次异常结果通常也不会立刻推翻理论，需要检查仪器、方法和辅助假设，并重复检验。</p>
+  <p>一次小样本观察可以提供初步线索；设计良好、结果稳定的多项独立研究能带来更高信心。科学共同体依据现有证据<b>将结论接受为目前的最佳解释</b>，并明确其适用边界，而不是将其封为「永久的绝对真理」。一次异常结果通常也不会立刻推翻理论，需要检查仪器、方法和辅助假设，并重复检验。</p>
   <div class="kw-card">
     <span class="kw-tag">科学态度</span><b>结论有强弱，模型有边界，判断可更新。</b>可检验性很重要，可靠测量、可重复性、预测能力和不同证据相互印证也同样重要。
   </div>
@@ -574,13 +574,13 @@ section.sec.c-sum { border-left: 6px solid #6d4c41; }
   <div class="interact">
     <div class="it-title">退出检测（独立完成 2 分钟）</div>
     <p>仍然面对开场广告，请完成三件事：</p>
-    <ol style="margin:4px 0;">
+    <ol>
       <li>指出「平均提高 30%」中的一个口径问题；</li>
       <li>指出观察性比较中的一个可能混淆变量；</li>
       <li>写出一条会明显提高或降低你对广告信心的新证据。</li>
     </ol>
     <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
-    <div class="ref-box">参考：①需要知道原始平均分和计算方法：「提高 30%」是相对原始平均分提高 30%，还是把「提高 30 分」误写成了「提高 30%」；②学习动机、原有基础、教师、补习等都可能混淆；③多个学校预先设计、执行良好的随机对照研究若重复得到相近结果，会提高信心，反之会降低信心。答案不要求完全相同，但必须说明证据如何影响判断。</div>
+    <div class="ref-box">参考：①先问清楚口径：「30%」是什么的 30%？是相对每个人前测成绩的平均提升幅度，还是整体平均分的提升幅度？是分数的相对增长率，还是及格率/优良率增加了 30 个百分点？再核对原始平均分与计算方法；②学习动机、原有基础、教师、补习等都可能混淆；③多个学校预先设计、执行良好的随机对照研究若重复得到相近结果，会提高信心，反之会降低信心。答案不要求完全相同，但必须说明证据如何影响判断。</div>
   </div>
 
   <div class="end-box"><b>最后一句：</b>理性的人不保证永远正确，但能够说明「我为什么这样判断」，也知道「什么证据会让我改变判断」。</div>
@@ -616,18 +616,18 @@ for (var i = 0; i < secs.length; i++) {
 function onScroll() {
   var pos = window.pageYOffset + 70;
   var cur = secs[0];
-  for (var i = 0; i < secs.length; i++) {
-    if (secs[i].offsetTop <= pos) cur = secs[i];
+  // 滚动到页面底部时，强制高亮最后一个小节，避免因固定偏移量无法触顶
+  var isBottom = (window.innerHeight + window.pageYOffset) >= document.documentElement.scrollHeight - 20;
+  if (isBottom) {
+    cur = secs[secs.length - 1];
+  } else {
+    for (var i = 0; i < secs.length; i++) {
+      if (secs[i].offsetTop <= pos) cur = secs[i];
+    }
   }
   var id = cur.id;
   for (var j = 0; j < chips.length; j++) {
     chips[j].classList.toggle("active", chips[j].getAttribute("href") === "#" + id);
-  }
-  if (id !== lastId && topbar.scrollWidth > topbar.clientWidth) {
-    var activeChip = document.querySelector('.topbar a.chip[href="#' + id + '"]');
-    if (activeChip) {
-      topbar.scrollLeft = Math.max(0, activeChip.offsetLeft - (topbar.clientWidth - activeChip.offsetWidth) / 2);
-    }
   }
   lastId = id;
   var info = times[id];

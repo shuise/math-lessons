@@ -511,12 +511,6 @@ function onScroll() {
   for (var j = 0; j < chips.length; j++) {
     chips[j].classList.toggle("active", chips[j].getAttribute("href") === "#" + id);
   }
-  if (id !== lastId && topbar.scrollWidth > topbar.clientWidth) {
-    var activeChip = document.querySelector('.topbar a.chip[href="#' + id + '"]');
-    if (activeChip) {
-      topbar.scrollLeft = Math.max(0, activeChip.offsetLeft - (topbar.clientWidth - activeChip.offsetWidth) / 2);
-    }
-  }
   lastId = id;
   var info = times[id];
   document.getElementById("tbProgress").textContent = (info ? info.name + " · " + info.start + "-" + info.end + "/60 分钟" : "");

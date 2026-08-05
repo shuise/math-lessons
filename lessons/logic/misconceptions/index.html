@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../../lib/logo.png?version=1.0.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>常见思维误区 · 大脑省力装置的陷阱</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+body {
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.9;
+  font-size: 16px;
+}
+article {
+  background: #fff; border-radius: 12px; padding: 32px 40px 48px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow-wrap: break-word; word-wrap: break-word; overflow-x: hidden;
+}
+h1 { color: #2c3e50; font-size: 1.7em; border-bottom: 3px solid #ad1457; padding-bottom: 10px; margin-top: 0; text-align: center; }
+.back {
+  display: inline-block; margin-bottom: 16px;
+  color: #1a73e8; text-decoration: none; font-size: 0.95em;
+}
+.back:hover { text-decoration: underline; }
+.tip { text-align: center; color: #777; margin-bottom: 10px; }
+
+/* ====== 课程信息栏 ====== */
+.course-meta {
+  display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: center;
+  margin: 14px 0 22px; padding: 12px 18px;
+  background: #fdf0f5; border-radius: 10px; border: 1px solid #f5c6d6;
+  font-size: 0.93em; color: #555;
+}
+.course-meta strong { color: #ad1457; }
+
+/* ====== 顶部导航条 ====== */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(6px);
+  border: 1px solid #e0e0e0; border-radius: 12px;
+  padding: 8px 12px; margin: 0 0 20px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.topbar .tb-label { flex: 0 0 auto; font-size: 0.8em; color: #888; margin-right: 4px; white-space: nowrap; }
+.topbar a.chip {
+  flex: 0 0 auto;
+  text-decoration: none; font-size: 0.8em; color: #555;
+  padding: 4px 12px; border-radius: 14px; border: 1px solid #ddd;
+  background: #fff; white-space: nowrap; transition: 0.15s;
+}
+.topbar a.chip:hover { border-color: #ad1457; color: #ad1457; }
+.topbar a.chip.active { background: #ad1457; color: #fff; border-color: #ad1457; }
+.topbar a.chip .tm { opacity: 0.75; font-size: 0.9em; }
+.topbar .tb-progress { flex: 0 0 auto; margin-left: 6px; font-size: 0.8em; color: #ad1457; font-weight: bold; white-space: nowrap; }
+
+/* ====== 分节卡片 ====== */
+section.sec {
+  border: 2px solid #e0e0e0; border-radius: 12px;
+  margin: 22px 0; padding: 20px 26px; scroll-margin-top: 64px;
+}
+section.sec.c-open { border-left: 6px solid #607d8b; }
+section.sec.c-1 { border-left: 6px solid #1a73e8; }
+section.sec.c-2 { border-left: 6px solid #e65100; }
+section.sec.c-3 { border-left: 6px solid #f57f17; }
+section.sec.c-4 { border-left: 6px solid #9c27b0; }
+section.sec.c-5 { border-left: 6px solid #00897b; }
+section.sec.c-sum { border-left: 6px solid #ad1457; }
+.sec-head {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px; margin-bottom: 12px;
+}
+.sec-head h2 { margin: 0; font-size: 1.22em; color: #2c3e50; }
+.sec-head .time-badge {
+  display: inline-block; background: #ad1457; color: #fff;
+  padding: 2px 12px; border-radius: 12px; font-size: 0.8em; font-weight: bold;
+}
+.sec-head .subtitle { width: 100%; color: #777; font-size: 0.92em; margin: 0; }
+.sec h3 { color: #2c3e50; margin: 20px 0 8px; font-size: 1.05em; }
+.sec p { margin: 8px 0; }
+.sec ul, .sec ol { margin: 8px 0; padding-left: 26px; }
+
+/* ====== 引言 / 名言 ====== */
+.quote-box {
+  background: #fafafa; border-left: 4px solid #bbb; border-radius: 0 8px 8px 0;
+  padding: 12px 16px; margin: 14px 0; color: #555; font-style: italic;
+}
+.quote-box .qsrc { display: block; text-align: right; font-size: 0.85em; color: #999; margin-top: 6px; font-style: normal; }
+
+/* ====== 知识卡片 ====== */
+.kw-card {
+  background: #fdf0f5; border: 1px solid #f5c6d6; border-radius: 10px;
+  padding: 12px 16px; margin: 12px 0; font-size: 0.95em;
+}
+.kw-card .kw-tag {
+  display: inline-block; background: #ad1457; color: #fff;
+  padding: 1px 10px; border-radius: 10px; font-size: 0.78em; margin-right: 8px;
+}
+.kw-card ol, .interact ol { margin: 4px 0; }
+
+/* ====== 案例卡片 ====== */
+.case-card {
+  background: #f8faff; border: 1px solid #e0e8f0; border-radius: 10px;
+  padding: 12px 16px; margin: 10px 0; font-size: 0.95em;
+}
+.case-card .case-title { font-weight: bold; color: #1a73e8; }
+.case-card .case-title.warn { color: #e65100; }
+
+/* ====== 互动讨论 ====== */
+.interact {
+  background: #fff8e1; border: 2px solid #ffc107; border-radius: 10px;
+  padding: 14px 18px; margin: 16px 0;
+}
+.interact .it-title { font-weight: bold; color: #e65100; font-size: 0.98em; margin-bottom: 6px; }
+.interact ul { margin: 4px 0; }
+.interact .btn-ref {
+  margin-top: 10px; padding: 4px 16px; border: 2px solid #e65100; color: #e65100;
+  border-radius: 14px; background: #fff; cursor: pointer; font-size: 0.85em; transition: 0.15s;
+}
+.interact .btn-ref:hover { background: #fff3e0; }
+.interact .btn-ref.open { background: #e65100; color: #fff; }
+.interact .ref-box {
+  display: none; margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+  background: #fff; border-left: 4px solid #e65100; font-size: 0.9em; line-height: 1.8;
+}
+.interact .ref-box.show { display: block; }
+
+/* ====== 误区表格 ====== */
+.bias-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.93em; }
+.bias-table th, .bias-table td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+.bias-table th { background: #fdf0f5; color: #ad1457; }
+.bias-table td b { color: #ad1457; }
+
+/* ====== 选学拓展 ====== */
+.extension {
+  margin: 14px 0; padding: 8px 14px;
+  background: #fafafa; border: 1px dashed #b0bec5; border-radius: 8px;
+}
+.extension summary { cursor: pointer; color: #546e7a; font-weight: bold; }
+.extension[open] summary { margin-bottom: 8px; }
+.extension[open] { padding-bottom: 14px; background: #f4f6f8; }
+
+/* ====== 表格 ====== */
+.sec table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.93em; }
+.sec th, .sec td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+.sec th { background: #fdf0f5; color: #2c3e50; }
+
+/* ====== 结尾 ====== */
+.end-box {
+  background: #fdf0f5; border: 2px solid #e57399; border-radius: 10px;
+  padding: 16px 20px; margin: 16px 0;
+}
+.end-box ol { margin: 6px 0; }
+.foot-note { text-align: center; color: #aaa; font-size: 0.85em; margin-top: 26px; }
+@media (max-width: 680px) {
+  body { padding: 12px; font-size: 15px; }
+  article { padding: 22px 16px 34px; border-radius: 8px; }
+  h1 { font-size: 1.45em; }
+  section.sec { padding: 16px 14px; }
+  .topbar { top: 0; border-radius: 8px; }
+  .topbar .tb-label { display: none; }
+  .topbar .tb-progress { width: auto; margin-left: 6px; }
+  .sec th, .sec td { padding: 7px 8px; }
+}
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>常见思维误区<br><small style="font-size:0.55em;color:#888;">大脑是个省力装置 —— 捷径偶尔好用，常常出错</small></h1>
+<p class="tip">误区不是笨，是大脑的默认设置。认识它，才能绕过它。</p>
+
+<div class="course-meta">
+  <span><strong>对象：</strong>高中学生</span>
+  <span><strong>核心时长：</strong>60 分钟（含互动）</span>
+  <span><strong>形式：</strong>案例 + 讨论 + 自我检测</span>
+</div>
+
+<div class="kw-card">
+  <span class="kw-tag">本课目标</span>三步走：
+  <ol>
+    <li><b>认识误区</b>：知道大脑有哪些默认的省力捷径；</li>
+    <li><b>识别误区</b>：在真实对话、新闻和广告里把它指出来；</li>
+    <li><b>绕过误区</b>：在重要决策上，用清单和反例拦住它。</li>
+  </ol>
+</div>
+
+<!-- ====== 顶部导航 ====== -->
+<nav class="topbar" id="topbar">
+  <span class="tb-label">课堂导航</span>
+  <a class="chip active" href="#sec-open" data-time="4">开场 <span class="tm">4′</span></a>
+  <a class="chip" href="#sec-1" data-time="9">一讲·自我归因 <span class="tm">9′</span></a>
+  <a class="chip" href="#sec-2" data-time="10">二讲·认知捷径 <span class="tm">10′</span></a>
+  <a class="chip" href="#sec-3" data-time="9">三讲·样本与群体 <span class="tm">9′</span></a>
+  <a class="chip" href="#sec-4" data-time="5">四讲·被操纵 <span class="tm">5′</span></a>
+  <a class="chip" href="#sec-5" data-time="10">五讲·解释与伪科学 <span class="tm">10′</span></a>
+  <a class="chip" href="#sec-sum" data-time="13">总结 <span class="tm">13′</span></a>
+  <span class="tb-progress" id="tbProgress">开场 · 0/60 分钟</span>
+</nav>
+
+<!-- ============================================================
+     开场
+     ============================================================ -->
+<section class="sec c-open" id="sec-open">
+  <div class="sec-head">
+    <h2>开场：大脑是个省力装置</h2>
+    <span class="time-badge">4 分钟</span>
+  </div>
+  <p>人脑每天要处理海量信息。为了省能量，进化出了一套「快捷方式」（心理学叫<b>启发式</b>）：看到一个熟人马上认出他、看到黑影立刻躲开——快，但粗糙。快捷方式大多数时候够用，<b>但在关键判断上会系统性出错</b>，这就是思维误区。</p>
+  <div class="quote-box">
+    我们绝大多数的日常行为都属于自动处理的过程。我们面临的挑战并不是如何改变大脑的运作方式，而是在现有的思维局限内如何更好地运用大脑。
+    <span class="qsrc">——《对赌：信息不足时如何做出高明决策》</span>
+  </div>
+  <div class="case-card">
+    <span class="case-title">本课结构</span>
+    <table>
+      <tr><th>环节</th><th>主题</th><th>核心误区</th></tr>
+      <tr><td>开场</td><td>大脑是个省力装置</td><td>快捷方式 ≠ 正确</td></tr>
+      <tr><td>第一讲</td><td>自我归因的误区</td><td>自利性偏差、冒名顶替</td></tr>
+      <tr><td>第二讲</td><td>认知捷径的误区</td><td>锚定、可得性、确认偏误</td></tr>
+      <tr><td>第三讲</td><td>样本与群体的误区</td><td>幸存者偏差、以己度人</td></tr>
+      <tr><td>第四讲</td><td>被操纵的误区</td><td>从众、框架</td></tr>
+      <tr><td>第五讲</td><td>解释与伪科学</td><td>解释深度错觉、不可证伪</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================
+     第一讲 · 自我归因的误区
+     ============================================================ -->
+<section class="sec c-1" id="sec-1">
+  <div class="sec-head">
+    <h2>第一讲 · 自我归因的误区</h2>
+    <span class="time-badge">9 分钟</span>
+    <p class="subtitle">目标：看清「成功归自己、失败归外因」的保护壳，以及它的反面</p>
+  </div>
+
+  <h3>1.1 自利性偏差</h3>
+  <div class="kw-card">
+    <span class="kw-tag">定义</span>成功归自己，失败归外因。
+  </div>
+  <div class="quote-box">
+    如果我做这件事没做好，那肯定是因为不可控的、别人的或者意外的缘故；如果我做这件事成功了，那肯定是因为我水平高。
+    <span class="qsrc">——《对赌》</span>
+  </div>
+  <div class="case-card">
+    <span class="case-title">考场版本</span>
+    <p>考好了：「我聪明、我努力」；考砸了：「题目太难、状态不好、老师没讲过」。</p>
+    <p><b>危害：</b>这种偏差保护自尊，却<b>阻碍成长</b>——考砸了找不到真实原因，下次还会犯。</p>
+  </div>
+  <div class="case-card">
+    <span class="case-title">进化解释</span>
+    <p>自信的人更容易获得信任与合作机会，所以「自我欺骗」可能有演化基础——我们先把自信的假面戴给自己，才戴给别人。</p>
+  </div>
+
+  <h3>1.2 冒名顶替综合征（反向的自利性偏差）</h3>
+  <div class="kw-card">
+    <span class="kw-tag">定义</span>明明成功靠实力，却坚信自己靠运气，随时会被识破是「骗子」。
+  </div>
+  <ul>
+    <li>学霸考了年级第一，却认为「只是这次题目简单」。</li>
+    <li>爱因斯坦临终前也可能经历过这种自我怀疑。</li>
+  </ul>
+  <div class="kw-card">
+    <span class="kw-tag">破解</span>把「三件好事」记成习惯——每天记下自己做成的三件小事，连续五周；别和别人比较，接受成功也接受失败。
+  </div>
+
+  <h3>1.3 「正确感」陷阱</h3>
+  <ul>
+    <li>「我是对的」「我早就知道」「我告诉过你」——说这些话感觉很好。</li>
+    <li>但<b>追求正确感</b>和<b>追求正确</b>是两回事。承认错误、修正观点，才能进步。</li>
+  </ul>
+  <div class="quote-box">
+    我们是否应该放弃「正确」的良好感觉来摆脱「错误」的痛苦？答案是：是的。
+    <span class="qsrc">——《对赌》</span>
+  </div>
+
+  <div class="interact">
+    <div class="it-title">互动（2 分钟）</div>
+    <p>回想上周一次「考砸」或「失误」：你当时的归因，属于「自利性偏差」还是「冒名顶替」？如果重新归因，你会怎么写？</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：自利性偏差的改写方向——把「题目太难」改成「哪一类题我确实没掌握」；冒名顶替的改写方向——把「只是运气」改成「我为了这次结果具体做了哪几件事」。归因要具体、可验证，才谈得上改进。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第二讲 · 认知捷径的误区
+     ============================================================ -->
+<section class="sec c-2" id="sec-2">
+  <div class="sec-head">
+    <h2>第二讲 · 认知捷径的误区</h2>
+    <span class="time-badge">10 分钟</span>
+    <p class="subtitle">目标：识别五种「数字与印象」绑架判断的捷径</p>
+  </div>
+
+  <h3>2.1 五种认知捷径</h3>
+  <table class="bias-table">
+    <tr><th>误区</th><th>定义</th><th>例子</th></tr>
+    <tr><td><b>锚定效应</b></td><td>先出现的数字绑架判断</td><td>先看到「原价 1000 现价 199」，就觉得占了便宜</td></tr>
+    <tr><td><b>可得性偏差</b></td><td>越容易想起的事，越以为常见</td><td>刚看过坠机新闻，就觉得坐飞机很危险</td></tr>
+    <tr><td><b>确认偏误</b></td><td>只收集支持自己观点的证据</td><td>觉得自己数学差，就只记得考砸的那次</td></tr>
+    <tr><td><b>光环效应</b></td><td>一个优点掩盖所有缺点</td><td>喜欢某位歌手，就认为他的观点也对</td></tr>
+    <tr><td><b>沉没成本</b></td><td>过去的投入绑架现在的决定</td><td>电影很烂但票已买，硬着头皮看完</td></tr>
+  </table>
+
+  <h3>2.2 最容易中招的：确认偏误</h3>
+  <div class="case-card">
+    <span class="case-title">同桌「针对我」的剧本</span>
+    <p>一旦有了「我同桌就是针对我」的想法，之后每一次普通互动都会被解读成「敌意」——借橡皮是试探、不借是报复、笑一下是嘲笑。证据永远「够用」，因为筛选证据的过滤器已经装好。</p>
+  </div>
+  <div class="kw-card">
+    <span class="kw-tag">反驳确认偏误</span><b>主动找反例</b>——问自己：「如果我是错的，证据会在哪里？」刻意去找那些「不符合我预期」的事实，而不是等它送上门。
+  </div>
+  <div class="quote-box">
+    由于总是基于自己的信念来进行决策，我们形成信念的方式以及缺乏转变信念方面的变通，都会带来严重的后果。
+    <span class="qsrc">——《对赌》</span>
+  </div>
+
+  <div class="interact">
+    <div class="it-title">互动（2 分钟）</div>
+    <p>下列三条新闻标题，各踩中了哪种捷径？①「某校 90% 学生用了 XX 记忆法后成绩大涨」；②「你以为的 100 元，其实只值 29（旁边划着大大的原价）」；③「连开 10 次红灯，原因竟是……」</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：①「90%」很可能是锚定+幸存者偏差（谁会被统计、谁不会），先看样本；②先出现的大数字「100」是锚，让你觉得 29 便宜；③「连开 10 次」利用可得性——罕见事件被说成规律，其实每次红灯都是独立事件。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第三讲 · 样本与群体的误区
+     ============================================================ -->
+<section class="sec c-3" id="sec-3">
+  <div class="sec-head">
+    <h2>第三讲 · 样本与群体的误区</h2>
+    <span class="time-badge">9 分钟</span>
+    <p class="subtitle">目标：看清「只看到活下来的」和「用自己的经验代替所有人」</p>
+  </div>
+
+  <h3>3.1 幸存者偏差</h3>
+  <div class="kw-card">
+    <span class="kw-tag">定义</span>只看到活下来的，忽略了消失的。
+  </div>
+  <div class="case-card">
+    <span class="case-title">两个例子</span>
+    <p>只看到辍学创业成功的比尔·盖茨，没看到成千上万辍学后平庸的人。</p>
+    <p>只看到 NBA 里的穷孩子，数据却说中产家庭的孩子更容易入选——因为营养、情商教育都跟家境有关。</p>
+  </div>
+  <div class="kw-card">
+    <span class="kw-tag">自检</span>每当听到「某某因为 X 所以成功了」，先问：<b>做了 X 却没成功的人，还在统计里吗？</b>
+  </div>
+
+  <h3>3.2 以己度人（用自己的经验推断群体）</h3>
+  <div class="kw-card">
+    <span class="kw-tag">定义</span>用自己的个体体验推测所有人。
+  </div>
+  <div class="case-card">
+    <span class="case-title">例子</span>
+    <p>你觉得自己数学不难，就以为「大家应该都会」——可你的同桌可能正被卡在第一步。</p>
+    <p>格拉德威尔说直觉比深思熟虑有效；但大数据研究反驳：大多数人会放大自我感受，用个体经验推测群体，恰恰容易产生谬误。</p>
+  </div>
+
+  <h3>3.3 社会期望偏差（说出来的话 ≠ 真实想法）</h3>
+  <div class="kw-card">
+    <span class="kw-tag">定义</span>人们在公开场合隐藏非主流想法，回答调研时「说假话」。
+  </div>
+  <ul>
+    <li>2016 年美国大选民调失灵：特朗普的「地下支持者」不愿公开表态。</li>
+    <li>自己也会中招：问「你周末学习了吗？」大部分人会回答学了。</li>
+  </ul>
+  <div class="kw-card">
+    <span class="kw-tag">启示</span><b>别人嘴上说的，不等于心里想的；自己心里想的，也不等于事实。</b>
+  </div>
+
+  <div class="interact">
+    <div class="it-title">互动（2 分钟）</div>
+    <p>「补课的人成绩都不错」——用今天三个概念（幸存者偏差、以己度人、社会期望偏差）各挑一个毛病。</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：①幸存者偏差——补了课但成绩没起色的人，很少出来说；②以己度人——「补课对 A 有用」不能推出「对所有人都有效」；③社会期望偏差——别人嘴上说「补课有用」可能是客套，真实数据要看匿名统计。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第四讲 · 被操纵的误区
+     ============================================================ -->
+<section class="sec c-4" id="sec-4">
+  <div class="sec-head">
+    <h2>第四讲 · 被操纵的误区</h2>
+    <span class="time-badge">5 分钟</span>
+    <p class="subtitle">目标：识别从众压力与语言框架的陷阱</p>
+  </div>
+
+  <h3>4.1 从众效应</h3>
+  <div class="kw-card">
+    <span class="kw-tag">定义</span>因为大家都这么做，就跟着做。
+  </div>
+  <ul>
+    <li>「全班都报了文科，我也报」——但兴趣和特长是你的，不是大家的。</li>
+    <li>真正的独立思考：知道<b>为什么</b>做，而不只是<b>跟着</b>做。</li>
+  </ul>
+
+  <h3>4.2 框架效应</h3>
+  <div class="kw-card">
+    <span class="kw-tag">定义</span>同一事实，换种说法，结论就变。
+  </div>
+  <div class="case-card">
+    <span class="case-title">手术的例子</span>
+    <p>「术后一个月死亡率 10%」vs「术后一个月存活率 90%」——多数人听到前者拒绝手术。</p>
+    <p>原因：大脑对损失更敏感（<b>损失厌恶</b>）。</p>
+  </div>
+  <div class="kw-card">
+    <span class="kw-tag">对策</span>遇到关键选择，主动把说法「翻译」成另一个框架，看结论是否不变。
+  </div>
+
+  <div class="interact">
+    <div class="it-title">互动（2 分钟）</div>
+    <p>「这次统考，及格率提高了 10%」vs「这次统考，还有 40% 的人没及格」——同一场考试，两种说法。先说出感受，再指出框架在哪里、怎么翻译。</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：前一句把注意力锚在「进步」（收益框架），后一句锚在「失败」（损失框架）。翻译方法：把两个框架并列——「及格率从 50% 升到 60%，即不及格率从 50% 降到 40%」，数据是同一组，感受却不同；决策时要基于数字本身，而不是说法。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     第五讲 · 解释与伪科学
+     ============================================================ -->
+<section class="sec c-5" id="sec-5">
+  <div class="sec-head">
+    <h2>第五讲 · 解释与伪科学</h2>
+    <span class="time-badge">10 分钟</span>
+    <p class="subtitle">目标：戳破「感觉自己懂了」，学会用可证伪性检验一切说法</p>
+  </div>
+
+  <h3>5.1 解释深度错觉</h3>
+  <div class="kw-card">
+    <span class="kw-tag">定义</span>感觉自己懂了，其实根本解释不出来。
+  </div>
+  <ul>
+    <li>大多数人解释不了冰箱怎么制冷、自行车怎么保持平衡。</li>
+    <li>考试时「这题我好像会」——一写就卡壳，就是解释深度错觉。</li>
+  </ul>
+  <div class="kw-card">
+    <span class="kw-tag">破解</span>用「费曼技巧」——把知识讲给完全不懂的人听，讲得通才算真懂。
+  </div>
+
+  <h3>5.2 先有结论，再找解释</h3>
+  <div class="quote-box">
+    更多时候都是先有结论再寻求解释。
+    <span class="qsrc">——《思维是平的》</span>
+  </div>
+  <ul>
+    <li>自省不是「查看内心」，而是「事后编故事」。</li>
+    <li>想考好 → 考好了 →「因为我努力了」（其实可能是题目简单）。</li>
+  </ul>
+
+  <h3>5.3 不可证伪的「科学」（伪科学）</h3>
+  <div class="kw-card">
+    <span class="kw-tag">波普尔标准</span>科学理论必须可以被事实推翻（<b>可证伪性</b>）。
+  </div>
+  <ul>
+    <li>弗洛伊德的精神分析：无论患者做什么，都能解释——「永远正确」意味着<b>不可证伪</b>，不是科学。</li>
+    <li>占星、星座运势：任何说法都有解释，同样不可证伪。</li>
+  </ul>
+  <div class="kw-card">
+    <span class="kw-tag">识别伪科学的信号</span>它能否提出一个「如果观察到什么，就证明我错了」的预测？
+  </div>
+
+  <h3>5.4 相关性 ≠ 因果</h3>
+  <ul>
+    <li>搜索「涨价」多，房价涨——是相关，不一定是因果。</li>
+    <li>「喜欢哈雷摩托车的人智商低」——可能是相关，用来推断个体就是误区。</li>
+  </ul>
+
+  <div class="interact">
+    <div class="it-title">互动（2 分钟）</div>
+    <p>用「可证伪性」检验三句话：①「明天可能下雨，也可能不下」；②「勤能补拙」；③「这个药对 80% 的患者有效」。哪句是科学表述？</p>
+    <button class="btn-ref" onclick="toggleRef(this)">展开参考要点</button>
+    <div class="ref-box">参考：①「怎么都行」——永远不被推翻，零信息量，不可证伪；②「补拙」的「拙」「勤」事后定义，失败可被解释成「还不够勤」，接近不可证伪；③可检验——如果随机对照试验中治愈率显著低于安慰剂，「80% 有效」就会被推翻，这是可证伪的科学表述。</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     总结
+     ============================================================ -->
+<section class="sec c-sum" id="sec-sum">
+  <div class="sec-head">
+    <h2>总结 · 误区自查清单</h2>
+    <span class="time-badge">13 分钟</span>
+  </div>
+  <table>
+    <tr><th>#</th><th>误区</th><th>一句话自检</th></tr>
+    <tr><td>1</td><td>自利性偏差</td><td>失败时，我找过自己的原因吗？</td></tr>
+    <tr><td>2</td><td>冒名顶替</td><td>我的成功真的只是运气吗？</td></tr>
+    <tr><td>3</td><td>正确感陷阱</td><td>我在求对，还是在求「显得对」？</td></tr>
+    <tr><td>4</td><td>锚定效应</td><td>第一个数字，绑架了我的判断吗？</td></tr>
+    <tr><td>5</td><td>可得性偏差</td><td>这是常见，还是只是我最近常看到？</td></tr>
+    <tr><td>6</td><td>确认偏误</td><td>我找过反例吗？</td></tr>
+    <tr><td>7</td><td>幸存者偏差</td><td>我看得到「没成功」的那群人吗？</td></tr>
+    <tr><td>8</td><td>以己度人</td><td>我的经验能代表所有人吗？</td></tr>
+    <tr><td>9</td><td>从众</td><td>我是因为「对」才做，还是因为「大家都在做」？</td></tr>
+    <tr><td>10</td><td>框架效应</td><td>换个说法，结论还一样吗？</td></tr>
+    <tr><td>11</td><td>解释深度错觉</td><td>我能把它讲清楚吗？</td></tr>
+    <tr><td>12</td><td>不可证伪</td><td>它允许被推翻吗？</td></tr>
+    <tr><td>13</td><td>相关 ≠ 因果</td><td>谁在影响谁？有没有第三变量？</td></tr>
+  </table>
+
+  <h3>课后思考（4 题）</h3>
+  <ol>
+    <li>从本周经历中找出一个「自利性偏差」的例子，改写归因。</li>
+    <li>找一个你「坚信」的观点，主动找三条反例。</li>
+    <li>回忆一次「先有结论再找解释」的经历，当时结论是怎么来的？</li>
+    <li>用「可证伪性」检验一个你平时信的东西（星座、考运、直觉）。</li>
+  </ol>
+
+  <div class="end-box">
+    <b>一句话总结：</b>大脑的快捷方式省力，但会收费。收费项目叫「偏差」——认识它的名字，你就能在关键决策前把它拦下来。
+  </div>
+</section>
+
+<p class="foot-note">— 常见思维误区 · 完 —</p>
+</article>
+
+<script>
+function toggleRef(btn) {
+  var box = btn.nextElementSibling;
+  var show = !box.classList.contains("show");
+  box.classList.toggle("show", show);
+  btn.classList.toggle("open", show);
+  btn.textContent = show ? "收起参考要点" : (btn.getAttribute("data-close") || "展开参考要点");
+}
+
+var secs = Array.prototype.slice.call(document.querySelectorAll("section.sec"));
+var chips = Array.prototype.slice.call(document.querySelectorAll(".topbar a.chip"));
+var times = {};
+chips.forEach(function (c) {
+  times[c.getAttribute("href").slice(1)] = parseInt(c.getAttribute("data-time"), 10);
+});
+var labels = { "sec-open": "开场", "sec-1": "第一讲", "sec-2": "第二讲", "sec-3": "第三讲", "sec-4": "第四讲", "sec-5": "第五讲", "sec-sum": "总结" };
+var lastId = "";
+var acc = 0;
+var accMap = {};
+Object.keys(times).forEach(function (k) {
+  accMap[k] = acc;
+  acc += times[k];
+});
+function onScroll() {
+  var pos = window.pageYOffset + 70;
+  var cur = secs[0];
+  var isBottom = (window.innerHeight + window.pageYOffset) >= document.documentElement.scrollHeight - 20;
+  if (isBottom) {
+    cur = secs[secs.length - 1];
+  } else {
+    for (var i = 0; i < secs.length; i++) {
+      if (secs[i].offsetTop <= pos) cur = secs[i];
+    }
+  }
+  var id = cur.id;
+  for (var j = 0; j < chips.length; j++) {
+    chips[j].classList.toggle("active", chips[j].getAttribute("href") === "#" + id);
+  }
+  lastId = id;
+  var info = times[id];
+  document.getElementById("tbProgress").textContent = labels[id] + " · " + accMap[id] + "-" + (accMap[id] + info) + "/60 分钟";
+}
+window.addEventListener("scroll", onScroll);
+onScroll();
+</script>
+</body>
+</html>
