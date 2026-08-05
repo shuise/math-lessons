@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../../lib/logo.png?version=1.0.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>逻辑与集合 · 高考模拟习题集</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+h2 { margin: 36px 0 16px; padding-bottom: 8px; border-bottom: 2px solid #1a73e8; color: #1a73e8; }
+h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
+.part-tag.mc { background: #1a73e8; }
+.part-tag.tf { background: #e65100; }
+.part-tag.proof { background: #00897b; }
+.part-tag.calc { background: #3949ab; }
+.part-tag {
+  display: inline-block; color: #fff; padding: 2px 12px; border-radius: 12px;
+  font-size: 0.8em; margin-left: 8px; vertical-align: middle;
+}
+/* 计分面板 */
+.score-panel {
+  text-align: center; padding: 16px; margin: 20px 0;
+  background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8;
+}
+.score-panel .score-num { font-size: 2em; font-weight: bold; color: #1a73e8; }
+.score-panel .score-sub { font-size: 0.9em; color: #666; margin: 4px 0 0; }
+.score-panel .btn-reset {
+  margin-left: 16px; padding: 8px 24px; border: 2px solid #1a73e8;
+  color: #1a73e8; border-radius: 20px; background: #fff;
+  cursor: pointer; font-size: 0.95em; transition: 0.15s;
+}
+.score-panel .btn-reset:hover { background: #1a73e8; color: #fff; }
+/* 试题卡片 */
+.quiz-question {
+  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+  padding: 18px 22px; margin: 18px 0; transition: all 0.2s;
+}
+.quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
+.quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+.quiz-question .q-title { font-weight: bold; font-size: 1.02em; margin-bottom: 10px; color: #2c3e50; }
+.quiz-question .q-no { display: inline-block; min-width: 2.2em; color: #e65100; font-weight: bold; margin-right: 4px; }
+.quiz-question .q-tag { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 0.72em; margin-right: 8px; color: #fff; background: #1a73e8; }
+.q-tag.logic { background: #1a73e8; }
+.q-tag.set { background: #00897b; }
+.quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-question .opt {
+  padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
+  cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
+}
+.quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
+.quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+.quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
+.quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
+.quiz-question .explain {
+  margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+  font-size: 0.93em; display: none; line-height: 1.85;
+}
+.quiz-question .explain.show { display: block; }
+.quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
+.quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
+/* 解答题卡片（推导/计算） */
+.solve-card {
+  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
+  padding: 18px 22px; margin: 18px 0;
+}
+.solve-card .q-title { font-weight: bold; font-size: 1.02em; margin-bottom: 8px; color: #2c3e50; }
+.solve-card .q-no { display: inline-block; min-width: 2.2em; color: #e65100; font-weight: bold; margin-right: 4px; }
+.solve-card .q-tag { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 0.72em; margin-right: 8px; color: #fff; }
+.solve-btn {
+  margin-top: 10px; padding: 5px 18px; border: 2px solid #00897b; color: #00897b;
+  border-radius: 14px; background: #fff; cursor: pointer; font-size: 0.85em; transition: 0.15s;
+}
+.solve-btn:hover { background: #e0f2f1; }
+.solve-btn.open { background: #00897b; color: #fff; }
+.solve-ans {
+  display: none; margin-top: 12px; padding: 12px 16px; border-radius: 8px;
+  background: #f0fdf9; border-left: 4px solid #00897b; font-size: 0.94em; line-height: 1.9;
+}
+.solve-ans.show { display: block; }
+.solve-ans .ans-final { color: #d32f2f; font-weight: bold; }
+.step-line { margin: 6px 0; }
+.self-score { margin-top: 10px; padding-top: 8px; border-top: 1px dashed #00897b; }
+.self-score .self-btn {
+  margin: 4px 6px 0 0; padding: 4px 14px; border-radius: 12px; font-size: 0.85em; cursor: pointer;
+}
+.self-score .self-btn.ok { border: 2px solid #4caf50; color: #4caf50; background: #fff; }
+.self-score .self-btn.ok:hover { background: #e8f5e9; }
+.self-score .self-btn.no { border: 2px solid #f44336; color: #f44336; background: #fff; }
+.self-score .self-btn.no:hover { background: #fce4ec; }
+.self-score .self-btn:disabled { opacity: 0.45; cursor: default; }
+.self-score .self-btn.selected { color: #fff; }
+.self-score .self-btn.ok.selected { background: #4caf50; }
+.self-score .self-btn.no.selected { background: #f44336; }
+.legend { background: #fff8e1; border: 1px dashed #ffc107; border-radius: 8px; padding: 10px 16px; margin: 14px 0; font-size: 0.9em; color: #666; }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">&larr; 返回逻辑课程</a>
+<article>
+<h1>逻辑与集合 · 高考模拟习题集</h1>
+<p class="tip" style="text-align:center;font-size:1.05em;">30 选择题 + 30 判断题 + 10 推导题 + 10 计算题 · 高考难度 · 建议 90 分钟完成</p>
+
+<div class="course-meta">
+  <span><strong>对象：</strong>高一~高三（已学集合与逻辑）</span>
+  <span><strong>时长：</strong>90 分钟（选择 20′ + 判断 15′ + 推导 25′ + 计算 25′ + 检查 5′）</span>
+  <span><strong>计分：</strong>选择/判断各 2 分，推导/计算各 5 分，满分 220 分</span>
+</div>
+
+<div class="score-panel">
+  得分：<span class="score-num" id="totalScore">0 / 220</span>
+  <button class="btn-reset" onclick="resetAll()">重置</button>
+  <div class="score-sub">已答 <span id="answeredCount">0</span> / 60 · 选择 <span id="mcScore">0</span>/60 · 判断 <span id="tfScore">0</span>/60 · 推导 <span id="proofScore">0</span>/50 · 计算 <span id="calcScore">0</span>/50</div>
+</div>
+
+<div class="legend">使用说明：选择题、判断题点击选项即自动判分并显示解析；推导题、计算题点击「显示解析」查看分步解答。全程约 90 分钟，可随时「重置」重新作答。</div>
+
+<!-- ==================== 一、选择题 ==================== -->
+<h2>一、选择题 <span class="part-tag mc">30 题 × 2 分</span></h2>
+<p style="color:#666;font-size:0.93em;">每题 4 个选项，只有一项符合题目要求。</p>
+
+<div class="quiz-question" id="c1">
+  <div class="q-title"><span class="q-no">1.</span><span class="q-tag set">集合</span>已知集合 A={1,2,3}，B={x | x²−x−2≤0，x∈Z}，则 A∩B =（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c1',0)">A. {1}</div>
+    <div class="opt" onclick="checkChoice('c1',1)">B. {1,2}</div>
+    <div class="opt" onclick="checkChoice('c1',2)">C. {0,1,2}</div>
+    <div class="opt" onclick="checkChoice('c1',3)">D. {−1,1,2}</div>
+  </div>
+  <div class="explain" id="explain-c1"><b>解析：</b>x²−x−2≤0 ⇔ (x−2)(x+1)≤0 ⇔ −1≤x≤2，结合 x∈Z 得 B={−1,0,1,2}，故 A∩B={1,2}。<b>选 B。</b></div>
+</div>
+
+<div class="quiz-question" id="c2">
+  <div class="q-title"><span class="q-no">2.</span><span class="q-tag logic">逻辑</span>命题「∀x∈R，x²≥0」的否定是（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c2',0)">A. ∃x∈R，x²＜0</div>
+    <div class="opt" onclick="checkChoice('c2',1)">B. ∀x∈R，x²＜0</div>
+    <div class="opt" onclick="checkChoice('c2',2)">C. ∃x∈R，x²≤0</div>
+    <div class="opt" onclick="checkChoice('c2',3)">D. ∀x∈R，x²≤0</div>
+  </div>
+  <div class="explain" id="explain-c2"><b>解析：</b>全称命题的否定是特称命题，量词 ∀ 改 ∃、结论取反面，即 ∃x∈R，x²＜0。<b>选 A。</b></div>
+</div>
+
+<div class="quiz-question" id="c3">
+  <div class="q-title"><span class="q-no">3.</span><span class="q-tag logic">逻辑</span>已知 p：x＞2，q：x＞1，则 p 是 q 的（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c3',0)">A. 充分不必要条件</div>
+    <div class="opt" onclick="checkChoice('c3',1)">B. 必要不充分条件</div>
+    <div class="opt" onclick="checkChoice('c3',2)">C. 充要条件</div>
+    <div class="opt" onclick="checkChoice('c3',3)">D. 既不充分也不必要条件</div>
+  </div>
+  <div class="explain" id="explain-c3"><b>解析：</b>x＞2 ⇒ x＞1，反之不成立（如 x=1.5），故 p 是 q 的充分不必要条件。<b>选 A。</b></div>
+</div>
+
+<div class="quiz-question" id="c4">
+  <div class="q-title"><span class="q-no">4.</span><span class="q-tag set">集合</span>设集合 A={x | x²−5x+6=0}，B={2}，则下列关系正确的是（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c4',0)">A. A∈B</div>
+    <div class="opt" onclick="checkChoice('c4',1)">B. B∈A</div>
+    <div class="opt" onclick="checkChoice('c4',2)">C. A⊆B</div>
+    <div class="opt" onclick="checkChoice('c4',3)">D. B⊆A</div>
+  </div>
+  <div class="explain" id="explain-c4"><b>解析：</b>x²−5x+6=0 ⇔ (x−2)(x−3)=0，A={2,3}。元素 2∈A，而集合 B={2}⊆A。<b>选 D。</b></div>
+</div>
+
+<div class="quiz-question" id="c5">
+  <div class="q-title"><span class="q-no">5.</span><span class="q-tag logic">逻辑</span>命题「若 x²=4，则 x=2」的逆否命题是（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c5',0)">A. 若 x≠2，则 x²≠4</div>
+    <div class="opt" onclick="checkChoice('c5',1)">B. 若 x²≠4，则 x≠2</div>
+    <div class="opt" onclick="checkChoice('c5',2)">C. 若 x=2，则 x²=4</div>
+    <div class="opt" onclick="checkChoice('c5',3)">D. 若 x≠−2，则 x²≠4</div>
+  </div>
+  <div class="explain" id="explain-c5"><b>解析：</b>逆否命题：交换并同时否定条件与结论，即「若 x≠2，则 x²≠4」。<b>选 A。</b></div>
+</div>
+
+<div class="quiz-question" id="c6">
+  <div class="q-title"><span class="q-no">6.</span><span class="q-tag set">集合</span>已知集合 A={x | 1＜x＜3}，B={x | 2≤x≤4}，则 A∪B =（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c6',0)">A. {x | 1＜x≤4}</div>
+    <div class="opt" onclick="checkChoice('c6',1)">B. {x | 1＜x＜4}</div>
+    <div class="opt" onclick="checkChoice('c6',2)">C. {x | 2≤x＜3}</div>
+    <div class="opt" onclick="checkChoice('c6',3)">D. {x | 1≤x≤4}</div>
+  </div>
+  <div class="explain" id="explain-c6"><b>解析：</b>两区间并集：左端取 1（开），右端取 4（闭），A∪B={x | 1＜x≤4}。<b>选 A。</b></div>
+</div>
+
+<div class="quiz-question" id="c7">
+  <div class="q-title"><span class="q-no">7.</span><span class="q-tag logic">逻辑</span>设 p：方程 x²+x−6=0 有一根为 2；q：方程 x²+x−6=0 有一根为 −3，则（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c7',0)">A. p 真、q 假</div>
+    <div class="opt" onclick="checkChoice('c7',1)">B. p 假、q 真</div>
+    <div class="opt" onclick="checkChoice('c7',2)">C. p∨q 为假</div>
+    <div class="opt" onclick="checkChoice('c7',3)">D. p∧q 为真</div>
+  </div>
+  <div class="explain" id="explain-c7"><b>解析：</b>x²+x−6=(x−2)(x+3)=0，两根为 2 与 −3，p、q 均真，故 p∧q 为真。<b>选 D。</b></div>
+</div>
+
+<div class="quiz-question" id="c8">
+  <div class="q-title"><span class="q-no">8.</span><span class="q-tag set">集合</span>设全集 U=R，A={x | x²−1＞0}，则 ∁<sub>U</sub>A =（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c8',0)">A. {x | −1≤x≤1}</div>
+    <div class="opt" onclick="checkChoice('c8',1)">B. {x | x＜−1 或 x＞1}</div>
+    <div class="opt" onclick="checkChoice('c8',2)">C. {x | −1＜x＜1}</div>
+    <div class="opt" onclick="checkChoice('c8',3)">D. R</div>
+  </div>
+  <div class="explain" id="explain-c8"><b>解析：</b>x²−1＞0 ⇔ x＜−1 或 x＞1，其补集为 {x | −1≤x≤1}。<b>选 A。</b></div>
+</div>
+
+<div class="quiz-question" id="c9">
+  <div class="q-title"><span class="q-no">9.</span><span class="q-tag logic">逻辑</span>「x∈A∩B」是「x∈A∪B」的（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c9',0)">A. 充分不必要条件</div>
+    <div class="opt" onclick="checkChoice('c9',1)">B. 必要不充分条件</div>
+    <div class="opt" onclick="checkChoice('c9',2)">C. 充要条件</div>
+    <div class="opt" onclick="checkChoice('c9',3)">D. 既不充分也不必要条件</div>
+  </div>
+  <div class="explain" id="explain-c9"><b>解析：</b>x∈A∩B ⇒ x∈A∪B；反之不成立（x 只在 A 中时 x∈A∪B 但 x∉A∩B）。充分不必要。<b>选 A。</b></div>
+</div>
+
+<div class="quiz-question" id="c10">
+  <div class="q-title"><span class="q-no">10.</span><span class="q-tag logic">逻辑</span>已知命题 p：∃x∈R，x²+2x+2≤0，则 ¬p 为（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c10',0)">A. ∀x∈R，x²+2x+2＞0</div>
+    <div class="opt" onclick="checkChoice('c10',1)">B. ∃x∈R，x²+2x+2＞0</div>
+    <div class="opt" onclick="checkChoice('c10',2)">C. ∀x∈R，x²+2x+2≥0</div>
+    <div class="opt" onclick="checkChoice('c10',3)">D. ∀x∈R，x²+2x+2＜0</div>
+  </div>
+  <div class="explain" id="explain-c10"><b>解析：</b>特称命题的否定为全称命题：量词 ∃ 改 ∀、结论取反面，¬p：∀x∈R，x²+2x+2＞0。<b>选 A。</b></div>
+</div>
+
+<div class="quiz-question" id="c11">
+  <div class="q-title"><span class="q-no">11.</span><span class="q-tag set">集合</span>已知集合 A={a,b}，B={a,b,c}，则满足 A⊆M⊆B 的集合 M 的个数为（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c11',0)">A. 1</div>
+    <div class="opt" onclick="checkChoice('c11',1)">B. 2</div>
+    <div class="opt" onclick="checkChoice('c11',2)">C. 3</div>
+    <div class="opt" onclick="checkChoice('c11',3)">D. 4</div>
+  </div>
+  <div class="explain" id="explain-c11"><b>解析：</b>M=A∪T，其中 T⊆{c}，T 可取 ∅ 或 {c}，共 2 种，故 M 的个数为 2。<b>选 B。</b></div>
+</div>
+
+<div class="quiz-question" id="c12">
+  <div class="q-title"><span class="q-no">12.</span><span class="q-tag logic">逻辑</span>命题「若 x＞0 且 y＞0，则 x+y＞0」的否命题是（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c12',0)">A. 若 x≤0 或 y≤0，则 x+y≤0</div>
+    <div class="opt" onclick="checkChoice('c12',1)">B. 若 x≤0 且 y≤0，则 x+y≤0</div>
+    <div class="opt" onclick="checkChoice('c12',2)">C. 若 x+y≤0，则 x≤0 或 y≤0</div>
+    <div class="opt" onclick="checkChoice('c12',3)">D. 若 x＞0 或 y＞0，则 x+y＞0</div>
+  </div>
+  <div class="explain" id="explain-c12"><b>解析：</b>否命题：条件与结论同时否定。「x＞0 且 y＞0」的否定是「x≤0 或 y≤0」（德摩根定律），「x+y＞0」的否定是「x+y≤0」。<b>选 A。</b></div>
+</div>
+
+<div class="quiz-question" id="c13">
+  <div class="q-title"><span class="q-no">13.</span><span class="q-tag set">集合</span>已知集合 A={1,2,3,4,5}，B={(x,y) | x∈A，y∈A，x−y∈A}，则 B 中所含元素的个数为（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c13',0)">A. 8</div>
+    <div class="opt" onclick="checkChoice('c13',1)">B. 10</div>
+    <div class="opt" onclick="checkChoice('c13',2)">C. 12</div>
+    <div class="opt" onclick="checkChoice('c13',3)">D. 16</div>
+  </div>
+  <div class="explain" id="explain-c13"><b>解析：</b>x−y∈{1,2,3,4,5} 且为正整数。按差值计数：差 1 有 4 对 (2,1)(3,2)(4,3)(5,4)；差 2 有 3 对；差 3 有 2 对；差 4 有 1 对；差 5 无。共 4+3+2+1=10 个元素。<b>选 B。</b></div>
+</div>
+
+<div class="quiz-question" id="c14">
+  <div class="q-title"><span class="q-no">14.</span><span class="q-tag logic">逻辑</span>设 p、q 是两个命题，若 p∨q 为假命题，则（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c14',0)">A. p、q 均假</div>
+    <div class="opt" onclick="checkChoice('c14',1)">B. p 假、q 真</div>
+    <div class="opt" onclick="checkChoice('c14',2)">C. p 真、q 假</div>
+    <div class="opt" onclick="checkChoice('c14',3)">D. p、q 均真</div>
+  </div>
+  <div class="explain" id="explain-c14"><b>解析：</b>「或」命题为假，当且仅当两个支命题均为假，故 p、q 均假。<b>选 A。</b></div>
+</div>
+
+<div class="quiz-question" id="c15">
+  <div class="q-title"><span class="q-no">15.</span><span class="q-tag set">集合</span>已知集合 A={x | x²+ax+1=0} 为空集，则 a 的取值范围是（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c15',0)">A. −2＜a＜2</div>
+    <div class="opt" onclick="checkChoice('c15',1)">B. −2≤a≤2</div>
+    <div class="opt" onclick="checkChoice('c15',2)">C. a＜−2 或 a＞2</div>
+    <div class="opt" onclick="checkChoice('c15',3)">D. a≤−2 或 a≥2</div>
+  </div>
+  <div class="explain" id="explain-c15"><b>解析：</b>一元二次方程 x²+ax+1=0 无实数根 ⇔ Δ=a²−4＜0 ⇔ −2＜a＜2。<b>选 A。</b></div>
+</div>
+
+<div class="quiz-question" id="c16">
+  <div class="q-title"><span class="q-no">16.</span><span class="q-tag set">集合</span>集合 A={x | x=2n，n∈Z}，B={x | x=4n，n∈Z}，则（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c16',0)">A. B⊆A</div>
+    <div class="opt" onclick="checkChoice('c16',1)">B. A⊆B</div>
+    <div class="opt" onclick="checkChoice('c16',2)">C. A=B</div>
+    <div class="opt" onclick="checkChoice('c16',3)">D. A∩B=∅</div>
+  </div>
+  <div class="explain" id="explain-c16"><b>解析：</b>A 为偶数集，B 为 4 的倍数集。4n=2·(2n)，故每个 B 的元素都是 A 的元素，B⊆A（真子集，如 2∈A 但 2∉B）。<b>选 A。</b></div>
+</div>
+
+<div class="quiz-question" id="c17">
+  <div class="q-title"><span class="q-no">17.</span><span class="q-tag logic">逻辑</span>命题「存在实数 x，使 x²+2x+5=0」的否定是（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c17',0)">A. 存在实数 x，使 x²+2x+5≠0</div>
+    <div class="opt" onclick="checkChoice('c17',1)">B. 不存在实数 x，使 x²+2x+5≠0</div>
+    <div class="opt" onclick="checkChoice('c17',2)">C. 对任意实数 x，使 x²+2x+5≠0</div>
+    <div class="opt" onclick="checkChoice('c17',3)">D. 对任意实数 x，使 x²+2x+5=0</div>
+  </div>
+  <div class="explain" id="explain-c17"><b>解析：</b>特称命题的否定为全称命题：∃x 改为 ∀x，等式否定为不等，即「对任意实数 x，使 x²+2x+5≠0」。<b>选 C。</b></div>
+</div>
+
+<div class="quiz-question" id="c18">
+  <div class="q-title"><span class="q-no">18.</span><span class="q-tag set">集合</span>设 U 为全集，集合 A、B 满足 A⊆B，则下列关系正确的是（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c18',0)">A. ∁<sub>U</sub>A⊆∁<sub>U</sub>B</div>
+    <div class="opt" onclick="checkChoice('c18',1)">B. ∁<sub>U</sub>B⊆∁<sub>U</sub>A</div>
+    <div class="opt" onclick="checkChoice('c18',2)">C. ∁<sub>U</sub>A=∁<sub>U</sub>B</div>
+    <div class="opt" onclick="checkChoice('c18',3)">D. 无法确定</div>
+  </div>
+  <div class="explain" id="explain-c18"><b>解析：</b>子集取补集后包含关系反转：A⊆B ⇒ ∁<sub>U</sub>B⊆∁<sub>U</sub>A（可画文氏图验证）。<b>选 B。</b></div>
+</div>
+
+<div class="quiz-question" id="c19">
+  <div class="q-title"><span class="q-no">19.</span><span class="q-tag logic">逻辑</span>设 p：x²−3x−4≤0，q：|x−2|＜3，则 p 是 q 的（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c19',0)">A. 充分不必要条件</div>
+    <div class="opt" onclick="checkChoice('c19',1)">B. 必要不充分条件</div>
+    <div class="opt" onclick="checkChoice('c19',2)">C. 充要条件</div>
+    <div class="opt" onclick="checkChoice('c19',3)">D. 既不充分也不必要条件</div>
+  </div>
+  <div class="explain" id="explain-c19"><b>解析：</b>p：(x−4)(x+1)≤0 ⇔ −1≤x≤4；q：−1＜x＜5。x=−1 满足 p 不满足 q，故 p⇏q；x=4.5 满足 q 不满足 p，故 q⇏p。既不充分也不必要。<b>选 D。</b></div>
+</div>
+
+<div class="quiz-question" id="c20">
+  <div class="q-title"><span class="q-no">20.</span><span class="q-tag set">集合</span>已知集合 A={x | x=3k+1，k∈Z}，B={x | x=3k−2，k∈Z}，则（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c20',0)">A. A=B</div>
+    <div class="opt" onclick="checkChoice('c20',1)">B. A⊆B 且 A≠B</div>
+    <div class="opt" onclick="checkChoice('c20',2)">C. B⊆A 且 B≠A</div>
+    <div class="opt" onclick="checkChoice('c20',3)">D. A∩B=∅</div>
+  </div>
+  <div class="explain" id="explain-c20"><b>解析：</b>3k−2=3(k−1)+1，即 B 中元素均形如 3m+1；反之 3k+1=3(k+1)−2，故 A=B。<b>选 A。</b></div>
+</div>
+
+<div class="quiz-question" id="c21">
+  <div class="q-title"><span class="q-no">21.</span><span class="q-tag logic">逻辑</span>命题「∀x∈[1,2]，x²−a≤0」为真命题，则 a 的最小值为（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c21',0)">A. 1</div>
+    <div class="opt" onclick="checkChoice('c21',1)">B. 2</div>
+    <div class="opt" onclick="checkChoice('c21',2)">C. 4</div>
+    <div class="opt" onclick="checkChoice('c21',3)">D. 8</div>
+  </div>
+  <div class="explain" id="explain-c21"><b>解析：</b>对 ∀x∈[1,2] 恒有 x²≤a，等价于 a≥(x²)<sub>max</sub>=4，故 a 的最小值为 4。<b>选 C。</b></div>
+</div>
+
+<div class="quiz-question" id="c22">
+  <div class="q-title"><span class="q-no">22.</span><span class="q-tag set">集合</span>设集合 A={0,1}，B={x | x⊆A}，则集合 B 中元素的个数为（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c22',0)">A. 2</div>
+    <div class="opt" onclick="checkChoice('c22',1)">B. 3</div>
+    <div class="opt" onclick="checkChoice('c22',2)">C. 4</div>
+    <div class="opt" onclick="checkChoice('c22',3)">D. 8</div>
+  </div>
+  <div class="explain" id="explain-c22"><b>解析：</b>B 的元素是 A 的所有子集：∅、{0}、{1}、{0,1}，共 4 个。<b>选 C。</b></div>
+</div>
+
+<div class="quiz-question" id="c23">
+  <div class="q-title"><span class="q-no">23.</span><span class="q-tag logic">逻辑</span>已知 p：x＞3 或 x＜−1，q：x＞2，则 ¬p 是 q 的（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c23',0)">A. 充分不必要条件</div>
+    <div class="opt" onclick="checkChoice('c23',1)">B. 必要不充分条件</div>
+    <div class="opt" onclick="checkChoice('c23',2)">C. 充要条件</div>
+    <div class="opt" onclick="checkChoice('c23',3)">D. 既不充分也不必要条件</div>
+  </div>
+  <div class="explain" id="explain-c23"><b>解析：</b>¬p：−1≤x≤3；q：x＞2。取 x=0 满足 ¬p 但不满足 q；取 x=4 满足 q 但不满足 ¬p。故既不充分也不必要。<b>选 D。</b></div>
+</div>
+
+<div class="quiz-question" id="c24">
+  <div class="q-title"><span class="q-no">24.</span><span class="q-tag set">集合</span>已知集合 A={−1,0,1}，B={y | y=|x|，x∈A}，则 A∩B =（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c24',0)">A. {0}</div>
+    <div class="opt" onclick="checkChoice('c24',1)">B. {1}</div>
+    <div class="opt" onclick="checkChoice('c24',2)">C. {0,1}</div>
+    <div class="opt" onclick="checkChoice('c24',3)">D. {−1,0,1}</div>
+  </div>
+  <div class="explain" id="explain-c24"><b>解析：</b>B={|−1|,|0|,|1|}={0,1}，A∩B={0,1}。<b>选 C。</b></div>
+</div>
+
+<div class="quiz-question" id="c25">
+  <div class="q-title"><span class="q-no">25.</span><span class="q-tag set">集合</span>设全集 U={1,2,3,4,5}，A∩B={2}，∁<sub>U</sub>A∩B={4}，∁<sub>U</sub>A∩∁<sub>U</sub>B={1,5}，则（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c25',0)">A. A={2,3}</div>
+    <div class="opt" onclick="checkChoice('c25',1)">B. A={2,4}</div>
+    <div class="opt" onclick="checkChoice('c25',2)">C. B={2,3}</div>
+    <div class="opt" onclick="checkChoice('c25',3)">D. B={3,4}</div>
+  </div>
+  <div class="explain" id="explain-c25"><b>解析：</b>画文氏图：A∩B={2}；B 中不属于 A 的只有 4；既不在 A 也不在 B 的为 1,5；剩余元素 3 必属于 A 且不属于 B。故 A={2,3}，B={2,4}。<b>选 A。</b></div>
+</div>
+
+<div class="quiz-question" id="c26">
+  <div class="q-title"><span class="q-no">26.</span><span class="q-tag logic">逻辑</span>命题「若 m＜n，则 m²＜n²」是假命题，下列可作反例的是（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c26',0)">A. m=1，n=−2</div>
+    <div class="opt" onclick="checkChoice('c26',1)">B. m=2，n=3</div>
+    <div class="opt" onclick="checkChoice('c26',2)">C. m=−2，n=1</div>
+    <div class="opt" onclick="checkChoice('c26',3)">D. m=−3，n=−2</div>
+  </div>
+  <div class="explain" id="explain-c26"><b>解析：</b>反例需满足 m＜n 且 m²≥n²。取 m=−3，n=−2：−3＜−2 但 9＞4。<b>选 D。</b></div>
+</div>
+
+<div class="quiz-question" id="c27">
+  <div class="q-title"><span class="q-no">27.</span><span class="q-tag set">集合</span>已知集合 A={x | x²+ax+2=0} 中恰有一个元素，则 a =（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c27',0)">A. ±2√2</div>
+    <div class="opt" onclick="checkChoice('c27',1)">B. ±2</div>
+    <div class="opt" onclick="checkChoice('c27',2)">C. 2√2</div>
+    <div class="opt" onclick="checkChoice('c27',3)">D. −2√2</div>
+  </div>
+  <div class="explain" id="explain-c27"><b>解析：</b>一元二次方程恰有一个实根（二重根）⇔ Δ=a²−8=0 ⇔ a=±2√2。<b>选 A。</b></div>
+</div>
+
+<div class="quiz-question" id="c28">
+  <div class="q-title"><span class="q-no">28.</span><span class="q-tag set">集合</span>设集合 A={1,2,4}，B={x | x²−4x+m=0}，若 A∩B={1}，则 B =（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c28',0)">A. {1,3}</div>
+    <div class="opt" onclick="checkChoice('c28',1)">B. {1,−3}</div>
+    <div class="opt" onclick="checkChoice('c28',2)">C. {1,4}</div>
+    <div class="opt" onclick="checkChoice('c28',3)">D. {1,0}</div>
+  </div>
+  <div class="explain" id="explain-c28"><b>解析：</b>由 1∈B 得 1−4+m=0 ⇒ m=3，B={x | x²−4x+3=0}={1,3}。<b>选 A。</b></div>
+</div>
+
+<div class="quiz-question" id="c29">
+  <div class="q-title"><span class="q-no">29.</span><span class="q-tag logic">逻辑</span>「a=b」是「ac=bc」的（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c29',0)">A. 充分不必要条件</div>
+    <div class="opt" onclick="checkChoice('c29',1)">B. 必要不充分条件</div>
+    <div class="opt" onclick="checkChoice('c29',2)">C. 充要条件</div>
+    <div class="opt" onclick="checkChoice('c29',3)">D. 既不充分也不必要条件</div>
+  </div>
+  <div class="explain" id="explain-c29"><b>解析：</b>a=b ⇒ ac=bc；但 ac=bc 时若 c=0 不能推出 a=b，故充分不必要。<b>选 A。</b></div>
+</div>
+
+<div class="quiz-question" id="c30">
+  <div class="q-title"><span class="q-no">30.</span><span class="q-tag set">集合</span>已知集合 A={x | 1≤x≤3}，B={x | x＞a}，若 A⊆B，则 a 的取值范围是（　）</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('c30',0)">A. a＜1</div>
+    <div class="opt" onclick="checkChoice('c30',1)">B. a≤1</div>
+    <div class="opt" onclick="checkChoice('c30',2)">C. a≤3</div>
+    <div class="opt" onclick="checkChoice('c30',3)">D. a＞3</div>
+  </div>
+  <div class="explain" id="explain-c30"><b>解析：</b>A⊆B 即 [1,3]⊆(a,+∞)，须 a＜1（若 a=1，则 x=1∉B）。<b>选 A。</b></div>
+</div>
+
+<!-- ==================== 二、判断题 ==================== -->
+<h2>二、判断题 <span class="part-tag tf">30 题 × 2 分</span></h2>
+<p style="color:#666;font-size:0.93em;">判断下列说法是否正确：正确的选「正确」，错误的选「错误」。</p>
+
+<div class="quiz-question" id="j1">
+  <div class="q-title"><span class="q-no">1.</span><span class="q-tag logic">逻辑</span>命题的否定只否定结论；否命题同时否定条件与结论。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j1',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j1',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j1"><b>解析：</b>说法正确。命题的否定只否定结论；否命题将条件、结论同时否定。</div>
+</div>
+
+<div class="quiz-question" id="j2">
+  <div class="q-title"><span class="q-no">2.</span><span class="q-tag logic">逻辑</span>原命题与其逆否命题同真同假。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j2',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j2',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j2"><b>解析：</b>正确。互为逆否的两个命题等价，这是反证法的理论依据。</div>
+</div>
+
+<div class="quiz-question" id="j3">
+  <div class="q-title"><span class="q-no">3.</span><span class="q-tag logic">逻辑</span>全称命题的否定是特称命题。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j3',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j3',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j3"><b>解析：</b>正确。¬(∀x，p(x)) ⇔ ∃x，¬p(x)。</div>
+</div>
+
+<div class="quiz-question" id="j4">
+  <div class="q-title"><span class="q-no">4.</span><span class="q-tag logic">逻辑</span>命题「若 x＞1，则 x＞0」的逆命题为真。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j4',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j4',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j4"><b>解析：</b>错误。逆命题为「若 x＞0，则 x＞1」，取 x=0.5 即反例，为假命题。</div>
+</div>
+
+<div class="quiz-question" id="j5">
+  <div class="q-title"><span class="q-no">5.</span><span class="q-tag logic">逻辑</span>「x＞2」是「x＞1」的充分不必要条件。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j5',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j5',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j5"><b>解析：</b>正确。x＞2 ⇒ x＞1，反之不成立，充分不必要。</div>
+</div>
+
+<div class="quiz-question" id="j6">
+  <div class="q-title"><span class="q-no">6.</span><span class="q-tag logic">逻辑</span>若 p∧q 为真命题，则 p∨q 必为真命题。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j6',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j6',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j6"><b>解析：</b>正确。p∧q 为真 ⇒ p、q 均真 ⇒ p∨q 为真。</div>
+</div>
+
+<div class="quiz-question" id="j7">
+  <div class="q-title"><span class="q-no">7.</span><span class="q-tag logic">逻辑</span>若 p∨q 为假命题，则 p∧q 必为假命题。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j7',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j7',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j7"><b>解析：</b>正确。p∨q 为假 ⇒ p、q 均假 ⇒ p∧q 为假。</div>
+</div>
+
+<div class="quiz-question" id="j8">
+  <div class="q-title"><span class="q-no">8.</span><span class="q-tag logic">逻辑</span>命题「∀x∈R，x²+1＞0」为真命题。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j8',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j8',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j8"><b>解析：</b>正确。x²≥0 对一切实数成立，x²+1≥1＞0。</div>
+</div>
+
+<div class="quiz-question" id="j9">
+  <div class="q-title"><span class="q-no">9.</span><span class="q-tag logic">逻辑</span>命题「∃x∈R，x²＜0」为真命题。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j9',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j9',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j9"><b>解析：</b>错误。对任意实数 x，x²≥0，不存在 x²＜0。</div>
+</div>
+
+<div class="quiz-question" id="j10">
+  <div class="q-title"><span class="q-no">10.</span><span class="q-tag logic">逻辑</span>若 p 是 q 的必要不充分条件，则 q 是 p 的充分不必要条件。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j10',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j10',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j10"><b>解析：</b>正确。p 是 q 的必要不充分 ⇔ q⇒p 且 p⇏q ⇔ q 是 p 的充分不必要。</div>
+</div>
+
+<div class="quiz-question" id="j11">
+  <div class="q-title"><span class="q-no">11.</span><span class="q-tag logic">逻辑</span>「p 或 q」为真，当且仅当 p、q 中至少有一个为真。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j11',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j11',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j11"><b>解析：</b>正确。这是「或」命题的真值定义。</div>
+</div>
+
+<div class="quiz-question" id="j12">
+  <div class="q-title"><span class="q-no">12.</span><span class="q-tag logic">逻辑</span>命题「若 a＞0 且 b＞0，则 ab＞0」的否命题为真。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j12',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j12',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j12"><b>解析：</b>错误。否命题为「若 a≤0 或 b≤0，则 ab≤0」，取 a=−1，b=−2 得 ab=2＞0，为假命题。</div>
+</div>
+
+<div class="quiz-question" id="j13">
+  <div class="q-title"><span class="q-no">13.</span><span class="q-tag logic">逻辑</span>反证法的一般步骤：先假设结论成立，再推出矛盾。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j13',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j13',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j13"><b>解析：</b>错误。反证法是先假设结论<b>不成立</b>，然后推出与已知条件、公理或事实相矛盾，从而说明假设错误、原结论成立。</div>
+</div>
+
+<div class="quiz-question" id="j14">
+  <div class="q-title"><span class="q-no">14.</span><span class="q-tag logic">逻辑</span>命题「∃x∈Z，x²=2」为真命题。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j14',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j14',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j14"><b>解析：</b>错误。x²=2 的解为 ±√2，均不是整数，故不存在这样的整数 x。</div>
+</div>
+
+<div class="quiz-question" id="j15">
+  <div class="q-title"><span class="q-no">15.</span><span class="q-tag logic">逻辑</span>若 p 是 q 的充分不必要条件，则 ¬p 是 ¬q 的必要不充分条件。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j15',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j15',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j15"><b>解析：</b>正确。p⇒q ⇔ ¬q⇒¬p（逆否），且 q⇏p ⇔ ¬p⇏¬q，故 ¬p 是 ¬q 的必要不充分条件。</div>
+</div>
+
+<div class="quiz-question" id="j16">
+  <div class="q-title"><span class="q-no">16.</span><span class="q-tag set">集合</span>空集是任何集合的子集。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j16',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j16',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j16"><b>解析：</b>正确。空集是任何集合的子集，即 ∅⊆A 对任意集合 A 成立。</div>
+</div>
+
+<div class="quiz-question" id="j17">
+  <div class="q-title"><span class="q-no">17.</span><span class="q-tag set">集合</span>空集是任何非空集合的真子集。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j17',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j17',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j17"><b>解析：</b>正确。∅⊆A 且 ∅≠A（A 非空），故 ∅ 是 A 的真子集。</div>
+</div>
+
+<div class="quiz-question" id="j18">
+  <div class="q-title"><span class="q-no">18.</span><span class="q-tag set">集合</span>若集合 A={a,b}，B={b,a}，则 A=B。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j18',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j18',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j18"><b>解析：</b>正确。集合中元素无序，两集合元素完全相同，故相等。</div>
+</div>
+
+<div class="quiz-question" id="j19">
+  <div class="q-title"><span class="q-no">19.</span><span class="q-tag set">集合</span>0∈∅。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j19',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j19',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j19"><b>解析：</b>错误。空集不含任何元素，0∉∅。</div>
+</div>
+
+<div class="quiz-question" id="j20">
+  <div class="q-title"><span class="q-no">20.</span><span class="q-tag set">集合</span>若 A⊆B，则 A∩B=A。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j20',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j20',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j20"><b>解析：</b>正确。A 的元素全在 B 中，交集就是 A 本身。</div>
+</div>
+
+<div class="quiz-question" id="j21">
+  <div class="q-title"><span class="q-no">21.</span><span class="q-tag set">集合</span>若 A⊆B 且 B⊆A，则 A=B。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j21',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j21',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j21"><b>解析：</b>正确。互相包含即两集合元素完全相同，这是判断集合相等的依据。</div>
+</div>
+
+<div class="quiz-question" id="j22">
+  <div class="q-title"><span class="q-no">22.</span><span class="q-tag set">集合</span>集合 {x∈N | x²＜5} 有 3 个元素。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j22',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j22',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j22"><b>解析：</b>正确。x²＜5 且 x∈N：0,1,2 共 3 个元素（教材规定自然数集含 0）。</div>
+</div>
+
+<div class="quiz-question" id="j23">
+  <div class="q-title"><span class="q-no">23.</span><span class="q-tag set">集合</span>若 A∪B=A，则 B⊆A。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j23',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j23',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j23"><b>解析：</b>正确。并集等于 A 说明 B 中每个元素都在 A 中，即 B⊆A。</div>
+</div>
+
+<div class="quiz-question" id="j24">
+  <div class="q-title"><span class="q-no">24.</span><span class="q-tag set">集合</span>设 U 为全集，则 ∁<sub>U</sub>(∁<sub>U</sub>A)=A。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j24',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j24',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j24"><b>解析：</b>正确。补集取两次回到自身（对合律），画文氏图即可验证。</div>
+</div>
+
+<div class="quiz-question" id="j25">
+  <div class="q-title"><span class="q-no">25.</span><span class="q-tag set">集合</span>A∪(B∩C)=(A∪B)∩(A∪C)。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j25',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j25',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j25"><b>解析：</b>正确。这是交、并对彼此的分配律，可用文氏图或元素归属证明。</div>
+</div>
+
+<div class="quiz-question" id="j26">
+  <div class="q-title"><span class="q-no">26.</span><span class="q-tag set">集合</span>集合 A 有 3 个元素，则 A 的真子集有 8 个。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j26',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j26',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j26"><b>解析：</b>错误。3 个元素的集合子集有 2³=8 个，但真子集要去掉它本身，为 8−1=7 个。</div>
+</div>
+
+<div class="quiz-question" id="j27">
+  <div class="q-title"><span class="q-no">27.</span><span class="q-tag set">集合</span>若 A∩B=∅，则 A=∅ 或 B=∅。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j27',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j27',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j27"><b>解析：</b>错误。如 A={1}，B={2}，A∩B=∅ 但 A、B 均非空。</div>
+</div>
+
+<div class="quiz-question" id="j28">
+  <div class="q-title"><span class="q-no">28.</span><span class="q-tag set">集合</span>设 A={x | x=2k，k∈Z}，B={x | x=2k+2，k∈Z}，则 A=B。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j28',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j28',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j28"><b>解析：</b>正确。2k+2=2(k+1)，两者都表示偶数集，故 A=B。</div>
+</div>
+
+<div class="quiz-question" id="j29">
+  <div class="q-title"><span class="q-no">29.</span><span class="q-tag set">集合</span>若 x∈A∪B，则 x∈A 或 x∈B。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j29',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j29',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j29"><b>解析：</b>正确。这正是并集的定义：元素属于并集 ⇔ 属于至少一个集合。</div>
+</div>
+
+<div class="quiz-question" id="j30">
+  <div class="q-title"><span class="q-no">30.</span><span class="q-tag set">集合</span>已知 U={1,2,3,4}，A={1,2}，B={2,3}，则 A∩∁<sub>U</sub>B={1}。</div>
+  <div class="options">
+    <div class="opt" onclick="checkChoice('j30',0)">正确</div>
+    <div class="opt" onclick="checkChoice('j30',1)">错误</div>
+  </div>
+  <div class="explain" id="explain-j30"><b>解析：</b>正确。∁<sub>U</sub>B={1,4}，A∩∁<sub>U</sub>B={1,2}∩{1,4}={1}。</div>
+</div>
+
+<!-- ==================== 三、推导题 ==================== -->
+<h2>三、推导题 <span class="part-tag proof">10 题 × 5 分</span></h2>
+<p style="color:#666;font-size:0.93em;">写出完整的推理过程，点击「显示解析」核对分步解答。</p>
+
+<div class="solve-card" id="d1">
+  <div class="q-title"><span class="q-no">1.</span><span class="q-tag logic" style="background:#00897b;">逻辑</span>用真值表证明：¬(p∧q) 与 ¬p∨¬q 等价（德摩根定律的「且」形式）。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>证：</b>列出四种赋值下两个命题的真值：</div>
+    <div class="step-line">p=T,q=T：p∧q=T，¬(p∧q)=F；¬p∨¬q=F∨F=F ✓</div>
+    <div class="step-line">p=T,q=F：p∧q=F，¬(p∧q)=T；¬p∨¬q=F∨T=T ✓</div>
+    <div class="step-line">p=F,q=T：p∧q=F，¬(p∧q)=T；¬p∨¬q=T∨F=T ✓</div>
+    <div class="step-line">p=F,q=F：p∧q=F，¬(p∧q)=T；¬p∨¬q=T∨T=T ✓</div>
+    <div class="step-line"><b>结论：</b>两组真值完全相同，故 ¬(p∧q) ⇔ ¬p∨¬q，命题得证。它在逻辑推理中的作用是把「否定一个且命题」转化为「否定两个支命题再取或」。</div>
+  </div>
+</div>
+
+<div class="solve-card" id="d2">
+  <div class="q-title"><span class="q-no">2.</span><span class="q-tag logic" style="background:#00897b;">逻辑</span>用真值表证明：原命题「若 p 则 q」与其逆否命题「若 ¬q 则 ¬p」等价，并说明由此得到的证明方法。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>证：</b>「若 p 则 q」只在 p=T、q=F 时为假，其余为真：</div>
+    <div class="step-line">p=T,q=T：p⇒q=T；¬q⇒¬p：F⇒F=T ✓</div>
+    <div class="step-line">p=T,q=F：p⇒q=F；¬q⇒¬p：T⇒F=F ✓</div>
+    <div class="step-line">p=F,q=T：p⇒q=T；¬q⇒¬p：F⇒T=T ✓</div>
+    <div class="step-line">p=F,q=F：p⇒q=T；¬q⇒¬p：T⇒T=T ✓</div>
+    <div class="step-line"><b>结论：</b>两者同真同假，即「若 p 则 q」⇔「若 ¬q 则 ¬p」。</div>
+    <div class="step-line"><b>方法：</b>当直接证明「若 p 则 q」困难时，改证其逆否命题「若 ¬q 则 ¬p」，即<b>反证法</b>的思想源头。</div>
+  </div>
+</div>
+
+<div class="solve-card" id="d3">
+  <div class="q-title"><span class="q-no">3.</span><span class="q-tag logic" style="background:#00897b;">逻辑</span>设命题 p：「∀x∈R，x²+ax+1＞0」为假命题，求实数 a 的取值范围，并写出 ¬p。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>第一步：</b>p 为假 ⇔ ¬p 为真，即「∃x∈R，x²+ax+1≤0」为真。</div>
+    <div class="step-line"><b>第二步：</b>「∀x∈R，x²+ax+1＞0 恒成立」等价于 Δ=a²−4＜0，即 −2＜a＜2 时 p 为真。</div>
+    <div class="step-line"><b>第三步：</b>故 p 为假时，a 取相反范围：a≤−2 或 a≥2。</div>
+    <div class="step-line"><b>第四步：</b>¬p 为「∃x∈R，x²+ax+1≤0」。</div>
+    <div class="step-line"><span class="ans-final">答案：a∈(−∞,−2]∪[2,+∞)；¬p：∃x∈R，x²+ax+1≤0。</span></div>
+  </div>
+</div>
+
+<div class="solve-card" id="d4">
+  <div class="q-title"><span class="q-no">4.</span><span class="q-tag logic" style="background:#00897b;">逻辑</span>已知 p：x²−5x+6≤0，q：x²−4x+3＜0，判断 p 是 q 的什么条件，并写出完整推导。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>第一步：</b>解 p：x²−5x+6=(x−2)(x−3)≤0 ⇒ 2≤x≤3，即 p 对应集合 P=[2,3]。</div>
+    <div class="step-line"><b>第二步：</b>解 q：x²−4x+3=(x−1)(x−3)＜0 ⇒ 1＜x＜3，即 q 对应集合 Q=(1,3)。</div>
+    <div class="step-line"><b>第三步：</b>比较包含关系：x=2 时 x∈P 但 x∉Q，故 P⊄Q，p⇏q；x=2.5 时 x∈Q 且 x∈P，再取 x=2，x∈P 而 x∉Q，需检验 Q⊆P：Q=(1,3)，P=[2,3]，取 x=1.5∈Q 但 1.5∉P，故 Q⊄P，q⇏p。</div>
+    <div class="step-line"><b>第四步：</b>双向都不成立。</div>
+    <div class="step-line"><span class="ans-final">答案：p 是 q 的既不充分也不必要条件。</span></div>
+  </div>
+</div>
+
+<div class="solve-card" id="d5">
+  <div class="q-title"><span class="q-no">5.</span><span class="q-tag logic" style="background:#00897b;">逻辑</span>判断命题「∃x∈Z，使 x²=3」的真假并证明，再写出它的否定。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>判断：</b>该特称命题为假命题。</div>
+    <div class="step-line"><b>证明：</b>若整数 x 满足 x²=3，则 x=±√3。因 √3 不是整数，与 x∈Z 矛盾，故不存在这样的整数 x。</div>
+    <div class="step-line"><b>否定：</b>全称命题「∀x∈Z，x²≠3」。</div>
+    <div class="step-line"><span class="ans-final">答案：假命题；¬p：∀x∈Z，x²≠3。</span></div>
+  </div>
+</div>
+
+<div class="solve-card" id="d6">
+  <div class="q-title"><span class="q-no">6.</span><span class="q-tag set" style="background:#00897b;">集合</span>已知集合 A={x | ax²−2x+1=0} 至多有一个元素，求实数 a 的取值范围。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>分类讨论（关键：不要漏掉 a=0）：</b></div>
+    <div class="step-line"><b>① a=0：</b>方程化为 −2x+1=0，x=½，恰有一个元素，符合「至多一个」。</div>
+    <div class="step-line"><b>② a≠0：</b>一元二次方程至多一个实根 ⇔ Δ≤0，即 4−4a≤0 ⇒ a≥1。</div>
+    <div class="step-line"><b>综合：</b>a=0 或 a≥1。</div>
+    <div class="step-line"><span class="ans-final">答案：a=0 或 a≥1。</span></div>
+  </div>
+</div>
+
+<div class="solve-card" id="d7">
+  <div class="q-title"><span class="q-no">7.</span><span class="q-tag set" style="background:#00897b;">集合</span>某班共有 45 人，其中 30 人会打篮球，25 人会踢足球，两种都会的有 18 人。求两种都不会的人数。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>第一步（容斥原理）：</b>至少会一种的人数 = |A∪B| = |A|+|B|−|A∩B| = 30+25−18 = 37。</div>
+    <div class="step-line"><b>第二步：</b>两种都不会的人数 = 45−37 = 8。</div>
+    <div class="step-line"><span class="ans-final">答案：8 人。</span></div>
+  </div>
+</div>
+
+<div class="solve-card" id="d8">
+  <div class="q-title"><span class="q-no">8.</span><span class="q-tag set" style="background:#00897b;">集合</span>已知集合 A={x | 1≤x≤3}，B={x | m≤x≤2m+1}，若 B⊆A，求实数 m 的取值范围。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>第一步（讨论空集）：</b>当 B=∅ 时，m＞2m+1 ⇒ m＜−1，此时 B⊆A 恒成立。</div>
+    <div class="step-line"><b>第二步（B 非空）：</b>B≠∅ 时需 m≤2m+1 即 m≥−1，且 B 的端点落在 A 内：m≥1 且 2m+1≤3 ⇒ m≥1 且 m≤1 ⇒ m=1。</div>
+    <div class="step-line"><b>第三步：</b>验证 m=1：B={x | 1≤x≤3}=A，B⊆A 成立。</div>
+    <div class="step-line"><b>综合：</b>m＜−1 或 m=1。</div>
+    <div class="step-line"><span class="ans-final">答案：m＜−1 或 m=1。</span></div>
+  </div>
+</div>
+
+<div class="solve-card" id="d9">
+  <div class="q-title"><span class="q-no">9.</span><span class="q-tag set" style="background:#00897b;">集合</span>证明：集合 A={x | x=2n，n∈Z} 与 B={x | x=2m−2，m∈Z} 相等。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>证法：</b>证明 A⊆B 且 B⊆A（集合相等判定）。</div>
+    <div class="step-line"><b>① A⊆B：</b>对任意 x∈A，存在 n∈Z 使 x=2n。取 m=n+1∈Z，则 x=2n=2(n+1)−2=2m−2∈B。故 A⊆B。</div>
+    <div class="step-line"><b>② B⊆A：</b>对任意 x∈B，存在 m∈Z 使 x=2m−2=2(m−1)。取 n=m−1∈Z，则 x=2n∈A。故 B⊆A。</div>
+    <div class="step-line"><b>结论：</b>双向包含成立，故 A=B。实际上两者都是偶数集，只是表示形式不同。</div>
+  </div>
+</div>
+
+<div class="solve-card" id="d10">
+  <div class="q-title"><span class="q-no">10.</span><span class="q-tag logic" style="background:#00897b;">逻辑</span>已知 p、q 均为命题，且「p∨q 为真」「p∧q 为假」同时成立，试确定 p、q 的真假，并给出完整推理。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>第一步：</b>由 p∨q 为真，p、q 至少有一个为真（不可能全假）。</div>
+    <div class="step-line"><b>第二步：</b>由 p∧q 为假，p、q 不可能全真（至少有一个为假）。</div>
+    <div class="step-line"><b>第三步：</b>综合两步：「至少一个真」且「至少一个假」⇒ p、q 一真一假。</div>
+    <div class="step-line"><b>第四步：</b>再验证两种情形均满足条件：p 真 q 假时，p∨q 真、p∧q 假；p 假 q 真时同理。</div>
+    <div class="step-line"><span class="ans-final">答案：p、q 一真一假（p 真 q 假，或 p 假 q 真）。</span></div>
+  </div>
+</div>
+
+<!-- ==================== 四、计算题 ==================== -->
+<h2>四、计算题 <span class="part-tag calc">10 题 × 5 分</span></h2>
+<p style="color:#666;font-size:0.93em;">要求写出完整的计算或推理过程，点击「显示解析」核对分步解答，并自评得分。</p>
+
+<div class="solve-card" id="calc1">
+  <div class="q-title"><span class="q-no">1.</span><span class="q-tag set" style="background:#3949ab;">集合</span>已知全集 U={x∈N | 1≤x≤8}，A={1,2,3,4,5}，B={2,4,6,7}。求：(1) A∪B；(2) A∩B；(3) ∁<sub>U</sub>(A∪B)；(4) (∁<sub>U</sub>A)∩B。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>第一步：</b>U={1,2,3,4,5,6,7,8}。</div>
+    <div class="step-line"><b>第二步：</b>(1) A∪B={1,2,3,4,5}∪{2,4,6,7}={1,2,3,4,5,6,7}。</div>
+    <div class="step-line"><b>第三步：</b>(2) A∩B={2,4}。</div>
+    <div class="step-line"><b>第四步：</b>(3) ∁<sub>U</sub>(A∪B)=U−(A∪B)={8}。</div>
+    <div class="step-line"><b>第五步：</b>(4) ∁<sub>U</sub>A={6,7,8}，故 (∁<sub>U</sub>A)∩B={6,7}。</div>
+    <div class="step-line"><span class="ans-final">答案：(1){1,2,3,4,5,6,7}；(2){2,4}；(3){8}；(4){6,7}。</span></div>
+  </div>
+</div>
+
+<div class="solve-card" id="calc2">
+  <div class="q-title"><span class="q-no">2.</span><span class="q-tag set" style="background:#3949ab;">集合</span>已知集合 A={x | −1≤x≤3}，B={x | m−2≤x≤m+2}。若 A∩B={x | 0≤x≤3}，求实数 m 的值。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>第一步：</b>A=[−1,3]，B=[m−2,m+2]。</div>
+    <div class="step-line"><b>第二步：</b>A∩B 的左端点是 max{−1, m−2}，已知交集左端为 0，故 m−2=0，即 m=2。</div>
+    <div class="step-line"><b>第三步：</b>验证：m=2 时 B=[0,4]，A∩B=[−1,3]∩[0,4]=[0,3]，符合题意。</div>
+    <div class="step-line"><span class="ans-final">答案：m=2。</span></div>
+  </div>
+</div>
+
+<div class="solve-card" id="calc3">
+  <div class="q-title"><span class="q-no">3.</span><span class="q-tag set" style="background:#3949ab;">集合</span>已知集合 A={x | (x−1)(x−a)=0} 的子集个数为 4，求实数 a 的值。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>第一步：</b>n 个元素的集合有 2ⁿ 个子集，子集个数为 4=2²，故 A 恰有 2 个元素。</div>
+    <div class="step-line"><b>第二步：</b>方程 (x−1)(x−a)=0 的根为 x=1 与 x=a，恰有两个不同实根 ⇔ a≠1。</div>
+    <div class="step-line"><b>第三步：</b>当 a=1 时 A={1} 只有 1 个元素、2 个子集，不合题意。</div>
+    <div class="step-line"><span class="ans-final">答案：a∈R 且 a≠1。</span></div>
+  </div>
+</div>
+
+<div class="solve-card" id="calc4">
+  <div class="q-title"><span class="q-no">4.</span><span class="q-tag set" style="background:#3949ab;">集合</span>某班 60 名同学，参加数学竞赛的有 30 人，参加物理竞赛的有 25 人，两科竞赛都参加的有 12 人。求：(1) 至少参加一科竞赛的人数；(2) 两科都不参加的人数；(3) 恰好只参加一科竞赛的人数。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>设：</b>A={参加数学竞赛的同学}，B={参加物理竞赛的同学}，则 |A|=30，|B|=25，|A∩B|=12。</div>
+    <div class="step-line"><b>第一步（容斥原理）：</b>(1) |A∪B|=|A|+|B|−|A∩B|=30+25−12=43（人）。</div>
+    <div class="step-line"><b>第二步：</b>(2) 两科都不参加 = 60−43=17（人）。</div>
+    <div class="step-line"><b>第三步：</b>(3) 只参加一科 = (|A|−|A∩B|)+(|B|−|A∩B|)=(30−12)+(25−12)=18+13=31（人）。</div>
+    <div class="step-line"><span class="ans-final">答案：(1) 43 人；(2) 17 人；(3) 31 人。</span></div>
+  </div>
+</div>
+
+<div class="solve-card" id="calc5">
+  <div class="q-title"><span class="q-no">5.</span><span class="q-tag logic" style="background:#3949ab;">逻辑</span>已知 p：x²−5x+6≤0，q：x²−(a+1)x+a≤0。若 q 是 p 的必要不充分条件，求实数 a 的取值范围。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>第一步：</b>解 p：x²−5x+6=(x−2)(x−3)≤0 ⇒ 2≤x≤3，即 P=[2,3]。</div>
+    <div class="step-line"><b>第二步：</b>q 对应 Q：x²−(a+1)x+a=(x−1)(x−a)≤0。</div>
+    <div class="step-line"><b>第三步：</b>「q 是 p 的必要不充分条件」⇔ P⊊Q（P 真包含于 Q）。</div>
+    <div class="step-line"><b>第四步（分类）：</b>若 a＜1，Q=[a,1]，不含 [2,3]，不合；若 a=1，Q={1}，不合；若 a＞1，Q=[1,a]，需 [2,3]⊆[1,a] 且两者不等，即 a≥3。</div>
+    <div class="step-line"><b>第五步（验证）：</b>a=3 时 Q=[1,3]，P=[2,3]⊊Q，符合；a＞3 时同样符合。</div>
+    <div class="step-line"><span class="ans-final">答案：a∈[3,+∞)。</span></div>
+  </div>
+</div>
+
+<div class="solve-card" id="calc6">
+  <div class="q-title"><span class="q-no">6.</span><span class="q-tag logic" style="background:#3949ab;">逻辑</span>若命题 p：「∀x∈[1,3]，x²−ax+2≥0」为真命题，求实数 a 的取值范围。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>第一步（分离参数）：</b>对 x∈[1,3] 恒有 x²−ax+2≥0 ⇔ a≤x+2/x 恒成立，即 a≤(x+2/x)<sub>min</sub>。</div>
+    <div class="step-line"><b>第二步（求最小值）：</b>由均值不等式，x+2/x≥2√(x·2/x)=2√2，当且仅当 x=2/x，即 x=√2∈[1,3] 时取等。</div>
+    <div class="step-line"><b>第三步：</b>故 (x+2/x)<sub>min</sub>=2√2，a≤2√2。</div>
+    <div class="step-line"><span class="ans-final">答案：a∈(−∞,2√2]。</span></div>
+  </div>
+</div>
+
+<div class="solve-card" id="calc7">
+  <div class="q-title"><span class="q-no">7.</span><span class="q-tag logic" style="background:#3949ab;">逻辑</span>写出下列命题的否定，并判断原命题与否定命题的真假：(1) ∀x∈R，x²+2x+2＞0；(2) ∃x∈R，x²+1=0。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>规则：</b>全称命题的否定是特称命题，特称命题的否定是全称命题（¬∀=∃，¬∃=∀）。</div>
+    <div class="step-line"><b>(1)：</b>否定为「∃x∈R，x²+2x+2≤0」。因 x²+2x+2=(x+1)²+1＞0 恒成立，原命题为真，其否定为假。</div>
+    <div class="step-line"><b>(2)：</b>否定为「∀x∈R，x²+1≠0」。因 x²+1≥1＞0 恒成立，原命题为假，其否定为真。</div>
+    <div class="step-line"><span class="ans-final">答案：(1) 否定：∃x∈R，x²+2x+2≤0（原真，否定假）；(2) 否定：∀x∈R，x²+1≠0（原假，否定真）。</span></div>
+  </div>
+</div>
+
+<div class="solve-card" id="calc8">
+  <div class="q-title"><span class="q-no">8.</span><span class="q-tag set" style="background:#3949ab;">集合</span>设全集 U={1,2,3,4,5,6,7,8,9,10}，A={1,2,3,4}，B={3,4,5,6}。验证德摩根定律：∁<sub>U</sub>(A∪B)=∁<sub>U</sub>A∩∁<sub>U</sub>B。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>第一步（左端）：</b>A∪B={1,2,3,4,5,6}，∁<sub>U</sub>(A∪B)=U−(A∪B)={7,8,9,10}。</div>
+    <div class="step-line"><b>第二步（右端）：</b>∁<sub>U</sub>A={5,6,7,8,9,10}，∁<sub>U</sub>B={1,2,7,8,9,10}。</div>
+    <div class="step-line"><b>第三步：</b>∁<sub>U</sub>A∩∁<sub>U</sub>B={7,8,9,10}。</div>
+    <div class="step-line"><b>第四步：</b>左右两端同为 {7,8,9,10}，等式成立，德摩根定律得到验证。</div>
+    <div class="step-line"><span class="ans-final">答案：两边都等于 {7,8,9,10}，等式成立。</span></div>
+  </div>
+</div>
+
+<div class="solve-card" id="calc9">
+  <div class="q-title"><span class="q-no">9.</span><span class="q-tag set" style="background:#3949ab;">集合</span>已知集合 A={x | x=3k+1，k∈Z，0≤k≤4}。(1) 用列举法表示 A；(2) 求 A 中所有元素之和；(3) 求 A 的子集个数。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>第一步：</b>k 取 0,1,2,3,4，代入 x=3k+1 得 x=1,4,7,10,13。</div>
+    <div class="step-line"><b>第二步：</b>(1) A={1,4,7,10,13}。</div>
+    <div class="step-line"><b>第三步：</b>(2) 元素之和 = 1+4+7+10+13=35。</div>
+    <div class="step-line"><b>第四步：</b>(3) A 有 5 个元素，子集个数 = 2⁵=32。</div>
+    <div class="step-line"><span class="ans-final">答案：(1) {1,4,7,10,13}；(2) 35；(3) 32。</span></div>
+  </div>
+</div>
+
+<div class="solve-card" id="calc10">
+  <div class="q-title"><span class="q-no">10.</span><span class="q-tag logic" style="background:#3949ab;">逻辑</span>设集合 A={x | −2≤x≤3}，B={x | m−1≤x≤2m+1}。条件 p：x∈A，q：x∈B。若 p 是 q 的必要条件，求实数 m 的取值范围。</div>
+  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
+  <div class="solve-ans">
+    <div class="step-line"><b>第一步（转化）：</b>p 是 q 的必要条件 ⇔ q⇒p ⇔ B⊆A。</div>
+    <div class="step-line"><b>第二步（讨论空集）：</b>B=∅ 时，m−1＞2m+1 ⇒ m＜−2，空集是任何集合的子集，B⊆A 成立。</div>
+    <div class="step-line"><b>第三步（B 非空）：</b>B≠∅ 时需 m≥−2，且端点落在 A 内：m−1≥−2 且 2m+1≤3，即 m≥−1 且 m≤1，故 −1≤m≤1。</div>
+    <div class="step-line"><b>第四步（综合）：</b>m＜−2 或 −1≤m≤1。</div>
+    <div class="step-line"><span class="ans-final">答案：m∈(−∞,−2)∪[−1,1]。</span></div>
+  </div>
+</div>
+
+</article>
+<script>
+// ============================================================
+// 逻辑与集合 · 高考模拟习题集 —— 计分脚本
+// 选择/判断：点击选项自动判分（2 分）；推导/计算：展开解析后自评（5 分）
+// ============================================================
+var QUIZ_ANSWERS = {
+  c1:1, c2:0, c3:0, c4:3, c5:0, c6:0, c7:3, c8:0, c9:0, c10:0,
+  c11:1, c12:0, c13:1, c14:0, c15:0, c16:0, c17:2, c18:1, c19:3, c20:0,
+  c21:2, c22:2, c23:3, c24:2, c25:0, c26:3, c27:0, c28:0, c29:0, c30:0,
+  j1:0, j2:0, j3:0, j4:1, j5:0, j6:0, j7:0, j8:0, j9:1, j10:0,
+  j11:0, j12:1, j13:1, j14:1, j15:0, j16:0, j17:0, j18:0, j19:1, j20:0,
+  j21:0, j22:0, j23:0, j24:0, j25:0, j26:1, j27:1, j28:0, j29:0, j30:0
+};
+var QUIZ_SCORE = { mc: 0, tf: 0, proof: 0, calc: 0 };
+
+// 选择题 / 判断题判分
+function checkChoice(id, idx) {
+  var box = document.getElementById(id);
+  if (!box || box.dataset.done) return;
+  box.dataset.done = "1";
+  var ok = (idx === QUIZ_ANSWERS[id]);
+  var opts = box.querySelectorAll(".opt");
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].classList.add("disabled");
+    if (i === QUIZ_ANSWERS[id]) opts[i].classList.add("correct-opt");
+    if (i === idx && !ok) opts[i].classList.add("wrong-opt");
+  }
+  box.classList.add(ok ? "correct" : "wrong");
+  var explain = document.getElementById("explain-" + id);
+  if (explain) explain.classList.add("show", ok ? "ok" : "fail");
+  if (id.charAt(0) === "c") QUIZ_SCORE.mc += ok ? 2 : 0;
+  else QUIZ_SCORE.tf += ok ? 2 : 0;
+  updateScore();
+}
+
+// 推导题 / 计算题：展开解析，首次展开时注入自评按钮
+function toggleSolve(btn) {
+  var card = btn.closest(".solve-card");
+  var ans = card.querySelector(".solve-ans");
+  var open = ans.classList.toggle("show");
+  btn.classList.toggle("open", open);
+  btn.textContent = open ? "收起解析" : "显示解析";
+  if (open && !card.dataset.self) {
+    card.dataset.self = "1";
+    var row = document.createElement("div");
+    row.className = "self-score";
+    row.innerHTML = '自评：<button class="self-btn ok" onclick="selfMark(\'' + card.id + '\',5)">我写对了 +5</button>' +
+                    '<button class="self-btn no" onclick="selfMark(\'' + card.id + '\',0)">我写错了 +0</button>';
+    ans.appendChild(row);
+  }
+}
+
+function selfMark(id, pts) {
+  var card = document.getElementById(id);
+  if (!card || card.dataset.marked) return;
+  card.dataset.marked = "1";
+  var btns = card.querySelectorAll(".self-btn");
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].disabled = true;
+    if (i === (pts > 0 ? 0 : 1)) btns[i].classList.add("selected");
+  }
+  card.classList.add(pts > 0 ? "correct" : "wrong");
+  if (id.indexOf("calc") === 0) QUIZ_SCORE.calc += pts;
+  else QUIZ_SCORE.proof += pts;
+  updateScore();
+}
+
+function updateScore() {
+  var total = QUIZ_SCORE.mc + QUIZ_SCORE.tf + QUIZ_SCORE.proof + QUIZ_SCORE.calc;
+  var answered = document.querySelectorAll(".quiz-question[data-done='1']").length;
+  document.getElementById("totalScore").textContent = total + " / 220";
+  document.getElementById("answeredCount").textContent = answered;
+  document.getElementById("mcScore").textContent = QUIZ_SCORE.mc;
+  document.getElementById("tfScore").textContent = QUIZ_SCORE.tf;
+  document.getElementById("proofScore").textContent = QUIZ_SCORE.proof;
+  document.getElementById("calcScore").textContent = QUIZ_SCORE.calc;
+}
+
+function resetAll() {
+  QUIZ_SCORE.mc = 0; QUIZ_SCORE.tf = 0; QUIZ_SCORE.proof = 0; QUIZ_SCORE.calc = 0;
+  var cards = document.querySelectorAll(".quiz-question, .solve-card");
+  for (var i = 0; i < cards.length; i++) {
+    var c = cards[i];
+    c.classList.remove("correct", "wrong");
+    c.dataset.done = ""; c.dataset.self = ""; c.dataset.marked = "";
+    var opts = c.querySelectorAll(".opt");
+    for (var j = 0; j < opts.length; j++) opts[j].classList.remove("disabled", "correct-opt", "wrong-opt");
+    var ex = c.querySelector(".explain");
+    if (ex) ex.classList.remove("show", "ok", "fail");
+    var ans = c.querySelector(".solve-ans");
+    if (ans) {
+      ans.classList.remove("show");
+      var row = ans.querySelector(".self-score");
+      if (row) row.parentNode.removeChild(row);
+    }
+  }
+  var btns = document.querySelectorAll(".solve-btn");
+  for (var k = 0; k < btns.length; k++) {
+    btns[k].classList.remove("open");
+    btns[k].textContent = "显示解析";
+  }
+  updateScore();
+}
+</script>
+</body>
+</html>
