@@ -10,8 +10,6 @@
 body { font-family: -apple-system,'Helvetica Neue','PingFang SC','Microsoft YaHei',sans-serif; max-width: 920px; margin: 0 auto; padding: 24px; background: #f5f7fa; color: #333; line-height: 1.9; font-size: 16px; }
 article { background: #fff; border-radius: 12px; padding: 36px 40px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); overflow-wrap: break-word; word-wrap: break-word; }
 h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding-bottom: 10px; margin-top: 0; text-align: center; }
-.back { display: inline-block; margin-bottom: 16px; color: #1a73e8; text-decoration: none; font-size: 0.95em; }
-.back:hover { text-decoration: underline; }
 .tip { text-align: center; color: #888; margin-bottom: 4px; }
 /* 考试遮罩 */
 .exam-overlay {
@@ -46,16 +44,9 @@ h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding
 .submit-btn:disabled { opacity: 0.4; cursor: default; }
 .exam-content { display: none; }
 /* 题目样式 */
-.quiz-question {
-  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
-  padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
-}
-.quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
-.quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
 .quiz-question .q-title { font-weight: bold; font-size: 1em; margin-bottom: 10px; color: #2c3e50; }
 .quiz-question .q-title .q-tag { display: inline-block; padding: 1px 10px; border-radius: 12px; font-size: 0.72em; margin-right: 6px; color: #fff; }
 .q-tag.judge { background: #e65100; }
-.q-tag.choice { background: #1a73e8; }
 .q-tag.calc { background: #9c27b0; }
 .q-tag.proof { background: #00695c; }
 .q-tag.gaokao { background: #d32f2f; }
@@ -64,15 +55,8 @@ h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding
   padding: 7px 12px; border: 2px solid #ddd; border-radius: 8px;
   cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none; font-size: 0.95em;
 }
-.quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
-.quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
-.quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
-.quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
 .quiz-question .opt.disabled { pointer-events: none; opacity: 0.75; }
 .quiz-question .explain { margin-top: 10px; padding: 10px 14px; border-radius: 8px; font-size: 0.9em; display: none; }
-.quiz-question .explain.show { display: block; }
-.quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
-.quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
 /* 计算/证明输入 */
 .fill-input {
   width: 240px; padding: 8px 12px; border: 2px solid #ddd; border-radius: 8px;
@@ -145,7 +129,7 @@ h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding
 @media (max-width: 640px) { article { padding: 20px 16px; } .overlay-card { padding: 24px 20px; } .fill-input { width: 100%; } }
 </style>
 </head>
-<body>
+<body class="quizset">
 <a class="back" href="../../index.html">&larr; 返回课程列表</a>
 <article>
 <h1>函数整体测试卷</h1>

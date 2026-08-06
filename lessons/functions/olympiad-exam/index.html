@@ -23,36 +23,15 @@ article {
   overflow-wrap: break-word; word-wrap: break-word; overflow-x: hidden;
 }
 h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #e65100; padding-bottom: 10px; margin-top: 0; text-align: center; }
-.back {
-  display: inline-block; margin-bottom: 16px;
-  color: #1a73e8; text-decoration: none; font-size: 0.95em;
-}
-.back:hover { text-decoration: underline; }
 .tip { text-align: center; color: #888; margin-bottom: 24px; }
 
 /* 大题样式 */
-.calc-card {
-  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
-  padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
-}
-.calc-card.correct { border-color: #4caf50; background: #f1f8e9; }
-.calc-card.wrong { border-color: #f44336; background: #fce4ec; }
-.calc-card .q-title {
-  font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50;
-}
+.calc-card.correct { border-color: #4caf50; }
+.calc-card.wrong { border-color: #f44336; }
 .calc-card .q-title .q-tag {
   display: inline-block; padding: 1px 10px; border-radius: 12px;
   font-size: 0.75em; margin-right: 6px; color: #fff; background: #e65100;
 }
-.calc-card .step-area {
-  margin: 10px 0; padding: 10px 14px; border-radius: 8px;
-  font-size: 0.93em; display: none; line-height: 1.8;
-}
-.calc-card .step-area.show { display: block; }
-.calc-card .step-area.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
-.calc-card .step-area.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
-.calc-card .step-area .step { margin: 4px 0; padding-left: 12px; border-left: 3px solid #bbb; }
-.calc-card .step-area .answer { color: #2c3e50; font-weight: bold; margin: 6px 0 0; font-size: 1.05em; }
 .calc-card .btn-toggle {
   display: inline-block; margin-top: 16px; padding: 6px 20px;
   border: 2px solid #e65100; color: #e65100; border-radius: 16px;
@@ -88,10 +67,6 @@ h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #e65100; padding
 .calc-card .btn-check:disabled { opacity: 0.5; cursor: default; }
 
 /* 难度标签 */
-.diff-tag {
-  display: inline-block; padding: 1px 8px; border-radius: 8px;
-  font-size: 0.7em; margin-left: 6px; font-weight: normal;
-}
 .diff-olym { background: #fce4ec; color: #e65100; border: 1px solid #ef9a9a; }
 .graph-figure { max-width: 560px; margin: 12px auto; padding: 8px; background: #fffaf6; border: 1px solid #f2c7ad; border-radius: 8px; }
 .graph-figure svg { display: block; width: 100%; height: auto; }
@@ -111,7 +86,7 @@ h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #e65100; padding
 .reset-btn:hover { background: #fce4ec; }
 </style>
 </head>
-<body>
+<body class="quizset">
 <a class="back" href="../../index.html">&larr; 返回课程列表</a>
 <article>
 <h1>函数综合 · 奥数测试</h1>

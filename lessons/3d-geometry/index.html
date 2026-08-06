@@ -8,31 +8,19 @@
 <link rel="stylesheet" href="../style.css">
 <style>
   h3 { color: #2c3e50; margin: 28px 0 12px; font-size: 1.15em; }
-  h4 { color: #555; margin: 18px 0 8px; font-size: 1em; }
-  .formula-box { border: 2px solid #1a73e8; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #f0f7ff; }
   .formula-box p { margin: 6px 0; text-align: center; font-size: 1.05em; }
   /* 用脉动点提示空间点及其投影关系，降低静态示意图的阅读门槛。 */
   .space-point { transform-box: fill-box; transform-origin: center; animation: point-pulse 1.8s ease-in-out infinite; }
   @keyframes point-pulse { 0%, 100% { r: 4.5px; opacity: .85; } 50% { r: 7px; opacity: 1; } }
-  .key-point { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; }
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
 
   /* Quiz styles */
-  .quiz-question {
-    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
-    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
-  }
-  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
-  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
-  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question.correct { background: #f1f8e9; }
+  .quiz-question.wrong { background: #fce4ec; }
   .q-tag {
     display: inline-block; padding: 2px 12px; border-radius: 12px;
     font-size: 0.75em; margin-right: 8px; color: #fff;
   }
-  .q-tag.concept { background: #1a73e8; }
-  .q-tag.calc { background: #e67e22; }
-  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
   .opt {
     padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
     cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none; margin: 0;
@@ -48,19 +36,6 @@
   .explain.show { display: block; }
   .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
   .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
-
-  /* Score panel */
-  .score-panel {
-    text-align: center; padding: 16px; margin: 20px 0;
-    background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8;
-  }
-  .score-panel .score-num { font-size: 2em; font-weight: bold; color: #1a73e8; }
-  .score-panel .btn-reset {
-    margin-left: 16px; padding: 8px 24px; border: 2px solid #1a73e8;
-    color: #1a73e8; border-radius: 20px; background: #fff;
-    cursor: pointer; font-size: 0.95em; transition: 0.15s;
-  }
-  .score-panel .btn-reset:hover { background: #1a73e8; color: #fff; }
 </style>
 </head>
 <body>

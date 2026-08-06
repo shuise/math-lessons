@@ -8,9 +8,6 @@
 <link rel="stylesheet" href="../style.css">
 <style>
   h3 { color: #2c3e50; margin: 24px 0 10px; font-size: 1.1em; }
-  .formula { text-align: center; margin: 16px 0; padding: 12px; background: #f8f9fa; border-radius: 8px; font-size: 1.1em; }
-  .formula-box { border: 2px solid #1a73e8; border-radius: 10px; padding: 16px 20px; margin: 16px 0; background: #f0f7ff; }
-  .formula-box p { margin: 6px 0; }
   .number-line { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 16px 0; flex-wrap: wrap; }
   .num-set { display: inline-block; padding: 6px 14px; border-radius: 8px; font-weight: bold; font-size: 1em; }
   .num-set.n { background: #e3f2fd; color: #1565c0; }
@@ -21,41 +18,39 @@
   .arrow { font-size: 1.4em; color: #999; }
   .complex-plane { text-align: center; margin: 16px 0; }
   .complex-plane svg { max-width: 100%; height: auto; }
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  /* 3.1 旋转控制按钮 */
+  .rotate-controls {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+    gap: 10px; margin: 12px 0 4px;
+  }
+  .rot-btn {
+    padding: 6px 18px; border-radius: 14px; cursor: pointer; font-size: 0.9em;
+    background: #fff; transition: 0.15s; user-select: none;
+  }
+  .rot-btn.cw { border: 2px solid #1a73e8; color: #1a73e8; }
+  .rot-btn.cw:hover { background: #e8f0fe; }
+  .rot-btn.ccw { border: 2px solid #e65100; color: #e65100; }
+  .rot-btn.ccw:hover { background: #fff3e0; }
+  .rot-btn.reset { border: 2px solid #607d8b; color: #607d8b; }
+  .rot-btn.reset:hover { background: #eceff1; }
+  .rot-angle {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 0.9em; color: #555;
+  }
+  .rot-angle input {
+    width: 72px; padding: 6px 8px; border: 2px solid #ddd; border-radius: 8px;
+    font-size: 0.9em; text-align: center; outline: none;
+  }
+  .rot-angle input:focus { border-color: #1a73e8; }
+  .rot-note { font-size: 0.85em; color: #888; width: 100%; text-align: center; }
   @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
 
   /* Quiz styles */
   .quiz-section { margin: 24px 0; }
-  .quiz-question {
-    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
-    padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
-  }
-  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
-  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
-  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
-  .quiz-question .q-tag {
-    display: inline-block; padding: 2px 12px; border-radius: 12px;
-    font-size: 0.75em; margin-right: 8px; color: #fff;
-  }
+  .quiz-question.correct { background: #f1f8e9; }
+  .quiz-question.wrong { background: #fce4ec; }
   .q-tag.concept { background: #9c27b0; }
   .q-tag.calc { background: #1a73e8; }
-  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
-  .quiz-question .opt {
-    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
-    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
-  }
-  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
-  .quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
-  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
-  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
-  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
-  .quiz-question .explain {
-    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
-    font-size: 0.93em; display: none;
-  }
-  .quiz-question .explain.show { display: block; }
-  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
-  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
 
   /* Fill-in-blank styles */
   .fill-question {
@@ -352,18 +347,25 @@
   <text x="205" y="285" font-size="13" fill="#666">−2</text>
   <text x="205" y="195" font-size="13" fill="#666">0</text>
   <text x="205" y="105" font-size="13" fill="#666">2</text>
-  <!-- 点 z = 3 + 2i -->
-  <circle cx="310" cy="110" r="6" fill="#1a73e8"/>
-  <text x="318" y="100" font-size="14" fill="#1a73e8" font-weight="bold">z = 3 + 2i</text>
+  <!-- 点 z = 3 + 2i（绕原点旋转的目标点） -->
+  <circle id="zPoint" cx="335" cy="100" r="6" fill="#1a73e8"/>
+  <text id="zLabel" x="343" y="92" font-size="14" fill="#1a73e8" font-weight="bold">z = 3 + 2i</text>
   <!-- 点 z = −1 + i -->
   <circle cx="120" cy="160" r="6" fill="#e65100"/>
   <text x="60" y="152" font-size="14" fill="#e65100" font-weight="bold">−1 + i</text>
   <!-- 网格辅助线 -->
-  <line x1="310" y1="190" x2="310" y2="110" stroke="#1a73e8" stroke-width="1" stroke-dasharray="4,4"/>
-  <line x1="200" y1="110" x2="310" y2="110" stroke="#1a73e8" stroke-width="1" stroke-dasharray="4,4"/>
+  <line id="zProjX" x1="335" y1="190" x2="335" y2="100" stroke="#1a73e8" stroke-width="1" stroke-dasharray="4,4"/>
+  <line id="zProjY" x1="200" y1="100" x2="335" y2="100" stroke="#1a73e8" stroke-width="1" stroke-dasharray="4,4"/>
   <!-- 原点标签 -->
   <text x="195" y="205" font-size="13" fill="#666">O</text>
 </svg>
+<div class="rotate-controls">
+  <label class="rot-angle"><input id="rotAngle" type="number" value="90" step="any" min="-360" max="360"> &deg;</label>
+  <button class="rot-btn cw" onclick="rotateZ(1)">&#8635; 逆时针旋转</button>
+  <button class="rot-btn ccw" onclick="rotateZ(-1)">&#8634; 顺时针旋转</button>
+  <button class="rot-btn reset" onclick="resetZ()">复位</button>
+  <span class="rot-note">以原点 O 为中心旋转 z = 3 + 2i：输入任意角度（支持小数，负数等效反向）后点击按钮，可连续叠加旋转</span>
+</div>
 </div>
 
 <div class="example">
@@ -871,6 +873,74 @@ function resetComp() {
     }
     document.getElementById("compExp" + i).className = "explain";
   }
+}
+
+// ============================================================
+// 3.1 复平面：z = 3 + 2i 绕原点 O 按任意角度旋转（可叠加）
+// 复坐标 (a, b) ↔ SVG 像素 (ox + a*s, oy − b*s)，s = 45px/单位
+// 旋转 θ（弧度）：a' = a·cosθ − b·sinθ，b' = a·sinθ + b·cosθ
+// ============================================================
+var Z = { a: 3, b: 2 };
+var Z_OX = 200, Z_OY = 190, Z_SCALE = 45;
+var zEls = {
+  pt: document.getElementById("zPoint"),
+  lb: document.getElementById("zLabel"),
+  px: document.getElementById("zProjX"),
+  py: document.getElementById("zProjY")
+};
+
+function fmtNum(v) {
+  // 保留 1 位小数；整数不带小数点；负数统一用 Unicode 减号
+  var r = Math.round(v * 10) / 10;
+  if (Math.abs(r) < 0.05) return "0";
+  var neg = r < 0;
+  var abs = Math.abs(r);
+  if (Math.abs(abs - Math.round(abs)) < 0.05) return (neg ? "−" : "") + String(Math.round(abs));
+  return (neg ? "−" : "") + String(abs);
+}
+
+function fmtComplex(a, b) {
+  // 旋转结果若为整数（90° 整数倍）用 "="，否则用 "≈"
+  function intLike(v) { return Math.abs(Math.round(v * 10) / 10 - Math.round(v)) < 0.05; }
+  var bZero = Math.abs(b) < 0.05, aZero = Math.abs(a) < 0.05;
+  var body;
+  if (bZero) body = fmtNum(a);
+  else if (aZero) body = (Math.abs(b) === 1 ? "i" : fmtNum(Math.abs(b)) + "i");
+  else body = fmtNum(a) + (b > 0 ? " + " : " − ") + (Math.abs(b) === 1 ? "i" : fmtNum(Math.abs(b)) + "i");
+  return (intLike(a) && intLike(b) ? "z = " : "z ≈ ") + body;
+}
+
+function renderZ() {
+  var cx = Z_OX + Z.a * Z_SCALE;
+  var cy = Z_OY - Z.b * Z_SCALE;
+  zEls.pt.setAttribute("cx", cx);
+  zEls.pt.setAttribute("cy", cy);
+  zEls.px.setAttribute("x1", cx); zEls.px.setAttribute("x2", cx);
+  zEls.px.setAttribute("y1", Z_OY); zEls.px.setAttribute("y2", cy);
+  zEls.py.setAttribute("x1", Z_OX); zEls.py.setAttribute("x2", cx);
+  zEls.py.setAttribute("y1", cy); zEls.py.setAttribute("y2", cy);
+  // 标签定位：点偏右时右对齐放在点左侧，点贴顶部时移到点下方，避免溢出画布
+  var rightSide = cx < Z_OX;
+  zEls.lb.setAttribute("text-anchor", rightSide ? "start" : "end");
+  zEls.lb.setAttribute("x", rightSide ? cx + 8 : cx - 8);
+  zEls.lb.setAttribute("y", cy < 60 ? cy + 18 : cy - 8);
+  zEls.lb.textContent = fmtComplex(Z.a, Z.b);
+}
+
+function rotateZ(dir) {
+  // dir = 1 逆时针旋转输入角度；dir = −1 顺时针旋转
+  var deg = parseFloat(document.getElementById("rotAngle").value);
+  if (isNaN(deg)) { alert("请输入有效的旋转角度"); return; }
+  var th = deg * Math.PI / 180 * dir;
+  var a = Z.a, b = Z.b, c = Math.cos(th), s = Math.sin(th);
+  Z.a = a * c - b * s;
+  Z.b = a * s + b * c;
+  renderZ();
+}
+
+function resetZ() {
+  Z.a = 3; Z.b = 2;
+  renderZ();
 }
 </script>
     <script src="../dt.js"></script>

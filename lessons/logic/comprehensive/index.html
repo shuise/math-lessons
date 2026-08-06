@@ -39,16 +39,8 @@
   .truth-table td { border: 1px solid #ddd; padding: 8px; text-align: center; }
   .true-val { color: #2e7d32; font-weight: bold; }
   .false-val { color: #e65100; font-weight: bold; }
-  /* Quiz */
-  .quiz-question {
-    background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
-    padding: 18px 22px; margin: 20px 0; transition: all 0.2s;
-  }
-  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
-  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
-  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
-  .quiz-question .q-no { display: inline-block; min-width: 2em; color: #e65100; font-weight: bold; margin-right: 4px; }
-  .quiz-question .q-tag { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 0.75em; margin-right: 8px; color: #fff; background: #1a73e8; }
+  /* Quiz（主卡由共享 style.css 提供，仅保留差异规则） */
+  .quiz-question .q-no { min-width: 2em; }
   .q-tag.comprehensive { background: #e65100; }
   .q-tag.multi { background: #6a1b9a; }
   .q-tag.condition { background: #00897b; }
@@ -58,46 +50,18 @@
   .q-tag.induce { background: #2e7d32; }
   .q-tag.proof { background: #c62828; }
   .q-tag.daily { background: #5d4037; }
-  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
-  .quiz-question .opt {
-    padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
-    cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
-  }
-  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
-  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
-  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
-  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
-  .quiz-question .explain {
-    margin-top: 10px; padding: 10px 14px; border-radius: 8px;
-    font-size: 0.93em; display: none;
-  }
-  .quiz-question .explain.show { display: block; }
-  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
-  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
-  .score-panel {
-    text-align: center; padding: 16px; margin: 20px 0;
-    background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8;
-  }
-  .score-panel .score-num { font-size: 2em; font-weight: bold; color: #1a73e8; }
-  .score-panel .btn-reset {
-    margin-left: 16px; padding: 8px 24px; border: 2px solid #1a73e8;
-    color: #1a73e8; border-radius: 20px; background: #fff;
-    cursor: pointer; font-size: 0.95em; transition: 0.15s;
-  }
-  .score-panel .btn-reset:hover { background: #1a73e8; color: #fff; }
+  /* .score-panel/.score-num/.btn-reset 由共享 style.css 提供 */
   .diff-tag {
     display: inline-block; padding: 1px 10px; border-radius: 10px;
     font-size: 0.7em; margin-left: 6px; font-weight: normal; vertical-align: middle;
   }
-  .diff-easy { background: #e8f5e9; color: #2e7d32; }
-  .diff-medium { background: #fff8e1; color: #f57f17; }
   .diff-hard { background: #fff3e0; color: #e65100; }
   .logic-symbol { font-weight: bold; color: #1a73e8; }
   .negation { text-decoration: overline; }
   .subsec { color: #1a73e8; font-weight: bold; margin-right: 6px; }
 </style>
 </head>
-<body>
+<body class="quizset">
 <a class="back" href="../index.html">&larr; 返回逻辑课程</a>
 <article>
 <h1>逻辑综合题推导</h1>

@@ -9,10 +9,9 @@
 <style>
 /* ====== 交互式选择题 ====== */
 .quiz-question { background: #fff; border: 2px solid #e0e0e0; border-radius: 10px; padding: 18px 22px; margin: 16px 0; }
-.quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
-.quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+.quiz-question.correct { background: #f1f8e9; }
+.quiz-question.wrong { background: #fce4ec; }
 .q-tag { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 0.75em; margin-right: 8px; color: #fff; }
-.q-tag.concept { background: #1a73e8; }
 .opt { padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; background: #fafafa; user-select: none; margin: 4px 0; }
 .opt:hover { background: #e3f2fd; border-color: #90caf9; }
 .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
@@ -22,10 +21,8 @@
 .explain.show { display: block; }
 .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
 .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
-.score-panel { text-align: center; padding: 16px; margin: 20px 0; background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8; }
 .score-panel .score-text { font-size: 1.4em; font-weight: bold; color: #1a73e8; margin: 8px 0; }
 .score-panel .btn-reset { display: inline-block; padding: 8px 28px; background: #fff; color: #1a73e8; border: 2px solid #1a73e8; border-radius: 8px; cursor: pointer; font-size: 1em; margin-top: 6px; transition: 0.15s; }
-.score-panel .btn-reset:hover { background: #1a73e8; color: #fff; }
 /* ====== 小节标题 ====== */
 h3 { color: #1557b0; font-size: 1.15em; margin: 28px 0 12px; padding-left: 8px; border-left: 3px solid #1557b0; }
 </style>

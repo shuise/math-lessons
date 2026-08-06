@@ -7,6 +7,11 @@
 <title>逻辑与集合 · 高考模拟习题集</title>
 <link rel="stylesheet" href="../../style.css">
 <style>
+/* mobile：两边留白尽量小，让内容尽量多 */
+@media (max-width: 720px) {
+  .score-panel { padding: 12px 8px; }
+  h2 { margin: 26px 0 12px; }
+}
 h2 { margin: 36px 0 16px; padding-bottom: 8px; border-bottom: 2px solid #1a73e8; color: #1a73e8; }
 h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 .part-tag.mc { background: #1a73e8; }
@@ -17,54 +22,14 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
   display: inline-block; color: #fff; padding: 2px 12px; border-radius: 12px;
   font-size: 0.8em; margin-left: 8px; vertical-align: middle;
 }
-/* 计分面板 */
-.score-panel {
-  text-align: center; padding: 16px; margin: 20px 0;
-  background: #f0f7ff; border-radius: 10px; border: 2px solid #1a73e8;
-}
-.score-panel .score-num { font-size: 2em; font-weight: bold; color: #1a73e8; }
+/* 计分面板（主样式由共享 style.css 提供，仅保留 .score-sub 差异） */
 .score-panel .score-sub { font-size: 0.9em; color: #666; margin: 4px 0 0; }
-.score-panel .btn-reset {
-  margin-left: 16px; padding: 8px 24px; border: 2px solid #1a73e8;
-  color: #1a73e8; border-radius: 20px; background: #fff;
-  cursor: pointer; font-size: 0.95em; transition: 0.15s;
-}
-.score-panel .btn-reset:hover { background: #1a73e8; color: #fff; }
-/* 试题卡片 */
-.quiz-question {
-  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
-  padding: 18px 22px; margin: 18px 0; transition: all 0.2s;
-}
-.quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
-.quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
-.quiz-question .q-title { font-weight: bold; font-size: 1.02em; margin-bottom: 10px; color: #2c3e50; }
-.quiz-question .q-no { display: inline-block; min-width: 2.2em; color: #e65100; font-weight: bold; margin-right: 4px; }
-.quiz-question .q-tag { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 0.72em; margin-right: 8px; color: #fff; background: #1a73e8; }
-.q-tag.logic { background: #1a73e8; }
-.q-tag.set { background: #00897b; }
-.quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
-.quiz-question .opt {
-  padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
-  cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
-}
-.quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
-.quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
-.quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
-.quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
-.quiz-question .explain {
-  margin-top: 10px; padding: 10px 14px; border-radius: 8px;
-  font-size: 0.93em; display: none; line-height: 1.85;
-}
-.quiz-question .explain.show { display: block; }
-.quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
-.quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
-/* 解答题卡片（推导/计算） */
-.solve-card {
-  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
-  padding: 18px 22px; margin: 18px 0;
-}
+/* 选择题（主卡由共享 style.css 提供，仅保留差异规则） */
+.quiz-question .q-title { font-size: 1.02em; }
+.quiz-question .q-tag { font-size: 0.72em; }
+.quiz-question .explain { line-height: 1.85; }
+/* 推导题（.solve-card 子规则共享未覆盖，保留） */
 .solve-card .q-title { font-weight: bold; font-size: 1.02em; margin-bottom: 8px; color: #2c3e50; }
-.solve-card .q-no { display: inline-block; min-width: 2.2em; color: #e65100; font-weight: bold; margin-right: 4px; }
 .solve-card .q-tag { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 0.72em; margin-right: 8px; color: #fff; }
 .solve-btn {
   margin-top: 10px; padding: 5px 18px; border: 2px solid #00897b; color: #00897b;
@@ -91,10 +56,35 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 .self-score .self-btn.selected { color: #fff; }
 .self-score .self-btn.ok.selected { background: #4caf50; }
 .self-score .self-btn.no.selected { background: #f44336; }
+/* 结果徽标（提交后只显示对错） */
+.result-badge { display: none; margin-top: 10px; padding: 6px 12px; border-radius: 8px; font-weight: bold; font-size: 0.95em; }
+.result-badge.show { display: block; }
+.result-badge.ok { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #4caf50; }
+.result-badge.no { background: #fbe9e7; color: #c62828; border-left: 4px solid #f44336; }
+/* 提交正确时所选选项（不暴露其他选项） */
+.opt.right-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+/* 「思路提示 / 查看答案」按钮 */
+.btn-row { margin-top: 10px; }
+.hint-btn, .ans-btn {
+  margin: 4px 8px 0 0; padding: 5px 18px; border-radius: 14px;
+  font-size: 0.85em; cursor: pointer; transition: 0.15s; background: #fff;
+}
+.hint-btn { border: 2px solid #f39c12; color: #f39c12; }
+.hint-btn:hover { background: #fef3e0; }
+.hint-btn.open { background: #f39c12; color: #fff; }
+.ans-btn { border: 2px solid #1a73e8; color: #1a73e8; }
+.ans-btn:hover { background: #e8f0fe; }
+.ans-btn.open { background: #1a73e8; color: #fff; }
+/* 思路提示内容区 */
+.hint-box {
+  display: none; margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+  background: #fff8e1; border-left: 4px solid #f39c12; font-size: 0.93em; line-height: 1.85;
+}
+.hint-box.show { display: block; }
 .legend { background: #fff8e1; border: 1px dashed #ffc107; border-radius: 8px; padding: 10px 16px; margin: 14px 0; font-size: 0.9em; color: #666; }
 </style>
 </head>
-<body>
+<body class="quizset">
 <a class="back" href="../index.html">&larr; 返回逻辑课程</a>
 <article>
 <h1>逻辑与集合 · 高考模拟习题集</h1>
@@ -112,7 +102,7 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
   <div class="score-sub">已答 <span id="answeredCount">0</span> / 60 · 选择 <span id="mcScore">0</span>/60 · 判断 <span id="tfScore">0</span>/60 · 推导 <span id="proofScore">0</span>/50 · 计算 <span id="calcScore">0</span>/50</div>
 </div>
 
-<div class="legend">使用说明：选择题、判断题点击选项即自动判分并显示解析；推导题、计算题点击「显示解析」查看分步解答。全程约 90 分钟，可随时「重置」重新作答。</div>
+<div class="legend">使用说明：选择题、判断题点击选项提交后<b>只提示对错、不直接给答案</b>；每题均配有「思路提示」与「查看答案」两个按钮，点击才展开对应内容。推导题、计算题同理。全程约 90 分钟，可随时「重置」重新作答。</div>
 
 <!-- ==================== 一、选择题 ==================== -->
 <h2>一、选择题 <span class="part-tag mc">30 题 × 2 分</span></h2>
@@ -398,7 +388,7 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
   <div class="options">
     <div class="opt" onclick="checkChoice('c26',0)">A. m=1，n=−2</div>
     <div class="opt" onclick="checkChoice('c26',1)">B. m=2，n=3</div>
-    <div class="opt" onclick="checkChoice('c26',2)">C. m=−2，n=1</div>
+    <div class="opt" onclick="checkChoice('c26',2)">C. m=0，n=1</div>
     <div class="opt" onclick="checkChoice('c26',3)">D. m=−3，n=−2</div>
   </div>
   <div class="explain" id="explain-c26"><b>解析：</b>反例需满足 m＜n 且 m²≥n²。取 m=−3，n=−2：−3＜−2 但 9＞4。<b>选 D。</b></div>
@@ -724,11 +714,10 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <!-- ==================== 三、推导题 ==================== -->
 <h2>三、推导题 <span class="part-tag proof">10 题 × 5 分</span></h2>
-<p style="color:#666;font-size:0.93em;">写出完整的推理过程，点击「显示解析」核对分步解答。</p>
+<p style="color:#666;font-size:0.93em;">写出完整的推理过程。可先点「思路提示」获取方向，完成后点「查看答案」核对并自评。</p>
 
 <div class="solve-card" id="d1">
   <div class="q-title"><span class="q-no">1.</span><span class="q-tag logic" style="background:#00897b;">逻辑</span>用真值表证明：¬(p∧q) 与 ¬p∨¬q 等价（德摩根定律的「且」形式）。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>证：</b>列出四种赋值下两个命题的真值：</div>
     <div class="step-line">p=T,q=T：p∧q=T，¬(p∧q)=F；¬p∨¬q=F∨F=F ✓</div>
@@ -741,7 +730,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="d2">
   <div class="q-title"><span class="q-no">2.</span><span class="q-tag logic" style="background:#00897b;">逻辑</span>用真值表证明：原命题「若 p 则 q」与其逆否命题「若 ¬q 则 ¬p」等价，并说明由此得到的证明方法。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>证：</b>「若 p 则 q」只在 p=T、q=F 时为假，其余为真：</div>
     <div class="step-line">p=T,q=T：p⇒q=T；¬q⇒¬p：F⇒F=T ✓</div>
@@ -755,7 +743,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="d3">
   <div class="q-title"><span class="q-no">3.</span><span class="q-tag logic" style="background:#00897b;">逻辑</span>设命题 p：「∀x∈R，x²+ax+1＞0」为假命题，求实数 a 的取值范围，并写出 ¬p。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>第一步：</b>p 为假 ⇔ ¬p 为真，即「∃x∈R，x²+ax+1≤0」为真。</div>
     <div class="step-line"><b>第二步：</b>「∀x∈R，x²+ax+1＞0 恒成立」等价于 Δ=a²−4＜0，即 −2＜a＜2 时 p 为真。</div>
@@ -767,7 +754,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="d4">
   <div class="q-title"><span class="q-no">4.</span><span class="q-tag logic" style="background:#00897b;">逻辑</span>已知 p：x²−5x+6≤0，q：x²−4x+3＜0，判断 p 是 q 的什么条件，并写出完整推导。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>第一步：</b>解 p：x²−5x+6=(x−2)(x−3)≤0 ⇒ 2≤x≤3，即 p 对应集合 P=[2,3]。</div>
     <div class="step-line"><b>第二步：</b>解 q：x²−4x+3=(x−1)(x−3)＜0 ⇒ 1＜x＜3，即 q 对应集合 Q=(1,3)。</div>
@@ -779,7 +765,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="d5">
   <div class="q-title"><span class="q-no">5.</span><span class="q-tag logic" style="background:#00897b;">逻辑</span>判断命题「∃x∈Z，使 x²=3」的真假并证明，再写出它的否定。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>判断：</b>该特称命题为假命题。</div>
     <div class="step-line"><b>证明：</b>若整数 x 满足 x²=3，则 x=±√3。因 √3 不是整数，与 x∈Z 矛盾，故不存在这样的整数 x。</div>
@@ -790,7 +775,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="d6">
   <div class="q-title"><span class="q-no">6.</span><span class="q-tag set" style="background:#00897b;">集合</span>已知集合 A={x | ax²−2x+1=0} 至多有一个元素，求实数 a 的取值范围。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>分类讨论（关键：不要漏掉 a=0）：</b></div>
     <div class="step-line"><b>① a=0：</b>方程化为 −2x+1=0，x=½，恰有一个元素，符合「至多一个」。</div>
@@ -802,7 +786,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="d7">
   <div class="q-title"><span class="q-no">7.</span><span class="q-tag set" style="background:#00897b;">集合</span>某班共有 45 人，其中 30 人会打篮球，25 人会踢足球，两种都会的有 18 人。求两种都不会的人数。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>第一步（容斥原理）：</b>至少会一种的人数 = |A∪B| = |A|+|B|−|A∩B| = 30+25−18 = 37。</div>
     <div class="step-line"><b>第二步：</b>两种都不会的人数 = 45−37 = 8。</div>
@@ -812,7 +795,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="d8">
   <div class="q-title"><span class="q-no">8.</span><span class="q-tag set" style="background:#00897b;">集合</span>已知集合 A={x | 1≤x≤3}，B={x | m≤x≤2m+1}，若 B⊆A，求实数 m 的取值范围。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>第一步（讨论空集）：</b>当 B=∅ 时，m＞2m+1 ⇒ m＜−1，此时 B⊆A 恒成立。</div>
     <div class="step-line"><b>第二步（B 非空）：</b>B≠∅ 时需 m≤2m+1 即 m≥−1，且 B 的端点落在 A 内：m≥1 且 2m+1≤3 ⇒ m≥1 且 m≤1 ⇒ m=1。</div>
@@ -824,7 +806,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="d9">
   <div class="q-title"><span class="q-no">9.</span><span class="q-tag set" style="background:#00897b;">集合</span>证明：集合 A={x | x=2n，n∈Z} 与 B={x | x=2m−2，m∈Z} 相等。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>证法：</b>证明 A⊆B 且 B⊆A（集合相等判定）。</div>
     <div class="step-line"><b>① A⊆B：</b>对任意 x∈A，存在 n∈Z 使 x=2n。取 m=n+1∈Z，则 x=2n=2(n+1)−2=2m−2∈B。故 A⊆B。</div>
@@ -835,7 +816,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="d10">
   <div class="q-title"><span class="q-no">10.</span><span class="q-tag logic" style="background:#00897b;">逻辑</span>已知 p、q 均为命题，且「p∨q 为真」「p∧q 为假」同时成立，试确定 p、q 的真假，并给出完整推理。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>第一步：</b>由 p∨q 为真，p、q 至少有一个为真（不可能全假）。</div>
     <div class="step-line"><b>第二步：</b>由 p∧q 为假，p、q 不可能全真（至少有一个为假）。</div>
@@ -847,11 +827,10 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <!-- ==================== 四、计算题 ==================== -->
 <h2>四、计算题 <span class="part-tag calc">10 题 × 5 分</span></h2>
-<p style="color:#666;font-size:0.93em;">要求写出完整的计算或推理过程，点击「显示解析」核对分步解答，并自评得分。</p>
+<p style="color:#666;font-size:0.93em;">要求写出完整的计算或推理过程。可先点「思路提示」获取方向，完成后点「查看答案」核对并自评。</p>
 
 <div class="solve-card" id="calc1">
   <div class="q-title"><span class="q-no">1.</span><span class="q-tag set" style="background:#3949ab;">集合</span>已知全集 U={x∈N | 1≤x≤8}，A={1,2,3,4,5}，B={2,4,6,7}。求：(1) A∪B；(2) A∩B；(3) ∁<sub>U</sub>(A∪B)；(4) (∁<sub>U</sub>A)∩B。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>第一步：</b>U={1,2,3,4,5,6,7,8}。</div>
     <div class="step-line"><b>第二步：</b>(1) A∪B={1,2,3,4,5}∪{2,4,6,7}={1,2,3,4,5,6,7}。</div>
@@ -864,7 +843,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="calc2">
   <div class="q-title"><span class="q-no">2.</span><span class="q-tag set" style="background:#3949ab;">集合</span>已知集合 A={x | −1≤x≤3}，B={x | m−2≤x≤m+2}。若 A∩B={x | 0≤x≤3}，求实数 m 的值。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>第一步：</b>A=[−1,3]，B=[m−2,m+2]。</div>
     <div class="step-line"><b>第二步：</b>A∩B 的左端点是 max{−1, m−2}，已知交集左端为 0，故 m−2=0，即 m=2。</div>
@@ -875,7 +853,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="calc3">
   <div class="q-title"><span class="q-no">3.</span><span class="q-tag set" style="background:#3949ab;">集合</span>已知集合 A={x | (x−1)(x−a)=0} 的子集个数为 4，求实数 a 的值。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>第一步：</b>n 个元素的集合有 2ⁿ 个子集，子集个数为 4=2²，故 A 恰有 2 个元素。</div>
     <div class="step-line"><b>第二步：</b>方程 (x−1)(x−a)=0 的根为 x=1 与 x=a，恰有两个不同实根 ⇔ a≠1。</div>
@@ -886,7 +863,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="calc4">
   <div class="q-title"><span class="q-no">4.</span><span class="q-tag set" style="background:#3949ab;">集合</span>某班 60 名同学，参加数学竞赛的有 30 人，参加物理竞赛的有 25 人，两科竞赛都参加的有 12 人。求：(1) 至少参加一科竞赛的人数；(2) 两科都不参加的人数；(3) 恰好只参加一科竞赛的人数。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>设：</b>A={参加数学竞赛的同学}，B={参加物理竞赛的同学}，则 |A|=30，|B|=25，|A∩B|=12。</div>
     <div class="step-line"><b>第一步（容斥原理）：</b>(1) |A∪B|=|A|+|B|−|A∩B|=30+25−12=43（人）。</div>
@@ -898,7 +874,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="calc5">
   <div class="q-title"><span class="q-no">5.</span><span class="q-tag logic" style="background:#3949ab;">逻辑</span>已知 p：x²−5x+6≤0，q：x²−(a+1)x+a≤0。若 q 是 p 的必要不充分条件，求实数 a 的取值范围。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>第一步：</b>解 p：x²−5x+6=(x−2)(x−3)≤0 ⇒ 2≤x≤3，即 P=[2,3]。</div>
     <div class="step-line"><b>第二步：</b>q 对应 Q：x²−(a+1)x+a=(x−1)(x−a)≤0。</div>
@@ -911,7 +886,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="calc6">
   <div class="q-title"><span class="q-no">6.</span><span class="q-tag logic" style="background:#3949ab;">逻辑</span>若命题 p：「∀x∈[1,3]，x²−ax+2≥0」为真命题，求实数 a 的取值范围。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>第一步（分离参数）：</b>对 x∈[1,3] 恒有 x²−ax+2≥0 ⇔ a≤x+2/x 恒成立，即 a≤(x+2/x)<sub>min</sub>。</div>
     <div class="step-line"><b>第二步（求最小值）：</b>由均值不等式，x+2/x≥2√(x·2/x)=2√2，当且仅当 x=2/x，即 x=√2∈[1,3] 时取等。</div>
@@ -922,7 +896,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="calc7">
   <div class="q-title"><span class="q-no">7.</span><span class="q-tag logic" style="background:#3949ab;">逻辑</span>写出下列命题的否定，并判断原命题与否定命题的真假：(1) ∀x∈R，x²+2x+2＞0；(2) ∃x∈R，x²+1=0。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>规则：</b>全称命题的否定是特称命题，特称命题的否定是全称命题（¬∀=∃，¬∃=∀）。</div>
     <div class="step-line"><b>(1)：</b>否定为「∃x∈R，x²+2x+2≤0」。因 x²+2x+2=(x+1)²+1＞0 恒成立，原命题为真，其否定为假。</div>
@@ -933,7 +906,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="calc8">
   <div class="q-title"><span class="q-no">8.</span><span class="q-tag set" style="background:#3949ab;">集合</span>设全集 U={1,2,3,4,5,6,7,8,9,10}，A={1,2,3,4}，B={3,4,5,6}。验证德摩根定律：∁<sub>U</sub>(A∪B)=∁<sub>U</sub>A∩∁<sub>U</sub>B。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>第一步（左端）：</b>A∪B={1,2,3,4,5,6}，∁<sub>U</sub>(A∪B)=U−(A∪B)={7,8,9,10}。</div>
     <div class="step-line"><b>第二步（右端）：</b>∁<sub>U</sub>A={5,6,7,8,9,10}，∁<sub>U</sub>B={1,2,7,8,9,10}。</div>
@@ -945,7 +917,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="calc9">
   <div class="q-title"><span class="q-no">9.</span><span class="q-tag set" style="background:#3949ab;">集合</span>已知集合 A={x | x=3k+1，k∈Z，0≤k≤4}。(1) 用列举法表示 A；(2) 求 A 中所有元素之和；(3) 求 A 的子集个数。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>第一步：</b>k 取 0,1,2,3,4，代入 x=3k+1 得 x=1,4,7,10,13。</div>
     <div class="step-line"><b>第二步：</b>(1) A={1,4,7,10,13}。</div>
@@ -957,7 +928,6 @@ h2 .part-tag { font-size: 0.6em; vertical-align: middle; }
 
 <div class="solve-card" id="calc10">
   <div class="q-title"><span class="q-no">10.</span><span class="q-tag logic" style="background:#3949ab;">逻辑</span>设集合 A={x | −2≤x≤3}，B={x | m−1≤x≤2m+1}。条件 p：x∈A，q：x∈B。若 p 是 q 的必要条件，求实数 m 的取值范围。</div>
-  <button class="solve-btn" onclick="toggleSolve(this)">显示解析</button>
   <div class="solve-ans">
     <div class="step-line"><b>第一步（转化）：</b>p 是 q 的必要条件 ⇔ q⇒p ⇔ B⊆A。</div>
     <div class="step-line"><b>第二步（讨论空集）：</b>B=∅ 时，m−1＞2m+1 ⇒ m＜−2，空集是任何集合的子集，B⊆A 成立。</div>
@@ -983,40 +953,150 @@ var QUIZ_ANSWERS = {
 };
 var QUIZ_SCORE = { mc: 0, tf: 0, proof: 0, calc: 0 };
 
-// 选择题 / 判断题判分
+// ===== 每题思路提示（点击「思路提示」才显示）=====
+var HINTS = {
+  // —— 选择题 ——
+  c1: "先把 B 中的不等式解出并限定 x∈Z，把 B 用列举法写出，再与 A 取公共元素。",
+  c2: "全称命题的否定：量词 ∀ 改 ∃，结论取反面（≥ 的反面是 ＜）。",
+  c3: "用集合观点：p 对应区间 (2,+∞)，q 对应 (1,+∞)，看哪个真包含哪个。",
+  c4: "先解方程求出 A 的元素，再区分「元素属于集合」与「集合包含于集合」两种记号。",
+  c5: "逆否命题：交换条件与结论的位置，并同时否定两者（¬q 在前，¬p 在后）。",
+  c6: "并集在数轴上取「两者覆盖的全部」，注意端点开闭：左端 1 开、右端 4 闭。",
+  c7: "先解出方程的两根，判断 p、q 各自真假，再按「且」「或」的真值表判断选项。",
+  c8: "先解 x²−1＞0 得 A，补集是 A 在 R 中剩下的部分，别忘了端点取等。",
+  c9: "交集比并集「更严格」，判断 x∈A∩B 能否推出 x∈A∪B，反过来能否推出。",
+  c10: "特称命题的否定：量词 ∃ 改 ∀，结论取反面（≤ 的反面是 ＞）。",
+  c11: "M 必须含有 a、b 且含于 B，只差一个 c 可加可不加——数一数有几种选择。",
+  c12: "否命题同时否定条件与结论；「且」的否定用德摩根定律变成「或」。",
+  c13: "数对 (x,y) 需满足 x−y∈A，即 x−y 是 1、2、3、4 之一，按差值分类计数。",
+  c14: "「或」命题为假 ⇔ 两个支命题都为假。",
+  c15: "A 为空集 ⇔ 一元二次方程无实根 ⇔ 判别式 Δ＜0。",
+  c16: "A 是全体偶数，B 是 4 的倍数，比较两个数集谁是谁的子集。",
+  c17: "特称命题的否定是全称命题：把「存在 x 使等式成立」改为「任意 x 使等式不成立」。",
+  c18: "A⊆B 时 A 小 B 大，取补集后大小关系会反转（可画文氏图验证）。",
+  c19: "分别解两个不等式得区间，在端点附近取具体数检验谁真包含谁。",
+  c20: "观察 3k−2 = 3(k−1)+1，把两个集合改写成同一种形式再比较。",
+  c21: "全称命题恒成立 ⇔ a 不小于 x² 在区间 [1,2] 上的最大值。",
+  c22: "B 的元素是「A 的子集」，把 A={0,1} 的所有子集逐一列举再数数。",
+  c23: "先用德摩根定律写出 ¬p 对应的区间，再与 q 的区间 (2,+∞) 比较。",
+  c24: "先按对应关系 y=|x| 算出 B，再与 A 求交集。",
+  c25: "画文氏图，把 U 的 5 个元素逐一归位到「A∩B、A 独有、B 独有、两外」四个区域。",
+  c26: "反例要满足「m＜n 但 m² 不小于 n²」，注意负数平方会变大，如 −3 与 −2。",
+  c27: "一元二次方程恰有一个实根（二重根）⇔ 判别式 Δ=0。",
+  c28: "由 1∈B 代入方程先求出 m，再解方程确定 B 的另一个元素。",
+  c29: "a=b 必得 ac=bc；反过来 ac=bc 时若 c=0 还能推出 a=b 吗？",
+  c30: "A⊆B 即 [1,3]⊆(a,+∞)：区间左端点开，a=1 时 1 会被排除，故 a 必须比 1 小。",
+  // —— 判断题 ——
+  j1: "辨析「命题的否定」与「否命题」：前者只否定结论，后者同时否定条件与结论。",
+  j2: "回忆四种命题的等价关系：原命题与逆否命题是否同真同假？",
+  j3: "量词互换规则：全称命题的否定是特称命题。",
+  j4: "先写出逆命题（条件与结论交换），再取具体数检验真假。",
+  j5: "x＞2 对应 (2,+∞)，x＞1 对应 (1,+∞)，用真包含关系判断充要性。",
+  j6: "p∧q 为真说明 p、q 分别是什么真假？此时 p∨q 一定为真吗？",
+  j7: "p∨q 为假意味着 p、q 都假，那 p∧q 必假吗？",
+  j8: "对任意实数 x，x²+1 是否恒大于 0？",
+  j9: "平方非负是基本事实，是否存在实数平方为负数？",
+  j10: "p 是 q 的必要不充分 ⇔ q⇒p 且 p⇏q，据此反过来看 q 与 p 的关系。",
+  j11: "「或」命题的真值定义：只要有一个支命题为真即真。",
+  j12: "先写出否命题（条件、结论同时否定，「且」变「或」），再找反例检验。",
+  j13: "反证法先假设的是「结论不成立」，还是「结论成立」？",
+  j14: "解 x²=2 得 ±√2，它们是否整数？",
+  j15: "p 是 q 的充分不必要 ⇔ p⇒q 真、q⇒p 假，取其逆否再看 ¬p 与 ¬q。",
+  j16: "空集与任意集合的子集关系是什么？",
+  j17: "真子集还要求「不相等」，空集对非空集合是否满足这两个条件？",
+  j18: "集合中元素无序且互异，{a,b} 与 {b,a} 的元素是否完全相同？",
+  j19: "空集里一个元素都没有，0 在不在其中？",
+  j20: "A⊆B 时 A 的元素全在 B 中，交集等于谁？画文氏图。",
+  j21: "互相包含是判断集合相等的依据，A⊆B 且 B⊆A 说明什么？",
+  j22: "自然数（含 0）中满足 x²＜5 的有哪几个？逐一列举。",
+  j23: "A∪B=A 说明 B 的元素都被并进 A 里了，B 与 A 什么关系？",
+  j24: "补集取两次会回到自身（对合律）。",
+  j25: "交对并、并对交的分配律是否成立？可用文氏图或元素归属法验证。",
+  j26: "3 个元素的子集共 2³=8 个，真子集要去掉哪一个？",
+  j27: "交集为空只要求两集合没有公共元素，两个集合都必须为空吗？",
+  j28: "2k+2 = 2(k+1)，两者是否都表示偶数集？",
+  j29: "并集的定义：元素属于并集 ⇔ 属于至少一个集合。",
+  j30: "先算 ∁<sub>U</sub>B={1,4}，再与 A 求交集看是否为 {1}。",
+  // —— 推导题 ——
+  d1: "列真值表：对 p、q 的四种取值，分别计算 ¬(p∧q) 与 ¬p∨¬q 两列，比较是否逐行相同。",
+  d2: "对 p、q 的四种取值，分别填「若 p 则 q」与「若 ¬q 则 ¬p」的真值，比较两列；再联系反证法。",
+  d3: "p 为假 ⇔ ¬p 为真 ⇔ 存在 x 使 x²+ax+1≤0 ⇔ 开口向上的二次式能取到非正值 ⇔ 判别式 Δ≥0。",
+  d4: "把 p、q 分别化为集合区间，比较真包含关系：P⊊Q、Q⊊P、相等还是互不包含。",
+  d5: "若存在整数 x 使 x²=3，则 √3 应为整数——检验这个矛盾；写否定时量词要由 ∃ 变 ∀。",
+  d6: "分两类：a=0 时是一次方程，a≠0 时是二次方程（判别式 Δ≤0），注意不要漏掉 a=0。",
+  d7: "用容斥原理：至少会一种的人数 = |A|+|B|−|A∩B|，再用全班人数减去它。",
+  d8: "B 可能为空集！先讨论 m−1＞2m+1 的情形，再讨论 B 非空时端点范围。",
+  d9: "证明 A=B 要双向包含：任取 x∈A 证 x∈B，再任取 x∈B 证 x∈A，构造合适的整数表示。",
+  d10: "p∨q 为真 ⇒ p、q 至少一真；p∧q 为假 ⇒ p、q 至少一假；综合两者看 p、q 的真假组合。",
+  // —— 计算题 ——
+  calc1: "先写出全集 U，再按「先括号内、再补集、最后交集」的运算顺序逐项计算。",
+  calc2: "A∩B 的左端点是 max(−1, m−2)，已知它为 0，反解 m 后务必代回验证。",
+  calc3: "子集个数 4=2² ⇔ A 恰有 2 个元素 ⇔ 方程两根不同 ⇔ 两个根不相等。",
+  calc4: "容斥原理 |A∪B|=|A|+|B|−|A∩B|；「只参加一科」= 各科人数分别减去都参加的人数后相加。",
+  calc5: "q 是 p 的必要不充分 ⇔ p 的解集真包含于 q 的解集；对 a 与 1 的大小分类讨论 q 的区间。",
+  calc6: "分离参数：恒成立 ⇔ a≤x+2/x 对 x∈[1,3] 恒成立 ⇔ a≤(x+2/x) 的最小值，用均值不等式求。",
+  calc7: "全称与特称互换、结论取反面即得否定；判断原命题真假可用配方或平方非负。",
+  calc8: "分别算两边：左边「先并再补」，右边「先补再交」，比较是否同为 {7,8,9,10}。",
+  calc9: "k 依次取 0~4 代入 x=3k+1 列举元素；元素和是等差数列求和；子集数 = 2ⁿ。",
+  calc10: "p 是 q 的必要条件 ⇔ B⊆A；先讨论 B=∅（m−1＞2m+1），再讨论非空时端点的取值范围。"
+};
+
+// 选择题 / 判断题：提交后只判断对错，不给出正确答案
 function checkChoice(id, idx) {
   var box = document.getElementById(id);
   if (!box || box.dataset.done) return;
   box.dataset.done = "1";
   var ok = (idx === QUIZ_ANSWERS[id]);
   var opts = box.querySelectorAll(".opt");
-  for (var i = 0; i < opts.length; i++) {
-    opts[i].classList.add("disabled");
-    if (i === QUIZ_ANSWERS[id]) opts[i].classList.add("correct-opt");
-    if (i === idx && !ok) opts[i].classList.add("wrong-opt");
+  for (var i = 0; i < opts.length; i++) opts[i].classList.add("disabled");
+  var badge = document.getElementById("result-" + id);
+  if (ok) {
+    box.classList.add("correct");
+    opts[idx].classList.add("right-opt");
+    if (badge) { badge.classList.add("show", "ok"); badge.innerHTML = "✓ 回答正确，得 2 分"; }
+  } else {
+    box.classList.add("wrong");
+    opts[idx].classList.add("wrong-opt");
+    if (badge) { badge.classList.add("show", "no"); badge.innerHTML = "✗ 回答错误，不得分"; }
   }
-  box.classList.add(ok ? "correct" : "wrong");
-  var explain = document.getElementById("explain-" + id);
-  if (explain) explain.classList.add("show", ok ? "ok" : "fail");
   if (id.charAt(0) === "c") QUIZ_SCORE.mc += ok ? 2 : 0;
   else QUIZ_SCORE.tf += ok ? 2 : 0;
   updateScore();
 }
 
-// 推导题 / 计算题：展开解析，首次展开时注入自评按钮
-function toggleSolve(btn) {
-  var card = btn.closest(".solve-card");
-  var ans = card.querySelector(".solve-ans");
-  var open = ans.classList.toggle("show");
+// 思路提示：点击展开 / 收起
+function toggleHint(id) {
+  var hint = document.getElementById("hint-" + id);
+  if (!hint) return;
+  var open = hint.classList.toggle("show");
+  var btn = document.getElementById(id).querySelector(".hint-btn");
   btn.classList.toggle("open", open);
-  btn.textContent = open ? "收起解析" : "显示解析";
-  if (open && !card.dataset.self) {
-    card.dataset.self = "1";
-    var row = document.createElement("div");
-    row.className = "self-score";
-    row.innerHTML = '自评：<button class="self-btn ok" onclick="selfMark(\'' + card.id + '\',5)">我写对了 +5</button>' +
-                    '<button class="self-btn no" onclick="selfMark(\'' + card.id + '\',0)">我写错了 +0</button>';
-    ans.appendChild(row);
+  btn.textContent = open ? "收起提示" : "思路提示";
+}
+
+// 查看答案：点击展开 / 收起（选择/判断题同时标出正确选项；推导/计算题首次展开注入自评）
+function toggleAns(id) {
+  var box = document.getElementById(id);
+  var isSolve = box.classList.contains("solve-card");
+  var ans = isSolve ? box.querySelector(".solve-ans") : box.querySelector(".explain");
+  if (!ans) return;
+  var open = ans.classList.toggle("show");
+  var btn = box.querySelector(".ans-btn");
+  btn.classList.toggle("open", open);
+  btn.textContent = open ? "收起答案" : "查看答案";
+  if (isSolve) {
+    if (open && !box.dataset.self) {
+      box.dataset.self = "1";
+      var row = document.createElement("div");
+      row.className = "self-score";
+      row.innerHTML = '自评：<button class="self-btn ok" onclick="selfMark(\'' + id + '\',5)">我写对了 +5</button>' +
+                      '<button class="self-btn no" onclick="selfMark(\'' + id + '\',0)">我写错了 +0</button>';
+      ans.appendChild(row);
+    }
+  } else {
+    var opts = box.querySelectorAll(".opt");
+    var correctIdx = QUIZ_ANSWERS[id];
+    if (correctIdx !== undefined && opts[correctIdx]) opts[correctIdx].classList.add("correct-opt");
   }
 }
 
@@ -1046,6 +1126,46 @@ function updateScore() {
   document.getElementById("calcScore").textContent = QUIZ_SCORE.calc;
 }
 
+// 初始化：为每题注入「思路提示 / 查看答案」按钮与提示区
+function initControls() {
+  document.querySelectorAll(".quiz-question").forEach(function(q) {
+    var id = q.id;
+    var explain = q.querySelector(".explain");
+    var badge = document.createElement("div");
+    badge.className = "result-badge";
+    badge.id = "result-" + id;
+    q.insertBefore(badge, explain);
+    var hint = document.createElement("div");
+    hint.className = "hint-box";
+    hint.id = "hint-" + id;
+    if (HINTS[id]) hint.innerHTML = "<b>思路提示：</b>" + HINTS[id];
+    q.insertBefore(hint, explain);
+    var row = document.createElement("div");
+    row.className = "btn-row";
+    row.innerHTML = '<button class="hint-btn" onclick="toggleHint(\'' + id + '\')">思路提示</button>' +
+                    '<button class="ans-btn" onclick="toggleAns(\'' + id + '\')">查看答案</button>';
+    q.insertBefore(row, hint);
+  });
+  document.querySelectorAll(".solve-card").forEach(function(c) {
+    var id = c.id;
+    var ans = c.querySelector(".solve-ans");
+    var hint = document.createElement("div");
+    hint.className = "hint-box";
+    hint.id = "hint-" + id;
+    if (HINTS[id]) hint.innerHTML = "<b>思路提示：</b>" + HINTS[id];
+    c.insertBefore(hint, ans);
+    var row = document.createElement("div");
+    row.className = "btn-row";
+    row.innerHTML = '<button class="hint-btn" onclick="toggleHint(\'' + id + '\')">思路提示</button>' +
+                    '<button class="ans-btn" onclick="toggleAns(\'' + id + '\')">查看答案</button>';
+    c.insertBefore(row, hint);
+    var oldBtn = c.querySelector(".solve-btn");
+    if (oldBtn) oldBtn.parentNode.removeChild(oldBtn);
+  });
+  updateScore();
+}
+initControls();
+
 function resetAll() {
   QUIZ_SCORE.mc = 0; QUIZ_SCORE.tf = 0; QUIZ_SCORE.proof = 0; QUIZ_SCORE.calc = 0;
   var cards = document.querySelectorAll(".quiz-question, .solve-card");
@@ -1054,9 +1174,13 @@ function resetAll() {
     c.classList.remove("correct", "wrong");
     c.dataset.done = ""; c.dataset.self = ""; c.dataset.marked = "";
     var opts = c.querySelectorAll(".opt");
-    for (var j = 0; j < opts.length; j++) opts[j].classList.remove("disabled", "correct-opt", "wrong-opt");
+    for (var j = 0; j < opts.length; j++) opts[j].classList.remove("disabled", "correct-opt", "wrong-opt", "right-opt");
+    var badge = document.getElementById("result-" + c.id);
+    if (badge) badge.className = "result-badge";
+    var hint = document.getElementById("hint-" + c.id);
+    if (hint) hint.classList.remove("show");
     var ex = c.querySelector(".explain");
-    if (ex) ex.classList.remove("show", "ok", "fail");
+    if (ex) ex.classList.remove("show");
     var ans = c.querySelector(".solve-ans");
     if (ans) {
       ans.classList.remove("show");
@@ -1064,10 +1188,11 @@ function resetAll() {
       if (row) row.parentNode.removeChild(row);
     }
   }
-  var btns = document.querySelectorAll(".solve-btn");
+  var btns = document.querySelectorAll(".hint-btn, .ans-btn");
   for (var k = 0; k < btns.length; k++) {
     btns[k].classList.remove("open");
-    btns[k].textContent = "显示解析";
+    if (btns[k].classList.contains("ans-btn")) btns[k].textContent = "查看答案";
+    else btns[k].textContent = "思路提示";
   }
   updateScore();
 }

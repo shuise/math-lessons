@@ -68,20 +68,9 @@
 
   /* Quiz styles */
   .quiz-question { background: #fff; border: 2px solid #e0e0e0; border-radius: 10px; padding: 18px 22px; margin: 16px 0; }
-  .quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
-  .quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
-  .quiz-question .q-title { font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50; }
+  .quiz-question.correct { background: #f1f8e9; }
+  .quiz-question.wrong { background: #fce4ec; }
   .quiz-question .q-tag { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 0.75em; margin-right: 8px; color: #fff; background: #1a73e8; }
-  .quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
-  .quiz-question .opt { padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none; }
-  .quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
-  .quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
-  .quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
-  .quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
-  .quiz-question .explain { margin-top: 10px; padding: 10px 14px; border-radius: 8px; font-size: 0.93em; display: none; }
-  .quiz-question .explain.show { display: block; }
-  .quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
-  .quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
   .score-panel { text-align: center; margin: 24px 0; }
   @media (max-width: 640px) {
     .control-group input[type="range"] { width: 100px; }

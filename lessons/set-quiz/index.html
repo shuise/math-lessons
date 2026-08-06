@@ -5,6 +5,7 @@
 <link rel="icon" type="image/png" href="../lib/logo.png?version=1.0.0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>集合基础测验</title>
+<link rel="stylesheet" href="../style.css">
 <style>
 body {
   font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
@@ -45,8 +46,8 @@ h1 {
   margin: 16px 0;
   transition: all 0.2s;
 }
-.quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
-.quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
+.quiz-question.correct { border-bottom-color: #4caf50; }
+.quiz-question.wrong { border-bottom-color: #f44336; }
 .quiz-question .q-title {
   font-weight: bold;
   font-size: 1.05em;
@@ -166,7 +167,7 @@ sup, sub { font-size: 0.75em; }
 .history-section li { margin: 8px 0; line-height: 1.8; }
 </style>
 </head>
-<body>
+<body class="quizset">
 <a class="back" href="../index.html">&larr; 返回课程列表</a>
 <article>
 <h1>集合基础测验</h1>

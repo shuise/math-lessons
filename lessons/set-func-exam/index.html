@@ -23,54 +23,21 @@ article {
   overflow-wrap: break-word; word-wrap: break-word; overflow-x: hidden;
 }
 h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding-bottom: 10px; margin-top: 0; text-align: center; }
-.back {
-  display: inline-block; margin-bottom: 16px;
-  color: #1a73e8; text-decoration: none; font-size: 0.95em;
-}
-.back:hover { text-decoration: underline; }
 .tip { text-align: center; color: #888; margin-bottom: 24px; }
 
-/* 通用题目卡片 */
-.question-card {
-  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
-  padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
-}
-.question-card.correct { border-color: #4caf50; background: #f1f8e9; }
-.question-card.wrong { border-color: #f44336; background: #fce4ec; }
-.question-card .q-title {
-  font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50;
-}
+/* 通用题目卡片（主卡由共享 style.css 提供，仅保留差异规则） */
 .question-card .q-title .q-tag {
   display: inline-block; padding: 1px 10px; border-radius: 12px;
   font-size: 0.75em; margin-right: 6px; color: #fff;
 }
-.q-tag.choice { background: #1a73e8; }
-.q-tag.tf { background: #e67e22; }
-.q-tag.fill { background: #9c27b0; }
 .q-tag.proof { background: #2e7d32; }
 
-/* 难度标签 */
-.diff-tag {
-  display: inline-block; padding: 1px 8px; border-radius: 8px;
-  font-size: 0.7em; margin-left: 6px; font-weight: normal;
-}
+/* 难度标签（.diff-hard/.diff-exam 由共享 style.css 提供，此处仅保留带边框差异） */
 .diff-easy { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
 .diff-medium { background: #fff8e1; color: #f57f17; border: 1px solid #ffe082; }
-.diff-hard { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
-.diff-exam { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
 .diff-olym { background: #e0f7fa; color: #006064; border: 1px solid #80deea; }
 
-/* 选择题/判断题选项 */
-.question-card .options { display: flex; flex-direction: column; gap: 8px; }
-.question-card .opt {
-  padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
-  cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
-}
-.question-card .opt:hover { background: #e3f2fd; border-color: #90caf9; }
-.question-card .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
-.question-card .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
-.question-card .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
-.question-card .opt.disabled { pointer-events: none; opacity: 0.7; }
+/* 选择题/判断题选项（共享 style.css 提供） */
 
 /* 填空题 */
 .fill-area { display: flex; gap: 10px; align-items: flex-start; margin-top: 8px; flex-wrap: wrap; }
@@ -78,9 +45,6 @@ h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding
   flex: 1; min-width: 200px; padding: 10px 14px; border: 2px solid #ddd; border-radius: 8px;
   font-size: 1em; outline: none; transition: border-color 0.15s; box-sizing: border-box;
 }
-.fill-input:focus { border-color: #1a73e8; }
-.fill-input.correct-input { border-color: #4caf50; background: #e8f5e9; }
-.fill-input.wrong-input { border-color: #f44336; background: #fce4ec; }
 
 /* 推导证明题 */
 .proof-area { margin-top: 8px; }
@@ -98,37 +62,17 @@ h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding
   padding: 8px 20px; background: #1a73e8; color: #fff; border: none;
   border-radius: 8px; cursor: pointer; font-size: 0.93em; transition: 0.15s; white-space: nowrap;
 }
-.btn-check:hover { background: #1557b0; }
-.btn-check:disabled { opacity: 0.5; cursor: default; }
 .btn-show-answer {
   padding: 6px 16px; background: #fff; color: #1a73e8; border: 2px solid #1a73e8;
   border-radius: 16px; cursor: pointer; font-size: 0.85em; transition: 0.15s; margin-left: 8px;
 }
 .btn-show-answer:hover { background: #e3f2fd; }
 
-.question-card .explain {
-  margin-top: 10px; padding: 10px 14px; border-radius: 8px;
-  font-size: 0.93em; display: none;
-}
-.question-card .explain.show { display: block; }
-.question-card .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
-.question-card .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
-
-/* 底部 */
-#scoreDisplay {
-  display: inline-block; background: #1a73e8; color: #fff;
-  padding: 12px 32px; border-radius: 30px; font-size: 1.2em; font-weight: bold;
-}
-.reset-btn {
-  display: inline-block; margin-top: 12px; padding: 8px 28px;
-  border: 2px solid #1a73e8; color: #1a73e8; border-radius: 20px;
-  background: #fff; cursor: pointer; font-size: 1em; transition: 0.15s;
-}
-.reset-btn:hover { background: #e3f2fd; }
+/* 底部（#scoreDisplay/.reset-btn 由共享提供） */
 .section-header { margin: 28px 0 12px; color: #2c3e50; font-size: 1.2em; border-left: 4px solid #1a73e8; padding-left: 12px; }
 </style>
 </head>
-<body>
+<body class="quizset">
 <a class="back" href="../index.html">&larr; 返回课程列表</a>
 <article>
 <h1>集合与函数综合测验</h1>

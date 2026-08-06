@@ -23,20 +23,9 @@ article {
   overflow-wrap: break-word; word-wrap: break-word;
 }
 h1 { color: #2c3e50; font-size: 1.7em; border-bottom: 3px solid #e65100; padding-bottom: 10px; margin-top: 0; text-align: center; }
-.back {
-  display: inline-block; margin-bottom: 16px;
-  color: #1a73e8; text-decoration: none; font-size: 0.95em;
-}
-.back:hover { text-decoration: underline; }
 .tip { text-align: center; color: #777; margin-bottom: 10px; }
 
 /* ====== 课程信息栏 ====== */
-.course-meta {
-  display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: center;
-  margin: 14px 0 22px; padding: 12px 18px;
-  background: #f8faff; border-radius: 10px; border: 1px solid #e0e8f0;
-  font-size: 0.93em; color: #555;
-}
 .course-meta strong { color: #e65100; }
 
 /* ====== 顶部导航条 ====== */
@@ -48,7 +37,6 @@ h1 { color: #2c3e50; font-size: 1.7em; border-bottom: 3px solid #e65100; padding
   display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.06);
 }
-.topbar .tb-label { font-size: 0.8em; color: #888; margin-right: 4px; white-space: nowrap; }
 .topbar a.chip {
   flex: 0 0 auto;
   text-decoration: none; font-size: 0.8em; color: #555;
@@ -57,50 +45,22 @@ h1 { color: #2c3e50; font-size: 1.7em; border-bottom: 3px solid #e65100; padding
 }
 .topbar a.chip:hover { border-color: #e65100; color: #e65100; }
 .topbar a.chip.active { background: #e65100; color: #fff; border-color: #e65100; }
-.topbar a.chip .tm { opacity: 0.75; font-size: 0.9em; }
 .topbar .tb-progress { margin-left: auto; font-size: 0.8em; color: #e65100; font-weight: bold; white-space: nowrap; flex: 0 0 auto; }
 
 /* ====== 分节卡片 ====== */
-section.sec {
-  border: 2px solid #e0e0e0; border-radius: 12px;
-  margin: 22px 0; padding: 20px 26px; scroll-margin-top: 64px;
-}
-section.sec.c-open { border-left: 6px solid #607d8b; }
 section.sec.c-1 { border-left: 6px solid #e65100; }
 section.sec.c-2 { border-left: 6px solid #9c27b0; }
 section.sec.c-3 { border-left: 6px solid #00897b; }
 section.sec.c-4 { border-left: 6px solid #3949ab; }
 section.sec.c-5 { border-left: 6px solid #f57f17; }
-section.sec.c-6 { border-left: 6px solid #2e7d32; }
-section.sec.c-7 { border-left: 6px solid #6d4c41; }
 section.sec.c-8 { border-left: 6px solid #c62828; }
 section.sec.c-sum { border-left: 6px solid #e65100; }
-.sec-head {
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 8px; margin-bottom: 12px;
-}
-.sec-head h2 { margin: 0; font-size: 1.22em; color: #2c3e50; }
 .sec-head .time-badge {
   display: inline-block; background: #e65100; color: #fff;
   padding: 2px 12px; border-radius: 12px; font-size: 0.8em; font-weight: bold;
 }
-.sec-head .subtitle { width: 100%; color: #777; font-size: 0.92em; margin: 0; }
-.sec h3 { color: #2c3e50; margin: 20px 0 8px; font-size: 1.05em; }
-.sec p { margin: 8px 0; }
-.sec ul, .sec ol { margin: 8px 0; padding-left: 26px; }
-
-/* ====== 引言 / 名言 ====== */
-.quote-box {
-  background: #fafafa; border-left: 4px solid #bbb; border-radius: 0 8px 8px 0;
-  padding: 12px 16px; margin: 14px 0; color: #555; font-style: italic;
-}
-.quote-box .qsrc { display: block; text-align: right; font-size: 0.85em; color: #999; margin-top: 6px; font-style: normal; }
 
 /* ====== 知识卡片 ====== */
-.kw-card {
-  background: #f0f7ff; border: 1px solid #bbdefb; border-radius: 10px;
-  padding: 12px 16px; margin: 12px 0; font-size: 0.95em;
-}
 .kw-card .kw-tag {
   display: inline-block; background: #e65100; color: #fff;
   padding: 1px 10px; border-radius: 10px; font-size: 0.78em; margin-right: 8px;
@@ -134,28 +94,7 @@ section.sec.c-sum { border-left: 6px solid #e65100; }
 }
 .saying-card .ref-box.show { display: block; }
 
-/* ====== 互动讨论 ====== */
-.interact {
-  background: #fff8e1; border: 2px solid #ffc107; border-radius: 10px;
-  padding: 14px 18px; margin: 16px 0;
-}
-.interact .it-title { font-weight: bold; color: #e65100; font-size: 0.98em; margin-bottom: 6px; }
-.interact ul { margin: 4px 0; }
-.interact .btn-ref {
-  margin-top: 10px; padding: 4px 16px; border: 2px solid #e65100; color: #e65100;
-  border-radius: 14px; background: #fff; cursor: pointer; font-size: 0.85em; transition: 0.15s;
-}
-.interact .btn-ref:hover { background: #fff3e0; }
-.interact .btn-ref.open { background: #e65100; color: #fff; }
-.interact .ref-box {
-  display: none; margin-top: 10px; padding: 10px 14px; border-radius: 8px;
-  background: #fff; border-left: 4px solid #e65100; font-size: 0.9em; line-height: 1.8;
-}
-.interact .ref-box.show { display: block; }
-
 /* ====== 表格 ====== */
-.sec table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.93em; }
-.sec th, .sec td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
 .sec th { background: #fff3e0; color: #bf360c; }
 .table-scroll { overflow-x: auto; }
 .table-scroll table { min-width: 620px; }
@@ -165,7 +104,6 @@ section.sec.c-sum { border-left: 6px solid #e65100; }
   background: #fff3e0; border: 2px solid #e65100; border-radius: 10px;
   padding: 16px 20px; margin: 16px 0;
 }
-.foot-note { text-align: center; color: #aaa; font-size: 0.85em; margin-top: 26px; }
 
 @media (max-width: 640px) {
   body { padding: 12px; font-size: 15px; }

@@ -23,120 +23,25 @@ article {
   overflow-wrap: break-word; word-wrap: break-word; overflow-x: hidden;
 }
 h1 { color: #2c3e50; font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding-bottom: 10px; margin-top: 0; text-align: center; }
-.back {
-  display: inline-block; margin-bottom: 16px;
-  color: #1a73e8; text-decoration: none; font-size: 0.95em;
-}
-.back:hover { text-decoration: underline; }
 .tip { text-align: center; color: #888; margin-bottom: 24px; }
 .note { text-align: center; color: #999; font-size: 0.88em; margin-bottom: 8px; }
 
-/* ------ 选择题样式 ------ */
-.quiz-question {
-  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
-  padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
-}
-.quiz-question.correct { border-color: #4caf50; background: #f1f8e9; }
-/* 仅答错时使用红色 */
-.quiz-question.wrong { border-color: #f44336; background: #fce4ec; }
-.quiz-question .q-title {
-  font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50;
-}
+/* ------ 选择题样式（主卡由共享 style.css 提供，仅保留差异规则） ------ */
 .quiz-question .q-title .q-tag {
   display: inline-block; padding: 1px 10px; border-radius: 12px;
   font-size: 0.75em; margin-right: 6px; color: #fff;
 }
-.q-tag.choice { background: #1a73e8; }
-.quiz-question .options { display: flex; flex-direction: column; gap: 8px; }
-.quiz-question .opt {
-  padding: 8px 14px; border: 2px solid #ddd; border-radius: 8px;
-  cursor: pointer; transition: all 0.15s; background: #fafafa; user-select: none;
-}
-.quiz-question .opt:hover { background: #e3f2fd; border-color: #90caf9; }
-.quiz-question .opt.selected { border-color: #1a73e8; background: #bbdefb; font-weight: bold; }
-.quiz-question .opt.correct-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
-/* 仅答错时使用红色 */
-.quiz-question .opt.wrong-opt { border-color: #f44336; background: #ffcdd2; }
-.quiz-question .opt.disabled { pointer-events: none; opacity: 0.7; }
-.quiz-question .explain {
-  margin-top: 10px; padding: 10px 14px; border-radius: 8px;
-  font-size: 0.93em; display: none;
-}
-.quiz-question .explain.show { display: block; }
-.quiz-question .explain.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
-/* 仅答错时使用红色 */
-.quiz-question .explain.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
 
-/* 难度标签 */
-.diff-tag {
-  display: inline-block; padding: 1px 8px; border-radius: 8px;
-  font-size: 0.7em; margin-left: 6px; font-weight: normal;
-}
-.diff-easy { background: #e8f5e9; color: #2e7d32; }
-.diff-medium { background: #fff8e1; color: #f57f17; }
-.diff-hard { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
-.diff-exam { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
-
-/* ------ 计算大题样式（与选择题保持一致） ------ */
-.calc-card {
-  background: #fff; border: 2px solid #e0e0e0; border-radius: 10px;
-  padding: 18px 22px; margin: 16px 0; transition: all 0.2s;
-}
-.calc-card.correct { border-color: #4caf50; background: #f1f8e9; }
-.calc-card.wrong { border-color: #f44336; background: #fce4ec; }
-.calc-card .q-title {
-  font-weight: bold; font-size: 1.05em; margin-bottom: 10px; color: #2c3e50;
-}
+/* ------ 计算大题样式（主卡/输入/按钮由共享 style.css 提供，仅保留差异规则） ------ */
 .calc-card .q-title .q-tag {
   display: inline-block; padding: 1px 10px; border-radius: 12px;
   font-size: 0.75em; margin-right: 6px; color: #fff; background: #1a73e8;
 }
-.calc-card .step-area {
-  margin: 10px 0; padding: 10px 14px; border-radius: 8px;
-  font-size: 0.93em; display: none; line-height: 1.8;
-}
-.calc-card .step-area.show { display: block; }
-.calc-card .step-area.ok { background: #e8f5e9; border-left: 4px solid #4caf50; }
-.calc-card .step-area.fail { background: #fbe9e7; border-left: 4px solid #f44336; }
-.calc-card .step-area .step { margin: 4px 0; padding-left: 12px; border-left: 3px solid #bbb; }
-.calc-card .step-area .answer { color: #2c3e50; font-weight: bold; margin: 6px 0 0; font-size: 1.05em; }
-.calc-card .btn-toggle {
-  display: inline-block; margin-top: 16px; padding: 6px 20px;
-  border: 2px solid #1a73e8; color: #1a73e8; border-radius: 16px;
-  background: #fff; cursor: pointer; font-size: 0.93em; transition: 0.15s;
-}
-.calc-card .btn-toggle:hover { background: #1a73e8; color: #fff; }
-.calc-card .calc-input {
-  width: 100%; padding: 10px 14px; border: 2px solid #ddd; border-radius: 8px;
-  font-size: 0.95em; outline: none; transition: border-color 0.15s;
-  margin: 6px 0; box-sizing: border-box;
-  font-family: 'Times New Roman', 'STIX', serif;
-}
-.calc-card .calc-input:focus { border-color: #1a73e8; }
-.calc-card .calc-input.correct-input { border-color: #4caf50; background: #e8f5e9; }
-/* 仅答错时使用红色 */
-.calc-card .calc-input.wrong-input { border-color: #f44336; background: #fce4ec; }
-.calc-card .btn-check {
-  padding: 6px 16px; background: #1a73e8; color: #fff; border: none;
-  border-radius: 8px; cursor: pointer; font-size: 0.9em; transition: 0.15s;
-}
-.calc-card .btn-check:hover { background: #1557b0; }
-.calc-card .btn-check:disabled { opacity: 0.5; cursor: default; }
 
-/* 底部 */
-#scoreDisplay {
-  display: inline-block; background: #1a73e8; color: #fff;
-  padding: 12px 32px; border-radius: 30px; font-size: 1.2em; font-weight: bold;
-}
-.reset-btn {
-  display: inline-block; margin-top: 12px; padding: 8px 28px;
-  border: 2px solid #1a73e8; color: #1a73e8; border-radius: 20px;
-  background: #fff; cursor: pointer; font-size: 1em; transition: 0.15s;
-}
-.reset-btn:hover { background: #e3f2fd; }
+/* 底部（#scoreDisplay/.reset-btn 由共享 style.css 提供） */
 </style>
 </head>
-<body>
+<body class="quizset">
 <a class="back" href="../index.html">&larr; 返回课程列表</a>
 <article>
 <h1>集合进阶测验</h1>
