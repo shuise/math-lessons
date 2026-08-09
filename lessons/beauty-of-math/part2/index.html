@@ -392,9 +392,15 @@ funcs.forEach((f, i) => {
   // insert table after graph
   if (f.tableId) {
     var tpl = document.getElementById(f.tableId);
-    if (tpl) section.appendChild(tpl.cloneNode(true));
+    if (tpl) {
+      var tableClone = tpl.cloneNode(true);
+      tableClone.removeAttribute('id');
+      section.appendChild(tableClone);
+    }
   } else if (tables.length > 0) {
-    section.appendChild(tables[0].cloneNode(true));
+    var genericTableClone = tables[0].cloneNode(true);
+    genericTableClone.removeAttribute('id');
+    section.appendChild(genericTableClone);
     tables[0].remove();
   }
 

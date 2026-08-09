@@ -304,11 +304,11 @@
   <div class="options">
     <div class="opt" onclick="checkChoice(5, 0)">A. 从一副扑克牌中随机抽一张</div>
     <div class="opt" onclick="checkChoice(5, 1)">B. 从一个装有 5 个球的袋中随机摸一个球</div>
-    <div class="opt" onclick="checkChoice(5, 2)">C. 在 [0, 10] 区间上随机取一个实数</div>
+    <div class="opt" onclick="checkChoice(5, 2)">C. 按均匀分布在 [0, 10] 区间上随机取一个实数</div>
     <div class="opt" onclick="checkChoice(5, 3)">D. 掷一颗骰子</div>
   </div>
   <div class="explain" id="explain5">
-    <strong>解析：</strong>A、B、D 的结果都是有限的，适用古典概型。C 中 [0, 10] 区间上有无穷多个实数，适用几何概型。选 C。
+    <strong>解析：</strong>A、B、D 的结果有限且基本事件等可能，适用古典概型。C 明确给出连续区间上的均匀分布，概率可用长度比计算，适用几何概型；仅仅“有无穷多个结果”并不足以判定为几何概型。选 C。
   </div>
 </div>
 

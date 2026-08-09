@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../../lib/logo.png?version=1.0.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>幂与根式 — 常见形式与互化</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+  article {
+    background: #fff; border-radius: 12px; padding: 36px 40px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    overflow-wrap: break-word; word-wrap: break-word; overflow-x: hidden;
+  }
+  h3 { color: #2c3e50; margin: 26px 0 10px; font-size: 1.15em; border-left: 4px solid #1a73e8; padding-left: 10px; }
+  .page-desc { color: #555; font-size: 1em; line-height: 1.8; margin: 12px 0 28px; }
+
+  /* 常见形式总览表 */
+  .form-table { width: 100%; border-collapse: collapse; margin: 14px 0 8px; font-size: 0.98em; }
+  .form-table th, .form-table td { border: 1px solid #e0e5ec; padding: 9px 14px; text-align: left; }
+  .form-table th { background: #f0f4fa; color: #2c3e50; }
+  .form-table tr:nth-child(even) { background: #fafbfd; }
+  .form-table .m { font-family: 'Courier New', Courier, monospace; font-size: 1.05em; white-space: nowrap; }
+
+  /* 转化卡片：公式 + 说明按钮 + 隐藏说明 */
+  .conv-card {
+    background: #f8faff; border: 1px solid #dce4f0; border-radius: 10px;
+    padding: 14px 18px; margin: 14px 0;
+  }
+  .conv-card .conv-formula {
+    font-size: 1.08em; line-height: 1.9; color: #1a3a5c;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  .conv-card .conv-formula .tag {
+    display: inline-block; margin-right: 10px; padding: 1px 10px; border-radius: 10px;
+    font-size: 0.72em; color: #fff; background: #1a73e8; vertical-align: middle;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+  .conv-btn {
+    display: inline-block; margin: 10px 0 0; padding: 5px 18px;
+    border: 2px solid #1a73e8; color: #1a73e8; border-radius: 14px;
+    background: #fff; cursor: pointer; font-size: 0.88em; transition: 0.15s;
+    user-select: none; font-family: inherit;
+  }
+  .conv-btn:hover { background: #e8f0fe; }
+  .conv-btn.open { background: #1a73e8; color: #fff; }
+  .conv-explain {
+    display: none; margin: 12px 0 0; padding: 12px 14px;
+    background: #e8f5e9; border-left: 4px solid #4caf50; border-radius: 0 8px 8px 0;
+    font-size: 0.95em; line-height: 1.9;
+  }
+  .conv-explain.show { display: block; }
+  .conv-explain .why-label { font-weight: bold; color: #2e7d32; }
+  .conv-explain .law { color: #1a73e8; font-weight: bold; }
+
+  /* 基础定律 */
+  .law-card {
+    background: #f0f7ff; border-left: 4px solid #1a73e8;
+    padding: 14px 18px; margin: 14px 0; border-radius: 0 8px 8px 0;
+  }
+  .law-card .law-formula {
+    font-family: 'Courier New', Courier, monospace; font-size: 1.05em; color: #1a3a5c;
+  }
+  .law-card .law-note { font-size: 0.9em; color: #666; margin-top: 4px; }
+
+  /* 综合例题 */
+  .ex-card {
+    background: #fff8e1; border-left: 4px solid #ffc107;
+    padding: 14px 18px; margin: 14px 0; border-radius: 0 8px 8px 0;
+  }
+  .ex-card .ex-q { margin: 0 0 8px; }
+  .ex-card .conv-explain { background: #fff3e0; border-left-color: #ff9800; }
+  .ex-card .conv-btn { border-color: #e65100; color: #e65100; }
+  .ex-card .conv-btn:hover { background: #fff3e0; }
+  .ex-card .conv-btn.open { background: #e65100; color: #fff; }
+  .key-point { margin-top: 18px; }
+
+  /* 底部「返回上一页」按钮 */
+  .back-btn {
+    display: inline-block; padding: 9px 30px;
+    background: #1a73e8; color: #fff; border: none; border-radius: 20px;
+    font-size: 0.95em; cursor: pointer; transition: 0.15s;
+    font-family: inherit; user-select: none;
+  }
+  .back-btn:hover { background: #1557b0; }
+
+  /* 选择题训练：结果徽标 / 双按钮 / 提示区（主样式由共享 style.css 提供） */
+  .result-badge { display: none; margin-top: 10px; padding: 6px 12px; border-radius: 8px; font-weight: bold; font-size: 0.95em; }
+  .result-badge.show { display: block; }
+  .result-badge.ok { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #4caf50; }
+  .result-badge.no { background: #fbe9e7; color: #c62828; border-left: 4px solid #f44336; }
+  .opt.right-opt { border-color: #4caf50; background: #c8e6c9; font-weight: bold; }
+  .btn-row { margin-top: 10px; }
+  .hint-btn, .ans-btn {
+    margin: 4px 8px 0 0; padding: 5px 18px; border-radius: 14px;
+    font-size: 0.85em; cursor: pointer; transition: 0.15s; background: #fff;
+  }
+  .hint-btn { border: 2px solid #f39c12; color: #f39c12; }
+  .hint-btn:hover { background: #fef3e0; }
+  .hint-btn.open { background: #f39c12; color: #fff; }
+  .ans-btn { border: 2px solid #1a73e8; color: #1a73e8; }
+  .ans-btn:hover { background: #e8f0fe; }
+  .ans-btn.open { background: #1a73e8; color: #fff; }
+  .hint-box {
+    display: none; margin-top: 10px; padding: 10px 14px; border-radius: 8px;
+    background: #fff8e1; border-left: 4px solid #f39c12; font-size: 0.93em; line-height: 1.85;
+  }
+  .hint-box.show { display: block; }
+  .quiz-train { margin-top: 40px; }
+  .quiz-train .q-title { margin-bottom: 6px; }
+  .quiz-train .q-tag { background: #1a73e8; }
+  .quiz-train .quiz-footer { margin-top: 30px; }
+
+  @media (max-width: 720px) {
+    article { padding: 20px 14px; }
+    .form-table { display: block; width: 100%; overflow-x: auto; font-size: 0.85em; white-space: nowrap; }
+    .form-table tbody { display: table; min-width: 650px; width: 100%; }
+    .form-table th, .form-table td { padding: 6px 8px; }
+    .conv-card { padding: 12px 14px; }
+  }
+</style>
+</head>
+<body>
+<a class="back" href="../../index.html">&larr; 返回课程列表</a>
+<article>
+<h1>幂与根式 — 常见形式与互化</h1>
+<p class="page-desc">根式、分数指数幂、负数指数幂、分式，这四种形式在数学中频繁出现，本质上是<strong>同一数量关系的不同写法</strong>。本页以幂的最基础运算定律为依据，把它们之间的互相转化整理清楚。每条转化默认隐藏说明，点击「查看说明」即可展开推导。</p>
+
+<h3>一、四种常见形式</h3>
+<table class="form-table">
+  <tr><th>形式</th><th>一般写法</th><th>示例</th><th>含义</th></tr>
+  <tr>
+    <td><b>根式</b></td>
+    <td class="m">ⁿ√a、ⁿ√(a<sup>m</sup>)</td>
+    <td class="m">√2、∛8、⁴√(x²)</td>
+    <td>ⁿ√a 表示规定的 n 次方根主值；特别地，√a 是 a 的非负平方根（a ≥ 0）</td>
+  </tr>
+  <tr>
+    <td><b>分数指数幂</b>（分数幂）</td>
+    <td class="m">a<sup>m/n</sup></td>
+    <td class="m">2<sup>1/2</sup>、x<sup>2/3</sup>、16<sup>3/4</sup></td>
+    <td>分母 n 是开方次数，分子 m 是乘方次数</td>
+  </tr>
+  <tr>
+    <td><b>负数指数幂</b>（负数幂）</td>
+    <td class="m">a<sup>−n</sup>、a<sup>−m/n</sup></td>
+    <td class="m">2<sup>−3</sup>、x<sup>−1/2</sup></td>
+    <td>取倒数：a<sup>−n</sup> = 1 / a<sup>n</sup></td>
+  </tr>
+  <tr>
+    <td><b>分式</b></td>
+    <td class="m">1 / a<sup>n</sup>、b / a<sup>m</sup></td>
+    <td class="m">1/8、1/√x、1/x²</td>
+    <td>分母含幂或根式，常与负数幂互化</td>
+  </tr>
+</table>
+
+<h3>二、最基础的运算定律</h3>
+<p>以下五条定律是全部转化的依据。为保证任意实指数都有统一含义，约定底数 a &gt; 0，m、n 为实数；涉及除法时分母还必须非零。把指数理解为“若干个 a 相乘”只适用于自然数指数，实指数是在保持这些运算律的前提下逐步推广得到的。</p>
+<div class="law-card">
+  <div class="law-formula">定律 1（同底数幂相乘）：&nbsp; a<sup>m</sup> · a<sup>n</sup> = a<sup>m+n</sup></div>
+  <div class="law-note">本质：m 个 a 相乘再乘 n 个 a，一共 m+n 个 a 相乘。</div>
+</div>
+<div class="law-card">
+  <div class="law-formula">定律 2（幂的乘方）：&nbsp; (a<sup>m</sup>)<sup>n</sup> = a<sup>m·n</sup></div>
+  <div class="law-note">本质：把 a<sup>m</sup> 这个整体再乘 n 次，每次贡献 m 个 a。</div>
+</div>
+<div class="law-card">
+  <div class="law-formula">定律 3（积的乘方）：&nbsp; (ab)<sup>n</sup> = a<sup>n</sup> · b<sup>n</sup></div>
+  <div class="law-note">本质：乘法的顺序无关，n 个 a 与 n 个 b 交错相乘可重排。</div>
+</div>
+<div class="law-card">
+  <div class="law-formula">定律 4（同底数幂相除）：&nbsp; a<sup>m</sup> ÷ a<sup>n</sup> = a<sup>m−n</sup></div>
+  <div class="law-note">本质：约掉分子分母中共同的 a，由定律 1 反推可得。</div>
+</div>
+<div class="law-card">
+  <div class="law-formula">定律 5（零次幂）：&nbsp; a<sup>0</sup> = 1（a ≠ 0）</div>
+  <div class="law-note">本质：a<sup>m</sup> ÷ a<sup>m</sup> = 1，由定律 4 又得 a<sup>m−m</sup> = a<sup>0</sup>。</div>
+</div>
+
+<h3>三、两个重要特例的推导</h3>
+<p>「零次幂为什么等于 1」「负一次幂为什么等于一次幂的倒数」，都可由上面的定律 4（同底数幂相除）一步推出。</p>
+
+<div class="conv-card">
+  <div class="conv-formula"><span class="tag">特例 1</span>为什么 a<sup>0</sup> = 1（a ≠ 0）？</div>
+  <button class="conv-btn" onclick="toggleConv(this)">查看推导</button>
+  <div class="conv-explain"><span class="why-label">推导：</span>由定律 4（a<sup>m</sup> ÷ a<sup>n</sup> = a<sup>m−n</sup>），令 m = n：<br>
+  <span class="law">a<sup>n</sup> ÷ a<sup>n</sup> = a<sup>n−n</sup> = a<sup>0</sup></span><br>
+  左边 a<sup>n</sup> ÷ a<sup>n</sup>：同一个数除以它自己，商等于 1（前提 a<sup>n</sup> ≠ 0，即 a ≠ 0）。<br>
+  于是两边相等，得 <b>a<sup>0</sup> = 1</b>。<br>
+  <b>几何直觉：</b>指数每减少 1，结果除以一次底数：a³ = a²·a → a² = a¹·a → a¹ = a⁰·a，要「衔接得住」，a⁰ 只能是 1。例如 2³=8、2²=4、2¹=2、2⁰=1，正好每次除以 2。</div>
+</div>
+
+<div class="conv-card">
+  <div class="conv-formula"><span class="tag">特例 2</span>为什么 a<sup>−1</sup> = 1 / a（a ≠ 0）？</div>
+  <button class="conv-btn" onclick="toggleConv(this)">查看推导</button>
+  <div class="conv-explain"><span class="why-label">推导：</span>由定律 4，令 m = 0、n = 1：<br>
+  <span class="law">a<sup>0</sup> ÷ a<sup>1</sup> = a<sup>0−1</sup> = a<sup>−1</sup></span><br>
+  左边 = 1 ÷ a = 1/a（用到了特例 1 的 a<sup>0</sup> = 1）。<br>
+  于是得 <b>a<sup>−1</sup> = 1 / a = (1/a)<sup>1</sup></b>，即负一次幂恰好是「一次幂的倒数」。<br>
+  <b>几何直觉：</b>延续「指数每减 1 就除以一次底数」：2¹=2 → 2⁰=1 → 2<sup>−1</sup>=1/2 → 2<sup>−2</sup>=1/4，向负方向延伸正好把「除以 2」继续下去，所以负指数就是取倒数。</div>
+</div>
+
+<h3>四、形式互化（点击查看说明）</h3>
+
+<div class="conv-card">
+  <div class="conv-formula"><span class="tag">根式 → 分数幂</span>√a = a<sup>1/2</sup>，&nbsp; ⁿ√a = a<sup>1/n</sup></div>
+  <button class="conv-btn" onclick="toggleConv(this)">查看说明</button>
+  <div class="conv-explain"><span class="why-label">为什么成立？</span>以 ⁿ√a = a<sup>1/n</sup> 为例。设 x = a<sup>1/n</sup>，由定律 2：(x)<sup>n</sup> = (a<sup>1/n</sup>)<sup>n</sup> = a<sup>(1/n)·n</sup> = a<sup>1</sup> = a。<br>即 x<sup>n</sup> = a，说明 x 恰好就是「n 次方后等于 a」的数，这正是 ⁿ√a 的定义。所以两者是同一个数的两种写法。特例 n = 2 即得 √a = a<sup>1/2</sup>。</div>
+</div>
+
+<div class="conv-card">
+  <div class="conv-formula"><span class="tag">根式 → 分数幂</span>ⁿ√(a<sup>m</sup>) = a<sup>m/n</sup>（一般形式）</div>
+  <button class="conv-btn" onclick="toggleConv(this)">查看说明</button>
+  <div class="conv-explain"><span class="why-label">为什么成立？</span>设 y = a<sup>m/n</sup>，由定律 2：(y)<sup>n</sup> = (a<sup>m/n</sup>)<sup>n</sup> = a<sup>(m/n)·n</sup> = a<sup>m</sup>。<br>即 y<sup>n</sup> = a<sup>m</sup>，所以 y 是 a<sup>m</sup> 的 n 次方根，即 ⁿ√(a<sup>m</sup>)。<br><b>记忆口诀：</b>分数指数的「分母」是根号上的次数（开方），「分子」是底数的乘方次数。例如 ⁿ√(x²) = x<sup>2/n</sup>。</div>
+</div>
+
+<div class="conv-card">
+  <div class="conv-formula"><span class="tag">负数幂 → 分式</span>a<sup>−n</sup> = 1 / a<sup>n</sup>，&nbsp; a<sup>−m/n</sup> = 1 / a<sup>m/n</sup></div>
+  <button class="conv-btn" onclick="toggleConv(this)">查看说明</button>
+  <div class="conv-explain"><span class="why-label">为什么成立？</span>由定律 4：a<sup>0</sup> ÷ a<sup>n</sup> = a<sup>0−n</sup> = a<sup>−n</sup>。<br>而 a<sup>0</sup> = 1（定律 5），所以 a<sup>0</sup> ÷ a<sup>n</sup> = 1 ÷ a<sup>n</sup> = 1/a<sup>n</sup>。<br>两者相等，得 a<sup>−n</sup> = 1/a<sup>n</sup>。把 n 换成 m/n 同理得 a<sup>−m/n</sup> = 1/a<sup>m/n</sup>。<br><b>本质：</b>负指数只是「把底数移到分母」的一种记号，一切指数运算法则仍然适用。</div>
+</div>
+
+<div class="conv-card">
+  <div class="conv-formula"><span class="tag">分式 → 负数幂</span>1 / a<sup>n</sup> = a<sup>−n</sup>，&nbsp; 1 / a<sup>m/n</sup> = a<sup>−m/n</sup></div>
+  <button class="conv-btn" onclick="toggleConv(this)">查看说明</button>
+  <div class="conv-explain"><span class="why-label">为什么成立？</span>这是上一条的逆向应用，但也可以独立验证：由定律 4，a<sup>−n</sup> · a<sup>n</sup> = a<sup>−n+n</sup> = a<sup>0</sup> = 1。<br>所以 a<sup>−n</sup> 与 a<sup>n</sup> 相乘等于 1，即 a<sup>−n</sup> 是 a<sup>n</sup> 的倒数：a<sup>−n</sup> = 1/a<sup>n</sup>。<br>这解释了「负号 = 倒过来」，例如 1/x² = x<sup>−2</sup>、1/√x = x<sup>−1/2</sup>。</div>
+</div>
+
+<div class="conv-card">
+  <div class="conv-formula"><span class="tag">负数幂 → 根式</span>a<sup>−m/n</sup> = 1 / ⁿ√(a<sup>m</sup>)</div>
+  <button class="conv-btn" onclick="toggleConv(this)">查看说明</button>
+  <div class="conv-explain"><span class="why-label">为什么成立？</span>分两步：<br>① 由「负数幂 → 分式」：a<sup>−m/n</sup> = 1 / a<sup>m/n</sup>；<br>② 由「根式 → 分数幂」：a<sup>m/n</sup> = ⁿ√(a<sup>m</sup>)。<br>两步合并即得 a<sup>−m/n</sup> = 1 / ⁿ√(a<sup>m</sup>)。例如 8<sup>−2/3</sup> = 1 / ∛(8²) = 1/4。</div>
+</div>
+
+<div class="conv-card">
+  <div class="conv-formula"><span class="tag">分式乘方</span>(a/b)<sup>n</sup> = a<sup>n</sup> / b<sup>n</sup>，&nbsp; (a/b)<sup>−n</sup> = (b/a)<sup>n</sup></div>
+  <button class="conv-btn" onclick="toggleConv(this)">查看说明</button>
+  <div class="conv-explain"><span class="why-label">为什么成立？</span>① (a/b)<sup>n</sup> = a<sup>n</sup>/b<sup>n</sup>：把 (a/b)<sup>n</sup> 展开为 n 个 a/b 相乘，分子是 n 个 a（= a<sup>n</sup>），分母是 n 个 b（= b<sup>n</sup>）。<br>② (a/b)<sup>−n</sup> = 1 ÷ (a/b)<sup>n</sup> = 1 ÷ (a<sup>n</sup>/b<sup>n</sup>) = b<sup>n</sup>/a<sup>n</sup> = (b/a)<sup>n</sup>。<br>「负号 + 分数线」合在一起等于把整个分式颠倒后再乘方。例如 (x/y)<sup>−2</sup> = (y/x)²。</div>
+</div>
+
+<h3>五、互化总表</h3>
+<table class="form-table">
+  <tr><th>原形式</th><th>目标形式</th><th>转化规则</th><th>示例</th></tr>
+  <tr><td class="m">√a</td><td class="m">a<sup>1/2</sup></td><td>平方根 = 1/2 次幂</td><td class="m">√9 = 9<sup>1/2</sup> = 3</td></tr>
+  <tr><td class="m">ⁿ√a</td><td class="m">a<sup>1/n</sup></td><td>n 次方根 = 1/n 次幂</td><td class="m">∛8 = 8<sup>1/3</sup> = 2</td></tr>
+  <tr><td class="m">ⁿ√(a<sup>m</sup>)</td><td class="m">a<sup>m/n</sup></td><td>分母开方、分子乘方</td><td class="m">⁴√(16²) = 16<sup>2/4</sup> = 4</td></tr>
+  <tr><td class="m">1 / a<sup>n</sup></td><td class="m">a<sup>−n</sup></td><td>分母变负指数</td><td class="m">1/8 = 2<sup>−3</sup></td></tr>
+  <tr><td class="m">1 / ⁿ√(a<sup>m</sup>)</td><td class="m">a<sup>−m/n</sup></td><td>根式倒数 = 负分数幂</td><td class="m">1/√x = x<sup>−1/2</sup></td></tr>
+  <tr><td class="m">a<sup>m/n</sup></td><td class="m">ⁿ√(a<sup>m</sup>)</td><td>分数幂还原为根式</td><td class="m">x<sup>2/3</sup> = ∛(x²)</td></tr>
+  <tr><td class="m">(a/b)<sup>−n</sup></td><td class="m">(b/a)<sup>n</sup></td><td>负幂取倒数并颠倒</td><td class="m">(2/3)<sup>−2</sup> = (3/2)² = 9/4</td></tr>
+</table>
+
+<h3>六、综合例题（点击查看解答）</h3>
+
+<div class="ex-card">
+  <p class="ex-q"><b>例 1</b>　当 x ≥ 0 时，把 √(x³) 写成分数指数幂的形式。</p>
+  <button class="conv-btn" onclick="toggleConv(this)">查看解答</button>
+  <div class="conv-explain"><span class="why-label">解：</span>√(x³) 表示 x³ 的平方根，平方根就是 1/2 次幂（转化「根式 → 分数幂」）：<br><span class="law">√(x³) = (x³)<sup>1/2</sup> = x<sup>3×(1/2)</sup> = x<sup>3/2</sup></span><br>中间一步用到了定律 2：幂的乘方，指数相乘。</div>
+</div>
+
+<div class="ex-card">
+  <p class="ex-q"><b>例 2</b>　当 x &gt; 0 时，把 x<sup>−2/3</sup> 分别写成分式与根式形式。</p>
+  <button class="conv-btn" onclick="toggleConv(this)">查看解答</button>
+  <div class="conv-explain"><span class="why-label">解：</span>① 分式形式（转化「负数幂 → 分式」）：x<sup>−2/3</sup> = 1 / x<sup>2/3</sup>。<br>② 根式形式（转化「负数幂 → 根式」）：x<sup>−2/3</sup> = 1 / ∛(x²)。<br>两条路径结果一致：1 / x<sup>2/3</sup> 与 1 / ∛(x²) 本质相同。</div>
+</div>
+
+<div class="ex-card">
+  <p class="ex-q"><b>例 3</b>　计算 16<sup>3/4</sup> 的值。</p>
+  <button class="conv-btn" onclick="toggleConv(this)">查看解答</button>
+  <div class="conv-explain"><span class="why-label">解：</span>分数幂 a<sup>m/n</sup> = ⁿ√(a<sup>m</sup>)，所以 16<sup>3/4</sup> = ⁴√(16³)。<br><b>更省事的做法：</b>先开方、后乘方——16<sup>3/4</sup> = (16<sup>1/4</sup>)³ = (⁴√16)³ = 2³ = 8。<br>因为 ⁴√16 = 2 正好是整数，先开方避免了大数乘方。<b>答案：8。</b></div>
+</div>
+
+<div class="ex-card">
+  <p class="ex-q"><b>例 4</b>　化简 8<sup>−1/3</sup> 与 25<sup>−1/2</sup>。</p>
+  <button class="conv-btn" onclick="toggleConv(this)">查看解答</button>
+  <div class="conv-explain"><span class="why-label">解：</span>① 8<sup>−1/3</sup> = 1 / 8<sup>1/3</sup> = 1 / ∛8 = 1/2。<br>② 25<sup>−1/2</sup> = 1 / 25<sup>1/2</sup> = 1 / √25 = 1/5。<br>关键步骤：负指数先取倒数，再处理分数幂（开方）。</div>
+</div>
+
+<div class="ex-card">
+  <p class="ex-q"><b>例 5</b>　当 x ≠ 0、y &gt; 0 时，把分式 1 / (x²·√y) 写成负指数幂的乘积形式。</p>
+  <button class="conv-btn" onclick="toggleConv(this)">查看解答</button>
+  <div class="conv-explain"><span class="why-label">解：</span>把分母里的每一项都用负指数表示（转化「分式 → 负数幂」）：<br>1 / x² = x<sup>−2</sup>，1 / √y = 1 / y<sup>1/2</sup> = y<sup>−1/2</sup>。<br>所以 <span class="law">1 / (x²·√y) = x<sup>−2</sup> · y<sup>−1/2</sup></span>。<br>这样乘除运算就统一成了「同底数幂相加」的形式，方便后续化简。</div>
+</div>
+
+<div class="key-point">
+  <b>一句话总结：</b>根号是「开方记号」，分数幂把开方和乘方合并进一个指数（分母开方、分子乘方），负指数把「倒数」写进指数（负号 = 移到分母）。三者由同底数幂乘除、幂的乘方这两条最基础定律统一起来；互化时必须同时保留原式的定义域条件。
+</div>
+
+<div class="quiz-train">
+  <h3>七、30 道选择题训练</h3>
+  <p>共 30 题，每题 1 分，满分 30 分。点击选项作答：选对绿色、选错红色（仅标记所选）；点「思路提示」看引导，点「查看答案」才显示正确选项与解析。</p>
+  <div id="quizList"></div>
+  <div class="quiz-footer">
+    <div id="scoreDisplay">0 / 30</div>
+    <div class="score-detail">已答 <span id="answeredCount">0</span> / 30 题</div>
+    <button class="reset-btn" onclick="resetQuiz()">重新开始</button>
+  </div>
+</div>
+
+<div style="text-align:center; margin-top:32px;">
+  <button class="back-btn" onclick="history.back()">&larr; 返回上一页</button>
+</div>
+
+</article>
+
+<script>
+// 点击「查看说明/查看解答」按钮切换说明区的显隐
+function toggleConv(btn) {
+  var card = btn.closest('.conv-card') || btn.closest('.ex-card');
+  var panel = card.querySelector('.conv-explain');
+  var isOpen = panel.classList.toggle('show');
+  var label;
+  if (btn.closest('.ex-card')) label = '查看解答';
+  else if (btn.closest('.conv-card').querySelector('.tag').textContent.indexOf('特例') === 0) label = '查看推导';
+  else label = '查看说明';
+  btn.textContent = isOpen ? '收起' : label;
+  btn.classList.toggle('open', isOpen);
+}
+
+// ============ 七、30 道选择题训练 ============
+var QUESTS = [
+  { q: "√9 的值是？", opts: ["2", "3", "4", "81"], a: 1,
+    hint: "√9 表示「平方后等于 9 的正数」，即 9 的 1/2 次幂。",
+    ans: "√9 = 9<sup>1/2</sup>。因为 3² = 9，所以 √9 = <b>3</b>。" },
+  { q: "8<sup>1/3</sup> 的值是？", opts: ["2", "4", "8/3", "24"], a: 0,
+    hint: "指数 1/3 表示「开 3 次方」，即求 ∛8。",
+    ans: "8<sup>1/3</sup> = ∛8。因为 2³ = 8，所以 8<sup>1/3</sup> = <b>2</b>。" },
+  { q: "16<sup>3/4</sup> 的值是？", opts: ["12", "64", "8", "4"], a: 2,
+    hint: "先开方后乘方更省事：16<sup>3/4</sup> = (16<sup>1/4</sup>)³。",
+    ans: "16<sup>3/4</sup> = (16<sup>1/4</sup>)³ = (⁴√16)³ = 2³ = <b>8</b>。" },
+  { q: "2<sup>−3</sup> 的值是？", opts: ["−8", "1/8", "8", "1/6"], a: 1,
+    hint: "负指数表示取倒数：2<sup>−3</sup> = 1 / 2³。",
+    ans: "2<sup>−3</sup> = 1 / 2³ = 1/8 = <b>1/8</b>。" },
+  { q: "x<sup>−2</sup>（x ≠ 0）写成不含负指数的形式是？", opts: ["−x²", "1/x²", "x²", "2/x"], a: 1,
+    hint: "负号表示把底数移到分母，指数变正。",
+    ans: "x<sup>−2</sup> = 1 / x² = <b>1/x²</b>。" },
+  { q: "√x（x ≥ 0）用分数指数幂表示是？", opts: ["x²", "x<sup>1/2</sup>", "x<sup>2</sup>", "1/x<sup>1/2</sup>"], a: 1,
+    hint: "平方根 = 1/2 次幂：√x = x<sup>1/2</sup>。",
+    ans: "√x = <b>x<sup>1/2</sup></b>（分母 2 是开方次数）。" },
+  { q: "x<sup>2/3</sup>（x &gt; 0）用根式表示是？", opts: ["∛(x²)", "√(x³)", "∛x / 2", "x² · x³"], a: 0,
+    hint: "分母 3 开 3 次方，分子 2 乘 2 次方：先 x² 再开 3 次方。",
+    ans: "x<sup>2/3</sup> = <b>∛(x²)</b>（分母 3 开方、分子 2 乘方）。" },
+  { q: "1/√x（x &gt; 0）写成指数形式是？", opts: ["x<sup>−1/2</sup>", "x<sup>1/2</sup>", "−x<sup>1/2</sup>", "x<sup>−2</sup>"], a: 0,
+    hint: "先化成幂 1/√x = 1 / x<sup>1/2</sup>，再用负指数。",
+    ans: "1/√x = 1 / x<sup>1/2</sup> = <b>x<sup>−1/2</sup></b>。" },
+  { q: "a<sup>0</sup> 的值是（a ≠ 0）？", opts: ["0", "1", "a", "不确定"], a: 1,
+    hint: "任何非零数的 0 次幂都等于 1（特例 1）。",
+    ans: "由 a<sup>n</sup> ÷ a<sup>n</sup> = a<sup>n−n</sup> = a<sup>0</sup>，而左边等于 1，所以 a<sup>0</sup> = <b>1</b>。" },
+  { q: "a<sup>−1</sup> 的值是（a ≠ 0）？", opts: ["−a", "1/a", "a", "1−a"], a: 1,
+    hint: "负一次幂 = 一次幂的倒数（特例 2）。",
+    ans: "由 a<sup>0</sup> ÷ a<sup>1</sup> = a<sup>0−1</sup> = a<sup>−1</sup>，左边 = 1/a，所以 a<sup>−1</sup> = <b>1/a</b>。" },
+  { q: "(2/3)<sup>−2</sup> 的值是？", opts: ["−4/3", "4/9", "9/4", "6/4"], a: 2,
+    hint: "负幂 = 取倒数并颠倒分式：(2/3)<sup>−2</sup> = (3/2)²。",
+    ans: "(2/3)<sup>−2</sup> = (3/2)² = <b>9/4</b>。" },
+  { q: "25<sup>−1/2</sup> 的值是？", opts: ["5", "−5", "1/5", "1/25"], a: 2,
+    hint: "先处理负号取倒数：25<sup>−1/2</sup> = 1 / 25<sup>1/2</sup> = 1/√25。",
+    ans: "25<sup>−1/2</sup> = 1 / 25<sup>1/2</sup> = 1 / √25 = 1/5 = <b>1/5</b>。" },
+  { q: "(a<sup>m</sup>)<sup>n</sup> 等于？", opts: ["a<sup>m+n</sup>", "a<sup>m−n</sup>", "a<sup>mn</sup>", "a<sup>m/n</sup>"], a: 2,
+    hint: "幂的乘方：指数相乘（定律 2）。",
+    ans: "(a<sup>m</sup>)<sup>n</sup> = <b>a<sup>mn</sup></b>（幂的乘方，指数相乘）。" },
+  { q: "a<sup>m</sup> · a<sup>n</sup> 等于？", opts: ["a<sup>m+n</sup>", "a<sup>mn</sup>", "a<sup>m−n</sup>", "2a<sup>m+n</sup>"], a: 0,
+    hint: "同底数幂相乘：指数相加（定律 1）。",
+    ans: "a<sup>m</sup> · a<sup>n</sup> = <b>a<sup>m+n</sup></b>（同底数幂相乘，指数相加）。" },
+  { q: "a<sup>m</sup> ÷ a<sup>n</sup> 等于？", opts: ["a<sup>mn</sup>", "a<sup>m+n</sup>", "a<sup>m−n</sup>", "a<sup>n−m</sup>"], a: 2,
+    hint: "同底数幂相除：指数相减（定律 4）。",
+    ans: "a<sup>m</sup> ÷ a<sup>n</sup> = <b>a<sup>m−n</sup></b>（同底数幂相除，指数相减）。" },
+  { q: "√2 · √8 的值是？", opts: ["4", "16", "√10", "8"], a: 0,
+    hint: "根号下相乘：√2 · √8 = √(2×8) = √16。",
+    ans: "√2 · √8 = √(2×8) = √16 = <b>4</b>。" },
+  { q: "x<sup>1/2</sup> · x<sup>1/2</sup> 等于？", opts: ["x<sup>1/4</sup>", "x", "2x<sup>1/2</sup>", "x²"], a: 1,
+    hint: "同底数幂相乘指数相加：1/2 + 1/2 = 1。",
+    ans: "x<sup>1/2</sup> · x<sup>1/2</sup> = x<sup>1/2+1/2</sup> = x¹ = <b>x</b>。" },
+  { q: "1/8 写成 2 的幂是？", opts: ["2<sup>−3</sup>", "2³", "8<sup>−1</sup> = −8", "2<sup>1/3</sup>"], a: 0,
+    hint: "8 = 2³，所以 1/8 = 1 / 2³ = 2<sup>−3</sup>。",
+    ans: "1/8 = 1 / 2³ = <b>2<sup>−3</sup></b>。" },
+  { q: "8<sup>−1/3</sup> 的值是？", opts: ["−2", "2", "1/2", "1/24"], a: 2,
+    hint: "负号取倒数、分数分母开方：8<sup>−1/3</sup> = 1 / ∛8。",
+    ans: "8<sup>−1/3</sup> = 1 / 8<sup>1/3</sup> = 1 / ∛8 = 1/2 = <b>1/2</b>。" },
+  { q: "⁴√(x⁸) 化简为（x ≥ 0）？", opts: ["x⁴", "x²", "x⁸/4", "2x²"], a: 1,
+    hint: "写成幂：⁴√(x⁸) = x<sup>8/4</sup> = x²。",
+    ans: "⁴√(x⁸) = x<sup>8/4</sup> = <b>x²</b>。" },
+  { q: "(x<sup>1/2</sup>)² 等于（x ≥ 0）？", opts: ["x<sup>1/4</sup>", "x", "x²", "2x"], a: 1,
+    hint: "幂的乘方指数相乘：1/2 × 2 = 1。",
+    ans: "(x<sup>1/2</sup>)² = x<sup>(1/2)×2</sup> = x¹ = <b>x</b>。" },
+  { q: "0.001 写成 10 的幂是？", opts: ["10<sup>−3</sup>", "10³", "10<sup>1/3</sup>", "−10³"], a: 0,
+    hint: "0.001 = 1/1000 = 1/10³。",
+    ans: "0.001 = 1/1000 = 1/10³ = <b>10<sup>−3</sup></b>。" },
+  { q: "x<sup>2/3</sup> · x<sup>1/3</sup> 等于？", opts: ["x<sup>2/9</sup>", "x", "x²", "x<sup>3/6</sup>"], a: 1,
+    hint: "同底数幂相乘指数相加：2/3 + 1/3 = 1。",
+    ans: "x<sup>2/3</sup> · x<sup>1/3</sup> = x<sup>2/3+1/3</sup> = x¹ = <b>x</b>。" },
+  { q: "√(x³)（x ≥ 0）写成指数形式是？", opts: ["x<sup>3/2</sup>", "x<sup>2/3</sup>", "x<sup>1/3</sup>", "x<sup>−3/2</sup>"], a: 0,
+    hint: "√x³ = (x³)<sup>1/2</sup> = x<sup>3×1/2</sup>。",
+    ans: "√x³ = (x³)<sup>1/2</sup> = <b>x<sup>3/2</sup></b>。" },
+  { q: "(x<sup>1/3</sup>)³ 等于（x ≥ 0）？", opts: ["x<sup>1/9</sup>", "x", "x³", "3x<sup>1/3</sup>"], a: 1,
+    hint: "幂的乘方指数相乘：1/3 × 3 = 1。",
+    ans: "(x<sup>1/3</sup>)³ = x<sup>(1/3)×3</sup> = x¹ = <b>x</b>。" },
+  { q: "2<sup>x</sup> = 8，则 x = ？", opts: ["2", "3", "4", "16"], a: 1,
+    hint: "8 = 2³，比较指数即可。",
+    ans: "8 = 2³，所以 2<sup>x</sup> = 2³，即 <b>x = 3</b>。" },
+  { q: "3<sup>−1</sup> + 3<sup>0</sup> 的值是？", opts: ["0", "4/3", "1/3", "1"], a: 1,
+    hint: "分别算 3<sup>−1</sup> = 1/3、3<sup>0</sup> = 1，再相加。",
+    ans: "3<sup>−1</sup> + 3<sup>0</sup> = 1/3 + 1 = <b>4/3</b>。" },
+  { q: "(a/b)<sup>−n</sup> 等于？", opts: ["(b/a)<sup>n</sup>", "(a/b)<sup>n</sup>", "−a<sup>n</sup>/b<sup>n</sup>", "a<sup>−n</sup>b<sup>n</sup>"], a: 0,
+    hint: "负幂 = 颠倒整个分式再乘方。",
+    ans: "(a/b)<sup>−n</sup> = <b>(b/a)<sup>n</sup></b>（负号 + 分数线 = 颠倒分式）。" },
+  { q: "把分式 1/(x²y)（xy ≠ 0）写成负指数乘积是？", opts: ["x<sup>2</sup>y<sup>−1</sup>", "x<sup>−2</sup>y<sup>−1</sup>", "x<sup>−2</sup>y", "−x²y"], a: 1,
+    hint: "分母每一项取负指数：1/x² = x<sup>−2</sup>，1/y = y<sup>−1</sup>。",
+    ans: "1/(x²y) = x<sup>−2</sup> · y<sup>−1</sup> = <b>x<sup>−2</sup>y<sup>−1</sup></b>。" },
+  { q: "√(x² + 2x + 1) 化简为（x &gt; −1）？", opts: ["x + 1", "x² + 1", "x − 1", "√(x²) + 1"], a: 0,
+    hint: "x² + 2x + 1 = (x + 1)²，开方得 |x+1|；由 x &gt; −1 为正。",
+    ans: "x² + 2x + 1 = (x + 1)²，所以 √(x²+2x+1) = |x+1|；因 x &gt; −1，x+1 &gt; 0，故 = <b>x + 1</b>。" }
+];
+
+var QUIZ_ANSWERS = {};
+for (var qi = 0; qi < QUESTS.length; qi++) QUIZ_ANSWERS["q" + (qi + 1)] = QUESTS[qi].a;
+var QUIZ_SCORE = 0;
+
+function renderQuiz() {
+  var list = document.getElementById("quizList");
+  var html = "";
+  for (var i = 0; i < QUESTS.length; i++) {
+    var n = i + 1;
+    var t = QUESTS[i];
+    html += '<div class="quiz-question" id="q' + n + '">';
+    html += '<div class="q-title"><span class="q-no">' + n + '.</span><span class="q-tag">选择题</span></div>';
+    html += '<div class="q-text">' + t.q + '</div>';
+    html += '<div class="options">';
+    for (var j = 0; j < t.opts.length; j++) {
+      html += '<div class="opt" onclick="checkChoice(' + n + ',' + j + ')">' + String.fromCharCode(65 + j) + '. ' + t.opts[j] + '</div>';
+    }
+    html += '</div>';
+    html += '<div class="explain"></div>';
+    html += '</div>';
+  }
+  list.innerHTML = html;
+}
+
+function checkChoice(n, idx) {
+  var box = document.getElementById("q" + n);
+  if (!box || box.dataset.done) return;
+  box.dataset.done = "1";
+  var ok = (idx === QUIZ_ANSWERS["q" + n]);
+  var opts = box.querySelectorAll(".opt");
+  for (var i = 0; i < opts.length; i++) opts[i].classList.add("disabled");
+  var badge = document.createElement("div");
+  badge.className = "result-badge show";
+  if (ok) {
+    opts[idx].classList.add("right-opt");
+    badge.className += " ok";
+    badge.innerHTML = "✓ 回答正确";
+    QUIZ_SCORE += 1;
+  } else {
+    opts[idx].classList.add("wrong-opt");
+    badge.className += " no";
+    badge.innerHTML = "✗ 回答错误，点「查看答案」看解析";
+  }
+  box.insertBefore(badge, box.querySelector(".explain"));
+  // 注入「思路提示 / 查看答案」双按钮
+  var row = document.createElement("div");
+  row.className = "btn-row";
+  row.innerHTML = '<button class="hint-btn" onclick="toggleHint(' + n + ')">思路提示</button>' +
+                  '<button class="ans-btn" onclick="toggleAns(' + n + ')">查看答案</button>';
+  box.insertBefore(row, box.querySelector(".explain"));
+  var hint = document.createElement("div");
+  hint.className = "hint-box";
+  hint.id = "hint-q" + n;
+  hint.innerHTML = "<b>思路提示：</b>" + QUESTS[n - 1].hint;
+  box.insertBefore(hint, box.querySelector(".explain"));
+  updateScore();
+}
+
+function toggleHint(n) {
+  var hint = document.getElementById("hint-q" + n);
+  var open = hint.classList.toggle("show");
+  var btn = document.getElementById("q" + n).querySelector(".hint-btn");
+  btn.classList.toggle("open", open);
+  btn.textContent = open ? "收起提示" : "思路提示";
+}
+
+function toggleAns(n) {
+  var box = document.getElementById("q" + n);
+  var explain = box.querySelector(".explain");
+  var open = explain.classList.toggle("show");
+  var btn = box.querySelector(".ans-btn");
+  btn.classList.toggle("open", open);
+  btn.textContent = open ? "收起答案" : "查看答案";
+  if (open) {
+    var t = QUESTS[n - 1];
+    var opts = box.querySelectorAll(".opt");
+    opts[t.a].classList.add("correct-opt");
+    explain.classList.add("ok");
+    explain.innerHTML = "<b>正确答案：</b>" + String.fromCharCode(65 + t.a) + ". " + t.opts[t.a] + "<br><b>解析：</b>" + t.ans;
+  }
+}
+
+function updateScore() {
+  var answered = document.querySelectorAll("#quizList .quiz-question[data-done='1']").length;
+  document.getElementById("scoreDisplay").textContent = QUIZ_SCORE + " / 30";
+  document.getElementById("answeredCount").textContent = answered;
+}
+
+function resetQuiz() {
+  QUIZ_SCORE = 0;
+  renderQuiz();
+  updateScore();
+}
+
+renderQuiz();
+updateScore();
+</script>
+</body>
+</html>

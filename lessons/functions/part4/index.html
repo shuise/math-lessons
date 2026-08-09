@@ -331,20 +331,20 @@
   </div>
   <div class="example" style="margin:0;">
     <p><strong>声音分贝 (Decibel)</strong></p>
-    <p>声音强度每 ×10，感知响度 ×2：</p>
-  <p>分贝 dB = 10 &middot; lg(强度比)</p>
-  <p class="step">10 分贝的差异意味着强度差了 10 倍，但耳朵听起来只是"大了一点点"。</p>
+    <p>声音强度每扩大 10 倍，声强级增加 10 dB：</p>
+  <p>声强级差 &Delta;L = 10 &middot; lg(强度比)</p>
+  <p class="step">+10 dB 表示物理声强约为原来的 10 倍；在频率等条件相近时，主观响度常被近似感受为约 2 倍，但这不是对所有人、所有声音都精确成立的公式。</p>
 </div>
 </div>
 
 <div class="example" style="margin-top:12px;">
   <p><strong>这就是著名的韦伯-费希纳定律 (Weber-Fechner Law)：</strong></p>
-  <p>人对声、光、触、味等几乎所有感觉，都与外界刺激强度的<strong>对数</strong>成正比。</p>
-  <p>原因是：感知系统需要处理极大范围的信号强度（从微弱耳语到喷气式飞机轰鸣，声强跨越了 10<sup>12</sup> 倍）。使用对数尺度，人类的一根神经就能同时编码"微弱"和"巨响"——这是进化给出的高效方案。</p>
+  <p>在一定刺激范围和实验条件下，一些感觉强度可以用外界刺激强度的<strong>对数函数近似描述</strong>；不同感觉、个体和强度区间可能需要其他模型。</p>
+  <p>这种近似说明了对数尺度为何适合压缩跨越多个数量级的物理信号，但它是经验模型，不应理解为所有感知都严格遵守同一条公式。</p>
 </div>
 
 <div class="hint">
-  <p><strong>核心洞察：</strong>对数就是大自然用来"压缩"极端尺度的工具。从不到 1 到上万亿，对数把乘除关系变成了加减关系，让人脑可以理解。</p>
+  <p><strong>核心洞察：</strong>对数尺度适合表示跨越多个数量级的数据：它把乘除关系变成加减关系，使比较和计算更直观。</p>
 </div>
 
 <h3>6.3 自然常数 e——"连续增长"的极限 (Euler's Number — Limit of Continuous Growth)</h3>
@@ -505,7 +505,7 @@
 <div id="quiz-container"></div>
 
 <div style="text-align:center;margin:24px 0;">
-  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 90</div>
+  <div id="scoreDisplay" style="display:inline-block;background:#1a73e8;color:#fff;padding:12px 32px;border-radius:30px;font-size:1.2em;font-weight:bold;">得分：0 / 100</div>
   <br>
   <button id="resetBtn" style="display:inline-block;margin-top:12px;padding:8px 28px;border:2px solid #1a73e8;color:#1a73e8;border-radius:20px;background:#fff;cursor:pointer;font-size:1em;transition:0.15s;">&ocy; 重新答题</button>
 </div>
@@ -790,14 +790,14 @@ function updateScore() {
     }
   }
   totalScore = total;
-  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a" + total + " / 90";
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a" + total + " / 100";
 }
 
 function resetQuiz() {
   correctCount = 0;
   totalScore = 0;
   answered = new Array(questions.length).fill(-1);
-  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a0 / 90";
+  document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a0 / 100";
   for (var i = 0; i < questions.length; i++) {
     var qDiv = document.getElementById("q" + i);
     qDiv.className = "quiz-question";

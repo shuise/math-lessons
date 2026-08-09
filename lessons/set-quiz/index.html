@@ -171,7 +171,7 @@ sup, sub { font-size: 0.75em; }
 <a class="back" href="../index.html">&larr; 返回课程列表</a>
 <article>
 <h1>集合基础测验</h1>
-<p style="color:#666;">考试时间：20 分钟 &nbsp;|&nbsp; 题型：填空题 + 选择题 + 判断题 &nbsp;|&nbsp; 共 27 题（含 2 道综合题），满分 100 分</p>
+<p style="color:#666;">考试时间：30 分钟 &nbsp;|&nbsp; 共 27 题，满分 100 分 &nbsp;|&nbsp; 5 填空 × 3 分 + 15 选择 × 3 分 + 5 判断 × 2 分 + 2 综合 × 15 分</p>
 <p style="font-size:0.93em; color:#888;">填空题填写答案后点击"确认"提交，选择题/判断题点击选项提交，系统自动判分并给出解析。</p>
 
 <div id="quiz-container"></div>
@@ -696,12 +696,15 @@ function checkFill(qIdx) {
 }
 
 function updateScore() {
-  var correct = 0;
+  var score = 0;
   for (var i = 0; i < questions.length; i++) {
     var parent = document.getElementById("q" + i);
-    if (parent.classList.contains("correct")) correct++;
+    if (parent.classList.contains("correct")) {
+      if (i < 20) score += 3;
+      else if (i < 25) score += 2;
+      else score += 15;
+    }
   }
-  var score = Math.round(correct / questions.length * 100);
   document.getElementById("scoreDisplay").textContent = "\u5f97\u5206\uff1a" + score + " / 100";
 }
 
