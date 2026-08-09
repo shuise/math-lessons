@@ -5,7 +5,7 @@
 <link rel="icon" type="image/png" href="../../lib/logo.png?version=1.0.0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>针对性强化训练</title>
-<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../style.css">
 <style>
 body {
   font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
@@ -141,8 +141,8 @@ var problems = [
   {
     part: "calc", kw: "对数 · 换底公式",
     q: "计算 log₂3·log₃4·log₄5·…·log₃₁3₂ 的值。",
-    hint: "联想换底公式 log_a b·log_b c = log_a c：相邻两项的「底」与「真数」首尾相接，整个乘积可以逐项约分。",
-    ans: "由换底公式 log_a b·log_b c = log_a c，逐项合并：<br>log₂3·log₃4·log₄5·…·log₃₁3₂ = log₂32。<br>因为 32 = 2⁵，所以 log₂32 = 5。<br><b>∴ 原式 = 5。</b>"
+    hint: "联想换底公式 log<sub>a</sub> b·log<sub>b</sub> c = log<sub>a</sub> c：相邻两项的「底」与「真数」首尾相接，整个乘积可以逐项约分。",
+    ans: "由换底公式 log<sub>a</sub> b·log<sub>b</sub> c = log<sub>a</sub> c，逐项合并：<br>log₂3·log₃4·log₄5·…·log₃₁3₂ = log₂32。<br>因为 32 = 2⁵，所以 log₂32 = 5。<br><b>∴ 原式 = 5。</b>"
   },
   {
     part: "calc", kw: "指数对数 · 比较大小",
@@ -200,7 +200,7 @@ var problems = [
   },
   {
     part: "calc", kw: "对数 · 复合函数单调性",
-    q: "已知函数 f(x) = log_a(ax² - x)（a &gt; 0 且 a ≠ 1）在区间 [2, 4] 上单调递增，求实数 a 的取值范围。",
+    q: "已知函数 f(x) = log<sub>a</sub>(ax² - x)（a &gt; 0 且 a ≠ 1）在区间 [2, 4] 上单调递增，求实数 a 的取值范围。",
     hint: "复合函数「同增异减」：先保证内层 u = ax² - x 在 [2, 4] 上恒正（用区间端点检查），再按 a &gt; 1 与 0 &lt; a &lt; 1 两类讨论内层单调性与外层配合；注意 0 &lt; a &lt; 1 一类可能和恒正条件矛盾。",
     ans: "设 u(x) = ax² - x，则 u′(x) = 2ax - 1。<br>① 若 a &gt; 1（外层递增），需内层在 [2, 4] 上递增且恒正：u′(x) ≥ 4a - 1 &gt; 0 恒成立；u(2) = 4a - 2 &gt; 0，即 a &gt; 1/2。所以 a &gt; 1 均符合。<br>② 若 0 &lt; a &lt; 1（外层递减），需内层递减：u′(4) = 8a - 1 &lt; 0，即 a &lt; 1/8。但恒正要求 u(2) = 4a - 2 &gt; 0，即 a &gt; 1/2，与 a &lt; 1/8 矛盾，无解。<br>综合：<b>a ∈ (1, +∞)。</b>"
   },
@@ -350,9 +350,9 @@ var problems = [
   },
   {
     part: "proof", kw: "对数 · 换底公式",
-    q: "证明换底公式：log_a b = log_c b / log_c a（其中 a、b、c &gt; 0，a ≠ 1，c ≠ 1）。",
-    hint: "设 log_a b = t，则由对数定义得 b = a^t；两边取以 c 为底的对数得 log_c b = t·log_c a，由 log_c a ≠ 0 解出 t，即得结论。",
-    ans: "设 log_a b = t，则 a^t = b。<br>两边同时取以 c 为底的对数：log_c(a^t) = log_c b，即 t·log_c a = log_c b。<br>因为 c ≠ 1，所以 log_c a ≠ 0，于是 t = log_c b / log_c a，即 log_a b = log_c b / log_c a。证毕。"
+    q: "证明换底公式：log<sub>a</sub> b = log<sub>c</sub> b / log<sub>c</sub> a（其中 a、b、c &gt; 0，a ≠ 1，c ≠ 1）。",
+    hint: "设 log<sub>a</sub> b = t，则由对数定义得 b = a<sup>t</sup>；两边取以 c 为底的对数得 log<sub>c</sub> b = t·log<sub>c</sub> a，由 log<sub>c</sub> a ≠ 0 解出 t，即得结论。",
+    ans: "设 log<sub>a</sub> b = t，则 a<sup>t</sup> = b。<br>两边同时取以 c 为底的对数：log<sub>c</sub>(a<sup>t</sup>) = log<sub>c</sub> b，即 t·log<sub>c</sub> a = log<sub>c</sub> b。<br>因为 c ≠ 1，所以 log<sub>c</sub> a ≠ 0，于是 t = log<sub>c</sub> b / log<sub>c</sub> a，即 log<sub>a</sub> b = log<sub>c</sub> b / log<sub>c</sub> a。证毕。"
   }
 ];
 

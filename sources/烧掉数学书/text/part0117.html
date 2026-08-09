@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="3FIHQ0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">6.3.1　相加反锤子</h4>
+
+  <p class="bodytext">对于导数我们曾发现过一个好东西，称为“相加锤子”。本质上它说的是“和的导数等于导数之和”，或者表示为：（f+g）'=f'+g'。如果新的“积分”思想也有类似的东西成立就太好了，这样我们就有了将难题打散为更容易问题的工具，就像原来的锤子一样。由于和的导数等于导数之和，我们可以猜测和的积分等于积分之和。<sup class="calibre3">①</sup><a id="zw1" href="part0117.html#zhu1"><sup class="calibre3">[1]</sup></a>也就是说，我们想知道这个是不是成立</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00563.jpeg"/>
+  </div>
+
+  <p class="bodytext">我们不知道它是否成立，如果成立就太好了，因为它正好是相加锤子的反面。如果你愿意，可以称之为“相加反锤子”。我们来看看它是否成立。</p>
+
+  <p class="bodytext">首先注意到我们可以将f（x）+g（x）本身视为单台机器，我们甚至可以给它取个名字，比如h（x）≡f（x）+g（x）。这样h（x）就是如果喂进去某个数x会吐出f（x）加g（x）的机器。想象h（x）的图形，可能是某个疯狂扭曲的东西，再想象在任意点x放置一个无限薄的矩形，从横轴往上（或往下）垂直拉伸至h的图形（见图6.4和图6.5）。</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00564.jpeg"/>     <p class="tuzhu-center">图6.4　随机选取的两台机器。左图，小矩形的面积为f（4）dx。右图，小矩形的面积为g（4）dx。</p>
+  </div>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00565.jpeg"/>     <p class="tuzhu-center">图6.5　f（x）+g（x）的图形。小矩形的面积为［f（4）+g（4）］dx=f（4）dx+g（4）dx。也就是说，小矩形的面积是图6.4左右两个小矩形的面积之和。由于对每一点x这个都成立，将每一点下面的面积加起来不会改变这个原则。</p>
+  </div>
+
+  <p class="bodytext">这个矩形的宽为dx，高为h（x）≡f（x）+g（x），因此面积为［f（x）+g（x）］dx。然后根据撕东西显然律，这个瘦高矩形可以拆分成两个更小的薄矩形，得到f（x）dx+g（x）dx。现在我们有了两个矩形，一个高为f（x），一个高为g（x）。因此可以用两种方式来分析每一点x处的无限小矩形，作为一个高的薄矩形，或者两个矮一些但一样薄的矩形。</p>
+
+  <p class="bodytext">很显然我们可以通过两种方式得到h下面的整个面积：将所有瘦高矩形相加得到<img alt="" class="gongshi" src="../images/00566.jpeg"/>（（f（x）+g（x））dx，或者将拆分的矩形相加得到<img alt="" class="gongshi" src="../images/00567.jpeg"/>。这两个表达式描述的是同一个东西：f+g下面的总面积。因此我们可以在两个表达式之间画等号，得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00568.jpeg"/>
+  </div>
+
+  <p class="bodytext">这正是我们想要证明的。我们将它正式写到方框里。</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">相加反锤子</span></p>
+
+    <p class="bodytext-c">我们发现了关于∫的新思想的另一个事实，</p>
+
+    <p class="bodytext-c"><span class="jiacu">和的∫是∫之和。</span></p>
+
+    <p class="bodytext-c">用另一种方式表述：对任意机器f和g，有</p>
+
+    <div class="zhong1">
+ <img alt="" class="image-tuzhu" src="../images/00569.jpeg"/>
+    </div>
+  </div>
+
+  <p class="bodytext">现在我们发明了相加反锤子，图6.4和6.5用图形对其进行了解释。字母f和g表示任意的两台机器，可能有很弯曲的图形。图6.4描绘了机器f和g，以及它们下面的面积。图6.5描绘了h（x）≡f（x）+g（x），并用另一种方式描绘了相加反锤子的内容。</p>
+
+  <hr class="calibre4"/>
+
+  <p class="notecontent"><a id="zhu1" href="part0117.html#zw1">[1]</a> m的“积分”就是教科书上说的<img alt="" class="gongshi" src="../images/00570.jpeg"/>。实际上，它们通常被称为m的“定积分”。“不定积分”通常指的是m的反导数，但这个术语容易误导，因为只有发现基本锤子<span class="jiacu">之后</span>它才有意义。在发现基本锤子之前，反导数与“积分”（即可能弯曲的面积）的关联并不明显。我们宁愿将<img alt="" class="gongshi" src="../images/00571.jpeg"/>直接称为m从a到b的积分。等基本锤子告诉我们积分与反导数是相关概念之后我们才会定义这个术语。</p>
+</body></html>

@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="2LQIK0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">5.2.1　AA型机器</h4>
+
+  <p class="bodytext">假设我们捕获了一台AA型机器。我们只知道它的性质，完全不知道它长什么样。我们试一下看能不能搞清楚。定义AA型机器的性质是：对任何数x和y，都有</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00401.jpeg"/>
+  </div>
+
+  <p class="bodytext">数x和y不是指的横坐标和纵坐标。它们只是我们放入机器的任意两个数的缩写。现在，如果这台机器对任意数x和y都有这个性质，则当x和y都为0时这个性质也成立。即</p>
+
+  <p class="bodytext-c">f（0）=f（0）+f（0）=2f（0），</p>
+
+  <p class="bodytext">但如果f（0）乘以2后保持不变，则f（0）必定等于0。这个事实从我们对AA型机器的定义来看并不明显，但现在我们发现语句。f（0）=0一直隐藏在那个定义中。澄清一下，我们并不清楚怎样才能搞清楚这头野兽长什么样。我们只是逗弄它，用我们唯一知道的，等式（5.1）。</p>
+
+  <p class="bodytext">如果将数y视为无穷小呢？将这个数缩写为dx，AA类机器的定义（等式（5.1））告诉我们</p>
+
+  <p class="bodytext-c">f（x+dx）=f（x）+f（dx），　（5.2）</p>
+
+  <p class="bodytext">这有点像导数。我们对导数知道一些，但我们对AA型机器知道得不多，因此可以试着让它更像导数，看能不能看出点什么。如果我们将f（x）项移到左边，然后除以dx，可以得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00402.jpeg"/>
+  </div>
+
+  <p class="bodytext">很好！左边现在正好就是导数f的定义，所以我们可以将左边替换为f'（x），得到：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00403.jpeg"/>
+  </div>
+
+  <p class="bodytext">右边也很像一个导数，但是少了些东西。也许已经有了……前面我们刚刚发现AA型机器的所有成员必须有f（0）=0。加0不会改变任何东西，因此可以将上式写成</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00404.jpeg"/>
+  </div>
+
+  <p class="bodytext">现在很容易看出右边就是无限接近的两个点，0和dx之间的“平移的同时爬升”。让人吃惊地是，让这个简单式子表面上看上去更复杂（在里面加了一堆0）实际上会让我们更容易看出这个式子其实是怎么回事：右边正好就是f在点x=0的导数。有了这些，我们可以将等式（5.5）的右边重新写成f'（0），从而得到</p>
+
+  <p class="bodytext-c">f'（x）=f'（0），　（5.6）</p>
+
+  <p class="bodytext">但这个必须对任何数x都成立，因此f的陡峭度处处相等［即都等于f'（0）］。因此f必定为直线，从而（根据我们在第1章的发现）得到AA型机器的成员都为f（x）=cx+b。而且我们还证明了当喂它们0时，这些成员都吐出0，因此必定有b=0。综合所有这些，可以得出：</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">AA型机器</span></p>
+
+    <p class="bodytext-c">AA型机器定义为所有将加转换为加的机器：</p>
+
+    <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00405.jpeg"/>
+    </div>
+
+    <p class="bodytext-c">我们发现这种机器的所有成员都可以表示为</p>
+
+    <p class="bodytext-c">f（x）=cx。</p>
+  </div>
+
+  <p class="bodytext">因此，仅仅根据这种机器的<span class="jiacu">性质</span>，我们就想办法搞清楚了它们的<span class="jiacu">样子</span>。我们并没有什么完善的方法，只是随意逗弄了一番，给机器喂东西，结果发现这种机器的所有成员都具有不变的陡峭度。这说明它们是直线，从而我们也知道了如何描述它们。让我们看看对其他类型的机器有没有类似的东西。</p>
+</body></html>

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="181NK0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h3 class="chapter-three">2.4　在黑暗中狩猎极值</h3>
+
+  <p class="bodytext">极值很有吸引力。观看奥运金牌选手短跑或游泳或投标枪显然要比你的邻居做同样的事情更有观赏性。我们喜欢观看在某项运动中最强的人的优异表现。另一方面，最糟糕的表现也能吸引我们的注意。极值引人注意的原理在数学世界中似乎也成立。通过符号运算来定位极值点——某个量取最大或最小、最高或最低、最好或最坏的地方——应该会很有用，因为我们并不总是能画出研究对象的图形。</p>
+
+  <p class="bodytext">当我们发明导数概念的时候，其实已经获得了一个很强大的能力：狩猎机器取得极值的位置的能力。我们甚至不用画出机器的图形！思路是这样。</p>
+
+  <p class="bodytext">由于机器的导数告诉了我们机器在某点的斜率，我们可以利用以下事实：在机器的水平点上导数为0。这样，找出能使得导数为0的点就能找到机器m的水平点，即确定哪些x能让</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00177.jpeg"/>
+  </div>
+
+  <p class="bodytext">如果能够找到这些x，也就找到了机器的水平点，然后只需检查这些点看极值在哪。关键是我们甚至不用画出机器的图形就能做到这一点。</p>
+
+  <p class="bodytext">我们来看一些简单的例子。回到图2.3，我们画了自乘机器m（x）≡x<sup class="calibre3">2</sup>的图形。从图中可以看出，这台机器没有最大值（随着x离0越来越远，它变得越来越大，两边都是如此），但它很明显在x=0处取到最小值。现在，即便我们画不出机器的图形，数学也可以告诉我们最小值在哪里。因为m（x）≡x<sup class="calibre3">2</sup>，我们已经知道了m'（x）=2x。现在只需将语句“机器在x处的导数为0”写成符号形式，就像这样：</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00178.jpeg"/>
+  </div>
+
+  <p class="bodytext">我用<sup class="calibre3"><img alt="" class="paralog" src="../images/00179.jpeg"/></sup>是因为语句2x=0并不总是成立，因此<sup class="calibre3"><img alt="" class="paralog" src="../images/00179.jpeg"/></sup>提醒我们是在迫使它成立，以便求出有哪些x能让这条语句成立。有哪些x能让它成立呢？幸运地是，不难看出只有在x=0时才有2x=0，也就是说机器m（x）≡x<sup class="calibre3">2</sup>有且仅有一个水平点，就是x=0。这个我们（从前面的图中就）已经知道了，但用熟悉的例子来验证我们的新思想是否能给出预期的答案总是很有用，这样我们就能在我们自己的世界中检验我们得到的东西，而不用求诸于课本或权威人士。</p>
+
+  <p class="bodytext">如果是机器f（x）≡（x-3）<sup class="calibre3">2</sup>呢？这台机器与前面的例子有点类似。（<span class="jiacu">某个东西</span>）<sup class="calibre3">2</sup>在除了<span class="jiacu">某个东西</span>=0以外的地方都为正，因此我们预计这台机器有且仅有一个水平点x=3，并且这个点同前面的例子一样也是最小值。</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00180.jpeg"/>     <p class="tuzhu-center">图2.5　这台机器有6个水平点。这些点的横坐标分别是0.25、1、1.8、2.7、4和4.8。不是所有的水平点都是极值，但极值肯定是水平点。这台机器的最大值在水平点x=4，最小值则在水平点x≈4.8。</p>
+  </div>
+
+  <p class="bodytext">这都没问题，但假设我们拿到的机器不那么容易看出与（<span class="jiacu">某个东西</span>）<sup class="calibre3">2</sup>类似，比如：</p>
+
+  <p class="bodytext-c">f（x）≡x<sup class="calibre3">2</sup>-6x+9，</p>
+
+  <p class="bodytext">这其实与f（x）≡（x-3）<sup class="calibre3">2</sup>是同一台机器，但从上面的等式中不容易看出有且仅有一个水平点x=3。不过我们还是可以用上面的方法得出结论——计算导数，并令其等于0：</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00181.jpeg"/>
+  </div>
+
+  <p class="bodytext">语句2x-6=0与语句2x=6说的是同一回事，都是说x=3。因此正如我们所料，我们能够找到这台机器有且仅有一个水平点，位置是x=3。从两个不同的途径得到了同样的结果，这进一步证实了我们的方法有用。</p>
+
+  <p class="bodytext">必须强调的是这个方法并不总是能找到给定机器的极值点（即最大值点和最小值点）。不过这并不是数学失败了，而是因为我们忽视了一些明显的事实。让我们用几个例子来说明这一点。假设我们想找到机器g（x）≡2x的极值，利用上面的方法，求导并令其等于0，结果得到</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00182.jpeg"/>
+  </div>
+
+  <p class="bodytext">“令导数为0”法得出了荒谬的2=0。难道这表明2真的等于0？但愿不是这样！那是不是意味着“令导数为0”法无法寻找极值点？也不是。机器g（x）≡2x是一条倾斜的直线，直线没有水平点，除非整条线都是水平的（图2.6表现了这种情形，其实不用画也能知道）。这个失败不是“令导数为0”法的缺陷。数学给出2=0这样不可能的结果告诉我们的是假设了某种不可能的东西。</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00183.jpeg"/>     <p class="tuzhu-center">图2.6　这台机器没有水平点。如果你逼迫数学告诉我们水平点在哪里，它会说2=0。不用担心，是我们自己搞乱了。出现这种情况通常是因为我们的假设中存在错误。</p>
+  </div>
+
+  <p class="bodytext">虽然像图2.7这样不幸的例子不会在这本书中经常出现，但还是有必要提一下，因为这有助于你理解数学家奇怪的写作方式。数学家喜欢“反例”——罕见而怪异的违反简单规则的例子，这种喜好使得他们的定理更难理解。例如，数学家可能会这样描述“令导数为0”法：“设f：（a，b）→R为某个函数，设x<sub class="calibre6">0</sub>∈（a，b）为f的局部极值，如果f在x<sub class="calibre6">0</sub>可导，则f'（x<sub class="calibre6">0</sub>）=0。”这简直是天书，但他们想表述的其实很简单。翻译出来是这样：“画出某台机器在图上的最高（或最低）点。机器在这些点必然为水平。当然，除非它是无穷尖的点，就像图2.7左边那样。但这种情况不常见。”图2.7右边的反例也包括在了上面的定理中，但更隐蔽。这就是为什么天书说：</p>
+
+  <p class="yinwen-c">“<span class="jiacu">如果</span>是极大或极小值点，<span class="jiacu">则</span>导数为0。”</p>
+
+  <p class="bodytext">而不是说：</p>
+
+  <p class="yinwen-c">“<span class="jiacu">如果</span>导数为0，<span class="jiacu">则</span>是极大或极小值点。”</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00184.jpeg"/>     <p class="tuzhu-center">图2.7　上面我们讨论了通过求导数为0的点求机器的最大最小值点。在一个理想的世界中，这个策略应当一直有效，但有些让人讨厌的情形并不是这样。我得大致提一下，虽然后面我们不会遇到。左边的机器有最大值，但位于一个无穷尖的位置，这点的导数并不为0，所以“令导数为0”法找不到它。幸运地是，除非我们刻意要求，否则不会出现这种无穷尖的机器，因此在这本书中不会需要找这种机器的极值点。右边的机器有两个水平点，但都不是极值点（也就是说既不是最大值也不是最小值）。对于这种情形，“令导数为0”法将给出这些没有意义的水平点，它们大致在x≈3和x≈9附近（弯曲的等号表示“大约”）</p>
+  </div>
+
+  <p class="bodytext">如果不是有图2.7右边这样的水平点（导数为0，但<span class="jiacu">不</span>是极大值或极小值点），则第二条语句也应当成立。如果这种不幸的例子不存在，我们就可以用第二条语句替代第一条，这将方便得多，因为求“导数为0”的点经常就是为了找最大或最小值点。</p>
+
+  <p class="bodytext">好吧！虽然有这些例外，我们还是在这本书中继续利用这个思想：给定机器的极值点通常可以通过求导数为0的点找到。当我们将导数的概念推广到更奇异的机器时，我们对这个思想的表述将稍加改变，但中心思想仍然是一样的。对于吞入一个数字吐出一个数字的机器，对于吞入两个数字吐出一个数字的机器，以及吞入N个数字吐出一个数字的机器，以及吞入无穷多个数字吐出一个数字的机器，“极值点通常位于导数为0的点”的原则始终不变，无论我们的数学世界变得多么奇怪。</p>
+</body></html>

@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="3GH2C0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">6.3.2　相乘反锤子</h4>
+
+  <p class="bodytext"><span class="jiacu">简单的相乘反锤子</span></p>
+
+  <p class="bodytext">我们实际上有两把相乘锤子，虽然其中一个是另一个的特例。在第2章我们曾证明（＃f（x））'=＃f'（x），其中＃是7或59这类固定的数。因此我们可以“将常数从导数中提取出来”。我想知道能不能“将常数从∫中提取出来”，使得∫＃（<span class="jiacu">某个东西</span>）=＃∫（<span class="jiacu">某个东西</span>）。根据这两个式子的意义，这个想法相当直观。我们知道在表达式∫f（x）dx中，其实是将许多无限小的矩形的面积相加。如果将每个矩形的高度都加倍，（无限薄的）宽度保持不变，每个矩形的面积就应当为原来面积的两倍，因此总面积也应当加倍。这个论证并不仅限于“加倍”，任意放大＃倍都应当成立。也就是说，对任意数＃和机器f，都应当有</p>
+
+  <div class="zhong1">
+ <img alt="" class="image-tuzhu" src="../images/00572.jpeg"/>
+  </div>
+
+  <p class="bodytext">太好了！我们又发现了一个与原来的求导锤子相对应的积分“反锤子”。</p>
+
+  <p class="bodytext"><span class="jiacu">不那么简单的相乘反锤子</span></p>
+
+  <p class="bodytext">前面我们发现可以将常数从积分中提取出来，就像将常数从导数中提取出来一样。不过，真正的相乘锤子要更复杂一些。它说的是</p>
+
+  <p class="bodytext-c">（fg）'=f'g+fg'，</p>
+
+  <p class="bodytext">或者用另一种缩写表述一下，</p>
+
+  <p class="bodytext-c">［f（x）g（x）］'=f'（x）g（x）+f（x）g'（x）。</p>
+
+  <p class="bodytext">我们来尝试一下根据它建立类似的相乘反锤子。如果对上面等式的两边“积分”——也就是将两边都放进∫里面——会得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00573.jpeg"/>
+  </div>
+
+  <p class="bodytext">上面等式的左边是导数的积分，因此可以用基本锤子处理得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00574.jpeg"/>
+  </div>
+
+  <p class="bodytext">左边有点丑，但是思想很简单，我们可以缩写一下。将上面的等式重新写成这样：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00575.jpeg"/>
+  </div>
+
+  <p class="bodytext">其中左边就是“全部代入b，然后全部代入a，然后取差值”的简写，即［f（x）g（x）］<sup class="calibre3"></sup>b<sub class="calibre6"></sub>a就是f（b）g（b）-f（a）g（a）的缩写。</p>
+
+  <p class="bodytext">现在，虽然等式（6.10）<span class="jiacu">成立</span>，但并不是<span class="jiacu">很有用</span>，因为只有在遇到正好形为<img alt="" class="gongshi" src="../images/00576.jpeg"/>+f（x）g'（x）dx的东西时才用得上，而这样的事情不会经常遇到。如果真遇到了这样的事情，就可以直接算出结果来。因此我们可以就此打住，称它为相乘反锤子，因为它“抵消”了相乘锤子。不过如果我们用稍微不同的方式来思考上面的想法，就能得到有用得多的反锤子。我们可以用相加反锤子将式（6.10）的大积分分成两项，就像这样，</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00577.jpeg"/>
+  </div>
+
+  <p class="bodytext">然后将其中一项积分移到等式的另一边。这么做的目的可能不那么容易看出来，不过我们很快会解释。现在我们将它正式写到方框里。</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">相乘反锤子</span></p>
+
+    <p class="bodytext-c">我们发现了关于∫新思想的另一个事实，</p>
+
+    <p class="bodytext-c">不过我们还不知道怎么使用它：</p>
+
+    <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00578.jpeg"/>
+    </div>
+  </div>
+
+  <p class="bodytext">怎么利用这个疯狂的语句呢？嗯，要记住相乘锤子（以及其他所有锤子）并不是告诉我们该怎么做的<span class="jiacu">规则</span>，而是让我们可以用特定方式解读事物的<span class="jiacu">工具</span>。以机器m（x）≡xe<sup class="calibre3">x</sup>为例。我们并不是<span class="jiacu">必须</span>将这台机器视为两台不同的机器相乘，但我们可以这样想，只要对我们有用。我们可以选择将xe<sup class="calibre3">m</sup>视为f（x）g（x），其中。f（x）≡x，g（x）≡e<sup class="calibre3">x</sup>。这样相乘锤子在后面的等式中缩写为HM就会告诉我们</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00579.jpeg"/>
+  </div>
+
+  <p class="bodytext">我们所有的锤子都带有同样的“只要对我们有用”说明，反锤子也是一样。但说了这么多，为什么上面方框中的等式（6.12）就比等式（6.9）更有用呢，何况它们<span class="jiacu">只不过</span>是把相同的句子用稍微不同的方式表述出来？问得好！等式（6.12）一般要比等式（6.9）更有用<span class="jiacu">不是</span>因为它们说了什么不同的东西，而是因为人类想象力的局限。解释一下我说的意思，假设我们在计算类似<img alt="" class="gongshi" src="../images/00580.jpeg"/>的东西时被卡住了。对于大多数人来说（包括我），与将m解释成如何由机器f和g构成下面这样的形式相比：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00581.jpeg"/>
+  </div>
+
+  <p class="bodytext">将m解释成如何由机器f和g构成如下形式要容易得多：</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00582.jpeg"/>
+  </div>
+
+  <p class="bodytext">这一点很重要，我们之前遇到过几次这种情形：两种方法、思想、等式，等等，可能在<span class="jiacu">逻辑上</span>是等价的，却并不意味着在<span class="jiacu">心理上</span>等价。用不同方式表述完全一样的东西可能理解的难易程度截然不同。相乘反锤子给了我们一种将一个问题转换为另一个问题的方法。转换之后的问题<span class="jiacu">对我们来说</span>一定会更简单？那倒未必。但如果选择的转换方式足够巧妙，却是有可能的。这里举一个如何转换问题的例子。假设我们想计算这个：</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00583.jpeg"/>
+  </div>
+
+  <p class="bodytext">根据基本锤子，如果能想到某台机器M（x）的导数为xe<sup class="calibre3">x</sup>，我们就能说：“啊哈！答案是M（1）-M（0）。”听起来容易，其实不容易！现在我们还压根不知道怎么找到导数刚好是xe<sup class="calibre3">x</sup>的机器。因此我们似乎卡住了。不过，相乘反锤子提供了一个可能的前进方向。如果能构想出两台机器f和g使得f'（x）g（x）=xe<sup class="calibre3">x</sup>，这把新的反锤子就能帮我们将问题转换为稍微不同的问题。我们先选择f'（x）≡e<sup class="calibre3">x</sup>和g（x）≡x，在应用相乘反锤子时，我们在等号上标注AHM。这样我们就能将问题重新写成这样：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00584.jpeg"/>
+  </div>
+
+  <p class="bodytext">我们选定了f'和g，现在反锤子却吐出了包含f和g'的语句。这些我们都不知道，因此我们需要将它们求出来才能明白这个语句。f很简单，我们定义了f'（x）≡e<sup class="calibre3">x</sup>，这就是那台极其特殊的机器，它的导数是它自己，因此它的反导数也是它自己：f（x）=e<sup class="calibre3">x</sup>。那么g'（x）呢？也简单。我们定义了g（x）≡x，因此g'（x）=1。现在我们可以将这些都代入上面的等式，得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00585.jpeg"/>
+  </div>
+
+  <p class="bodytext">第一项<img alt="" class="zaozi1" src="../images/00586.jpeg"/>就是1e<sup class="calibre3">1</sup>-0e<sup class="calibre3">0</sup>的缩写，也就是e。第二项呢？哦，我们知道e<sup class="calibre3">x</sup>是e<sup class="calibre3">x</sup>的反导数，因此根据基本锤子，可以得到<img alt="" class="gongshi" src="../images/00587.jpeg"/>dx=e<sup class="calibre3">1</sup>-e<sup class="calibre3">0</sup>=e-1。合到一起得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00588.jpeg"/>
+  </div>
+
+  <p class="bodytext">漂亮！利用相乘反锤子将我们无法解决的问题转换为等价但形式不同的问题，就能轻松解决这个问题，我们发现答案就是1。当然，很多时候不一定会这么顺利。如果我们对f和g作出同样正确但稍微不同的选择呢？我们来看一下。我们也可以选择f'（x）≡x和g（x）≡e<sup class="calibre3">x</sup>。这样问题就会变成：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00589.jpeg"/>
+  </div>
+
+  <p class="bodytext">这比我们开始的问题还吓人一些。必须强调的是，我们没有做错什么。上面的推导是完全正确的。只是我们选择的f'和g没有让问题<span class="jiacu">对我们来说</span>看起来更简单。就如前面讨论的，这对于锤子和反锤子是一个普遍原则。我们可以自由使用它们，但并不能保证它们会将问题转化成我们认为“更简单”的问题。这不是它们的错。这是人类想象力的局限。</p>
+</body></html>

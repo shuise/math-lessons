@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="TI1E0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">2.2.5　发生了什么？无穷小和极限</h4>
+
+  <p class="yinwen">现在全世界在教授微积分时都是把它当作对极限过程的研究，而不是其本原：无穷小分析。作为一个大部分时间都以教微积分为生的人，我可以告诉你试图解释复杂而无聊的极限理论有多么让人厌倦。</p>
+
+  <p class="bodytext-right">——鲁迪·拉克（Rudy Rucker），《无穷和心智》（Infinity and the Mind）</p>
+
+  <p class="yinwen">有时候知道你的0有多大会很有用。</p>
+
+  <p class="bodytext-right">——无名氏</p>
+
+  <p class="bodytext">如果无穷小的数的思想让你有点吓到了，你并不孤独！在牛顿发明微积分之后，为了搞清楚类似这样的论证如何才能得出正确答案，人们折腾了一个多世纪。毕竟，它们显得如此荒谬。<span class="jiacu">微小量</span>要么是0要么不是0！你不能一会当它不是0，过了一会又当它是0？</p>
+
+  <p class="bodytext">多年来，人们发明了各种复杂的数学装置，用来将微积分“形式化”，以帮助他们搞清楚微积分到底是怎么回事。这很好！可以佐证我们发明的疯狂思想确实成立，人们这样做我们应当感到高兴。但无穷小的数的思想是如此美丽，而且的确能起作用，不应当被掩盖在各种复杂的数学装置下面。事实上，物理学家在直接使用无穷小的数的概念时胆子更大。他们在计算时就像我们一样，他们得到的答案与数学家一样，但往往更容易。<a id="zw1" href="part0031.html#zhu1"><sup class="calibre3">[1]</sup></a>现在，一些数学装置严肃地处理无穷小的数的思想，另一些则试图避开这个思想。后面这一种要常见得多，因此我会先介绍前一种，只是出于好奇。</p>
+
+  <p class="bodytext">其中一种用来形式化无穷小思想的装置是所谓的“超滤器”。超滤器相当复杂，从不在入门教材中讲授。虽然我们不会去讨论它，但最好还是能知道它的存在，因为这表明至少还是有一种处理微积分的严格方法认真对待了无穷小的思想。</p>
+
+  <p class="bodytext">不过，你在所有标准入门课本中看到的装置都是所谓的“极限”，它要简单得多，但目的是一样的：它让数学家们能得到使用无穷小的好处，却又不承认无穷小思想的作用。</p>
+
+  <p class="bodytext">“极限”装置的基本思想是这样。不再将<span class="jiacu">微小量</span>视为无穷小的数，而是一个要多小有多小的数。也就是说，不把它写成一个具体的数，比如<span class="jiacu">微小量</span>=0.000 01，而是让它的值在同样的计算过程中保持未知。可以想象成在<span class="jiacu">微小量</span>上装了一个旋钮，可以调整到想要的大小，只要不完全等于0。但是请注意整个推理的基础是M在x处的陡峭度可以通过自认为它是完美的直线求出。而这只有当<span class="jiacu">微小量</span>被降到0（即无穷放大）时才能成立。因此与我们的写法不一样，你会在标准课本中看到类似这样的写法。请先熟悉一下这些奇怪的新贵，然后我会向你解释这和我们做的其实本质上是一样的。</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00121.jpeg"/>
+  </div>
+
+  <p class="bodytext">这是什么意思？让我们翻译一下。</p>
+
+  <p class="bodytext">首先，他们使用的是字母h而不是<span class="jiacu">微小量</span>。我不知道为什么他们用h，我怀疑是“水平（Horizontal）”的缩写，因为x的微小改变会导致水平轴上的微小变化。其次，课本上不是像我们一样用“M在x处的陡峭度”，而是缩写为M'（x）。这也可以，写起来还快些。<a id="zw2" href="part0031.html#zhu2"><sup class="calibre3">[2]</sup></a>第三，在左边有很古怪的东西：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00122.jpeg"/>
+  </div>
+
+  <p class="bodytext">这个装置让我们可以避免思考无穷小，如果我们想这样做的话。上面的符号读作“当h趋近0时……的极限”，意思大概是这样：</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">缩写lim<sub class="calibre6">h→0</sub>［…］的意思</span></p>
+
+    <p class="bodytext">将h视为常规的数，而不是无穷小，计算括号里面的东西。然后，当我们将分母里的h都消除后（这样我们就不用担心除以0）我们将h的旋钮调得越来越小。例如当h越来越趋近0时，3+h会越来越趋近3，更复杂的像79x<sup class="calibre3">999</sup>+200x<sup class="calibre3">2</sup>h+h<sup class="calibre3">5</sup>会越来越趋近79x<sup class="calibre3">999</sup>。</p>
+  </div>
+
+  <p class="bodytext">当我们想象无穷放大时，这是做同一件事情的另一种很棒的方式，但如果不解释清楚为什么这样做，会让人很困惑。一方面它让事情变得更简单了，因为我们不用担心无穷小的意义。但从另一方面来说它又让事情变得更难了，因为学生不总是能明白为什么要学“极限”这个奇怪的东西，尤其是学习极限往往是在前面，后面才会知道将弯曲的问题变成直的问题的思想，以及通过放大来定义弯曲的东西的斜率。也就是说，他们教我们学习极限时，我们不知道为什么要学，他们在告诉我们原因之前就先把极限发明出来了。人们觉得微积分让人困惑也就不足为奇了。</p>
+
+  <p class="bodytext">如果想避免为无穷小的意义担心的话，有几种（可选的！）装置可以做到这一点，极限只是其中之一。在这本书中，我们偶尔会用到极限，也偶尔会用到无穷小，这样你对两者都会习惯。幸运地是，用任何一种方法都能得到同样的答案，因此你可以想用哪种就用哪种。</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00123.jpeg"/>     <p class="tuzhu-center">图2.2　机器M的陡峭度（或“导数”）有时候也缩写为<img alt="" class="gongshi" src="../images/00124.jpeg"/>。这里解释了原因。</p>
+  </div>
+
+  <hr class="calibre4"/>
+
+  <p class="notecontent"><a id="zhu1" href="part0031.html#zw1">[1]</a>在这本书中我们会看到，当我们进入更高级的主题时，这个差别更加明显。</p>
+
+  <p class="notecontent"><a id="zhu2" href="part0031.html#zw2">[2]</a>撇号缩写的意思是“放大M（x），像直线一样计算其斜率。”</p>
+</body></html>

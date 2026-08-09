@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="3JCK20-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">6.3.5　另一把基本锤子</h4>
+
+  <p class="bodytext">在这一章开始的时候，我们发现了基本锤子，还讨论了积分与求导的对立。然而，我们真正建立的其实是导数在积分<span class="jiacu">内部</span>时积分与求导的对立。积分与求导相对立的一般性思想很容易让人记起，但如果对立只能以给定的秩序出现——即求导在先，积分在后——就不那么优雅了。以更优雅的方式叙述的渴望驱使我们想知道求导与积分是不是也能以另一种方式对立。我们可能想先看一下能不能计算</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00628.jpeg"/>
+  </div>
+
+  <p class="bodytext">但这个表达式其实有误导性。因为<img alt="" class="gongshi" src="../images/00629.jpeg"/>中的x其实不是f（x）≡x<sup class="calibre3">2</sup>中的x那种意义上的“变量”。用专业术语来说，积分中的x是所谓的“约束变量”，并不能用数代入，只是一个占位符。它与下面的表达式中的i起到的作用是一样的</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00630.jpeg"/>
+  </div>
+
+  <p class="bodytext">这其实就是14的一种奇特写法（因为1+4+9=14），因此不能将i=17之类的东西代入式（6.25）。我们可以将式（6.25）中的i换成其他字母，例如j或k，这个式子仍然是14的一种奇特写法。出于同样的原因，<img alt="" class="gongshi" src="../images/00631.jpeg"/>也不依赖于x，它与<img alt="" class="gongshi" src="../images/00632.jpeg"/>和<img alt="" class="gongshi" src="../images/00633.jpeg"/>（★）d★没什么不同。这样看来我们的问题似乎可以解决。因为<img alt="" class="gongshi" src="../images/00634.jpeg"/>（★）d★就是一个数，与x无关，我们可以这样写</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00635.jpeg"/>
+  </div>
+
+  <p class="bodytext">嗯……这不会是基本锤子的另一种版本。如果导数总是从外面干掉积分，则两个概念就似乎根本不是对立的。不过这个结论下得太匆忙。我们真正需要的是换一种思考这个问题的方式。积分（相对于x）的导数等于0，因为积分不依赖于x。如果稍微改变一下问题，也许会得到更有趣的东西。我们可以取相对于积分顶上的数的导数：</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00636.jpeg"/>
+  </div>
+
+  <p class="bodytext">这里我们用s代替x作为“约束变量”，避免两者都用x造成混淆。有两种方式可以解开这个古怪的表达式。首先，如果用M表示m的反导数，我们就可以直接应用我们已经发现的原版基本锤子得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00637.jpeg"/>
+  </div>
+
+  <p class="bodytext">还有一种方法是利用导数的定义作一个巧妙的非正式论证：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00638.jpeg"/>
+  </div>
+
+  <p class="bodytext">其中第一行到第二行的推导可以想象为将整个面积分成两部分，即［从a到（x+dx）的面积］减去［从a到x的面积］就是［从x到（x+dx）的面积］。然后我们似乎困住了，但只要我们还记得这一切的意义，就不难摆脱困境。<img alt="" class="gongshi" src="../images/00639.jpeg"/>指的是无限接近的x和x+dx两点之间m的图形下的面积。因此这就是宽为dx高为m（x）的矩形的面积，当然也就是m（x）dx。上面最后一行就是<img alt="" class="gongshi" src="../images/00640.jpeg"/>与它相乘，因此最后一行就等于m（x）。写到一起就是</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00641.jpeg"/>
+  </div>
+
+  <p class="bodytext">这样我们就得到了同前面一样的结果：积分与求导在两种情况下顺序调换。为了总结我们证明的成果，我们将两个版本的基本锤子放到一起，其中老版本用稍微不同的方式写出来，以揭示与新版的关联：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00642.jpeg"/>
+  </div>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00643.jpeg"/>     <p class="tuzhu-center">图6.6　想办法计算弯曲东西的长度。放大的思想在前面很有用，这里也可以试一试。在某个点x处将某台机器m的图形无穷放大，弯曲看起来就变直了。然后用捷径公式计算微小长度段dl。然后把所有段都加到一起就可以了。是这样吗？</p>
+  </div>
+</body></html>

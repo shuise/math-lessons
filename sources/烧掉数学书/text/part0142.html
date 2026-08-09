@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="47DFS0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">N.2.4　用∂还是不用∂？缩写影响论证</h4>
+
+  <p class="bodytext">在我们的多变量微积分之旅中下一个让人迷惑的标记是陌生的符号∂。前面我说过课本上用“偏导数”这个术语指称这样的表达式：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00761.jpeg"/>
+  </div>
+
+  <p class="bodytext">仔细看这个概念的标准标记会发现另一个第22条军规。事情是这样：在这两个式子的上面，你可以看到写d<sub class="calibre6">x</sub>和d<sub class="calibre6">y</sub>是多余的。你可能会想可以简化成</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00762.jpeg"/>
+  </div>
+
+  <p class="bodytext">这样也不会混淆，因为两个表达式底下的dx和dy提醒我们是对m的哪个格子做微小的改变：左边是x格子，右边是y格子。这当然是对的。像式（N.13）那样让d<sub class="calibre6">x</sub>和d<sub class="calibre6">y</sub>的下标出现在导数中<span class="jiacu">是</span>多余的。那为什么最初我们要引入这些下标呢？是这样，我们最初引入标记d<sub class="calibre6">x</sub>m和d<sub class="calibre6">y</sub>m是因为dm在式（N.14）中的两次出现实际上指的是<span class="jiacu">不同的东西</span>，你只要比较两个等式右边的上面就能看出来：在左边我们改变的是第一格，右边我们改变的是第二格。如果永远只处理导数，就没有必要写成d<sub class="calibre6">x</sub>m和d<sub class="calibre6">y</sub>m。只要看导数下面就能明白是在对哪个变量做微小改变。大部分遇到这个标记选择问题的教科书都将式（N.13）写成下面这样：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00763.jpeg"/>
+  </div>
+
+  <p class="bodytext">比较我们的标记和他们的标记，可以得到</p>
+
+  <div class="zhong1">
+ <img alt="" class="image-tuzhu" src="../images/00764.jpeg"/>
+  </div>
+
+  <p class="bodytext">这种不同的写法也有它自己的利弊。好的一面是，它比我用的标记要漂亮得多，并且避免了下标x和y，当我们讨论导数本身时这些是多余的。不好的一面是，这个∂标记使得简单的无穷小论证更难了。接下来，我们用一个隐藏了简单思想的难看等式来解释为什么。在所有多变量微积分书籍中你都会看到等式</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00765.jpeg"/>
+  </div>
+
+  <p class="bodytext">我们马上会推导这个等式，但是现在，我们先看看它有多么让人迷惑！这个可怕的等式包含6个像无穷小量的符号：dm、∂m、dy、∂y、dx和∂x。注意等式（N.16）并没有什么可以消掉从而化简的东西。疯狂的∂x与我们比较熟悉的dx长得不一样，因此不要以为我们可以用底下的∂x消掉dx。y也是一样，抵消是非法的，因为符号不一样。</p>
+
+  <p class="bodytext">现在虽然我们还没有推导它，但我还是忍不住告诉你等式（N.16）的滑稽秘密：如果正确解释，∂x和dx<span class="jiacu">其实就是同一个东西！</span>∂y和dy也是一样的。如果觉得这个还不够让人迷糊，我们还可以用这个事实让一些事情更糟糕。用∂x消掉dx，再用∂y消掉dy，我们会得到怪异的谬论：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00766.jpeg"/>
+  </div>
+
+  <p class="bodytext">后面我们会看到，这个等式其实是对的。不过，∂m+∂m并<span class="jiacu">不</span>等于2∂m！这并不是说算术定律在这里不成立。其实，在这个迷惑人的标记的不朽丰碑中，上面等式中这两个∂m其实指的是不同的东西！它们就是我们所说的d<sub class="calibre6">x</sub>m和d<sub class="calibre6">y</sub>m，正是前面选择忽略（当时多余的）下标导致接下来所有这些让人头痛的标记。</p>
+
+  <p class="bodytext">为什么要用<span class="jiacu">单个</span>符号∂m表示两个<span class="jiacu">不同</span>的东西（d<sub class="calibre6">x</sub>m和d<sub class="calibre6">y</sub>m）而同时又用两个<span class="jiacu">不同的</span>符号（∂x和dx）表示<span class="jiacu">同一个</span>东西呢？理由并不是非常疯狂。这是因为标准教科书通常不用无穷小论证。根据对这些思想通常的表现形式，大部分教科书虽然用到了导数，但<span class="jiacu">并不</span>用无穷小。但是对我们来说，对d<sub class="calibre6">x</sub>m和d<sub class="calibre6">y</sub>m进行区分的好处是很明显的，因为<span class="jiacu">它们不是同一个东西！</span>课本上通常忽略下标，而他们的选择也有道理：如果我们只谈论导数，不涉及无穷小本身，d<sub class="calibre6">x</sub>m和d<sub class="calibre6">y</sub>m的下标就<span class="jiacu">总是</span>多余的。</p>
+
+  <p class="bodytext">总而言之，在使用∂标记时，我们失去了单变量微积分的d标记的精髓：像操作数一样操作无穷小的能力。没有了这个，在推导时抵消它们和重排它们的顺序来进行推导就要困难得多。</p>
+</body></html>

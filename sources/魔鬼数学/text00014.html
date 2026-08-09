@@ -1,0 +1,6745 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+<head><title></title>
+</head>
+<body><span id="filepos0003208284"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">帕斯卡三角形和圣诞节礼物</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">请仔细观察下图中的帕斯卡三角形（Pascal’s triangle）：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="610" width="1217" src="Image00818.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>用符号表示的帕斯卡三角形</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">我们在本书第1章学过，把数字排列成三角形就会表现出一些有趣的规律。本章讨论的数字<img align="middle" height="84" width="55" src="Image00781.jpg" />
+ 排列成三角形时，也会形成非常美丽的规律。这个三角形被称为帕斯卡三角形，如上图所示。利用公式<img align="middle" height="84" width="230" src="Image00819.jpg" />
+ ，我们可以把上图中的符号变成数字，如下图所示，然后寻找其中的规律。本章将对大多数规律做出解释，但你在第一遍阅读时尽可以略过不读，只要了解它有哪些规律即可。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="591" width="1171" src="Image00820.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>用数字表示的帕斯卡三角形</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">在用符号表示的帕斯卡三角形中，第0行只有一项，即<img align="middle" height="84" width="56" src="Image00821.jpg" />
+ = 1。（记住，0! = 1。）在用数字表示的帕斯卡三角形中，由于所有行的第一项和最后一项都是1，因此：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="60" width="236" src="Image00822.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">请认真观察第5行：</p>
+<blockquote height="2em" width="2em" align="justify">第5行：1 5 10 10 5 1</blockquote>
+<p height="2em" width="2em" align="justify">注意，第二项是5。一般而言，第<i>n</i>
+ 行的第2项是<i>n</i>
+ 。这是有道理的，因为<img align="middle" height="84" width="55" src="Image00823.jpg" />
+ 这个数字表示从<i>n</i>
+ 个对象中选取1个的方案数量，它的值等于<i>n</i>
+ 。还请注意，这个三角形的每一行都对称：从左至右看与从右至左看是一样的。例如，第5行中有：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="153" width="118" src="Image00824.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">这个规律的一般表达式为：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="44" width="118" src="Image00825.jpg" />
+</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">有两个方法可以证明这种对称关系。根据公式，我们可以进行代数证明：</blockquote>
+<blockquote height="1em" width="0pt" align="center"><img align="baseline" height="106" width="967" src="Image00826.jpg" />
+</blockquote>
+<blockquote height="1em" width="2em" align="justify">但是，无须借助公式，我们也能理解其中的道理。例如，为什么<img align="middle" height="84" width="56" src="Image00779.jpg" />
+ =<img align="middle" height="84" width="56" src="Image00827.jpg" />
+ 呢？数字<img align="middle" height="84" width="56" src="Image00779.jpg" />
+ 表示（从10种口味的冰激凌中）选择3种口味的冰激凌放到一个杯子里，这同时意味着有7种口味的冰激凌不会被放到杯子里，两者是一回事。</blockquote>
+<p height="2em" width="2em" align="justify">你也许还看出了另外一个规律：各行中的所有数字，除去开头和结尾的那些1以外，都是其正上方的两个数字之和。我们把这个令人惊讶不已的关系称作“帕斯卡恒等式”（Pascal’s identity）。例如，观察帕斯卡三角形的第9行和第10行：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="182" width="1203" src="Image00828.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>每个数字都是其正上方的两数之和</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">这是为什么呢？既然120 = 36 + 84，那么换成计数问题，这个等式就变成以下形式：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="65" width="236" src="Image00829.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">为了理解其中的道理，我们先来思考这个问题：如果一家商店出售10种口味的冰激凌，你要买一个包含3种不同口味的圆筒冰激凌（口味的次序不重要），会有多少种选择呢？第一种答案是我们已经知道的：<img align="middle" height="84" width="56" src="Image00779.jpg" />
+ 。但是，我们还可以换一个方法解决这个问题。假设其中一种口味是香草味，那么不含香草味的圆筒冰激凌有多少种呢？答案是<img align="middle" height="84" width="56" src="Image00830.jpg" />
+ ，因为我们可以在剩下的9种口味中任意选择3种。含有香草味的圆筒冰激凌有多少种呢？如果香草味是必选口味，那么其余两种口味有<img align="middle" height="84" width="56" src="Image00831.jpg" />
+ 种可选方案。因此，一共有<img align="middle" height="84" width="56" src="Image00831.jpg" />
+ +<img align="middle" height="84" width="56" src="Image00830.jpg" />
+ 种选择。哪个答案是正确的呢？两个方法的逻辑都正确，因此两个答案都正确，也就是说它们的值是相同的。同理（如果你愿意，也可采用代数方法），对于0~<i>n</i>
+ 中的任意数<i>k</i>
+ ，下列公式都是成立的：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="55" width="236" src="Image00832.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">接下来，我们把帕斯卡三角形中各行的数字分别相加（如下图所示），观察其中的规律。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="204" width="354" src="Image00833.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>帕斯卡三角形中的各行数字之和都是2的幂次方</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">可以看出，各行数字之和全部是2的幂次方。具体地说，第<i>n</i>
+ 行的数字和是2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ 。为什么会这样呢？我们可以对这个规律换一种表述方式：第0行的和是1，之后每增加一行，和就会随之增加一倍。借助帕斯卡恒等式（我们刚才已经完成了它的证明），就能明白其中的道理。例如，在求第5行的和时，我们用第4行的数字来改写求和算式，就会得到：</p>
+<p height="1em" width="0pt" align="center">1 + 5 + 10 + 10 + 5 + 1</p>
+<p height="1em" width="0pt" align="center">= 1 + (1 + 4) + (4 + 6) + (6 + 4) + (4 + 1) + 1</p>
+<p height="1em" width="0pt" align="center">= (1 + 1) + (4 + 4) + (6 + 6) + (4 + 4) + (1 + 1)</p>
+<p height="1em" width="2em" align="justify">由此可见，第5行的数字之和正好是第4行数字之和的两倍。同理可证，和加倍的这条规律永远成立。</p>
+<p height="1em" width="2em" align="justify">将其转换成二项式系数的形式，第<i>n</i>
+ 行的所有数字之和为：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="52" width="354" src="Image00834.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">从各项本身来看，它们都可以表示成阶乘的形式，通常可以被多个不同的数整除，但是各项之和竟然只有一个底数2，这个结果真的令人意想不到。</p>
+<p height="1em" width="2em" align="justify">这条规律还可以通过组合予以解释，我们把这个方法称为组合证明法。我们通过一家出售5种口味冰激凌的商店，来解释第5行的所有数字之和。（第<i>n</i>
+ 行的证明过程与之类似。）</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="188" width="236" src="Image00835.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>口味各不相同的圆筒冰激凌一共有多少种？</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">如果要求所选冰激凌口味各不相同，一共可以制成多少种圆筒呢？圆筒里可以放入1、2、3、4或5种口味的冰激凌，而且先后次序不重要。有2种口味的冰激凌有多少种？前文中说过，有<img align="middle" height="84" width="56" src="Image00836.jpg" />
+ = 10种。根据所选口味的数量，圆筒冰激凌的总数为：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="55" width="354" src="Image00837.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">化简后是1 + 5 + 10 + 10 + 5 + 1。此外，我们也可以用乘法法则来回答这个问题。我们先不考虑圆筒中有几种口味的冰激凌，而是针对每种口味考虑是否把它放进圆筒里。例如，巧克力味的冰激凌有2种选择（放或不放），香草味有2种选择（放或不放），以这种方式考虑全部5种口味的情况。（注意，如果我们针对每种口味所做的选择都是“不放”，最终得到的将是一个空圆筒，但这个结果是允许出现的。）因此，我们一共可以做出的圆筒冰激凌数量是：</p>
+<p height="1em" width="0pt" align="center">2×2×2×2×2 = 2<sup>
+<small>
+<font size="2">5</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="2em" align="justify">由于两种方法都是合乎逻辑的，因此：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="47" width="354" src="Image00838.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">证明完毕。</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">通过类似的组合证明法可以发现，如果以间隔一个数的方式对第<i>n</i>
+ 行求和，得数是2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">– 1</font>
+</small>
+</sup>
+ 。对于奇数行而言，这个规律很好理解。以第5行为例，1 + 10 + 5与被排除在外的5 + 10 + 1的得数一样，都等于所有数字之和2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ 的1/2。对于偶数行而言，这个规律同样有效。以第4行为例，1 + 6 + 1 = 4 + 4 = 2<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ 。一般而言，对于任意的<i>n</i>
+ ≥1，都有：</blockquote>
+<blockquote height="1em" width="0pt" align="center"><img align="baseline" height="37" width="236" src="Image00839.jpg" />
+</blockquote>
+<blockquote height="1em" width="2em" align="justify">这是为什么呢？等式左边表示圆筒中的冰激凌口味数量是偶数（冰激凌共有<i>n</i>
+ 种且口味各不相同）。我们也可以通过在第1至第（<i>n</i>
+ – 1）种口味的冰激凌中做选择的方式配制出这些冰激凌。第1种口味的冰激凌有2个选择（放或不放），第2种口味有2个选择……第（<i>n</i>
+ – 1）种口味有2个选择。但是，要让圆筒中冰激凌的口味数量是偶数，最后一种口味只能有1个选择。因此，冰激凌口味为偶数的圆筒数量是2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">– 1</font>
+</small>
+</sup>
+ 。</blockquote>
+<p height="2em" width="2em" align="justify">把帕斯卡三角形转化成直角三角形的形式，就可以发现更多的规律。最前面的一列（第0列）的各项都是1，紧随其后的一列（第1列）都是1、2、3、4等正整数。第2列的前几项是1、3、6、10、15…大家应该比较熟悉，这些都是我们在第1章里讨论过的三角形数。第2列的各个数字也可以写成:</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="40" width="236" src="Image00840.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">第<i>k</i>
+ 列的各项是<img align="middle" height="84" width="55" src="Image00841.jpg" />
+ ，<img align="middle" height="84" width="87" src="Image00842.jpg" />
+ ，<img align="middle" height="84" width="87" src="Image00843.jpg" />
+ ，…</p>
+<p height="1em" width="2em" align="justify">现在，我们把任意列的前几个数字（可多可少）相加，看看它们的和有什么特点。例如，如果我们把第2列的前5个数字相加，如下图所示：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="645" width="953" src="Image00844.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>帕斯卡直角三角形表现出形似“曲棍球球棒”的规律</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">即1 + 3 + 6 + 10 + 15 = 35，得数正好是15的右下方的那个数字。换句话说：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="35" width="236" src="Image00845.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">这是“曲棍球球棒恒等式”的一个实例。这个规律之所以被称作曲棍球球棒恒等式，是因为在帕斯卡直角三角形中，它表现为一个数字从一长列数字的末端伸出的形状，与曲棍球球棒十分相似。为了理解这个规律的成因，我们假设有一支由7人组成的曲棍球球队，每名球员的球衣上都有一个不同的号码，分别是1、2、3、4、5、6、7。我需要挑选其中3名球员去上一堂训练课，一共有多少种选择方案呢？由于次序不重要，因此共有<img align="middle" height="84" width="56" src="Image00846.jpg" />
+ 个方案。接下来，我们分几种情况来讨论这个问题。7号球员被选中的方案有多少种？在等效的前提下，这个问题可以变成：7是被选中的3个号码中最大的选择方案有多少种？由于7已经包含在内，另两名球员的选择方案有<img align="middle" height="84" width="56" src="Image00847.jpg" />
+ 种。接下来，6是最大号码的选择方案有多少种？在这种情况下，6号是必选的，7号则不能选，因此剩下的2名球员有<img align="middle" height="84" width="56" src="Image00836.jpg" />
+ 种选择方案。同理，5号、4号和3号为最大号码的选择方案分别有<img align="middle" height="84" width="56" src="Image00802.jpg" />
+ 、<img align="middle" height="84" width="56" src="Image00848.jpg" />
+ 、<img align="middle" height="84" width="56" src="Image00849.jpg" />
+ 种。由于最大号码只能是3、4、5、6或7，因此我们已经考虑了所有可能的情况，也就是说，选择3名球员的方案共有<img align="middle" height="84" width="56" src="Image00849.jpg" />
+ +<img align="middle" height="84" width="56" src="Image00848.jpg" />
+ + … +<img align="middle" height="84" width="56" src="Image00847.jpg" />
+ 种，与上述等式的左边正好一样。因此，这个证明结果的一般表达式为：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="35" width="236" src="Image00850.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">我们利用这个公式，来解决每个圣诞节都可能需要考虑的一个重要问题。歌曲《圣诞12天》中唱道，深深爱着你的人在第1天会送给你1份礼物（1只鹧鸪鸟），在第2天送给你3份礼物（1只鹧鸪鸟和2只斑鸠），在第3天送给你6份礼物（1只鹧鸪鸟、2只斑鸠和3只法国母鸡）……现在的问题是：12天后，你一共收到了多少份礼物？</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="804" width="1058" src="Image00851.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>12天后，爱你的人一共送给你多少份圣诞礼物？</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">在圣诞假期的第<i>n</i>
+ 天，你收到的礼物总数是：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="36" width="236" src="Image00852.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">（利用三角形数的公式和<i>k</i>
+ = 1时的曲棍球球棒恒等式可以得出上述结果。）因此，第1天你会收到<img align="middle" height="84" width="56" src="Image00849.jpg" />
+ = 1份礼物，第2天你会收到<img align="middle" height="84" width="56" src="Image00848.jpg" />
+ = 3份礼物，到了第12天，你会收到<img align="middle" height="84" width="249" src="Image00853.jpg" />
+ 份礼物。利用曲棍球球棒恒等式，你收到的礼物总数是：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="39" width="354" src="Image00854.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">因此，如果你准备在明年把这些礼物分批送给自己，就意味着你每天都可以收到一件礼物（别忘了，生日那天你不需要给自己送礼物）！</p>
+<p height="1em" width="2em" align="justify">给大家送上一首喜庆的歌——《圣诞假期的第<i>n</i>
+ 天》，庆祝这道题得出了美妙的答案。</p>
+<blockquote height="2em" width="2em" align="justify">圣诞假期的第<i>n</i>
+ 天，我的真爱送给我</blockquote>
+<blockquote height="6pt" width="2em" align="justify">
+<i>n</i>
+ 个新奇的小玩意儿</blockquote>
+<blockquote height="6pt" width="2em" align="justify">
+<i>n</i>
+ – 1个好玩的东西</blockquote>
+<blockquote height="6pt" width="2em" align="justify">
+<i>n</i>
+ – 2个有意思的礼物</blockquote>
+<blockquote height="6pt" width="2em" align="justify">……</blockquote>
+<blockquote height="6pt" width="2em" align="justify">数一数</blockquote>
+<blockquote height="6pt" width="2em" align="justify">
+<i>n</i>
+ 天以来</blockquote>
+<blockquote height="6pt" width="2em" align="justify">我一共收到多少份礼物？</blockquote>
+<blockquote height="6pt" width="2em" align="justify">正好是<img align="middle" height="84" width="86" src="Image00855.jpg" />
+ 份。</blockquote>
+<p height="2em" width="2em" align="justify">接下来，我们讨论帕斯卡三角形的一个最奇怪的规律。我们把帕斯卡三角形里的奇数圈起来，仔细观察就会发现大三角形里还有小三角形。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="659" width="831" src="Image00856.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>圈出帕斯卡三角形里的奇数</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">接下来，我们画一个更大的16行帕斯卡三角形，并把其中的奇数换成1，偶数换成0。仔细观察，就会发现每一对0和每一对1下面都是0。由此可见，两个偶数相加或者两个奇数相加，它们的和都是偶数。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="656" width="862" src="Image00857.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>更大的帕斯卡三角形里的奇数</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">再接下来是一个更大的帕斯卡三角形。在这个256行的帕斯卡三角形里，所有奇数都构成了黑色三角形，所有偶数都构成了白色三角形。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="577" width="924" src="Image00858.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>帕斯卡三角形与谢尔宾斯基三角形的“邂逅”</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">上幅图是谢尔宾斯基三角形（分形的一种）的近似图形。谢尔宾斯基三角形是隐藏在帕斯卡三角形中的众多宝藏之一。再给大家一个惊喜。帕斯卡三角形中，每行有多少个奇数？观察第1行至第8行（不含第0行），我们发现奇数的个数分别是2、2、4、2、4、4、8、2。尽管这些数都是2的幂次方，但似乎没有明显的规律。事实上，2的幂次方是一个重要的特点。例如，正好有2个奇数的行是第1、2、4、8行，这些数都是2的幂次方。为了找到一般性规律，我们需要利用一个事实：每个大于或等于0的整数都可以表示成2的幂次方之和的形式。例如：</p>
+<p height="1em" width="2em" align="justify">1 = 1</p>
+<p height="1em" width="2em" align="justify">2 = 2</p>
+<p height="1em" width="2em" align="justify">3 = 2 + 1</p>
+<p height="1em" width="2em" align="justify">4 = 4</p>
+<p height="1em" width="2em" align="justify">5 = 4 + 1</p>
+<p height="1em" width="2em" align="justify">6 = 4 + 2</p>
+<p height="1em" width="2em" align="justify">7 = 4 + 2 + 1</p>
+<p height="1em" width="2em" align="justify">8 = 8</p>
+<p height="1em" width="2em" align="justify">第1、2、4、8（这些数字都是一个2的幂次方）行有2个奇数，第3、5、6（这些数字都是两个2的幂次方之和）行有4个奇数，第7（3个2的幂次方之和）行有8个奇数。下面，给大家介绍一个令人吃惊但是非常美丽的法则。如果<i>n</i>
+ 是<i>p</i>
+ 个2的幂次方之和，那么第<i>n</i>
+ 行中奇数的个数就是2<sup>
+<small>
+<font size="2">
+<i>p</i>
+</font>
+</small>
+</sup>
+ 。例如，第83行有多少个奇数呢？由于83 = 64 + 16 + 2 + 1，即4个2的幂次方之和，因此第83行有2<sup>
+<small>
+<font size="2">4</font>
+</small>
+</sup>
+ = 16个奇数！</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">为了满足大家的好奇心，我告诉大家一个事实（但在这里就不提供证明过程了）：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">
+<i>k</i>
+ = 64<i>a</i>
+ + 16<i>b</i>
+ + 2<i>c</i>
+ + <i>d</i>
+</blockquote>
+<blockquote height="6pt" width="2em" align="justify">只要<i>a</i>
+ 、<i>b</i>
+ 、<i>c</i>
+ 、<i>d</i>
+ 等于0或1，<img align="middle" height="84" width="56" src="Image00859.jpg" />
+ 就是奇数。具体来说，<i>k</i>
+ 的值肯定是下面这些数字中的一个：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">0，1，2，3，16，17，18，19，64，65，66，69，80，81，82，83</blockquote>
+<p height="2em" width="2em" align="justify">在本章结束之前，我再给大家介绍最后一个规律。我们已经知道帕斯卡三角形各行之和的规律（2的幂次方）和各列之和的规律（曲棍球球棒），如果沿对角线方向求和呢？</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="629" width="770" src="Image00860.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>帕斯卡三角形与斐波那契数列的“邂逅”</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">如上图所示，沿对角线方向求和时，我们得到的和是：</p>
+<p height="1em" width="0pt" align="center">1，1，2，3，5，8，13，21，34</p>
+<p height="1em" width="2em" align="justify">这些数字就是我们下一章将要讨论的内容：奇妙的斐波那契数列。</p>
+<span id="filepos0003231796"></span>
+<p height="3em" width="0pt" align="center">
+<font size="4">
+<font color="#000000">第5章</font>
+</font>
+<br/>
+<br/>
+<font size="4">
+<font color="#000000">超酷的斐波那契数列</font>
+</font>
+</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="36" width="354" src="Image00861.jpg" />
+</p>
+<span id="filepos0003232121"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">大自然中随处可见的数字</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">请大家认真观察最奇妙的数列之一——斐波那契数列。</p>
+<p height="1em" width="0pt" align="center">1，1，2，3，5，8，13，21，34，55，89，144，233 …</p>
+<p height="1em" width="2em" align="justify">斐波那契数列的前两项分别是1、1，第3项是1 + 1 = 2（第1项和第2项之和），第4项是1 + 2 = 3（第2项和第3项之和），第5项是2 + 3 = 5（第3项和第4项之和），之后的各项依次是3 + 5 = 8，5 + 8 = 13，8 + 13 = 21…。1202年，比萨的利奥纳多（后被人称为“斐波那契”）在其著作《算盘书》（<i>Liber Abaci</i>
+ ）中第一次介绍了这些数字。这部著作不仅把阿拉伯—印度数字系统引入了欧洲国家，还为西方世界创立了沿用至今的计算方法。</p>
+<p height="1em" width="2em" align="justify">这部著作论述了很多计算问题，其中有一个有趣的“兔子问题”：假设兔子永远不会死，小兔子长大需要1个月，然后每个月生一对小兔子；如果一开始的时候有一对小兔子，那么12个月之后共有多少对兔子？加 入 会 员 微 信 whair004</p>
+<p height="1em" width="2em" align="justify">我们可以用图形或者符号来呈现这个问题。用小写字母“r”表示一对小兔子，用大写字母“R”表示成年兔子。每个小写的“r”到下一个月就会变成大写的“R”，大写的“R”则变成“Rr”。（也就是说，小兔子长成大兔子，大兔子生下小兔子。）</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="251" width="354" src="Image00862.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">我们利用下表对问题建模。我们发现，在前6个月里，兔子的对数分别是1、1、2、3、5、8。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="537" width="1221" src="Image00863.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">我们在不具体列出兔群构成的情况下，可以证明到第7个月时有13对兔子。那么，其中有多少对成年兔子呢？由于第6个月的所有兔子到第7个月时都是成年兔子，因此第7个月有8对成年兔子。</p>
+<p height="1em" width="2em" align="justify">第7个月又有多少对小兔子呢？它在数量上等于第6个月的成年兔子的对数，即5对（与第5个月时的兔子总数必然相等）。因此，第7个月的兔子对数为8 + 5 = 13。</p>
+<p height="1em" width="2em" align="justify">如果把斐波那契数列的前两项分别定义为<i>F<sub>
+<small>1</small>
+</sub>
+</i>
+ = 1，<i>F<sub>
+<small>2</small>
+</sub>
+</i>
+ = 1，随后各项分别为其前面两个数字之和，那么，对于<i>n</i>
+ ≥3，有：</p>
+<p height="1em" width="0pt" align="center">
+<i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ = <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–1</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–2</small>
+</sub>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">如下表所示，<i>F<sub>
+<small>3</small>
+</sub>
+</i>
+ = 2, <i>F<sub>
+<small>4</small>
+</sub>
+</i>
+ = 3, <i>F<sub>
+<small>5</small>
+</sub>
+</i>
+ = 5, <i>F<sub>
+<small>6</small>
+</sub>
+</i>
+ = 8，以此类推。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="164" width="1208" src="Image00864.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>斐波那契数列的前13个数字</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">因此，前文中兔子问题的答案是<i>F<sub>
+<small>13</small>
+</sub>
+</i>
+ = 233（包含<i>F<sub>
+<small>12</small>
+</sub>
+</i>
+ = 144对成年兔子和<i>F<sub>
+<small>11</small>
+</sub>
+</i>
+ = 89对小兔子）。</p>
+<p height="1em" width="2em" align="justify">除了研究人口动态以外，斐波那契数列还有无数其他应用，而且我们经常可以在自然界中发现它的踪影。例如，花朵的花瓣数常常是斐波那契数列中的一个数字，向日葵、菠萝、松球等的螺旋结构中也常常含有斐波那契数列中的数字。但是，最让我沉醉不已的是斐波那契数列表现出来的那些美丽动人的规律。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="187" width="236" src="Image00865.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">例如，我们把斐波那契数列的前几个数字相加，看看它们的和有什么特点。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="185" width="236" src="Image00866.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">这些和大多不是斐波那契数列中的数字，但却非常接近。事实上，这些和分别比斐波那契数列小1。下面，我们来看看其中的奥秘。以最后一个等式为例，我们把每个数字改写成其后两个数字之差的形式，上式就会变成：</p>
+<p height="1em" width="0pt" align="center">1 + 1 + 2 + 3 + 5 + 8 + 13</p>
+<p height="1em" width="2em" align="justify">=(2 – 1) + (3 – 2) + (5 – 3) + (8 – 5) + (13 – 8) + (21 – 13) + (34 – 21)</p>
+<p height="1em" width="2em" align="justify">= 34 – 1</p>
+<p height="1em" width="2em" align="justify">请注意观察，(2 – 1)中的2会被(3 – 2)中的2抵消，(3 – 2)中的3会被(5 – 3)中的3抵消，最终，除了最后一项中的34和第1项中的（–1）以外，所有项均相互抵消了。一般而言，斐波那契数列的前<i>n</i>
+ 个数字相加有一个非常简单的求和公式：</p>
+<p height="1em" width="0pt" align="center">
+<i>F<sub>
+<small>1</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>2</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>3</small>
+</sub>
+</i>
+ + … + <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ = <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+2</small>
+</sub>
+</i>
+ –1</p>
+<p height="1em" width="2em" align="justify">下面我再向大家介绍一个与之相关、答案同样美丽简练的问题。如果将斐波那契数列的前<i>n</i>
+ 个偶数项数字相加，它们的和有什么特征？也就是说，下面这个求和算式可以简化吗？</p>
+<p height="1em" width="0pt" align="center">
+<i>F<sub>
+<small>2</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>4</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>6</small>
+</sub>
+</i>
+ + … + <i>F<sub>
+<small>2</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">先观察前几个偶数项的数字之和：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="192" width="236" src="Image00867.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">注意，这些数字看上去非常眼熟。事实上，这些数字在前面求斐波那契数列的前<i>n</i>
+ 个数字之和时出现过，所有的数字都比斐波那契数列小1。考虑到斐波那契数列的每个数字都是其前两项相加之和，因此，在第一项之后，我们可以把每个偶数项的数字替换成其前两个数字之和。从下面的算式可以看出，这个问题实际上已经变成了上面的那个求和问题：</p>
+<p height="1em" width="2em" align="justify">1 + 3 + 8 + 21</p>
+<p height="1em" width="2em" align="justify">= 1 + (1+2) + (3 + 5) + (8 + 13)</p>
+<p height="1em" width="2em" align="justify">= 34–1</p>
+<p height="1em" width="2em" align="justify">最后一行符合前<i>n</i>
+ 项斐波那契数列之和的特征：前7个数字的和比第9个数字小1。</p>
+<p height="1em" width="2em" align="justify">一般而言，鉴于<i>F<sub>
+<small>2</small>
+</sub>
+</i>
+ = <i>F<sub>
+<small>1</small>
+</sub>
+</i>
+ = 1，且每个数字都是前两项之和，因此我们可以把偶数项数字的求和问题变成前2<i>n</i>
+ – 1个数字的求和问题。</p>
+<p height="1em" width="2em" align="justify">
+<i>F<sub>
+<small>2</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>4</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>6</small>
+</sub>
+</i>
+ + … + <i>F<sub>
+<small>2</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">= <i>F<sub>
+<small>1</small>
+</sub>
+</i>
+ + (<i>F<sub>
+<small>2</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>3</small>
+</sub>
+</i>
+ ) + (<i>F<sub>
+<small>4</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>5</small>
+</sub>
+</i>
+ ) + … + (<i>F<sub>
+<small>2</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ <sub>
+<small>– 2</small>
+</sub>
+ + <i>F<sub>
+<small>2</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ <sub>
+<small>– 1</small>
+</sub>
+ )</p>
+<p height="1em" width="2em" align="justify">= <i>F<sub>
+<small>2</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+1</small>
+</sub>
+</i>
+ – 1</p>
+<p height="1em" width="2em" align="justify">接下来，我们再研究前<i>n</i>
+ 个奇数项的数字之和。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="185" width="236" src="Image00868.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">这些和表现出更明显的规律：前<i>n</i>
+ 个奇数项的数字之和就是下一个数字。利用上面的方法，我们可以得到：</p>
+<p height="1em" width="2em" align="justify">
+<i>F<sub>
+<small>1</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>3</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>5</small>
+</sub>
+</i>
+ + … + <i>F<sub>
+<small>2</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–1</small>
+</sub>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">= 1 + (<i>F<sub>
+<small>1</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>2</small>
+</sub>
+</i>
+ ) + (<i>F<sub>
+<small>3</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>4</small>
+</sub>
+</i>
+ ) + … + (<i>F<sub>
+<small>2</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ <sub>
+<small>– 3</small>
+</sub>
+ + <i>F<sub>
+<small>2</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ <sub>
+<small>– 2</small>
+</sub>
+ )</p>
+<p height="1em" width="2em" align="justify">= 1 + ( <i>F<sub>
+<small>2</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ –1)</p>
+<p height="1em" width="2em" align="justify">= <i>F<sub>
+<small>2</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">我们还可以换一种证明方法，得出相同的结果。如果从斐波那契数列的前2<i>n</i>
+ 个数字之和中减去前<i>n</i>
+ 个偶数项数字之和，就会得到前<i>n</i>
+ 个奇数项数字之和：</blockquote>
+<blockquote height="6pt" width="2em" align="justify">
+<i>F<sub>
+<small>1</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>3</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>5</small>
+</sub>
+</i>
+ + … + <i>F<sub>
+<small>2</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–1</small>
+</sub>
+</i>
+</blockquote>
+<blockquote height="6pt" width="2em" align="justify">= (<i>F<sub>
+<small>1</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>2</small>
+</sub>
+</i>
+ + … + <i>F<sub>
+<small>2</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–1</small>
+</sub>
+</i>
+ ) – (<i>F<sub>
+<small>2</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>4</small>
+</sub>
+</i>
+ + … + <i>F<sub>
+<small>2</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–2</small>
+</sub>
+</i>
+ )</blockquote>
+<blockquote height="6pt" width="2em" align="justify">= (<i>F<sub>
+<small>2</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ <sub>
+<small>+ 1</small>
+</sub>
+ – 1) – (<i>F<sub>
+<small>2</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ <sub>
+<small>– 1</small>
+</sub>
+ – 1)</blockquote>
+<blockquote height="6pt" width="2em" align="justify">= <i>F<sub>
+<small>2</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+</blockquote>
+<span id="filepos0003244235"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">兔子、音乐与拼图</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">到目前为止，我们已经讨论了斐波那契数列的若干规律，但也只能算点到为止。你也许会想，这些数字的作用肯定不限于计算有多少对兔子吧。的确，斐波那契数列是很多计数问题的答案。1150年（比萨的利奥纳多还没有开始研究那些兔子呢），印度数学家赫马查德拉问，如果音乐的终止式只包含长度为1或2的音节，那么长度为<i>n</i>
+ 的终止式共有多少种呢？我们用简单的数学语言来表述这个问题。</p>
+<p height="1em" width="2em" align="justify">问题：如果把数字<i>n</i>
+ 写成1与2的和的形式，一共有多少种写法？</p>
+<p height="1em" width="2em" align="justify">我们把答案记作<i>f<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ ，然后考虑<i>n</i>
+ 取较小值时<i>f<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ 的值。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="554" width="1208" src="Image00869.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">和为1的情况只有一种，和为2有两种情况（1 + 1和2），和为3有三种情况（1 + 1+ 1, 1 + 2，2 + 1）。注意，只可以使用1和2这两个数字。此外，数字的先后次序是需要考虑的重要因素，因此1 + 2与2 + 1不同。和为4有5种情况（1 + 1 + 1 + 1, 1 + 1 + 2, 1 + 2 + 1, 2 + 1 + 1, 2 + 2），上表中给出的答案似乎都是斐波那契数列中的数字，事实也确实如此。</p>
+<p height="1em" width="2em" align="justify">我们以<i>f<sub>
+<small>5</small>
+</sub>
+</i>
+ = 8为例，看看和为5的情况为什么有8种。求和时，第1项只能是1或者2。第1项是1的情况一共有多少种呢？在1之后，我们必须再给出一系列的1和2，而且这些数之和等于4。我们知道，这样的序列共有<i>f<sub>
+<small>4</small>
+</sub>
+</i>
+ = 5种。同理，第1项是2且各项之和是5的情况共有多少种呢？在第一个数字2之后，剩余各项之和必须是3，一共有<i>f<sub>
+<small>3</small>
+</sub>
+</i>
+ = 3种情况。因此，和为5的情况一共有5 + 3 = 8种。同理，和为6的序列一共有13种，因为第1项数字是1的情况共有<i>f<sub>
+<small>5</small>
+</sub>
+</i>
+ = 8种，第1项数字是2的情况共有<i>f<sub>
+<small>4</small>
+</sub>
+</i>
+ = 5种。一般而言，和为<i>n</i>
+ 的序列共有<i>f<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ 种，其中，以1开始的序列有<i>f<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–1</small>
+</sub>
+</i>
+ 种，以2开始的序列有<i>f<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–2</small>
+</sub>
+</i>
+ 种，因此：</p>
+<p height="1em" width="0pt" align="center">
+<i>f<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ = <i>f<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–1</small>
+</sub>
+</i>
+ + <i>f<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–2</small>
+</sub>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">也就是说，<i>f<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ 的前几个数字与斐波那契数列相似，随后各项的增长方式也与斐波那契数列相似。因此，这些数字构成的就是斐波那契数列，不过两者之间还存在一个小差异，或者更准确地说是发生了位移。请注意，<i>f<sub>
+<small>1</small>
+</sub>
+</i>
+ = 1 = <i>F<sub>
+<small>2</small>
+</sub>
+</i>
+ ，<i>f<sub>
+<small>2</small>
+</sub>
+</i>
+ = 2 = <i>F<sub>
+<small>3</small>
+</sub>
+</i>
+ ，<i>f<sub>
+<small>3</small>
+</sub>
+</i>
+ = 3 = <i>F<sub>
+<small>4</small>
+</sub>
+</i>
+ ，以此类推。（为方便起见，我们定义<i>f<sub>
+<small>0</small>
+</sub>
+</i>
+ = <i>F<sub>
+<small>1</small>
+</sub>
+</i>
+ = 1，<i>f<sub>
+<small>–1</small>
+</sub>
+</i>
+ = <i>F<sub>
+<small>0</small>
+</sub>
+</i>
+ = 0。）一般而言，对于<i>n</i>
+ ≥1，有：</p>
+<p height="1em" width="0pt" align="center">
+<i>f<sub>
+<small>n</small>
+</sub>
+</i>
+ = <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+1</small>
+</sub>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">了解斐波那契数列的应用价值之后，我们可以利用这方面的知识，对它的很多美丽的规律加以证明。大家还记得我们在第4章结尾部分讨论的帕斯卡三角形的对角线方向的数字之和吧。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="640" width="862" src="Image00870.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">例如，第8条对角线方向的数字之和是：</p>
+<p height="1em" width="0pt" align="center">1 + 7 + 15 + 10 + 1 = 34 = <i>F<sub>
+<small>9</small>
+</sub>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">如果表述成“<i>n</i>
+ 选几”的形式，就是：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="43" width="236" src="Image00871.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">为了帮助大家理解这个规律，我们用两个办法来解决下面这个计数问题。</p>
+<p height="1em" width="2em" align="justify">问题：和为8的1–2序列有多少种？</p>
+<p height="1em" width="2em" align="justify">第一种方法：根据定义，有<i>f<sub>
+<small>8</small>
+</sub>
+</i>
+ = <i>F<sub>
+<small>9</small>
+</sub>
+</i>
+ 种。</p>
+<p height="1em" width="2em" align="justify">第二种方法：根据序列中2的个数，把这个问题分成5种情况加以考虑。</p>
+<p height="1em" width="2em" align="justify">没有2的序列有多少种？显然只有1种，即11111111，毫无疑问<img align="middle" height="84" width="56" src="Image00872.jpg" />
+ = 1。</p>
+<p height="1em" width="2em" align="justify">只有1个2的序列有多少种？有7种，即2111111，1211111，1121111，1112111，1111211，1111121，1111112。这些序列包含7个数字，数字2在其中有<img align="middle" height="84" width="56" src="Image00873.jpg" />
+ = 7种不同的位置。</p>
+<p height="1em" width="2em" align="justify">有2个2的序列有多少种？符合这个条件的代表性序列是221111，我在这里就不一一列出全部15种序列了。提醒大家注意一点：符合条件的序列都有2个2和4个1，共包含6个数。因此，2个2在这些序列中一共有<img align="middle" height="84" width="56" src="Image00847.jpg" />
+ = 15种不同的位置。同理，含有3个2的序列还必须包含2个1，共有5个数字，这样的序列有<img align="middle" height="84" width="56" src="Image00874.jpg" />
+ = 10种。最后，含有4个2的序列只有<img align="middle" height="84" width="56" src="Image00875.jpg" />
+ = 1种，即2222。</p>
+<p height="1em" width="2em" align="justify">比较这两个答案，就能得出令人满意的解释。一般而言，帕斯卡三角形的第<i>n</i>
+ 条对角线方向的数字之和，一定是一个斐波那契数列中的数字。具体地说，对于所有的<i>n</i>
+ ≥0，在求第<i>n</i>
+ 条对角线方向的数字之和（从第1项加到第<i>n</i>
+ / 2项，以保证求和的行为限制在三角形范围之内）时，我们都会得到：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="46" width="354" src="Image00876.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">我们还可以通过拼图来理解斐波那契数列，这个方法的效果与前几种差不多，却更加直观。例如，<i>f<sub>
+<small>4</small>
+</sub>
+</i>
+ = 5表明，在利用方块（长度为1）和双方块（长度为2）拼成长度为4的长条时共有5种拼法。比如，1 + 1 + 2表示方块—方块—双方块的拼法。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="288" width="354" src="Image00877.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>利用方块和双方块拼成长度为4的长条共有5种拼法，证明</b>
+</font>
+ <font size="2">
+<i>
+<b>f<sub>
+<small>
+<font size="2">
+<b>4</b>
+</font>
+</small>
+</sub>
+</b>
+</i>
+</font>
+ <font size="2">
+<b>= 5成立</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">利用拼图法，我们还可以理解斐波那契数列的另一个重要规律。观察下表，找出斐波那契数列进行平方运算之后的规律。</p>
+<p height="1em" width="2em" align="justify">把斐波那契数列中两个连续的数字相加，和为下一个数字，这个结果并不令人吃惊。（毕竟，斐波那契数列就是这样定义的。）但是，你绝对想不到它们的二次幂竟然也有一些非常有意思的规律。我们先把连续数字的二次幂相加，看看它们的和有什么规律。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="227" width="1211" src="Image00878.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>斐波那契数列中</b>
+</font>
+ <font size="2">
+<i>
+<b>f<sub>
+<small>
+<font size="2">
+<b>0</b>
+</font>
+</small>
+</sub>
+</b>
+</i>
+</font>
+ <font size="2">
+<b>至</b>
+</font>
+ <font size="2">
+<i>
+<b>f<sub>
+<small>
+<font size="2">
+<b>10</b>
+</font>
+</small>
+</sub>
+</b>
+</i>
+</font>
+ <font size="2">
+<b>的二次幂</b>
+</font>
+</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="249" width="354" src="Image00879.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">我们利用计数的方法来解释其中的规律。最后一个等式表明：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="38" width="118" src="Image00880.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">为什么会这样？通过一个简单的计数问题，我们就能理解其中的缘由。</p>
+<p height="1em" width="2em" align="justify">问题：利用方块和双方块拼成长度为10的长条，共有多少种方法？</p>
+<p height="1em" width="2em" align="justify">第一种方法：根据定义，有<i>f<sub>
+<small>10</small>
+</sub>
+</i>
+ 种拼法。下图所示是一种典型的拼法，即2 + 1 + 1 + 2 + 1 + 2 + 1。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="142" width="889" src="Image00881.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">我们说这种拼法在第2、3、4、6、7、9和10单元处是可以拆分的。（也就是说，除了双方块的中间位置，其他地方都是可以拆分的。）而在第1、5、8单元处是不可拆分的。</p>
+<p height="1em" width="2em" align="justify">第二种方法：我们分两种情况考虑，即在第5单元处可以拆分的拼图和在该处不可拆分的拼图。在第5单元处可以拆分、长度为10的拼图共有多少种呢？这样的拼图可以一分为二，前一半有<i>f<sub>
+<small>5</small>
+</sub>
+</i>
+ = 8种拼法，后一半也有<i>f<sub>
+<small>5</small>
+</sub>
+</i>
+ = 8种拼法。因此，根据第4章介绍的乘法法则，如下图所示，共有<i>f</i>
+ <sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ <sub>
+<small>5</small>
+</sub>
+ = 8<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ 种拼法。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="291" width="1041" src="Image00882.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>长度为10且在第5单元处可以拆分的拼图有</b>
+</font>
+ <font size="2">
+<i>
+<b>f</b>
+</i>
+</font>
+ <img align="middle" height="63" width="14" src="Image00883.jpg" />
+ <font size="2">
+<b>种</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">长度为10且在第5单元处不可拆分的拼图有多少种？在这样的拼图中，第5、6单元必然是一个双方块，如下图所示。在这种情况下，左右两边各有<i>f<sub>
+<small>
+<font size="2">
+<i>4</i>
+</font>
+</small>
+</sub>
+</i>
+ = 5种拼法，因此，在第5单元处不可拆分的长条共有<i>f</i>
+ <sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ <sub>
+<small>4</small>
+</sub>
+ = 5<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ 种拼法。把这两种情况加总，就会得到 <i>f<sub>
+<small>10</small>
+</sub>
+</i>
+ =<i>f</i>
+ <sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ <sub>
+<small>5</small>
+</sub>
+ + <i>f</i>
+ <sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ <sub>
+<small>4</small>
+</sub>
+ 。证明完毕。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="301" width="1047" src="Image00884.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>长度为10且在第5单元处不可拆分的拼图有</b>
+</font>
+ <font size="2">
+<i>
+<b>f</b>
+</i>
+</font>
+ <img align="middle" height="63" width="14" src="Image00885.jpg" />
+ <font size="2">
+<b>种</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">一般而言，取长度为2<i>n</i>
+ 的拼图，考虑中间位置可以拆分与不可拆分的情况，就可以得出下面这个美观简练的规律：</p>
+<p height="1em" width="0pt" align="center">
+<i>f<sub>
+<small>2</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ =<i>f</i>
+ <sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ + <i>f</i>
+ <sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>– 1</small>
+</sub>
+</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">有了上面这个等式之后，我们可能希望推而广之，以便在类似情况下也可以使用它。例如，长度为<i>m</i>
+ + <i>n</i>
+ 的拼图。在第<i>m</i>
+ 单元处可以拆分的拼图有多少种？左边有<i>f<sub>
+<small>m</small>
+</sub>
+</i>
+ 种拼法，右边有<i>f<sub>
+<small>n</small>
+</sub>
+</i>
+ 种拼法，因此共有<i>f<sub>
+<small>m</small>
+</sub>
+</i>
+ <i>f<sub>
+<small>n</small>
+</sub>
+</i>
+ 种拼法。在第<i>m</i>
+ 单元处不可拆分的拼图有多少种呢？这种拼图的第<i>m</i>
+ 和<i>m</i>
+ + 1单元必然是一个双方块，因此其余的位置有<i>f<sub>
+<small>
+<font size="2">
+<i>m</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–1</small>
+</sub>
+</i>
+ <i>f<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–1</small>
+</sub>
+</i>
+ 种拼法。加到一起，就会得到下面这个非常有用的等式。对于<i>m</i>
+ , <i>n</i>
+ ≥0：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">
+<i>f<sub>
+<small>
+<font size="2">
+<i>m</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ = <i>f<sub>
+<small>
+<font size="2">
+<i>m</i>
+</font>
+</small>
+</sub>
+</i>
+ <i>f<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ + <i>f<sub>
+<small>
+<font size="2">
+<i>m</i>
+</font>
+</small>
+</sub>
+</i>
+ <sub>
+<small>– 1</small>
+</sub>
+ <i>f<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ <sub>
+<small>– 1</small>
+</sub>
+</blockquote>
+<p height="2em" width="2em" align="justify">接下来，我们介绍另一个规律。把斐波那契数列中数字的二次幂相加，观察和有什么特征。</p>
+<p height="1em" width="0pt" align="center">1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ = 2 = 1×2</p>
+<p height="1em" width="0pt" align="center">1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ = 6 = 2×3</p>
+<p height="1em" width="0pt" align="center">1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 3<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ = 15 = 3×5</p>
+<p height="1em" width="0pt" align="center">1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 3<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 5<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ = 40 = 5×8</p>
+<p height="1em" width="0pt" align="center">1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 3<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 5<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 8<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ = 104 = 8×13</p>
+<p height="1em" width="0pt" align="center">…</p>
+<p height="1em" width="2em" align="justify">哇，太棒了！斐波那契数列中数字的平方和，就是最后一个数字与下一个数字的乘积！为什么1、1、2、3、5、8的平方和等于8×13呢？用几何图形可以“看出”其中的奥秘。取边长分别是1、1、2、3、5、8的正方形，按下图所示的方式拼到一起。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="144" width="236" src="Image00886.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">我们先放一个1×1的正方形，再在旁边放另一个1×1的正方形，就会得到一个1×2的长方形。在这个长方形的下面，放一个2×2的正方形，就会得到一个3×2的长方形。沿着长方形的长边，放一个3×3的正方形（得到一个3×5的长方形）。然后，在下面放置一个5×5的正方形（得到一个8×5的长方形）。最后，在旁边放置一个8×8的正方形，就会得到一个8×13的长方形。现在，我们考虑一个简单的问题。</p>
+<p height="1em" width="2em" align="justify">问题：这个大长方形的面积是多少？</p>
+<p height="1em" width="2em" align="justify">第一种方法：这个长方形的面积是所有正方形的面积之和。换句话说，大长方形的面积必然是1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 3<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 5<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 8<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ 。</p>
+<p height="1em" width="2em" align="justify">第二种方法：这个大长方形的高是8，底边长度为5 + 8 = 13，因此它的面积必然是8×13。</p>
+<p height="1em" width="2em" align="justify">由于这两种方法都是正确的，所以算出的面积必然相等，上面的等式得以证明。事实上，回头去看这个大长方形的构建过程，你就会发现上面列出的关于这个规律的所有关系（例如，1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 3<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 5<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ = 5×8）都已经得到了证明。沿着这个思路，你还可以构建大小为13×21、21×34…的长方形。由此可知，这个规律永远成立，其一般表达式为：</p>
+<p height="1em" width="0pt" align="center">1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 3<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 5<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 8<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + … + <i>F<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ =<i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+1</small>
+</sub>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">接下来，我们将斐波那契数列中与某个数字左右相邻的两个数字相乘，看看乘积有什么规律。例如，在斐波那契数列中，与5相邻的两个数字分别是3和8，乘积是3×8 = 24，比5<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ 小1；与8相邻的两个数字分别是5和13，乘积是5×13 = 65，比8<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ 大1。认真观察下表，很容易得出：在斐波那契数列中，与某个数字左右相邻的两个数字相乘，乘积与该数字的二次幂相差1。换句话说：</p>
+<p height="1em" width="0pt" align="center">
+<i>F<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ – <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–1</small>
+</sub>
+</i>
+ <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+1</small>
+</sub>
+</i>
+ = ±1</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="404" width="1218" src="Image00887.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>与某个数字左右相邻的两数乘积与该数字的二次幂之间相差1</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">利用归纳法（一种证明方法，我们将在下一章学习这种方法）可以证明，对于<i>n</i>
+ ≥1：</p>
+<p height="1em" width="0pt" align="center">
+<i>F</i>
+ <img align="middle" height="84" width="14" src="Image00888.jpg" />
+ – <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–1</small>
+</sub>
+</i>
+ <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+1</small>
+</sub>
+</i>
+ = (–1)<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">+1</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="2em" align="justify">接下来，我们研究与某个数字距离较大的两个数字的乘积，以便把这个规律推而广之。以<i>F<sub>
+<small>5</small>
+</sub>
+</i>
+ = 5为例，我们发现，与之紧密相邻的两个斐波那契数字的乘积是3×8 = 24，与5<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ 相差1。与5相距2个数字的左右两数相乘时，也会得到相同的结果，即2×13 = 26同样与5<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ 相差1。与5相距3、4或5个数字的左右两数相乘呢？它们的乘积分别是1×21 = 21，1×34 = 34，0×55 = 0。这些乘积与25相差多少呢？它们的距离分别是4、9、25，都是完全平方数。而且，它们不是没有任何规律的完全平方数，而是斐波那契数列中数字的二次幂！下表给出了更多的证据，证明这个规律确实存在，其一般表达式为：</p>
+<p height="1em" width="0pt" align="center">
+<i>F<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ – <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>r</i>
+</font>
+</small>
+</sub>
+</i>
+ <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>r</i>
+</font>
+</small>
+</sub>
+</i>
+ =± <i>F<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ <sub>
+<small>
+<font size="2">
+<i>r</i>
+</font>
+</small>
+</sub>
+</i>
+</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="630" width="1228" src="Image00889.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>在斐波那契数列中，某个数字的两个远邻的乘积一定与该数字的二次幂相距较近，该距离一定是某个数字的二次幂</b>
+</font>
+</p>
+<span id="filepos0003267684"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">质数、黄金比例与《达·芬奇密码》</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">我们已经知道，帕斯卡三角形中的偶数与奇数表现出一种极其复杂的规律。对于斐波那契数列而言，情况则简单得多。在斐波那契数列中哪些是偶数呢？</p>
+<p height="1em" width="0pt" align="center">1，1，2，3，5，8，13，21，34，55，89，144…</p>
+<p height="1em" width="2em" align="justify">偶数有<i>F<sub>
+<small>3</small>
+</sub>
+</i>
+ = 2，<i>F<sub>
+<small>6</small>
+</sub>
+</i>
+ = 8，<i>F<sub>
+<small>9</small>
+</sub>
+</i>
+ = 34，<i>F<sub>
+<small>12</small>
+</sub>
+</i>
+ = 144，等等。（在本节中，由于斐波那契数列表现出更美的规律性，因此我们继续用大写字母“<i>F</i>
+ ”来表示斐波那契数列中的数字。）前几个偶数出现在第3、6、9、12等的位置上，说明每3项就有一个偶数。我们注意到，这个规律始于：</p>
+<blockquote height="2em" width="2em" align="justify">奇，奇，偶</blockquote>
+<p height="2em" width="2em" align="justify">然后重复：</p>
+<blockquote height="2em" width="2em" align="justify">奇，奇，偶，奇，奇，偶，奇，奇，偶……</blockquote>
+<p height="2em" width="2em" align="justify">这是因为，在每个“奇，奇，偶”代码块之后，接下来的代码块必然以“奇 + 偶 = 奇”开始，然后是“偶 + 奇 = 奇”，再然后是“奇 + 奇 = 偶”，如此循环往复。</p>
+<p height="1em" width="2em" align="justify">用第3章的同余概念来表示的话，就是说斐波那契数列中的所有偶数都关于0同余（模为2），所有奇数都关于1同余（模为2），并且1 + 1 ≡ 0 (mod 2)。因此，斐波那契数列的以2为模的表达方式是：</p>
+<p height="1em" width="0pt" align="center">1，1，0，1，1，0，1，1，0，1，1，0…</p>
+<p height="1em" width="2em" align="justify">那么，斐波那契数列中的哪些数字是3的倍数呢？前几个是3的倍数的数字为<i>F<sub>
+<small>4</small>
+</sub>
+</i>
+ = 3，<i>F<sub>
+<small>8</small>
+</sub>
+</i>
+ = 21，<i>F<sub>
+<small>12</small>
+</sub>
+</i>
+ = 144，这似乎表明序号是4的倍数的数字都是3的倍数。为了证明这个猜想，我们以3为模，把斐波那契数列简化成0、1或2的形式，其中1 + 2 ≡ 0，且2 + 2 ≡1 (mod 3)。</p>
+<p height="1em" width="2em" align="justify">于是，斐波那契数列变为：</p>
+<p height="1em" width="0pt" align="center">1，1，2，0，2，2，1，0，1，1，2，0，2，2，1，0，1，1…</p>
+<p height="1em" width="2em" align="justify">在第8项之后，又回到了1和1，因此整个数列围绕大小为8的数据块不断重复，其中0排在第4位。因此，序号是4的倍数的数字都是3的倍数，反之亦然。如果模为5、8或13，就可以证明：</p>
+<blockquote height="2em" width="2em" align="justify">序号是5的倍数的数字都是5的倍数；</blockquote>
+<blockquote height="6pt" width="2em" align="justify">序号是6的倍数的数字都是8的倍数；</blockquote>
+<blockquote height="6pt" width="2em" align="justify">序号是7的倍数的数字都是13的倍数。</blockquote>
+<p height="2em" width="2em" align="justify">而且，这个规律还可以继续推而广之。</p>
+<p height="1em" width="2em" align="justify">斐波那契数列中两个相邻的数字有什么规律呢？它们有什么共同点吗？有意思的是，我们现在可以证明，从某种意义上讲，这些数字没有任何共同点。所以，我们说两个相邻的数字</p>
+<p height="1em" width="0pt" align="center">(1 , 1), (1 , 2), (2 , 3), (3 , 5), (5 , 8), (8 , 13), (13 , 21), (21 , 34),…</p>
+<p height="1em" width="2em" align="justify">是互质的。也就是说，不存在一个大于1且可以同时整除这两个数字的数。例如，以上面最后一对数字为例，我们发现21可以被1、3、7、21整除，而34的因数是1、2、17、34。因此，除了1以外，21和34没有公因数。我们能确定这个规律始终成立吗？我们是否可以确定下一对数字，即 (34 , 55)，也是互质的？我们无须找出55的因数，即可完成这项证明。我们反过来假设存在一个数字<i>d</i>
+ &gt; 1且可以同时整除34和55，那么这个数字肯定可以整除它们的差55 – 34 = 21（如果55和34都是<i>d</i>
+ 的倍数，它们的差也肯定是<i>d</i>
+ 的倍数）。但这是不可能的，因为我们已经知道不存在一个大于1且可以同时整除21和34的数字<i>d</i>
+ 。重复这个证明过程，就可以证明斐波那契数列中所有两个相邻的数字都是互质的。</p>
+<p height="1em" width="2em" align="justify">接下来，我要向大家介绍斐波那契数列最讨人喜欢的一个特点！我们知道，两个数字的“最大公因数”（greatest common divisor）是可以同时整除这两个数字且数值最大的那个数。例如，20和90的最大公因数是10，记作：</p>
+<p height="1em" width="0pt" align="center">(20 , 90) = 10</p>
+<p height="1em" width="2em" align="justify">你知道斐波那契数列中的第20个和第90个数字的最大公因数是多少吗？绝对难以想象！答案是55，这个数字本身也包含在斐波那契数列中，而且正好是第10个数字！用等式表示的话，就是：</p>
+<p height="1em" width="0pt" align="center">(<i>F<sub>
+<small>20</small>
+</sub>
+</i>
+ ，<i>F<sub>
+<small>90</small>
+</sub>
+</i>
+ ) = <i>F<sub>
+<small>10</small>
+</sub>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">一般地，对于整数<i>m</i>
+ 和<i>n</i>
+ ，有：</p>
+<p height="1em" width="0pt" align="center">(<i>F<sub>
+<small>
+<font size="2">
+<i>m</i>
+</font>
+</small>
+</sub>
+</i>
+ ，<i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ ) = <i>F</i>
+ <sub>
+<small>(</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>m</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>,</small>
+</sub>
+ <sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>)</small>
+</sub>
+</p>
+<p height="1em" width="2em" align="justify">也就是说，“斐波那契数列中两个数字的最大公因数也是斐波那契数列中的数字，它的序号就是那两个数字序号的最大公因数”！尽管我们不准备证明这个规律，但我还是要把它介绍给大家，因为这确实是一个美轮美奂的规律，我完全无法抵制它的诱惑。</p>
+<p height="1em" width="2em" align="justify">规律有时候也具有欺骗性。例如，斐波那契数列中的哪些数字是“质数”（prime number）？（我们在下一章就会讨论质数的概念，它是指大于1且只能被1和自身整除的数。）大于1但不是质数的数叫作“合数”（composite number），因为它们可以被分解成较小数字的乘积形式。前几个质数是</p>
+<p height="1em" width="0pt" align="center">2，3，5，7，11，13，17，19…</p>
+<p height="1em" width="2em" align="justify">下面，我们考察序号为质数的斐波那契数列中的数字：</p>
+<p height="1em" width="0pt" align="center">
+<i>F<sub>
+<small>2</small>
+</sub>
+</i>
+ = 1，<i>F<sub>
+<small>3</small>
+</sub>
+</i>
+ = 2，<i>F<sub>
+<small>5</small>
+</sub>
+</i>
+ = 5，<i>F<sub>
+<small>7</small>
+</sub>
+</i>
+ = 13，<i>F<sub>
+<small>11</small>
+</sub>
+</i>
+ = 89，<i>F<sub>
+<small>13</small>
+</sub>
+</i>
+ = 233，<i>F<sub>
+<small>17</small>
+</sub>
+</i>
+ = 1 597</p>
+<p height="1em" width="2em" align="justify">可以看出，2、5、13、89、233、1 597都是质数。这个现象似乎表明，如果<i>p</i>
+ &gt; 2是质数，那么<i>F<sub>
+<small>
+<font size="2">
+<i>p</i>
+</font>
+</small>
+</sub>
+</i>
+ 也是质数。但是，<i>F<sub>
+<small>19</small>
+</sub>
+</i>
+ = 4 181不是质数，因为4 181 = 37×113。然而，如果斐波那契数列中的某个数字大于3且为质数，那么它的序号一定是质数，这条规律确实存在，而且可以根据我们前面讨论的一条规律推导得出。例如，<i>F<sub>
+<small>14</small>
+</sub>
+</i>
+ 肯定是一个合数，因为斐波那契数列中序号是7的倍数的数字都是<i>F<sub>
+<small>7</small>
+</sub>
+</i>
+ = 13的倍数（事实确实如此，<i>F<sub>
+<small>14</small>
+</sub>
+</i>
+ = 377 = 13×29）。</p>
+<p height="1em" width="2em" align="justify">事实上，斐波那契数列中的数字为质数的情况极为少见。在我创作本书的时候，已经被证实是质数的数字一共只有33个，其中最大的是<i>F<sub>
+<small>81 839</small>
+</sub>
+</i>
+ 。对于斐波那契数列中的质数个数是否为无限的问题，数学界还没有得出最终结论。</p>
+<p height="1em" width="2em" align="justify">下面，我暂停讨论这些严肃的内容，为大家表演一个根据斐波那契数列设计的小魔术。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="235" width="354" src="Image00890.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">在上表的第1行和第2行中分别填入一个1~10中的数字。将这两个数字相加，并把和填入第3行。将第2行和第3行的数字相加，将它们的和填入第4行。按照斐波那契数列的特点，继续填写上表其余各行（第3行 + 第4行 = 第5行，以此类推），直到所有10行全部填满。接下来，用第9行的数字去除第10行的数字，读取得数的前三位数。在这个例子中，我们发现<img align="middle" height="84" width="72" src="Image00891.jpg" />
+ =1.618 279…。因此，得数的前三位数是1.61。无论你相信与否，在第1行和第2行填入任意一个正数（无须整数，也无须是1~10中的数字），第10行与第9行的比值一定是1.61。请大家自行举例验证。</p>
+<p height="1em" width="2em" align="justify">为了找出其中的奥秘，我们把第1行和第2行的数字分别记作<i>x</i>
+ 和<i>y</i>
+ 。如下表所示，根据斐波那契数列的特点，第3行必然是<i>x</i>
+ + <i>y</i>
+ ，第4行是 <i>y</i>
+ + (<i>x</i>
+ + <i>y</i>
+ ) = <i>x</i>
+ + 2<i>y</i>
+ ，以此类推。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="594" width="878" src="Image00892.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">我们需要求出第10行与第9行的两个数字的比值：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="76" width="236" src="Image00893.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">比值的前三位数一定是1.61，这是为什么呢？在回答这个问题时，我们可以从分数加法运算的一个常见错误中汲取灵感。假设有两个分数<img align="middle" height="84" width="32" src="Image00894.jpg" />
+ 和<img align="middle" height="84" width="32" src="Image00895.jpg" />
+ ，其中<i>b</i>
+ 和<i>d</i>
+ 都是正数。如果将分子和分母分别相加，会得到什么结果？无论你相信与否，这个结果被称为“中间数”（mediant），即它一定是位于那两个分数之间的某个值。也就是说，对于任意两个不同的分数<i>a</i>
+ /<i>b</i>
+ &lt; <i>c</i>
+ /<i>d</i>
+ ，其中<i>b</i>
+ 、<i>d</i>
+ 为正数，都有：</p>
+<p height="1em" width="0pt" align="center"><img align="middle" height="84" width="32" src="Image00894.jpg" />
+ &lt;<img align="middle" height="84" width="88" src="Image00896.jpg" />
+ &lt;<img align="middle" height="84" width="32" src="Image00895.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">例如，有两个分数1/3和1/2，它们的中间数是2/5，三者的关系是：1/3 &lt; 2/5 &lt; 1/2。</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">中间数的值为什么位于给定的两个分数之间呢？如果<img align="middle" height="84" width="32" src="Image00894.jpg" />
+ &lt;<img align="middle" height="84" width="32" src="Image00895.jpg" />
+ ，且<i>b</i>
+ 、<i>d</i>
+ 为正数，那么<i>ad</i>
+ &lt; <i>bc</i>
+ 必然成立。两边同时加上<i>ab</i>
+ ，得到<i>ab</i>
+ + <i>ad</i>
+ &lt; <i>ab</i>
+ + <i>bc</i>
+ ，即<i>a</i>
+ (<i>b</i>
+ + <i>d</i>
+ ) &lt; (<i>a</i>
+ + <i>c</i>
+ ) <i>b</i>
+ ，因此<img align="middle" height="84" width="32" src="Image00894.jpg" />
+ &lt;<img align="middle" height="84" width="88" src="Image00896.jpg" />
+ 。同理，<img align="middle" height="84" width="88" src="Image00896.jpg" />
+ &lt;<img align="middle" height="84" width="32" src="Image00895.jpg" />
+ 成立。</blockquote>
+<p height="2em" width="2em" align="justify">接下来，请注意，对于<i>x</i>
+ 、<i>y</i>
+ &gt; 0，有：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="77" width="118" src="Image00897.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">它们的中间数必须位于两个分数之间，也就是说：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="37" width="354" src="Image00898.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">因此，第10行和第9行的数字比值的前三项必然是1.61。证明完毕。</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">在答出1.61之前，你可以迅速求出表中所有数字的和，让观众大吃一惊。例如，如果一开始的两个数字是3和7，你迅速扫一眼，就可以立刻说出所有数字之和——781。这是怎么做到的呢？是因为我们有代数这个武器。把前文第二张表中的所有数值相加，你就会发现和是55<i>x</i>
+ + 88<i>y</i>
+ 。这又有什么用呢？有用，因为它正好是11(5<i>x</i>
+ + 8<i>y</i>
+ ) = 11×第7行数字。因此，只需看看第7行的数字（本例中的这个数字是71），然后将它乘以11（或许你还可以使用本书第1章介绍的乘数是11的简便计算技巧），就可以得到781。</blockquote>
+<p height="2em" width="2em" align="justify">数字1.61有什么重要意义吗？如果把表格不断延续下去，你就会发现相邻两项的比值逐渐趋近于黄金比例<sup><span id="filepos0003281729"></span>
+ <small>
+<a href="text00014.html#filepos0003294333">[1]</a>
+</small>
+</sup>
+ （the golden ratio）。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="55" width="236" src="Image00899.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">有时，数学界用希腊字母<i>φ</i>
+ 来表示这个数字。</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">通过代数运算，我们可以证明斐波那契数列中两个相邻数字之间的比值与<i>g</i>
+ 越来越接近。假设随着<i>n</i>
+ 不断增大，<i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+1</small>
+</sub>
+</i>
+ / <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ 与某个比值<i>r</i>
+ 越来越接近。但是，根据斐波那契数列的定义，<i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+1</small>
+</sub>
+</i>
+ = <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–1</small>
+</sub>
+</i>
+ ，因此：</blockquote>
+<blockquote height="1em" width="0pt" align="center"><img align="baseline" height="51" width="236" src="Image00900.jpg" />
+</blockquote>
+<blockquote height="1em" width="2em" align="justify">随着<i>n</i>
+ 不断变大，等式左边不断趋近于<i>r</i>
+ ，而等式右边不断趋近于1 +<img align="middle" height="84" width="33" src="Image00901.jpg" />
+ ，因此：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">
+<i>r</i>
+ = 1 +<img align="middle" height="84" width="33" src="Image00901.jpg" />
+</blockquote>
+<blockquote height="6pt" width="2em" align="justify">等式两边同时乘以<i>r</i>
+ ，就会得到：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">
+<i>r<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ = <i>r</i>
+ + 1</blockquote>
+<blockquote height="6pt" width="2em" align="justify">也就是说，<i>r<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ – <i>r</i>
+ –1 = 0，根据二次方程求根公式，该方程式的唯一正根是 <i>r</i>
+ =<img align="middle" height="84" width="96" src="Image00902.jpg" />
+ ，即<i>g</i>
+ 。</blockquote>
+<p height="2em" width="2em" align="justify">斐波那契数列的第<i>n</i>
+ 个数字有一个非常迷人的表达式，就是“斐波那契数列比内公式”：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="48" width="236" src="Image00903.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">这个公式非常有意思，也让人感到非常不可思议，因为每一项里都有<img align="middle" height="56" width="40" src="Image00904.jpg" />
+ ，但最后的结果却是整数！</p>
+<p height="1em" width="2em" align="justify">由于<img align="middle" height="84" width="96" src="Image00905.jpg" />
+ = – 0.618 03…，它的值在 –1和0之间，如果我们对它不断地进行升幂处理，它就会越来越接近0。事实上，我们可以证明，对于任意的<i>n</i>
+ ≥0，我们都可以通过计算<i>g<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+</i>
+ /<img align="middle" height="56" width="40" src="Image00904.jpg" />
+ 的值，然后取最接近这个值的整数，来得到<i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ 。不信的话，请你拿出计算器，自己动手算算看。如果<i>g</i>
+ 取近似值1.618，升到10次幂就是122.966…（接近于123）。然后用这个数字除以<img align="middle" height="56" width="40" src="Image00904.jpg" />
+ （约等于2.236），结果是54.992。四舍五入后，就会得到<i>F<sub>
+<small>10</small>
+</sub>
+</i>
+ = 55，这与我们已知的情况一致。如果取<i>g<sup>
+<small>
+<font size="2">20</font>
+</small>
+</sup>
+</i>
+ ，即15 126.999 93，它除以<img align="middle" height="56" width="40" src="Image00904.jpg" />
+ 的商是6 765.000 03，因此<i>F<sub>
+<small>20</small>
+</sub>
+</i>
+ = 6 765。利用计算器计算<i>g<sup>
+<small>
+<font size="2">100</font>
+</small>
+</sup>
+</i>
+ /<img align="middle" height="56" width="40" src="Image00904.jpg" />
+ ，就会得到<i>F<sub>
+<small>100</small>
+</sub>
+</i>
+ ，约为3.54×10<sup>
+<small>
+<font size="2">20</font>
+</small>
+</sup>
+ 。</p>
+<p height="1em" width="2em" align="justify">在我们刚才的计算过程中，我们似乎把<i>g<sup>
+<small>
+<font size="2">10</font>
+</small>
+</sup>
+</i>
+ 和<i>g<sup>
+<small>
+<font size="2">20</font>
+</small>
+</sup>
+</i>
+ 视为整数来处理，这是为什么呢？请仔细观察“卢卡斯数列”（Lucas Sequence）：</p>
+<p height="1em" width="0pt" align="center">1，3，4，7，11，18，29，47，76，123，199，322，521…</p>
+<p height="1em" width="2em" align="justify">卢卡斯数列是以爱德华·卢卡斯（Édouard Lucas，1842—1891）的名字命名的。这位法国数学家发现了该数列与斐波那契数列的众多属性，其中包括我们在前面讨论的最大公因数属性，而且他是把1，1，2，3，5，8…命名为斐波那契数列的第一人。卢卡斯数列有它自己的比内公式（比斐波那契数列比内公式简单一些），即：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="58" width="236" src="Image00906.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">也就是说，对于<i>n</i>
+ ≥1，<i>L<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ 是非常接近<i>g<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+</i>
+ 的整数。（这与我们在前面看到的内容是一致的，因为<i>g<sup>
+<small>
+<font size="2">10</font>
+</small>
+</sup>
+</i>
+ ≈123 = <i>L<sub>
+<small>10</small>
+</sub>
+</i>
+ 。）从下表可以看出，斐波那契数列与卢卡斯数列还有其他的关系。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="447" width="1198" src="Image00907.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>斐波那契数列、卢卡斯数列及它们的关系</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">有的规律是显而易见的。例如，把斐波那契数列中的某个数字的左右“邻居”相加，就会得到卢卡斯数列中的某个数字：</p>
+<p height="1em" width="0pt" align="center">
+<i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–1</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+1</small>
+</sub>
+</i>
+ = <i>L<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">把卢卡斯数列中某个数字的左右“邻居”相加，和是斐波那契数列中的某个数字的5倍：</p>
+<p height="1em" width="0pt" align="center">
+<i>L<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>–1</small>
+</sub>
+</i>
+ + <i>L<sub>
+<small>n+1</small>
+</sub>
+</i>
+ = 5<i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">将斐波那契数列中的某个数字与对应的卢卡斯数列中某个数字相乘，就会得到斐波那契数列中的另一个数字！</p>
+<p height="1em" width="0pt" align="center">
+<i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ L<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ = <i>F<sub>
+<small>
+<font size="2">
+<i>2n</i>
+</font>
+</small>
+</sub>
+</i>
+</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">我们利用比内公式和简单的代数运算［比如，(<i>x</i>
+ – <i>y</i>
+ )(<i>x</i>
+ + <i>y</i>
+ ) = <i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ – <i>y<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ ］，证明上面给出的最后一种关系。令<i>h</i>
+ = （1–<img align="middle" height="56" width="40" src="Image00904.jpg" />
+ ）/2，斐波那契数列和卢卡斯数列的比内公式可以分别表述为：</blockquote>
+<blockquote height="1em" width="0pt" align="center"><img align="baseline" height="43" width="236" src="Image00908.jpg" />
+</blockquote>
+<blockquote height="1em" width="2em" align="justify">把这两个表达式相乘，就会得到：</blockquote>
+<blockquote height="1em" width="0pt" align="center"><img align="baseline" height="43" width="354" src="Image00909.jpg" />
+</blockquote>
+<p height="2em" width="2em" align="justify">那么，“黄金比例”这个名称又是从哪里得来的呢？它来自“黄金矩形”（golden rectangle）。如下图所示，该矩形的长宽之比正好是<i>g</i>
+ = 1.618 03…。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="213" width="354" src="Image00910.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>黄金矩形可以产生同样具有黄金比例关系的小矩形</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">把矩形的短边定义为1个单位，从矩形中移除一个1×1的正方形，剩下的矩形大小为1×(<i>g</i>
+ –1)，它的长宽之比为：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="36" width="236" src="Image00911.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">因此，这个小矩形也同原来的矩形一样，具有黄金比例关系。顺便告诉大家，<i>g</i>
+ 是具有这种完美属性的唯一数字，因为等式<img align="middle" height="84" width="81" src="Image00912.jpg" />
+ = <i>g</i>
+ ，即<i>g<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ – <i>g</i>
+ – 1 = 0。根据二次方程求根公式，满足这个方程式的唯一正数就是（1 +<img align="middle" height="56" width="40" src="Image00904.jpg" />
+ ） / 2 = <i>g</i>
+ 。</p>
+<p height="1em" width="2em" align="justify">凭借这个属性，黄金矩形被视为最美的矩形，很多艺术家、建筑师和摄影师都会有意识地在作品中使用这种矩形。达·芬奇的老朋友、合作伙伴卢卡·帕乔利把黄金矩形的长宽比称作“神圣比例”（the divine proportion）。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="602" width="971" src="Image00913.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>斐波那契数列与黄金比例给众多艺术家、建筑师和摄影家带来了灵感</b>
+</font>
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>图片来源：娜塔莉亚·圣克莱尔</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">由于黄金比例具有很多充满美感的数学属性，即使某些情况与黄金比例无关，人们也往往会想到它。例如，丹·布朗在他的著作《达·芬奇密码》中断言，1.618这个数字几乎无处不在，人类的身体就是一个证据。例如，布朗称，人的身高与肚脐高度之比一定是1.618。我自己没有做过这个实验，但是《大学数学》杂志上刊登了一篇题为“黄金比例的误读”的文章，作者乔治·马考夫斯基称这个说法根本不对。不过，在某些人看来，只要某个数字似乎与1.6比较接近，就意味着黄金比例在发挥神奇的作用。</p>
+<p height="1em" width="2em" align="justify">我经常说，斐波那契数列的许多规律都充满了诗意。我在这里举一个从诗歌得出斐波那契数列的例子，大多数五行打油诗都有下面这种韵律。（暂且把这首打油诗称作“dum”吧。）</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="454" width="1204" src="Image00914.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>斐波那契数列打油诗</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">数一数每行的音节数，就会发现到处都是斐波那契数列中的数字！我诗兴大发，决定也创作一首斐波那契数列的打油诗：</p>
+<blockquote height="2em" width="2em" align="justify">I think Fibonacci is fun（我觉得斐波那契数列真有意思。）</blockquote>
+<blockquote height="6pt" width="2em" align="justify">It starts with a 1 and a 1（开始两项是1和1。）</blockquote>
+<blockquote height="6pt" width="2em" align="justify">Then 2, 3, 5, 8（然后是2，3，5，8。）</blockquote>
+<blockquote height="6pt" width="2em" align="justify">But don’t stop there, mate（不过，伙计，不要着急，）</blockquote>
+<blockquote height="6pt" width="2em" align="justify">The fun has just barely begun!（更好玩的还在后面呢！）</blockquote>
+<span id="filepos0003294333"></span>
+<p height="1em" width="2em" align="justify">
+<a href="text00014.html#filepos0003281729">
+<font size="2">[1]</font>
+</a>
+ <font size="2">黄金比例，美国常用1.618 03…表示，中国惯用0.618 03…表示，表示方法不同，实质计算相同。——编者注</font>
+</p>
+<span id="filepos0003294607"></span>
+<p height="3em" width="0pt" align="center">
+<font size="4">
+<font color="#000000">第6章</font>
+</font>
+<br/>
+<br/>
+<font size="4">
+<font color="#000000">永恒的数学定理</font>
+</font>
+</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="40" width="354" src="Image00915.jpg" />
+</p>
+<span id="filepos0003294926"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">紫牛、俄罗斯方块与数学定理的证明</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">数学的一大乐趣，也是数学不同于其他科学的显著标志，就是它可以通过证明的方式帮助我们拨云见日，消除疑虑。在其他科学领域，我们之所以接受某些法则，是因为这些法则与现实世界一致，但一旦有新的证据出现，这些法则就有可能被推翻或者修改。在数学领域，如果某个命题被证明为真，那么它将永远是真实的。例如，欧几里得早在两千多年前就证明了质数有无数个，对于这个命题的真实性，我们无须怀疑。技术诞生之后还会退出历史舞台，但数学定理亘古不变。伟大的数学家高德菲·哈罗德·哈代（G. H. Hardy）说过：“同画家和诗人一样，数学家也是规律的创造者。数学家创造的规律之所以更加持久，原因就在于这些规律中蕴藏着思想。”我常常想，要想在学术方面取得不朽的成绩，最好的办法就是证明一条新的数学定理。</p>
+<p height="1em" width="2em" align="justify">数学家不仅可以证明某些事情的确定性，还可以证明某些事情是不可能的。人们有时说：“你无法证伪。”这句话的意思是，你无法证明紫色奶牛不存在，因为说不定哪天就会出现一头这样的奶牛。但在数学领域，你可以证伪。例如，无论你怎么努力，都找不到和为奇数的两个偶数，也找不到比其他质数都大的质数。第一次接触时，证明可能会让我们望而生畏（也许第二次、第三次时我们还会感到害怕），需要不断练习才能逐渐适应。但是，一旦你精于此道，就会觉得其乐无穷，无论是你自己动手证明，还是看别人的证明过程。好的证明就像一个精彩的故事，让你满心愉悦。加 入 会 员 微 信 whair004</p>
+<p height="1em" width="2em" align="justify">接下来，我和大家分享我第一次证明某件事是不可能的经历。小时候，我喜欢玩游戏、做智力测试题。一天，一位朋友给我出了一道难题，让我兴致盎然。他拿出一个空的8×8棋盘和32个普通的1×2双方块，然后问我：“你可以用这些双方块，把整个棋盘都盖住吗？”我说：“当然可以，只要每行放4个双方块就行了。”</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="354" width="354" src="Image00916.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>用1×2的双方块覆盖8×8的棋盘</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">他说：“非常好！现在，我们把右下角和左上角的这两个方格去掉。”说完，他在这两个方格上各放了一枚硬币，表示这两个区域不存在。“你可以用31个双方块覆盖棋盘上剩下的62个方格吗？”</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="354" width="354" src="Image00917.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>去掉右下角和左上角的两个方格之后，双方块可以盖住整个棋盘吗？</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">“也许可以吧。”我答道。但是，无论我怎么摆放，双方块都无法盖住整个棋盘。于是我想，这个任务是不是不可能完成呢？</p>
+<p height="1em" width="2em" align="justify">“如果你觉得这个任务无法完成，你如何证明？”朋友问道。但是，摆放双方块的方法有无数种，如果我不一一尝试，怎么能证明这是一个不可能完成的任务呢？这时候，他给了我一点儿提示：“观察一下棋盘上的颜色。”</p>
+<p height="1em" width="2em" align="justify">颜色？这与颜色有什么关系？我突然想明白了。由于去掉的两个方格都是浅色的，因此棋盘上还剩下32个深色方格和30个浅色方格。每个双方块正好覆盖一个浅色方格和一个深色方格，所以用31个双方块不可能盖住整个棋盘。太棒了！</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">如果你喜欢上面的证明过程，那么你肯定也会喜欢下面这个证明过程。俄罗斯方块游戏中有7种形状各异的板块，有时候它们分别被称为I、J、L、O、Z、T、S。</blockquote>
+<blockquote height="1em" width="0pt" align="center"><img align="baseline" height="224" width="354" src="Image00918.jpg" />
+</blockquote>
+<blockquote height="0pt" width="2em" align="center">
+<font size="2">
+<b>这7个板块可以拼成一个4×7的长方形吗？</b>
+</font>
+</blockquote>
+<blockquote height="1em" width="2em" align="justify">由于每个板块都包含4个1×1方块，因此我们自然想知道7个板块是不是可以拼成一个4×7的长方形，拼装的时候可以翻转或旋转这些板块。事实证明，这个任务是无法完成的。如何证明它是不可能的呢？如下图所示，把4×7长方形涂成14个浅色方格和14个深色方格。</blockquote>
+<blockquote height="1em" width="0pt" align="center"><img align="baseline" height="201" width="354" src="Image00919.jpg" />
+</blockquote>
+<blockquote height="1em" width="2em" align="justify">请注意，除了T以外，其他的板块无论摆放到哪个位置上，都会覆盖两个深色方格和两个浅色方格。而在T覆盖的4个方格中，有三个方格的颜色一样。因此，无论其余6个板块怎么摆放，它们都会覆盖12个浅色方格和12个深色方格。剩余的2个浅色方格和2个深色方格只能用板块T来覆盖，而这是不可能的。</blockquote>
+<p height="2em" width="2em" align="justify">如果我们认为某个数学命题是真实的，怎样才能证明它的确是真实的呢？通常，先要对我们所研究的数学对象进行描述。例如，我们说整数集合</p>
+<p height="1em" width="0pt" align="center">…，–2，–1，0，1，2，3，…</p>
+<p height="1em" width="2em" align="justify">包含所有整数：正数、负数和零。</p>
+<p height="1em" width="2em" align="justify">之后，我们要对这些对象做出一些显而易见的假设。例如，“两个整数的和或积一定是整数”。（下一章将讨论几何学，届时我们会做出这样的假设：“对于任意两点，都可以画出一条经过这两点的直线”。）这些显而易见的命题叫作“公理”（axioms）。在这些公理的基础上，通过逻辑推理和代数运算，我们经常可以推导出一些正确的命题，叫作“定理”（theorems）。定理有时候并不是显而易见的。阅读本章，你可以学会证明数学命题的基本方法。</p>
+<p height="1em" width="2em" align="justify">我们先来证明一些很容易取信于人的定理。第一次听到“两个偶数的和是偶数”、“两个奇数的乘积是奇数”等命题时，我们通常会默默地举出几个实例，检验之后才会断定这个命题是真实的或者有道理的。你有时甚至会想，这个命题太显而易见了，都可以当作公理使用了。但是，我们没必要把它作为公理，因为利用已知的公理，可以证明这个命题为真。在证明偶数和奇数的某些属性时，我们需要先弄明白它们的含义。</p>
+<p height="1em" width="2em" align="justify">“偶数”是2的倍数。用代数语言来表述的话，就是如果<i>n</i>
+ = 2<i>k</i>
+ ，<i>k</i>
+ 是整数，那么我们说<i>n</i>
+ 是偶数。0是不是偶数呢？是偶数，因为0 = 2×0。现在，我们可以证明“两个偶数的和是偶数”这个命题了。</p>
+<p height="1em" width="2em" align="justify">定理：如果<i>m</i>
+ 和<i>n</i>
+ 是偶数，那么<i>m</i>
+ + <i>n</i>
+ 也是偶数。</p>
+<p height="1em" width="2em" align="justify">这是一个典型的“如果—那么”定理。在证明这种命题时，我们通常会对“如果”部分做出假设，然后通过逻辑和代数运算，证明可以根据假设得出“那么”部分。在本例中，我们假设<i>m</i>
+ 和<i>n</i>
+ 是偶数，希望得出<i>m</i>
+ + <i>n</i>
+ 也是偶数的结论。</p>
+<p height="1em" width="2em" align="justify">证明：假设<i>m</i>
+ 和<i>n</i>
+ 是偶数，因此<i>m</i>
+ = 2<i>j</i>
+ ，<i>n</i>
+ = 2<i>k</i>
+ ，其中<i>j</i>
+ 和<i>k</i>
+ 都是整数，进而可以得出：</p>
+<p height="1em" width="0pt" align="center">
+<i>m</i>
+ + <i>n</i>
+ = 2<i>j</i>
+ + 2<i>k</i>
+ = 2 (<i>j</i>
+ + <i>k</i>
+ )</p>
+<p height="1em" width="2em" align="justify">由于<i>j</i>
+ + <i>k</i>
+ 是整数，因此<i>m</i>
+ + <i>n</i>
+ 是2的倍数，从而证明<i>m</i>
+ + <i>n</i>
+ 必然是偶数。</p>
+<p height="1em" width="2em" align="justify">注意，上述证明的依据是，两个整数的和（即本例中的<i>j</i>
+ + <i>k</i>
+ ）也必然是整数这条公理。在证明复杂的命题时，我们不仅需要依赖一些基本公理，还可能需要利用已经被证明的定理。数学界的一个常见做法就是在证明结束之后，在最后一行的右侧页边添加一个标识，例如□、■或者Q. E .D。Q. E. D是拉丁语“quod erat demonstrandum”的缩写，意思是“证明完毕”。（如果你愿意，你也可以把它看作英语“quite easily done”的缩写，意思是“太简单了”。）如果我认为某个证明过程特别美妙，我就会在结尾处画一个笑脸符号（<img align="middle" height="56" width="59" src="Image00920.jpg" />
+ ）。</p>
+<p height="1em" width="2em" align="justify">在证明了“如果—那么”定理之后，数学家们开始考虑逆命题的真实性。逆命题就是把原命题的“如果”和“那么”这两个部分对调之后得到的命题。上例的逆命题是：“如果<i>m</i>
+ + <i>n</i>
+ 是偶数，那么<i>m</i>
+ 和<i>n</i>
+ 都是偶数”。只需举出一个“反例”（counterexample），就能很容易地证明这是一个假命题。对于这个命题而言，我们可以举一个非常简单的反例：</p>
+<p height="1em" width="0pt" align="center">1 + 1 = 2</p>
+<p height="1em" width="2em" align="justify">这个例子表明，即使两个数不是偶数，它们的和也可以是偶数。</p>
+<p height="1em" width="2em" align="justify">下面讨论一条关于“奇数”的定理。奇数是指不是2的倍数的数字。如果用2除以一个奇数，余数一定是1。用代数语言来表述，就是如果<i>n</i>
+ = 2<i>k</i>
+ + 1，<i>k</i>
+ 是整数，那么<i>n</i>
+ 是奇数。有了这个定义之后，我们只需通过简单的代数运算，就能证明“两个奇数的乘积是奇数”这个命题。</p>
+<p height="1em" width="2em" align="justify">定理：如果<i>m</i>
+ 和<i>n</i>
+ 是奇数，那么<i>mn</i>
+ 也是奇数。</p>
+<p height="1em" width="2em" align="justify">证明：假设<i>m</i>
+ 和<i>n</i>
+ 是奇数。那么<i>m</i>
+ = 2<i>j</i>
+ + 1，<i>n</i>
+ = 2<i>k</i>
+ + 1，<i>j</i>
+ 、<i>k</i>
+ 是整数。根据FOIL法则：</p>
+<p height="1em" width="0pt" align="center">
+<i>mn</i>
+ = (2<i>j</i>
+ + 1) (2<i>k</i>
+ + 1) = 4<i>jk</i>
+ + 2<i>j</i>
+ + 2<i>k</i>
+ + 1 = 2 (2<i>jk</i>
+ + <i>j</i>
+ + <i>k</i>
+ ) + 1</p>
+<p height="1em" width="2em" align="justify">由于2<i>jk</i>
+ + <i>j</i>
+ + <i>k</i>
+ 是整数，因此<i>mn</i>
+ 是“某个整数的2倍 + 1”，从而证明<i>mn</i>
+ 是奇数。 □</p>
+<p height="1em" width="2em" align="justify">它的逆命题“如果<i>mn</i>
+ 是奇数，那么<i>m</i>
+ 和<i>n</i>
+ 都是奇数”是否为真呢？这个命题也是真命题，我们可以利用“反证法”（proof by contradiction）来证明。反证法是指，如果我们否定结论（“<i>m</i>
+ 、<i>n</i>
+ 都是奇数”），我们之前做出的假设就不成立。因此，从逻辑上讲，结论必定是成立的。</p>
+<p height="1em" width="2em" align="justify">定理：如果<i>mn</i>
+ 是奇数，那么<i>m</i>
+ 和<i>n</i>
+ 都是奇数。</p>
+<p height="1em" width="2em" align="justify">证明：与结论相反，我们假设<i>m</i>
+ 或<i>n</i>
+ 是偶数（或同为偶数）。这两个数字中到底哪一个是偶数无关紧要，我们假定<i>m</i>
+ 是偶数，也就是说，<i>m</i>
+ = 2<i>j</i>
+ ，<i>j</i>
+ 为整数。那么，乘积<i>mn</i>
+ = 2<i>jn</i>
+ 也是偶数，这与我们之前假设<i>mn</i>
+ 是奇数的前提相悖。</p>
+<p height="1em" width="2em" align="justify">如果某个命题和它的逆命题都是真命题，数学界就称之为“当且仅当定理”（if and only if theorem）。我们前面已经完成了下述定理的证明工作。</p>
+<p height="1em" width="2em" align="justify">定理：当且仅当<i>mn</i>
+ 是奇数时，<i>m</i>
+ 和<i>n</i>
+ 都是奇数。</p>
+<span id="filepos0003307851"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">有理数和无理数</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">上述定理不会让你感到吃惊，它们的证明过程也非常直接。只在证明某些不太直观的定理时，我们才可以体会到其中的乐趣。到目前为止，我们接触的都是整数，现在可以进阶到分数的相关定理的证明了。“有理数”（rational number）是指可以表示为分数形式的数字。更准确的说法是，如果<i>r</i>
+ = <i>a</i>
+ / <i>b</i>
+ ，其中<i>a</i>
+ 和<i>b</i>
+ 是整数（且<i>b</i>
+ ≠ 0），那么我们说<i>r</i>
+ 是有理数。不能表示为分数形式的数字叫作“无理数”（irrational number）。（你或许听说过，数字π= 3.141 59…就是无理数，我们将在本书第8章对它进行详细介绍。）</p>
+<p height="1em" width="2em" align="justify">在介绍下一个定理之前，我们有必要回顾一下分数的加法。如果分数的分母相同，进行加法运算时就极为简单。例如：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="46" width="354" src="Image00921.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">否则，我们必须先把它们化成分母相同的形式，再进行加法运算。例如：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="48" width="354" src="Image00922.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">一般而言，在计算两个分数 <i>a</i>
+ / <i>b</i>
+ 和<i>c</i>
+ / <i>d</i>
+ 的和时，我们可以为它们赋予一个公分母，例如：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="50" width="236" src="Image00923.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">接下来，我们就可以证明有理数的一些简单属性了。</p>
+<p height="1em" width="2em" align="justify">定理：两个有理数的平均数仍然是有理数。</p>
+<p height="1em" width="2em" align="justify">证明：令<i>x</i>
+ 和<i>y</i>
+ 为有理数，必然存在<i>a</i>
+ 、<i>b</i>
+ 、<i>c</i>
+ 、<i>d</i>
+ ，满足<i>x</i>
+ = <i>a</i>
+ / <i>b</i>
+ ，<i>y</i>
+ = <i>c</i>
+ / <i>d</i>
+ 。所以，<i>x</i>
+ 和<i>y</i>
+ 的平均数为：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="44" width="236" src="Image00924.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">由此可见，该平均数是一个分数，且分子、分母均为整数。因此，有理数<i>x</i>
+ 和<i>y</i>
+ 的平均数也是有理数。</p>
+<p height="1em" width="2em" align="justify">我们想一想，这个定理有什么含义？它的意思是，对于任意两个有理数，即使它们非常接近，我们也总能找出一个位于它们之间的有理数。也许你忍不住会想，所有的数字都是有理数（古希腊人也曾有这样的想法）。但是，令人吃惊的是，这个想法是错误的。我们以<img align="middle" height="56" width="40" src="Image00925.jpg" />
+ 为例，这个数字的小数形式是1.414 2…。现在，我们有很多方法，用分数来近似地表示<img align="middle" height="56" width="40" src="Image00925.jpg" />
+ 。例如，<img align="middle" height="56" width="40" src="Image00925.jpg" />
+ 近似等于10 / 7或者1 414 /1 000，但是这些分数的平方都不会正好等于2。是不是因为我们找得还不够仔细呢？下面这个定理告诉我们，无论我们怎么努力，都会无功而返。该定理的证明采用了反证法，关于无理数的定理通常都会采用这种证明方法。我们知道，所有分数都可化简至最简分数，即分子和分母没有大于1的公因数。下面的证明过程就将利用分数的这个特点。</p>
+<p height="1em" width="2em" align="justify">定理：<img align="middle" height="56" width="40" src="Image00925.jpg" />
+ 是无理数。</p>
+<p height="1em" width="2em" align="justify">证明：我们假设<img align="middle" height="56" width="40" src="Image00925.jpg" />
+ 是有理数，则必然存在正整数<i>a</i>
+ 和<i>b</i>
+ ，满足：</p>
+<p height="1em" width="0pt" align="center"><img align="middle" height="56" width="40" src="Image00926.jpg" />
+ = <i>a</i>
+ / <i>b</i>
+</p>
+<p height="1em" width="2em" align="justify">其中，<i>a</i>
+ / <i>b</i>
+ 是最简分数。等式两边同时进行平方运算，就有：</p>
+<p height="1em" width="0pt" align="center">2 = <i>a<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ / <i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">也就是说，<i>a<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ = 2<i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 。由此可知，<i>a<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 必然是偶数。如果<i>a<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 是偶数，那么<i>a</i>
+ 也必然是偶数（前文中已经证明，如果<i>a</i>
+ 是奇数，那么其自乘的结果也必然是奇数）。因此，<i>a</i>
+ = 2<i>k</i>
+ ，<i>k</i>
+ 是整数。将它代入上面的等式，就有：</p>
+<p height="1em" width="0pt" align="center">(2<i>k</i>
+ )<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ = 2<i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+</p>
+<p height="1em" width="0pt" align="center">4<i>k<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ = 2<i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+</p>
+<p height="1em" width="0pt" align="center">
+<i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ = 2<i>k<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">因此，<i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 是偶数。既然<i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 是偶数，<i>b</i>
+ 也必然是偶数。但是，<i>a</i>
+ 和<i>b</i>
+ 都是偶数，这与<i>a</i>
+ / <i>b</i>
+ 是最简分数的前提相矛盾。因此，<img align="middle" height="56" width="40" src="Image00925.jpg" />
+ 是有理数这个假设不成立，这证明<img align="middle" height="56" width="40" src="Image00925.jpg" />
+ 是无理数。 <img align="middle" height="56" width="59" src="Image00920.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">单凭逻辑的力量，就证明了一个非常令人吃惊的结果，所以我十分喜欢这个证明过程（画了个笑脸）。本书第12章将告诉我们，无理数非常多。事实上，从严格意义上讲，绝大多数的实数都是无理数，尽管我们在日常生活中接触的大多是有理数。</p>
+<p height="1em" width="2em" align="justify">上面这条定理有一个有趣的“推论”（corollary），推论是指由某条定理推导得出的定理。这个推论的推导过程利用了“指数定律”（law of exponentiation），即对于任意整数<i>a</i>
+ 、<i>b</i>
+ 、<i>c</i>
+ ：</p>
+<p height="1em" width="0pt" align="center">（<i>a<sup>
+<small>
+<font size="2">
+<i>b</i>
+</font>
+</small>
+</sup>
+</i>
+ ）<sup>
+<small>
+<font size="2">
+<i>c</i>
+</font>
+</small>
+</sup>
+ = <i>a<sup>
+<small>
+<font size="2">
+<i>bc</i>
+</font>
+</small>
+</sup>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">例如，（5<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ ）<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ = 5<sup>
+<small>
+<font size="2">6</font>
+</small>
+</sup>
+ ，这是有道理的，因为：</p>
+<p height="1em" width="0pt" align="center">（5<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ ）<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ = (5 × 5 × 5) × (5 × 5 × 5) = 5<sup>
+<small>
+<font size="2">6</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="2em" align="justify">推论：存在无理数<i>a</i>
+ 和<i>b</i>
+ ，使得<i>a<sup>
+<small>
+<font size="2">
+<i>b</i>
+</font>
+</small>
+</sup>
+</i>
+ 是有理数。</p>
+<p height="1em" width="2em" align="justify">尽管现在我们只知道一个无理数，即<img align="middle" height="56" width="40" src="Image00925.jpg" />
+ ，但足以证明这条定理，这真是太棒了！下面的证明过程可以告诉你符合条件的<i>a</i>
+ 和<i>b</i>
+ 是存在的，但不能告诉你它们的值分别是多少。我们把这种证明称为“存在性证明”（existence proof）。</p>
+<p height="1em" width="2em" align="justify">证明：我们知道<img align="middle" height="56" width="40" src="Image00925.jpg" />
+ 是无理数，我们来看<img align="middle" height="56" width="40" src="Image00925.jpg" />
+ <sup>
+<small><img align="middle" height="42" width="27" src="Image00927.jpg" />
+</small>
+</sup>
+ 这个数字，它是不是有理数呢？如果是，那么令<i>a</i>
+ =<img align="middle" height="56" width="40" src="Image00925.jpg" />
+ ，<i>b</i>
+ =<img align="middle" height="56" width="40" src="Image00925.jpg" />
+ ，命题就得到了证明。如果答案是否定的，就说明我们知道的无理数又多了一个，即<img align="middle" height="56" width="40" src="Image00925.jpg" />
+ <img align="middle" height="56" width="36" src="Image00927.jpg" />
+ 。令<i>a</i>
+ =<img align="middle" height="56" width="40" src="Image00925.jpg" />
+ <img align="middle" height="56" width="36" src="Image00927.jpg" />
+ ，<i>b</i>
+ =<img align="middle" height="56" width="40" src="Image00925.jpg" />
+ ，根据指数定律，就可以得到：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="42" width="236" src="Image00928.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">答案是一个有理数。因此，无论<img align="middle" height="56" width="40" src="Image00925.jpg" />
+ <sup>
+<small><img align="middle" height="42" width="27" src="Image00927.jpg" />
+</small>
+</sup>
+ 是有理数还是无理数，我们都可以找到<i>a</i>
+ 、<i>b</i>
+ ，使得<i>a<sup>
+<small>
+<font size="2">
+<i>b</i>
+</font>
+</small>
+</sup>
+</i>
+ 是有理数。 <img align="middle" height="56" width="59" src="Image00920.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">存在性证明这种证明方法通常很巧妙，但它有时也存在不尽如人意的地方，无法告诉你想要了解的所有信息。（如果你感到好奇，我可以告诉你<img align="middle" height="56" width="40" src="Image00925.jpg" />
+ <sup>
+<small><img align="middle" height="42" width="27" src="Image00927.jpg" />
+</small>
+</sup>
+ 是无理数，但这不属于本章讨论的范围。）</p>
+<p height="1em" width="2em" align="justify">更能让人心满意足的证明方法是“构造性证明”（constructive proof），因为它告诉你的信息正好是你想要了解的信息。例如，我们可以证明所有的有理数<i>a</i>
+ / <i>b</i>
+ 都是有尽或者循环小数（这是因为，随着除法运算的进行，<i>b</i>
+ 除过的数字必然会再次出现，并被<i>b</i>
+ 除）。但是，它的反命题是否正确？有尽小数必然是有理数，例如，0.123 58 =12 358 / 100 000。循环小数呢？例如，0.123 123 123…一定是有理数吗？答案是肯定的。下面这种巧妙的方法可以告诉我们有理数到底是什么。我们把这个神秘数字设为<i>w</i>
+ ，于是：</p>
+<p height="1em" width="0pt" align="center">
+<i>w</i>
+ = 0.123 123 123…</p>
+<p height="1em" width="2em" align="justify">两边同时乘以1 000，上式就会变成：</p>
+<p height="1em" width="0pt" align="center">1 000<i>w</i>
+ = 123.123 123 123…</p>
+<p height="1em" width="2em" align="justify">用第二个等式减去第一个等式，就会得到：</p>
+<p height="1em" width="0pt" align="center">999<i>w</i>
+ = 123</p>
+<p height="1em" width="0pt" align="center">
+<i>w</i>
+ =<img align="middle" height="84" width="65" src="Image00929.jpg" />
+ =<img align="middle" height="84" width="65" src="Image00930.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">我们换另一个循环小数再试一试。这一次的循环小数并不是从小数点后第一位就开始循环，比如，如何将小数0.833 33…表示成分数形式呢？先令：</p>
+<p height="1em" width="0pt" align="center">
+<i>x</i>
+ = 0.833 33…</p>
+<p height="1em" width="2em" align="justify">两边同时乘以100：</p>
+<p height="1em" width="0pt" align="center">100<i>x</i>
+ = 83.333 3…</p>
+<p height="1em" width="2em" align="justify">再同时除以10：</p>
+<p height="1em" width="0pt" align="center">10<i>x</i>
+ = 8.333 3…</p>
+<p height="1em" width="2em" align="justify">从100<i>x</i>
+ 中减去10<i>x</i>
+ ，小数点后面的所有项都抵消了：</p>
+<p height="1em" width="0pt" align="center">90<i>x</i>
+ = (83.333 3…) – (8.333 3…) = 75</p>
+<p height="1em" width="0pt" align="center">
+<i>x</i>
+ =<img align="middle" height="84" width="65" src="Image00931.jpg" />
+ =<img align="middle" height="84" width="65" src="Image00932.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">运用构造性证明这种证明方法，我们可以证明当且仅当某个数字的小数形式是有尽或者循环小数时，该数才是有理数。如果某数的小数形式是不循环的无尽小数，例如：</p>
+<p height="1em" width="0pt" align="center">
+<i>v</i>
+ = 0.123 456 789 101 112 131 415…</p>
+<p height="1em" width="2em" align="justify">这个数字就是无理数。</p>
+<span id="filepos0003320975"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">棋盘覆盖问题与归纳性证明</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">我们再回过头去，证明与正整数相关的一些定理。在本书第1章，通过观察：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="210" width="236" src="Image00933.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">我们先提出前<i>n</i>
+ 个奇数的和是<i>n<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 的命题，然后着手证明这个命题。当时，我们使用的是巧妙的“组合性证明”（combinatorial proof）法，即通过两种方法统计棋盘的方格数，证明了这个命题的真实性。接下来，我们用一种无须巧妙构思的方法来证明这个命题。假设我告诉你（也许你本就深信不疑）前10个奇数的和1 + 3 + … + 19是10<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ ，即100，如果你表示同意，那么再加上第11个奇数（21），和毫无疑问是121，也就是11<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ 。换句话说，如果针对前10个奇数该命题为真，那么针对前11个奇数该命题同样为真。这就是“归纳证性明”（proof by induction）法的指导思想。在涉及<i>n</i>
+ 的证明时，我们通常会先证明命题在一开始的时候（通常是<i>n</i>
+ = 1时）是正确的，然后证明如果<i>n</i>
+ = <i>k</i>
+ 时命题成立，那么<i>n</i>
+ = <i>k</i>
+ + 1时它也成立。由此可证，在<i>n</i>
+ 取所有值时命题都成立。归纳性证明就像爬梯子：先证明你可以踏上梯子，然后证明如果你已经爬上了一级，就可以再向上爬一级。稍稍思考其中的道理，你就会相信自己可以爬上梯子的任意一级。</p>
+<p height="1em" width="2em" align="justify">例如，对于前<i>n</i>
+ 个奇数的和这个命题，我们的目标是证明对于所有的<i>n</i>
+ ≥1，都有：</p>
+<p height="1em" width="0pt" align="center">1 + 3 + 5 + … + (2<i>n</i>
+ – 1) = <i>n<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">我们发现，第一个奇数1的和的确是1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ ，因此当<i>n</i>
+ = 1时，这个命题肯定是正确的。接下来，我们注意到，如果前<i>k</i>
+ 个奇数的和是<i>k<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ ，即：</p>
+<p height="1em" width="0pt" align="center">1 + 3 + 5 + … + (2<i>k</i>
+ – 1) = <i>k<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">再加上下一个奇数（2<i>k</i>
+ + 1），就有：</p>
+<p height="1em" width="0pt" align="center">1 + 3 + 5 + … + (2<i>k</i>
+ – 1) + (2<i>k</i>
+ + 1) = <i>k<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + (2<i>k</i>
+ + 1)</p>
+<p height="1em" width="0pt" align="center">= (<i>k</i>
+ + 1)<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="2em" align="justify">也就是说，如果前<i>k</i>
+ 个奇数的和是<i>k<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ ，那么前<i>k</i>
+ + 1个奇数的和一定是(<i>k</i>
+ + 1)<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ 。既然<i>n</i>
+ = 1时命题成立，由上述证明过程可知，<i>n</i>
+ 取所有值时该命题也成立。</p>
+<p height="1em" width="2em" align="justify">归纳性证明法是一个功能强大的证明方法。本书讨论的第一个问题是前<i>n</i>
+ 个数字的和：</p>
+<p height="1em" width="0pt" align="center">1 + 2 + 3 + … + <i>n</i>
+ =<img align="middle" height="84" width="109" src="Image00934.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">当<i>n</i>
+ = 1时，该命题肯定是正确的，因为1 = （1×2） / 2。如果我们假设对于某个数字<i>k</i>
+ ，命题</p>
+<p height="1em" width="0pt" align="center">1 + 2 + 3 + … + <i>k</i>
+ =<img align="middle" height="84" width="103" src="Image00935.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">是正确的，在上式基础上再加上 (<i>k</i>
+ + 1)，就会得到：</p>
+<p height="1em" width="0pt" align="center">1 + 2 + 3 + … + <i>k</i>
+ + (<i>k</i>
+ + 1) =<img align="middle" height="84" width="103" src="Image00936.jpg" />
+ + (<i>k</i>
+ + 1)</p>
+<p height="1em" width="0pt" align="center">= (<i>k</i>
+ + 1) (<img align="middle" height="84" width="28" src="Image00937.jpg" />
+ + 1)</p>
+<p height="1em" width="0pt" align="center">=<img align="middle" height="84" width="168" src="Image00938.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">这是用 <i>k</i>
+ + 1代替<i>n</i>
+ 时的求和公式。因此，如果<i>n</i>
+ = <i>k</i>
+ （<i>k</i>
+ 是任意正数）时公式成立，那么当<i>n</i>
+ = <i>k</i>
+ + 1时，该公式同样成立。由此可证，当<i>n</i>
+ 取所有正值时，公式都成立。</p>
+<p height="1em" width="2em" align="justify">在本章以及后续章节中，我们将见到更多的归纳性证明实例。为了帮助大家加深印象，我在这里为大家送上“数学音乐家”戴恩·坎普（Dane Camp）和拉里·莱塞（Larry Lesser）创作的一首歌，这首歌采用了美国民谣歌手鲍勃·迪伦（Bob Dylan）的作品《答案在风中飘荡》（Blowing in the Wind）的旋律。</p>
+<blockquote height="2em" width="2em" align="justify">如何才能证明<i>n</i>
+ 取所有值时</blockquote>
+<blockquote height="6pt" width="2em" align="justify">命题都成立？</blockquote>
+<blockquote height="6pt" width="2em" align="justify">既然无法一一验证</blockquote>
+<blockquote height="6pt" width="2em" align="justify">盲目尝试又有何益！</blockquote>
+<blockquote height="6pt" width="2em" align="justify">面临如此困境，</blockquote>
+<blockquote height="6pt" width="2em" align="justify">能否找到锦囊妙计？</blockquote>
+<br/>
+<br/>
+<blockquote height="6pt" width="2em" align="justify">答案啊，我的朋友，是要学会归纳性证明，</blockquote>
+<blockquote height="6pt" width="2em" align="justify">答案是要学会归纳性证明！</blockquote>
+<br/>
+<br/>
+<blockquote height="6pt" width="2em" align="justify">首先研究开始时的情况</blockquote>
+<blockquote height="6pt" width="2em" align="justify">证明命题没有问题，</blockquote>
+<blockquote height="6pt" width="2em" align="justify">然后假设<i>n</i>
+ = <i>k</i>
+ 时命题为真</blockquote>
+<blockquote height="6pt" width="2em" align="justify">并证明<i>n</i>
+ = <i>k</i>
+ + 1时仍然成立！</blockquote>
+<blockquote height="6pt" width="2em" align="justify">至此问题迎刃而解</blockquote>
+<blockquote height="6pt" width="2em" align="justify">告诉我你是否感到满意？</blockquote>
+<br/>
+<br/>
+<blockquote height="6pt" width="2em" align="justify">既然已经说了<i>n</i>
+ 次，说<i>n</i>
+ + 1次又何妨</blockquote>
+<blockquote height="6pt" width="2em" align="justify">答案是要学会归纳性证明！</blockquote>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">我们在本书第5章讨论了斐波那契数列数字间的几种相互关系。下面，我们就用归纳性证明法验证其中几个等式。</blockquote>
+<blockquote height="6pt" width="2em" align="justify">定理：对于<i>n</i>
+ ≥1，</blockquote>
+<blockquote height="6pt" width="0pt" align="center">
+<i>F<sub>
+<small>1</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>2</small>
+</sub>
+</i>
+ + … + <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+</i>
+ = <i>F<sub>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+2</small>
+</sub>
+</i>
+ –1</blockquote>
+<blockquote height="6pt" width="2em" align="justify">证明：当<i>n</i>
+ = 1时，上式为 <i>F<sub>
+<small>1</small>
+</sub>
+</i>
+ = <i>F<sub>
+<small>3</small>
+</sub>
+</i>
+ –1，即1 = 2–1，这显然是成立的。假设当<i>n</i>
+ = <i>k</i>
+ 时，命题也成立，那么：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">
+<i>F<sub>
+<small>1</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>2</small>
+</sub>
+</i>
+ + … + <i>F<sub>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sub>
+</i>
+ = <i>F<sub>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+2</small>
+</sub>
+</i>
+ –1</blockquote>
+<blockquote height="6pt" width="2em" align="justify">在等式两边同时加上下一个数字<i>F<sub>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+1</small>
+</sub>
+</i>
+ ，就会得到</blockquote>
+<blockquote height="6pt" width="0pt" align="center">
+<i>F<sub>
+<small>1</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>2</small>
+</sub>
+</i>
+ + … + <i>F<sub>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+1</small>
+</sub>
+</i>
+ = <i>F<sub>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+1</small>
+</sub>
+</i>
+ + <i>F<sub>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+2</small>
+</sub>
+</i>
+ – 1</blockquote>
+<blockquote height="6pt" width="0pt" align="center">= <i>F<sub>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sub>
+ <sub>
+<small>+3</small>
+</sub>
+</i>
+ – 1</blockquote>
+<blockquote height="6pt" width="2em" align="justify">证明完毕。 □</blockquote>
+<blockquote height="6pt" width="2em" align="justify">斐波那契数列的平方和等式的证明同样简单。</blockquote>
+<blockquote height="6pt" width="2em" align="justify">定理：对于<i>n</i>
+ ≥1，</blockquote>
+<blockquote height="1em" width="0pt" align="center"><img align="baseline" height="34" width="236" src="Image00939.jpg" />
+</blockquote>
+<blockquote height="1em" width="2em" align="justify">证明：当<i>n</i>
+ = 1时，上式为<img align="middle" height="84" width="51" src="Image00940.jpg" />
+ = <i>F<sub>
+<small>1</small>
+</sub>
+</i>
+ <i>F<sub>
+<small>2</small>
+</sub>
+</i>
+ ，这显然是成立的，因为<i>F<sub>
+<small>2</small>
+</sub>
+</i>
+ = <i>F<sub>
+<small>1</small>
+</sub>
+</i>
+ =1。假设当<i>n</i>
+ = <i>k</i>
+ 时定理也成立，那么：</blockquote>
+<blockquote height="1em" width="0pt" align="center"><img align="baseline" height="38" width="236" src="Image00941.jpg" />
+</blockquote>
+<blockquote height="1em" width="2em" align="justify">在等式两边同时加上<img align="middle" height="84" width="104" src="Image00942.jpg" />
+ ，就会得到：</blockquote>
+<blockquote height="1em" width="0pt" align="center"><img align="baseline" height="102" width="354" src="Image00943.jpg" />
+</blockquote>
+<blockquote height="1em" width="2em" align="justify">证明完毕。 □</blockquote>
+<p height="2em" width="2em" align="justify">我们在本书第1章发现，“三次方的和就是和的二次方”，例如：</p>
+<p height="1em" width="0pt" align="center">1<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ = 1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="0pt" align="center">1<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ = (1 + 2)<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="0pt" align="center">1<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 3<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ = (1 + 2 + 3)<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="0pt" align="center">1<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 3<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 4<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ = (1 + 2 + 3 + 4)<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="2em" align="justify">但是，我们当时无法证明。有了归纳性证明法之后，就可以轻松完成证明工作了。这个一般性规律是：对于<i>n</i>
+ ≥1，</p>
+<p height="1em" width="0pt" align="center">1<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 3<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + … + <i>n<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ = (1 + 2 + 3 + … + <i>n</i>
+ )<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="2em" align="justify">由于我们已经知道1 + 2 + … + <i>n</i>
+ =<img align="middle" height="84" width="103" src="Image00944.jpg" />
+ ，因此我们可以证明下面这条等价定理。</p>
+<p height="1em" width="2em" align="justify">定理：对于<i>n</i>
+ ≥1，</p>
+<p height="1em" width="0pt" align="center">1<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 3<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + … + <i>n<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ =<img align="middle" height="84" width="122" src="Image00945.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">证明：当<i>n</i>
+ = 1时，命题1<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ = (1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ ×2<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ ) /4成立。如果<i>n</i>
+ = <i>k</i>
+ 时定理也成立，就有：</p>
+<p height="1em" width="0pt" align="center">1<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 3<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + … + <i>k<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ =<img align="middle" height="84" width="122" src="Image00946.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">两边同时加上 (<i>k</i>
+ + 1)<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ ，就会得到：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="181" width="354" src="Image00947.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">证明完毕。 □</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">下面是立方和公式的几何证明。</blockquote>
+<blockquote height="1em" width="0pt" align="center"><img align="baseline" height="236" width="236" src="Image00948.jpg" />
+</blockquote>
+<blockquote height="1em" width="2em" align="justify">我们用两种方法计算上图的面积，然后进行比较。一方面，这是一个正方形，它的边长是1 + 2 + 3 + 4 + 5，因此它的面积是 (1 + 2 + 3 + 4 + 5)<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ 。</blockquote>
+<blockquote height="6pt" width="2em" align="justify">另一方面，我们从左上角开始，沿对角线方向观察，就会发现这个正方形是由1个1×1的正方形，2个2×2的正方形（其中一个正方形被分割成两半），3个3×3的正方形，4个4×4的正方形（其中一个正方形被分割成两半）和5个5×5的正方形构成的，因此它的面积等于：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">(1×1<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ ) + (2×2<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ ) + (3×3<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ ) + (4×4<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ ) + (5×5<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ )</blockquote>
+<blockquote height="6pt" width="0pt" align="center">= 1<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 3<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 4<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 5<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</blockquote>
+<blockquote height="6pt" width="2em" align="justify">由于计算的面积相等，所以：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">1<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 3<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 4<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 5<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ = (1 + 2 + 3 + 4 + 5)<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</blockquote>
+<blockquote height="6pt" width="2em" align="justify">利用相同的方法可以画出边长为1 + 2 + … + <i>n</i>
+ 的正方形，并证明下面这个等式成立：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">1<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + 3<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + … + <i>n<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ = (1 + 2 + 3 + … + <i>n</i>
+ )<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ <img align="middle" height="56" width="59" src="Image00920.jpg" />
+</blockquote>
+<p height="2em" width="2em" align="justify">归纳性证明法不仅限于证明求和问题。只要我们可以用“较小”问题（<i>n</i>
+ = <i>k</i>
+ 时）的答案来推导出“较大”问题（<i>n</i>
+ = <i>k</i>
+ + 1时）的答案，归纳性证明法往往就有用武之地。下面向大家介绍一个让我深感满意的归纳性证明实例。问题与本章开头讨论的棋盘覆盖问题有关，但不是证明不可能性，而是证明某种可能性。而且，我们使用的不是双方块，而是L形的三方块。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="236" width="236" src="Image00949.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">因为64不是3的倍数，全部使用三方块的话是无法覆盖8×8棋盘的。但是，如果在棋盘上放一个1×1方块，那么无论这个1×1方块放在棋盘的什么位置，我们都可以用三方块覆盖棋盘的剩余面积。而且，这个命题不仅在棋盘的规格是8×8时为真，对于2×2、4×4、16×16的棋盘，该命题同样成立。</p>
+<p height="1em" width="2em" align="justify">定理：对于所有的<i>n</i>
+ ≥1，都可以用三方块和一个1×1方块完全覆盖规格为2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ ×2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ 的棋盘，而且1×1方块可以放置在棋盘的任何位置上。</p>
+<p height="1em" width="2em" align="justify">证明：当<i>n</i>
+ = 1时，定理成立，因为任何一个2×2的棋盘都可以用一个三方块和一个1×1方块来覆盖，而且1×1方块可以摆放在棋盘的任何位置上。接下来，假设当<i>n</i>
+ = <i>k</i>
+ 时（即棋盘大小为2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ ×2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ 时）定理也成立。我们需要完成的任务是证明在棋盘大小为2<sup>
+<small>
+<font size="2">
+<i>k+1</i>
+</font>
+</small>
+</sup>
+ ×2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">+1</font>
+</small>
+</sup>
+ 时，该定理仍然成立。如下图所示，将1×1方块摆放在棋盘的任意位置上，然后将棋盘分成四等分。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="228" width="236" src="Image00950.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>用三方块覆盖棋盘</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">由于放有1×1方块的那一等分的大小为2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ ×2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ ，因此，它可以被三方块完全覆盖（根据假设，当<i>n</i>
+ = <i>k</i>
+ 时，定理成立）。接下来，我们在棋盘的中心位置放一个三方块，让它与其余三个等分相交。这三个等分的大小分别为2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ ×2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ ，且其中有一个1×1方格已经被覆盖了，所以用三方块可以完全覆盖住它们。因此，在棋盘大小为2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">+1</font>
+</small>
+</sup>
+ ×2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">+1</font>
+</small>
+</sup>
+ 时，定理仍然成立。 <img align="middle" height="56" width="59" src="Image00920.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">本节最后证明的等式有很多重要应用，我们将用归纳证明法和其他几种不同方法予以证明。这个令人感兴趣的问题是：如果从2<sup>
+<small>
+<font size="2">0</font>
+</small>
+</sup>
+ = 1开始，将2的前<i>n</i>
+ 次方相加，和是多少？下面是排在前几位的2的幂次方：</p>
+<p height="1em" width="0pt" align="center">1，2，4，8，16，32，64，128，256，512，1 024…</p>
+<p height="1em" width="2em" align="justify">将它们加到一起，就会得到：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="203" width="236" src="Image00951.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">大家看出其中的规律了吗？所有的和都比2的更高次幂小1。</p>
+<p height="1em" width="2em" align="justify">定理：对于<i>n</i>
+ ≥1，</p>
+<p height="1em" width="0pt" align="center">1 + 2 + 4 + 8 +… + 2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ = 2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ – 1</p>
+<p height="1em" width="2em" align="justify">证明：如上所述，当<i>n</i>
+ = 1时（以及<i>n</i>
+ = 2，3，4或5时）定理成立。假设当<i>n</i>
+ = <i>k</i>
+ 时定理成立，就有：</p>
+<p height="1em" width="0pt" align="center">1 + 2 + 4 + 8 +… + 2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ = 2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ –1</p>
+<p height="1em" width="2em" align="justify">在等式两边同时加上更高一阶的2次幂，即2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ ，就会得到：</p>
+<p height="1em" width="0pt" align="center">1 + 2 + 4 + 8 +… + 2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ = (2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ – 1) + 2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="0pt" align="center">= 2×2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ –1</p>
+<p height="1em" width="0pt" align="center">= 2<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">+1</font>
+</small>
+</sup>
+ –1 □</p>
+<p height="1em" width="2em" align="justify">在第4章和第5章，我们通过运用不同方法回答同一个计数问题，证明了多种相互关系。看了下面的内容，你也许会认为组合性证明法真的非常重要！</p>
+<p height="1em" width="2em" align="justify">问题：从<i>n</i>
+ 名曲棍球球员（球衣号码为1~<i>n</i>
+ ）中选择若干名球员加入体育联合会代表团，要求代表团中至少包含1名球员，一共有多少种选择方案？</p>
+<p height="1em" width="2em" align="justify">第一种解法：每名球员都有参加或者不参加代表团这两个选择，因此选择方案应该是2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ 种。但所有球员均不参加的情况是不允许的，还需要减去1。所以，一共有2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ –1种选择方案。</p>
+<p height="1em" width="2em" align="justify">第二种解法：考虑参加者的球衣号码最大的情况。如果1是最大号码，选择方案只有1种；如果2是最大号码，选择方案有2种（2号球员可能独自参加，也可能和1号球员一起参加）；3是最大号码时，选择方案有4种（3号球员必须参加，1号和2号球员各有两个选择）。以此类推，<i>n</i>
+ 是最大球衣号码时，选择方案有2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ 种，因为<i>n</i>
+ 号球员必须参加，1号至<i>n</i>
+ – 1号球员各有两个选择（参加和不参加）。加到一起，一共有1 + 2 + 4 + … + 2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ 种选择方案。</p>
+<p height="1em" width="2em" align="justify">由于这两种解法都是正确的，因此必然会得出相同的答案。也就是说，1 + 2 + 4 + … + 2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ = 2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ – 1。 <img align="middle" height="56" width="59" src="Image00920.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">不过，最简单的证明方法可能是单纯的代数运算，这让我们不禁回想起把循环小数表示成分数形式的那个方法。</p>
+<p height="1em" width="2em" align="justify">代数证明：</p>
+<p height="1em" width="0pt" align="center">令<i>S</i>
+ = 1 + 2 + 4 + 8 + … + 2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="2em" align="justify">两边同时乘以2，就会得到：</p>
+<p height="1em" width="0pt" align="center">2<i>S</i>
+ = 2 + 4 + 8 + … + 2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ + 2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="2em" align="justify">用第二个等式减去第一个等式，除了第一个等式的第一项和第二个等式的最后一项外，其余各项都被消掉了，因此：</p>
+<p height="1em" width="0pt" align="center">
+<i>S</i>
+ = 2<i>S</i>
+ –<i>S</i>
+ = 2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ – 1 □</p>
+<p height="1em" width="2em" align="justify">我们刚刚证明的定理其实是二进制表示方法的关键内容。二进制表示方法非常重要，计算机就是利用它来存储和处理数字的。二进制表示方法的理论依据是，所有数字都可以表示成2的不同次幂相加的唯一形式。例如：</p>
+<p height="1em" width="0pt" align="center">83 = 64 + 16 + 2 + 1</p>
+<p height="1em" width="2em" align="justify">在把十进制转化成二进制时，每个2的幂次方用数字1表示，缺位的幂次方用数字0表示。在这个例子中，83 = (1×64) + (0×32) + (1×16) + (0×8) + (0×4) + (1×2) + (1×1)。因此，83的二进制表示就是：</p>
+<p height="1em" width="0pt" align="center">83 = (1010011)<sub>
+<small>2</small>
+</sub>
+</p>
+<p height="1em" width="2em" align="justify">我们怎么知道所有正数都可以这样表示呢？假设从1到99的所有数字都可以表示成2的不同次幂相加的唯一形式，我们怎么知道100是否可以表示成这种唯一形式呢？首先，我们在100以内找到2的最高次幂，这个数字应该是64。（64是必不可少的吗？是的，因为即使我们把1、2、4、8、16、32全部选上，它们的和也只有63。）选好64之后，我们还需要用2的不同次幂相加得到36，才能凑成100。根据假设，我们可以用2的不同次幂相加的唯一形式表示36，因此，100也必然有唯一的二进制表示。［我们怎么表示36呢？先找到2的最高次幂，然后得到36 = 32 + 4。因此，100 = 64 + 32 + 4的二进制表示就是 (1100100)<sub>
+<small>2</small>
+</sub>
+ 。］我们可以将这个过程推而广之，从而证明所有的正数都有唯一的二进制表示。</p>
+<span id="filepos0003348492"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">谜一般的质数</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">上文中我们证明了所有的正整数都可以表示成2的不同次幂相加的唯一形式。从某种意义上讲，你可以把2的幂次方看作建筑材料，通过加法运算，搭建起正整数这座大厦。接下来，我们将会看到质数通过乘法运算扮演了一个类似的角色：所有正整数都可以表示成质数乘积的唯一形式。2的幂次方很容易确认，不会给数学界带来多少意外发现。质数则不同，它们复杂得多，还有很多未解之谜。</p>
+<p height="1em" width="2em" align="justify">质数是只有1和它本身这两个正约数的正整数。排在前几位的质数是：</p>
+<p height="1em" width="0pt" align="center">2，3，5，7，11，13，17，19，23，29，31，37，41，43，47，53…</p>
+<p height="1em" width="2em" align="justify">1只有一个约数，就是它本身，因此1不是质数。（人们认为1不是质数，还有一个更重要的原因，稍后揭晓。）请注意，2是唯一一个既是偶数又是质数的数字。因此，有人可能会认为2是最奇怪的质数。</p>
+<p height="1em" width="2em" align="justify">有3个或3个以上约数的正整数叫作“合数”，因为它们可以被分解成多个因数相乘的形式。排在前几位的合数是：</p>
+<p height="1em" width="0pt" align="center">4，6，8，9，10，12，14，15，16，18，20，21，22，24，25，26，27，28，30…</p>
+<p height="1em" width="2em" align="justify">例如，4有3个约数：1，2和4。6有4个约数：1，2，3和6。注意，1既不是质数，也不是合数。数学界把1称为“计数单位”（unit），它是所有整数的约数。</p>
+<p height="1em" width="2em" align="justify">所有合数都可以表示成质数乘积的形式。比如，120 = 6×20，由于6和20是合数，可以表示成质数乘积的形式，即6 = 2×3，20 = 2×2×5。因此：</p>
+<p height="1em" width="0pt" align="center">120 = 2×2×2×3×5 = 2<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ ×3<sup>
+<small>
+<font size="2">1</font>
+</small>
+</sup>
+ ×5<sup>
+<small>
+<font size="2">1</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="2em" align="justify">有意思的是，无论我们以何种方式开始，质因数分解的最后结果都是一样的。这就是“唯一分解定理”（unique factorization theorem）得出的结论。唯一分解定理亦称“算术基本定理”（fundamental theorem of arithmetic），指任何一个大于1的正整数都能分解成有限个质数的乘积的唯一形式。</p>
+<p height="1em" width="2em" align="justify">顺便告诉大家，我们认为1不是质数的真正原因就在于这条定理。例如，12可以分解成2×2×3，也可以分解成1×1×2×2×3，如果把1视为质数，那么质因数分解就无法得出唯一的结果。</p>
+<p height="1em" width="2em" align="justify">一旦知道某个数字如何分解，就可以了解到关于这个数字的很多信息。小时候，我最喜欢的数字是9，但在成长的过程中，我最喜欢的数字也在不断“成长”，而且越来越复杂（例如，π = 3.141 59…，<i>φ</i>
+ = 1.618…，e= 2.718 28…，以及没有小数表达式的<i>i</i>
+ ，等等。我们将在本书第10章讨论这些数字。）在接触无理数之前，我一度非常喜欢2 520这个数字，因为在可以被从1到10的所有数字整除的数中，它是最小的一个。它的质因数分解表达式是：</p>
+<p height="1em" width="0pt" align="center">2 520 = 2<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ ×3<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ ×5<sup>
+<small>
+<font size="2">1</font>
+</small>
+</sup>
+ ×7<sup>
+<small>
+<font size="2">1</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="2em" align="justify">只要知道某个数字的质因数分解结果，就可以立刻说出它有多少个正约数。例如，2 520的约数必然是2<sup>
+<small>
+<font size="2">
+<i>a</i>
+</font>
+</small>
+</sup>
+ ×3<sup>
+<small>
+<font size="2">
+<i>b</i>
+</font>
+</small>
+</sup>
+ ×5<sup>
+<small>
+<font size="2">
+<i>c</i>
+</font>
+</small>
+</sup>
+ ×7<sup>
+<small>
+<font size="2">
+<i>d</i>
+</font>
+</small>
+</sup>
+ 的形式，其中<i>a</i>
+ 是0、1、2、3（4种可能），<i>b</i>
+ 是0、1、2（3种可能），<i>c</i>
+ 是0、1（2种可能），<i>d</i>
+ 是0、1（2种可能）。因此，根据乘法法则，2 520有4×3×2×2 = 48个正约数。</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">算术基本定理的证明需要利用质数的某个属性（所有数论教科书都会在第1章证明这个属性）：如果<i>p</i>
+ 是质数，而且是两个或两个以上数字乘积的一个约数，那么<i>p</i>
+ 至少是其中一个乘数的约数。例如，</blockquote>
+<blockquote height="6pt" width="0pt" align="center">999 999 = 333×3 003</blockquote>
+<blockquote height="6pt" width="2em" align="justify">999 999是11的倍数，因此11必然是333或者3 003的约数。（的确如此，因为3 003 = 11×273。）然而，有的合数并不具有这个属性。例如，60 = 6×10是4的倍数，但4既不是6的约数，也不是10的约数。</blockquote>
+<blockquote height="6pt" width="2em" align="justify">为了证明质因数分解的唯一性，我们先做一个相反的假设：某个数字的质因数分解结果不止一个。假设<i>N</i>
+ 是有两个质因数分解结果的最小数字，例如：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">
+<i>p<sub>
+<small>1</small>
+</sub>
+ p<sub>
+<small>2</small>
+</sub>
+</i>
+ …<i>p<sub>
+<small>
+<font size="2">
+<i>r</i>
+</font>
+</small>
+</sub>
+</i>
+ = <i>N</i>
+ = <i>q<sub>
+<small>
+<font size="2">
+<i>1</i>
+</font>
+</small>
+</sub>
+ q<sub>
+<small>2</small>
+</sub>
+</i>
+ …<i>q<sub>
+<small>
+<font size="2">
+<i>s</i>
+</font>
+</small>
+</sub>
+</i>
+</blockquote>
+<blockquote height="6pt" width="2em" align="justify">其中，所有的<i>p<sub>
+<small>
+<font size="2">
+<i>i</i>
+</font>
+</small>
+</sub>
+</i>
+ 和<i>q<sub>
+<small>
+<font size="2">
+<i>j</i>
+</font>
+</small>
+</sub>
+</i>
+ 项都是质数。因为<i>N</i>
+ 肯定是<i>p<sub>
+<small>1</small>
+</sub>
+</i>
+ 的倍数，所以<i>p<sub>
+<small>1</small>
+</sub>
+</i>
+ 肯定是某个<i>q<sub>
+<small>
+<font size="2">
+<i>j</i>
+</font>
+</small>
+</sub>
+</i>
+ 项的约数。为了方便起见，我们假定<i>p<sub>
+<small>1</small>
+</sub>
+</i>
+ 是<i>q<sub>
+<small>1</small>
+</sub>
+</i>
+ 的约数。由于<i>q<sub>
+<small>1</small>
+</sub>
+</i>
+ 是质数，因此肯定有<i>q<sub>
+<small>1</small>
+</sub>
+</i>
+ = <i>p<sub>
+<small>1</small>
+</sub>
+</i>
+ 。把上面的等式除以<i>p<sub>
+<small>1</small>
+</sub>
+</i>
+ ，就会得到：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">
+<i>p<sub>
+<small>2</small>
+</sub>
+</i>
+ …<i>p<sub>
+<small>
+<font size="2">
+<i>r</i>
+</font>
+</small>
+</sub>
+</i>
+ =<img align="middle" height="84" width="54" src="Image00952.jpg" />
+ = <i>q<sub>
+<small>2</small>
+</sub>
+</i>
+ …<i>q<sub>
+<small>s</small>
+</sub>
+</i>
+</blockquote>
+<blockquote height="6pt" width="2em" align="justify">这说明<img align="middle" height="84" width="54" src="Image00952.jpg" />
+ 也有两个质因数分解结果，但我们假设<i>N</i>
+ 才是有两个质因数分解结果的最小数字，因此两者是矛盾的。 □</blockquote>
+<blockquote height="4em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">在有的数字系统中，并不是所有的数字都有唯一的质因数分解结果。例如，火星人长了两个脑袋，因此他们只使用偶数：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">2，4，6，8，10，12，14，16，18，20，22，24，26，28，30…</blockquote>
+<blockquote height="6pt" width="2em" align="justify">在火星人的数字系统中，6和10被视为质数，因为它们不能分解成更小的偶数。在这种数字系统中，质数和合数严格地交替出现。4的所有倍数都是合数（因为4<i>k</i>
+ = 2×2<i>k</i>
+ ），其他的所有偶数（包括6、10、14、18等）都是质数，因为它们无法分解成两个更小的偶数。但是，我们来看180这个数字：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">6×30 = 180 = 10×18</blockquote>
+<blockquote height="6pt" width="2em" align="justify">在火星人的数字系统中，180有两种不同的质因数分解结果，这证明火星数字系统中的质因数分解不具有唯一性。</blockquote>
+<blockquote height="1em" width="0pt" align="center"><img align="baseline" height="143" width="236" src="Image00953.jpg" />
+</blockquote>
+<p height="2em" width="2em" align="justify">1~100中有25个质数，101~200中有21个质数，210~300中有16个质数。随着数字越来越大，质数出现的频率越来越低。（但是，这种减少的趋势无法预测。例如，在301~400和401~500中，分别有16和17个质数，而1 000 001~1 000 100中只有6个质数。）这是有道理的，因为大数有多个约数的可能性更大。</p>
+<p height="1em" width="2em" align="justify">我们可以证明，有时候连续100个数字之中也没有一个质数。如果愿意花时间寻找，你甚至可以发现连续1 000或者100万个数字中也没有一个质数。你不相信的话，我可以立刻为你提供连续99个合数（尽管在这之前就已经出现过同类现象了）。观察下面这99个连续数字。</p>
+<p height="1em" width="0pt" align="center">100! + 2，100! + 3，100! + 4，…，100! + 100</p>
+<p height="1em" width="2em" align="justify">因为100! = 100×99×98×…×3×2×1，所以它肯定可以被2~100的所有数字整除。接下来，我们以100! + 53为例。由于53是100!的约数，因此它肯定也是100! + 53的约数。同理可证，对于所有的2 ≤ <i>k</i>
+ ≤ 100，100! + <i>k</i>
+ 都必然是<i>k</i>
+ 的倍数，也就是说，它们都是合数。</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">注意，我们在上述证明过程中根本没有提到100! + 1是不是质数的问题，但我们其实是可以做出判断的。在这里，我们要应用一个非常棒的定理——“威尔逊定理”（Wilson’s theorem）。这条定理指出，当且仅当 (<i>n</i>
+ －1)! + 1是<i>n</i>
+ 的倍数时，<i>n</i>
+ 为质数。用几个比较小的数字加以检验，就会发现确实如此。1! + 1 = 2是2的倍数，2! + 1 = 3是3的倍数，3! + 1 = 7不是4的倍数，4! + 1 = 25是5的倍数，5! + 1 = 121不是6的倍数，6! + 1 = 721是7的倍数，等等。由于101是质数，根据威尔逊定理，100! + 1是101的倍数，因此它是合数。也就是说，从100!至100! + 100的101个连续数字都是合数。</blockquote>
+<p height="2em" width="2em" align="justify">既然随着数字越来越大，质数的出现频率越来越低，人们自然会想，当数字大到一定程度时，会不会就没有质数了呢？两千多年前，欧几里得告诉我们并非如此。但不能因为他是欧几里得我们就相信他的话，我们还是尽情享受证明的乐趣吧。</p>
+<p height="1em" width="2em" align="justify">定理：质数有无穷多个。</p>
+<p height="1em" width="2em" align="justify">证明：我们反过来假设质数的个数是有限的。既然质数的个数有限，就必然存在最大的质数，我们将这个数字记作<i>P</i>
+ 。现在，观察<i>P</i>
+ ! + 1这个数字。由于从2到<i>P</i>
+ 的所有数字都可以整除<i>P</i>
+ !，因此它们都不可能整除<i>P</i>
+ ! + 1。这样一来，<i>P</i>
+ ! + 1就必然有一个大于<i>P</i>
+ 的约数为质数，而我们假设<i>P</i>
+ 是最大的质数，两者是矛盾的！ □</p>
+<p height="1em" width="2em" align="justify">尽管我们永远也无法找到一个最大的质数，但这并不能阻止数学家和计算机科学家寻找更大质数的努力。在我创作本书的时候，已知的最大质数有17 425 170位数。把这个数字写下来，可以写成大约100本跟本书大小、厚度差不多的书。不过，我们也可以把它表示为：</p>
+<p height="1em" width="0pt" align="center">2<sup>
+<small>
+<font size="2">57 885 161</font>
+</small>
+</sup>
+ – 1</p>
+<p height="1em" width="2em" align="justify">我们之所以能把它以如此简单的形式表达出来，是因为我们可以准确地判断出2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ – 1或2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ + 1是不是质数。</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">根据伟大的数学家皮埃尔·德·费马（Pierre de Fermat）的证明，如果<i>p</i>
+ 是奇质数，那么2<sup>
+<small>
+<font size="2">
+<i>p</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">
+<i>1</i>
+</font>
+</small>
+</sup>
+ – 1必然是<i>p</i>
+ 的倍数。我们用前几个奇质数来验证一下。取质数3、5、7、11，我们发现： 2<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ – 1 = 3是3的倍数，2<sup>
+<small>
+<font size="2">4</font>
+</small>
+</sup>
+ – 1 = 15是5的倍数，2<sup>
+<small>
+<font size="2">6</font>
+</small>
+</sup>
+ – 1 = 63是7的倍数，2<sup>
+<small>
+<font size="2">10</font>
+</small>
+</sup>
+ –1 = 1 023是11的倍数。对于合数，我们知道，如果<i>n</i>
+ 是偶数，那么2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ –1必然是奇数，不可能是<i>n</i>
+ 的倍数。我们再用前几个奇合数9、15和21验证一下，结果发现：2<sup>
+<small>
+<font size="2">8</font>
+</small>
+</sup>
+ – 1 = 255不是9的倍数，2<sup>
+<small>
+<font size="2">14</font>
+</small>
+</sup>
+ – 1 = 16 383不是15的倍数，2<sup>
+<small>
+<font size="2">20</font>
+</small>
+</sup>
+ –1 = 1 048 575不是21的倍数（就连3的倍数都不是）。根据费马的这条定理，如果知道2<sup>
+<small>
+<font size="2">
+<i>N</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ – 1不是数字<i>N</i>
+ 的倍数，那么我们甚至不需要找出<i>N</i>
+ 的约数，就可以根据这个属性确定<i>N</i>
+ 不是质数！但是，这条定理反过来却不成立。确实有些合数从某些方面来看像质数（这类数字被称为“伪质数”）。最小的伪质数是341 = 11×31，它就具备2<sup>
+<small>
+<font size="2">340</font>
+</small>
+</sup>
+ – 1是341的倍数这个属性。伪质数有无穷多个，尽管它们出现的频率比较低，但好在我们已经找到了甄别办法。</blockquote>
+<p height="2em" width="2em" align="justify">质数有很多应用，尤其在计算机科学领域。在几乎所有加密算法（包括为互联网金融交易保驾护航的公钥加密系统）中，质数都发挥了核心作用。很多加密算法都利用了这样一个事实：我们可以很快地判断出某个数字是否为质数，但我们还没有找到快速分解大数字的方法。例如，如果我随机选取两个1 000位的质数相乘，答案是一个2 000位数，任何人、任何计算机（除非量子计算机被人们成功地制造出来）几乎都不可能根据这个乘积找出原来的两个质数。人们认为，基于人类无法分解大数字这个特点编制而成的密码（例如公钥加密系统）具有很高的安全性。</p>
+<p height="1em" width="2em" align="justify">几千年来，质数之美一直让人类魂牵梦绕。古希腊人说，如果某个数字等于所有真约数（除自身以外的约数）之和，这个数字就是“完全数”（perfect number）。例如，6的真约数是1、2、3，它们的和正好是6，因此6是一个完全数。第二个完全数是28，它的真约数1、2、4、7、14的和正好是28。接下来的两个完全数是496和8 128。完全数有什么规律呢？不妨考察它们的质因数分解结果。</p>
+<p height="1em" width="0pt" align="center">6 = 2×3</p>
+<p height="1em" width="0pt" align="center">28 = 4×7</p>
+<p height="1em" width="0pt" align="center">496 = 16×31</p>
+<p height="1em" width="0pt" align="center">8 128 = 64×127</p>
+<p height="1em" width="2em" align="justify">看出其中的规律了吗？被乘数是2的幂次方，乘数是比被乘数的2倍小1的质数。（因此，在上述算式中我们没有看到8×15或者32×63，因为15和63都不是质数。）我们可以用下面这条定理对这个规律加以概括。</p>
+<p height="1em" width="2em" align="justify">定理：如果2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ –1是质数，那么2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ ×(2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ –1)是完全数。</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">证明：令<i>p</i>
+ = 2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ –1，<i>p</i>
+ 是质数，我们的目标是证明2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ <i>p</i>
+ 是完全数。2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ <i>p</i>
+ 的真约数有哪些呢？不含<i>p</i>
+ 的约数只有1，2，4，8，…，2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ ，它们的和为2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">– 1</font>
+</small>
+</sup>
+ = <i>p</i>
+ 。其他约数（不包括2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ <i>p</i>
+ ）则都包含<i>p</i>
+ ，这些约数的和为 <i>p</i>
+ (1 + 2 + 4 + 8 + … + 2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–2</font>
+</small>
+</sup>
+ ) = <i>p</i>
+ (2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ – 1)。因此，所有真约数的和为:</blockquote>
+<blockquote height="6pt" width="0pt" align="center">
+<i>p</i>
+ + <i>p</i>
+ (2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ – 1) = <i>p</i>
+ ［1 + (2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ – 1)］ = 2<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ <i>p</i>
+</blockquote>
+<blockquote height="6pt" width="2em" align="justify">证明完毕。 □</blockquote>
+<p height="2em" width="2em" align="justify">伟大的数学家莱昂哈德·欧拉（Leonhard Euler，1707—1783）证明了所有完全数都是偶数。在我创作本书的时候，人们已经发现了48个完全数，而且全部是偶数。是否存在完全奇数呢？目前，还没有人知道这个问题的答案。有人认为，如果完全奇数真的存在，它们的位数将超过300。不过，还没有人证明完全奇数肯定不存在。</p>
+<p height="1em" width="2em" align="justify">关于质数，有很多表述简单但却悬而未决的问题。前面已经说过，关于斐波那契数列中的质数是否有无穷多个的问题，现在还没有答案。［已经有人证明斐波那契数列中只有两个完全平方数（1和144）和两个完全立方数（1和8）。］还有一个未解难题被称为“哥德巴赫猜想”（Goldbach’s conjecture），即所有大于2的偶数都是两个质数之和。目前没有人可以证明这个猜想，但是有人证明，如果有反例存在，那么这个数字至少是19位数。［不久前，人们在一个比较相似的问题上取得了突破。2013年，法国数学家哈罗德·贺夫高特（Harald Helfgott）证明了所有大于7的奇数都至多是三个奇质数之和。］最后再介绍一个未解难题。我们把差为2的两个质数定义为“孪生质数”（twin primes）。排在前面的几对孪生质数分别是3和5，5和7，11和13，17和19，29和31，等等。你知道为什么3、5、7是唯一的“质数三胞胎”吗？尽管已经有人证明末位数是1（或者3、7、9）的质数有无穷多个［古斯塔夫·狄利克雷（Gustav Dirichlet）提出的一个命题的特例］，但孪生质数是否有无穷多对的问题仍未找到答案。</p>
+<p height="1em" width="2em" align="justify">在结束本章之前，我们来看一个有点儿可疑的证明，但是我希望大家能相信这个命题。</p>
+<p height="1em" width="2em" align="justify">命题：所有正整数都值得关注！</p>
+<p height="1em" width="2em" align="justify">证明：人们一致认为前几个正整数值得关注。例如，1是第一个正整数，2是第一个偶数，3是第一个奇数，4是唯一一个名副其实的数字（它的英文单词“FOUR”正好有4个字母）。我们反过来假设有的正整数不值得关注，那么必然有第一个不值得关注的正整数，我们把它记作<i>N</i>
+ 。但是，作为第一个不值得关注的正整数，<i>N</i>
+ 必然因此引起关注！因此，不值得我们关注的正整数是不存在的！<img align="middle" height="56" width="59" src="Image00920.jpg" />
+</p>
+<span id="filepos0003370140"></span>
+<p height="3em" width="0pt" align="center">
+<font size="4">
+<font color="#000000">第7章</font>
+</font>
+<br/>
+<br/>
+<font size="4">
+<font color="#000000">开脑洞的几何学</font>
+</font>
+</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="115" width="314" src="Image00954.jpg" />
+</p>
+<span id="filepos0003370460"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">答案出人意料的小测试</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">我先向大家介绍一个可以作为魔术表演素材的几何问题，请在一张纸上完成以下步骤：</p>
+<p height="1em" width="2em" align="justify">第一步：画一个四边形。4条边不得交叉，并按顺时针方向将4个角分别标记为<i>A</i>
+ 、<i>B</i>
+ 、<i>C</i>
+ 和<i>D</i>
+ （参见下图）。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="226" width="578" src="Image00955.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>3个任意的四边形</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">第二步：把4条边<img align="middle" height="56" width="341" src="Image00956.jpg" />
+ 的中点分别标记为<i>E</i>
+ 、<i>F</i>
+ 、<i>G</i>
+ 和<i>H</i>
+ 。</p>
+<p height="1em" width="2em" align="justify">第三步：如下图所示，连接各边中点，构成一个新的四边形<i>EFGH</i>
+ 。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="244" width="601" src="Image00957.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>四边形各边中点的连线一定会构成一个平行四边形</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">无论你相信与否，EFGH一定是平行四边形。换句话说，<img align="middle" height="56" width="65" src="Image00958.jpg" />
+ 一定平行于<img align="middle" height="56" width="74" src="Image00959.jpg" />
+ ，<img align="middle" height="56" width="72" src="Image00960.jpg" />
+ 一定与<img align="middle" height="56" width="72" src="Image00961.jpg" />
+ 平行。（此外，<img align="middle" height="56" width="65" src="Image00958.jpg" />
+ 和<img align="middle" height="56" width="74" src="Image00959.jpg" />
+ 的长度相同，<img align="middle" height="56" width="72" src="Image00960.jpg" />
+ 与<img align="middle" height="56" width="72" src="Image00961.jpg" />
+ 的长度也相同。）从上图就可以看出这些特点，不过大家最好自己动手画几幅图验证一下。</p>
+<p height="1em" width="2em" align="justify">这样的意外发现在几何学中比比皆是。做出一些非常简单的假设，然后运用一些并不复杂的逻辑证明，往往就会得出一些非常完美的结果。我们做一个小测验，看看大家在几何方面的直觉能力怎么样。有的问题有非常直观的答案，但有的问题却有令人意想不到的答案（即使拥有一定的几何知识，看到这些答案时，你也会感到惊讶）。</p>
+<p height="1em" width="2em" align="justify">问题1：一位农民准备修建周长为52英尺<sup><span id="filepos0003373251"></span>
+ <small>
+<a href="text00014.html#filepos0003441261">[1]</a>
+</small>
+</sup>
+ 的矩形篱笆墙。这个矩形的长和宽各是多少时，它的面积最大？</p>
+<p height="1em" width="2em" align="justify">A）正方形（各边边长均为13英尺）。</p>
+<p height="1em" width="2em" align="justify">B）长宽比接近于黄金比例1.618（比如，长16英尺，宽10英尺）。</p>
+<p height="1em" width="2em" align="justify">C）尽可能地长（长和宽分别接近于26英尺和0英尺）。</p>
+<p height="1em" width="2em" align="justify">D）以上篱笆围成的面积都是相同的。</p>
+<p height="1em" width="2em" align="justify">问题2：观察下图中的两条灰色平行线，其中<i>X</i>
+ 和<i>Y</i>
+ 在下面那条直线上。要求在上方的那条直线上选择一点，使该点与<i>X</i>
+ 、<i>Y</i>
+ 构成的三角形周长最小。应选择哪个点？</p>
+<p height="1em" width="2em" align="justify">A）点<i>A</i>
+ （位于<i>X</i>
+ 和<i>Y</i>
+ 中点的正上方）。</p>
+<p height="1em" width="2em" align="justify">B）点<i>B</i>
+ （使<i>B</i>
+ 、<i>X</i>
+ 和<i>Y</i>
+ 构成直角三角形）。</p>
+<p height="1em" width="2em" align="justify">C）尽可能地远离<i>X</i>
+ 和<i>Y</i>
+ （如点<i>C</i>
+ ）。</p>
+<p height="1em" width="2em" align="justify">D）位置无所谓，因为所有三角形的周长都相同。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="201" width="614" src="Image00962.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>上方直线上的哪个点（与点</b>
+</font>
+ <font size="2">
+<i>
+<b>X</b>
+</i>
+</font>
+ <font size="2">
+<b>、</b>
+</font>
+ <font size="2">
+<i>
+<b>Y</b>
+</i>
+</font>
+ <font size="2">
+<b>一起）构成的三角形周长最小？哪个点构成的三角形面积最大？</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">问题3：上图中，要使三个点构成的三角形面积最大，应选择哪个点？</p>
+<p height="1em" width="2em" align="justify">A）点<i>A</i>
+ 。</p>
+<p height="1em" width="2em" align="justify">B）点<i>B</i>
+ 。</p>
+<p height="1em" width="2em" align="justify">C）尽可能地远离<i>X</i>
+ 和<i>Y</i>
+ 。</p>
+<p height="1em" width="2em" align="justify">D）位置无所谓，因为所有三角形的面积都相同。</p>
+<p height="1em" width="2em" align="justify">问题4：橄榄球场上两个球门之间的距离是360英尺。一条长为360英尺的绳子两端分别系在两个球门柱根部。如果绳子增加1英尺，那么球场正中间处的绳子可以抬到多高？</p>
+<p height="1em" width="2em" align="justify">A）离地面的高度不到1英寸<sup><span id="filepos0003375879"></span>
+ <small>
+<a href="text00014.html#filepos0003441421">[2]</a>
+</small>
+</sup>
+ 。</p>
+<p height="1em" width="2em" align="justify">B）其高度正好可以让人从下面爬过去。</p>
+<p height="1em" width="2em" align="justify">C）其高度正好可以让人从下面走过去。</p>
+<p height="1em" width="2em" align="justify">D）其高度足以通过一辆卡车。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="110" width="598" src="Image00963.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>长为361英尺的绳子两端分别系在相距360英尺的两个球门柱根部，球场中间的绳子可以抬到多高？</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">下面给出了这4个问题的答案。我认为前两个问题的答案十分直观，而后两个则会让大多数人大吃一惊。在本章的后半部分，我会对这些答案一一做出解释。</p>
+<p height="1em" width="2em" align="justify">问题1答案：A。周长一定时，要使矩形面积最大，各条边的长度应该相等。因此，最佳选择是正方形。</p>
+<p height="1em" width="2em" align="justify">问题2答案：A。选择位于<i>X</i>
+ 和<i>Y</i>
+ 中点正上方的点<i>A</i>
+ ，三点构成的三角形<i>XAY</i>
+ 的周长最小。</p>
+<p height="1em" width="2em" align="justify">问题3答案：D。所有三角形的面积都相同。</p>
+<p height="1em" width="2em" align="justify">问题4答案：D。球场正中间的绳子可以抬至离地面13英尺处，足够大多数卡车从下方通过。</p>
+<p height="1em" width="2em" align="justify">借助简单的代数运算，就可以解释问题1的答案。如果矩形上下两条边的长度为<i>b</i>
+ ，左右两条边的长度为<i>h</i>
+ ，它的周长就是2<i>b</i>
+ + 2<i>h</i>
+ ，也就是4条边的边长之和。面积表示由4条边围成的图形大小，为<i>bh</i>
+ 。（我们在后文中将详细讨论图形的面积。）由于周长必须是52英尺，因此2<i>b</i>
+ + 2<i>h</i>
+ = 52，也就是说：</p>
+<p height="1em" width="0pt" align="center">
+<i>b</i>
+ + <i>h</i>
+ = 26</p>
+<p height="1em" width="2em" align="justify">既然 <i>h</i>
+ = 26 – <i>b</i>
+ ，那么我们希望得到的最大面积<i>bh</i>
+ 等于：</p>
+<p height="1em" width="0pt" align="center">
+<i>b</i>
+ (26 – <i>h</i>
+ ) = 26<i>b</i>
+ – <i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">
+<i>b</i>
+ 取何值才能使上面这个等式的值最大呢？利用本书第11章介绍的微积分知识，我们很容易就能找到答案。但是，利用第2章介绍的完全平方数，也能算出<i>b</i>
+ 的值。<i>b</i>
+ 的值有了之后，就可以算出矩形的面积是：</p>
+<p height="1em" width="0pt" align="center">26<i>b</i>
+ – <i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ = 169 – ( <i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ – 26<i>b</i>
+ + 169) = 169 – (<i>b</i>
+ – 13)<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="2em" align="justify">当<i>b</i>
+ = 13时，矩形的面积是169 – 0<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ = 169。当<i>b</i>
+ ≠13时，矩形的面积为：</p>
+<p height="1em" width="0pt" align="center">169 – (某个不为0的数)<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="2em" align="justify">从169中减去某个正数，得数肯定小于169。因此，当<i>b</i>
+ = 13，<i>h</i>
+ = 26 – <i>b</i>
+ = 13时，矩形的面积最大。在问题1中，农民的篱笆周长是否为52英尺，这是一个无关紧要的条件，这也正是几何学令人惊讶的一个方面。我们可以借助相同的方法证明这样一个问题：要使周长为<i>p</i>
+ 的矩形面积最大，矩形的最佳形状应该是正方形，其各边边长均为<i>p</i>
+ /4。</p>
+<p height="1em" width="2em" align="justify">为了解释其他几个问题，我们需要先思考几个看似自相矛盾的研究成果，研究几何学的几个经典问题。三角形的内角和为什么是180°？勾股定理到底指什么？如何判断两个三角形的形状是否相同？三角形的形状是否相同，有什么重要意义？</p>
+<span id="filepos0003380133"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">你不可不知的几何学经典定理</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">几何学的起源要追溯至古希腊时期。几何学（geometry）的名称来源于“土地”（geo）和“测量”（metria）这两个词语，而且几何学最初应用于土地勘测与天文学研究。但是，古希腊人是演绎和推理大师，他们把几何学发展成现在这种艺术形式。欧几里得汇总了当时（大约是公元前300年）已知的所有几何学研究成果，编写出有史以来最成功的教科书之一——《几何原本》（<i>The Elements</i>
+ ）。这本书介绍的诸多理念，包括数学严谨性、逻辑演绎、公理、证明方法等，在数学界沿用至今。</p>
+<p height="1em" width="2em" align="justify">欧几里得在这本书的开头给出了五条公理（亦称“公设”，即我们可以视作常识的命题）。一旦我们接受了这些公理，就可以根据它们推导出几乎所有的几何学真理。下面就是欧几里得的五条公理。（事实上，他对第五条公理的表述略有不同，但我们在这里给出的与之等价。）</p>
+<blockquote height="2em" width="2em" align="justify">公理1：任意两点都可以用唯一一条线段连接。</blockquote>
+<blockquote height="6pt" width="2em" align="justify">公理2：任意线段的两端都可以无限延长，变成直线。</blockquote>
+<blockquote height="6pt" width="2em" align="justify">公理3：以任意点<i>O</i>
+ 为圆心且经过任意点<i>P</i>
+ 的圆只有一个。</blockquote>
+<blockquote height="6pt" width="2em" align="justify">公理4：所有直角都是90°。</blockquote>
+<blockquote height="6pt" width="2em" align="justify">公理5：经过直线<i>l</i>
+ 外一点<i>P</i>
+ ，有且只有一条直线与<i>l</i>
+ 平行。</blockquote>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">有必要告诉大家，我们在本章讨论的是“平面几何”（plane geometry，亦称欧几里得几何），也就是说，我们假设自己身处的环境是一个平面，如<i>x</i>
+ –<i>y</i>
+ 平面。但是，如果改变某些公理，我们仍然可以得到某些有趣又有用的数学体系，例如以球面上的点为研究对象的球面几何。球面几何中的“直线”是周长最大的圆（称作大圆），因此，所有的直线都会相交，不存在平行直线。如果对公理5做出修改——至少有两条直线经过点<i>P</i>
+ 且与<i>l</i>
+ 平行，平面几何就会变成“双曲几何”（hyperbolic geometry）。双曲几何自成体系，有专属的美丽定理。艺术家埃舍尔（Escher）就是利用它创作出大量的版画杰作。下面向大家展示的是运用双曲几何法则绘制而成的一幅图（该图片作者是道格拉斯·邓汉姆）。加 入 会 员 微 信 whair004</blockquote>
+<blockquote height="1em" width="0pt" align="center"><img align="baseline" height="428" width="427" src="Image00964.jpg" />
+</blockquote>
+<p height="2em" width="2em" align="justify">事实上，还有一些欧几里得在《几何原本》中没有提到的公理，我将根据需要，把它们介绍给大家。本章的目的不是取代几何学教材，因此我不会从最基础的几何学内容开始一一讲解。我认为大家对点、直线、角、圆、周长和面积等概念都有直观的认识，我也尽可能地不使用术语和数学符号，以便大家把注意力集中在几何学中最值得关注的内容上。</p>
+<p height="1em" width="2em" align="justify">例如，我假设大家已经知道（或者说愿意接受）圆为360°这个事实。角的度数在0°到360°之间。大家想一想时钟的指针，时针和分针的末端在圆心处重合，1点钟时它们呈现的是1/12个圆，因此夹角是30°；3点钟时它们呈现的是1/4个圆，因此夹角是90°。90°的角叫作直角，此时，我们称构成这个角的直线或线段相互垂直。6点钟时，两根指针形成一条直线，夹角为180°。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="178" width="620" src="Image00965.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>三个角的度数分别为30°、90°和180°</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">在这里，我要向大家介绍一个有用的符号。连接点<i>A</i>
+ 和点<i>B</i>
+ 的线段通常被标记为<img align="middle" height="56" width="60" src="Image00966.jpg" />
+ ，而表示线段长度时则去掉上方的横线，例如，<img align="middle" height="56" width="60" src="Image00966.jpg" />
+ 的长度是<i>AB</i>
+ 。</p>
+<p height="1em" width="2em" align="justify">两条直线相交时，会形成4个角，如下图所示。这些角有什么特点呢？可以看出，两个邻角（如角<i>a</i>
+ 和角<i>b</i>
+ ）加到一起就会变成一条直线，直线的角度为180°。因此，角<i>a</i>
+ 与角<i>b</i>
+ 的和肯定是180°。这样的两个角叫作“互补角”。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="190" width="339" src="Image00967.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>两条直线相交，邻角的和为180°。不相邻的两个角（叫作对顶角）度数相同。图中角</b>
+</font>
+ <font size="2">
+<i>
+<b>a</b>
+</i>
+</font>
+ <font size="2">
+<b>与角</b>
+</font>
+ <font size="2">
+<i>
+<b>c</b>
+</i>
+</font>
+ <font size="2">
+<b>、角</b>
+</font>
+ <font size="2">
+<i>
+<b>b</b>
+</i>
+</font>
+ <font size="2">
+<b>和角</b>
+</font>
+ <font size="2">
+<i>
+<b>d</b>
+</i>
+</font>
+ <font size="2">
+<b>形成两对对顶角</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">其他几对邻角同样具有这种属性。也就是说：</p>
+<p height="1em" width="0pt" align="center">
+<i>a</i>
+ + <i>b</i>
+ = 180°</p>
+<p height="1em" width="0pt" align="center">
+<i>b</i>
+ + <i>c</i>
+ = 180°</p>
+<p height="1em" width="0pt" align="center">
+<i>c</i>
+ + <i>d</i>
+ = 180°</p>
+<p height="1em" width="0pt" align="center">
+<i>d</i>
+ + <i>a</i>
+ = 180°</p>
+<p height="1em" width="2em" align="justify">用第一个等式去减第二个等式，得到<i>a</i>
+ – <i>c</i>
+ = 0。也就是说：</p>
+<p height="1em" width="0pt" align="center">
+<i>a</i>
+ = <i>c</i>
+</p>
+<p height="1em" width="2em" align="justify">用第二个等式去减第三个等式，就会得到：</p>
+<p height="1em" width="0pt" align="center">
+<i>b</i>
+ = <i>d</i>
+</p>
+<p height="1em" width="2em" align="justify">两条直线相交，不相邻的两个角叫作“对顶角”。我们刚刚证明的就是“对顶角定理”：对顶角度数相等。</p>
+<p height="1em" width="2em" align="justify">我们接下来的任务是证明任意三角形的内角和为180°。在开始证明之前，我先介绍平行线的几条属性。如果两条直线永远不会相交，我们就说它们相互平行。（记住，直线的两端可以无限延伸。）下图所示的是两条平行线<i>l<sub>
+<small>1</small>
+</sub>
+</i>
+ 和<i>l<sub>
+<small>2</small>
+</sub>
+</i>
+ ，第三条直线<i>l<sub>
+<small>3</small>
+</sub>
+</i>
+ 不与它们平行，而与它们分别交于点<i>P</i>
+ 和点<i>Q</i>
+ 。仔细观察就会发现，直线<i>l<sub>
+<small>3</small>
+</sub>
+</i>
+ 与直线<i>l<sub>
+<small>1</small>
+</sub>
+</i>
+ 、<i>l<sub>
+<small>2</small>
+</sub>
+</i>
+ 形成的角的度数相同。也就是说，我们认为 <i>a</i>
+ = <i>e</i>
+ 。我们把角<i>a</i>
+ 与角<i>e</i>
+ 称作“同位角”。（角<i>b</i>
+ 和角<i>f</i>
+ 、角<i>c</i>
+ 和角<i>g</i>
+ 、角<i>d</i>
+ 和角<i>h</i>
+ 也互为同位角。）同位角看起来显然度数相等，但根据欧几里得的五大公理，我们却无法加以证明。因此，我们需要一条新公理。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="213" width="277" src="Image00968.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>同位角的度数相等。在图中，</b>
+</font>
+ <font size="2">
+<i>
+<b>a</b>
+</i>
+</font>
+ <font size="2">
+<b>=</b>
+</font>
+ <font size="2">
+<i>
+<b>e</b>
+</i>
+</font>
+ <font size="2">
+<b>，</b>
+</font>
+ <font size="2">
+<i>
+<b>b</b>
+</i>
+</font>
+ <font size="2">
+<b>=</b>
+</font>
+ <font size="2">
+<i>
+<b>f</b>
+</i>
+</font>
+ <font size="2">
+<b>，</b>
+</font>
+ <font size="2">
+<i>
+<b>c</b>
+</i>
+</font>
+ <font size="2">
+<b>=</b>
+</font>
+ <font size="2">
+<i>
+<b>g</b>
+</i>
+</font>
+ <font size="2">
+<b>，</b>
+</font>
+ <font size="2">
+<i>
+<b>d</b>
+</i>
+</font>
+ <font size="2">
+<b>=</b>
+</font>
+ <font size="2">
+<i>
+<b>h</b>
+</i>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">同位角公理：同位角的度数相等。</p>
+<p height="1em" width="2em" align="justify">结合同位角公理和对顶角定理，我们知道在上图中：</p>
+<p height="1em" width="0pt" align="center">
+<i>a</i>
+ = <i>c</i>
+ = <i>g</i>
+ = <i>e</i>
+</p>
+<p height="1em" width="0pt" align="center">
+<i>b</i>
+ = <i>d</i>
+ = <i>h</i>
+ = <i>f</i>
+</p>
+<p height="1em" width="2em" align="justify">很多书都为相等的两个角赋予了特殊的名称，例如，形成Z字形的角<i>a</i>
+ 与角<i>g</i>
+ 被称为“内错角”。至此，我们已经证明任意角都与它的对顶角、同位角和内错角的度数相等。接下来，我们利用这个结果证明几何学的一个基本定理。</p>
+<p height="1em" width="2em" align="justify">定理：任意三角形的内角和都是180°。</p>
+<p height="1em" width="2em" align="justify">证明：观察下图所示三角形<i>ABC</i>
+ ，它的三个内角分别是角<i>a</i>
+ 、角<i>b</i>
+ 和角<i>c</i>
+ 。过点<i>B</i>
+ 画一条直线，并使它与经过点<i>A</i>
+ 、点<i>C</i>
+ 的直线平行。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="205" width="472" src="Image00969.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>为什么</b>
+</font>
+ <font size="2">
+<i>
+<b>a</b>
+</i>
+</font>
+ <font size="2">
+<b>+</b>
+</font>
+ <font size="2">
+<i>
+<b>b</b>
+</i>
+</font>
+ <font size="2">
+<b>+</b>
+</font>
+ <font size="2">
+<i>
+<b>c</b>
+</i>
+</font>
+ <font size="2">
+<b>=180°呢？</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">角<i>d</i>
+ 、角<i>b</i>
+ 和角<i>e</i>
+ 形成一条直线，因此 <i>d</i>
+ + <i>b</i>
+ + <i>e</i>
+ = 180°。角a与角<i>d</i>
+ 是内错角，角<i>c</i>
+ 与角<i>e</i>
+ 也是内错角，因此 <i>d</i>
+ = <i>a</i>
+ ，<i>e</i>
+ = <i>c</i>
+ ，<i>a</i>
+ + <i>b</i>
+ + <i>c</i>
+ =180°。证明完毕。 □</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">“三角形内角和为180°”是平面几何的一个重要定理，但在其他几何学中未必成立。例如，假设我们在地球上画一个三角形。从北极开始，沿着任意经线到达赤道，然后向右，跨越1/4个地球后再向右转，最终回到北极。这个三角形其实包含三个直角，内角和为270°。在球面几何中，三角形的内角和不是固定值，而与三角形的面积直接相关。</blockquote>
+<p height="2em" width="2em" align="justify">在几何教学活动中，学生们经常需要证明两个不同的图形是全等的。如果一个几何图形经过平移、旋转或翻转后可以得到另一个图形，我们就说这两个图形是全等的。例如，下图中的三角形<i>ABC</i>
+ 和三角形<i>DEF</i>
+ 就是全等三角形，因为通过平移，三角形<i>DEF</i>
+ 恰好可以与三角形<i>ABC</i>
+ 完全重合。本书中的图形，如果两条边（或两个角）上有同等数量的短线标记，就表明它们的长度（或角度）相同。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="133" width="607" src="Image00970.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>全等三角形</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">我们用符号<img align="baseline" height="10" width="16" src="Image00971.jpg" />
+ 表示全等，例如，△<i>ABC</i>
+ <img align="baseline" height="10" width="16" src="Image00971.jpg" />
+ △<i>DEF</i>
+ 的意思是，这两个三角形的边长和角度完全相同。具体来说，<i>AB</i>
+ 、<i>BC</i>
+ 、<i>CA</i>
+ 分别等于<i>DE</i>
+ 、<i>EF</i>
+ 、<i>FD</i>
+ ，角<i>A</i>
+ 、角<i>B</i>
+ 、角<i>C</i>
+ 的度数分别与角<i>D</i>
+ 、角<i>E</i>
+ 、角<i>F</i>
+ 相等。我们在上图中相等的角上标记了相同的符号，相等的边也做了同样的处理。</p>
+<p height="1em" width="2em" align="justify">一旦知道某些边和角相等之后，我们就会知道其余的边和角肯定也相等。例如，如果你知道两个三角形的三对边都相等，有两对角也相等（比如，∠<i>A</i>
+ = ∠<i>D</i>
+ ，∠<i>B</i>
+ = ∠<i>E</i>
+ ），那么第三对角必然相等，它们是全等三角形。如果知道有两对边的边长相等，比如<i>AB</i>
+ = <i>DE</i>
+ ，<i>AC</i>
+ =<i>DF</i>
+ ，而且这两条边的夹角也相等，在这个例子中就是∠<i>A</i>
+ = ∠<i>D</i>
+ ，就必然存在以下关系：<i>BC</i>
+ = <i>EF</i>
+ ，∠<i>B</i>
+ = ∠<i>E</i>
+ ，∠<i>C</i>
+ = ∠<i>F</i>
+ 。我们把它称作SAS公理，SAS代表“边—角—边”。</p>
+<p height="1em" width="2em" align="justify">SAS公理不是定理，因为我们不能用已有的公理对其进行证明。但是，一旦我们接受这条公理，我们就可以对SSS（边—边—边）、ASA（角—边—角）、AAS（角—角—边）等重要定理做出严谨的证明。要确保全等，相等的那个角就必须是两对相等的边的夹角，因此我们不能推导出所谓的“SSA定理”。SSS定理非常有意思：如果两个三角形的三条边相等，那么它们的三个角也相等。</p>
+<p height="1em" width="2em" align="justify">接下来，我们用SAS公理来证明非常重要的等腰三角形定理。如果某个三角形有两条边相等，我们就说它是一个“等腰三角形”。既然说到等腰三角形，我再向大家介绍其他几种三角形。三条边都相等的三角形叫作“等边三角形”。有一个角为90°的三角形叫作“直角三角形”。如果三个内角都小于90°，这个三角形就是“锐角三角形”。如果有一个内角大于90°，我们就称它为“钝角三角形”。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="103" width="620" src="Image00972.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>等边三角形，锐角三角形，直角三角形，钝角三角形</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">等腰三角形定理：如果等腰三角形<i>ABC</i>
+ 的边长<i>AB</i>
+ = <i>AC</i>
+ ，那么这两条边所对的角一定相等。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="176" width="182" src="Image00973.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>等腰三角形定理：如果</b>
+</font>
+ <font size="2">
+<i>
+<b>AB</b>
+</i>
+</font>
+ <font size="2">
+<b>=</b>
+</font>
+ <font size="2">
+<i>
+<b>AC</b>
+</i>
+</font>
+ <font size="2">
+<b>，那么 ∠</b>
+</font>
+ <font size="2">
+<i>
+<b>B</b>
+</i>
+</font>
+ <font size="2">
+<b>= ∠</b>
+</font>
+ <font size="2">
+<i>
+<b>C</b>
+</i>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">证明：如图所示，从<i>A</i>
+ 处画一条直线平分 ∠<i>A</i>
+ （这条直线叫作“角平分线”），与<img align="middle" height="56" width="73" src="Image00974.jpg" />
+ 交于点<i>X</i>
+ 。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="196" width="182" src="Image00975.jpg" />
+</p>
+<p height="5pt" width="2em" align="center">
+<font size="2">
+<b>证明等腰三角形定理时，先画出角平分线，然后利用SAS公理证明两个小三角形全等</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">我们认为<i>BAX</i>
+ 与<i>CAX</i>
+ 是全等三角形，这是因为<i>BA</i>
+ = <i>CA</i>
+ （<i>ABC</i>
+ 是等腰三角形），∠<i>BAX</i>
+ = ∠<i>CAX</i>
+ （<i>AX</i>
+ 是角平分线），且<i>AX</i>
+ = <i>AX</i>
+ （这不是输入错误。<img align="middle" height="56" width="76" src="Image00976.jpg" />
+ 是两个小三角形的公共边，长度必然相同）。因此，根据SAS公理，这两个小三角形是全等的。由于△<i>BAX</i>
+ <img align="baseline" height="10" width="16" src="Image00971.jpg" />
+ △<i>CAX</i>
+ ，因此其余的边和角也必然相等，即∠<i>B</i>
+ = ∠<i>C</i>
+ 。证明完毕。 □</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">利用SSS定理也可以证明等腰三角形定理。先取<img align="middle" height="56" width="73" src="Image00974.jpg" />
+ 的中点<i>M</i>
+ ，令<i>BM</i>
+ = <i>MC</i>
+ ，再画出线段<img align="middle" height="56" width="67" src="Image00977.jpg" />
+ 。由于 <i>BA</i>
+ = <i>CA</i>
+ （等腰三角形），<i>AM</i>
+ = <i>AM</i>
+ ，<i>MB</i>
+ = <i>MC</i>
+ （<i>M</i>
+ 为中点），因此，根据SSS定理，△<i>BAM</i>
+ <img align="baseline" height="10" width="16" src="Image00971.jpg" />
+ △<i>CAM</i>
+ ，它们的角也都相等，即∠<i>B</i>
+ = ∠<i>C</i>
+ 。</blockquote>
+<blockquote height="6pt" width="2em" align="justify">两个三角形全等，说明 ∠<i>BAM</i>
+ = ∠<i>CAM</i>
+ ，因此<img align="middle" height="56" width="67" src="Image00977.jpg" />
+ 也是角平分线。此外，由于∠<i>BMA</i>
+ = ∠<i>CMA</i>
+ ，而且它们的和是180°，因此它们都等于90°。也就是说，在等腰三角形中，<i>A</i>
+ 的角平分线也是<img align="middle" height="56" width="73" src="Image00974.jpg" />
+ 的“垂直平分线”。</blockquote>
+<blockquote height="6pt" width="2em" align="justify">顺便告诉大家，等腰三角形定理的逆命题也是正确的：如果 ∠<i>B</i>
+ = ∠<i>C</i>
+ ，那么<i>AB</i>
+ = <i>AC</i>
+ 。证明过程是：从<i>A</i>
+ 画一条角平分线至点<i>X</i>
+ 。由于∠<i>B</i>
+ = ∠<i>C</i>
+ （条件），∠<i>BAX</i>
+ = ∠<i>CAX</i>
+ （角平分线），<i>AX</i>
+ = <i>AX</i>
+ ，因此根据AAS定理，我们断定 △<i>BAX</i>
+ <img align="baseline" height="10" width="16" src="Image00971.jpg" />
+ △<i>CAX</i>
+ 。由此可知，<i>AB</i>
+ = <i>AC</i>
+ ，<i>ABC</i>
+ 是等腰三角形。</blockquote>
+<p height="2em" width="2em" align="justify">等边三角形的所有边都相等，因此等腰三角形定理适用于等边三角形，从而证明等边三角形的三个内角都相等。由于三角形的内角和是180°，因此我们可以得出下面的推论。</p>
+<p height="1em" width="2em" align="justify">推论：等边三角形的三个内角都是60°。</p>
+<p height="1em" width="2em" align="justify">根据SSS定理，如果两个三角形<i>ABC</i>
+ 和<i>DEF</i>
+ 的三对边都相等（<i>AB</i>
+ =<i>DE</i>
+ ，<i>BC</i>
+ = <i>EF</i>
+ ，<i>CA</i>
+ = <i>FD</i>
+ ），那么它们的内角肯定也相等（∠<i>A</i>
+ = ∠<i>D</i>
+ ，∠<i>B</i>
+ = ∠<i>E</i>
+ ，∠<i>C</i>
+ = ∠<i>F</i>
+ ）。它的逆命题也成立吗？如果三角形<i>ABC</i>
+ 和<i>DEF</i>
+ 的三对角都相等，那么它们的三对边也都相等吗？如下图所示，答案显然是否定的。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="144" width="497" src="Image00978.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>相似三角形的内角相等，边长成比例关系</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">内角度数对应相等的三角形叫作“相似三角形”。如果三角形<i>ABC</i>
+ 和<i>DEF</i>
+ 相似（记作△<i>ABC</i>
+ <img align="baseline" height="5" width="15" src="Image00979.jpg" />
+ △<i>DEF</i>
+ ，或者是 <i>ABC</i>
+ <img align="baseline" height="5" width="15" src="Image00979.jpg" />
+ <i>DEF</i>
+ ），那么∠<i>A</i>
+ = ∠<i>D</i>
+ ，∠<i>B</i>
+ = ∠<i>E</i>
+ ，∠<i>C</i>
+ = ∠<i>F</i>
+ 。从本质上看，如果两个三角形相似，那么一个三角形是另一个三角形的缩小版。因此，如果△<i>ABC</i>
+ <img align="baseline" height="5" width="15" src="Image00979.jpg" />
+ △<i>DEF</i>
+ ，那么其对应边长成比例关系，比例因子为正数<i>k</i>
+ 。也就是说，<i>DE</i>
+ = <i>kAB</i>
+ ，<i>EF</i>
+ = <i>kBC</i>
+ ，<i>FD</i>
+ = <i>kCA</i>
+ 。</p>
+<p height="1em" width="2em" align="justify">接下来，我们用这些知识来解答本章开头小测试中的问题2。假设有两条平行线，下方那条直线上有一个线段<img align="middle" height="56" width="63" src="Image00980.jpg" />
+ 。我们需要完成的任务是在上方那条直线上找到点<i>P</i>
+ ，使三角形<i>XYP</i>
+ 的周长最小。</p>
+<p height="1em" width="2em" align="justify">定理：上方直线上的点<i>P</i>
+ 位于<img align="middle" height="56" width="63" src="Image00980.jpg" />
+ 中点正上方时，三角形<i>XYP</i>
+ 的周长最小。</p>
+<p height="1em" width="2em" align="justify">尽管微积分可以帮助我们解决这个问题，但是过程比较复杂，若利用“映像”原理，我们就可以轻轻松松地找出正确答案。（后面的证明非常有意思，但是过程比较长，大家阅读时可以浏览一下，也可以跳过不读。）</p>
+<p height="1em" width="2em" align="justify">证明：假设<i>P</i>
+ 是上方直线上的任意一点，<i>Z</i>
+ 为上方直线上的一个固定点，且点<i>Z</i>
+ 位于点<i>Y</i>
+ 的正上方。（更精确的说法是：<img align="middle" height="56" width="56" src="Image00981.jpg" />
+ 垂直于上下两条直线且与上方直线交于点<i>Z</i>
+ ，如下图所示。）<i>Y'</i>
+ 位于<img align="middle" height="56" width="56" src="Image00981.jpg" />
+ 的延长线上，且<i>Y'Z</i>
+ = <i>ZY</i>
+ 。换句话说，上方那条直线就像一面大镜子，<i>Y'</i>
+ 是<i>Y</i>
+ 经过点<i>Z</i>
+ 形成的映像。</p>
+<p height="1em" width="2em" align="justify">我断定<i>PZY</i>
+ 和<i>PZY'</i>
+ 是全等三角形，因为 <i>PZ</i>
+ = <i>PZ</i>
+ ，∠<i>PZY</i>
+ = 90°= ∠<i>PZY'</i>
+ ，<i>ZY</i>
+ = <i>ZY</i>
+ '，因此，根据SAS定理，两个三角形全等，<i>PY</i>
+ = <i>PY</i>
+ '。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="339" width="614" src="Image00982.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>由于三角形</b>
+</font>
+ <font size="2">
+<i>
+<b>PZY</b>
+</i>
+</font>
+ <font size="2">
+<b>和</b>
+</font>
+ <font size="2">
+<i>
+<b>PZY</b>
+</i>
+</font>
+ <font size="2">
+<b>'全等（SAS定理），因此必然有</b>
+</font>
+ <font size="2">
+<i>
+<b>PY</b>
+</i>
+</font>
+ <font size="2">
+<b>=</b>
+</font>
+ <font size="2">
+<i>
+<b>PY'</b>
+</i>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">三角形<i>YXP</i>
+ 的周长是三个边长之和：</p>
+<p height="1em" width="0pt" align="center">
+<i>YX</i>
+ + <i>XP</i>
+ + <i>PY</i>
+</p>
+<p height="1em" width="2em" align="justify">我们已经证明<i>PY</i>
+ = <i>PY'</i>
+ ，因此三角形周长也等于：</p>
+<p height="1em" width="0pt" align="center">
+<i>YX</i>
+ + <i>XP</i>
+ + <i>PY'</i>
+</p>
+<p height="1em" width="2em" align="justify">因为边长<i>YX</i>
+ 与点<i>P</i>
+ 的位置无关，因此我们只需考虑<i>XP</i>
+ + <i>PY'</i>
+ 的值最小时点<i>P</i>
+ 所在的位置。</p>
+<p height="1em" width="2em" align="justify">仔细观察就可以发现，线段<img align="middle" height="56" width="60" src="Image00983.jpg" />
+ 和<img align="middle" height="56" width="77" src="Image00984.jpg" />
+ 构成了由<i>X</i>
+ 至<i>Y'</i>
+ 的一条弯曲路径。由于两点之间直线距离最短，因此，从<i>X</i>
+ 至<i>Y'</i>
+ 画一条直线就可以确定点<i>P</i>
+ 的最佳位置点<i>P</i>
+ *，即这条直线与上面那条直线的交点，如下图所示。但是，我们的任务还没有全部完成，因为我们还需要证明点<i>P</i>
+ *位于<img align="middle" height="56" width="63" src="Image00980.jpg" />
+ 中点的正上方。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="338" width="614" src="Image00985.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>三角形</b>
+</font>
+ <font size="2">
+<i>
+<b>MXP</b>
+</i>
+</font>
+ <font size="2">
+<b>*和</b>
+</font>
+ <font size="2">
+<i>
+<b>YXY'</b>
+</i>
+</font>
+ <font size="2">
+<b>相似，二者的比例因子为2</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">把<i>P</i>
+ *正下方的那个点记作<i>M</i>
+ ，就有<img align="middle" height="56" width="88" src="Image00986.jpg" />
+ 垂直于<img align="middle" height="56" width="63" src="Image00980.jpg" />
+ ）。由于上下两条直线平行，因此<i>P</i>
+ *<i>M</i>
+ =<i>ZY</i>
+ 。（凭直觉可以得出这个结论，因为平行线之间的距离是一定的。也可以这样证明：画出线段<img align="middle" height="56" width="74" src="Image00987.jpg" />
+ ，根据AAS定理可知三角形<i>MYZ</i>
+ 与<i>ZP</i>
+ *<i>M</i>
+ 全等。）</p>
+<p height="1em" width="2em" align="justify">要证明<i>M</i>
+ 是<img align="middle" height="56" width="63" src="Image00980.jpg" />
+ 的中点，我们先要证明三角形<i>MXP</i>
+ *与<i>YXY'</i>
+ 相似。∠<i>MXP</i>
+ *与∠<i>YXY'</i>
+ 是同一个角，∠<i>P</i>
+ *<i>MX</i>
+ 与∠<i>Y'YX</i>
+ 都是直角，因此这两个角也是相等的。由于三角形内角和为180°，其中有两对角相等，那么第三对角也必然相等。这两个相似三角形的比例因子是多少呢？通过构造性证明法，可以得出：</p>
+<p height="1em" width="0pt" align="center">
+<i>YY'</i>
+ = <i>YZ</i>
+ + <i>ZY'</i>
+ = 2<i>YZ</i>
+ = 2<i>MP</i>
+ *</p>
+<p height="1em" width="2em" align="justify">因此，比例因子为2。也就是说，<i>XM</i>
+ 是<i>XY</i>
+ 的1/2，<i>M</i>
+ 是<img align="middle" height="56" width="63" src="Image00980.jpg" />
+ 的中点。</p>
+<p height="1em" width="2em" align="justify">所以，位于上方直线上且使三角形<i>XYP</i>
+ 的周长最小的点<i>P</i>
+ *正好在<img align="middle" height="56" width="63" src="Image00980.jpg" />
+ 中点的正上方。证明完毕。 □</p>
+<p height="1em" width="2em" align="justify">有时，我们也可以利用代数知识来解决几何问题。例如，假设平面上有线段<img align="middle" height="56" width="60" src="Image00966.jpg" />
+ ，其中<i>A</i>
+ 的坐标是 (<i>a<sub>
+<small>1</small>
+</sub>
+</i>
+ ，<i>a<sub>
+<small>2</small>
+</sub>
+</i>
+ )，<i>B</i>
+ 的坐标是(<i>b<sub>
+<small>1</small>
+</sub>
+</i>
+ ，<i>b<sub>
+<small>2</small>
+</sub>
+</i>
+ )，<i>M</i>
+ 是<img align="middle" height="56" width="60" src="Image00966.jpg" />
+ 的中点，如下图所示。那么，<i>M</i>
+ 的坐标为：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="58" width="382" src="Image00988.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">例如，如果 <i>A</i>
+ = (1，2)，<i>B</i>
+ = (3，4)，那么<img align="middle" height="56" width="60" src="Image00966.jpg" />
+ 的中点<i>M</i>
+ = [(1 + 3)/2,(2 + 4)/2] = ( 2, 3 )。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="394" width="382" src="Image00989.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>取线段两个端点坐标的平均值，即可找到线段中点的坐标</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">我们利用这个事实来证明三角形的一个重要属性。画一个三角形，然后用线段连接各边中点，其中有什么特点？下面这条定理给出了答案。</p>
+<p height="1em" width="2em" align="justify">三角形中点定理：对于任意三角形<i>ABC</i>
+ ，用线段连接<img align="middle" height="56" width="60" src="Image00966.jpg" />
+ 的中点和<img align="middle" height="56" width="73" src="Image00974.jpg" />
+ 的中点，该线段与三角形的第三条边<img align="middle" height="56" width="61" src="Image00990.jpg" />
+ 平行。此外，如果<img align="middle" height="56" width="61" src="Image00990.jpg" />
+ 的长度为<i>b</i>
+ ，连接中点的那条线段的长度就为<i>b</i>
+ /2。</p>
+<p height="1em" width="2em" align="justify">证明：如下图所示，以点<i>A</i>
+ 为原点(0, 0)、边<img align="middle" height="56" width="61" src="Image00990.jpg" />
+ 所在直线为横轴画出坐标系，点<i>C</i>
+ 的坐标是(<i>b</i>
+ , 0)。假设点<i>B</i>
+ 的坐标为(<i>x</i>
+ , <i>y</i>
+ )，那么<img align="middle" height="56" width="60" src="Image00966.jpg" />
+ 的中点坐标为(<i>x</i>
+ /2 , <i>y</i>
+ /2)，<img align="middle" height="56" width="73" src="Image00974.jpg" />
+ 的中点坐标为 [(<i>x</i>
+ + <i>b</i>
+ )/2 , <i>y</i>
+ /2]。由于这两个中点的纵坐标相同，连接它们的线段必然是水平的，与边<img align="middle" height="56" width="61" src="Image00990.jpg" />
+ 平行。此外，这条线段的长度为 (<i>x</i>
+ + <i>b</i>
+ )/2 – <i>x</i>
+ /2 = <i>b</i>
+ /2。证明完毕。 □</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="275" width="529" src="Image00991.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>三角形两边中点的连线与第三边平行，且长度是第三边的1/2</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">三角形中点定理揭示了本章开头的那个魔术的奥秘：连接四边形<i>ABCD</i>
+ 各边的中点，所形成的四边形<i>EFGH</i>
+ 一定是平行四边形。为什么？我们从四边形的顶点<i>A</i>
+ 至顶点<i>C</i>
+ 画一条对角线，如下图所示，这条对角线会把四边形分成三角形<i>ABC</i>
+ 和三角形<i>ADC</i>
+ 。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="240" width="245" src="Image00992.jpg" />
+</p>
+<p height="5pt" width="2em" align="center">
+<font size="2">
+<b>根据三角形中点定理，</b>
+</font>
+ <img align="middle" height="42" width="49" src="Image00958.jpg" />
+ <font size="2">
+<b>和</b>
+</font>
+ <img align="middle" height="42" width="56" src="Image00959.jpg" />
+ <font size="2">
+<b>都与</b>
+</font>
+ <img align="middle" height="42" width="45" src="Image00990.jpg" />
+ <font size="2">
+<b>平行</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">观察三角形<i>ABC</i>
+ 和<i>ADC</i>
+ 。根据三角形中点定理，我们发现<img align="middle" height="56" width="65" src="Image00958.jpg" />
+ 与<img align="middle" height="56" width="61" src="Image00990.jpg" />
+ 平行，<img align="middle" height="56" width="61" src="Image00990.jpg" />
+ 与<img align="middle" height="56" width="74" src="Image00959.jpg" />
+ 平行，因此<img align="middle" height="56" width="65" src="Image00958.jpg" />
+ 与<img align="middle" height="56" width="74" src="Image00959.jpg" />
+ 平行。（而且，<img align="middle" height="56" width="65" src="Image00958.jpg" />
+ 与<img align="middle" height="56" width="74" src="Image00959.jpg" />
+ 都是<img align="middle" height="56" width="61" src="Image00990.jpg" />
+ 的一半，因此它们的长度相等。）同理，如果从<i>B</i>
+ 向<i>D</i>
+ 画一条对角线，就会发现<img align="middle" height="56" width="72" src="Image00960.jpg" />
+ 与<img align="middle" height="56" width="72" src="Image00961.jpg" />
+ 平行，且长度相等。因此，<i>EFGH</i>
+ 是平行四边形。</p>
+<p height="1em" width="2em" align="justify">上面这些定理大多都是关于三角形的，实际上，几何学的很多内容都以三角形为研究对象。三角形是最简单的多边形，其次是四边形、五边形等。有<i>n</i>
+ 条边的多边形有时被称作“<i>n</i>
+ 边形”（<i>n</i>
+ –gon）。我们已经证明三角形的内角和是180°，那么超过三条边的多边形的内角和是多少呢？正方形、矩形、平行四边形等四边形有4条边。矩形的4个内角都是90°，因此它的内角和必然是360°。下面这条定理对任意一个四边形来说都是正确的，你也可以说它是一条结论。</p>
+<p height="1em" width="2em" align="justify">定理：任意四边形的内角和为360°。</p>
+<p height="1em" width="2em" align="justify">证明：如图所示，取任意四边形，顶点分别为<i>A</i>
+ 、<i>B</i>
+ 、<i>C</i>
+ 、<i>D</i>
+ 。连接<i>A</i>
+ 、<i>C</i>
+ 两个顶点，该四边形就会被分割成两个三角形。这两个三角形的内角和均为180°，因此，该四边形的内角和为2×180°= 360°。 □</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="266" width="397" src="Image00993.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>任意四边形的内角和为360°</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">下面我再介绍一条定理，就可以揭示其中的规律。</p>
+<p height="1em" width="2em" align="justify">定理：任意五边形的内角和为540°。</p>
+<p height="1em" width="2em" align="justify">证明：如下图所示，观察顶点为<i>A</i>
+ 、<i>B</i>
+ 、<i>C</i>
+ 、<i>D</i>
+ 、<i>E</i>
+ 的任意五边形。连接<i>A</i>
+ 和<i>C</i>
+ ，五边形就会被分割成一个三角形和一个四边形。我们知道，三角形<i>ABC</i>
+ 的内角和为180°，四边形<i>ACDE</i>
+ 的内角和为360°，因此，五边形的内角和为180°+ 360°= 540°。证明完毕。 □</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="255" width="266" src="Image00994.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>任意五边形的内角和为540°</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">利用归纳性证明法计算<i>n</i>
+ 边形的内角和，或者通过连接<i>A</i>
+ 与其他顶点将<i>n</i>
+ 边形分割成<i>n</i>
+ – 2个三角形，由此我们可以得出下面这条定理。</p>
+<p height="1em" width="2em" align="justify">定理：<i>n</i>
+ 边形的内角和为180(<i>n</i>
+ – 2)°。</p>
+<p height="1em" width="2em" align="justify">这条定理有一个神奇的应用。画一个八边形，在其内部任意位置标记5个点。连接顶点和这5个点，使八边形内只包含三角形。（这项操作叫作“三角形分割”。）下面有三个八边形，前两个给出了不同的三角形分割方案，最后一个留给大家自己动手操作。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="157" width="546" src="Image00995.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">在我给出的两个示例中，都包含16个三角形。你在第三个八边形里取5个点之后，无论这些点处于什么位置，只要你严格按照要求操作，最后都会得到16个三角形。（如果你没有得到16个三角形，那么请你仔细检查八边形内部，确保所有图形都只有三个顶点。如果某个图形看上去像三角形，但实际上是一个四边形，那么你必须在其中添加一个线段，将它分割成两个三角形。）其中的道理可用下面这条定理解释。</p>
+<p height="1em" width="2em" align="justify">定理：如果一个多边形有<i>n</i>
+ 条边，内部有<i>p</i>
+ 个点，利用这些边和点对该多边形进行三角形分割操作之后，得到的三角形数量一定是2<i>p</i>
+ + <i>n</i>
+ – 2个。</p>
+<p height="1em" width="2em" align="justify">在上例中，<i>n</i>
+ = 8，<i>p</i>
+ = 5，根据这个定理，得到的三角形数量必然是10 + 8 – 2 = 16个。</p>
+<p height="1em" width="2em" align="justify">证明：假设<i>n</i>
+ 边形经三角形分割操作后得到<i>T</i>
+ 个三角形。我们通过两种方法解答下面的统计问题，从而证明 <i>T</i>
+ = 2<i>p</i>
+ + <i>n</i>
+ – 2。</p>
+<p height="1em" width="2em" align="justify">问题：所有三角形的内角和是多少？</p>
+<p height="1em" width="2em" align="justify">答案1：由于一共有<i>T</i>
+ 个三角形，每个三角形的内角和为180°，因此所有三角形的内角和为180<i>T</i>
+ °。</p>
+<p height="1em" width="2em" align="justify">答案2：分两种情况考虑。包围多边形内部各点的角必然绕该点一周，因此这些角的和是360<i>p</i>
+ °。与此同时，我们知道<i>n</i>
+ 边形的内角和为180(<i>n</i>
+ – 2)°，因此所有三角形的内角和为360<i>p</i>
+ + 180(<i>n</i>
+ – 2)°。</p>
+<p height="1em" width="2em" align="justify">由于这两个答案相等，因此：</p>
+<p height="1em" width="0pt" align="center">180<i>T</i>
+ = 360 <i>p</i>
+ + 180 (<i>n</i>
+ – 2)</p>
+<p height="1em" width="2em" align="justify">两边同时除以180，就会得到：</p>
+<p height="1em" width="0pt" align="center">
+<i>T</i>
+ = 2<i>p</i>
+ + <i>n</i>
+ – 2</p>
+<p height="1em" width="2em" align="justify">证明完毕。 <img align="middle" height="56" width="59" src="Image00920.jpg" />
+</p>
+<span id="filepos0003416824"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">多边形的周长和面积</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">多边形的周长是所有边长之和。例如，如果矩形的底边长度为<i>b</i>
+ ，高为<i>h</i>
+ ，它的周长就是2<i>b</i>
+ + 2<i>h</i>
+ ，这是因为这个矩形有两条长度为<i>b</i>
+ 的边和两条长度为<i>h</i>
+ 的边。那么，这个矩形的面积是多少呢？我们把1×1方格的面积（平方单位）定义为1。如下图所示，如果<i>b</i>
+ 和<i>h</i>
+ 是正整数，那么我们可以把这个图形分割成<i>bh</i>
+ 个1×1方格，因此它的面积是<i>bh</i>
+ 。一般来说，对于底边为<i>b</i>
+ 、高为<i>h</i>
+ 的任意矩形（其中<i>b</i>
+ 和<i>h</i>
+ 是正数，但不一定是整数），我们将它的面积定义为<i>bh</i>
+ 。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="256" width="420" src="Image00996.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>底为</b>
+</font>
+ <font size="2">
+<i>
+<b>b</b>
+</i>
+</font>
+ <font size="2">
+<b>、高为</b>
+</font>
+ <font size="2">
+<i>
+<b>h</b>
+</i>
+</font>
+ <font size="2">
+<b>的矩形周长是2</b>
+</font>
+ <font size="2">
+<i>
+<b>b</b>
+</i>
+</font>
+ <font size="2">
+<b>+ 2</b>
+</font>
+ <font size="2">
+<i>
+<b>h</b>
+</i>
+</font>
+ <font size="2">
+<b>，面积是</b>
+</font>
+ <font size="2">
+<i>
+<b>bh</b>
+</i>
+</font>
+</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">在本章中，我们一直在利用代数知识解释几何问题。不过，几何学有时候也可以帮助我们解释代数问题。思考一下这样一个代数问题：如果<i>x</i>
+ 可以取任意正数，那么<i>x +</i>
+ 1/<i>x</i>
+ 的最小值是多少？如果<i>x</i>
+ = 1，上式就等于2；如果<i>x</i>
+ = 1.25，上式就等于1.25 + 0.8 = 2.05；如果<i>x</i>
+ = 2，得数就是2.5。这些数据似乎表明最小值是2，这个答案是正确的，但我们如何证明呢？在本书第11章中，我们可以通过微积分直截了当地解决这个问题。但是，只要动动脑筋，我们也可以借助简单的几何知识，轻轻松松地完成这项任务。</blockquote>
+<blockquote height="6pt" width="2em" align="justify">下图是一个中间有空洞的正方形。整个图形由4个长方块拼成，每个长方块的边长分别为<i>x</i>
+ 和1/<i>x</i>
+ 。整个图形（包括中间的空洞）的面积是多少？</blockquote>
+<blockquote height="1em" width="0pt" align="center"><img align="baseline" height="240" width="252" src="Image00997.jpg" />
+</blockquote>
+<blockquote height="1em" width="2em" align="justify">一方面，由于该图形是边长为<i>x</i>
+ + 1/<i>x</i>
+ 的正方形，因此它的面积为 (<i>x</i>
+ + 1/<i>x</i>
+ )<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ 。另一方面，每个长方块的面积是1，这个图形的面积至少是4。也就是说：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">(<i>x</i>
+ + 1/<i>x</i>
+ )<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ H 4</blockquote>
+<blockquote height="6pt" width="2em" align="justify">从而得出 <i>x</i>
+ + 1/<i>x</i>
+ H 2。证明完毕。 <img align="middle" height="56" width="59" src="Image00920.jpg" />
+</blockquote>
+<p height="2em" width="2em" align="justify">从矩形面积的计算方法，我们几乎可以推导出所有几何图形面积的计算方法。我们先来推导三角形面积的计算方法。</p>
+<p height="1em" width="2em" align="justify">定理：底为<i>b</i>
+ 、高为<i>h</i>
+ 的三角形的面积为<img align="middle" height="56" width="22" src="Image00998.jpg" />
+ <i>bh</i>
+ 。</p>
+<p height="1em" width="2em" align="justify">下图中的3个三角形的底都是<i>b</i>
+ ，高都是<i>h</i>
+ ，因此它们的面积相等。从本质上讲，这与本章开头小测试中的问题3相同。对于很多人来说，这是一个让他们吃惊的事实。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="151" width="642" src="Image00999.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>底为</b>
+</font>
+ <font size="2">
+<i>
+<b>b</b>
+</i>
+</font>
+ <font size="2">
+<b>、高为</b>
+</font>
+ <font size="2">
+<i>
+<b>h</b>
+</i>
+</font>
+ <font size="2">
+<b>的三角形的面积是</b>
+</font>
+ <img align="middle" height="42" width="16" src="Image00998.jpg" />
+ <font size="2">
+<i>
+<b>bh</b>
+</i>
+</font>
+ <font size="2">
+<b>。无论直角三角形、锐角三角形还是钝角三角形，都遵循这个规律</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">根据角<i>A</i>
+ 与角<i>C</i>
+ 的大小，可以将这个问题分成3种情况考虑。如果角<i>A</i>
+ 或角<i>C</i>
+ 是直角，我们可以复制三角形<i>ABC</i>
+ ，并把两个三角形放在一起（如下图所示），构成面积为<i>bh</i>
+ 的矩形。由于三角形<i>ABC</i>
+ 的面积是矩形面积的1/2，因此三角形的面积必然等于<img align="middle" height="56" width="22" src="Image00998.jpg" />
+ <i>bh</i>
+ 。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="183" width="222" src="Image01000.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>两个底为</b>
+</font>
+ <font size="2">
+<i>
+<b>b</b>
+</i>
+</font>
+ <font size="2">
+<b>、高为</b>
+</font>
+ <font size="2">
+<i>
+<b>h</b>
+</i>
+</font>
+ <font size="2">
+<b>的三角形可以构成一个面积为</b>
+</font>
+ <font size="2">
+<i>
+<b>bh</b>
+</i>
+</font>
+ <font size="2">
+<b>的矩形</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">如果角<i>A</i>
+ 和角<i>C</i>
+ 都是锐角，我们也可以做出巧妙的证明。如下图所示，从点<i>B</i>
+ 向<img align="middle" height="56" width="61" src="Image00990.jpg" />
+ 画一条垂线（被称作三角形<i>ABC</i>
+ 的高），交点为<i>X</i>
+ ，那么垂线的长度为<i>h</i>
+ 。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="151" width="228" src="Image01001.jpg" />
+</p>
+<p height="1em" width="2em" align="justify"><img align="middle" height="56" width="61" src="Image00990.jpg" />
+ 可以分成<img align="middle" height="56" width="76" src="Image00976.jpg" />
+ 和<img align="middle" height="56" width="66" src="Image01002.jpg" />
+ 两条线段，它们的长度分别是<i>b<sub>
+<small>1</small>
+</sub>
+</i>
+ 和<i>b<sub>
+<small>2</small>
+</sub>
+</i>
+ ，因此 <i>b<sub>
+<small>1</small>
+</sub>
+</i>
+ + <i>b<sub>
+<small>2</small>
+</sub>
+</i>
+ = <i>b</i>
+ 。由于<i>BXA</i>
+ 和<i>BXC</i>
+ 都是直角三角形，因此从第一种情况可知，它们的面积分别是<img align="middle" height="56" width="22" src="Image00998.jpg" />
+ <i>b<sub>
+<small>1</small>
+</sub>
+ h</i>
+ 和<img align="middle" height="56" width="22" src="Image00998.jpg" />
+ <i>b<sub>
+<small>2</small>
+</sub>
+ h</i>
+ 。那么，三角形<i>ABC</i>
+ 的面积为：</p>
+<p height="1em" width="0pt" align="center"><img align="middle" height="56" width="22" src="Image00998.jpg" />
+ <i>b<sub>
+<small>1</small>
+</sub>
+ h</i>
+ +<img align="middle" height="56" width="22" src="Image00998.jpg" />
+ <i>b<sub>
+<small>2</small>
+</sub>
+ h</i>
+ =<img align="middle" height="56" width="22" src="Image00998.jpg" />
+ ( <i>b<sub>
+<small>1</small>
+</sub>
+</i>
+ + <i>b<sub>
+<small>2</small>
+</sub>
+</i>
+ )<i>h</i>
+ =<img align="middle" height="56" width="22" src="Image00998.jpg" />
+ <i>bh</i>
+</p>
+<p height="1em" width="2em" align="justify">如果角<i>A</i>
+ 或角<i>C</i>
+ 是钝角，情况就会如下图所示。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="154" width="228" src="Image01003.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">如果三角形<i>ABC</i>
+ 是锐角三角形，我们就把它表示成两个直角三角形的和；如果它是钝角三角形，我们就把它表示成两个直角三角形（<i>ABY</i>
+ 和<i>CBY</i>
+ ）的差。大直角三角形<i>ABY</i>
+ 的底是 <i>b</i>
+ + <i>c</i>
+ ，它的面积为<img align="middle" height="56" width="22" src="Image00998.jpg" />
+ (<i>b</i>
+ + <i>c</i>
+ )<i>h</i>
+ ，小直角三角形<i>CBY</i>
+ 的面积为<img align="middle" height="56" width="22" src="Image00998.jpg" />
+ <i>ch</i>
+ ，所以三角形<i>ABC</i>
+ 的面积是：</p>
+<p height="1em" width="0pt" align="center"><img align="middle" height="56" width="22" src="Image00998.jpg" />
+ (<i>b</i>
+ + <i>c</i>
+ )<i>h</i>
+ –<img align="middle" height="56" width="22" src="Image00998.jpg" />
+ <i>ch</i>
+ = <i>bh</i>
+</p>
+<p height="1em" width="2em" align="justify">证明完毕。 <img align="middle" height="56" width="59" src="Image00920.jpg" />
+</p>
+<span id="filepos0003425400"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">勾股定理与想象力</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">勾股定理可能是最著名的几何定理，也是最著名的数学定理之一，因此我必须用一节的篇幅对它进行专门介绍。在直角三角形中，与直角相对的边叫作斜边，另外两边叫作直角边。下面这个直角三角形的直角边是<img align="middle" height="56" width="73" src="Image00974.jpg" />
+ 和<img align="middle" height="56" width="61" src="Image00990.jpg" />
+ ，斜边是<img align="middle" height="56" width="60" src="Image00966.jpg" />
+ ，它的边长分别是<i>a</i>
+ 、<i>b</i>
+ 和<i>c</i>
+ 。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="195" width="99" src="Image01004.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">勾股定理：如果直角三角形的直角边长为<i>a</i>
+ 和<i>b</i>
+ ，斜边长为<i>c</i>
+ ，就有：</p>
+<p height="1em" width="0pt" align="center">
+<i>a<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ = <i>c<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">据说勾股定理的证明方法超过300种，本书将介绍其中最简单的几种。大家在阅读时，可以略过某些证明方法。我希望大家在看完之后，会觉得其中至少有一种证明方法非常有意思，并且夸赞道：“这个证明方法真是太棒了！”</p>
+<p height="1em" width="2em" align="justify">证明方法1：在下图中，我们将4个直角三角形拼成一个大正方形。</p>
+<p height="1em" width="2em" align="justify">问题：这个大正方形的面积是多少？</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="288" width="340" src="Image01005.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>用两种方法计算大正方形的面积。比较两个答案，勾股定理就会浮出水面</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">答案1：这个大正方形的边长是 <i>a</i>
+ + <i>b</i>
+ ，因此它的面积是 (<i>a</i>
+ + <i>b</i>
+ )<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ = <i>a<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + 2<i>ab</i>
+ + <i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 。</p>
+<p height="1em" width="2em" align="justify">答案2：换个角度思考，大正方形包含4个三角形，每个三角形的面积为 <i>ab</i>
+ /2，中间还有一个倾斜的正方形，面积为<i>c<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 。（中间的那个图形为什么是正方形呢？我们知道它的4条边都相等，如果将这个图形旋转90°，根据对称原理，图形保持不变，因此这个图形的4个内角都相等。同时，由于四边形的内角和为360°，所以每个角都是90°。）因此，大正方形的面积是4(<i>ab</i>
+ )/2 + <i>c<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ = 2<i>ab</i>
+ + <i>c<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 。</p>
+<p height="1em" width="2em" align="justify">综合上述两种答案，就会得到：</p>
+<p height="1em" width="0pt" align="center">
+<i>a<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + 2<i>ab</i>
+ + <i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ = 2<i>ab</i>
+ + <i>c<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">两边同时减去2<i>ab</i>
+ ：</p>
+<p height="1em" width="0pt" align="center">
+<i>a<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ = <i>c<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">证明完毕。 <img align="middle" height="56" width="59" src="Image00920.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">证明方法2：我们把上图中的三角形按照下图所示方式重新排列。在上图中没有被三角形覆盖的面积是<i>c<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ ，而在第二幅图中没有被三角形覆盖的面积是<i>a<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 。因此，<i>c<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ = <i>a<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 。证明完毕。 <img align="middle" height="56" width="59" src="Image00920.jpg" />
+</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="293" width="589" src="Image01006.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>比较两个图中空白区域的面积，就可以得到</b>
+</font>
+ <font size="2">
+<i>
+<b>a<sup>
+<small>
+<font size="2">
+<b>2</b>
+</font>
+</small>
+</sup>
+</b>
+</i>
+</font>
+ <font size="2">
+<b>+</b>
+</font>
+ <font size="2">
+<i>
+<b>b<sup>
+<small>
+<font size="2">
+<b>2</b>
+</font>
+</small>
+</sup>
+</b>
+</i>
+</font>
+ <font size="2">
+<b>=</b>
+</font>
+ <font size="2">
+<i>
+<b>c<sup>
+<small>
+<font size="2">
+<b>2</b>
+</font>
+</small>
+</sup>
+</b>
+</i>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">证明方法3：如下图所示，我们再次调整三角形的位置，让它们拼成一个面积为<i>c<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 、结构更紧凑的正方形。（这之所以是一个正方形，是因为它的4个角都是角<i>A</i>
+ 和角<i>B</i>
+ 结合形成的，而且这两个角的和是90°。）前文已经计算过，这4个三角形的面积是4(<i>ab</i>
+ /2) = 2<i>ab</i>
+ ，位于中央位置的那个倾斜正方形的面积是 (<i>a</i>
+ – <i>b</i>
+ )<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ = <i>a<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ – 2<i>ab</i>
+ + <i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ ，两者相加的和是2<i>ab</i>
+ + (<i>a<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ – 2<i>ab</i>
+ + <i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ ) = <i>a<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 。证明完毕。 <img align="middle" height="56" width="59" src="Image00920.jpg" />
+</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="267" width="262" src="Image01007.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>该图形的面积既可以表示为</b>
+</font>
+ <font size="2">
+<i>
+<b>c<sup>
+<small>
+<font size="2">
+<b>2</b>
+</font>
+</small>
+</sup>
+</b>
+</i>
+</font>
+ <font size="2">
+<b>，又可以表示为</b>
+</font>
+ <font size="2">
+<i>
+<b>a<sup>
+<small>
+<font size="2">
+<b>2</b>
+</font>
+</small>
+</sup>
+</b>
+</i>
+</font>
+ <font size="2">
+<b>+</b>
+</font>
+ <font size="2">
+<i>
+<b>b<sup>
+<small>
+<font size="2">
+<b>2</b>
+</font>
+</small>
+</sup>
+</b>
+</i>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">证明方法4：下面给出的是一种相似性证明法，即在证明过程中会利用相似三角形。如下图所示，从直角<i>C</i>
+ 向斜边画垂直线段<img align="middle" height="56" width="77" src="Image01008.jpg" />
+ 。我们观察发现，三角形<i>ADC</i>
+ 包含一个直角和角A，因此它的第三个内角必然和角<i>B</i>
+ 相等。同理，三角形<i>CDB</i>
+ 包含一个直角和角<i>B</i>
+ ，因此它的第三个内角必然和角<i>A</i>
+ 相等。也就是说，这3个三角形彼此相似：</p>
+<p height="1em" width="0pt" align="center">△ <i>ACB</i>
+ <img align="baseline" height="5" width="15" src="Image00979.jpg" />
+ △<i>ADC</i>
+ <img align="baseline" height="5" width="15" src="Image00979.jpg" />
+ △<i>CDB</i>
+</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="196" width="262" src="Image01009.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>两个小三角形都与大三角形相似</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">注意，表示这些三角形时字母次序不能出错。我们知道，∠<i>ACB</i>
+ =∠<i>ADC</i>
+ = ∠<i>CDB</i>
+ = 90°，它们都是直角。同理，∠<i>A</i>
+ = ∠<i>BAC</i>
+ = ∠<i>CAD</i>
+ = ∠<i>BCD</i>
+ ，∠<i>B</i>
+ = ∠<i>CBA</i>
+ = ∠<i>DCA</i>
+ = ∠<i>DBC</i>
+ 。比较三角形<i>ACB</i>
+ 和<i>ADC</i>
+ 的边长，就会得到：</p>
+<p height="1em" width="0pt" align="center">
+<i>AC</i>
+ / <i>AB</i>
+ = <i>AD</i>
+ / <i>AC</i>
+ ⇒ <i>AC<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ = <i>AD</i>
+ × <i>AB</i>
+</p>
+<p height="1em" width="2em" align="justify">比较三角形<i>ACB</i>
+ 和<i>CDB</i>
+ 的边长，就会得到：</p>
+<p height="1em" width="0pt" align="center">
+<i>CB</i>
+ / <i>BA</i>
+ = <i>DB</i>
+ / <i>BC</i>
+ ⇒ <i>BC<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ = <i>DB</i>
+ × <i>AB</i>
+</p>
+<p height="1em" width="2em" align="justify">两个等式相加，就会得到：</p>
+<p height="1em" width="0pt" align="center">
+<i>AC<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>BC<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ = <i>AB</i>
+ × (<i>AD</i>
+ + <i>DB</i>
+ )</p>
+<p height="1em" width="2em" align="justify">由于<i>AD</i>
+ + <i>DB</i>
+ = <i>AB</i>
+ = <i>c</i>
+ ，因此：</p>
+<p height="1em" width="0pt" align="center">
+<i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>a<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ = <i>c<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ <img align="middle" height="56" width="59" src="Image00920.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">下面介绍的是一种纯粹的几何证明方法，不需要使用代数知识，但要求我们有图形想象能力。</p>
+<p height="1em" width="2em" align="justify">证明方法5：如下图所示，画出面积分别为<i>a<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 和<i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 的两个正方形，并将它们并排放置，因此它们的总面积是<i>a<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 。我们对这个图形进行分割处理，把它变成两个直角三角形（直角边长分别是<i>a</i>
+ 和<i>b</i>
+ ，斜边长为<i>c</i>
+ ）和一个看上去比较奇怪的图形。注意，这个奇怪图形底部的那个角肯定是90°。我们想象在大正方形的左上角和小正方形的右上角分别装上铰链。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="217" width="603" src="Image01010.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>这两个正方形的面积为</b>
+</font>
+ <font size="2">
+<i>
+<b>a<sup>
+<small>
+<font size="2">
+<b>2</b>
+</font>
+</small>
+</sup>
+</b>
+</i>
+</font>
+ <font size="2">
+<b>+</b>
+</font>
+ <font size="2">
+<i>
+<b>b<sup>
+<small>
+<font size="2">
+<b>2</b>
+</font>
+</small>
+</sup>
+</b>
+</i>
+</font>
+ <font size="2">
+<b>，经过分割处理，它们可以变成……</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">接下来，想象左下角的那个三角形逆时针旋转90°，停留在大正方形的上方。然后，另一个三角形顺时针旋转90°，使它的直角正好与两个正方形构成的直角重合（如下图所示）。这样一来，我们就会得到一个倾斜的正方形，它的面积为<i>c<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 。因此，<i>a<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>b<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ = <i>c<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 。证明完毕。 <img align="middle" height="56" width="59" src="Image00920.jpg" />
+</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="266" width="620" src="Image01011.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>……一个面积为</b>
+</font>
+ <font size="2">
+<i>
+<b>c<sup>
+<small>
+<font size="2">
+<b>2</b>
+</font>
+</small>
+</sup>
+</b>
+</i>
+</font>
+ <font size="2">
+<b>的正方形</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">现在，我们可以解答本章开头小测试中的问题4了。利用勾股定理，即可算出系在相距360英尺的两个球门柱根部的长度为361英尺的绳子可以抬高多少。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="113" width="536" src="Image01012.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>根据勾股定理，</b>
+</font>
+ <font size="2">
+<i>
+<b>h<sup>
+<small>
+<font size="2">
+<b>2</b>
+</font>
+</small>
+</sup>
+</b>
+</i>
+</font>
+ <font size="2">
+<b>+ 180<sup>
+<small>
+<font size="2">
+<b>2</b>
+</font>
+</small>
+</sup>
+ = 180.5<sup>
+<small>
+<font size="2">
+<b>2</b>
+</font>
+</small>
+</sup>
+</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">球场中央到球门柱的距离是180英尺。如上图所示，绳子抬至最高处之后，所构成的直角三角形的一条直角边长为180英尺，斜边长为180.5英尺。根据勾股定理，经过简单的代数运算，就可以得出：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="153" width="236" src="Image01013.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">因此，大多数卡车都可以轻松地从绳子下方通过！</p>
+<span id="filepos0003438775"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">魔术时间到了！</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">在本章开头，我为大家介绍了一个魔术，下面我再介绍一个根据几何原理设计的魔术。勾股定理的大多数证明方法都是在保持面积不变的前提下重新排列几何图形的各个组成部分，从而得到一个不同的图形。先请大家思考一个悖论。如下图所示，把一个8×8的正方形分割成4块（每块的边长都是3、5或8的斐波那契数列中的数字），然后重新排列，拼成一个5×13的矩形。（大家不妨自己动手试一试！）但是，第一个图形的面积是8×8 = 64，第二个图形的面积却是5×13 = 65，这怎么可能？问题出在哪里呢？</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="247" width="615" src="Image01014.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>一个面积为64的正方形可以重新排列成一个面积为65的矩形吗？</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">奥秘就在那个5×13矩形的对角“线”上，它其实不是直线。例如，图中三角形<i>C</i>
+ 的斜边斜率为3/8 = 0.375（横坐标增加了8，纵坐标增加了3），而图形<i>D</i>
+ （梯形）的斜边斜率为2/5 = 0.4（横坐标增加了5，纵坐标增加了2）。由于两个斜边的斜率不同，因此它们不会构成一条直线。此外，梯形<i>A</i>
+ 与三角形<i>B</i>
+ 也存在同样的情况。仔细观察下图中的三角形，就会发现在两条“近似对角线”之间，多出了一点儿面积。这些面积分布在一个很长的区域内，大小正好是一个单位。加 入 会 员 微 信 whair004</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="137" width="354" src="Image01015.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>矩形多出来的那一个单位的面积就分布在对角线周围</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">我们在本章推导出关于三角形、正方形、矩形和其他多边形的众多属性，这些属性都建立在直线的基础之上。如果我们研究的是圆和其他曲线类图形，就需要借助三角学、微积分等更复杂的几何概念，也无法回避一个充满吸引力的数字——π。</p>
+<span id="filepos0003441261"></span>
+<p height="1em" width="2em" align="justify">
+<a href="text00014.html#filepos0003373251">
+<font size="2">[1]</font>
+</a>
+ <font size="2">1英尺≈0.304 8米。——编者注</font>
+</p>
+<span id="filepos0003441421"></span>
+<p height="5pt" width="2em" align="justify">
+<a href="text00014.html#filepos0003375879">
+<font size="2">[2]</font>
+</a>
+ <font size="2">1英寸≈2.54厘米。——编者注</font>
+</p>
+<span id="filepos0003441597"></span>
+<p height="3em" width="0pt" align="center">
+<font size="4">
+<font color="#000000">第8章</font>
+</font>
+<br/>
+<br/>
+<font size="4">
+<font color="#000000">永不止步的π</font>
+</font>
+</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="63" width="509" src="Image01016.jpg" />
+</p>
+<span id="filepos0003441912"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">一条能绕地球一周的绳子</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">在上一章的开头，为了测试大家在矩形及三角形等方面的几何直觉能力，我提出了4个问题，最后一个问题是用绳子连接橄榄球场两端的球门柱。本章将专门讨论圆这种几何图形，请大家拿出一条绳子，用它环绕地球一周！</p>
+<p height="0pt" width="0pt">
+<font size="2">  </font>
+ <img align="baseline" height="250" width="269" src="Image01017.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">问题1：假设我们有一条刚好可以绕地球一周的长绳子（约为25 000英里<sup><span id="filepos0003442672"></span>
+ <small>
+<a href="text00015.html#filepos0003494723">[1]</a>
+</small>
+</sup>
+ 长）。在打结时，我们把绳子的长度增加10英尺。如果要求绳子距赤道的高度全部相同，这个高度应该是多少？</p>
+<p height="1em" width="2em" align="justify">A）离地面不到1英寸。</p>
+<p height="1em" width="2em" align="justify">B）正好可以让人从下面爬过去。</p>
+<p height="1em" width="2em" align="justify">C）正好可以让人从下面走过去。</p>
+<p height="1em" width="2em" align="justify">D）足够一辆卡车从下方通过。</p>
+<p height="1em" width="2em" align="justify">问题2：如下图所示，<i>X</i>
+ 和<i>Y</i>
+ 是圆上的两个固定点，<i>Z</i>
+ 是“优弧”（major arc，指<i>X</i>
+ 和<i>Y</i>
+ 之间的那条长弧，而不是短弧）上的一个点。要使∠<i>XZY</i>
+ 最小，点<i>Z</i>
+ 的位置如何确定？</p>
+<p height="1em" width="2em" align="justify">A）点<i>A</i>
+ （与<i>X</i>
+ 、<i>Y</i>
+ 的中点相对）。</p>
+<p height="1em" width="2em" align="justify">B）点<i>B</i>
+ （点<i>X</i>
+ 通过圆心的映射）。</p>
+<p height="1em" width="2em" align="justify">C）点<i>C</i>
+ （与点<i>X</i>
+ 尽可能接近）。</p>
+<p height="1em" width="2em" align="justify">D）无所谓。无论点<i>Z</i>
+ 在什么位置上，∠<i>XZY</i>
+ 都相同。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="388" width="395" src="Image01018.jpg" />
+</p>
+<p height="5pt" width="2em" align="center">
+<font size="2">
+<b>如何在</b>
+</font>
+ <font size="2">
+<i>
+<b>X</b>
+</i>
+</font>
+ <font size="2">
+<b>和</b>
+</font>
+ <font size="2">
+<i>
+<b>Y</b>
+</i>
+</font>
+ <font size="2">
+<b>之间的优弧上选取一点，使构成的角度数最大？∠</b>
+</font>
+ <font size="2">
+<i>
+<b>XAY</b>
+</i>
+</font>
+ <font size="2">
+<b>、∠</b>
+</font>
+ <font size="2">
+<i>
+<b>XBY</b>
+</i>
+</font>
+ <font size="2">
+<b>、∠</b>
+</font>
+ <font size="2">
+<i>
+<b>XCY</b>
+</i>
+</font>
+ <font size="2">
+<b>，还是所有角的度数都相同？</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">要解答这两个问题，我们需要进一步了解圆的相关属性。（即使没有圆的相关知识，你也能找出这两道题的正确答案，分别是<i>B</i>
+ 和<i>D</i>
+ 。但是，要弄清楚为什么它们是正确答案，就需要对圆的知识有所了解。）如下图所示，点<i>O</i>
+ 和正数<i>r</i>
+ 就可以定义一个圆：圆上的所有点与<i>O</i>
+ 的距离都是<i>r</i>
+ 。点<i>O</i>
+ 是“圆心”，<i>r</i>
+ 是圆的“半径”。为方便起见，数学界把从点<i>O</i>
+ 至点<i>P</i>
+ 的线段<img align="middle" height="56" width="68" src="Image01019.jpg" />
+ 也称作半径。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="377" width="377" src="Image01020.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>圆心为</b>
+</font>
+ <font size="2">
+<i>
+<b>O</b>
+</i>
+</font>
+ <font size="2">
+<b>、半径为</b>
+</font>
+ <font size="2">
+<i>
+<b>r</b>
+</i>
+</font>
+ <font size="2">
+<b>、直径</b>
+</font>
+ <font size="2">
+<i>
+<b>D</b>
+</i>
+</font>
+ <font size="2">
+<b>= 2</b>
+</font>
+ <font size="2">
+<i>
+<b>r</b>
+</i>
+</font>
+ <font size="2">
+<b>的圆</b>
+</font>
+</p>
+</body>
+</html>

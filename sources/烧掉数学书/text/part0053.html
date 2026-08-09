@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="1IHDQ0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">3.1.4　瞎猜</h4>
+
+  <p class="bodytext">这个主意似乎有些牵强，我们不知道行不行，但不妨试一下。反正也没有其他办法，而且失败了也不会怎么样。我们可以胆子大一点，看能不能在这个问题上取得一些进展。</p>
+
+  <p class="bodytext">理查德·费曼曾说过，发现新物理定律的第一步是猜测。这是句玩笑话，但并不是真的开玩笑。发现新事物就是一个不墨守成规的过程。实在并不关心我们如何在它的秘密上跌跌绊绊，猜测不亚于其他任何方法。我们不妨猜测一下。我们已经知道（f+g）'=f'+g'。也就是说，和的导数是导数的和。因此一个很自然的猜测是，乘积的导数会不会是导数的乘积。似乎很合理，对吗？我们把它写下来，不过不要忘了这只是猜测：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00241.jpeg"/>
+  </div>
+
+  <p class="bodytext">好了，我们有了一个猜测。上面的猜测是受另一个我们已经<span class="jiacu">知道</span>的事实启发，即（f+g）'=f'+g'，因此不算是胡乱猜测。如果我们的猜测是正确的，就必须与我们已知的事实相一致，因此让我们看看根据它能不能得出之前发现的事实。我们知道x<sup class="calibre3">2</sup>的导数是2x，如果上面的猜测是对的，我们还能将x<sup class="calibre3">2</sup>的导数写成</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00242.jpeg"/>
+  </div>
+
+  <p class="bodytext">结果行不通。无论x是多少，x<sup class="calibre3">2</sup>的导数总是等于1，这种说法显然不对。好吧，我们猜错了，但还是知道了一些东西。而且反过来看，我们还能知道我们的猜测错在哪里。毕竟，如果（fg）'=f'g'是对的，那么<span class="jiacu">一切机器</span>的导数都会等于零。为什么？因为任何机器f都等于1乘以其自身，因此如果我们的猜测是对的，就会有：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00243.jpeg"/>
+  </div>
+
+  <p class="bodytext">我们的猜测失败了，又不知道该怎么办了。我想还是只能回到绘图板前。用绘图板画什么？我想应该是回到导数的定义。我们假设f和g可以是任意机器，不必非得是加乘机器。然后令M（x）≡f（x）g（x）。因此M吐出来的与f和g吐出来的东西的乘积是一样的。然后根据导数的定义，并用t作为很小的数的缩写，可以得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00244.jpeg"/>
+  </div>
+
+  <p class="bodytext">我们又卡住了。还没走多远就碰壁了！现在怎么办？</p>
+
+  <p class="bodytext">嗯，如果我们可以撒个谎改变这个问题，情况也许会好一些，因为那样就和我们能够处理的一个问题比较像。我的意思是说，如果用f（x）替代f（x+t），也许能有一些进展。我们先暂时把真正的问题放在一边，先看看我们撒了谎的这个版本。我会将我们改动了的地方标记为<sup class="calibre3"><img alt="" class="gongshi" src="../images/00245.jpeg"/></sup>。见到<sup class="calibre3"><img alt="" class="gongshi" src="../images/00246.jpeg"/></sup>符号就表示我们在这里撒了谎，目的是让问题容易一点。这没问题，只要我们记得我们还没有真正解决原来的问题。这也许是做无用功，但是谁知道呢？这样的诱骗也许能让我们对碰壁的问题有新的认识。下面继续：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00247.jpeg"/>
+  </div>
+
+  <p class="bodytext">棒极了！我们已经绕过了卡壳的地方。现在同以往一样将t缩小到0，让最右边变成f（x）g'（x），最左边正好就是M（x）≡f（x）g（x）的导数，从而得到</p>
+
+  <div class="zhong1">
+ <img alt="" class="image-tuzhu" src="../images/00248.jpeg"/>
+  </div>
+
+  <p class="bodytext">这个有用吗？我们是得到了<span class="jiacu">一个</span>答案，但不是真正的答案，因为我们撒了谎。但如果我们回到原来的问题，撒同样的谎，然后又<span class="jiacu">改正这个谎</span>，也许就能在<span class="jiacu">不</span>改变原来问题的基础上实现类似的进展。我们如何才能撒谎然后改正呢？嗯，我们可以加上0……不是真的0。我们不再像上面那样改变问题，而是把<span class="jiacu">想要</span>的项加上，然后又减去同样的项，这样我们就没有改变问题。</p>
+
+  <p class="bodytext">因此与前面撒的谎类似，将f（x）g（x+t）加到原问题的分子部分，不过这次我们还要将f（x）g（x+t）重新减掉，这样就没有改变问题。总的效果是我们什么也没做。我们只是加了0。但是说在一长串等式中间“加上0”并没有真正表达出我们想做的事情，当然也没有公正体现出这个想法的怪异和巧妙之处。为了取得进展，我们可以毫无拘束地<span class="jiacu">为所欲为</span>，然后施加等量的解毒剂来消除我们造成的影响，为我们的鲁莽道歉。毒药和解毒剂的混用不会改变问题，但是我们的所作所为会让问题长出<span class="jiacu">“（某个东西）-（某个东西）”</span>形状的疤痕，并且如果我们仔细塑造，就可以得到某种可以抓手的地方，拉着我们前进。让我们来看看这个想法是不是真的有效。准备好了吗？让我们继续：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00249.jpeg"/>
+  </div>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00250.jpeg"/>
+  </div>
+
+  <p class="bodytext">结果比我们预想的还要好。为了改正撒的谎，余下了一些本不想要的东西。然而，让人喜出望外地是，和我们想要的项一样，余下的这些也是好东西，因为我们发现可以将g（x+t）提取出来放到外面。</p>
+
+  <p class="bodytext">在上面等式的最后一行我们得到了4项。现在，如果让t趋近于0，所有这些项就要么变成了那两台机器之一，要么变成了它们的导数。第一项仍然是f（x），第二项变成g'（x），第三项变成f'（x），第四项为g（x）。从而得到f'（x）g（x）+f（x）g'（x）。我们撒谎然后改正真的起作用了！让我们把这些写到方框里表彰并总结一下：</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">如何用这些项谈论乘积的导数</span></p>
+
+    <p class="bodytext-c">我们刚刚发现：</p>
+
+    <p class="bodytext-c">如果M（x）≡f（x）g（x），</p>
+
+    <p class="bodytext-c">则M'（x）=f'（x）g（x）+f（x）g'（x）。</p>
+
+    <p class="bodytext-c">用不同的方式再说一遍：</p>
+
+    <p class="bodytext-c">（fg）'=f'g+g'f。</p>
+
+    <p class="bodytext-c">再用不同的方式说一遍：</p>
+
+    <div class="zhong1">
+ <img alt="" class="image-tuzhu" src="../images/00251.jpeg"/>
+    </div>
+
+    <p class="bodytext-c">有点疯狂，继续！</p>
+
+    <p class="bodytext-c">［f（x）g（x）］'=f'（x）g（x）+f（x）g'（x）。</p>
+
+    <p class="bodytext-c">你还在吗？好吧，再来一遍：</p>
+
+    <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00252.jpeg"/>
+    </div>
+  </div>
+</body></html>

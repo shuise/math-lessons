@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="164MG0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">2.3.7　将难题分解成简单的问题</h4>
+
+  <p class="bodytext">目前我们还只有两种方法求机器的导数。一种是利用导数的定义——即将第1章斜率的定义应用于无限接近的两个点。如果有谁给我们一台机器M，我们可以这样求它的导数：</p>
+
+  <div class="zhong1">
+ <img alt="" class="image-tuzhu" src="../images/00161.jpeg"/>
+  </div>
+
+  <p class="bodytext">其中<span class="jiacu">微小量</span>表示某个无穷小的数（你可以认为是某个很小的数，不一定非得无穷小，然后在消去分母中的<span class="jiacu">微小量</span>之后再让它趋近于0）。</p>
+
+  <p class="bodytext">还有一种求导数的方法是问我们自己：“我们有没有求过类似的导数？”例如，我们知道类似M（x）≡x<sup class="calibre3">n</sup>的机器的导数是M'（x）=nx<sup class="calibre3">n-1</sup>，其中n是整数。我们可以给这个规律起个名字叫“幂次方法则”，就像课本上那样，当然这是我们自己发现的，利用了导数的定义。所以我猜我们其实只有一种求导数的方法：定义。同数学中的其他“定律”一样，它们并不真的是定律，它们只不过是我们根据定义发现的东西的名称。我们自己创造的概念定义源自模糊定性的日常概念，并且当我们不是很清楚该如何做的时候还会诉诸美学甚至率性而为。</p>
+
+  <p class="bodytext">数学就是这么古怪……</p>
+
+  <p class="bodytext">既然我们已经得出了可以描述我们的世界中所有机器的足够大又足够未知的缩写，就可以用加乘机器来检验一下我们对无穷放大镜的掌握程度。不过虽然我们将所有的机器浓缩在一个缩写中，它还是相当复杂。如果将式子</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00162.jpeg"/>
+  </div>
+
+  <p class="bodytext">直接代入导数的定义，得到的将是一团乱麻，不知道如何下手。我们可以尝试将难问题分解成几个我们能够解答的简单问题。</p>
+
+  <p class="bodytext">我们已经发现：任何加乘机器都只不过是一堆更简单的项相加。从等式（2.15）可以看出，这些更简单的项的形式是＃<sub class="calibre6">k</sub>x<sup class="calibre3">k</sup>，其中k是某个整数，＃<sub class="calibre6">k</sub>可以是任意数，不一定是整数。如果我们能求出类似＃x<sup class="calibre3">n</sup>的机器的导数，然后将这些项的导数相加，也许就能得到总的导数。如果是这样，我们就能知道如何将无穷放大镜应用于<span class="jiacu">任何</span>加乘机器。到那时，我们就能征服我们的整个世界。</p>
+
+  <p class="bodytext"><span class="jiacu">单项：＃x<sup class="calibre3">n</sup></span></p>
+
+  <p class="bodytext">我们已经知道如何对x<sup class="calibre3">n</sup>应用无穷放大镜。它的导数是nx<sup class="calibre3">n-1</sup>。因此我们的问题是当我们求＃x<sup class="calibre3">n</sup>的导数时，如何处理数＃。我们可以定义m（x）≡＃x<sup class="calibre3">n</sup>，然后对其求导。将斜率定义应用于无限接近的两个点：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00163.jpeg"/>
+  </div>
+
+  <p class="bodytext">其中t是某个很小的数，我们可以想象在它上面装了旋钮。如果我们调整旋钮，让t趋近于0，最左边就变成了导数的定义m'（x）。最右边呢？＃是一个数，因此当t减小时，＃保持不变，而＃的右边就是x<sup class="calibre3">n</sup>的导数，我们已经求出来了。因此正如我们所希望的，数＃可以提取出来，m（x）≡＃x<sup class="calibre3">n</sup>的导数就是</p>
+
+  <p class="bodytext-c">m'（x）=＃nx<sup class="calibre3">n-1</sup>。</p>
+
+  <p class="bodytext">但是等一下……除了最后一步，我们并没有用到机器x<sup class="calibre3">n</sup>的任何特殊属性。这个论证能不能推广？我们来看看如果m（x）是（某个数）乘以（某台机器），或者说m（x）≡＃f（x），这个论证是不是也能成立。也就是说，这两台几乎一样的机器的导数是不是存在某种关系？我们可以进行同样的论证：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00164.jpeg"/>
+  </div>
+
+  <p class="bodytext">同前面一样，我们让t趋近于0。最左边就变成了m'（x）的定义。最右边呢？同前面一样，＃是一个数，它不受t影响，因此当t趋近于0时＃保持不变。＃右边的项则变成了f'（x）的定义。这样我们就发现了与无穷放大镜有关的一个新的事实，机器乘一个数对它有何影响！我们对刚才的发现很自豪，应该写在方框里，用几种不同的方式表达这个思想。</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">我们刚才发明的</span></p>
+
+    <p class="bodytext-c">两台几乎一样的机器，差别只是乘了一个数，它们的导数有没有关联？有！</p>
+
+    <p class="bodytext-c">如果m（x）≡＃f（x），则m'（x）=＃f'（x）。</p>
+
+    <p class="bodytext-c">用另一种方式说一遍：</p>
+
+    <p class="bodytext-c">［＃f（x）］'=＃f'（x）。</p>
+
+    <p class="bodytext-c">用另一种方式再说一遍：</p>
+
+    <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00165.jpeg"/>
+    </div>
+
+    <p class="bodytext-c">有点疯狂，不过再说一遍：</p>
+
+    <p class="bodytext-c">（＃f）'=＃（f'）。</p>
+
+    <p class="bodytext-c">你还在吗？好吧，再说一遍：</p>
+
+    <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00166.jpeg"/>
+    </div>
+  </div>
+
+  <p class="bodytext"><span class="jiacu">将各项合到一起</span></p>
+
+  <p class="bodytext">在尝试将无穷放大镜应用于加乘机器的过程中，<a id="zw1" href="part0040.html#zhu1"><sup class="calibre3">[1]</sup></a>我们意识到也许可以将这个难题分解成两个简单的问题。一是求＃x<sup class="calibre3">n</sup>的导数，其中n是整数。我们解决了这个问题，然后顺着这条思路我们发现同样的论证也可以用于更一般的问题，常数可以从导数中提取出来，（＃f）'=＃（f'）。</p>
+
+  <p class="bodytext">现在我们来尝试回答第二个“简单”的问题。如果我们的机器是由一堆更小的机器相加得到的，如果我们知道这些更小的机器的导数，能够推出整台机器的导数吗？</p>
+
+  <p class="bodytext">假设我们有一台机器，它其实是两台更小的机器挨着放到一起，但有人给它们一起装了个外壳，这样看上去就像一台大机器。假设我们将某个数x放进这台大机器，如果第一台机器吐出来7，第二台机器吐出来4，我们看见的就是这个大箱子吐出来11。任何复杂的机器（比如现代计算机）其实都可以这样认为：可以当作一台大机器，也可以当作绑在一起的许多小机器。</p>
+
+  <p class="bodytext">这个问题为什么重要？问“一台大机器<span class="jiacu">到底</span>是由多少台小机器组成的？”没什么意义。如果一台大机器可以被视为是由两台更简单的机器组成，我们的思路就可以不局限于此。我们可以将其缩写为M（x）≡f（x）+g（x），我们并没有具体指定这些机器是什么机器，所以从中推出的结论适用于任何由两台“更简单”的机器组成的机器。顺着这条思路，我们来看一下从机器M的各组成部分的导数是不是能推出“大”机器M本身的导数。由于我们没有对小机器f和g作任何设定，因此只能回到导数的定义，从而得到：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00167.jpeg"/>
+  </div>
+
+  <p class="bodytext">第一个等号利用了M的定义。第二和第三个等号只是将东西移来移去，试着将f和g分开。之所以这样做是因为这里的关键是将难题分解成简单的问题，因此最好是能将大机器M的导数转化成它的组成部分，f和g的导数。我们的确做到了。现在如果让t趋近于0，等式的左上角就会变成M'（x）。等式下面的两部分则分别变成了f'（x）和g'（x）。</p>
+
+  <p class="bodytext">这样我们就发现了关于无穷放大镜的一个新的事实，它将帮助我们将难题分解成更简单的问题。同前面一样，让我们把它写在方框里，并且用几种不同的方式表达。</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">我们刚才发明的</span></p>
+
+    <p class="bodytext-c">如果M（x）≡f（x）+g（x），大机器M（x）的导数与组成部分</p>
+
+    <p class="bodytext-c">f（x）和g（x）的导数之间有关联吗？有！</p>
+
+    <p class="bodytext-c">如果M（x）=f（x）+g（x），则M'（x）=f'（x）+g'（x）。</p>
+
+    <p class="bodytext-c">用另一种方式说一遍：</p>
+
+    <p class="bodytext-c">［f（x）+g（x）］'=f'（x）+g'（x）。</p>
+
+    <p class="bodytext-c">用另一种方式再说一遍！</p>
+
+    <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00168.jpeg"/>
+    </div>
+
+    <p class="bodytext-c">有点疯狂，不过再说一遍：</p>
+
+    <p class="bodytext-c">（f+g）'=f'+g'。</p>
+
+    <p class="bodytext-c">你还在吗？好吧，再说一遍：</p>
+
+    <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00169.jpeg"/>
+    </div>
+
+    <p class="bodytext-c">也许对任意多台机器也管用，不过目前我们还不知道：</p>
+
+    <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00170.jpeg"/>
+    </div>
+  </div>
+
+  <p class="bodytext">这样我们就知道了如何处理加到一起的两台机器。但如果将3台、100台或n台机器加到一起呢？我们需要从2开始为每个数寻找一个新定律吗？仔细想想，就会发现只要认识到了前面的思想的威力，这些问题就会烟消云散。这个思想是这样：</p>
+
+  <div class="kx">
+     <p class="bodytext">问“一台大机器<span class="jiacu">到底</span>是由多少台小机器组成的？”没什么意义。如果一台大机器可以被视为是由两台更简单的机器组成的，我们的思路就可以不局限于此。</p>
+  </div>
+
+  <p class="bodytext">同样的哲学也可以应用到任意多项，而不仅仅是两项。如果我们承认一台“大机器”是由一堆机器组合而成，就可以利用一个有趣的技巧。假设我们有一台大机器可以认为是由3个部分加到一起组成。这台大机器的导数是什么？我们只知道当机器是由两个部分组成时，“和的导数是导数之和”，也就是说：</p>
+
+  <p class="bodytext-c">（f+g）'=f'+g'。</p>
+
+  <p class="bodytext">但如果将机器之和也视为机器，我们就可以将简单的两部分之和应用两次，就像这样：</p>
+
+  <p class="bodytext-c">［f+g+h］'=［f+（g+h）］'=f'+（g+h）'=f'+g'+h'。</p>
+
+  <p class="bodytext">第一个等号说的是“暂时先将（g+h）视为一台机器”。第二和第三个等号则是应用我们已知的规律：当只有两个组成部分时，你可以分配撇号。我们先将（g+h）视为一台机器，对f和（g+h）应用。然后将（g+h）视为两台机器的组合，对g和h应用。因此对（g+h）的认识在中间的等号上改变了。显然同样的推理还可以走得更远。如果有n台机器，则下面的等式成立：</p>
+
+  <p class="bodytext-c">（m<sub class="calibre6">1</sub>+m<sub class="calibre6">2</sub>+…+m<sub class="calibre6">n</sub>）'=m'<sub class="calibre6">1</sub>+m'<sub class="calibre6">2</sub>+…+m'<sub class="calibre6">n</sub>。</p>
+
+  <p class="bodytext">这是基于从两台到三台机器同样的推理。我们只需要一遍又一遍应用相同的论证。结论很惊人，因为从“两部分”版的（f+g）'=f'+g'我们就直接得到了更通用的版本。通过应用“两部分”版，然后不断改变我们对机器是由哪两部分组成的认识，我们就能得到更大的“n部分”版！</p>
+
+  <p class="bodytext-c">（远处传来低沉的声音。）</p>
+
+  <p class="bodytext">啊哈！又来了！</p>
+
+  <p class="bodytext"><span class="jiacu">读者</span>：为什么你老是这样？</p>
+
+  <p class="bodytext"><span class="jiacu">作者</span>：那不是我！</p>
+
+  <p class="bodytext"><span class="jiacu">读者</span>：（带着怀疑的口吻）……你<span class="jiacu">确定</span>？</p>
+
+  <p class="bodytext"><span class="jiacu">作者</span>：当然！我和你一样不知道咋回事……我们到了哪里？哦，我想这一节该结束了！让我们继续，亲爱的读者！</p>
+
+  <hr class="calibre4"/>
+
+  <p class="notecontent"><a id="zhu1" href="part0040.html#zw1">[1]</a>用课本上的话来说就是“求多项式的导数”。</p>
+</body></html>

@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="49AH00-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">N.3.2　技巧实践</h4>
+
+  <p class="bodytext">注意到“二进一出”机器m（x，y）能够被图形化为悬浮的（可能弯曲的）面。图N.1给出了更详细的解释。</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00769.jpeg"/>     <p class="tuzhu-center">图N.1　将吞进去两个数吐出来一个数的机器m图形化。我们可以将机器吞进去的两个数画作“地面上”的坐标。如果将地面上的点（x，y）喂给机器m，它就会吐出一个数m（x，y），这个数可以图形化为悬浮在点（x，y）上面的图形的“高度”。地面上的每个点都对应一个高度，因此这种机器的图形是一个二维面。</p>
+  </div>
+
+  <p class="bodytext">现在我们可以将无穷放大镜的思想用于图N.1。如果我们在曲面上放大，它看起来就会像是平面。我们想象在图N.1的图形上选取任意一点无穷放大，得到的将是图N.2中倾斜（但不弯曲）的面。</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00770.jpeg"/>     <p class="tuzhu-center">图N.2　我们在曲面上无穷放大就会得到一个（倾斜的）平面。图中标注了水平面坐标。</p>
+  </div>
+
+  <p class="bodytext">我们曾讨论过偏导数，但如果能够形成类似单一导数的思想就更好，如果你愿意，可以称它为“总导数”。不再将x和y视为分开的数，而是（暂时）视为单一的对象成分：一个“向量”，写作（x，y）。现在我们可以像定义一种新型的导数那样做：从机器m开始，喂给它某个<span class="jiacu">食物</span>。在这里<span class="jiacu">食物</span>是向量（x，y）。机器吐出来一个数m（x，y）。然后我们对<span class="jiacu">食物</span>做微小的改变，让它增加一个“微小向量”（dx，dy），变成m（x+dx，y+dy）。然后同以往一样，我们观察m（之后）-m（之前），即<a id="zw1" href="part0144.html#zhu1"><sup class="calibre3">[1]</sup></a></p>
+
+  <p class="bodytext-c">dm≡m（x+dx，y+dy）-m（x，y），　（N.20）</p>
+
+  <p class="bodytext">符号dm表示当我们将两个输入都改变无穷小量时（x变成x+dx，y变成y+dy）m的图形“高度”的微小变化。这时我们可以绘制曲面放大处的图形。有许多需要标注的地方，所以我把它分成了3幅图。下面是我们在3幅图中标注的东西。</p>
+
+  <p class="bodytext">1.在图N.2中，我只标注了“地面”上的4个点，分别是（x，y）、（x+dx，y）、（x，y+dy）和（x+dx，y+dy）。</p>
+
+  <p class="bodytext">2.在图N.3中，我标注了图N.2中4个点的输出或图形的“高度”。这些高度记为m（x，y）、m（x+dx，y）、m（x，y+dy）和m（x+dx，y+dy）。</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00771.jpeg"/>     <p class="tuzhu-center">图N.3　同图N.2一样，不过这里标注了垂直坐标。</p>
+  </div>
+
+  <p class="bodytext">3.在图N.4中，我标注了高度的微小差异d<sub class="calibre6">x</sub>m和d<sub class="calibre6">y</sub>m。回想前者的定义是d<sub class="calibre6">x</sub>m≡m（x+dx，y）-m（x，y），因此如果把点（x，y）当作起始点，则d<sub class="calibre6">x</sub>m就是沿x方向行走无穷小距离dx后爬升的微小高度差。类似的，从（x，y）开始，d<sub class="calibre6">y</sub>m是沿y方向行走无穷小距离dy后爬升的微小高度差。</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00772.jpeg"/>     <p class="tuzhu-center">图N.4　d<sub class="calibre7">x</sub>m和d<sub class="calibre7">y</sub>m的几何意义。</p>
+  </div>
+
+  <p class="bodytext">到目前为止我们除了放大和命名，并没做什么事情，但我们已经非常接近推导出熟悉的等式（N.18）和（N.19）！在继续之前，请仔细看一下图N.2、N.3和N.4，确保自己理解了图上标注的所有东西。</p>
+
+  <p class="bodytext">现在，由于在书上指点很难，我不得不定义一些名词。我这样定义“左线”：想象从图N.2的点（x，y）开始，沿着图往左走，沿着x轴，直到抵达（x+dx，y）上面的点。这是左线的第一步。完成第一步后，你的高度增加了d<sub class="calibre6">x</sub>m（请搞清楚为什么）。现在开始左线的第二步，想象继续从你现在的位置走到顶部去。这一步你其实是沿着y方向，增加的高度为（终点高度）-（起点高度），或</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00773.jpeg"/>
+  </div>
+
+  <p class="bodytext">我在d上面加了顶帽子因为我们已经用d<sub class="calibre6">y</sub>m表示了m（x，y+dy）-m（x，y），帽子提醒我们这两个量不是同一个，或者说它们似乎不是同一个。<a id="zw2" href="part0144.html#zhu2"><sup class="calibre3">[2]</sup></a>左线的净效应是你的高度从m（x，y）变成了m（x+dx，y+dy），也就是我们在式（N.20）中说的dm。因此可以写为</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00774.jpeg"/>
+  </div>
+
+  <p class="bodytext">虽然没有必要，我们还可以类似地定义“右线”为沿着另一个方向行走的过程，可以得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00775.jpeg"/>
+  </div>
+
+  <p class="bodytext">其中<img alt="" class="zaozi1" src="../images/00776.jpeg"/>≡m（x+dx，y+dy）-m（x，y+dy）。两边都可以走并且得到的结论是一样的，因此我们可以忘掉<img alt="" class="zaozi1" src="../images/00777.jpeg"/>。好了，现在是好玩的部分。回想我们是通过同时让两个格子微小变化来定义dm，因为我们想看看能不能得出“总导数”。注意等式（N.21）和（N.22）<span class="jiacu">几乎</span>就是告诉我们“总微分”dm与“偏微分”d<sub class="calibre6">x</sub>m和d<sub class="calibre6">y</sub>m的关系。麻烦在于，每个等式都只包含一个熟悉的“无帽子”的偏微分，另一个则是讨厌的<img alt="" class="zaozi1" src="../images/00778.jpeg"/>微分，不是同一个东西。</p>
+
+  <p class="bodytext">真不是同一个吗？由于无穷放大了，我们看到的是平面，因此根据图N.5描绘的理由，量<img alt="" class="zaozi1" src="../images/00779.jpeg"/>与d<sub class="calibre6">x</sub>m应当是一样的，<img alt="" class="zaozi1" src="../images/00780.jpeg"/>与d<sub class="calibre6">y</sub>m也应当一样。因此“戴帽子”的量与对应的无帽子的量其实是一回事。总而言之：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00781.jpeg"/>
+  </div>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00782.jpeg"/>     <p class="tuzhu-center">图N.5　对<img alt="" class="zaozi1" src="../images/00783.jpeg"/>为什么与dxm相同和<img alt="" class="zaozi1" src="../images/00784.jpeg"/>为什么与dym相同的解释。</p>
+  </div>
+
+  <p class="bodytext">这个等式表述了一个极为简单的事实：无论我们走哪边（左线或右线），<span class="jiacu">总的高度变化</span>都是<span class="jiacu">第一步</span>的高度变化加上<span class="jiacu">第二步</span>的高度变化。这个思想简单得不能再简单了。你可以再读一遍，体会一下它有多简单。几乎什么也没说。现在揭示好玩的地方。这条简单的语句（N.23）与前面说过的吓人语句（N.18）其实是一回事。</p>
+
+  <p class="bodytext">要从等式（N.23）推导出吓人的双胞胎语句（N.18），我们所要做的就是乘两次1，然后转换缩写。我们来试一下。从等式（N.23）开始，我们可以这样做：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00785.jpeg"/>
+  </div>
+
+  <p class="bodytext">现在，只需换成（容易误导但的确漂亮的）偏导数的标准标记就可以得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00786.jpeg"/>
+  </div>
+
+  <p class="bodytext">这也就是我们最初要推导的吓人等式（N.18）。回想前面的标记给了等式（N.18）一种“二者合一和一中有二”的特性：∂x和dx是同一个量，虽然是用的不同的符号表示，而两个∂m则是<span class="jiacu">不同</span>的量，用的又是同一个符号。这样标注简直愚蠢。</p>
+
+  <p class="bodytext">下一步，我们可以进行之前提到的逻辑跳跃，通过形象化三维对n维进行推理。我们刚才的论证是针对两个输入一个输出的机器。现在假设我们得到了一台n个输入一个输出的机器，并想象同时对所有格子做微小改变。同前面一样，我们看m的输出的变化：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00787.jpeg"/>
+  </div>
+
+  <p class="bodytext">你也可以写成</p>
+
+  <p class="bodytext-c">dm≡m（v+dv）-m（v），</p>
+
+  <p class="bodytext">其中dv=（dx<sub class="calibre6">1</sub>，dx<sub class="calibre6">2</sub>，…，dx<sub class="calibre6">n</sub>）。如果在任意点（x<sub class="calibre6">1</sub>，x<sub class="calibre6">2</sub>，…，x<sub class="calibre6">n</sub>）无穷放大m的图形，我们应当会“看见”n维的平行格盒子类的东西，就像我们在前面看到的二维格，虽然我们画不出来。因此，同前面一样，这时应当有</p>
+
+  <p class="bodytext-c">dm=d<sub class="calibre6">1</sub>m+d<sub class="calibre6">2</sub>m+…+d<sub class="calibre6">n</sub>m，　（N.25）</p>
+
+  <p class="bodytext">这里我们用了d<sub class="calibre6">i</sub>m而不是<img alt="" class="zaozi" src="../images/00788.jpeg"/>以避免标记繁杂。它说的是我们画不出来的这个空间中两点之间的总高差等于各项高差的累加。沿x<sub class="calibre6">1</sub>方向行走微小量dx<sub class="calibre6">1</sub>有一个高差d<sub class="calibre6">1</sub>m；沿x<sub class="calibre6">2</sub>方向行走微小量dx<sub class="calibre6">2</sub>有一个高差d<sub class="calibre6">2</sub>m；如此继续。总量是各步之和——这就是等式（N.25）所说的内容，虽然我们无法画出它所说的，我们还是有信心它是对的，因为我们理解了发明等式（N.23）时的基本思路。</p>
+
+  <p class="bodytext">好了！等式（N.25）就是我们想要推导的结果，因此我们基本成功了。不过，如果定义一些新的缩写，我们就能推导出在所有多变量微积分课本中都有的一个公式。根据前面同样的逻辑，我们可以将上面等式中的每一项乘以1，交换相乘的顺序，然后换成标准标记，得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00789.jpeg"/>
+  </div>
+
+  <p class="bodytext">假装我们是课本，我们还可以这样重写。我们定义两个向量v和w的“点乘”为将两个向量绑到一起得到一个数的操作，做法是这样：</p>
+
+  <p class="bodytext-c">v·w≡v<sub class="calibre6">1</sub>w<sub class="calibre6">1</sub>+v<sub class="calibre6">2</sub>w<sub class="calibre6">2</sub>+…+v<sub class="calibre6">n</sub>w<sub class="calibre6">n</sub>，</p>
+
+  <p class="bodytext">也就是将向量逐格相乘，然后将结果加总。有了这个之后，如果我们定义缩写</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00790.jpeg"/>
+  </div>
+
+  <p class="bodytext">则可以将等式（N.26）重新写为：</p>
+
+  <p class="bodytext-c">dm=（▽m）·dx，</p>
+
+  <p class="bodytext">因此这个包含向量的全偏导数以及无穷小向量和点乘的看起来很炫的语句其实告诉我们的还是与前面类似的事实。行进过程中总的高度变化很简单：第一步的高度变化，加上第二步的高度变化，如此继续，直到第n步。</p>
+
+  <hr class="calibre4"/>
+
+  <p class="notecontent"><a id="zhu1" href="part0144.html#zw1">[1]</a> 这时通常我们会除以<span class="jiacu">食物</span>的微小变化得到某种导数。但这里我们一次改变了所有格子，因为<span class="jiacu">食物</span>现在是整个向量。因此要在通常意义上计算导数，我们得说清楚“被向量除”是什么意思。我们现在先不管这个，只看分子：前面定义的dm。</p>
+
+  <p class="notecontent"><a id="zhu2" href="part0144.html#zw2">[2]</a> 我们很快就会意识到dym和<img alt="" class="zaozi1" src="../images/00791.jpeg"/>其实<span class="jiacu">就是</span>同一个，但这是因为我们无穷放大了。</p>
+</body></html>

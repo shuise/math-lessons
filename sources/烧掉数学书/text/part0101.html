@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="30A8Q0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">5.4.4　怀旧装置再次让生活简单</h4>
+
+  <p class="bodytext">虽然知道了q（x）的导数是<img alt="" class="gongshi" src="../images/00495.jpeg"/>，我们还是不知道如何用更简单的东西来描述q（x）。也就是说，</p>
+
+  <p class="bodytext">我们不知道计算q（3）或q（72）具体的数值。这同我们在第4章遇到的困难一样，当时我们除了画图之外不知道如何描述机器V和H（课本上说的“正弦”和“余弦”）。当时，我们最后发现怀旧装置可以让我们将V和H写成有无穷多项的加乘机器，从而缓解了我们对它们的担忧。有了V和H的加乘机器展开，我们就有把握在需要的时候计算出它们的具体数值，只需要算一堆加和乘就可以了。</p>
+
+  <p class="bodytext">也许我们可以用怀旧装置来探索一下“自然对数”机器q（x）是什么样子，尝试计算q（9）或q（42）之类的具体数值。可能行不通，但不妨一试。将q放进怀旧装置，我们得到</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00496.jpeg"/>
+  </div>
+
+  <p class="bodytext">嗯……这个行不通。因为q的导数是<img alt="" class="gongshi" src="../images/00497.jpeg"/>，在x=0时会变成无穷大。为什么q在0附近的行为会如此古怪呢？原来，机器q是根据性质q（e<sup class="calibre3">x</sup>）=x定义的。而e<sup class="calibre3">x</sup>总是为正：当x变成越来越大的负数时它会变得越来越小，只有当x为-∞时它才会逼近0。根据这个推理，会有q（0）=-∞，因此也许我们不应当直接对q使用怀旧装置，因为q在0附近变得有点疯狂。</p>
+
+  <p class="bodytext">如果我们对机器q（1+x）使用怀旧装置呢？机器是一样的，只是平移了一下。而且在x=0时的表现好多了，因为q（1+x）=q（1）=0。这样来思考这台机器也许会更简单。不过我们能求出这台机器在x=0处的所有阶导数吗？嗯，它们其实就是原机器q在x=1处的导数，因此我们需要对所有n求出q<sup class="calibre3">（n）</sup>（1）。我们将q的前面几阶导数求出来，看有没有什么模式：</p>
+
+  <p class="bodytext-c">q'（x）=x<sup class="calibre3">-1</sup>，</p>
+
+  <p class="bodytext-c">q″（x）=-x<sup class="calibre3">-2</sup>，</p>
+
+  <p class="bodytext-c">q<sup class="calibre3"><img alt="" class="zaozi" src="../images/00385.jpeg"/></sup>（x）=2x<sup class="calibre3">-3</sup>，</p>
+
+  <p class="bodytext-c">q<sup class="calibre3">（4）</sup>（x）=-（3）（2）x<sup class="calibre3">-4</sup>，</p>
+
+  <p class="bodytext-c">q<sup class="calibre3">（5）</sup>（x）=（4）（3）（2）x<sup class="calibre3">-5</sup>。</p>
+
+  <p class="bodytext">嘿，其实很简单！只需反复应用在第3章发现的熟悉模式（x<sup class="calibre3">＃</sup>）'=＃x<sup class="calibre3">＃-1</sup>就可以了。指数是负数，因此每次求导时都会反号。第n阶导数的指数就是负的n，前面的数则是（n-1）！，因此确实存在模式。我们可以将我们发现的这些简写为：</p>
+
+  <p class="bodytext-c">q<sup class="calibre3">（n）</sup>（x）=（-1）<sup class="calibre3">n+1</sup>（n-1）！x<sup class="calibre3">-n</sup>。</p>
+
+  <p class="bodytext">好的，这样我们就得到了q（x）的任意阶导数。那q（x+1）的导数呢？嗯，用重新缩写锤子，我们发现Q（x）≡q（x+1）的导数就是将x+1代入q（x）的导数，因为<img alt="" class="gongshi" src="../images/00498.jpeg"/>（x+1）=1。棒极了！这样我们就得到，若n≥1，</p>
+
+  <p class="bodytext-c">Q<sup class="calibre3">（n）</sup>（x）=（-1）<sup class="calibre3">n+1</sup>（n-1）！（x+1）<sup class="calibre3">-n</sup>。</p>
+
+  <p class="bodytext">应用怀旧装置需要q<sup class="calibre3">（n）</sup>（1），也就是Q<sup class="calibre3">（n）</sup>（0）。利用上面的等式可以得出，若n≥1，</p>
+
+  <p class="bodytext-c">Q<sup class="calibre3">（n）</sup>（0）=（-1）<sup class="calibre3">n+1</sup>（n-1）！。　（5.41）</p>
+
+  <p class="bodytext">若n=0，Q<sup class="calibre3">（n）</sup>（0）=Q（0）≡q（1）=0。现在我们终于可以应用怀旧装置了：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00499.jpeg"/>
+  </div>
+
+  <p class="bodytext">上面的等式（5.41）中的（n-1）！会与底下的n！部分抵消，因为n！=n·（n-1）！。结果留下：</p>
+
+  <div class="zhong1">
+ <img alt="" class="image-tuzhu" src="../images/00500.jpeg"/>
+  </div>
+
+  <p class="bodytext">这其实就是以下式子的缩写</p>
+
+  <div class="zhong1">
+ <img alt="" class="image-tuzhu" src="../images/00501.jpeg"/>
+  </div>
+
+  <p class="bodytext">由于q（x）会在0处变得无穷大，相应的q（x+1）也会在-1处变得无穷大，因此不清楚我们是不是对所有x都能信任这个表达式。但现在至少我们对MA型机器的认识更具体了。上面的等式让我们可以将所谓的“自然对数”q视为无穷加乘机器。由于MA型机器的所有成员只不过就是q乘以常数，我们从而也就有了描述“对数”（MA型机器）的一种方式，不用再只会说“它们所做的就是消除幂机器c<sup class="calibre3">x</sup>的作用”。</p>
+</body></html>

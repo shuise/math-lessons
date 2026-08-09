@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+  <head>
+    <title>7 图形</title>
+  </head>
+  <body>
+
+<div id="chapter09.xhtml">
+</div><div class="header0"><h1><span style="font-size:16px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;display: block;text-align:center;"><b>7</b></span></h1></div>
+<div class="part">
+</div><div class="header0"><h1><span id="sigil_toc_id_68" style="font-size:22px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;display: block;text-align:center;"><b>图</b><b>形</b></span></h1></div>
+<div class="part">
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">为什么2+4=4+2？</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">又是一个不痛不痒、显而易见的问题，一个我们在很多年前一瞥之下就已知道的答案：因为等号两边都等于6。或许在经过前面章节的讨论之后，我们马上就可以把这个问题转变成：“在什么情况下2+4=4+2？”形成这样的思维习惯令我深感欣慰，但是这一次我想采取另一种方法，尝试证明二者并不相等。左边表达式的意思是我们先取走2个东西，再取走4个东西，而右边表达式的意思是我们先取走4个东西，再取走2个东西。或许值得花一点儿时间思考一下，二者能给出同样的结果并不是那么显而易见。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我将要研究如何从原则上判断结果相等的表达式，而无须计算具体的结果。我们可以采用孩子们的做法，比如使用积木或其他物体，或者画出物体的图形。利用图形研究数学听起来有点儿“孩子气”，但是在这一章，我们恰恰就要讨论数学中深奥的图形问题。我尽量用积极的态度回应图形过于“孩子气”的说法，因为这是一个带有主观评判色彩的词语，好像说只有发育不全的人才会这么做，等他们长大之后自然就不会这么做了。但是“孩子气”往往伴随着诸多美妙、有益的方面，只可惜这些方面经常遭到社会的压力和成年人责任感的排斥。这里有无拘无束的好奇心、对新思想的渴求、施展想象力的巨大勇气，以及浑然懵懂又泰然自若的心态。孩子们知道他们无法理解成人世界里的太多事情，并对此习以为常，我相信这就是他们尽管不甚理解但依然不那么害怕数学的原因之一。然而，如果成年人不理解数学，他们就会陷入失败者的深深自责（或者想起自己曾经被贴上数学菜鸟的标签）。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">画图是抽象数学研究者的重要工作内容之一，远比我们想象中与孩子的行为更相似。在我的研究领域范畴论中，到处都是图形，方程和代数线条反而不多见。虽然名为“抽象代数”，但实际上它的大部分推理都是通过图形来完成的（更正式的说法是“图表”），对图形的使用使得它成为数学中一个极富成效的崭新领域。甚至还有一类数学图表，其专业名称就是“dessin d’enfant”（法语“儿童画”），最早由法国数学家亚历山大·格罗滕迪克于1984年提出。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">当我在2016年受芝加哥EMC2酒店委托制作数学艺术品时，我从未觉得自己是个视觉艺术家。但是后来我意识到，我在数学研究中画过那么多图形，从某种程度上说我就是抽象视觉艺术家呀。因此，这一章就是有关图形在数学中的应用——它们不仅作为视觉辅助工具，还成为实际数学本身的一部分。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">首先我会使用一些图形帮助我们解释为什么2+4=4+2，以此来探寻深层次的理解，而不是仅仅说“因为两边都等于6”。</span></p>
+</div><div class="header1"><h2><span id="sigil_toc_id_69" style="font-size:19px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;"><b>“</b><b>一</b><b>切</b><b>等</b><b>式</b><b>都</b><b>是</b><b>谎</b><b>言</b><b>”</b></span></h2></div>
+<div class="part">
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">让孩子们接受2+4等于4+2这个结论通常要费点儿时间，这当然可以理解，因为表面上看它们毕竟不是一模一样的东西。对于一个依然在用手指头计数的幼童，解答4+2这个问题应该很简单：他们先在头脑里记住4这个数字，然后借助两根手指“往下数”，很快就能得到6。但是，如果你让他们计算2+4，他们就要先记住2，然后尝试用4根手指往下数。对这个年龄段的孩子来说，摆弄4根手指是一项艰巨的任务，他们要花更长的时间，费更多的力气，也更有可能得出错误答案。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">因此，对这个年龄段的孩子来说，4+2与2+4明显不同，后者所涉及的加法比前者更难。这就是我为什么没有问二者为何相等，也没有问在什么情况下相等，而是要重点关注它们在什么意义上相等。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">借用这个例子，等号两边在产生相同答案的意义上是相等的，尽管所涉及的过程是不同的。这就是这个等式的全部意义所在：一边复杂，一边简单，所以知道二者的结果相同让我们获益匪浅。这意味着我们可以通过简单的一边来理解复杂的一边，数学所有的等式都是如此。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我们所讨论的等式是加法交换律的一个例子，也就是交换加数的位置，和不变。有关加法的另一项基本定律是加数的组合方式（通常用括号表示）不影响结果，也就是结合律。例如以下等式在加法中成立：</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;display: block;text-align:center;">(8+5)+5=8+(5+5)</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我个人觉得等号右边比左边更简单。括号提醒我先做5+5，这很简单，无须思考我就知道等于10，接下来的8加10也无须思考就能给出答案。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">而左边的括号提醒我先做8+5，这可麻烦了，因为答案超过了10。当然这个问题还不至于让我望而却步，但它毕竟比5+5耗费了更多的脑力。与其吹嘘多么轻松就能找到答案，我觉得不如仔细观察哪些因素让问题变得更加复杂了，尤其是当一点一滴的认知负荷迅速积累，最终让我们不堪重负的时候。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">顺带提一句，这也是为什么数学有时会强调记忆某些“事实”，因为只要记住了这些东西，你就可以快速地调出答案而不用费更多脑筋，做事情的效率也就更高了。我个人的经验是，我可以通过消化而不是记忆来减轻脑力负荷。我从未“记忆”5+5等于10，这个答案已经成为我基本意识中的一部分，或者就在我的手上。重要的一点是，尽管记住某件事情可以减轻认知负荷，但它也会让你与真正的理解渐行渐远，最终的结果往往得不偿失。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">所以不管怎样，2+4=4+2这个等式都告诉我们两边有难易上的差别，于是我们可以利用简单的一边来获取答案，反正我们知道结果是一样的。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">实际上，这才是所有等式的真正含义：两种事物在某个层面上相同，在另一个层面上不同。这意味着我们可以利用其相同的层面探索二者的不同之处，进而获取更多的知识，并把理解推向更深的层面。我们通常会关注等式所表达出的二者相同的意义，但同样重要的是二者在另一个层面上不同的意义——因此它们其实并不一样。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">唯一能表明两边完全相同的等式是<span style="font-size:16px;font-style: oblique;font-family:&#39;PingFang SC&#39;;"><i>x</i></span>=<span style="font-size:16px;font-style: oblique;font-family:&#39;PingFang SC&#39;;"><i>x</i></span>，以及与之类似的表现形式。等式两边确实一模一样，因此它完全没用。陈述某个事物等于它自己，无法让我们获得任何新知识。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我有时会说“一切等式都是谎言”，这看起来有博取点击量的“标题党”之嫌。我可能会说：“一切等式都是谎言（或无用的）。”但问题在于，这个等式表明二者相等并非虚言，只不过比我们赋予它的概念具有更微妙的含义。（或者也许是我们在等式上撒了谎。）等式实际上是在说，如果我们现在决定专注于这两种情况的一个特定方面，那么它们是等价的，尽管总体而言，情况在某种意义上有所不同。这是我在高维度范畴论研究中的一个重要部分，因为当研究比数字更微妙的抽象概念时，我们也有更微妙的方法，它们可以是“相同”的，而不仅仅是“相等”的。因此，在任何给定的情况下，我们对什么才算“相同”都有微妙的选择。于是我们回到了最初的问题2+4=4+2，以及我们如何利用积木向孩子们解释清楚这个道理。</span></p>
+</div><div class="header1"><h2><span id="sigil_toc_id_70" style="font-size:19px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;"><b>积</b><b>木</b><b>算</b><b>术</b><b>的</b><b>深</b><b>奥</b><b>思</b><b>想</b></span></h2></div>
+<div class="part">
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">用积木来做算术，通常被认为是只有小孩子在学会如何进行“正常的”数学运算之前才需要做的事。他们总要长大，然后把积木丢在一边，在头脑中运算，或者使用那些令父母也摸不着头脑的时髦“手法”。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">但实际上，用积木做算术包含了深奥的数学思想，它能让我们深刻领会高维度抽象数学微妙的一面。或许我们很难相信高维度理论竟然出现在基本数学运算的过程中，但事实的确如此。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我们在讨论网格乘法时已经见识过一些高维度的思想，这实际上可以归结为我们如何将乘法当作重复的加法。如果我们把3×2想象成3个2，结果或许就是以下3对积木的样子：</span></p><div style="display: block;text-align:center;">
+	<img width="647" src="../images/image_199.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我们也可以把2×3想象成两堆三联积木：</span></p><div style="display: block;text-align:center;">
+	<img width="647" src="../images/image_200.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">在这一点上，二者为什么相等在视觉上看还不是那么明显。我们当然可以分别数出6个数，但这只能证明二者相等，原因依然不明。看不到通行规则，我们就很难将其推广到其他数字上。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我们已经知道（在第3章），把积木按网格方式排列更具启发意义：</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_201.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">现在我们有机会利用视觉直观感受深入了解为什么二者相等。关键在于，我们根本不需要知道具体答案是什么就能判断二者是否相等。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这张图所描述的事实就是，对于同样一个网格排列，我们既可以将其视为两行三列，也可以视为三列两行。换个方式来说，我们可以在想象中旋转摆放这些积木的桌子，或者围绕这张桌子走动，从不同的视角看它们。积木的数量不会因我们所处的位置而改变。从抽象的角度说，这类似于我们缩放三角形的过程，无论我们从近距离还是远距离观察——我们的视角不同，但三角形本身没有改变。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">转换观察积木排列的视角所对应的逻辑结构就是：</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;display: block;text-align:center;">3×2=2×3</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">要注意，这个论证过程让我们跳出一维空间，进入二维空间。如果这些积木都是穿在算盘上的珠子，我们就无法提出这样的论点。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">如果考虑加法的交换律，我们甚至需要进入更高的维度。比如用积木计算4+2，或许是这样的：</span></p><div style="display: block;text-align:center;">
+	<img width="550" src="../images/image_202.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">2+4就是这样的：</span></p><div style="display: block;text-align:center;">
+	<img width="543" src="../images/image_203.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我们当然能理解二者概念相同，只需要走到桌子的另一边，或者把积木交换位置：</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_204.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这个过程在视觉上很有吸引力，但同样需要借助二维空间。相比之下，结合律可以在一维空间内得到完美的阐释（比如算盘上的珠子）。如下图所示，只需要左右滑动圆形积木。这张图是滑动圆形积木之前的 (4+2)+3：</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_205.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">之后变成4+(2+3)：</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_206.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">以上探索过程自然会促使我们思考，2+4在什么情况下等于4+2。讨论问题的环境很重要，一维空间无法让我们得出结论，把问题以图形的方式呈现出来有助于我们做到这一点。</span></p>
+</div><div class="header1"><h2><span id="sigil_toc_id_71" style="font-size:19px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;"><b>图</b><b>形</b><b>的</b><b>作</b><b>用</b></span></h2></div>
+<div class="part">
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">图形有时候只是视觉辅助工具，帮助我们理解某个抽象概念，有时候它又是运算过程中的正式符号。后者在范畴论中较为常见，我们在处理极为复杂的代数问题时所需的帮助不仅仅是写在一行中的符号。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我必须承认，这些内容对残障人士不够友好，因为这在一定程度上排斥了盲人群体。我总喜欢在书里添加很多生动有趣的图表，然而，我曾收到一些视力受损人士发来的（非常礼貌的）信息，他们说一直在收听书的音频版本，并且很感兴趣，但无法参阅附带的PDF（可携带文件格式）文件里的图表。我迟迟没有找到解决方法，对此深表歉意。对其他众多读者来说，数学中的视觉表达方式极为重要，它推动了这门学科的发展。</span></p><aside epub:type="footnote" id="footnote-10-130">《美国数学会通告》卷49，第10期的文章《盲人数学家的世界》生动记载了莫林和其他几位视觉受损的数学家的工作成果。见https://www.ams.org/notices/200210/comm-morin.pdf。</aside>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我要补充的是，有一些才华横溢的盲人数学家也在从事几何学和拓扑学的研究，专门研究图形和图形之间的关系。伯纳德·莫林提出了一个著名的数学方法，让球体从内向外翻转（术语叫作“外翻”）。这在物理世界中绝对是违反直觉的，而摒弃对实体物的视觉感受可能有助于这项理论的产生。
+	<sup><a epub:type="noteref" href="#footnote-10-130"> <img width="11" src="../images/image_207.png" alt="《美国数学会通告》卷49，第10期的文章《盲人数学家的世界》生动记载了莫林和其他几位视觉受损的数学家的工作成果。见https://www.ams.org/notices/200210/comm-morin.pdf。" class="epub-footnote"/></a></sup></span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我还必须承认，听障人士也很难充分利用视觉辅助工具。最近我的课堂上出现了一名聋哑学生，他身边跟着一位手语翻译。我发现他无法兼顾我的视觉图形讲解和翻译的手语，于是我只好把所有视觉图形部分讲解两遍，但结果仍不理想，因为他总是不能同时看到手语和图形。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这里列出我在范畴论研究中使用的一些视觉表达工具。下面是一项严谨的论证过程的两个部分：</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_208.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">下面是一些能帮助我们获得直观感受的视觉辅助工具：</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_209.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这两类图形能帮助我们理解逻辑如何与视觉对应，以及视觉如何与逻辑对应。这种对应和转化的过程不仅限于高等级的数学研究，也是我们日常绘图制表的关键，这也是学校里折磨很多学生的事情。</span></p>
+</div><div class="header1"><h2><span id="sigil_toc_id_72" style="font-size:19px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;"><b>绘</b><b>图</b></span></h2></div>
+<div class="part">
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">为什么绘图如此重要？我曾听到有人抱怨，称绘图是一项艺术技能而非数学技能，那么它为什么会出现在数学里？</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">对于这个问题，我的第一个答案是，一个艺术问题并不排除它也是数学问题。但是从更深层次来看，问题的答案取决于我们如何定义“好”的绘图。我认为绘制一张“数学意义上好的”图形与绘制一张“艺术意义上好的”图形是不同的，二者都很重要，但分别出于不同（又有些重叠）的目的。在标准的数学教育中，我们的目标是绘制数学意义上好的图表，但不顾及艺术感是我们的一种疏忽（oversight）。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">顺便说一句，oversight（监督、失察）是一个奇怪的单词，它能表达两个相反的意思，就像overlooking（忽视、俯瞰）：它既表示在查看某事时忽略、错过了一些东西，也表示从上方把景色尽收眼底。一个有众多人参与的项目需要良好的oversight（监督），如果没有人oversight（监督）那就算oversight（失察）了。这类单词被称为“自动反义词”，我觉得很有趣。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">不管怎样，图形往往都与那些令人痛苦又毫无意义的数学课联系在一起，面对各种各样含义不明又令人毫无兴趣的公式，你不得不把它们画出来。这一点已经被完全抹杀了，我们不知道为什么要绘图，也看不到这一过程是多么美妙。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我对数学最早期的记忆之一，是母亲告诉我如何画出一个开平方图形。也就是说，你可以用下面的图形来展示数字开平方的运算过程：对于横轴上的每个数字，都要在它的上方一定距离处标记一个点，其垂直距离就是横轴上数字的平方。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">于是我们先从这个运算开始：</span></p><div style="display: block;text-align:center;">
+	<img width="312" src="../images/image_210.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我们还要把0、负数和非整数包括进来，最终的结果就是这样一张图：</span></p><div style="display: block;text-align:center;">
+	<img width="493" src="../images/image_211.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我当时还很小，只记得在看到将数学计算过程变成一个图形之后，大脑飞速运转的情景，就好像打开一个新世界的大门，我感受到数学的神奇魅力。现在我能联想到的是我的一位好友阿玛妮亚·家本桃修所说的“多式联运翻译”概念，她是一位文学翻译家、作家、诗人、音乐家和综合品类创作者。她既教书育人也自己从事一些翻译工作，但不限于语言之间的转换，还涉及各类艺术形式之间的转换，比如从音乐到诗歌、从诗歌到舞蹈或从食物到舞蹈。从某种意义上说，我们可以把绘图当成一种多式联运翻译，如此一来，我们就能从各类形式的优势和直觉中受益。在绘图这件事上，我们最开始的“形式”是严谨、正规的数学计算，通常用一个公式来表达。公式便于推理，也适合构建逻辑论证。在被翻译成图形之后，它好像就没那么严谨、正规了，似乎也不适宜构建逻辑论证。但它更有利于唤醒人类其他方面的直觉，或许是更具人性化、对形状和趋势的直觉。</span></p><aside epub:type="footnote" id="footnote-10-31">数据来源：https://github.com/nychealth/coronavirus-data。</aside>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">例如，下面的列表显示了2020年3月纽约市新冠病毒感染者人数：
+	<sup><a epub:type="noteref" href="#footnote-10-31"> <img width="10" src="../images/image_207.png" alt="数据来源：https://github.com/nychealth/coronavirus-data。" class="epub-footnote"/></a></sup></span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_212.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">除了能看到患者数量在持续增长，我们很难做出任何本能反应。下面是经过转换的图形：左图呈现出的趋势不甚明朗，但右图显示了连续7天的平均值，消除了每日数据波动的干扰。</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_213.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">视觉直观感受在这时发挥了作用，让我们看到令人担忧的增长趋势，不仅是数字的增长，曲线也越来越陡峭，直到3月22日左右才开始放缓。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">与抽象概念打交道不是件容易的事，因为……它就是很抽象。所以将其转换到一个更能唤起我们直觉的领域会大有帮助。把抽象的概念转化成视觉图形，这样我们就能充分利用我们的视觉直觉，为数学研究带来累累硕果。因此，重要的是要了解哪些抽象特征对应于哪些视觉特征。</span></p>
+</div><div class="header1"><h2><span id="sigil_toc_id_73" style="font-size:19px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;"><b>特</b><b>征</b><b>转</b><b>化</b></span></h2></div>
+<div class="part">
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">当面对一个图形时，我们或许会提出一些与视觉特征有关的问题：它有角吗？它有洞吗？它是上升的还是下降的？它会反转吗？它在哪里上升更快，或下降更快？它是否从某一点开始趋向于无穷？它是否会以稳定的趋势走向无穷大？它会变成一条水平线吗？哪里的波动最剧烈？</span></p><div style="display: block;text-align:center;">
+	<img width="813" src="../images/image_214.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">接下来我们开始分析这些特征出现的原因。视觉特征相当生动，它们都对应了哪些逻辑特征呢？之后我们可以从反方向思考：如果我们有了一个抽象概念，它会展现出哪些视觉特征？这就是绘图的意义所在，它能让我们更好地了解公式的运作原理。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">画好图形不是要画出优美的曲线，而是要清晰地表现出我们感兴趣的关键特征。在某种程度上，这也是艺术的意义所在——先确定你想要引起人们对世界上的哪些问题的关注，然后选择一种真正将我们的注意力集中在该特征上的呈现方式。立体主义和印象派就分别采用不同的方式让我们关注不同的问题。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">现在，在某些情况下，“清晰地”表现某事物的确意味着漂亮地表现它，这取决于你的受众是谁。我最早在艺术学校教书时讲到了等边三角形的对称性，我交给每个学生一张纸和一把剪刀，让他们剪出一个大致形状的等边三角形。我没想到学生们竟然如此力求完美。我还没有告诉他们接下来要做什么，也没告诉他们并不需要完美的等边三角形，因为我们不打算搭建什么东西或者把这些三角形拼在一起。重要的是，这个三角形符合他们头脑中的等边概念就好。但即使我说了也无济于事，因为每个人对“差不多的”等边三角形都有不同的容忍度。下面的作品已经让我非常满意了：</span></p><div style="display: block;text-align:center;">
+	<img width="777" src="../images/image_215.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">就像我也可以画出下面的图形，并宣布它们就是圆：</span></p><div style="display: block;text-align:center;">
+	<img width="474" src="../images/image_216.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">但幼童或容忍度较低的人可能没办法把这样的图形想象成圆。这有点儿像我们在看电影或歌剧时，没必要过分纠结演员是否和角色中的人物一样，是个14岁的少年或肺结核患者。我们中的一些人很容易被音乐深深吸引并为之感动，当音乐响起，他们能产生各种各样的想象力，而另一些人不那么容易被感动，不能（或不愿）说服自己相信舞台上的演员刚好也是14岁。更糟糕的是，评论人士和导演都认为影片中的男女主角必须很瘦，否则这个角色就不能让观众相信。这不仅是对肥胖者的侮辱，而且说明评论人士无法想象人们会爱上一个胖子。我跑题了。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">数学课上的学生可能搞不清哪些特征是“重要”的，哪些特征不重要，主要是因为“重要”在不同的背景下有不同的定义，而且往往很难被说清。教育家克里斯托弗·丹尼尔森曾经指出，如果你让孩子们看下面两个图形：</span></p><div style="display: block;text-align:center;">
+	<img width="599" src="../images/image_217.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">很多孩子会说左边的图形是正方形，右边的图形不是正方形，而是菱形。但实际上二者都是同样的正方形，只是摆放的方向不同。我们当然可以告诉他们两个图形相同，但是如果他们把数字7写成下面这个样子，我们就会告诉他们方向搞错了。</span></p><div style="display: block;text-align:center;">
+	<img width="135" src="../images/image_218.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">看看，图形改变方向还是同样的图形，数字改变方向就是错误的，所以背景很重要。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我们在第1章讨论不同背景下三角形的不同概念时看到了这一点。要想知道哪些特征最值得被强调，我们必须了解（或者选择）我们所处的背景。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">你或许会说，计算机完全有能力精确地绘制出具有所有特征的图形，我们为什么还要自己动手呢？这是个好问题，当图形计算器最早出现的时候，我喜欢只输入公式，然后看着计算器为我画出图形。真省事呀！现在你可以在搜索栏输入一个公式，搜索引擎就能帮你把图画好，我其实很喜欢这样做。有时我会输入“sin (1/x)”，然后输入“x sin (1/x)”，然后惊叹于即刻呈现在眼前的图形，真是太了不起了。下面就是这两个图形：</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_219.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">然而，绘图并不是为了生成一张图片，而是要了解哪些代数、逻辑特征产生了哪些视觉特征。即使有一张图片摆在眼前，你也需要理解为什么出现的会是这张图片。当观察一个图形脑海中浮现出“为什么”的时候，你就是在像数学家一样思考。如果直觉告诉你走为上计，那就说明你也许曾经被图形伤害过，这也是我们当前的教育制度的失败之处。（请注意，我无意指责某些教师，而是在指责约束他们的体制。）</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">用图形来表示数学是一套深奥的理论，也容易让人感到困惑，因为它涉及理解或选择与当前情况相关的内容，并且只表示这些内容。刻意忽略其他特征尤其能帮助那些不熟悉当前环境的人，他们不知道该忽略哪些特征。有时候“艺术”特征也很重要，但数学家有时忽略了这一点，因为他们早已习惯使用抽象的思维方式。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这也是数据视觉化过程中一个很重要的方面，弗洛伦斯·南丁格尔深谙其道。</span></p>
+</div><div class="header1"><h2><span id="sigil_toc_id_74" style="font-size:19px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;"><b>数</b><b>学</b><b>家</b><b>弗</b><b>洛</b><b>伦</b><b>斯</b><b>·</b><b>南</b><b>丁</b><b>格</b><b>尔</b></span></h2></div>
+<div class="part"><aside epub:type="footnote" id="footnote-10-413">南丁格尔的原始数据图名为“东部军队死亡原因示意图”，出现在1858年呈交给维多利亚女王的报告《关于影响英国军队健康、效率和医院管理的事项的说明》中。我重新绘制了其中的一部分。完整的数据图见https://en.wikipedia.org/wiki/Florence_Nightingale#/media/File:Nightingale mortality.jpg。</aside>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">弗洛伦斯·南丁格尔也被称作“提灯女神”，或许她最广为人知的身份是一名优秀的护士，但实际上她还是一位卓越的数学家和统计学家。她毫无争议的一项伟大成就是对克里米亚战争期间士兵死亡的数据进行了严谨的量化分析。在她参与这项工作之前，士兵的死亡率高达40%，但是经过仔细分析，她发现死于疾病的士兵是死于战争的士兵的10倍多。于是她采取了一些措施大幅减少了这些因素导致的死亡人数，包括清理医院的环境，改进通风和排污系统，改善士兵的饮食。更重要的是，她不仅独自完成了数据分析，还深刻地意识到把这些数据清晰、生动地呈现给掌权者的重要性，因为那些人或许不像她那样对数据有深刻的洞察力。于是她设计出极具视觉冲击力的数据表达方式，她当时使用的工具是饼状图的一个变体，她称其为“鸡冠花图”，现在这类图的正式名称变成了平淡无奇的“极坐标区域图”。下面是一个例子。这张图按月展示了死亡人数，每个月的数据还分为战争伤害死亡、疾病死亡和其他原因死亡几个类别。
+	<sup><a epub:type="noteref" href="#footnote-10-413"> <img width="10" src="../images/image_207.png" alt="南丁格尔的原始数据图名为“东部军队死亡原因示意图”，出现在1858年呈交给维多利亚女王的报告《关于影响英国军队健康、效率和医院管理的事项的说明》中。我重新绘制了其中的一部分。完整的数据图见https://en.wikipedia.org/wiki/Florence_Nightingale#/media/File:Nightingale mortality.jpg。" class="epub-footnote"/></a></sup></span></p><div style="display: block;text-align:center;">
+	<img width="824" src="../images/image_220.jpg" alt=""/></div><aside epub:type="footnote" id="footnote-10-155">我在https://www.statisticshowto.com/probability-and-statistics/descriptive-statistics/pie-chart/找到这些数据，它来自美国水研究基金会1999年的一项研究“住宅端水资源使用”。数据早已过时，我只是用它来说明饼状图的特点。</aside>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这里展示的一个重要信息是相对死亡比例，而非单纯的数字。这张图极其生动地表明，疾病不但是最重要的死因，而且具有很强的季节性。具体的数字用图中的扇形面积来表示，计算过程比较复杂，但极富视觉冲击力。饼状图是一种较为简单的表达形式，但需要再次强调：重点在于比例，而非具体数值。下面这张饼状图展现了美国水资源的使用情况：
+	<sup><a epub:type="noteref" href="#footnote-10-155"> <img width="10" src="../images/image_207.png" alt="我在https://www.statisticshowto.com/probability-and-statistics/descriptive-statistics/pie-chart/找到这些数据，它来自美国水研究基金会1999年的一项研究“住宅端水资源使用”。数据早已过时，我只是用它来说明饼状图的特点。" class="epub-footnote"/></a></sup></span></p><div style="display: block;text-align:center;">
+	<img width="522" src="../images/image_221.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这张饼状图里的数字也用面积来表示，但计算起来不那么复杂，每块区域毕竟都是圆形面积的若干分之一。图的内容也比较简单，因为我们只关注整体现象中极少的几个方面：我们没有展示一年中各个月的数据，只说明了水资源不同用途的相对比例。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">在特定条件下只关心一个问题并忽略其他问题，让我想起了芝加哥的冬天，到了一定月份，那里的天气变得极其寒冷，我已经不在乎自己的模样，一心想要保暖，当时的我看起来一定有些滑稽。有时候我希望在夏天也能享受这种程度的自由，但来自社会的压力制止了我的冲动。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">饼状图和极坐标区域图都可以用来展示数据，但是在抽象的数学领域，我们不仅要关注“事实”，还要思考过程，因此我们需要用视觉化的方式来表现过程。这是我的范畴论研究的核心部分。与此相关的一个形象的例子，就是我们如何研究交换律的较为微妙的方面。</span></p>
+</div><div class="header1"><h2><span id="sigil_toc_id_75" style="font-size:19px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;"><b>微</b><b>妙</b><b>的</b><b>交</b><b>换</b><b>律</b></span></h2></div>
+<div class="part">
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">利用视觉手段解释为什么2+4=4+2，让我们更深入地理解了等式成立的原因，但它也带来更多的问题。我们看到，只要能摆脱一维空间的局限，我们就可以通过交换积木的位置来证明等式成立：</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_222.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">但是还有另一种交换位置的方法：</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_223.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">因此让4+2变成与其等同的2+4存在两种稍微不同的方法。在抽象数学领域，我们更关心过程而非结果，所以或许我们也应该关心一下交换积木位置的不同方法。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我们关心的理由或许是兴趣使然，也或许是不同的方法的确会造成某些潜在的影响。在英国传统的五月柱舞中，舞者们手持一根从花柱上垂下的彩带，在舞蹈过程中交换彼此的位置，同时把彩带缠绕在花柱上。小时候我被这项活动深深地吸引了，但直到后来才发现它所包含的数学意义。舞者以何种方式彼此交织极为重要，这能让花柱上的彩带呈现出不同的图案。如果舞者从未交换彼此的位置，花柱上也就不会出现任何图案。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这个例子可能有点儿深奥，但你编辫子的手法也阐明了同样的道理，尤其是法式辫子。下面是我头发的两张照片，第一张照片是我把外侧发束压在中间发束之下，结成了法式辫子。第二张照片是我把外侧发束放在中间发束之上穿过，就结成了瑞典式辫子。</span></p><div style="display: block;text-align:center;">
+	<img width="722" src="../images/image_224.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">小时候我总是对如何编出发辫的不同图案很感兴趣，现在的我更是超级着迷，因为这与我从事的高维度范畴论研究有关。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我这项理论研究的出发点就是基于我们不仅关心某物是否发生了互换，而且关心互换的具体方式。如果它最终不具备互换的特性，那么为什么会这样？它具有“某种程度”的互换性吗？这些问题要比仅仅用是和否来回答“它能互换吗”微妙得多，也深奥得多。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我最喜欢的几个例子都发生在厨房里，如果打算制作蛋黄酱，你就需要先准备好蛋黄，然后缓慢地加入橄榄油。如果反过来，你把蛋黄倒入橄榄油中必然会失败，因为二者不能互换，甚至没有丝毫互换的余地。了解食物制作过程中哪些东西可以互换、哪些东西不可以互换非常重要，这样你才能知道什么时候必须按顺序添加什么东西。当我制作巧克力慕斯的时候，重要的一步是把蛋黄（缓慢地）倒入融化的巧克力，而不能把巧克力倒入蛋黄，这有利于巧克力凝固。在制作提拉米苏的时候，我曾经尝试把马斯卡普奶酪加到蛋黄混合物中，但是反过来把蛋黄加到马斯卡普奶酪中的效果更好，因为这不会让奶酪结成块状。有人说微微加热也能避免结块的现象，但我尝试之后发现整块蛋糕变成了一摊稀泥，太让人失望了。（现在肯定有人想和我分享制作提拉米苏的诀窍，但我在这里可不想讨论厨艺。）</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">在抽象的数学领域，我们希望能通过研究那些几乎有效的案例来寻求对问题更细微的理解。对于交换律，我们严肃地接受了4+2与2+4并不相同的事实，二者只不过产生了相等的结果。经过仔细分析计算的过程，我们发现二者的关系可以用交换积木的位置来类比，然而我们也注意到，让积木彼此交换位置存在两种方式。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">于是就出现了一个新的问题：这两种交换位置的方式算是相同的吗？</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">问题变得越来越有趣了，因为这取决于我们要不要引入一个更高的维度。到目前为止，我们认为在一维空间里积木的位置无法互换，在二维空间里有两种互换的方式。如果进入三维空间，我们就会发现这两种互换方式是相互关联的。我被更高维度的数学吸引，因为当我想了解答案的细微之处时，这些问题一直在推动我。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">接下来我想要简要介绍一下交换律的故事在我的研究领域的发展历程。我们已经深入一层又一层的抽象概念，所以下面的内容或许会令人生畏——你可以随意浏览这一部分，或者只看看图形。传统观点认为，很难向非数学专业人士解释数学研究理论，因此没必要做这样的尝试。但是我觉得这样做还是有意义的，即使只是想了解一下事情的进展，并有机会激发出人们的一丁点儿兴趣。这就像我很喜欢阅读Alinea餐厅的烹饪手册，尽管这些菜谱几乎完全超出了任何普通家庭厨房的技术范围。我尤其喜欢这样的鼓励式注释，“没有冷食反扒炉也不用担心，可以用液氮替代”（因为我们肯定都在厨房里放液氮）。不过，我仍然喜欢欣赏美食的照片，还喜欢阅读主厨格兰特·阿卡兹和他的团队在厨房里的工作故事。下面几个段落的内容或许让你摸不着头脑，但至少能让你对纯粹的数学研究产生一丝兴趣。</span></p>
+</div><div class="header1"><h2><span id="sigil_toc_id_76" style="font-size:19px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;"><b>数</b><b>学</b><b>发</b><b>辫</b></span></h2></div>
+<div class="part">
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">在抽象数学领域，我们会研究一般意义上的交换律，而不必指明是加法还是乘法。我们非常重视物体空间位置彼此交换的思想，比如下图A和B交换位置的过程：</span></p><div style="display: block;text-align:center;">
+	<img width="173" src="../images/image_225.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">之后我们开始想象一些变化，就如同真的在摆弄几根绳子。如果有3根绳子，我们可以把两根并在一起与另一根交叉，最终的效果和我们分别用两根绳子之中的一根与第三根绳子交叉相同。这个过程可以表示为以下的辫子等式：</span></p><div style="display: block;text-align:center;">
+	<img width="468" src="../images/image_226.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我们还可以让一根绳子与另外两根并在一起的绳子交叉，这与一次交叉一根绳子的效果相同：</span></p><div style="display: block;text-align:center;">
+	<img width="498" src="../images/image_227.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我希望你能让自己相信，如果这是现实世界中相互交叉的3根绳子，上面等式所表明的构造与你的直观感受并无不同，因为你可以拉紧或移动某些绳子，让左边的构造变成右边的构造。这就是我们在数学中认定辫子结构“相等”的含义，即它们之间的差别仅在于移动和拉紧，而与解开和重新缠绕无关。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这个解释其实不大严谨，也有些模糊，但是可以借用埃米尔·阿廷于20世纪中期提出的某些辫子理论使其合乎严格的逻辑。这项理论指引我们如何利用“基本构成要素”来编织辫子结构。下图的基本构成要素就是一个简单的交叉：</span></p><div style="display: block;text-align:center;">
+	<img width="189" src="../images/image_228.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">重要的是，一根绳子与另一根绳子交叉——如果它们交叉两次，并不等于什么都没有发生，尽管A和B最终都回到了原来的位置，因为两根绳子阻挡了彼此的路径：</span></p><div style="display: block;text-align:center;">
+	<img width="511" src="../images/image_229.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这些辫子的确表明了A和B彼此交换位置的过程。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">要想撤销这个交叉过程，我们需要使用“反向交叉”：原本右侧的绳子从左侧的绳子上方穿过，而反向交叉时左侧的绳子要位于上方：</span></p><div style="display: block;text-align:center;">
+	<img width="526" src="../images/image_230.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这等于逆转了最初的交叉，因为如果你先后完成了这样的两次交叉，两根绳子就会各归原位。这在辫子的概念里等同于什么都没有发生。</span></p><div style="display: block;text-align:center;">
+	<img width="550" src="../images/image_231.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">就如同你在编辫子时，左边那绺发束如果不跟任何发束交叉，它就会孤零零地散在一旁。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">请注意，基本交叉的定义存在一定的主观因素，我们也可以说后者是基本交叉，前者是反向交叉。整个论述过程因此就会发生掉转，但整体结构不受影响。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">现在我们就可以重复利用这两种交叉方式（基本交叉和反向交叉），来梳起一个长发人士经常使用的基本的三股辫子。我们先让右边两个发束基本交叉，再让左边两个发束反向交叉，之后重复这个过程。下方左图展示了具体的步骤，如果我们把发束“拉紧”，就会出现右图平滑的辫子结构。在数学意义上二者相等，因为我们并未改变发束交叉的方式，只是将其拉紧了。</span></p><div style="display: block;text-align:center;">
+	<img width="792" src="../images/image_232.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我们可以把基本交叉想象成数字1，即整数的基本构成要素。反向交叉就像数字-1，它在加法的世界里能与数字1相“抵消”。我们可以用这些来构建所有的整数世界（包括正整数和负整数），也能利用基本交叉和反向交叉构建所有的辫子结构。然而，编辫子存在更多的可能性，因为我们有机会使用数量更多的绳子，所以不能仅考虑两根绳子相互缠绕的各类情形。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">使用更多的绳子的情形之一就是辫子面包。我虽然算不上面点专家，但也曾饶有兴趣地尝试制作辫子面包：</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_233.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我最熟悉的辫子面包是哈拉面包，但我毕竟不是犹太人，做不出最正宗的版本，因为它不仅是一种面包，也是一种宗教仪式。当然，辫子面包并非犹太人独有，瑞士民间传说称它源于一项古老的父系社会传统：女人在丈夫去世后必须陪葬。后来这项传统变得更加人性化（但在我看来依然带有性别歧视和愚蠢的色彩），女人只需要把她的一束头发编成辫子与丈夫一同下葬，最后变成了一个金黄色的辫子面包，这就是瑞士的辫子面包（Zopf）。另一种说法称辫子面包不容易变质，我猜原因在于每一根面束都形成了一层外壳。但我很难相信这个理由，因为切开辫子面包后的横截面都是一整块面团，看不到每根面束的样子。</span></p><aside epub:type="footnote" id="footnote-10-48">我喜欢这个网站：thebreadkitchen.com。</aside>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">辫子面包的制作过程让我很着迷，我建议你去看看相关视频，观察重复的动作是如何塑造出面包上的图案的。
+	<sup><a epub:type="noteref" href="#footnote-10-48"> <img width="11" src="../images/image_207.png" alt="我喜欢这个网站：thebreadkitchen.com。" class="epub-footnote"/></a></sup>软软的面团在烘焙师的操作下变来变去，让我有一种满足感，把这种手法转变成数学模型的过程更让我着迷。面包视频的目的是让更多人能复制其编织的过程，而数学表述单纯是为了确保严谨性。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">对数学来说，重要的是证明图形推理具有逻辑上的正确性。在这个例子中，我们可以利用直觉把辫子想象成现实中的辫子。我已经提到，如果通过“拉紧”的方式能把一种辫子变成另一种辫子，二者就被视为“相等”。但是如果我们让一根绳子与一个交叉再次交叉，或者让两个交叉相互交叉，这种“相等”的现象就会变得更加复杂。对于常规的发辫来说，任何一股发束都无法绕过其他发束，这就是为什么它是一种安全的扎头发方式。但是在其他辫子结构中，我们或许可以让某些辫子自由运动，观察其展现出的差异，同时不需要改变端点的位置，也不需要解开或重新缠绕。在这种情况下，我们也认为辫子是“相等”的。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">例如，你如果仔细观察下面两张图或许会发现，把左图绳子的位置稍加移动，不需要解开或重新缠绕，就能呈现出右图的样子：</span></p><div style="display: block;text-align:center;">
+	<img width="556" src="../images/image_234.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">你可以采用这样的方式来观察两个图形：起点在右侧的那根绳子位于最上方，没有绳子从它的上方穿过，它的终点是左下角。起点位于中间的那根绳子路线比较曲折，但终点还是到达下方中间的位置。最后是起点位于左侧的那根绳子，它在最下方，没有压在任何一根绳子之上，终点是右下方的位置。我始终相信，观察并思考这两个图形就是在学习数学，尽管你既没有计算和解答，也没有处理任何数字。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这意味着我们可以先选取左侧那根最底层的绳子，把它向下拉，然后把中间那根绳子拉到右侧，最后让最上层那根绳子向左移动，这就变成了右侧的图形。然而，这只是图形带给我们的直觉，并不正规，因此证明逻辑与直觉相互对应就变得非常重要，这也是我在范畴论中的一项重要研究成果。</span></p>
+</div><div class="header1"><h2><span id="sigil_toc_id_77" style="font-size:19px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;"><b>范</b><b>畴</b><b>论</b><b>中</b><b>的</b><b>辫</b><b>子</b></span></h2></div>
+<div class="part">
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">在讨论普通乘法里的普通交换律时，我们只有两个选择，要么互换要么不互换：</span></p>
+	<p><span style="font-size:16px;font-style: oblique;font-family:&#39;PingFang SC&#39;;display: block;text-align:center;"><i>a</i><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">×</span><i>b</i><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">=</span><i>b</i><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">×</span><i>a</i><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">或</span><i>a</i><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">×</span><i>b</i><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">≠</span><i>b</i><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">×</span><i>a</i></span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">但是如果想要深入理解乘法互换的过程，我们就需要一种更富表现力的代数表达式。我们需要一种介于“等于”和“不等于”之间的关系，这样才能判定和记录积木相互之间移动的抽象过程。范畴论就提供了这样一种代数表达方式。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这里的“范畴”（category）不是英语中的一个单词，而是一个数学术语。它是研究对象间的关系而非对象本身的一个数学分支。在范畴论中，这些关系通常用箭头来表示，被称为“态射”，因为它们往往表示一种“形态”变成另一种“形态”。于是我们可以把交换律写成这样一个过程：</span></p><div style="display: block;text-align:center;">
+	<img width="114" src="../images/image_235.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">但是我们通常会使用这个符号<span style="font-size:16px;font-family:&#39;DejaVu Sans&#39;;">⊗</span>，它可以代表乘法、加法或者其他运算过程，就像我们用字母取代数字一样，这样我们就可以笼统地谈论数字而不必谈论具体数字。现在我们用一个一般意义上的符号.来取代特定的运算符号，比如+或×，还继续用字母来表示数字、物体或其他任何对象。于是我们可以把<span style="font-size:16px;font-style: oblique;font-family:&#39;PingFang SC&#39;;"><i>A</i></span>、<span style="font-size:16px;font-style: oblique;font-family:&#39;PingFang SC&#39;;"><i>B</i></span>两个对象放在一起，表示为<span style="font-size:16px;font-style: oblique;font-family:&#39;PingFang SC&#39;;"><i>A</i></span><span style="font-size:16px;font-family:&#39;DejaVu Sans&#39;;">⊗</span><span style="font-size:16px;font-style: oblique;font-family:&#39;PingFang SC&#39;;"><i>B</i></span>。抽象数学中的抽象概念真的是在一层层地叠加啊。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这样的抽象理论还让我们有机会用符号来表示更多的事物，比如类似于乘法的关系，尽管它并不是严格意义上的乘法。我们在第1章讨论过非数字相乘的可能性，比如图形与图形相乘。有太多的事物可以在某种意义上相乘，范畴论就是将这些概念本身作为一个抽象结构来研究。一组具有某种乘法关系的对象集合被称为“幺半群”。如果这种所谓的乘法可以互换，它就被称为“可交换幺半群”。一个包含了某种乘法关系的范畴叫作“幺半范畴”，它就是一个范畴与一个幺半群的交叉。</span></p><div style="display: block;text-align:center;">
+	<img width="554" src="../images/image_236.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">互换的过程可以被表示为一种状态向另一种状态逐渐演化的方式，在范畴论中被称作“辫状结构”，灵感来自我们编发辫的过程，每一股发束都记录下精确的走向。在范畴论中，我们可以把辫状结构写成一个过程，或者一个态射，比如：</span></p><div style="display: block;text-align:center;">
+	<img width="127" src="../images/image_237.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">它表示<span style="font-size:16px;font-style: oblique;font-family:&#39;PingFang SC&#39;;"><i>A</i></span>与<span style="font-size:16px;font-style: oblique;font-family:&#39;PingFang SC&#39;;"><i>B</i></span>相互交织运动的过程。我们要求辫状结构必须符合一些基本的规则，这些规则与我们上一节的图解相对应，只过我们需要用代数而非图形的方法来表示。由此产生的代数结构被称为“辫状幺半范畴”。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我们接下来要证明，如果两个辫状图被视为“相同的辫状图”，那么它们将表示与该范畴中的代数方法所表示的态射相同的态射。这在范畴论中被称为“一致性定理”，因为我们要借此来判断各种不同的推理方式是一致的。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">一致性定理让我深为着迷，因为这表明对同一结构的不同推理方法是等价的，我们因此可以充分利用二者的优势。如果一个是代数方法，一个是图形方法，那就意味着我们可以同时获得不同形式的直觉。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这让我想到了生活中那些令人心旷神怡的连贯现象。记得有一次，我高兴地发现一家商店里的橄榄瓶盖竟然能盖在另一家商店里的橄榄瓶上。四处寻找匹配的瓶盖（当时我正在重复使用瓶子）的确令人疲惫不堪。我的脑海中有一个关于哪些品牌的瓶盖能交换使用的印象，我最近（无意中）发现是蓓妮妈妈果酱瓶和克劳森泡菜瓶。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">看起来我们总是要借助（强大的）视觉直觉来引领（孱弱的）代数直觉，在低维空间或许的确如此。但随着空间维度的增加，我们的视觉直觉会突然达到极限，我们只好转而依赖代数手段。</span></p>
+</div><div class="header1"><h2><span id="sigil_toc_id_78" style="font-size:19px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;"><b>高</b><b>维</b><b>度</b><b>空</b><b>间</b><b>里</b><b>的</b><b>辫</b><b>状</b><b>结</b><b>构</b></span></h2></div>
+<div class="part">
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我们也许可以再上升一个维度，并且仍然可以用形象化的方式进行想象。我们还是在讨论交换律，所以我们的直觉感受依然是把积木滑来滑去。到目前为止，我们已经看到以下这些维度：</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">·在一维世界中，积木被固定在单一的路径上，相互之间不能交换位置。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">·在二维世界中，积木可以在两个不同的方向上交换位置。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">在我们思考两种交换位置的方法是否被视为相同的时候，请允许我提醒，这取决于我们所在的空间维度。像往常一样，关键的问题依然是什么才算“相同”。如果我们让左侧的积木绕着右侧的积木滑动，依然是同样的方向，但再往上走一点儿，这真的重要吗？</span></p><div style="display: block;text-align:center;">
+	<img width="876" src="../images/image_238.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我们打心眼里不觉得高一点儿还是低一点儿有什么区别。在二维空间里，我们只承认两种交换位置的方式：从上边绕过去还是从下边绕过去，而不用操心它们在上边或下边的位置。如果觉得好笑，我们还可以让积木绕几个圈，但无论如何我们不会关心确切的绕圈路径。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">现在假设我们进入了三维空间，我们不但能让方形积木向更上方滑动，还能让它们离开纸张。同样的道理，这也不能算作完全不同的方法。你可以让它们离纸张越来越远，然后从空中慢慢降落，最终重新落回到纸张上，但位置是在圆形积木的下方。所以在三维空间里，从上边绕过去和从下边绕过去似乎没什么区别。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">另一种思考方式是，如果你看到两个人在地面上（二维）绕圈行走，我们可以明确判断出他们行走的方向是顺时针还是逆时针。但如果是两只鸟在空中（三维）相互围绕着对方飞来飞去，那就不存在“顺时针”和“逆时针”的概念了，因为没有一个（时针所依赖的）固定的平面，所以方向完全取决于我们观察的角度。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">从数学意义上说，我们无法在三维空间里识别顺时针和逆时针，因为有一种方法能让顺时针路线“态射”成逆时针路线。我们一开始认为，把2+4变成4+2存在两种方法，而现在又出现了一个更高维的版本。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">现在我们已经采用了一些态射的方法，结果发现我们可以依次把一种变化态射成另一种变化。现在问题有点儿令人难以置信了，因为我们可以采取两种方法来进行更高级别的态射：我们可以把最初的路径拉向我们（远离纸张），然后放到页面的下方，或者我们可以将其向后推（进入纸张），同样放到页面的下方。或许就像交换律一样，我们不关心采取哪种方法，只知道存在这种可能性。也或许如同辫状结构，我们想要记录下不同的路径，并进行测量。为了做到这一点，我们就需要一个新的范畴论维度。于是我们就来到了二维范畴，高级别的交换律态射被称为“异叙”。尽管这是一个二维范畴，但它源于我们对三维空间路径的思考。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">最终出现的结构被称为“异叙幺半二范畴”——几个单词的概念排列在一起，这绝对是令数学很难被理解的原因之一。但我们的确是逐渐将这些概念构建起来的，每一个新的概念都基于对前期问题的理解。我们有了一些研究对象，想要了解它们之间的关系，于是创建了一个范畴。我们想要理解乘法等概念，于是有了“幺半群”结构。我们想要增加一些微妙的变化，于是有了二维范畴。我们想要记录实现交换律的各类过程，于是有了辫状结构。我们想要测量把一种辫状结构态射成另一种辫状结构的方法，于是有了异叙。</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_239.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">如果你的大脑还没有燃烧，你或许还可以猜测、设想、预计或推断这个过程还在继续。在这么多的维度中，从前方异叙和从后方异叙要么相同要么不同。如果有另一个维度，我们就可以测量具体的路径，有两种方法。如果再上升一个维度，我们就可以测量它们之间的差异，以此类推。最终的结果就是无穷维度范畴论中具有细微差别的交换律理论，这就是我的主要研究方向：如何理解、组织、分析这些细微差别。因为视觉直观感受虽然可以在二维和三维空间助我们一臂之力，但到了无穷维度就无计可施了，所以我们只能回到严谨的代数学方法上。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">如果要把所有这些问题解释清楚，那就肯定不止本书现在这么多内容了（前面的一些内容或许已经超出本书真正要讲的范围）。如果你觉得你的大脑快要爆炸了，那么你可能是对的，因为这些问题也时常让我感到脑力不支。问题的答案肯定不是显而易见的，但与此同时，我们可以通过描绘我们周围熟悉的三维世界来获得一些直觉。这个过程给我带来了无穷的乐趣。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这类研究甚至有一些直接应用的机会，因为它与空间中的路径和物体交换位置的方式有关。尽管我们生活在一个三维的物理世界中，但更高维度的空间其实也与我们息息相关。我以前写过这样一个事实，一个具有多个铰链的机械臂在更高维度的空间有效地运行，因为每个铰链都需要一个坐标来指定其位置。我们自己的手臂能做出各种复杂的动作，是由肩膀、肘部和手腕决定的，每一处都有前后、上下、左右的空间定位，可能还有一些旋转。手臂本身位于三维空间，但所有这些数据可以更准确地描述出它的运动，这些数据可能是八维甚至更高维度的。因此，高维空间里的路径就是机器人科学的重要研究内容，抽象高维空间的路径理论也能帮助我们了解类似计算机这种复杂的系统何时将崩溃。过程在抽象空间中可以被描述成路径，路径冲突就会导致崩溃，就像你从一个编织紧密的发辫里强行抽出一绺发束。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">但我不想过分关注这些实际用途，因为这不是推动我继续研究的动力，也不是推动纯粹数学理论发展的动力。驱动我和整个纯粹数学进步的是它的神奇、有趣和神秘。所有这些都来自我对积木滑动相互经过时的视觉表现的思考，以及随之而来的敏锐嗅觉。</span></p>
+</div><div class="header1"><h2><span id="sigil_toc_id_79" style="font-size:19px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;"><b>抽</b><b>象</b><b>结</b><b>构</b><b>的</b><b>视</b><b>觉</b><b>表</b><b>达</b></span></h2></div>
+<div class="part">
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我最喜欢的例子是标准伦敦地铁地图。出于版权原因，我无法在这里展示它，但我希望你能想象或者找到这张地图，来了解我想要说明什么。它的设计非常清晰，服务于特定的目的，即让人搞清楚地铁将如何从一个地方开到另一个地方。然而，这份地图所标注的地理位置并不准确，如果有机会看到严格按照地理位置绘制的地铁图，你会发现你很难读懂它，你反而会赞叹伦敦地铁地图的精妙之处。最早期的伦敦地铁图并不是这样的，1931年一名制图员哈里·贝克受绘制电路图的启发设计出这种地图。电路图只关注各个部位之间的连接，而非物理位置。贝克意识到地铁图也可以沿用这样的思路：标准地铁图所展现的重要结构只表示各条地铁线路之间的连接，而不是它们真实的地理位置。于是他改变了原有地图的布局，只保留了正确的连接关系。这样的改变遇到当局的一些抵制，但是试用版受到了乘客的欢迎。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">变换物理位置但保留原有关系的思路，类似于我们前面给30分解因子绘制的8的因子图。我们可以这样开始：8的因子是1、2、4、8，8等于2×4，因此可以用下图来表示：</span></p><div style="display: block;text-align:center;">
+	<img width="264" src="../images/image_240.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">但是好像缺了一层关系：2也是4的因子，这里却没有体现出来，于是我们可以添加一个从4到2的箭头。接着我们发现了一些冗余：8就像2的祖父，所以它们之间不需要箭头，通过4就可以推导出来。同样我们也不需要从4到1的箭头。于是我们就得到这样的一个Z字形图：</span></p><div style="display: block;text-align:center;">
+	<img width="279" src="../images/image_241.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">抽象结构至此都已就位，但在物理位置上还有所欠缺：它其实并不需要摆成Z字形。抽象的关系完全可以是一条直线，所以我们干脆把它拉成一条直线：</span></p><div style="display: block;text-align:center;">
+	<img width="558" src="../images/image_242.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">就像伦敦地铁图，我们改变了物理布局但保留了抽象的结构关系。这种灵活性具有重要的意义。有时候我们会发现自己画出来的图形不那么直观，就像这样：</span></p><div style="display: block;text-align:center;">
+	<img width="316" src="../images/image_243.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">但稍作改变之后它就变成了3个并排堆叠的正方形：</span></p><div style="display: block;text-align:center;">
+	<img width="500" src="../images/image_244.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">如果视觉符号能保留一定的物理灵活度，它就具有强大的功能。我们可以想一想家谱的排列方式，一代又一代家族成员必须按部就班地出现在一个页面上：</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_245.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">在范畴论中，对象之间的关系用箭头来表示，而不取决于对象在页面上的位置。这样做的一个结果就是，我们可以随意改变对象的位置而不会改变我们试图表达的意思。例如，我们可以用下列任何一种方式画出8的因子图解，它们表达的都是相同的抽象概念，但是不同的视觉表现可能会引发不同的情感联系。</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_246.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">有些例子只是杜撰的，目的是说明问题，但是这些观点可以作为我们深入推理的强大工具。下面的例子来自我个人的研究，同样的关系用不同的方式来表现，就会产生不同的视觉效果。就我们讨论的目的而言，图解的具体含义并不重要，但从图形来看，我希望你能感觉到，这个版本的图解在几何学上并没有表现出太多意义。</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_247.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">但是如果我们稍加改动，它就变成了一个立方体：</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_248.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这是一个强大的想法，它能帮助我们更好地理解抽象概念，然而遗憾的是，它也可以被用来实现某些邪恶的目的：有人利用误导性视觉效果操纵毫无戒心的读者。这并不是严格意义上的错误，因为它依然表达了正确的逻辑概念，但被刻意扭曲的视觉效果左右了我们的思想。一个广为人知的例子是用下面这样的图形来表现数据变化的趋势：</span></p><div style="display: block;text-align:center;">
+	<img width="656" src="../images/image_249.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">但仔细观察之后你会发现，纵坐标从100万开始。如果纵坐标从0开始，图形就会变成下面这样：明显没那么夸张了。</span></p><div style="display: block;text-align:center;">
+	<img width="645" src="../images/image_250.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">另一种视觉操纵手法是利用三维饼状图，也就是把圆形变成圆柱体。这样一来，我们自然会看到“前面”露出更多的面积，这可能会让我们产生前面“切片”数据量更大的印象。这种手法可以被用来刻意夸大前面部分的重要意义，同时弱化后面部分的意义。在下面的例子中，人们很容易忽略因“渗漏”而导致的水资源消耗。</span></p><div style="display: block;text-align:center;">
+	<img width="509" src="../images/image_251.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">让我们觉得某些东西比实际尺寸更大的另一个例子，就是广为人知的世界地图的呈现方式。这个问题把我们带回到圆形与正方形的关系上，但是要上升一个维度，因为我们想要把一个（或多或少）球形的地球展现在一张平面纸上。形状失真必然不可避免，因此我们不得不尽量选择失真度最低的方法。针对不同的目的，球体的二维投影有很多种方法，其中最经典的就是“墨卡托投影”，它是导航的利器，因为它可以保持角度准确，这意味着你在前往某地时可以准确判断出前进的方向。然而，它的负面效果是某些地区的形状被严重扭曲，离赤道越远的地带，面积看起来就越大。这意味着北半球（帝国主义）国家在地图上的面积比实际大很多，而赤道附近的国家看起来要小得多。例如美国就被不成比例地放大，而非洲大陆的面积显得格外小。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">在不改变理论内涵的情况下左右我们的情绪，这无疑是一种巧妙的操纵技巧。这种现象也出现在我们的语言中，不管是好是坏。用一个可爱的绰号来指代某样东西，能让我们对其产生温柔的感觉，比如，“毛球定理”是一个神秘的定理，“毛球”的形象让这个相当晦涩的概念变得栩栩如生，简单来说这项理论认为，当我们想要把一个毛球梳理平整时，我们必然会遇到至少一个无法梳理平整的点。另一个绰号是我们在第4章提到的“三明治定理”，它的意思是把一个匪夷所思的函数夹在两个我们早已了如指掌的函数之间，就像两片形状齐整的面包之间夹着不规则的馅料。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这种改变情绪认知的手段也被用于达成某些居心叵测的目的。美国“平价医疗法案”被共和党人贴上“奥巴马医改”的标签，因为他们知道，这件事一旦与奥巴马扯上关系，一些原本支持这项法案的人就会转变立场，只是因为他们讨厌奥巴马。因此出现了一些声称支持平价医疗法案但反对奥巴马医改的人，尽管二者本来就是一回事。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">然而，如果专注于左右人们情绪反应的阴险手段，我们就看不到它是一个多么强大的工具。比如，当分析新冠病毒感染疫情期间的感染率时，我们可以用对数刻度取代线性刻度。这意味着纵轴的刻度值不再以数字的相同增量向上，比如10、20、30、40等等，而是变成以相等的倍数向上，比如10、100、1000、10000。如果我们预期数字将以相等的倍数增长，而不是以相同的增量增长，那么这是个非常有用的方法。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">下面是我们在前面讨论过的新冠病毒感染率趋势图（取动态7天的平均值）。左图是以<span style="font-size:16px;font-style: oblique;font-family:&#39;PingFang SC&#39;;"><i>y</i></span>轴线性刻度绘制的数据，右图是以<span style="font-size:16px;font-style: oblique;font-family:&#39;PingFang SC&#39;;"><i>y</i></span>轴对数刻度绘制的数据。</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_252.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">右侧的趋势图在一开始像一条直线，表明这是一条指数线，指数以常数倍增长，因此在<span style="font-size:16px;font-style: oblique;font-family:&#39;PingFang SC&#39;;"><i>y</i></span>轴上以常数倍间隔来绘制这些点，看起来就是一条直线。相较于指数曲线，我们的眼睛更容易识别直线，也更容易察觉到增长趋势的放缓，因为我们能看到本应继续向上延伸的直线变“平”了。关键的是要时刻记住我们在使用对数刻度，有些居心不良的人在使用对数刻度时不做特殊说明，就是为了隐瞒数字急剧增长的事实。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这就是把抽象概念转化为图形所包含的真正力量。我们最好能透彻理解它是如何运作的，这样我们才能用最生动的方式表达我们的思想，也可以确保我们免受心怀不轨之人的操纵。我甚至会借助图形来了解自己生活的方方面面。</span></p>
+</div><div class="header1"><h2><span id="sigil_toc_id_80" style="font-size:19px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;"><b>我</b><b>的</b><b>图</b><b>形</b><b>生</b><b>活</b></span></h2></div>
+<div class="part">
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我已经展示了一些我最喜欢的纯粹数学图形。本书的前言部分有一张图，描述了随着时间的推移我与数学课的爱恨情仇，以及我对数学坚定不移的爱。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这里还有一些我钟爱有加的图形，它们曾经帮助我了解自己生活的方方面面。我相信，从我所有的写作中你可以明显看出，我喜欢使用图形来表述抽象的概念，以帮助读者深入理解某些事物。我设计的很多图形都是用来向他人解释我的想法的，但是有些图形是真正用来帮助我理解自己的生活的，也可以用来给他人解释某些事情。</span></p>
+</div><div class="header1"><h2><span id="sigil_toc_id_81" style="font-size:19px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;"><b>我</b><b>的</b><b>冰</b><b>激</b><b>凌</b><b>满</b><b>足</b><b>感</b></span></h2></div>
+<div class="part">
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">下面这张图表示随着时间的推移冰激凌让我获得的满足感。</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_253.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">根据这张图，我在想到冰激凌的时候兴奋感开始迅速增强。冰激凌到手的那一刻兴奋感差不多达到了顶点，就连吃第一口的感觉也抵不上购买和期待的感觉。之后我的满足感急剧下降，但我还在继续吃手中的冰激凌，徒劳地想要留住那转瞬即逝的满足感。到了某一时刻满足感开始反噬，但可惜的是，我依然没有停止的意思，直到我因为吃了太多冰激凌而感到非常痛苦。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">不管怎样，这的确是我的真实经历。画这张图让我相信，最好还是在吃第一口冰激凌之后，在满足感开始下降之前尽快住嘴。这样我就可以等到下一次最大限度地享受第一口所带来的满足感，从而达到兴奋的顶峰。这个道理为我打开了一扇神奇的大门，我完全可以把一桶冰激凌放在冰箱里，一次吃上一两口，这样一来，同样一桶冰激凌所带来的满足感的总和大大超过了我从前一口气把它吃光所获得的满足感。</span></p>
+</div><div class="header1"><h2><span id="sigil_toc_id_82" style="font-size:19px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;"><b>睡</b><b>眠</b></span></h2></div>
+<div class="part">
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">下面这张图是我的清醒程度与睡眠时间的比较。</span></p><div style="display: block;text-align:center;">
+	<img width="826" src="../images/image_254.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这是一个相当典型的反比关系：一物减少则另一物增加。我睡得越少就越清醒，这似乎跟我们的常识不一样，但如果我们从下面这个方向看待因果关系：</span></p><div style="display: block;text-align:center;">
+	<img width="370" src="../images/image_255.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">然而在现实中，对我来说，因果关系的方向是这样的：</span></p><div style="display: block;text-align:center;">
+	<img width="383" src="../images/image_256.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">显然，如果我很清醒，我就不需要太多睡眠；但如果我很疲惫，我就需要大量的睡眠。这个逻辑让我意识到清醒的程度与昨晚的睡眠关系不大，而是与最近几个星期总体的生活状态有关。还有其他一些在你看来似乎矛盾的现象，只是因为你从不同的角度考虑因果关系。如果一个行业，比如学术界，有很多贫穷从业者，女性和有色人种很少，那么这个行业更关心如何进一步包容贫困人群，而不关心是否包容女性和有色人种，这似乎是矛盾的。作为对当前行业包容性水平的回应，这种立场显然是没有道理的。但是如果你考虑到人们往往比其他人更关心自己的劣势，这就是有道理的，如果一个行业没有太多的女性和有色人种从业者，这个行业就不大会考虑女性和有色人种的福祉。</span></p>
+	<p><span style="font-size:17px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;"><b>人</b></span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">有些图形还能帮助我了解关于人的一些事情。我曾经参加过帕蒂·洛克教授的一次讲座，当时看到一张生动的数据图，内容是针对在线婚恋网站OKCupid用户的研究案例。这张图展现的是受访者眼中最具吸引力的约会对象的年龄情况，有女性对男性的看法，也有男性对女性的看法：</span></p><div style="display: block;text-align:center;">
+	<img width="900" src="../images/image_257.jpg" alt=""/></div><aside epub:type="footnote" id="footnote-10-31">DataAnalysis in theM athematics Curriculum,2018, available via https://www.lock5stat.com/powerpoint.html brockport 2018.</aside>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">我只是凭印象画出这样一张图，你可以在洛克教授的网站上看到原图。
+	<sup><a epub:type="noteref" href="#footnote-10-31"> <img width="10" src="../images/image_207.png" alt="DataAnalysis in theM athematics Curriculum,2018, available via https://www.lock5stat.com/powerpoint.html brockport 2018." class="epub-footnote"/></a></sup>她在演示过程中采用了颇富戏剧性的方法：她首先展示出女性对男性的看法，于是我们都想到了自己，“对呀，女人当然都喜欢和她们年龄相仿的男人”。然后她亮出了男性对女性的看法：男人无论多大年龄，都喜欢寻找年轻女人。观众集体翻起了白眼，如此生动的数据展示让现场爆发出一阵笑声。</span></p>
+	<p><span style="font-size:17px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;"><b>对</b><b>他</b><b>人</b><b>的</b><b>关</b><b>心</b></span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">下图展示的是我对他人的关心程度和我与对方关系的紧密程度（实线）。</span></p><div style="display: block;text-align:center;">
+	<img width="891" src="../images/image_258.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这张图表明我关心每个人，但我更关心那些与我关系紧密的人。我觉得这是人之常情，家人发生不幸要比与我从未谋面的陌生人发生不幸更让我难过。然而这样的态度也存在一些争议，因为一些有怜悯心的自由主义者哀叹我们只关心身边的人，对生活在地球另一边人的遭遇不闻不问。我的确认识一些积极主张平等关心所有人的人士，就是图中的那条虚线。对这些人的主张我没有异议，但是这张图让我看到友谊能带来一些有趣的互动。</span></p>
+	<p><span style="font-size:17px;font-weight: bold;color:rgb(0, 0, 0);font-family:&#39;PingFang SC&#39;;"><b>悲</b><b>伤</b></span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这里有一张图帮助我了解为何我们会有悲伤的情绪，以及我们该如何防止它出现。下面需要更多的叙述性解释，先看看它的样子：</span></p><div style="display: block;text-align:center;">
+	<img width="887" src="../images/image_259.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">有些关系不可避免地会走到尽头，但几乎所有的悲伤都源于人们跌入感情的悬崖。然而，人们通常不会在一夜之间恩断义绝或移情别恋，感情的破裂往往是在一段时间内逐渐发生、发展的。沿袭前面的例子，我称呼这两个人为亚历克丝和萨姆。图中的虚线表示亚历克丝对萨姆的爱意逐渐减退。问题在于，尽管逐渐心灰意冷，但亚历克丝依然表现得一如既往，至少萨姆的感觉是一如既往。之后亚历克丝的爱跌入谷底，再也无法维持这段感情，萨姆这才猛然醒悟，对亚历克丝的心态认知发生了彻底的翻转，进而从感情的悬崖上跌落，就是图中的那条实线。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">或许实际的情况是，亚历克丝在对萨姆逐渐心灰意冷的过程中一直有新欢，只是不想跟萨姆开诚布公，直到另一份感情已经牢不可破。也或许亚历克丝早已对二人的生活失去幸福感，但不知道原因出在哪里，也不想捅破这层窗户纸，担心萨姆会有过激的反应。于是亚历克丝只能装作一切如常，直到有一天发现再也无力继续这种同床异梦的关系。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">无论是哪种情况，我都认为关键在于确保实线与虚线之间不会出现间隙，这样就不会出现感情的悬崖。但是这需要亚历克丝的自我意识，还需要双方之间的信任，他们可以开诚布公地表达自己的感受。或许这本就不是一段美好的关系，他们无法用这种方式来解决感情问题。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">如果亚历克丝已经来到感情的悬崖边，而且没有足够的自我意识，那么该当如何？我认为即使到了这个时候，最好的做法也是小心翼翼地搭建一个缓坡，就像下图那条新的虚线：</span></p><div style="display: block;text-align:center;">
+	<img width="783" src="../images/image_260.jpg" alt=""/></div>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这条虚线对应了最初感情逐渐消失的过程，尽管是在事情发生之后。有很多人反对这种做法，说这是不诚实的行为，但是我觉得，亚历克丝最初隐瞒第一条虚线已经构成了不诚实的行为。而且，以不诚实的方式搭建一道缓坡，是为了保护另一方免受伤害，在这种情况下，不诚实可能是合理的。换个方式来说，诚实不是伤害他人的正当理由。在生活中，我们为了照顾他人的情绪，或者为了表现出我们的礼貌、善良，我们可以采取很多方式隐藏我们直截了当的诚实。事实诚实与情感诚实不同。如果有人送给你一件你不大喜欢的礼物，但是你说自己很喜欢，这就是事实谎言。但如果你感谢对方的好意，这就是情感诚实。同样，如果有人说：“你喜欢我的新发型吗？”说喜欢或许构成事实谎言，但如果你真正的意思是希望支持和验证对方的选择，这就是情感诚实，而这些选择与你无关。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">把感情悬崖改造成一道感情缓坡同样是事实谎言，但如果你不想让自己成为一个糟糕的人，也不想为这个世界带来更多悲伤，那么搭建一道感情缓坡就是情感诚实。有时我会想到莎士比亚的十四行诗，或者更久远的卡图卢斯的诗句，并惊叹于我们人类依然像数千年前的人类一样在彼此伤害着对方。如果无法学会该如何停止伤别人的心，我们所做的一切努力——学校里传授的知识、技术的进步、外太空旅行、高耸入云的摩天大楼、无穷维度的范畴——都将失去意义。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">这并不是学校里的数学课曾经教授的内容，但我多么希望它是啊，我自己就把这部分内容作为艺术系学生数学课的结尾。一名学生后来写信告诉我，她给朋友们讲述了这张图的故事，而且仅凭这张图她就说服了几个朋友开始选修我的课程。</span></p>
+	<p><span style="font-size:16px;font-family:&#39;PingFang SC&#39;;">如果感受不到与数学的任何缘分，你的确很难把它学好。对有些人来说，所谓的缘分就是找出正确的答案并受到表扬；有些人觉得摆弄数学符号乐趣无穷；有些人觉得数学内在的逻辑给人一种满足感；有些人觉得学以致用的过程令人兴奋。但是还有些人在数学方面从未受到过表扬，符号和逻辑令他们望而却步，他们对学以致用也很冷淡，他们或许更喜欢开放性的问题、生动的视觉形象，甚至喜欢数学的间接应用能揭示生活中通常被认为与数学无关的部分。如果我还没有把这件事讲清楚，请允许我再次强调：这是数学的一个重要部分。这些可能被当成“数学外行人”说的话，但这更接近专业抽象数学家的态度，我们这些专业的抽象数学家应当投入更多的时间和精力让人们知道这一点。</span></p></div>
+
+
+</body>
+</html>

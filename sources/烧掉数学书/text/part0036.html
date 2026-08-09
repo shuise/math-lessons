@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="12AK80-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">2.3.3　解读舞蹈：机器与弯曲无关</h4>
+
+  <p class="bodytext">前一节我们对语句“机器M（x）≡x<sup class="calibre3">2</sup>的导数为M'（x）=2x”进行了常规解读。这个解读与机器M的图形有关，发现不同的位置有不同的陡峭度，并将导数解读为不同位置的陡峭度。</p>
+
+  <p class="bodytext">但我承诺过还要用另一种方式解读，现在我们来看看。我们将通过另一种思维方式得到相同的结论。首先，注意到我们不一定需要用画图来将自乘机器形象化。我们可以将M（x）≡x<sup class="calibre3">2</sup>视为边长为x的正方形的面积。既然是不同的思维方式，我们可以用缩写A替代M，用l替代x。这样我们就得到了A（l）≡l<sup class="calibre3">2</sup>，我们谈论的仍然是同一台机器，只是现在我们不再将其视为弯曲的东西。</p>
+
+  <p class="bodytext">在微积分中经常是这样，我们得到一台机器，然后问这样的问题，“如果将放进去的东西改变一点点，机器的反应会有什么变化？”鉴于d是“差异（Difference）”的首字母，l是“长度（Length）”的首字母，我们可以用缩写dl来表示长度的微小变化。我们可以将dl视为正方形边长的变化，因此l<sub class="calibre6">变化后</sub>≡l<sub class="calibre6">变化前</sub>+dl。当长度改变了一点点，我们可以问面积如何改变。变化之前的面积是l<sup class="calibre3">2</sup>，变化之后的面积是（l+dl）<sup class="calibre3">2</sup>。我们把这些写到方框里。</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00135.jpeg"/>     <p class="tuzhu-center">图2.4　理解自乘机器A（l）≡l<sup class="calibre5">2</sup>的导数的另一种方式。最开始有一个边长为l的正方形。然后让l变化一点点成为l+dl，看面积如何变化。从图中可以看出，面积的变化是dA≡A<sub class="calibre7">变化后</sub>-A<sub class="calibre7">变化前</sub>=2（l·dl）+（dl）<sup class="calibre5">2</sup>。因此在dl缩减为0之前，可以得到<img alt="" class="gongshi" src="../images/00136.jpeg"/>。然后将dl缩减为0（如果你愿意，可以从一开始就将其视为“无穷小”），得到导数为<img alt="" class="gongshi" src="../images/00137.jpeg"/>。我们可以认为语句<img alt="" class="gongshi" src="../images/00138.jpeg"/>说的是两个细长的矩形缩成了两条线（因此是2l），而小正方形则缩成了一个点（因此是dl），只将线增加了无穷小的长度，因此可以忽略掉，只写<img alt="" class="gongshi" src="../images/00139.jpeg"/>。</p>
+  </div>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">正方形的微小变化：</span></p>
+
+    <p class="bodytext-c">变化之前的边长：l</p>
+
+    <p class="bodytext-c">变化之后的边长：l+dl</p>
+
+    <p class="bodytext-c">边长的变化：dl=l<sub class="calibre6">变化后</sub>－l<sub class="calibre6">变化前</sub></p>
+
+    <p class="bodytext-c">变化之前的面积：l<sup class="calibre3">2</sup></p>
+
+    <p class="bodytext-c">变化之后的面积：（l+dl）<sup class="calibre3">2</sup></p>
+
+    <p class="bodytext-c">面积的变化：dA=A<sub class="calibre6">变化后</sub>-A<sub class="calibre6">变化前</sub></p>
+  </div>
+
+  <p class="bodytext">我们让放进机器的数变化了一点。机器吐出来的数会有什么变化呢？我们可以画图。图2.4展示了当边长变化一点点时，面积会如何变化。可以用多种方式缩写面积的变化：</p>
+
+  <p class="bodytext-c">dA≡A<sub class="calibre6">变化后</sub>-A<sub class="calibre6">变化前</sub>≡A（l+dl）-A（l）。</p>
+
+  <p class="bodytext">从图中可以看出面积的变化是</p>
+
+  <p class="bodytext-c">dA=2（l·dl）+（dl）<sup class="calibre3">2</sup>，</p>
+
+  <p class="bodytext">这其实就是说</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00140.jpeg"/>
+  </div>
+
+  <p class="bodytext">然后将dl缩减为0（如果你愿意，可以从一开始就将其视为无穷小，因此2l+dl与2l无法区分），我们发现自乘机器A（l）≡l<sup class="calibre3">2</sup>的“导数”是</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00141.jpeg"/>
+  </div>
+
+  <p class="bodytext">这与我们在前面发现的语句M'（x）=2x是一样的。两者说的都是自乘机器对放进去的任何数的“导数”或“陡峭度”或“变化率”都是这个数本身的两倍大。</p>
+</body></html>

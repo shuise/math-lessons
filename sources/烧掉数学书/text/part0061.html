@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="1Q5IA0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">3.4.6　可能有用的疯狂想法</h4>
+
+  <p class="bodytext">有一个疯狂的想法。我们想做的是对超级通用的某个东西的幂的机器进行求导：</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00297.jpeg"/>
+  </div>
+
+  <p class="bodytext">其中P表示“幂（Power）”，m和n是整数。而根据我们发明幂的方式，这个可以用另一种方式表述</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00298.jpeg"/>
+  </div>
+
+  <p class="bodytext">从最开始我们就一直强调我们可以随意进行缩写，现在，如果我们<span class="jiacu">真正</span>认真对待这个想法，就能实施一个有用的技巧。上面P（x）的表达式看上去吓人，其实只不过是</p>
+
+  <p class="bodytext-c">P（x）=（<span class="jiacu">某个东西</span>）<sup class="calibre3">m</sup>，</p>
+
+  <p class="bodytext">其中（<span class="jiacu">某个东西</span>）是<img alt="" class="gongshi" src="../images/00299.jpeg"/>的缩写。因此P（x）是一个我们知道怎么求导的东西放在<span class="jiacu">另一个</span>我们知道怎么求导的东西中间。即</p>
+
+  <p class="bodytext">1.我们知道如何求（<span class="jiacu">某个东西</span>）<sup class="calibre3">m</sup>的导数，就是m（<span class="jiacu">某个东西</span>）<sup class="calibre3">m-1</sup>。</p>
+
+  <p class="bodytext">2.我们也知道如何求里面的（<span class="jiacu">某个东西</span>）的导数，因为（<span class="jiacu">某个东西</span>）就是<img alt="" class="gongshi" src="../images/00300.jpeg"/>的缩写，我们才在前面求出了<img alt="" class="gongshi" src="../images/00301.jpeg"/>的导数。</p>
+
+  <p class="bodytext">但这个推理链条并不是那么无懈可击，因为在语句（1）中，我们将（<span class="jiacu">某个东西</span>）视为变量，而在语句（2）中，我们是将x视为变量。如何将这两种思维方式结合到一起并不是很清楚。不过，如果能够将它们结合到一起，也许就能对<img alt="" class="gongshi" src="../images/00302.jpeg"/>进行求导，我们甚至也许还能将这种思维方式应用于今后遇到的更疯狂的机器。</p>
+
+  <p class="bodytext">到目前为止，我们主要是用“撇”号表示导数，将机器M的导数记为M'。这没问题。但我们也想尝试搞清楚上面这个疯狂的想法，我们意识到P（x）是由我们知道如何求导的两项构成的，一项包含另一项。为了表述这个思想，我们需要将两个不同的东西视为“变量”，但撇号无法让我们很好地表述这个思想。问题出在哪里？如果我们真的可以<span class="jiacu">随意</span>进行缩写，那么下面这些语句说的就是同一件事情：</p>
+
+  <p class="bodytext-c">（x<sup class="calibre3">n</sup>）'=nx<sup class="calibre3">n-1</sup>，</p>
+
+  <p class="bodytext-c">（Q<sup class="calibre3">n</sup>）'=nQ<sup class="calibre3">n-1</sup>，</p>
+
+  <p class="bodytext-c"><span class="jiacu">（啪啦）'=n（啪啦</span>）<sup class="calibre3">n-1</sup>。</p>
+
+  <p class="bodytext">这似乎是完全合理的，因为我们可以随意进行缩写。不过，撇号和这个新的疯狂想法无法很好地相处，如果我们在论证中同时使用撇号和疯狂的想法，很容易就会陷入一团乱麻。问题是这样。我们知道<img alt="" class="gongshi" src="../images/00303.jpeg"/>，它说的就是（x）'=1，但是如果我们能随意缩写，我们就能取任何机器，比如M（s）≡s<sup class="calibre3">n</sup>，用x≡s<sup class="calibre3">n</sup>对其进行缩写，然后用撇号我们可以得到（x）'=1。不过，x就是s<sup class="calibre3">n</sup>的缩写，而我们知道（s<sup class="calibre3">n</sup>）'=ns<sup class="calibre3">n-1</sup>。但这样我们就“证明”了ns<sup class="calibre3">n-1</sup>=1，这肯定不会始终成立！例如，当s=1和n=2，它说1=2。啊！哪里错了？</p>
+
+  <p class="bodytext">你可能会想是不是缩写不对，然后认为我们<span class="jiacu">不能</span>随意进行缩写。我们当然可以！我们刚才落入的陷阱其实是撇号的问题，因为它没有提醒我们将什么视为变量！当我们写下（x）'=1时，我们其实是在用撇号表示“相对于x的导数，”或者“将x视为变量时的导数。”当我们写下（s<sup class="calibre3">n</sup>）'=ns<sup class="calibre3">n-1</sup>，我们其实是在用撇号表示“相对于s的导数”，或者“将s视为变量时的导数。”因此当我们写下这些的时候并没有错，只是不能在它们之间画等号，因为这两个式子回答的是不同的问题。</p>
+
+  <p class="bodytext">世界一切如常，我们还是可以随意进行缩写。但我们注意到了，如果我们想按照前面论及x、Q和<span class="jiacu">啪啦</span>的那三个式子那样谈论事情，撇号会带来危险。如果采用另一种方式来表述同样的意思，可以这样：</p>
+
+  <div class="zhong1">
+ <img alt="" class="image-tuzhu" src="../images/00304.jpeg"/>
+  </div>
+
+  <p class="bodytext">请注意随着变量变化，我们考虑的问题也在随之变化，因此当我们考虑的变量不同时，<img alt="" class="gongshi" src="../images/00305.jpeg"/>中的x变成了Q，然后又变成了<span class="jiacu">啪啦</span>。我们还是可以随心所欲，只是要记住当我们在发明缩写时，思考的是什么东西。如果没有把握，最好回头看一下我们在发明缩写时想的是什么。我们是不用记忆任何东西，但必须保证不会与我们之前说的相矛盾。</p>
+
+  <p class="bodytext">现在有了这些之后，让我们回过头来看看能不能不用撇号表达我们关于重新缩写的疯狂思想。我们只允许自己用d标记，因为这个标记更便于我们转换变量。我们之前的想法是，如果</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00306.jpeg"/>
+  </div>
+
+  <p class="bodytext">可以将其写成<img alt="" class="gongshi" src="../images/00307.jpeg"/>。然后如果我们利用缩写（<span class="jiacu">某个东西</span>）≡<img alt="" class="gongshi" src="../images/00308.jpeg"/>，就能得到P（x）=（<span class="jiacu">某个东西</span>）<sup class="calibre3">m</sup>，然后得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00309.jpeg"/>
+  </div>
+
+  <p class="bodytext">现在我们改变了标记，可以更清楚地看出之前错在哪里。我们没有做错，只是回答的问题与我们最初问的稍有不同。我们想知道P（x）的导数，将x视为变量。而我们回答的则是另一个问题：P（x）的导数，将（<span class="jiacu">某个东西</span>）视为变量，其中（<span class="jiacu">某个东西</span>）是<img alt="" class="gongshi" src="../images/00310.jpeg"/>的缩写。</p>
+
+  <p class="bodytext">这正是我们反复遇到的情形。我们想回答一个问题，但是回答不了。然后发现如果问题稍加变化，就能轻松解决。因此要回答最初的问题——我们无法回答的那个——我们可以借助那个名为“撒谎然后改正”的思维体操。如果问题仅仅是“P（x）相对于（<span class="jiacu">某个东西</span>）的导数是什么，其中（<span class="jiacu">某个东西</span>）为<img alt="" class="gongshi" src="../images/00311.jpeg"/>？”回答会很容易。但那不是我们问的问题，因此我们撒个谎，先回答容易的问题，然后<span class="jiacu">改正</span>。我的意思是这样。我们从问题</p>
+
+  <div class="zhong3">
+ <img alt="" class="image-tuzhu" src="../images/00312.jpeg"/>
+  </div>
+
+  <p class="bodytext">开始。我们不知道，所以我们撒谎，将问题变成</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00313.jpeg"/>
+  </div>
+
+  <p class="bodytext">这个问题我们<span class="jiacu">能</span>回答，至少在（<span class="jiacu">某个东西</span>）是<img alt="" class="gongshi" src="../images/00314.jpeg"/>的时候可以。不过我们撒了谎，改变了一些东西，所以需要回过头去改正，首先在上面再放一个d（<span class="jiacu">某个东西</span>）与在下面引入的d（<span class="jiacu">某个东西</span>）相抵消，然后，然后将我们撒谎时拿掉的dx重新放在下面。这样就回到了最初的问题，只是样子有了一点变化：</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00315.jpeg"/>
+  </div>
+
+  <p class="bodytext">如果我们不想说这是撒谎和改正，只需将整个过程视为乘以1。为了说明这一点，我们将刚才的论证过程一次性展示出来。</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00316.jpeg"/>
+  </div>
+
+  <p class="bodytext">嘿！我们知道如何计算这些！这很不错。我们定义了P（x）≡<img alt="" class="gongshi" src="../images/00317.jpeg"/>，但是不想进行冗长的求导。我们做得到，但想试试有没有捷径。撇号让我们有点迷糊，但是一旦用d标记重写，问题就会变得容易得多，只需要撒谎然后改正就行了。我们已经求出了P相对于（<span class="jiacu">某个东西</span>）的导数是</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00318.jpeg"/>
+  </div>
+
+  <p class="bodytext">并且我们也求出了（<span class="jiacu">某个东西</span>）≡<img alt="" class="gongshi" src="../images/00319.jpeg"/>相对于x的导数是</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00320.jpeg"/>
+  </div>
+
+  <p class="bodytext">因此这个神奇的新锤子告诉我们，要求P相对于x的导数，无需采取那个冗长的方法，只需将上面这两个式子相乘就可以了。让我们试一下。</p>
+</body></html>

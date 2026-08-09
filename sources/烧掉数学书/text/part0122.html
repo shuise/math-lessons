@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="3KB4K0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h3 class="chapter-three">6.4　第二朵乌云</h3>
+
+  <p class="bodytext">我们已经在两个不同的领域——先是陡峭度，然后是面积——征服了弯曲，但我们还不知道怎么计算弯曲东西的长度。现在可以回顾一下我们的整个旅程，看看过去是什么帮助了我们。</p>
+
+  <p class="bodytext">在处理陡峭度时，我们征服弯曲的方式是将弯曲的机器m（在具体值保持未知的点x处）无穷放大，然后将其视为直线来计算其陡峭度。</p>
+
+  <p class="bodytext">在处理面积时，我们征服弯曲的方式是将每一点x处机器图形下的微小面积视为一个无穷薄的面积为m（x）dx的矩形。然后假想将所有微小的面积加到一起。一开始我们不知道该怎么做，但是我们给未知的答案取了个名字：<img alt="" class="gongshi" src="../images/00644.jpeg"/>。在发现了基本锤子之后，我们发现∫的新思想其实就是原来的导数思想反过来。</p>
+
+  <p class="bodytext">然后呢？我们已经有了很多无穷放大镜的经验，写出弯曲东西的长度表达式应该不会太困难。至于是不是要具体计算某个特例中的弯曲东西的长度则是另一回事，就像处理面积时一样。根据我们到目前为止的放大镜经验，我们从机器m开始，然后想象对其图形上的某个点无穷放大，对具体放大的点保持未知。然后同往常一样，关注与第一个点无穷接近的某个点。图6.6描绘了这种情形。</p>
+
+  <p class="bodytext">放大之后，这个问题就不那么熟悉了。我们得到了水平距离为dx的两个点，垂直距离记为dm。同以往一样，dm就是m（x+dx）-m（x）的缩写，不过根据我们的目的，我们不用展开这个缩写。我们用dl作为两点之间实际距离的缩写——即沿着图形移动时体验到的距离。由于放大会将曲线变成无穷小的直线，我们可以利用捷径公式得到：</p>
+
+  <p class="bodytext-c">（dl）<sup class="calibre3">2</sup>=（dx）<sup class="calibre3">2</sup>+（dm）<sup class="calibre3">2</sup>，</p>
+
+  <p class="bodytext">或者等价地，<img alt="" class="zaozi" src="../images/00645.jpeg"/>。将无穷小段dl全部加起来，得到的应当就是曲线的总长度。</p>
+
+  <p class="bodytext">曲线的“总长度”是什么意思呢？曲线可以无限延伸，这时答案应当为无穷大，但这并不是我们想问的问题。我们真正想知道的是在点x=a和x=b之间m的图形的长度。用符号总结这一段就是：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00646.jpeg"/>
+  </div>
+
+  <p class="bodytext">好了……我们之前没有见过这样的东西。我们见过的涉及∫符号的表达式都是这个样子：</p>
+
+  <div class="zhong3">
+ <img alt="" class="image-tuzhu" src="../images/00647.jpeg"/>
+  </div>
+
+  <p class="bodytext">因此我们可以尝试让式（6.27）中的<img alt="" class="zaozi" src="../images/00648.jpeg"/>像（某台机器）dx。我们可以撒谎然后改正得到<img alt="" class="gongshi" src="../images/00649.jpeg"/>。最右边的dx项就是我们需要的，但剩余的部分很丑。让我们将1／dx项移到剩下部分的里面。平方根符号很难联系到可行的操作，因此将平方根符号变成<img alt="" class="gongshi" src="../images/00650.jpeg"/>次幂。根据我们发明幂的方式，我们知道如果两项有相同的指数，就可以合到一起：</p>
+
+  <p class="bodytext-c">（某个东西）<sup class="calibre3">＃</sup>（另一个东西）<sup class="calibre3">＃</sup>=［（某个东西）·（另一个东西）］<sup class="calibre3">＃</sup>，　（6.28）</p>
+
+  <p class="bodytext">因此如果我们想将<img alt="" class="gongshi" src="../images/00651.jpeg"/>移到让人迷惑的剩余部分的里面，可以再次采取撒谎然后改正的方法，将<img alt="" class="gongshi" src="../images/00652.jpeg"/>写成好笑的形式：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00653.jpeg"/>
+  </div>
+
+  <p class="bodytext">这样做之后，我们就可以接着前面往下推。不要被这一大堆符号吓到了！这看起来好像是有一长串推导步骤，其实大部分都可以省略。我之所以给出详细步骤是因为我真的很喜欢这些推导，而且我希望每一步都尽可能容易理解。每一步真的都很简单。准备好了吗？开始吧：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00654.jpeg"/>
+  </div>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00655.jpeg"/>
+  </div>
+
+  <p class="bodytext">然后是好玩的部分。我们可以通过这个洞察以更加清晰的方式写出式（6.27）。将我们刚才推导出式（6.27）的等式都丢掉，我们发现任何曲线的总长度都可以写为：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00656.jpeg"/>
+  </div>
+
+  <p class="bodytext">漂亮！在这一章的开头部分，我们发现新的∫思想其实就是原来的导数思想的反面，因此我们可以将两个思想合二为一。而刚才我们又有了计算曲线长度的新思想，将曲线放大，让它看起来像是直的，在微观层面上测量微小段的长度，然后将小段长度加总。令人惊讶地是，我们发现这个思想其实与∫是一回事，同样是导数的反面。一切都井然有序，而且比我们所期望的更漂亮！式（6.31）是这一节的总结，虽然看起来复杂，其实它说的是：</p>
+
+  <p class="bodytext"><span class="jiacu">问</span>：嗨，我有一个弯曲的东西m（x）。我该怎么计算它的长度？</p>
+
+  <p class="bodytext"><span class="jiacu">答</span>：我不知道，但这与<img alt="" class="zaozi" src="../images/00657.jpeg"/>下的面积是一样的。</p>
+
+  <p class="bodytext"><span class="jiacu">问</span>：这样更容易计算长度吗？</p>
+
+  <p class="bodytext"><span class="jiacu">答</span>：对某些m也许是这样。我不知道。别问我。</p>
+</body></html>

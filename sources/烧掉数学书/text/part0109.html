@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="37UDA0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h1 class="chapter-one" id="calibre_pb_0">第三幕</h1>
+
+  <h2 class="chapter-two" id="sigil_toc_id_13">第6章　合二为一</h2>
+
+  <h3 class="chapter-three" id="sigil_toc_id_14">6.1　两者等同</h3>
+
+  <h4 class="chapter-four" id="sigil_toc_id_15">6.1.1　又一个变成思想的缩写</h4>
+
+  <p class="bodytext">在前面的插曲中，我们讨论了求弯曲事物的面积的问题。我们最终放弃了，但是有了一点认识。如果我们在机器图形的任意点x进行放大，那一点下的瘦长条可以视为高为m（x）宽为dx的无限薄的矩形。因此任意点x处机器图形下的面积就是m（x）dx。因此，如果我们能将（比如x=a和x=b之间）所有点x处的无限薄矩形的面积都加起来，我们就能得到m（可能弯曲）的图形下的总面积。</p>
+
+  <p class="bodytext">我们不知道具体该怎么做。不过我们写了一个很大的缩写来总结这个思想：<img alt="" class="gongshi" src="../images/00530.jpeg"/>。这个缩写体现了将弯曲面积视为无限多个无限薄矩形（因此面积为m（x）dx）之和（因此用了S形的∫）。但这只是对（未知）答案的缩写。它没有告诉我们具体该如何计算弯曲的面积。</p>
+
+  <p class="bodytext">任何人到这里都有可能被卡住。不过新缩写中的dx让人眼熟。我们之前见过这个符号，就在导数的下面。也许导数能帮助我们理解这个新的∫思想。</p>
+
+  <p class="bodytext">导数也是机器。例如f（s）≡s<sup class="calibre3">2</sup>具有导数。f'（s）≡2s，这个2s就同x<sup class="calibre3">2</sup>一样也是机器。因此，可以假设滑稽的∫符号内部的m（x）其实是某台机器M（x）的导数。这可以写为</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00531.jpeg"/>
+  </div>
+
+  <p class="bodytext">如果我们这样看m，就能用下面这个巧妙的变换重写（未知）弯曲面积的缩写：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00532.jpeg"/>
+  </div>
+
+  <p class="bodytext">符号dM其实就是M（x+dx）-M（x）的缩写，无限接近的两点之间高度的微小变化。因此符号<img alt="" class="gongshi" src="../images/00533.jpeg"/>的意思是：从x=a走到x=b，将沿途经过的微小变化累加起来。</p>
+
+  <p class="bodytext">现在，由于符号<img alt="" class="gongshi" src="../images/00534.jpeg"/>表示的是“a和b之间高度的微小变化的求和”，因此它必定也就是a和b之间的高度的<span class="jiacu">总</span>变化，也就是M（结束）-M（起始），或者说M（b）-M（a）。如果不明白，可以看一下图6.1。据此，我们可以进一步扩展上面的等式，</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00535.jpeg"/>     <p class="tuzhu-center">图6.1　<img alt="" class="gongshi" src="../images/00536.jpeg"/>＝M（b）-M（a）的图形解释。左图揭示了图形由有限条线段构成的机器的思想。a和b之间总的高度变化可以从两方面来认识。一方面，高度变化是M（结束）-M（起始）（右图是M（b）-M（a），左图是M（x<sub class="calibre7">7</sub>）-M（x<sub class="calibre7">0</sub>））。另一方面，总的高度变化就是沿着机器图形前进时每一“步”经历的微小高度变化的和。每一步的高度变化可以表示为ΔM<sub class="calibre7">k</sub>≡M（x<sub class="calibre7">k+1</sub>）-M（x<sub class="calibre7">k</sub>）。在右边真正弯曲的情形中，这个思想同样成立，但现在是无限多个无穷小步，每一步都导致无穷小的高度变化dM。无穷小的高度变化之和（即<img alt="" class="gongshi" src="../images/00537.jpeg"/>）就是总的高度变化（即M（b）－M（a））。</p>
+  </div>
+
+  <p class="bodytext">将其要点总结为</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00538.jpeg"/>
+  </div>
+
+  <p class="bodytext">现在我们又卡……等一下。我们做出来了？</p>
+</body></html>

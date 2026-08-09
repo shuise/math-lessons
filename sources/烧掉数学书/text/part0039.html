@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="1565U0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">2.3.6　一次性描述我们所有的机器：超级未知的缩写</h4>
+
+  <p class="bodytext">我们已经用一堆特殊的机器测试了无穷放大镜，下一步该干什么呢？到目前为止，我们唯一知道的机器是能完全用加和乘描述的机器。这句话我们说了好多次了，因此值得问一问它到底是什么意思。<span class="jiacu">能够</span>用加和乘“完全描述”的机器是什么样的机器？描述中能不能用到除？答案似乎应当是不能，因为除并没有真正存在于我们的世界。但似乎又可以。在我们的世界中，数字<img alt="" class="gongshi" src="../images/00156.jpeg"/>就是与s相乘得1的那个数。那只能用加和乘描述到底是什么意思呢？</p>
+
+  <p class="bodytext">这其实只是一个如何用词的问题，因此我们现在不用太过担心。至少到目前为止，我们还不允许在描述中用到“除”，这只不过意味着我们暂时排除类似<img alt="" class="gongshi" src="../images/00157.jpeg"/>这样的机器。什么样的机器是我们能够描述的呢？下面列出了一些：</p>
+
+  <p class="bodytext">1.m（s）≡s<sup class="calibre3">3</sup>；</p>
+
+  <p class="bodytext">2.r（q）≡q<sup class="calibre3">2</sup>-53q+9；</p>
+
+  <p class="bodytext">3.f（u）≡5u<sup class="calibre3">2</sup>+7u<sup class="calibre3">3</sup>-92u<sup class="calibre3">79</sup>。</p>
+
+  <p class="bodytext">我们对这些具体的机器并不感兴趣，但我们喜欢无穷放大镜，希望能更好地利用它。当我们列出越来越多能够用加和乘描述的机器，就会发现其中似乎存在模式。我们目前能够描述的所有机器都有共同的结构。它们都是由这样的项组成：</p>
+
+  <p class="bodytext-c">（<span class="jiacu">某个数</span>）·（<span class="jiacu">食物</span>）<sup class="calibre3">某个数</sup>，</p>
+
+  <p class="bodytext">其中“<span class="jiacu">食物</span>”是我们喂给机器吃的东西的缩写（课本上称为“变量”），前后两个<span class="jiacu">某个数</span>不一定相同。我们在前面列出的所有机器，以及目前我们能够完全描述的所有机器，本质上都是将一堆这样的项加到一起。为什么不是“加和乘”到一起？问得好！那是因为类似（<span class="jiacu">某个数</span>）·（<span class="jiacu">食物</span>）<sup class="calibre3"><span class="jiacu">某个数</span></sup>的两项相乘后，又会产生相同的结构。ax<sup class="calibre3">n</sup>和bx<sup class="calibre3">m</sup>相乘得到（ab）x<sup class="calibre3">n+m</sup>，仍然是（<span class="jiacu">某个数</span>）·（<span class="jiacu">食物</span>）<sup class="calibre3"><span class="jiacu">某个数</span></sup>这样的形式。所以我们能够用加和乘完全描述的机器都能够通过对这样的项进行加总得到。让我们构造一些缩写以便于从总体上谈论这类机器。</p>
+
+  <p class="bodytext">对各种不同的数字我们需要有不同的缩写。只有在＃是正整数时我们才知道（<span class="jiacu">某个东西</span>）<sup class="calibre3">＃</sup>是什么意思，<a id="zw1" href="part0039.html#zhu1"><sup class="calibre3">[1]</sup></a>因此在我们的世界中，（到目前！）还没有负的或分数幂这样的东西。既然目前我们还只能思考整数幂，我们就能把所有的机器写成这样：</p>
+
+  <p class="bodytext-c">M（x）≡＃<sub class="calibre6">0</sub>+＃<sub class="calibre6">1</sub>x<sup class="calibre3">1</sup>+＃<sub class="calibre6">2</sub>x<sup class="calibre3">2</sup>+…+＃<sub class="calibre6">n</sub>x<sup class="calibre3">n</sup>，　（2.14）</p>
+
+  <p class="bodytext">其中n是特定机器的描述中出现的最大次幂，符号＃<sub class="calibre6">0</sub>，＃<sub class="calibre6">1</sub>，＃<sub class="calibre6">2</sub>，…，＃<sub class="calibre6">n</sub>是各项前面的数的缩写。我们给它们加上脚标以便区分，这样我们就不用每个数都用不同的字母表示。脚标从0而不是1开始，为的是与幂保持一致，这样各项的形式就是＃<sub class="calibre6">k</sub>x<sup class="calibre3">k</sup>，而不是＃<sub class="calibre6">k</sub>x<sup class="calibre3">k-1</sup>（第一项除外）。之所以这样做，唯一的动机是美观。如果我们把x<sup class="calibre3">0</sup>视为1的缩写，那么每一项（包括第一项）的形式就都是＃<sub class="calibre6">k</sub>x<sup class="calibre3">k</sup>。（之所以选择x<sup class="calibre3">0</sup>=1其实还有一个更好的理由。在下一插曲中我们会看到。）到目前为止，我们之所以将x<sup class="calibre3">0</sup>作为1的缩写完全是因为美观，好让等式（2.14）中的每一项的形式都是＃<sub class="calibre6">k</sub>x<sup class="calibre3">k</sup>。目前我们也没有理由从原则上怀疑0次幂的确等于1。我们只是在缩写。</p>
+
+  <p class="bodytext">这样等式（2.14）就是目前我们所能谈论的<span class="jiacu">所有</span>机器的缩写。描述这些机器时要写那么多项和省略号有点烦。我们可以发明更简略的形式。我们可以将等式（2.14）的右边缩写成这样：</p>
+
+  <p class="bodytext-c">加总（＃<sub class="calibre6">k</sub>x<sup class="calibre3">k</sup>），其中k从0开始一直到n，</p>
+
+  <p class="bodytext">但这还是有点笨拙。我们只需要提醒自己k从哪开始到哪结束，没必要写那么多字，所以我们进一步将它缩写成这样：</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00158.jpeg"/>
+  </div>
+
+  <p class="bodytext">课本上常用的形式是</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00159.jpeg"/>
+  </div>
+
+  <p class="bodytext">课本上通常是用c（c表示“常数”）而不是＃。它们用∑（S的希腊字母），因为S是“求和（Sum）”的首字母。这种写法在习惯之前会有点吓人，但其实只不过是等式（2.14）右边的缩写。如果你不喜欢用∑，也可以用原来那种形式。</p>
+
+  <p class="bodytext">这样我们就有了可以一次性谈论所有机器的缩写。既然我们有了缩写，干脆再给它们起个名字，免得总是说“可以用加和乘完全描述的机器”。我们可以称它们为“加乘机器”。根据以往的经验，你可能会想课本上是不是也有相应的名字。的确是这样！课本上称它们为“多项式”，这个名字并没有好到哪里去。<a id="zw2" href="part0039.html#zhu2"><sup class="calibre3">[2]</sup></a></p>
+
+  <p class="bodytext">无论怎样，如果我们想在加乘机器上应用无穷放大镜，我们的应用技巧就得上升到一个新的高度。不过在此之前，让我们总结一下前面讨论的内容，正式一点写在方框里。</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">超级未知的缩写</span></p>
+
+    <p class="bodytext-c">左边的奇怪符号只不过是右边这些东西的缩写：</p>
+
+    <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00160.jpeg"/>
+    </div>
+  </div>
+
+  <div class="kx">
+     <p class="bodytext"><span class="jiacu">为什么：</span>我们给出这个缩写是因为我们想谈论能完全用加和乘描述的<span class="jiacu">任何</span>机器。</p>
+
+    <p class="bodytext"><span class="jiacu">另外：</span>数字符号（例如，＃<sub class="calibre6">0</sub>，＃<sub class="calibre6">1</sub>，＃<sub class="calibre6">2</sub>，…，＃<sub class="calibre6">n</sub>）就是7、52或3／2这样的常规数字。用＃这样的符号表示（而不是写成具体的数字比如7）可以让数字保持未知。这样我们就能一次性谈论无穷多种机器。</p>
+
+    <p class="bodytext"><span class="jiacu">名称：</span>我们将这类机器称为“加乘机器。”课本上通常称它们为“多项式”。</p>
+  </div>
+
+  <hr class="calibre4"/>
+
+  <p class="notecontent"><a id="zhu1" href="part0039.html#zw1">[1]</a>请记住（<span class="jiacu">某个东西</span>）<sup class="calibre5">＃</sup>就是（<span class="jiacu">某个东西</span>）（<span class="jiacu">某个东西</span>）…（<span class="jiacu">某个东西</span>）的缩写，其中＃是某个东西出现的次数。如果我们保持一致，（<span class="jiacu">某个东西</span>）<sup class="calibre5">1</sup>就应当是（<span class="jiacu">某个东西</span>）的另一种写法。</p>
+
+  <p class="notecontent"><a id="zhu2" href="part0039.html#zw2">[2]</a>当然，“加乘机器”也不怎么样，有点笨拙。但至少能提醒我们在谈论什么。</p>
+</body></html>

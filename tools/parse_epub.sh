@@ -5,7 +5,7 @@
 # 用法: ./parse_epub.sh <input.epub> [选项]
 #
 # 选项:
-#   -o <dir>     输出目录（默认: epub-output/<书名>）
+#   -o <dir>     输出目录（默认: sources/<书名>）
 #   -f <format>  输出格式: markdown（默认）, text
 #   -h           显示帮助
 #
@@ -148,13 +148,13 @@ while [[ $# -gt 0 ]]; do
   shift
 done
 
-# 检查输入文件
+# 检查输入文件（支持 .epub 文件或已解压的 EPUB 目录）
 if [[ -z "$INPUT_FILE" ]]; then
   echo "错误: 请指定 EPUB 文件" >&2
   usage
 fi
 
-if [[ ! -f "$INPUT_FILE" ]]; then
+if [[ ! -e "$INPUT_FILE" ]]; then
   echo "错误: 文件不存在: $INPUT_FILE" >&2
   exit 1
 fi
@@ -167,8 +167,14 @@ INPUT_FILE="$(cd "$(dirname "$INPUT_FILE")" && pwd)/$(basename "$INPUT_FILE")"
 TMP_DIR="$(mktemp -d /tmp/epub-XXXXXX)"
 trap 'rm -rf "$TMP_DIR"' EXIT
 
-echo "正在解压: $INPUT_FILE"
-unzip -qo "$INPUT_FILE" -d "$TMP_DIR"
+if [[ -d "$INPUT_FILE" ]]; then
+  # 输入已是解压后的 EPUB 目录，直接复制使用
+  echo "输入为目录，直接解析: $INPUT_FILE"
+  cp -R "$INPUT_FILE"/. "$TMP_DIR"/
+else
+  echo "正在解压: $INPUT_FILE"
+  unzip -qo "$INPUT_FILE" -d "$TMP_DIR"
+fi
 
 # ============================================================
 # 2. 定位 OPF 文件
@@ -211,7 +217,7 @@ echo "作者: $CREATOR"
 # ============================================================
 if [[ -z "$OUTPUT_DIR" ]]; then
   SAFE_TITLE=$(echo "$TITLE" | sed 's/[^a-zA-Z0-9_\u4e00-\u9fa5-]/-/g; s/-\+/-/g; s/^-\|-$//g')
-  OUTPUT_DIR="epub-output/${SAFE_TITLE:-epub-unknown}"
+  OUTPUT_DIR="sources/${SAFE_TITLE:-epub-unknown}"
 fi
 
 mkdir -p "$OUTPUT_DIR"
@@ -222,12 +228,28 @@ mkdir -p "$OUTPUT_DIR"
 echo "正在提取内容..."
 
 # 收集 manifest 中的 id->href 映射
-declare -A MANIFEST
-while IFS='|' read -r id href; do
-  MANIFEST["$id"]="$href"
+# （bash 3.2 无关联数组，用 "key|value" 文本列表 + get_by_key 查询替代）
+MANIFEST_LIST=""
+while IFS='|' read -r m_id m_href; do
+  [[ -z "$m_id" ]] && continue
+  MANIFEST_LIST="${MANIFEST_LIST}${m_id}|${m_href}"$'\n'
 done < <(xmlstarlet sel -N dc="http://purl.org/dc/elements/1.1/" \
   -t -m "//*[local-name()='manifest']/*[local-name()='item']" \
   -v "concat(@id, '|', @href)" -n "$OPF_FILE" 2>/dev/null)
+
+# 在 "key|value" 文本列表中查询 key 对应的 value
+get_by_key() {
+  local list="$1" key="$2" line
+  while IFS= read -r line; do
+    case "$line" in
+      "$key"\|*)
+        printf '%s' "${line#*|}"
+        return 0
+        ;;
+    esac
+  done <<< "$list"
+  return 1
+}
 
 # 输出文件
 OUTPUT_FILE="$OUTPUT_DIR/$(basename "$INPUT_FILE" .epub).md"
@@ -249,16 +271,38 @@ OUTPUT_FILE="$OUTPUT_DIR/$(basename "$INPUT_FILE" .epub).md"
   echo ""
 } > "$OUTPUT_FILE"
 
+# 解析 toc.ncx 目录，建立 章节文件绝对路径 -> 标题 映射
+TOC_LIST=""
+NCX_ID=$(xmlstarlet sel -N dc="http://purl.org/dc/elements/1.1/" \
+  -t -v "//*[local-name()='spine']/@toc" "$OPF_FILE" 2>/dev/null | head -1)
+NCX_HREF="$(get_by_key "$MANIFEST_LIST" "$NCX_ID" 2>/dev/null || true)"
+if [[ -n "$NCX_HREF" ]]; then
+  NCX_FILE="$OPF_DIR/$NCX_HREF"
+  NCX_FILE="$(cd "$(dirname "$NCX_FILE")" 2>/dev/null && pwd)/$(basename "$NCX_FILE")"
+  if [[ -f "$NCX_FILE" ]]; then
+    echo "发现目录: $NCX_HREF"
+    while IFS='|' read -r nsrc ntitle; do
+      [[ -z "$nsrc" ]] && continue
+      nclean="${nsrc%%#*}"
+      [[ -z "$nclean" ]] && continue
+      nabs="$(cd "$(dirname "$OPF_DIR/$nclean")" 2>/dev/null && pwd)/$(basename "$nclean")"
+      TOC_LIST="${TOC_LIST}${nabs}|$(printf '%s' "$ntitle" | sed 's/&amp;/\&/g; s/&lt;/</g; s/&gt;/>/g; s/&quot;/"/g; s/&#39;/'"'"'/g')"$'\n'
+    done < <(xmlstarlet sel -N x="http://www.daisy.org/z3986/2005/ncx/" \
+      -t -m "//x:navPoint" \
+      -v "concat(x:content/@src, '|', x:navLabel/x:text)" -n "$NCX_FILE" 2>/dev/null)
+  fi
+fi
+
 # 按 spine 顺序处理
 SPINE_ITEMS=$(xmlstarlet sel -N dc="http://purl.org/dc/elements/1.1/" \
-  -t -m "//*[local()='spine']/*[local()='itemref']" \
+  -t -m "//*[local-name()='spine']/*[local-name()='itemref']" \
   -v "@idref" -n "$OPF_FILE" 2>/dev/null)
 
 CHAPTER_NUM=0
 while IFS= read -r idref; do
   [[ -z "$idref" ]] && continue
 
-  HREF="${MANIFEST[$idref]:-}"
+  HREF="$(get_by_key "$MANIFEST_LIST" "$idref" 2>/dev/null || true)"
   [[ -z "$HREF" ]] && continue
 
   CONTENT_FILE="$OPF_DIR/$HREF"
@@ -274,6 +318,26 @@ while IFS= read -r idref; do
     *.htm|*.html|*.xhtml|*.xml)
       CHAPTER_NUM=$((CHAPTER_NUM + 1))
       printf "  [%d] %s\n" "$CHAPTER_NUM" "$HREF"
+
+      # 章节标题：ncx 目录 > html h1/h2/title > 文件名清理 > 第 N 节
+      # （ncx 标题若只是文件名式 text00006/cover1 等视为无效，继续回退）
+      TITLE="$(get_by_key "$TOC_LIST" "$CONTENT_FILE" 2>/dev/null || true)"
+      if [[ -z "$TITLE" ]] || [[ "$TITLE" =~ ^[A-Za-z]*[0-9]+$ ]] || [[ "$TITLE" =~ ^[0-9_]+$ ]] || [[ "$TITLE" =~ ^[A-Za-z]+[-_.]?[0-9]+$ ]]; then
+        TITLE=$(grep -oE '<h[12][^>]*>[^<]+' "$CONTENT_FILE" 2>/dev/null | head -1 | sed 's/<[^>]*>//' | sed 's/^[[:space:]]*//; s/[[:space:]]*$//' || true)
+      fi
+      if [[ -z "$TITLE" ]]; then
+        TITLE=$(grep -oE '<title[^>]*>[^<]+' "$CONTENT_FILE" 2>/dev/null | head -1 | sed 's/<[^>]*>//' | sed 's/^[[:space:]]*//; s/[[:space:]]*$//' || true)
+        [[ "$TITLE" =~ ^[A-Za-z]*[0-9]+$ ]] && TITLE=""
+        [[ "$TITLE" =~ ^[A-Za-z]+[-_.]?[0-9]+$ ]] && TITLE=""
+        [[ "$TITLE" =~ -[0-9]+$ ]] && TITLE=""
+      fi
+      if [[ -z "$TITLE" ]]; then
+        TITLE=$(basename "$HREF" | sed 's/\.[^.]*$//' | sed 's/[0-9_]*//g' | sed -E 's/^(text|part|chapter|cover|page|img|image|ch|sec|section|title)$//I')
+      fi
+      if [[ -z "$TITLE" ]]; then
+        TITLE="第 ${CHAPTER_NUM} 节"
+      fi
+      printf '\n## %s\n\n' "$TITLE" >> "$OUTPUT_FILE"
 
       if [[ "$OUTPUT_FORMAT" == "markdown" ]]; then
         html_to_markdown "$CONTENT_FILE" >> "$OUTPUT_FILE"

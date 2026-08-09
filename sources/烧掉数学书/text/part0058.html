@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="1NA0K0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">3.4.3　数学炼金术</h4>
+
+  <p class="yinwen">你可能认为我是用锤子砸鸡蛋，但我砸开了鸡蛋。</p>
+
+  <p class="bodytext-right">——钱德拉塞卡（Subrahmanyan Chandrasekhar），谈论他在论文中大量使用公式的习惯</p>
+
+  <p class="bodytext">我们如何才能确信，无论＃是什么数，这个“指数减1”模式（x<sup class="calibre3">＃</sup>）'=＃x<sup class="calibre3">＃-1</sup>都会是正确的呢？我们可以先试着用锤子敲打一下<img alt="" class="gongshi" src="../images/00263.jpeg"/>，其中m和n是任意整数，但其实我们还不是很清楚该怎么下手。先用<img alt="" class="gongshi" src="../images/00264.jpeg"/>试一下，其中n是任意正整数。对于这头野兽我们只知道它是这样发明的：</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00265.jpeg"/>
+  </div>
+
+  <p class="bodytext">如果我们想用和前面一样的论证方式求<img alt="" class="gongshi" src="../images/00266.jpeg"/>的导数，就要创造更大的锤子。我们需要什么样的锤子呢？我们已经有了用各项的导数谈论乘积的导数的锤子（fg）'=f'g+g'f。这一次，我们有n个东西乘到一起，因此似乎我们需要另一个复杂的论证来求出类似f<sub class="calibre6">1</sub>f<sub class="calibre6">2</sub>…f<sub class="calibre6">n</sub>这样n台机器相乘的导数。但我们也许不用重新发明锤子。记得前面我们发现了公式（f+g）'=f'+g'，然后用这个论证了（f<sub class="calibre6">1</sub>+f<sub class="calibre6">2</sub>+…+f<sub class="calibre6">n</sub>）'=f<sub class="calibre6">1</sub>'+f<sub class="calibre6">2</sub>'…+f<sub class="calibre6">n</sub>'。要从两机器版推广到n机器版，我们要做的就是带上哲学家的帽子，不断将机器之和解释为单台大机器，然后反复应用两机器版本。</p>
+
+  <p class="bodytext">这里我们再尝试一下，先来看我们还没有解决的最简单情形。我们想发明锤子计算（fgh）'，即三台机器乘到一起。在下面的论证中，我偶尔会使用［这种］［括号］而不是（这种），以免f'（gh）这样的表达式看起来像是“gh的f导数”。下面的论证就是一堆相乘，我们只不过是用f'gh和f'［gh］这样的缩写来表示f'（x）g（x）h（x）。如果我们<span class="jiacu">总是</span>用缩写f'gh代替f'（x）g（x）h（x）会很容易混淆，但至少在下面的论证中，这样缩写可以有效避免杂乱。</p>
+
+  <p class="bodytext">好了！如果我们私底下将gh视为单台机器，则fgh就可以视为两台机器，即（f）和（gh），因此可以应用两机器版的锤子。然后我们可以转换想法，将gh视为两台机器相乘，这样也许能发现模式。但我们不是将这些机器输入对方，只是相乘。好了，我们开始。首先用两机器版的锤子，将gh视为单台大机器。可以得到：</p>
+
+  <p class="bodytext-c">［fgh］'=f'［gh］+f［gh］'。</p>
+
+  <p class="bodytext">最右边的［gh］'项可以用两机器版的锤子分开，写成［gh］'=g'h+gh'。借助这个绝招，我们得到</p>
+
+  <p class="bodytext-c">［fgh］'=f'gh+fg'h+fgh'。　（3.5）</p>
+
+  <p class="bodytext">我们隐约看到了某种模式。我们可以这样总结这个模式：如果你将n台机器乘到一起，比如f<sub class="calibre6">1</sub>f<sub class="calibre6">2</sub>…f<sub class="calibre6">n</sub>，则整个机器的导数<span class="jiacu">似乎</span>是把一堆项加到一起，其中每一项<span class="jiacu">几乎</span>都同原来的机器一样，只是有且仅有一台机器变成了导数。有多少台机器相乘结果就有多少项，因为每台机器都要变一次。我们可以这样描述我们的猜测：</p>
+
+  <p class="bodytext-c">（f<sub class="calibre6">1</sub>f<sub class="calibre6">2</sub>…f<sub class="calibre6">n</sub>）'=（f<sub class="calibre6">1</sub>'f<sub class="calibre6">2</sub>…f<sub class="calibre6">n</sub>）+（f<sub class="calibre6">1</sub>f<sub class="calibre6">2</sub>'…f<sub class="calibre6">n</sub>）+…+（f<sub class="calibre6">1</sub>f<sub class="calibre6">2</sub>…f<sub class="calibre6">n</sub>'），</p>
+
+  <p class="bodytext">但这看起来相当复杂，还有一堆点点点。我们怎么才能确信无论n是多少这个模式都会一直成立呢？有一个办法。我们知道两机器版，我们又将两机器版应用了两次得到了三机器版。怎么才能得到四机器版呢？可以将f<sub class="calibre6">2</sub>f<sub class="calibre6">3</sub>f<sub class="calibre6">4</sub>视为单台机器，这样就又可以应用两机器版了，就像这样：</p>
+
+  <p class="bodytext-c">［f<sub class="calibre6">1</sub>f<sub class="calibre6">2</sub>f<sub class="calibre6">3</sub>f<sub class="calibre6">4</sub>］'=f<sub class="calibre6">1</sub>'［f<sub class="calibre6">2</sub>f<sub class="calibre6">3</sub>f<sub class="calibre6">4</sub>］+f<sub class="calibre6">1</sub>［f<sub class="calibre6">2</sub>f<sub class="calibre6">3</sub>f<sub class="calibre6">4</sub>］'。</p>
+
+  <p class="bodytext">不过我们之前已经发明了三机器版的锤子，因此可以将上面等式最右边的项拆开得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00267.jpeg"/>
+  </div>
+
+  <p class="bodytext">这实在难看，但至少不复杂，只是符号很多。上面这个等式其实是说“每个人都有一次机会变成导数”，只是用了一大堆符号。除此之外，这个推理过程倒没什么难看的。而且，不仅结果中显现出了模式，<span class="jiacu">我们的推理过程也显现出了模式。</span></p>
+
+  <p class="bodytext">推理过程中的模式是，如果我们相信这个数学模式对于多台乘到一起的机器为真<a id="zw1" href="part0058.html#zhu1"><sup class="calibre3">[1]</sup></a>，则我们总是可以将机器数量再增加一台。</p>
+
+  <p class="yinwen">·我们知道这个模式对于两台乘到一起的机器为真。</p>
+
+  <p class="yinwen">·如果我们知道这个模式对于两台乘到一起的机器为真（这个我们已经知道了），则我们可以论证它对于三台乘到一起的机器也为真（这个我们已经做到了）。</p>
+
+  <p class="yinwen">·如果我们知道这个模式对于三台乘到一起的机器为真（这个我们已经知道了），则我们可以论证它对于四台乘到一起的机器也为真（这个我们已经做到了）。</p>
+
+  <p class="yinwen">·……</p>
+
+  <p class="yinwen">·如果我们知道这个模式对于792台乘到一起的机器为真，则我们可以论证它对于793台乘到一起的机器也为真。</p>
+
+  <p class="yinwen">·无穷无尽。</p>
+
+  <p class="bodytext">这就是我们的推理过程中显现出的模式。我们有理由相信我们在数学中发现的模式对于所有n都将成立。不过，初看上去这似乎是不可能的。毕竟，我们需要相信的是一个无穷的语句包：每条语句对应一个数字n。当n是792，这条语句是“这个模式对于792台乘到一起的机器为真。”</p>
+
+  <p class="bodytext">我们如何才能在有限的时间内让自己信服这无穷多的语句呢？其实，我们在推理过程中观察到的模式已经提示了前进的方向。我们已经在几个特例中发现了“每个人都有一次机会”的模式（两台机器乘到一起，三台，四台）。我们能不能以缩写形式来论证，如果我们知道这个模式对于多台乘到一起的机器为真，则再增加一台机器也为真？这样我们自然就能知道这个模式无论对于多少台乘到一起的机器都为真。让我们用缩写形式来说一遍。</p>
+
+  <p class="bodytext">让我们假设我们已经得到了针对某个特定的数k的锤子。也就是说，假设这个模式对于特定数量台乘到一起的机器为真，称这个数为k。然后我们可以用这个假设证明这个模式对下一个数k+1为真。一旦假设这个模式对于k台机器为真，就可以论证这个模式对k+1台机器也必须为真，只要将前k台机器视为一台大机器，我们称之为g，然后应用两机器版的锤子就行。也就是说，缩写g=f<sub class="calibre6">1</sub>f<sub class="calibre6">2</sub>…f<sub class="calibre6">k</sub>，然后得到：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00268.jpeg"/>
+  </div>
+
+  <p class="bodytext">然后因为我们假设我们已经知道了“每个人都有一次机会”模式对于任何k台乘到一起的机器为真，就可以用它来展开等式（3.6）中的g'项，因为g就是k台乘到一起的机器的缩写。因此可以将g'写为：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00269.jpeg"/>
+  </div>
+
+  <p class="bodytext">先不要将这个丑陋的大家伙代入等式（3.6）中，只需想象一下如果那样做我们会得到什么。如果将f<sub class="calibre6">k+1</sub>附加到式（3.7）右边的每一项，正好就是等式（3.6）中的g'f<sub class="calibre6">k+1</sub>项。因此再看等式（3.6），g'f<sub class="calibre6">k+1</sub>项是k项相加：第1项是轮到f<sub class="calibre6">1</sub>求导，第2项是轮到f<sub class="calibre6">2</sub>求导，一直到第k项。但f<sub class="calibre6">k+1</sub>始终位于这些项的右边，一直没有轮到它求导。</p>
+
+  <p class="bodytext">这个模式失效了吗？不！轮到f<sub class="calibre6">k+1</sub>求导的项正是等式（3.6）最右边的gf'<sub class="calibre6">k+1</sub>项。因此等式（3.6）的一团乱麻虽然看起来乱，其实并不乱，因为一旦用k项版的锤子将其展开，等式（3.6）正好就是k+1项相加，其中每一项刚好都轮到一台机器求导，每台机器有且仅有一次机会。</p>
+
+  <p class="bodytext">这是一个怪异的论证，因此值得用缩写形式总结一下我们所使用的推理模式。我们想要让自己信服“每个人都有一次机会求导”模式对任意多台乘到一起的机器都为真。我们可以将此视为想要让自己确信无穷多条不同的语句为真。我的意思是这样：用S表示词语“语句”，用n表示某个整数。则对于每个数n，都有一条语句我们想确信其为真，我们可以将其缩写为：</p>
+
+  <p class="bodytext">S（n）≡“对于任何n台乘到一起的机器，‘每个人都有一次机会求导’的模式对于乘积的导数始终为真。”</p>
+
+  <p class="bodytext">我们最初的锤子（fg）'=f'g+g'f其实是说语句S（2）为真。然后我们证明了这个模式对3台乘到一起的机器为真，从而得到了等式（3.5）。这个等式就是语句S（3）。最终我们意识到继续下去没有意义，因为我们想要确信的是无穷多条语句。然后我们在这个推理过程中发现了一个模式可以让我们从语句S（k）得到下一条语句S（k+1）。我们无法一下子让自己确信S（n）对于任意n都为真，但我们可以做两件事情：</p>
+
+  <p class="bodytext">1.我们可以确信S（2）为真。</p>
+
+  <p class="bodytext">2.如果我们假设自己已经确信了语句S（<span class="jiacu">某个数</span>）为真，则很容易让自己确信语句S（<span class="jiacu">下一个数</span>）同样也为真。</p>
+
+  <p class="bodytext">虽然不是那么直截了当，这两件事情还是足以证明S（n）对任意整数n≥2都为真。其中的逻辑是这样：假设有人告诉你n=1749然后请你告诉她为什么S（1749）为真。这时如果直接解答这个问题将非常费劲，假设我们已经让她信服上面的两条：S（2）为真，以及更强有力的部分，S（<span class="jiacu">某个数</span>）总是意味着S（<span class="jiacu">下一个数</span>）。用一次上面列出的第1项，然后反复用第2项，就会得到：我们相信S（2）。而如果我们相信S（2），就得相信S（3）。而如果我们相信S（3），就得相信S（4）。如果我们相信S（4）……你明白这个意思。</p>
+
+  <p class="bodytext">我们可以到达任何地方，只要我们相信（1）我们可以走出第一步，以及（2）如果我们走出某一步，就可以走下一步。另一种思考这种推理的方式是将其视为梯子。我们证明的是（1）我们可以登上第一级，以及（2）无论我们在梯子的哪一级，都可以再往上爬一级。如果我们明确了这两件事情，我们就知道自己想爬多高就能爬多高。</p>
+
+  <p class="bodytext">课本上将这种推理方式称为“数学归纳法”。虽然一旦习惯了这个名称也很好，但还是有几个原因让它不尽如人意。首先，它不能很贴切地提醒我们在谈论什么，而且更重要地是，它会让外行感到疑惑，因为“归纳”一词有多重含义：（a）我们所做的数学论证的模式，（b）一种不相关的电磁现象<a id="zw2" href="part0058.html#zhu2"><sup class="calibre3">[2]</sup></a>，以及（c）一种概率性的推理模式，在数学证明中通常与“演绎”推理相对。虽然归纳一词有这么多不相关的意义，但如果你是在“数学”一词后见到它，那么它说的就是这个类似爬梯子的推理模式。</p>
+
+  <hr class="calibre4"/>
+
+  <p class="notecontent"><a id="zhu1" href="part0058.html#zw1">[1]</a> 如果我使用的短语“模式为真”让你觉得困扰，因为违背了只有语句（命题）可以为真的事实，不要紧张……其实，你是对的。</p>
+
+  <p class="notecontent"><a id="zhu2" href="part0058.html#zw2">[2]</a> 英文“induction”有电磁感应的意思。——译者注</p>
+</body></html>

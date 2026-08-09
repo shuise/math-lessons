@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="2MP360-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">5.2.2　AM型机器</h4>
+
+  <p class="bodytext">现在假设我们捕获了一台AM型机器。同前面一样，我们只知道它的性质，不知道它长什么样。定义AM型机器的性质为：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00406.jpeg"/>
+  </div>
+
+  <p class="bodytext">我们来逗弄一下。如果设x和y都等于0呢？我们得到f（0）=f（0）f（0）。这并不足以确定f（0），因为1和0都有这个性质（即0=0·0，1=1·1）。因此继续寻找。如果让其中一个输入为0（例如y=0），另一个不做假设呢？我们会得到</p>
+
+  <p class="bodytext-c">f（x）=f（x）f（0）。</p>
+
+  <p class="bodytext">这好多了。这个语句告诉我们f（0）=1。<span class="jiacu">除非</span>f（x）是一台永远吐0的乏味机器，这样上面的语句也会成立，但这样f（0）就不会等于1。基于避免乏味的原则，让我们假设这台AM型机器不会一直吐0。这样上面的论证就说明f（0）=1。</p>
+
+  <p class="bodytext">好了，我们不知道该怎么做，不过可以像上次一样尝试一下让两边像导数。上次我们只需处理相加，因此更容易让两边像导数。也许我们还是可以利用导数，不过方式不一样。记住我们只是用x和y表示两个可能喂进机器的东西，不是横坐标和纵坐标；我们可以在不改变x的情况下改变y，因此有<img alt="" class="gongshi" src="../images/00407.jpeg"/>，这意味着<img alt="" class="gongshi" src="../images/00408.jpeg"/>（x+y）=1。据此，我们对y求导。利用重新缩写锤子（即“链式法则”），可以得到</p>
+
+  <p class="bodytext-c">f'（x+y）=f（x）f'（y），</p>
+
+  <p class="bodytext">其中撇号表示对y的导数。我们能从中得到关于机器f的任何有意思的结论吗？嗯，如果我们让x=0，会得到语句f'（y）=1·f'（y）。这不会告诉我们任何东西，没什么用。我们再试一下让y=0，这回得到</p>
+
+  <p class="bodytext-c">f'（x）=f'（0）f（x）。</p>
+
+  <p class="bodytext">嘿！这说的是AM型机器的成员<span class="jiacu">差不多</span>就是它们自己的导数。它们乘以某个固定的数刚好就是自己的导数。这样的机器我们之前没见过。例如，加乘机器都没有这样的性质，因为导数会将各项的指数减1：（x<sup class="calibre3">n</sup>）'=nx<sup class="calibre3">n-1</sup>。如果AM型机器的某个特殊成员有f'（0）=1，则它<span class="jiacu">正好</span>就是自己的导数！而如果机器f是自己的导数，则它乘以任何常数得到的机器也会是自己的导数。也就是说，如果f是自己的导数，即f'（x）=f（x），则任何机器m（x）≡cf（x）也将满足m'（x）=cf'（x）=cf（x）≡m（x），因此m也是自己的导数。因此我们会得到无穷多台是自己导数的机器——每台对应一个数c——但这些机器中只有一台是AM型机器的成员。为什么？因为我们已经看到了AM型机器具有性质f（0）=1。因此只有一台极其特殊的机器<span class="jiacu">既是</span>自己的导数<span class="jiacu">也是</span>AM型机器的成员。我们不知道这样的机器长什么样，但我们可以称这台特殊的机器为E，表示“极其（Extremely）特殊”。因此E是唯一满足以下条件的机器：</p>
+
+  <p class="bodytext-c">E'（x）=E（x）且E（0）=1。</p>
+
+  <p class="bodytext">我们还是不知道AM型机器长什么样，但至少有了大致的想法，因为我们<span class="jiacu">知道了</span>它们与我们以前见过的机器都不一样。我们还能做什么呢？只能围绕着一个事实，就是这些野兽将加转换为乘。因此如果n是整数，f是AM型机器，则有</p>
+
+  <div class="zhong1">
+ <img alt="" class="image-tuzhu" src="../images/00409.jpeg"/>
+  </div>
+
+  <p class="bodytext">有意思……输入跑到上方变成指数了，而f（1）就是某个我们不知道的数。我想知道这个是不是对任何数x都成立。之前我们发现了可以用形为<img alt="" class="gongshi" src="../images/00410.jpeg"/>的数逼近任何数，其中n和m是整数。因此如果我们能证明这个“输入上移”性质对任意类似<img alt="" class="gongshi" src="../images/00411.jpeg"/>的数都成立，我们就会坚信它对任意数x都成立。假设某个数x可以写为<img alt="" class="gongshi" src="../images/00412.jpeg"/>，其中n和m是整数。则我们又可以玩相同的手法，只是反过来</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00413.jpeg"/>
+  </div>
+
+  <p class="bodytext">其中符号<sup class="calibre3"><img alt="" class="gongshi" src="../images/00414.jpeg"/></sup>表示依据的是AM型机器的定义。因此上面的等式说f（n）等于最右边那个东西。但就在刚才，我们发现f（n）=f（1）<sup class="calibre3">n</sup>。因此我们用两种方式描述了同一个东西，可以将这两个表达式结合到一起得到</p>
+
+  <div class="zhong1">
+ <img alt="" class="image-tuzhu" src="../images/00415.jpeg"/>
+  </div>
+
+  <p class="bodytext">现在怎么办？最好能将<img alt="" class="gongshi" src="../images/00416.jpeg"/>项分离出来，这样就能对AM型机器长什么样有更好的认识。我们可以将两边的指数同时乘以<img alt="" class="gongshi" src="../images/00417.jpeg"/>，从而将左边的m指数消掉：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00418.jpeg"/>
+  </div>
+
+  <p class="bodytext">因此现在我们相当有把握AM型机器的所有成员对任何数x都有“输入上楼”的性质，因为任何数x都能用形为<img alt="" class="gongshi" src="../images/00419.jpeg"/>的数任意逼近。因为f（1）只不过是一个我们不知道的数，因此同样可以写成c，然后将我们刚才所说的总结为</p>
+
+  <p class="bodytext-c">f（x）=c<sup class="calibre3">x</sup>。</p>
+
+  <p class="bodytext">我们来检查一下我们的推理，确保形为f（x）=c<sup class="calibre3">x</sup>的机器的确是AM型机器的成员：</p>
+
+  <p class="bodytext-c">f（x+y）=c<sup class="calibre3">x+y</sup>=c<sup class="calibre3">x</sup>c<sup class="calibre3">y</sup>=f（x）f（y）。</p>
+
+  <p class="bodytext">完美！这样这些c<sup class="calibre3">x</sup>就的确都<span class="jiacu">是</span>AM型机器，无论正数c是多少，而且这些机器的性质与我们定义的幂契合得<span class="jiacu">非常</span>好！前面我们发现了必然存在某台极其特殊的AM型机器E（x）是其自身的导数，当时我们还不知道AM型机器都可以表示为c<sup class="calibre3">x</sup>。现在我们知道对每个正整数c都可以得到一台不同的AM型机器。我们用方框总结一下所发现的关于这种机器的一切。</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00420.jpeg"/>     <p class="tuzhu-center">图5.1　我们发现AM型机器的所有成员都可表示为f（x）=c<sup class="calibre5">x</sup>，不同的正数c对应AM型机器的不同成员。这些机器画成图是这样。</p>
+  </div>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">AM型机器</span></p>
+
+    <p class="bodytext-c">AM型机器定义为所有将加转换为乘的机器：</p>
+
+    <div class="zhong1">
+ <img alt="" class="image-tuzhu" src="../images/00421.jpeg"/>
+    </div>
+
+    <p class="bodytext-c">我们发现这种机器的所有成员都可以表示为</p>
+
+    <p class="bodytext-c">f（x）=c<sup class="calibre3">x</sup>，</p>
+
+    <p class="bodytext-c">其中c为某个数。</p>
+
+    <p class="bodytext-c"><span class="jiacu">不动之物</span></p>
+
+    <p class="bodytext">我们还发现存在某台极其特殊的AM型机器是它自身的导数。我们将这台机器命名为E，表示“极其特殊”。这台机器是求导的“不动之物”。结合我们对AM型机器的这个发现，我们可以说：必定存在某个极其特殊的数e，使得AM型机器</p>
+
+    <p class="bodytext-c">E（x）≡e<sup class="calibre3">x</sup></p>
+
+    <p class="bodytext">是其自身的导数。我们现在还不知道这个数是多少，但它一定存在。</p>
+  </div>
+</body></html>

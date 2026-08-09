@@ -1,0 +1,2225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+<head><title></title>
+</head>
+<body><span id="filepos0003690979"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">神秘莫测的无穷大</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">我把无穷大这个概念放到最后讲，并不是说这个概念不重要。在第1章开始数学世界的探索之旅时，我们研究了1~100的求和问题：</p>
+<p height="1em" width="0pt" align="center">1 + 2 + 3 + 4 + … + 100 = 5 050</p>
+<p height="1em" width="2em" align="justify">最后，我们得出了1~ <i>n</i>
+ 的求和公式：</p>
+<p height="1em" width="0pt" align="center">1 + 2 + 3 + … + <i>n</i>
+ =<img align="middle" height="84" width="177" src="Image01281.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">还得出了有限个数字的其他求和公式。本章将探究无穷级数求和问题，例如：</p>
+<p height="1em" width="0pt" align="center">1 +<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01283.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01284.jpg" />
+ + …</p>
+<p height="1em" width="2em" align="justify">我来告诉大家，上面这道题的答案是2。而且，2不是近似答案，而是确切得数。有的无穷级数求和非常有意思，例如：</p>
+<p height="1em" width="0pt" align="center">1 –<img align="middle" height="84" width="33" src="Image01039.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01054.jpg" />
+ –<img align="middle" height="84" width="33" src="Image01049.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01055.jpg" />
+ –<img align="middle" height="84" width="53" src="Image01285.jpg" />
+ + … =<img align="middle" height="84" width="40" src="Image01286.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">有的无穷级数求和则无法给出确切答案，例如：</p>
+<p height="1em" width="0pt" align="center">1 +<img align="middle" height="56" width="22" src="Image00998.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01039.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01054.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01287.jpg" />
+ + …</p>
+<p height="1em" width="2em" align="justify">我们把所有正数的和定义为“无穷大”，记作:</p>
+<p height="1em" width="0pt" align="center">1 + 2 + 3 + 4 + 5 + … = ∞</p>
+<p height="1em" width="2em" align="justify">它的意思是，这个和将不断增加，没有上限。换句话说，这个和最终将超过你能想到的所有数字： 100、100万、10<sup>
+<small>
+<font size="2">15</font>
+</small>
+</sup>
+ ，或者其他大数。不过，在本章结尾部分，我们将看到有人可以证明：</p>
+<p height="1em" width="0pt" align="center">1 + 2 + 3 + 4 + 5 + … =<img align="middle" height="84" width="56" src="Image01288.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">你是不是觉得很奇怪？我希望如此！一旦走进无穷大这个光怪陆离的领域，你就会发现各种各样稀奇古怪的现象。数学之所以引人入胜、充满乐趣，这也是其中一个原因。</p>
+<p height="1em" width="2em" align="justify">无穷大是不是一个数字呢？尽管我们有时候把它当作一个数字，但实际上它并不是数字。粗略地说，数学界可能会这样理解无穷大的概念：</p>
+<p height="1em" width="0pt" align="center">∞+ 1 =∞ ∞+∞ =∞ 5×∞= ∞<img align="middle" height="84" width="53" src="Image01289.jpg" />
+ = 0</p>
+<p height="1em" width="2em" align="justify">从技术上讲，最大的数字是不存在的，因为我们总是可以加上1，得到一个更大的数字。从本质上讲，∞这个符号的意思是“任意大”，或者说大于所有正数。同理，–∞的意思是这个数字比所有负数都小。顺便告诉大家，∞–∞（无穷大减去无穷大）和1/0都无解。大家可能会认为1/0 =∞，因为1被越来越小的数除，商应该越来越大。但是，如果我们用越来越接近0的负数去除1，商就会朝着负数的方向渐行渐远。</p>
+<span id="filepos0003695215"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">等比数列和喝啤酒的数学家</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">先来思考一个数学界普遍认可，但大多数人第一眼见到时都觉得不正确的命题：</p>
+<p height="1em" width="0pt" align="center">0.999 99… = 1</p>
+<p height="1em" width="2em" align="justify">所有人都承认这两个数字非常接近，也可以说是无比接近，但很多人仍然认为不应该把它们视为同一个数。下面，我将提供不同的证据，证明这两个数字其实相等。我希望其中至少有一个解释可以让你感到满意。</p>
+<p height="1em" width="2em" align="justify">如果大家认为下面这个等式成立</p>
+<p height="1em" width="0pt" align="center"><img align="middle" height="84" width="33" src="Image01039.jpg" />
+ = 0.333 33…</p>
+<p height="1em" width="2em" align="justify">那么，最简便的证明方法可能就是在上式两边同时乘以3，然后得到：</p>
+<p height="1em" width="0pt" align="center">1 =<img align="middle" height="84" width="33" src="Image01290.jpg" />
+ = 0.999 99…</p>
+<p height="1em" width="2em" align="justify">第二种证明方法是本书第6章用过的循环小数计算方法。我们用变量<i>w</i>
+ 来表示无穷小数展开式：</p>
+<p height="1em" width="0pt" align="center">
+<i>w</i>
+ = 0.999 99…</p>
+<p height="1em" width="2em" align="justify">在等式两边同时乘以10，就会得到：</p>
+<p height="1em" width="0pt" align="center">10<i>w</i>
+ = 9.999 99…</p>
+<p height="1em" width="2em" align="justify">再用第二个等式减去第一个等式：</p>
+<p height="1em" width="0pt" align="center">9<i>w</i>
+ = 9.000 00…</p>
+<p height="1em" width="2em" align="justify">由此得到：<i>w</i>
+ = 1。</p>
+<p height="1em" width="2em" align="justify">下面这种证明方法无须使用任何代数运算。如果两个数字不相等，那么它们中间必然存在一个不等于它们的数字（例如平均数）。大家对于这句话应该没有异议吧？我们采用反证法，假设0.999 99…与1是两个不相等的数字。在这种情况下，它们中间是否存在其他数字呢？如果无法找到这样的数字，就说明0.999 99…与1不可能是两个不相等的数字。</p>
+<p height="1em" width="2em" align="justify">如果两个数字或者两个无穷和彼此之间无限接近，我们就说这两个数字或无穷和相等。换句话说，你随便选一个正数，比如0.01、0.000 000 1或者十亿分之一，这两个数字之间的差都比你选的这个数字小。由于1和0.999 99…的差小于任意正数，因此数学界一致认为这两个数字是相等的。</p>
+<p height="1em" width="2em" align="justify">同理，我们可以算出下面这个无穷级数的和：</p>
+<p height="1em" width="0pt" align="center">1 +<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01283.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01284.jpg" />
+ + …= 2</p>
+<p height="1em" width="2em" align="justify">我们用一个具体的方式来解释这个和。假设你朝着2米外的一堵墙壁走过去，第一步正好是1米，第二步是0.5米，然后是1/4米、1/8米，以此类推。每走一步，你与墙壁之间的距离就缩短1/2。不考虑在实际情况下步幅下限的问题，最后你如愿以偿地无限接近那堵墙。也就是说，所有步幅的总和正好等于2米。</p>
+<p height="1em" width="2em" align="justify">如下图所示，我们还可以用几何方法来表示这个和。假设我们有一个1×2的矩形，面积为2。然后，我们将它切去1/2，再切去1/2，就这样不停地切下去。第一次切完后矩形的面积是1，接下来依次是1/2、1/4……随着<i>n</i>
+ 趋于无穷大，这些切掉的部分就会组成整个矩形，因此它们的总面积为2。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="314" width="612" src="Image01291.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>1 +</b>
+</font>
+ <img align="middle" height="63" width="25" src="Image00998.jpg" />
+ <font size="2">
+<b>+</b>
+</font>
+ <img align="middle" height="63" width="25" src="Image01282.jpg" />
+ <font size="2">
+<b>+</b>
+</font>
+ <img align="middle" height="63" width="25" src="Image01283.jpg" />
+ <font size="2">
+<b>+</b>
+</font>
+ <img align="middle" height="63" width="40" src="Image01284.jpg" />
+ <font size="2">
+<b>+ …= 2的几何证明法</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">下面再介绍一种基于代数运算的解释方法。观察下表给出的“部分和”（partial sums）公式。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="925" width="1248" src="Image01292.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">表中给出的部分和似乎表明，对于<i>n</i>
+ H 0，有：</p>
+<p height="1em" width="0pt" align="center">1 +<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01283.jpg" />
+ … +<img align="middle" height="84" width="53" src="Image01293.jpg" />
+ = 2 –<img align="middle" height="84" width="53" src="Image01293.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">我们可以通过归纳性证明法（参见本书第6章）验证上述结论，也可以把它视为下面给出的有穷等比数列求和公式的一个特例。</p>
+<p height="1em" width="2em" align="justify">定理（有穷等比数列）：对于<i>x</i>
+ ≠ 1且<i>n</i>
+ H 0，有：</p>
+<p height="1em" width="0pt" align="center">1 + <i>x</i>
+ + <i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ + … + <i>x<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+</i>
+ =<img align="middle" height="84" width="157" src="Image01294.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">证明方法1：这条定理可以按照以下方式，利用归纳性证明法来验证。当<i>n</i>
+ = 0时，该公式可以简化为1 =<img align="baseline" height="50" width="55" src="Image01295.jpg" />
+ ，这个等式毫无疑问是成立的。现在，我们假设当<i>n</i>
+ = <i>k</i>
+ 时公式成立，就有：</p>
+<p height="1em" width="0pt" align="center">1 + <i>x</i>
+ + <i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ + … + <i>x<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+</i>
+ =<img align="baseline" height="50" width="94" src="Image01294.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">当 <i>n</i>
+ = <i>k</i>
+ + 1时，即在上式左右两边同时加上 <i>x<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">+1</font>
+</small>
+</sup>
+</i>
+ ，就会得到：</p>
+<p height="1em" width="0pt" align="center">1 + <i>x</i>
+ + <i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ + … + <i>x<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">+1</font>
+</small>
+</sup>
+</i>
+ =<img align="baseline" height="50" width="94" src="Image01294.jpg" />
+ + <i>x<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">+1</font>
+</small>
+</sup>
+</i>
+</p>
+<p height="1em" width="0pt" align="center">=<img align="baseline" height="50" width="94" src="Image01294.jpg" />
+ +<img align="baseline" height="52" width="85" src="Image01296.jpg" />
+</p>
+<p height="1em" width="0pt" align="center">=<img align="baseline" height="63" width="186" src="Image01297.jpg" />
+</p>
+<p height="1em" width="0pt" align="center">=<img align="baseline" height="50" width="94" src="Image01294.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">也就是说，当 <i>n</i>
+ = <i>k</i>
+ + 1时，公式仍然成立。证明完毕。 □</p>
+<p height="1em" width="2em" align="justify">或者，我们也可以采用下面这种代数证明法。</p>
+<p height="1em" width="2em" align="justify">证明方法2：令</p>
+<p height="1em" width="0pt" align="center">
+<i>S</i>
+ = 1 + <i>x</i>
+ + <i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ + … + <i>x<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">两边同时乘以<i>x</i>
+ ，就会得到：</p>
+<p height="1em" width="0pt" align="center">
+<i>xS</i>
+ = <i>x</i>
+ + <i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ + … + <i>x<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">+1</font>
+</small>
+</sup>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">用第一个等式减去第二个等式，可以消去很多项，得到：</p>
+<p height="1em" width="0pt" align="center">
+<i>S</i>
+ – <i>xS</i>
+ = 1 – <i>x<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">+1</font>
+</small>
+</sup>
+</i>
+</p>
+<p height="1em" width="2em" align="justify">也就是说，<i>S</i>
+ (1– <i>x</i>
+ ) = 1 – <i>x<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">+1</font>
+</small>
+</sup>
+</i>
+ ，即<i>S</i>
+ =<img align="middle" height="84" width="157" src="Image01294.jpg" />
+ 。</p>
+<p height="1em" width="2em" align="justify">请大家注意，当 <i>x</i>
+ = 1/2时，有穷等比数列的和与我们前文中发现的规律一致：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="188" width="1054" src="Image01298.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">当<i>n</i>
+ 不断增大时，(1/2)<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ 将会趋近于0。因此，当<i>n</i>
+ → ∞时，就有：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="360" width="1226" src="Image01299.jpg" />
+</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">跟大家讲一个只有数学界人士才会觉得有趣的笑话。一大群数学家走进一间酒吧。第一个人说：“我要一杯啤酒。”第二个人说：“我要半杯啤酒。”第三个人说：“我要1/4杯啤酒。”第四个人说：“我要1/8杯啤酒。”酒吧招待一边给他们递来两杯啤酒，一边大声说道：“我知道你们的极限！”</blockquote>
+<p height="2em" width="2em" align="justify">一般地，对于任意一个–1~1之间的数字而言，如果不断增加它的幂，它就会越来越趋近0。由此，我们便有了非常重要的（无穷）等比数列。</p>
+<p height="1em" width="2em" align="justify">定理（等比数列）：对于 –1 &lt; <i>x</i>
+ &lt; 1，有：</p>
+<p height="1em" width="0pt" align="center">1 + <i>x</i>
+ + <i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">4</font>
+</small>
+</sup>
+</i>
+ + … =<img align="middle" height="84" width="82" src="Image01279.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">令 <i>x</i>
+ = 1/2，就可以用等比数列解决上面的最后一个问题：</p>
+<p height="1em" width="0pt" align="center">1 +<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01283.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01284.jpg" />
+ + … =<img align="middle" height="84" width="102" src="Image01300.jpg" />
+ = 2</p>
+<p height="1em" width="2em" align="justify">等比数列看上去是不是有些眼熟？这是因为在上一章的结尾部分，我们曾用微积分证明函数 <i>y</i>
+ = 1/(1– <i>x</i>
+ )等于泰勒级数1 + <i>x</i>
+ + <i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ +<i>x<sup>
+<small>
+<font size="2">4</font>
+</small>
+</sup>
+</i>
+ + …</p>
+<p height="1em" width="2em" align="justify">利用等比数列，还可以得出什么结果？请大家思考下面这个求和问题：</p>
+<p height="1em" width="0pt" align="center"><img align="middle" height="84" width="33" src="Image01282.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01284.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01301.jpg" />
+ +<img align="middle" height="84" width="72" src="Image01302.jpg" />
+ + …</p>
+<p height="1em" width="2em" align="justify">从各项中分别提取1/4，上式就会变成：</p>
+<p height="1em" width="0pt" align="center"><img align="middle" height="84" width="33" src="Image01282.jpg" />
+ (1 +<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01284.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01301.jpg" />
+ + …)</p>
+<p height="1em" width="2em" align="justify">根据等比数列公式（令<i>x</i>
+ = 1/4），上式可以简化为：</p>
+<p height="1em" width="0pt" align="center"><img align="middle" height="84" width="33" src="Image01282.jpg" />
+ (<img align="middle" height="84" width="102" src="Image01303.jpg" />
+ ) =<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ ×<img align="middle" height="84" width="33" src="Image01037.jpg" />
+ =<img align="middle" height="84" width="33" src="Image01039.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">这个级数有一个无须只言片语并且充满美感的证明方法（如下图所示）。注意，图中黑色方块正好占大方块面积的1/3。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="461" width="473" src="Image01304.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>无须任何语言即可证明1/4 + 1/16 +1/64 + 1/256 + …= 1/3</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">我们甚至还可以用等比数列来解决0.999 99…问题，这是因为无穷小数展开式其实就是伪装后的无穷级数。具体来说，我们可以用<i>x</i>
+ = 1/10的等比数列加以证明：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="536" width="986" src="Image01305.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">即使<i>x</i>
+ 为复数，只要它的模小于1，等比数列公式同样成立。例如，虚数<i>i</i>
+ /2的模为1/2，根据等比级数公式，我们可以得到：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="230" width="1078" src="Image01306.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">展现在复平面上的情况如下图所示。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="470" width="442" src="Image01307.jpg" />
+</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="46" width="354" src="Image01308.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">有穷等比数列公式成立的条件是<i>x</i>
+ ≠ 1，而（无穷）等比数列则要求 |<i>x</i>
+ | &lt; 1。例如，当 <i>x</i>
+ = 2时，有穷等比数列的和为：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="107" width="1014" src="Image01309.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">但是，将 <i>x</i>
+ = 2代入等比数列公式，却会得到：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="40" width="354" src="Image01310.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">这个结果荒谬可笑。（不过，我们的眼睛有时也会欺骗我们。在本章的最后一节，我们就会发现这个结果其实有一个可以让我们接受的理由。）</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">正整数有无穷多个：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">1，2，3，4，5…</blockquote>
+<blockquote height="6pt" width="2em" align="justify">正偶数也有无穷多个：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">2，4，6，8，10…</blockquote>
+<blockquote height="6pt" width="2em" align="justify">数学家说，正整数集与正偶数集的大小（或者叫作基数、无穷大阶数）是相同的，因为这两个集合可以形成一一对应的关系：</blockquote>
+<blockquote height="1em" width="0pt" align="center"><img align="baseline" height="99" width="252" src="Image01311.jpg" />
+</blockquote>
+<blockquote height="1em" width="2em" align="justify">可以与正整数集形成一一对应关系的集合叫作“可列集”，可列集的无穷大阶数最低。元素可以一一排序的集合都是可列集，因为在排列时，第一个元素对应1，第二个元素对应2，以此类推。</blockquote>
+<blockquote height="6pt" width="2em" align="justify">包含所有整数的集无法按照由小到大的顺序一一排列（哪个数字应该排在第一位？）：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">…–3，–2，–1，0，1，2，3…</blockquote>
+<blockquote height="6pt" width="2em" align="justify">但是，这些数字可以下面这种方式排列：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">0，1，–1，2，–2，3，–3…</blockquote>
+<blockquote height="6pt" width="2em" align="justify">也就是说，整数集是可列集，它的大小与正整数集相同。</blockquote>
+<blockquote height="6pt" width="2em" align="justify">正有理数集呢？该集合的所有元素都是 <i>m</i>
+ /<i>n</i>
+ 形式的数字，其中<i>m</i>
+ 和<i>n</i>
+ 是正整数。也许你不相信，但正有理数集确实是可列集，因为它的元素可以按照下面这种方式排列：</blockquote>
+<blockquote height="6pt" width="0pt" align="center"><img align="middle" height="84" width="33" src="Image01312.jpg" />
+ ，<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ ，<img align="middle" height="84" width="33" src="Image01313.jpg" />
+ ，<img align="middle" height="84" width="33" src="Image01039.jpg" />
+ ，<img align="middle" height="84" width="33" src="Image01314.jpg" />
+ ，<img align="middle" height="84" width="33" src="Image01315.jpg" />
+ ，<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ ，<img align="middle" height="84" width="33" src="Image01057.jpg" />
+ ，<img align="middle" height="84" width="33" src="Image01316.jpg" />
+ ，<img align="middle" height="84" width="33" src="Image01317.jpg" />
+ …</blockquote>
+<blockquote height="6pt" width="2em" align="justify">在排列时，我们按照分子、分母的和来确定各个元素的先后次序。由于这个排列方式可将所有有理数都涵盖在内，因此正有理数集也是可列集。</blockquote>
+<blockquote height="4em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">是否存在不是可列集的无穷数字集呢？德国数学家格奥尔格·康托尔（Georg Cantor，1845~1918）证明，0~1之间的所有实数构成的集合是不可列集。你也许想按照下列方式或者其他类似方式来列举这些实数：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">0.1，0.2，…，0.9，0.01，0.02，…，0.99，0.001，0.002，… 0.999，…</blockquote>
+<blockquote height="6pt" width="2em" align="justify">但是，只有那些位数有限的数字才会被列举出来，而像1/3 =0.333…这样的数字永远也不会出现。是不是可以想出更有创意的办法，列举出所有实数呢？康托尔通过以下方法证明这是不可能做到的。他先假设实数可以一一排列，然后他给出了一个具体的例子，比如这个排列的前几个元素是：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">0.314 159 265…</blockquote>
+<blockquote height="6pt" width="0pt" align="center">0.271 828 459…</blockquote>
+<blockquote height="6pt" width="0pt" align="center">0.618 033 988…</blockquote>
+<blockquote height="6pt" width="0pt" align="center">0.123 581 321…</blockquote>
+<blockquote height="6pt" width="0pt" align="center">…</blockquote>
+<blockquote height="6pt" width="2em" align="justify">我们可以找出一个不属于这个排列的实数，从而证明这个排列是不完整的。具体来说，这个实数就是0.<i>r<sub>
+<small>1</small>
+</sub>
+ r<sub>
+<small>2</small>
+</sub>
+ r<sub>
+<small>3</small>
+</sub>
+ r<sub>
+<small>4</small>
+</sub>
+</i>
+ …，其中<i>r<sub>
+<small>1</small>
+</sub>
+</i>
+ 是0~9的整数且不同于该排列的第一个数字的第一位数（在本例中，<i>r<sub>
+<small>1</small>
+</sub>
+</i>
+ ≠ 3），<i>r<sub>
+<small>2</small>
+</sub>
+</i>
+ 则不同于该排列的第二个数字的第二位数（在本例中，<i>r<sub>
+<small>2</small>
+</sub>
+</i>
+ ≠ 7），以此类推。比如，这个数字可以是0.267 4…。这样的数字是不可能出现在上述排列中的，这个数字与排列中的第100万个数字有什么不同？答案是它们的第100万位数字不相同。因此，无论你想出什么样的排列方法，都必然会遗漏某些数字，从而证明实数是不可列集。这个证明方法被称为“康托尔对角线证明法”，不过我宁愿称之为“康托尔举例证明法”。（抱歉。）</blockquote>
+<blockquote height="6pt" width="2em" align="justify">从本质上讲，我们已经证明无理数远比有理数多，尽管有理数也有无穷多个。你在实数线上随机选择一个实数，几乎可以肯定这个数字是无理数。</blockquote>
+<p height="2em" width="2em" align="justify">概率问题中经常出现无穷级数。假设你投掷两枚6面色子。如果投掷的结果不是6点，也不是7点，就需要继续投掷。如果先掷出6点，你就赢了，否则你就输了。你在游戏中获胜的概率是多少？每次投掷都有6×6个概率相同的可能结果。当然，其中有5个可能的结果是6[即(1, 5)、(2, 4)、(3, 3)、(4, 2)和(5, 1)]，有6个可能的结果是7[即(1, 6)、(2, 5)、(3, 4)、(4, 3)、(5, 2)和(6, 1)]。如此看来，你获胜的概率不到50%。直觉告诉我们，在36个可能的结果中，只有5 + 6 = 11个有效结果，如果出现其他结果，就都需要重新投掷。而在这11个结果中，有5个意味着你赢了，有6个意味着你输了。因此，你获胜的概率似乎是5/11。</p>
+<p height="1em" width="2em" align="justify">利用等比数列，我们可以证明你获胜的概率的确是5/11。第一次投掷时，你获胜的概率是5/36。第二次投掷呢？要在第二次投掷时获胜，第一次投掷时就不能出现6或7，而且第二次必须掷出6点。第一次投掷时出现6或7的概率是5/36 + 6/36 = 11/36，也就是说，既不是6又不是7的概率是25/36。第二次投掷获胜的概率是25/36与5/36（独立投掷情况下出现6的概率）的乘积，也就是 (25/36)×(5/36)。要在第三次投掷时获胜，前两次投掷就不能掷出6或7，而且第三次必须掷出6。因此，第三次投掷获胜的概率为 (25/36) ×(25/36) ×(5/36)。第四次投掷获胜的概率是 (25/36)<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ ×(5/36)，以此类推。把所有这些概率加到一起，就是你获胜的概率：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="636" width="1149" src="Image01318.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">证明完毕。 □</p>
+<span id="filepos0003719249"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">调和级数奏出的优美乐曲</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">如果无穷级数的和是一个（有限）数，我们就说它收敛（converge）于该数。如果某个无穷级数不收敛，我们就说它是一个发散（diverge）级数。在一个收敛的无穷级数中，所有数字必须趋近0。例如，无穷级数1 + 1/2 + 1/4 + 1/8 + … 收敛于2。请大家注意观察，该级数的各个项，即1、1/2、1/4、1/8等越来越接近0。</p>
+<p height="1em" width="2em" align="justify">但是，这句话反过来说却不成立。即使各项都趋近0，级数本身仍然有可能是发散的。这方面的一个重要实例就是“调和级数”（harmonic series）。调和级数之所以得此名称，是因为古希腊人发现，如果琴弦长度与1、1/2、1/3、1/4、1/5…成比例关系，就可以弹奏出悦耳动听的音乐。</p>
+<p height="1em" width="2em" align="justify">定理：对于调和级数，有：</p>
+<p height="1em" width="0pt" align="center">1 +<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01039.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01054.jpg" />
+ + … = ∞</p>
+<p height="1em" width="2em" align="justify">证明：要证明调和级数的和为无穷大，就需要证明它的和可以是任意大的数字。我们先根据分母，将各项分到不同的组中。可以看出，调和级数的前9项都大于1/10，因此：</p>
+<p height="1em" width="0pt" align="center">1 +<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01039.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01054.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01287.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01049.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01283.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01055.jpg" />
+ &gt;<img align="middle" height="84" width="53" src="Image01319.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">接下来的90项都大于1/100，因此：</p>
+<p height="1em" width="0pt" align="center"><img align="middle" height="84" width="53" src="Image01320.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01285.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01321.jpg" />
+ + … +<img align="middle" height="84" width="53" src="Image01322.jpg" />
+ &gt; 90×<img align="middle" height="84" width="72" src="Image01323.jpg" />
+ =<img align="middle" height="84" width="53" src="Image01319.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">同理，再接下来的900项都大于1/1 000，因此：</p>
+<p height="1em" width="0pt" align="center"><img align="middle" height="84" width="72" src="Image01323.jpg" />
+ +<img align="middle" height="84" width="72" src="Image01324.jpg" />
+ +<img align="middle" height="84" width="72" src="Image01325.jpg" />
+ + … +<img align="middle" height="84" width="72" src="Image01326.jpg" />
+ &gt;<img align="middle" height="84" width="92" src="Image01327.jpg" />
+ =<img align="middle" height="84" width="53" src="Image01319.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">之后还有：</p>
+<p height="1em" width="0pt" align="center"><img align="middle" height="84" width="92" src="Image01328.jpg" />
+ +<img align="middle" height="84" width="92" src="Image01329.jpg" />
+ +<img align="middle" height="84" width="92" src="Image01330.jpg" />
+ + … +<img align="middle" height="84" width="92" src="Image01331.jpg" />
+ &gt;<img align="middle" height="84" width="112" src="Image01332.jpg" />
+ =<img align="middle" height="84" width="53" src="Image01319.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">以此类推，所有数字的和至少为：</p>
+<p height="1em" width="0pt" align="center"><img align="middle" height="84" width="53" src="Image01319.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01319.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01319.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01319.jpg" />
+ + …</p>
+<p height="1em" width="2em" align="justify">而且，这个和可以无限增加。证明完毕。 <img align="middle" height="56" width="59" src="Image00920.jpg" />
+</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">跟大家分享一个有趣的现象：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">1 +<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01039.jpg" />
+ + …<img align="middle" height="84" width="33" src="Image01226.jpg" />
+ ≈ γ <i>+</i>
+ ln <i>n</i>
+</blockquote>
+<blockquote height="6pt" width="2em" align="justify">其中γ（即欧拉–马歇罗尼常数，读作“gama”）为0.577 215 564 9…，ln<i>n</i>
+ 是 <i>n</i>
+ 的自然对数（参见本书第10章）。（至于γ是不是有理数，目前还不知道。）随着<i>n</i>
+ 不断增大，上式左右两边的值的近似程度越来越高。下面是和的确切值与近似值的对比表。</blockquote>
+<blockquote height="1em" width="0pt" align="center"><img align="baseline" height="481" width="1138" src="Image01333.jpg" />
+</blockquote>
+<blockquote height="1em" width="2em" align="justify">下面这个现象同样有趣。如果我们仅考虑分母为质数的项，那么对于较大的质数<i>p</i>
+ ，有：</blockquote>
+<blockquote height="6pt" width="0pt" align="center"><img align="middle" height="84" width="33" src="Image00998.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01039.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01054.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01049.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01285.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01334.jpg" />
+ + …<img align="middle" height="84" width="33" src="Image01335.jpg" />
+ ≈ <i>M</i>
+ + ln ln <i>p</i>
+</blockquote>
+<blockquote height="6pt" width="2em" align="justify">其中<i>M</i>
+ = 0.261 497 2…，被称为“梅尔滕斯常数”。随着<i>p</i>
+ 不断增大，等式两边值的近似程度也会越来越高。</blockquote>
+<blockquote height="6pt" width="2em" align="justify">根据上式，我们可以得出：</blockquote>
+<blockquote height="6pt" width="0pt" align="center"><img align="middle" height="84" width="33" src="Image00998.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01039.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01054.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01049.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01285.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01334.jpg" />
+ + … = ∞</blockquote>
+<blockquote height="6pt" width="2em" align="justify">但是，这个级数趋于无穷大的速度非常慢，这是因为<i>p</i>
+ 的对数的对数值比较小，尽管<i>p</i>
+ 本身非常大。比如，以小于古戈尔（googol，即10<sup>
+<small>
+<font size="2">100</font>
+</small>
+</sup>
+ ）的质数为分母的所有数字的和小于6。</blockquote>
+<p height="2em" width="2em" align="justify">接下来，我们对调和级数稍加改动，看看会有什么现象发生。我们从调和级数中删掉一些项，只要这些项的个数是一个有限数，该级数就仍然是发散级数。例如，我们删掉前100万项（即1 +<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ + … +<img align="middle" height="84" width="63" src="Image01336.jpg" />
+ ，这些项的和略大于14），那么剩余各项之和仍然无穷大。</p>
+<p height="1em" width="2em" align="justify">增大调和级数的各个项，它们的和也是发散的。例如，对于<i>n</i>
+ &gt; 1，有<img align="middle" height="84" width="72" src="Image01337.jpg" />
+ &gt;<img align="middle" height="84" width="33" src="Image01226.jpg" />
+ ，因此：</p>
+<p height="1em" width="0pt" align="center">1 +<img align="middle" height="84" width="72" src="Image01338.jpg" />
+ +<img align="middle" height="84" width="72" src="Image01339.jpg" />
+ +<img align="middle" height="84" width="72" src="Image01340.jpg" />
+ + … = ∞</p>
+<p height="1em" width="2em" align="justify">但是，即使让各项变小，和也不一定会收敛。例如，让调和级数的所有项都除以100，它仍然是一个发散级数，因为：</p>
+<p height="1em" width="0pt" align="center"><img align="middle" height="84" width="72" src="Image01323.jpg" />
+ +<img align="middle" height="84" width="72" src="Image01341.jpg" />
+ +<img align="middle" height="84" width="72" src="Image01342.jpg" />
+ + … =<img align="middle" height="84" width="72" src="Image01323.jpg" />
+ (1 + 1/2 + 1/3 + 1/4 + … ) = ∞</p>
+<p height="1em" width="2em" align="justify">不过，把各项变小，也有可能得到一个收敛级数。例如，让所有项进行平方运算，它们的和就会收敛。根据欧拉的证明：</p>
+<p height="1em" width="0pt" align="center">1 +<img align="middle" height="84" width="43" src="Image01343.jpg" />
+ +<img align="middle" height="84" width="43" src="Image01344.jpg" />
+ +<img align="middle" height="84" width="43" src="Image01345.jpg" />
+ + … =<img align="middle" height="84" width="46" src="Image01346.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">事实上，我们利用积分就可以证明对于任意的<i>p</i>
+ &gt; 1，1 +<img align="middle" height="84" width="43" src="Image01347.jpg" />
+ +<img align="middle" height="84" width="43" src="Image01348.jpg" />
+ +<img align="middle" height="84" width="43" src="Image01349.jpg" />
+ + …都会收敛于某个小于<img align="middle" height="84" width="65" src="Image01350.jpg" />
+ 的数。例如，如果 <i>p</i>
+ = 1.01，那么下式的各项都会略微小于调和级数的各项。但是，即便如此，它也是一个收敛级数。</p>
+<p height="1em" width="0pt" align="center">1 +<img align="middle" height="84" width="72" src="Image01351.jpg" />
+ +<img align="middle" height="84" width="72" src="Image01352.jpg" />
+ +<img align="middle" height="84" width="72" src="Image01353.jpg" />
+ + … ＜101</p>
+<p height="1em" width="2em" align="justify">假设我们从调和级数中删掉所有包含9的项，会有什么结果呢？可以证明，在这种情况下，这个级数的和不是无穷大（它肯定收敛于某个数字）。在证明时，我们根据分母的长度把不含有9的项分别相加。例如，我们先计算分母只有一位数的8个分数（<img align="middle" height="84" width="33" src="Image01312.jpg" />
+ ,<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ ,<img align="middle" height="84" width="33" src="Image01039.jpg" />
+ ,…,<img align="middle" height="84" width="33" src="Image01283.jpg" />
+ ）之和。分母是两位数且不包含9的项一共有8×9 = 72个，这是因为第一位数有8种选择（不能是0或9），第二位数有9种选择。同理，分母是三位数且不包含9的项有8×9×9个。一般地，分母是<i>n</i>
+ 位数且不包含9的项有8×9<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ <sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ 个。注意，分母是一位数的最大分数是1，分母是两位数的最大分数是<img align="middle" height="84" width="53" src="Image01320.jpg" />
+ ，分母是三位数的最大分数是<img align="middle" height="84" width="72" src="Image01323.jpg" />
+ 。因此，我们可以将这个无穷级数按照以下方式分成几组：</p>
+<p height="1em" width="0pt" align="center">1 +<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01039.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01054.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01287.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01049.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01283.jpg" />
+ ＜ 8</p>
+<p height="1em" width="0pt" align="center"><img align="middle" height="84" width="53" src="Image01320.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01285.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01321.jpg" />
+ + … +<img align="middle" height="84" width="53" src="Image01354.jpg" />
+ ＜ ( 8×9) ×<img align="middle" height="84" width="53" src="Image01320.jpg" />
+ = 8 (<img align="middle" height="84" width="53" src="Image01319.jpg" />
+ )</p>
+<p height="1em" width="0pt" align="center"><img align="middle" height="84" width="72" src="Image01323.jpg" />
+ +<img align="middle" height="84" width="72" src="Image01324.jpg" />
+ +<img align="middle" height="84" width="72" src="Image01325.jpg" />
+ + … +<img align="middle" height="84" width="72" src="Image01355.jpg" />
+ ＜ ( 8×9<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ ) ×<img align="middle" height="84" width="72" src="Image01323.jpg" />
+ = 8 (<img align="middle" height="84" width="53" src="Image01319.jpg" />
+ )<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="2em" align="justify">以此类推，根据等比数列公式，所有数字的和最多为：</p>
+<p height="1em" width="0pt" align="center">8[ 1+<img align="middle" height="84" width="53" src="Image01319.jpg" />
+ + (<img align="middle" height="84" width="53" src="Image01319.jpg" />
+ )<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + (<img align="middle" height="84" width="53" src="Image01319.jpg" />
+ )<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+ + …] =<img align="middle" height="84" width="88" src="Image01356.jpg" />
+ =80</p>
+<p height="1em" width="2em" align="justify">也就是说，各项中不包含9的无穷级数收敛于某个小于80的数字。 □</p>
+<p height="1em" width="2em" align="justify">在理解这个无穷级数的收敛性时，我们可以考虑一个事实：几乎所有大数都包含9。的确，如果大家随意写下一个数字，它的每个数位上的数字都可以从0到9中随机选择，那么这个数字的前<i>n</i>
+ 位数中不包含9的概率是(9/10)<sup>
+<small>
+<font size="2">
+<i>n</i>
+</font>
+</small>
+</sup>
+ 。随着<i>n</i>
+ 不断增大，这个概率将趋近0。</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">如果我们把π和e的值视为随机排列的数字串，那么你最喜欢的整数几乎肯定会出现在其中。例如，我最喜欢的四位数2 520就出现在π的第1845~1848位上。斐波那契数列的前6个数字（1，1，2，3，5，8）与从π的第820390位开始的6个数字一致。这6个数字出现在π的前100万位中并不令人吃惊，一方面，因为在随机生成的数字中，有6个连续数位上的数字与你给出的六位数相同的概率是百万分之一。因此，在π的前100万位数中找到与斐波那契数列的前6项相同的数字的可能性本来就存在。另一方面，999 999在π中出现得非常早（开始于第763位），真的十分令人吃惊。物理学家理查德·费曼说过，在背诵圆周率的过程中，如果你只背到第767位，人们说不定会以为π是有理数呢，因为他们最后听到的是“999999…”。</blockquote>
+<blockquote height="6pt" width="2em" align="justify">借助网站或者某些应用程序，就可以在π和e中找出我们喜欢的数字串。我就用过某个类似程序，结果发现在π的前3 000位数中，最后5位数是31961。这个数字对于我来说十分特别，因为1961年3月19日是我的出生日期！</blockquote>
+<span id="filepos0003735358"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">不可思议的无穷和</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">回顾一下到目前为止我们接触到的无穷和。</p>
+<p height="1em" width="2em" align="justify">在本章开头，我们讨论了：</p>
+<p height="1em" width="0pt" align="center">1 +<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01283.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01284.jpg" />
+ + … = 2</p>
+<p height="1em" width="2em" align="justify">我们发现，这是等比数列的一个特例。等比数列公式指出，对于任意<i>x</i>
+ ，只要 –1 &lt; <i>x</i>
+ &lt; 1，就有</p>
+<p height="1em" width="0pt" align="center">1 + <i>x</i>
+ + <i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">4</font>
+</small>
+</sup>
+</i>
+ + … =<img align="middle" height="84" width="82" src="Image01279.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">注意，当<i>x</i>
+ 为0到–1之间的负数时，等比数列公式同样有效。例如，如果<i>x</i>
+ = –1/2，则：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="123" width="986" src="Image01357.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">各项交替为正负数且趋于0的级数叫作“交错级数”，交错级数一定会收敛于某个数。在理解上面这个交错级数时，我们可以画一条实数线，并把手指放在数字0的位置上。然后，把手指向右移动1个单位，再向左移动1/2个单位，再向右移动1/4个单位（这时候，你的手指应该在3/4的位置上），再向左移动1/8个单位（此时，你的手指应该在5/8的位置上）。以此类推，你的手指将在某个数字附近来回移动（在本例中，这个数字是2/3）。</p>
+<p height="1em" width="2em" align="justify">现在，请大家观察下面这个交错级数：</p>
+<p height="1em" width="0pt" align="center">1 –<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01039.jpg" />
+ –<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01054.jpg" />
+ –<img align="middle" height="84" width="33" src="Image01287.jpg" />
+ + …</p>
+<p height="1em" width="2em" align="justify">看完前4项之后，我们知道这个无穷级数的和至少是1–1/2 + 1/3 – 1/4 = 7/12 = 0.583…；看完前5项之后，我们知道这个无穷级数的和至多是1–1/2 + 1/3 – 1/4 + 1/5 = 47/60 = 0.783…。这个级数的和是0.693 147…，在上述两个数字中间偏右的位置。利用微积分，我们可以算出这个和的确切值。</p>
+<p height="1em" width="2em" align="justify">我们先上一道“开胃小菜”。请大家写出等比数列：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="51" width="354" src="Image01358.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">想一想，如果两边同时求导，会出现什么情况？本书第11章告诉我们：1，<i>x</i>
+ ，<i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ ，<i>x<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ ，<i>x<sup>
+<small>
+<font size="2">4</font>
+</small>
+</sup>
+</i>
+ …的导数分别是0，1，2<i>x</i>
+ ，3<i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ ，4<i>x<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ …。因此，如果我们假设无穷级数和的导数就是导数的和，那么利用链式法则对(1 – <i>x</i>
+ )<sup>
+<small>
+<font size="2">–1</font>
+</small>
+</sup>
+ 求导，我们可以得出：对于 –1 &lt; <i>x</i>
+ &lt; 1，有：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="95" width="658" src="Image01358.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">我们把等比数列中的<i>x</i>
+ 替换成–<i>x</i>
+ ，就会发现：对于 –1 &lt; <i>x</i>
+ &lt; 1，有：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="95" width="765" src="Image01359.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">现在，求等式两边的反导数（微积分学称之为“不定积分”）。不定积分是求导的逆运算，例如，<i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 的导数是2<i>x</i>
+ ，反过来，2<i>x</i>
+ 的不定积分是<i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ 。[<i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + 5，<i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + π或<i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>c</i>
+ （<i>c</i>
+ 为任意数）的导数同样是2<i>x</i>
+ ，所以2<i>x</i>
+ 的不定积分其实是<i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>c</i>
+ 。]1，<i>x</i>
+ ，<i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ ，<i>x<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ ，<i>x<sup>
+<small>
+<font size="2">4</font>
+</small>
+</sup>
+</i>
+ …的不定积分分别是<i>x</i>
+ ，<i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ /2，<i>x<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ /3，<i>x<sup>
+<small>
+<font size="2">4</font>
+</small>
+</sup>
+</i>
+ /4，<i>x<sup>
+<small>
+<font size="2">5</font>
+</small>
+</sup>
+</i>
+ /5…；1/(1 + <i>x</i>
+ )的不定积分是1 + <i>x</i>
+ 的自然对数。也就是说，对于 –1 &lt; <i>x</i>
+ &lt; 1，有：</p>
+<p height="1em" width="0pt" align="center">
+<i>x</i>
+ –<img align="middle" height="84" width="36" src="Image01360.jpg" />
+ +<img align="middle" height="84" width="36" src="Image01361.jpg" />
+ –<img align="middle" height="84" width="36" src="Image01362.jpg" />
+ +<img align="middle" height="84" width="36" src="Image01363.jpg" />
+ – … = ln(1 + <i>x</i>
+ )</p>
+<p height="1em" width="2em" align="justify">等式左边的常数项为0，这是因为当<i>x</i>
+ = 0时，我们希望右边的值为ln 1 = 0。当<i>x</i>
+ 逐渐接近1时，我们就会发现0.693 147…的自然含义，即：</p>
+<p height="1em" width="0pt" align="center">1 –<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01039.jpg" />
+ –<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01054.jpg" />
+ –<img align="middle" height="84" width="33" src="Image01287.jpg" />
+ + … = ln 2</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">如果我们将等比数列中的<i>x</i>
+ 替换成 –<i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ ，当<i>x</i>
+ 在 –1~ 1之间时，就有：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">1 – <i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">4</font>
+</small>
+</sup>
+</i>
+ – <i>x<sup>
+<small>
+<font size="2">6</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">8</font>
+</small>
+</sup>
+</i>
+ – … =<img align="middle" height="84" width="102" src="Image01364.jpg" />
+</blockquote>
+<blockquote height="6pt" width="2em" align="justify">大多数微积分教科书都会证明 <i>y</i>
+ = arc tan<i>x</i>
+ 的导数为 <i>y'</i>
+ =<img align="middle" height="84" width="102" src="Image01364.jpg" />
+ 。对等式两边同时求不定积分（注意，arc tan 0 = 0），就会得到：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">
+<i>x –</i>
+ <img align="middle" height="84" width="36" src="Image01361.jpg" />
+ +<img align="middle" height="84" width="36" src="Image01363.jpg" />
+ –<img align="middle" height="84" width="36" src="Image01365.jpg" />
+ +<img align="middle" height="84" width="36" src="Image01366.jpg" />
+ – … = arc tan <i>x</i>
+</blockquote>
+<blockquote height="6pt" width="2em" align="justify">令<i>x</i>
+ 趋近0，就会得到：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">1 –<img align="middle" height="84" width="33" src="Image01039.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01054.jpg" />
+ –<img align="middle" height="84" width="33" src="Image01049.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01055.jpg" />
+ –<img align="middle" height="84" width="53" src="Image01285.jpg" />
+ + … = arc tan 1 =<img align="middle" height="84" width="53" src="Image01367.jpg" />
+</blockquote>
+<p height="2em" width="2em" align="justify">在研究了等比数列的应用之后，我们接下来讨论等比数列在应用过程中容易出现的错误。等比数列的定义指出，对于任意<i>x</i>
+ ，只要 –1 &lt; <i>x</i>
+ &lt; 1，就有：</p>
+<p height="1em" width="0pt" align="center">1 + <i>x</i>
+ + <i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">4</font>
+</small>
+</sup>
+</i>
+ + … =<img align="middle" height="84" width="82" src="Image01279.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">我们来看当<i>x</i>
+ = –1时会出现什么结果。根据等比数列公式，有：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="106" width="838" src="Image01368.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">这个答案不可能是正确的。因为我们加、减的都是整数，所以最后结果不可能是像1/2这样的分数。即使这个级数收敛于某个数字，也不会是1/2。不过，这个答案并不是完全没有道理。观察该级数的部分和，就会发现：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="159" width="236" src="Image01369.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">以此类推，由于部分和中有一半是1，还有一半是0，因此1/2这个答案似乎不无道理。</p>
+<p height="1em" width="2em" align="justify">如果<i>x</i>
+ 取不符合条件要求的值，比如<i>x</i>
+ = 2，根据等比数列，就会得出：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="99" width="777" src="Image01370.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">这个答案似乎比1/2更荒谬。多个正数的和怎么可能是负数呢？不过，这个答案也许同样可以找到一个合理的解释。比如，我们在本书第3章见过，在类似于10 ≡ –1(mod 11)的关系中，10<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ ≡ (–1)<sup>
+<small>
+<font size="2">
+<i>k</i>
+</font>
+</small>
+</sup>
+ (mod 11)这个等式是成立的。也就是说，正数也可以表现出负数的特性。</p>
+<p height="1em" width="2em" align="justify">让我们打破常规，以一种创造性思维去理解1 + 2 + 4 + 8 + 16 + …的意义。我们在本书第4章讨论过，每一个正整数都可以表示成2的幂次方之和的唯一形式，这是计算机采用的二进制的基础。每个整数都是有限个2的幂次方之和。比如，106 = 2 + 8 + 32 + 64中包含4个2的幂次方。现在，我们假设无穷大的整数也可以表示成这种形式，其中2的幂次方的个数可以根据需要，想用多少个就用多少个。那么，无穷大的整数就会具有以下这种典型的表现形式：</p>
+<p height="1em" width="0pt" align="center">1 + 2 + 8 + 16 + 64 + 256 + 2 048 + …</p>
+<p height="1em" width="2em" align="justify">其中，2的幂次方连续不断地出现。我们不清楚这些数字有什么含义，但我们可以建立高度一致的运算规则。比如，只要我们确定一种自然的进位方式，就可以对这些数字进行加法运算。比如，在上面这个无穷级数的基础上加上106的2的幂次方表达式，就会得到：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="108" width="443" src="Image01371.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">其中，2 + 2得4；接下来，8 + 8得16，它与后面的16相加得32，32又与后面一个32相加得64；两个64相加得128，而从256往后的所有项都保持不变。现在，我们给“最大”的无穷大整数加上1：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="75" width="480" src="Image01372.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">在这种情况下会发生一连串的如上所述的加法运算，而横线下面看不到一个2的幂次方。也就是说，和可以视为0。既然(1 + 2 + 4 + 8 + 16 + …) + 1 = 0，那么在等式两边同时减去1，就会发现这个无穷级数的和似乎真的等于 –1。</p>
+<p height="1em" width="2em" align="justify">下面这个匪夷所思的无穷级数求和是我的最爱：</p>
+<p height="1em" width="0pt" align="center">1 + 2 + 3 + 4 + 5 + … =<img align="middle" height="84" width="56" src="Image01288.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">在证明有穷等比数列和的时候，我们在第二种证法里使用了代数的移项法。现在，我们用同样的方法来“证明”上式。这种方法适用于有穷级数求和，如果应用于无穷级数求和，就可能导致荒谬的结果。我们先用代数的移项法来解释前文中的一个恒等式。我们按下列方式把这个等式写两遍，但在写第二遍时每项向后移动一个位置：</p>
+<p height="1em" width="0pt" align="center">
+<i>S</i>
+ = 1 – 1 + 1 – 1 + 1 – 1 + …</p>
+<p height="1em" width="0pt" align="center">
+<i>S</i>
+ = – 1 – 1 + 1 – 1 + 1 – …</p>
+<p height="1em" width="2em" align="justify">将两个等式相加，可以得到：</p>
+<p height="1em" width="0pt" align="center">2<i>S</i>
+ = 1</p>
+<p height="1em" width="2em" align="justify">因此，<i>S</i>
+ = 1/2。这跟我们在前文中令<i>x</i>
+ = –1时根据等比数列公式得到的结果一致。</p>
+<blockquote height="3em" width="3em" align="left">
+<font size="4">延伸阅读</font>
+</blockquote>
+<blockquote height="8pt" width="2em" align="justify">利用代数移项法，我们可以轻而易举地证明等比数列公式，不过证明过程不太严谨。</blockquote>
+<blockquote height="6pt" width="0pt" align="center">
+<i>S</i>
+ = 1 + <i>x</i>
+ + <i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">4</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">5</font>
+</small>
+</sup>
+</i>
+ + …</blockquote>
+<blockquote height="6pt" width="0pt" align="center">
+<i>xS</i>
+ = <i>x</i>
+ + <i>x<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">3</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">4</font>
+</small>
+</sup>
+</i>
+ + <i>x<sup>
+<small>
+<font size="2">5</font>
+</small>
+</sup>
+</i>
+ + …</blockquote>
+<blockquote height="6pt" width="2em" align="justify">两式相减，就会得到：</blockquote>
+<blockquote height="6pt" width="0pt" align="center">
+<i>S</i>
+ (1 – <i>x</i>
+ ) = 1</blockquote>
+<blockquote height="6pt" width="0pt" align="center">
+<i>S</i>
+ =<img align="middle" height="84" width="82" src="Image01279.jpg" />
+</blockquote>
+<p height="2em" width="2em" align="justify">如果把我们最渴望知道答案的无穷级数求和问题变成一个正负项交错排列的形式，就会得出一个非常有趣的答案：</p>
+<p height="1em" width="0pt" align="center">1 – 2 + 3 – 4 + 5 – 6 + 7 – 8 + … =<img align="middle" height="84" width="33" src="Image01282.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">下面，我们用移项法来证明这个结论。先把等式写两遍：</p>
+<p height="1em" width="0pt" align="center">
+<i>T</i>
+ = 1 – 2 + 3 – 4 + 5 – 6 + 7 – 8 + …</p>
+<p height="1em" width="0pt" align="center">
+<i>T</i>
+ = 1 – 2 + 3 – 4 + 5 – 6 + 7 – …</p>
+<p height="1em" width="2em" align="justify">两式相加，就会得到：</p>
+<p height="1em" width="0pt" align="center">2<i>T</i>
+ = 1 – 1 + 1 – 1 + 1 – 1 + 1 – 1 + …</p>
+<p height="1em" width="2em" align="justify">也就是说，2<i>T</i>
+ = <i>S</i>
+ = 1/2。所以，<i>T</i>
+ = 1/4。证明完毕。</p>
+<p height="1em" width="2em" align="justify">最后，我们再做一个实验。把所有正整数的和记作<i>U</i>
+ ，然后在它的下面列出<i>T</i>
+ 的算式（不用移位）。</p>
+<p height="1em" width="0pt" align="center">
+<i>U</i>
+ = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + …</p>
+<p height="1em" width="0pt" align="center">
+<i>T</i>
+ = 1 – 2 + 3 – 4 + 5 – 6 + 7 – 8 + …</p>
+<p height="1em" width="2em" align="justify">用第一个等式减去第二个等式，就会得到：</p>
+<p height="1em" width="0pt" align="center">
+<i>U</i>
+ <i>–</i>
+ <i>T</i>
+ = 4 + 8 + 12 + 16 + … = 4 (1 + 2 + 3 + 4 + …)</p>
+<p height="1em" width="2em" align="justify">也就是说：</p>
+<p height="1em" width="0pt" align="center">
+<i>U</i>
+ – <i>T</i>
+ = 4<i>U</i>
+</p>
+<p height="1em" width="2em" align="justify">求<i>U</i>
+ 的值，因为3<i>U</i>
+ = –<i>T</i>
+ = –1/4所以：</p>
+<p height="1em" width="0pt" align="center">
+<i>U</i>
+ = –1/12</p>
+<p height="1em" width="2em" align="justify">证明完毕。</p>
+<p height="1em" width="2em" align="justify">必须指出，无穷多个正整数的和必然趋向无穷大。但是，不要简单地把上面这些有穷数答案全部视为噱头，因为在某些情况下，它们其实是有道理的。在理解数字时，如果我们拓展思路，就会发现1 + 2 +4 + 8 + 16 + … = –1并非毫无道理。回想一下，如果我们对数的理解仅限于实数线，就不可能找到二次幂等于 –1的数字。但是，如果我们把复数看作复平面上的“居民”，而且为它们建立一套严格统一的运算法则，就可以找到二次幂等于–1的数字了。事实上，研究弦理论的理论物理学家在计算时就会用到1 + 2 + 3 + 4 + … = –1/12这个结果。如果遇到某些看似荒谬的计算结果，例如上面给出的这些无穷级数的和，大家尽可以一笑置之，但是，如果我们充分发挥自己的想象力，思考各种可能性，说不定这个世界就会多出一个严谨统一、充满美感的数字系统。</p>
+<p height="1em" width="2em" align="justify">在结束本书的写作之前，我再向大家介绍一个看上去荒诞不经的计算结果。在本节开头，我告诉大家下面这个交错级数收敛于ln 2 = 0.693 147…。</p>
+<p height="1em" width="0pt" align="center">1 –<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01039.jpg" />
+ –<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01054.jpg" />
+ –<img align="middle" height="84" width="33" src="Image01287.jpg" />
+ + …</p>
+<p height="1em" width="2em" align="justify">改变这些数字的先后次序，它的和应该不会发生变化，因为根据加法交换律，对于任意数字<i>A</i>
+ 和数字<i>B</i>
+ ，都有：</p>
+<p height="1em" width="0pt" align="center">
+<i>A</i>
+ + <i>B</i>
+ = <i>B</i>
+ + <i>A</i>
+</p>
+<p height="1em" width="2em" align="justify">但是，如果把这些数字按照下面这种次序重新排列，会出现什么结果呢？</p>
+<p height="1em" width="0pt" align="center">1 –<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ –<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01039.jpg" />
+ –<img align="middle" height="84" width="33" src="Image01287.jpg" />
+ –<img align="middle" height="84" width="33" src="Image01283.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01054.jpg" />
+ –<img align="middle" height="84" width="53" src="Image01320.jpg" />
+ –<img align="middle" height="84" width="53" src="Image01321.jpg" />
+ + …</p>
+<p height="1em" width="2em" align="justify">注意，加在一起的还是那些数字，因为所有分母为奇数的数字都带有正号，所有分母为偶数的数字都带有负号。尽管算式中偶数的出现频率是奇数的两倍，但无论奇数还是偶数都用之不竭，而且原算式中的所有项在新算式中都只出现一次。大家对此没有异议吧？那么，请大家算出这个和：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="471" width="1235" src="Image01373.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">结果我们发现它竟然是原无穷和的一半！怎么会出现这种情况呢？把各项数字重新排列，计算结果竟然变得不一样了。之所以出现这个令人惊讶的结果，是因为在无穷多个数字相加时不可以使用加法交换律。</p>
+<p height="1em" width="2em" align="justify">如果收敛级数中的正数项和负数项分别构成发散级数（也就是说，正数项的和为∞，负数项的和为–∞），就会出现这样的问题。我们给出的最后一个例子就是这种情况。这样的级数被称为“条件收敛级数”。令人吃惊的是，对条件收敛级数重新排序，可以得出我们想要得到的任意结果。比如，如何排列上面这个级数，让它最后的得数为42呢？首先，让正数项相加，使它们的和刚好超过42，然后减去第一个负数项。再加上一个正数项，使和再次超过42，然后减去第二个负数项。重复上述步骤，最终的和就会越来越接近42。（比如，减去第5个负数项 –1/10之后的计算结果，与42的差会始终保持在0.1以下。减去第50个负数项 –1/100后的计算结果与42的差会始终保持在0.01以下，以此类推。）</p>
+<p height="1em" width="2em" align="justify">我们在实践中遇到的无穷级数大多不会表现出这种奇怪的特性。如果某个无穷级数的所有项在取绝对值（将负数项全部变成正数项）之后具有收敛性，我们就称这是一个“绝对收敛级数”。例如，我们在前文中见过的交错级数：</p>
+<p height="1em" width="0pt" align="center">1 –<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ –<img align="middle" height="84" width="33" src="Image01283.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01284.jpg" />
+ – … =<img align="middle" height="84" width="33" src="Image01057.jpg" />
+</p>
+<p height="1em" width="2em" align="justify">它就是一个绝对收敛级数，因为各项的绝对值相加可以得到一个我们非常熟悉的收敛级数：</p>
+<p height="1em" width="0pt" align="center">1 +<img align="middle" height="84" width="33" src="Image00998.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01282.jpg" />
+ +<img align="middle" height="84" width="33" src="Image01283.jpg" />
+ +<img align="middle" height="84" width="53" src="Image01284.jpg" />
+ + … = 2</p>
+<p height="1em" width="2em" align="justify">绝对收敛级数虽然有无穷多项，但它们可以应用加法交换律。因此，在上面那个交错级数中，无论我们如何打乱1、–1/2、1/4、–1/8等项的先后次序，它们的和一定收敛于2/3。</p>
+<p height="1em" width="2em" align="justify">无穷级数可以无休止地写下去，但是写作总有结束的一天，我也必须遵从这个规律。现在，我似乎应该跟大家说再见了，但是，我仍然希望把握最后的机会，继续带领大家遨游数学的魔法王国。</p>
+<span id="filepos0003759052"></span>
+<p height="3em" width="0pt" align="left">
+<font size="4">
+<font color="#000000">一玩就停不下来的幻方游戏！</font>
+</font>
+</p>
+<p height="2em" width="2em" align="justify">为了感谢大家的一路相伴，在本书即将结束之际，我请大家再感受一次数学的神奇。这次体验与无穷大无关，但同样神奇，它就是“幻方”（magic square）。幻方是由数字组成的方形表格，每行、每列和对角线上的数字之和都相等。下图是众所周知的3×3幻方，其中每行、每列和每条对角线上的数字之和都等于15。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="108" width="114" src="Image01374.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>幻和值为15的3×3幻方</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">幻方还有一个不为人所知的特性，我称为“平方回文特性”。首先，把各行与各列的三个数字分别看成三位数，然后求它们的平方和，就会发现：</p>
+<p height="1em" width="0pt" align="center">492<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 357<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 816<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ = 294<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 753<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 618<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="0pt" align="center">438<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 951<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 276<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ = 834<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 159<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 672<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="2em" align="justify">某些“泛”对角线也有类似现象，例如：</p>
+<p height="1em" width="0pt" align="center">456<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 312<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 897<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ = 654<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 213<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+ + 798<sup>
+<small>
+<font size="2">2</font>
+</small>
+</sup>
+</p>
+<p height="1em" width="2em" align="justify">这真是太神奇了！</p>
+<p height="1em" width="2em" align="justify">最简单的4×4幻方（如下图所示）使用的是1~16的数字，所有行、列及对角线的幻和值都是34。数学家和魔术师都喜欢4×4幻方，因为他们可以通过几十种方法算出幻和值。比如，在下图这个幻方中，所有行、列和对角线的和都是34。同时，幻方中所有的2×2正方形[包括左上角的1/4区域（8，11，13，2）、中间四格、幻方的四个角，等等]中的4个数字的和也是34。此外，就连泛对角线以及幻方内所有3×3正方形的顶点之和也是34。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="144" width="200" src="Image01375.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>幻和值为34的幻方。不仅各行、各列、各条对角线的数字之和为34，几乎所有的2×2正方形中的数字之和也都等于34</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">你是不是对某个大于20的两位数情有独钟？你可以用这个数字<i>T</i>
+ 作为幻和值，轻而易举地设计一个幻方。选择1~12的数字，再加上<i>T</i>
+ – 18、<i>T</i>
+ – 19、<i>T</i>
+ – 20和<i>T</i>
+ – 21这4个数字，按下图所示方式填入各个方格，就搞定了。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="145" width="376" src="Image01376.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>幻和值为</b>
+</font>
+ <font size="2">
+<i>
+<b>T</b>
+</i>
+</font>
+ <font size="2">
+<b>的幻方速成法</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">以幻和值 <i>T</i>
+ = 55的幻方为例（如下图所示）。上例中和为34的所有四数集合，只要这4个数字中正好包含一个（而不能是两个或0个）含有变量<i>T</i>
+ 的方格，它们的和就一定是55。因此，右上角的正方形符合条件（35 + 1 + 7 + 12 = 55），而中间偏左的正方形则不符合条件（34 + 2 + 3 + 37 ≠ 55）。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="148" width="376" src="Image01377.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>幻和值为55的幻方</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">并不是所有人都喜欢某个两位数，但是所有人都会记住自己的生日，而且我发现很多人喜欢用生日数字作为幻和值，设计出个性化的幻方。下面，我向大家介绍一种“双生日”幻方设计法，让自己的生日出现两次，分别位于第一行和4个角。假设你的生日是由<i>A</i>
+ 、<i>B</i>
+ 、<i>C</i>
+ 、<i>D</i>
+ 这4个数字构成的，我们可以按照下述方式设计这个幻方。请大家注意观察，幻方的各行、各列、各条对角线和几乎所有的2×2正方形中的数字之和，都是幻和值 <i>A</i>
+ + <i>B</i>
+ + <i>C</i>
+ + <i>D</i>
+ 。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="148" width="376" src="Image01378.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>双生日幻方。日期</b>
+</font>
+ <font size="2">
+<i>
+<b>A</b>
+</i>
+</font>
+ <font size="2">
+<b>、</b>
+</font>
+ <font size="2">
+<i>
+<b>B</b>
+</i>
+</font>
+ <font size="2">
+<b>、</b>
+</font>
+ <font size="2">
+<i>
+<b>C</b>
+</i>
+</font>
+ <font size="2">
+<b>、</b>
+</font>
+ <font size="2">
+<i>
+<b>D</b>
+</i>
+</font>
+ <font size="2">
+<b>位于在第一行以及4个角</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">我的母亲是1936年11月18日出生的，用这些数字可以设计出下面这个幻方：</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="144" width="219" src="Image01379.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>用我母亲的出生日期设计的幻方，幻和值为38</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">现在，请大家用自己的出生日期设计一个幻方吧。按照上面的介绍，实现的方法应该超过36种，试试看你能找出多少种吧。</p>
+<p height="1em" width="2em" align="justify">4×4幻方的组合方式最多，不过，运用特定的方法，人们可以设计出更高阶的幻方。例如，下面是一个10×10幻方，使用了1~100的所有数字。</p>
+<p height="1em" width="0pt" align="center"><img align="baseline" height="360" width="503" src="Image01380.jpg" />
+</p>
+<p height="0pt" width="2em" align="center">
+<font size="2">
+<b>包含1~100的所有数字的10×10幻方</b>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">如果不进行计算，你能说出这个幻方的各行、各列和各条对角线的数字之和是多少吗？当然可以！我们早就证明了1~100的数字之和为5 050，那么幻方的各行之和必然是5 050的1/10。因此，这个幻方的幻和值肯定是5 050/10 = 505。本书从讨论1~100的数字求和问题开始，现在又以同样的问题结束，似乎是一个不错的选择。恭喜你已经读完了这本书，对此我深表感谢。本书探讨了数学领域的大量内容、观点和解决问题的方法。当你再一次通读本书或者阅读涉及数学思维的其他著作时，如果你觉得我介绍的知识对你有帮助、值得研究，或者让你感受到了数学的神奇和美丽，我将深感欣慰。</p>
+<span id="filepos0003766907"></span>
+<p height="3em" width="0pt" align="center">
+<font size="4">
+<font color="#000000">后记</font>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">我希望大家读完本书之后，会对数学方面的书籍产生兴趣，因为这类好书真的很多。实际上，有很多非常有趣的数学知识，包括本书中的许多内容，都是我在课堂以外的地方学到的。</p>
+<p height="1em" width="2em" align="justify">本书是我的视频课程“数学的乐趣”（<i>The Joy of Mathematics</i>
+ ）的衍生品。该课程由“精品课程”（The Great Courses）出品，共24节，每节30分钟。除了本书介绍的所有内容，还包括“概率的乐趣”、“数学游戏与魔术”等。“精品课程”有30多种数学课（包括音频、视频，还提供下载服务），涉及面非常广，包括代数学、几何学、微积分、数学史等内容。他们精挑细选，邀请全美最优秀的教师来讲授这些课程。除了“数学的乐趣”以外，我还帮助他们录制了“离散数学”、“心算的秘密”、“游戏与智力测试中的数学”三门课程。</p>
+<p height="1em" width="2em" align="justify">如果大家想阅读心算方面的书，可以考虑我与迈克尔·舍默（Michael Shermer）合著的《心算的秘密》。这本书详细介绍了各种心算技巧，可以帮大家快速、准确地完成计算。只要你掌握了10以内的乘法表，就可以理解这本书中介绍的所有心算技巧。</p>
+<p height="1em" width="2em" align="justify">针对更高水平的读者，我编写了另外三本数学书。美国数学协会（MAA）出版了我与詹妮弗·奎恩（Jennifer J.Quinn）合著的《真正有用的证明方法：组合性证明的艺术》，以及我与埃兹·布朗（Ezra Brown）合编的《数论点心》。最近出版的《引人入胜的图论世界》一书是我与加里·查特兰德（Gary Chartrand）、张平（音）合作完成的，由普林斯顿大学出版社出版。</p>
+<p height="1em" width="2em" align="justify">诚挚感谢马丁·伽德纳（Martin Gardner），这位有史以来最伟大的数学家出版了200多部著作，其中大多都是趣味数学。他的作品（以及他在《科学美国人》杂志上的“数学游戏”专栏文章）影响了一代又一代人，激发了他们学习数学的热情和兴趣。此外，亚历克斯·贝洛（Alex Bellos）、伊瓦斯·彼得森（Ivars Peterson）和伊恩·斯图尔特（Ian Stewart）也继承了伽德纳的衣钵，他们的所有著作都值得一读。在这种风格的作品中，史蒂夫·斯托加茨（Steven Strogatz）的《<i>x</i>
+ 的奇幻之旅》是一本非常优秀的数学普及读物，值得推荐。</p>
+<p height="1em" width="2em" align="justify">在以培养高阶数学能力为目的的教科书方面，我大力推荐理查德·鲁斯克（Richard Rusczyk）的《解题的艺术》丛书。这套书分门别类、深入浅出地讨论了代数学、几何学、微积分、难题解答等内容。同时，他们还在网站上为数学爱好者和准备参加数学竞赛的学生提供在线课程。</p>
+<p height="1em" width="2em" align="justify">互联上还有其他一些有意思的资源。我的同事弗朗西斯·苏（Francis Su）在他的趣味数学网站上提供了数百个实例。他设计这些问题的初衷是为教师服务，帮助他们用5分钟的时间快速搞活课堂气氛。亚历克斯·博格莫尔尼（Alex Bogomolny）在他的网站“快刀斩乱麻”上发布了“互动式数学问题与难题集锦”，足以让你在相当长的时间里都能体验到数学的乐趣。他还在一篇文章中列出了100多种证明勾股定理的方法。“数学狂”网站是一个充满欢乐的免费网站，那里有大量关于趣味数学的内容。</p>
+<p height="1em" width="2em" align="justify">以上是我的诚挚推荐，祝大家阅读愉快！</p>
+<span id="filepos0003770897"></span>
+<p height="3em" width="0pt" align="center">
+<font size="4">
+<font color="#000000">致谢</font>
+</font>
+</p>
+<p height="1em" width="2em" align="justify">如果没有我的图书经纪人卡伦·甘茨·扎勒（Karen Gantz Zahler）坚持不懈的鼓励，如果没有基础读物（Basic Books）出版社编辑凯莱赫（Kelleher）的热心支持，本书英文版就不可能顺利出版。</p>
+<p height="1em" width="2em" align="justify">如果娜塔莉亚·圣克莱尔（Natalya St. Clair）没有帮助我制作完成大量图表、插图和数学图形，很难想象我将面临什么样的困难。娜塔莉亚独具匠心，把数学装扮得赏心悦目，与她合作是一件非常愉快的事。</p>
+<p height="1em" width="2em" align="justify">我曾经的学生萨姆·古特孔斯特（Sam Gutekunst）认真阅读了本书的所有章节，为我提供了许多有价值的意见和建议，并帮助编辑凯莱赫解决了很多难题。此外，艾米·谢尔–加拉施（Amy hell-Gellasch)和文森特·马茨科（Vencent Matsko）也阅读了本书，并从数学专业人士的角度提出了大量独到的见解，对本书的定稿起到了积极的推动作用。</p>
+<p height="1em" width="2em" align="justify">我在哈维姆德学院的同事和学生为我提供了大量帮助。特别感谢弗朗西斯·苏教授，与他的交谈以及他的“趣味数学”网站给了我许多灵感。感谢斯科特（Scott）与卡洛尔·安·斯莫尔伍德（Carol Ann Smallwood）捐资设立的斯莫尔伍德家族数学教席。同时，还要感谢克里斯托弗·布朗（Christopher Brown）、加里·查特兰德（Gary Chartrand）、杰伊·考迪斯（Jay Cordes）、约翰·福特（John Fort）、罗恩·格拉汉姆（Ron Graham）、穆罕默德·奥马尔（Mohamed omar）、詹森·罗森豪斯（Jason Rosenhouse）与娜塔莉亚·圣克莱尔，他们为我提供了大量有益的想法。</p>
+<p height="1em" width="2em" align="justify">伊森·布朗与我分享了他记忆的秘诀，道格拉斯·邓汉姆同意我引用他创作的图案，戴尔·戈德曼（Dale Gerdemann）为我绘制了谢尔宾斯基三角形，迈克·基斯同意我引用他仿写的用于记忆 π 的诗作，数学音乐家拉里·莱塞与丹·坎普同意我在书中引用他们创作的关于归纳性证明法的歌曲，娜塔莉亚·圣克莱尔同意我使用她拍摄的照片《黄金玫瑰》。我在此对他们的热情帮助表示感谢。</p>
+<p height="1em" width="2em" align="justify">感谢珀修斯图书集团的专业团队，能够与琼多（Quynh Do）、凯莱赫、凯西·尼尔森（Cassie Nelson）、梅丽莎·维洛内西（Melissa Veronesi）、苏·瓦尔哈（Sue Varga）、杰夫·威廉姆斯（Jeff Williams）等人合作，我深感荣幸。</p>
+<p height="1em" width="2em" align="justify">“精品课程”非常出色，让我可以用一种之前不敢想象的方式普及数学知识。在我创作本书时，他们还允许我大量引用“数学的乐趣”课程的内容。对于他们的帮助，我无比感激。</p>
+<p height="1em" width="2em" align="justify">我要感谢我出色的父母拉里·本杰明（Larry Benjamin）和勒诺·本杰明（Lenore Benjamin），还要感谢谆谆教导我的所有老师。我永远也忘不了我的小学老师贝蒂·戈尔德（Betty Gold）、玛丽·安·斯帕克斯（Mary Ann Sparks）、珍妮·菲斯勒（Jean Fisler），还有梅菲尔德中学、卡内基–梅隆大学、约翰·霍普金斯大学以及哈维姆德学院的同学们以及数学与应用数学系的教职员工们。</p>
+<p height="1em" width="2em" align="justify">最后，我要把最真诚的谢意献给我的妻子迪娜（Deena）和我的两个女儿劳瑞尔（Laurel）、爱丽尔（Ariel），感谢她们对我的爱，以及对我埋头创作的包容和耐心。迪娜，你总是一丝不苟地校对我的所有书稿，我永远爱你，感激你！感谢你们，有了你们，我的生活才变得如此多姿多彩！</p>
+<p height="1em" width="2em" align="right">阿瑟·本杰明<br/>
+<br/>
+于美国加州克莱蒙特市</p>
+<span id="filepos0003775078"></span>
+<p height="3em" width="0pt">
+<font size="2">图书在版编目（CIP）数据</font>
+</p>
+<br/>
+<br/>
+<p height="0pt" width="0pt">
+<font size="2">12堂魔力数学课 /（美）阿瑟·本杰明著；胡小锐译. -- 北京：中信出版社，2017.6</font>
+</p>
+<p height="0pt" width="0pt">
+<font size="2">书名原文：The Magic of Math</font>
+</p>
+<p height="0pt" width="0pt">
+<font size="2">ISBN 978-7-5086-7448-3</font>
+</p>
+<p height="0pt" width="0pt">
+<font size="2">I. ① 1… II. ①阿…②胡… III. ①数学－普及读物 IV. ①O1-49</font>
+</p>
+<p height="0pt" width="0pt">
+<font size="2">中国版本图书馆CIP数据核字（2017）第081491号</font>
+</p>
+<br/>
+<br/>
+<p height="0pt" width="0pt">
+<font size="2">12堂魔力数学课</font>
+</p>
+<p height="0pt" width="0pt">
+<font size="2">著者：[ 美] 阿瑟·本杰明</font>
+</p>
+<p height="0pt" width="0pt">
+<font size="2">译者：胡小锐</font>
+</p>
+<p height="0pt" width="0pt">
+<font size="2">出版发行：中信出版集团股份有限公司</font>
+</p>
+<p height="0pt" width="0pt">
+<font size="2">（北京市朝阳区惠新东街甲4号富盛大厦2座 邮编100029）</font>
+</p>
+<p height="0pt" width="0pt">
+<font size="2">电子书排版：萌芽图文</font>
+</p>
+<br/>
+<br/>
+<p height="0pt" width="0pt">
+<font size="2">中信出版社官网：</font>
+ <a href="http://www.citicpub.com/">
+<font size="2">http://www.citicpub.com/</font>
+</a>
+</p>
+<p height="0pt" width="0pt">
+<font size="2">官方微博：</font>
+ <a href="http://weibo.com/citicpub">
+<font size="2">http://weibo.com/citicpub</font>
+</a>
+</p>
+<p height="0pt" width="0pt">
+<font size="2">更多好书，尽在中信书院</font>
+</p>
+<p height="0pt" width="0pt">
+<font size="2">中信书院：App下载地址</font>
+ <a href="https://book.yunpub.cn/">
+<font size="2">https://book.yunpub.cn/</font>
+</a>
+ <font size="2">（中信官方数字阅读平台）</font>
+</p>
+<p height="0pt" width="0pt">
+<font size="2">微信号：中信书院</font>
+</p>
+<p height="1em" width="0pt" align="center">
+<font size="5">
+<b>Table of Contents</b>
+</font>
+</p>
+<p height="1em" width="-14pt">
+<a href="text00000.html">扉页</a>
+</p>
+<p height="0pt" width="-14pt">
+<a href="text00000.html#filepos0000000604">目录</a>
+</p>
+<p height="0pt" width="-14pt">
+<a href="text00000.html#filepos0000001932">魔鬼数学：大数据时代，数学思维的力量</a>
+</p>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00000.html#filepos0000002066">扉页</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00000.html#filepos0000003191">目录</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00000.html#filepos0000006955">引言 数学知识什么时候能派上用场呢？</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00000.html#filepos0000048993">第一部分 线性</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00000.html#filepos0000190595">第二部分 推理</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00001.html#filepos0000435457">第三部分 期望值</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00002.html#filepos0000651286">第四部分 回归</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00003.html#filepos0000790163">第五部分 存在</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00004.html#filepos0000920211">结语 如何做出正确的决策？</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00004.html#filepos0000959859">致谢</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00004.html#filepos0000965773">版权页</a>
+</blockquote>
+</blockquote>
+<p height="0pt" width="-14pt">
+<a href="text00004.html#filepos0000968688">爱与数学</a>
+</p>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00004.html#filepos0000968806">扉页</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00004.html#filepos0000969337">目录</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00004.html#filepos0000973260">序言</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00004.html#filepos0000993118">导言</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00004.html#filepos0000995992">第1章 神秘的怪兽</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00004.html#filepos0001009078">第2章 对称的奥秘</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00004.html#filepos0001038679">第3章 第五道题</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00004.html#filepos0001064736">第4章 理论数学与应用数学</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00004.html#filepos0001078749">第5章 辫群与贝蒂数</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00005.html#filepos0001103194">第6章 敲开数学世界的大门</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00005.html#filepos0001138159">第7章 把一个个小岛连接起来</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00005.html#filepos0001161818">第8章 神奇的猜想</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00005.html#filepos0001209356">第9章 现代数学的“罗塞塔石碑”</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00005.html#filepos0001240091">第10章 李代数与n维空间</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00005.html#filepos0001276867">第11章 登顶数学险峰</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00005.html#filepos0001294041">第12章 数学思维的力量</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00005.html#filepos0001314609">第13章 来自哈佛大学校长的邀请</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00006.html#filepos0001344375">第14章 层-函数字典</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00006.html#filepos0001380758">第15章 数学领域的美丽邂逅</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00006.html#filepos0001414409">第16章 地球人和火星人</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00006.html#filepos0001464981">第17章 数学之美</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00006.html#filepos0001523256">第18章 爱的公式与终极真理</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001557033">结语</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001560976">致谢</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001563144">版权页</a>
+</blockquote>
+</blockquote>
+<p height="0pt" width="-14pt">
+<a href="text00007.html#filepos0001566151">爱情数学：如何用数学找到真爱？</a>
+</p>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001566269">扉页</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001566764">目录</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001569161">引言</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001573995">第一章 找到真爱的概率有多大？</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001584094">第二章 容貌有多重要？</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001600162">第三章 如何让作乐时光发挥最大价值？</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001613039">第四章 网络交友</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001636962">第五章 恋爱游戏</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001655174">第六章 性爱的数学法则</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001668625">第七章 何时应该安定下来？</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001679671">第八章 如何优化婚礼？</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001696255">第九章 王子公主怎样才能一直幸福地生活在一起？</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001708357">结语</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001711288">参考文献</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001717854">致谢</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001719080">版权页</a>
+</blockquote>
+</blockquote>
+<p height="0pt" width="-14pt">
+<a href="text00007.html#filepos0001722190">数学简史</a>
+</p>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001722324">扉页</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001722693">目录</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001728571">前言</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001739197">第一章 中东，或数学的起源</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00007.html#filepos0001788374">第二章 希腊的那些先哲们</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00008.html#filepos0001855405">第三章 中世纪的中国</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00008.html#filepos0001923309">第四章 印度人和波斯人</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00008.html#filepos0002009820">第五章 从文艺复兴到微积分的诞生</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00009.html#filepos0002075345">第六章 分析时代与法国大革命</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00009.html#filepos0002149408">第七章 现代数学与现代艺术</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00009.html#filepos0002234788">第八章 抽象化：20世纪以来</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00010.html#filepos0002344966">附录1 数学年表</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00010.html#filepos0002355268">附录2 常用数学符号的来历</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00010.html#filepos0002355534">参考文献</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00010.html#filepos0002364783">版权页</a>
+</blockquote>
+</blockquote>
+<p height="0pt" width="-14pt">
+<a href="text00010.html#filepos0002365483">数学世界的探奇之旅</a>
+</p>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00010.html#filepos0002365617">扉页</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00010.html#filepos0002366030">目录</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00010.html#filepos0002369993">第1章 虚拟的“居民”？</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00010.html#filepos0002389184">第2章 史前人类的计数系统</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00010.html#filepos0002413506">第3章 毕达哥拉斯：万物皆是数字</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00010.html#filepos0002447869">第4章 欧几里得：几何定理的完美证明</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00010.html#filepos0002462921">第5章 阿基米德：用沙粒填满宇宙</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00010.html#filepos0002474731">第6章 斐波那奇：阿拉伯数字的登场</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00011.html#filepos0002506639">第7章 培根：数学是自然科学的钥匙</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00011.html#filepos0002533404">第8章 高斯：神通广大的虚数</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00011.html#filepos0002543252">第9章 牛顿：微积分与宇宙观</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00011.html#filepos0002567584">第10章 卡尔达诺：概率与“水晶球”</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00011.html#filepos0002617607">第11章 麦克斯韦：关于电磁波的数学方程组</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00011.html#filepos0002642427">第12章 康托尔：让一众科学家挠头的无穷大</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00011.html#filepos0002702975">第13章 爱因斯坦：量子物理与抽象数学</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00012.html#filepos0002744336">第14章 诺特：对称之美与隐形恶龙</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00012.html#filepos0002788228">第15章 数学的力量？</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00012.html#filepos0002824410">致谢</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00012.html#filepos0002825006">注释</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00012.html#filepos0002830455">版权页</a>
+</blockquote>
+</blockquote>
+<p height="0pt" width="-14pt">
+<a href="text00012.html#filepos0002832508">数学颂</a>
+</p>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00012.html#filepos0002832642">扉页</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00012.html#filepos0002833041">目录</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00012.html#filepos0002834664">前言</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00012.html#filepos0002836954">必须拯救数学</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00012.html#filepos0002869368">哲学和数学，一对老情侣的故事</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00012.html#filepos0002904659">数学谈些什么？</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00012.html#filepos0002935945">以数学为基础的形而上学的尝试</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00012.html#filepos0002952100">数学能带来幸福吗？</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00012.html#filepos0002978592">结论</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00013.html#filepos0002985707">译后记</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00013.html#filepos0003000550">版权页</a>
+</blockquote>
+</blockquote>
+<p height="0pt" width="-14pt">
+<a href="text00013.html#filepos0003000936">12堂魔力数学课</a>
+</p>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00013.html#filepos0003001070">扉页</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00013.html#filepos0003001473">目录</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00013.html#filepos0003010228">引言</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00013.html#filepos0003015931">第1章 数字之舞</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00013.html#filepos0003062319">第2章 有魔法的代数学</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00013.html#filepos0003128743">第3章 神奇的数字“9”</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00013.html#filepos0003177382">第4章 好吃又好玩的排列组合</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00014.html#filepos0003231796">第5章 超酷的斐波那契数列</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00014.html#filepos0003294607">第6章 永恒的数学定理</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00014.html#filepos0003370140">第7章 开脑洞的几何学</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00014.html#filepos0003441597">第8章 永不止步的π</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00015.html#filepos0003495258">第9章 用途多多的三角学</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00015.html#filepos0003561626">第10章 盒子外面的i和e</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00015.html#filepos0003619877">第11章 快思慢想的微积分</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00015.html#filepos0003690653">第12章 比宇宙还大的无穷大</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00016.html#filepos0003766907">后记</a>
+</blockquote>
+</blockquote>
+<blockquote height="0pt">
+<blockquote width="0pt">
+<a href="text00016.html#filepos0003770897">致谢</a>
+</blockquote>
+</blockquote>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="28FAO0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h3 class="chapter-three">4.6　方向难题</h3>
+
+  <h4 class="chapter-four" id="sigil_toc_id_8">4.6.1　方向太多</h4>
+
+  <p class="bodytext">还有一个不幸的事实与坐标有关，虽然这不是坐标自身的错。这个不幸的事实是：方向太多。无论我们怎样选择坐标，不是一切都会指向我们的某个轴的方向。我们用寻找回家的路来说明这个问题。假设你坐船跨越海洋寻找远方的陆地。你不想在海上迷失方向，因此你决定带上地图。如果你整个旅程都往正西走，找到回家的路将不会有什么问题。如果你走的距离为d，只需调转船头沿相反的方向走相同的距离d就可以了。虽然东-西只是我们平常用的坐标系中的一根“轴”，上面的思想却适用于任何方向。如果你沿直线走距离d，转身沿相反的方向走相同的距离就可以了。不幸地是，有时候没法走直线。你可能需要转弯避开礁石，你也可能因为意外转向，等等。如果你改变了方向，你现在走了多远呢？你需要有办法能组合不同方向的信息。</p>
+
+  <p class="bodytext">初看上去，这个问题有点像我们已经解决的一个问题。如果我们用x<sub class="calibre6">k</sub>表示我们第k天在东-西方向上行进的公里数，则n天后，我们在东-西方向上行进的千米数就是x<sub class="calibre6">1</sub>+x<sub class="calibre6">2</sub>+…+x<sub class="calibre6">n</sub>，或者（用第2章的标记法缩写这些相加）</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00338.jpeg"/>
+  </div>
+
+  <p class="bodytext">类似地，如果我们用y<sub class="calibre6">k</sub>表示第k天我们在南-北方向上行进的千米数，则n天后，我们在南-北方向上行进的千米数就是</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00339.jpeg"/>
+  </div>
+
+  <p class="bodytext">X和Y分别是我们在东-西和南-北方向上行进的总距离。如果我们想知道离家有多远，可以用捷径公式计算<img alt="" class="zaozi" src="../images/00340.jpeg"/>。</p>
+
+  <p class="bodytext">但是就算我们知道如何计算平方根（我们还不知道），也没有实际解决我们的问题！我们真正的问题是通常我们收到的信息不是x<sub class="calibre6">k</sub>和y<sub class="calibre6">k</sub>这样的形式。我们不知道它们是什么。当我们在真实世界中航海时，我们发现大自然不会每天告诉我们x<sub class="calibre6">k</sub>和y<sub class="calibre6">k</sub>。也就是说，我们拿到的信息不是沿东-西和南-北方向走了多远。我们拿到的可能是距离（长度）和方向（角度）。也就是说，我们顶多能有类似图4.4这样的东西，也可能是这样的清单：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00341.jpeg"/>     <p class="tuzhu-center">图4.4　我们需要想办法组合不同方向的信息。</p>
+  </div>
+
+  <p class="bodytext"><span class="jiacu">第1天：</span>往东12千米。</p>
+
+  <p class="bodytext"><span class="jiacu">第2天：</span>往东北7千米。</p>
+
+  <p class="bodytext"><span class="jiacu">第3天：</span>往东北偏东10千米。</p>
+
+  <p class="bodytext">不清楚怎么算我们走了多远。主要问题是我们拿到的信息是<span class="jiacu">沿某个方向而不是轴</span>行进的距离：有太多可能的方向。如果给我们的信息是每天沿地图水平和垂直方向走的距离（即沿东-西走了多远，沿南-北走了多远），我们就知道该怎么做。那就是我们在上面解决的更简单的问题，用x<sub class="calibre6">k</sub>和y<sub class="calibre6">k</sub>以及捷径公式就可以。</p>
+
+  <p class="bodytext">图4.4展示了这个问题，图4.5则展示了为什么这个问题其实是一个转换问题。如果我们知道如何将每天的“距离和角度”信息转换成“水平和垂直”信息，就能将其还原成我们在上面已经解决的问题，从而解决这个问题。</p>
+
+  <p class="bodytext">我们将航海问题还原成稍微简单一点的抽象问题。现在我们可以忘掉图4.4和4.5中的三段路径。为什么？因为一旦我们掌握了将距离和角度信息转换为水平和垂直信息的方法，只需将这个方法应用三次，就能（从原理上）解决我们的航海问题。</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00342.jpeg"/>     <p class="tuzhu-center">图4.5　只要我们能将“距离和角度”信息转换为“水平和垂直”信息，就不容易在海上迷失方向。</p>
+  </div>
+
+  <p class="bodytext">以更抽象的形式来看这个难题，作为转换问题，我们可以看到这个问题的本质与航海无关。它是一个关于将以距离和方向的语言描述的信息转换成以我们的坐标系——用相互垂直的两个方向建立的坐标系——语言描述的等价信息的问题。认识到这个问题其实比我们最初认为的更具普遍性之后，让我们以更抽象的方式来思考它。</p>
+</body></html>

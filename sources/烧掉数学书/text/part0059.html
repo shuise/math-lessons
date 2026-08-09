@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="1O8H60-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">3.4.4　更有力的锤子</h4>
+
+  <p class="bodytext">我们有了更有力的锤子：</p>
+
+  <p class="bodytext-c">（f<sub class="calibre6">1</sub>f<sub class="calibre6">2</sub>…f<sub class="calibre6">n</sub>）'=每个人轮流求导一次得到的东西。</p>
+
+  <p class="bodytext">说详细点就是：</p>
+
+  <p class="bodytext-c">（f<sub class="calibre6">1</sub>f<sub class="calibre6">2</sub>…f<sub class="calibre6">n</sub>）'=（f<sub class="calibre6">1</sub>'f<sub class="calibre6">2</sub>…f<sub class="calibre6">n</sub>）+（f<sub class="calibre6">1</sub>f<sub class="calibre6">2</sub>'…f<sub class="calibre6">n</sub>）+…+（f<sub class="calibre6">1</sub>f<sub class="calibre6">2</sub>…f<sub class="calibre6">n</sub>'）。　（3.8）</p>
+
+  <p class="bodytext">现在我们可以尝试对<img alt="" class="gongshi" src="../images/00270.jpeg"/>求导了。记得我们想用对<img alt="" class="gongshi" src="../images/00271.jpeg"/>求导的类似思路来论证。我们认为通过定义一个很简单的机器，但是以一种很好笑的方式写出来，也许就能从中求出<img alt="" class="gongshi" src="../images/00272.jpeg"/>的导数：</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00273.jpeg"/>
+  </div>
+
+  <p class="bodytext">这台机器只不过是“最乏味的机器”M（x）≡x的伪装，这台机器会把我们放进去的任何东西都送回来。我们知道它的导数是</p>
+
+  <p class="bodytext-c">M'（x）=1，</p>
+
+  <p class="bodytext">我们可以对它应用更有力的锤子。其实这个新锤子的力量不限于这个问题。因为M（x）只不过是<img alt="" class="gongshi" src="../images/00274.jpeg"/>的n份拷贝，当我们对M（x）应用新锤子的时候，等式（3.8）中的每一项都是一样的，都有n-1份<img alt="" class="gongshi" src="../images/00275.jpeg"/>拷贝和1份<img alt="" class="gongshi" src="../images/00276.jpeg"/>拷贝。由于同样的东西出现了n次，因此得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00277.jpeg"/>
+  </div>
+
+  <p class="bodytext">我们已经用两种方式描述了相同的东西，因此可以在它们之间画等号：</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00278.jpeg"/>
+  </div>
+
+  <p class="bodytext">缩写<img alt="" class="gongshi" src="../images/00279.jpeg"/>看起来很吓人，但根据我们发明的幂，这其实就是x<sup class="calibre3"><span class="jiacu">某个东西</span></sup><span class="jiacu">，其中某个东西</span>就是你将<img alt="" class="gongshi" src="../images/00280.jpeg"/>相加n-1次得到的东西。因此<span class="jiacu">某个东西</span>其实就是<img alt="" class="gongshi" src="../images/00281.jpeg"/>（n-1），或者换一种描述方式，<img alt="" class="gongshi" src="../images/00282.jpeg"/>。所以我们可以将上面等式中的指数换掉。另外，我们想求的是<img alt="" class="gongshi" src="../images/00283.jpeg"/>，所以可以将除此以外的一切都扔到等号的另一边。从而得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00284.jpeg"/>
+  </div>
+
+  <p class="bodytext">此时此刻，终于完成了，我们得到了想要的东西。它还没有“化简”，但这并不重要。问某个东西有没有“化简”就好像问某个艺术品“好不好”。这个问题不是毫无意义，但也不是很有意义，并且答案肯定不是唯一的。它取决于审美偏好。化简是人类构造。对于数学来说，描述同一件事情的“化简”的答案与丑陋的答案没有区别。因此在这个意义上，我们已经完成了。</p>
+
+  <p class="bodytext">不过私底下我们还是有点忐忑，因为我们还不确定这与我们一直以来发现的模式是不是一致的。记得前面每次求x的某次幂的导数时，得到的导数都是将原来的指数拿到前面去，然后将头顶上的指数减1。当指数为正整数时，我们在语句（x<sup class="calibre3">n</sup>）'=nx<sup class="calibre3">n-1</sup>中发现了这个模式，当指数为负整数时，我们在语句（x<sup class="calibre3">-n</sup>）'=（-n）x<sup class="calibre3">-n-1</sup>中发现了这个模式，甚至当指数为特定的分数指数时，我们在语句<img alt="" class="gongshi" src="../images/00285.jpeg"/>中也发现了这个模式。我们希望这个模式一直成立，因为如果这样的话我们的数学世界中就不会有许多不同的用于对指数幂进行求导的丑陋“规则”，取决于指数是什么，我们只需要一个大的神奇规则。我们刚才在等式（3.9）中发现的东西也许会说类似的事情，也许不会。但是根据它目前的表述方式，我们看不出来。</p>
+
+  <p class="bodytext">因此虽然“化简”是无关于数学的人类构造物，虽然判卷老师对正确但“没有化简”的答案扣分只不过是根据自己的偏好，我们出于自身的需要还是要将等式（3.9）写成另一种的形式，这样我们才能知道如何统一我们的数学世界。至于你想不想把这个称为“化简”都无关紧要。我们想做的就是将等式（3.9）变得容易看出我们发现的到目前为止一直成立的模式是不是仍然成立。我们怎样才能将等式（3.9）捏成这样的形式呢？在我们发明幂时，发现<img alt="" class="gongshi" src="../images/00286.jpeg"/>可以写成（<span class="jiacu">某个东西</span>）<sup class="calibre3">-＃</sup>。因此再来看我们刚才发现的等式（3.9），注意到<img alt="" class="gongshi" src="../images/00287.jpeg"/>我们就能将一些东西从下面移到上面。同样，除以n实际上就是乘以<img alt="" class="gongshi" src="../images/00288.jpeg"/>。因此我们可以将等式（3.9）重新写成</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00289.jpeg"/>
+  </div>
+
+  <p class="bodytext">完美！同样的模式再次出现。这不可能是出于巧合。如果能一劳永逸地解决这个疑问就太棒了。现在我们很有把握无论＃是什么数，都有（x<sup class="calibre3">＃</sup>）=＃x<sup class="calibre3">＃-1</sup>。我们不知道是不是任何数都可以写成<img alt="" class="gongshi" src="../images/00290.jpeg"/>的形式，其中m和n是整数，但我们确信任何数＃都能用形为<img alt="" class="gongshi" src="../images/00291.jpeg"/>的某个数任意逼近。怎么做？这样：假设有人给你一个很长的数，比如</p>
+
+  <p class="bodytext-c">＃=8.34567840987238654…，</p>
+
+  <p class="bodytext">这个数是我在键盘上乱敲的，假设我说“用<img alt="" class="gongshi" src="../images/00291.jpeg"/>形式的数逼近这个数至小数点后第10位，其中m和n是整数”，你不需要多高深的数学就能做到，只需要这样做：</p>
+
+  <div class="zhong1">
+ <img alt="" class="image-tuzhu" src="../images/00292.jpeg"/>
+  </div>
+
+  <p class="bodytext">因此虽然是我随意捏造的一个数字，还是能用整数除整数来逼近到（比如说）小数点后10位，不需要什么高深的数学。显然，无论最初是什么数，也无论要精确到小数点后多少位，这个方法都能做到。</p>
+
+  <p class="bodytext">因此，为了让我们自己确信（x<sup class="calibre3">＃</sup>）'=＃x<sup class="calibre3">＃-1</sup>对任何数＃都成立，我们首先从<img alt="" class="gongshi" src="../images/00293.jpeg"/>形式的指数开始，至少我们知道可以用这种形式的数任意逼近任何数＃。我们不知道是不是有无法<span class="jiacu">明确</span>写成整数比的数，也许所有数都是整数比，也许不是；我们目前还不知道——但上面的论证确保了就算这种古怪的数<span class="jiacu">的确</span>存在，我们也可以用整数比任意逼近它们。因此，就算我们最终发现不是所有数都能表示为<img alt="" class="gongshi" src="../images/00294.jpeg"/>，其中m和n都是整数，我们也能确信这个模式依然能成立，只要我们想这样做。现在让我们一劳永逸地解决这个疑问。</p>
+</body></html>

@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="318PC0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h3 class="chapter-three">5.5　MM型机器</h3>
+
+  <p class="bodytext">在结束这一章之前我们还有一个类型没有探索：MM。MM型机器定</p>
+
+  <p class="bodytext">义为具有以下性质的所有机器：对所有x和y，</p>
+
+  <p class="bodytext-c">f（xy）=f（x）f（y）。</p>
+
+  <p class="bodytext">我们来看看能否搞清楚它们长什么样。我们不知道该怎么做，也许可以用类似AM型机器的做法：求这些野兽的定义相对于其中一个变量——比如y——的导数。这样可以得到</p>
+
+  <p class="bodytext-c">xf'（xy）=f（x）f'（y），</p>
+
+  <p class="bodytext">其中撇号表示求导，将y作为变量。这个等式对所有x和y都应当成立，但我们不需要那么多信息，因此给x或y代入具体的值也许能将其化简为意义更明显的形式。如果我们设x=1，则可以得到</p>
+
+  <p class="bodytext-c">f'（y）=f（1）f'（y）.　（5.43）</p>
+
+  <p class="bodytext">我怀疑这个说明f（1）=1。如果我们设y=1而不是x=1呢？这样会得到</p>
+
+  <p class="bodytext-c">xf'（x）=f（x）f'（1）。</p>
+
+  <p class="bodytext">由于f'（1）只是某个我们不知道的数，我们可以将这个重写为</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00502.jpeg"/>
+  </div>
+
+  <p class="bodytext">这是在数学中许多让人不知道该怎么办的情形之一，在探索这个问题的过程中，任何人都有可能在这里卡住。头脑清醒的人不会认为这个问题会马上解决，但是如果（无论出于何种愚蠢的理由）我们对f（x）的“自然对数”求导，就会看出这些等式在说什么。回想一下我们在前面发现的</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00503.jpeg"/>
+  </div>
+
+  <p class="bodytext">其中q（x）就是教科书上所谓的“自然对数”，或“以e为底的对数”，写作ln（x）。我们可以随心所欲地缩写，因此上面的等式说的其实和下面这些是一样的：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00504.jpeg"/>
+  </div>
+
+  <p class="bodytext">其中最后这个式子对我们这里有帮助。现在，如果我们利用重新缩写锤子取q（f（x））相对于x的导数，可以得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00505.jpeg"/>
+  </div>
+
+  <p class="bodytext">利用我们在式（5.44）中的发现，可以将上面等式最右边的f'（x）换成<img alt="" class="gongshi" src="../images/00506.jpeg"/>，从而得到</p>
+
+  <div class="zhong1">
+ <img alt="" class="image-tuzhu" src="../images/00507.jpeg"/>
+  </div>
+
+  <p class="bodytext">注意上面等式最右边的<img alt="" class="gongshi" src="../images/00508.jpeg"/>可以认为是自然对数q（x）的导数。利用这个以及对数的性质c·q（x）=q（x<sup class="calibre3">c</sup>）可以得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00509.jpeg"/>
+  </div>
+
+  <p class="bodytext">我们得到了一个形为“（一个东西）的导数等于（另一个东西）的导数”的命题。但如果这个成立，则必然有“（一个东西）=（另一个东西）+（某个数）”。为什么？因为如果两台机器的斜率处处相等，则这两台机器必定处处一样，只是它们的图形相对有垂直的移动。这个一般性结论让我们可以从式（5.45）得到结论</p>
+
+  <p class="bodytext-c">q（f（x））=q（x<sup class="calibre3">c</sup>）+A，</p>
+
+  <p class="bodytext">其中A是某个我们不知道的数。但不知道A与不知道它的对数是一样的，因此我们可以用q（B）替代A，其中B是某个我们不知道的数，这不会改变我们的无知。利用这个手法我们可以得到</p>
+
+  <p class="bodytext-c">q（f（x））=q（x<sup class="calibre3">c</sup>）+q（B）=q（Bx<sup class="calibre3">c</sup>）。</p>
+
+  <p class="bodytext">最后，将这个等式的两边放进q的反面机器（即e<sup class="calibre3">x</sup>），可以得到</p>
+
+  <p class="bodytext-c">f（x）=Bx<sup class="calibre3">c</sup>。</p>
+
+  <p class="bodytext">代入x=1得到f（1）=B，但我们在前面发现<a id="zw1" href="part0102.html#zhu1"><sup class="calibre3">[1]</sup></a>对MM型机器的所有成员有f（1）=1，因此必定有B=1。将这些合到一起，我们发现MM型机器的所有成员都可以表示为</p>
+
+  <p class="bodytext-c">f（x）=x<sup class="calibre3">c</sup>，</p>
+
+  <p class="bodytext">其中c的不同选择可以得到MM型机器的不同成员。这种机器我们已经很熟悉了，不用再花时间讨论。</p>
+
+  <hr class="calibre4"/>
+
+  <p class="notecontent"><a id="zhu1" href="part0102.html#zw1">[1]</a> 等式（5.43）后面那一行。</p>
+</body></html>

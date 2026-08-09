@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="29DRA0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">4.6.2　抽象形式的方向难题</h4>
+
+  <p class="bodytext">奇怪地是，我们可以通过让问题变得更抽象而不是更具象来对其进行简化。不过，我们还不知道怎么做。方向难题可以总结如下：</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">捷径逆问题</span></p>
+
+    <p class="bodytext">假设我们已经选取了坐标系，这样我们就有了两个方向，v和h（“垂直（Vertical）”和“水平（Horizontal）”）。有人给了我们一条长为l的直线，可能指向任何方向。有没有办法描述它在垂直方向上有多长，在水平方向上又有多长？</p>
+  </div>
+
+  <p class="bodytext">图4.6描绘了这个问题。目前我们对这个问题还没什么头绪。不过，可以先选择一些缩写，比如用H表示水平方向上的量，用V表示垂直方向上的量。这样我们就可以写</p>
+
+  <p class="bodytext-c">H（东西）=？</p>
+
+  <p class="bodytext-c">V（东西）=？</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00343.jpeg"/>     <p class="tuzhu-center">图4.6　如果有人给了我们一条长为l的直线，没有沿着坐标方向，有没有办法求出它在垂直方向和水平方向上各有多长？</p>
+  </div>
+
+  <p class="bodytext">还知道其他的吗？嗯，无论这个东西的长度是多少，<a id="zw1" href="part0077.html#zhu1"><sup class="calibre3">[1]</sup></a>如果它完全垂直，则H应当为0，如果它完全水平，则V应当为0。不过在垂直和水平之间的所有倾斜角度上，我们都不知道该怎么做。如果有办法度量倾斜度就好了。做得到吗？</p>
+
+  <p class="bodytext">其实在某种意义上，我们已经发明了度量倾斜度的方法，斜率就可以用来干这个。回想一下，我们对直线斜率的定义就是<img alt="" class="gongshi" src="../images/00344.jpeg"/>，其中v是线上两点的垂直距离，h是水平距离。不过虽然斜率或陡峭度应当能度量直线的倾斜度，这个想法还是有点前后颠倒。因为我们的方向难题想要求的就是水平和垂直项，所以最好不要在解题的前提条件中包含它们。我们需要另找方法来谈论方向。</p>
+
+  <p class="bodytext">我们在日常生活中说的“方向”是什么意思呢？如果我们站立起来“改变方向”（即转圈），最终我们会转出一个圆，也许我们可以用圆来谈论方向。有很多方法可以这样做，就像有很多方法度量长度一样。我们可以选择比如转一个完整的圈，回到原点，作为角度1。如果这样做，转半圈就是角度<img alt="" class="gongshi" src="../images/00345.jpeg"/>，朝左转则是角度<img alt="" class="gongshi" src="../images/00346.jpeg"/>，依此类推。</p>
+
+  <p class="bodytext">这样很好，说实话，我不知道为什么标准教科书不这样做。很可能是因为这会使得一些表达式显得更复杂，但也会使另一些显得更简单。出于各种理由，度量角度有两个常用的传统，除此以外你基本看不到其他方式。第一种方法是用“度”度量角度，转一整圈计为360度。我认为用这种方式的唯一理由是360恰好可以被很多数整除。更通用的方法是以圆的半径作为单位度量角度。这个想法初看上去很怪异但其实很合理。在前面的对话中，我们发现我们的放弃数＃与数学的放弃数#是一样的，最初定义为：</p>
+
+  <p class="bodytext-c">圆的周长≡#·d，　（4.2）</p>
+
+  <p class="bodytext">其中d是圆的直径。如果用r表示圆的“半径”，则d=2r，因此我们可以将数学对#的定义写为：</p>
+
+  <p class="bodytext-c">圆的周长≡2·#·r，　（4.3）</p>
+
+  <p class="bodytext">这其实是说，无论你的圆有多大，沿着圆走一圈需要2#个半径这么长。出于各种原因，度量角度最普遍的传统<span class="jiacu">没有</span>将转一整圈计为1或360，而是2#。我们还是不知道#的数值是多少，<a id="zw2" href="part0077.html#zhu2"><sup class="calibre3">[2]</sup></a>但如果我们采用这个传统，转半圈的角度就是#，转四分之一圈就是<img alt="" class="gongshi" src="../images/00347.jpeg"/>，依此类推。我们在整本书中都将采用这个传统度量角度。</p>
+
+  <p class="bodytext">我们用缩写α表示“角度（Angle）”，因为α就是希腊字母中的a，这能提醒我们在谈论什么。<a id="zw3" href="part0077.html#zhu3"><sup class="calibre3">[3]</sup></a>发明了角度的概念后，现在我们可以用稍微不同的语言来表述我们的方向难题了。</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">捷径逆问题</span></p>
+
+    <p class="bodytext">假设我们已经选定了坐标系，这样就有了两个方向v和h，分别表示“垂直”和“水平”。有人给我们一根长为l的直东西，从正水平轴开始逆时针度量的角度为α。有没有办法描述垂直方向和水平方向上各有多长呢？</p>
+  </div>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00348.jpeg"/>     <p class="tuzhu-center">图4.7　现在我们知道角度是多少了，可以将方向难题的抽象形式重新画成这样。</p>
+  </div>
+
+  <p class="bodytext">图4.7用新的方式描绘了方向难题。现在我们不再用H（东西）和V（东西），而是写成：</p>
+
+  <p class="bodytext-c">H（l，α）=？</p>
+
+  <p class="bodytext-c">V（l，α）=？</p>
+
+  <p class="bodytext">虽然还不能彻底解决方向难题，但是不难看出不同的方向难题相互关联。我的意思是这样。如果有人问我两个不同的问题，有<span class="jiacu">相同</span>的角度α，但是长度不同。例如，除了原来的问题，假设还问了我们另一个问题，长度为2l而不是l：</p>
+
+  <p class="bodytext-c">H（2l，α）=？</p>
+
+  <p class="bodytext-c">V（2l，α）=？</p>
+
+  <p class="bodytext">这种情形类似于我们在这一章开始时遇到的与＃和#有关的问题。这两个方向难题我们都没法解决，但我们相信这两个我们解决不了的问题相互有关联。只要看一下图4.8就能看出</p>
+
+  <p class="bodytext-c">H（2l，α）=2H（l，α），</p>
+
+  <p class="bodytext-c">V（2l，α）=2V（l，α），</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00349.jpeg"/>     <p class="tuzhu-center">图4.8　两个相关的方向难题。我们还不知道H（l，α）和V（l，α），但是可以看出这两个角度相同长度不同的问题之间的关联。例如，H（2l，α）=2H（l，α）。</p>
+  </div>
+
+  <p class="bodytext">也就是说，我们将2l问题还原成了l问题，虽然我们还是解决不了！另外，在这个论证中，2这个数并没有特殊之处。不难想象类似图4.8的图可以揭示H（3l，α）和V（3l，α）也有同样的模式。对任意整数n都能画出类似的图，对于<img alt="" class="gongshi" src="../images/00350.jpeg"/>或<img alt="" class="gongshi" src="../images/00351.jpeg"/>这类简单的非整数也是一样，因此不难让我们自己相信相同的模式对任何数＃都成立。也就是说，对任何数＃，都有：</p>
+
+  <p class="bodytext-c">H（＃l，α）=＃H（l，α），</p>
+
+  <p class="bodytext-c">V（＃l，α）=＃V（l，α）。</p>
+
+  <p class="bodytext">利用这两个事实，我们可以通过一个巧妙的手法逼近方向难题的解。即，如果以上两项事实对于任何数＃都成立，我们就可以将这些事实应用于长度l本身，将l视为l·1，从而得到</p>
+
+  <p class="bodytext-c">H（l，α）=lH（1，α），</p>
+
+  <p class="bodytext-c">V（l，α）=lV（1，α），</p>
+
+  <p class="bodytext">棒极了。这两个语句说的是，我们只需要解决特定长度的方向难题。可以选择长度1，也可以选择其他任何数。例如，H（l，α）=<img alt="" class="gongshi" src="../images/00352.jpeg"/>H（17，α），或任何类似的形式，都同样正确。我们选择1纯粹是出于审美。关键之处不在于选择的长度，方向难题的“长度”部分根本就不是问题的一部分。只要算出了H（1，α）和V（1，α），马上就能算出任何长度l的H（l，α）和V（l，α）。</p>
+
+  <p class="bodytext">我们可以用这个新的认识继续改进缩写。既然长度变化很容易处理，也就不用在H和V中写入长度项。我们可以缩写成：</p>
+
+  <p class="bodytext-c">H（α）≡H（1，α），</p>
+
+  <p class="bodytext-c">V（α）≡V（1，α）。</p>
+
+  <p class="bodytext">以后一旦我们想明确写出长度，就可以写成H（l，α）=lH（α）这样。</p>
+
+  <hr class="calibre4"/>
+
+  <p class="notecontent"><a id="zhu1" href="part0077.html#zw1">[1]</a> 我知道这样选择词汇有点懒。抱歉用“东西”这个词，但是我厌倦了“线段”的说法。“棍子”感觉也不对。当然“东西”这个词有点普通和抽象，但数学就是这样。</p>
+
+  <p class="notecontent"><a id="zhu2" href="part0077.html#zw2">[2]</a> 记得#就是课本上称为π的数。我们在知道如何计算它的数值之前选择称它为#，以明确自己的无知，直到自己克服掉它。</p>
+
+  <p class="notecontent"><a id="zhu3" href="part0077.html#zw3">[3]</a> 为什么用α而不是a？嗯，从一些方面来说a是更好的选择。希腊字母并不是必须的。不过，虽然我们经常自由发明我们自己的标记，但是偶尔提到一下标准标记，甚至在不那么可怕的时候用一下也是可以的。不知出于何种原因，在数学（以及物理）中有一个不成文的传统，就是用希腊字母表示与角度有关的东西。为什么？不知道。课本上通常用字母θ、φ、α、β表示角度；用ω表示角速度；用T表示力矩（物理中力的角度版）；等等。虽然用其他字母表的字母有时候显得很浮夸，在这里这个传统倒没那么糟糕。因此，既然α看起来很像a，可以提醒我们在谈论什么，从现在起，我们就允许它进入我们的世界。</p>
+</body></html>

@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="F8900-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">1.2.6　向前！只为快乐</h4>
+
+  <p class="yinwen">数学的精髓全在于自由。</p>
+
+  <p class="bodytext-right">——格奥尔格·康托尔（Georg Cantor），《论文集》（Gesammelte Abhandlungen）</p>
+
+  <p class="bodytext">我们讨论了在数学中什么是任意，什么是必然，接下来我们来看看，要构造标准的斜率定义，并成为唯一的可能，还需要哪些假设。</p>
+
+  <p class="bodytext">让我们进一步挖掘关于陡峭度的日常观念，看一看我们的数学定义必须具备哪些性质。到目前为止，我们还没有理由认为<img alt="" class="gongshi" src="../images/00055.jpeg"/>（平移的同时爬升）要比<img alt="" class="gongshi" src="../images/00056.jpeg"/>（爬升的同时平移）好。不过虽然后面这个完全也可以用来度量陡峭度，却有一个奇怪的特性。</p>
+
+  <p class="bodytext">根据“爬升的同时平移”的定义，水平物体的陡峭度为无穷大，完全垂直的物体的陡峭度则为0。也就是说，如果两点之间的垂直距离为0（v=0），则<img alt="" class="gongshi" src="../images/00057.jpeg"/>就变成<img alt="" class="gongshi" src="../images/00058.jpeg"/>，无穷大（至少可以说接近无穷，因为<img alt="" class="gongshi" src="../images/00059.jpeg"/>=很大，而且随着很小的一块变得更小，很大的一块就变得更大）。同样，如果两点间的水平距离为0（h=0），则“爬升的同时平移”的距离为0。这不能说是错误，但不符合我们的习惯。毕竟我们是这个世界的主宰，因此我们可以合理地要求平直的事物陡峭度为0。让我们正式写下来：</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">日常经验告诉我们的第三件事情</span></p>
+
+    <p class="bodytext">无论“陡峭度”如何定义，水平直线的陡峭度应当为0。</p>
+  </div>
+
+  <p class="bodytext">这排除了许多选项。例如，<img alt="" class="gongshi" src="../images/00060.jpeg"/>排除了，<img alt="" class="gongshi" src="../images/00061.jpeg"/>排除了，<img alt="" class="gongshi" src="../images/00062.jpeg"/>排除了，只要是水平事物（v=0）的陡峭度不等于0的都排除了。这很好！我们把幸存下来的选项列出来：</p>
+
+  <p class="bodytext">1.<img alt="" class="gongshi" src="../images/00063.jpeg"/>仍然成立，这是“平移的同时爬升”。</p>
+
+  <p class="bodytext">2.<img alt="" class="gongshi" src="../images/00064.jpeg"/>仍然成立，这是“平移的同时爬升”的平方。</p>
+
+  <p class="bodytext">3.<img alt="" class="gongshi" src="../images/00065.jpeg"/>仍然成立。这个太疯狂了。</p>
+
+  <p class="bodytext">仍然有无穷多种候选定义，但其中许多都很怪异。我们完全可以选择自己喜欢的然后结束，不过我们再坚持一下，看看要得出标准定义还需要哪些假设。</p>
+
+  <p class="bodytext">我们还没有说过不同的斜坡之间如何关联。例如，说一个斜坡比另一个“陡峭两倍”是什么意思？我们还没有认真想过，因此目前还没有正确答案。但我们想要让我们发明的概念<span class="jiacu">对我们</span>有用，因此让我们想一下当我们说“陡峭两倍”时的意思是什么。假设我们有两个点，高一些的点在右边，两点连起来就像一个斜坡。然后假设我们抬升较高的那个点，让垂直距离加倍而水平距离保持不变。也就是说，将斜坡的高度加倍，水平宽度保持不变。现在在一定程度上我们可以说，如果两个斜坡的水平宽度相等，而其中一个的高度是另一个的两倍，则陡峭度也应当是另一个的两倍。同样，这里也没什么理由要求我们必须这样想，但其他想法似乎更糟：例如，说垂直距离加倍陡峭度应当乘以72似乎没什么道理，因为说不清楚为什么这个比其他无穷多种选择更好。而认为高度加倍陡峭度也应当加倍则具有一定的简单性和优雅性。让我们正式写下来：</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">日常经验告诉我们的第四件事情</span></p>
+
+    <p class="bodytext">无论“陡峭度”如何定义，如果斜坡的水平距离保持不变而高度加倍，则“陡峭度”也应当加倍。</p>
+  </div>
+
+  <p class="bodytext">应当如何缩写这个思想呢？v加倍而h保持不变，陡峭度应当加倍，因此我们可以缩写成这样：</p>
+
+  <p class="bodytext-c">S（h，2v）=2S（h，v）。</p>
+
+  <p class="bodytext">这里我们再一次尝试将定性转化为定量。同前面一样，这里面的2没有什么特别的。我们想要表达的思想要比这个更具一般性。例如，基于同样的理由，如果不改变水平距离，而垂直距离增大到3倍，则陡峭度也应当是原来的3倍。因此我们可以将无穷多条语句缩写为一条语句，就跟前面一样：</p>
+
+  <p class="bodytext-c">S（h，＃v）=＃S（h，v），</p>
+
+  <p class="bodytext">很好。现在可以再排除一些候选定义。还有哪些候选符合这个要求呢？我们来试一下。对于候选定义S（h，v）≡v<img alt="" class="gongshi" src="../images/00066.jpeg"/>如果将v加倍，则得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00067.jpeg"/>
+  </div>
+
+  <p class="bodytext">可见如果垂直距离加倍，陡峭度将增大到原来的<span class="jiacu">四倍</span>。因此我们可以将它排除，它不符合日常经验告诉我们的第四件事情。好吧，我们刚才检验了<img alt="" class="gongshi" src="../images/00068.jpeg"/>当＃等于2的情形，那么如果＃等于3、5或119呢？我们不用逐项检验这些指数（那将需要无穷长时间），可以让指数保持未知来一次性检验。与前面的论证类似：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00069.jpeg"/>
+  </div>
+
+  <p class="bodytext">而所有这些都必须等于2S（h，v），否则就违反了日常经验告诉我们的第四件事情。因此当高度加倍时要让陡峭度也加倍，2<sup class="calibre3">＃</sup>就必须刚好等于2。而这只有当＃等于1时才成立，因此几乎排除了所有可能！我们将幸存的列出来：</p>
+
+  <p class="bodytext">1.<img alt="" class="gongshi" src="../images/00070.jpeg"/>仍然成立，这是“平移的同时爬升”。</p>
+
+  <p class="bodytext">2.<img alt="" class="gongshi" src="../images/00071.jpeg"/>仍然成立，这是“3乘以平移的同时爬升”。</p>
+
+  <p class="bodytext">3.<img alt="" class="gongshi" src="../images/00072.jpeg"/>仍然成立，这是“974乘以平移的同时爬升”。</p>
+
+  <p class="bodytext">除了“某个数乘以平移的同时爬升，”其他的基本上都被前面列出的某项要求排除了。可见在教科书讲“斜率是平移的同时爬升”时掩盖了多少推理过程。留下来的所有定义都可以视为S（h，v）≡（<span class="jiacu">某个东西</span>）<img alt="" class="gongshi" src="../images/00073.jpeg"/>，因此我们来看看直觉思维对（<span class="jiacu">某个东西</span>）是多少有何想法。</p>
+
+  <p class="bodytext">假设重力改变一点方向。则以前水平的东西都将有一些倾斜。如果重力方向改变90度，则原来水平的东西将变成垂直。现在，如果“往上”的方向改变90度，则一切的陡峭度都将改变……除了一件事情：刚好介于垂直和水平之间的斜坡。也就是说，如果重力倾倒，水平距离与垂直距离相等的斜坡（h=v）将是<span class="jiacu">唯一</span>陡峭度不变的东西。形为S（h，v）≡（<span class="jiacu">某个东西</span>）<img alt="" class="gongshi" src="../images/00074.jpeg"/>的陡峭度定义都会将这个特殊的斜坡的陡峭度赋值为（<span class="jiacu">某个东西</span>），因为这个特殊的斜坡具有v=h的特性。因此认为（<span class="jiacu">某个东西</span>）是多少就等同于认为这个特殊斜坡的陡峭度是多少。</p>
+
+  <p class="bodytext">我们来考虑一些可能性。假设我们让（<span class="jiacu">某个东西</span>）等于5。则这个特殊的斜坡在重力倾倒前后的陡峭度都是5，但其他斜坡就会很怪异。v=3和h=1的斜坡的陡峭度是15，重力倾倒后的陡峭度则是<img alt="" class="gongshi" src="../images/00075.jpeg"/>。这没有错，但是显得相当随意，重力倾倒前后的陡峭度之间没有以一种好看的方式关联起来。如果纯粹出于美学原因将特殊山坡的陡峭度定为1，则<span class="jiacu">其他</span>斜坡的表现会好得多。这样陡峭度为3的斜坡在重力倾倒后的陡峭度就为<img alt="" class="gongshi" src="../images/00076.jpeg"/>。陡峭度为<img alt="" class="gongshi" src="../images/00077.jpeg"/>的斜坡就变为<img alt="" class="gongshi" src="../images/00078.jpeg"/>。这看起来简单多了。如果我们纯粹出于美学动机这样选择，就会得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00079.jpeg"/>
+  </div>
+
+  <p class="bodytext">作为唯一的可能。我们可以写下来：</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">日常经验“告诉”我们的第五件事情（不是非得如此）</span></p>
+
+    <p class="bodytext">重力方向改变90度（即交换v和h时）只有一个斜坡的陡峭度保持不变。出于优雅和简单的原因，我们给这个斜坡的陡峭度赋值为1。这样在重力倾倒时<span class="jiacu">其他</span>所有斜坡的表现都很好。</p>
+  </div>
+
+  <p class="bodytext">现在你知道了在学校里他们<span class="jiacu">到底</span>有多少东西没有告诉你。在发明数学概念时都是这样，我们最终得到的定义是源自各种变换和美学的奇怪混合：我们的定义具有的一些性质是因为我们希望它符合我们的日常观念，还有一些是因为我们希望得出的定义能够尽可能的优雅简单，而衡量优雅和简单的标准则来自我们人类自己。</p>
+</body></html>

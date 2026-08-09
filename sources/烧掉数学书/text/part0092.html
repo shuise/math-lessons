@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="2NNJO0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">5.2.3　MA型机器</h4>
+
+  <p class="bodytext">接下来我们会看到，MA型机器在某种意义上是AM型机器的“反面”，因此两种机器可能都与神秘的数e有关。我们来看一下。我们将AM型机器定义为所有具有以下性质的机器的集合：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00422.jpeg"/>
+  </div>
+
+  <p class="bodytext">MA型机器则定义为所有具有以下性质的机器的集合：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00423.jpeg"/>
+  </div>
+
+  <p class="bodytext">我们用不同的字母描述这些机器以免混淆。设g是一台MA型机器，f是一台AM型机器。那么，虽然我们不知道MA型机器长什么样，还是可以得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00424.jpeg"/>
+  </div>
+
+  <p class="bodytext">但这其实是说，如果我们将AM型机器的输出管和MA型机器的输入管连到一起建造一台大机器，则整体上就是一台AA型机器！也就是说，如果我们定义h（x）≡g（f（x）），则我们刚才证明了机器h有如下性质：</p>
+
+  <p class="bodytext-c">h（x+y）=h（x）+h（y），</p>
+
+  <p class="bodytext">因此h是一台AA型机器。注意我们没有特意要求这三个思想以如此优雅的方式相互关联，这个事实一直隐藏在我们的定义中，是它们的一个必然推论。然后呢？嗯，我们可以从我们对AA型机器的辛勤工作中获益。之前我们发现了任何AA型机器都可以表示为ax。而这里我们发现h就是AA型机器，因此有</p>
+
+  <p class="bodytext-c">h（x）≡g（f（x））=ax，</p>
+
+  <p class="bodytext">其中a是某个数。哪个数？我们不知道，但如果将1喂给上面的等式会得到g（f（1））=a，因此可得</p>
+
+  <p class="bodytext-c">g（f（x））=g（f（1））x。　（5.11）</p>
+
+  <p class="bodytext">有意思……这表明如果我们将AM型机器的输出喂给MA型机器，它们的作用<span class="jiacu">几乎</span>会相互抵消。如果g（f（1））等于1，则有g（f（x））=x。因此f和g会执行相反的动作，让我们刚好得到放进去的东西。我们进一步搞清楚了AM型机器是MA型机器的“反面”是什么意思。</p>
+
+  <p class="bodytext">我们在前面发现了AM型机器都可以表示为f（x）=c<sup class="calibre3">x</sup>，其中c就是f（1）的缩写。不同的c值对应不同的AM型机器，因此我们给缩写加个下标，写成f<sub class="calibre6">c</sub>（x）≡c<sup class="calibre3">x</sup>。这样更便于谈论AM型机器的特定成员，也不会与其他AM型机器搞混。有了新的缩写，等式（5.11）说的是对于任何<span class="jiacu">特定的</span>AM型机器f<sub class="calibre6">c</sub>，可以得到</p>
+
+  <p class="bodytext-c">g（f<sub class="calibre6">c</sub>（x））=g（f<sub class="calibre6">c</sub>（1））x=g（c<sup class="calibre3">1</sup>）x=g（c）x，　（5.12）</p>
+
+  <p class="bodytext">因此现在我们可以说如果g（c）=1，则f<sub class="calibre6">c</sub>和g可以相互抵消。与不同的c对应不同的AM型机器一样，现在不同的c也对应不同的MA型机器。因此虽然我们还不知道MA型机器长什么样，我们还是知道<span class="jiacu">每台MA型机器都有一台AM型机器与之对应</span>：分享相同c值的那台。</p>
+
+  <p class="bodytext">由于有这种对应关系，现在我们也给g加上下标来表示特定的MA型机器，就像我们刚才对AM型机器做的那样。即，g<sub class="calibre6">c</sub>是满足g<sub class="calibre6">c</sub>（c）=1的MA型机器的缩写。例如，c=2，我们得到AM型机器f<sub class="calibre6">2</sub>（x）≡2<sup class="calibre3">x</sup>，与其对应的g<sub class="calibre6">2</sub>则是满足g<sub class="calibre6">2</sub>（2）=1的MA型机器。发现了这两种机器的对应关系以及刚好是其自身导数的神秘机器后，我们可以将这一切都写到方框里，好好地自我欣赏一下。</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">AM型与MA型机器的对应：</span></p>
+
+    <p class="bodytext-c">AM型机器定义为所有将加转换为乘的机器：</p>
+
+    <div class="zhong1">
+ <img alt="" class="image-tuzhu" src="../images/00425.jpeg"/>
+    </div>
+
+    <p class="bodytext-c">我们发现这种机器的所有成员都可以表示为</p>
+
+    <p class="bodytext-c">f<sub class="calibre6">c</sub>（x）≡c<sup class="calibre3">x</sup>。</p>
+
+    <p class="bodytext-c">MA型机器定义为所有将乘转换为加的机器：</p>
+
+    <div class="zhong1">
+ <img alt="" class="image-tuzhu" src="../images/00426.jpeg"/>
+    </div>
+
+    <p class="bodytext">我们不知道这种机器“长什么样”，也就是说我们无法用我们知道的东西来描述它们。不过，我们还是知道了每台AM型机器都有一台对应的MA型机器能消除它做的事情。MA型机器g<sub class="calibre6">c</sub>定义为能让以下语句成立的那台机器：</p>
+
+    <p class="bodytext-c">g<sub class="calibre6">c</sub>（f<sub class="calibre6">c</sub>（x））≡x。　（5.13）</p>
+  </div>
+
+  <p class="bodytext">虽然我们还是不知道什么数e能使得机器E（x）≡e<sup class="calibre3">x</sup>是其自身的导数，我们还是可以谈论这台机器的对应机器，g<sub class="calibre6">e</sub>（f<sub class="calibre6">e</sub>（x））≡x，或者写成g<sub class="calibre6">e</sub>（e<sup class="calibre3">x</sup>）=x。我们对这台机器一无所知，除了它有“特殊的关联”。我们之所以关注它，是因为它是求导的不动之物——求导数时保持不变的机器——的反面。</p>
+</body></html>

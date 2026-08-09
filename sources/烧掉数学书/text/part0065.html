@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="1TVKI0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h3 class="chapter-three">3.6　锤子和链条</h3>
+
+  <p class="bodytext">重新缩写锤子通常被称为“链式法则”。这个名字倒是不赖，但是大部分书籍谈论它时所用的标记法都很古怪，会给学生带来不必要的折磨，也深深隐藏了背后思想的简单性。记得我们在发明重新缩写锤子（“链式法则”）时一个主要的障碍是认识到这个思想不适合用撇号标记。用撇号标记不是不可以，但我们发现很容易犯错，因为其中一部分将x作为变量，另一部分又将s（表示<span class="jiacu">某个东西</span>）作为变量。课本上经常是这样表述这个思想的。</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">课本中如何谈论重新缩写锤子</span></p>
+
+    <p class="bodytext">“链式法则”是对两个函数的复合进行求导的法则。设h（x）=f（g（x）），链式法则说的是h'（x）=f'（g（x））g'（x）。</p>
+  </div>
+
+  <p class="bodytext">要说明的是，课本上关于“链式法则”的这种说法并不是不正确；只是不必要地将对一个简单思想的解释复杂化了。虽然“链式法则”<span class="jiacu">能够</span>解读为关于两个函数的复合的陈述，这样的表述方式却没有传达出一个关键点：“两个函数的复合”指的是什么<span class="jiacu">完全</span>取决于我们自己！我们可以用各种方式将M（x）≡8x<sup class="calibre3">4</sup>这样的函数理解为“函数的复合”（即将一个函数输入另一个函数）。例如，如果我们定义f（x）≡x<sup class="calibre3">4</sup>和g（x）≡8x，则M（x）=g（f（x））。同样，如果我们定义a（x）≡2x，b（x）≡<img alt="" class="gongshi" src="../images/00326.jpeg"/>，则M（x）=b（a（x））。对任何函数都有无数种方法将其视为两个或三个或59个其他函数的“复合”。因此，我们无法从客观的意义上说某个特定的函数<span class="jiacu">是</span>“两个函数的复合”。至于怎样选则取决于我们自己。我们干嘛要选？好吧，除非对我们有帮助！毕竟，这正是我们最初发明重新缩写锤子时的思维过程。</p>
+
+  <p class="bodytext">为了更细致地展现这两种思维方式的不同之处，我们会按课本上的方法使用重新缩写锤子（链式法则）来求M（x）≡（x<sup class="calibre3">17</sup>+2x+30）<sup class="calibre3">509</sup>的导数，然后和我们前面的用法比较一下。如果掌握了其中的思想，无论用哪种方法都可以直接得出结论，不过这里还是给出详细的步骤。</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">课本上通常如何使用重新缩写锤子（“链式法则”）</span></p>
+
+    <p class="bodytext-c">我们想求导如下函数</p>
+
+    <p class="bodytext-c">M（x）=（x<sup class="calibre3">17</sup>+2x+30）<sup class="calibre3">509</sup>，</p>
+
+    <p class="bodytext-c">定义函数为</p>
+
+    <p class="bodytext-c">f（x）=x<sup class="calibre3">509</sup></p>
+
+    <p class="bodytext-c">和</p>
+
+    <p class="bodytext-c">g（x）=x<sup class="calibre3">17</sup>+2x+30，</p>
+
+    <p class="bodytext-c">我们发现M是复合函数：</p>
+
+    <p class="bodytext-c">M（x）=f（g（x））。</p>
+
+    <p class="bodytext-c">求导f得到</p>
+
+    <p class="bodytext-c">f'（x）=509x<sup class="calibre3">508</sup>，</p>
+
+    <p class="bodytext-c">类似地，求导g得到</p>
+
+    <p class="bodytext-c">g'（x）=17x<sup class="calibre3">16</sup>+2，</p>
+
+    <p class="bodytext-c">从而，应用链式法则得到</p>
+
+    <p class="bodytext-c">M'（x）=f'（g（x））g'（x）=509（x<sup class="calibre3">17</sup>+2x+30）<sup class="calibre3">508</sup>（17x<sup class="calibre3">16</sup>+2）。</p>
+  </div>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">我们通常如何使用重新缩写锤子（“链式法则”）</span></p>
+
+    <p class="bodytext-c">我们想求导如下机器</p>
+
+    <p class="bodytext-c">M（x）≡（x<sup class="calibre3">17</sup>+2x+30）<sup class="calibre3">509</sup>，</p>
+
+    <p class="bodytext-c">将x视为变量。</p>
+
+    <p class="bodytext-c">这是一个很丑陋的问题，但其实就是一堆求幂，</p>
+
+    <p class="bodytext-c">那个我们没那么怕，因此缩写</p>
+
+    <p class="bodytext-c">s≡x<sup class="calibre3">17</sup>+2x+30，</p>
+
+    <p class="bodytext-c">其中s表示<span class="jiacu">某个东西</span>。则</p>
+
+    <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00327.jpeg"/>
+    </div>
+
+    <p class="bodytext-c">但我们想求的是<img alt="" class="gongshi" src="../images/00328.jpeg"/>，而不是<img alt="" class="gongshi" src="../images/00329.jpeg"/>，因此撒谎，然后改正得到</p>
+
+    <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00330.jpeg"/>
+    </div>
+
+    <p class="bodytext-c">撒谎然后改正告诉我们还需要（<span class="jiacu">某个东西</span>）的导数，将x作为变量。</p>
+
+    <p class="bodytext-c">但这个也很容易。</p>
+
+    <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00331.jpeg"/>
+    </div>
+
+    <p class="bodytext-c">因此最后我们得到</p>
+
+    <div class="zhong1">
+ <img alt="" class="image-tuzhu" src="../images/00332.jpeg"/>
+    </div>
+  </div>
+
+  <p class="bodytext">注意在两个例子中我们得到了一模一样的答案。这两种方法在逻辑上是等价的，但是在心理上肯定不等价。更糟糕地是，称之为“复合函数的求导法则”让人们认为存在名为“复合函数”的某种东西。其实并不存在。</p>
+
+  <p class="bodytext">“除非对我们有帮助”哲学是我们最初发明这三个锤子的原因，也是我们用“锤子”而不是“规则”或“定理”来称呼将难题拆解为简单问题的方法的另一个原因。“和差法则”“乘积法则”和“链式法则”的说法并不是不对，只是有微妙的误导性。这三个拆解方法不是教我们怎样做的<span class="jiacu">法则</span>，而是如果我们想做的话，告诉我们可以做什么的<span class="jiacu">工具</span>。这个区别极为重要，因此我们专门给它一个方框：</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">所有锤子的重点</span></p>
+
+    <p class="bodytext">1.我们可以<span class="jiacu">选择</span>将任何特定的机器视为“其实”是两台机器相加，如果这样做能帮助我们。</p>
+
+    <p class="bodytext">这就是我们发明<span class="jiacu">相加锤子</span>的原因。</p>
+
+    <p class="bodytext">2.我们可以<span class="jiacu">选择</span>将任何特定的机器视为“其实”是两台机器相乘，如果这样做能帮助我们。</p>
+
+    <p class="bodytext">这就是我们发明<span class="jiacu">相乘锤子</span>的原因。</p>
+
+    <p class="bodytext">3.我们可以<span class="jiacu">选择</span>将任何特定的机器视为“其实”是一台机器吃掉另一台机器，如果这样做能帮助我们。</p>
+
+    <p class="bodytext">这就是我们发明<span class="jiacu">重新缩写锤子</span>的原因。</p>
+  </div>
+
+  <p class="bodytext">大声清晰地说出重点之后，让我们将这三个锤子添加到我们快速扩充的武器库，然后继续我们的旅程。</p>
+</body></html>

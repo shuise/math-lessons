@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="147LC0-9a3d15f463364d1986c2d2557d06c470" class="calibre">
+  <h4 class="chapter-four">2.3.5　更疯狂的机器</h4>
+
+  <p class="bodytext"><span class="jiacu">机器M（x）≡x<sup class="calibre3">3</sup></span></p>
+
+  <p class="bodytext">如果想继续测试无穷放大镜，需要给出一些机器。我们先试一下M（x）≡x<sup class="calibre3">3</sup>。前面我们用<span class="jiacu">微小量</span>和dx这两个缩写来表示很小（几乎无穷小）的数。我们还用了dl，不过用法与dx相同。两者都能用，不过都有点繁琐。我们可以用单字母缩写t表示<span class="jiacu">微小量</span>。同前面一样，t是很小（几乎无穷小）的数。我们准备把x放进机器，然后把x+t放进机器，看机器的反应有什么变化。我们用dM作为反应变化的缩写，dM≡M（x+t）-M（x）。因此</p>
+
+  <p class="bodytext-c">dM≡M（x+t）-M（x）=（x+t）<sup class="calibre3">3</sup>-x<sup class="calibre3">3</sup>，　（2.1）</p>
+
+  <p class="bodytext">（x+t）<sup class="calibre3">3</sup>中包含有x<sup class="calibre3">3</sup>，可以与dM的右边负的x<sup class="calibre3">3</sup>抵消，不过我们还是得对（x+t）<sup class="calibre3">3</sup>进行分解才能知道留下了什么。（很快我们就会发现一条更快的捷径。）</p>
+
+  <p class="bodytext-c">（x+t）<sup class="calibre3">3</sup>≡（x+t）（x+t）（x+t）=x<sup class="calibre3">3</sup>+3x<sup class="calibre3">2</sup>t+3t<sup class="calibre3">2</sup>x+t<sup class="calibre3">3</sup>。　（2.2）</p>
+
+  <p class="bodytext">这条语句很丑陋，没有人想去记忆它。幸运地是，我们在第1章知道了如何把它发明出来，可以画图，也可以多用几次撕东西显然律。虽然很丑，等式（2.2）还是给出了2.1的另一种表现形式。即：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00143.jpeg"/>
+  </div>
+
+  <p class="bodytext">等号上面的标号提醒我们，如果不知道原因，可以参考哪个等式。每一项都至少有一个t，因此两边同时除以t，得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00144.jpeg"/>
+  </div>
+
+  <p class="bodytext">其中3x<sup class="calibre3">2</sup>是唯一不含t的项。而t是无穷小的数的缩写，你也可以认为它是非常小，小得注意不到的数。因此我们可以将等式重写为</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00145.jpeg"/>
+  </div>
+
+  <p class="bodytext">消失项（t）表示当t趋近于0时，这一项将要消失，因此左边那一项就是两个非常接近的点之间的“平移的同时爬升”，当t变成0时，它就是M的导数。所以将t变成0得到</p>
+
+  <p class="bodytext-c">M'（x）=3x<sup class="calibre3">2</sup>，</p>
+
+  <p class="bodytext">对不对？目前我们还不知道。让我们继续，也许最终我们会明白这一切是怎么回事。（不要着急，会清楚的。）</p>
+
+  <p class="bodytext"><span class="jiacu">机器M（x）≡x<sup class="calibre3">n</sup></span></p>
+
+  <p class="bodytext">上一个例子中最难的部分不是微积分，就这方面来说其实只需要将所有含有t的项舍弃。最难的部分是将（x+t）<sup class="calibre3">3</sup>展开，很繁琐。我们来试试看能不能<span class="jiacu">不用</span>全部展开就可以求出机器M（x）≡x<sup class="calibre3">4</sup>的导数（即对其应用无穷放大镜）。同前面一样，我们要计算这个：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00146.jpeg"/>
+  </div>
+
+  <p class="bodytext">其中t是某个很小的数。我们需要想办法消除底下的t，<a id="zw1" href="part0038.html#zhu1"><sup class="calibre3">[1]</sup></a>然后就能将t变成0。</p>
+
+  <p class="bodytext">怎样才能避免展开（x+t）<sup class="calibre3">4</sup>呢？为什么要避免这样做？因为完全展开它基本是力气活。我们这样做会浪费时间，更重要地是，这不会有助于我们学会解决（x+t）<sup class="calibre3">999</sup>或（x+t）<sup class="calibre3">n</sup>这样的问题。因此我们不去展开它，只需大致弄清楚展开后是什么样子。（x+t）<sup class="calibre3">4</sup>是（x+t）（x+t）（x+t）（x+t）的缩写。我们可以将其看作4个袋子，每个袋子里有两样东西：x和t。如果我们花时间去展开，得到的就是一堆加在一起的各种项。我们不关心完整的展开结果，只想知道各项大概是什么样子，这样我们就能对最后的结果有大致的了解。假设我们这样缩写：</p>
+
+  <p class="bodytext-c">（x+t）（x+t）（x+t）（x+t）≡（4个袋子）≡（x+t）（3个袋子），</p>
+
+  <p class="bodytext">对最右边应用撕东西显然律，然后关注两项中的一项。就像这样：</p>
+
+  <p class="yinwen">（4个袋子）≡（x+t）（3个袋子）</p>
+
+  <p class="yinwen">　　　　　=x（3个袋子）+t（3个袋子）</p>
+
+  <p class="yinwen">　　　　　=x（3个袋子）+…。　（2.3）</p>
+
+  <p class="bodytext">在上面的等式中，我们打开了一个袋子，将两项拿了出来，然后关注其中一项。请注意，我们并不关心具体哪一项。我们只想知道最终结果中任意的一项是什么样子，从而建立起对最终结果的直觉。因此我们可以只关注其中一项，然后继续把其他袋子打开。每次打开袋子的时候我们应当关注哪一项呢？这并不重要，我们可以随便选。我们可以从第1个袋子中选x，然后从第2个中选t，从第3个中选t，从第4个中选x：x、t、t、x。每打开一个袋子我们选一项，我把每次选的那一项写在等号上。下面等式中的每一行都是等式（2.3）中三个推理步骤——打开、撕、选——的缩略：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00147.jpeg"/>
+  </div>
+
+  <p class="bodytext">这并不复杂，但已经给了我们想要的信息。我们还是不知道完整的“展开”结果是什么，但现在我们能看到完整展开式中的每一项都是通过选择建立的。准确的说是4次选择：每次从一个袋子中选择一项。我们随机选出了xttx，因此其他所有可能的选择也会出现在最终结果中。因此不用展开（x+t）<sup class="calibre3">4</sup>我们也能知道完整展开式中会有xttx，同样也会有xxxx、tttt、xttt、等等。</p>
+
+  <p class="bodytext">知道这个对于我们已经够了。用这个简单的知识很容易就能计算出x<sup class="calibre3">4</sup>甚至x<sup class="calibre3">n</sup>的导数。让我们回到我们的问题，我们想计算这个：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00148.jpeg"/>
+  </div>
+
+  <p class="bodytext">下面是思维过程：</p>
+
+  <p class="bodytext">1.（x+t）<sup class="calibre3">4</sup>的其中一项是xxxx，也就是x<sup class="calibre3">4</sup>，这一项在等式（2.5）中会与负的x<sup class="calibre3">4</sup>抵消。</p>
+
+  <p class="bodytext">2.（x+t）<sup class="calibre3">4</sup>中的某些项只含有一个t。这个t来自4个袋子之一，因此只含有一个t的应当有4项：txxx、xtxx、xxtx和xxxt。这些单独的t会与等式（2.5）底下的t抵消，将这4项变成xxx，即x<sup class="calibre3">3</sup>。4份x<sup class="calibre3">3</sup>也就是4x<sup class="calibre3">3</sup>。现在这些项中都不再含有t，因此当我们将t变成0时，它们将不会消失。我们将所有这些项写为t·保留项，以强调它们只含有一个t，这样当它们除以t时，就变成保留项，保留项是一堆不含有t的项。在这个例子中，保留项就是4x<sup class="calibre3">3</sup>，但写成更通用的形式有助于我们分析4以外的其他次幂。</p>
+
+  <p class="bodytext">3.其余项都不止含有一个t，例如ttxx或txxt。等式（2.5）下面的t会抵消其中一个t，但这样它们都至少还有一个t，因此当t变成0时这项都会消失。我们将这些项记为t·消失项（t）以强调它们在除以t后还会含有t。</p>
+
+  <p class="bodytext">采用这种方式，我们就能将等式（2.5）用我们刚才拟定的缩写重新写出来，得到：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00149.jpeg"/>
+  </div>
+
+  <p class="bodytext">x<sup class="calibre3">4</sup>项会相互抵消，然后可以消除t得到</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00150.jpeg"/>
+  </div>
+
+  <p class="bodytext">然后假设t越来越小，趋近于0。这对保留项没有影响，但会干掉消失项。左边变成M的导数，写作M'（x）。最后我们得到</p>
+
+  <p class="bodytext-c">M'（x）=保留项。　（2.8）</p>
+
+  <p class="bodytext">哈！M的导数就是我们说的保留项，在这个例子中是4x<sup class="calibre3">3</sup>。但在整个论证过程中，我们并没有限定幂只能是4。因此同样的论证对更通用的形式（x+t）<sup class="calibre3">n</sup>也能成立，无论n是多少。</p>
+
+  <p class="bodytext">因为我们懒得用常规的方式展开（x+t）<sup class="calibre3">4</sup>，所以我们寻找通用的模式。这种奇怪的论证带来的好处是，我们很快就能求出x<sup class="calibre3">n</sup>的导数，无论n是多少！</p>
+
+  <p class="bodytext">要在n保持为未知的情况下求x<sup class="calibre3">n</sup>的导数，我们需要计算：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00151.jpeg"/>
+  </div>
+
+  <p class="bodytext">同前面一样，我们可以用袋子来思考。这次我们有n个袋子：</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00152.jpeg"/>
+  </div>
+
+  <p class="bodytext">（x+t）<sup class="calibre3">n</sup>的每一项都是将n个东西相乘，有各种数量的x和t。例如，有一项只有x，</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00153.jpeg"/>
+  </div>
+
+  <p class="bodytext">即x<sup class="calibre3">n</sup>，它会与等式（2.9）中负的x<sup class="calibre3">n</sup>抵消。有一项是第二个位置和最后一个位置是t，其余的都是x，就像这样：</p>
+
+  <div class="zhong2">
+ <img alt="" class="image-tuzhu" src="../images/00154.jpeg"/>
+  </div>
+
+  <p class="bodytext">但这一项有2个t，因此即便与等式（2.9）底下的t相除，仍然还有一个t，因此当t趋向于0时这一项将会消失，其他有2个或更多t的项也是一样。</p>
+
+  <p class="bodytext">因此我们不用根据某个复杂的公式来展开（x+t）<sup class="calibre3">n</sup>。<a id="zw2" href="part0038.html#zhu2"><sup class="calibre3">[2]</sup></a>同前面一样，只有那些有1个t的项会对导数有影响，因为这一项在与等式（2.9）底下的t相除后会保留下来。这样的项包括txxx…xxxx、xtxx…xxxx，等等，但其实就是tx<sup class="calibre3">n-1</sup>。t可以是来自n个袋子中的任意一个，因此这个相同的项正好出现了n次。</p>
+
+  <div class="zhong">
+ <img alt="" class="image-tuzhu" src="../images/00155.jpeg"/>
+  </div>
+
+  <p class="bodytext">我们可以将其写成：</p>
+
+  <p class="bodytext-c">t·保留项=ntx<sup class="calibre3">n-1</sup>，　（2.12）</p>
+
+  <p class="bodytext">两边的t抵消后得到</p>
+
+  <p class="bodytext-c">保留项=nx<sup class="calibre3">n-1</sup>。　（2.13）</p>
+
+  <p class="bodytext">根据前面同样的推理，保留项就是机器M（x）≡x<sup class="calibre3">n</sup>的导数，因此我们可以将这一节总结为</p>
+
+  <div class="kx">
+     <p class="bodytext-c"><span class="jiacu">我们刚才所发明的</span></p>
+
+    <p class="bodytext-c">如果M（x）≡x<sup class="calibre3">n</sup>，</p>
+
+    <p class="bodytext-c">则M'（x）=nx<sup class="calibre3">n-1</sup></p>
+  </div>
+
+  <p class="bodytext">你可能对n=2和n=3的结果比这一节关于保留项的疯狂结果感到更放心，但其实我们可以用原来的结果来验证我们的新结果！如果我们是对的，无论n是多少，M（x）≡x<sup class="calibre3">n</sup>这样的机器的导数都应当是M'（x）=nx<sup class="calibre3">n-1</sup>，那这个公式就应当能印证我们原来的结果，否则它就是错的。也就是说，我们的新公式要能够得出x<sup class="calibre3">2</sup>的导数是2x，x<sup class="calibre3">3</sup>的导数是3x<sup class="calibre3">2</sup>。事实的确如此！当n=2，式子nx<sup class="calibre3">n-1</sup>就是2x；当n=3，它就是3x<sup class="calibre3">2</sup>。你可能还会争辩说，“我们不能因为这个论证与我们所知的两个例子相符就完全确信它是对的！”你是对的，但这还是能让我们更加相信自己在正确的轨道上，并且在推理的过程中没有犯错。在发明数学的过程中，是不是应当相信总是取决于我们自己，因为我们的数学世界并不是来自哪本有现成答案的书本。</p>
+
+  <hr class="calibre4"/>
+
+  <p class="notecontent"><a id="zhu1" href="part0038.html#zw1">[1]</a>为什么要消除底下的t？因为（<span class="jiacu">微小量／微小量</span>）不一定是很小的数！类似的，如果（<span class="jiacu">某个东西</span>）是某个常规的数，不是无穷小，则（<span class="jiacu">某个东西</span>）（<span class="jiacu">微小量</span>）／（<span class="jiacu">微小量</span>）也不是无穷小。它正好等于（<span class="jiacu">某个东西</span>）。因此我们消除底下的t是因为它让我们无法知道哪些项是真的无穷小，哪些项又是类似2或78这样常规的数。</p>
+
+  <p class="notecontent"><a id="zhu2" href="part0038.html#zw2">[2]</a>这个复杂的公式在教科书上被称为“二项式定理”。其实就是用一种复杂的方式谈论我们说的袋子，用一种奇怪的标记法。我们不需要它也完全能做到。</p>
+</body></html>
