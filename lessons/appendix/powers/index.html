@@ -288,12 +288,12 @@
 </div>
 
 <div class="quiz-train">
-  <h3>七、30 道选择题训练</h3>
-  <p>共 30 题，每题 1 分，满分 30 分。点击选项作答：选对绿色、选错红色（仅标记所选）；点「思路提示」看引导，点「查看答案」才显示正确选项与解析。</p>
+  <h3>七、50 道选择题训练</h3>
+  <p>共 50 题，每题 1 分，满分 50 分。覆盖根式 ↔ 分数幂互化、负指数 ↔ 分式、幂的运算定律、0 次幂、负分数幂、指数方程与混合化简等各类题型。点击选项作答：选对绿色、选错红色（仅标记所选）；点「思路提示」看引导，点「查看答案」才显示正确选项与解析。</p>
   <div id="quizList"></div>
   <div class="quiz-footer">
-    <div id="scoreDisplay">0 / 30</div>
-    <div class="score-detail">已答 <span id="answeredCount">0</span> / 30 题</div>
+    <div id="scoreDisplay">0 / 50</div>
+    <div class="score-detail">已答 <span id="answeredCount">0</span> / 50 题</div>
     <button class="reset-btn" onclick="resetQuiz()">重新开始</button>
   </div>
 </div>
@@ -318,42 +318,42 @@ function toggleConv(btn) {
   btn.classList.toggle('open', isOpen);
 }
 
-// ============ 七、30 道选择题训练 ============
+// ============ 七、50 道选择题训练 ============
 var QUESTS = [
   { q: "√9 的值是？", opts: ["2", "3", "4", "81"], a: 1,
     hint: "√9 表示「平方后等于 9 的正数」，即 9 的 1/2 次幂。",
     ans: "√9 = 9<sup>1/2</sup>。因为 3² = 9，所以 √9 = <b>3</b>。" },
-  { q: "8<sup>1/3</sup> 的值是？", opts: ["2", "4", "8/3", "24"], a: 0,
+  { q: "8<sup>1/3</sup> 的值是？", opts: ["4", "8/3", "24", "2"], a: 3,
     hint: "指数 1/3 表示「开 3 次方」，即求 ∛8。",
     ans: "8<sup>1/3</sup> = ∛8。因为 2³ = 8，所以 8<sup>1/3</sup> = <b>2</b>。" },
   { q: "16<sup>3/4</sup> 的值是？", opts: ["12", "64", "8", "4"], a: 2,
     hint: "先开方后乘方更省事：16<sup>3/4</sup> = (16<sup>1/4</sup>)³。",
     ans: "16<sup>3/4</sup> = (16<sup>1/4</sup>)³ = (⁴√16)³ = 2³ = <b>8</b>。" },
-  { q: "2<sup>−3</sup> 的值是？", opts: ["−8", "1/8", "8", "1/6"], a: 1,
+  { q: "2<sup>−3</sup> 的值是？", opts: ["−8", "8", "1/6", "1/8"], a: 3,
     hint: "负指数表示取倒数：2<sup>−3</sup> = 1 / 2³。",
     ans: "2<sup>−3</sup> = 1 / 2³ = 1/8 = <b>1/8</b>。" },
   { q: "x<sup>−2</sup>（x ≠ 0）写成不含负指数的形式是？", opts: ["−x²", "1/x²", "x²", "2/x"], a: 1,
     hint: "负号表示把底数移到分母，指数变正。",
     ans: "x<sup>−2</sup> = 1 / x² = <b>1/x²</b>。" },
-  { q: "√x（x ≥ 0）用分数指数幂表示是？", opts: ["x²", "x<sup>1/2</sup>", "x<sup>2</sup>", "1/x<sup>1/2</sup>"], a: 1,
+  { q: "√x（x ≥ 0）用分数指数幂表示是？", opts: ["x²", "x<sup>2</sup>", "1/x<sup>1/2</sup>", "x<sup>1/2</sup>"], a: 3,
     hint: "平方根 = 1/2 次幂：√x = x<sup>1/2</sup>。",
     ans: "√x = <b>x<sup>1/2</sup></b>（分母 2 是开方次数）。" },
   { q: "x<sup>2/3</sup>（x &gt; 0）用根式表示是？", opts: ["∛(x²)", "√(x³)", "∛x / 2", "x² · x³"], a: 0,
     hint: "分母 3 开 3 次方，分子 2 乘 2 次方：先 x² 再开 3 次方。",
     ans: "x<sup>2/3</sup> = <b>∛(x²)</b>（分母 3 开方、分子 2 乘方）。" },
-  { q: "1/√x（x &gt; 0）写成指数形式是？", opts: ["x<sup>−1/2</sup>", "x<sup>1/2</sup>", "−x<sup>1/2</sup>", "x<sup>−2</sup>"], a: 0,
+  { q: "1/√x（x &gt; 0）写成指数形式是？", opts: ["x<sup>1/2</sup>", "−x<sup>1/2</sup>", "x<sup>−2</sup>", "x<sup>−1/2</sup>"], a: 3,
     hint: "先化成幂 1/√x = 1 / x<sup>1/2</sup>，再用负指数。",
     ans: "1/√x = 1 / x<sup>1/2</sup> = <b>x<sup>−1/2</sup></b>。" },
   { q: "a<sup>0</sup> 的值是（a ≠ 0）？", opts: ["0", "1", "a", "不确定"], a: 1,
     hint: "任何非零数的 0 次幂都等于 1（特例 1）。",
     ans: "由 a<sup>n</sup> ÷ a<sup>n</sup> = a<sup>n−n</sup> = a<sup>0</sup>，而左边等于 1，所以 a<sup>0</sup> = <b>1</b>。" },
-  { q: "a<sup>−1</sup> 的值是（a ≠ 0）？", opts: ["−a", "1/a", "a", "1−a"], a: 1,
+  { q: "a<sup>−1</sup> 的值是（a ≠ 0）？", opts: ["−a", "a", "1−a", "1/a"], a: 3,
     hint: "负一次幂 = 一次幂的倒数（特例 2）。",
     ans: "由 a<sup>0</sup> ÷ a<sup>1</sup> = a<sup>0−1</sup> = a<sup>−1</sup>，左边 = 1/a，所以 a<sup>−1</sup> = <b>1/a</b>。" },
   { q: "(2/3)<sup>−2</sup> 的值是？", opts: ["−4/3", "4/9", "9/4", "6/4"], a: 2,
     hint: "负幂 = 取倒数并颠倒分式：(2/3)<sup>−2</sup> = (3/2)²。",
     ans: "(2/3)<sup>−2</sup> = (3/2)² = <b>9/4</b>。" },
-  { q: "25<sup>−1/2</sup> 的值是？", opts: ["5", "−5", "1/5", "1/25"], a: 2,
+  { q: "25<sup>−1/2</sup> 的值是？", opts: ["5", "1/5", "−5", "1/25"], a: 1,
     hint: "先处理负号取倒数：25<sup>−1/2</sup> = 1 / 25<sup>1/2</sup> = 1/√25。",
     ans: "25<sup>−1/2</sup> = 1 / 25<sup>1/2</sup> = 1 / √25 = 1/5 = <b>1/5</b>。" },
   { q: "(a<sup>m</sup>)<sup>n</sup> 等于？", opts: ["a<sup>m+n</sup>", "a<sup>m−n</sup>", "a<sup>mn</sup>", "a<sup>m/n</sup>"], a: 2,
@@ -371,7 +371,7 @@ var QUESTS = [
   { q: "x<sup>1/2</sup> · x<sup>1/2</sup> 等于？", opts: ["x<sup>1/4</sup>", "x", "2x<sup>1/2</sup>", "x²"], a: 1,
     hint: "同底数幂相乘指数相加：1/2 + 1/2 = 1。",
     ans: "x<sup>1/2</sup> · x<sup>1/2</sup> = x<sup>1/2+1/2</sup> = x¹ = <b>x</b>。" },
-  { q: "1/8 写成 2 的幂是？", opts: ["2<sup>−3</sup>", "2³", "8<sup>−1</sup> = −8", "2<sup>1/3</sup>"], a: 0,
+  { q: "1/8 写成 2 的幂是？", opts: ["2³", "8<sup>−1</sup> = −8", "2<sup>1/3</sup>", "2<sup>−3</sup>"], a: 3,
     hint: "8 = 2³，所以 1/8 = 1 / 2³ = 2<sup>−3</sup>。",
     ans: "1/8 = 1 / 2³ = <b>2<sup>−3</sup></b>。" },
   { q: "8<sup>−1/3</sup> 的值是？", opts: ["−2", "2", "1/2", "1/24"], a: 2,
@@ -380,7 +380,7 @@ var QUESTS = [
   { q: "⁴√(x⁸) 化简为（x ≥ 0）？", opts: ["x⁴", "x²", "x⁸/4", "2x²"], a: 1,
     hint: "写成幂：⁴√(x⁸) = x<sup>8/4</sup> = x²。",
     ans: "⁴√(x⁸) = x<sup>8/4</sup> = <b>x²</b>。" },
-  { q: "(x<sup>1/2</sup>)² 等于（x ≥ 0）？", opts: ["x<sup>1/4</sup>", "x", "x²", "2x"], a: 1,
+  { q: "(x<sup>1/2</sup>)² 等于（x ≥ 0）？", opts: ["x<sup>1/4</sup>", "x²", "2x", "x"], a: 3,
     hint: "幂的乘方指数相乘：1/2 × 2 = 1。",
     ans: "(x<sup>1/2</sup>)² = x<sup>(1/2)×2</sup> = x¹ = <b>x</b>。" },
   { q: "0.001 写成 10 的幂是？", opts: ["10<sup>−3</sup>", "10³", "10<sup>1/3</sup>", "−10³"], a: 0,
@@ -395,13 +395,13 @@ var QUESTS = [
   { q: "(x<sup>1/3</sup>)³ 等于（x ≥ 0）？", opts: ["x<sup>1/9</sup>", "x", "x³", "3x<sup>1/3</sup>"], a: 1,
     hint: "幂的乘方指数相乘：1/3 × 3 = 1。",
     ans: "(x<sup>1/3</sup>)³ = x<sup>(1/3)×3</sup> = x¹ = <b>x</b>。" },
-  { q: "2<sup>x</sup> = 8，则 x = ？", opts: ["2", "3", "4", "16"], a: 1,
+  { q: "2<sup>x</sup> = 8，则 x = ？", opts: ["3", "2", "4", "16"], a: 0,
     hint: "8 = 2³，比较指数即可。",
     ans: "8 = 2³，所以 2<sup>x</sup> = 2³，即 <b>x = 3</b>。" },
-  { q: "3<sup>−1</sup> + 3<sup>0</sup> 的值是？", opts: ["0", "4/3", "1/3", "1"], a: 1,
+  { q: "3<sup>−1</sup> + 3<sup>0</sup> 的值是？", opts: ["0", "1/3", "1", "4/3"], a: 3,
     hint: "分别算 3<sup>−1</sup> = 1/3、3<sup>0</sup> = 1，再相加。",
     ans: "3<sup>−1</sup> + 3<sup>0</sup> = 1/3 + 1 = <b>4/3</b>。" },
-  { q: "(a/b)<sup>−n</sup> 等于？", opts: ["(b/a)<sup>n</sup>", "(a/b)<sup>n</sup>", "−a<sup>n</sup>/b<sup>n</sup>", "a<sup>−n</sup>b<sup>n</sup>"], a: 0,
+  { q: "(a/b)<sup>−n</sup> 等于？", opts: ["(a/b)<sup>n</sup>", "−a<sup>n</sup>/b<sup>n</sup>", "(b/a)<sup>n</sup>", "a<sup>−n</sup>b<sup>n</sup>"], a: 2,
     hint: "负幂 = 颠倒整个分式再乘方。",
     ans: "(a/b)<sup>−n</sup> = <b>(b/a)<sup>n</sup></b>（负号 + 分数线 = 颠倒分式）。" },
   { q: "把分式 1/(x²y)（xy ≠ 0）写成负指数乘积是？", opts: ["x<sup>2</sup>y<sup>−1</sup>", "x<sup>−2</sup>y<sup>−1</sup>", "x<sup>−2</sup>y", "−x²y"], a: 1,
@@ -409,7 +409,67 @@ var QUESTS = [
     ans: "1/(x²y) = x<sup>−2</sup> · y<sup>−1</sup> = <b>x<sup>−2</sup>y<sup>−1</sup></b>。" },
   { q: "√(x² + 2x + 1) 化简为（x &gt; −1）？", opts: ["x + 1", "x² + 1", "x − 1", "√(x²) + 1"], a: 0,
     hint: "x² + 2x + 1 = (x + 1)²，开方得 |x+1|；由 x &gt; −1 为正。",
-    ans: "x² + 2x + 1 = (x + 1)²，所以 √(x²+2x+1) = |x+1|；因 x &gt; −1，x+1 &gt; 0，故 = <b>x + 1</b>。" }
+    ans: "x² + 2x + 1 = (x + 1)²，所以 √(x²+2x+1) = |x+1|；因 x &gt; −1，x+1 &gt; 0，故 = <b>x + 1</b>。" },
+  { q: "⁴√(x³)（x ≥ 0）写成指数形式是？", opts: ["x<sup>4/3</sup>", "x<sup>3·4</sup>", "x<sup>1/4</sup>", "x<sup>3/4</sup>"], a: 3,
+    hint: "4 次根号对应分母 4：⁴√(x³) = x<sup>3/4</sup>。",
+    ans: "⁴√(x³) = <b>x<sup>3/4</sup></b>（分母 4 开 4 次方、分子 3 乘 3 次方）。" },
+  { q: "x<sup>5/6</sup>（x &gt; 0）用根式表示是？", opts: ["⁶√(x⁵)", "√(x⁵)", "∛(x⁵)", "x⁵ + x⁶"], a: 0,
+    hint: "分母 6 开 6 次方、分子 5 乘 5 次方。",
+    ans: "x<sup>5/6</sup> = <b>⁶√(x⁵)</b>。" },
+  { q: "√x · ∛x（x &gt; 0）合并为？", opts: ["x<sup>1/6</sup>", "x<sup>5/6</sup>", "x<sup>2/3</sup>", "⁶√x"], a: 1,
+    hint: "化成同底数幂：√x = x<sup>1/2</sup>、∛x = x<sup>1/3</sup>，指数相加 1/2 + 1/3。",
+    ans: "√x · ∛x = x<sup>1/2</sup> · x<sup>1/3</sup> = x<sup>1/2+1/3</sup> = <b>x<sup>5/6</sup></b>。" },
+  { q: "(1/2)<sup>−3</sup> 的值是？", opts: ["8", "1/8", "−8", "6"], a: 0,
+    hint: "负幂取倒数并颠倒分式：(1/2)<sup>−3</sup> = 2³。",
+    ans: "(1/2)<sup>−3</sup> = 2³ = <b>8</b>。" },
+  { q: "1 / x<sup>3/2</sup>（x &gt; 0）写成负指数是？", opts: ["x<sup>−2/3</sup>", "x<sup>3/2</sup>", "x<sup>−3/2</sup>", "x<sup>2/3</sup>"], a: 2,
+    hint: "1 / x<sup>k</sup> = x<sup>−k</sup>，把指数整体取负即可。",
+    ans: "1 / x<sup>3/2</sup> = <b>x<sup>−3/2</sup></b>。" },
+  { q: "x<sup>−1/2</sup> · x<sup>2</sup>（x &gt; 0）化简为？", opts: ["x<sup>5/2</sup>", "x<sup>−5/2</sup>", "x<sup>1/2</sup>", "x<sup>3/2</sup>"], a: 3,
+    hint: "同底数幂相乘指数相加：−1/2 + 2 = 3/2。",
+    ans: "x<sup>−1/2</sup> · x<sup>2</sup> = x<sup>−1/2+2</sup> = <b>x<sup>3/2</sup></b>。" },
+  { q: "(ab)<sup>3</sup> 展开等于？", opts: ["a³ + b³", "a<sup>3</sup>b", "a³b³", "3ab"], a: 2,
+    hint: "积的乘方 = 每个因式分别乘方（定律 3）。",
+    ans: "(ab)<sup>3</sup> = <b>a³b³</b>（积的乘方，各因式分别乘方）。" },
+  { q: "(a²/b)<sup>3</sup>（b ≠ 0）展开等于？", opts: ["a⁶/b³", "a²/b³", "a⁵/b³", "a⁶b³"], a: 0,
+    hint: "分式乘方 = 分子分母分别乘方，分子 (a²)³ = a⁶。",
+    ans: "(a²/b)<sup>3</sup> = (a²)³ / b³ = <b>a⁶/b³</b>。" },
+  { q: "x² · x³ ÷ x⁴（x ≠ 0）化简为？", opts: ["x²", "x⁶", "x", "x<sup>1/2</sup>"], a: 2,
+    hint: "乘除统一成指数加减：2 + 3 − 4 = 1。",
+    ans: "x² · x³ ÷ x⁴ = x<sup>2+3−4</sup> = <b>x</b>。" },
+  { q: "27<sup>2/3</sup> 的值是？", opts: ["18", "9", "3", "81"], a: 1,
+    hint: "先开方后乘方：27<sup>2/3</sup> = (∛27)²。",
+    ans: "27<sup>2/3</sup> = (∛27)² = 3² = <b>9</b>。" },
+  { q: "81<sup>−1/4</sup> 的值是？", opts: ["3", "−3", "1/3", "1/81"], a: 2,
+    hint: "负号取倒数、分母 4 开 4 次方：81<sup>−1/4</sup> = 1 / ⁴√81。",
+    ans: "81<sup>−1/4</sup> = 1 / ⁴√81 = 1/3 = <b>1/3</b>。" },
+  { q: "(1/9)<sup>3/2</sup> 的值是？", opts: ["1/27", "1/9", "1/3", "27"], a: 0,
+    hint: "(1/9)<sup>3/2</sup> = ((1/9)<sup>1/2</sup>)³ = (1/3)³。",
+    ans: "(1/9)<sup>3/2</sup> = (√(1/9))³ = (1/3)³ = <b>1/27</b>。" },
+  { q: "(−8)<sup>1/3</sup> 的值是？", opts: ["2", "−24", "无意义", "−2"], a: 3,
+    hint: "负数可以开奇次方：∛(−8) = −2。",
+    ans: "(−8)<sup>1/3</sup> = ∛(−8) = <b>−2</b>（奇次方根保留负号）。" },
+  { q: "(π − 3)<sup>0</sup> 的值是？", opts: ["0", "1", "π − 3", "不确定"], a: 1,
+    hint: "π ≈ 3.14，π − 3 ≠ 0，非零数的 0 次幂等于 1。",
+    ans: "因为 π − 3 ≠ 0，由零次幂性质得 (π − 3)<sup>0</sup> = <b>1</b>。" },
+  { q: "a<sup>−1</sup> · a（a ≠ 0）等于？", opts: ["a²", "0", "1", "1/a"], a: 2,
+    hint: "同底数幂相乘指数相加：−1 + 1 = 0，a⁰ = 1。",
+    ans: "a<sup>−1</sup> · a = a<sup>−1+1</sup> = a⁰ = <b>1</b>。" },
+  { q: "2<sup>x</sup> = 1/16，则 x = ？", opts: ["−4", "4", "−8", "8"], a: 0,
+    hint: "1/16 = 1/2⁴ = 2<sup>−4</sup>，比较指数。",
+    ans: "1/16 = 2<sup>−4</sup>，所以 2<sup>x</sup> = 2<sup>−4</sup>，即 <b>x = −4</b>。" },
+  { q: "√(x⁶)（x ≥ 0）化简为？", opts: ["x⁶/2", "x²", "x⁴", "x³"], a: 3,
+    hint: "√(x⁶) = x<sup>6/2</sup> = x³。",
+    ans: "√(x⁶) = x<sup>6/2</sup> = <b>x³</b>。" },
+  { q: "(√2)<sup>−4</sup> 的值是？", opts: ["4", "1/4", "1/16", "16"], a: 1,
+    hint: "√2 = 2<sup>1/2</sup>，所以 (√2)<sup>−4</sup> = 2<sup>−2</sup>。",
+    ans: "(√2)<sup>−4</sup> = (2<sup>1/2</sup>)<sup>−4</sup> = 2<sup>−2</sup> = <b>1/4</b>。" },
+  { q: "4<sup>100</sup> 与 2<sup>200</sup> 的大小关系是？", opts: ["4<sup>100</sup> 更大", "2<sup>200</sup> 更大", "相等", "无法比较"], a: 2,
+    hint: "4 = 2²，所以 4<sup>100</sup> = (2²)<sup>100</sup> = 2<sup>200</sup>。",
+    ans: "4<sup>100</sup> = (2²)<sup>100</sup> = 2<sup>200</sup>，故二者<b>相等</b>。" },
+  { q: "√(a²)（a &lt; 0）化简为？", opts: ["a", "a²", "|−a|", "−a"], a: 3,
+    hint: "√(a²) = |a|；因为 a &lt; 0，|a| = −a。",
+    ans: "√(a²) = |a|，因 a &lt; 0，所以 = <b>−a</b>。" }
 ];
 
 var QUIZ_ANSWERS = {};
@@ -496,7 +556,7 @@ function toggleAns(n) {
 
 function updateScore() {
   var answered = document.querySelectorAll("#quizList .quiz-question[data-done='1']").length;
-  document.getElementById("scoreDisplay").textContent = QUIZ_SCORE + " / 30";
+  document.getElementById("scoreDisplay").textContent = QUIZ_SCORE + " / 50";
   document.getElementById("answeredCount").textContent = answered;
 }
 
