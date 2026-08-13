@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../lib/logo.png?version=1.0.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模拟考试 · 集合、逻辑与函数</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  /* 主样式由共享 style.css 提供，此处仅保留本考试页差异规则 */
+  article { padding: 28px 32px; }
+  h1 { text-align: center; }
+  .page-desc { text-align: center; color: #666; font-size: 0.95em; margin: 8px 0 20px; }
+
+  /* 提示页 */
+  .start-box { text-align: center; padding: 30px 10px 40px; }
+  .start-box .rules {
+    text-align: left; background: #f0f7ff; border-left: 4px solid #1a73e8;
+    padding: 16px 24px; border-radius: 0 10px 10px 0; margin: 0 auto 30px;
+    max-width: 620px; font-size: 1.02em;
+  }
+  .start-box .rules h3 { margin: 0 0 10px; color: #1a3a5c; }
+  .start-box .rules ul { margin: 0; padding-left: 22px; }
+  .btn-start {
+    display: inline-block; padding: 12px 52px; background: #1a73e8; color: #fff;
+    border: none; border-radius: 26px; font-size: 1.1em; cursor: pointer;
+    font-family: inherit; transition: 0.15s;
+  }
+  .btn-start:hover { background: #1557b0; }
+
+  /* 考试页顶部：计时 + 提交 */
+  .exam-top {
+    position: sticky; top: 0; z-index: 50; background: #fff;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 4px; border-bottom: 2px solid #1a73e8; margin-bottom: 8px;
+  }
+  .timer-box { font-size: 1.35em; font-weight: 700; color: #1a73e8; letter-spacing: 0.5px; }
+  .timer-box.low { color: #f44336; animation: blink 1s infinite; }
+  @keyframes blink { 50% { opacity: 0.45; } }
+  .btn-submit {
+    padding: 8px 24px; background: #1a73e8; color: #fff; border: none;
+    border-radius: 20px; font-size: 0.98em; cursor: pointer; font-family: inherit;
+  }
+  .btn-submit:hover { background: #1557b0; }
+  .progress-line { font-size: 0.92em; color: #666; margin: 4px 0 10px; }
+  .progress-line b { color: #e65100; }
+
+  section.exam-sec { margin: 26px 0; }
+  section.exam-sec h2 { font-size: 1.18em; }
+
+  .q-card {
+    background: #f8f9fb; border: 1px solid #e9ecef; border-radius: 10px;
+    padding: 14px 16px; margin: 12px 0;
+  }
+  .q-title { font-weight: 600; margin-bottom: 10px; line-height: 1.85; }
+  .q-no { color: #e65100; font-weight: 700; margin-right: 6px; }
+  .opts { display: flex; flex-wrap: wrap; gap: 10px; }
+  .opt {
+    border: 1.5px solid #c5cdd9; border-radius: 8px; padding: 6px 14px;
+    cursor: pointer; user-select: none; background: #fff; transition: 0.15s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .opt:hover { border-color: #1a73e8; }
+  .opt.sel { border-color: #1a73e8; background: #e8f0fe; font-weight: 600; }
+  .opt-key {
+    display: inline-block; width: 20px; height: 20px; line-height: 20px;
+    text-align: center; border-radius: 50%; background: #eef1f5;
+    font-size: 0.82em; color: #555; flex: none;
+  }
+  .opt.sel .opt-key { background: #1a73e8; color: #fff; }
+
+  /* 填空题 */
+  .fill-line { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .fill-line input {
+    border: 1.5px solid #c5cdd9; border-radius: 6px; padding: 6px 10px;
+    font-size: 1em; width: 170px; font-family: inherit;
+  }
+  .fill-line input:focus { outline: none; border-color: #1a73e8; }
+
+  /* 结果页 */
+  .result-box { text-align: center; }
+  .score-big { font-size: 3.2em; font-weight: 700; color: #1a73e8; line-height: 1.2; margin: 10px 0 4px; }
+  .score-big .unit { font-size: 0.35em; color: #666; font-weight: 400; }
+  .score-sub { color: #666; margin-bottom: 6px; }
+  .score-bar-wrap {
+    background: #eef1f5; border-radius: 10px; height: 18px;
+    margin: 16px auto; max-width: 480px; overflow: hidden;
+  }
+  .score-bar {
+    height: 100%; border-radius: 10px; width: 0;
+    background: linear-gradient(90deg, #1a73e8, #4fc3f7); transition: width 0.8s;
+  }
+  .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 26px 0; }
+  .sum-item { background: #f8f9fb; border-radius: 10px; padding: 14px 10px; border: 1px solid #e9ecef; }
+  .sum-item .s-title { font-size: 0.92em; color: #555; margin-bottom: 6px; }
+  .sum-item .num { font-size: 1.5em; font-weight: 700; }
+  .sum-item .num .ok { color: #4caf50; }
+  .sum-item .num .no { color: #f44336; }
+  .wrong-list { text-align: left; margin-top: 26px; }
+  .wrong-list h3 { color: #c62828; margin-bottom: 8px; }
+  .all-correct {
+    background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 10px;
+    padding: 18px; color: #2e7d32; font-size: 1.05em; margin-top: 16px;
+  }
+  .wrong-item {
+    background: #fff8f8; border: 1px solid #ffcdd2; border-radius: 10px;
+    padding: 12px 16px; margin: 10px 0;
+  }
+  .wrong-item .w-head { font-weight: 700; margin-bottom: 4px; }
+  .wrong-item .w-type { color: #d32f2f; font-size: 0.85em; margin-right: 8px; }
+  .wrong-item .w-q { font-weight: 400; }
+  .wrong-item .u-ans { color: #f44336; margin: 2px 0; }
+  .wrong-item .c-ans { color: #2e7d32; margin: 2px 0; }
+  .wrong-item .w-why {
+    color: #555; font-size: 0.93em; border-top: 1px dashed #ffcdd2;
+    margin-top: 8px; padding-top: 8px;
+  }
+  .btn-reset {
+    display: inline-block; padding: 10px 36px; background: #fff;
+    border: 2px solid #1a73e8; color: #1a73e8; border-radius: 22px;
+    cursor: pointer; font-size: 1em; margin-top: 24px; font-family: inherit;
+  }
+  .btn-reset:hover { background: #e8f0fe; }
+  .back-link { display: block; margin-top: 14px; color: #666; font-size: 0.9em; }
+
+  @media (max-width: 720px) {
+    article { padding: 18px 12px; }
+    .opt { flex: 1 1 auto; min-width: 42%; }
+    .summary-grid { gap: 8px; }
+    .exam-top { padding: 10px 2px; }
+    .timer-box { font-size: 1.1em; }
+  }
+</style>
+</head>
+<body>
+<article>
+<h1>模拟考试 · 集合、逻辑与函数</h1>
+<p class="page-desc">中级难度 · 自动计时 · 自动判分</p>
+
+<!-- 提示页 -->
+<div id="startScreen">
+  <div class="start-box">
+    <div class="rules">
+      <h3>考试说明</h3>
+      <ul>
+        <li><b>考试范围</b>：集合、逻辑、函数（中级难度）</li>
+        <li><b>试卷构成</b>：选择题 30 题 + 判断题 20 题 + 填空题 50 题，共 100 题</li>
+        <li><b>计分</b>：每题 1 分，满分 100 分，交卷后自动判分</li>
+        <li><b>限时</b>：60 分钟。倒计时结束将自动提交试卷</li>
+        <li><b>提前交卷</b>：任意时刻可点击右上角「提交试卷」提前交卷</li>
+        <li><b>交卷后</b>：显示得分、各题型错误总结与完整错题解析</li>
+        <li>填空题答案请用键盘可输入的字符（如数字、汉字、半角括号与比较符号），不需要输入特殊数学符号</li>
+      </ul>
+    </div>
+    <button class="btn-start" onclick="startExam()">开始考试</button>
+  </div>
+</div>
+
+<!-- 考试页 -->
+<div id="examScreen" style="display:none;">
+  <div class="exam-top">
+    <div class="timer-box" id="timerBox">剩余 60:00</div>
+    <button class="btn-submit" onclick="manualSubmit()">提交试卷</button>
+  </div>
+  <div class="progress-line">已作答 <b id="answeredCount">0</b> / 100 题</div>
+
+  <section class="exam-sec">
+    <h2>一、选择题（第 1–30 题，每题 1 分）</h2>
+    <div id="mcqWrap"></div>
+  </section>
+  <section class="exam-sec">
+    <h2>二、判断题（第 31–50 题，每题 1 分）</h2>
+    <div id="tfWrap"></div>
+  </section>
+  <section class="exam-sec">
+    <h2>三、填空题（第 51–100 题，每题 1 分）</h2>
+    <div id="fillWrap"></div>
+  </section>
+</div>
+
+<!-- 结果页 -->
+<div id="resultScreen" style="display:none;"></div>
+
+<script>
+/* ============ 题库数据 ============ */
+// 选择题：a 为正确选项索引（0=A, 1=B, 2=C, 3=D）
+const MCQ = [
+  // —— 集合（10 题）——
+  { q: "已知集合 A={1,2,3}，B={2,3,4}，则 A∩B 中元素的个数是（&nbsp;）。",
+    opts: ["1", "2", "3", "4"], a: 1,
+    why: "A∩B={2,3}，共 2 个元素。" },
+  { q: "集合 A={x | x²−3x+2=0}，则 A 的子集个数是（&nbsp;）。",
+    opts: ["2", "3", "4", "6"], a: 2,
+    why: "x²−3x+2=0 解得 x=1 或 2，A={1,2}，含 2 个元素，子集个数为 2²=4。" },
+  { q: "已知全集 U={1,2,3,4,5}，A={1,3}，则 A 的补集（∁<sub>U</sub>A）是（&nbsp;）。",
+    opts: ["{2,4}", "{1,3,5}", "{2,4,5}", "{1,2,3,4,5}"], a: 2,
+    why: "补集为全集中不属于 A 的元素：{2,4,5}。" },
+  { q: "设集合 A={x | −1≤x≤2}，B={x | 0&lt;x&lt;3}，则 A∪B 是（&nbsp;）。",
+    opts: ["{x | −1&lt;x&lt;3}", "{x | 0≤x≤2}", "{x | −1≤x≤2}", "{x | −1≤x&lt;3}"], a: 3,
+    why: "两集合并集取覆盖范围：−1≤x&lt;3。" },
+  { q: "已知集合 A={x | x&gt;1}，B={x | x≤3}，则 A∩B 是（&nbsp;）。",
+    opts: ["{x | 1≤x&lt;3}", "{x | x&gt;1}", "{x | 1≤x≤3}", "{x | 1&lt;x≤3}"], a: 3,
+    why: "两集合的交集为 1&lt;x≤3。" },
+  { q: "集合 {a,b} 与集合 {b,a} 的关系是（&nbsp;）。",
+    opts: ["相等", "真子集", "完全不同", "无法判断"], a: 0,
+    why: "集合中的元素无序，{a,b}={b,a}，两集合相等。" },
+  { q: "已知集合 A={x∈N | x&lt;4}，则 A 中元素的个数是（&nbsp;）。",
+    opts: ["3", "4", "2", "5"], a: 1,
+    why: "自然数 N 通常含 0，A={0,1,2,3}，共 4 个元素。" },
+  { q: "已知全集 U={1,2,3,4}，A={1,2}，B={2,3}，则 (∁<sub>U</sub>A)∩B 是（&nbsp;）。",
+    opts: ["{2}", "{3}", "{4}", "{1,2}"], a: 1,
+    why: "∁<sub>U</sub>A={3,4}，与 B={2,3} 的交集为 {3}。" },
+  { q: "若集合 A={x | x²=1}，B={x | x=1}，则（&nbsp;）。",
+    opts: ["A=B", "A⊂B（A 是 B 的真子集）", "B⊂A（B 是 A 的真子集）", "A∩B=∅"], a: 2,
+    why: "A={−1,1}，B={1}，故 B 是 A 的真子集。" },
+  { q: "设 A={x | 0≤x≤2}，B={y | 0≤y≤2}，则 A∩B 是（&nbsp;）。",
+    opts: ["空集", "{x | 0≤x≤2}", "{0,2}", "{x | 0&lt;x&lt;2}"], a: 1,
+    why: "A 与 B 都等于数集 [0,2]，交集仍为 {x | 0≤x≤2}。" },
+
+  // —— 逻辑（10 题）——
+  { q: "命题「若 x&gt;1，则 x&gt;0」的逆命题是（&nbsp;）。",
+    opts: ["若 x&gt;0，则 x&gt;1", "若 x≤1，则 x≤0", "若 x&gt;1，则 x&gt;0", "若 x≤0，则 x≤1"], a: 0,
+    why: "逆命题：把条件与结论互换，即「若 x&gt;0，则 x&gt;1」。" },
+  { q: "命题「∀x∈R，x²≥0」的否定是（&nbsp;）。",
+    opts: ["∀x∈R，x²&lt;0", "∃x∈R，x²≥0", "∃x∈R，x²=0", "∃x∈R，x²&lt;0"], a: 3,
+    why: "全称命题的否定是特称命题：存在 x 使 x²&lt;0。" },
+  { q: "「x=1」是「x²=1」的（&nbsp;）。",
+    opts: ["充分不必要条件", "必要不充分条件", "充要条件", "既不充分也不必要条件"], a: 0,
+    why: "x=1 能推出 x²=1；但 x²=1 时 x 可为 −1，故不必要。" },
+  { q: "命题「若 x²−1=0，则 x=1」的否命题是（&nbsp;）。",
+    opts: ["若 x²−1≠0，则 x≠1", "若 x≠1，则 x²−1≠0", "若 x²−1=0，则 x≠1", "若 x=1，则 x²−1=0"], a: 0,
+    why: "否命题：条件与结论都否定，即「若 x²−1≠0，则 x≠1」。" },
+  { q: "已知 p：x&gt;2，q：x²&gt;4，则 p 是 q 的（&nbsp;）。",
+    opts: ["充分不必要条件", "必要不充分条件", "充要条件", "既不充分也不必要条件"], a: 0,
+    why: "x&gt;2 推出 x²&gt;4；但 x²&gt;4 时 x 可能小于 −2，故不必要。" },
+  { q: "命题 p：A∩B=∅，命题 q：A 与 B 没有公共元素，则 p 是 q 的（&nbsp;）。",
+    opts: ["充分不必要条件", "必要不充分条件", "充要条件", "既不充分也不必要条件"], a: 2,
+    why: "交集为空与没有公共元素是同一件事，两者互相推出。" },
+  { q: "命题「∃x∈R，x²+x+1&lt;0」是（&nbsp;）。",
+    opts: ["真命题，如 x=0 时成立", "真命题，如 x=1 时成立", "真命题，如 x=−1 时成立", "假命题"], a: 3,
+    why: "x²+x+1 的判别式 Δ=1−4=−3&lt;0 且开口向上，恒大于 0，故不存在这样的 x。" },
+  { q: "命题「若 a&gt;b，则 a²&gt;b²」是（&nbsp;）。",
+    opts: ["真命题", "假命题", "无法判断", "当 a、b 均为正数时是真命题"], a: 1,
+    why: "取 a=1，b=−2，有 1&gt;−2 但 1²&lt;(−2)²，举出反例即为假命题。" },
+  { q: "设集合 A={x | −1&lt;x&lt;3}，则「x∈A」是「0&lt;x&lt;2」的（&nbsp;）。",
+    opts: ["充分不必要条件", "必要不充分条件", "充要条件", "既不充分也不必要条件"], a: 1,
+    why: "0&lt;x&lt;2 能推出 x∈A；反之 x=2.5∈A 但不在 (0,2) 内，故 x∈A 是必要不充分条件。" },
+  { q: "命题「若两条直线平行，则同位角相等」的逆否命题是（&nbsp;）。",
+    opts: ["若同位角相等，则两条直线平行", "若同位角不相等，则两条直线不平行", "若两条直线不平行，则同位角相等", "若两条直线平行，则同位角不相等"], a: 1,
+    why: "逆否命题：条件与结论都否定并互换，即「若同位角不相等，则两条直线不平行」。" },
+
+  // —— 函数（10 题）——
+  { q: "函数 f(x)=1/(x−2) 的定义域是（&nbsp;）。",
+    opts: ["x&gt;2", "x≥2", "x&lt;2", "x≠2"], a: 3,
+    why: "分母不能为 0，故 x−2≠0，即 x≠2。" },
+  { q: "函数 f(x)=x²−4x+3 的对称轴是（&nbsp;）。",
+    opts: ["x=1", "x=3", "x=2", "x=−2"], a: 2,
+    why: "对称轴 x=−b/(2a)=4/2=2。" },
+  { q: "函数 y=log<sub>2</sub>x 的单调性是（&nbsp;）。",
+    opts: ["在 (0,+∞) 上单调递增", "在 (0,+∞) 上单调递减", "先增后减", "没有单调性"], a: 0,
+    why: "底数 2&gt;1，对数函数在定义域 (0,+∞) 上单调递增。" },
+  { q: "下列函数中是偶函数的是（&nbsp;）。",
+    opts: ["f(x)=x²", "f(x)=x³", "f(x)=2<sup>x</sup>", "f(x)=log<sub>2</sub>x"], a: 0,
+    why: "f(−x)=(−x)²=x²=f(x)，满足偶函数定义。" },
+  { q: "已知 f(x)=2x+1，g(x)=x²，则 f(g(2)) 等于（&nbsp;）。",
+    opts: ["5", "6", "8", "9"], a: 3,
+    why: "g(2)=4，f(4)=2×4+1=9。" },
+  { q: "函数 f(x)=x²+1（x∈R）的值域是（&nbsp;）。",
+    opts: ["R", "(0,+∞)", "[1,+∞)", "[0,+∞)"], a: 2,
+    why: "x²≥0，故 x²+1≥1，值域为 [1,+∞)。" },
+  { q: "已知 f(x) 是奇函数且 f(2)=3，则 f(−2) 等于（&nbsp;）。",
+    opts: ["3", "−3", "0", "无法确定"], a: 1,
+    why: "奇函数满足 f(−x)=−f(x)，故 f(−2)=−f(2)=−3。" },
+  { q: "指数函数 y=(1/2)<sup>x</sup> 在 R 上的单调性是（&nbsp;）。",
+    opts: ["单调递增", "单调递减", "不增不减", "先增后减"], a: 1,
+    why: "底数 0&lt;1/2&lt;1，指数函数在 R 上单调递减。" },
+  { q: "函数 y=√(x−1) 的定义域是（&nbsp;）。",
+    opts: ["x&gt;1", "x≤1", "x≥1", "x≠1"], a: 2,
+    why: "被开方数 x−1≥0，即 x≥1。" },
+  { q: "已知 log<sub>2</sub>x=3，则 x 等于（&nbsp;）。",
+    opts: ["3", "6", "9", "8"], a: 3,
+    why: "由对数定义，x=2³=8。" }
+];
+
+// 判断题：a 为 1（对）或 0（错）
+const TF = [
+  { q: "空集是任何集合的子集。", a: 1, why: "空集是任何集合的子集，也是空集的子集。" },
+  { q: "若 A∩B=B，则 A⊆B。", a: 0, why: "A∩B=B 说明 B⊆A，而不是 A⊆B。举反例：A={1,2}，B={1}。" },
+  { q: "集合 {0} 是空集。", a: 0, why: "{0} 含有元素 0，不是空集；空集写作 ∅。" },
+  { q: "{x | x²=−1，x∈R} 是空集。", a: 1, why: "实数范围内任何数的平方都不等于 −1，故该集合无元素。" },
+  { q: "集合中的元素不能重复出现。", a: 1, why: "集合具有互异性，相同元素在集合中只算一个。" },
+  { q: "若 A∩B=A，则 A⊆B。", a: 1, why: "A∩B=A 说明 A 中的元素都在 B 中，即 A⊆B。" },
+  { q: "命题的逆否命题与原命题同真假。", a: 1, why: "原命题与其逆否命题等价，真假相同。" },
+  { q: "「x²&gt;0」是「x&gt;0」的充分条件。", a: 0, why: "x²&gt;0 时 x 可为负数，推不出 x&gt;0，故不充分。" },
+  { q: "命题「若 x=1，则 x²=1」是真命题。", a: 1, why: "x=1 时 x²=1 一定成立。" },
+  { q: "全称命题「所有素数都是奇数」是真命题。", a: 0, why: "2 是素数但它是偶数，构成反例。" },
+  { q: "函数 f(x)=x² 在定义域 R 上单调递增。", a: 0, why: "f(x)=x² 在 (−∞,0) 上单调递减，在 (0,+∞) 上单调递增。" },
+  { q: "函数 f(x)=|x| 是偶函数。", a: 1, why: "|−x|=|x|，满足偶函数定义。" },
+  { q: "y=log<sub>3</sub>x 与 y=log<sub>1/3</sub>x 的单调性相同。", a: 0, why: "底数 3&gt;1 单调递增，底数 1/3&lt;1 单调递减，两者相反。" },
+  { q: "函数 f(x)=1/x 在 (−∞,0)∪(0,+∞) 上单调递减。", a: 0, why: "只能说在 (−∞,0) 和 (0,+∞) 两个区间上分别递减，不能在并集上断言单调递减。" },
+  { q: "函数 y=x³ 是奇函数。", a: 1, why: "(−x)³=−x³，满足奇函数定义。" },
+  { q: "函数 f(x)=2<sup>x</sup> 的值域是 R。", a: 0, why: "指数函数值域为 (0,+∞)，不包括 0 和负数。" },
+  { q: "二次函数 y=ax²+bx+c（a≠0）的图像一定与 x 轴有交点。", a: 0, why: "当判别式 Δ&lt;0 时，图像与 x 轴没有交点，如 y=x²+1。" },
+  { q: "若 f(1)=1 且 f(2)=2，则 f(x)=x。", a: 0, why: "只知两点的函数值，无法确定整个函数，如 f(x)=x² 也满足。" },
+  { q: "函数 y=√x 与 y=x<sup>1/2</sup> 表示同一个函数。", a: 1, why: "两者定义域都是 [0,+∞)，对应关系相同，是同一个函数。" },
+  { q: "集合 A={1,2}，B={x | x²−3x+2=0}，则 A=B。", a: 1, why: "x²−3x+2=0 的解为 1 和 2，B={1,2}=A。" }
+];
+
+// 填空题：a 为标准答案（全部使用键盘可输入的普通字符，无特殊数学符号）
+const FILL = [
+  // —— 集合（第 1–15 题）——
+  { q: "已知集合 A={1,2,3}，B={2,3,4}，则 A∪B 中元素的个数为____。", a: "4", why: "A∪B={1,2,3,4}，共 4 个元素。" },
+  { q: "集合 {1,2,3} 的真子集的个数为____。", a: "7", why: "3 个元素的集合有 2³=8 个子集，真子集为 8−1=7 个。" },
+  { q: "已知 A={x | −1≤x≤3}，B={x | x&lt;2}，则 A∩B 用区间表示为____（如 [-1,2)）。", a: "[-1,2)", why: "交集为 −1≤x&lt;2，区间写法 [-1,2)。" },
+  { q: "已知集合 A={a+1, 2}，若 1∈A，则 a 的值为____。", a: "0", why: "1∈A，则 a+1=1，解得 a=0（此时 A={1,2}）。" },
+  { q: "设集合 A={x | 1≤x≤3}，B={x | 2&lt;x&lt;5}，则 A∪B 用区间表示为____。", a: "[1,5)", why: "并集覆盖 1≤x&lt;5，即 [1,5)。" },
+  { q: "已知全集 U={1,2,3,4,5,6}，A={1,2,3}，则 A 的补集中元素的个数为____。", a: "3", why: "补集为 {4,5,6}，共 3 个元素。" },
+  { q: "已知集合 A={x | x²−5x+6=0}，则 A 中所有元素之和为____。", a: "5", why: "解得 x=2 和 3，和为 2+3=5。" },
+  { q: "集合 A={1,2}，B={x | x∈A}，则 B 与 A 的关系是____（填相等或不相等）。", a: "相等", why: "B={1,2}，与 A 完全相同。" },
+  { q: "已知集合 A={x | x&lt;3}，B={x | x≥1}，则 A∩B 用区间表示为____。", a: "[1,3)", why: "交集为 1≤x&lt;3。" },
+  { q: "设 A={x | 0&lt;x&lt;4}，B={x | x≤2}，则 A∩B 用区间表示为____。", a: "(0,2]", why: "交集为 0&lt;x≤2。" },
+  { q: "集合 A={1,2,3}，B={3,4,5}，则 A∩B 中最大的元素是____。", a: "3", why: "A∩B={3}，最大元素为 3。" },
+  { q: "已知集合 M={x | x²−2x−3=0}，则 M 中元素的个数为____。", a: "2", why: "x²−2x−3=(x+1)(x−3)=0，解得 x=−1 和 3，共 2 个。" },
+  { q: "已知 A={x | −2≤x≤1}，若 A 是 B={x | x&gt;a} 的子集，则 a 的取值范围是____（填 a&lt;? 的形式）。", a: "a<-2", why: "A 中最小元素为 −2，要 A⊆B，需 −2&gt;a，即 a&lt;−2。" },
+  { q: "已知全集 U={1,2,3,4,5}，A={1,3,5}，则 A 的补集中最大的元素是____。", a: "4", why: "补集为 {2,4}，最大元素为 4。" },
+  { q: "集合 {x∈Z | −2≤x&lt;3} 中元素的个数为____。", a: "5", why: "元素为 −2,−1,0,1,2，共 5 个。" },
+
+  // —— 逻辑（第 16–30 题）——
+  { q: "命题「若 a&gt;b，则 a+1&gt;b」的逆否命题是____命题（填真或假）。", a: "真", why: "原命题为真（a&gt;b 时 a+1&gt;b 显然成立），逆否命题与原命题同真假。" },
+  { q: "「x=1」是「x²=1」的____条件（填：充分不必要、必要不充分、充要、既不充分也不必要）。", a: "充分不必要", why: "x=1 推出 x²=1；但 x=−1 时 x²=1 却不满足 x=1。" },
+  { q: "命题「∀x∈R，x≥0」是假命题，其否定是「存在实数 x，使得____」。", a: "x<0", why: "全称命题的否定为特称命题，即存在 x 使 x&lt;0。" },
+  { q: "设 p：x&gt;3，q：x&gt;2，则 p 是 q 的____条件（填：充分不必要、必要不充分、充要、既不充分也不必要）。", a: "充分不必要", why: "x&gt;3 推出 x&gt;2；反之 x=2.5 满足 x&gt;2 却不满足 x&gt;3。" },
+  { q: "命题「若 x²−4=0，则 x=2」是____命题（填真或假）。", a: "假", why: "x=−2 时 x²−4=0 但 x≠2，反例使其为假命题。" },
+  { q: "命题「若一个数是偶数，则它能被 2 整除」的逆命题是____命题（填真或假）。", a: "真", why: "逆命题为「若一个数能被 2 整除，则它是偶数」，这正是偶数的定义，为真。" },
+  { q: "「x&gt;0」是「x≥0」的____条件（填：充分不必要、必要不充分、充要、既不充分也不必要）。", a: "充分不必要", why: "x&gt;0 推出 x≥0；反之 x=0 满足 x≥0 却不满足 x&gt;0。" },
+  { q: "命题「若 a=0 且 b=0，则 ab=0」的逆命题是____命题（填真或假）。", a: "假", why: "逆命题为「若 ab=0，则 a=0 且 b=0」，取 a=1、b=0 时 ab=0 但 a≠0，为假。" },
+  { q: "已知命题 p：1 是质数，命题 q：2 是偶数，则复合命题「p 且 q」是____命题（填真或假）。", a: "假", why: "1 不是质数，p 为假，故「p 且 q」为假。" },
+  { q: "命题「若四边形是正方形，则它是矩形」的逆否命题是____命题（填真或假）。", a: "真", why: "原命题为真，逆否命题与原命题同真假。" },
+  { q: "设命题 p：x&gt;1，命题 q：x²&gt;x，则 p 是 q 的____条件（填：充分不必要、必要不充分、充要、既不充分也不必要）。", a: "充分不必要", why: "x&gt;1 时 x²&gt;x 成立；但 x&lt;0 时 x²&gt;x 也成立，故不必要。" },
+  { q: "命题「∃x∈R，x²+2x+1=0」是____命题（填真或假）。", a: "真", why: "x=−1 时 x²+2x+1=0，存在这样的 x。" },
+  { q: "「两个三角形全等」是「两个三角形面积相等」的____条件（填：充分不必要、必要不充分、充要、既不充分也不必要）。", a: "充分不必要", why: "全等推出面积相等；但面积相等不保证全等。" },
+  { q: "命题「若 a 和 b 都是奇数，则 a+b 是偶数」是____命题（填真或假）。", a: "真", why: "奇数加奇数一定为偶数。" },
+  { q: "命题「若 x+y=3，则 x=1 且 y=2」是____命题（填真或假）。", a: "假", why: "取 x=2、y=1 时 x+y=3 但不满足 x=1 且 y=2，为假。" },
+
+  // —— 函数（第 31–50 题）——
+  { q: "函数 f(x)=√(x−2) 的定义域是 x≥____。", a: "2", why: "被开方数 x−2≥0，即 x≥2。" },
+  { q: "函数 f(x)=1/(x+1) 的定义域是 x≠____。", a: "-1", why: "分母 x+1≠0，即 x≠−1。" },
+  { q: "函数 f(x)=x²−2x+3 的最小值是____。", a: "2", why: "f(x)=(x−1)²+2，当 x=1 时取最小值 2。" },
+  { q: "函数 y=log<sub>2</sub>(3x−1) 中，x 的取值范围是 x&gt;____。", a: "1/3", why: "真数 3x−1&gt;0，解得 x&gt;1/3。" },
+  { q: "函数 f(x)=x²−4x+3 的对称轴是 x=____。", a: "2", why: "对称轴 x=−b/(2a)=4/2=2。" },
+  { q: "已知 f(x)=3x−1，则 f(2)=____。", a: "5", why: "f(2)=3×2−1=5。" },
+  { q: "若 f(x)=x²，则 f(−3)=____。", a: "9", why: "f(−3)=(−3)²=9。" },
+  { q: "已知 f(x) 是奇函数且 f(1)=2，则 f(−1)=____。", a: "-2", why: "奇函数 f(−x)=−f(x)，故 f(−1)=−2。" },
+  { q: "已知 f(x) 是偶函数且 f(2)=3，则 f(−2)=____。", a: "3", why: "偶函数 f(−x)=f(x)，故 f(−2)=3。" },
+  { q: "函数 y=2<sup>x</sup> 与 y=(1/2)<sup>x</sup> 的图像关于____对称（填 x轴、y轴 或 原点）。", a: "y轴", why: "y=2<sup>x</sup> 与 y=2<sup>−x</sup> 的图像关于 y 轴对称，而 (1/2)<sup>x</sup>=2<sup>−x</sup>。" },
+  { q: "函数 f(x)=log<sub>3</sub>x 的定义域是 x&gt;____。", a: "0", why: "对数函数的真数必须为正，即 x&gt;0。" },
+  { q: "若 log<sub>5</sub>x=2，则 x=____。", a: "25", why: "由对数定义 x=5²=25。" },
+  { q: "函数 f(x)=x³−x 的奇偶性是____（填：奇函数、偶函数或非奇偶函数）。", a: "奇函数", why: "f(−x)=(−x)³−(−x)=−x³+x=−f(x)，为奇函数。" },
+  { q: "二次函数 y=x²−2x 的顶点的横坐标为 x=____。", a: "1", why: "顶点横坐标 x=−b/(2a)=2/2=1。" },
+  { q: "函数 f(x)=|x| 的最小值是____。", a: "0", why: "|x|≥0，当 x=0 时取最小值 0。" },
+  { q: "若 f(x+1)=x+2，则 f(1)=____。", a: "2", why: "令 x=0，则 f(1)=0+2=2。" },
+  { q: "函数 y=√(x²−1) 的定义域是 x≤−1 或 x≥____。", a: "1", why: "需 x²−1≥0，即 x≤−1 或 x≥1。" },
+  { q: "已知 f(x)=2x+1，g(x)=x−1，则 f(g(2))=____。", a: "3", why: "g(2)=1，f(1)=2×1+1=3。" },
+  { q: "函数 y=x²+2x+1 的图像与 x 轴的交点个数是____。", a: "1", why: "y=(x+1)²，图像与 x 轴相切于 (−1,0)，只有 1 个交点。" },
+  { q: "已知函数 f(x)=x²−mx+1 的图像关于 x=2 对称，则 m=____。", a: "4", why: "对称轴 x=m/2=2，解得 m=4。" }
+];
+
+/* ============ 答题状态 ============ */
+const answers = {
+  mcq: new Array(MCQ.length).fill(-1),
+  tf: new Array(TF.length).fill(-1),
+  fill: new Array(FILL.length).fill("")
+};
+let timeLeft = 60 * 60;   // 60 分钟
+let timer = null;
+const LETTERS = ["A", "B", "C", "D"];
+
+/* ============ 工具函数 ============ */
+function esc(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+function normalize(s) {
+  return String(s || "")
+    .replace(/[\s\u3000]/g, "")                       // 去除所有空白（含全角空格）
+    .replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (ch) {      // 全角转半角
+      return String.fromCharCode(ch.charCodeAt(0) - 0xFEE0);
+    })
+    .toLowerCase();
+}
+
+/* ============ 渲染试卷 ============ */
+function renderAll() {
+  const mcqWrap = document.getElementById("mcqWrap");
+  MCQ.forEach(function (it, i) {
+    const card = document.createElement("div");
+    card.className = "q-card";
+    card.innerHTML =
+      '<div class="q-title"><span class="q-no">' + (i + 1) + ".</span>" + it.q + "</div>" +
+      '<div class="opts">' + it.opts.map(function (o, j) {
+        return '<div class="opt" onclick="pickMCQ(' + i + "," + j + ')"><span class="opt-key">' + LETTERS[j] + '</span><span>' + o + "</span></div>";
+      }).join("") + "</div>";
+    mcqWrap.appendChild(card);
+  });
+
+  const tfWrap = document.getElementById("tfWrap");
+  TF.forEach(function (it, i) {
+    const card = document.createElement("div");
+    card.className = "q-card";
+    card.innerHTML =
+      '<div class="q-title"><span class="q-no">' + (i + 1) + ".</span>" + it.q + "</div>" +
+      '<div class="opts">' +
+      '<div class="opt" onclick="pickTF(' + i + ",1)\"><span class=\"opt-key\">A</span><span>对</span></div>" +
+      '<div class="opt" onclick="pickTF(' + i + ",0)\"><span class=\"opt-key\">B</span><span>错</span></div>" +
+      "</div>";
+    tfWrap.appendChild(card);
+  });
+
+  const fillWrap = document.getElementById("fillWrap");
+  FILL.forEach(function (it, i) {
+    const card = document.createElement("div");
+    card.className = "q-card";
+    card.innerHTML =
+      '<div class="q-title"><span class="q-no">' + (i + 1) + ".</span>" + it.q + "</div>" +
+      '<div class="fill-line"><span>答案：</span><input type="text" id="fill' + i +
+      '" placeholder="请输入答案" oninput="recordFill(' + i + ', this.value)"></div>';
+    fillWrap.appendChild(card);
+  });
+  updateProgress();
+}
+
+/* ============ 答题交互 ============ */
+function pickMCQ(i, j) {
+  answers.mcq[i] = j;
+  const wrap = document.getElementById("mcqWrap");
+  const card = wrap.children[i];
+  const opts = card.querySelectorAll(".opt");
+  opts.forEach(function (o, k) {
+    o.classList.toggle("sel", k === j);
+  });
+  updateProgress();
+}
+
+function pickTF(i, j) {
+  answers.tf[i] = j;
+  const wrap = document.getElementById("tfWrap");
+  const card = wrap.children[i];
+  const opts = card.querySelectorAll(".opt");
+  opts.forEach(function (o, k) {
+    o.classList.toggle("sel", k === 1 - j);  // 位置 0 对应「对」(j=1)，位置 1 对应「错」(j=0)
+  });
+  updateProgress();
+}
+
+function recordFill(i, v) {
+  answers.fill[i] = v;
+  updateProgress();
+}
+
+function updateProgress() {
+  let n = 0;
+  answers.mcq.forEach(function (v) { if (v !== -1) n++; });
+  answers.tf.forEach(function (v) { if (v !== -1) n++; });
+  answers.fill.forEach(function (v) { if (v.trim() !== "") n++; });
+  document.getElementById("answeredCount").textContent = n;
+}
+
+/* ============ 考试流程 ============ */
+function startExam() {
+  document.getElementById("startScreen").style.display = "none";
+  document.getElementById("examScreen").style.display = "block";
+  renderAll();
+  timer = setInterval(tick, 1000);
+}
+
+function tick() {
+  timeLeft--;
+  if (timeLeft <= 0) {
+    clearInterval(timer);
+    timer = null;
+    doSubmit();
+    return;
+  }
+  const m = Math.floor(timeLeft / 60);
+  const s = timeLeft % 60;
+  const el = document.getElementById("timerBox");
+  el.textContent = "剩余 " + String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+  if (timeLeft <= 300) el.classList.add("low");
+}
+
+function manualSubmit() {
+  if (!confirm("确定现在提交试卷吗？提交后不能再修改答案。")) return;
+  if (timer) { clearInterval(timer); timer = null; }
+  doSubmit();
+}
+
+function doSubmit() {
+  const wrong = [];
+  let score = 0;
+  let c1 = 0, w1 = 0, c2 = 0, w2 = 0, c3 = 0, w3 = 0;
+
+  MCQ.forEach(function (it, i) {
+    const sel = answers.mcq[i];
+    if (sel === it.a) { score++; c1++; }
+    else {
+      w1++;
+      wrong.push({
+        type: "选择题", no: i + 1, q: it.q,
+        userTxt: sel === -1 ? "未作答" : "你选了 " + LETTERS[sel] + "（" + it.opts[sel] + "）",
+        ansTxt: "正确答案 " + LETTERS[it.a] + "（" + it.opts[it.a] + "）",
+        why: it.why
+      });
+    }
+  });
+
+  TF.forEach(function (it, i) {
+    const sel = answers.tf[i];
+    if (sel === it.a) { score++; c2++; }
+    else {
+      w2++;
+      wrong.push({
+        type: "判断题", no: i + 1, q: it.q,
+        userTxt: sel === -1 ? "未作答" : "你判为 " + (sel === 1 ? "对" : "错"),
+        ansTxt: "正确答案 " + (it.a === 1 ? "对" : "错"),
+        why: it.why
+      });
+    }
+  });
+
+  FILL.forEach(function (it, i) {
+    const raw = answers.fill[i];
+    if (normalize(raw) !== "" && normalize(raw) === normalize(it.a)) { score++; c3++; }
+    else {
+      w3++;
+      wrong.push({
+        type: "填空题", no: i + 1, q: it.q,
+        userTxt: raw.trim() === "" ? "未作答" : "你填了 " + raw.trim(),
+        ansTxt: "正确答案 " + it.a,
+        why: it.why
+      });
+    }
+  });
+
+  showResult(score, { c1: c1, w1: w1, c2: c2, w2: w2, c3: c3, w3: w3 }, wrong);
+}
+
+function showResult(score, st, wrong) {
+  document.getElementById("examScreen").style.display = "none";
+  const box = document.getElementById("resultScreen");
+  box.style.display = "block";
+
+  let html = '<div class="result-box">';
+  html += '<div class="score-big">' + score + '<span class="unit"> 分 / 100</span></div>';
+  html += '<div class="score-sub">共 100 题 · 全部为 1 分 · 答对 ' + score + " 题，答错 " + wrong.length + " 题</div>";
+  html += '<div class="score-bar-wrap"><div class="score-bar" id="scoreBar"></div></div>';
+
+  html += '<div class="summary-grid">' +
+    '<div class="sum-item"><div class="s-title">选择题（30 题）</div><div class="num"><span class="ok">对 ' + st.c1 + '</span> / <span class="no">错 ' + st.w1 + "</span></div></div>" +
+    '<div class="sum-item"><div class="s-title">判断题（20 题）</div><div class="num"><span class="ok">对 ' + st.c2 + '</span> / <span class="no">错 ' + st.w2 + "</span></div></div>" +
+    '<div class="sum-item"><div class="s-title">填空题（50 题）</div><div class="num"><span class="ok">对 ' + st.c3 + '</span> / <span class="no">错 ' + st.w3 + "</span></div></div>" +
+    "</div>";
+
+  if (wrong.length === 0) {
+    html += '<div class="all-correct">恭喜！全部答对，满分 100 分！</div>';
+  } else {
+    html += '<div class="wrong-list"><h3>错题回顾（共 ' + wrong.length + " 题）</h3>";
+    wrong.forEach(function (w, i) {
+      html += '<div class="wrong-item">' +
+        '<div class="w-head"><span class="w-type">' + esc(w.type) + " " + w.no + " 题</span><span class=\"w-q\">" + w.q + "</span></div>" +
+        '<div class="u-ans">' + esc(w.userTxt) + "</div>" +
+        '<div class="c-ans">' + esc(w.ansTxt) + "</div>" +
+        '<div class="w-why">解析：' + w.why + "</div>" +
+        "</div>";
+    });
+    html += "</div>";
+  }
+
+  html += '<div><button class="btn-reset" onclick="location.reload()">再考一次</button></div>';
+  html += '<a class="back-link" href="../index.html">← 返回课程首页</a>';
+  html += "</div>";
+
+  box.innerHTML = html;
+
+  // 触发进度条动画
+  setTimeout(function () {
+    document.getElementById("scoreBar").style.width = score + "%";
+  }, 50);
+}
+</script>
+</body>
+</html>
