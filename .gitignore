@@ -11,3 +11,5 @@ tools/*.processed.tif
 tools/easyocr_models/
 # Large epub files exceeding GitHub limit
 *.epub
+# 自助答疑密钥（本地）
+.env
