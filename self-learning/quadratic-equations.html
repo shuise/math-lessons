@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一元二次方程 — 自学课件</title>
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #3949ab; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid #5c6bc0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .highlight { background: #fff3e0; border-left: 4px solid #ff9800; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+
+  @media (max-width: 720px) {
+    article { padding: 20px 12px !important; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .highlight { padding: 12px 14px; margin: 12px 0; }
+    .formula table { font-size: 13px; }
+    .formula table th, .formula table td { padding: 4px 6px; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:8px;"><a href="index.html">← 课程列表</a></p>
+  <h1>一元二次方程</h1>
+
+  <h2>起源：一块田有多大？</h2>
+  <div class="origin">
+    <p><strong>4000 年前的古巴比伦，</strong>人们已经会解一元二次方程了。他们用楔形文字刻在泥板上，记录了大量这样的问题：</p>
+    <p>"一个正方形的面积加上它的边长等于 3/4，求边长。"翻译成现代数学就是：x² + x = 3/4。</p>
+    <p>巴比伦人用了一种"凑完全平方"的方法（就是后来的配方法），一步步算出答案。但他们没有负数的概念，只取正数解。</p>
+    <p>到了公元 9 世纪，波斯数学家<strong>花拉子米</strong>在《代数学》中系统总结了配方法，并给出了几何解释——用正方形和长方形的面积来直观理解 x² + bx 为什么能配成 (x + b/2)²。</p>
+    <p>又过了 800 年，法国数学家<strong>韦达</strong>（François Viète，1540–1603 年）发现了根与系数的关系——不用解方程，就能知道两根之和与两根之积。这就是韦达定理。</p>
+    <p><strong>一元二次方程要解决的核心问题：</strong>未知数出现了平方，方程最多有两个解。怎么最快、最准地找到它们？</p>
+  </div>
+
+  <h2>一、什么是二次方程？</h2>
+  <div class="story">
+    <p>一元一次方程里，x 最多只有一次方：2x + 3 = 7。现在，x 变成了平方：x² = 9。</p>
+    <p>x² = 9 有两个解：x = 3 和 x = -3（因为 3² = 9，(-3)² = 9）。</p>
+    <p><strong>一元二次方程：</strong>未知数最高次数是 2 的方程。标准形式：ax² + bx + c = 0（a ≠ 0）。</p>
+  </div>
+
+  <h2>二、四种解法（从简单到通用）</h2>
+
+  <h3>方法一：直接开平方法（最简单）</h3>
+  <div class="formula">
+    <p>如果方程能写成 x² = a 或 (x+m)² = a 的形式，直接开平方：x = ±√a</p>
+    <p>a > 0 → 两个解，a = 0 → 一个解，a &lt; 0 → 无实数解</p>
+  </div>
+  <div class="example">(x-2)² = 9 → x-2 = ±3 → x = 5 或 x = -1</div>
+
+  <h3>方法二：配方法（花拉子米的方法，最体现思想）</h3>
+  <div class="story">
+    <p><strong>花拉子米的几何解释：</strong>把 x² + bx 想象成一个边长为 x 的正方形，加上一个宽为 x、长为 b/2 的矩形，再加一个（每边都是 b/2 的矩形）。拼在一起是一个边长为 x + b/2 的大正方形，面积是 x² + bx + (b/2)²。</p>
+    <p>所以 x² + bx 想变成完全平方，需要加上 (b/2)²。这就是"配方"。</p>
+  </div>
+
+  <div class="example">
+    <strong>解 x² + 6x + 5 = 0：</strong><br>
+    x² + 6x = -5（常数移到右边）<br>
+    x² + 6x + 9 = -5 + 9（两边加 9，因为 (6/2)² = 9）<br>
+    (x + 3)² = 4<br>
+    x + 3 = ±2 → x = -1 或 x = -5
+  </div>
+
+  <h3>方法三：公式法（最通用，从配方法推导出来）</h3>
+  <div class="highlight">
+    <p>对于 ax² + bx + c = 0（a ≠ 0），解为：</p>
+    <p style="font-size:18px;text-align:center;font-weight:bold;">x = (-b ± √(b² - 4ac)) / (2a)</p>
+    <p>这个公式其实就是把配方法写成通用形式——对所有二次方程都适用！</p>
+  </div>
+
+  <div class="example">
+    解 2x² - 4x - 6 = 0：a=2, b=-4, c=-6<br>
+    x = (4 ± √(16 + 48)) / 4 = (4 ± 8) / 4 → x = 3 或 x = -1
+  </div>
+
+  <h3>方法四：因式分解法（最快，但需要能分解）</h3>
+  <div class="example">
+    x² - 5x + 6 = 0 → (x-2)(x-3) = 0 → x = 2 或 x = 3<br>
+    原理：如果 A × B = 0，那么 A = 0 或 B = 0。
+  </div>
+
+  <h2>三、根的判别式：Δ = b² - 4ac</h2>
+  <div class="key">
+    <p><strong>不用解方程，看一眼 Δ 就知道有几个解：</strong></p>
+    <ul>
+      <li><strong>Δ > 0：</strong>两个不同的实数解</li>
+      <li><strong>Δ = 0：</strong>一个实数解（两个相等，叫"重根"）</li>
+      <li><strong>Δ &lt; 0：</strong>没有实数解（因为 √负数 在实数范围内没有意义）</li>
+    </ul>
+    <p><strong>为什么？</strong>看求根公式：x = (-b ± √Δ) / (2a)。如果 Δ &lt; 0，√Δ 不存在，就没有实数解。</p>
+  </div>
+
+  <h2>四、韦达定理：根与系数的关系</h2>
+  <div class="formula">
+    <p>如果 ax² + bx + c = 0 的两个根是 x₁ 和 x₂，那么：</p>
+    <p style="text-align:center;font-size:18px;"><strong>x₁ + x₂ = -b/a，x₁ · x₂ = c/a</strong></p>
+    <p><strong>证明：</strong>从求根公式，x₁ = (-b + √Δ)/(2a)，x₂ = (-b - √Δ)/(2a)。两根相加：√Δ 抵消，得 -2b/(2a) = -b/a。两根相乘：用平方差公式 (u+v)(u-v) = u²-v²，得 (b²-Δ)/(4a²) = (b²-(b²-4ac))/(4a²) = 4ac/(4a²) = c/a。</p>
+  </div>
+
+  <div class="example">
+    <strong>验证：</strong>x² - 5x + 6 = 0 的根是 2 和 3。<br>
+    2 + 3 = 5 = -(-5)/1 ✓ · · 2 × 3 = 6 = 6/1 ✓
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li>一元二次方程 ax² + bx + c = 0，最多两个解</li>
+      <li>四种解法：直接开平方 → 配方 → 公式 → 因式分解</li>
+      <li>Δ = b² - 4ac 判断有几个解</li>
+      <li>韦达定理：x₁ + x₂ = -b/a，x₁ · x₂ = c/a</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="index.html">← 返回课程列表</a></p>
+</article>
+</body>
+</html>

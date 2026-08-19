@@ -289,13 +289,8 @@
     q.style.cssText = 'background:#eef4fe;border-radius:8px;padding:6px 10px;margin-bottom:6px;color:#1a3d6e;';
     wrap.appendChild(q);
     var a = document.createElement('div');
-    a.innerHTML = mdToHtml(it.a);
+    renderAnswerHtml(a, it.a);
     wrap.appendChild(a);
-    if (MATH_RE.test(it.a)) {
-      ensureMathJax(function () {
-        try { MathJax.typesetPromise([a]); } catch (e) { /* ignore */ }
-      });
-    }
     return wrap;
   }
   function loadingNode(q) {
@@ -306,17 +301,61 @@
     return item;
   }
 
+  /* ---------- 深度引导选项（【深度引导】后的列表 → 可点击按钮） ---------- */
+  function extractOptions(answer) {
+    var opts = [];
+    var m = answer.match(/【深度引导】\s*([\s\S]*)$/);
+    if (m) {
+      m[1].split('\n').forEach(function (l) {
+        var o = l.replace(/^\s*[-*•]\s*/, '').trim();
+        if (o && !/^【/.test(o)) opts.push(o);
+      });
+    }
+    return opts;
+  }
+  function renderAnswerHtml(el, answer) {
+    var opts = extractOptions(answer);
+    // 正文中去掉【深度引导】及其列表（选项改为按钮展示）
+    var display = opts.length ? answer.replace(/【深度引导】[\s\S]*$/, '') : answer;
+    el.innerHTML = mdToHtml(display);
+    if (opts.length) {
+      var box = document.createElement('div');
+      box.innerHTML = '<div style="margin:10px 0 2px;color:#555;font-weight:600;">💡 继续深入，选一个继续问：</div>';
+      opts.forEach(function (o) {
+        var b = document.createElement('button');
+        b.textContent = o;
+        b.style.cssText = 'display:block;width:100%;box-sizing:border-box;text-align:left;background:#f4f8ff;border:1px solid #d3e3fb;color:#1a3d6e;border-radius:8px;padding:7px 10px;margin:6px 0;font:13px/1.6 inherit;cursor:pointer;';
+        b.addEventListener('click', function () { ask(o); });
+        box.appendChild(b);
+      });
+      el.appendChild(box);
+    }
+    if (MATH_RE.test(answer)) {
+      ensureMathJax(function () { try { MathJax.typesetPromise([el]); } catch (e) { /* ignore */ } });
+    }
+  }
+
   /* ---------- 提问 ---------- */
   // 直连 DeepSeek（纯静态服务器下 /api/qa 不可用时的兜底）
   function buildSystemPrompt(grade) {
     return '你是一位面向' + grade + '（及以下年级）学生/零基础读者的高中数学讲解老师，必须用最生活化、最简单的语言讲解数学知识。' +
-      '回答规则（必须严格遵守）：' +
-      '1) 全部内容控制在 120~180 字以内，只写 3 句话，结构固定为：' +
-      '第一句【定义】用一句话说清概念是什么；第二句【逻辑分析】用一句话讲为什么这样、关键逻辑；第三句【示例】给一个生活化的例子。' +
-      '2) 禁止使用小标题、序号、分点列表、多段落；不要客套话，不要复述题目，直接输出这 3 句话。' +
-      '3) 先结合读者提供的课件上下文；上下文与问题无关时，明确说一句后给通用解释。' +
-      '4) 讲解深度必须符合读者年级：读者是' + grade + '，只允许使用该年级及以下能理解的概念和方法；不得超纲。' +
-      '5) 输出简体中文；公式用 $...$ 内联表示。';
+      '回答格式（必须严格遵守，三段式）：' +
+      '第一段【真正的问题】用一句话（不超过30字）提炼读者问题描述背后真正想问的核心；问题本身已很明确时，直接用一句话确认它。' +
+      '第二段【解答】控制在120~180字，只写3句话：第一句定义、第二句逻辑分析、第三句生活化示例。' +
+      '第三段【深度引导】换行写"【深度引导】"，下面用无序列表给出 3 个继续深入的方向，' +
+      '每项以"- "开头，写成一个可以直接追问的引导语（如"想知道……，可以问……"），让读者选择后继续提问。' +
+      '其他规则：' +
+      '1) 除以上三个标记外，不得使用其他小标题、序号、分点；不要客套话，不要复述题目。' +
+      '2) 先结合读者提供的课件上下文；上下文与问题无关时，明确说一句后给通用解释。' +
+      '3) 讲解深度必须符合读者年级：读者是' + grade + '，只允许使用该年级及以下能理解的概念和方法；不得超纲。' +
+      '4) 输出简体中文；公式用 $...$ 内联表示。' +
+      '5) 输出必须严格按以下结构：' +
+      '【真正的问题】……' +
+      '【解答】……' +
+      '【深度引导】' +
+      '- ……' +
+      '- ……' +
+      '- ……';
   }
   function askDirect(text, ctx, history) {
     if (!cfg || !cfg.apiKey) {
@@ -384,12 +423,7 @@
       var el = item.querySelector('.qa-loading');
       if (el) {
         el.className = '';
-        el.innerHTML = mdToHtml(answer);
-        if (MATH_RE.test(answer)) {
-          ensureMathJax(function () {
-            try { MathJax.typesetPromise([el]); } catch (e) { /* ignore */ }
-          });
-        }
+        renderAnswerHtml(el, answer);
       }
       list.scrollTop = list.scrollHeight;
       showToast(direct ? '回答已保存（直连 DeepSeek）' : '回答已保存，点右下角气泡可随时回看');

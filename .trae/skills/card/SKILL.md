@@ -37,29 +37,46 @@ description: "从笔记库提取 500 字以内的内容生成精美卡片，用�
    - 使用二维码生成服务（如 `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=<URL 编码后的链接>`）生成二维码图片
    - 将二维码嵌入卡片 HTML，置于来源信息旁边或下方
    - 若无网页来源（如书籍/人名），跳过此步骤
-6. 将卡片渲染为 PNG 图片：用浏览器打开卡片 HTML 后对卡片区域截图保存为 PNG，或使用 html2canvas 等工具将卡片 DOM 导出为 PNG 图片；图片宽度固定 1080px，高度按内容动态调整（详见「动态高度实现」）
+6. 将卡片渲染为 PNG 图片：用浏览器打开卡片 HTML 后对卡片区域截图保存为 PNG，或使用 html2canvas 等工具将卡片 DOM 导出为 PNG 图片；图片宽度固定 750px，高度按内容动态调整（详见「动态高度实现」）
 7. 将生成的 PNG 卡片保存到系统相册：使用 `osascript -e 'tell application "Photos" to import POSIX file "<PNG 绝对路径>"'` 导入 macOS 照片 App；若命令失败，改用 `open -a Photos "<PNG 路径>"` 手动导入
 8. 删除临时 HTML 文件，只保留相册中的 PNG
 
 ## 保存到系统相册
 
 - 保存目标：macOS 照片 App（系统相册）
+- **文件名必须用纯 ASCII**（中文路径会导致 osascript 静默失败，输出为空）
 - 导入方式（macOS）：
-  - `osascript -e 'tell application "Photos" to import POSIX file "/path/to/card.png"'` —— 直接导入照片图库
-  - 备选：`open -a Photos "/path/to/card.png"` 打开照片 App 后手动拖入/导入
-- 导入后删除本地临时 PNG 与 HTML，只保留系统相册中的成品卡片
+  ```bash
+  osascript -e 'tell application "Photos" to import POSIX file "/absolute/path/to/card.png"'
+  ```
+  成功时输出 `media item id XXXXXXXX-XXXX-...`，失败时输出为空。**必须确认输出含 media item id 后才算导入成功。**
+- 备选：`open -a Photos "/path/to/card.png"` 打开照片 App 后手动拖入/导入
+- **严禁在 osascript 同一轮中执行 DeleteFile**——Photos 导入可能是异步的，源文件提前删除会导致导入失败。必须分两步：先 osascript 导入并验证输出，确认成功后再删除临时文件。
 
 ## PNG 输出要求
 
 1. 最终交付给用户的成品卡片保存在系统相册（macOS 照片 App），HTML 与本地临时 PNG 完成后删除
-2. 图片宽度固定 1080px，高度由卡片内容动态决定（不使用固定 1440 高度、不裁剪、不留白），保证文字清晰可读
+2. 图片宽度固定 750px，高度由卡片内容动态决定（不使用固定 1440 高度、不裁剪、不留白），保证文字清晰可读
 3. 图片中需保留卡片完整内容与末尾来源信息；若来源为网页，二维码必须出现在图片末尾
 
-## 动态高度实现
+## 渲染为 PNG（关键步骤）
 
-1. 卡片 HTML 中不写死高度：`html, body { width: 1080px; }`，`.card` 不设 `height`，高度由内容自然撑开
-2. 渲染 PNG 时先让浏览器以较大窗口高度（如 1440px）截图，再用图片处理工具（如 Python PIL）裁剪掉底部多余空白，得到贴合内容高度的 PNG
-3. 或使用支持整页截图的工具（如 Playwright 的 `page.screenshot(full_page=True)`）直接输出内容高度的 PNG
+### HTML 准备
+1. 卡片 HTML 中不写死高度：`html, body { width: 750px; }`，`.card` 不设 `height`，高度由内容自然撑开。body 背景用纯白 `#ffffff`，卡片用主题色。
+
+### 渲染（使用 Playwright，默认移动端模式）
+2. 调用 `scripts/render_card.py <input.html> <output.png>` 渲染。
+   - 默认使用 iPhone 14 Pro 移动端配置（UA / hasTouch / isMobile），覆写视口宽度 750px、`device_scale_factor=1`
+   - 自动检测 `document.body.scrollHeight` 获取内容高度
+   - 输出 PNG 恰好为 750 × N px，无需任何裁剪
+3. 若 Playwright 不可用，备选 Chrome headless：
+   ```bash
+   /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
+     --headless --screenshot=out.png --window-size=750,2000 \
+     --force-device-scale-factor=1 --hide-scrollbars \
+     'http://localhost:PORT/card.html'
+   ```
+   注意：Chrome headless 截图会在文件名后自动加 `_1` 修饰，需重命名。
 
 ## UI 规范
 
@@ -99,4 +116,4 @@ description: "从笔记库提取 500 字以内的内容生成精美卡片，用�
 3. 为什么神们决定摧毁特洛伊？
 ```
 
-输出：按列表顺序依次生成 3 张独立卡片（每张均为 1080px 宽、高度按内容自适应、按主题配色、含来源与二维码），全部导入系统相册后统一汇报结果。
+输出：按列表顺序依次生成 3 张独立卡片（每张均为 750px 宽、高度按内容自适应、按主题配色、含来源与二维码），全部导入系统相册后统一汇报结果。
