@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>角 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #c62828; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed #c62828; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .diff-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; color: #fff; margin-left: 8px; }
+  .diff-easy { background: #66bb6a; }
+  .diff-medium { background: #ff9800; }
+  .diff-hard { background: #f44336; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  @media (max-width: 720px) {
+    article { padding: 20px 12px !important; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：课件 10（几何图形）、课件 11（直线、射线、线段）</p>
+  <h1>角</h1>
+
+  <h2>起源：为什么要把圆分成 360 度？</h2>
+  <div class="origin">
+    <p><strong>角</strong>无处不在——打开的门和门框之间、时钟的时针和分针之间、滑梯和地面之间。</p>
+    <p>古巴比伦人最早把圆分成了 360 等份。为什么是 360？有很多说法：</p>
+    <ul>
+      <li><strong>天文说：</strong>古巴比伦人观察到，太阳在天空中"走"一圈大约需要 360 天（他们的历法一年 360 天）。</li>
+      <li><strong>数学说：</strong>60 进制很方便——360 能被 2、3、4、5、6、8、9、10、12、15、18、20、24、30、36、40、45、60、72、90、120、180 整除，比 100 方便得多。</li>
+      <li><strong>几何说：</strong>360 接近一年中的天数，六等分刚好是 60，适合画正六边形和等边三角形。</li>
+    </ul>
+    <p>《古今数学思想》提到：巴比伦的 60 进制通过天文学传到希腊，又通过希腊传到欧洲。今天我们仍然用度、分、秒来量角度，就是巴比伦文明的遗产。</p>
+  </div>
+
+  <h2>一、什么是角？</h2>
+  <div class="story">
+    <p><strong>角</strong> = 从同一点出发的两条射线组成的图形。</p>
+    <p>这个公共点叫作<strong>顶点</strong>，两条射线叫作<strong>边</strong>。</p>
+    <div class="graphic">
+      <svg viewBox="0 0 500 200" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+        <defs>
+          <style>
+            .angle-arc { fill: none; stroke: #c62828; stroke-width: 2; }
+            .angle-label { font-size: 14px; fill: #c62828; font-weight: bold; }
+            @keyframes rotateRay { from { transform: rotate(0deg); } to { transform: rotate(45deg); } }
+          </style>
+        </defs>
+        <!-- 角的基本构成 -->
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#c62828" font-weight="bold">角 = 顶点 + 两条射线</text>
+        <!-- 射线1 -->
+        <line x1="150" y1="140" x2="350" y2="140" stroke="#333" stroke-width="2"/>
+        <polygon points="350,140 342,136 342,144" fill="#333"/>
+        <!-- 射线2 -->
+        <line x1="150" y1="140" x2="300" y2="60" stroke="#333" stroke-width="2"/>
+        <polygon points="300,60 295,68 305,68" fill="#333"/>
+        <!-- 顶点 -->
+        <circle cx="150" cy="140" r="6" fill="#c62828"/>
+        <text x="140" y="158" text-anchor="end" font-size="13" fill="#c62828" font-weight="bold">顶点 O</text>
+        <!-- 弧（角） -->
+        <path d="M200,140 A50,50 0 0,0 230,100" fill="none" stroke="#c62828" stroke-width="2.5"/>
+        <text x="225" y="115" fill="#c62828" font-weight="bold" font-size="14">∠AOB</text>
+        <!-- 标注 -->
+        <text x="350" y="155" text-anchor="start" font-size="12" fill="#555">边（射线 OA）</text>
+        <text x="310" y="55" text-anchor="start" font-size="12" fill="#555">边（射线 OB）</text>
+      </svg>
+    </div>
+    <p>角的表示：<strong>∠AOB</strong> 或 <strong>∠O</strong>（顶点字母在中间）。</p>
+  </div>
+
+  <h2>二、角的度量：度、分、秒</h2>
+  <div class="formula">
+    <p>角的大小用<strong>度（°）</strong>来度量。</p>
+    <p><strong>1 度</strong> = 把圆分成 360 等份，每一份的圆心角是 1 度。</p>
+    <p>更精细的度量：</p>
+    <ul>
+      <li><strong>1° = 60′</strong>（60 分）</li>
+      <li><strong>1′ = 60″</strong>（60 秒）</li>
+    </ul>
+    <div class="key">
+      <p><strong>为什么是 60 进制？</strong>这是古巴比伦的遗产！60 能被 2、3、4、5、6、10、12、15、20、30 整除，分起来特别方便。</p>
+    </div>
+  </div>
+
+  <h2>三、角的分类</h2>
+  <div class="story">
+    <div class="graphic">
+      <svg viewBox="0 0 500 320" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+        <defs><style>text{font-size:12px;text-anchor:middle;fill:#555}</style></defs>
+        <!-- 锐角 -->
+        <line x1="60" y1="130" x2="60" y2="50" stroke="#4caf50" stroke-width="2.5"/>
+        <line x1="60" y1="130" x2="150" y2="130" stroke="#4caf50" stroke-width="2.5"/>
+        <path d="M75,130 A15,15 0 0,0 60,115" fill="none" stroke="#4caf50" stroke-width="2"/>
+        <text x="105" y="125" fill="#4caf50" font-weight="bold">锐角</text>
+        <text x="105" y="145" fill="#4caf50">0° < 锐角 < 90°</text>
+
+        <!-- 直角 -->
+        <line x1="210" y1="130" x2="210" y2="50" stroke="#2196f3" stroke-width="2.5"/>
+        <line x1="210" y1="130" x2="300" y2="130" stroke="#2196f3" stroke-width="2.5"/>
+        <rect x="210" y="115" width="15" height="15" fill="none" stroke="#2196f3" stroke-width="2"/>
+        <text x="255" y="125" fill="#2196f3" font-weight="bold">直角</text>
+        <text x="255" y="145" fill="#2196f3">直角 = 90°</text>
+
+        <!-- 钝角 -->
+        <line x1="360" y1="130" x2="360" y2="50" stroke="#ff9800" stroke-width="2.5"/>
+        <line x1="360" y1="130" x2="450" y2="130" stroke="#ff9800" stroke-width="2.5"/>
+        <line x1="360" y1="130" x2="300" y2="80" stroke="#ff9800" stroke-width="2.5"/>
+        <path d="M365,130 A5,5 0 0,0 360,125" fill="none" stroke="none"/>
+        <text x="375" y="125" fill="#ff9800" font-weight="bold">钝角</text>
+        <text x="375" y="145" fill="#ff9800">90° < 钝角 < 180°</text>
+
+        <!-- 平角 -->
+        <text x="250" y="195" text-anchor="middle" font-size="14" fill="#e91e63" font-weight="bold">平角 = 180°</text>
+        <line x1="60" y1="230" x2="440" y2="230" stroke="#e91e63" stroke-width="2.5"/>
+        <circle cx="250" cy="230" r="5" fill="#e91e63"/>
+        <text x="250" y="250" text-anchor="middle" fill="#e91e63">一条直线就是一个平角</text>
+
+        <!-- 周角 -->
+        <text x="250" y="275" text-anchor="middle" font-size="14" fill="#9c27b0" font-weight="bold">周角 = 360°</text>
+        <circle cx="250" cy="310" r="10" fill="none" stroke="#9c27b0" stroke-width="2.5"/>
+        <text x="250" y="310" text-anchor="middle" font-size="11" fill="#9c27b0" dominant-baseline="central">360°</text>
+      </svg>
+    </div>
+    <div class="key">
+      <p><strong>分类总结：</strong></p>
+      <ul>
+        <li><strong>锐角</strong>：0° < 角 < 90°（尖锐的角）</li>
+        <li><strong>直角</strong>：角 = 90°（方方正正的角）</li>
+        <li><strong>钝角</strong>：90° < 角 < 180°（钝钝的角）</li>
+        <li><strong>平角</strong>：角 = 180°（一条直线）</li>
+        <li><strong>周角</strong>：角 = 360°（转了一圈）</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>四、角的加减与特殊关系</h2>
+  <div class="formula">
+    <p><strong>角的加法：</strong>∠AOB + ∠BOC = ∠AOC（如果 B 在 AOC 内部）</p>
+    <p><strong>特殊关系：</strong></p>
+    <ul>
+      <li><strong>互余：</strong>两个角加起来 = 90°，如 30° 和 60°</li>
+      <li><strong>互补：</strong>两个角加起来 = 180°，如 120° 和 60°</li>
+      <li><strong>对顶角：</strong>两条直线相交，对顶角相等</li>
+    </ul>
+    <div class="example">
+      <strong>对顶角相等：</strong><br>
+      两条直线相交，形成四个角。∠1 和 ∠3 是对顶角，∠2 和 ∠4 是对顶角。<br>
+      为什么 ∠1 = ∠3？因为 ∠1 + ∠2 = 180°（平角），∠2 + ∠3 = 180°（平角），所以 ∠1 = ∠3。
+    </div>
+  </div>
+
+  <h2>角的度量：量角器怎么用？</h2>
+  <div class="story">
+    <p><strong>量角器</strong>是一个半圆形的工具，上面标着 0° 到 180°（有时会标两圈）。</p>
+    <p><strong>使用步骤：</strong></p>
+    <ol>
+      <li>把量角器的<strong>中心点</strong>对准角的顶点</li>
+      <li>让量角器的<strong>0° 刻度线</strong>对准角的一条边</li>
+      <li>看另一条边指在哪个刻度上——那就是角的度数</li>
+    </ol>
+    <p><strong>注意：</strong>量角器上有两圈刻度（内圈和外圈），选对起点是 0° 的那一圈。</p>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>时钟在 3:00 时，时针和分针的夹角是多少度？在 5:00 时呢？</p>
+    <p><strong>问题 2：</strong>一个角的补角比它的余角大多少度？这个差值是固定的吗？</p>
+    <p><strong>问题 3：</strong>为什么古巴比伦人把圆分成 360 等份，而不是 100 等份？如果是你，你会选哪个数？为什么？</p>
+  </div>
+
+  <h2>拓展阅读</h2>
+  <div class="extend">
+    <p><strong>弧度制：</strong>除了"度"，数学家还发明了另一种度量角的方式——<strong>弧度（radian）</strong>。1 弧度等于"弧长等于半径时的圆心角"。一个圆是 2π 弧度 ≈ 6.28 弧度。为什么用弧度？因为到了高中，三角函数用弧度来算微分和积分会简单得多。</p>
+    <p><strong>推荐阅读：</strong>《古今数学思想》—— 了解角度的由来和巴比伦 60 进制的影响；《极简数学》—— 用生活中的例子理解角度。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 判断：120° 的角是钝角。对还是错？<span class="diff-tag diff-easy">简单</span></p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">钝角：大于 90° 且小于 180°。</div>
+    <div class="ans-box" id="a1">对。120° 在 90° 和 180° 之间，是钝角。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 一个角是 35°，它的余角是多少度？补角是多少度？<span class="diff-tag diff-easy">简单</span></p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">余角 = 90° - 35°；补角 = 180° - 35°。</div>
+    <div class="ans-box" id="a2">余角 = 55°，补角 = 145°。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 时钟在 2:30 时，时针和分针的夹角是多少度？<span class="diff-tag diff-medium">中等</span></p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">分针在 6（180°）。时针在 2 和 3 之间的正中间：2 是 60°，30 分钟走了一半 → 60° + 15° = 75°。</div>
+    <div class="ans-box" id="a3">180° - 75° = 105°（钝角）</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 两条直线相交，其中一个角是 50°。求另外三个角的度数。<span class="diff-tag diff-hard">较难</span></p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">对顶角相等，邻补角之和为 180°。</div>
+    <div class="ans-box" id="a4">对顶角 = 50°，另外两个角各 = 180° - 50° = 130°。所以四个角分别是 50°、130°、50°、130°。</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>角</strong> = 从同一点出发的两条射线组成的图形，顶点 + 两条边</li>
+      <li>角的度量单位是<strong>度（°）</strong>，1° = 60′，1′ = 60″（古巴比伦 60 进制遗产）</li>
+      <li><strong>锐角</strong>（< 90°）→ <strong>直角</strong>（= 90°）→ <strong>钝角</strong>（90°~180°）→ <strong>平角</strong>（= 180°）→ <strong>周角</strong>（= 360°）</li>
+      <li><strong>互余</strong>：和为 90°；<strong>互补</strong>：和为 180°；<strong>对顶角</strong>：相等</li>
+      <li>量角器：中心对准顶点，0° 线对准一条边，读另一条边</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="index.html">← 返回课程列表</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+</body>
+</html>

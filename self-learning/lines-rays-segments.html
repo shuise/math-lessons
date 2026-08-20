@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>直线、射线、线段 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📏</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #0277bd; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed #0277bd; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .diff-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; color: #fff; margin-left: 8px; }
+  .diff-easy { background: #66bb6a; }
+  .diff-medium { background: #ff9800; }
+  .diff-hard { background: #f44336; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  @media (max-width: 720px) {
+    article { padding: 20px 12px !important; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：课件 10（几何图形——点、线、面、体）</p>
+  <h1>直线、射线、线段</h1>
+
+  <h2>起源：拉直的绳子与欧几里得的定义</h2>
+  <div class="origin">
+    <p>古埃及人丈量土地时，用的工具是<strong>拉直的绳子</strong>。一根绷紧的绳子，就是最早的"直线"。</p>
+    <p>欧几里得在《几何原本》中给"线"下了定义："<strong>线是没有宽度的长度。</strong>"而<strong>直线</strong>是"线上各点均匀地排列着"的线——即两点之间最短的路径。</p>
+    <p>《古今数学思想》中提到：欧几里得的定义看似简单，但蕴含了深刻的洞察——<strong>直线不仅是几何的基本元素，还是"最短"这一概念的载体。</strong>后来的数学家发现，在球面上，两点之间的最短路径不是直线，而是大圆弧——这就是为什么飞机的航线在地图上看起来是弯的。</p>
+  </div>
+
+  <h2>一、直线、射线、线段：三兄弟的区别</h2>
+  <div class="story">
+    <p>我们每天都在和"线"打交道，但"线"有三种不同的身份：</p>
+    <div class="graphic">
+      <svg viewBox="0 0 500 280" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+        <defs><style>text{font-size:13px;text-anchor:middle}</style></defs>
+        <!-- 直线 -->
+        <text x="250" y="25" font-size="14" fill="#0277bd" font-weight="bold">直线：没有端点，向两端无限延伸</text>
+        <line x1="30" y1="60" x2="470" y2="60" stroke="#0277bd" stroke-width="2.5"/>
+        <polygon points="470,60 462,56 462,64" fill="#0277bd"/>
+        <polygon points="30,60 38,56 38,64" fill="#0277bd"/>
+        <circle cx="30" cy="60" r="3" fill="none"/>
+        <circle cx="250" cy="60" r="3" fill="none"/>
+        <circle cx="470" cy="60" r="3" fill="none"/>
+        <text x="250" y="80" fill="#888">用两个大写字母表示：直线 AB 或 直线 l</text>
+        <!-- 射线 -->
+        <text x="250" y="115" font-size="14" fill="#e65100" font-weight="bold">射线：有一个端点，向一个方向无限延伸</text>
+        <line x1="60" y1="150" x2="440" y2="150" stroke="#e65100" stroke-width="2.5"/>
+        <polygon points="440,150 432,146 432,154" fill="#e65100"/>
+        <circle cx="60" cy="150" r="5" fill="#e65100"/>
+        <text x="60" y="170" fill="#e65100" font-weight="bold">端点</text>
+        <text x="250" y="172" fill="#888">用端点和另一点表示：射线 AB</text>
+        <!-- 线段 -->
+        <text x="250" y="205" font-size="14" fill="#2e7d32" font-weight="bold">线段：有两个端点，长度有限</text>
+        <line x1="60" y1="240" x2="440" y2="240" stroke="#2e7d32" stroke-width="2.5"/>
+        <circle cx="60" cy="240" r="5" fill="#2e7d32"/>
+        <circle cx="440" cy="240" r="5" fill="#2e7d32"/>
+        <text x="60" y="260" fill="#2e7d32" font-weight="bold">端点</text>
+        <text x="440" y="260" fill="#2e7d32" font-weight="bold">端点</text>
+        <text x="250" y="262" fill="#888">用两个端点表示：线段 AB</text>
+      </svg>
+    </div>
+    <div class="key">
+      <p><strong>核心区别：</strong>看"有没有端点"和"有几个端点"。</p>
+      <ul>
+        <li><strong>直线</strong>：0 个端点，两端无限延伸，不能测量长度</li>
+        <li><strong>射线</strong>：1 个端点，向一个方向无限延伸，不能测量长度</li>
+        <li><strong>线段</strong>：2 个端点，长度有限，可以测量</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>二、生活中三兄弟的身影</h2>
+  <div class="example">
+    <p><strong>直线：</strong>地平线（看起来无限延伸）、铁轨（向远方无限延伸）</p>
+    <p><strong>射线：</strong>手电筒的光（从灯泡出发，射向远方）、激光笔的光线</p>
+    <p><strong>线段：</strong>铅笔的长度、桌子的边、一根绳子</p>
+  </div>
+
+  <h2>三、两点之间，线段最短</h2>
+  <div class="formula">
+    <p><strong>在所有连接 A、B 两点的线中，线段 AB 最短。</strong></p>
+    <p>这就是"两点之间，线段最短"——也是一个非常基本、不证自明的几何事实（公理）。</p>
+    <div class="graphic">
+      <svg viewBox="0 0 500 160" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+        <defs><style>text{font-size:12px;text-anchor:middle}</style></defs>
+        <circle cx="50" cy="100" r="6" fill="#0277bd"/>
+        <text x="50" y="85" fill="#0277bd" font-weight="bold">A</text>
+        <circle cx="450" cy="100" r="6" fill="#0277bd"/>
+        <text x="450" y="85" fill="#0277bd" font-weight="bold">B</text>
+        <!-- 线段（最短） -->
+        <line x1="50" y1="100" x2="450" y2="100" stroke="#2e7d32" stroke-width="3"/>
+        <text x="250" y="95" fill="#2e7d32" font-weight="bold">线段 AB（最短！）</text>
+        <!-- 曲线（更长） -->
+        <path d="M50,100 Q100,30 250,80 Q400,130 450,100" fill="none" stroke="#e65100" stroke-width="2" stroke-dasharray="6 3"/>
+        <text x="250" y="55" fill="#e65100">曲线（更长）</text>
+        <!-- 折线（更长） -->
+        <polyline points="50,100 150,140 350,60 450,100" fill="none" stroke="#9c27b0" stroke-width="2" stroke-dasharray="6 3"/>
+        <text x="250" y="145" fill="#9c27b0">折线（更长）</text>
+      </svg>
+    </div>
+  </div>
+
+  <h2>阅读与思考：长度的测量</h2>
+  <div class="quote">
+    <p><strong>古人怎么量长度？</strong></p>
+    <p>最早的"尺子"就是人体本身：<strong>一拃</strong>（拇指到中指的距离）、<strong>一庹</strong>（两臂伸开的长度）、<strong>一步</strong>、<strong>一脚</strong>。古埃及的"肘尺"是从肘到中指尖的长度，约 52 厘米。</p>
+    <p>但问题来了——每个人的手不一样长！所以交易时经常吵架。于是各国开始统一标准：英国的"英尺"（foot）据说是某位国王的脚长；中国的"尺"在秦朝统一后有了标准。</p>
+    <p>到了 18 世纪末，法国人决定用<strong>地球</strong>来定义长度——把从北极到赤道距离的一千万分之一定为 1 米。这就是<strong>米</strong>的由来。今天，1 米被定义为"光在真空中 1/299792458 秒内走过的距离"——用宇宙中最精确的"尺子"（光速）来定义。</p>
+    <p><strong>思考：</strong>为什么需要用光速来定义米，而不是用一根金属棒？</p>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>一条直线上有 3 个点 A、B、C。这条直线上有多少条线段？有多少条射线？</p>
+    <p><strong>问题 2：</strong>为什么"两点之间线段最短"在球面上不成立？在球面上，两点之间的最短路径是什么？</p>
+    <p><strong>问题 3：</strong>如果不用尺子，你能用什么方法比较两条线段的长度？</p>
+  </div>
+
+  <h2>拓展阅读</h2>
+  <div class="extend">
+    <p><strong>欧几里得的第五公设：</strong>《几何原本》有五条公理。第五条（平行公设）困扰了数学家两千年——"过直线外一点，有且只有一条直线与它平行"。很多人试图从其他四条推出第五条，都失败了。直到 19 世纪，罗巴切夫斯基和高斯发现：如果放弃这条公设，可以得到完全不同的几何学（非欧几何）——这正是爱因斯坦广义相对论的数学基础。</p>
+    <p><strong>推荐阅读：</strong>《古今数学思想》—— 欧几里得几何与公理化方法；《数学思维》—— 理解"公理"在数学中的角色。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 判断：手电筒发出的光可以看作一条射线。对还是错？<span class="diff-tag diff-easy">简单</span></p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">射线有一个端点，向一个方向无限延伸。</div>
+    <div class="ans-box" id="a1">对。灯泡是端点，光向一个方向无限延伸。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 平面上有 4 个不在同一直线上的点。连接任意两点，最多能画出多少条线段？<span class="diff-tag diff-easy">简单</span></p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">4 个点两两连线：从 4 个中选 2 个的组合数。</div>
+    <div class="ans-box" id="a2">6 条线段。（4×3÷2 = 6）</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 一条直线上有 5 个点 A、B、C、D、E（按顺序排列）。请写出以 A 为端点的所有线段。<span class="diff-tag diff-medium">中等</span></p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">线段有两个端点。以 A 为一个端点，另一个端点可以是 B、C、D、E。</div>
+    <div class="ans-box" id="a3">AB、AC、AD、AE（共 4 条）。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 平面上有 n 个点，任意三点不共线。连接任意两点得到一条线段。总共有多少条线段？用 n 的代数式表示。<span class="diff-tag diff-hard">较难</span></p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">每个点与其余 n-1 个点相连，但每条线段被算了两次。</div>
+    <div class="ans-box" id="a4">n(n-1)/2 条线段。与课件 4 中"握手问题"的代数式相同。</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>直线</strong>：0 个端点，两端无限延伸，记作 直线 AB</li>
+      <li><strong>射线</strong>：1 个端点，向一个方向无限延伸，记作 射线 AB</li>
+      <li><strong>线段</strong>：2 个端点，长度有限可测量，记作 线段 AB</li>
+      <li><strong>两点之间，线段最短</strong>——这是几何的基本公理</li>
+      <li>长度的测量从人体到地球到光速，追求越来越精确、不变的标准</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="angles.html">下一课：角 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+</body>
+</html>

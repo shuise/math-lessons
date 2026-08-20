@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自然数、零与十进制 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔢</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #43a047; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed #43a047; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .diff-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; color: #fff; margin-left: 8px; }
+  .diff-easy { background: #66bb6a; }
+  .diff-medium { background: #ff9800; }
+  .diff-hard { background: #f44336; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  .num-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  .num-table td, .num-table th { border: 1px solid #ddd; padding: 8px 12px; text-align: center; }
+  .num-table th { background: #e8f5e9; }
+
+  @media (max-width: 720px) {
+    article { padding: 20px 12px !important; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：无需任何数学知识，只需要会数数</p>
+  <h1>自然数、零与十进制</h1>
+
+  <h2>起源：数是怎么来的？</h2>
+  <div class="origin">
+    <p><strong>一万年前，</strong>一个牧羊人每天早晨放羊，晚上要把羊赶回羊圈。他怎么知道羊有没有少？他捡来一堆石子——每只羊对应一颗石子。早上放羊时，每出一只羊，丢一颗石子。晚上回圈时，每进一只羊，捡一颗石子。如果最后石子多了，说明羊丢了。</p>
+    <p>这就是<strong>一一对应</strong>——人类最早"数数"的方式。不需要知道"1, 2, 3"这些词，只需要知道"一样多"。</p>
+    <p>慢慢地，人们开始需要更大的数。古埃及人用象形符号：一根竖线表示 1，一个绳圈表示 10，一卷绳子表示 100，一枝莲花表示 1000。罗马人用字母：I 是 1，V 是 5，X 是 10，L 是 50，C 是 100。但罗马数字有个大问题：写 3888 要写成 MMMDCCCLXXXVIII——又长又不好算！</p>
+    <p>真正的突破来自<strong>印度</strong>。大约在公元 5 世纪，印度数学家发明了 10 个符号：0, 1, 2, 3, 4, 5, 6, 7, 8, 9。而最关键的一个发明，是<strong>零</strong>。</p>
+  </div>
+
+  <h2>一、什么是自然数？</h2>
+  <div class="story">
+    <p><strong>自然数</strong>就是用来"数东西"的数：0, 1, 2, 3, 4, 5, …</p>
+    <p>它们"自然"地出现在生活中——数苹果、数人数、数手指。每数一个，就加 1。这个"永远可以加 1"的性质，叫做自然数的<strong>无限性</strong>——没有最大的自然数。</p>
+    <p>注意：有些地方说自然数从 1 开始（不包括 0），有些地方从 0 开始。在我们的课程中，自然数<span style="text-decoration:underline;">从 0 开始</span>，因为 0 太重要了，不能丢掉。</p>
+  </div>
+
+  <h2>二、零：印度人最伟大的发明</h2>
+  <div class="key">
+    <p><strong>你可能会想：</strong>零不就是"什么都没有"吗？这有什么了不起的？</p>
+    <p>想想看：如果你在泥板上写"3"和"5"，你想表示"三百零五"，怎么办？在两个符号中间留个空位？那万一别人看不出来是空位呢？</p>
+    <p>古巴比伦人就遇到了这个问题。他们用楔形文字写数字，空位容易混淆。直到印度人发明了一个专门的符号来占空位——<strong>零</strong>——问题才解决。</p>
+    <p>《中小学数学要义》中说：<strong>"有了零，才真正有了十进制。"</strong>零不仅是"没有"，它还是<strong>占位符</strong>——在 305 中，十位上的 0 告诉你"十位没有，但百位和个位有"，它把一个可能混淆的数字变成了清晰的表达。</p>
+    <p>零的发明大约在公元 9 世纪。印度的数学家们把零叫做"śūnya"（空），后来阿拉伯人翻译成"sifr"（这也是英语"cipher"的词源），最后传到欧洲。</p>
+  </div>
+
+  <h2>三、位值制：为什么 111 的三个"1"不一样大？</h2>
+  <div class="story">
+    <p>111 这个数，有三个"1"。但第一个 1 表示 100，第二个表示 10，第三个表示 1。</p>
+    <p>这就是<strong>位值制</strong>——同一个数字放在不同位置，代表不同的值。每个位置的值是 10 的幂：</p>
+
+    <div class="graphic">
+      <div style="text-align:center;margin-bottom:8px;font-size:14px;color:#888;">点击不同位置的"1"，看它代表多少 ↓</div>
+      <svg viewBox="0 0 500 200" style="max-width:100%;height:auto;cursor:pointer;">
+        <defs>
+          <style>
+            .place-box { fill: #f5f5f5; stroke: #ddd; stroke-width: 2; rx: 8; }
+            .place-box.highlight { fill: #e8f5e9; stroke: #43a047; stroke-width: 3; }
+            .place-digit { font-size: 32px; font-weight: bold; fill: #333; text-anchor: middle; dominant-baseline: central; }
+            .place-label { font-size: 13px; fill: #888; text-anchor: middle; }
+            .place-value { font-size: 14px; fill: #43a047; text-anchor: middle; font-weight: bold; }
+            .plus-sign { font-size: 20px; fill: #e65100; text-anchor: middle; dominant-baseline: central; }
+            .arrow-line { stroke: #43a047; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+            .arrow-line.hidden { opacity: 0; }
+            .formula-text { font-size: 16px; fill: #333; text-anchor: middle; }
+            @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+            .pulse { animation: pulse 1.5s ease-in-out infinite; }
+          </style>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#43a047"/>
+          </marker>
+        </defs>
+        <!-- 百位 -->
+        <rect x="30" y="30" width="70" height="70" class="place-box" id="box100"/>
+        <text x="65" y="65" class="place-digit">1</text>
+        <text x="65" y="108" class="place-label">百位</text>
+        <text x="65" y="18" class="place-value" id="val100" style="opacity:0">= 100</text>
+        <line x1="65" y1="105" x2="65" y2="150" class="arrow-line hidden" id="arr100"/>
+        <text x="65" y="165" class="formula-text" style="fill:#43a047;font-weight:bold;opacity:0" id="txt100">1 × 100</text>
+        <text x="110" y="65" class="plus-sign">+</text>
+        <!-- 十位 -->
+        <rect x="130" y="30" width="70" height="70" class="place-box" id="box10"/>
+        <text x="165" y="65" class="place-digit">1</text>
+        <text x="165" y="108" class="place-label">十位</text>
+        <text x="165" y="18" class="place-value" id="val10" style="opacity:0">= 10</text>
+        <line x1="165" y1="105" x2="165" y2="150" class="arrow-line hidden" id="arr10"/>
+        <text x="165" y="165" class="formula-text" style="fill:#e65100;font-weight:bold;opacity:0" id="txt10">1 × 10</text>
+        <text x="210" y="65" class="plus-sign">+</text>
+        <!-- 个位 -->
+        <rect x="230" y="30" width="70" height="70" class="place-box" id="box1"/>
+        <text x="265" y="65" class="place-digit">1</text>
+        <text x="265" y="108" class="place-label">个位</text>
+        <text x="265" y="18" class="place-value" id="val1" style="opacity:0">= 1</text>
+        <line x1="265" y1="105" x2="265" y2="150" class="arrow-line hidden" id="arr1"/>
+        <text x="265" y="165" class="formula-text" style="fill:#7b1fa2;font-weight:bold;opacity:0" id="txt1">1 × 1</text>
+        <!-- 底部结果 -->
+        <text x="250" y="192" class="formula-text" style="font-weight:bold;fill:#333;font-size:18px" id="result">= 111</text>
+      </svg>
+    </div>
+
+    <div class="formula">
+      <p style="text-align:center;font-size:18px;"><strong>111 = 1×100 + 1×10 + 1×1 = 1×10² + 1×10¹ + 1×10⁰</strong></p>
+      <p style="text-align:center;">个位是 10⁰ = 1，十位是 10¹ = 10，百位是 10² = 100</p>
+    </div>
+    <p>罗马数字就没有这个本事。罗马数字里，I 永远表示 1，不管它放在哪里。所以罗马人做乘法特别麻烦——他们得用算盘辅助。</p>
+    <p>位值制的好处：<strong>任何大小的数，只需要 10 个符号（0-9）就能表示。</strong>这就是"十进制"——逢十进一。</p>
+  </div>
+
+  <h2>四、为什么是十进制？</h2>
+  <div class="quote">
+    <p>答案很简单：<strong>因为人有 10 根手指。</strong></p>
+    <p>人类最早的计算器就是手指。数完 10 根手指，换一个人接着数，或者在地上画一道记号——这就是"进位"的原始想法。</p>
+    <p>历史上也出现过其他进制：古巴比伦人用 60 进制（至今我们计算时间、角度仍用 60 进制），玛雅人用 20 进制。但十进制因为和手指对应，最终被全世界接受。</p>
+  </div>
+
+  <h2>五、自然数的运算</h2>
+  <div class="formula">
+    <p>自然数之间可以做四种基本运算：</p>
+    <p><strong>加法（+）：</strong>把两堆东西合在一起。<br>例：3 + 5 = 8</p>
+    <p><strong>减法（-）：</strong>从一堆东西里拿走一些。<br>例：8 - 3 = 5<br>注意：在自然数里，<strong>小减大不行</strong>（3 - 8 没有自然数答案）。这就是为什么后面会发明负数！</p>
+    <p><strong>乘法（×）：</strong>重复加同一个数。<br>例：3 × 4 = 3 + 3 + 3 + 3 = 12</p>
+    <p><strong>除法（÷）：</strong>把一堆东西平均分。<br>例：12 ÷ 3 = 4<br>注意：在自然数里，<strong>不能整除的情况</strong>（12 ÷ 5）没有自然数答案。这就是为什么后面会发明分数！</p>
+  </div>
+
+  <div class="key">
+    <p><strong>核心思想：</strong>自然数上的两种"不满足"——减法不够用、除法不够用——正是驱动数学发展的动力。负数和分数，都是为了解决这些"不够用"而诞生的。</p>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>如果人类有 8 根手指，我们可能用几进制？试着写出八进制下的 1 到 10（用十进制表示）。</p>
+    <p><strong>问题 2：</strong>罗马数字为什么不适合做乘法？试着用罗马数字计算 XXIII × IV（23 × 4），看看有多麻烦。</p>
+    <p><strong>问题 3：</strong>零是"空"的意思，但它在数字中又不可或缺。你能举出三个生活中"零很重要"的例子吗？</p>
+  </div>
+
+  <h2>拓展阅读</h2>
+  <div class="extend">
+    <p><strong>印度-阿拉伯数字的传播：</strong>公元 8 世纪，阿拉伯商人把印度数字带到了巴格达。花拉子米写了一本书介绍印度计数法，后来这本书被翻译成拉丁文，印度-阿拉伯数字才开始在欧洲传播。但许多欧洲人抗拒它——他们觉得罗马数字"更正规"。直到 13 世纪，意大利数学家斐波那契大力推广，才逐渐普及。</p>
+    <p><strong>推荐阅读：</strong>《中小学数学要义》第一章——从数数讲到十进制，特别适合理解数的本质；《古今数学思想》——了解各个文明对数的贡献。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 把 3056 写成"位值展开"的形式（像 111 = 1×100 + 1×10 + 1×1 那样）。<span class="diff-tag diff-easy">简单</span></p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">千位是 3，百位是 0，十位是 5，个位是 6。</div>
+    <div class="ans-box" id="a1">3×1000 + 0×100 + 5×10 + 6×1 = 3×10³ + 0×10² + 5×10¹ + 6×10⁰</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 在自然数中，5 - 9 有答案吗？为什么？<span class="diff-tag diff-easy">简单</span></p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">自然数从 0 开始，减法对应"拿走"。</div>
+    <div class="ans-box" id="a2">没有。因为 5 比 9 小，从 5 个东西里拿走 9 个是不可能的。需要有负数才能做。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 罗马数字中没有零。如果罗马人想写"二百零五"，他们只能写成 CCV（205）。你能看出这有什么问题吗？（提示：CCV 也可能是 205，也可能被误解为其他意思）<span class="diff-tag diff-medium">中等</span></p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">CCV 中 C=100, V=5，加起来是 205。但用位值制写 205 和 250 有本质区别。</div>
+    <div class="ans-box" id="a3">没有零作为占位符，很难区分 205、250、2005 等数。罗马人靠额外的符号和约定来区分，但不如位值制清晰。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 一个三位数，百位数字是 a，十位数字是 b，个位数字是 c。用 a、b、c 写出这个数的"位值展开"表达式。<span class="diff-tag diff-hard">较难</span></p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">百位是 10²=100，十位是 10¹=10，个位是 10⁰=1。</div>
+    <div class="ans-box" id="a4">a×100 + b×10 + c×1 = 100a + 10b + c</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li>自然数 = 用来数东西的数（0, 1, 2, 3, …）</li>
+      <li><strong>零</strong>是印度人 9 世纪的伟大发明——既是"空"，又是不可或缺的占位符</li>
+      <li><strong>位值制</strong>：同一个数字在不同位置代表不同的值，靠 10 的幂来区分</li>
+      <li><strong>十进制</strong>：因为人有 10 根手指，每满 10 就进一位</li>
+      <li>自然数中减法"小减大"不行 → 需要负数；除法"不能整除"不行 → 需要分数。这些"不够用"正是数学前进的动力</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="fractions.html">下一课：分数 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+
+// 位值制 SVG 交互
+(function(){
+  var svg = document.querySelector('.graphic svg');
+  if (!svg) return;
+  var boxes = { 'box100':['val100','arr100','txt100'], 'box10':['val10','arr10','txt10'], 'box1':['val1','arr1','txt1'] };
+  var active = null;
+  svg.addEventListener('click', function(e){
+    var box = e.target.closest('.place-box');
+    if (!box) return;
+    var id = box.id;
+    // 重置所有
+    Object.keys(boxes).forEach(function(k){
+      var el = document.getElementById(k);
+      if (el) el.classList.remove('highlight');
+      boxes[k].forEach(function(sid){
+        var s = document.getElementById(sid);
+        if (s) { s.style.opacity = '0'; s.classList.remove('pulse'); }
+      });
+      var a = document.getElementById('arr' + k.slice(3));
+      if (a) a.classList.add('hidden');
+    });
+    if (active === id) { active = null; return; }
+    active = id;
+    box.classList.add('highlight');
+    boxes[id].forEach(function(sid){
+      var s = document.getElementById(sid);
+      if (s) { s.style.opacity = '1'; if (sid.startsWith('txt')) s.classList.add('pulse'); }
+    });
+    var arr = document.getElementById('arr' + id.slice(3));
+    if (arr) arr.classList.remove('hidden');
+  });
+})();
+</script>
+</body>
+</html>

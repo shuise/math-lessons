@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>整式运算 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #e91e63; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed #e91e63; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .diff-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; color: #fff; margin-left: 8px; }
+  .diff-easy { background: #66bb6a; }
+  .diff-medium { background: #ff9800; }
+  .diff-hard { background: #f44336; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+
+  @media (max-width: 720px) {
+    article { padding: 20px 12px !important; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：课件 1-4（自然数、分数、负数、代数式）</p>
+  <h1>整式运算</h1>
+
+  <h2>起源：花拉子米的"对消"</h2>
+  <div class="origin">
+    <p>还记得花拉子米吗？他在《还原与对消计算概要》中总结了两大法宝：<strong>"还原"（al-jabr）</strong>和<strong>"对消"（al-muqabala）</strong>。</p>
+    <p>其中"对消"就是<strong>合并同类项</strong>——把方程中相同的项合并起来，化繁为简。这个看似简单的操作，是整式运算的核心。</p>
+    <p>《古今数学思想》中写道："花拉子米的'对消'，是代数运算中第一个真正具有普遍性的方法。"</p>
+  </div>
+
+  <h2>一、同类项与合并</h2>
+  <div class="story">
+    <p><strong>同类项：</strong>字母部分完全相同的项。</p>
+    <div class="formula">
+      <p>3x² 和 -5x² 是同类项（字母部分都是 x²）</p>
+      <p>3x² 和 3x 不是同类项（一个是 x²，一个是 x）</p>
+      <p>4ab 和 -2ab 是同类项</p>
+    </div>
+    <p><strong>合并同类项：</strong>把同类项的系数加起来，字母部分不变。</p>
+    <div class="example">
+      <strong>例：</strong>3x² + 5x - 2x² + 7 - 3x + 1<br>
+      = (3x² - 2x²) + (5x - 3x) + (7 + 1)<br>
+      = x² + 2x + 8
+    </div>
+    <div class="key">
+      <p><strong>为什么能合并？</strong>3x² 和 2x² 就像 3 个苹果和 2 个苹果——你可以把它们加起来变成 5 个苹果。但 3x² 和 2x 是"苹果"和"橘子"——不能直接加。</p>
+    </div>
+  </div>
+
+  <h2>二、分配律：整式运算的基石</h2>
+  <div class="formula">
+    <p><strong>分配律：</strong>a(b + c) = ab + ac</p>
+    <p><strong>为什么？</strong>用面积图来理解：一个长方形，宽是 a，长是 (b + c)。面积 = a × (b + c)。也可以把长方形切成两块：一块面积是 a×b，另一块是 a×c。所以 a(b + c) = ab + ac。</p>
+    <div class="example">
+      <strong>例：</strong>3(x + 2) = 3x + 6<br>
+      <strong>例：</strong>-2(3x - 5) = -6x + 10（注意：负号分配进去，各项都要变号）
+    </div>
+  </div>
+
+  <h2>三、多项式乘法：FOIL 和面积图</h2>
+  <div class="story">
+    <p><strong>两个多项式相乘，</strong>用分配律逐项展开：</p>
+    <div class="formula">
+      <p style="text-align:center;">(a + b)(c + d) = a×c + a×d + b×c + b×d</p>
+      <p>这就是 FOIL 规则：</p>
+      <p>F（First 首项）：a × c<br>
+      O（Outer 外项）：a × d<br>
+      I（Inner 内项）：b × c<br>
+      L（Last 末项）：b × d</p>
+    </div>
+    <div class="example">
+      <strong>例：</strong>(x + 2)(x + 3)<br>
+      = x·x + x·3 + 2·x + 2·3<br>
+      = x² + 3x + 2x + 6<br>
+      = x² + 5x + 6
+    </div>
+  </div>
+
+  <h2>四、三大乘法公式（用面积图证明）</h2>
+  <div class="formula">
+    <p><strong>公式 1：完全平方公式</strong></p>
+    <p style="text-align:center;font-size:18px;">(a + b)² = a² + 2ab + b²</p>
+    <p><strong>为什么？</strong>画一个边长为 (a+b) 的大正方形，面积 = (a+b)²。把它切成四块：</p>
+    <ul>
+      <li>一块 a×a = a²</li>
+      <li>两块 a×b = ab（上下各一块，共 2ab）</li>
+      <li>一块 b×b = b²</li>
+    </ul>
+    <p>总面积 = a² + 2ab + b²。这就是面积图的证明——不需要背公式，看图就懂了。</p>
+
+    <div class="graphic">
+      <div style="text-align:center;margin-bottom:8px;font-size:14px;color:#888;">拖动滑块改变 a 和 b，看正方形怎么变化 ↓</div>
+      <div style="text-align:center;margin:8px 0;">
+        <label style="font-size:14px;">a = <span id="valA" style="font-weight:bold;color:#e91e63;">3</span></label>
+        <input type="range" id="sliderA" min="1" max="5" value="3" oninput="updateSquare()" style="vertical-align:middle;margin:0 8px;width:120px;">
+        <label style="font-size:14px;margin-left:12px;">b = <span id="valB" style="font-weight:bold;color:#2196f3;">2</span></label>
+        <input type="range" id="sliderB" min="1" max="5" value="2" oninput="updateSquare()" style="vertical-align:middle;margin:0 8px;width:120px;">
+      </div>
+      <svg viewBox="0 0 520 380" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+        <defs>
+          <style>
+            .area-a2 { fill: rgba(233, 30, 99, 0.25); stroke: #e91e63; stroke-width: 2; }
+            .area-ab1 { fill: rgba(33, 150, 243, 0.25); stroke: #2196f3; stroke-width: 2; }
+            .area-ab2 { fill: rgba(33, 150, 243, 0.25); stroke: #2196f3; stroke-width: 2; }
+            .area-b2 { fill: rgba(76, 175, 80, 0.25); stroke: #4caf50; stroke-width: 2; }
+            .area-outer { fill: none; stroke: #333; stroke-width: 3; stroke-dasharray: 8 4; }
+            .area-label { font-size: 14px; font-weight: bold; text-anchor: middle; dominant-baseline: central; }
+            @keyframes growWidth { from { width: 0; } }
+          </style>
+        </defs>
+        <g id="squareGraph" transform="translate(40,20)">
+          <!-- 大正方形边框 -->
+          <rect id="outerRect" x="0" y="0" width="320" height="320" class="area-outer"/>
+          <!-- 四块区域 -->
+          <rect id="rA2" x="0" y="0" width="200" height="200" class="area-a2" rx="0"/>
+          <text id="tA2" x="100" y="100" class="area-label" fill="#e91e63">a² = 9</text>
+          <rect id="rAB1" x="200" y="0" width="120" height="200" class="area-ab1" rx="0"/>
+          <text id="tAB1" x="260" y="100" class="area-label" fill="#2196f3">ab = 6</text>
+          <rect id="rAB2" x="0" y="200" width="200" height="120" class="area-ab2" rx="0"/>
+          <text id="tAB2" x="100" y="260" class="area-label" fill="#2196f3">ab = 6</text>
+          <rect id="rB2" x="200" y="200" width="120" height="120" class="area-b2" rx="0"/>
+          <text id="tB2" x="260" y="260" class="area-label" fill="#4caf50">b² = 4</text>
+          <!-- 边长标注 -->
+          <text id="labelA" x="100" y="335" text-anchor="middle" font-size="16" fill="#e91e63" font-weight="bold">a = 3</text>
+          <text id="labelB" x="380" y="260" text-anchor="middle" font-size="16" fill="#2196f3" font-weight="bold" transform="rotate(90,380,260)">b = 2</text>
+          <!-- 公式 -->
+          <text x="260" y="360" text-anchor="middle" font-size="16" fill="#333" font-weight="bold" id="formulaDisplay">(3+2)² = 9 + 6 + 6 + 4 = 25</text>
+        </g>
+      </svg>
+    </div>
+    <div class="example">
+      <strong>例：</strong>(x + 3)² = x² + 2·x·3 + 3² = x² + 6x + 9
+    </div>
+  </div>
+
+  <div class="formula">
+    <p><strong>公式 2：平方差公式</strong></p>
+    <p style="text-align:center;font-size:18px;">(a + b)(a - b) = a² - b²</p>
+    <p><strong>为什么？</strong>展开：(a + b)(a - b) = a² - ab + ab - b² = a² - b²。中间两项 -ab 和 +ab 抵消了。</p>
+    <div class="example">
+      <strong>例：</strong>(x + 5)(x - 5) = x² - 25<br>
+      <strong>例：</strong>101 × 99 = (100 + 1)(100 - 1) = 100² - 1² = 10000 - 1 = 9999
+    </div>
+  </div>
+
+  <div class="formula">
+    <p><strong>公式 3：差的完全平方</strong></p>
+    <p style="text-align:center;font-size:18px;">(a - b)² = a² - 2ab + b²</p>
+    <p><strong>为什么？</strong>(a - b)² = (a + (-b))² = a² + 2a(-b) + (-b)² = a² - 2ab + b²</p>
+  </div>
+
+  <div class="key">
+    <p><strong>这三个公式非常重要！</strong>它们不仅是解二次方程的工具，更是数学中"用几何证明代数"的经典例子。在后面的课件中，你会看到花拉子米如何用完全平方公式来"配方法"解二次方程。</p>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>不用 FOIL 公式，用面积图解释：(x + 2)(x + 5) 展开后为什么是 x² + 7x + 10？</p>
+    <p><strong>问题 2：</strong>201 × 199 用平方差公式怎么快速算出来？</p>
+    <p><strong>问题 3：</strong>已知 (x + y)² = 25，(x - y)² = 9。求 xy 的值。（提示：展开两个式子，看它们之间有什么关系。）</p>
+  </div>
+
+  <h2>拓展阅读</h2>
+  <div class="extend">
+    <p><strong>面积图与代数：</strong>在笛卡儿发明坐标系之前，数学家们用几何图形来证明代数公式。花拉子米解二次方程用的是"拼图法"——把 x² + bx 拼成一个正方形。这种"几何代数"在阿拉伯数学中非常发达，后来的配方法就源于此。</p>
+    <p><strong>推荐阅读：</strong>《代数的历史》—— 花拉子米的几何解法；《古今数学思想》—— 阿拉伯数学中的代数几何结合。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 合并同类项：4x² - 3x + 7 - 2x² + 5x - 3 <span class="diff-tag diff-easy">简单</span></p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">x² 项：4-2=2；x 项：-3+5=2；常数项：7-3=4。</div>
+    <div class="ans-box" id="a1">2x² + 2x + 4</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 展开 (x + 4)(x - 3) <span class="diff-tag diff-easy">简单</span></p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">FOIL：x·x + x·(-3) + 4·x + 4·(-3)。</div>
+    <div class="ans-box" id="a2">x² + x - 12</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 用平方差公式计算：103 × 97 <span class="diff-tag diff-medium">中等</span></p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">103 = 100+3，97 = 100-3。用 (a+b)(a-b) = a²-b²。</div>
+    <div class="ans-box" id="a3">(100+3)(100-3) = 100² - 3² = 10000 - 9 = 9991</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 已知 (x + y)² = 49, xy = 6。求 x² + y² 的值。<span class="diff-tag diff-hard">较难</span></p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">展开 (x+y)² = x² + 2xy + y²。所以 x² + y² = (x+y)² - 2xy。</div>
+    <div class="ans-box" id="a4">x² + y² = 49 - 2×6 = 49 - 12 = 37</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>同类项</strong> = 字母部分一样的项，合并时只用管系数</li>
+      <li><strong>分配律</strong> a(b+c) = ab+ac 是整式运算的基石</li>
+      <li><strong>FOIL</strong>：(a+b)(c+d) = ac + ad + bc + bd</li>
+      <li><strong>完全平方</strong>：(a+b)² = a²+2ab+b² —— 用面积图证明，不靠死记</li>
+      <li><strong>平方差</strong>：(a+b)(a-b) = a²-b² —— 中间项抵消，可用于快速心算</li>
+      <li>这些公式是后面解二次方程的"钥匙"</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="factoring-rational.html">下一课：因式分解与分式 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+
+// 完全平方公式面积图
+function updateSquare() {
+  var a = parseInt(document.getElementById('sliderA').value);
+  var b = parseInt(document.getElementById('sliderB').value);
+  var scale = 50;
+  var aw = a * scale, bh = b * scale;
+  var total = aw + bh;
+  var a2 = a * a, ab = a * b, b2 = b * b;
+  // 更新显示
+  document.getElementById('valA').textContent = a;
+  document.getElementById('valB').textContent = b;
+  // 更新矩形
+  document.getElementById('outerRect').setAttribute('width', total);
+  document.getElementById('outerRect').setAttribute('height', total);
+  document.getElementById('rA2').setAttribute('width', aw);
+  document.getElementById('rA2').setAttribute('height', aw);
+  document.getElementById('tA2').setAttribute('x', aw/2);
+  document.getElementById('tA2').setAttribute('y', aw/2);
+  document.getElementById('tA2').textContent = 'a² = ' + a2;
+  document.getElementById('rAB1').setAttribute('x', aw);
+  document.getElementById('rAB1').setAttribute('width', bh);
+  document.getElementById('rAB1').setAttribute('height', aw);
+  document.getElementById('tAB1').setAttribute('x', aw + bh/2);
+  document.getElementById('tAB1').setAttribute('y', aw/2);
+  document.getElementById('tAB1').textContent = 'ab = ' + ab;
+  document.getElementById('rAB2').setAttribute('y', aw);
+  document.getElementById('rAB2').setAttribute('width', aw);
+  document.getElementById('rAB2').setAttribute('height', bh);
+  document.getElementById('tAB2').setAttribute('x', aw/2);
+  document.getElementById('tAB2').setAttribute('y', aw + bh/2);
+  document.getElementById('tAB2').textContent = 'ab = ' + ab;
+  document.getElementById('rB2').setAttribute('x', aw);
+  document.getElementById('rB2').setAttribute('y', aw);
+  document.getElementById('rB2').setAttribute('width', bh);
+  document.getElementById('rB2').setAttribute('height', bh);
+  document.getElementById('tB2').setAttribute('x', aw + bh/2);
+  document.getElementById('tB2').setAttribute('y', aw + bh/2);
+  document.getElementById('tB2').textContent = 'b² = ' + b2;
+  // 标签
+  document.getElementById('labelA').setAttribute('x', aw/2);
+  document.getElementById('labelA').setAttribute('y', total + 18);
+  document.getElementById('labelA').textContent = 'a = ' + a;
+  document.getElementById('labelB').setAttribute('x', total + 18);
+  document.getElementById('labelB').setAttribute('y', aw + bh/2);
+  document.getElementById('labelB').textContent = 'b = ' + b;
+  // 公式
+  var result = (a + b) * (a + b);
+  document.getElementById('formulaDisplay').setAttribute('x', total/2);
+  document.getElementById('formulaDisplay').textContent = '(' + a + '+' + b + ')² = ' + a2 + ' + ' + ab + ' + ' + ab + ' + ' + b2 + ' = ' + result;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>分数 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍕</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #e65100; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed #e65100; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .diff-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; color: #fff; margin-left: 8px; }
+  .diff-easy { background: #66bb6a; }
+  .diff-medium { background: #ff9800; }
+  .diff-hard { background: #f44336; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+
+  @media (max-width: 720px) {
+    article { padding: 20px 12px !important; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：课件 1（自然数、零与十进制）</p>
+  <h1>分数</h1>
+
+  <h2>起源：分披萨的问题</h2>
+  <div class="origin">
+    <p><strong>想象一下：</strong>你和三个朋友一起分一块披萨。每人分多少？整数不够用了——1 块披萨分给 4 个人，每人得到的是"四分之一块"，写成 1/4。</p>
+    <p>这就是分数的诞生——<strong>当整数不够用的时候，人们发明了分数。</strong></p>
+    <p>早在 4000 年前，古埃及人已经在用分数了。他们的《阿姆士纸草书》中大量使用"单位分数"（分子为 1 的分数，如 1/2、1/3、1/4），他们甚至会把 2/5 写成 1/3 + 1/15。古埃及人之所以这样写，是因为他们把所有分数都理解为"分东西"——把东西分成若干份，取其中一份。</p>
+    <p>古巴比伦人则用 60 进制分数（因为 60 能被 2、3、4、5、6 整除，分起来很方便）。我们今天把一小时分成 60 分钟、一分钟分成 60 秒，就是受古巴比伦的影响。</p>
+    <p>中国在《九章算术》（公元 1 世纪）中已经系统地使用分数运算，包括约分、通分、加减乘除，水平远超同时代的西方。</p>
+  </div>
+
+  <h2>一、什么是分数？</h2>
+  <div class="story">
+    <p>分数 = 把"整体 1"分成若干等份，取其中几份。</p>
+    <div class="formula">
+      <p style="text-align:center;font-size:20px;"><strong>分数 = 分子 / 分母</strong></p>
+      <p style="text-align:center;">分母 = 分成了几份，分子 = 取了几份</p>
+    </div>
+    <p>例如：3/4 表示把一块饼分成 4 等份，取了 3 份。</p>
+    <p><strong>三种类型：</strong></p>
+    <ul>
+      <li><strong>真分数：</strong>分子 < 分母，如 1/2、3/4——小于 1</li>
+      <li><strong>假分数：</strong>分子 ≥ 分母，如 5/3、7/4——大于或等于 1</li>
+      <li><strong>带分数：</strong>整数 + 真分数，如 1½（即 3/2）</li>
+    </ul>
+  </div>
+
+  <h2>二、等值分数：为什么 1/2 = 2/4 = 3/6？</h2>
+  <div class="story">
+    <p>把一块饼切成 2 份，取 1 份 = 1/2</p>
+    <p>把同一块饼切成 4 份，取 2 份 = 2/4</p>
+    <p>把同一块饼切成 6 份，取 3 份 = 3/6</p>
+    <p><strong>你取的饼的量是一样的！</strong>只是切法和数法不同。这就是<strong>等值分数</strong>。</p>
+
+    <div class="graphic">
+      <div style="text-align:center;margin-bottom:8px;font-size:14px;color:#888;">点击按钮切换分数，看饼的大小是否一样 ↓</div>
+      <div style="text-align:center;margin:8px 0;">
+        <button onclick="showFraction(2,1)" class="btn-sm" style="font-size:14px;padding:6px 16px;margin:4px;" id="btn2_1">1/2</button>
+        <button onclick="showFraction(4,2)" class="btn-sm" style="font-size:14px;padding:6px 16px;margin:4px;" id="btn4_2">2/4</button>
+        <button onclick="showFraction(6,3)" class="btn-sm" style="font-size:14px;padding:6px 16px;margin:4px;" id="btn6_3">3/6</button>
+        <button onclick="showFraction(8,4)" class="btn-sm" style="font-size:14px;padding:6px 16px;margin:4px;" id="btn8_4">4/8</button>
+      </div>
+      <svg viewBox="0 0 300 220" style="max-width:300px;height:auto;display:block;margin:0 auto;">
+        <defs>
+          <style>
+            .slice { transition: all 0.4s ease; }
+            .slice-filled { fill: #ff9800; stroke: #fff; stroke-width: 2; }
+            .slice-empty { fill: #f5f5f5; stroke: #fff; stroke-width: 2; }
+            @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+          </style>
+        </defs>
+        <g id="pieChart" transform="translate(150,95)">
+          <circle cx="0" cy="0" r="65" fill="#f5f5f5" stroke="#ddd" stroke-width="2"/>
+          <g id="pieSlices"></g>
+          <text x="0" y="95" text-anchor="middle" font-size="16" fill="#333" font-weight="bold" id="fracLabel">1/2</text>
+        </g>
+      </svg>
+    </div>
+    <div class="key">
+      <p><strong>分数的基本性质：</strong>分子和分母同时乘（或除以）同一个非零的数，分数的大小不变。</p>
+      <p style="text-align:center;">a/b = (a×k)/(b×k)，其中 k ≠ 0</p>
+    </div>
+    <p>这个性质是一切分数运算的基础。</p>
+  </div>
+
+  <h2>三、约分与通分</h2>
+  <div class="formula">
+    <p><strong>约分：</strong>分子分母同时除以它们的公因数，让分数变"简洁"。</p>
+    <p>例：12/18 = (12÷6)/(18÷6) = 2/3</p>
+    <p><strong>最简分数：</strong>分子分母互质（不能再约分），如 2/3。</p>
+    <p><strong>通分：</strong>把两个分母不同的分数，变成分母相同的分数（方便比较和加减）。</p>
+    <p>例：比较 1/3 和 1/4？通分成 4/12 和 3/12，显然 4/12 > 3/12。</p>
+    <p><strong>通分的关键：</strong>找到两个分母的<strong>最小公倍数</strong>。比如 3 和 4 的最小公倍数是 12。</p>
+  </div>
+
+  <div class="example">
+    <strong>通分步骤：</strong><br>
+    1/3 + 1/4<br>
+    = 4/12 + 3/12（通分：3 和 4 的最小公倍数是 12）<br>
+    = 7/12（分母不变，分子相加）<br>
+    = 7/12（已是最简，无需约分）
+  </div>
+
+  <h2>四、分数四则运算</h2>
+  <div class="formula">
+    <p><strong>加减法：</strong>先通分，再加减分子，分母不变。</p>
+    <p style="text-align:center;">a/c + b/c = (a+b)/c</p>
+    <p><strong>乘法：</strong>分子乘分子，分母乘分母。</p>
+    <p style="text-align:center;">a/b × c/d = (a×c)/(b×d)</p>
+    <p><strong>为什么？</strong>1/2 × 1/3 表示"一半的三分之一"，把一块饼先横切两半，再竖切三等份，一共 6 小块，每块是 1/6。</p>
+    <p><strong>除法：</strong>除以一个分数 = 乘以它的倒数。</p>
+    <p style="text-align:center;">a/b ÷ c/d = a/b × d/c</p>
+    <p><strong>为什么？</strong>6 ÷ 2 表示"6 里面有几个 2"，答案是 3。同样，1/2 ÷ 1/4 表示"半个饼里面有几个 1/4 个饼"——答案是 2。因为 1/2 = 2/4，所以 2/4 ÷ 1/4 = 2。也就是说：1/2 ÷ 1/4 = 1/2 × 4/1 = 2。</p>
+  </div>
+
+  <h2>五、倒数</h2>
+  <div class="key">
+    <p><strong>倒数：</strong>两个数相乘等于 1，它们就互为倒数。</p>
+    <p style="text-align:center;">a/b 的倒数是 b/a（因为 a/b × b/a = 1）</p>
+    <p>古巴比伦人称互为倒数的两个数为<strong> igum 和 igibum</strong>。他们制作了详细的倒数表，因为用倒数可以把除法变成乘法——除以一个数，等于乘以它的倒数。这个巧妙的思路，今天的计算机仍然在用！</p>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>古埃及人用"单位分数"表示所有分数，比如 2/5 = 1/3 + 1/15。你能把 3/7 拆成两个不同的单位分数之和吗？</p>
+    <p><strong>问题 2：</strong>为什么 0 不能做分母？试着用"分饼"来解释：0 份是什么意思？</p>
+    <p><strong>问题 3：</strong>分数 a/b 和 b/a 互为倒数。如果 a/b = b/a，这个分数是多少？</p>
+  </div>
+
+  <h2>拓展阅读</h2>
+  <div class="extend">
+    <p><strong>古巴比伦的 60 进制分数：</strong>古巴比伦人用 60 作为分母的基数，因为 60 能被 2、3、4、5、6、10、12、15、20、30 整除，分东西特别方便。我们今天的时间（1 小时 = 60 分钟）、角度（1 度 = 60 分）都继承了古巴比伦的做法。</p>
+    <p><strong>推荐阅读：</strong>《中小学数学要义》—— 分数章节用最朴素的方式解释通分和约分；《古今数学思想》—— 了解古埃及和古巴比伦分数系统的演变。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 把 18/24 约分成最简分数。<span class="diff-tag diff-easy">简单</span></p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">分子分母同时除以它们的最大公因数 6。</div>
+    <div class="ans-box" id="a1">18/24 = 3/4</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 计算：2/3 + 1/4 = ？<span class="diff-tag diff-easy">简单</span></p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">通分：3 和 4 的最小公倍数是 12。2/3 = 8/12，1/4 = 3/12。</div>
+    <div class="ans-box" id="a2">8/12 + 3/12 = 11/12</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 计算：3/5 ÷ 2/3 = ？<span class="diff-tag diff-medium">中等</span></p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">除以一个分数 = 乘以它的倒数。2/3 的倒数是 3/2。</div>
+    <div class="ans-box" id="a3">3/5 × 3/2 = 9/10</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 一个分数的分子比分母小 5；如果分子分母同时加 3，分数变成 2/3。求原来的分数。<span class="diff-tag diff-hard">较难</span></p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">设分子为 x，分母为 x+5。加 3 后：(x+3)/(x+8) = 2/3。交叉相乘。</div>
+    <div class="ans-box" id="a4">3(x+3) = 2(x+8) → 3x+9 = 2x+16 → x = 7。原分数为 7/12。</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li>分数 = 把"整体 1"分成若干等份——当整数除不尽时，分数来帮忙</li>
+      <li><strong>基本性质</strong>：分子分母同乘同除非零数，分数大小不变</li>
+      <li><strong>约分</strong> = 化简分数；<strong>通分</strong> = 统一分母（方便加减和比较）</li>
+      <li>加减：先通分；乘：分子乘分子，分母乘分母；除：乘倒数</li>
+      <li><strong>倒数</strong>：两个数相乘得 1，古巴比伦人叫 igum/igibum</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="negative-numbers.html">下一课：负数 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+
+// 等值分数饼图
+function showFraction(total, filled) {
+  var t = document.getElementById('pieSlices');
+  var lbl = document.getElementById('fracLabel');
+  var angle = 360 / total;
+  var html = '';
+  var colors = ['#ff9800','#ffb74d','#ffcc80','#ffe0b2','#ff9800','#ffb74d','#ffcc80','#ffe0b2'];
+  for (var i = 0; i < total; i++) {
+    var a1 = i * angle - 90;
+    var a2 = (i + 1) * angle - 90;
+    var r1 = a1 * Math.PI / 180, r2 = a2 * Math.PI / 180;
+    var x1 = 65 * Math.cos(r1), y1 = 65 * Math.sin(r1);
+    var x2 = 65 * Math.cos(r2), y2 = 65 * Math.sin(r2);
+    var large = (angle > 180) ? 1 : 0;
+    var fill = i < filled ? colors[i] : '#f0f0f0';
+    html += '<path d="M0,0 L' + x1.toFixed(1) + ',' + y1.toFixed(1) + ' A65,65 0 ' + large + ',1 ' + x2.toFixed(1) + ',' + y2.toFixed(1) + ' Z" fill="' + fill + '" stroke="#fff" stroke-width="1.5" style="transition:fill 0.3s"/>';
+  }
+  t.innerHTML = html;
+  lbl.textContent = filled + '/' + total;
+  ['btn2_1','btn4_2','btn6_3','btn8_4'].forEach(function(id){ document.getElementById(id).style.fontWeight='normal'; });
+  document.getElementById('btn' + total + '_' + filled).style.fontWeight = 'bold';
+}
+// 初始化
+showFraction(2, 1);
+</script>
+</body>
+</html>

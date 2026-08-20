@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>几何图形 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔺</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #00897b; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed #00897b; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .diff-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; color: #fff; margin-left: 8px; }
+  .diff-easy { background: #66bb6a; }
+  .diff-medium { background: #ff9800; }
+  .diff-hard { background: #f44336; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  @media (max-width: 720px) {
+    article { padding: 20px 12px !important; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：课件 1（自然数——数数和测量是一切几何的起点）</p>
+  <h1>几何图形</h1>
+
+  <h2>起源：尼罗河边的几何学</h2>
+  <div class="origin">
+    <p><strong>几何学</strong>这个词来自希腊语"γεωμετρία"（geometria），其中"geo"是"土地"，"metria"是"测量"——<strong>几何就是"测量土地"的学问。</strong></p>
+    <p>为什么是测量土地？古埃及有一条神奇的河——<strong>尼罗河</strong>。每年夏天，尼罗河都会泛滥，淹没两岸的农田。洪水退去后，田地的边界被冲得面目全非。法老的官员们必须重新丈量土地，按面积收税。</p>
+    <p>《古今数学思想》中写道："古埃及人发展出了一套测量技术，他们用绳子和木桩在地面上画直线、直角和圆。这些实践活动，就是几何学的萌芽。"</p>
+    <p>但埃及人的几何学还停留在"怎么做"的层面——知道怎么量，却不问"为什么"。真正把几何变成一门科学的是<strong>古希腊人</strong>。公元前 300 年左右，<strong>欧几里得</strong>写了《几何原本》——从少数几条"公理"（不证自明的基本事实）出发，用逻辑推理导出了几百条定理。这本书影响了人类文明两千年，直到 20 世纪，全世界的中学生还在学欧几里得几何。</p>
+    <p>《一个数学家的叹息》中 Lockhart 说："欧几里得的《几何原本》不是一本教科书，而是一首逻辑的诗。它告诉我们：从最简单的起点出发，用推理可以到达多远。"</p>
+  </div>
+
+  <h2>一、什么是几何图形？</h2>
+  <div class="story">
+    <p><strong>几何图形</strong>就是我们在生活中看到的各种形状的数学抽象——圆形的太阳、方形的桌子、三角形的屋顶。</p>
+    <p>几何图形由基本的"积木"构成：</p>
+    <ul>
+      <li><strong>点：</strong>没有大小，只表示位置。用一个大写字母表示，如"点 A"。</li>
+      <li><strong>线：</strong>点移动的轨迹。线有长度，没有宽度。</li>
+      <li><strong>面：</strong>线移动形成的区域。面有面积，没有厚度。</li>
+      <li><strong>体：</strong>面移动形成的空间。体有体积。</li>
+    </ul>
+    <div class="key">
+      <p><strong>核心思想：</strong>几何学中的所有图形，都可以用"点动成线、线动成面、面动成体"来解释。数学中的点、线、面是理想化的概念——现实中不存在"没有大小的点"，但正是这种理想化让我们能精确推理。</p>
+    </div>
+  </div>
+
+  <h2>二、平面图形 vs 立体图形</h2>
+  <div class="formula">
+    <p><strong>平面图形：</strong>所有点都在同一个平面上的图形。</p>
+    <p>例如：三角形、四边形、圆、五边形……</p>
+    <p><strong>立体图形：</strong>点不都在同一平面上的图形，有"体积"。</p>
+    <p>例如：立方体、球、圆柱、圆锥、棱锥……</p>
+    <div class="example">
+      <strong>从平面到立体：</strong><br>
+      三角形（平面）→ 三棱锥（立体）<br>
+      矩形（平面）→ 长方体（立体）<br>
+      圆（平面）→ 球（立体）
+    </div>
+  </div>
+
+  <h2>图说数学史：几何的起源</h2>
+  <div class="quote">
+    <p><strong>古埃及（约公元前 3000 年）：</strong>尼罗河丈量 → 发明了直角、测量面积的方法。古埃及人用一根绳子打 12 个等距的结（3-4-5 三角形），就能拉出一个直角——这就是"勾三股四弦五"的原始版本。</p>
+    <p><strong>古巴比伦（约公元前 1800 年）：</strong>泥板上记录了圆面积、梯形面积的计算方法，他们还知道勾股定理（比毕达哥拉斯早 1000 年）。</p>
+    <p><strong>古希腊（约公元前 600 年）：</strong>泰勒斯把几何从埃及带回希腊，开始问"为什么"。毕达哥拉斯证明了勾股定理。欧几里得集大成，写出《几何原本》。</p>
+    <p><strong>关键转折：</strong>古希腊人把几何从"实用的技术"变成了"逻辑的科学"。他们不再满足于"这样做是对的"，而要追问"为什么这样做是对的"。这就是数学精神的诞生。</p>
+  </div>
+
+  <h2>三、认识常见的几何图形</h2>
+  <div class="story">
+    <p><strong>平面图形：</strong></p>
+    <div class="graphic">
+      <svg viewBox="0 0 500 180" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+        <defs><style>text{font-size:12px;fill:#555;text-anchor:middle}</style></defs>
+        <!-- 三角形 -->
+        <polygon points="50,140 110,20 170,140" fill="rgba(233,30,99,0.15)" stroke="#e91e63" stroke-width="2"/>
+        <text x="110" y="160">三角形</text>
+        <!-- 正方形 -->
+        <rect x="200" y="40" width="100" height="100" fill="rgba(33,150,243,0.15)" stroke="#2196f3" stroke-width="2"/>
+        <text x="250" y="160">正方形</text>
+        <!-- 圆 -->
+        <circle cx="380" cy="90" r="50" fill="rgba(76,175,80,0.15)" stroke="#4caf50" stroke-width="2"/>
+        <text x="380" y="160">圆</text>
+      </svg>
+    </div>
+    <p><strong>立体图形：</strong></p>
+    <div class="graphic">
+      <svg viewBox="0 0 500 160" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+        <defs><style>text{font-size:12px;fill:#555;text-anchor:middle}</style></defs>
+        <!-- 立方体 -->
+        <polygon points="50,40 150,20 250,40 250,120 150,140 50,120" fill="rgba(156,39,176,0.12)" stroke="#9c27b0" stroke-width="2"/>
+        <polygon points="50,40 50,120 150,140 150,60" fill="rgba(156,39,176,0.08)" stroke="#9c27b0" stroke-width="2"/>
+        <polygon points="50,40 150,60 250,40 150,20" fill="rgba(156,39,176,0.15)" stroke="#9c27b0" stroke-width="2"/>
+        <text x="150" y="160">立方体</text>
+        <!-- 球 -->
+        <circle cx="350" cy="80" r="45" fill="rgba(255,152,0,0.15)" stroke="#ff9800" stroke-width="2"/>
+        <ellipse cx="350" cy="80" rx="15" ry="45" fill="none" stroke="#ff9800" stroke-width="1" stroke-dasharray="4 3"/>
+        <text x="350" y="145">球</text>
+      </svg>
+    </div>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>古埃及人用 3-4-5 绳子拉直角。为什么 3-4-5 能构成直角三角形？你能验证一下吗？</p>
+    <p><strong>问题 2：</strong>举出 3 个生活中"点动成线、线动成面、面动成体"的例子。</p>
+    <p><strong>问题 3：</strong>平面图形是"平"的，立体图形是"立"的。一张纸上的圆是平面图形，一个足球是立体图形。你能说出一张纸本身是平面图形还是立体图形吗？为什么？</p>
+  </div>
+
+  <h2>拓展阅读</h2>
+  <div class="extend">
+    <p><strong>欧几里得与《几何原本》：</strong>《几何原本》共 13 卷，从 5 条公理出发，推导出 465 个命题。它的逻辑结构影响了整个西方科学——牛顿的《自然哲学的数学原理》、斯宾诺莎的《伦理学》都模仿了《几何原本》的写法。</p>
+    <p><strong>推荐阅读：</strong>《古今数学思想》—— 了解几何学的起源和演变；《一个数学家的叹息》—— Lockhart 用诗意的语言描述几何之美。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 下列图形中，哪些是平面图形，哪些是立体图形？三角形、球、长方形、圆柱、圆、正方体。<span class="diff-tag diff-easy">简单</span></p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">所有点在同一平面 = 平面图形；有体积 = 立体图形。</div>
+    <div class="ans-box" id="a1">平面：三角形、长方形、圆。立体：球、圆柱、正方体。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> "几何"这个词的原意是什么？它在哪个古代文明中诞生？<span class="diff-tag diff-easy">简单</span></p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">geo = 土地，metria = 测量。</div>
+    <div class="ans-box" id="a2">原意是"测量土地"，诞生于古埃及（尼罗河泛滥后需要重新丈量土地）。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 一个正方体有几个面？几条棱？几个顶点？<span class="diff-tag diff-medium">中等</span></p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">想象一个骰子，或者用"面动成体"来推导。</div>
+    <div class="ans-box" id="a3">6 个面，12 条棱，8 个顶点。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 古埃及人用 3-4-5 绳子拉直角。请计算：3² + 4² = ？它的结果暗示了什么？<span class="diff-tag diff-hard">较难</span></p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">3² = 9，4² = 16，加起来等于 25。5² = 25。</div>
+    <div class="ans-box" id="a4">3² + 4² = 9 + 16 = 25 = 5²。这说明如果一个三角形的三边满足"两边的平方和等于第三边的平方"，它一定是直角三角形。这就是勾股定理！</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>几何</strong> = 测量土地，起源于古埃及尼罗河丈量</li>
+      <li><strong>欧几里得</strong>把几何从"技术"变成"科学"——从公理出发，用逻辑推导一切</li>
+      <li>几何图形由点、线、面、体构成：<strong>点动成线、线动成面、面动成体</strong></li>
+      <li><strong>平面图形</strong>（三角形、圆、正方形）vs <strong>立体图形</strong>（立方体、球、圆柱）</li>
+      <li>古希腊人追问"为什么"的精神，开启了真正的数学</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="lines-rays-segments.html">下一课：直线、射线、线段 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+</body>
+</html>

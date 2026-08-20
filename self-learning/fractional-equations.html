@@ -4,15 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>分式方程 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
 <link rel="stylesheet" href="../lessons/style.css">
 <style>
   :root { --accent: #e65100; }
   .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid #5c6bc0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
   .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .danger { background: #ffebee; border-left: 4px solid #f44336; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed #e65100; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .diff-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; color: #fff; margin-left: 8px; }
+  .diff-easy { background: #66bb6a; }
+  .diff-medium { background: #ff9800; }
+  .diff-hard { background: #f44336; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
 
   @media (max-width: 720px) {
     article { padding: 20px 12px !important; }
@@ -20,39 +33,36 @@
     h2 { font-size: 18px; }
     h3 { font-size: 16px; }
     p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .danger { padding: 12px 14px; margin: 12px 0; }
+    .origin, .story, .formula, .key, .example, .danger, .quote { padding: 12px 14px; margin: 12px 0; }
   }
 </style>
 </head>
 <body>
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:8px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：课件 2（分数·倒数）、课件 6（因式分解与分式）、课件 7（一元一次方程）</p>
   <h1>分式方程</h1>
 
   <h2>起源：未知数怎么跑到分母里了？</h2>
   <div class="origin">
-    <p>普通方程里，未知数 x 在分子上：2x + 3 = 7。但如果 x 跑到分母里了呢？比如：「一个人完成一项工作需要 x 天，他每天完成 1/x。如果他先做 2 天，再和另一个人合作 3 天完成，求 x。」</p>
-    <p>这种问题自然就产生了分母中含未知数的方程。古人在解决工程问题、行程问题时，经常遇到这种情况。</p>
-    <p><strong>分式方程要解决的核心问题：</strong>未知数出现在分母里，不能直接按一元一次方程解。但思路是一样的——想办法把分母去掉，变回我们熟悉的整式方程。</p>
-    <p>不过，分式方程有一个<strong>陷阱</strong>：去分母时，我们假设分母不为 0。如果解出的 x 恰好让某个分母为 0，那这个解就是假的（叫"增根"），必须舍去。这个坑，古人也是踩过很多次才发现的。</p>
+    <p><strong>早在 4000 年前的古巴比伦，</strong>人们就已经在泥板上处理"倒数"问题了。他们用苏美尔语单词"igum"和"igibum"表示互为倒数的两个数。比如：「已知一个数 igum 和它的倒数 igibum，它们的和是某个值，求这两个数。」</p>
+    <p>这种问题自然就产生了分母中含未知数的方程。当古人解决工程问题（"一个人单独完成一项工作需要 x 天"）或行程问题（"甲从 A 到 B 需要 x 小时，乙需要 y 小时"）时，未知数经常会出现在分母里。</p>
+    <p><strong>分式方程要解决的核心问题：</strong>未知数在分母里，不能直接按一元一次方程解。但思路是一样的——想办法把分母去掉，变回整式方程。</p>
+    <p>不过，分式方程有一个<strong>特殊的陷阱</strong>：去分母时，我们假设分母不为 0。如果解出的 x 恰好让某个分母为 0，那么我们就相当于在等式两边乘了 0——这会把假解"制造"出来。这个坑，数学家们也是踩了无数次才总结出来的。</p>
   </div>
 
   <h2>一、什么是分式方程？</h2>
   <div class="story">
-    <p><strong>分式方程</strong>：分母中含有未知数的方程。</p>
+    <p><strong>分式方程：</strong>分母中含有未知数的方程。</p>
     <p>比如：1/(x-2) = 3，x/(x+1) = 2，2/(x+1) + 3/(x-1) = 5/(x²-1)。</p>
-    <p>注意分母不能为 0！比如 1/(x-2) = 3 中，x 不能等于 2。</p>
+    <p><strong>注意：</strong>分母不能为 0！比如 1/(x-2) = 3 中，x 不能等于 2。</p>
   </div>
 
   <h2>二、核心思路：去分母</h2>
   <div class="key">
     <p>分式方程 → 两边同时乘以最简公分母 → 变成整式方程 → 按一元一次方程解。</p>
-    <p>就像把分数方程"翻译"成整数方程，然后再解。</p>
+    <p>就像把分数方程"翻译"成整数方程，然后再解。这个思路的基础是等式的基本性质：<strong>等式两边同时乘以同一个非零的数，等式仍然成立。</strong></p>
   </div>
-
-  <h2>三、逻辑推导：为什么能去分母？</h2>
-  <p>等式的性质：等式两边同时乘以同一个<strong>非零</strong>的数，等式仍然成立。</p>
-  <p>所以我们可以两边同时乘以所有分母的最小公倍数（最简公分母），把所有分母同时消掉。前提是我们要确保乘的表达式不为 0。</p>
 
   <div class="example">
     <strong>例子：</strong>解 1/(x-2) = 3<br><br>
@@ -63,9 +73,9 @@
     <strong>检验：</strong>1/(7/3-2) = 1/(1/3) = 3 ✓
   </div>
 
-  <h2>四、致命的陷阱：增根</h2>
+  <h2>三、致命的陷阱：增根</h2>
   <div class="danger">
-    <p><strong>什么是增根？</strong>解方程时，我们两边乘了一个含有未知数的式子。如果解出的 x 恰好让这个式子等于 0，那么我们就相当于在等式两边乘了 0——这会把假解也"制造"出来。</p>
+    <p><strong>什么是增根？</strong>解方程时，我们两边乘了一个含有未知数的式子。如果解出的 x 恰好让这个式子等于 0，那么我们就相当于在等式两边乘了 0——0 乘以任何数都等于 0，这样会把原本不成立的等式也变成"成立"的样子，产生假解。</p>
     <p><strong>所以分式方程解完后必须检验！</strong>把解代入原方程，确保每个分母都不为 0。让分母为 0 的解就是增根，必须舍去。</p>
   </div>
 
@@ -76,7 +86,7 @@
     <strong>结论：</strong>x=1 是增根，这个方程无解。
   </div>
 
-  <h2>五、完整解题步骤</h2>
+  <h2>四、完整解题步骤</h2>
   <div class="formula">
     <p><strong>第 1 步：</strong>找最简公分母（所有分母的最小公倍数）</p>
     <p><strong>第 2 步：</strong>两边同时乘最简公分母，去掉所有分母</p>
@@ -92,6 +102,54 @@
     <strong>检验：</strong>x=4/5 时，x+1 ≠ 0，x-1 ≠ 0，分母都不为 0 ✓
   </div>
 
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>古巴比伦人的"igum/igibum"问题：一个数加上它的倒数等于 5/2。这个数是多少？（提示：设这个数为 x，列方程 x + 1/x = 5/2。）</p>
+    <p><strong>问题 2：</strong>为什么解分式方程要检验？如果忘记检验，可能会有多严重的后果？请举一个例子说明。</p>
+    <p><strong>问题 3：</strong>方程 1/(x-1) + 1/(x-2) = 0 有解吗？如果有，解是多少？如果没有，为什么？</p>
+  </div>
+
+  <h2>拓展阅读</h2>
+  <div class="extend">
+    <p><strong>古巴比伦的倒数表：</strong>古巴比伦人制作了详细的倒数表，因为他们用倒数来做除法——除以一个数等于乘以它的倒数。这种"用乘法代替除法"的思路，在今天的计算机中仍然被广泛使用。</p>
+    <p><strong>增根的历史：</strong>数学家们很早就注意到了"增根"现象。欧拉在他的《代数引论》中专门讨论了这种"伪解"，提醒后人解完方程后一定要代入原方程验证。</p>
+    <p><strong>推荐阅读：</strong>《古今数学思想》—— 了解古巴比伦数学的惊人成就；《改变世界的方程》—— 探索方程如何塑造科学。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 解方程：1/(x-3) = 2 <span class="diff-tag diff-easy">简单</span></p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">两边乘 (x-3)：1 = 2(x-3)，解出 x 后检验分母不为 0。</div>
+    <div class="ans-box" id="a1">x = 7/2，检验：x-3 = 1/2 ≠ 0 ✓</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 解方程：x/(x+1) = 2/3 <span class="diff-tag diff-easy">简单</span></p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">交叉相乘：3x = 2(x+1)，然后解方程并检验。</div>
+    <div class="ans-box" id="a2">x = 2，检验：x+1 = 3 ≠ 0 ✓</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 解方程：2/(x-1) = 3/(x+1) <span class="diff-tag diff-medium">中等</span></p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">交叉相乘：2(x+1) = 3(x-1)，解出 x 后检验两个分母。</div>
+    <div class="ans-box" id="a3">x = 5，检验：x-1=4≠0, x+1=6≠0 ✓</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 解方程：x/(x-2) - 1 = 2/(x-2) <span class="diff-tag diff-hard">较难</span></p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">把 1 也写成 (x-2)/(x-2)：x/(x-2) - (x-2)/(x-2) = 2/(x-2)。合并后去分母，注意检验！</div>
+    <div class="ans-box" id="a4">去分母得 x - (x-2) = 2 → 2 = 2，恒成立，但 x ≠ 2。所以 x 为 ≠ 2 的任意实数。</div>
+  </div>
+
   <h2>小结</h2>
   <div class="key">
     <ul>
@@ -104,5 +162,9 @@
 
   <p style="text-align:right;margin-top:32px;"><a href="quadratic-equations.html">下一课：一元二次方程 →</a></p>
 </article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
 </body>
 </html>
