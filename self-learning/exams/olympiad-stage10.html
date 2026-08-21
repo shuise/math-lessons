@@ -49,7 +49,7 @@
   <!-- Problem 1 -->
   <div class="problem">
     <p><strong>1.</strong> 已知圆的半径为 5 cm，圆心到一条直线的距离为 3 cm。判断直线与圆的位置关系。如果相交，求弦长。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-1" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(1, \'π\')">提交</button><span class="feedback" id="fb-1"></span></div><button class="btn-sm" onclick="toggleHint(\'h1\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-1" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(1, 'π')">提交</button><span class="feedback" id="fb-1"></span></div><button class="btn-sm" onclick="toggleHint('h1')">💡 思路提示</button>
     <div class="hint-box" id="h1"><p>比较圆心到直线的距离 d 与半径 r 的大小：d < r 相交，d = r 相切，d > r 相离。弦长公式：2√(r² - d²)。</p></div>
     <button class="btn-sm" onclick="toggleAns('a1')">✅ 查看答案</button>
     <div class="ans-box" id="a1"><p>d = 3 cm，r = 5 cm，d < r，<strong>直线与圆相交</strong>。<br>弦长 = 2√(r² - d²) = 2√(25 - 9) = 2√16 = <strong>8 cm</strong>。</p></div>
@@ -58,7 +58,7 @@
   <!-- Problem 2 -->
   <div class="problem">
     <p><strong>2.</strong> 在 △ABC 中，∠C = 90°，sin A = 3/5，AB = 10。求 BC 和 AC 的长度。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-2" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(2, \'2πr\')">提交</button><span class="feedback" id="fb-2"></span></div><button class="btn-sm" onclick="toggleHint(\'h2\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-2" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(2, '2πr')">提交</button><span class="feedback" id="fb-2"></span></div><button class="btn-sm" onclick="toggleHint('h2')">💡 思路提示</button>
     <div class="hint-box" id="h2"><p>sin A = 对边/斜边 = BC/AB。由 sin A = 3/5 和 AB = 10 求出 BC，再用勾股定理求 AC（或用 cos A）。</p></div>
     <button class="btn-sm" onclick="toggleAns('a2')">✅ 查看答案</button>
     <div class="ans-box" id="a2"><p>sin A = BC/AB = 3/5，AB = 10<br>∴ BC = 10 × (3/5) = <strong>6</strong><br>AC = √(AB² - BC²) = √(100 - 36) = √64 = <strong>8</strong><br>（或 AC = AB·cos A = 10 × (4/5) = 8）</p></div>
@@ -67,7 +67,7 @@
   <!-- Problem 3 -->
   <div class="problem">
     <p><strong>3.</strong> 已知两个相似三角形的相似比为 2:3，小三角形的面积为 16 cm²。求大三角形的面积。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, \'πr²\')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint(\'h3\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, 'πr²')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint('h3')">💡 思路提示</button>
     <div class="hint-box" id="h3"><p>相似三角形的面积比等于相似比的平方。相似比 2:3，面积比 = (2/3)² = 4/9。</p></div>
     <button class="btn-sm" onclick="toggleAns('a3')">✅ 查看答案</button>
     <div class="ans-box" id="a3"><p>面积比 = (2/3)² = 4/9<br>设大三角形面积为 S，则 16/S = 4/9<br>∴ S = 16 × (9/4) = <strong>36 cm²</strong></p></div>
@@ -76,7 +76,7 @@
   <!-- Problem 4 -->
   <div class="problem">
     <p><strong>4.</strong> 已知圆 O 的直径 AB = 10 cm，C 是圆上一点，∠CAB = 30°。求弦 AC 的长度。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-4" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(4, \'360\')">提交</button><span class="feedback" id="fb-4"></span></div><button class="btn-sm" onclick="toggleHint(\'h4\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-4" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(4, '360')">提交</button><span class="feedback" id="fb-4"></span></div><button class="btn-sm" onclick="toggleHint('h4')">💡 思路提示</button>
     <div class="hint-box" id="h4"><p>直径所对的圆周角是直角，因此 ∠ACB = 90°。在 Rt△ABC 中，已知斜边 AB 和一个锐角，用三角函数求 AC。</p></div>
     <button class="btn-sm" onclick="toggleAns('a4')">✅ 查看答案</button>
     <div class="ans-box" id="a4"><p>AB 是直径，C 在圆上 → ∠ACB = 90°（直径所对的圆周角）<br>在 Rt△ABC 中，∠CAB = 30°，AB = 10<br>AC = AB·cos 30° = 10 × (√3/2) = <strong>5√3 cm</strong></p></div>
@@ -85,7 +85,7 @@
   <!-- Problem 5 -->
   <div class="problem">
     <p><strong>5.</strong> 已知 tan α = 2，求 (sin α + cos α)/(sin α - cos α) 的值。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-5" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(5, \'180\')">提交</button><span class="feedback" id="fb-5"></span></div><button class="btn-sm" onclick="toggleHint(\'h5\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-5" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(5, '180')">提交</button><span class="feedback" id="fb-5"></span></div><button class="btn-sm" onclick="toggleHint('h5')">💡 思路提示</button>
     <div class="hint-box" id="h5"><p>分子分母同除以 cos α，将式子化为只含 tan α 的形式。</p></div>
     <button class="btn-sm" onclick="toggleAns('a5')">✅ 查看答案</button>
     <div class="ans-box" id="a5"><p>分子分母同除以 cos α：<br>(sin α + cos α)/(sin α - cos α) = (tan α + 1)/(tan α - 1)<br>= (2 + 1)/(2 - 1) = <strong>3</strong></p></div>
@@ -94,7 +94,7 @@
   <!-- Problem 6 -->
   <div class="problem">
     <p><strong>6.</strong> 在 △ABC 中，DE ∥ BC，且 AD : DB = 2 : 3。已知 △ADE 的面积为 8 cm²。求梯形 DBCE 的面积。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-6" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(6, \'相似\')">提交</button><span class="feedback" id="fb-6"></span></div><button class="btn-sm" onclick="toggleHint(\'h6\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-6" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(6, '相似')">提交</button><span class="feedback" id="fb-6"></span></div><button class="btn-sm" onclick="toggleHint('h6')">💡 思路提示</button>
     <div class="hint-box" id="h6"><p>由 DE ∥ BC 得 △ADE ∽ △ABC。由 AD : DB = 2 : 3 得 AD : AB = 2 : 5。面积比 = 相似比的平方。梯形面积 = △ABC 面积 - △ADE 面积。</p></div>
     <button class="btn-sm" onclick="toggleAns('a6')">✅ 查看答案</button>
     <div class="ans-box" id="a6"><p>AD : DB = 2 : 3 → AD : AB = 2 : (2+3) = 2 : 5<br>相似比 = 2/5，面积比 = (2/5)² = 4/25<br>8 / S△ABC = 4/25 → S△ABC = 8 × (25/4) = 50 cm²<br>梯形 DBCE 面积 = 50 - 8 = <strong>42 cm²</strong></p></div>
@@ -103,7 +103,7 @@
   <!-- Problem 7 -->
   <div class="problem">
     <p><strong>7.</strong> 已知扇形的圆心角为 120°，半径为 6 cm。求扇形的弧长和面积。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-7" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(7, \'AA\')">提交</button><span class="feedback" id="fb-7"></span></div><button class="btn-sm" onclick="toggleHint(\'h7\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-7" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(7, 'AA')">提交</button><span class="feedback" id="fb-7"></span></div><button class="btn-sm" onclick="toggleHint('h7')">💡 思路提示</button>
     <div class="hint-box" id="h7"><p>弧长公式：l = (n/360) × 2πr。面积公式：S = (n/360) × πr²。</p></div>
     <button class="btn-sm" onclick="toggleAns('a7')">✅ 查看答案</button>
     <div class="ans-box" id="a7"><p>弧长 = (120/360) × 2π × 6 = (1/3) × 12π = <strong>4π cm</strong><br>面积 = (120/360) × π × 6² = (1/3) × 36π = <strong>12π cm²</strong></p></div>
@@ -112,7 +112,7 @@
   <!-- Problem 8 -->
   <div class="problem">
     <p><strong>8.</strong> 在 Rt△ABC 中，∠C = 90°，∠A = 30°，BC = 4。将 △ABC 绕点 C 逆时针旋转 60°，得到 △A'B'C。求点 A' 到点 B 的距离。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-8" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(8, \'SAS\')">提交</button><span class="feedback" id="fb-8"></span></div><button class="btn-sm" onclick="toggleHint(\'h8\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-8" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(8, 'SAS')">提交</button><span class="feedback" id="fb-8"></span></div><button class="btn-sm" onclick="toggleHint('h8')">💡 思路提示</button>
     <div class="hint-box" id="h8"><p>建立坐标系，以 C 为原点。先求出 A 和 B 的坐标，再用旋转公式求出 A' 的坐标，最后用两点间距离公式求 A'B。</p></div>
     <button class="btn-sm" onclick="toggleAns('a8')">✅ 查看答案</button>
     <div class="ans-box" id="a8"><p>以 C 为原点，CA 在 x 轴上，CB 在 y 轴上。<br>在 Rt△ABC 中，∠A = 30°，BC = 4<br>AB = 8，AC = 4√3<br>∴ A(4√3, 0)，B(0, 4)<br>绕 C 逆时针旋转 60°：<br>A'(4√3·cos60°, 4√3·sin60°) = (4√3×1/2, 4√3×√3/2) = (2√3, 6)<br>A'B = √[(2√3)² + (6-4)²] = √(12 + 4) = √16 = <strong>4</strong></p></div>
@@ -121,7 +121,7 @@
   <!-- Problem 9 -->
   <div class="problem">
     <p><strong>9.</strong> 已知 PA、PB 是圆 O 的两条切线，A、B 为切点。∠APB = 60°，OA = 4 cm。求 PA 的长度。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, \'sin\')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint(\'h9\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, 'sin')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint('h9')">💡 思路提示</button>
     <div class="hint-box" id="h9"><p>切线长定理：PA = PB。连接 OA、OP，OP 平分 ∠APB。在 Rt△OAP 中，OA ⟂ PA，∠APO = 30°，用三角函数求 PA。</p></div>
     <button class="btn-sm" onclick="toggleAns('a9')">✅ 查看答案</button>
     <div class="ans-box" id="a9"><p>连接 OA、OP。由切线性质：OA ⟂ PA。<br>由切线长定理：OP 平分 ∠APB，∴ ∠APO = 30°。<br>在 Rt△OAP 中，tan 30° = OA/PA = 4/PA = 1/√3<br>∴ PA = <strong>4√3 cm</strong></p></div>
@@ -130,7 +130,7 @@
   <!-- Problem 10 -->
   <div class="problem">
     <p><strong>10.</strong> 已知圆锥的底面半径为 3 cm，母线长为 5 cm。求圆锥的侧面积和全面积。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-10" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(10, \'cos\')">提交</button><span class="feedback" id="fb-10"></span></div><button class="btn-sm" onclick="toggleHint(\'h10\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-10" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(10, 'cos')">提交</button><span class="feedback" id="fb-10"></span></div><button class="btn-sm" onclick="toggleHint('h10')">💡 思路提示</button>
     <div class="hint-box" id="h10"><p>圆锥侧面积公式：S侧 = πrl（r 为底面半径，l 为母线长）。全面积 = 侧面积 + 底面积 = πrl + πr²。</p></div>
     <button class="btn-sm" onclick="toggleAns('a10')">✅ 查看答案</button>
     <div class="ans-box" id="a10"><p>侧面积 = πrl = π × 3 × 5 = <strong>15π cm²</strong><br>底面积 = πr² = π × 9 = 9π cm²<br>全面积 = 15π + 9π = <strong>24π cm²</strong></p></div>

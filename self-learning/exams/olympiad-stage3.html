@@ -49,7 +49,7 @@
   <!-- Problem 1 -->
   <div class="problem">
     <p><strong>1.</strong> 解方程：|2x − 3| = 5</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-1" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(1, \'x=2\')">提交</button><span class="feedback" id="fb-1"></span></div><button class="btn-sm" onclick="toggleHint(\'h1\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-1" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(1, 'x=2')">提交</button><span class="feedback" id="fb-1"></span></div><button class="btn-sm" onclick="toggleHint('h1')">💡 思路提示</button>
     <div class="hint-box" id="h1"><p>绝对值方程要分两种情况讨论：2x − 3 = 5 或 2x − 3 = −5。</p></div>
     <button class="btn-sm" onclick="toggleAns('a1')">✅ 查看答案</button>
     <div class="ans-box" id="a1"><p>情况一：2x − 3 = 5 → 2x = 8 → x = 4<br>情况二：2x − 3 = −5 → 2x = −2 → x = −1<br><strong>答案：x = 4 或 x = −1</strong></p></div>
@@ -58,7 +58,7 @@
   <!-- Problem 2 -->
   <div class="problem">
     <p><strong>2.</strong> 已知方程 x² + px + q = 0 的两个根分别是 2 和 −3，求 p 和 q 的值。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-2" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(2, \'x=1\')">提交</button><span class="feedback" id="fb-2"></span></div><button class="btn-sm" onclick="toggleHint(\'h2\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-2" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(2, 'x=1')">提交</button><span class="feedback" id="fb-2"></span></div><button class="btn-sm" onclick="toggleHint('h2')">💡 思路提示</button>
     <div class="hint-box" id="h2"><p>利用韦达定理：两根之和 = −p，两根之积 = q。</p></div>
     <button class="btn-sm" onclick="toggleAns('a2')">✅ 查看答案</button>
     <div class="ans-box" id="a2"><p>由韦达定理：<br>两根之和：2 + (−3) = −1 = −p → p = 1<br>两根之积：2 × (−3) = −6 = q<br><strong>答案：p = 1，q = −6</strong></p></div>
@@ -67,7 +67,7 @@
   <!-- Problem 3 -->
   <div class="problem">
     <p><strong>3.</strong> 解方程：(x + 1)/(x − 2) + (x − 2)/(x + 1) = 10/3</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, \'x=±2\')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint(\'h3\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, 'x=±2')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint('h3')">💡 思路提示</button>
     <div class="hint-box" id="h3"><p>令 t = (x + 1)/(x − 2)，则原方程变为 t + 1/t = 10/3。解出 t 后再回代求 x。注意检验增根。</p></div>
     <button class="btn-sm" onclick="toggleAns('a3')">✅ 查看答案</button>
     <div class="ans-box" id="a3"><p>令 t = (x + 1)/(x − 2)，则方程变为 t + 1/t = 10/3。<br>两边乘以 3t：3t² + 3 = 10t → 3t² − 10t + 3 = 0 → (3t − 1)(t − 3) = 0<br>t = 1/3 或 t = 3。<br>当 t = 3：(x + 1)/(x − 2) = 3 → x + 1 = 3x − 6 → 2x = 7 → x = 7/2<br>当 t = 1/3：(x + 1)/(x − 2) = 1/3 → 3x + 3 = x − 2 → 2x = −5 → x = −5/2<br>检验：分母 x − 2 ≠ 0 且 x + 1 ≠ 0，两个解均满足。<br><strong>答案：x = 7/2 或 x = −5/2</strong></p></div>
@@ -76,7 +76,7 @@
   <!-- Problem 4 -->
   <div class="problem">
     <p><strong>4.</strong> 已知方程 x² − 2x − 1 = 0 的两个根是 α 和 β，求 α² + β² 的值。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-4" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(4, \'x=3\')">提交</button><span class="feedback" id="fb-4"></span></div><button class="btn-sm" onclick="toggleHint(\'h4\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-4" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(4, 'x=3')">提交</button><span class="feedback" id="fb-4"></span></div><button class="btn-sm" onclick="toggleHint('h4')">💡 思路提示</button>
     <div class="hint-box" id="h4"><p>用韦达定理求出 α + β 和 αβ，再利用 α² + β² = (α + β)² − 2αβ。</p></div>
     <button class="btn-sm" onclick="toggleAns('a4')">✅ 查看答案</button>
     <div class="ans-box" id="a4"><p>由韦达定理：α + β = 2，αβ = −1<br>α² + β² = (α + β)² − 2αβ = 2² − 2 × (−1) = 4 + 2 = <strong>6</strong></p></div>
@@ -85,7 +85,7 @@
   <!-- Problem 5 -->
   <div class="problem">
     <p><strong>5.</strong> 解方程：x² − |x| − 2 = 0</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-5" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(5, \'x=1/2\')">提交</button><span class="feedback" id="fb-5"></span></div><button class="btn-sm" onclick="toggleHint(\'h5\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-5" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(5, 'x=1/2')">提交</button><span class="feedback" id="fb-5"></span></div><button class="btn-sm" onclick="toggleHint('h5')">💡 思路提示</button>
     <div class="hint-box" id="h5"><p>分两种情况：x ≥ 0 时，|x| = x；x < 0 时，|x| = −x。分别求解并验证。</p></div>
     <button class="btn-sm" onclick="toggleAns('a5')">✅ 查看答案</button>
     <div class="ans-box" id="a5"><p>情况一：x ≥ 0，则 |x| = x，方程变为 x² − x − 2 = 0<br>(x − 2)(x + 1) = 0 → x = 2 或 x = −1<br>因为 x ≥ 0，取 x = 2。<br>情况二：x < 0，则 |x| = −x，方程变为 x² + x − 2 = 0<br>(x + 2)(x − 1) = 0 → x = −2 或 x = 1<br>因为 x < 0，取 x = −2。<br><strong>答案：x = 2 或 x = −2</strong></p></div>
@@ -94,7 +94,7 @@
   <!-- Problem 6 -->
   <div class="problem">
     <p><strong>6.</strong> 小明和小红同时从 A 地出发去 B 地。小明骑车速度是 15 km/h，小红步行速度是 5 km/h。小明到 B 地后立即返回，在距离 B 地 3 km 处遇到小红。求 A、B 两地的距离。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-6" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(6, \'x=0或x=4\')">提交</button><span class="feedback" id="fb-6"></span></div><button class="btn-sm" onclick="toggleHint(\'h6\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-6" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(6, 'x=0或x=4')">提交</button><span class="feedback" id="fb-6"></span></div><button class="btn-sm" onclick="toggleHint('h6')">💡 思路提示</button>
     <div class="hint-box" id="h6"><p>设 A、B 距离为 d km。两人相遇时，小明走了 d + 3 km，小红走了 d − 3 km。两人所用时间相同，列出方程。</p></div>
     <button class="btn-sm" onclick="toggleAns('a6')">✅ 查看答案</button>
     <div class="ans-box" id="a6"><p>设 A、B 距离为 d km。<br>相遇时小明走了 d + 3 km，用时 (d + 3)/15 小时。<br>小红走了 d − 3 km，用时 (d − 3)/5 小时。<br>两人用时相同：(d + 3)/15 = (d − 3)/5<br>两边乘以 15：d + 3 = 3(d − 3)<br>d + 3 = 3d − 9<br>2d = 12<br>d = 6<br><strong>答案：A、B 两地距离为 6 km</strong></p></div>
@@ -103,7 +103,7 @@
   <!-- Problem 7 -->
   <div class="problem">
     <p><strong>7.</strong> 已知 x₁、x₂ 是方程 2x² − 3x − 1 = 0 的两个根，求 1/x₁ + 1/x₂ 的值。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-7" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(7, \'x=-1±√5\')">提交</button><span class="feedback" id="fb-7"></span></div><button class="btn-sm" onclick="toggleHint(\'h7\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-7" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(7, 'x=-1±√5')">提交</button><span class="feedback" id="fb-7"></span></div><button class="btn-sm" onclick="toggleHint('h7')">💡 思路提示</button>
     <div class="hint-box" id="h7"><p>1/x₁ + 1/x₂ = (x₁ + x₂)/(x₁x₂)。用韦达定理求出两根之和与积。</p></div>
     <button class="btn-sm" onclick="toggleAns('a7')">✅ 查看答案</button>
     <div class="ans-box" id="a7"><p>由韦达定理：x₁ + x₂ = 3/2，x₁x₂ = −1/2<br>1/x₁ + 1/x₂ = (x₁ + x₂)/(x₁x₂) = (3/2)/(−1/2) = <strong>−3</strong></p></div>
@@ -112,7 +112,7 @@
   <!-- Problem 8 -->
   <div class="problem">
     <p><strong>8.</strong> 解方程：(x² + 1)/x + x/(x² + 1) = 5/2</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-8" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(8, \'x=3\')">提交</button><span class="feedback" id="fb-8"></span></div><button class="btn-sm" onclick="toggleHint(\'h8\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-8" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(8, 'x=3')">提交</button><span class="feedback" id="fb-8"></span></div><button class="btn-sm" onclick="toggleHint('h8')">💡 思路提示</button>
     <div class="hint-box" id="h8"><p>令 t = (x² + 1)/x，则方程变为 t + 1/t = 5/2。注意 x ≠ 0。</p></div>
     <button class="btn-sm" onclick="toggleAns('a8')">✅ 查看答案</button>
     <div class="ans-box" id="a8"><p>令 t = (x² + 1)/x，则方程变为 t + 1/t = 5/2。<br>2t² + 2 = 5t → 2t² − 5t + 2 = 0 → (2t − 1)(t − 2) = 0<br>t = 1/2 或 t = 2。<br>当 t = 2：(x² + 1)/x = 2 → x² + 1 = 2x → x² − 2x + 1 = 0 → (x − 1)² = 0 → x = 1<br>当 t = 1/2：(x² + 1)/x = 1/2 → 2x² + 2 = x → 2x² − x + 2 = 0<br>判别式 Δ = (−1)² − 4 × 2 × 2 = 1 − 16 = −15 < 0，无实数解。<br>检验：x = 1 时，分母不为 0。<br><strong>答案：x = 1</strong></p></div>
@@ -121,7 +121,7 @@
   <!-- Problem 9 -->
   <div class="problem">
     <p><strong>9.</strong> 已知关于 x 的方程 x² − (k + 2)x + 2k = 0 有一个根是 −1，求 k 的值和另一个根。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, \'x=4\')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint(\'h9\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, 'x=4')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint('h9')">💡 思路提示</button>
     <div class="hint-box" id="h9"><p>将 x = −1 代入方程求出 k，再解方程求出另一个根。</p></div>
     <button class="btn-sm" onclick="toggleAns('a9')">✅ 查看答案</button>
     <div class="ans-box" id="a9"><p>将 x = −1 代入方程：<br>(−1)² − (k + 2)(−1) + 2k = 0<br>1 + k + 2 + 2k = 0<br>3k + 3 = 0 → k = −1<br>代入原方程：x² − (−1 + 2)x + 2(−1) = 0 → x² − x − 2 = 0<br>(x − 2)(x + 1) = 0<br>所以另一个根为 <strong>x = 2</strong>。<br><strong>答案：k = −1，另一个根为 2</strong></p></div>
@@ -130,7 +130,7 @@
   <!-- Problem 10 -->
   <div class="problem">
     <p><strong>10.</strong> 三个连续整数，它们的平方和是 110。求这三个数。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-10" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(10, \'x=1\')">提交</button><span class="feedback" id="fb-10"></span></div><button class="btn-sm" onclick="toggleHint(\'h10\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-10" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(10, 'x=1')">提交</button><span class="feedback" id="fb-10"></span></div><button class="btn-sm" onclick="toggleHint('h10')">💡 思路提示</button>
     <div class="hint-box" id="h10"><p>设中间数为 n，则三个数为 n − 1、n、n + 1。列出平方和方程，化简后是一元二次方程。</p></div>
     <button class="btn-sm" onclick="toggleAns('a10')">✅ 查看答案</button>
     <div class="ans-box" id="a10"><p>设三个连续整数为 n − 1、n、n + 1。<br>(n − 1)² + n² + (n + 1)² = 110<br>n² − 2n + 1 + n² + n² + 2n + 1 = 110<br>3n² + 2 = 110<br>3n² = 108<br>n² = 36<br>n = 6 或 n = −6<br>当 n = 6 时，三个数为 5、6、7。<br>当 n = −6 时，三个数为 −7、−6、−5。<br><strong>答案：5, 6, 7 或 −7, −6, −5</strong></p></div>

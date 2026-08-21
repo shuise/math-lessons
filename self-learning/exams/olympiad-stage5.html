@@ -49,7 +49,7 @@
   <!-- Problem 1 -->
   <div class="problem">
     <p><strong>1.</strong> 如图，AB ∥ CD，∠B = 50°，∠D = 30°。求 ∠BED 的度数。（E 在 AB 和 CD 之间，连接 BE 和 ED）</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-1" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(1, \'180\')">提交</button><span class="feedback" id="fb-1"></span></div><button class="btn-sm" onclick="toggleHint(\'h1\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-1" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(1, '180')">提交</button><span class="feedback" id="fb-1"></span></div><button class="btn-sm" onclick="toggleHint('h1')">💡 思路提示</button>
     <div class="hint-box" id="h1"><p>过点 E 作一条与 AB、CD 都平行的辅助线，将 ∠BED 分成两个角，分别与 ∠B 和 ∠D 构成内错角。</p></div>
     <button class="btn-sm" onclick="toggleAns('a1')">✅ 查看答案</button>
     <div class="ans-box" id="a1"><p><strong>∠BED = 80°。</strong></p><p>过 E 作 EF ∥ AB（则 EF ∥ CD）。∠BEF = ∠B = 50°（内错角），∠FED = ∠D = 30°（内错角）。所以 ∠BED = ∠BEF + ∠FED = 50° + 30° = 80°。</p></div>
@@ -58,7 +58,7 @@
   <!-- Problem 2 -->
   <div class="problem">
     <p><strong>2.</strong> 已知三角形两边长分别为 5 和 8，第三边长为整数。求第三边长的所有可能值。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-2" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(2, \'60\')">提交</button><span class="feedback" id="fb-2"></span></div><button class="btn-sm" onclick="toggleHint(\'h2\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-2" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(2, '60')">提交</button><span class="feedback" id="fb-2"></span></div><button class="btn-sm" onclick="toggleHint('h2')">💡 思路提示</button>
     <div class="hint-box" id="h2"><p>三角形三边关系：任意两边之和大于第三边，任意两边之差小于第三边。即 |8 − 5| &lt; x &lt; 8 + 5。</p></div>
     <button class="btn-sm" onclick="toggleAns('a2')">✅ 查看答案</button>
     <div class="ans-box" id="a2"><p><strong>第三边长的可能值为：4, 5, 6, 7, 8, 9, 10, 11, 12。</strong></p><p>设第三边长为 x，由三边关系：8 − 5 &lt; x &lt; 8 + 5，即 3 &lt; x &lt; 13。x 为整数，故 x = 4, 5, 6, 7, 8, 9, 10, 11, 12。</p></div>
@@ -67,7 +67,7 @@
   <!-- Problem 3 -->
   <div class="problem">
     <p><strong>3.</strong> 已知 △ABC 中，∠A = 60°，∠B = 80°。求 ∠C 的外角的度数。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, \'SAS\')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint(\'h3\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, 'SAS')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint('h3')">💡 思路提示</button>
     <div class="hint-box" id="h3"><p>先求 ∠C = 180° − ∠A − ∠B，再求外角。或者直接用“外角等于不相邻的两个内角之和”。</p></div>
     <button class="btn-sm" onclick="toggleAns('a3')">✅ 查看答案</button>
     <div class="ans-box" id="a3"><p><strong>∠C 的外角 = 140°。</strong></p><p>方法一：∠C = 180° − 60° − 80° = 40°，外角 = 180° − 40° = 140°。</p><p>方法二：外角 = ∠A + ∠B = 60° + 80° = 140°。</p></div>
@@ -76,7 +76,7 @@
   <!-- Problem 4 -->
   <div class="problem">
     <p><strong>4.</strong> 已知 △ABC ≌ △DEF，且 AB = 7 cm，BC = 9 cm，∠B = 55°。求 DE 的长度和 ∠E 的度数。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-4" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(4, \'SSS\')">提交</button><span class="feedback" id="fb-4"></span></div><button class="btn-sm" onclick="toggleHint(\'h4\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-4" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(4, 'SSS')">提交</button><span class="feedback" id="fb-4"></span></div><button class="btn-sm" onclick="toggleHint('h4')">💡 思路提示</button>
     <div class="hint-box" id="h4"><p>全等三角形的对应边相等、对应角相等。注意对应关系：△ABC ≌ △DEF 中，A ↔ D，B ↔ E，C ↔ F。</p></div>
     <button class="btn-sm" onclick="toggleAns('a4')">✅ 查看答案</button>
     <div class="ans-box" id="a4"><p><strong>DE = 7 cm，∠E = 55°。</strong></p><p>由 △ABC ≌ △DEF 知：AB 对应 DE，∠B 对应 ∠E。所以 DE = AB = 7 cm，∠E = ∠B = 55°。</p></div>
@@ -85,7 +85,7 @@
   <!-- Problem 5 -->
   <div class="problem">
     <p><strong>5.</strong> 在 △ABC 中，AD 是 BC 边上的中线。已知 AB = 6，AC = 8，BC = 10。求 AD 的长度。（提示：用中线长公式）</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-5" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(5, \'AAS\')">提交</button><span class="feedback" id="fb-5"></span></div><button class="btn-sm" onclick="toggleHint(\'h5\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-5" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(5, 'AAS')">提交</button><span class="feedback" id="fb-5"></span></div><button class="btn-sm" onclick="toggleHint('h5')">💡 思路提示</button>
     <div class="hint-box" id="h5"><p>中线长公式：AD² = (2AB² + 2AC² − BC²) / 4。代入数值计算即可。</p></div>
     <button class="btn-sm" onclick="toggleAns('a5')">✅ 查看答案</button>
     <div class="ans-box" id="a5"><p><strong>AD = 5。</strong></p><p>由中线长公式：AD² = (2×6² + 2×8² − 10²) / 4 = (2×36 + 2×64 − 100) / 4 = (72 + 128 − 100) / 4 = 100 / 4 = 25，所以 AD = 5。</p><p>（注：6² + 8² = 10²，此三角形为直角三角形，AD 恰为斜边中线，等于斜边一半。）</p></div>
@@ -94,7 +94,7 @@
   <!-- Problem 6 -->
   <div class="problem">
     <p><strong>6.</strong> 两条平行线被第三条直线所截，得到 8 个角。已知其中一个角是 70°，求其余 7 个角的度数。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-6" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(6, \'HL\')">提交</button><span class="feedback" id="fb-6"></span></div><button class="btn-sm" onclick="toggleHint(\'h6\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-6" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(6, 'HL')">提交</button><span class="feedback" id="fb-6"></span></div><button class="btn-sm" onclick="toggleHint('h6')">💡 思路提示</button>
     <div class="hint-box" id="h6"><p>两直线平行时，同位角相等，内错角相等，同旁内角互补（和为 180°）。8 个角中只有两种不同的度数，它们互补。</p></div>
     <button class="btn-sm" onclick="toggleAns('a6')">✅ 查看答案</button>
     <div class="ans-box" id="a6"><p>两直线平行时，8 个角分为两组：<br>一组 4 个角都等于 70°（同位角、内错角相等）。<br>另一组 4 个角都等于 180° − 70° = <strong>110°</strong>（同旁内角互补）。<br>所以其余 7 个角中，有 3 个是 70°，4 个是 110°。<br>（具体哪个角是哪个度数，取决于 70° 角在哪个位置。）</p></div>
@@ -103,7 +103,7 @@
   <!-- Problem 7 -->
   <div class="problem">
     <p><strong>7.</strong> 已知 OA = OB，OC = OD，∠AOB = ∠COD = 90°。求证：AC = BD，且 AC ⊥ BD。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-7" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(7, \'等腰\')">提交</button><span class="feedback" id="fb-7"></span></div><button class="btn-sm" onclick="toggleHint(\'h7\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-7" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(7, '等腰')">提交</button><span class="feedback" id="fb-7"></span></div><button class="btn-sm" onclick="toggleHint('h7')">💡 思路提示</button>
     <div class="hint-box" id="h7"><p>将 △AOC 绕点 O 旋转 90°，观察它与 △BOD 的关系。或者用 SAS 证明 △AOC ≌ △BOD。</p></div>
     <button class="btn-sm" onclick="toggleAns('a7')">✅ 查看答案</button>
     <div class="ans-box" id="a7"><p><strong>证明：</strong></p><p>在 △AOC 和 △BOD 中：OA = OB（已知），OC = OD（已知），∠AOC = ∠AOB + ∠BOC = 90° + ∠BOC，∠BOD = ∠COD + ∠BOC = 90° + ∠BOC，所以 ∠AOC = ∠BOD。</p><p>由 SAS 得 △AOC ≌ △BOD，∴ AC = BD。</p><p>将 △AOC 绕 O 旋转 90° 可与 △BOD 重合，故 AC 与 BD 的夹角为 90°，即 AC ⊥ BD。</p></div>
@@ -112,7 +112,7 @@
   <!-- Problem 8 -->
   <div class="problem">
     <p><strong>8.</strong> 一个三角形的三个内角的度数之比为 2:3:4。求这个三角形三个内角的度数，并判断是什么三角形。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-8" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(8, \'直角\')">提交</button><span class="feedback" id="fb-8"></span></div><button class="btn-sm" onclick="toggleHint(\'h8\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-8" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(8, '直角')">提交</button><span class="feedback" id="fb-8"></span></div><button class="btn-sm" onclick="toggleHint('h8')">💡 思路提示</button>
     <div class="hint-box" id="h8"><p>三角形内角和为 180°。按比例分配：总份数 = 2+3+4 = 9，每份 = 180° ÷ 9 = 20°。三个角分别占 2 份、3 份、4 份。</p></div>
     <button class="btn-sm" onclick="toggleAns('a8')">✅ 查看答案</button>
     <div class="ans-box" id="a8"><p>三角形内角和 = 180°。<br>总份数 = 2 + 3 + 4 = 9。<br>每份 = 180° ÷ 9 = 20°。<br>三个角分别为：<br>2 × 20° = <strong>40°</strong>，3 × 20° = <strong>60°</strong>，4 × 20° = <strong>80°</strong>。<br>最大角 80° < 90°，所以是<strong>锐角三角形</strong>。</p></div>
@@ -121,7 +121,7 @@
   <!-- Problem 9 -->
   <div class="problem">
     <p><strong>9.</strong> 已知 △ABC 中，AB = AC，∠A = 40°。在 BC 上取一点 D，使得 ∠BAD = 30°。求 ∠ADC 的度数。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, \'全等\')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint(\'h9\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, '全等')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint('h9')">💡 思路提示</button>
     <div class="hint-box" id="h9"><p>先由等腰三角形求 ∠B 和 ∠C，再在 △ABD 中求 ∠ADB，∠ADC 和 ∠ADB 互为补角。也可以在 △ADC 中直接求。</p></div>
     <button class="btn-sm" onclick="toggleAns('a9')">✅ 查看答案</button>
     <div class="ans-box" id="a9"><p><strong>∠ADC = 100°。</strong></p><p>AB = AC，∠A = 40°，所以 ∠B = ∠C = (180° − 40°) / 2 = 70°。</p><p>∠CAD = ∠A − ∠BAD = 40° − 30° = 10°。</p><p>在 △ADC 中，∠ADC = 180° − ∠CAD − ∠C = 180° − 10° − 70° = 100°。</p></div>
@@ -130,7 +130,7 @@
   <!-- Problem 10 -->
   <div class="problem">
     <p><strong>10.</strong> 已知 AD 是 △ABC 的角平分线（AD 平分 ∠A），AB = 8 cm，AC = 6 cm，BC = 7 cm。求 BD 和 DC 的长度。（提示：角平分线定理）</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-10" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(10, \'对应\')">提交</button><span class="feedback" id="fb-10"></span></div><button class="btn-sm" onclick="toggleHint(\'h10\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-10" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(10, '对应')">提交</button><span class="feedback" id="fb-10"></span></div><button class="btn-sm" onclick="toggleHint('h10')">💡 思路提示</button>
     <div class="hint-box" id="h10"><p>角平分线定理：角平分线将对边分成的两段与两邻边成比例，即 BD : DC = AB : AC。</p></div>
     <button class="btn-sm" onclick="toggleAns('a10')">✅ 查看答案</button>
     <div class="ans-box" id="a10"><p><strong>BD = 4 cm，DC = 3 cm。</strong></p><p>由角平分线定理：BD : DC = AB : AC = 8 : 6 = 4 : 3。<br>BC = 7 cm，按比例分配：<br>总份数 = 4 + 3 = 7。<br>每份 = 7 ÷ 7 = 1 cm。<br>BD = 4 × 1 = <strong>4 cm</strong>，DC = 3 × 1 = <strong>3 cm</strong>。</p></div>

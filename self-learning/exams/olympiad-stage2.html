@@ -49,7 +49,7 @@
   <!-- Problem 1 -->
   <div class="problem">
     <p><strong>1.</strong> 已知 x + 1/x = 3，求 x² + 1/x² 的值。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-1" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(1, \'a+b\')">提交</button><span class="feedback" id="fb-1"></span></div><button class="btn-sm" onclick="toggleHint(\'h1\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-1" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(1, 'a+b')">提交</button><span class="feedback" id="fb-1"></span></div><button class="btn-sm" onclick="toggleHint('h1')">💡 思路提示</button>
     <div class="hint-box" id="h1"><p>利用完全平方公式：(x + 1/x)² = x² + 2 + 1/x²，移项即可得到 x² + 1/x²。</p></div>
     <button class="btn-sm" onclick="toggleAns('a1')">✅ 查看答案</button>
     <div class="ans-box" id="a1"><p>(x + 1/x)² = x² + 2·x·(1/x) + 1/x² = x² + 2 + 1/x²<br>所以 x² + 1/x² = (x + 1/x)² − 2 = 3² − 2 = 9 − 2 = <strong>7</strong></p></div>
@@ -58,7 +58,7 @@
   <!-- Problem 2 -->
   <div class="problem">
     <p><strong>2.</strong> 计算：2024² − 2023²（不用计算器，用平方差公式）</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-2" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(2, \'x²-1\')">提交</button><span class="feedback" id="fb-2"></span></div><button class="btn-sm" onclick="toggleHint(\'h2\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-2" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(2, 'x²-1')">提交</button><span class="feedback" id="fb-2"></span></div><button class="btn-sm" onclick="toggleHint('h2')">💡 思路提示</button>
     <div class="hint-box" id="h2"><p>平方差公式：a² − b² = (a + b)(a − b)。</p></div>
     <button class="btn-sm" onclick="toggleAns('a2')">✅ 查看答案</button>
     <div class="ans-box" id="a2"><p>2024² − 2023² = (2024 + 2023)(2024 − 2023) = 4047 × 1 = <strong>4047</strong></p></div>
@@ -67,7 +67,7 @@
   <!-- Problem 3 -->
   <div class="problem">
     <p><strong>3.</strong> 因式分解：x⁴ + 4</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, \'2\')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint(\'h3\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, '2')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint('h3')">💡 思路提示</button>
     <div class="hint-box" id="h3"><p>添项补全完全平方：x⁴ + 4 = x⁴ + 4x² + 4 − 4x² = (x² + 2)² − (2x)²。这是 Sophie Germain 恒等式。</p></div>
     <button class="btn-sm" onclick="toggleAns('a3')">✅ 查看答案</button>
     <div class="ans-box" id="a3"><p>x⁴ + 4 = x⁴ + 4x² + 4 − 4x²<br>= (x² + 2)² − (2x)²<br>= (x² + 2x + 2)(x² − 2x + 2)<br><strong>答案：(x² + 2x + 2)(x² − 2x + 2)</strong></p></div>
@@ -76,7 +76,7 @@
   <!-- Problem 4 -->
   <div class="problem">
     <p><strong>4.</strong> 已知 a + b = 5，ab = 3，求 a³ + b³ 的值。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-4" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(4, \'a²-2ab+b²\')">提交</button><span class="feedback" id="fb-4"></span></div><button class="btn-sm" onclick="toggleHint(\'h4\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-4" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(4, 'a²-2ab+b²')">提交</button><span class="feedback" id="fb-4"></span></div><button class="btn-sm" onclick="toggleHint('h4')">💡 思路提示</button>
     <div class="hint-box" id="h4"><p>立方和公式：a³ + b³ = (a + b)(a² − ab + b²) = (a + b)[(a + b)² − 3ab]。</p></div>
     <button class="btn-sm" onclick="toggleAns('a4')">✅ 查看答案</button>
     <div class="ans-box" id="a4"><p>a³ + b³ = (a + b)(a² − ab + b²)<br>= (a + b)[(a + b)² − 3ab]<br>= 5 × (5² − 3 × 3)<br>= 5 × (25 − 9)<br>= 5 × 16 = <strong>80</strong></p></div>
@@ -85,7 +85,7 @@
   <!-- Problem 5 -->
   <div class="problem">
     <p><strong>5.</strong> 化简：(x² − 4)/(x² − x − 6) ÷ (x² − 2x − 8)/(x² + 3x + 2)</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-5" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(5, \'x²+x-2\')">提交</button><span class="feedback" id="fb-5"></span></div><button class="btn-sm" onclick="toggleHint(\'h5\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-5" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(5, 'x²+x-2')">提交</button><span class="feedback" id="fb-5"></span></div><button class="btn-sm" onclick="toggleHint('h5')">💡 思路提示</button>
     <div class="hint-box" id="h5"><p>先将各项因式分解，除法转化为乘法，再约分。注意分母不能为零的条件。</p></div>
     <button class="btn-sm" onclick="toggleAns('a5')">✅ 查看答案</button>
     <div class="ans-box" id="a5"><p>原式 = (x² − 4)/(x² − x − 6) × (x² + 3x + 2)/(x² − 2x − 8)<br>= (x − 2)(x + 2)/[(x − 3)(x + 2)] × (x + 1)(x + 2)/[(x − 4)(x + 2)]<br>= (x − 2)/(x − 3) × (x + 1)/(x − 4)<br>= <strong>(x − 2)(x + 1)/[(x − 3)(x − 4)]</strong>（x ≠ −2, 3, 4, −1）</p></div>
@@ -94,7 +94,7 @@
   <!-- Problem 6 -->
   <div class="problem">
     <p><strong>6.</strong> 已知 a² + b² + c² = ab + bc + ca，求证 a = b = c。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-6" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(6, \'1\')">提交</button><span class="feedback" id="fb-6"></span></div><button class="btn-sm" onclick="toggleHint(\'h6\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-6" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(6, '1')">提交</button><span class="feedback" id="fb-6"></span></div><button class="btn-sm" onclick="toggleHint('h6')">💡 思路提示</button>
     <div class="hint-box" id="h6"><p>将等式两边乘以 2，移项后配方。每个完全平方项都必须为零。</p></div>
     <button class="btn-sm" onclick="toggleAns('a6')">✅ 查看答案</button>
     <div class="ans-box" id="a6"><p>a² + b² + c² = ab + bc + ca<br>两边乘以 2：2a² + 2b² + 2c² = 2ab + 2bc + 2ca<br>移项：2a² + 2b² + 2c² − 2ab − 2bc − 2ca = 0<br>配方：(a² − 2ab + b²) + (b² − 2bc + c²) + (c² − 2ca + a²) = 0<br>(a − b)² + (b − c)² + (c − a)² = 0<br>因为平方数 ≥ 0，所以每一项都必须为 0：<br>a − b = 0，b − c = 0，c − a = 0<br>因此 <strong>a = b = c</strong>。</p></div>
@@ -103,7 +103,7 @@
   <!-- Problem 7 -->
   <div class="problem">
     <p><strong>7.</strong> 计算：99 × 101 × 10001</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-7" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(7, \'3\')">提交</button><span class="feedback" id="fb-7"></span></div><button class="btn-sm" onclick="toggleHint(\'h7\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-7" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(7, '3')">提交</button><span class="feedback" id="fb-7"></span></div><button class="btn-sm" onclick="toggleHint('h7')">💡 思路提示</button>
     <div class="hint-box" id="h7"><p>99 = 100 − 1，101 = 100 + 1，10001 = 10000 + 1。利用平方差公式多次化简。</p></div>
     <button class="btn-sm" onclick="toggleAns('a7')">✅ 查看答案</button>
     <div class="ans-box" id="a7"><p>99 × 101 × 10001<br>= (100 − 1)(100 + 1) × 10001<br>= (100² − 1²) × 10001<br>= (10000 − 1) × 10001<br>= 9999 × 10001<br>= (10000 − 1)(10000 + 1)<br>= 10000² − 1²<br>= 100000000 − 1<br>= <strong>99999999</strong></p></div>
@@ -112,7 +112,7 @@
   <!-- Problem 8 -->
   <div class="problem">
     <p><strong>8.</strong> 因式分解：x² − y² + 2x + 1</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-8" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(8, \'x(x+1)(x-1)\')">提交</button><span class="feedback" id="fb-8"></span></div><button class="btn-sm" onclick="toggleHint(\'h8\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-8" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(8, 'x(x+1)(x-1)')">提交</button><span class="feedback" id="fb-8"></span></div><button class="btn-sm" onclick="toggleHint('h8')">💡 思路提示</button>
     <div class="hint-box" id="h8"><p>将含 x 的项分组：x² + 2x + 1 = (x + 1)²，再用平方差公式。</p></div>
     <button class="btn-sm" onclick="toggleAns('a8')">✅ 查看答案</button>
     <div class="ans-box" id="a8"><p>x² − y² + 2x + 1<br>= (x² + 2x + 1) − y²<br>= (x + 1)² − y²<br>= (x + 1 + y)(x + 1 − y)<br><strong>答案：(x + y + 1)(x − y + 1)</strong></p></div>
@@ -121,7 +121,7 @@
   <!-- Problem 9 -->
   <div class="problem">
     <p><strong>9.</strong> 已知 (x + y)² = 25，(x − y)² = 9，求 xy 的值。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, \'2\')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint(\'h9\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, '2')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint('h9')">💡 思路提示</button>
     <div class="hint-box" id="h9"><p>利用恒等式 (x + y)² − (x − y)² = 4xy。</p></div>
     <button class="btn-sm" onclick="toggleAns('a9')">✅ 查看答案</button>
     <div class="ans-box" id="a9"><p>(x + y)² − (x − y)² = 4xy<br>25 − 9 = 4xy<br>16 = 4xy<br>xy = <strong>4</strong></p></div>
@@ -130,7 +130,7 @@
   <!-- Problem 10 -->
   <div class="problem">
     <p><strong>10.</strong> 若 a、b、c 是三角形的三边长，且 a² + b² + c² = ab + bc + ca，判断这个三角形是什么三角形。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-10" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(10, \'0\')">提交</button><span class="feedback" id="fb-10"></span></div><button class="btn-sm" onclick="toggleHint(\'h10\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-10" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(10, '0')">提交</button><span class="feedback" id="fb-10"></span></div><button class="btn-sm" onclick="toggleHint('h10')">💡 思路提示</button>
     <div class="hint-box" id="h10"><p>与第 6 题类似，推出 a = b = c。三边相等说明是等边三角形。</p></div>
     <button class="btn-sm" onclick="toggleAns('a10')">✅ 查看答案</button>
     <div class="ans-box" id="a10"><p>由 a² + b² + c² = ab + bc + ca，两边乘以 2 后配方得：<br>(a − b)² + (b − c)² + (c − a)² = 0<br>所以 a = b = c。<br>三条边相等的三角形是 <strong>等边三角形</strong>。</p></div>

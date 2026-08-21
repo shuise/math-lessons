@@ -49,7 +49,7 @@
   <!-- Problem 1 -->
   <div class="problem">
     <p><strong>1.</strong> 已知一次函数 y = kx + b 的图象经过点 (1, 3) 和 (2, 5)。求这个一次函数的解析式。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-1" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(1, \'y=2x+1\')">提交</button><span class="feedback" id="fb-1"></span></div><button class="btn-sm" onclick="toggleHint(\'h1\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-1" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(1, 'y=2x+1')">提交</button><span class="feedback" id="fb-1"></span></div><button class="btn-sm" onclick="toggleHint('h1')">💡 思路提示</button>
     <div class="hint-box" id="h1"><p>将两个点的坐标分别代入 y = kx + b，得到关于 k 和 b 的二元一次方程组，解出 k 和 b 即可。</p></div>
     <button class="btn-sm" onclick="toggleAns('a1')">✅ 查看答案</button>
     <div class="ans-box" id="a1"><p>代入 (1, 3)：3 = k + b<br>代入 (2, 5)：5 = 2k + b<br>两式相减得 k = 2，代入得 b = 1。<br>∴ 一次函数解析式为 <strong>y = 2x + 1</strong>。</p></div>
@@ -58,7 +58,7 @@
   <!-- Problem 2 -->
   <div class="problem">
     <p><strong>2.</strong> 已知二次函数 y = x² - 4x + 3。求它的顶点坐标、对称轴和与 x 轴的交点坐标。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-2" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(2, \'y=-x+3\')">提交</button><span class="feedback" id="fb-2"></span></div><button class="btn-sm" onclick="toggleHint(\'h2\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-2" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(2, 'y=-x+3')">提交</button><span class="feedback" id="fb-2"></span></div><button class="btn-sm" onclick="toggleHint('h2')">💡 思路提示</button>
     <div class="hint-box" id="h2"><p>用配方法将函数化为 y = (x - h)² + k 的形式，顶点为 (h, k)，对称轴为 x = h。令 y = 0 解方程求与 x 轴的交点。</p></div>
     <button class="btn-sm" onclick="toggleAns('a2')">✅ 查看答案</button>
     <div class="ans-box" id="a2"><p>y = x² - 4x + 3 = (x - 2)² - 1<br>∴ 顶点坐标为 <strong>(2, -1)</strong>，对称轴为 <strong>x = 2</strong>。<br>令 y = 0：(x - 2)² - 1 = 0 → (x - 2)² = 1 → x - 2 = ±1<br>∴ x₁ = 1，x₂ = 3，与 x 轴的交点为 <strong>(1, 0) 和 (3, 0)</strong>。</p></div>
@@ -67,7 +67,7 @@
   <!-- Problem 3 -->
   <div class="problem">
     <p><strong>3.</strong> 已知反比例函数 y = k/x 的图象经过点 (2, 3)。求 k 的值，并判断点 (-3, -2) 是否在这个函数的图象上。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, \'y=x²\')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint(\'h3\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, 'y=x²')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint('h3')">💡 思路提示</button>
     <div class="hint-box" id="h3"><p>将已知点的坐标代入 y = k/x 求出 k。判断一个点是否在图象上，只需将该点坐标代入函数解析式，看等式是否成立。</p></div>
     <button class="btn-sm" onclick="toggleAns('a3')">✅ 查看答案</button>
     <div class="ans-box" id="a3"><p>代入 (2, 3)：3 = k/2 → <strong>k = 6</strong>。<br>函数为 y = 6/x。<br>检验 (-3, -2)：6/(-3) = -2，等式成立。<br>∴ 点 (-3, -2) <strong>在</strong>这个函数的图象上。</p></div>
@@ -76,7 +76,7 @@
   <!-- Problem 4 -->
   <div class="problem">
     <p><strong>4.</strong> 已知二次函数 y = x² - 2x - 3。当 x 取何值时，y > 0？当 x 取何值时，y 随 x 增大而减小？</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-4" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(4, \'y=1/x\')">提交</button><span class="feedback" id="fb-4"></span></div><button class="btn-sm" onclick="toggleHint(\'h4\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-4" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(4, 'y=1/x')">提交</button><span class="feedback" id="fb-4"></span></div><button class="btn-sm" onclick="toggleHint('h4')">💡 思路提示</button>
     <div class="hint-box" id="h4"><p>先因式分解求与 x 轴的交点，结合开口方向判断 y > 0 的区间。求对称轴，结合开口方向判断增减性。</p></div>
     <button class="btn-sm" onclick="toggleAns('a4')">✅ 查看答案</button>
     <div class="ans-box" id="a4"><p>y = x² - 2x - 3 = (x - 3)(x + 1)<br>与 x 轴交于 x = -1 和 x = 3，开口向上。<br>∴ y > 0 时，<strong>x < -1 或 x > 3</strong>。<br>对称轴为 x = 1，开口向上，在对称轴左侧 y 随 x 增大而减小。<br>∴ y 随 x 增大而减小时，<strong>x < 1</strong>。</p></div>
@@ -85,7 +85,7 @@
   <!-- Problem 5 -->
   <div class="problem">
     <p><strong>5.</strong> 已知一次函数 y = 2x + 1 和反比例函数 y = 6/x。求它们的交点坐标。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-5" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(5, \'开口向上\')">提交</button><span class="feedback" id="fb-5"></span></div><button class="btn-sm" onclick="toggleHint(\'h5\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-5" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(5, '开口向上')">提交</button><span class="feedback" id="fb-5"></span></div><button class="btn-sm" onclick="toggleHint('h5')">💡 思路提示</button>
     <div class="hint-box" id="h5"><p>联立两个函数解析式，消去 y 得到关于 x 的分式方程，去分母化为一元二次方程求解，再代回求 y。</p></div>
     <button class="btn-sm" onclick="toggleAns('a5')">✅ 查看答案</button>
     <div class="ans-box" id="a5"><p>联立：2x + 1 = 6/x<br>两边乘 x：2x² + x - 6 = 0<br>因式分解：(2x - 3)(x + 2) = 0<br>∴ x₁ = 3/2，x₂ = -2<br>代入 y = 2x + 1：y₁ = 4，y₂ = -3<br>∴ 交点坐标为 <strong>(3/2, 4) 和 (-2, -3)</strong>。</p></div>
@@ -94,7 +94,7 @@
   <!-- Problem 6 -->
   <div class="problem">
     <p><strong>6.</strong> 已知二次函数 y = ax² + bx + c 的图象经过点 (0, 1)、(1, 0)、(-1, 4)。求 a、b、c 的值。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-6" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(6, \'对称轴\')">提交</button><span class="feedback" id="fb-6"></span></div><button class="btn-sm" onclick="toggleHint(\'h6\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-6" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(6, '对称轴')">提交</button><span class="feedback" id="fb-6"></span></div><button class="btn-sm" onclick="toggleHint('h6')">💡 思路提示</button>
     <div class="hint-box" id="h6"><p>将三个点的坐标分别代入，得到关于 a、b、c 的三元一次方程组。先由 (0, 1) 直接得到 c 的值。</p></div>
     <button class="btn-sm" onclick="toggleAns('a6')">✅ 查看答案</button>
     <div class="ans-box" id="a6"><p>代入 (0, 1)：c = 1<br>代入 (1, 0)：a + b + 1 = 0 → a + b = -1 ①<br>代入 (-1, 4)：a - b + 1 = 4 → a - b = 3 ②<br>① + ②：2a = 2 → a = 1<br>代入①：1 + b = -1 → b = -2<br>∴ <strong>a = 1，b = -2，c = 1</strong>，函数为 y = x² - 2x + 1 = (x - 1)²。</p></div>
@@ -103,7 +103,7 @@
   <!-- Problem 7 -->
   <div class="problem">
     <p><strong>7.</strong> 已知点 A(2, 3) 和点 B(5, 7)。求线段 AB 的中点坐标和 AB 的长度。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-7" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(7, \'顶点\')">提交</button><span class="feedback" id="fb-7"></span></div><button class="btn-sm" onclick="toggleHint(\'h7\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-7" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(7, '顶点')">提交</button><span class="feedback" id="fb-7"></span></div><button class="btn-sm" onclick="toggleHint('h7')">💡 思路提示</button>
     <div class="hint-box" id="h7"><p>中点坐标公式：( (x₁+x₂)/2, (y₁+y₂)/2 )。两点间距离公式：√[(x₂-x₁)² + (y₂-y₁)²]。</p></div>
     <button class="btn-sm" onclick="toggleAns('a7')">✅ 查看答案</button>
     <div class="ans-box" id="a7"><p>中点坐标：( (2+5)/2, (3+7)/2 ) = <strong>(3.5, 5)</strong><br>AB = √[(5-2)² + (7-3)²] = √(9 + 16) = √25 = <strong>5</strong></p></div>
@@ -112,7 +112,7 @@
   <!-- Problem 8 -->
   <div class="problem">
     <p><strong>8.</strong> 已知一次函数 y = kx + b 的图象与直线 y = 2x - 1 平行，且经过点 (1, 4)。求这个一次函数与坐标轴围成的三角形面积。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-8" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(8, \'(-1,0)\')">提交</button><span class="feedback" id="fb-8"></span></div><button class="btn-sm" onclick="toggleHint(\'h8\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-8" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(8, '(-1,0)')">提交</button><span class="feedback" id="fb-8"></span></div><button class="btn-sm" onclick="toggleHint('h8')">💡 思路提示</button>
     <div class="hint-box" id="h8"><p>两直线平行则斜率相等，由此得 k = 2。代入点 (1, 4) 求 b。求出函数与 x 轴、y 轴的交点，围成的三角形是直角三角形，面积 = (1/2)×|x截距|×|y截距|。</p></div>
     <button class="btn-sm" onclick="toggleAns('a8')">✅ 查看答案</button>
     <div class="ans-box" id="a8"><p>平行于 y = 2x - 1 → k = 2<br>代入 (1, 4)：4 = 2×1 + b → b = 2<br>∴ 函数为 y = 2x + 2<br>与 x 轴交点：令 y = 0 → x = -1，交点 (-1, 0)<br>与 y 轴交点：令 x = 0 → y = 2，交点 (0, 2)<br>三角形面积 = 1/2 × |−1| × 2 = <strong>1</strong></p></div>
@@ -121,7 +121,7 @@
   <!-- Problem 9 -->
   <div class="problem">
     <p><strong>9.</strong> 已知二次函数 y = x² - 2mx + m² - 1。求证：无论 m 取何值，这个函数的图象与 x 轴总有两个交点。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, \'y=2x-1\')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint(\'h9\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, 'y=2x-1')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint('h9')">💡 思路提示</button>
     <div class="hint-box" id="h9"><p>二次函数图象与 x 轴的交点个数由判别式 Δ = b² - 4ac 决定。计算 Δ，判断其是否恒大于 0。</p></div>
     <button class="btn-sm" onclick="toggleAns('a9')">✅ 查看答案</button>
     <div class="ans-box" id="a9"><p>Δ = (-2m)² - 4×1×(m² - 1) = 4m² - 4m² + 4 = 4<br>∵ Δ = 4 > 0 恒成立<br>∴ 无论 m 取何值，函数图象与 x 轴总有两个交点。<br>（这两个交点为 (m+1, 0) 和 (m-1, 0)）</p></div>
@@ -130,7 +130,7 @@
   <!-- Problem 10 -->
   <div class="problem">
     <p><strong>10.</strong> 已知二次函数 y = ax² + bx + c 的图象顶点在 x 轴上，且经过点 (1, 2) 和 (3, 2)。求这个二次函数的解析式。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-10" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(10, \'y=-x²+1\')">提交</button><span class="feedback" id="fb-10"></span></div><button class="btn-sm" onclick="toggleHint(\'h10\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-10" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(10, 'y=-x²+1')">提交</button><span class="feedback" id="fb-10"></span></div><button class="btn-sm" onclick="toggleHint('h10')">💡 思路提示</button>
     <div class="hint-box" id="h10"><p>顶点在 x 轴上，可设 y = a(x - h)²。点 (1, 2) 和 (3, 2) 的纵坐标相同，说明它们关于对称轴对称，对称轴 x = h 在它们正中间，由此求出 h。再代入一个点求出 a。</p></div>
     <button class="btn-sm" onclick="toggleAns('a10')">✅ 查看答案</button>
     <div class="ans-box" id="a10"><p>顶点在 x 轴上，设 y = a(x - h)²。<br>点 (1, 2) 和 (3, 2) 纵坐标相同，关于对称轴 x = h 对称，<br>∴ h = (1+3)/2 = 2。<br>函数为 y = a(x - 2)²。<br>代入 (1, 2)：2 = a(1 - 2)² → a = 2。<br>∴ 解析式为 y = 2(x - 2)²，即 <strong>y = 2x² - 8x + 8</strong>。</p></div>

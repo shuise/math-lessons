@@ -49,7 +49,7 @@
   <!-- Problem 1 -->
   <div class="problem">
     <p><strong>1.</strong> 解方程组：{ x + y = 7, xy = 12 }</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-1" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(1, \'x=1,y=2\')">提交</button><span class="feedback" id="fb-1"></span></div><button class="btn-sm" onclick="toggleHint(\'h1\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-1" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(1, 'x=1,y=2')">提交</button><span class="feedback" id="fb-1"></span></div><button class="btn-sm" onclick="toggleHint('h1')">💡 思路提示</button>
     <div class="hint-box" id="h1"><p>利用韦达定理：x 和 y 是方程 t² − 7t + 12 = 0 的两个根。或者用代入法：y = 7 − x，代入 xy = 12 解二次方程。</p></div>
     <button class="btn-sm" onclick="toggleAns('a1')">✅ 查看答案</button>
     <div class="ans-box" id="a1"><p><strong>解为 x = 3, y = 4 或 x = 4, y = 3。</strong></p><p>由韦达定理，x、y 是 t² − (x+y)t + xy = 0 即 t² − 7t + 12 = 0 的两个根。</p><p>因式分解：(t − 3)(t − 4) = 0，得 t = 3 或 t = 4。</p><p>所以方程组的解为 (x, y) = (3, 4) 或 (4, 3)。</p></div>
@@ -58,7 +58,7 @@
   <!-- Problem 2 -->
   <div class="problem">
     <p><strong>2.</strong> 解不等式：|2x − 1| &lt; 3，并把解集在数轴上表示出来。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-2" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(2, \'x=2,y=1\')">提交</button><span class="feedback" id="fb-2"></span></div><button class="btn-sm" onclick="toggleHint(\'h2\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-2" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(2, 'x=2,y=1')">提交</button><span class="feedback" id="fb-2"></span></div><button class="btn-sm" onclick="toggleHint('h2')">💡 思路提示</button>
     <div class="hint-box" id="h2"><p>利用绝对值不等式的性质：|A| &lt; a（a > 0）等价于 −a &lt; A &lt; a。</p></div>
     <button class="btn-sm" onclick="toggleAns('a2')">✅ 查看答案</button>
     <div class="ans-box" id="a2"><p><strong>解集为 −1 &lt; x &lt; 2。</strong></p><p>|2x − 1| &lt; 3 等价于 −3 &lt; 2x − 1 &lt; 3。</p><p>同时加 1：−2 &lt; 2x &lt; 4。</p><p>同时除以 2：−1 &lt; x &lt; 2。</p><p>数轴表示：在 −1 和 2 之间画空心圆圈，用线段连接。</p></div>
@@ -67,7 +67,7 @@
   <!-- Problem 3 -->
   <div class="problem">
     <p><strong>3.</strong> 鸡兔同笼：笼子里有鸡和兔共 35 个头，94 只脚。问鸡和兔各有多少只？</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, \'x=3,y=0\')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint(\'h3\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, 'x=3,y=0')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint('h3')">💡 思路提示</button>
     <div class="hint-box" id="h3"><p>设鸡 x 只，兔 y 只。头数关系：x + y = 35；脚数关系：2x + 4y = 94。</p></div>
     <button class="btn-sm" onclick="toggleAns('a3')">✅ 查看答案</button>
     <div class="ans-box" id="a3"><p><strong>鸡 23 只，兔 12 只。</strong></p><p>设鸡 x 只，兔 y 只，则：</p><p>① x + y = 35</p><p>② 2x + 4y = 94</p><p>由 ① × 2：2x + 2y = 70 ③</p><p>② − ③：2y = 24，y = 12。</p><p>代入 ①：x = 23。</p><p>检验：23 + 12 = 35 ✓，2×23 + 4×12 = 46 + 48 = 94 ✓。</p></div>
@@ -76,7 +76,7 @@
   <!-- Problem 4 -->
   <div class="problem">
     <p><strong>4.</strong> 解不等式组：{ 2x − 1 > 3, 3x + 2 ≤ 14 }，并求整数解。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-4" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(4, \'x>2\')">提交</button><span class="feedback" id="fb-4"></span></div><button class="btn-sm" onclick="toggleHint(\'h4\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-4" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(4, 'x>2')">提交</button><span class="feedback" id="fb-4"></span></div><button class="btn-sm" onclick="toggleHint('h4')">💡 思路提示</button>
     <div class="hint-box" id="h4"><p>分别解每个不等式，然后取交集。整数解即交集内的整数值。</p></div>
     <button class="btn-sm" onclick="toggleAns('a4')">✅ 查看答案</button>
     <div class="ans-box" id="a4"><p><strong>解集为 2 &lt; x ≤ 4，整数解为 x = 3, 4。</strong></p><p>解 2x − 1 > 3：2x > 4，x > 2。</p><p>解 3x + 2 ≤ 14：3x ≤ 12，x ≤ 4。</p><p>取交集：2 &lt; x ≤ 4。整数解为 x = 3 和 x = 4。</p></div>
@@ -85,7 +85,7 @@
   <!-- Problem 5 -->
   <div class="problem">
     <p><strong>5.</strong> 已知关于 x、y 的方程组 { 2x + 3y = k, 3x + 5y = k + 1 } 的解满足 x + y = 12。求 k 的值。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-5" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(5, \'x≤3\')">提交</button><span class="feedback" id="fb-5"></span></div><button class="btn-sm" onclick="toggleHint(\'h5\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-5" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(5, 'x≤3')">提交</button><span class="feedback" id="fb-5"></span></div><button class="btn-sm" onclick="toggleHint('h5')">💡 思路提示</button>
     <div class="hint-box" id="h5"><p>先用加减消元法解出 x、y 关于 k 的表达式，再代入 x + y = 12 求 k。或者直接对两个方程变形消元得到 x + y 与 k 的关系。</p></div>
     <button class="btn-sm" onclick="toggleAns('a5')">✅ 查看答案</button>
     <div class="ans-box" id="a5"><p><strong>k = 14。</strong></p><p>① × 3：6x + 9y = 3k</p><p>② × 2：6x + 10y = 2k + 2</p><p>相减：y = (2k + 2) − 3k = −k + 2。</p><p>代入 ①：2x + 3(−k + 2) = k，2x − 3k + 6 = k，2x = 4k − 6，x = 2k − 3。</p><p>由 x + y = 12：(2k − 3) + (−k + 2) = 12，k − 1 = 12，k = 13。</p><p>检验：k = 13 时，x = 2×13−3 = 23，y = −13+2 = −11，x+y = 12 ✓。</p><p>等等，让我重新验算：</p><p>① 2x + 3y = k</p><p>② 3x + 5y = k + 1</p><p>② − ①：x + 2y = 1</p><p>由 ①：(x + 2y) + x + y = 1 + 12 = k，即 1 + 12 = k，k = 13。</p><p>更巧妙的方法：② − ① 得 x + 2y = 1。又 x + y = 12，两式相减得 y = −11，代入 x + y = 12 得 x = 23。代入 ①：2×23 + 3×(−11) = 46 − 33 = 13 = k。所以 k = 13。</p></div>
@@ -94,7 +94,7 @@
   <!-- Problem 6 -->
   <div class="problem">
     <p><strong>6.</strong> 已知 a > b > 0，比较 1/a 和 1/b 的大小。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-6" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(6, \'1<x<5\')">提交</button><span class="feedback" id="fb-6"></span></div><button class="btn-sm" onclick="toggleHint(\'h6\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-6" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(6, '1<x<5')">提交</button><span class="feedback" id="fb-6"></span></div><button class="btn-sm" onclick="toggleHint('h6')">💡 思路提示</button>
     <div class="hint-box" id="h6"><p>利用不等式性质：若 a > b > 0，两边同除以 ab（正数），不等号方向不变。</p></div>
     <button class="btn-sm" onclick="toggleAns('a6')">✅ 查看答案</button>
     <div class="ans-box" id="a6"><p><strong>1/a &lt; 1/b。</strong></p><p>由 a > b > 0，两边同除以正数 ab：a/(ab) > b/(ab)，即 1/b > 1/a，所以 1/a &lt; 1/b。</p><p>直观理解：分母越大，分数值越小。a > b，所以 1/a 比 1/b 小。</p></div>
@@ -103,7 +103,7 @@
   <!-- Problem 7 -->
   <div class="problem">
     <p><strong>7.</strong> 一项工程，甲单独做 12 天完成，乙单独做 18 天完成。现在甲先做 3 天，然后乙加入。问还需要多少天完成？</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-7" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(7, \'x≥2或x≤-2\')">提交</button><span class="feedback" id="fb-7"></span></div><button class="btn-sm" onclick="toggleHint(\'h7\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-7" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(7, 'x≥2或x≤-2')">提交</button><span class="feedback" id="fb-7"></span></div><button class="btn-sm" onclick="toggleHint('h7')">💡 思路提示</button>
     <div class="hint-box" id="h7"><p>设总工作量为 1。甲效率 = 1/12，乙效率 = 1/18。甲先做 3 天完成 3/12 = 1/4，剩余 3/4 由甲乙合作完成。</p></div>
     <button class="btn-sm" onclick="toggleAns('a7')">✅ 查看答案</button>
     <div class="ans-box" id="a7"><p><strong>还需要 5.4 天（或 27/5 天）。</strong></p><p>甲效率 = 1/12，乙效率 = 1/18。</p><p>甲先做 3 天完成：3 × 1/12 = 1/4。</p><p>剩余工作量：1 − 1/4 = 3/4。</p><p>甲乙合作效率：1/12 + 1/18 = 3/36 + 2/36 = 5/36。</p><p>还需要天数：(3/4) ÷ (5/36) = (3/4) × (36/5) = 27/5 = 5.4 天。</p></div>
@@ -112,7 +112,7 @@
   <!-- Problem 8 -->
   <div class="problem">
     <p><strong>8.</strong> 解关于 x 的不等式：ax > b（分情况讨论 a > 0、a &lt; 0、a = 0）</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-8" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(8, \'x=1,y=1\')">提交</button><span class="feedback" id="fb-8"></span></div><button class="btn-sm" onclick="toggleHint(\'h8\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-8" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(8, 'x=1,y=1')">提交</button><span class="feedback" id="fb-8"></span></div><button class="btn-sm" onclick="toggleHint('h8')">💡 思路提示</button>
     <div class="hint-box" id="h8"><p>不等式两边除以 a 时，需要注意 a 的正负决定不等号方向是否改变。a = 0 时，不等式变为 0 > b，需要根据 b 的值判断。</p></div>
     <button class="btn-sm" onclick="toggleAns('a8')">✅ 查看答案</button>
     <div class="ans-box" id="a8"><p><strong>分情况讨论：</strong></p><p>① 当 a > 0 时，x > b/a。</p><p>② 当 a &lt; 0 时，除以负数不等号反向，x &lt; b/a。</p><p>③ 当 a = 0 时：不等式变为 0 > b。若 b &lt; 0，则 0 > b 恒成立，解为全体实数；若 b ≥ 0，则 0 > b 不成立，无解。</p></div>
@@ -121,7 +121,7 @@
   <!-- Problem 9 -->
   <div class="problem">
     <p><strong>9.</strong> 已知方程组 { x + y = 3a + 1, x − y = 5a − 1 } 的解满足 x > 0 且 y &lt; 0。求 a 的取值范围。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, \'x=0,y=3\')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint(\'h9\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, 'x=0,y=3')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint('h9')">💡 思路提示</button>
     <div class="hint-box" id="h9"><p>先解出 x、y 关于 a 的表达式，再代入 x > 0 和 y &lt; 0 两个条件，解不等式组求 a 的范围。</p></div>
     <button class="btn-sm" onclick="toggleAns('a9')">✅ 查看答案</button>
     <div class="ans-box" id="a9"><p><strong>a > 1。</strong></p><p>两式相加：2x = 8a，x = 4a。</p><p>两式相减：2y = −2a + 2，y = −a + 1。</p><p>由 x > 0：4a > 0，a > 0。</p><p>由 y &lt; 0：−a + 1 &lt; 0，a > 1。</p><p>取交集：a > 1。</p></div>
@@ -130,7 +130,7 @@
   <!-- Problem 10 -->
   <div class="problem">
     <p><strong>10.</strong> 一个两位数，十位数字与个位数字之和为 10。如果把这个两位数的十位数字与个位数字对调，得到的新数比原数大 36。求原数。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-10" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(10, \'x=-1,y=2\')">提交</button><span class="feedback" id="fb-10"></span></div><button class="btn-sm" onclick="toggleHint(\'h10\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-10" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(10, 'x=-1,y=2')">提交</button><span class="feedback" id="fb-10"></span></div><button class="btn-sm" onclick="toggleHint('h10')">💡 思路提示</button>
     <div class="hint-box" id="h10"><p>设十位数字为 x，个位数字为 y，则原数为 10x + y，新数为 10y + x。列方程组：x + y = 10，(10y + x) − (10x + y) = 36。</p></div>
     <button class="btn-sm" onclick="toggleAns('a10')">✅ 查看答案</button>
     <div class="ans-box" id="a10"><p><strong>原数是 37。</strong></p><p>设十位数字为 x，个位数字为 y（x、y 为 1~9 的整数，x ≠ 0）。</p><p>① x + y = 10</p><p>② (10y + x) − (10x + y) = 36，即 9y − 9x = 36，y − x = 4。</p><p>由 ① + ②′：2y = 14，y = 7。</p><p>代入 ①：x = 3。</p><p>原数为 37，新数为 73。检验：73 − 37 = 36 ✓。</p></div>

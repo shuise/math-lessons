@@ -49,7 +49,7 @@
   <!-- Problem 1 -->
   <div class="problem">
     <p><strong>1.</strong> 一个三位数，十位数字比个位数字大 1，百位数字比十位数字大 2，且各位数字之和为 10。如果把这个三位数的数字顺序颠倒，得到的新数比原数小 297。求这个三位数。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-1" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(1, \'532\')">提交</button><span class="feedback" id="fb-1"></span></div><button class="btn-sm" onclick="toggleHint(\'h1\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-1" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(1, '532')">提交</button><span class="feedback" id="fb-1"></span></div><button class="btn-sm" onclick="toggleHint('h1')">💡 思路提示</button>
     <div class="hint-box" id="h1"><p>从个位数字开始逐个尝试。个位加 1 得十位，十位加 2 得百位，看三个数字之和是否为 10。</p></div>
     <button class="btn-sm" onclick="toggleAns('a1')">✅ 查看答案</button>
     <div class="ans-box" id="a1"><p>从个位开始逐个尝试：<br>个位 = 0：十位 = 1，百位 = 3，数字和 = 0+1+3 = 4 ≠ 10<br>个位 = 1：十位 = 2，百位 = 4，数字和 = 1+2+4 = 7 ≠ 10<br>个位 = 2：十位 = 3，百位 = 5，数字和 = 2+3+5 = 10 ✓<br>所以三位数是 532。颠倒后为 235，532 − 235 = 297，符合条件。<br><strong>答案：532</strong></p></div>
@@ -58,7 +58,7 @@
   <!-- Problem 2 -->
   <div class="problem">
     <p><strong>2.</strong> 计算：1/2 + 1/6 + 1/12 + 1/20 + 1/30 + 1/42 + 1/56 + 1/72 + 1/90</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-2" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(2, \'9/10\')">提交</button><span class="feedback" id="fb-2"></span></div><button class="btn-sm" onclick="toggleHint(\'h2\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-2" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(2, '9/10')">提交</button><span class="feedback" id="fb-2"></span></div><button class="btn-sm" onclick="toggleHint('h2')">💡 思路提示</button>
     <div class="hint-box" id="h2"><p>观察每一项的分母：2 = 1×2，6 = 2×3，12 = 3×4，…… 你能把每一项拆成两个分数的差吗？比如 1/6 = 1/2 − 1/3。</p></div>
     <button class="btn-sm" onclick="toggleAns('a2')">✅ 查看答案</button>
     <div class="ans-box" id="a2"><p>把每一项拆成两个分数的差：<br>1/2 = 1/(1×2) = 1 − 1/2<br>1/6 = 1/(2×3) = 1/2 − 1/3<br>1/12 = 1/(3×4) = 1/3 − 1/4<br>……<br>1/90 = 1/(9×10) = 1/9 − 1/10<br>全部相加后，中间项全部抵消：<br>原式 = 1 − 1/10 = <strong>9/10</strong></p></div>
@@ -67,7 +67,7 @@
   <!-- Problem 3 -->
   <div class="problem">
     <p><strong>3.</strong> 观察下列数列的规律，在括号里填上合适的数：1, 4, 9, 16, 25, ( ), 49, 64</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, \'36\')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint(\'h3\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, '36')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint('h3')">💡 思路提示</button>
     <div class="hint-box" id="h3"><p>观察每个数与它所在位置序号的关系。第 1 个数是 1，第 2 个数是 4，第 3 个数是 9……</p></div>
     <button class="btn-sm" onclick="toggleAns('a3')">✅ 查看答案</button>
     <div class="ans-box" id="a3"><p>1 = 1×1，4 = 2×2，9 = 3×3，16 = 4×4，25 = 5×5<br>所以第 6 个数是 6×6 = <strong>36</strong><br>验证：第 7 个数 7×7 = 49，第 8 个数 8×8 = 64，规律正确。</p></div>
@@ -76,7 +76,7 @@
   <!-- Problem 4 -->
   <div class="problem">
     <p><strong>4.</strong> 比较 5/8 和 7/12 的大小，哪个分数更大？</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-4" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(4, \'5/8\')">提交</button><span class="feedback" id="fb-4"></span></div><button class="btn-sm" onclick="toggleHint(\'h4\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-4" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(4, '5/8')">提交</button><span class="feedback" id="fb-4"></span></div><button class="btn-sm" onclick="toggleHint('h4')">💡 思路提示</button>
     <div class="hint-box" id="h4"><p>把两个分数通分，变成同分母的分数再比较分子。</p></div>
     <button class="btn-sm" onclick="toggleAns('a4')">✅ 查看答案</button>
     <div class="ans-box" id="a4"><p>8 和 12 的最小公倍数是 24。<br>5/8 = (5×3)/(8×3) = 15/24<br>7/12 = (7×2)/(12×2) = 14/24<br>因为 15/24 > 14/24，所以 <strong>5/8 更大</strong>。</p></div>
@@ -85,7 +85,7 @@
   <!-- Problem 5 -->
   <div class="problem">
     <p><strong>5.</strong> 计算：(−1) + 2 + (−3) + 4 + (−5) + 6 + … + (−99) + 100</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-5" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(5, \'50\')">提交</button><span class="feedback" id="fb-5"></span></div><button class="btn-sm" onclick="toggleHint(\'h5\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-5" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(5, '50')">提交</button><span class="feedback" id="fb-5"></span></div><button class="btn-sm" onclick="toggleHint('h5')">💡 思路提示</button>
     <div class="hint-box" id="h5"><p>将相邻两项配对：(−1 + 2) = 1，(−3 + 4) = 1，…… 一共有多少对？</p></div>
     <button class="btn-sm" onclick="toggleAns('a5')">✅ 查看答案</button>
     <div class="ans-box" id="a5"><p>原式 = (−1 + 2) + (−3 + 4) + (−5 + 6) + … + (−99 + 100)<br>每一对的和都是 1，共有 100 ÷ 2 = 50 对。<br>总和 = 50 × 1 = <strong>50</strong></p></div>
@@ -94,7 +94,7 @@
   <!-- Problem 6 -->
   <div class="problem">
     <p><strong>6.</strong> 用数字 1、2、3、4 各一次组成两个两位数，怎样组合能使这两个两位数的乘积最大？最大的乘积是多少？</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-6" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(6, \'1312\')">提交</button><span class="feedback" id="fb-6"></span></div><button class="btn-sm" onclick="toggleHint(\'h6\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-6" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(6, '1312')">提交</button><span class="feedback" id="fb-6"></span></div><button class="btn-sm" onclick="toggleHint('h6')">💡 思路提示</button>
     <div class="hint-box" id="h6"><p>要使乘积最大，十位上应该放较大的数字。把最大的两个数字 4 和 3 放在十位，剩下 2 和 1 放在个位，比较两种排列的乘积。</p></div>
     <button class="btn-sm" onclick="toggleAns('a6')">✅ 查看答案</button>
     <div class="ans-box" id="a6"><p>十位放最大的两个数字：4 和 3。个位放剩下的 2 和 1。有两种可能：<br>41 × 32 = 1312<br>42 × 31 = 1302<br>1312 > 1302，所以 41 和 32 的组合乘积最大。<br><strong>答案：41 × 32 = 1312</strong></p></div>
@@ -103,7 +103,7 @@
   <!-- Problem 7 -->
   <div class="problem">
     <p><strong>7.</strong> 比较大小：999/1000 和 1000/1001，哪个大？不用计算器。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-7" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(7, \'1000/1001\')">提交</button><span class="feedback" id="fb-7"></span></div><button class="btn-sm" onclick="toggleHint(\'h7\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-7" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(7, '1000/1001')">提交</button><span class="feedback" id="fb-7"></span></div><button class="btn-sm" onclick="toggleHint('h7')">💡 思路提示</button>
     <div class="hint-box" id="h7"><p>将两个分数都写成「1 减去一个分数」的形式，比较减去的部分大小。</p></div>
     <button class="btn-sm" onclick="toggleAns('a7')">✅ 查看答案</button>
     <div class="ans-box" id="a7"><p>999/1000 = 1 − 1/1000<br>1000/1001 = 1 − 1/1001<br>因为 1/1000 > 1/1001，所以 1 − 1/1000 < 1 − 1/1001。<br>因此 <strong>1000/1001 更大</strong>。</p></div>
@@ -112,7 +112,7 @@
   <!-- Problem 8 -->
   <div class="problem">
     <p><strong>8.</strong> 把 1/7 化成小数，小数点后第 2024 位数字是多少？</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-8" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(8, \'15\')">提交</button><span class="feedback" id="fb-8"></span></div><button class="btn-sm" onclick="toggleHint(\'h8\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-8" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(8, '15')">提交</button><span class="feedback" id="fb-8"></span></div><button class="btn-sm" onclick="toggleHint('h8')">💡 思路提示</button>
     <div class="hint-box" id="h8"><p>先算出 1/7 的小数，找出循环节长度，再用 2024 除以循环节长度看余数。</p></div>
     <button class="btn-sm" onclick="toggleAns('a8')">✅ 查看答案</button>
     <div class="ans-box" id="a8"><p>1/7 = 0.142857142857…，循环节为 142857，长度为 6。<br>2024 ÷ 6 = 337 余 2。<br>余数为 2，对应循环节的第 2 位数字。<br>循环节第 2 位是 <strong>4</strong>。</p></div>
@@ -121,7 +121,7 @@
   <!-- Problem 9 -->
   <div class="problem">
     <p><strong>9.</strong> 在数轴上，从表示 −3 的点出发，先向右移动 7 个单位，再向左移动 5 个单位，最后到达哪个点？</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, \'13\')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint(\'h9\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, '13')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint('h9')">💡 思路提示</button>
     <div class="hint-box" id="h9"><p>在数轴上，向右移动就加上对应的数，向左移动就减去对应的数。一步一步来。</p></div>
     <button class="btn-sm" onclick="toggleAns('a9')">✅ 查看答案</button>
     <div class="ans-box" id="a9"><p>起点：−3<br>向右移动 7 个单位：−3 + 7 = 4<br>再向左移动 5 个单位：4 − 5 = −1<br>最后到达 <strong>−1</strong>。</p></div>
@@ -130,7 +130,7 @@
   <!-- Problem 10 -->
   <div class="problem">
     <p><strong>10.</strong> 一个自然数，用它去除 70、110、160 得到的三个余数之和是 50。求这个自然数。</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-10" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(10, \'17\')">提交</button><span class="feedback" id="fb-10"></span></div><button class="btn-sm" onclick="toggleHint(\'h10\')">💡 思路提示</button>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-10" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(10, '17')">提交</button><span class="feedback" id="fb-10"></span></div><button class="btn-sm" onclick="toggleHint('h10')">💡 思路提示</button>
     <div class="hint-box" id="h10"><p>三个被除数的和是 340，减去余数和 50 得到 290，这个 290 一定是除数的整数倍。找出 290 大于 16 的约数，逐个验证。</p></div>
     <button class="btn-sm" onclick="toggleAns('a10')">✅ 查看答案</button>
     <div class="ans-box" id="a10"><p>三个被除数的和：70 + 110 + 160 = 340。<br>减去三个余数的和 50：340 − 50 = 290。<br>290 一定是除数的整数倍（因为 340 = 除数 × 商的和 + 50）。<br>290 = 2 × 5 × 29，约数有：1, 2, 5, 10, 29, 58, 145, 290。<br>三个余数之和为 50，每个余数都小于除数，所以除数至少为 17（如果除数是 16，三个余数最大为 15+15+15=45 < 50）。<br>大于 16 的约数：29, 58, 145, 290。<br>逐个验证：<br>29：70÷29=2 余 12，110÷29=3 余 23，160÷29=5 余 15，12+23+15=50 ✓<br>58：70÷58=1 余 12，110÷58=1 余 52，160÷58=2 余 44，12+52+44=108 ✗<br>因此 <strong>除数是 29</strong>。</p></div>
