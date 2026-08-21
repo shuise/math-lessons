@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """
 通用课件检查工具 — 检查 self-learning/exams 目录下所有 exam/olympiad 文件的交互状态
-用法: python3 check_exams.py
+用法: python3 tools/check_exams.py [exams_dir]
+
+默认检查 self-learning/exams/ 目录，可传自定义路径。
 
 检查项:
 1. JS 函数是否齐全
@@ -15,7 +17,13 @@
 """
 import os, re, glob, sys
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+# 支持从项目根目录或 tools/ 运行
+_script_dir = os.path.dirname(os.path.abspath(__file__))
+_project_root = os.path.dirname(_script_dir)
+DEFAULT_EXAMS = os.path.join(_project_root, 'self-learning', 'exams')
+
+# 命令行参数: 可指定 exams 目录
+BASE = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_EXAMS
 
 def scan_file(fpath):
     with open(fpath, 'r') as f:

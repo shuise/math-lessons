@@ -1,6 +1,13 @@
+#!/usr/bin/env python3
+"""
+update_mobile_css.py - 批量更新 self-learning 课件的移动端 CSS
+用法: python3 tools/update_mobile_css.py
+"""
 import os
 
-dirpath = "self-learning"
+_script_dir = os.path.dirname(os.path.abspath(__file__))
+_project_root = os.path.dirname(_script_dir)
+dirpath = os.path.join(_project_root, "self-learning")
 count = 0
 
 for fname in os.listdir(dirpath):

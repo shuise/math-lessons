@@ -1,4 +1,16 @@
-import re, os
+#!/usr/bin/env python3
+"""
+add_prereq_links.py - 为 self-learning 课件批量添加前置知识链接
+用法:
+  python3 tools/add_prereq_links.py          # 执行添加
+  python3 tools/add_prereq_links.py --check   # 仅检查不修改
+"""
+import re, os, sys
+
+# 支持从项目根目录运行
+_script_dir = os.path.dirname(os.path.abspath(__file__))
+_project_root = os.path.dirname(_script_dir)
+CHECK_ONLY = '--check' in sys.argv
 
 courses = {
     1: "natural-numbers.html", 2: "fractions.html", 3: "negative-numbers.html",
@@ -16,7 +28,7 @@ courses = {
     32: "data-collection.html", 33: "data-analysis.html", 34: "probability.html",
 }
 
-dirpath = "self-learning"
+dirpath = os.path.join(_project_root, "self-learning")
 count = 0
 
 for fname in os.listdir(dirpath):
@@ -68,9 +80,16 @@ for fname in os.listdir(dirpath):
     )
 
     if new_content != content:
-        with open(fpath, 'w', encoding='utf-8') as f:
-            f.write(new_content)
-        print(f"Updated: {fname}")
-        count += 1
+        if CHECK_ONLY:
+            print(f"NEEDS UPDATE: {fname}")
+            count += 1
+        else:
+            with open(fpath, 'w', encoding='utf-8') as f:
+                f.write(new_content)
+            print(f"Updated: {fname}")
+            count += 1
 
-print(f"\nTotal updated: {count} files")
+if CHECK_ONLY:
+    print(f"\n{count} files need update (check mode)")
+else:
+    print(f"\nTotal updated: {count} files")

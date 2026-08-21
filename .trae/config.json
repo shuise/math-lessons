@@ -1,0 +1,99 @@
+{
+  "hooks": {
+    "onFileSave": [
+      {
+        "name": "check-exams",
+        "description": "检查试卷/奥数文件的交互状态（JS函数/转义引号/feedback span/CSS样式）",
+        "pattern": "self-learning/exams/*.html",
+        "command": "cd ${projectRoot} && python3 tools/check_exams.py"
+      },
+      {
+        "name": "check-courseware",
+        "description": "检查课件的前置知识声明和难度标签",
+        "pattern": "self-learning/*.html",
+        "command": "cd ${projectRoot} && python3 tools/add_prereq_links.py --check"
+      }
+    ],
+    "onFileCreate": [
+      {
+        "name": "init-exam-ui",
+        "description": "新建试卷文件时注入标准交互UI（底部留白100px/不贴边/checkSingle+checkMulti+checkFill）",
+        "pattern": "self-learning/exams/*.html",
+        "command": "cd ${projectRoot} && python3 tools/check_exams.py ${file}"
+      }
+    ],
+    "manual": [
+      {
+        "name": "parse-epub",
+        "description": "解析 EPUB 文件为 Markdown（教材入库）",
+        "command": "cd ${projectRoot} && python3 tools/parse_epub.py"
+      },
+      {
+        "name": "split-epub-books",
+        "description": "按 ncx 顶层书目拆分合集 Markdown 为每本一个文件",
+        "command": "cd ${projectRoot} && python3 tools/split_epub_books.py"
+      },
+      {
+        "name": "update-mobile-css",
+        "description": "批量更新 self-learning 课件的移动端 CSS（去边角/留白/100%宽度）",
+        "command": "cd ${projectRoot} && python3 tools/update_mobile_css.py"
+      },
+      {
+        "name": "remove-diff-tags",
+        "description": "批量移除 self-learning 课件中的难度标签",
+        "command": "cd ${projectRoot} && python3 tools/remove_diff_tags.py"
+      },
+      {
+        "name": "add-prereq-links",
+        "description": "为 self-learning 课件批量添加前置知识链接",
+        "command": "cd ${projectRoot} && python3 tools/add_prereq_links.py"
+      },
+      {
+        "name": "check-exams-full",
+        "description": "全量检查 exams 目录（手动触发完整报告）",
+        "command": "cd ${projectRoot} && python3 tools/check_exams.py"
+      }
+    ]
+  },
+  "tools": [
+    {
+      "name": "check_exams",
+      "description": "检查试卷交互状态（JS函数/转义引号/容器id/feedback span/CSS样式）",
+      "script": "tools/check_exams.py",
+      "trigger": "onSave:self-learning/exams/*.html",
+      "args": "[exams_dir]"
+    },
+    {
+      "name": "parse_epub",
+      "description": "解析 EPUB 文件提取文本为 Markdown",
+      "script": "tools/parse_epub.py",
+      "trigger": "manual",
+      "args": "<input.epub> [-o <output_dir>]"
+    },
+    {
+      "name": "split_epub_books",
+      "description": "按 ncx 顶层书目拆分合集 Markdown",
+      "script": "tools/split_epub_books.py",
+      "trigger": "manual",
+      "args": "<epub> <合集md> [输出目录]"
+    },
+    {
+      "name": "update_mobile_css",
+      "description": "批量更新课件移动端 CSS",
+      "script": "tools/update_mobile_css.py",
+      "trigger": "manual"
+    },
+    {
+      "name": "remove_diff_tags",
+      "description": "批量移除课件难度标签",
+      "script": "tools/remove_diff_tags.py",
+      "trigger": "manual"
+    },
+    {
+      "name": "add_prereq_links",
+      "description": "批量添加前置知识链接",
+      "script": "tools/add_prereq_links.py",
+      "trigger": "manual"
+    }
+  ]
+}
