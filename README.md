@@ -1,7 +1,12 @@
 # 数学课程 
 
+高中在线地址： https://fe.bluetech.top/lessons/
 
-在线地址： https://fe.bluetech.top/lessons/
+
+
+初中在线地址：https://fe.bluetech.top/self-learning
+
+
 
 
 ## 其他说明

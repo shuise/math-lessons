@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>抛物线、二次函数与椭圆曲线 — 专题</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+<link rel="stylesheet" href="../style.css">
+<style>
+  :root { --accent: #6a1b9a; }
+  body { background: #f5f7fa; }
+  h1 { color: var(--accent); }
+  h2 { color: #4a148c; border-bottom: 2px solid #e1bee7; padding-bottom: 8px; margin-top: 48px; }
+  h3 { color: #5e35b1; margin-top: 28px; }
+  .section-intro { color: #555; font-size: 15px; margin-bottom: 20px; line-height: 1.9; }
+  .explain-text { color: #444; font-size: 14.5px; line-height: 2; margin: 12px 0; }
+  .explain-text strong { color: #4a148c; }
+  .canvas-wrap {
+    text-align: center; margin: 20px 0; background: #fafafa;
+    border-radius: 12px; padding: 16px; border: 1px solid #e8e8e8;
+  }
+  .canvas-wrap canvas { display: block; margin: 0 auto; max-width: 100%; }
+  .controls {
+    display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
+    align-items: center; margin: 12px 0; padding: 12px 16px;
+    background: #f3e5f5; border-radius: 8px;
+  }
+  .controls label { font-size: 14px; color: #4a148c; font-weight: 500; white-space: nowrap; }
+  .controls input[type=range] { width: 120px; accent-color: var(--accent); }
+  .controls .val { display: inline-block; min-width: 36px; font-size: 13px; color: #6a1b9a; font-weight: bold; text-align: center; }
+  .info-panel {
+    display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+    margin: 10px 0; font-size: 14px;
+  }
+  .info-tag {
+    padding: 4px 12px; border-radius: 14px; font-weight: 500;
+    background: #ede7f6; color: #4527a0; font-size: 13px;
+  }
+  .info-tag.highlight { background: #fff3e0; color: #e65100; }
+  .highlight-box {
+    background: linear-gradient(135deg, #f3e5f5, #e8eaf6);
+    border-left: 4px solid #6a1b9a; padding: 16px 20px; border-radius: 0 8px 8px 0;
+    margin: 20px 0; line-height: 1.9;
+  }
+  .relation-chain {
+    text-align: center; font-size: 15px; padding: 20px; background: #fafafa;
+    border-radius: 12px; border: 1px solid #e0e0e0; margin: 24px 0;
+    line-height: 2.4;
+  }
+  .relation-chain .arrow { color: #6a1b9a; font-weight: bold; font-size: 18px; }
+  .note { background: #fff8e1; border-left: 4px solid #ffc107; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 16px 0; font-size: 14px; line-height: 1.8; }
+  .btn-group { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 8px 0; }
+  .btn-group button {
+    padding: 6px 16px; border: 1px solid #ce93d8; border-radius: 16px;
+    background: #fff; color: #6a1b9a; cursor: pointer; font-size: 13px;
+    transition: all 0.2s;
+  }
+  .btn-group button:hover, .btn-group button.active { background: #6a1b9a; color: #fff; }
+  .step-list { list-style: none; padding: 0; }
+  .step-list li { padding: 8px 0 8px 28px; position: relative; line-height: 1.8; }
+  .step-list li::before { content: '▸'; position: absolute; left: 8px; color: #6a1b9a; }
+  .key-point { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 16px 0; line-height: 1.9; }
+
+  @media (max-width: 720px) {
+    article { padding: 20px 12px !important; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; margin-top: 32px; }
+    h3 { font-size: 16px; }
+    .controls { gap: 8px; padding: 10px; }
+    .controls input[type=range] { width: 80px; }
+    .controls label { font-size: 12px; }
+    .canvas-wrap { padding: 8px; }
+    .explain-text { font-size: 13.5px; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="../index.html">← 课程列表</a></p>
+  <h1>抛物线、二次函数与椭圆曲线</h1>
+
+  <p class="section-intro">
+    从几何的<strong>圆锥曲线</strong>，到代数的<strong>二次函数图象</strong>，再到现代密码学的<strong>椭圆曲线</strong>——它们之间有着深厚的几何与代数联系。本专题通过<strong>3D 动画与交互</strong>带你直观感受这些关系。
+  </p>
+
+  <!-- ==================== 一、圆锥曲线 ==================== -->
+  <h2>一、圆锥曲线：同一个圆锥，不同的截面</h2>
+
+  <h3>什么是圆锥曲线？</h3>
+  <p class="explain-text">
+    想象一个<strong>圆锥</strong>——就像冰淇淋的蛋筒，把它上下对称地延伸，得到一个"双锥体"（两个锥尖对尖）。现在，用一把<strong>无限大的"刀"（平面）</strong>去切这个双锥体。刀的角度不同，切出来的截面形状就不同——这就是<strong>圆锥曲线</strong>。
+  </p>
+  <p class="explain-text">
+    这个概念最早由古希腊数学家<strong>阿波罗尼奥斯</strong>（Apollonius of Perga，约公元前 200 年）系统研究。他写了一本叫《圆锥曲线》的书，用纯几何方法推导出了几乎所有我们今天知道的圆锥曲线性质——<strong>比坐标系的发明早了 1800 年！</strong>
+  </p>
+
+  <div class="key-point">
+    <strong>核心理解：</strong>一个圆锥 + 一个平面 = 四种曲线。刀的角度决定了截面是<strong>圆、椭圆、抛物线还是双曲线</strong>。它们不是四个孤立的图形，而是同一几何过程的<strong>连续变化</strong>。
+  </div>
+
+  <p class="explain-text">
+    <strong>如何判断截面类型？</strong>关键看刀面与圆锥<strong>轴线</strong>的夹角，以及刀面与圆锥<strong>母线</strong>（侧面上的线）的夹角：
+  </p>
+  <ul class="step-list">
+    <li><strong>刀面 ⟂ 轴线</strong>（夹角 = 90°）→ 截面是<strong>圆</strong>，这是最特殊的情况</li>
+    <li><strong>刀面倾斜，但角度大于母线角</strong> → 截面是<strong>椭圆</strong>，一个压扁的圆</li>
+    <li><strong>刀面恰好平行于一条母线</strong> → 截面是<strong>抛物线</strong>，临界状态！</li>
+    <li><strong>刀面更倾斜，角度小于母线角</strong> → 截面是<strong>双曲线</strong>，会切到上下两个锥</li>
+  </ul>
+
+  <p class="explain-text">
+    拖动下方滑块，<strong>亲眼观察</strong>刀面角度变化时截面形状如何连续演变。也可以点击"自动演示"看完整过程。
+  </p>
+
+  <div class="canvas-wrap">
+    <canvas id="coneCanvas" width="600" height="500"></canvas>
+  </div>
+  <div class="controls">
+    <label>刀面角度：</label>
+    <input type="range" id="planeAngle" min="0" max="80" value="30" step="0.5">
+    <span class="val" id="angleVal">30°</span>
+  </div>
+  <div class="btn-group">
+    <button onclick="coneAutoPlay()">▶ 自动演示</button>
+    <button onclick="coneReset()">↺ 重置</button>
+  </div>
+  <div class="info-panel">
+    <span class="info-tag" id="sectionType">椭圆</span>
+    <span class="info-tag highlight" id="sectionDetail">截面与轴线夹角 > 母线夹角</span>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>几何关系：</strong>抛物线是<strong>椭圆的极限形态</strong>。保持椭圆的一个顶点和焦点不动，把另一个焦点拉向无穷远处，椭圆就会变成一条抛物线。此时离心率 <em>e</em> 从小于 1 逐渐趋近于 1。而双曲线是"切过了头"——刀面同时切到了上下两个锥。</p>
+  </div>
+
+  <!-- ==================== 二、一元二次函数 ==================== -->
+  <h2>二、一元二次函数图象：y = ax² + bx + c</h2>
+
+  <h3>抛物线的几何定义</h3>
+  <p class="explain-text">
+    在几何中，<strong>抛物线是这样定义的：在平面内，到一个定点 F 和一条不经过 F 的定直线 l 距离相等的点的轨迹（或集合）。</strong>这个定点 F 叫做<strong>焦点</strong>，定直线 l 叫做<strong>准线</strong>。
+  </p>
+  <p class="explain-text">
+    这个定义非常优美：抛物线上任意一点 P，它到焦点 F 的距离 PF，恰好等于它到准线 l 的垂直距离。换句话说，抛物线就是"到一条线和一个点一样远"的所有点组成的曲线。这个定义完全不依赖圆锥——它直接告诉你抛物线长什么样、有什么性质。
+  </p>
+
+  <div class="key-point">
+    <strong>抛物线定义：</strong>到定点（焦点）和定直线（准线）距离相等的点的轨迹。焦点到准线的距离决定了抛物线的"开口大小"——距离越大，抛物线越"宽"。
+  </div>
+
+  <h3>从几何到代数</h3>
+  <p class="explain-text">
+    用圆锥截面可以得到抛物线，用焦点和准线也可以定义抛物线——这两种定义是等价的。在代数中，<strong>一元二次函数 y = ax² + bx + c</strong> 的图象恰好就是一条抛物线——但只是<strong>开口向上或向下</strong>的抛物线（对称轴平行于 y 轴）。如果抛物线开口向左或向右（如 x = y²），它仍然是一条抛物线，但不能写成 y = f(x) 的形式。
+  </p>
+  <p class="explain-text">
+    <strong>三个参数分别控制什么？</strong>把抛物线想象成一根有弹性的 U 形钢丝：
+  </p>
+  <ul class="step-list">
+    <li><strong>a（二次项系数）</strong>：控制<strong>开口方向和宽度</strong>。a > 0 开口向上（像碗），a < 0 开口向下（像山）。|a| 越大，抛物线越"瘦"；|a| 越小，抛物线越"胖"</li>
+    <li><strong>b（一次项系数）</strong>：控制<strong>对称轴的水平位置</strong>。b 与 a 一起决定顶点在 x 轴的哪里：顶点横坐标 = −b/(2a)</li>
+    <li><strong>c（常数项）</strong>：控制<strong>上下平移</strong>。c 就是抛物线与 y 轴的交点纵坐标（因为当 x=0 时，y = c）</li>
+  </ul>
+
+  <p class="explain-text">
+    拖动下方滑块，<strong>观察每个参数如何影响抛物线</strong>。特别留意：改变 b 时，顶点沿一条<strong>倒抛物线</strong>轨迹移动！
+  </p>
+
+  <div class="canvas-wrap">
+    <canvas id="quadCanvas" width="560" height="400"></canvas>
+  </div>
+  <div class="controls">
+    <label>a（开口）：</label>
+    <input type="range" id="paramA" min="-30" max="30" value="10" step="1">
+    <span class="val" id="valA">1.0</span>
+    <label>b（对称）：</label>
+    <input type="range" id="paramB" min="-40" max="40" value="0" step="1">
+    <span class="val" id="valB">0</span>
+    <label>c（截距）：</label>
+    <input type="range" id="paramC" min="-30" max="30" value="-10" step="1">
+    <span class="val" id="valC">-1.0</span>
+  </div>
+  <div class="info-panel">
+    <span class="info-tag" id="vertexInfo">顶点: (0, -1.0)</span>
+    <span class="info-tag" id="axisInfo">对称轴: x = 0</span>
+    <span class="info-tag highlight" id="deltaInfo">Δ = 40, 两个实根</span>
+  </div>
+  <div class="btn-group">
+    <button onclick="quadPreset('up')">a>0 开口向上</button>
+    <button onclick="quadPreset('down')">a<0 开口向下</button>
+    <button onclick="quadPreset('shift')">b 变化</button>
+    <button onclick="quadPreset('noroot')">无实根</button>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>关键公式：</strong>顶点坐标 = (−b/2a, (4ac−b²)/4a)，判别式 Δ = b² − 4ac。Δ > 0 时抛物线与 x 轴有两个交点（两个实根），Δ = 0 时恰好相切（一个重根），Δ < 0 时完全在 x 轴上方或下方（无实根）。</p>
+  </div>
+
+  <!-- ==================== 三、椭圆到抛物线的极限 ==================== -->
+  <h2>三、从椭圆到抛物线：极限之美</h2>
+
+  <h3>为什么抛物线是椭圆的"极限"？</h3>
+  <p class="explain-text">
+    椭圆有两个<strong>焦点</strong> F₁ 和 F₂。椭圆上任意一点到两焦点的距离之和是常数（这就是椭圆的定义）。现在做一个思想实验：<strong>保持 F₁ 和左端点不动，把 F₂ 逐渐向右拉到无穷远</strong>。随着 F₂ 远去，椭圆变得越来越扁、越来越长，直到 F₂ "到达无穷远"——椭圆就变成了<strong>抛物线</strong>。
+  </p>
+  <p class="explain-text">
+    衡量这个过程的参数是<strong>离心率 e = c/a</strong>（c 是焦距的一半，a 是半长轴）。当 e 从 0 增加到 1：
+  </p>
+  <ul class="step-list">
+    <li><strong>e = 0</strong>：圆（两个焦点重合在圆心）</li>
+    <li><strong>0 < e < 1</strong>：椭圆，e 越大越扁</li>
+    <li><strong>e → 1⁻</strong>：椭圆被无限拉长，趋向抛物线</li>
+    <li><strong>e = 1</strong>：抛物线！只有一个焦点（另一个在无穷远）</li>
+    <li><strong>e > 1</strong>：双曲线（越过临界点之后）</li>
+  </ul>
+
+  <p class="explain-text">
+    拖动离心率滑块或用"播放动画"按钮，<strong>亲眼见证</strong>椭圆如何被拉成抛物线。注意观察右焦点 F₂ 的位置变化。
+  </p>
+
+  <div class="canvas-wrap">
+    <canvas id="limitCanvas" width="560" height="420"></canvas>
+  </div>
+  <div class="controls">
+    <label>离心率 e：</label>
+    <input type="range" id="eccentricity" min="50" max="100" value="70" step="1">
+    <span class="val" id="eccVal">0.70</span>
+  </div>
+  <div class="info-panel">
+    <span class="info-tag" id="eccType">椭圆</span>
+    <span class="info-tag highlight" id="eccDesc">0 < e < 1，封闭曲线</span>
+  </div>
+  <div class="btn-group">
+    <button onclick="animateEcc()">▶ 播放动画（椭圆→抛物线）</button>
+    <button onclick="resetEcc()">↺ 重置到 e=0.7</button>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>极限理解：</strong>抛物线是椭圆在"一个焦点被拉到无穷远"时的极限情形。当 e → 1⁻ 时，椭圆越来越扁，右端点趋向无穷，最终"断开"变成开放的抛物线。这解释了为什么抛物线只有一个焦点、离心率恰好等于 1。</p>
+  </div>
+
+  <!-- ==================== 四、椭圆曲线 ==================== -->
+  <h2>四、椭圆曲线：升维到三次</h2>
+
+  <div class="note" style="border-left-color:#6a1b9a;background:#f3e5f5;">
+    <strong>扩展学习：</strong>
+    <a href="https://www.bilibili.com/video/BV1U64y1J7dM/" target="_blank" rel="noopener">椭圆曲线密码学详解</a>（B 站视频，深入理解椭圆曲线的数学原理与密码学应用）
+  </div>
+
+  <h3>椭圆曲线 ≠ 椭圆</h3>
+  <p class="explain-text">
+    <strong>椭圆曲线</strong>虽然名字里带"椭圆"，但它的图象既不是椭圆也不是抛物线。这个名字的由来是：人们在计算<strong>椭圆的弧长</strong>时，遇到了形如 y² = x³ + ax + b 的积分，这类积分被称为"椭圆积分"，对应的曲线也就叫"椭圆曲线"。
+  </p>
+  <p class="explain-text">
+    <strong>从二次到三次：</strong>抛物线和椭圆都是<strong>二次方程</strong>（x² 或 y² 项），而椭圆曲线是<strong>三次方程</strong>（y² = x³ + ax + b）。这多出来的"一次"带来了本质的区别：
+  </p>
+  <ul class="step-list">
+    <li><strong>二次曲线上的点</strong>只有几何位置关系，点与点之间没有自然的"加法"</li>
+    <li><strong>椭圆曲线上的点</strong>具有<strong>"弦切法加法"</strong>：任意两点连线与曲线交于第三点，利用这个性质可以定义点之间的加法，构成<strong>阿贝尔群</strong></li>
+    <li>这个代数群结构正是<strong>椭圆曲线密码学（ECC）</strong>的数学基础——比特币、HTTPS 证书背后都有它的身影</li>
+  </ul>
+
+  <p class="explain-text">
+    拖动参数 a 和 b，观察椭圆曲线的形态变化。特别注意：当判别式 Δ = −4a³ − 27b² = 0 时，曲线会出现<strong>尖点或自交点</strong>（奇异曲线），此时不能用于密码学。
+  </p>
+
+  <div class="canvas-wrap">
+    <canvas id="ecCanvas" width="560" height="400"></canvas>
+  </div>
+  <div class="controls">
+    <label>参数 a：</label>
+    <input type="range" id="ecA" min="-40" max="10" value="-10" step="1">
+    <span class="val" id="ecValA">-1.0</span>
+    <label>参数 b：</label>
+    <input type="range" id="ecB" min="-30" max="30" value="0" step="1">
+    <span class="val" id="ecValB">0</span>
+  </div>
+  <div class="info-panel">
+    <span class="info-tag" id="ecDisc">Δ = -4a³ − 27b²</span>
+    <span class="info-tag highlight" id="ecStatus">非奇异</span>
+  </div>
+  <div class="btn-group">
+    <button class="active" onclick="setECPreset(-10,0)">比特币曲线</button>
+    <button onclick="setECPreset(-10,10)">双组件</button>
+    <button onclick="setECPreset(-30,20)">单组件</button>
+    <button onclick="setECPreset(0,0)">奇异曲线</button>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>弦切法加法（几何演示）：</strong>在椭圆曲线上任取两点 P 和 Q，过 P、Q 作直线，与曲线交于第三点 R。将 R 关于 x 轴反射得到 R'，定义 P + Q = R'。如果 P = Q（同一个点），则用切线代替割线。这个运算满足交换律、结合律，有单位元（无穷远点）和逆元，构成一个<strong>阿贝尔群</strong>。</p>
+  </div>
+
+  <div class="note">
+    <strong>对比总结：</strong>抛物线 y = x²（二次，开放）、椭圆 x²/a² + y²/b² = 1（二次，封闭）、椭圆曲线 y² = x³ + ax + b（三次，有代数群结构）。<strong>次数从 2 升到 3</strong>，不仅改变了图象的形状，更赋予了曲线上点之间<strong>全新的代数结构</strong>——这正是现代密码学的基石。
+  </div>
+
+  <!-- ==================== 总结 ==================== -->
+  <h2>总结：关系链</h2>
+
+  <h3>统一的代数表达</h3>
+  <p class="explain-text">
+    圆、椭圆、抛物线和双曲线，这四种圆锥曲线可以用<strong>同一个二次方程</strong>来表示：
+  </p>
+  <p style="text-align:center;font-size:18px;padding:12px;background:#f3e5f5;border-radius:8px;margin:12px 0;">
+    <strong>Ax² + Bxy + Cy² + Dx + Ey + F = 0</strong>
+  </p>
+  <p class="explain-text">
+    通过调整系数 A、B、C、D、E、F，这个方程可以描述<strong>所有圆锥曲线</strong>。判别式 B² − 4AC 决定了曲线类型：B² − 4AC < 0 为椭圆（包括圆），B² − 4AC = 0 为抛物线，B² − 4AC > 0 为双曲线。这正是几何与代数<strong>完美统一</strong>的体现——同一个方程，涵盖四种看似不同的曲线。
+  </p>
+
+  <div class="relation-chain">
+    <p><strong>一元二次函数图象</strong> <span class="arrow">→ 几何等价 →</span> <strong>特定方向的抛物线</strong> <span class="arrow">→ 极限界限 →</span> <strong>椭圆</strong>（一个焦点拉到无穷远）</p>
+    <p style="margin-top:16px;"><strong>抛物线 &amp; 椭圆</strong>（二次曲线：y = x² 或 x² + y² = 1） <span class="arrow">→ 次数升级到 3 次 →</span> <strong>椭圆曲线</strong>（三次曲线：y² = x³ + ax + b）</p>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;color:#999;"><a href="../conic-sections/index.html">相关课程：曲线和方程 — 圆锥曲线 →</a></p>
+</article>
+
+<script>
+// ========== 一、3D 圆锥曲线截面 ==========
+(function() {
+  const canvas = document.getElementById('coneCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const slider = document.getElementById('planeAngle');
+  const angleVal = document.getElementById('angleVal');
+  const sectionType = document.getElementById('sectionType');
+  const sectionDetail = document.getElementById('sectionDetail');
+
+  // 3D 圆锥参数
+  const coneHalfAngle = 25; // 母线与轴线的夹角
+  const coneHalfRad = coneHalfAngle * Math.PI / 180;
+
+  // 3D → 2D 等距投影
+  function isoX(x, y) { return W/2 + (x - y) * 0.866; }
+  function isoY(x, y, z) { return 380 - z + (x + y) * 0.5; }
+
+  // 圆锥面上一点 (3D)：高度 z，角度 phi 绕轴线
+  function conePoint(z, phi) {
+    const r = (290 - z) * Math.tan(coneHalfRad);
+    return { x: r * Math.cos(phi), y: r * Math.sin(phi), z: z };
+  }
+
+  // 计算截面平面与圆锥的交线
+  function computeIntersection(planeAngleDeg) {
+    const planeAngleRad = planeAngleDeg * Math.PI / 180;
+    const points = [];
+
+    // 平面方程：过点 (0, 0, z0)，法向量 (sinθ, 0, cosθ)
+    // 平面与圆锥的交线参数化
+    const z0 = 180; // 平面过轴线的高度
+    const tanTheta = Math.tan(planeAngleRad);
+
+    for (let i = 0; i <= 360; i += 1) {
+      const phi = i * Math.PI / 180;
+      // 圆锥面：r = (290 - z) * tan(coneHalfRad)
+      // 平面：z = z0 + tanTheta * x = z0 + tanTheta * r * cos(phi)
+      // 代入：z = z0 + tanTheta * (290 - z) * tan(coneHalfRad) * cos(phi)
+      // 解出 z
+      const denom = 1 + tanTheta * Math.tan(coneHalfRad) * Math.cos(phi);
+      if (Math.abs(denom) < 0.001) continue; // 平行于母线
+      const z = (z0 + tanTheta * 290 * Math.tan(coneHalfRad) * Math.cos(phi)) / denom;
+      if (z < 30 || z > 330) continue;
+
+      const r = (290 - z) * Math.tan(coneHalfRad);
+      const x = r * Math.cos(phi);
+      const y = r * Math.sin(phi);
+      points.push({ x, y, z });
+    }
+    return points;
+  }
+
+  function drawCone(planeAngleDeg) {
+    ctx.clearRect(0, 0, W, H);
+
+    const planeAngleRad = planeAngleDeg * Math.PI / 180;
+
+    // === 1. 画上部圆锥（背面） ===
+    ctx.fillStyle = 'rgba(120,60,160,0.12)';
+    ctx.strokeStyle = 'rgba(120,60,160,0.3)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    const apex = { x: 0, y: 0, z: 290 };
+    const baseR = 290 * Math.tan(coneHalfRad);
+    // 画圆锥背面（phi 从 π 到 2π）
+    ctx.moveTo(isoX(apex.x, apex.y), isoY(apex.x, apex.y, apex.z));
+    for (let i = 180; i <= 360; i++) {
+      const phi = i * Math.PI / 180;
+      const bx = baseR * Math.cos(phi);
+      const by = baseR * Math.sin(phi);
+      ctx.lineTo(isoX(bx, by), isoY(bx, by, 0));
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // 底面椭圆（背面半）
+    ctx.beginPath();
+    ctx.ellipse(isoX(0,0), isoY(0,0,0), baseR * 0.866, baseR * 0.35, 0, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // === 2. 画下部圆锥（背面） ===
+    const bottomZ = -60;
+    const bottomR = (290 - bottomZ) * Math.tan(coneHalfRad);
+    ctx.fillStyle = 'rgba(120,60,160,0.06)';
+    ctx.beginPath();
+    ctx.moveTo(isoX(apex.x, apex.y), isoY(apex.x, apex.y, apex.z));
+    for (let i = 180; i <= 360; i++) {
+      const phi = i * Math.PI / 180;
+      const bx = bottomR * Math.cos(phi);
+      const by = bottomR * Math.sin(phi);
+      ctx.lineTo(isoX(bx, by), isoY(bx, by, bottomZ));
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(120,60,160,0.2)';
+    ctx.stroke();
+
+    // === 3. 画轴线 ===
+    ctx.setLineDash([5, 5]);
+    ctx.strokeStyle = '#999';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(isoX(0, 0), isoY(0, 0, 310));
+    ctx.lineTo(isoX(0, 0), isoY(0, 0, bottomZ - 20));
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // === 4. 画截面平面 ===
+    const planeMidZ = 180;
+    const planeLen = baseR * 1.4;
+    const dx = planeLen * Math.cos(planeAngleRad);
+    const dz = planeLen * Math.sin(planeAngleRad);
+    const pw = baseR * 1.0;
+
+    const pMidX = isoX(0, 0);
+    const pMidY = isoY(0, 0, planeMidZ);
+    const pLeftX = isoX(-dx, 0);
+    const pLeftY = isoY(-dx, 0, planeMidZ + dz);
+    const pRightX = isoX(dx, 0);
+    const pRightY = isoY(dx, 0, planeMidZ - dz);
+
+    // 平面法向偏移
+    const perpAngle = planeAngleRad + Math.PI / 2;
+    const pwx = Math.cos(perpAngle) * pw * 0.866;
+    const pwy = Math.cos(perpAngle) * pw * 0.5 + Math.sin(perpAngle) * pw;
+
+    ctx.save();
+    ctx.globalAlpha = 0.28;
+    ctx.fillStyle = '#ff6f00';
+    ctx.beginPath();
+    ctx.moveTo(pLeftX - pwx, pLeftY - pwy);
+    ctx.lineTo(pLeftX + pwx, pLeftY + pwy);
+    ctx.lineTo(pRightX + pwx, pRightY + pwy);
+    ctx.lineTo(pRightX - pwx, pRightY - pwy);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = '#e65100';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.restore();
+
+    // 平面中线
+    ctx.strokeStyle = '#e65100';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(pLeftX, pLeftY);
+    ctx.lineTo(pRightX, pRightY);
+    ctx.stroke();
+
+    // 标注平面
+    ctx.fillStyle = '#e65100';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('刀面', pRightX + 10, pRightY - 5);
+
+    // === 5. 画上部圆锥（前面，半透明） ===
+    ctx.save();
+    ctx.globalAlpha = 0.55;
+    ctx.fillStyle = 'rgba(156,39,176,0.25)';
+    ctx.strokeStyle = 'rgba(156,39,176,0.5)';
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(isoX(apex.x, apex.y), isoY(apex.x, apex.y, apex.z));
+    for (let i = 0; i <= 180; i++) {
+      const phi = i * Math.PI / 180;
+      const bx = baseR * Math.cos(phi);
+      const by = baseR * Math.sin(phi);
+      ctx.lineTo(isoX(bx, by), isoY(bx, by, 0));
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    ctx.restore();
+
+    // === 6. 画下部圆锥（前面，半透明） ===
+    ctx.save();
+    ctx.globalAlpha = 0.35;
+    ctx.fillStyle = 'rgba(156,39,176,0.15)';
+    ctx.beginPath();
+    ctx.moveTo(isoX(apex.x, apex.y), isoY(apex.x, apex.y, apex.z));
+    for (let i = 0; i <= 180; i++) {
+      const phi = i * Math.PI / 180;
+      const bx = bottomR * Math.cos(phi);
+      const by = bottomR * Math.sin(phi);
+      ctx.lineTo(isoX(bx, by), isoY(bx, by, bottomZ));
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(156,39,176,0.3)';
+    ctx.stroke();
+    ctx.restore();
+
+    // 底面椭圆（前面半）
+    ctx.strokeStyle = 'rgba(120,60,160,0.2)';
+    ctx.beginPath();
+    ctx.ellipse(isoX(0,0), isoY(0,0,bottomZ), bottomR * 0.866, bottomR * 0.35, 0, Math.PI, 0);
+    ctx.stroke();
+
+    // === 7. 画交线 ===
+    const intersection = computeIntersection(planeAngleDeg);
+    if (intersection.length > 0) {
+      // 画交线在圆锥面上
+      ctx.strokeStyle = '#ff3d00';
+      ctx.lineWidth = 3;
+      ctx.shadowColor = 'rgba(255,61,0,0.5)';
+      ctx.shadowBlur = 6;
+      ctx.beginPath();
+      for (let i = 0; i < intersection.length; i++) {
+        const p = intersection[i];
+        const sx = isoX(p.x, p.y), sy = isoY(p.x, p.y, p.z);
+        if (i === 0) ctx.moveTo(sx, sy);
+        else ctx.lineTo(sx, sy);
+      }
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    }
+
+    // 标注顶点
+    ctx.fillStyle = '#4a148c';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('顶点', isoX(0,0), isoY(0,0,290) - 12);
+
+    // 标注轴线角度
+    ctx.fillStyle = '#999';
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText('圆锥半角 = ' + coneHalfAngle + '°', W - 20, 45);
+
+    // === 8. 截面形状预览 ===
+    const shapeY = 430;
+    ctx.fillStyle = '#fafafa';
+    ctx.fillRect(20, shapeY - 30, W - 40, 65);
+
+    // 判断类型
+    let typeName, curveColor;
+    if (planeAngleDeg < 1) {
+      typeName = '圆 (e = 0)'; curveColor = '#4caf50';
+      sectionDetail.textContent = '刀面垂直于轴线';
+    } else if (planeAngleDeg < coneHalfAngle) {
+      typeName = '椭圆 (e < 1)'; curveColor = '#2196f3';
+      sectionDetail.textContent = '刀面与轴线夹角 > 母线夹角';
+    } else if (Math.abs(planeAngleDeg - coneHalfAngle) < 0.5) {
+      typeName = '抛物线 (e = 1)'; curveColor = '#ff9800';
+      sectionDetail.textContent = '刀面平行于一条母线 —— 临界状态！';
+    } else {
+      typeName = '双曲线 (e > 1)'; curveColor = '#f44336';
+      sectionDetail.textContent = '刀面与轴线夹角 < 母线夹角，同时切到上下两锥';
+    }
+
+    sectionType.textContent = typeName;
+    sectionType.style.background = curveColor;
+    sectionType.style.color = '#fff';
+
+    ctx.fillStyle = '#666';
+    ctx.font = '13px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('截面形状：' + typeName, W / 2, shapeY - 8);
+
+    const cx = W / 2, cy = shapeY + 18;
+    if (planeAngleDeg < coneHalfAngle) {
+      const rx = 90, ry = Math.max(10, 90 * (1 - planeAngleDeg / coneHalfAngle) * 0.7 + 8);
+      ctx.strokeStyle = curveColor;
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      if (rx > ry + 5) {
+        const c = Math.sqrt(rx * rx - ry * ry);
+        ctx.fillStyle = curveColor;
+        ctx.beginPath(); ctx.arc(cx - c, cy, 2.5, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(cx + c, cy, 2.5, 0, Math.PI * 2); ctx.fill();
+      }
+    } else if (Math.abs(planeAngleDeg - coneHalfAngle) < 0.5) {
+      ctx.strokeStyle = curveColor;
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      const prx = 100;
+      ctx.moveTo(cx - prx, cy + 20);
+      for (let i = 0; i <= 100; i++) {
+        const t = (i / 100) * 2 - 1;
+        ctx.lineTo(cx + t * prx, cy + 20 - t * t * 22);
+      }
+      ctx.stroke();
+    } else {
+      ctx.strokeStyle = curveColor;
+      ctx.lineWidth = 2.5;
+      const hrx = 80;
+      [1, -1].forEach(sign => {
+        ctx.beginPath();
+        for (let i = 0; i <= 100; i++) {
+          const t = (i / 100) * 2.5 + 0.2;
+          const sx = cx + t * hrx / 2.5, sy = cy + sign * Math.sqrt(t * t - 1) * 22;
+          if (i === 0) ctx.moveTo(sx, sy); else ctx.lineTo(sx, sy);
+        }
+        ctx.stroke();
+        ctx.beginPath();
+        for (let i = 0; i <= 100; i++) {
+          const t = -(i / 100) * 2.5 - 0.2;
+          const sx = cx + t * hrx / 2.5, sy = cy + sign * Math.sqrt(t * t - 1) * 22;
+          if (i === 0) ctx.moveTo(sx, sy); else ctx.lineTo(sx, sy);
+        }
+        ctx.stroke();
+      });
+    }
+  }
+
+  function update() {
+    const val = parseFloat(slider.value);
+    angleVal.textContent = val.toFixed(1) + '°';
+    drawCone(val);
+  }
+
+  slider.addEventListener('input', update);
+
+  let autoPlayId = null;
+  window.coneAutoPlay = function() {
+    if (autoPlayId) { cancelAnimationFrame(autoPlayId); autoPlayId = null; }
+    let dir = 1;
+    let val = parseFloat(slider.value);
+    function step() {
+      val += dir * 0.3;
+      if (val >= 80) { val = 80; dir = -1; }
+      if (val <= 0) { val = 0; dir = 1; }
+      slider.value = val;
+      update();
+      autoPlayId = requestAnimationFrame(() => setTimeout(step, 25));
+    }
+    step();
+  };
+  window.coneReset = function() {
+    if (autoPlayId) { cancelAnimationFrame(autoPlayId); autoPlayId = null; }
+    slider.value = 30;
+    update();
+  };
+
+  update();
+})();
+
+// ========== 二、一元二次函数图象 ==========
+(function() {
+  const canvas = document.getElementById('quadCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  const sliders = {
+    a: document.getElementById('paramA'), b: document.getElementById('paramB'), c: document.getElementById('paramC')
+  };
+  const vals = {
+    a: document.getElementById('valA'), b: document.getElementById('valB'), c: document.getElementById('valC')
+  };
+  const info = {
+    vertex: document.getElementById('vertexInfo'), axis: document.getElementById('axisInfo'), delta: document.getElementById('deltaInfo')
+  };
+
+  const xMin = -6, xMax = 6, yMin = -6, yMax = 6;
+  const ox = W / 2, oy = H / 2;
+  const sx = (W - 80) / (xMax - xMin);
+  const sy = (H - 80) / (yMax - yMin);
+
+  function toX(px) { return ox + px * sx; }
+  function toY(py) { return oy - py * sy; }
+
+  function draw() {
+    const a = parseInt(sliders.a.value) / 10;
+    const b = parseInt(sliders.b.value) / 10;
+    const c = parseInt(sliders.c.value) / 10;
+
+    vals.a.textContent = a.toFixed(1);
+    vals.b.textContent = b.toFixed(1);
+    vals.c.textContent = c.toFixed(1);
+
+    ctx.clearRect(0, 0, W, H);
+
+    // 网格
+    ctx.strokeStyle = '#e8e8e8'; ctx.lineWidth = 0.5;
+    for (let i = Math.ceil(xMin); i <= xMax; i++) {
+      ctx.beginPath(); ctx.moveTo(toX(i), 20); ctx.lineTo(toX(i), H - 20); ctx.stroke();
+    }
+    for (let i = Math.ceil(yMin); i <= yMax; i++) {
+      ctx.beginPath(); ctx.moveTo(20, toY(i)); ctx.lineTo(W - 20, toY(i)); ctx.stroke();
+    }
+
+    // 坐标轴
+    ctx.strokeStyle = '#333'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(20, oy); ctx.lineTo(W - 20, oy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ox, H - 20); ctx.lineTo(ox, 20); ctx.stroke();
+    ctx.fillStyle = '#333';
+    ctx.beginPath(); ctx.moveTo(W - 20, oy); ctx.lineTo(W - 28, oy - 5); ctx.lineTo(W - 28, oy + 5); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(ox, 20); ctx.lineTo(ox - 5, 28); ctx.lineTo(ox + 5, 28); ctx.fill();
+
+    ctx.fillStyle = '#666'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+    for (let i = Math.ceil(xMin); i <= xMax; i++) { if (i !== 0) ctx.fillText(i, toX(i), oy + 15); }
+    ctx.textAlign = 'right';
+    for (let i = Math.ceil(yMin); i <= yMax; i++) { if (i !== 0) ctx.fillText(i, ox - 6, toY(i) + 4); }
+    ctx.fillText('O', ox - 8, oy + 14);
+
+    // 抛物线
+    ctx.strokeStyle = '#6a1b9a'; ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    let firstPoint = true;
+    for (let px = xMin; px <= xMax; px += 0.02) {
+      const py = a * px * px + b * px + c;
+      const sx = toX(px), sy = toY(py);
+      if (sy > H + 50 || sy < -50) { firstPoint = true; continue; }
+      if (firstPoint) { ctx.moveTo(sx, sy); firstPoint = false; }
+      else { ctx.lineTo(sx, sy); }
+    }
+    ctx.stroke();
+
+    // 顶点
+    const vx = -b / (2 * a), vy = a * vx * vx + b * vx + c;
+    ctx.fillStyle = '#e65100';
+    ctx.beginPath(); ctx.arc(toX(vx), toY(vy), 5, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#e65100'; ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('顶点', toX(vx) + 10, toY(vy) - 8);
+
+    // 对称轴
+    ctx.setLineDash([4, 4]);
+    ctx.strokeStyle = '#ff9800'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(toX(vx), 20); ctx.lineTo(toX(vx), H - 20); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // y截距
+    ctx.fillStyle = '#2196f3';
+    ctx.beginPath(); ctx.arc(ox, toY(c), 4, 0, Math.PI * 2); ctx.fill();
+    ctx.fillText('c=' + c.toFixed(1), ox + 10, toY(c) - 5);
+
+    const delta = b * b - 4 * a * c;
+    info.vertex.textContent = '顶点: (' + vx.toFixed(2) + ', ' + vy.toFixed(2) + ')';
+    info.axis.textContent = '对称轴: x = ' + vx.toFixed(2);
+    if (delta > 0.01) {
+      const x1 = (-b - Math.sqrt(delta)) / (2 * a), x2 = (-b + Math.sqrt(delta)) / (2 * a);
+      info.delta.textContent = 'Δ = ' + delta.toFixed(1) + ', 两实根';
+      info.delta.style.background = '#e8f5e9'; info.delta.style.color = '#2e7d32';
+      ctx.fillStyle = '#2e7d32';
+      ctx.beginPath(); ctx.arc(toX(x1), oy, 4, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(toX(x2), oy, 4, 0, Math.PI * 2); ctx.fill();
+      ctx.fillText('根', toX(x1), oy + 16);
+      ctx.fillText('根', toX(x2), oy + 16);
+    } else if (Math.abs(delta) < 0.01) {
+      info.delta.textContent = 'Δ = 0, 重根'; info.delta.style.background = '#fff3e0'; info.delta.style.color = '#e65100';
+    } else {
+      info.delta.textContent = 'Δ = ' + delta.toFixed(1) + ', 无实根'; info.delta.style.background = '#fce4ec'; info.delta.style.color = '#c62828';
+    }
+  }
+
+  Object.values(sliders).forEach(s => s.addEventListener('input', draw));
+
+  window.quadPreset = function(type) {
+    switch(type) {
+      case 'up': sliders.a.value = 10; sliders.b.value = 0; sliders.c.value = -10; break;
+      case 'down': sliders.a.value = -10; sliders.b.value = 0; sliders.c.value = 30; break;
+      case 'shift': sliders.a.value = 10; sliders.b.value = -30; sliders.c.value = 10; break;
+      case 'noroot': sliders.a.value = 10; sliders.b.value = 0; sliders.c.value = 20; break;
+    }
+    draw();
+  };
+
+  draw();
+})();
+
+// ========== 三、椭圆到抛物线的极限 ==========
+(function() {
+  const canvas = document.getElementById('limitCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const slider = document.getElementById('eccentricity');
+  const eccVal = document.getElementById('eccVal');
+  const eccType = document.getElementById('eccType');
+  const eccDesc = document.getElementById('eccDesc');
+
+  const cx = 280, cy = 210, a = 240;
+
+  function drawEcc(e) {
+    ctx.clearRect(0, 0, W, H);
+
+    const c = a * e;
+    const b = a * Math.sqrt(Math.max(0, 1 - e * e));
+
+    // 背景网格
+    ctx.strokeStyle = '#e8e8e8'; ctx.lineWidth = 0.5;
+    for (let i = 0; i < W; i += 40) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, H); ctx.stroke(); }
+    for (let i = 0; i < H; i += 40) { ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(W, i); ctx.stroke(); }
+
+    // 水平中线（x 轴）
+    ctx.strokeStyle = '#999'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(W, cy); ctx.stroke();
+
+    // 左顶点（固定的那个顶点）
+    const lvx = cx - a;
+    ctx.fillStyle = '#4caf50';
+    ctx.beginPath(); ctx.arc(lvx, cy, 5, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#4caf50'; ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('左顶点（固定）', lvx, cy + 20);
+
+    // 右顶点
+    const rvx = cx + a;
+    if (rvx < W - 10) {
+      ctx.fillStyle = '#4caf50';
+      ctx.beginPath(); ctx.arc(rvx, cy, 5, 0, Math.PI * 2); ctx.fill();
+      ctx.fillText('右顶点', rvx, cy + 20);
+    }
+
+    // 曲线
+    if (e < 0.99) {
+      // 椭圆
+      ctx.strokeStyle = '#6a1b9a'; ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      const steps = 300;
+      for (let i = 0; i <= steps; i++) {
+        const t = (i / steps) * Math.PI * 2 - Math.PI;
+        const ex = cx + a * Math.cos(t), ey = cy - b * Math.sin(t);
+        if (i === 0) ctx.moveTo(ex, ey); else ctx.lineTo(ex, ey);
+      }
+      ctx.stroke();
+
+      // 上下顶点（短轴端点）
+      if (b > 5) {
+        ctx.fillStyle = 'rgba(106,27,154,0.5)';
+        ctx.beginPath(); ctx.arc(cx, cy - b, 3, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(cx, cy + b, 3, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#6a1b9a'; ctx.font = '11px sans-serif'; ctx.textAlign = 'left';
+        ctx.fillText('短半轴 b=' + b.toFixed(0), cx + 8, cy - b);
+      }
+    } else {
+      // 抛物线近似（e=1）：开口向右，顶点在左顶点处
+      ctx.strokeStyle = '#ff9800'; ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      const pStart = lvx;
+      const pScale = a * 0.8;
+      ctx.moveTo(pStart, cy);
+      for (let i = 0; i <= 300; i++) {
+        const t = (i / 300) * 2.4;
+        const dx = t * t * pScale / 6;
+        const dy = t * pScale;
+        ctx.lineTo(pStart + dx, cy - dy);
+      }
+      for (let i = 300; i >= 0; i--) {
+        const t = (i / 300) * 2.4;
+        const dx = t * t * pScale / 6;
+        const dy = t * pScale;
+        ctx.lineTo(pStart + dx, cy + dy);
+      }
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(255,152,0,0.08)';
+      ctx.fill();
+      ctx.strokeStyle = '#ff9800';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+    }
+
+    // 左焦点 F₁
+    const f1x = cx - c;
+    ctx.fillStyle = '#e65100';
+    ctx.beginPath(); ctx.arc(f1x, cy, 5, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#e65100'; ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('F₁', f1x, cy - 14);
+
+    // 右焦点 F₂
+    const f2x = cx + c;
+    if (f2x < W - 30) {
+      ctx.beginPath(); ctx.arc(f2x, cy, 5, 0, Math.PI * 2); ctx.fill();
+      ctx.fillText('F₂', f2x, cy - 14);
+    } else {
+      ctx.fillText('F₂ → ∞', W - 55, cy - 20);
+      ctx.strokeStyle = '#e65100'; ctx.lineWidth = 1.5;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath(); ctx.moveTo(cx + c * 0.5, cy); ctx.lineTo(W - 30, cy); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#e65100';
+      ctx.beginPath(); ctx.moveTo(W - 30, cy); ctx.lineTo(W - 38, cy - 5); ctx.lineTo(W - 38, cy + 5); ctx.fill();
+    }
+
+    // 标注：显示 a、b、c 的长度标注线
+    ctx.fillStyle = '#666'; ctx.font = '12px sans-serif'; ctx.textAlign = 'left';
+
+    // a 的标注（从中心到右顶点）
+    ctx.strokeStyle = '#4caf50'; ctx.lineWidth = 1;
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath(); ctx.moveTo(cx, cy + 28); ctx.lineTo(cx + a, cy + 28); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#4caf50'; ctx.fillText('a = ' + a, cx + a/2 - 15, cy + 45);
+
+    // c 的标注（从中心到右焦点）
+    if (c > 5 && f2x < W - 30) {
+      ctx.strokeStyle = '#e65100'; ctx.lineWidth = 1;
+      ctx.setLineDash([3, 3]);
+      ctx.beginPath(); ctx.moveTo(cx, cy + 42); ctx.lineTo(cx + c, cy + 42); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#e65100'; ctx.fillText('c = ' + c.toFixed(0), cx + c/2 - 10, cy + 59);
+    }
+
+    // b 的标注（从中心到上顶点）
+    if (b > 5 && e < 0.99) {
+      ctx.strokeStyle = '#6a1b9a'; ctx.lineWidth = 1;
+      ctx.setLineDash([3, 3]);
+      ctx.beginPath(); ctx.moveTo(cx - 28, cy); ctx.lineTo(cx - 28, cy - b); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#6a1b9a'; ctx.textAlign = 'right';
+      ctx.fillText('b=' + b.toFixed(0), cx - 32, cy - b/2 + 4);
+    }
+
+    // 左上角信息面板
+    ctx.fillStyle = '#666'; ctx.font = '13px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('a = ' + a + '（半长轴，固定）', 10, 25);
+    ctx.fillText('c = ' + c.toFixed(0) + '（焦距的一半）', 10, 45);
+    ctx.fillText('b = ' + b.toFixed(0) + '（半短轴）', 10, 65);
+    ctx.fillText('e = c/a = ' + e.toFixed(2), 10, 85);
+
+    eccVal.textContent = e.toFixed(2);
+    if (e < 0.99) {
+      eccType.textContent = '椭圆'; eccType.style.background = '#2196f3'; eccType.style.color = '#fff';
+      eccDesc.textContent = '0 < e < 1，封闭曲线，两个焦点';
+    } else {
+      eccType.textContent = '抛物线（极限）'; eccType.style.background = '#ff9800'; eccType.style.color = '#fff';
+      eccDesc.textContent = 'e → 1，开口曲线，F₂ 在无穷远';
+    }
+  }
+
+  function update() { drawEcc(parseInt(slider.value) / 100); }
+  slider.addEventListener('input', update);
+
+  window.animateEcc = function() {
+    let e = parseInt(slider.value) / 100;
+    function step() {
+      if (e >= 1) { slider.value = 100; drawEcc(1); return; }
+      e += 0.005;
+      slider.value = Math.round(e * 100);
+      drawEcc(e);
+      requestAnimationFrame(() => setTimeout(step, 30));
+    }
+    step();
+  };
+  window.resetEcc = function() { slider.value = 70; drawEcc(0.7); };
+
+  update();
+})();
+
+// ========== 四、椭圆曲线 ==========
+(function() {
+  const canvas = document.getElementById('ecCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  const sliderA = document.getElementById('ecA'), sliderB = document.getElementById('ecB');
+  const valA = document.getElementById('ecValA'), valB = document.getElementById('ecValB');
+  const ecDisc = document.getElementById('ecDisc'), ecStatus = document.getElementById('ecStatus');
+
+  const xMin = -4, xMax = 5, yMin = -5, yMax = 5;
+  const ox = 180, oy = H / 2;
+  const sx = (W - 220) / (xMax - xMin), sy = (H - 80) / (yMax - yMin);
+
+  function toX(px) { return ox + px * sx; }
+  function toY(py) { return oy - py * sy; }
+
+  function draw() {
+    const a = parseInt(sliderA.value) / 10, b = parseInt(sliderB.value) / 10;
+    valA.textContent = a.toFixed(1); valB.textContent = b.toFixed(1);
+
+    ctx.clearRect(0, 0, W, H);
+
+    ctx.strokeStyle = '#e8e8e8'; ctx.lineWidth = 0.5;
+    for (let i = Math.ceil(xMin); i <= xMax; i++) {
+      ctx.beginPath(); ctx.moveTo(toX(i), 20); ctx.lineTo(toX(i), H - 20); ctx.stroke();
+    }
+    for (let i = Math.ceil(yMin); i <= yMax; i++) {
+      ctx.beginPath(); ctx.moveTo(20, toY(i)); ctx.lineTo(W - 20, toY(i)); ctx.stroke();
+    }
+
+    ctx.strokeStyle = '#333'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(20, oy); ctx.lineTo(W - 20, oy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ox, H - 20); ctx.lineTo(ox, 20); ctx.stroke();
+    ctx.fillStyle = '#333';
+    ctx.beginPath(); ctx.moveTo(W - 20, oy); ctx.lineTo(W - 28, oy - 5); ctx.lineTo(W - 28, oy + 5); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(ox, 20); ctx.lineTo(ox - 5, 28); ctx.lineTo(ox + 5, 28); ctx.fill();
+
+    ctx.fillStyle = '#666'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+    for (let i = Math.ceil(xMin); i <= xMax; i++) { if (i !== 0) ctx.fillText(i, toX(i), oy + 15); }
+    ctx.textAlign = 'right';
+    for (let i = Math.ceil(yMin); i <= yMax; i++) { if (i !== 0) ctx.fillText(i, ox - 6, toY(i) + 4); }
+    ctx.fillText('O', ox - 8, oy + 14);
+
+    const f = x => x * x * x + a * x + b;
+
+    [1, -1].forEach(sign => {
+      ctx.strokeStyle = '#6a1b9a'; ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      let started = false;
+      for (let px = xMin; px <= xMax; px += 0.02) {
+        const val = f(px);
+        if (val < 0) { started = false; continue; }
+        const py = sign * Math.sqrt(val);
+        const scx = toX(px), scy = toY(py);
+        if (scy > H + 20 || scy < -20) { started = false; continue; }
+        if (!started) { ctx.moveTo(scx, scy); started = true; }
+        else { ctx.lineTo(scx, scy); }
+      }
+      ctx.stroke();
+    });
+
+    const disc = -4 * a * a * a - 27 * b * b;
+    ecDisc.textContent = 'Δ = ' + disc.toFixed(1);
+    if (disc !== 0) {
+      ecStatus.textContent = '非奇异（可用于 ECC）'; ecStatus.style.background = '#e8f5e9'; ecStatus.style.color = '#2e7d32';
+    } else {
+      ecStatus.textContent = '奇异曲线（有尖点或自交点）'; ecStatus.style.background = '#fce4ec'; ecStatus.style.color = '#c62828';
+    }
+  }
+
+  sliderA.addEventListener('input', draw);
+  sliderB.addEventListener('input', draw);
+
+  window.setECPreset = function(a, b) {
+    sliderA.value = a * 10; sliderB.value = b * 10; draw();
+    document.querySelectorAll('.btn-group button').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+  };
+
+  draw();
+})();
+</script>
+</body>
+</html>
