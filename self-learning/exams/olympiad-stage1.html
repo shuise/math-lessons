@@ -40,7 +40,7 @@
 <body>
 <article>
   <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="../index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="../natural-numbers.html">课件 1（自然数、零与十进制）</a>、<a href="../fractions.html">课件 2（分数）</a>、<a href="../negative-numbers.html">课件 3（负数）</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="../natural-numbers.html">课件 1（自然数、零与十进制）</a>、<a href="../fractions.html">课件 2（分数）</a>、<a href="../negative-numbers.html">课件 3（负数）</a>、<a href="../rational-operations.html">课件 4（有理数加减乘除）</a></p>
   <h1>奥数挑战 — 阶段一：数与计算</h1>
   <div class="origin">
     <p>本阶段围绕「自然数、分数、负数」出题，考察位值制、分数的灵活运用、负数的运算规律等。每题都有思路提示和详细答案，建议先独立思考，实在想不出再看提示。<strong>本阶段所有题目均不涉及方程和代数式，仅使用算术方法求解。</strong></p>
@@ -66,11 +66,11 @@
 
   <!-- Problem 3 -->
   <div class="problem">
-    <p><strong>3.</strong> 观察下列数列的规律，在括号里填上合适的数：1, 4, 9, 16, 25, ( ), 49, 64</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, '36')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint('h3')">💡 思路提示</button>
-    <div class="hint-box" id="h3"><p>观察每个数与它所在位置序号的关系。第 1 个数是 1，第 2 个数是 4，第 3 个数是 9……</p></div>
+    <p><strong>3.</strong> 9 的乘法口诀有：一九得九、二九十八、三九二十七……九九八十一。把这些结果（9, 18, 27, 36, …, 81）中每个数的各位数字相加，你会发现它们的数字之和都等于同一个数。这个数是多少？</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, '9')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint('h3')">💡 思路提示</button>
+    <div class="hint-box" id="h3"><p>把 9, 18, 27, 36, 45, 54, 63, 72, 81 每一个数的各位数字加起来，看看和都是几？</p></div>
     <button class="btn-sm" onclick="toggleAns('a3')">✅ 查看答案</button>
-    <div class="ans-box" id="a3"><p>1 = 1×1，4 = 2×2，9 = 3×3，16 = 4×4，25 = 5×5<br>所以第 6 个数是 6×6 = <strong>36</strong><br>验证：第 7 个数 7×7 = 49，第 8 个数 8×8 = 64，规律正确。</p></div>
+    <div class="ans-box" id="a3"><p>把每个结果的各位数字相加：<br>9 → 9<br>18 → 1+8 = 9<br>27 → 2+7 = 9<br>36 → 3+6 = 9<br>45 → 4+5 = 9<br>…… 全部等于 <strong>9</strong>。<br>规律：9 的倍数，各位数字之和一定是 9（或 9 的倍数）。反过来也成立：一个数各位数字之和是 9 的倍数，这个数本身也是 9 的倍数。例如 477：4+7+7 = 18，1+8 = 9，所以 477 是 9 的倍数（477 = 9×53）。</p></div>
   </div>
 
   <!-- Problem 4 -->
@@ -120,11 +120,11 @@
 
   <!-- Problem 9 -->
   <div class="problem">
-    <p><strong>9.</strong> 在数轴上，从表示 −3 的点出发，先向右移动 7 个单位，再向左移动 5 个单位，最后到达哪个点？</p>
-    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, '13')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint('h9')">💡 思路提示</button>
-    <div class="hint-box" id="h9"><p>在数轴上，向右移动就加上对应的数，向左移动就减去对应的数。一步一步来。</p></div>
+    <p><strong>9.</strong> 一只青蛙在井底，井深 8 米。它白天向上跳 3 米，晚上休息时向下滑 2 米。请问它第几天才能跳出井口？（把向上跳记作 +3，向下滑记作 −2）</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, '6')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint('h9')">💡 思路提示</button>
+    <div class="hint-box" id="h9"><p>先算一个完整昼夜（白天+晚上）净上升多少米。注意：当某天白天跳出井口后，当晚就不会再向下滑了。</p></div>
     <button class="btn-sm" onclick="toggleAns('a9')">✅ 查看答案</button>
-    <div class="ans-box" id="a9"><p>起点：−3<br>向右移动 7 个单位：−3 + 7 = 4<br>再向左移动 5 个单位：4 − 5 = −1<br>最后到达 <strong>−1</strong>。</p></div>
+    <div class="ans-box" id="a9"><p>一个完整昼夜净上升：3 − 2 = 1 米。<br>但最后一天只要白天跳出 8 米就成功了，不再下滑。<br>前 5 天（5 个昼夜）净上升 5 米，第 6 天白天从 5 米处向上跳 3 米：5 + 3 = 8，正好到井口！<br>所以第 <strong>6</strong> 天跳出井口。</p></div>
   </div>
 
   <!-- Problem 10 -->

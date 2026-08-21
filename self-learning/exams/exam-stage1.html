@@ -52,11 +52,11 @@
 <body>
 <article>
   <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="../index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：无（第一课）</p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="../natural-numbers.html">课件 1（自然数、零与十进制）</a>、<a href="../fractions.html">课件 2（分数）</a>、<a href="../negative-numbers.html">课件 3（负数）</a>、<a href="../rational-operations.html">课件 4（有理数加减乘除）</a></p>
   <h1>模拟考试 — 阶段一：数与计算</h1>
   <div class="exam-header">
     <p>⏱ 时间：30 分钟 | ✅ 判断题 10 题 | 🔘 单选题 10 题 | ☑️ 多选题 5 题 | ✏️ 其他题型 5 题 | 共 30 题</p>
-    <p style="font-size:13px;color:#888;">考查范围：自然数、零与十进制 · 分数 · 负数</p>
+    <p style="font-size:13px;color:#888;">考查范围：自然数、零与十进制 · 分数 · 负数 · 有理数加减乘除</p>
   </div>
 
   <p class="section-title">一、判断题（每题 1 分，共 10 分）</p>
@@ -79,18 +79,18 @@
 
   <!-- 判 2 -->
   <div class="q-item">
-    <p><strong>2.</strong> 在十进制中，数字"5"在 352 和 527 中代表的值相同。</p>
+    <p><strong>2.</strong> 乘法口诀表里的"三四十二"，意思是 3 个 4 连加（4+4+4），或者 4 个 3 连加（3+3+3+3）。</p>
     <div id="tf-1-2">
-      <button class="tf-btn" onclick="checkTF(this, false, '1-2')">正确</button>
-      <button class="tf-btn" onclick="checkTF(this, true, '1-2')">错误</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '1-2')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '1-2')">错误</button>
       <span class="feedback" id="fb-1-2"></span>
     </div>
     <div class="btn-row">
       <button class="btn-hint" onclick="toggleHint('h1-2')">💡 思路引导</button>
       <button class="btn-ans" onclick="toggleAns('a1-2')">✅ 正确答案</button>
     </div>
-    <div class="hint-box" id="h1-2">回顾位值制的概念：同一个数字在不同位置，代表的值一样吗？在 352 中，5 在什么位？在 527 中呢？</div>
-    <div class="ans-box" id="a1-2"><strong>❌ 错误。</strong>在 352 中，5 在十位，代表 50；在 527 中，5 在百位，代表 500。这就是位值制——同一个数字在不同位置，代表不同的值。</div>
+    <div class="hint-box" id="h1-2">回忆乘法的本意：3×4 是不是可以理解为"重复加法"？这句口诀省略了什么动作？</div>
+    <div class="ans-box" id="a1-2"><strong>✅ 正确。</strong>乘法的本质就是"重复加法"。3×4 = 4+4+4 = 3+3+3+3 = 12。"三四十二"这句口诀，把这个重复加法的结果背下来，方便快速计算。</div>
   </div>
 
   <!-- 判 3 -->
@@ -127,7 +127,7 @@
 
   <!-- 判 5 -->
   <div class="q-item">
-    <p><strong>5.</strong> 零的发明是印度数学家对数学最重要的贡献之一。</p>
+    <p><strong>5.</strong> 除法可以看作重复减法：12 ÷ 3 = 4，意味着从 12 里每次减去 3，正好减 4 次减完。</p>
     <div id="tf-1-5">
       <button class="tf-btn" onclick="checkTF(this, true, '1-5')">正确</button>
       <button class="tf-btn" onclick="checkTF(this, false, '1-5')">错误</button>
@@ -137,8 +137,8 @@
       <button class="btn-hint" onclick="toggleHint('h1-5')">💡 思路引导</button>
       <button class="btn-ans" onclick="toggleAns('a1-5')">✅ 正确答案</button>
     </div>
-    <div class="hint-box" id="h1-5">零有什么作用？它不仅仅是"没有"，还是占位符。有了零，十进制才真正完善。</div>
-    <div class="ans-box" id="a1-5"><strong>✅ 正确。</strong>印度数学家约在公元 5 世纪发明了零作为占位符，使得十进制位值制真正完善。没有零，就无法区分 35 和 305。</div>
+    <div class="hint-box" id="h1-5">想想除法的本意。12 个苹果分给 3 人，每人 4 个——这和"从 12 里连续减 3"有什么联系？减几次正好减完？</div>
+    <div class="ans-box" id="a1-5"><strong>✅ 正确。</strong>除法是减法的简写：12 ÷ 3 = 4 表示从 12 里连续减去 3，减 4 次（12-3-3-3-3=0）正好减完。所以除法和乘法一样，本质上都源于加减法。</div>
   </div>
 
   <!-- 判 6 -->
@@ -351,20 +351,20 @@
 
   <!-- 选 8 -->
   <div class="q-item">
-    <p><strong>18.</strong> 把 2/3 化成小数，结果是：</p>
+    <p><strong>18.</strong> 计算 (-8) + (+3) - (-5) 的结果是：</p>
     <div id="opt-1-18">
-      <button class="opt-btn" onclick="checkSingle(this, true, '1-18')" data-correct="true">A. 0.666...（无限循环小数）</button>
-      <button class="opt-btn" onclick="checkSingle(this, false, '1-18')" data-correct="false">B. 0.6</button>
-      <button class="opt-btn" onclick="checkSingle(this, false, '1-18')" data-correct="false">C. 0.66</button>
-      <button class="opt-btn" onclick="checkSingle(this, false, '1-18')" data-correct="false">D. 0.67</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-18')" data-correct="false">A. -10</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-18')" data-correct="false">B. -6</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '1-18')" data-correct="true">C. 0</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-18')" data-correct="false">D. 6</button>
       <span class="feedback" id="fb-1-18"></span>
     </div>
     <div class="btn-row">
       <button class="btn-hint" onclick="toggleHint('h1-18')">💡 思路引导</button>
       <button class="btn-ans" onclick="toggleAns('a1-18')">✅ 正确答案</button>
     </div>
-    <div class="hint-box" id="h1-18">分数化小数：用分子除以分母。2 ÷ 3 = ? 注意观察商是否无限循环。</div>
-    <div class="ans-box" id="a1-18"><strong>A。</strong>2 ÷ 3 = 0.666...，6 无限循环。这是一个无限循环小数，不是 0.6（有限小数），也不是四舍五入后的近似值 0.67。</div>
+    <div class="hint-box" id="h1-18">先把"减去负数"转成"加上正数"。(-8) + (+3) 算出多少？再 - (-5) 等于加上几？</div>
+    <div class="ans-box" id="a1-18"><strong>C。</strong>(-8) + (+3) = -5（异号相加，取绝对值大的符号，8-3=5 取负号）；-5 - (-5) = -5 + 5 = 0。减去一个负数，等于加上它的相反数。</div>
   </div>
 
   <!-- 选 9 -->

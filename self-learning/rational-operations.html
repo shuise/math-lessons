@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>有理数的加减乘除 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #7b1fa2; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed #7b1fa2; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+
+  /* 「乘法＝重复加、除法＝重复减」可视化 */
+  .dot-grid { justify-content:center; align-items:center; margin:18px 0; gap:8px; }
+  .dot-grid.line { flex-wrap:nowrap; }
+  .dot-group { display:flex; gap:6px; padding:6px 12px; border-radius:12px; background:#f5f5f5; align-items:center; }
+  .dot-group .grp-tag { font-size:12px; color:#888; margin-right:4px; }
+  .dot { width:34px; height:34px; border-radius:50%; box-shadow:0 1px 3px rgba(0,0,0,0.25); }
+  .viewbtn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+  @media (max-width: 720px) {
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+    .dot { width:26px; height:26px; }
+    .dot-group { padding:5px 8px; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./natural-numbers.html">课件 1（自然数、零与十进制）</a>、<a href="./fractions.html">课件 2（分数）</a>、<a href="./negative-numbers.html">课件 3（负数）</a></p>
+  <h1>有理数的加减乘除</h1>
+
+  <h2>起源：四种最古老的运算</h2>
+  <div class="origin">
+    <p><strong>加、减、乘、除，是人类最早发明的四种运算。</strong>它们不是数学家凭空规定的，而是从生活里"长"出来的：</p>
+    <ul>
+      <li>猎人今天打了 3 只兔，昨天打了 5 只，合起来几只？→ <strong>加法</strong>（合并）</li>
+      <li>有 8 个苹果，吃了 3 个，还剩几个？→ <strong>减法</strong>（拿走）</li>
+      <li>每筐装 4 个苹果，3 筐共几个？→ <strong>乘法</strong>（重复）</li>
+      <li>12 个苹果平均分给 3 个孩子，每人几个？→ <strong>除法</strong>（平分）</li>
+    </ul>
+    <p>中国《九章算术》（公元 1 世纪）已经把分数和正负数的加减乘除法则整理得清清楚楚，比欧洲早了一千多年。但真正让四则运算"人人会算"的，是印度-阿拉伯数字加上<strong>位值制</strong>——对齐数位、满十进一，纸笔就能算，不用算盘。</p>
+    <p>这一课，我们要把前面三课学过的<strong>自然数、分数、负数</strong>，统一到一套运算规则里。更重要的是——你会发现一个惊人的事实：<strong>乘法和除法，其实"并不存在"，它们只是加法和减法的快捷方式。</strong></p>
+  </div>
+
+  <h2>一、什么是有理数？</h2>
+  <div class="story">
+    <p>前几课我们认识了三种数：</p>
+    <ul>
+      <li>自然数：0, 1, 2, 3, …</li>
+      <li>负数：… -3, -2, -1（在零的左边）</li>
+      <li>分数：1/2, 3/4, -2/5, …</li>
+    </ul>
+    <p>把<strong>整数</strong>（正整数、零、负整数）和<strong>分数</strong>（正分数、负分数）合在一起，统称为<strong>有理数</strong>。</p>
+    <p><strong>为什么叫"有理"？</strong>其实这是翻译带来的误会。英文叫 rational number，而 rational 的词根是 ratio——"<strong>比</strong>"。所以有理数的本意是"<strong>能写成两个整数之比的数</strong>"。</p>
+  </div>
+  <div class="key">
+    <p><strong>有理数的本质：能写成"两个整数之比"。</strong></p>
+    <ul>
+      <li>整数 3 能写成 3/1（分母是 1），所以整数是有理数。</li>
+      <li>分数 2/5 本身就是比，当然是有理数。</li>
+      <li>小数 0.3 = 3/10，0.25 = 1/4，都是分数的另一种写法，所以<strong>有限小数也是有理数</strong>。</li>
+    </ul>
+    <p>也就是说：到目前为止你见过的所有数（除了还没学的"无限不循环小数"），<strong>全部是有理数</strong>。有理数的世界，就是我们已经能完全掌握的数的王国。</p>
+  </div>
+
+  <h2>二、加法与减法：合并与拿走</h2>
+  <div class="story">
+    <p><strong>加法</strong>就是"合并两堆东西"。3 + 5 = 把 3 个和 5 个放一起 = 8 个。</p>
+    <p><strong>减法</strong>就是"从一堆里拿走"。8 - 3 = 从 8 个里拿走 3 个 = 5 个。</p>
+    <p>用数轴（第 3 课学过）来想：往右走是加，往左走是减。</p>
+  </div>
+
+  <h3>为什么加法可以交换，减法不行？</h3>
+  <div class="key">
+    <p>这是这一课最该想明白的问题之一。答案朴素得惊人：</p>
+    <p><strong>加法是"合并"——合并两堆东西，先数哪一堆都一样，结果不变。</strong>所以 3 + 5 = 5 + 3 = 8。这就是<strong>加法交换律</strong>。</p>
+    <p><strong>减法是"拿走"——从谁那里拿走，结果不一样。</strong>"8 个里拿走 3 个"剩 5 个；"3 个里拿走 8 个"拿不动，要欠 5 个（变成 -5）。所以 8 - 3 = 5，但 3 - 8 = -5，结果不同。<strong>减法没有交换律</strong>。</p>
+    <p>一句话：<strong>"合并"没方向，所以能交换；"拿走"有方向，所以不能交换。</strong></p>
+  </div>
+
+  <h3>正数与负数怎么加减？</h3>
+  <div class="formula">
+    <p>第 3 课我们学过，这里把规则收进"四则运算"的统一框架：</p>
+    <p><strong>同号相加</strong>：符号不变，绝对值相加。<br>
+    例：(-3) + (-5) = -(3 + 5) = -8（两笔欠债，欠得更多）</p>
+    <p><strong>异号相加</strong>：取大绝对值减小绝对值，符号跟着大的。<br>
+    例：(-3) + 5 = +(5 - 3) = 2（欠 3 元又得 5 元，净剩 2 元）</p>
+    <p><strong>减法变加法</strong>：减去一个数 = 加上它的相反数。<br>
+    例：3 - (-2) = 3 + 2 = 5（"减去欠债" = "还掉欠债"，钱变多了）</p>
+  </div>
+
+  <h3>分数加减的前提：通分</h3>
+  <div class="story">
+    <p>分数要相加，<strong>必须分母相同</strong>——因为分母表示"切成同样大的几份"，只有份数一样大，才能直接数。</p>
+    <p>1/2 + 1/3 怎么算？分母 2 和 3 不同，先把它们切成一样大的份——找 2 和 3 的公倍数 6：</p>
+    <p style="text-align:center;">1/2 = 3/6，&nbsp;&nbsp; 1/3 = 2/6</p>
+    <p style="text-align:center;">1/2 + 1/3 = 3/6 + 2/6 = 5/6</p>
+    <p>这个把分母变相同的过程，叫<strong>通分</strong>。它其实是第 2 课学的"等值分数"的应用——切得更细，但每份取的量没变。</p>
+  </div>
+  <div class="key">
+    <p><strong>分数加减的前提：通分到同分母，然后分子相加减，分母不变。</strong></p>
+    <p>道理朴素：分母是"每份多大"，分子是"取了几份"。要合并，得先让"每份"一样大，才能直接数"几份"。</p>
+  </div>
+
+  <h2>三、乘法：重复的加法</h2>
+  <div class="story">
+    <p>这是本课最核心的发现。<strong>乘法到底是什么？</strong></p>
+    <p style="text-align:center;font-size:18px;"><strong>3 × 4 = 4 + 4 + 4 = 12</strong></p>
+    <p>3 × 4 的意思不是什么新东西，就是"<strong>把 4 加 3 次</strong>"。乘号 ×，本质上是个"省略号"——省掉了好几个加号。</p>
+    <p>所以：</p>
+    <p style="text-align:center;"><strong>乘法 = 重复加同一个数</strong></p>
+  </div>
+
+  <div class="key">
+    <p><strong>核心思想：实际运算中，乘法并不存在！</strong></p>
+    <p>3 × 4 真正发生的事情，是 4 + 4 + 4。乘法只是我们给"重复加"起的一个名字、一个简写。</p>
+    <p>那为什么还要学乘法？因为<strong>每次都去加 4 + 4 + 4 太慢</strong>。于是人们把常见的"重复加"的结果<strong>提前算好</strong>，背下来——</p>
+    <p style="text-align:center;">三四十二，所以 3 × 4 直接得 12，不用再去 4+4+4。</p>
+    <p><strong>乘法口诀表，本质上就是一张"加法答案速查表"。</strong>记住了它，就不用每次重新加。算得快的秘诀，就是把答案提前装进脑子里。</p>
+  </div>
+
+  <h3>乘法口诀表的意义</h3>
+  <div class="story">
+    <p><strong>九九表是中国人的发明。</strong>早在春秋时代（公元前 7 世纪），中国人就有了"九九歌"。最初它是<strong>倒着背</strong>的——从"九九八十一"开始，背到"二二如四"，所以才叫"九九"表。后来大约在 13 世纪，人们把它翻过来从"一一如一"开始背，一直用到现在。</p>
+    <p>九九表把 1 到 9 的所有"重复加"结果（共 81 条，去重后 45 条）一次性背完。背完之后，1 到 9 范围内的乘法，你<strong>不再需要重新加</strong>，直接"查表"。</p>
+    <p>更大的数呢？比如 12 × 3——把它<strong>拆成口诀表内的</strong>：12 × 3 = (10 + 2) × 3 = 10×3 + 2×3 = 30 + 6 = 36。所有多位数乘法，最后都化归到口诀表。所以背好九九表，是一切乘法的基础。</p>
+  </div>
+
+  <h3>乘法运算律：交换律与分配律</h3>
+
+  <div class="key">
+    <p><strong>交换律：a × b = b × a</strong></p>
+    <p>乘法是"重复加"，3 × 4 = 4 + 4 + 4，4 × 3 = 3 + 3 + 3 + 3。两种方式数同一堆东西，总数当然一样。就像一堆 12 个点，横着数 3 行 4 列，竖着数 4 行 3 列，点数不变。</p>
+  </div>
+
+  <div class="graphic">
+    <div style="text-align:center;margin-bottom:8px;font-size:14px;color:#888;">同样是 12 个点，换个摆法，含义就变 ↓</div>
+    <div style="text-align:center;margin:8px 0;">
+      <button onclick="setView('mul34', this)" class="btn-sm viewbtn" id="vb0">3 × 4</button>
+      <button onclick="setView('mul43', this)" class="btn-sm viewbtn">4 × 3</button>
+      <button onclick="setView('div3', this)" class="btn-sm viewbtn">12 ÷ 3</button>
+      <button onclick="setView('div4', this)" class="btn-sm viewbtn">12 ÷ 4</button>
+    </div>
+    <div id="dotGrid" class="dot-grid" style="display:flex;"></div>
+    <p id="dotDesc" style="text-align:center;margin-top:10px;color:#333;line-height:1.7;"></p>
+  </div>
+
+  <div class="key">
+    <p><strong>分配律：a × (b + c) = a × b + a × c</strong></p>
+    <p>这条规律是<strong>竖式乘法的灵魂</strong>。它的意思是：一个数乘以"两个数的和"，等于分别乘再相加。</p>
+    <p>为什么？因为乘法是重复加。3 × (4 + 5) 就是把 (4+5) 加 3 次：(4+5) + (4+5) + (4+5) = 4+4+4 + 5+5+5 = 3×4 + 3×5。把 4 加 3 次和 5 加 3 次<strong>分开算</strong>，结果一样。这就是分配律——把一个"大乘法"拆成几个"小乘法"分别算。</p>
+    <p>回头看刚才的 12 × 3 = (10 + 2) × 3 = 10×3 + 2×3，用的正是分配律：把 12 拆成 10 + 2，分别乘 3 再相加。所有多位数乘法，都是在反复用分配律把大数拆小，直到每一步都落在口诀表范围内。</p>
+  </div>
+
+  <h3>实战：用口诀表和加法算 987 × 123</h3>
+  <div class="example">
+    <p><strong>思路：</strong>987 × 123 拆成 987 × (100 + 20 + 3)，用分配律分别算，再相加。每一步只用到口诀表内的乘法和加法。</p>
+
+    <p><strong>第一步：987 × 3</strong>（用分配律拆成个位数乘法）</p>
+    <p style="text-align:center;background:#fafafa;padding:12px;border-radius:6px;line-height:2;">
+      987 × 3<br>
+      = (900 + 80 + 7) × 3 &nbsp;&nbsp;<span style="color:#888;">← 分配律：拆成百位、十位、个位</span><br>
+      = 900 × 3 + 80 × 3 + 7 × 3 &nbsp;&nbsp;<span style="color:#888;">← 分配律</span><br>
+      = 2700 + 240 + 21 &nbsp;&nbsp;<span style="color:#888;">← 口诀表：九三二十七、三八二十四、三七二十一</span><br>
+      = <strong>2961</strong>
+    </p>
+
+    <p><strong>第二步：987 × 20</strong>（20 = 2 × 10，先乘 2 再补 0）</p>
+    <p style="text-align:center;background:#fafafa;padding:12px;border-radius:6px;line-height:2;">
+      987 × 20<br>
+      = 987 × 2 × 10 &nbsp;&nbsp;<span style="color:#888;">← 20 = 2 × 10</span><br>
+      = (900 + 80 + 7) × 2 × 10 &nbsp;&nbsp;<span style="color:#888;">← 分配律</span><br>
+      = (1800 + 160 + 14) × 10 &nbsp;&nbsp;<span style="color:#888;">← 口诀表：九二十八、八二十六、二七一十四</span><br>
+      = 1974 × 10<br>
+      = <strong>19740</strong>
+    </p>
+
+    <p><strong>第三步：987 × 100</strong>（100 = 1 × 100，口诀表"一九得九"再补两个 0）</p>
+    <p style="text-align:center;background:#fafafa;padding:12px;border-radius:6px;line-height:2;">
+      987 × 100<br>
+      = (900 + 80 + 7) × 100<br>
+      = 90000 + 8000 + 700 &nbsp;&nbsp;<span style="color:#888;">← 一九得九，补两个 0；一八得八，补两个 0；一七得七，补两个 0</span><br>
+      = <strong>98700</strong>
+    </p>
+
+    <p><strong>第四步：三部分相加</strong></p>
+    <p style="text-align:center;background:#fafafa;padding:12px;border-radius:6px;line-height:2;">
+      987 × 123<br>
+      = 987 × 100 + 987 × 20 + 987 × 3 &nbsp;&nbsp;<span style="color:#888;">← 分配律</span><br>
+      = 98700 + 19740 + 2961<br>
+      = <strong>121401</strong>
+    </p>
+
+    <p style="text-align:center;background:#e8f5e9;padding:12px;border-radius:6px;font-size:18px;font-weight:bold;">
+      987 × 123 = 121401 ✓
+    </p>
+  </div>
+
+  <div class="key">
+    <p><strong>仔细看这个过程，你会发现：</strong></p>
+    <ul>
+      <li>每一步乘法都<strong>不超过九九表的范围</strong>——最大用到 9 × 9 = 81</li>
+      <li>除了口诀表，只用到了<strong>加法</strong>——把各部分的结果加起来</li>
+      <li>分配律是<strong>拆分工具</strong>：把大数拆成个位、十位、百位，分别乘</li>
+      <li>交换律保证我们可以<strong>选方便的方向乘</strong>——用 987 × 3 而不是 3 × 987，结果一样</li>
+      <li>这就是竖式乘法的原理——竖式只是把上面这几步写得更紧凑</li>
+    </ul>
+  </div>
+
+  <h3>正数、负数、小数的乘法技巧</h3>
+  <div class="formula">
+    <p><strong>第一步：定符号。</strong>同号得正，异号得负（和第 3 课一致）。</p>
+    <p><strong>第二步：算绝对值的乘积</strong>（用口诀表）。</p>
+    <p>例：(-3) × 4 → 异号得负，3 × 4 = 12 → 结果 -12。</p>
+    <p>例：(-3) × (-4) → 同号得正，3 × 4 = 12 → 结果 +12（取消了 3 笔各 4 元的欠债，净多 12 元）。</p>
+  </div>
+  <div class="example">
+    <strong>小数乘法：先按整数算，最后数小数位数。</strong><br>
+    例：0.3 × 0.4 = ？<br>
+    先算 3 × 4 = 12；0.3 和 0.4 各是一位小数（相当于分母都是 10），乘起来分母是 10 × 10 = 100，所以结果是两位小数 → <strong>0.12</strong>。<br>
+    <span style="color:#888;">朴素道理：0.3 = 3/10，0.4 = 4/10，(3/10) × (4/10) = 12/100 = 0.12。</span>
+  </div>
+
+  <h2>四、除法：重复的减法</h2>
+  <div class="story">
+    <p>既然乘法是"重复加"，那除法呢？</p>
+    <p style="text-align:center;font-size:18px;"><strong>12 ÷ 3 = 12 − 3 − 3 − 3 − 3 = 0，减了 4 次，所以答案是 4</strong></p>
+    <p>12 ÷ 3 的意思，是"从 12 里每次拿走 3，能拿走几次"。一次次减 3，减到没法再减——减了 4 次正好到 0。所以答案是 4。</p>
+    <p style="text-align:center;"><strong>除法 = 重复减同一个数</strong></p>
+  </div>
+
+  <div class="key">
+    <p><strong>核心思想：除法也不存在！</strong></p>
+    <p>12 ÷ 3 真正发生的事，是 12 − 3 − 3 − 3 − 3。除法只是给"重复减"起的名字。</p>
+    <p>但每次都去减 3 太慢，所以人们用<strong>乘法口诀表反查</strong>：3 乘几等于 12？→ 在口诀表里查 3 那一行，"三四十二"，立刻得到 4。所以 12 ÷ 3 = 4。</p>
+    <p><strong>除法 = 用乘法口诀表反查的减法。</strong>乘法是"查加法答案"，除法是"反查加法答案"——两张表，其实是同一张。</p>
+  </div>
+
+  <div class="key">
+    <p><strong>除法没有交换律。</strong></p>
+    <p>12 ÷ 3 = 4，但 3 ÷ 12 = 1/4（每次拿走 12 个，3 不够拿，要用分数）。"从谁那里每次拿走几个"，方向不同结果不同。除法和减法一样<strong>有方向</strong>，不能交换。</p>
+  </div>
+
+  <h3>正数、负数、小数的除法技巧</h3>
+  <div class="formula">
+    <p><strong>第一步：定符号。</strong>同号得正，异号得负。</p>
+    <p><strong>第二步：算绝对值的除法</strong>（用口诀表反查）。</p>
+    <p>例：(-12) ÷ 3 → 异号得负，12 ÷ 3 = 4 → 结果 -4。</p>
+    <p>例：(-12) ÷ (-3) → 同号得正，12 ÷ 3 = 4 → 结果 +4。</p>
+  </div>
+  <div class="example">
+    <strong>小数除法：把除数变整数（移动小数点）。</strong><br>
+    例：1.5 ÷ 0.3 = ？<br>
+    把被除数和除数同时乘 10，除数 0.3 变成整数 3：1.5 ÷ 0.3 = 15 ÷ 3 = <strong>5</strong>。<br>
+    <span style="color:#888;">朴素道理：1.5 = 15/10，0.3 = 3/10，(15/10) ÷ (3/10) = (15/10) × (10/3) = 15/3 = 5。被除数和除数同时放大，相当于分数的"等值变形"，商不变。</span>
+  </div>
+
+  <h3>分数除法：除以一个数 = 乘以它的倒数</h3>
+  <div class="story">
+    <p><strong>倒数</strong>：把一个分数的分子分母颠倒，就得到它的倒数。比如 1/3 的倒数是 3/1 = 3（因为 1/3 × 3 = 1）。</p>
+    <p>分数除法的口诀：<strong>除以一个数（不为零），等于乘以它的倒数</strong>。</p>
+    <p>例：1/2 ÷ 1/3 = 1/2 × 3 = <strong>3/2</strong>。</p>
+    <p>用"重复减"验证（通分到 6 分之几）：1/2 = 3/6，1/3 = 2/6。3/6 里每次减 2/6，减一次剩 1/6——1/6 正好是 2/6 的一半，所以总共能减 1 又 1/2 次，即 3/2 次。两种算法结果一致。<strong>当除不尽、减不出整数次时，分数就派上用场了</strong>，这正是第 2 课分数的用武之地。</p>
+  </div>
+
+  <h2>五、运算律：为什么这些规则成立</h2>
+  <div class="formula">
+    <p>把前面几节的观察收拢，就得到有理数的<strong>三大运算律</strong>。它们不是规定，而是"加法是合并、乘法是重复加"的<strong>自然推论</strong>。</p>
+  </div>
+  <div class="key">
+    <p><strong>① 加法交换律</strong>：合并两堆东西，顺序无所谓。<br>
+    3 + 5 = 5 + 3</p>
+    <p><strong>② 加法结合律</strong>：三堆东西合并，先合并哪两堆都一样。<br>
+    (2 + 3) + 4 = 2 + (3 + 4) = 9</p>
+    <p><strong>③ 乘法交换律</strong>：重复加，换个方向数，总数不变。<br>
+    3 × 4 = 4 × 3</p>
+    <p><strong>④ 乘法结合律</strong>：重复加的"分组"可以换。<br>
+    (3 × 4) × 5 = 3 × (4 × 5) = 60（先数 3 个 4 再数 5 遍，还是先数 4 个 5 再数 3 遍，总数一样）</p>
+  </div>
+
+  <h3>分配律：乘法对加法的分配</h3>
+  <div class="story">
+    <p>最有用的运算律是<strong>分配律</strong>。它的朴素解释，完全来自"乘法是重复加"：</p>
+    <p style="text-align:center;font-size:18px;"><strong>3 × (4 + 5) = 3 × 4 + 3 × 5</strong></p>
+    <p>左边 3 × (4 + 5)：把 (4 + 5) 重复加 3 次 = (4+5) + (4+5) + (4+5) = 9 + 9 + 9 = 27。</p>
+    <p>右边 3 × 4 + 3 × 5：把 4 加 3 次、把 5 加 3 次，再合起来 = (4+4+4) + (5+5+5) = 12 + 15 = 27。</p>
+    <p>两边相等，因为<strong>把 (4+5) 加 3 次，等价于把 4 加 3 次再加上把 5 加 3 次</strong>——这就是把加数"拆开"分别重复加。本质上，分配律只是<strong>加法交换律 + 结合律 + 乘法定义</strong>的推论。</p>
+  </div>
+  <div class="key">
+    <p><strong>分配律：把一个数乘进括号里，等于分别乘再相加。</strong></p>
+    <p>3 × (4 + 5) = 3×4 + 3×5。它就是"重复加可以拆开来做"的另一种说法。</p>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>用"重复加"和"重复减"解释：为什么 0 × 5 = 0？为什么 5 × 0 = 0？（提示：0 × 5 是"把 0 加 5 次"，5 × 0 是"把 5 加 0 次"。）</p>
+    <p><strong>问题 2：</strong>0 不能作除数。试用"重复减"解释：5 ÷ 0 为什么没有意义？（提示：每次从 5 里减 0，永远到不了 0 吗？）</p>
+    <p><strong>问题 3：</strong>九九表只到 9 × 9。要算 12 × 13，你会怎么"拆"成口诀表内的乘法？写出你的拆法和过程。</p>
+    <p><strong>问题 4：</strong>用"乘法就是重复加"解释分配律：为什么 3 × (4 + 5) 等于 3 × 4 + 3 × 5？</p>
+  </div>
+
+  <h2>拓展阅读</h2>
+  <div class="extend">
+    <p><strong>九九表为什么叫"九九"？</strong>因为它最初是<strong>倒着背</strong>的，从"九九八十一"开始。2002 年湖南里耶出土的秦简上，就有完整的"九九表"，距今 2200 多年，是现存最早的实物九九表。欧洲长期没有口诀表，做乘法要画"格子算"（gelosia），又慢又麻烦。九九表是中国人对计算效率的一大贡献。</p>
+    <p><strong>《九章算术》的统一法则：</strong>它把分数和正负数的加减乘除都整理成口诀。比如正负数减法："同名相除（同号相减），异名相益（异号相加）"——一句话就概括了我们今天讲的全部加减规则。</p>
+    <p><strong>推荐阅读：</strong>《中小学数学要义》——把四则运算的脉络讲得最清楚；《极简数学》——用分饼、欠债、温度计把抽象规则讲得直观；《古今数学思想》——看各种运算规则是怎么一步步被人类提炼出来的。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 计算：(-3) + 7 - (-2) = ？</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">减负 = 加正：-(-2) 就是 +2。把减法都变成加法，再从左到右算。</div>
+    <div class="ans-box" id="a1">(-3) + 7 - (-2) = (-3) + 7 + 2 = 4 + 2 = <strong>6</strong></div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 计算 0.3 × 0.5 = ？并用分数解释为什么是这个结果。</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">0.3 = 3/10，0.5 = 5/10。两个一位小数相乘，结果是两位小数。</div>
+    <div class="ans-box" id="a2">3 × 5 = 15，两位小数 → <strong>0.15</strong>。用分数：(3/10) × (5/10) = 15/100 = 0.15。两个分母 10 相乘得 100，所以是两位小数。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 计算 1.5 ÷ 0.3 = ？并说明"小数点移动"为什么有效。</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">把被除数和除数同时乘 10，让除数变整数。这相当于分数的等值变形，商不变。</div>
+    <div class="ans-box" id="a3">1.5 ÷ 0.3 = 15 ÷ 3 = <strong>5</strong>。被除数和除数同时放大 10 倍，相当于 15/10 ÷ 3/10 化成 15/3，分数等值变形，所以商不变。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 通分计算：1/2 + 1/3 - 1/6 = ？</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">2、3、6 的最小公倍数是 6，把三个分数都化成分母为 6 的等值分数。</div>
+    <div class="ans-box" id="a4">1/2 = 3/6，1/3 = 2/6，1/6 = 1/6。原式 = 3/6 + 2/6 - 1/6 = 4/6 = <strong>2/3</strong>（化成最简分数）。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 用乘法口诀表"反查"：24 ÷ 4 = ？写出你的反查思路，并用"重复减"验证。</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">除法是"反查加法答案"：找 4 乘几等于 24，也就是在 4 那一行查口诀。</div>
+    <div class="ans-box" id="a5">口诀表 4 那一行："四六二十四"，所以 4 × 6 = 24，反查得 24 ÷ 4 = <strong>6</strong>。用重复减验证：24 − 4 − 4 − 4 − 4 − 4 − 4 = 0，减了 6 次，所以是 6。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 计算 (-2) × 3 × (-4) = ？并说出每一步的符号判断。</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">同号得正、异号得负。从左到右两两相乘，先定符号再算绝对值。</div>
+    <div class="ans-box" id="a6">(-2) × 3 = -6（异号得负，2×3=6）；(-6) × (-4) = +24（同号得正，6×4=24）。结果 <strong>24</strong>。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>7.</strong> 小明说"加法有交换律，所以减法也有交换律"。他说的对吗？举例说明。</p>
+    <button class="btn-sm" onclick="toggleHint('h7')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a7')">查看答案</button>
+    <div class="hint-box" id="h7">试试 5 - 3 和 3 - 5 是不是相等。想想"合并"和"拿走"哪个有方向。</div>
+    <div class="ans-box" id="a7"><strong>不对。</strong>5 - 3 = 2，但 3 - 5 = -2，结果不同。加法是"合并"，没方向，能交换；减法是"拿走"，有方向（从谁那里拿走），所以<strong>减法没有交换律</strong>。</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>有理数</strong> = 整数 + 分数 = 所有能写成"两个整数之比"的数（含有限小数）</li>
+      <li><strong>加法</strong>是"合并"，<strong>减法</strong>是"拿走"；加法可交换（合并没方向），减法不可交换（拿走有方向）</li>
+      <li><strong>乘法并不存在</strong>：3 × 4 = 4 + 4 + 4，是"重复加"；乘法口诀表是一张"加法答案速查表"</li>
+      <li><strong>除法也不存在</strong>：12 ÷ 3 = 12 − 3 − 3 − 3 − 3，是"重复减"；用口诀表反查更快</li>
+      <li><strong>分数加减</strong>要先通分（让每份一样大）；<strong>小数乘除</strong>靠"数小数位"和"移小数点"，根子都是分数</li>
+      <li><strong>三大运算律</strong>（交换、结合、分配）都是"加法是合并、乘法是重复加"的自然推论，不是硬规定</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="algebraic-expressions.html">下一课：代数式与字母表示数 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+
+// 「乘法＝重复加、除法＝重复减」可视化
+var COLORS = ['#e91e63', '#43a047', '#1a73e8', '#ff9800', '#9c27b0'];
+
+function addDot(parent, ci) {
+  var d = document.createElement('div');
+  d.className = 'dot';
+  d.style.background = COLORS[ci % COLORS.length];
+  parent.appendChild(d);
+}
+
+function setView(v, btn) {
+  document.querySelectorAll('.viewbtn').forEach(function (b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+
+  var grid = document.getElementById('dotGrid');
+  var desc = document.getElementById('dotDesc');
+  grid.innerHTML = '';
+  grid.className = 'dot-grid';
+  grid.style.display = 'flex';
+  grid.style.gridTemplateColumns = '';
+
+  if (v === 'mul34') {
+    grid.style.display = 'grid';
+    grid.style.gridTemplateColumns = 'repeat(4, 34px)';
+    var c34 = [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2];
+    c34.forEach(function (c) { addDot(grid, c); });
+    desc.innerHTML = '<strong>3 × 4</strong>：把 4 个点排成一组，共 3 组 → 4 + 4 + 4 = <strong>12</strong>';
+  } else if (v === 'mul43') {
+    grid.style.display = 'grid';
+    grid.style.gridTemplateColumns = 'repeat(3, 34px)';
+    var c43 = [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3];
+    c43.forEach(function (c) { addDot(grid, c); });
+    desc.innerHTML = '<strong>4 × 3</strong>：把 3 个点排成一组，共 4 组 → 3 + 3 + 3 + 3 = <strong>12</strong><br>同一堆 12 个，横竖换个数法 → 乘法可交换！';
+  } else if (v === 'div3') {
+    grid.classList.add('line');
+    [0, 1, 2, 3].forEach(function (g) {
+      var grp = document.createElement('div');
+      grp.className = 'dot-group';
+      grp.style.borderLeft = '4px solid ' + COLORS[g];
+      var tag = document.createElement('span');
+      tag.className = 'grp-tag';
+      tag.textContent = '3';
+      grp.appendChild(tag);
+      for (var i = 0; i < 3; i++) { addDot(grp, g); }
+      grid.appendChild(grp);
+    });
+    desc.innerHTML = '<strong>12 ÷ 3</strong>：12 − 3 − 3 − 3 − 3 = 0，减了 <strong>4</strong> 次 → 答案是 4';
+  } else if (v === 'div4') {
+    grid.classList.add('line');
+    [0, 1, 2].forEach(function (g) {
+      var grp = document.createElement('div');
+      grp.className = 'dot-group';
+      grp.style.borderLeft = '4px solid ' + COLORS[g];
+      var tag = document.createElement('span');
+      tag.className = 'grp-tag';
+      tag.textContent = '4';
+      grp.appendChild(tag);
+      for (var i = 0; i < 4; i++) { addDot(grp, g); }
+      grid.appendChild(grp);
+    });
+    desc.innerHTML = '<strong>12 ÷ 4</strong>：12 − 4 − 4 − 4 = 0，减了 <strong>3</strong> 次 → 答案是 3';
+  }
+}
+
+// 默认显示 3 × 4
+(function () {
+  var firstBtn = document.getElementById('vb0');
+  setView('mul34', firstBtn);
+})();
+</script>
+<script src="../lessons/dt.js"></script>
+</body>
+</html>
