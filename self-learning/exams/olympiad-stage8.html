@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>奥数挑战 — 阶段八 — 自学课件</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../lessons/style.css">
+<style>
+  :root { --accent: #33691e; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .problem { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  @media (max-width: 720px) {
+    article { padding-bottom: 100px !important; }
+    article { padding: 20px 12px 100px 12px !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .problem { padding: 12px 14px; margin: 12px 0; }
+  }
+
+  .fill-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .fill-input { padding: 6px 12px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 15px; width: 180px; }
+  .fill-input:focus { outline: none; border-color: #1976d2; }
+  .check-btn { padding: 6px 16px; border: 1px solid #1976d2; border-radius: 6px; background: #1976d2; color: #fff; font-size: 13px; cursor: pointer; }
+  .check-btn:hover { background: #1565c0; }
+  .feedback { display: none; margin-left: 8px; font-size: 14px; font-weight: 600; }
+  .feedback.show { display: inline; }
+  .feedback.correct-fb { color: #2e7d32; }
+  .feedback.wrong-fb { color: #c62828; }
+  
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="../index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="../symmetry.html">课件 20（轴对称）</a>、<a href="../pythagorean.html">课件 21（勾股定理）</a>、<a href="../parallelogram.html">课件 22（平行四边形）</a></p>
+  <h1>奥数挑战 — 阶段八：特殊图形与勾股定理</h1>
+  <div class="origin">
+    <p>本阶段围绕「轴对称、勾股定理、平行四边形」出题，考察等腰三角形性质、勾股定理的应用、中位线定理、特殊四边形的判定等。</p>
+  </div>
+
+  <!-- Problem 1 -->
+  <div class="problem">
+    <p><strong>1.</strong> 已知直角三角形的两条直角边分别为 6 cm 和 8 cm。求斜边上的高。</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-1" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(1, \'对称\')">提交</button><span class="feedback" id="fb-1"></span></div><button class="btn-sm" onclick="toggleHint(\'h1\')">💡 思路提示</button>
+    <div class="hint-box" id="h1"><p>先求斜边长（勾股定理），再用面积法：三角形面积 = (1/2)×直角边乘积 = (1/2)×斜边×斜边上的高。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a1')">✅ 查看答案</button>
+    <div class="ans-box" id="a1"><p><strong>斜边上的高 = 4.8 cm。</strong></p><p>斜边 c = √(6² + 8²) = √(36 + 64) = √100 = 10 cm。</p><p>面积 S = (1/2) × 6 × 8 = 24 cm²。</p><p>又 S = (1/2) × c × h = (1/2) × 10 × h = 5h，所以 5h = 24，h = 4.8 cm。</p></div>
+  </div>
+
+  <!-- Problem 2 -->
+  <div class="problem">
+    <p><strong>2.</strong> 已知等腰三角形的腰长为 5 cm，底边长为 6 cm。求底边上的高。</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-2" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(2, \'勾股\')">提交</button><span class="feedback" id="fb-2"></span></div><button class="btn-sm" onclick="toggleHint(\'h2\')">💡 思路提示</button>
+    <div class="hint-box" id="h2"><p>等腰三角形底边上的高也是底边的中线，将底边平分。在由高、半底边、腰构成的直角三角形中用勾股定理。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a2')">✅ 查看答案</button>
+    <div class="ans-box" id="a2"><p><strong>底边上的高 = 4 cm。</strong></p><p>底边上的高将底边平分为两段，每段 3 cm。</p><p>在直角三角形中，腰为斜边 5 cm，半底边为一直角边 3 cm，由勾股定理：h = √(5² − 3²) = √(25 − 9) = √16 = 4 cm。</p></div>
+  </div>
+
+  <!-- Problem 3 -->
+  <div class="problem">
+    <p><strong>3.</strong> 在平行四边形 ABCD 中，AB = 6 cm，BC = 8 cm，∠B = 60°。求平行四边形 ABCD 的面积。</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, \'a²+b²=c²\')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint(\'h3\')">💡 思路提示</button>
+    <div class="hint-box" id="h3"><p>平行四边形面积 = 底 × 高 = AB × BC × sin∠B。过 A 作 BC 的垂线，在 30°-60°-90° 直角三角形中求高。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a3')">✅ 查看答案</button>
+    <div class="ans-box" id="a3"><p><strong>面积 = 24√3 cm²。</strong></p><p>以 AB 为底，高 h = BC × sin60° = 8 × (√3/2) = 4√3 cm。</p><p>面积 = AB × h = 6 × 4√3 = 24√3 cm²。</p><p>（或以 BC 为底：高 = AB × sin60° = 6 × √3/2 = 3√3，面积 = 8 × 3√3 = 24√3。）</p></div>
+  </div>
+
+  <!-- Problem 4 -->
+  <div class="problem">
+    <p><strong>4.</strong> 已知直角三角形的三边长都是整数，且一条直角边为 12。求斜边的可能长度。</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-4" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(4, \'5\')">提交</button><span class="feedback" id="fb-4"></span></div><button class="btn-sm" onclick="toggleHint(\'h4\')">💡 思路提示</button>
+    <div class="hint-box" id="h4"><p>这是整数边直角三角形（勾股数）问题。已知一条直角边为 12，回忆或验证常见的含 12 的勾股数组合。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a4')">✅ 查看答案</button>
+    <div class="ans-box" id="a4"><p><strong>斜边的可能长度为 13、15、20、37。</strong></p><p>已知一条直角边为 12，三边都是整数的直角三角形（勾股数）有：<br>(5, 12, 13)：5² + 12² = 25 + 144 = 169 = 13² ✓<br>(9, 12, 15)：9² + 12² = 81 + 144 = 225 = 15² ✓<br>(12, 16, 20)：12² + 16² = 144 + 256 = 400 = 20² ✓<br>(12, 35, 37)：12² + 35² = 144 + 1225 = 1369 = 37² ✓<br>所以斜边可能是 13、15、20 或 37。</p></div>
+  </div>
+
+  <!-- Problem 5 -->
+  <div class="problem">
+    <p><strong>5.</strong> 已知矩形 ABCD 中，AB = 3，BC = 4。在矩形所在平面上找一点 P，使得 PA + PB + PC + PD 最小。</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-5" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(5, \'13\')">提交</button><span class="feedback" id="fb-5"></span></div><button class="btn-sm" onclick="toggleHint(\'h5\')">💡 思路提示</button>
+    <div class="hint-box" id="h5"><p>利用三角形不等式：PA + PC ≥ AC，PB + PD ≥ BD，等号成立当且仅当 P 在对角线上。那么 P 同时在 AC 和 BD 上时，P 在对角线交点。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a5')">✅ 查看答案</button>
+    <div class="ans-box" id="a5"><p><strong>P 为矩形对角线的交点（中心）。</strong></p><p>由三角形不等式：PA + PC ≥ AC，等号成立当 P 在 AC 上；PB + PD ≥ BD，等号成立当 P 在 BD 上。</p><p>所以 PA + PB + PC + PD ≥ AC + BD = 5 + 5 = 10。</p><p>当 P 同时在对角线 AC 和 BD 上，即 P 为对角线交点时，等号成立，和取最小值 10。</p><p>此时 P 的坐标为矩形中心，PA = PB = PC = PD = 2.5。</p></div>
+  </div>
+
+  <!-- Problem 6 -->
+  <div class="problem">
+    <p><strong>6.</strong> 在 △ABC 中，D、E、F 分别是 AB、BC、CA 的中点。已知 △DEF 的面积为 5 cm²。求 △ABC 的面积。</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-6" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(6, \'平行四边形\')">提交</button><span class="feedback" id="fb-6"></span></div><button class="btn-sm" onclick="toggleHint(\'h6\')">💡 思路提示</button>
+    <div class="hint-box" id="h6"><p>中位线定理：连接三角形各边中点得到的小三角形（中点三角形）与原三角形相似，面积比为相似比的平方。三条中位线将原三角形分成四个全等的小三角形。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a6')">✅ 查看答案</button>
+    <div class="ans-box" id="a6"><p><strong>△ABC 的面积 = 20 cm²。</strong></p><p>三角形三条中位线将原三角形分成四个全等的小三角形，△DEF 是其中一个小三角形（其余三个为 △ADF、△BDE、△CEF）。</p><p>所以 S△ABC = 4 × S△DEF = 4 × 5 = 20 cm²。</p></div>
+  </div>
+
+  <!-- Problem 7 -->
+  <div class="problem">
+    <p><strong>7.</strong> 已知梯形的上底为 4 cm，下底为 10 cm，两腰分别为 5 cm 和 7 cm。求梯形的高。</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-7" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(7, \'矩形\')">提交</button><span class="feedback" id="fb-7"></span></div><button class="btn-sm" onclick="toggleHint(\'h7\')">💡 思路提示</button>
+    <div class="hint-box" id="h7"><p>过上底的两个端点分别作下底的垂线，将下底分成三段。左段 + 右段 = 下底 − 上底 = 6。两个直角三角形中，高的平方分别等于 5² − 左段² 和 7² − 右段²，两者相等。利用平方差公式求左段和右段。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a7')">✅ 查看答案</button>
+    <div class="ans-box" id="a7"><p><strong>梯形的高 = 2√6 cm（约 4.90 cm）。</strong></p><p>过上底两端点作下底的垂线，将下底分为三段：左段、上底 4、右段。<br>左段 + 右段 = 10 − 4 = 6 cm。<br>在两个直角三角形中，由勾股定理：<br>高² = 5² − 左段² = 25 − 左段²<br>高² = 7² − 右段² = 49 − 右段²<br>所以 25 − 左段² = 49 − 右段²，即 右段² − 左段² = 24。<br>利用平方差：右段² − 左段² = (右段 + 左段)(右段 − 左段) = 6 × (右段 − 左段) = 24。<br>所以 右段 − 左段 = 4。<br>又 右段 + 左段 = 6，所以 右段 = 5，左段 = 1。<br>高² = 25 − 1² = 24，高 = 2√6 cm。</p></div>
+  </div>
+
+  <!-- Problem 8 -->
+  <div class="problem">
+    <p><strong>8.</strong> 在 Rt△ABC 中，∠C = 90°，CD ⊥ AB 于 D。已知 AC = 6，BC = 8。求 CD 的长度。</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-8" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(8, \'菱形\')">提交</button><span class="feedback" id="fb-8"></span></div><button class="btn-sm" onclick="toggleHint(\'h8\')">💡 思路提示</button>
+    <div class="hint-box" id="h8"><p>用面积法：三角形的面积既可以用两直角边表示，也可以用斜边和斜边上的高表示。两者相等即可求出 CD。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a8')">✅ 查看答案</button>
+    <div class="ans-box" id="a8"><p><strong>CD = 4.8。</strong></p><p>斜边 AB = √(6² + 8²) = √(36 + 64) = 10。</p><p>S△ABC = (1/2) × AC × BC = (1/2) × 6 × 8 = 24。</p><p>又 S△ABC = (1/2) × AB × CD = (1/2) × 10 × CD = 5 CD。</p><p>所以 5 CD = 24，CD = 4.8。</p></div>
+  </div>
+
+  <!-- Problem 9 -->
+  <div class="problem">
+    <p><strong>9.</strong> 已知菱形 ABCD 的对角线 AC = 10 cm，BD = 24 cm。求菱形的边长和面积。</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, \'正方形\')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint(\'h9\')">💡 思路提示</button>
+    <div class="hint-box" id="h9"><p>菱形对角线互相垂直平分，用勾股定理求边长。菱形面积 = 对角线乘积的一半。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a9')">✅ 查看答案</button>
+    <div class="ans-box" id="a9"><p><strong>边长 = 13 cm，面积 = 120 cm²。</strong></p><p>菱形对角线互相垂直平分，半对角线长分别为 5 cm 和 12 cm。</p><p>由勾股定理：边长 = √(5² + 12²) = √(25 + 144) = √169 = 13 cm。</p><p>面积 = 对角线乘积 / 2 = (10 × 24) / 2 = 120 cm²。</p></div>
+  </div>
+
+  <!-- Problem 10 -->
+  <div class="problem">
+    <p><strong>10.</strong> 在正方形 ABCD 中，E 是 BC 上一点，且 BE = 1/3 BC。连接 AE，交 BD 于 F。求 BF : FD 的值。</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-10" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(10, \'相等\')">提交</button><span class="feedback" id="fb-10"></span></div><button class="btn-sm" onclick="toggleHint(\'h10\')">💡 思路提示</button>
+    <div class="hint-box" id="h10"><p>观察 △BFE 和 △DFA：对顶角相等，AD ∥ BE（正方形对边平行），两对内错角相等。所以 △BFE ∽ △DFA。相似比 = BE : AD = 1/3 : 1 = 1 : 3。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a10')">✅ 查看答案</button>
+    <div class="ans-box" id="a10"><p><strong>BF : FD = 1 : 3。</strong></p><p>在正方形 ABCD 中，AD ∥ BC，所以 AD ∥ BE。<br>在 △BFE 和 △DFA 中：<br>∠BFE = ∠DFA（对顶角相等）<br>∠FBE = ∠FDA（内错角，AD ∥ BE）<br>∠BEF = ∠DAF（内错角，AD ∥ BE）<br>所以 △BFE ∽ △DFA（AA 相似）。<br>相似比 = BE : AD = (1/3 BC) : BC = 1 : 3。<br>因此 BF : FD = 1 : 3。</p></div>
+  </div>
+</article>
+<script>
+function toggleHint(id) {
+  var el = document.getElementById(id);
+  el.classList.toggle('show');
+}
+function toggleAns(id) {
+  var el = document.getElementById(id);
+  el.classList.toggle('show');
+}
+</script>
+
+<script>
+function checkOlympiad(qid, correctAns) {
+  const inp = document.getElementById('inp-' + qid);
+  const fb = document.getElementById('fb-' + qid);
+  if (!inp || !fb) return;
+  const userAns = inp.value.trim();
+  if (!userAns) { fb.textContent = '请输入答案'; fb.className = 'feedback show wrong-fb'; return; }
+  
+  // 灵活比较：去掉空格，统一大小写
+  const normalize = s => s.replace(/\s+/g, '').toLowerCase();
+  const u = normalize(userAns);
+  const c = normalize(correctAns);
+  
+  // 尝试多种比较方式
+  let isCorrect = false;
+  // 1. 完全相同
+  if (u === c) isCorrect = true;
+  // 2. 数值比较（尝试转为浮点数）
+  if (!isCorrect) {
+    const un = parseFloat(u);
+    const cn = parseFloat(c);
+    if (!isNaN(un) && !isNaN(cn) && Math.abs(un - cn) < 0.0001) isCorrect = true;
+  }
+  // 3. 分数比较 (如 9/10)
+  if (!isCorrect) {
+    const parts = u.split('/');
+    if (parts.length === 2) {
+      const num = parseFloat(parts[0]), den = parseFloat(parts[1]);
+      if (!isNaN(num) && !isNaN(den) && den !== 0) {
+        const val = num / den;
+        const cn = parseFloat(c);
+        if (!isNaN(cn) && Math.abs(val - cn) < 0.0001) isCorrect = true;
+      }
+    }
+    const cparts = c.split('/');
+    if (!isCorrect && cparts.length === 2) {
+      const cn = parseFloat(cparts[0]) / parseFloat(cparts[1]);
+      const un = parseFloat(u);
+      if (!isNaN(un) && !isNaN(cn) && Math.abs(un - cn) < 0.0001) isCorrect = true;
+    }
+  }
+  // 4. 包含检查 (如 "5/8" 在 "5/8更大" 中)
+  if (!isCorrect && (u.includes(c) || c.includes(u))) isCorrect = true;
+  
+  if (isCorrect) {
+    fb.textContent = '✓ 正确！';
+    fb.className = 'feedback show correct-fb';
+    inp.style.borderColor = '#4caf50';
+  } else {
+    fb.textContent = '✗ 不对，再想想';
+    fb.className = 'feedback show wrong-fb';
+    inp.style.borderColor = '#f44336';
+  }
+}
+</script>
+</body>
+</html>

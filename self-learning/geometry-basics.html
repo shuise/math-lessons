@@ -17,16 +17,13 @@
   .challenge { background: #e8eaf6; border: 2px dashed #00897b; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .diff-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; color: #fff; margin-left: 8px; }
-  .diff-easy { background: #66bb6a; }
-  .diff-medium { background: #ff9800; }
-  .diff-hard { background: #f44336; }
   .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
   .hint-box.show, .ans-box.show { display: block; }
   .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
   .btn-sm:hover { background: #e8e8e8; }
   @media (max-width: 720px) {
-    article { padding: 20px 12px !important; }
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
     h1 { font-size: 22px; }
     h2 { font-size: 18px; }
     h3 { font-size: 16px; }
@@ -38,7 +35,7 @@
 <body>
 <article>
   <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：课件 1（自然数——数数和测量是一切几何的起点）</p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./natural-numbers.html">课件 1（自然数——数数和测量是一切几何的起点）</a></p>
   <h1>几何图形</h1>
 
   <h2>起源：尼罗河边的几何学</h2>
@@ -137,7 +134,7 @@
   <h2>习题</h2>
 
   <div class="exercise">
-    <p><strong>1.</strong> 下列图形中，哪些是平面图形，哪些是立体图形？三角形、球、长方形、圆柱、圆、正方体。<span class="diff-tag diff-easy">简单</span></p>
+    <p><strong>1.</strong> 下列图形中，哪些是平面图形，哪些是立体图形？三角形、球、长方形、圆柱、圆、正方体。</p>
     <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
     <div class="hint-box" id="h1">所有点在同一平面 = 平面图形；有体积 = 立体图形。</div>
@@ -145,7 +142,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>2.</strong> "几何"这个词的原意是什么？它在哪个古代文明中诞生？<span class="diff-tag diff-easy">简单</span></p>
+    <p><strong>2.</strong> "几何"这个词的原意是什么？它在哪个古代文明中诞生？</p>
     <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
     <div class="hint-box" id="h2">geo = 土地，metria = 测量。</div>
@@ -153,7 +150,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>3.</strong> 一个正方体有几个面？几条棱？几个顶点？<span class="diff-tag diff-medium">中等</span></p>
+    <p><strong>3.</strong> 一个正方体有几个面？几条棱？几个顶点？</p>
     <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
     <div class="hint-box" id="h3">想象一个骰子，或者用"面动成体"来推导。</div>
@@ -161,7 +158,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>4.</strong> 古埃及人用 3-4-5 绳子拉直角。请计算：3² + 4² = ？它的结果暗示了什么？<span class="diff-tag diff-hard">较难</span></p>
+    <p><strong>4.</strong> 古埃及人用 3-4-5 绳子拉直角。请计算：3² + 4² = ？它的结果暗示了什么？</p>
     <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
     <div class="hint-box" id="h4">3² = 9，4² = 16，加起来等于 25。5² = 25。</div>

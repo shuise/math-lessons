@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>相似 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔺</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #bf360c; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fbe9e7; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  .method-card { background: #fafafa; border: 2px solid #e0e0e0; border-radius: 10px; padding: 16px 18px; margin: 14px 0; }
+  .method-card h3 { margin-top: 0; color: var(--accent); }
+  .graphic { margin: 16px 0; text-align: center; }
+  .compare { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+  .compare > div { flex: 1; min-width: 250px; }
+  @media (max-width: 720px) {
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./triangle.html">课件 14（三角形）</a>、15（全等三角形）、20（轴对称）</p>
+  <h1>相似 — 形状相同，大小不同</h1>
+
+  <h2>起源：泰勒斯再测金字塔</h2>
+  <div class="origin">
+    <p>还记得全等三角形那课里提到的<strong>泰勒斯</strong>吗？他不光用全等三角形测了船距，还有一个更著名的故事——<strong>测量金字塔的高度</strong>。</p>
+    <p>传说泰勒斯旅行到埃及，看到宏伟的金字塔，心想：这么高的金字塔，怎么才能知道它的高度呢？总不能爬上去量吧？</p>
+    <p>他想到了一个绝妙的办法：在金字塔旁边立了一根木棍。等到某一天某个时刻，木棍的影子长度恰好等于木棍的高度时，他跑去测量金字塔影子的长度——这个长度，就是金字塔的高度！</p>
+    <p>为什么？因为在这个时刻，<strong>木棍和它的影子组成的三角形</strong>，与<strong>金字塔和它的影子组成的三角形</strong>，它们的<strong>形状完全一样</strong>，只是大小不同——这就是"相似"的思想。</p>
+    <p>《古今数学思想》中记载："泰勒斯利用相似三角形的原理测量金字塔高度，是几何学从实用测量走向理论科学的关键一步。"</p>
+  </div>
+
+  <h2>概念与定义</h2>
+  <div class="story">
+    <h3>一、什么是相似？</h3>
+    <p>你在手机上看照片时，用两根手指一捏，照片就缩小了；一撑，照片就放大了。缩小的照片和放大的照片，图案完全一样，只是大小不同——这就是"相似"。</p>
+    <p>在数学中，<strong>相似</strong>说的就是：两个图形<strong>形状完全相同</strong>，但<strong>大小可以不同</strong>。</p>
+
+    <div class="key">
+      <p><strong>相似多边形的定义：</strong>各角对应相等、各边对应成比例的两个多边形叫做<strong>相似多边形</strong>（similar polygons）。</p>
+      <p>记作：△ABC ∽ △DEF（"∽"读作"相似于"）</p>
+    </div>
+
+    <div class="graphic">
+      <svg viewBox="0 0 600 220" style="max-width:100%;height:auto;">
+        <defs>
+          <style>text{font-size:14px;fill:#333;font-family:serif}</style>
+        </defs>
+        <!-- 三角形1（小） -->
+        <polygon points="60,170 180,40 260,170" fill="rgba(191,54,12,0.12)" stroke="#bf360c" stroke-width="2.5"/>
+        <text x="50" y="195">A</text>
+        <text x="170" y="30">B</text>
+        <text x="265" y="195">C</text>
+        <!-- 等号 -->
+        <text x="295" y="115" font-size="22" fill="#bf360c" font-weight="bold">∽</text>
+        <!-- 三角形2（大） -->
+        <polygon points="350,170 530,40 650,170" fill="rgba(191,54,12,0.12)" stroke="#bf360c" stroke-width="2.5"/>
+        <text x="340" y="195">D</text>
+        <text x="520" y="30">E</text>
+        <text x="655" y="195">F</text>
+        <!-- 比例标注 -->
+        <text x="190" y="210" font-size="12" fill="#bf360c">AB : DE = BC : EF = CA : FD</text>
+      </svg>
+    </div>
+
+    <div class="compare">
+      <div class="key">
+        <p><strong>全等 vs 相似：</strong></p>
+        <ul>
+          <li><strong>全等</strong>：形状相同 + 大小相等（相似比 = 1:1）</li>
+          <li><strong>相似</strong>：形状相同，大小可以不同（相似比不一定为 1）</li>
+        </ul>
+        <p><strong>全等是相似的特殊情况！</strong>相似比为 1:1 时，相似就是全等。</p>
+      </div>
+      <div class="formula">
+        <p><strong>相似比（比例因子）：</strong></p>
+        <p style="font-size:1.1em;text-align:center;">k = <sup>对应边</sup>⁄<sub>对应边</sub></p>
+        <p>如果 k &gt; 1，放大；如果 0 &lt; k &lt; 1，缩小；如果 k = 1，全等。</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>逻辑推导：相似三角形的三种判定方法</h2>
+  <div class="story">
+    <p>全等三角形需要三组条件（SSS、SAS、ASA 等），相似三角形是否也需要这么多？答案是：<strong>不需要！因为相似只要求形状相同，大小可以不同，所以条件更宽松。</strong></p>
+  </div>
+
+  <div class="method-card">
+    <h3>方法一：AA（角角）——两个角对应相等</h3>
+    <p><strong>内容：</strong>如果两个三角形的<strong>两个角</strong>分别对应相等，那么这两个三角形相似。</p>
+    <p><strong>通俗理解：</strong>三角形内角和是 180°，两个角相等就意味着第三个角也相等。三个角都相等，形状就确定了——大小可以不同，但形状一定一样。</p>
+    <p><strong>这是最常用的判定方法！</strong>因为只需要两个角，比全等少多了。</p>
+    <div class="graphic">
+      <svg viewBox="0 0 600 220" style="max-width:100%;height:auto;">
+        <polygon points="50,180 160,40 270,180" fill="rgba(191,54,12,0.12)" stroke="#bf360c" stroke-width="2.5"/>
+        <text x="40" y="205">A</text><text x="150" y="30">B</text><text x="275" y="205">C</text>
+        <path d="M68,172 A16,16 0 0,0 80,158" fill="none" stroke="#1565c0" stroke-width="2"/>
+        <text x="55" y="168" font-size="12" fill="#1565c0" font-weight="bold">∠</text>
+        <path d="M155,50 A18,18 0 0,0 170,68" fill="none" stroke="#1565c0" stroke-width="2"/>
+        <text x="170" y="55" font-size="12" fill="#1565c0" font-weight="bold">∠</text>
+
+        <text x="295" y="115" font-size="22" fill="#bf360c" font-weight="bold">∽</text>
+
+        <polygon points="350,180 520,40 700,180" fill="rgba(191,54,12,0.12)" stroke="#bf360c" stroke-width="2.5"/>
+        <text x="338" y="205">D</text><text x="510" y="30">E</text><text x="705" y="205">F</text>
+        <path d="M370,172 A16,16 0 0,0 382,158" fill="none" stroke="#1565c0" stroke-width="2"/>
+        <text x="357" y="168" font-size="12" fill="#1565c0" font-weight="bold">∠</text>
+        <path d="M515,50 A18,18 0 0,0 530,68" fill="none" stroke="#1565c0" stroke-width="2"/>
+        <text x="530" y="55" font-size="12" fill="#1565c0" font-weight="bold">∠</text>
+      </svg>
+    </div>
+    <div class="example">
+      <p><strong>经典例子：</strong>如图，DE ∥ BC，则 △ADE ∽ △ABC（AA：∠A 公共，∠ADE = ∠B 同位角相等）。</p>
+    </div>
+  </div>
+
+  <div class="method-card">
+    <h3>方法二：SAS（边角边）——两边成比例且夹角相等</h3>
+    <p><strong>内容：</strong>如果两个三角形的<strong>两边对应成比例</strong>且<strong>夹角相等</strong>，那么这两个三角形相似。</p>
+    <p><strong>通俗理解：</strong>两边长度虽然不同，但它们的比例相同，而且这两条边张开的"角度"也一样——这时候，第三条边也会按相同的比例变化，整个形状就锁定了。</p>
+    <div class="graphic">
+      <svg viewBox="0 0 600 210" style="max-width:100%;height:auto;">
+        <polygon points="50,170 180,30 270,170" fill="rgba(191,54,12,0.12)" stroke="#bf360c" stroke-width="2.5"/>
+        <text x="40" y="195">A</text><text x="170" y="20">B</text><text x="275" y="195">C</text>
+        <line x1="50" y1="170" x2="180" y2="30" stroke="#c62828" stroke-width="2"/>
+        <text x="95" y="95" font-size="12" fill="#c62828" font-weight="bold">‖</text>
+        <line x1="180" y1="30" x2="270" y2="170" stroke="#1565c0" stroke-width="2"/>
+        <text x="215" y="90" font-size="12" fill="#1565c0" font-weight="bold">‖</text>
+        <path d="M165,48 A18,18 0 0,0 180,65" fill="none" stroke="#e65100" stroke-width="2"/>
+        <text x="182" y="60" font-size="12" fill="#e65100" font-weight="bold">∠</text>
+
+        <text x="295" y="115" font-size="22" fill="#bf360c" font-weight="bold">∽</text>
+
+        <polygon points="350,170 540,30 670,170" fill="rgba(191,54,12,0.12)" stroke="#bf360c" stroke-width="2.5"/>
+        <text x="338" y="195">D</text><text x="530" y="20">E</text><text x="675" y="195">F</text>
+        <line x1="350" y1="170" x2="540" y2="30" stroke="#c62828" stroke-width="2"/>
+        <text x="425" y="95" font-size="12" fill="#c62828" font-weight="bold">‖</text>
+        <line x1="540" y1="30" x2="670" y2="170" stroke="#1565c0" stroke-width="2"/>
+        <text x="595" y="90" font-size="12" fill="#1565c0" font-weight="bold">‖</text>
+        <path d="M520,48 A18,18 0 0,0 535,65" fill="none" stroke="#e65100" stroke-width="2"/>
+        <text x="537" y="60" font-size="12" fill="#e65100" font-weight="bold">∠</text>
+      </svg>
+    </div>
+    <p><strong>注意：</strong>与全等 SAS 的区别——全等要求两边"相等"，相似只要求两边"成比例"。</p>
+  </div>
+
+  <div class="method-card">
+    <h3>方法三：SSS（边边边）——三边对应成比例</h3>
+    <p><strong>内容：</strong>如果两个三角形的<strong>三条边对应成比例</strong>，那么这两个三角形相似。</p>
+    <p><strong>通俗理解：</strong>三条边的长度等比例缩放——比如每条边都变为原来的 2 倍或 1/3——整个三角形的形状不会变，只是大小变了。</p>
+    <div class="graphic">
+      <svg viewBox="0 0 600 210" style="max-width:100%;height:auto;">
+        <polygon points="50,170 170,30 270,170" fill="rgba(191,54,12,0.12)" stroke="#bf360c" stroke-width="2.5"/>
+        <text x="40" y="195">A</text><text x="160" y="20">B</text><text x="275" y="195">C</text>
+        <line x1="50" y1="170" x2="170" y2="30" stroke="#c62828" stroke-width="2"/>
+        <text x="90" y="95" font-size="12" fill="#c62828" font-weight="bold">‖</text>
+        <line x1="170" y1="30" x2="270" y2="170" stroke="#1565c0" stroke-width="2"/>
+        <text x="210" y="90" font-size="12" fill="#1565c0" font-weight="bold">‖</text>
+        <line x1="50" y1="170" x2="270" y2="170" stroke="#2e7d32" stroke-width="2"/>
+        <text x="150" y="190" font-size="12" fill="#2e7d32" font-weight="bold">‖</text>
+
+        <text x="295" y="115" font-size="22" fill="#bf360c" font-weight="bold">∽</text>
+
+        <polygon points="350,170 550,30 690,170" fill="rgba(191,54,12,0.12)" stroke="#bf360c" stroke-width="2.5"/>
+        <text x="338" y="195">D</text><text x="540" y="20">E</text><text x="695" y="195">F</text>
+        <line x1="350" y1="170" x2="550" y2="30" stroke="#c62828" stroke-width="2"/>
+        <text x="430" y="95" font-size="12" fill="#c62828" font-weight="bold">‖</text>
+        <line x1="550" y1="30" x2="690" y2="170" stroke="#1565c0" stroke-width="2"/>
+        <text x="610" y="90" font-size="12" fill="#1565c0" stroke-width="0">‖</text>
+        <line x1="350" y1="170" x2="690" y2="170" stroke="#2e7d32" stroke-width="2"/>
+        <text x="510" y="190" font-size="12" fill="#2e7d32" stroke-width="0">‖</text>
+      </svg>
+    </div>
+    <p><strong>注意：</strong>与全等 SSS 的区别——全等要求三边"相等"，相似只要求三边"成比例"。</p>
+  </div>
+
+  <div class="key">
+    <p><strong>全等判定 vs 相似判定 对比：</strong></p>
+    <table>
+      <tr><th></th><th>全等（≅）</th><th>相似（∽）</th></tr>
+      <tr><td>SSS</td><td>三边对应相等</td><td>三边对应成比例</td></tr>
+      <tr><td>SAS</td><td>两边及其夹角对应相等</td><td>两边成比例且夹角相等</td></tr>
+      <tr><td>ASA / AA</td><td>两角及其夹边对应相等</td><td>两角对应相等（不需要边！）</td></tr>
+      <tr><td>AAS</td><td>两角及一角的对边相等</td><td>包含在 AA 中（AA 就够了）</td></tr>
+      <tr><td>HL</td><td>斜边和一直角边对应相等</td><td>斜边和一直角边对应成比例</td></tr>
+    </table>
+    <p>看出规律了吗？<strong>把"相等"换成"成比例"，大部分全等判定就变成了相似判定。</strong>而且相似少了一个条件——因为大小不需要确定。</p>
+  </div>
+
+  <h2>相似三角形的性质</h2>
+  <div class="story">
+    <p>一旦你证明了两个三角形相似，就能得到很多有用的结论：</p>
+
+    <div class="formula">
+      <p><strong>性质 1（对应边成比例）：</strong></p>
+      <p style="text-align:center;font-size:1.1em;">若 △ABC ∽ △DEF，则 AB : DE = BC : EF = CA : FD = <strong>k</strong>（相似比）</p>
+    </div>
+
+    <div class="formula">
+      <p><strong>性质 2（对应角相等）：</strong></p>
+      <p style="text-align:center;font-size:1.1em;">∠A = ∠D，∠B = ∠E，∠C = ∠F</p>
+    </div>
+
+    <div class="formula">
+      <p><strong>性质 3（周长比 = 相似比）：</strong></p>
+      <p style="text-align:center;font-size:1.1em;">周长(△ABC) : 周长(△DEF) = k</p>
+    </div>
+
+    <div class="formula">
+      <p><strong>性质 4（面积比 = 相似比的平方）：</strong></p>
+      <p style="text-align:center;font-size:1.1em;">面积(△ABC) : 面积(△DEF) = k²</p>
+    </div>
+
+    <div class="graphic">
+      <svg viewBox="0 0 600 250" style="max-width:100%;height:auto;">
+        <defs>
+          <style>text{font-family:sans-serif}</style>
+        </defs>
+        <!-- 两个相似三角形 -->
+        <polygon points="50,180 180,40 260,180" fill="rgba(191,54,12,0.12)" stroke="#bf360c" stroke-width="2.5"/>
+        <text x="38" y="205" font-size="14" fill="#333" font-family="serif">A</text>
+        <text x="170" y="28" font-size="14" fill="#333" font-family="serif">B</text>
+        <text x="265" y="205" font-size="14" fill="#333" font-family="serif">C</text>
+        <!-- 标记边 -->
+        <text x="100" y="100" font-size="11" fill="#c62828">3</text>
+        <text x="210" y="95" font-size="11" fill="#1565c0">4</text>
+        <text x="145" y="198" font-size="11" fill="#2e7d32">5</text>
+
+        <text x="295" y="115" font-size="22" fill="#bf360c" font-weight="bold">∽</text>
+
+        <polygon points="350,180 520,40 650,180" fill="rgba(191,54,12,0.12)" stroke="#bf360c" stroke-width="2.5"/>
+        <text x="338" y="205" font-size="14" fill="#333" font-family="serif">D</text>
+        <text x="510" y="28" font-size="14" fill="#333" font-family="serif">E</text>
+        <text x="655" y="205" font-size="14" fill="#333" font-family="serif">F</text>
+        <text x="420" y="100" font-size="11" fill="#c62828">6</text>
+        <text x="570" y="95" font-size="11" fill="#1565c0">8</text>
+        <text x="490" y="198" font-size="11" fill="#2e7d32">10</text>
+
+        <!-- 说明 -->
+        <text x="300" y="235" font-size="13" fill="#bf360c" text-anchor="middle">相似比 k = 2 &nbsp;|&nbsp; 周长比 = 2 &nbsp;|&nbsp; 面积比 = 4</text>
+      </svg>
+    </div>
+
+    <div class="example">
+      <p><strong>为什么面积比是 k²？</strong>想象一个底和高都是原来的 2 倍的三角形，面积 = ½ × 底 × 高 = ½ × (2×原底) × (2×原高) = 4 × 原面积。所以面积比 = 相似比的平方。</p>
+    </div>
+  </div>
+
+  <h2>位似：相似 + 对应点连线交于一点</h2>
+  <div class="story">
+    <p><strong>位似</strong>（homothety）是一种特殊的相似关系。两个图形不仅相似，而且<strong>对应点的连线都经过同一个点</strong>——这个点叫做<strong>位似中心</strong>。</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 600 320" style="max-width:100%;height:auto;">
+        <defs>
+          <style>text{font-family:sans-serif}</style>
+        </defs>
+        <!-- 位似中心 O -->
+        <circle cx="120" cy="160" r="5" fill="#bf360c"/>
+        <text x="110" y="152" font-size="14" fill="#bf360c" font-weight="bold">O</text>
+
+        <!-- 小三角形 -->
+        <polygon points="180,100 280,90 230,180" fill="rgba(191,54,12,0.12)" stroke="#bf360c" stroke-width="2"/>
+        <text x="175" y="95" font-size="13" fill="#333" font-family="serif">A</text>
+        <text x="285" y="88" font-size="13" fill="#333" font-family="serif">B</text>
+        <text x="225" y="198" font-size="13" fill="#333" font-family="serif">C</text>
+
+        <!-- 大三角形 -->
+        <polygon points="260,80 500,50 400,240" fill="rgba(191,54,12,0.12)" stroke="#bf360c" stroke-width="2"/>
+        <text x="252" y="72" font-size="13" fill="#333" font-family="serif">A'</text>
+        <text x="505" y="48" font-size="13" fill="#333" font-family="serif">B'</text>
+        <text x="395" y="258" font-size="13" fill="#333" font-family="serif">C'</text>
+
+        <!-- 连线 -->
+        <line x1="120" y1="160" x2="260" y2="80" stroke="#bf360c" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <line x1="120" y1="160" x2="500" y2="50" stroke="#bf360c" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <line x1="120" y1="160" x2="400" y2="240" stroke="#bf360c" stroke-width="1.5" stroke-dasharray="6,3"/>
+
+        <text x="300" y="290" font-size="13" fill="#bf360c" text-anchor="middle">△ABC 和 △A'B'C' 位似，O 为位似中心</text>
+      </svg>
+    </div>
+
+    <div class="key">
+      <p><strong>位似的特征：</strong></p>
+      <ul>
+        <li><strong>两个图形相似</strong>（形状相同）</li>
+        <li><strong>对应点的连线交于同一点</strong>（位似中心）</li>
+        <li><strong>对应边平行</strong>（在位似中，AB ∥ A'B'，BC ∥ B'C'，CA ∥ C'A'）</li>
+      </ul>
+    </div>
+
+    <p><strong>生活中的位似：</strong>投影仪放大的画面、手电筒照出的影子——光从一点发出，把物体"放大"到屏幕上，这就是位似。地图上的缩放也是位似（只不过地图的位似中心在无穷远处）。</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 600 280" style="max-width:100%;height:auto;">
+        <defs>
+          <style>text{font-family:sans-serif}</style>
+        </defs>
+        <!-- 光源 -->
+        <circle cx="300" cy="40" r="8" fill="#ffc107" stroke="#e65100" stroke-width="2"/>
+        <text x="290" y="30" font-size="12" fill="#e65100">光源</text>
+        <!-- 光线 -->
+        <line x1="300" y1="40" x2="100" y2="230" stroke="#ffc107" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <line x1="300" y1="40" x2="500" y2="230" stroke="#ffc107" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <line x1="300" y1="40" x2="300" y2="230" stroke="#ffc107" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <!-- 小物体 -->
+        <polygon points="210,130 390,130 300,100" fill="rgba(191,54,12,0.2)" stroke="#bf360c" stroke-width="2"/>
+        <text x="300" y="150" text-anchor="middle" font-size="12" fill="#bf360c">物体</text>
+        <!-- 影子（大三角形） -->
+        <polygon points="100,230 500,230 300,230" fill="rgba(0,0,0,0.08)" stroke="#666" stroke-width="2"/>
+        <line x1="100" y1="230" x2="500" y2="230" stroke="#666" stroke-width="2"/>
+        <text x="300" y="250" text-anchor="middle" font-size="12" fill="#666">影子（位似放大）</text>
+      </svg>
+    </div>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>两个相似三角形的相似比是 2:3，小三角形的面积是 16cm²，大三角形的面积是多少？</p>
+    <p><strong>问题 2：</strong>如图，在 △ABC 中，DE ∥ BC，AD = 3，DB = 6，BC = 12。求 DE 的长度。</p>
+    <p><strong>问题 3：</strong>能不能说"两个等腰三角形一定相似"？如果不能，请举出反例。</p>
+    <p><strong>问题 4：</strong>位似中心和相似比有什么关系？如果位似中心在两图形之间，相似比是正还是负？</p>
+  </div>
+
+  <h2>拓展阅读：奇妙的分形图形</h2>
+  <div class="extend">
+    <p><strong>分形</strong>（fractal）是数学中最迷人的概念之一。一个图形如果<strong>它的每个部分都和整体形状相似</strong>，就叫做分形。这就是"自相似性"——你放大分形图形的任何一个角落，看到的图案都和整体一模一样。</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 600 220" style="max-width:100%;height:auto;">
+        <defs>
+          <style>text{font-family:sans-serif}</style>
+        </defs>
+        <!-- 科赫雪花（简化示意） -->
+        <text x="140" y="25" text-anchor="middle" font-size="13" fill="#333" font-weight="bold">科赫雪花</text>
+        <line x1="40" y1="180" x2="240" y2="180" stroke="#bf360c" stroke-width="2"/>
+        <line x1="40" y1="180" x2="140" y2="60" stroke="#bf360c" stroke-width="2"/>
+        <line x1="240" y1="180" x2="140" y2="60" stroke="#bf360c" stroke-width="2"/>
+        <!-- 中间突起 -->
+        <line x1="90" y1="140" x2="140" y2="100" stroke="#bf360c" stroke-width="1.5"/>
+        <line x1="190" y1="140" x2="140" y2="100" stroke="#bf360c" stroke-width="1.5"/>
+        <line x1="90" y1="140" x2="140" y2="180" stroke="#bf360c" stroke-width="1.5"/>
+        <line x1="190" y1="140" x2="140" y2="180" stroke="#bf360c" stroke-width="1.5"/>
+        <text x="140" y="210" text-anchor="middle" font-size="11" fill="#666">每条边不断长出小三角形</text>
+
+        <!-- 谢尔宾斯基三角形 -->
+        <text x="440" y="25" text-anchor="middle" font-size="13" fill="#333" font-weight="bold">谢尔宾斯基三角形</text>
+        <polygon points="340,180 540,180 440,60" fill="rgba(191,54,12,0.15)" stroke="#bf360c" stroke-width="2"/>
+        <polygon points="390,120 490,120 440,180" fill="#fff" stroke="#bf360c" stroke-width="1.5"/>
+        <polygon points="365,150 415,150 390,180" fill="#fff" stroke="#bf360c" stroke-width="1"/>
+        <polygon points="465,150 515,150 490,180" fill="#fff" stroke="#bf360c" stroke-width="1"/>
+        <polygon points="415,90 465,90 440,120" fill="#fff" stroke="#bf360c" stroke-width="1"/>
+        <text x="440" y="210" text-anchor="middle" font-size="11" fill="#666">不断挖掉中间的倒三角形</text>
+      </svg>
+    </div>
+
+    <p><strong>科赫雪花：</strong>从一条线段出发，把中间三分之一换成等边三角形的两边，然后对每条新线段重复这个操作——无限重复下去，就得到了一条无限长但包围面积有限的曲线！</p>
+    <p><strong>谢尔宾斯基三角形：</strong>从一个实心三角形开始，挖掉中间倒三角形，然后在剩下的三个小三角形中重复同样的操作——无限次之后，你得到了一个"处处是洞"但面积趋近于零的图形。</p>
+    <p><strong>自然界中的分形：</strong>雪花、树叶的脉络、海岸线、闪电、花椰菜——大自然中到处都是分形。分形几何的创始人曼德博（Benoit Mandelbrot）说："云不是球，山不是锥，海岸线不是圆。"</p>
+    <p><strong>推荐阅读：</strong>《混沌与分形——科学的新疆界》、《分形——大自然的几何学》。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 下列说法正确的是（　）</p>
+    <p>A. 相似三角形一定全等</p>
+    <p>B. 全等三角形一定相似</p>
+    <p>C. 面积相等的两个三角形一定相似</p>
+    <p>D. 周长相等的两个三角形一定相似</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">全等是相似的特殊情况（相似比 k=1），所以全等一定相似。反过来，相似不一定全等（大小可以不同）。</div>
+    <div class="ans-box" id="a1"><strong>B</strong>。全等三角形相似比为 1，一定相似。A 反了；C、D 面积或周长相等但形状可能完全不同。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 已知 △ABC ∽ △DEF，相似比 k = 1:3。若 AB = 4cm，则 DE = ？</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">AB : DE = 1:3，即 AB / DE = 1/3 → DE = 3 × AB。</div>
+    <div class="ans-box" id="a2">DE = 3 × 4 = 12cm。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 根据下列条件，能判定 △ABC ∽ △DEF 的是（　）</p>
+    <p>A. AB = DE，BC = EF，∠A = ∠D</p>
+    <p>B. ∠A = ∠D，∠B = ∠E</p>
+    <p>C. AB = 2，BC = 3，DE = 4，EF = 5</p>
+    <p>D. ∠A = 30°，∠B = 60°，∠D = 30°，∠E = 70°</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">A 是 SSA，不能判定全等也不能判定相似；B 是 AA，可以判定相似；C 两边不成比例（2:4 ≠ 3:5）；D 第三个角不相等（∠C=90°，∠F=80°）。</div>
+    <div class="ans-box" id="a3"><strong>B</strong>。两个角对应相等 → AA 判定相似。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 如图，在 △ABC 中，DE ∥ BC，AD = 2，DB = 4，BC = 9。求 DE。</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">DE ∥ BC → △ADE ∽ △ABC（AA）。相似比 = AD : AB = 2 : (2+4) = 2:6 = 1:3。DE : BC = 1:3。</div>
+    <div class="ans-box" id="a4">DE = BC × 1/3 = 9 × 1/3 = <strong>3</strong>。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 两个相似三角形的相似比是 3:5，小三角形的周长是 18cm。大三角形的周长是多少？</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">周长比 = 相似比。小三角形:大三角形 = 3:5，即 18 : 大周长 = 3:5。</div>
+    <div class="ans-box" id="a5">大三角形周长 = 18 × 5/3 = <strong>30cm</strong>。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 两个相似三角形的面积比是 4:9，它们的相似比是多少？</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">面积比 = 相似比的平方，即 k² = 4:9 → k = 2:3。</div>
+    <div class="ans-box" id="a6">相似比 = <strong>2:3</strong>。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>7.</strong> 小明身高 1.5m，在阳光下影长 2m。同一时刻，旁边一棵树的影长是 8m。这棵树有多高？</p>
+    <button class="btn-sm" onclick="toggleHint('h7')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a7')">查看答案</button>
+    <div class="hint-box" id="h7">人和影、树和影分别构成两个相似三角形（太阳光是平行光，对应角相等）。高度比 = 影长比。</div>
+    <div class="ans-box" id="a7">树高 : 1.5 = 8 : 2 → 树高 = 1.5 × 4 = <strong>6m</strong>。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>8.</strong> 下列选项中，关于位似的说法正确的是（　）</p>
+    <p>A. 位似图形一定是全等图形</p>
+    <p>B. 位似图形的对应边不一定平行</p>
+    <p>C. 位似图形对应点连线交于同一点</p>
+    <p>D. 位似中心只能在图形外部</p>
+    <button class="btn-sm" onclick="toggleHint('h8')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a8')">查看答案</button>
+    <div class="hint-box" id="h8">位似不一定全等（A 错）；位似图形对应边平行（B 错）；位似中心可以在图形内部、边界上或外部（D 错）。</div>
+    <div class="ans-box" id="a8"><strong>C</strong>。位似的定义就是对应点连线交于同一点（位似中心）。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>9.</strong> 如图，在 △ABC 中，∠ACB = 90°，CD ⊥ AB 于 D。图中有几对相似三角形？请把它们写出来。</p>
+    <button class="btn-sm" onclick="toggleHint('h9')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a9')">查看答案</button>
+    <div class="hint-box" id="h9">利用"同角的余角相等"和 AA 判定。注意 △ACD 和 △CBD 都跟 △ABC 有公共角，且都有一个直角。</div>
+    <div class="ans-box" id="a9">有 3 对：△ACD ∽ △ABC（∠A 公共，∠ADC = ∠ACB = 90°）；△CBD ∽ △ABC（∠B 公共，∠CDB = ∠ACB = 90°）；△ACD ∽ △CBD（由前两对推出，或直接证 ∠ACD = ∠B）。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>10.</strong> 已知 △ABC 三边长分别为 3、4、5。△DEF 与 △ABC 相似，且最短边长为 9。求 △DEF 的另外两边长和面积。</p>
+    <button class="btn-sm" onclick="toggleHint('h10')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a10')">查看答案</button>
+    <div class="hint-box" id="h10">3、4、5 是直角三角形（3²+4²=5²）。相似比 k = 9:3 = 3:1。△ABC 面积 = ½×3×4 = 6。面积比 = k² = 9。</div>
+    <div class="ans-box" id="a10">另外两边：4×3 = <strong>12</strong>，5×3 = <strong>15</strong>。△DEF 面积 = 6 × 9 = <strong>54</strong>。</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>相似</strong> = 形状相同，大小可以不同。全等是相似的特殊情况（相似比 k = 1）</li>
+      <li><strong>三种判定方法：</strong>AA（两角相等）、SAS（两边成比例且夹角相等）、SSS（三边成比例）。AA 最常用！</li>
+      <li><strong>相似比 = 对应边的比 = 周长的比。</strong>面积比 = 相似比的平方</li>
+      <li><strong>位似</strong> = 相似 + 对应点连线交于一点（位似中心），对应边互相平行</li>
+      <li><strong>分形</strong> = 自相似性——每个局部都和整体形状相似，是大自然中普遍存在的几何模式</li>
+      <li>相似三角形是几何中<strong>最强大的工具之一</strong>：测高度、测距离、证明比例关系，都离不开它</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="trigonometry.html">下一课：锐角三角函数 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+<script src="../lessons/dt.js"></script>
+</body>
+</html>

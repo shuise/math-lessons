@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>二元一次方程组 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #33691e; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed #33691e; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; line-height: 1.8; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  .svg-fig { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+  @media (max-width: 720px) {
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./linear-equations.html">课件 7（一元一次方程——等式的天平）</a></p>
+  <h1>二元一次方程组</h1>
+
+  <h2>起源：一个未知数不够用了</h2>
+  <div class="origin">
+    <p>在课件 7 中，我们学会了解一元一次方程。比如"小明有 x 元，花掉 5 元后还剩 12 元，原来有多少？"——列方程 x − 5 = 12，解得 x = 17。简洁明了。</p>
+    <p>但现实世界往往不止一个未知数。比如：</p>
+    <div class="key">
+      <p><strong>鸡兔同笼：</strong>笼子里有鸡和兔共 35 只，脚共有 94 只。鸡和兔各几只？</p>
+    </div>
+    <p>这里有两个未知数——鸡的数量和兔的数量——而且它们互相"纠缠"在一起：总数固定，脚数也固定。只设一个未知数当然也能解（把兔的只数用 35−x 表示），但思路绕弯，不够自然。</p>
+    <p>更好的办法是：<strong>坦坦荡荡设两个未知数，用两个方程来约束它们。</strong>这就是二元一次方程组的思想——就像用两根绳子同时绑住两个"调皮鬼"，让它们无处可逃。</p>
+  </div>
+
+  <h2>一、概念与定义</h2>
+  <div class="story">
+    <h3>什么是二元一次方程？</h3>
+    <div class="formula">
+      <p><strong>定义：</strong>含有<strong>两个</strong>未知数，并且未知数的次数都是 <strong>1</strong> 的<strong>整式</strong>方程，叫做<strong>二元一次方程</strong>。</p>
+      <p>一般形式：<em>ax + by = c</em>（a, b ≠ 0）</p>
+    </div>
+    <p>比如：x + y = 10，2x − 3y = 5，0.5m + n = 1.2 都是二元一次方程。</p>
+
+    <div class="example">
+      <strong>判断下列哪些是二元一次方程：</strong><br>
+      • x + y = 5 → ✓（两个未知数，次数都是 1）<br>
+      • x² + y = 3 → ✗（x 的次数是 2）<br>
+      • xy = 6 → ✗（xy 是二次项）<br>
+      • 1/x + y = 2 → ✗（不是整式方程）<br>
+      • 3x − 2y + 1 = 0 → ✓（可以写成 3x − 2y = −1）
+    </div>
+
+    <div class="key">
+      <p><strong>类比理解：</strong>一元一次方程就像一条直线上找一个点；二元一次方程就像一张平面上找一条线——满足 x + y = 10 的点有无数个（比如 (0,10), (1,9), (2,8), …），它们排成一条直线。</p>
+    </div>
+
+    <h3>什么是二元一次方程组？</h3>
+    <p>把两个二元一次方程用大括号联立起来，它们的公共解同时满足两个方程，这就是<strong>二元一次方程组</strong>。</p>
+    <div class="formula">
+      <p><strong>方程组</strong>就是两个方程"组队"一起约束：</p>
+      <p style="font-size:1.2em;">{ x + y = 10<br>　2x − y = 5 }</p>
+      <p>满足上面所有方程的 x、y 的值，叫做方程组的<strong>解</strong>。</p>
+    </div>
+
+    <p>回到鸡兔同笼：设鸡 x 只，兔 y 只，则：</p>
+    <div class="key">
+      <p>{ x + y = 35（头数）<br>　2x + 4y = 94（脚数） }</p>
+    </div>
+    <p>只要能找到同时满足这两个方程的 x 和 y，问题就解决了！</p>
+  </div>
+
+  <h2>图说：两条直线的交点就是解</h2>
+  <div class="formula">
+    <p>每一个二元一次方程在坐标系里都是一条直线。两个方程就是两条直线，它们的<strong>交点</strong>就是方程组的解——因为交点同时满足两个方程。</p>
+    <svg class="svg-fig" viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <style>
+          text { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+          .axis-label { font-size: 13px; fill: #555; }
+          .line-label { font-size: 13px; font-weight: bold; }
+          .point-label { font-size: 14px; font-weight: bold; fill: #c62828; }
+          .grid-line { stroke: #e8e8e8; stroke-width: 0.5; }
+        </style>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#555"/>
+        </marker>
+      </defs>
+
+      <!-- 网格 -->
+      <line x1="50" y1="20" x2="50" y2="320" class="grid-line"/>
+      <line x1="50" y1="70" x2="460" y2="70" class="grid-line"/>
+      <line x1="50" y1="120" x2="460" y2="120" class="grid-line"/>
+      <line x1="50" y1="170" x2="460" y2="170" class="grid-line"/>
+      <line x1="50" y1="220" x2="460" y2="220" class="grid-line"/>
+      <line x1="50" y1="270" x2="460" y2="270" class="grid-line"/>
+      <line x1="50" y1="320" x2="460" y2="320" class="grid-line"/>
+      <line x1="100" y1="20" x2="100" y2="320" class="grid-line"/>
+      <line x1="150" y1="20" x2="150" y2="320" class="grid-line"/>
+      <line x1="200" y1="20" x2="200" y2="320" class="grid-line"/>
+      <line x1="250" y1="20" x2="250" y2="320" class="grid-line"/>
+      <line x1="300" y1="20" x2="300" y2="320" class="grid-line"/>
+      <line x1="350" y1="20" x2="350" y2="320" class="grid-line"/>
+      <line x1="400" y1="20" x2="400" y2="320" class="grid-line"/>
+      <!-- x 轴 -->
+      <line x1="50" y1="270" x2="460" y2="270" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="466" y="274" class="axis-label">x</text>
+      <!-- y 轴 -->
+      <line x1="50" y1="320" x2="50" y2="20" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="46" y="16" class="axis-label">y</text>
+      <!-- 原点 -->
+      <text x="40" y="288" class="axis-label" font-size="11">O</text>
+
+      <!-- 刻度标注 -->
+      <text x="95" y="288" class="axis-label" font-size="10">1</text>
+      <text x="145" y="288" class="axis-label" font-size="10">2</text>
+      <text x="195" y="288" class="axis-label" font-size="10">3</text>
+      <text x="245" y="288" class="axis-label" font-size="10">4</text>
+      <text x="295" y="288" class="axis-label" font-size="10">5</text>
+      <text x="345" y="288" class="axis-label" font-size="10">6</text>
+      <text x="395" y="288" class="axis-label" font-size="10">7</text>
+      <text x="40" y="265" class="axis-label" font-size="10">1</text>
+      <text x="40" y="215" class="axis-label" font-size="10">2</text>
+      <text x="40" y="165" class="axis-label" font-size="10">3</text>
+      <text x="40" y="115" class="axis-label" font-size="10">4</text>
+      <text x="40" y="65" class="axis-label" font-size="10">5</text>
+
+      <!-- 直线 L1: x + y = 10 → y = 10 - x -->
+      <!-- 通过 (0,10) → (50, -230) 和 (10,0) → (450, 270) 但画布限制 -->
+      <!-- 画布坐标: x_pixel = 50 + x*50, y_pixel = 270 - y*50 -->
+      <!-- (0,10): (50, 270-500=-230) 超出画布 -->
+      <!-- (2,8): (150, 270-400=-130) 超出 -->
+      <!-- (4,6): (250, 270-300=-30) 超出 -->
+      <!-- (6,4): (350, 270-200=70) -->
+      <!-- (8,2): (450, 270-100=170) -->
+      <!-- (10,0): (550, 270) 超出 -->
+      <line x1="200" y1="20" x2="450" y2="170" stroke="#1a73e8" stroke-width="2.5"/>
+      <text x="400" y="100" class="line-label" fill="#1a73e8">L₁: x + y = 10</text>
+
+      <!-- 直线 L2: 2x - y = 5 → y = 2x - 5 -->
+      <!-- (0,-5): (50, 270+250=520) 超出 -->
+      <!-- (2,-1): (150, 270+50=320) 超出 -->
+      <!-- (3,1): (200, 270-50=220) -->
+      <!-- (4,3): (250, 270-150=120) -->
+      <!-- (5,5): (300, 270-250=20) -->
+      <!-- (6,7): (350, 270-350=-80) 超出 -->
+      <line x1="200" y1="220" x2="300" y2="20" stroke="#e65100" stroke-width="2.5"/>
+      <text x="240" y="145" class="line-label" fill="#e65100">L₂: 2x − y = 5</text>
+
+      <!-- 交点 (5,5): (300, 20) -->
+      <circle cx="300" cy="20" r="7" fill="#c62828" stroke="#fff" stroke-width="2"/>
+      <line x1="300" y1="20" x2="300" y2="270" stroke="#c62828" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+      <line x1="50" y1="20" x2="300" y2="20" stroke="#c62828" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+      <text x="310" y="16" class="point-label">(5, 5)</text>
+
+      <!-- 图例 -->
+      <rect x="80" y="338" width="14" height="14" rx="3" fill="#1a73e8"/>
+      <text x="100" y="350" style="font-size:12px;fill:#555;">x + y = 10</text>
+      <rect x="190" y="338" width="14" height="14" rx="3" fill="#e65100"/>
+      <text x="210" y="350" style="font-size:12px;fill:#555;">2x − y = 5</text>
+      <circle cx="340" cy="345" r="6" fill="#c62828"/>
+      <text x="352" y="350" style="font-size:12px;fill:#555;">交点 = 解</text>
+
+      <text x="260" y="375" style="font-size:11px;fill:#999;text-anchor:middle;">两条直线的交点就是方程组的解</text>
+    </svg>
+    <p style="text-align:center;color:#888;font-size:13px;">图：方程组 { x + y = 10, 2x − y = 5 } 的几何意义——两条直线交于 (5, 5)</p>
+  </div>
+
+  <h2>二、消元法：为什么能消？</h2>
+  <div class="story">
+    <p>现在我们面临一个实际问题：<strong>怎么找到那个交点？</strong>也就是怎么解方程组？</p>
+    <p>核心思想只有三个字：<strong>消元法</strong>。把两个未知数的问题"降维"成一个未知数——就像先把两个纠缠的绳结解开一个，剩下的就好办了。</p>
+
+    <div class="key">
+      <p><strong>消元法的"通行证"——等式的性质：</strong></p>
+      <ul>
+        <li><strong>性质 1：</strong>等式两边同时加上（或减去）同一个数，等式仍然成立。</li>
+        <li><strong>性质 2：</strong>等式两边同时乘以（或除以）同一个不为 0 的数，等式仍然成立。</li>
+        <li><strong>性质 3（传递性）：</strong>如果 a = b 且 b = c，那么 a = c。</li>
+      </ul>
+      <p>正是因为这些性质，我们才能放心地对方程做各种变形——不会破坏等号两边的平衡！</p>
+    </div>
+
+    <p>消元法有两种"武器"：<strong>代入消元</strong>和<strong>加减消元</strong>。本质上它们是一回事——都是利用等式性质，消去一个未知数。</p>
+
+    <h3>武器一：代入消元法</h3>
+    <p><strong>比喻：</strong>就像侦探破案——先从一个线索中"套出"一个嫌疑人的信息，再把这个信息代入另一个线索，锁定真相。</p>
+
+    <div class="example">
+      <strong>解方程组：</strong>{ x + y = 10 ……①<br>　2x − y = 5 ……② }<br><br>
+      <strong>步骤：</strong><br>
+      <span class="step">① 由方程①，把 y 用 x 表示：y = 10 − x</span><br>
+      <span class="step">② 把这个表达式代入②，代替 y：2x − (10 − x) = 5</span><br>
+      <span class="step">③ 化简：2x − 10 + x = 5 → 3x = 15 → x = 5</span><br>
+      <span class="step">④ 把 x = 5 代回 y = 10 − x，得 y = 5</span><br>
+      <span class="answer">所以方程组的解是：x = 5, y = 5</span>
+    </div>
+
+    <p><strong>代入法的关键：</strong>从其中一个方程中解出一个未知数（用另一个未知数表示），然后代入另一个方程。</p>
+
+    <h3>武器二：加减消元法</h3>
+    <p><strong>比喻：</strong>就像天平称重——如果你有两个天平，把它们的读数加起来或相减，有时能巧妙地抵消掉一个未知数，像变魔术一样。</p>
+
+    <div class="example">
+      <strong>解同一个方程组：</strong>{ x + y = 10 ……①<br>　2x − y = 5 ……② }<br><br>
+      <strong>步骤：</strong><br>
+      <span class="step">① 观察：①中有 +y，②中有 −y，系数互为相反数</span><br>
+      <span class="step">② ① + ②：(x + y) + (2x − y) = 10 + 5 → 3x = 15 → x = 5</span><br>
+      <span class="step">③ 把 x = 5 代入①：5 + y = 10 → y = 5</span><br>
+      <span class="answer">所以方程组的解是：x = 5, y = 5</span>
+    </div>
+
+    <p><strong>加减法的关键：</strong>让两个方程中同一个未知数的系数互为相反数（或相等），然后相加（或相减）消去它。</p>
+
+    <div class="key">
+      <p><strong>什么时候用代入法？什么时候用加减法？</strong></p>
+      <ul>
+        <li><strong>代入法：</strong>当某个未知数的系数是 1 或 −1 时很方便（比如 x + y = 10 中，直接得到 y = 10 − x）</li>
+        <li><strong>加减法：</strong>当两个方程中同一个未知数的系数已经互为相反数或相等，或者容易通过乘以一个数变成那样时，非常快</li>
+        <li><strong>其实无所谓：</strong>两种方法永远都能用，只是熟练后你会自然选择更省力的那种</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>图说：代入消元法的几何直观</h2>
+  <div class="formula">
+    <p>下面这张图展示了代入消元法的本质：从一条直线（方程①）上取一个"动点"，沿着这条线滑动，直到它恰好也落在另一条直线上（满足方程②）。</p>
+    <svg class="svg-fig" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <style>
+          text { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+        </style>
+        <marker id="arrow2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#555"/>
+        </marker>
+      </defs>
+
+      <!-- 坐标轴 -->
+      <line x1="40" y1="280" x2="470" y2="280" stroke="#555" stroke-width="1.5" marker-end="url(#arrow2)"/>
+      <text x="476" y="284" style="font-size:13px;fill:#555;">x</text>
+      <line x1="40" y1="290" x2="40" y2="30" stroke="#555" stroke-width="1.5" marker-end="url(#arrow2)"/>
+      <text x="36" y="26" style="font-size:13px;fill:#555;">y</text>
+
+      <!-- 直线 L1: y = 10 - x (蓝色) -->
+      <line x1="40" y1="30" x2="460" y2="280" stroke="#1a73e8" stroke-width="2.5" opacity="0.4"/>
+      <text x="420" y="290" style="font-size:13px;fill:#1a73e8;font-weight:bold;">L₁: y = 10 − x</text>
+
+      <!-- 直线 L2: y = 2x - 5 (橙色) -->
+      <line x1="130" y1="280" x2="300" y2="30" stroke="#e65100" stroke-width="2.5" opacity="0.4"/>
+      <text x="240" y="55" style="font-size:13px;fill:#e65100;font-weight:bold;">L₂: y = 2x − 5</text>
+
+      <!-- 在 L1 上标几个点，展示"代入"的思想 -->
+      <!-- L1 上的点: (1,9), (3,7), (5,5), (7,3), (9,1) -->
+      <!-- 像素坐标: x_pixel = 40 + x*40, y_pixel = 280 - y*30 -->
+
+      <!-- (1,9): (80, 10) -->
+      <circle cx="80" cy="10" r="5" fill="#1a73e8" opacity="0.6"/>
+      <text x="70" y="8" style="font-size:11px;fill:#1a73e8;">(1,9)</text>
+
+      <!-- (3,7): (160, 70) -->
+      <circle cx="160" cy="70" r="5" fill="#1a73e8" opacity="0.6"/>
+      <text x="135" y="65" style="font-size:11px;fill:#1a73e8;">(3,7)</text>
+
+      <!-- (5,5): (240, 130) → 交点! -->
+      <circle cx="240" cy="130" r="9" fill="#c62828" stroke="#fff" stroke-width="2.5"/>
+      <text x="252" y="126" style="font-size:14px;fill:#c62828;font-weight:bold;">(5,5) ✓</text>
+      <text x="252" y="142" style="font-size:11px;fill:#c62828;">交点=解</text>
+
+      <!-- (7,3): (320, 190) -->
+      <circle cx="320" cy="190" r="5" fill="#1a73e8" opacity="0.6"/>
+      <text x="330" y="195" style="font-size:11px;fill:#1a73e8;">(7,3)</text>
+
+      <!-- (9,1): (400, 250) -->
+      <circle cx="400" cy="250" r="5" fill="#1a73e8" opacity="0.6"/>
+      <text x="410" y="255" style="font-size:11px;fill:#1a73e8;">(9,1)</text>
+
+      <!-- 标注: 代入过程 -->
+      <text x="260" y="170" style="font-size:13px;fill:#555;text-anchor:middle;">代入 L₂ 检验</text>
+      <text x="260" y="188" style="font-size:13px;fill:#555;text-anchor:middle;">2x − y = 5 ?</text>
+
+      <!-- 箭头从 (1,9) 到 (3,7) -->
+      <path d="M 85 15 Q 120 40 155 65" fill="none" stroke="#1a73e8" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+      <path d="M 165 75 Q 200 100 230 120" fill="none" stroke="#1a73e8" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+
+      <text x="40" y="320" style="font-size:11px;fill:#999;">沿 L₁ 滑动，逐个代入 L₂ 检验，直到 (5,5) 同时满足两个方程</text>
+    </svg>
+    <p style="text-align:center;color:#888;font-size:13px;">图：沿 L₁ 上的点逐个"代入"L₂ 检验——只有 (5,5) 同时满足两个方程</p>
+  </div>
+
+  <h2>三、实际问题：鸡兔同笼</h2>
+  <div class="story">
+    <p>现在我们用二元一次方程组来解经典的鸡兔同笼问题。你会发现，设两个未知数让思路变得异常清晰。</p>
+
+    <div class="key">
+      <p><strong>题目：</strong>笼子里有鸡和兔共 35 只，它们的脚共有 94 只。鸡和兔各几只？</p>
+    </div>
+
+    <div class="example">
+      <strong>解：</strong>设鸡有 x 只，兔有 y 只。<br><br>
+      <span class="step">① 头数关系：x + y = 35</span><br>
+      <span class="step">② 脚数关系：2x + 4y = 94（鸡 2 只脚，兔 4 只脚）</span><br><br>
+      <strong>用加减消元法：</strong><br>
+      <span class="step">② − ① × 2：(2x + 4y) − 2(x + y) = 94 − 70</span><br>
+      <span class="step">化简：2x + 4y − 2x − 2y = 24 → 2y = 24 → y = 12</span><br>
+      <span class="step">代入①：x + 12 = 35 → x = 23</span><br>
+      <span class="answer">答：鸡 23 只，兔 12 只。</span><br>
+      <span class="step">验证：23 × 2 + 12 × 4 = 46 + 48 = 94 ✓</span>
+    </div>
+
+    <p><strong>为什么用加减法？</strong>因为两个方程中 x 的系数已经相同（都是 1），只需给①乘以 2，就能消去 x——这比代入法更快捷。</p>
+  </div>
+
+  <h2>图说：鸡兔同笼的几何意义</h2>
+  <div class="formula">
+    <svg class="svg-fig" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <style>
+          text { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+        </style>
+        <marker id="arrow3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#555"/>
+        </marker>
+      </defs>
+
+      <!-- 坐标轴 -->
+      <line x1="50" y1="300" x2="460" y2="300" stroke="#555" stroke-width="1.5" marker-end="url(#arrow3)"/>
+      <text x="466" y="304" style="font-size:13px;fill:#555;">鸡 x</text>
+      <line x1="50" y1="310" x2="50" y2="40" stroke="#555" stroke-width="1.5" marker-end="url(#arrow3)"/>
+      <text x="46" y="36" style="font-size:13px;fill:#555;">兔 y</text>
+
+      <!-- 刻度 -->
+      <text x="30" y="135" style="font-size:10px;fill:#888;">35</text>
+      <text x="30" y="95" style="font-size:10px;fill:#888;">40</text>
+      <text x="42" y="295" style="font-size:10px;fill:#888;">0</text>
+      <text x="145" y="295" style="font-size:10px;fill:#888;">10</text>
+      <text x="195" y="295" style="font-size:10px;fill:#888;">20</text>
+      <text x="245" y="295" style="font-size:10px;fill:#888;">30</text>
+      <text x="295" y="295" style="font-size:10px;fill:#888;">40</text>
+
+      <!-- 头数线: x + y = 35 → y = 35 - x -->
+      <!-- 像素: x_pixel = 50 + x*5, y_pixel = 300 - y*4 -->
+      <!-- (0,35): (50, 300-140=160) -->
+      <!-- (35,0): (225, 300) -->
+      <line x1="50" y1="160" x2="390" y2="300" stroke="#1a73e8" stroke-width="2.5"/>
+      <text x="340" y="270" style="font-size:13px;fill:#1a73e8;font-weight:bold;">头数: x + y = 35</text>
+
+      <!-- 脚数线: 2x + 4y = 94 → y = (94 - 2x)/4 = 23.5 - 0.5x -->
+      <!-- (0,23.5): (50, 300-94=206) -->
+      <!-- (47,0): (285, 300) -->
+      <line x1="50" y1="206" x2="285" y2="300" stroke="#e65100" stroke-width="2.5"/>
+      <text x="180" y="240" style="font-size:13px;fill:#e65100;font-weight:bold;">脚数: 2x + 4y = 94</text>
+
+      <!-- 交点 (23,12): x_pixel = 50+23*5=165, y_pixel = 300-12*4=252 -->
+      <circle cx="165" cy="252" r="8" fill="#c62828" stroke="#fff" stroke-width="2.5"/>
+      <line x1="165" y1="252" x2="165" y2="300" stroke="#c62828" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+      <line x1="50" y1="252" x2="165" y2="252" stroke="#c62828" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+      <text x="175" y="248" style="font-size:14px;fill:#c62828;font-weight:bold;">(23, 12)</text>
+
+      <!-- 标注 -->
+      <text x="295" y="340" style="font-size:12px;fill:#555;">鸡 23 只，兔 12 只</text>
+      <text x="295" y="356" style="font-size:12px;fill:#555;">脚：23×2 + 12×4 = 94 ✓</text>
+
+      <!-- 图例 -->
+      <rect x="50" y="328" width="14" height="14" rx="3" fill="#1a73e8"/>
+      <text x="70" y="340" style="font-size:12px;fill:#555;">x + y = 35</text>
+      <rect x="160" y="328" width="14" height="14" rx="3" fill="#e65100"/>
+      <text x="180" y="340" style="font-size:12px;fill:#555;">2x + 4y = 94</text>
+    </svg>
+    <p style="text-align:center;color:#888;font-size:13px;">图：鸡兔同笼方程组的几何表示——两条直线交于 (23, 12)</p>
+  </div>
+
+  <h2>四、更多实际问题</h2>
+  <div class="story">
+
+    <h3>行程问题</h3>
+    <div class="key">
+      <p><strong>题目：</strong>甲、乙两人从相距 36 千米的两地同时出发，相向而行，2 小时后相遇。如果两人同向而行，甲 6 小时可以追上乙。求甲、乙各自的速度。</p>
+    </div>
+    <div class="example">
+      <strong>解：</strong>设甲的速度为 x km/h，乙的速度为 y km/h。<br><br>
+      <span class="step">① 相向而行：速度和 × 时间 = 距离 → (x + y) × 2 = 36 → x + y = 18</span><br>
+      <span class="step">② 同向而行：速度差 × 时间 = 距离 → (x − y) × 6 = 36 → x − y = 6</span><br><br>
+      <strong>用加减消元法：</strong><br>
+      <span class="step">① + ②：2x = 24 → x = 12</span><br>
+      <span class="step">① − ②：2y = 12 → y = 6</span><br>
+      <span class="answer">答：甲的速度为 12 km/h，乙的速度为 6 km/h。</span>
+    </div>
+
+    <h3>工程问题</h3>
+    <div class="key">
+      <p><strong>题目：</strong>一项工程，甲单独做需要 12 天，乙单独做需要 18 天。现在甲先做若干天后，乙加入一起做，又过了 4 天完成全部工程。问甲一开始单独做了几天？</p>
+    </div>
+    <div class="example">
+      <strong>解：</strong>设甲一开始单独做了 x 天。<br><br>
+      <span class="step">甲的工作效率：1/12（每天完成工程的 1/12）</span><br>
+      <span class="step">乙的工作效率：1/18（每天完成工程的 1/18）</span><br>
+      <span class="step">甲单独做 x 天：完成 x/12</span><br>
+      <span class="step">两人合作 4 天：完成 4 × (1/12 + 1/18) = 4 × (3/36 + 2/36) = 4 × 5/36 = 20/36 = 5/9</span><br>
+      <span class="step">总完成量 = 1 → x/12 + 5/9 = 1</span><br>
+      <span class="step">x/12 = 1 − 5/9 = 4/9 → x = 4/9 × 12 = 16/3 ≈ 5.33 天</span><br>
+      <span class="answer">答：甲一开始单独做了 16/3 天（约 5 天 8 小时）。</span>
+    </div>
+
+    <div class="key">
+      <p><strong>二元一次方程组解实际问题的三步法：</strong></p>
+      <ol>
+        <li><strong>设未知数：</strong>把问题中的两个未知量设为 x 和 y</li>
+        <li><strong>列方程：</strong>根据题目中的两个等量关系，列出两个方程</li>
+        <li><strong>解方程：</strong>用代入法或加减法求解，并检验是否符合实际</li>
+      </ol>
+    </div>
+  </div>
+
+  <h2>五、拓展：三元一次方程组</h2>
+  <div class="story">
+    <p>既然二元一次方程组能解决两个未知数的问题，那如果遇到<strong>三个</strong>未知数呢？自然就有了三元一次方程组。</p>
+
+    <div class="formula">
+      <p><strong>类比：</strong></p>
+      <ul>
+        <li>一元一次方程 → 一个点（在数轴上）</li>
+        <li>二元一次方程组 → 两条直线的交点（在平面上）</li>
+        <li>三元一次方程组 → 三个平面的交点（在空间中）</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <strong>例：解三元一次方程组</strong><br>
+      { x + y + z = 6 ……①<br>　2x − y + z = 3 ……②<br>　x + 2y − z = 2 ……③ }<br><br>
+      <strong>思路：先消去一个未知数，变成二元一次方程组</strong><br>
+      <span class="step">① + ③：(x + y + z) + (x + 2y − z) = 6 + 2 → 2x + 3y = 8 ……④</span><br>
+      <span class="step">② + ③：(2x − y + z) + (x + 2y − z) = 3 + 2 → 3x + y = 5 ……⑤</span><br>
+      <span class="step">现在有了二元一次方程组 { 2x + 3y = 8, 3x + y = 5 }</span><br>
+      <span class="step">由⑤：y = 5 − 3x，代入④：2x + 3(5 − 3x) = 8 → 2x + 15 − 9x = 8 → −7x = −7 → x = 1</span><br>
+      <span class="step">代回：y = 5 − 3 = 2，代入①：1 + 2 + z = 6 → z = 3</span><br>
+      <span class="answer">解：x = 1, y = 2, z = 3</span>
+    </div>
+
+    <p><strong>核心思想：降维打击。</strong>三元→二元→一元，逐层消元。就像剥洋葱，一层一层剥开，最后总能看到"芯"。</p>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>如果二元一次方程组中两个方程代表的两条直线平行（没有交点），这意味着什么？方程组有解吗？试着用消元法推导一下会发生什么。</p>
+    <p><strong>问题 2：</strong>一个两位数，十位数字与个位数字之和为 9，且这个两位数比它的个位数字与十位数字交换位置后得到的数大 27。求这个两位数。你能用两种方法（设两个未知数 vs 设一个未知数）解吗？哪种更自然？</p>
+    <p><strong>问题 3：</strong>三元一次方程组在空间中代表三个平面的交点。你能想象出三个平面可能有哪些位置关系吗？（提示：可能交于一点、交于一条线、没有公共交点……）</p>
+  </div>
+
+  <h2>拓展阅读：一次方程组的古今表示</h2>
+  <div class="extend">
+    <p><strong>中国古代的"方程术"：</strong>早在两千多年前的《九章算术》第八章"方程"中，就系统地介绍了线性方程组的解法。古人是把方程组的系数排成一个方阵，用算筹（小竹棍）摆成矩阵的形式，然后进行类似于今天"加减消元"的操作。这种方法比西方早了 1500 多年！</p>
+    <p><strong>古希腊的"辗转相消法"：</strong>公元 3 世纪，古希腊数学家丢番图（Diophantus）在《算术》一书中也研究了多元一次方程。但他主要关注整数解，开创了"不定方程"的研究方向。</p>
+    <p><strong>现代的"高斯消元法"：</strong>19 世纪，德国数学家高斯（Gauss）将消元法系统化，发展出了"高斯消元法"——这是今天计算机解线性方程组最常用的算法。从天气预报到 3D 游戏渲染，背后都有高斯消元法的影子！</p>
+    <p><strong>推荐阅读：</strong>《九章算术》——了解中国古代数学的辉煌成就；《数学之美》——了解线性方程组在现代科技中的应用（推荐系统、搜索引擎、图像处理）。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 下列方程组中，哪些是二元一次方程组？</p>
+    <p>① { x + y = 3, 2x − y = 1 }　② { x² + y = 5, x − y = 1 }　③ { xy = 6, x + y = 5 }　④ { 3a − 2b = 4, a + b = 7 }</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">检查每个方程：是否都是整式方程？未知数次数是否都是 1？</div>
+    <div class="ans-box" id="a1">① 是（两个方程都是二元一次方程）<br>② 不是（x² 是二次）<br>③ 不是（xy 是二次项）<br>④ 是（未知数用 a、b 表示，只要是两个未知数、一次即可）</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 用代入消元法解方程组：{ y = 2x − 3, 3x + 2y = 8 }</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">第一个方程已经写成了 y = … 的形式，直接代入第二个方程即可。</div>
+    <div class="ans-box" id="a2">把 y = 2x − 3 代入 3x + 2y = 8：<br>3x + 2(2x − 3) = 8 → 3x + 4x − 6 = 8 → 7x = 14 → x = 2<br>y = 2×2 − 3 = 1<br>解：x = 2, y = 1</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 用加减消元法解方程组：{ 3x + 4y = 10, 3x − 2y = 4 }</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">两个方程中 x 的系数都是 3，相减可以消去 x。</div>
+    <div class="ans-box" id="a3">① − ②：(3x + 4y) − (3x − 2y) = 10 − 4 → 6y = 6 → y = 1<br>代入①：3x + 4 = 10 → 3x = 6 → x = 2<br>解：x = 2, y = 1</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 解方程组：{ 2x + 3y = 7, 4x − y = 7 }（选择你认为最方便的方法）</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">加减法：给第二个方程乘以 3，使 y 的系数互为相反数。或代入法：由第二个方程得 y = 4x − 7。</div>
+    <div class="ans-box" id="a4"><strong>加减法：</strong>②×3：12x − 3y = 21<br>① + ③：14x = 28 → x = 2<br>代入②：8 − y = 7 → y = 1<br>解：x = 2, y = 1</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 鸡兔同笼变式：停车场上有汽车（4 个轮子）和摩托车（2 个轮子）共 32 辆，轮子共 108 个。汽车和摩托车各多少辆？</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">设汽车 x 辆，摩托车 y 辆。列方程：x + y = 32（辆数），4x + 2y = 108（轮子数）。</div>
+    <div class="ans-box" id="a5">{ x + y = 32, 4x + 2y = 108 }<br>② − ①×2：(4x + 2y) − 2(x + y) = 108 − 64 → 2x = 44 → x = 22<br>y = 32 − 22 = 10<br>答：汽车 22 辆，摩托车 10 辆。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 行程问题：一艘轮船在静水中的速度为 18 km/h，顺流而下航行 60 km 比逆流而上航行 60 km 少用 1.5 小时。求水流速度。</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">设水流速度为 x km/h。顺流速度 = 18 + x，逆流速度 = 18 − x。时间差 = 1.5 小时。</div>
+    <div class="ans-box" id="a6">60/(18 − x) − 60/(18 + x) = 1.5<br>通分：60(18 + x − 18 + x) / (18² − x²) = 1.5<br>120x / (324 − x²) = 1.5 → 120x = 1.5(324 − x²) → 120x = 486 − 1.5x²<br>1.5x² + 120x − 486 = 0 → 除以 1.5：x² + 80x − 324 = 0<br>(x + 84)(x − 4) = 0 → x = 4（x = −84 舍去）<br>答：水流速度为 4 km/h。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>7.</strong> 工程问题：甲、乙两人合作一项工程，12 天可以完成。如果甲单独做 10 天后，乙再加入，再合作 6 天也可以完成。甲、乙单独完成各需多少天？</p>
+    <button class="btn-sm" onclick="toggleHint('h7')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a7')">查看答案</button>
+    <div class="hint-box" id="h7">设甲单独需 x 天，乙单独需 y 天。则甲效率 1/x，乙效率 1/y。</div>
+    <div class="ans-box" id="a7">{ 12(1/x + 1/y) = 1, 10/x + 6(1/x + 1/y) = 1 }<br>由①：1/x + 1/y = 1/12<br>由②：10/x + 6/12 = 1 → 10/x = 1/2 → x = 20<br>代入①：1/20 + 1/y = 1/12 → 1/y = 1/12 − 1/20 = 5/60 − 3/60 = 2/60 = 1/30 → y = 30<br>答：甲单独需 20 天，乙单独需 30 天。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>8.</strong> 数字问题：一个两位数，十位数字是个位数字的 2 倍。如果把这个两位数的十位数字和个位数字交换位置，得到的新数比原数小 27。求这个两位数。</p>
+    <button class="btn-sm" onclick="toggleHint('h8')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a8')">查看答案</button>
+    <div class="hint-box" id="h8">设十位数字为 x，个位数字为 y。原数 = 10x + y，新数 = 10y + x。</div>
+    <div class="ans-box" id="a8">{ x = 2y, (10x + y) − (10y + x) = 27 }<br>化简②：9x − 9y = 27 → x − y = 3<br>代入①：2y − y = 3 → y = 3 → x = 6<br>原数 = 63<br>验证：63 − 36 = 27 ✓</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>9.</strong> 解三元一次方程组：{ x + y = 3, y + z = 5, z + x = 4 }</p>
+    <button class="btn-sm" onclick="toggleHint('h9')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a9')">查看答案</button>
+    <div class="hint-box" id="h9">观察这个方程组的特点：三个方程两两对称。试试把三个方程相加。</div>
+    <div class="ans-box" id="a9">① + ② + ③：2(x + y + z) = 12 → x + y + z = 6<br>然后：z = 6 − 3 = 3, x = 6 − 5 = 1, y = 6 − 4 = 2<br>解：x = 1, y = 2, z = 3</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>10.</strong> 思考题：如果方程组 { ax + by = c, dx + ey = f } 中，a、b、d、e 满足什么比例关系时，方程组无解？满足什么比例关系时，有无穷多解？</p>
+    <button class="btn-sm" onclick="toggleHint('h10')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a10')">查看答案</button>
+    <div class="hint-box" id="h10">回想两条直线在平面上的位置关系：相交、平行、重合。用系数的比例关系来判断。</div>
+    <div class="ans-box" id="a10"><strong>无解（两直线平行）：</strong>a/d = b/e ≠ c/f<br>（两条直线斜率相同但截距不同，永远不会相交）<br><strong>无穷多解（两直线重合）：</strong>a/d = b/e = c/f<br>（两个方程本质上是同一个方程，整条直线上的点都是解）<br><strong>唯一解（两直线相交）：</strong>a/d ≠ b/e</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>二元一次方程：</strong>含有两个未知数，未知数次数都是 1 的整式方程，一般形式 ax + by = c</li>
+      <li><strong>二元一次方程组：</strong>两个二元一次方程联立，它们的公共解是方程组的解</li>
+      <li><strong>几何意义：</strong>每个方程是一条直线，方程组的解就是两条直线的交点</li>
+      <li><strong>代入消元法：</strong>从一个方程解出一个未知数，代入另一个方程——像侦探套线索</li>
+      <li><strong>加减消元法：</strong>让系数互为相反数后相加（或相等后相减），消去一个未知数——像天平称重</li>
+      <li><strong>为什么能消？</strong>等式的基本性质保证了我们做的一切变形都不会破坏等式</li>
+      <li><strong>三步法解实际问题：</strong>设未知数 → 列方程 → 解方程并检验</li>
+      <li><strong>三元一次方程组：</strong>逐层消元，三元→二元→一元，降维打击</li>
+      <li><strong>解的三种情况：</strong>唯一解（相交）、无解（平行）、无穷多解（重合）</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="inequalities.html">下一课：不等式 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+<script src="../lessons/dt.js"></script>
+</body>
+</html>

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>轴对称 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦋</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #004d40; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e0f2f1; border-left: 4px solid #00897b; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #e0f7fa; border-left: 4px solid #00acc1; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  .graphic { margin: 16px 0; text-align: center; }
+  @media (max-width: 720px) {
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./triangle.html">课件 14（三角形）</a>、15（全等三角形）</p>
+  <h1>轴对称 — 大自然最爱的设计</h1>
+
+  <h2>起源：蝴蝶的翅膀</h2>
+  <div class="origin">
+    <p>你有没有观察过一只<strong>蝴蝶</strong>？它的左翅和右翅几乎一模一样——如果把蝴蝶沿着身体中间那条线对折，两边翅膀会<strong>完全重合</strong>。</p>
+    <p>不只蝴蝶。人的<strong>脸</strong>（大致）、一片<strong>叶子</strong>、故宫的<strong>宫殿</strong>、甚至一个普通的<strong>汉字"中"</strong>——它们都有这个共同的特点：沿某条线对折，两边的部分能完全重合。这就是<strong>轴对称</strong>。</p>
+    <p>古希腊人最早系统研究了对称。柏拉图认为，对称代表着和谐与美。数学家外尔（Hermann Weyl）在 1952 年写了一本经典著作《对称》，开篇就说："对称，无论你从广义还是狭义来定义它，都是一种理念——人类世世代代试图用它来理解和创造秩序、美与完美。"</p>
+    <p>今天，我们就来揭开轴对称的数学秘密——它不只是"好看"，还藏着许多重要的几何定理，甚至能帮我们解决<strong>最短路径</strong>这样的实际问题。</p>
+  </div>
+
+  <h2>一、什么是轴对称？</h2>
+  <div class="story">
+    <p>拿一张纸，画一个图形，然后沿着一条直线对折。如果对折后，图形的两边<strong>完全重合</strong>，那么这个图形就是<strong>轴对称图形</strong>，那条直线叫做<strong>对称轴</strong>。</p>
+
+    <div class="key">
+      <p><strong>轴对称图形：</strong>如果一个图形沿一条直线折叠后，直线两旁的部分能够<strong>互相重合</strong>，那么这个图形叫做<strong>轴对称图形</strong>（axially symmetric figure），这条直线叫做<strong>对称轴</strong>（axis of symmetry）。</p>
+    </div>
+
+    <div class="graphic">
+      <svg viewBox="0 0 640 280" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text.label { font-size:14px; fill:#333; font-family:serif; }
+            text.desc { font-size:13px; fill:#555; text-anchor:middle; }
+          </style>
+        </defs>
+        <!-- 蝴蝶 -->
+        <text x="320" y="32" text-anchor="middle" font-size="16" fill="#333" font-weight="bold">轴对称图形：蝴蝶</text>
+        <!-- 左翅 -->
+        <path d="M320,100 Q240,60 180,120 Q220,140 260,130 Q280,160 320,150" fill="rgba(0,77,64,0.15)" stroke="#004d40" stroke-width="2"/>
+        <path d="M320,150 Q280,170 240,190 Q220,210 180,200 Q200,170 260,180 Q280,190 320,180" fill="rgba(0,77,64,0.1)" stroke="#004d40" stroke-width="2"/>
+        <!-- 右翅 -->
+        <path d="M320,100 Q400,60 460,120 Q420,140 380,130 Q360,160 320,150" fill="rgba(0,77,64,0.15)" stroke="#004d40" stroke-width="2"/>
+        <path d="M320,150 Q360,170 400,190 Q420,210 460,200 Q440,170 380,180 Q360,190 320,180" fill="rgba(0,77,64,0.1)" stroke="#004d40" stroke-width="2"/>
+        <!-- 身体 -->
+        <ellipse cx="320" cy="150" rx="8" ry="35" fill="#004d40" opacity="0.5"/>
+        <!-- 对称轴 -->
+        <line x1="320" y1="55" x2="320" y2="230" stroke="#c62828" stroke-width="2" stroke-dasharray="8,4"/>
+        <text x="330" y="60" font-size="13" fill="#c62828" font-weight="bold">对称轴</text>
+        <!-- 触角 -->
+        <path d="M320,70 Q300,40 280,30" fill="none" stroke="#004d40" stroke-width="1.5"/>
+        <path d="M320,70 Q340,40 360,30" fill="none" stroke="#004d40" stroke-width="1.5"/>
+        <circle cx="280" cy="30" r="3" fill="#004d40"/>
+        <circle cx="360" cy="30" r="3" fill="#004d40"/>
+      </svg>
+    </div>
+
+    <p>注意区分两个概念：</p>
+    <ul>
+      <li><strong>轴对称图形</strong>——说的是<strong>一个图形</strong>本身是否对称（如蝴蝶、等腰三角形、圆）</li>
+      <li><strong>两个图形成轴对称</strong>——说的是<strong>两个图形</strong>沿某条直线对折后能重合（如镜子里的你和真实的你）</li>
+    </ul>
+
+    <div class="example">
+      <p><strong>想一想：</strong>下面哪些是轴对称图形？</p>
+      <p>等腰三角形 ✓ &nbsp;|&nbsp; 长方形 ✓ &nbsp;|&nbsp; 平行四边形（非菱形）✗ &nbsp;|&nbsp; 圆 ✓ &nbsp;|&nbsp; 线段 ✓</p>
+      <p>有趣的是，一般的平行四边形<strong>不是</strong>轴对称图形——你找不到一条直线把它对折后两边重合。但<strong>菱形</strong>和<strong>正方形</strong>这些特殊的平行四边形却是轴对称的！</p>
+    </div>
+  </div>
+
+  <h2>二、轴对称的性质：对应点与对称轴</h2>
+  <div class="story">
+    <p>在轴对称中，重合的点叫做<strong>对应点</strong>（也叫对称点）。比如，把蝴蝶左翅上的一个点和右翅上对折后重合的点，就是一对对应点。</p>
+    <p>对应点和对称轴之间有什么关系呢？</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 640 300" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <!-- 对称轴 -->
+        <line x1="320" y1="30" x2="320" y2="280" stroke="#c62828" stroke-width="2.5" stroke-dasharray="8,4"/>
+        <text x="330" y="45" font-size="14" fill="#c62828" font-weight="bold">l（对称轴）</text>
+
+        <!-- 点A和点A' -->
+        <circle cx="180" cy="100" r="4" fill="#004d40"/>
+        <text x="165" y="90" font-size="15" fill="#004d40" font-weight="bold" font-family="serif">A</text>
+        <circle cx="460" cy="100" r="4" fill="#004d40"/>
+        <text x="470" y="90" font-size="15" fill="#004d40" font-weight="bold" font-family="serif">A'</text>
+
+        <!-- 连线AA' -->
+        <line x1="180" y1="100" x2="460" y2="100" stroke="#1565c0" stroke-width="1.8"/>
+        <text x="310" y="95" font-size="12" fill="#1565c0">AA'</text>
+
+        <!-- 交点O -->
+        <circle cx="320" cy="100" r="3" fill="#1565c0"/>
+        <text x="330" y="110" font-size="13" fill="#1565c0">O</text>
+
+        <!-- 垂直标记 -->
+        <rect x="314" y="94" width="6" height="6" fill="none" stroke="#1565c0" stroke-width="1.2"/>
+
+        <!-- 等长标记 -->
+        <line x1="180" y1="115" x2="180" y2="115" stroke="#e65100" stroke-width="2"/>
+        <line x1="180" y1="115" x2="255" y2="115" stroke="#e65100" stroke-width="2"/>
+        <line x1="255" y1="115" x2="255" y2="115" stroke="#e65100" stroke-width="2"/>
+        <line x1="255" y1="115" x2="320" y2="115" stroke="#e65100" stroke-width="2"/>
+        <text x="175" y="130" font-size="12" fill="#e65100">AO = OA'</text>
+
+        <!-- 点B和点B' -->
+        <circle cx="220" cy="220" r="4" fill="#004d40"/>
+        <text x="205" y="210" font-size="15" fill="#004d40" font-weight="bold" font-family="serif">B</text>
+        <circle cx="420" cy="220" r="4" fill="#004d40"/>
+        <text x="430" y="210" font-size="15" fill="#004d40" font-weight="bold" font-family="serif">B'</text>
+
+        <line x1="220" y1="220" x2="420" y2="220" stroke="#1565c0" stroke-width="1.8"/>
+        <circle cx="320" cy="220" r="3" fill="#1565c0"/>
+        <rect x="314" y="214" width="6" height="6" fill="none" stroke="#1565c0" stroke-width="1.2"/>
+
+        <!-- 结论 -->
+        <text x="320" y="275" text-anchor="middle" font-size="14" fill="#004d40" font-weight="bold">对称轴垂直平分对应点的连线！</text>
+      </svg>
+    </div>
+
+    <div class="key">
+      <p><strong>轴对称的性质：</strong>如果两个图形关于某条直线对称，那么：</p>
+      <ol>
+        <li><strong>对称轴</strong>是任何一对对应点所连线段的<strong>垂直平分线</strong></li>
+        <li>对应线段相等，对应角相等（两个图形全等）</li>
+      </ol>
+    </div>
+
+    <p>通俗地说：<strong>对称轴就像一面镜子</strong>——镜子里的你和真实的你，到镜面的距离相等，连线和镜面垂直。</p>
+  </div>
+
+  <h2>三、线段垂直平分线的性质</h2>
+  <div class="story">
+    <p>既然对称轴是"垂直平分线"，这个概念本身值得好好研究。</p>
+
+    <div class="key">
+      <p><strong>线段垂直平分线：</strong>经过线段中点并且<strong>垂直于</strong>这条线段的直线，叫做这条线段的<strong>垂直平分线</strong>（也叫中垂线）。</p>
+    </div>
+
+    <h3>性质定理：垂直平分线上的点到线段两端距离相等</h3>
+    <p>反过来也成立：到线段两端距离相等的点，在这条线段的垂直平分线上。</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 640 280" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <!-- 线段AB -->
+        <line x1="100" y1="210" x2="460" y2="210" stroke="#333" stroke-width="2.5"/>
+        <text x="88" y="230" font-size="15" font-weight="bold" fill="#333" font-family="serif">A</text>
+        <text x="468" y="230" font-size="15" font-weight="bold" fill="#333" font-family="serif">B</text>
+
+        <!-- 中点 -->
+        <circle cx="280" cy="210" r="3" fill="#333"/>
+        <text x="290" y="225" font-size="13" fill="#333">中点</text>
+
+        <!-- 垂直平分线 -->
+        <line x1="280" y1="30" x2="280" y2="210" stroke="#c62828" stroke-width="2.5" stroke-dasharray="8,4"/>
+        <text x="290" y="50" font-size="14" fill="#c62828" font-weight="bold">垂直平分线</text>
+
+        <!-- 点P在垂直平分线上 -->
+        <circle cx="280" cy="80" r="4" fill="#004d40"/>
+        <text x="290" y="75" font-size="15" fill="#004d40" font-weight="bold" font-family="serif">P</text>
+
+        <!-- PA和PB -->
+        <line x1="280" y1="80" x2="100" y2="210" stroke="#1565c0" stroke-width="2"/>
+        <line x1="280" y1="80" x2="460" y2="210" stroke="#1565c0" stroke-width="2"/>
+        <text x="170" y="145" font-size="13" fill="#1565c0">PA</text>
+        <text x="380" y="145" font-size="13" fill="#1565c0">PB</text>
+
+        <!-- 等号 -->
+        <text x="320" y="160" font-size="16" fill="#004d40" font-weight="bold">PA = PB</text>
+
+        <!-- 点Q在垂直平分线上 -->
+        <circle cx="280" cy="150" r="4" fill="#004d40"/>
+        <text x="290" y="145" font-size="15" fill="#004d40" font-weight="bold" font-family="serif">Q</text>
+        <line x1="280" y1="150" x2="100" y2="210" stroke="#2e7d32" stroke-width="2"/>
+        <line x1="280" y1="150" x2="460" y2="210" stroke="#2e7d32" stroke-width="2"/>
+        <text x="240" y="185" font-size="13" fill="#2e7d32">QA</text>
+        <text x="320" y="185" font-size="13" fill="#2e7d32">QB</text>
+
+        <!-- 结论 -->
+        <text x="320" y="270" text-anchor="middle" font-size="14" fill="#004d40" font-weight="bold">垂直平分线上的任意一点，到 A 和 B 的距离都相等！</text>
+      </svg>
+    </div>
+
+    <div class="example">
+      <p><strong>证明思路：</strong>设 P 在 AB 的垂直平分线上，O 为 AB 中点。</p>
+      <p>在 △POA 和 △POB 中：</p>
+      <ul>
+        <li>OA = OB（O 是中点）</li>
+        <li>∠POA = ∠POB = 90°（PO ⊥ AB）</li>
+        <li>PO = PO（公共边）</li>
+      </ul>
+      <p>∴ △POA ≅ △POB（<strong>SAS</strong>）→ PA = PB</p>
+    </div>
+
+    <p>这个定理在轴对称中极其重要——<strong>对称轴就是对应点连线的垂直平分线</strong>，所以沿着对称轴上的任意一点，到两个对应点的距离相等。</p>
+  </div>
+
+  <h2>四、等腰三角形："等边对等角"与"三线合一"</h2>
+  <div class="story">
+    <p>等腰三角形是轴对称图形中最经典、最实用的例子。<strong>等腰三角形的对称轴就是底边上的高（中线、顶角平分线）所在的直线</strong>。</p>
+
+    <h3>性质一：等边对等角</h3>
+    <div class="key">
+      <p><strong>定理：</strong>等腰三角形的两个<strong>底角</strong>相等。</p>
+      <p>反过来也成立：如果一个三角形有两个角相等，那么这两个角所对的边也相等（<strong>等角对等边</strong>）。</p>
+    </div>
+
+    <div class="graphic">
+      <svg viewBox="0 0 500 300" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <!-- 等腰三角形 -->
+        <polygon points="80,250 420,250 250,60" fill="rgba(0,77,64,0.12)" stroke="#004d40" stroke-width="2.5"/>
+        <text x="65" y="275" font-size="15" fill="#333" font-weight="bold" font-family="serif">B</text>
+        <text x="428" y="275" font-size="15" fill="#333" font-weight="bold" font-family="serif">C</text>
+        <text x="250" y="45" font-size="15" fill="#333" font-weight="bold" font-family="serif">A</text>
+
+        <!-- 腰的标记 -->
+        <line x1="80" y1="250" x2="250" y2="60" stroke="#e65100" stroke-width="2"/>
+        <text x="140" y="150" font-size="12" fill="#e65100" font-weight="bold">‖</text>
+        <line x1="250" y1="60" x2="420" y2="250" stroke="#e65100" stroke-width="2"/>
+        <text x="340" y="150" font-size="12" fill="#e65100" font-weight="bold">‖</text>
+        <text x="160" y="138" font-size="13" fill="#e65100">腰</text>
+        <text x="360" y="138" font-size="13" fill="#e65100">腰</text>
+
+        <!-- 底边 -->
+        <text x="240" y="268" font-size="13" fill="#555">底边</text>
+
+        <!-- 底角标记 -->
+        <path d="M100,238 A20,20 0 0,0 115,220" fill="none" stroke="#1565c0" stroke-width="2"/>
+        <text x="105" y="222" font-size="13" fill="#1565c0" font-weight="bold">∠B</text>
+        <path d="M400,238 A20,20 0 0,1 385,220" fill="none" stroke="#1565c0" stroke-width="2"/>
+        <text x="380" y="222" font-size="13" fill="#1565c0" font-weight="bold">∠C</text>
+
+        <text x="250" y="295" text-anchor="middle" font-size="14" fill="#004d40" font-weight="bold">∵ AB = AC &nbsp; ∴ ∠B = ∠C</text>
+      </svg>
+    </div>
+
+    <div class="example">
+      <p><strong>证明思路（用全等三角形）：</strong></p>
+      <p>作顶角 A 的平分线 AD，交 BC 于 D。</p>
+      <p>在 △ABD 和 △ACD 中：AB = AC（已知），∠BAD = ∠CAD（AD 是角平分线），AD = AD（公共边）。</p>
+      <p>∴ △ABD ≅ △ACD（<strong>SAS</strong>）→ ∠B = ∠C。</p>
+    </div>
+
+    <h3>性质二：三线合一</h3>
+    <p>这是等腰三角形最神奇的性质！刚才我们作的顶角平分线 AD，它同时还是<strong>底边上的中线</strong>和<strong>底边上的高</strong>。也就是说：</p>
+
+    <div class="formula">
+      <p style="font-size:1.1em;text-align:center;color:#004d40;"><strong>等腰三角形中，顶角平分线、底边上的中线、底边上的高，三条线重合！</strong></p>
+    </div>
+
+    <div class="graphic">
+      <svg viewBox="0 0 500 320" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <!-- 等腰三角形 -->
+        <polygon points="80,260 420,260 250,60" fill="rgba(0,77,64,0.1)" stroke="#004d40" stroke-width="2.5"/>
+        <text x="65" y="285" font-size="15" fill="#333" font-weight="bold" font-family="serif">B</text>
+        <text x="428" y="285" font-size="15" fill="#333" font-weight="bold" font-family="serif">C</text>
+        <text x="250" y="45" font-size="15" fill="#333" font-weight="bold" font-family="serif">A</text>
+
+        <!-- 三线合一（用三种颜色标记） -->
+        <!-- 中线：蓝色 -->
+        <line x1="250" y1="60" x2="250" y2="260" stroke="#1565c0" stroke-width="6" stroke-dasharray="none" opacity="0.3"/>
+        <!-- 角平分线：红色 -->
+        <line x1="250" y1="60" x2="250" y2="260" stroke="#c62828" stroke-width="4" stroke-dasharray="none" opacity="0.3"/>
+        <!-- 高：绿色 -->
+        <line x1="250" y1="60" x2="250" y2="260" stroke="#2e7d32" stroke-width="2" stroke-dasharray="none"/>
+
+        <circle cx="250" cy="260" r="3" fill="#333"/>
+        <text x="260" y="275" font-size="13" fill="#333" font-family="serif">D</text>
+
+        <!-- 直角标记 -->
+        <rect x="244" y="252" width="8" height="8" fill="none" stroke="#2e7d32" stroke-width="1.5"/>
+
+        <!-- 等长标记 -->
+        <line x1="80" y1="260" x2="250" y2="260" stroke="#e65100" stroke-width="2"/>
+        <line x1="250" y1="260" x2="420" y2="260" stroke="#e65100" stroke-width="2"/>
+        <text x="155" y="278" font-size="12" fill="#e65100">BD = DC</text>
+
+        <!-- 角标记 -->
+        <path d="M230,78 A22,22 0 0,0 255,72" fill="none" stroke="#c62828" stroke-width="1.5"/>
+        <path d="M270,78 A22,22 0 0,1 245,72" fill="none" stroke="#c62828" stroke-width="1.5"/>
+        <text x="250" y="95" font-size="11" fill="#c62828">∠1=∠2</text>
+
+        <!-- 图例 -->
+        <text x="250" y="310" text-anchor="middle" font-size="13" fill="#004d40" font-weight="bold">
+          <tspan fill="#1565c0">中线</tspan> =
+          <tspan fill="#2e7d32">高</tspan> =
+          <tspan fill="#c62828">角平分线</tspan>
+        </text>
+      </svg>
+    </div>
+
+    <div class="key">
+      <p><strong>三线合一意味着：</strong>在等腰三角形中，只要知道一条线是"顶角平分线"、"底边上的中线"、"底边上的高"中的<strong>任意一个</strong>，就自动知道它也是另外两个！</p>
+      <p>这不仅是一个性质的总结，更是<strong>解题的重要工具</strong>——很多几何题就是靠"三线合一"来找到突破口。</p>
+    </div>
+
+    <div class="example">
+      <p><strong>快速练习：</strong>等腰三角形中，顶角是 80°，底角各是多少？</p>
+      <p>答：底角 = (180° − 80°) ÷ 2 = <strong>50°</strong>。因为"等边对等角"，两个底角相等。</p>
+    </div>
+  </div>
+
+  <h2>五、最短路径问题：将军饮马</h2>
+  <div class="story">
+    <p>这是轴对称最精彩的应用——一个流传千年的经典问题。</p>
+
+    <div class="quote">
+      <p><strong>相传古罗马有一位将军，每天要从军营 A 出发，先到河边饮马，再到军营 B。问：他应该在河边的哪个位置饮马，才能使总路程最短？</strong></p>
+    </div>
+
+    <p>这个问题看起来简单，但如果不借助轴对称，很难直接找到答案。让我们用轴对称来破解它！</p>
+
+    <h3>轴对称解法的核心思想</h3>
+    <p>把河岸看作一条直线（对称轴），作 A 点关于河岸的对称点 A'。那么，A' 到河边任意一点的距离，等于 A 到河边同一点的距离。</p>
+    <p>于是，"从 A 到河边再到 B" 的最短路径，就变成了 "从 A' 到 B 的直线"！</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 700 420" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <!-- 标题 -->
+        <text x="350" y="28" text-anchor="middle" font-size="16" fill="#333" font-weight="bold">将军饮马：轴对称解法</text>
+
+        <!-- 河岸（对称轴） -->
+        <line x1="30" y1="340" x2="670" y2="340" stroke="#1565c0" stroke-width="3"/>
+        <text x="680" y="345" font-size="14" fill="#1565c0" font-weight="bold">河岸（直线 l）</text>
+
+        <!-- 军营A -->
+        <circle cx="120" cy="240" r="5" fill="#c62828"/>
+        <text x="105" y="230" font-size="15" fill="#333" font-weight="bold" font-family="serif">A（军营）</text>
+
+        <!-- 军营B -->
+        <circle cx="500" cy="280" r="5" fill="#c62828"/>
+        <text x="510" y="275" font-size="15" fill="#333" font-weight="bold" font-family="serif">B（军营）</text>
+
+        <!-- A 的对称点 A' -->
+        <circle cx="120" cy="440" r="5" fill="#e65100"/>
+        <text x="105" y="460" font-size="15" fill="#e65100" font-weight="bold" font-family="serif">A'（A 的对称点）</text>
+
+        <!-- 虚线连接 A-A' -->
+        <line x1="120" y1="240" x2="120" y2="440" stroke="#999" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <!-- 垂足 -->
+        <circle cx="120" cy="340" r="3" fill="#999"/>
+
+        <!-- A' 到 B 的直线 -->
+        <line x1="120" y1="440" x2="500" y2="280" stroke="#e65100" stroke-width="2" stroke-dasharray="6,3"/>
+
+        <!-- 交点 P（最佳饮马点） -->
+        <circle cx="310" cy="340" r="6" fill="#004d40"/>
+        <text x="320" y="335" font-size="16" fill="#004d40" font-weight="bold">P</text>
+
+        <!-- A 到 P 的路径 -->
+        <line x1="120" y1="240" x2="310" y2="340" stroke="#2e7d32" stroke-width="2.5"/>
+        <!-- P 到 B 的路径 -->
+        <line x1="310" y1="340" x2="500" y2="280" stroke="#2e7d32" stroke-width="2.5"/>
+
+        <!-- 标注 -->
+        <text x="190" y="275" font-size="13" fill="#2e7d32">AP</text>
+        <text x="410" y="295" font-size="13" fill="#2e7d32">PB</text>
+
+        <!-- A'P = AP 标记 -->
+        <text x="200" y="400" font-size="12" fill="#e65100">A'P = AP</text>
+
+        <!-- 说明文字 -->
+        <text x="350" y="390" text-anchor="middle" font-size="13" fill="#004d40" font-weight="bold">
+          AP + PB = A'P + PB = A'B（直线段最短！）
+        </text>
+      </svg>
+    </div>
+
+    <div class="key">
+      <p><strong>将军饮马问题的解法步骤：</strong></p>
+      <ol>
+        <li>作 A 点关于河岸直线 l 的<strong>对称点 A'</strong></li>
+        <li>连接 A' 和 B，与河岸的交点即为<strong>最佳饮马点 P</strong></li>
+        <li>最短路径 = AP + PB = A'B</li>
+      </ol>
+      <p><strong>为什么这是最短的？</strong>因为河岸上的任意其他点 Q，都有 AQ + QB = A'Q + QB ≥ A'B（两点之间线段最短）。</p>
+    </div>
+
+    <div class="example">
+      <p><strong>变式练一练：</strong>如果将军的两个军营在河的<strong>同侧</strong>呢？</p>
+      <p>答案是一样的——把其中一个点关于河岸作对称，转化为异侧问题即可。轴对称的威力就在这里：<strong>把"同侧"问题转化为"异侧"问题</strong>，然后用"两点之间线段最短"直接解决。</p>
+    </div>
+  </div>
+
+  <h2>六、用轴对称设计图案</h2>
+  <div class="story">
+    <p>轴对称不只是数学定理，它还是<strong>设计的重要工具</strong>。很多美丽的图案，都是通过轴对称创作出来的。</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 640 240" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <text x="320" y="28" text-anchor="middle" font-size="16" fill="#333" font-weight="bold">轴对称设计示例</text>
+
+        <!-- 示例1：雪花图案 -->
+        <text x="130" y="55" text-anchor="middle" font-size="13" fill="#555">❄ 雪花</text>
+        <line x1="130" y1="60" x2="130" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="130" y1="130" x2="30" y2="130" stroke="#004d40" stroke-width="1.5" opacity="0.4"/>
+        <line x1="130" y1="130" x2="60" y2="80" stroke="#004d40" stroke-width="1.5" opacity="0.4"/>
+        <line x1="130" y1="130" x2="60" y2="180" stroke="#004d40" stroke-width="1.5" opacity="0.4"/>
+        <line x1="130" y1="130" x2="230" y2="130" stroke="#004d40" stroke-width="1.5" opacity="0.4"/>
+        <line x1="130" y1="130" x2="200" y2="80" stroke="#004d40" stroke-width="1.5" opacity="0.4"/>
+        <line x1="130" y1="130" x2="200" y2="180" stroke="#004d40" stroke-width="1.5" opacity="0.4"/>
+        <circle cx="130" cy="130" r="4" fill="#004d40"/>
+        <circle cx="80" cy="130" r="3" fill="#004d40"/>
+        <circle cx="180" cy="130" r="3" fill="#004d40"/>
+        <circle cx="105" cy="105" r="2.5" fill="#004d40"/>
+        <circle cx="155" cy="105" r="2.5" fill="#004d40"/>
+        <circle cx="105" cy="155" r="2.5" fill="#004d40"/>
+        <circle cx="155" cy="155" r="2.5" fill="#004d40"/>
+
+        <!-- 示例2：脸谱 -->
+        <text x="320" y="55" text-anchor="middle" font-size="13" fill="#555">🎭 脸谱</text>
+        <line x1="320" y1="60" x2="320" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="4,3"/>
+        <ellipse cx="320" cy="130" rx="60" ry="55" fill="rgba(0,77,64,0.08)" stroke="#004d40" stroke-width="2"/>
+        <ellipse cx="300" cy="120" rx="10" ry="14" fill="none" stroke="#004d40" stroke-width="1.5"/>
+        <ellipse cx="340" cy="120" rx="10" ry="14" fill="none" stroke="#004d40" stroke-width="1.5"/>
+        <circle cx="300" cy="120" r="4" fill="#004d40"/>
+        <circle cx="340" cy="120" r="4" fill="#004d40"/>
+        <path d="M300,148 Q320,158 340,148" fill="none" stroke="#c62828" stroke-width="2"/>
+        <path d="M300,148 Q320,168 340,148" fill="none" stroke="#c62828" stroke-width="1.5" stroke-dasharray="3,2"/>
+
+        <!-- 示例3：窗花 -->
+        <text x="510" y="55" text-anchor="middle" font-size="13" fill="#555">🪟 窗花</text>
+        <line x1="510" y1="60" x2="510" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="4,3"/>
+        <rect x="480" y="80" width="60" height="60" fill="rgba(0,77,64,0.08)" stroke="#004d40" stroke-width="2"/>
+        <line x1="480" y1="80" x2="540" y2="140" stroke="#004d40" stroke-width="1.5"/>
+        <line x1="540" y1="80" x2="480" y2="140" stroke="#004d40" stroke-width="1.5"/>
+        <circle cx="510" cy="110" r="8" fill="none" stroke="#004d40" stroke-width="1.5"/>
+        <circle cx="510" cy="110" r="3" fill="#004d40"/>
+        <path d="M480,100 Q510,90 540,100" fill="none" stroke="#c62828" stroke-width="1.2"/>
+        <path d="M480,120 Q510,130 540,120" fill="none" stroke="#c62828" stroke-width="1.2"/>
+
+        <!-- 底部说明 -->
+        <text x="320" y="230" text-anchor="middle" font-size="13" fill="#555">每个图案都有一条对称轴（虚线），左右（或上下）完全对称</text>
+      </svg>
+    </div>
+
+    <div class="key">
+      <p><strong>轴对称在生活中的应用：</strong></p>
+      <ul>
+        <li><strong>建筑：</strong>故宫、天坛、泰姬陵——几乎所有经典建筑都是轴对称的</li>
+        <li><strong>艺术：</strong>剪纸、窗花、脸谱、纹样设计</li>
+        <li><strong>工程：</strong>飞机、汽车、船舶——轴对称设计保证了平衡和稳定</li>
+        <li><strong>自然：</strong>蝴蝶、雪花、花朵、人脸——大自然偏爱对称</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>为什么一般的平行四边形不是轴对称图形？它需要满足什么条件才能变成轴对称图形？</p>
+    <p><strong>问题 2：</strong>等腰三角形底边上的任意一点，到两腰的距离之和有什么规律？</p>
+    <p><strong>问题 3：</strong>在将军饮马问题中，如果河流不是一条直线，而是一个圆形的湖，将军要从 A 走到湖边再到 B，该怎么做？</p>
+    <p><strong>问题 4：</strong>一个等边三角形有几条对称轴？正方形呢？正五边形呢？你能发现什么规律？</p>
+  </div>
+
+  <h2>拓展阅读</h2>
+  <div class="extend">
+    <p><strong>外尔与《对称》：</strong>赫尔曼·外尔（Hermann Weyl，1885—1955）是 20 世纪最伟大的数学家之一。他在 1952 年出版的《对称》是一本写给大众的数学经典，从艺术、建筑、自然界中的对称出发，一直讲到群论和晶体结构。外尔说："对称是一种理念，人类世世代代试图用它来理解和创造秩序、美与完美。"</p>
+    <p><strong>从轴对称到反射变换：</strong>在更高年级的数学中，轴对称会被抽象为一种"变换"——把平面上的每个点映射到它关于某条直线的对称点。这种变换在数学中叫做<strong>反射</strong>（reflection），是几何变换（平移、旋转、反射）的基本类型之一。两次反射组合起来，可能得到平移或旋转——这背后是群论的思想。</p>
+    <p><strong>推荐阅读：</strong>外尔《对称》（Symmetry）、M. C. Escher 的对称画作（他用数学原理创作了令人惊叹的对称图案）。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 下列图形中，是轴对称图形的是（　）</p>
+    <p>A. 任意三角形 &nbsp; B. 任意平行四边形 &nbsp; C. 等腰梯形 &nbsp; D. 任意梯形</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">等腰梯形沿上下底中点连线对折，两边能重合。一般三角形、一般平行四边形、一般梯形都不行。</div>
+    <div class="ans-box" id="a1"><strong>C</strong>。等腰梯形是轴对称图形，对称轴是经过上底和下底中点的直线。A 只有等腰三角形才轴对称；B 一般平行四边形不是轴对称（菱形除外）；D 一般梯形不是。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 点 A 的坐标是 (3, 5)，点 A 关于 x 轴的对称点 A' 的坐标是（　）</p>
+    <p>A. (−3, 5) &nbsp; B. (3, −5) &nbsp; C. (−3, −5) &nbsp; D. (5, 3)</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">关于 x 轴对称，x 坐标不变，y 坐标变号。想象把点沿垂直于 x 轴的方向翻折。</div>
+    <div class="ans-box" id="a2"><strong>B</strong>。(3, 5) 关于 x 轴对称后，横坐标不变，纵坐标变为相反数，即 (3, −5)。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 等腰三角形的一个底角是 35°，它的顶角是多少度？</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">等腰三角形两个底角相等。内角和 = 180°，顶角 = 180° − 2 × 底角。</div>
+    <div class="ans-box" id="a3">顶角 = 180° − 2 × 35° = 180° − 70° = <strong>110°</strong>。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 等腰三角形的顶角是 50°，它是什么三角形？（按角分类）</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">先求底角：底角 = (180° − 50°) ÷ 2 = 65°。三个角都小于 90°，所以是锐角三角形。</div>
+    <div class="ans-box" id="a4">底角 = (180° − 50°) ÷ 2 = 65°。三个角分别为 50°、65°、65°，都小于 90°，所以是<strong>锐角三角形</strong>。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 在等腰三角形 ABC 中，AB = AC，AD 是 BC 边上的高。如果 ∠BAD = 30°，求 ∠B 的度数。</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">利用"三线合一"：AD 既是高，也是顶角平分线。所以 ∠BAC = 2 × ∠BAD = 60°。然后 ∠B = (180° − 60°) ÷ 2。</div>
+    <div class="ans-box" id="a5">由"三线合一"，AD 是顶角平分线，∴ ∠BAC = 2 × 30° = 60°。∠B = ∠C = (180° − 60°) ÷ 2 = <strong>60°</strong>。这个三角形恰好是等边三角形！</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 已知点 P 在线段 AB 的垂直平分线上，且 PA = 10cm，则 PB = ？</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">垂直平分线的性质：垂直平分线上的点到线段两端距离相等。</div>
+    <div class="ans-box" id="a6">PB = PA = <strong>10cm</strong>。垂直平分线上的点到线段两端距离相等。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>7.</strong> 在"将军饮马"问题中，A 到河岸的距离是 200m，B 到河岸的距离是 300m，A 和 B 沿河岸方向的水平距离是 400m。求最短路径 AP + PB 的长度。</p>
+    <button class="btn-sm" onclick="toggleHint('h7')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a7')">查看答案</button>
+    <div class="hint-box" id="h7">作 A 关于河岸的对称点 A'。A' 到河岸也是 200m。A' 和 B 的垂直距离 = 200 + 300 = 500m，水平距离 = 400m。用勾股定理求 A'B。</div>
+    <div class="ans-box" id="a7">A'B = √(400² + 500²) = √(160000 + 250000) = √410000 = 100√41 ≈ <strong>640.3m</strong>。这就是最短路径的长度。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>8.</strong> 下列说法正确的是（　）</p>
+    <p>A. 等腰三角形一定是锐角三角形</p>
+    <p>B. 等腰三角形的对称轴是底边上的中线</p>
+    <p>C. 等腰三角形底边上的高就是它的对称轴</p>
+    <p>D. 有两个角相等的三角形是等腰三角形</p>
+    <button class="btn-sm" onclick="toggleHint('h8')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a8')">查看答案</button>
+    <div class="hint-box" id="h8">A 错，顶角可以是钝角（如 100°）；B 错，对称轴是"中线所在的直线"，不是线段；C 错，同理，对称轴是直线不是线段；D 对，等角对等边。</div>
+    <div class="ans-box" id="a8"><strong>D</strong>。"等角对等边"——如果一个三角形有两个角相等，那么它们所对的边也相等，从而是等腰三角形。A 的反例：顶角 120° 的等腰三角形是钝角三角形。B 和 C 的错误在于：对称轴是直线，不是线段。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>9.</strong> 用一条直线将等腰三角形分成两个部分，使得这两个部分关于这条直线对称。这条直线是什么？</p>
+    <button class="btn-sm" onclick="toggleHint('h9')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a9')">查看答案</button>
+    <div class="hint-box" id="h9">等腰三角形的对称轴就是底边上的高（中线、顶角平分线）所在的直线。</div>
+    <div class="ans-box" id="a9">这条直线是<strong>底边上的高（中线、顶角平分线）所在的直线</strong>——也就是等腰三角形的对称轴。它把等腰三角形分成两个全等的直角三角形，关于这条直线对称。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>10.</strong> 设计题：在方格纸上，有一个点 A(2, 3) 和一条直线 l（x 轴）。请你画出点 A 关于直线 l 的对称点 A'，并说明如果要构造一个以 l 为对称轴的轴对称图形，最少需要几个点？</p>
+    <button class="btn-sm" onclick="toggleHint('h10')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a10')">查看答案</button>
+    <div class="hint-box" id="h10">关于 x 轴对称：横坐标不变，纵坐标变号。构造轴对称图形，只需画出对称轴一侧的图形，另一侧由对称性质自动确定。</div>
+    <div class="ans-box" id="a10">A'(2, −3)。构造轴对称图形时，只需画出对称轴<strong>一侧</strong>的图形（可能包含多个点），另一侧的所有点都可以通过轴对称得到。所以理论上，只需知道一侧的图形，整个轴对称图形就确定了。</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>轴对称：</strong>沿一条直线对折，两边完全重合。这条直线叫对称轴</li>
+      <li><strong>对称轴的性质：</strong>对称轴垂直平分任意一对对应点的连线</li>
+      <li><strong>垂直平分线：</strong>经过线段中点且垂直于线段的直线。垂直平分线上的点到线段两端距离相等</li>
+      <li><strong>等腰三角形：</strong>两腰相等 → 两底角相等（等边对等角）；顶角平分线、底边上的中线、底边上的高三线合一</li>
+      <li><strong>将军饮马：</strong>利用轴对称，把"同侧折线最短"问题转化为"两点之间线段最短"</li>
+      <li><strong>轴对称设计：</strong>只需画出对称轴一侧的图形，另一侧由对称自动生成</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="pythagorean.html">下一课：勾股定理 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+<script src="../lessons/dt.js"></script>
+</body>
+</html>

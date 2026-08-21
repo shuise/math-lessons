@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模拟考试 — 阶段六 — 自学课件</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../lessons/style.css">
+<style>
+  :root { --accent: #2e7d32; }
+  .exam-header { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .section-title { color: #2e7d32; font-size: 18px; font-weight: 700; margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #c8e6c9; }
+  .q-item { padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+  .q-item:last-child { border-bottom: none; }
+  .btn-row { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-hint, .btn-ans { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; }
+  .btn-hint:hover { background: #fff3e0; border-color: #ff9800; }
+  .btn-ans:hover { background: #e8f5e9; border-color: #4caf50; }
+  .hint-box, .ans-box { display: none; margin-top: 8px; padding: 10px 14px; border-radius: 6px; font-size: 14px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .hint-box { background: #fff8e1; border-left: 3px solid #ff9800; }
+  .ans-box { background: #e8f5e9; border-left: 3px solid #4caf50; }
+  .opt-row { margin: 4px 0; padding-left: 8px; }
+  .opt { display: inline-block; min-width: 24px; font-weight: 600; }
+  @media (max-width: 720px) {
+    article { padding-bottom: 100px !important; }
+    article { padding: 20px 12px 100px 12px !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    .q-item { padding: 10px 0; }
+    .exam-header { padding: 12px 14px; margin: 12px 0; }
+  }
+  .opt-btn { display: inline-block; padding: 6px 16px; margin: 3px 4px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .opt-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .opt-btn.selected { border-color: #1976d2; background: #e3f2fd; }
+  .opt-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .opt-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .tf-btn { display: inline-block; padding: 6px 20px; margin: 3px 6px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .tf-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .tf-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .tf-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .fill-input { padding: 6px 12px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 15px; width: 160px; }
+  .fill-input:focus { outline: none; border-color: #1976d2; }
+  .check-btn { padding: 6px 16px; border: 1px solid #1976d2; border-radius: 6px; background: #1976d2; color: #fff; font-size: 13px; cursor: pointer; margin-left: 8px; }
+  .check-btn:hover { background: #1565c0; }
+  .feedback { display: none; margin-left: 8px; font-size: 14px; font-weight: 600; }
+  .feedback.show { display: inline; }
+  .feedback.correct-fb { color: #2e7d32; }
+  .feedback.wrong-fb { color: #c62828; }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="../index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="../natural-numbers.html">课件1</a>、<a href="../fractions.html">课件2</a>、<a href="../negative-numbers.html">课件3</a>、<a href="../algebraic-expressions.html">课件4</a>、<a href="../polynomials.html">课件5</a>、<a href="../factoring-rational.html">课件6</a>、<a href="../linear-equations.html">课件7</a>、<a href="../fractional-equations.html">课件8</a>、<a href="../quadratic-equations.html">课件9</a>、<a href="../real-numbers.html">课件10</a>、<a href="../quadratic-radicals.html">课件11</a>、<a href="../linear-systems.html">课件12</a>、<a href="../inequalities.html">课件13</a>、<a href="../coordinate-system.html">课件14</a>、<a href="../linear-function.html">课件15</a>、<a href="../quadratic-function.html">课件16</a>、<a href="../inverse-function.html">课件17</a></p>
+  <h1>模拟考试 — 阶段六：函数</h1>
+  <div class="exam-header">
+    <p>⏱ 时间：30 分钟 | ✅ 判断题 10 题 | 🔘 单选题 10 题 | ☑️ 多选题 5 题 | ✏️ 其他题型 5 题 | 共 30 题</p>
+  </div>
+
+  <p class="section-title">一、判断题（每题 1 分，共 10 分）</p>
+
+  <div class="q-item"><p><strong>1.</strong> 平面直角坐标系中，点 (3, −2) 在第四象限。</p>
+    <div id="tf-9-1">
+      <button class="tf-btn" onclick="checkTF(this, true, '9-1')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '9-1')">错误</button>
+      <span class="feedback" id="fb-9-1"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-1"><p>第四象限的特征：x &gt; 0, y &lt; 0。点 (3, −2) 的 x = 3 &gt; 0，y = −2 &lt; 0，符合第四象限。</p></div>
+    <div class="ans-box" id="a1-1"><p><strong>✅ 正确。</strong>x = 3 &gt; 0，y = −2 &lt; 0，该点在第四象限。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>2.</strong> y = 2x + 1 中，y 是 x 的正比例函数。</p>
+    <div id="tf-9-2">
+      <button class="tf-btn" onclick="checkTF(this, false, '9-2')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '9-2')">错误</button>
+      <span class="feedback" id="fb-9-2"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-2"><p>正比例函数的形式是 y = kx（k ≠ 0），没有常数项。y = 2x + 1 有常数项 +1，是一次函数但不是正比例函数。</p></div>
+    <div class="ans-box" id="a1-2"><p><strong>❌ 错误。</strong>y = 2x + 1 是一次函数，但不是正比例函数。正比例函数必须形如 y = kx（k ≠ 0）。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>3.</strong> 一次函数 y = kx + b 的图像是一条直线。</p>
+    <div id="tf-9-3">
+      <button class="tf-btn" onclick="checkTF(this, true, '9-3')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '9-3')">错误</button>
+      <span class="feedback" id="fb-9-3"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-3"><p>一次函数的图像一定是直线，k 是斜率，b 是截距。这是基本性质。</p></div>
+    <div class="ans-box" id="a1-3"><p><strong>✅ 正确。</strong>一次函数 y = kx + b（k ≠ 0）的图像始终是一条直线。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>4.</strong> 二次函数 y = x² 的图像关于 y 轴对称。</p>
+    <div id="tf-9-4">
+      <button class="tf-btn" onclick="checkTF(this, true, '9-4')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '9-4')">错误</button>
+      <span class="feedback" id="fb-9-4"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-4"><p>y = x² 中，(−x)² = x²，所以 y 的值只与 |x| 有关，图像关于 y 轴对称（即关于直线 x = 0 对称）。</p></div>
+    <div class="ans-box" id="a1-4"><p><strong>✅ 正确。</strong>y = x² 是偶函数，图像关于 y 轴对称。对称轴为 x = 0（即 y 轴）。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>5.</strong> 反比例函数 y = k/x 的图像一定经过原点。</p>
+    <div id="tf-9-5">
+      <button class="tf-btn" onclick="checkTF(this, false, '9-5')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '9-5')">错误</button>
+      <span class="feedback" id="fb-9-5"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-5"><p>当 x = 0 时，y = k/0 无意义，所以反比例函数的定义域不包含 x = 0，图像不可能经过原点。</p></div>
+    <div class="ans-box" id="a1-5"><p><strong>❌ 错误。</strong>反比例函数 y = k/x 中 x ≠ 0，图像不经过原点。图像是双曲线，以坐标轴为渐近线。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>6.</strong> 函数 y = 2x + 3 与 y = 2x − 1 的图像是平行的。</p>
+    <div id="tf-9-6">
+      <button class="tf-btn" onclick="checkTF(this, true, '9-6')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '9-6')">错误</button>
+      <span class="feedback" id="fb-9-6"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-6')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-6')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-6"><p>两条直线平行的条件是斜率相等。y = 2x + 3 和 y = 2x − 1 的斜率都是 k = 2，截距不同，所以平行。</p></div>
+    <div class="ans-box" id="a1-6"><p><strong>✅ 正确。</strong>两条直线的斜率 k 都是 2，截距分别为 3 和 −1，斜率相同、截距不同，所以两直线平行。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>7.</strong> 二次函数 y = −x² + 2x 的开口向上。</p>
+    <div id="tf-9-7">
+      <button class="tf-btn" onclick="checkTF(this, false, '9-7')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '9-7')">错误</button>
+      <span class="feedback" id="fb-9-7"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-7')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-7')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-7"><p>二次函数 y = ax² + bx + c 的开口方向由 a 的符号决定：a &gt; 0 开口向上，a &lt; 0 开口向下。这里 a = −1 &lt; 0。</p></div>
+    <div class="ans-box" id="a1-7"><p><strong>❌ 错误。</strong>a = −1 &lt; 0，二次函数开口向下。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>8.</strong> 点 P(2, 3) 关于 x 轴的对称点是 (2, −3)。</p>
+    <div id="tf-9-8">
+      <button class="tf-btn" onclick="checkTF(this, true, '9-8')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '9-8')">错误</button>
+      <span class="feedback" id="fb-9-8"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-8')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-8')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-8"><p>关于 x 轴对称：x 坐标不变，y 坐标取相反数。关于 y 轴对称：y 坐标不变，x 坐标取相反数。</p></div>
+    <div class="ans-box" id="a1-8"><p><strong>✅ 正确。</strong>关于 x 轴对称，横坐标不变，纵坐标变为相反数：(2, 3) → (2, −3)。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>9.</strong> 一次函数 y = kx + b 中，k 越大，直线越陡。</p>
+    <div id="tf-9-9">
+      <button class="tf-btn" onclick="checkTF(this, false, '9-9')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '9-9')">错误</button>
+      <span class="feedback" id="fb-9-9"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-9')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-9')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-9"><p>|k| 越大，直线越陡。k 的符号决定倾斜方向（上升或下降），但陡峭程度由 |k| 决定。</p></div>
+    <div class="ans-box" id="a1-9"><p><strong>❌ 错误。</strong>是 |k| 越大，直线越陡。k 的符号只决定上升还是下降，比较陡峭程度要用绝对值。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>10.</strong> 二次函数 y = (x − 2)² + 3 的顶点坐标是 (2, 3)。</p>
+    <div id="tf-9-10">
+      <button class="tf-btn" onclick="checkTF(this, true, '9-10')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '9-10')">错误</button>
+      <span class="feedback" id="fb-9-10"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-10')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-10')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-10"><p>顶点式 y = a(x − h)² + k 的顶点坐标为 (h, k)。这里 h = 2, k = 3。</p></div>
+    <div class="ans-box" id="a1-10"><p><strong>✅ 正确。</strong>顶点式 y = a(x − h)² + k 中，顶点坐标为 (h, k)，即 (2, 3)。</p></div>
+  </div>
+
+  <p class="section-title">二、单选题（每题 2 分，共 20 分）</p>
+
+  <div class="q-item"><p><strong>11.</strong> 点 A(−3, 4) 到 x 轴的距离是（　）</p>
+    <div id="opt-9-11">
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-11')" data-correct="false">A. 3</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '9-11')" data-correct="true">B. 4</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-11')" data-correct="false">C. 5</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-11')" data-correct="false">D. 7</button>
+      <span class="feedback" id="fb-9-11"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-1"><p>点到 x 轴的距离 = |纵坐标|；点到 y 轴的距离 = |横坐标|。A(−3, 4) 到 x 轴的距离 = |4| = 4。</p></div>
+    <div class="ans-box" id="a2-1"><p><strong>答案：B。</strong>点到 x 轴的距离等于纵坐标的绝对值：|4| = 4。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>12.</strong> 一次函数 y = −2x + 3 的图像不经过（　）</p>
+    <div id="opt-9-12">
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-12')" data-correct="false">A. 第一象限</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-12')" data-correct="false">B. 第二象限</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '9-12')" data-correct="true">C. 第三象限</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-12')" data-correct="false">D. 第四象限</button>
+      <span class="feedback" id="fb-9-12"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-2"><p>k = −2 &lt; 0，直线从左到右下降；b = 3 &gt; 0，与 y 轴交于正半轴。画出草图：经过第一、二、四象限，不经过第三象限。</p></div>
+    <div class="ans-box" id="a2-2"><p><strong>答案：C。</strong>k &lt; 0 且 b &gt; 0，直线经过第一、二、四象限，不经过第三象限。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>13.</strong> 二次函数 y = x² − 4x + 3 的对称轴是（　）</p>
+    <div id="opt-9-13">
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-13')" data-correct="false">A. x = 1</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '9-13')" data-correct="true">B. x = 2</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-13')" data-correct="false">C. x = 3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-13')" data-correct="false">D. x = 4</button>
+      <span class="feedback" id="fb-9-13"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-3"><p>对称轴公式：x = −b/(2a)。这里 a = 1, b = −4，所以 x = −(−4)/(2×1) = 4/2 = 2。</p></div>
+    <div class="ans-box" id="a2-3"><p><strong>答案：B。</strong>对称轴 x = −b/(2a) = −(−4)/(2×1) = 2。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>14.</strong> 反比例函数 y = 6/x，当 x = 2 时，y 的值为（　）</p>
+    <div id="opt-9-14">
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-14')" data-correct="false">A. 2</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '9-14')" data-correct="true">B. 3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-14')" data-correct="false">C. 4</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-14')" data-correct="false">D. 12</button>
+      <span class="feedback" id="fb-9-14"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-4"><p>直接代入：y = 6/2 = 3。</p></div>
+    <div class="ans-box" id="a2-4"><p><strong>答案：B。</strong>y = 6/2 = 3。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>15.</strong> 一次函数 y = kx + b 经过点 (1, 3) 和 (2, 5)，则 k 的值为（　）</p>
+    <div id="opt-9-15">
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-15')" data-correct="false">A. 1</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '9-15')" data-correct="true">B. 2</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-15')" data-correct="false">C. 3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-15')" data-correct="false">D. −1</button>
+      <span class="feedback" id="fb-9-15"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-5"><p>斜率 k = (y₂ − y₁)/(x₂ − x₁) = (5 − 3)/(2 − 1) = 2/1 = 2。</p></div>
+    <div class="ans-box" id="a2-5"><p><strong>答案：B。</strong>k = (5 − 3)/(2 − 1) = 2。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>16.</strong> 将抛物线 y = x² 向上平移 2 个单位，得到的解析式是（　）</p>
+    <div id="opt-9-16">
+      <button class="opt-btn" onclick="checkSingle(this, true, '9-16')" data-correct="true">A. y = x² + 2</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-16')" data-correct="false">B. y = x² − 2</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-16')" data-correct="false">C. y = (x + 2)²</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-16')" data-correct="false">D. y = (x − 2)²</button>
+      <span class="feedback" id="fb-9-16"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-6')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-6')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-6"><p>向上平移：y 值增加 2，即 y = x² + 2。左右平移才改变 x 部分：右移减，左移加。</p></div>
+    <div class="ans-box" id="a2-6"><p><strong>答案：A。</strong>向上平移 2 个单位：y = x² + 2。C、D 是左右平移。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>17.</strong> 二次函数 y = −(x − 1)² + 4 的最大值是（　）</p>
+    <div id="opt-9-17">
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-17')" data-correct="false">A. 1</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-17')" data-correct="false">B. 2</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '9-17')" data-correct="true">C. 4</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-17')" data-correct="false">D. 无最大值</button>
+      <span class="feedback" id="fb-9-17"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-7')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-7')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-7"><p>顶点式 y = a(x − h)² + k，a = −1 &lt; 0，开口向下，最大值在顶点处取得，即 k = 4。</p></div>
+    <div class="ans-box" id="a2-7"><p><strong>答案：C。</strong>a = −1 &lt; 0，开口向下，顶点 (1, 4) 是最高点，最大值为 4。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>18.</strong> 反比例函数 y = −4/x 的图像位于（　）</p>
+    <div id="opt-9-18">
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-18')" data-correct="false">A. 第一、三象限</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '9-18')" data-correct="true">B. 第二、四象限</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-18')" data-correct="false">C. 第一、二象限</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-18')" data-correct="false">D. 第三、四象限</button>
+      <span class="feedback" id="fb-9-18"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-8')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-8')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-8"><p>反比例函数 y = k/x：k &gt; 0 时图像在第一、三象限；k &lt; 0 时图像在第二、四象限。这里 k = −4 &lt; 0。</p></div>
+    <div class="ans-box" id="a2-8"><p><strong>答案：B。</strong>k = −4 &lt; 0，反比例函数图像位于第二、四象限。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>19.</strong> 已知一次函数 y = kx + b 中，y 随 x 的增大而减小，且图像与 y 轴交于正半轴，则（　）</p>
+    <div id="opt-9-19">
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-19')" data-correct="false">A. k &gt; 0, b &gt; 0</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '9-19')" data-correct="true">B. k &lt; 0, b &gt; 0</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-19')" data-correct="false">C. k &gt; 0, b &lt; 0</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-19')" data-correct="false">D. k &lt; 0, b &lt; 0</button>
+      <span class="feedback" id="fb-9-19"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-9')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-9')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-9"><p>y 随 x 增大而减小 → k &lt; 0；与 y 轴交于正半轴 → b &gt; 0。</p></div>
+    <div class="ans-box" id="a2-9"><p><strong>答案：B。</strong>k &lt; 0（减小），b &gt; 0（正半轴截距）。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>20.</strong> 二次函数 y = x² − 2x − 3 与 x 轴的交点坐标是（　）</p>
+    <div id="opt-9-20">
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-20')" data-correct="false">A. (1, 0) 和 (−3, 0)</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '9-20')" data-correct="true">B. (−1, 0) 和 (3, 0)</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-20')" data-correct="false">C. (−1, 0) 和 (−3, 0)</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '9-20')" data-correct="false">D. (1, 0) 和 (3, 0)</button>
+      <span class="feedback" id="fb-9-20"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-10')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-10')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-10"><p>令 y = 0：x² − 2x − 3 = 0 → (x − 3)(x + 1) = 0 → x = 3 或 x = −1。交点坐标为 (3, 0) 和 (−1, 0)。</p></div>
+    <div class="ans-box" id="a2-10"><p><strong>答案：B。</strong>解 x² − 2x − 3 = 0 得 x = −1 或 x = 3，交点为 (−1, 0) 和 (3, 0)。</p></div>
+  </div>
+
+  <p class="section-title">三、多选题（每题 3 分，共 15 分）</p>
+
+  <div class="q-item"><p><strong>21.</strong> 下列函数中，y 随 x 的增大而增大的有（　）</p>
+    <div id="opt-9-21">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. y = 3x − 1</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">B. y = −x + 5</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">C. y = 2/x（x &gt; 0）</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. y = x²（x &gt; 0）</button>
+      <button class="check-btn" onclick="checkMulti('9-21')">提交</button>
+      <span class="feedback" id="fb-9-21"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-1"><p>A: k = 3 &gt; 0，增大 ✓；B: k = −1 &lt; 0，减小 ✗；C: 在第一象限，反比例函数 y 随 x 增大而减小 ✗；D: 在 x &gt; 0 时，二次函数 y = x² 递增 ✓。</p></div>
+    <div class="ans-box" id="a3-1"><p><strong>答案：AD。</strong>A 一次函数 k &gt; 0 递增；D 在 x &gt; 0 区间内 y = x² 递增。B 递减，C 在第一象限递减。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>22.</strong> 关于二次函数 y = ax² + bx + c（a ≠ 0），下列说法正确的有（　）</p>
+    <div id="opt-9-22">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. a &gt; 0 时，图像开口向上</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 对称轴为 x = −b/(2a)</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 顶点在对称轴上</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 图像总是关于 y 轴对称</button>
+      <button class="check-btn" onclick="checkMulti('9-22')">提交</button>
+      <span class="feedback" id="fb-9-22"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-2"><p>A、B、C 是二次函数的基本性质。D 错误：只有当 b = 0 时对称轴才是 y 轴（x = 0），一般情况对称轴是 x = −b/(2a)。</p></div>
+    <div class="ans-box" id="a3-2"><p><strong>答案：ABC。</strong>A、B、C 均正确。D 错误，对称轴为 x = −b/(2a)，只有当 b = 0 时才关于 y 轴对称。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>23.</strong> 反比例函数 y = k/x 的性质中，正确的有（　）</p>
+    <div id="opt-9-23">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 图像是双曲线</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 当 k &gt; 0 时，在每个象限内 y 随 x 增大而减小</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 图像关于原点对称</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 图像与坐标轴有交点</button>
+      <button class="check-btn" onclick="checkMulti('9-23')">提交</button>
+      <span class="feedback" id="fb-9-23"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-3"><p>A: 反比例函数图像是双曲线 ✓；B: k &gt; 0 时在每个象限内递减 ✓；C: 反比例函数是奇函数，关于原点对称 ✓；D: x ≠ 0，y ≠ 0，不与坐标轴相交 ✗。</p></div>
+    <div class="ans-box" id="a3-3"><p><strong>答案：ABC。</strong>A、B、C 正确。D 错误，反比例函数图像以坐标轴为渐近线，永不相交。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>24.</strong> 下列点中，在一次函数 y = 2x − 1 图像上的有（　）</p>
+    <div id="opt-9-24">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. (0, −1)</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. (1, 1)</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. (2, 3)</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. (−1, −3)</button>
+      <button class="check-btn" onclick="checkMulti('9-24')">提交</button>
+      <span class="feedback" id="fb-9-24"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-4"><p>将各点坐标代入 y = 2x − 1 验证：A: 2×0−1=−1 ✓；B: 2×1−1=1 ✓；C: 2×2−1=3 ✓；D: 2×(−1)−1=−3 ✓。</p></div>
+    <div class="ans-box" id="a3-4"><p><strong>答案：ABCD。</strong>四个点代入 y = 2x − 1 全部成立，都在该直线上。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>25.</strong> 一次函数与二次函数的区别有（　）</p>
+    <div id="opt-9-25">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 一次函数图像是直线，二次函数图像是抛物线</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 一次函数自变量的最高次数是 1，二次函数是 2</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">C. 一次函数有最大值，二次函数没有</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 二次函数有对称轴，一次函数没有</button>
+      <button class="check-btn" onclick="checkMulti('9-25')">提交</button>
+      <span class="feedback" id="fb-9-25"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-5"><p>A、B、D 正确。C 错误：一次函数 k ≠ 0 时既无最大值也无最小值（无限延伸）；二次函数开口向下时有最大值，开口向上时有最小值。</p></div>
+    <div class="ans-box" id="a3-5"><p><strong>答案：ABD。</strong>A、B、D 正确。C 错误，一次函数（k ≠ 0）没有最大值也没有最小值，二次函数有最大值或最小值。</p></div>
+  </div>
+
+  <p class="section-title">四、其他题型（每题 3 分，共 15 分）</p>
+
+  <div class="q-item"><p><strong>26.</strong> 已知一次函数的图像经过点 (1, 4) 和 (−1, 0)，求这个一次函数的解析式。</p>
+    <div id="fill-9-26">
+      <input class="fill-input" id="inp-9-26" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('9-26', 'y=2x+2')">提交</button>
+      <span class="feedback" id="fb-9-26"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-1"><p>先求斜率 k = (4 − 0)/(1 − (−1)) = 4/2 = 2。再代入一个点求 b：4 = 2×1 + b → b = 2。解析式为 y = 2x + 2。</p></div>
+    <div class="ans-box" id="a4-1"><p><strong>答案：y = 2x + 2。</strong>k = (4 − 0)/(1 − (−1)) = 2，代入 (1, 4)：4 = 2×1 + b → b = 2。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>27.</strong> 求二次函数 y = x² − 4x + 7 的顶点坐标和最小值。</p>
+    <div id="fill-9-27">
+      <input class="fill-input" id="inp-9-27" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('9-27', '顶点(2,3),最小值3')">提交</button>
+      <span class="feedback" id="fb-9-27"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-2"><p>配方法：y = x² − 4x + 4 + 3 = (x − 2)² + 3。顶点为 (2, 3)，a = 1 &gt; 0 开口向上，最小值为 3。</p></div>
+    <div class="ans-box" id="a4-2"><p><strong>答案：顶点 (2, 3)，最小值 3。</strong>y = (x − 2)² + 3，顶点 (2, 3)，a &gt; 0，最小值为 3。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>28.</strong> 已知反比例函数 y = k/x 的图像经过点 (2, 3)，求 k 的值，并判断点 (−1, −6) 是否在该函数图像上。</p>
+    <div id="fill-9-28">
+      <input class="fill-input" id="inp-9-28" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('9-28', 'k=6,在图像上')">提交</button>
+      <span class="feedback" id="fb-9-28"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-3"><p>由点 (2, 3) 求 k：k = xy = 2×3 = 6。验证 (−1, −6)：xy = (−1)×(−6) = 6 = k，所以在图像上。</p></div>
+    <div class="ans-box" id="a4-3"><p><strong>答案：k = 6，点 (−1, −6) 在该函数图像上。</strong>k = xy = 6，(−1)×(−6) = 6 = k，所以在图像上。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>29.</strong> 已知二次函数 y = ax² + bx + c 经过点 (0, 3)、(1, 0)、(2, −1)，求 a、b、c 的值。</p>
+    <div id="fill-9-29">
+      <input class="fill-input" id="inp-9-29" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('9-29', 'a=1,b=-4,c=3')">提交</button>
+      <span class="feedback" id="fb-9-29"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-4"><p>代入三点列方程组：(0, 3): c = 3；(1, 0): a + b + 3 = 0 → a + b = −3；(2, −1): 4a + 2b + 3 = −1 → 4a + 2b = −4 → 2a + b = −2。解方程组得 a = 1, b = −4。</p></div>
+    <div class="ans-box" id="a4-4"><p><strong>答案：a = 1, b = −4, c = 3。</strong>代入 (0, 3) 得 c = 3；代入 (1, 0) 得 a + b = −3；代入 (2, −1) 得 4a + 2b = −4 → 2a + b = −2。解得 a = 1, b = −4。解析式为 y = x² − 4x + 3。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>30.</strong> 画出一次函数 y = −x + 2 的草图，并写出它与两坐标轴围成的三角形面积。</p>
+    <div id="fill-9-30">
+      <input class="fill-input" id="inp-9-30" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('9-30', '面积=2')">提交</button>
+      <span class="feedback" id="fb-9-30"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-5"><p>与 x 轴交点：令 y = 0，−x + 2 = 0 → x = 2；与 y 轴交点：令 x = 0，y = 2。三角形面积 = (1/2)×2×2 = 2。</p></div>
+    <div class="ans-box" id="a4-5"><p><strong>答案：面积 = 2。</strong>与 x 轴交于 (2, 0)，与 y 轴交于 (0, 2)。三角形为直角三角形，面积 = (1/2)×2×2 = 2。</p></div>
+  </div>
+
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+function checkTF(btn, isCorrect, qid) {
+  const container = document.getElementById('tf-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.tf-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function checkSingle(btn, isCorrect, qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.opt-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function toggleMultiOpt(btn) {
+  btn.classList.toggle('selected');
+}
+function checkMulti(qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  const opts = container.querySelectorAll('.opt-btn');
+  let allCorrect = true;
+  opts.forEach(o => {
+    o.style.pointerEvents = 'none';
+    const isCorrect = o.dataset.correct === 'true';
+    const isSelected = o.classList.contains('selected');
+    if (isCorrect && isSelected) o.classList.add('correct');
+    else if (!isCorrect && isSelected) { o.classList.add('wrong'); allCorrect = false; }
+    else if (isCorrect && !isSelected) { o.classList.add('correct'); allCorrect = false; }
+  });
+  const fb = document.getElementById('fb-' + qid);
+  if (fb) { fb.textContent = allCorrect ? '✓ 正确' : '✗ 错误'; fb.className = 'feedback show ' + (allCorrect ? 'correct-fb' : 'wrong-fb'); }
+}
+function checkFill(qid, correctAns) {
+  const container = document.getElementById('fill-' + qid);
+  if (!container || container.dataset.done) return;
+  const input = document.getElementById('inp-' + qid);
+  const fb = document.getElementById('fb-' + qid);
+  const userAns = input.value.trim();
+  if (!userAns) return;
+  container.dataset.done = '1';
+  input.disabled = true;
+  const checkBtn = container.querySelector('.check-btn');
+  if (checkBtn) checkBtn.style.display = 'none';
+  const normalized = userAns.replace(/\s+/g, '');
+  const normalizedCorrect = correctAns.replace(/\s+/g, '');
+  if (normalized === normalizedCorrect) {
+    input.style.borderColor = '#4caf50';
+    input.style.background = '#e8f5e9';
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    input.style.borderColor = '#f44336';
+    input.style.background = '#ffebee';
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+</script>
+</body>
+</html>

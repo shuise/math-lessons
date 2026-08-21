@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模拟考试 — 阶段四 — 自学课件</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../lessons/style.css">
+<style>
+  :root { --accent: #2e7d32; }
+  .exam-header { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .section-title { color: #2e7d32; font-size: 18px; font-weight: 700; margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #c8e6c9; }
+  .q-item { padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+  .q-item:last-child { border-bottom: none; }
+  .btn-row { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-hint, .btn-ans { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; }
+  .btn-hint:hover { background: #fff3e0; border-color: #ff9800; }
+  .btn-ans:hover { background: #e8f5e9; border-color: #4caf50; }
+  .hint-box, .ans-box { display: none; margin-top: 8px; padding: 10px 14px; border-radius: 6px; font-size: 14px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .hint-box { background: #fff8e1; border-left: 3px solid #ff9800; }
+  .ans-box { background: #e8f5e9; border-left: 3px solid #4caf50; }
+  .opt-row { margin: 4px 0; padding-left: 8px; }
+  .opt { display: inline-block; min-width: 24px; font-weight: 600; }
+  @media (max-width: 720px) {
+    article { padding-bottom: 100px !important; }
+    article { padding: 20px 12px 100px 12px !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    .q-item { padding: 10px 0; }
+    .exam-header { padding: 12px 14px; margin: 12px 0; }
+  }
+  .opt-btn { display: inline-block; padding: 6px 16px; margin: 3px 4px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .opt-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .opt-btn.selected { border-color: #1976d2; background: #e3f2fd; }
+  .opt-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .opt-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .tf-btn { display: inline-block; padding: 6px 20px; margin: 3px 6px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .tf-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .tf-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .tf-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .fill-input { padding: 6px 12px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 15px; width: 160px; }
+  .fill-input:focus { outline: none; border-color: #1976d2; }
+  .check-btn { padding: 6px 16px; border: 1px solid #1976d2; border-radius: 6px; background: #1976d2; color: #fff; font-size: 13px; cursor: pointer; margin-left: 8px; }
+  .check-btn:hover { background: #1565c0; }
+  .feedback { display: none; margin-left: 8px; font-size: 14px; font-weight: 600; }
+  .feedback.show { display: inline; }
+  .feedback.correct-fb { color: #2e7d32; }
+  .feedback.wrong-fb { color: #c62828; }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="../index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="../natural-numbers.html">课件1</a>、<a href="../fractions.html">课件2</a>、<a href="../negative-numbers.html">课件3</a>、<a href="../algebraic-expressions.html">课件4</a>、<a href="../polynomials.html">课件5</a>、<a href="../factoring-rational.html">课件6</a>、<a href="../linear-equations.html">课件7</a>、<a href="../fractional-equations.html">课件8</a>、<a href="../quadratic-equations.html">课件9</a>、<a href="../real-numbers.html">课件10</a>、<a href="../quadratic-radicals.html">课件11</a></p>
+  <h1>模拟考试 — 阶段四：实数与根式</h1>
+  <div class="exam-header">
+    <p>⏱ 时间：30 分钟 | ✅ 判断题 10 题 | 🔘 单选题 10 题 | ☑️ 多选题 5 题 | ✏️ 其他题型 5 题 | 共 30 题</p>
+  </div>
+
+  <p class="section-title">一、判断题（每题 1 分，共 10 分）</p>
+
+  <div class="q-item"><p><strong>1.</strong> 有理数和无理数统称为实数。</p>
+    <div id="tf-6-1">
+      <button class="tf-btn" onclick="checkTF(this, true, '6-1')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '6-1')">错误</button>
+      <span class="feedback" id="fb-6-1"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-1"><p>回顾实数的定义：实数 = 有理数 ∪ 无理数，这是实数的基本分类。</p></div>
+    <div class="ans-box" id="a1-1"><p><strong>✅ 正确。</strong>实数由有理数和无理数两大部分组成，有理数包括整数和分数，无理数是无限不循环小数。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>2.</strong> √4 是无理数。</p>
+    <div id="tf-6-2">
+      <button class="tf-btn" onclick="checkTF(this, false, '6-2')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '6-2')">错误</button>
+      <span class="feedback" id="fb-6-2"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-2"><p>先计算 √4 的值，再判断它属于有理数还是无理数。注意：带根号的数不一定是无理数。</p></div>
+    <div class="ans-box" id="a1-2"><p><strong>❌ 错误。</strong>√4 = 2，2 是整数，属于有理数。只有开不尽的根式才是无理数，如 √2、√3 等。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>3.</strong> 无限小数都是无理数。</p>
+    <div id="tf-6-3">
+      <button class="tf-btn" onclick="checkTF(this, false, '6-3')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '6-3')">错误</button>
+      <span class="feedback" id="fb-6-3"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-3"><p>无限小数分为无限循环小数和无限不循环小数。想一想：1/3 = 0.333… 是什么数？</p></div>
+    <div class="ans-box" id="a1-3"><p><strong>❌ 错误。</strong>无限循环小数是有理数（如 0.333… = 1/3），只有无限<strong>不循环</strong>小数才是无理数。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>4.</strong> √(a²) = a 对任意实数 a 都成立。</p>
+    <div id="tf-6-4">
+      <button class="tf-btn" onclick="checkTF(this, false, '6-4')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '6-4')">错误</button>
+      <span class="feedback" id="fb-6-4"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-4"><p>取 a = −3 试一试：左边 √((−3)²) = √9 = 3，右边 = −3，相等吗？</p></div>
+    <div class="ans-box" id="a1-4"><p><strong>❌ 错误。</strong>正确公式是 √(a²) = |a|。当 a ≥ 0 时 √(a²) = a；当 a &lt; 0 时 √(a²) = −a。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>5.</strong> 两个无理数的和一定是无理数。</p>
+    <div id="tf-6-5">
+      <button class="tf-btn" onclick="checkTF(this, false, '6-5')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '6-5')">错误</button>
+      <span class="feedback" id="fb-6-5"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-5"><p>找反例：√2 和 −√2 都是无理数，它们的和是多少？</p></div>
+    <div class="ans-box" id="a1-5"><p><strong>❌ 错误。</strong>反例：√2 + (−√2) = 0，0 是有理数。两个无理数的和可能是有理数。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>6.</strong> √a · √b = √(ab) 对任意 a ≥ 0, b ≥ 0 成立。</p>
+    <div id="tf-6-6">
+      <button class="tf-btn" onclick="checkTF(this, true, '6-6')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '6-6')">错误</button>
+      <span class="feedback" id="fb-6-6"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-6')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-6')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-6"><p>这是二次根式乘法的基本性质，前提是被开方数非负。</p></div>
+    <div class="ans-box" id="a1-6"><p><strong>✅ 正确。</strong>这是二次根式的乘法法则：√a · √b = √(ab)（a ≥ 0, b ≥ 0）。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>7.</strong> 数轴上每一个点都对应一个有理数。</p>
+    <div id="tf-6-7">
+      <button class="tf-btn" onclick="checkTF(this, false, '6-7')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '6-7')">错误</button>
+      <span class="feedback" id="fb-6-7"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-7')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-7')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-7"><p>想一想：能在数轴上找到 √2 对应的点吗？画一个边长为 1 的正方形，其对角线长就是 √2。</p></div>
+    <div class="ans-box" id="a1-7"><p><strong>❌ 错误。</strong>数轴上的点与<strong>实数</strong>一一对应，不只是有理数。无理数如 √2、π 也对应数轴上的点。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>8.</strong> 最简二次根式要求被开方数不含分母。</p>
+    <div id="tf-6-8">
+      <button class="tf-btn" onclick="checkTF(this, true, '6-8')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '6-8')">错误</button>
+      <span class="feedback" id="fb-6-8"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-8')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-8')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-8"><p>回忆最简二次根式的两个条件：①被开方数不含分母；②被开方数中不含能开得尽方的因数或因式。</p></div>
+    <div class="ans-box" id="a1-8"><p><strong>✅ 正确。</strong>最简二次根式满足两个条件：被开方数不含分母，且被开方数中不含能开得尽方的因数或因式。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>9.</strong> π 是有理数。</p>
+    <div id="tf-6-9">
+      <button class="tf-btn" onclick="checkTF(this, false, '6-9')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '6-9')">错误</button>
+      <span class="feedback" id="fb-6-9"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-9')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-9')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-9"><p>π 是无限不循环小数，不能用两个整数的比表示。它属于哪一类？</p></div>
+    <div class="ans-box" id="a1-9"><p><strong>❌ 错误。</strong>π ≈ 3.1415926… 是无限不循环小数，属于无理数。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>10.</strong> 同类二次根式是指被开方数相同的二次根式。</p>
+    <div id="tf-6-10">
+      <button class="tf-btn" onclick="checkTF(this, false, '6-10')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '6-10')">错误</button>
+      <span class="feedback" id="fb-6-10"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-10')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-10')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-10"><p>同类二次根式要先化成最简二次根式后再比较被开方数。比如 √8 和 √2 是同类吗？√8 = 2√2。</p></div>
+    <div class="ans-box" id="a1-10"><p><strong>❌ 错误。</strong>同类二次根式是指<strong>化成最简二次根式后</strong>被开方数相同的二次根式。如 √8 = 2√2 与 √2 是同类二次根式。</p></div>
+  </div>
+
+  <p class="section-title">二、单选题（每题 2 分，共 20 分）</p>
+
+  <div class="q-item"><p><strong>11.</strong> 下列各数中，是无理数的是（　）</p>
+    <div id="opt-6-11">
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-11')" data-correct="false">A. 3.14</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-11')" data-correct="false">B. 22/7</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '6-11')" data-correct="true">C. √3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-11')" data-correct="false">D. 0.3̇（0.333…）</button>
+      <span class="feedback" id="fb-6-11"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-1"><p>逐一判断：3.14 是有限小数（有理数）；22/7 是分数（有理数）；0.333… 是循环小数（有理数）；√3 开不尽，是无限不循环小数。</p></div>
+    <div class="ans-box" id="a2-1"><p><strong>答案：C。</strong>√3 是无理数。A 是有限小数，B 是分数，D 是循环小数，三者均为有理数。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>12.</strong> 化简 √48 的结果是（　）</p>
+    <div id="opt-6-12">
+      <button class="opt-btn" onclick="checkSingle(this, true, '6-12')" data-correct="true">A. 4√3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-12')" data-correct="false">B. 3√4</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-12')" data-correct="false">C. 2√12</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-12')" data-correct="false">D. 6√2</button>
+      <span class="feedback" id="fb-6-12"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-2"><p>将 48 分解质因数：48 = 16 × 3 = 4² × 3，所以 √48 = √(16 × 3) = √16 × √3 = 4√3。</p></div>
+    <div class="ans-box" id="a2-2"><p><strong>答案：A。</strong>√48 = √(16 × 3) = 4√3。B 写法不规范，C 不是最简（12 中还含 4），D 计算错误。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>13.</strong> 计算 √12 + √27 的结果是（　）</p>
+    <div id="opt-6-13">
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-13')" data-correct="false">A. √39</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '6-13')" data-correct="true">B. 5√3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-13')" data-correct="false">C. 15</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-13')" data-correct="false">D. 3√3</button>
+      <span class="feedback" id="fb-6-13"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-3"><p>先分别化简：√12 = 2√3，√27 = 3√3，合并同类二次根式：2√3 + 3√3 = 5√3。注意不能直接加被开方数。</p></div>
+    <div class="ans-box" id="a2-3"><p><strong>答案：B。</strong>√12 = 2√3，√27 = 3√3，相加得 5√3。A 错误地加了被开方数，C 和 D 计算错误。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>14.</strong> 化简 1/√2 的结果是（　）</p>
+    <div id="opt-6-14">
+      <button class="opt-btn" onclick="checkSingle(this, true, '6-14')" data-correct="true">A. √2/2</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-14')" data-correct="false">B. 2/√2</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-14')" data-correct="false">C. √2</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-14')" data-correct="false">D. 1/2</button>
+      <span class="feedback" id="fb-6-14"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-4"><p>分母有理化：分子分母同乘 √2，1/√2 = √2/(√2 × √2) = √2/2。</p></div>
+    <div class="ans-box" id="a2-4"><p><strong>答案：A。</strong>分母有理化：1/√2 = √2/2。这是最简形式。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>15.</strong> 计算 (√5 + √3)(√5 − √3) 的结果是（　）</p>
+    <div id="opt-6-15">
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-15')" data-correct="false">A. 8</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '6-15')" data-correct="true">B. 2</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-15')" data-correct="false">C. 2√15</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-15')" data-correct="false">D. 4</button>
+      <span class="feedback" id="fb-6-15"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-5"><p>利用平方差公式：(a + b)(a − b) = a² − b²。这里 a = √5，b = √3。</p></div>
+    <div class="ans-box" id="a2-5"><p><strong>答案：B。</strong>(√5 + √3)(√5 − √3) = (√5)² − (√3)² = 5 − 3 = 2。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>16.</strong> 下列二次根式中，与 √3 是同类二次根式的是（　）</p>
+    <div id="opt-6-16">
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-16')" data-correct="false">A. √18</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '6-16')" data-correct="true">B. √12</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-16')" data-correct="false">C. √24</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-16')" data-correct="false">D. √8</button>
+      <span class="feedback" id="fb-6-16"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-6')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-6')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-6"><p>先化简每个选项：√18 = 3√2，√12 = 2√3，√24 = 2√6，√8 = 2√2。找被开方数为 3 的。</p></div>
+    <div class="ans-box" id="a2-6"><p><strong>答案：B。</strong>√12 = 2√3，与 √3 的被开方数相同（最简形式），是同类二次根式。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>17.</strong> 若 √(x − 2) 有意义，则 x 的取值范围是（　）</p>
+    <div id="opt-6-17">
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-17')" data-correct="false">A. x &gt; 2</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '6-17')" data-correct="true">B. x ≥ 2</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-17')" data-correct="false">C. x &lt; 2</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-17')" data-correct="false">D. x ≤ 2</button>
+      <span class="feedback" id="fb-6-17"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-7')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-7')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-7"><p>二次根式有意义的条件是被开方数 ≥ 0，即 x − 2 ≥ 0，解出 x。</p></div>
+    <div class="ans-box" id="a2-7"><p><strong>答案：B。</strong>被开方数 x − 2 ≥ 0，解得 x ≥ 2。注意等号可以取到（√0 = 0 有意义）。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>18.</strong> 计算 √8 × √2 的结果是（　）</p>
+    <div id="opt-6-18">
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-18')" data-correct="false">A. √10</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '6-18')" data-correct="true">B. 4</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-18')" data-correct="false">C. √16</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-18')" data-correct="false">D. 2√2</button>
+      <span class="feedback" id="fb-6-18"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-8')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-8')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-8"><p>利用乘法法则：√8 × √2 = √(8 × 2) = √16 = 4。</p></div>
+    <div class="ans-box" id="a2-8"><p><strong>答案：B。</strong>√8 × √2 = √(8 × 2) = √16 = 4。C 不是最简结果，A 和 D 计算错误。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>19.</strong> 比较大小：3√2 和 2√3，正确的是（　）</p>
+    <div id="opt-6-19">
+      <button class="opt-btn" onclick="checkSingle(this, true, '6-19')" data-correct="true">A. 3√2 &gt; 2√3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-19')" data-correct="false">B. 3√2 = 2√3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-19')" data-correct="false">C. 3√2 &lt; 2√3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-19')" data-correct="false">D. 无法比较</button>
+      <span class="feedback" id="fb-6-19"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-9')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-9')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-9"><p>两边平方比较：(3√2)² = 9 × 2 = 18，(2√3)² = 4 × 3 = 12。因为 18 &gt; 12，且两数均为正，所以 3√2 &gt; 2√3。</p></div>
+    <div class="ans-box" id="a2-9"><p><strong>答案：A。</strong>(3√2)² = 18，(2√3)² = 12，18 &gt; 12，所以 3√2 &gt; 2√3。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>20.</strong> 化简 √(1/3) 的结果是（　）</p>
+    <div id="opt-6-20">
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-20')" data-correct="false">A. 1/3</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '6-20')" data-correct="true">B. √3/3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-20')" data-correct="false">C. 3/√3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '6-20')" data-correct="false">D. √3</button>
+      <span class="feedback" id="fb-6-20"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-10')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-10')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-10"><p>√(1/3) = √1/√3 = 1/√3，分母有理化：分子分母同乘 √3，得 √3/3。</p></div>
+    <div class="ans-box" id="a2-10"><p><strong>答案：B。</strong>√(1/3) = 1/√3 = √3/3。这是最简二次根式。</p></div>
+  </div>
+
+  <p class="section-title">三、多选题（每题 3 分，共 15 分）</p>
+
+  <div class="q-item"><p><strong>21.</strong> 下列计算正确的有（　）</p>
+    <div id="opt-6-21">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">A. √2 + √3 = √5</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. √2 × √3 = √6</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. √8 ÷ √2 = 2</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 3√2 − √2 = 2√2</button>
+      <button class="check-btn" onclick="checkMulti('6-21')">提交</button>
+      <span class="feedback" id="fb-6-21"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-1"><p>逐一检验：A 不能直接加被开方数；B 用乘法法则 √a·√b = √(ab)；C 用除法法则；D 合并同类二次根式。</p></div>
+    <div class="ans-box" id="a3-1"><p><strong>答案：BCD。</strong>A 错误，√2 + √3 ≠ √5（不能直接加被开方数）；B 正确，√2 × √3 = √6；C 正确，√8 ÷ √2 = √(8/2) = √4 = 2；D 正确，合并同类二次根式。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>22.</strong> 下列二次根式中，是最简二次根式的有（　）</p>
+    <div id="opt-6-22">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. √6</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">B. √12</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">C. √(1/2)</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. √15</button>
+      <button class="check-btn" onclick="checkMulti('6-22')">提交</button>
+      <span class="feedback" id="fb-6-22"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-2"><p>最简二次根式条件：①被开方数不含分母；②被开方数不含能开得尽方的因数。检查 B：12 = 4×3，含 4 可开方；C：含分母。</p></div>
+    <div class="ans-box" id="a3-2"><p><strong>答案：AD。</strong>√6 和 √15 的被开方数不含分母，也不含能开得尽方的因数，是最简二次根式。B 中 √12 = 2√3，C 中 √(1/2) = √2/2，均不是最简。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>23.</strong> 下列各组二次根式中，是同类二次根式的有（　）</p>
+    <div id="opt-6-23">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. √8 与 √18</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. √3 与 √(1/3)</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. √12 与 √27</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 2√5 与 3√5</button>
+      <button class="check-btn" onclick="checkMulti('6-23')">提交</button>
+      <span class="feedback" id="fb-6-23"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-3"><p>先化简再判断：A: √8 = 2√2，√18 = 3√2（同类）；B: √(1/3) = √3/3（同类）；C: √12 = 2√3，√27 = 3√3（同类）；D: 显然同类。</p></div>
+    <div class="ans-box" id="a3-3"><p><strong>答案：ABCD。</strong>A: √8 = 2√2，√18 = 3√2；B: √3 与 √(1/3) = √3/3；C: √12 = 2√3，√27 = 3√3；D: 2√5 与 3√5。四组化简后都是同类二次根式。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>24.</strong> 下列关于实数的说法中，正确的有（　）</p>
+    <div id="opt-6-24">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 实数包括有理数和无理数</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">B. 带根号的数一定是无理数</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 无理数都是无限小数</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 有理数都可以写成分数形式</button>
+      <button class="check-btn" onclick="checkMulti('6-24')">提交</button>
+      <span class="feedback" id="fb-6-24"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-4"><p>A 是实数定义；B 反例：√4 = 2 是有理数；C 无理数是无限不循环小数；D 有理数 = 整数/整数（分母不为 0）。</p></div>
+    <div class="ans-box" id="a3-4"><p><strong>答案：ACD。</strong>A 正确；B 错误，如 √4 = 2 是有理数；C 正确，无理数都是无限不循环小数；D 正确，有理数即分数形式。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>25.</strong> 下列运算中，结果正确的有（　）</p>
+    <div id="opt-6-25">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. (√3 + 1)² = 4 + 2√3</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">B. √(4 + 9) = √4 + √9</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. √(a²b) = a√b（a &gt; 0, b &gt; 0）</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 1/(√3 − 1) = (√3 + 1)/2</button>
+      <button class="check-btn" onclick="checkMulti('6-25')">提交</button>
+      <span class="feedback" id="fb-6-25"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-5"><p>A: (√3 + 1)² = 3 + 2√3 + 1 = 4 + 2√3 ✓；B: √(4 + 9) = √13 ≠ 2 + 3；C: √(a²b) = |a|√b = a√b（a &gt; 0）✓；D: 分母有理化：分子分母同乘 (√3 + 1)。</p></div>
+    <div class="ans-box" id="a3-5"><p><strong>答案：ACD。</strong>A 正确，用完全平方公式；B 错误，√(a+b) ≠ √a + √b；C 正确，a &gt; 0 时 √(a²) = a；D 正确，分母有理化得 (√3 + 1)/2。</p></div>
+  </div>
+
+  <p class="section-title">四、其他题型（每题 3 分，共 15 分）</p>
+
+  <div class="q-item"><p><strong>26.</strong> 化简：√75 − √48 + √(1/3)</p>
+    <div id="fill-6-26">
+      <input class="fill-input" id="inp-6-26" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('6-26', '4√3/3')">提交</button>
+      <span class="feedback" id="fb-6-26"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-1"><p>先逐个化简：√75 = 5√3，√48 = 4√3，√(1/3) = √3/3。然后合并同类二次根式。</p></div>
+    <div class="ans-box" id="a4-1"><p><strong>答案：4√3/3。</strong>√75 = 5√3，√48 = 4√3，√(1/3) = √3/3。原式 = 5√3 − 4√3 + √3/3 = √3 + √3/3 = 4√3/3。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>27.</strong> 分母有理化：2/(√5 − 1)</p>
+    <div id="fill-6-27">
+      <input class="fill-input" id="inp-6-27" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('6-27', '(√5+1)/2')">提交</button>
+      <span class="feedback" id="fb-6-27"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-2"><p>分子分母同乘分母的共轭式 (√5 + 1)，利用平方差公式：(√5 − 1)(√5 + 1) = 5 − 1 = 4。</p></div>
+    <div class="ans-box" id="a4-2"><p><strong>答案：(√5 + 1)/2。</strong>2/(√5 − 1) = 2(√5 + 1)/[(√5 − 1)(√5 + 1)] = 2(√5 + 1)/(5 − 1) = 2(√5 + 1)/4 = (√5 + 1)/2。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>28.</strong> 计算：(√6 + √2)(√6 − √2) + √27 ÷ √3</p>
+    <div id="fill-6-28">
+      <input class="fill-input" id="inp-6-28" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('6-28', '7')">提交</button>
+      <span class="feedback" id="fb-6-28"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-3"><p>分步计算：第一部分用平方差公式得 6 − 2 = 4；第二部分 √27 ÷ √3 = √9 = 3。最后相加。</p></div>
+    <div class="ans-box" id="a4-3"><p><strong>答案：7。</strong>(√6 + √2)(√6 − √2) = 6 − 2 = 4；√27 ÷ √3 = √(27/3) = √9 = 3；4 + 3 = 7。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>29.</strong> 已知 x = √3 + 1，求 x² − 2x + 1 的值。</p>
+    <div id="fill-6-29">
+      <input class="fill-input" id="inp-6-29" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('6-29', '3')">提交</button>
+      <span class="feedback" id="fb-6-29"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-4"><p>方法一：直接代入计算。方法二：注意到 x² − 2x + 1 = (x − 1)²，而 x = √3 + 1，所以 x − 1 = √3。</p></div>
+    <div class="ans-box" id="a4-4"><p><strong>答案：3。</strong>x² − 2x + 1 = (x − 1)² = (√3 + 1 − 1)² = (√3)² = 3。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>30.</strong> 化简：√(9 − 4√5)</p>
+    <div id="fill-6-30">
+      <input class="fill-input" id="inp-6-30" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('6-30', '√5-2')">提交</button>
+      <span class="feedback" id="fb-6-30"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-5"><p>设 √(9 − 4√5) = √a − √b（a &gt; b &gt; 0），平方得 a + b − 2√(ab) = 9 − 4√5。比较得 a + b = 9，2√(ab) = 4√5，即 ab = 20。解出 a = 5，b = 4。</p></div>
+    <div class="ans-box" id="a4-5"><p><strong>答案：√5 − 2。</strong>设 √(9 − 4√5) = √a − √b，平方得 a + b − 2√(ab) = 9 − 4√5。a + b = 9，ab = 20，解得 a = 5，b = 4。故原式 = √5 − √4 = √5 − 2。</p></div>
+  </div>
+
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+function checkTF(btn, isCorrect, qid) {
+  const container = document.getElementById('tf-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.tf-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function checkSingle(btn, isCorrect, qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.opt-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function toggleMultiOpt(btn) {
+  btn.classList.toggle('selected');
+}
+function checkMulti(qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  const opts = container.querySelectorAll('.opt-btn');
+  let allCorrect = true;
+  opts.forEach(o => {
+    o.style.pointerEvents = 'none';
+    const isCorrect = o.dataset.correct === 'true';
+    const isSelected = o.classList.contains('selected');
+    if (isCorrect && isSelected) o.classList.add('correct');
+    else if (!isCorrect && isSelected) { o.classList.add('wrong'); allCorrect = false; }
+    else if (isCorrect && !isSelected) { o.classList.add('correct'); allCorrect = false; }
+  });
+  const fb = document.getElementById('fb-' + qid);
+  if (fb) { fb.textContent = allCorrect ? '✓ 正确' : '✗ 错误'; fb.className = 'feedback show ' + (allCorrect ? 'correct-fb' : 'wrong-fb'); }
+}
+function checkFill(qid, correctAns) {
+  const container = document.getElementById('fill-' + qid);
+  if (!container || container.dataset.done) return;
+  const input = document.getElementById('inp-' + qid);
+  const fb = document.getElementById('fb-' + qid);
+  const userAns = input.value.trim();
+  if (!userAns) return;
+  container.dataset.done = '1';
+  input.disabled = true;
+  const checkBtn = container.querySelector('.check-btn');
+  if (checkBtn) checkBtn.style.display = 'none';
+  const normalized = userAns.replace(/\s+/g, '');
+  const normalizedCorrect = correctAns.replace(/\s+/g, '');
+  if (normalized === normalizedCorrect) {
+    input.style.borderColor = '#4caf50';
+    input.style.background = '#e8f5e9';
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    input.style.borderColor = '#f44336';
+    input.style.background = '#ffebee';
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+</script>
+</body>
+</html>

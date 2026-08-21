@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>奥数挑战 — 阶段四 — 自学课件</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../lessons/style.css">
+<style>
+  :root { --accent: #c62828; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .problem { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  @media (max-width: 720px) {
+    article { padding-bottom: 100px !important; }
+    article { padding: 20px 12px 100px 12px !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .problem { padding: 12px 14px; margin: 12px 0; }
+  }
+
+  .fill-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .fill-input { padding: 6px 12px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 15px; width: 180px; }
+  .fill-input:focus { outline: none; border-color: #1976d2; }
+  .check-btn { padding: 6px 16px; border: 1px solid #1976d2; border-radius: 6px; background: #1976d2; color: #fff; font-size: 13px; cursor: pointer; }
+  .check-btn:hover { background: #1565c0; }
+  .feedback { display: none; margin-left: 8px; font-size: 14px; font-weight: 600; }
+  .feedback.show { display: inline; }
+  .feedback.correct-fb { color: #2e7d32; }
+  .feedback.wrong-fb { color: #c62828; }
+  
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="../index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="../geometry-basics.html">课件 10（几何图形）</a>、<a href="../lines-rays-segments.html">课件 11（直线、射线、线段）</a>、<a href="../angles.html">课件 12（角）</a></p>
+  <h1>奥数挑战 — 阶段四：几何图形初步</h1>
+  <div class="origin">
+    <p>本阶段围绕「几何图形、直线/射线/线段、角」出题，考察线段计数、角度计算、几何图形的空间想象能力等。每题都有思路提示和详细答案，建议先独立思考，实在想不出再看提示。</p>
+  </div>
+
+  <!-- Problem 1 -->
+  <div class="problem">
+    <p><strong>1.</strong> 平面上有 6 个点，任意三点不共线。连接任意两点得到一条线段，问最多能画出多少条线段？</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-1" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(1, \'180\')">提交</button><span class="feedback" id="fb-1"></span></div><button class="btn-sm" onclick="toggleHint(\'h1\')">💡 思路提示</button>
+    <div class="hint-box" id="h1"><p>每两点确定一条线段，就是组合数问题：从 6 个点中任选 2 个点，即 C(6, 2)。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a1')">✅ 查看答案</button>
+    <div class="ans-box" id="a1"><p>从 6 个点中任选 2 个点，每条线段对应一个选择。<br>线段数 = C(6, 2) = 6 × 5 / 2 = <strong>15 条</strong></p></div>
+  </div>
+
+  <!-- Problem 2 -->
+  <div class="problem">
+    <p><strong>2.</strong> 一个角的补角比它的余角的 3 倍还大 10°，求这个角。</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-2" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(2, \'45\')">提交</button><span class="feedback" id="fb-2"></span></div><button class="btn-sm" onclick="toggleHint(\'h2\')">💡 思路提示</button>
+    <div class="hint-box" id="h2"><p>补角比余角总是大 90°（因为补角 = 180°−角，余角 = 90°−角，相减得 90°）。已知补角 = 3×余角 + 10°，所以补角比余角大 2×余角 + 10°。这个差就是 90°。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a2')">✅ 查看答案</button>
+    <div class="ans-box" id="a2"><p>补角比余角总是大 90°（补角 = 180°−角，余角 = 90°−角，相减得 90°）。<br>已知补角 = 3 × 余角 + 10°。<br>所以补角 − 余角 = (3 × 余角 + 10°) − 余角 = 2 × 余角 + 10°。<br>这个差就是 90°：2 × 余角 + 10° = 90°。<br>2 × 余角 = 80°，余角 = 40°。<br>这个角 = 90° − 40° = <strong>50°</strong>。</p></div>
+  </div>
+
+  <!-- Problem 3 -->
+  <div class="problem">
+    <p><strong>3.</strong> 平面上有 5 条直线，任意两条都不平行，任意三条都不共点。它们最多能把平面分成多少部分？</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-3" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(3, \'60\')">提交</button><span class="feedback" id="fb-3"></span></div><button class="btn-sm" onclick="toggleHint(\'h3\')">💡 思路提示</button>
+    <div class="hint-box" id="h3"><p>n 条直线最多分平面数公式：1 + n(n + 1)/2。也可以递推：每增加一条直线，新增的区域数等于该直线被已有直线分成的段数。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a3')">✅ 查看答案</button>
+    <div class="ans-box" id="a3"><p>n 条直线最多分平面数 = 1 + n(n + 1)/2<br>n = 5 时：1 + 5 × 6 / 2 = 1 + 15 = <strong>16 部分</strong></p></div>
+  </div>
+
+  <!-- Problem 4 -->
+  <div class="problem">
+    <p><strong>4.</strong> 已知 ∠AOB = 80°，OC 是 ∠AOB 内部的一条射线，且 ∠AOC = 30°。求 ∠BOC 的度数。</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-4" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(4, \'90\')">提交</button><span class="feedback" id="fb-4"></span></div><button class="btn-sm" onclick="toggleHint(\'h4\')">💡 思路提示</button>
+    <div class="hint-box" id="h4"><p>OC 在 ∠AOB 内部，所以 ∠BOC = ∠AOB − ∠AOC。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a4')">✅ 查看答案</button>
+    <div class="ans-box" id="a4"><p>因为 OC 在 ∠AOB 内部，所以：<br>∠BOC = ∠AOB − ∠AOC = 80° − 30° = <strong>50°</strong></p></div>
+  </div>
+
+  <!-- Problem 5 -->
+  <div class="problem">
+    <p><strong>5.</strong> 一个正方体有 6 个面，每个面都是正方形。如果沿某些棱剪开，把这个正方体展开成一个平面图形（展开图），有多少种不同的展开图？（旋转重合的算同一种）</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-5" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(5, \'30\')">提交</button><span class="feedback" id="fb-5"></span></div><button class="btn-sm" onclick="toggleHint(\'h5\')">💡 思路提示</button>
+    <div class="hint-box" id="h5"><p>正方体展开图有「一四一」型（6 种）、「二三一」型（3 种）、「二二二」型（1 种）、「三三」型（1 种），共 11 种。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a5')">✅ 查看答案</button>
+    <div class="ans-box" id="a5"><p>正方体展开图共有 11 种，分为四类：<br>「一四一」型：6 种（中间 4 个，上下各 1 个）<br>「二三一」型：3 种（中间 3 个，两边分别 2 个和 1 个）<br>「二二二」型：1 种（三组各 2 个）<br>「三三」型：1 种（两组各 3 个）<br><strong>答案：11 种</strong></p></div>
+  </div>
+
+  <!-- Problem 6 -->
+  <div class="problem">
+    <p><strong>6.</strong> 时钟在 3:00 到 4:00 之间，什么时候时针和分针重合？</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-6" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(6, \'120\')">提交</button><span class="feedback" id="fb-6"></span></div><button class="btn-sm" onclick="toggleHint(\'h6\')">💡 思路提示</button>
+    <div class="hint-box" id="h6"><p>3:00 时，时针指向 90°，分针指向 0°，两针相差 90°。分针每分钟走 6°，时针每分钟走 0.5°，分针每分钟比时针多走 5.5°。用相差的角度除以速度差，得到追上的时间。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a6')">✅ 查看答案</button>
+    <div class="ans-box" id="a6"><p>3:00 时，时针在 90° 位置，分针在 0° 位置，两针相差 90°。<br>分针每分钟走 6°，时针每分钟走 0.5°。<br>分针每分钟比时针多走：6° − 0.5° = 5.5°。<br>追上需要的时间：90° ÷ 5.5° = 90 ÷ (11/2) = 180/11 分钟。<br>180/11 ≈ 16.36 分钟，即约 16 分 22 秒。<br><strong>答案：3 点 180/11 分（约 3 点 16 分 22 秒）</strong></p></div>
+  </div>
+
+  <!-- Problem 7 -->
+  <div class="problem">
+    <p><strong>7.</strong> 已知线段 AB = 10 cm，C 是 AB 上一点，且 AC : CB = 2 : 3。求 AC 和 CB 的长度。</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-7" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(7, \'垂直\')">提交</button><span class="feedback" id="fb-7"></span></div><button class="btn-sm" onclick="toggleHint(\'h7\')">💡 思路提示</button>
+    <div class="hint-box" id="h7"><p>AC : CB = 2 : 3，所以 AC = 2/(2+3) × AB，CB = 3/(2+3) × AB。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a7')">✅ 查看答案</button>
+    <div class="ans-box" id="a7"><p>AC : CB = 2 : 3，总份数 = 2 + 3 = 5。<br>AC = 10 × 2/5 = <strong>4 cm</strong><br>CB = 10 × 3/5 = <strong>6 cm</strong></p></div>
+  </div>
+
+  <!-- Problem 8 -->
+  <div class="problem">
+    <p><strong>8.</strong> 三个角 ∠1、∠2、∠3 满足：∠1 与 ∠2 互余，∠2 与 ∠3 互补，且 ∠1 = 25°。求 ∠3 的度数。</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-8" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(8, \'平行\')">提交</button><span class="feedback" id="fb-8"></span></div><button class="btn-sm" onclick="toggleHint(\'h8\')">💡 思路提示</button>
+    <div class="hint-box" id="h8"><p>互余：和为 90°；互补：和为 180°。先由 ∠1 求出 ∠2，再由 ∠2 求出 ∠3。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a8')">✅ 查看答案</button>
+    <div class="ans-box" id="a8"><p>∠1 与 ∠2 互余：∠1 + ∠2 = 90° → 25° + ∠2 = 90° → ∠2 = 65°<br>∠2 与 ∠3 互补：∠2 + ∠3 = 180° → 65° + ∠3 = 180° → ∠3 = <strong>115°</strong></p></div>
+  </div>
+
+  <!-- Problem 9 -->
+  <div class="problem">
+    <p><strong>9.</strong> 平面上有 n 个点，任意三点不共线。连接任意两点得到一条线段，共有 28 条线段。求 n 是几。</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-9" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(9, \'60\')">提交</button><span class="feedback" id="fb-9"></span></div><button class="btn-sm" onclick="toggleHint(\'h9\')">💡 思路提示</button>
+    <div class="hint-box" id="h9"><p>从 n 个点中选 2 个点，线段数 = n × (n−1) ÷ 2 = 28。所以 n × (n−1) = 56。两个连续自然数相乘得 56，是哪两个数？</p></div>
+    <button class="btn-sm" onclick="toggleAns('a9')">✅ 查看答案</button>
+    <div class="ans-box" id="a9"><p>线段数 = n × (n−1) ÷ 2 = 28<br>所以 n × (n−1) = 56。<br>两个连续自然数相乘得 56：<br>6 × 7 = 42（太小），7 × 8 = 56（正好），8 × 9 = 72（太大）。<br>所以 n = 8，n−1 = 7。<br><strong>答案：n = 8</strong></p></div>
+  </div>
+
+  <!-- Problem 10 -->
+  <div class="problem">
+    <p><strong>10.</strong> 一个角是 45°，用放大 3 倍的放大镜看这个角，看到的角度是多少度？为什么？</p>
+    <div class="fill-row"><input type="text" class="fill-input" id="inp-10" placeholder="输入你的答案"><button class="check-btn" onclick="checkOlympiad(10, \'120\')">提交</button><span class="feedback" id="fb-10"></span></div><button class="btn-sm" onclick="toggleHint(\'h10\')">💡 思路提示</button>
+    <div class="hint-box" id="h10"><p>角度的大小由两条边的张开程度决定，与边的长度无关。放大镜放大的是边长，不改变张开程度。</p></div>
+    <button class="btn-sm" onclick="toggleAns('a10')">✅ 查看答案</button>
+    <div class="ans-box" id="a10"><p>放大镜看到的角度仍然是 <strong>45°</strong>。<br>原因：角度的大小由两条边张开的程度决定，与边的长度无关。放大镜只放大图形的边长（线性尺寸），不会改变两边之间的夹角大小。角的度数是两边方向差的度量，不受长度变化的影响。</p></div>
+  </div>
+</article>
+<script>
+function toggleHint(id) {
+  var el = document.getElementById(id);
+  el.classList.toggle('show');
+}
+function toggleAns(id) {
+  var el = document.getElementById(id);
+  el.classList.toggle('show');
+}
+</script>
+
+<script>
+function checkOlympiad(qid, correctAns) {
+  const inp = document.getElementById('inp-' + qid);
+  const fb = document.getElementById('fb-' + qid);
+  if (!inp || !fb) return;
+  const userAns = inp.value.trim();
+  if (!userAns) { fb.textContent = '请输入答案'; fb.className = 'feedback show wrong-fb'; return; }
+  
+  // 灵活比较：去掉空格，统一大小写
+  const normalize = s => s.replace(/\s+/g, '').toLowerCase();
+  const u = normalize(userAns);
+  const c = normalize(correctAns);
+  
+  // 尝试多种比较方式
+  let isCorrect = false;
+  // 1. 完全相同
+  if (u === c) isCorrect = true;
+  // 2. 数值比较（尝试转为浮点数）
+  if (!isCorrect) {
+    const un = parseFloat(u);
+    const cn = parseFloat(c);
+    if (!isNaN(un) && !isNaN(cn) && Math.abs(un - cn) < 0.0001) isCorrect = true;
+  }
+  // 3. 分数比较 (如 9/10)
+  if (!isCorrect) {
+    const parts = u.split('/');
+    if (parts.length === 2) {
+      const num = parseFloat(parts[0]), den = parseFloat(parts[1]);
+      if (!isNaN(num) && !isNaN(den) && den !== 0) {
+        const val = num / den;
+        const cn = parseFloat(c);
+        if (!isNaN(cn) && Math.abs(val - cn) < 0.0001) isCorrect = true;
+      }
+    }
+    const cparts = c.split('/');
+    if (!isCorrect && cparts.length === 2) {
+      const cn = parseFloat(cparts[0]) / parseFloat(cparts[1]);
+      const un = parseFloat(u);
+      if (!isNaN(un) && !isNaN(cn) && Math.abs(un - cn) < 0.0001) isCorrect = true;
+    }
+  }
+  // 4. 包含检查 (如 "5/8" 在 "5/8更大" 中)
+  if (!isCorrect && (u.includes(c) || c.includes(u))) isCorrect = true;
+  
+  if (isCorrect) {
+    fb.textContent = '✓ 正确！';
+    fb.className = 'feedback show correct-fb';
+    inp.style.borderColor = '#4caf50';
+  } else {
+    fb.textContent = '✗ 不对，再想想';
+    fb.className = 'feedback show wrong-fb';
+    inp.style.borderColor = '#f44336';
+  }
+}
+</script>
+</body>
+</html>

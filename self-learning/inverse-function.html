@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>反比例函数 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>↗</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #e65100; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed #e65100; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  .btn-sm.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .graph-svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+  .compare-box { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin: 16px 0; }
+  .compare-box .card { flex: 1; min-width: 220px; background: #fff; border: 2px solid #e0e0e0; border-radius: 10px; padding: 16px; text-align: center; }
+  .compare-box .card .card-title { font-weight: bold; font-size: 15px; color: var(--accent); margin-bottom: 8px; }
+  .compare-box .card svg { max-width: 100%; height: auto; }
+  @media (max-width: 720px) {
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+    .compare-box { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./linear-function.html">课件 24（一次函数）</a></p>
+  <h1>反比例函数</h1>
+
+  <h2>起源：为什么需要研究"反着变"的关系？</h2>
+  <div class="origin">
+    <p>在上一次课中，我们学了一次函数 y = kx + b。它的特点是：<strong>x 越大，y 也跟着越大（或越小）</strong>，而且变化是均匀的——每增加 1 个 x，y 就固定地增加 k。这种关系叫做"正比例关系"的推广。</p>
+    <p>但在生活中，还有很多关系是<strong>反着来的</strong>：一个量变大，另一个量反而变小，而且变得<strong>不均匀</strong>。</p>
+    <p>比如：你有一笔固定的钱去买笔，<strong>笔越贵，能买到的数量就越少</strong>。又比如：走一段固定的路程，<strong>速度越快，花的时间就越短</strong>。再比如：一个长方形的面积固定不变，<strong>长变得越大，宽就变得越小</strong>。</p>
+    <p>这些关系中，两个量的<strong>乘积</strong>总是一个固定的数。古希腊数学家早就在几何中注意到这种关系（比如矩形面积固定时，长和宽的关系），但直到 17 世纪笛卡儿坐标系诞生后，人们才画出了它的图象——竟然是一条<strong>弯弯的、分成两支的曲线</strong>，叫做"双曲线"。</p>
+    <p>这不是一条直线，而是一条<strong>永远不会碰到坐标轴</strong>的曲线。这个奇怪的性质，让反比例函数成为初中数学里最有趣也最需要想象力的函数之一。</p>
+  </div>
+
+  <h2>一、什么是反比例关系？——从生活例子出发</h2>
+  <div class="story">
+    <p>先看几个生活中的例子，感受一下"反比例"是什么感觉：</p>
+
+    <div class="example">
+      <strong>例 1：买笔问题</strong><br>
+      你带了 60 元去买笔。<br>
+      • 如果笔 2 元一支，你能买 60 ÷ 2 = <strong>30</strong> 支<br>
+      • 如果笔 5 元一支，你能买 60 ÷ 5 = <strong>12</strong> 支<br>
+      • 如果笔 10 元一支，你能买 60 ÷ 10 = <strong>6</strong> 支<br>
+      发现规律：<strong>单价 × 数量 = 60</strong>，永远是 60 元！<br>
+      设单价为 x（元），数量为 y（支），则 y = 60 / x。
+    </div>
+
+    <div class="example">
+      <strong>例 2：行程问题</strong><br>
+      从家到学校有 1200 米。<br>
+      • 如果每分钟走 60 米，需要 1200 ÷ 60 = <strong>20</strong> 分钟<br>
+      • 如果每分钟走 100 米，需要 1200 ÷ 100 = <strong>12</strong> 分钟<br>
+      • 如果每分钟走 200 米，需要 1200 ÷ 200 = <strong>6</strong> 分钟<br>
+      发现规律：<strong>速度 × 时间 = 1200</strong>，永远是 1200 米！<br>
+      设速度为 x（米/分），时间为 y（分），则 y = 1200 / x。
+    </div>
+
+    <div class="key">
+      <p><strong>核心发现：</strong>两个量 x 和 y，如果它们的<strong>乘积</strong>总是一个固定的数（记作 k），即 <strong>x · y = k</strong>（k ≠ 0），我们就说 x 和 y 成<strong>反比例关系</strong>。x 越大，y 越小；x 越小，y 越大。</p>
+    </div>
+  </div>
+
+  <h2>二、反比例函数的概念与定义</h2>
+  <div class="story">
+    <div class="formula">
+      <p><strong>反比例函数：</strong><span style="font-size:1.3em;">y = <span style="display:inline-block;text-align:center;line-height:1.2;"><span style="border-bottom:1.5px solid #333;">k</span><br><span style="font-size:0.8em;">x</span></span></span>（k 是常数，k ≠ 0）</p>
+      <p>k 叫做<strong>比例系数</strong>。x 不能等于 0（因为分母不能为 0）。</p>
+    </div>
+
+    <div class="key">
+      <p><strong>两种等价形式：</strong></p>
+      <ul>
+        <li>① y = k / x —— 最常见的写法</li>
+        <li>② x · y = k —— 乘积形式，更能看出"反比例"的本质</li>
+        <li>③ y = k · x<sup>−1</sup> —— 用负指数表示（以后会学到），强调 x 在分母上</li>
+      </ul>
+      <p><strong>注意：</strong>x 不能为 0！因为分母不能为 0，所以图象永远不会碰到 y 轴。</p>
+    </div>
+
+    <h3>自变量的取值范围</h3>
+    <div class="example">
+      <p>对于 y = k / x：</p>
+      <p>• <strong>x ≠ 0</strong>（分母不为 0，这是铁律）</p>
+      <p>• 除此之外，x 可以取任何实数</p>
+      <p>• 同样，y 也永远不等于 0（因为 k ≠ 0，所以 k / x 永远不等于 0）</p>
+      <p>• 这意味着：<strong>图象永远不会碰到 x 轴，也永远不会碰到 y 轴</strong></p>
+    </div>
+
+    <h3>一次函数 vs 反比例函数：对比</h3>
+    <table>
+      <tr><th></th><th>一次函数 y = kx + b</th><th>反比例函数 y = k / x</th></tr>
+      <tr><td>x 的位置</td><td>在分子上（一次方）</td><td>在<strong>分母</strong>上</td></tr>
+      <tr><td>x 能否为 0</td><td>可以</td><td><strong>不可以</strong></td></tr>
+      <tr><td>图象形状</td><td>一条直线</td><td>两条弯弯的曲线（<strong>双曲线</strong>）</td></tr>
+      <tr><td>变化规律</td><td>均匀变化</td><td><strong>不均匀</strong>变化</td></tr>
+      <tr><td>是否过原点</td><td>可能过（b=0 时）</td><td><strong>永不过</strong>原点</td></tr>
+      <tr><td>与坐标轴的关系</td><td>会与坐标轴相交</td><td><strong>永不</strong>与坐标轴相交</td></tr>
+    </table>
+
+    <div class="example">
+      <strong>判断：下列函数是不是反比例函数？</strong><br>
+      • y = 3 / x → 是 ✓（k = 3）<br>
+      • y = −2 / x → 是 ✓（k = −2）<br>
+      • y = 1 / (x + 1) → 不是 ✗（分母中有 x + 1，不是纯 x）<br>
+      • y = x / 3 → 不是 ✗（x 在分子上，这是一次函数 y = (1/3)x）<br>
+      • xy = 5 → 是 ✓（写成 y = 5 / x）
+    </div>
+  </div>
+
+  <h2>三、图象：双曲线——两支永远不碰坐标轴的曲线</h2>
+  <div class="story">
+    <p>反比例函数 y = k / x 的图象叫做<strong>双曲线</strong>。它和我们之前见过的直线完全不同——它由<strong>两条分开的、弯弯的曲线</strong>组成，这两条曲线叫做"两支"。</p>
+
+    <div class="key">
+      <p><strong>双曲线的核心特征：</strong></p>
+      <ul>
+        <li>由<strong>两个分支</strong>组成，分别位于 k 的正负号决定的象限中</li>
+        <li><strong>关于原点对称</strong>：如果你把图象绕原点旋转 180°，它会和原来的图象完全重合</li>
+        <li>两支曲线<strong>永远不碰到</strong> x 轴和 y 轴（x 轴和 y 轴叫做"渐近线"）</li>
+        <li>曲线会无限靠近坐标轴，但永远不会真正碰到——就像你永远在接近终点，但永远到不了</li>
+      </ul>
+    </div>
+
+    <h3>k > 0 时：图象在第一、三象限</h3>
+    <p>当 k 是正数时，x 和 y 同号（都正或都负），所以图象在第一象限（x > 0, y > 0）和第三象限（x < 0, y < 0）。</p>
+
+    <h3>k < 0 时：图象在第二、四象限</h3>
+    <p>当 k 是负数时，x 和 y 异号，所以图象在第二象限（x < 0, y > 0）和第四象限（x > 0, y < 0）。</p>
+
+    <h3>交互图：点击不同 k 值，观察双曲线如何变化</h3>
+    <div style="text-align:center;margin-bottom:8px;font-size:14px;color:#888;">点击不同 k 值，观察双曲线在哪两个象限 ↓</div>
+    <div style="text-align:center;margin:8px 0;">
+      <button onclick="setK(6)" class="btn-sm" id="bk6">k = 6</button>
+      <button onclick="setK(3)" class="btn-sm active" id="bk3">k = 3</button>
+      <button onclick="setK(1)" class="btn-sm" id="bk1">k = 1</button>
+      <button onclick="setK(0.5)" class="btn-sm" id="bk05">k = 0.5</button>
+      <button onclick="setK(-1)" class="btn-sm" id="bkm1">k = −1</button>
+      <button onclick="setK(-3)" class="btn-sm" id="bkm3">k = −3</button>
+      <button onclick="setK(-6)" class="btn-sm" id="bkm6">k = −6</button>
+    </div>
+    <svg viewBox="0 0 520 480" class="graph-svg" id="svgK">
+      <defs>
+        <marker id="arrowK" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#555"/>
+        </marker>
+      </defs>
+      <!-- 坐标轴 -->
+      <line x1="60" y1="240" x2="470" y2="240" stroke="#555" stroke-width="1.5" marker-end="url(#arrowK)"/>
+      <line x1="260" y1="440" x2="260" y2="40" stroke="#555" stroke-width="1.5" marker-end="url(#arrowK)"/>
+      <text x="475" y="255" font-size="13" fill="#555">x</text>
+      <text x="270" y="35" font-size="13" fill="#555">y</text>
+      <text x="270" y="255" font-size="12" fill="#888">O</text>
+      <!-- 网格 -->
+      <g stroke="#e8e8e8" stroke-width="0.8">
+        <line x1="60" y1="20" x2="460" y2="20"/><line x1="60" y1="64" x2="460" y2="64"/>
+        <line x1="60" y1="108" x2="460" y2="108"/><line x1="60" y1="152" x2="460" y2="152"/>
+        <line x1="60" y1="196" x2="460" y2="196"/><line x1="60" y1="284" x2="460" y2="284"/>
+        <line x1="60" y1="328" x2="460" y2="328"/><line x1="60" y1="372" x2="460" y2="372"/>
+        <line x1="60" y1="416" x2="460" y2="416"/>
+        <line x1="104" y1="40" x2="104" y2="440"/><line x1="148" y1="40" x2="148" y2="440"/>
+        <line x1="192" y1="40" x2="192" y2="440"/><line x1="236" y1="40" x2="236" y2="440"/>
+        <line x1="284" y1="40" x2="284" y2="440"/><line x1="328" y1="40" x2="328" y2="440"/>
+        <line x1="372" y1="40" x2="372" y2="440"/><line x1="416" y1="40" x2="416" y2="440"/>
+      </g>
+      <!-- 刻度标注 -->
+      <g font-size="11" fill="#888">
+        <text x="256" y="108">3</text><text x="256" y="152">2</text><text x="256" y="196">1</text>
+        <text x="256" y="288">−1</text><text x="256" y="332">−2</text><text x="256" y="376">−3</text>
+        <text x="256" y="420">−4</text><text x="256" y="76">4</text>
+        <text x="104" y="256">−4</text><text x="148" y="256">−3</text><text x="192" y="256">−2</text>
+        <text x="240" y="256">−1</text><text x="288" y="256">1</text><text x="332" y="256">2</text>
+        <text x="376" y="256">3</text><text x="420" y="256">4</text>
+      </g>
+      <!-- 双曲线路径 -->
+      <path id="curve1" d="" fill="none" stroke="#e65100" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="curve2" d="" fill="none" stroke="#e65100" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- 渐近线提示（虚线） -->
+      <line x1="260" y1="40" x2="260" y2="440" stroke="#ccc" stroke-width="0.8" stroke-dasharray="4 6" opacity="0.5"/>
+      <line x1="60" y1="240" x2="460" y2="240" stroke="#ccc" stroke-width="0.8" stroke-dasharray="4 6" opacity="0.5"/>
+      <!-- 图例 -->
+      <text id="legendK" x="260" y="470" text-anchor="middle" font-size="15" fill="#e65100" font-weight="bold">y = 3/x</text>
+    </svg>
+    <p style="text-align:center;color:#888;font-size:13px;">图：k 取不同值时双曲线的变化。k > 0 在一三象限，k < 0 在二四象限。|k| 越大，曲线离原点越远。</p>
+
+    <h3>静态对比图：k > 0 和 k < 0 的图象</h3>
+    <div class="compare-box">
+      <div class="card">
+        <div class="card-title">k > 0（一、三象限）</div>
+        <svg viewBox="0 0 240 240" style="max-width:240px;">
+          <line x1="30" y1="120" x2="220" y2="120" stroke="#555" stroke-width="1.2"/>
+          <line x1="120" y1="210" x2="120" y2="20" stroke="#555" stroke-width="1.2"/>
+          <text x="215" y="132" font-size="10" fill="#555">x</text>
+          <text x="128" y="18" font-size="10" fill="#555">y</text>
+          <text x="128" y="132" font-size="10" fill="#888">O</text>
+          <g stroke="#e8e8e8" stroke-width="0.5">
+            <line x1="30" y1="30" x2="210" y2="30"/><line x1="30" y1="60" x2="210" y2="60"/>
+            <line x1="30" y1="90" x2="210" y2="90"/><line x1="30" y1="150" x2="210" y2="150"/>
+            <line x1="30" y1="180" x2="210" y2="180"/><line x1="30" y1="210" x2="210" y2="210"/>
+            <line x1="60" y1="30" x2="60" y2="210"/><line x1="90" y1="30" x2="90" y2="210"/>
+            <line x1="150" y1="30" x2="150" y2="210"/><line x1="180" y1="30" x2="180" y2="210"/>
+          </g>
+          <path d="M135,30 L150,45 L165,62 L180,80 L195,101 L208,125" fill="none" stroke="#e65100" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M105,210 L90,195 L75,178 L60,160 L45,139 L32,115" fill="none" stroke="#e65100" stroke-width="2.5" stroke-linecap="round"/>
+          <text x="120" y="235" text-anchor="middle" font-size="12" fill="#e65100" font-weight="bold">y = 2/x</text>
+        </svg>
+      </div>
+      <div class="card">
+        <div class="card-title">k < 0（二、四象限）</div>
+        <svg viewBox="0 0 240 240" style="max-width:240px;">
+          <line x1="30" y1="120" x2="220" y2="120" stroke="#555" stroke-width="1.2"/>
+          <line x1="120" y1="210" x2="120" y2="20" stroke="#555" stroke-width="1.2"/>
+          <text x="215" y="132" font-size="10" fill="#555">x</text>
+          <text x="128" y="18" font-size="10" fill="#555">y</text>
+          <text x="128" y="132" font-size="10" fill="#888">O</text>
+          <g stroke="#e8e8e8" stroke-width="0.5">
+            <line x1="30" y1="30" x2="210" y2="30"/><line x1="30" y1="60" x2="210" y2="60"/>
+            <line x1="30" y1="90" x2="210" y2="90"/><line x1="30" y1="150" x2="210" y2="150"/>
+            <line x1="30" y1="180" x2="210" y2="180"/><line x1="30" y1="210" x2="210" y2="210"/>
+            <line x1="60" y1="30" x2="60" y2="210"/><line x1="90" y1="30" x2="90" y2="210"/>
+            <line x1="150" y1="30" x2="150" y2="210"/><line x1="180" y1="30" x2="180" y2="210"/>
+          </g>
+          <path d="M105,30 L90,45 L75,62 L60,80 L45,101 L32,125" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M135,210 L150,195 L165,178 L180,160 L195,139 L208,115" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linecap="round"/>
+          <text x="120" y="235" text-anchor="middle" font-size="12" fill="#1565c0" font-weight="bold">y = −2/x</text>
+        </svg>
+      </div>
+    </div>
+    <p style="text-align:center;color:#888;font-size:13px;">左：k = 2 > 0，图象在一三象限。右：k = −2 < 0，图象在二四象限。无论哪种情况，两支都关于原点对称，且永远不会碰到坐标轴。</p>
+
+    <h3>画图的步骤</h3>
+    <div class="formula">
+      <p><strong>画反比例函数图象的方法：</strong></p>
+      <p>① 先确定 k 的正负，判断图象在哪两个象限</p>
+      <p>② 列出 x 和 y 的对应值（多取几个点，尤其靠近 0 的地方多取几个）</p>
+      <p>③ 在坐标系中描点</p>
+      <p>④ 用光滑的曲线把点连起来（注意：<strong>不能画成折线</strong>，也不能让曲线碰到坐标轴）</p>
+    </div>
+
+    <div class="example">
+      <strong>例：画出 y = 6 / x 的图象</strong><br>
+      k = 6 > 0，所以图象在一三象限。<br>
+      列表：<br>
+      x = 1 → y = 6；x = 2 → y = 3；x = 3 → y = 2；x = 6 → y = 1<br>
+      x = −1 → y = −6；x = −2 → y = −3；x = −3 → y = −2；x = −6 → y = −1<br>
+      x = 0.5 → y = 12；x = 0.2 → y = 30（越来越靠近 y 轴）<br>
+      描点、连线，就得到一条双曲线。
+    </div>
+  </div>
+
+  <h2>四、性质：反比例函数的"脾气"</h2>
+  <div class="story">
+    <div class="key">
+      <p><strong>性质 1：增减性（在每一支内）</strong></p>
+      <p>• k > 0 时：在<strong>每一支</strong>内，y 随 x 的增大而<strong>减小</strong>（从左到右，曲线下降）</p>
+      <p>• k < 0 时：在<strong>每一支</strong>内，y 随 x 的增大而<strong>增大</strong>（从左到右，曲线上升）</p>
+      <p style="color:#888;font-size:0.9em;">⚠️ 注意：必须说"在每一支内"，不能笼统地说"y 随 x 增大而减小"。因为越过 x = 0 时，y 会从负无穷跳到正无穷。</p>
+    </div>
+
+    <div class="key">
+      <p><strong>性质 2：对称性</strong></p>
+      <p>• 双曲线<strong>关于原点对称</strong>：如果点 (a, b) 在图象上，那么 (−a, −b) 也在图象上</p>
+      <p>• 这也意味着：如果 (a, b) 满足 y = k / x，那么 (−a, −b) 也满足，因为 k / (−a) = −k / a = −b</p>
+    </div>
+
+    <div class="key">
+      <p><strong>性质 3：渐近线</strong></p>
+      <p>• x 轴（y = 0）和 y 轴（x = 0）是双曲线的<strong>渐近线</strong></p>
+      <p>• 曲线会无限靠近这两条线，但<strong>永远不会碰到</strong>它们</p>
+      <p>• 为什么？因为 x 不能为 0（分母不能为 0），y 也永远不能为 0（k ≠ 0）</p>
+    </div>
+
+    <div class="key">
+      <p><strong>性质 4：|k| 的影响</strong></p>
+      <p>• |k| 越大，双曲线离原点越<strong>远</strong>（两支向外扩张）</p>
+      <p>• |k| 越小，双曲线离原点越<strong>近</strong>（两支向内收缩）</p>
+      <p>• 但无论 |k| 多大或多小，双曲线永远不会碰到坐标轴</p>
+    </div>
+
+    <div class="example">
+      <strong>快速判断：</strong>对于反比例函数 y = −5 / x<br>
+      • k = −5 < 0 → 图象在<strong>第二、四象限</strong><br>
+      • 在每一支内，y 随 x 增大而<strong>增大</strong><br>
+      • 关于<strong>原点</strong>对称<br>
+      • |k| = 5，比较大，曲线离原点比较远
+    </div>
+  </div>
+
+  <h2>五、逻辑推导：待定系数法求 k</h2>
+  <div class="formula">
+    <p>反比例函数只有一个未知数 k，所以只需要<strong>一个点的坐标</strong>就能求出解析式。</p>
+    <p>方法：设 y = k / x，把已知点 (x₀, y₀) 代入，得到 k = x₀ · y₀。</p>
+  </div>
+
+  <div class="example">
+    <strong>例 1：</strong>已知反比例函数的图象经过点 (2, 3)，求解析式。<br><br>
+    <strong>解：</strong>设 y = k / x。<br>
+    代入 (2, 3)：3 = k / 2 → k = 6<br>
+    <strong>所以 y = 6 / x。</strong>
+  </div>
+
+  <div class="example">
+    <strong>例 2：</strong>已知 y 与 x 成反比例，且当 x = −4 时，y = 5。求 y 与 x 的函数关系式，并求 x = 10 时 y 的值。<br><br>
+    <strong>解：</strong>设 y = k / x。<br>
+    当 x = −4 时，y = 5 → 5 = k / (−4) → k = −20<br>
+    所以 y = −20 / x。<br>
+    当 x = 10 时，y = −20 / 10 = −2。
+  </div>
+
+  <div class="example">
+    <strong>例 3：</strong>已知反比例函数 y = k / x 的图象经过点 A(3, −4)。<br>
+    (1) 求 k 的值<br>
+    (2) 判断点 B(2, −6) 和 C(−2, 6) 是否在这个函数的图象上<br><br>
+    <strong>解：</strong><br>
+    (1) 代入 A(3, −4)：−4 = k / 3 → k = −12，所以 y = −12 / x<br>
+    (2) 对于 B(2, −6)：−12 / 2 = −6，等于 −6 ✓，B 在图象上<br>
+    对于 C(−2, 6)：−12 / (−2) = 6，等于 6 ✓，C 也在图象上<br>
+    <strong>发现：B 和 C 关于原点对称！</strong>这验证了双曲线的对称性。
+  </div>
+
+  <h2>六、反比例函数与一次函数的综合</h2>
+  <div class="story">
+    <p>反比例函数经常和一次函数一起出现，最常见的题型是求它们的<strong>交点</strong>。</p>
+
+    <div class="example">
+      <strong>例：</strong>求反比例函数 y = 6 / x 与一次函数 y = x + 1 的交点坐标。<br><br>
+      <strong>解：</strong>联立方程组：<br>
+      6 / x = x + 1<br>
+      两边同乘 x（x ≠ 0）：6 = x² + x<br>
+      x² + x − 6 = 0<br>
+      (x + 3)(x − 2) = 0<br>
+      x = −3 或 x = 2<br>
+      当 x = −3 时，y = −3 + 1 = −2<br>
+      当 x = 2 时，y = 2 + 1 = 3<br>
+      <strong>交点坐标为 (−3, −2) 和 (2, 3)。</strong>
+    </div>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>反比例函数 y = k / x 的图象上有一点 P，它的横坐标和纵坐标是方程 t² − 5t + k = 0 的两个根。求 k 的值，并判断 P 在哪个象限。（提示：设 P 的坐标为 (a, b)，则 a 和 b 是方程的两个根，且 ab = k。利用韦达定理。）</p>
+    <p><strong>问题 2：</strong>一次函数 y = −x + 4 与反比例函数 y = k / x 的图象只有一个交点。求 k 的值，并说明这个交点的几何意义。（提示：只有一个交点意味着什么？从方程的角度思考。）</p>
+    <p><strong>问题 3：</strong>你有一个长方形的花园，面积是 100 平方米。你用篱笆围住它，篱笆的总长度（周长）取决于长和宽。当长和宽各是多少时，篱笆的总长度最短？用反比例函数和一次函数的知识解释。（提示：设长为 x，宽为 100/x，周长 = 2(x + 100/x)。）</p>
+  </div>
+
+  <h2>拓展阅读</h2>
+  <div class="extend">
+    <p><strong>生活中的反比例关系：</strong></p>
+    <ul>
+      <li><strong>速度和时间的反比例：</strong>路程固定时，速度越快，时间越短。这就是为什么高速公路上开得快能省时间——速度和时间成反比。</li>
+      <li><strong>压力和面积的反比例：</strong>用同样的力，受力面积越小，压强越大。这就是为什么针尖能轻易刺穿东西——面积小，压强大。图钉、菜刀的原理都与此有关。</li>
+      <li><strong>电阻和电流的反比例（欧姆定律）：</strong>电压固定时，电阻越大，电流越小。I = U / R，就是一个反比例函数。</li>
+      <li><strong>工作人数和工作时间的反比例：</strong>一项工作，人数越多，需要的时间越短。（假设每个人工作效率相同）</li>
+      <li><strong>单价和数量的反比例：</strong>预算固定时，单价越贵，能买的数量越少。这就是我们开头买笔的例子。</li>
+    </ul>
+    <p><strong>双曲线名字的由来：</strong>"双曲线"（hyperbola）这个词来自古希腊语，意思是"超出、过度"。古希腊数学家阿波罗尼奥斯在研究圆锥截面时发现了它——用平面去截一个圆锥，如果截面和圆锥的轴夹角小于母线与轴的夹角，截口就是双曲线。这和反比例函数的图象是同一类曲线！</p>
+    <p><strong>为什么又叫"反比例"？</strong>对比正比例关系 y = kx（x 越大 y 越大，倍数关系），反比例关系 y = k / x 是"反着来"的——x 越大 y 越小。但注意，反比例不等于"反函数"（那是另一个概念，以后会学到）。</p>
+    <p><strong>推荐阅读：</strong>《数学之美》——了解函数在生活中的应用；《极简数学》——坐标系和函数图象；《什么是数学》——圆锥曲线和双曲线的几何意义。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 下列函数中，哪些是反比例函数？如果是，请指出 k 的值。<br>
+    (1) y = 5 / x<br>
+    (2) y = x / 5<br>
+    (3) y = −3 / x<br>
+    (4) xy = 8<br>
+    (5) y = 1 / (2x)</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">反比例函数的标准形式是 y = k/x（k ≠ 0），或者等价形式 xy = k。注意 x 在分母上。</div>
+    <div class="ans-box" id="a1">(1) 是，k = 5<br>(2) 不是，x 在分子上，这是一次函数 y = (1/5)x<br>(3) 是，k = −3<br>(4) 是，写成 y = 8/x，k = 8<br>(5) 是，y = 1/(2x) = (1/2)/x，k = 1/2</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 已知反比例函数 y = 8 / x。<br>
+    (1) 当 x = 2 时，y = ？<br>
+    (2) 当 x = −4 时，y = ？<br>
+    (3) 当 y = 4 时，x = ？</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">直接代入公式计算。注意 x 和 y 都不能为 0。</div>
+    <div class="ans-box" id="a2">(1) y = 8/2 = 4<br>(2) y = 8/(−4) = −2<br>(3) 4 = 8/x → x = 8/4 = 2</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 对于反比例函数 y = −6 / x：<br>
+    (1) k = ？<br>
+    (2) 图象在哪些象限？<br>
+    (3) 在每一支内，y 随 x 的增大而增大还是减小？<br>
+    (4) 图象关于什么对称？</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">k < 0 时，图象在二四象限。在每一支内，y 随 x 增大而增大。双曲线关于原点对称。</div>
+    <div class="ans-box" id="a3">(1) k = −6<br>(2) 第二象限和第四象限<br>(3) k < 0，在每一支内 y 随 x 的增大而增大<br>(4) 关于原点对称</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 已知反比例函数的图象经过点 (3, 4)，求这个函数的解析式。</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">设 y = k/x，代入点的坐标：4 = k/3，解出 k。或者直接用 k = x·y。</div>
+    <div class="ans-box" id="a4">k = 3 × 4 = 12<br>解析式：y = 12 / x</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 已知 y 与 x 成反比例，且当 x = 2 时，y = 9。<br>
+    (1) 求 y 与 x 的函数关系式<br>
+    (2) 当 x = 6 时，求 y 的值<br>
+    (3) 当 y = 3 时，求 x 的值</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">先求 k = x·y = 2×9 = 18，然后代入计算。</div>
+    <div class="ans-box" id="a5">(1) k = 2×9 = 18，y = 18/x<br>(2) 当 x = 6 时，y = 18/6 = 3<br>(3) 当 y = 3 时，3 = 18/x → x = 6</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 已知点 A(2, 6) 在反比例函数 y = k / x 的图象上。<br>
+    (1) 求 k 的值<br>
+    (2) 点 B(3, 4)、C(−2, −6)、D(1, 12) 是否也在图象上？</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">先求 k = 2×6 = 12。判断一个点是否在图象上，就看它的横纵坐标乘积是否等于 k。</div>
+    <div class="ans-box" id="a6">(1) k = 2×6 = 12<br>(2) B(3, 4)：3×4 = 12 ✓，在图象上<br>C(−2, −6)：(−2)×(−6) = 12 ✓，在图象上<br>D(1, 12)：1×12 = 12 ✓，在图象上<br>全部都在图象上！</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>7.</strong> 请画出反比例函数 y = 4 / x 的图象简图，并标出至少四个点。</p>
+    <button class="btn-sm" onclick="toggleHint('h7')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a7')">查看答案</button>
+    <div class="hint-box" id="h7">k = 4 > 0，图象在一三象限。取 x = 1, 2, 4 和 x = −1, −2, −4 等点，描点后用光滑曲线连接。</div>
+    <div class="ans-box" id="a7">k = 4 > 0，图象在一三象限。<br>取点：(1, 4), (2, 2), (4, 1), (−1, −4), (−2, −2), (−4, −1)<br>描点后用光滑曲线分别在两个象限中连线。<br>注意：曲线不能画成折线，也不能碰到坐标轴。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>8.</strong> 对于反比例函数 y = (m − 2) / x，当 x > 0 时，y 随 x 的增大而减小。求 m 的取值范围。</p>
+    <button class="btn-sm" onclick="toggleHint('h8')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a8')">查看答案</button>
+    <div class="hint-box" id="h8">当 x > 0 时 y 随 x 增大而减小，说明在第一象限内曲线下降，这要求 k > 0。这里的 k = m − 2。</div>
+    <div class="ans-box" id="a8">当 x > 0 时，y 随 x 增大而减小 → k > 0<br>即 m − 2 > 0 → m > 2</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>9.</strong> 反比例函数 y = 8 / x 与一次函数 y = 2x 的图象有几个交点？求出交点坐标。</p>
+    <button class="btn-sm" onclick="toggleHint('h9')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a9')">查看答案</button>
+    <div class="hint-box" id="h9">联立方程：8/x = 2x，两边乘 x 得 8 = 2x²，解出 x。注意 x ≠ 0。</div>
+    <div class="ans-box" id="a9">8/x = 2x → 8 = 2x² → x² = 4 → x = 2 或 x = −2<br>当 x = 2 时，y = 2×2 = 4<br>当 x = −2 时，y = 2×(−2) = −4<br>两个交点：(2, 4) 和 (−2, −4)，关于原点对称。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>10.</strong> 小明骑自行车从家到图书馆，全程 15 千米。设他的速度为 v 千米/小时，所需时间为 t 小时。<br>
+    (1) 写出 t 关于 v 的函数解析式<br>
+    (2) 如果小明以 10 千米/小时的速度骑行，需要多长时间？<br>
+    (3) 如果小明想在 1.5 小时内到达，他至少需要骑多快？<br>
+    (4) 这个函数的图象在哪两个象限？实际意义中，我们只关心哪个象限？为什么？</p>
+    <button class="btn-sm" onclick="toggleHint('h10')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a10')">查看答案</button>
+    <div class="hint-box" id="h10">路程 = 速度 × 时间，所以 t = 15/v。速度和时间在实际中都是正数，所以我们只关心第一象限。</div>
+    <div class="ans-box" id="a10">(1) t = 15/v（v > 0）<br>(2) t = 15/10 = 1.5 小时<br>(3) 1.5 = 15/v → v = 10 千米/小时，至少需要骑 10 千米/小时<br>(4) 数学上图象在一三象限（k = 15 > 0），但实际意义中 v > 0 且 t > 0，所以我们只关心第一象限的那一支。</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>反比例函数：</strong>y = k / x（k ≠ 0），x 不能为 0</li>
+      <li><strong>图象：</strong>双曲线，由两支曲线组成，关于原点对称，永远不碰到坐标轴</li>
+      <li><strong>k > 0：</strong>图象在第一、三象限，每一支内 y 随 x 增大而减小</li>
+      <li><strong>k < 0：</strong>图象在第二、四象限，每一支内 y 随 x 增大而增大</li>
+      <li><strong>求解析式：</strong>只需要一个点，k = x · y（待定系数法）</li>
+      <li><strong>与一次函数的区别：</strong>一次函数是直线（均匀变化），反比例函数是双曲线（不均匀变化，有渐近线）</li>
+      <li><strong>判断点是否在图象上：</strong>看横纵坐标的乘积是否等于 k</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="index.html">← 返回课程列表</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+
+// 生成双曲线路径数据
+function hyperbolaPath(k, cx, cy, scale, xMin, xMax, step) {
+  var parts1 = []; // 第一支（x > 0 或 x < 0 取决于 k 的正负和象限）
+  var parts2 = [];
+  var first1 = true, first2 = true;
+
+  // 正向（x > 0）
+  for (var x = step; x <= xMax; x += step) {
+    var y = k / x;
+    var sx = cx + x * scale;
+    var sy = cy - y * scale;
+    if (sy > 440 || sy < 20) {
+      if (!first1) parts1.push('M');
+      first1 = true;
+      continue;
+    }
+    if (first1) { parts1.push('M' + sx.toFixed(1) + ',' + sy.toFixed(1)); first1 = false; }
+    else { parts1.push('L' + sx.toFixed(1) + ',' + sy.toFixed(1)); }
+  }
+
+  // 负向（x < 0）
+  for (var x = -step; x >= xMin; x -= step) {
+    var y = k / x;
+    var sx = cx + x * scale;
+    var sy = cy - y * scale;
+    if (sy > 440 || sy < 20) {
+      if (!first2) parts2.push('M');
+      first2 = true;
+      continue;
+    }
+    if (first2) { parts2.push('M' + sx.toFixed(1) + ',' + sy.toFixed(1)); first2 = false; }
+    else { parts2.push('L' + sx.toFixed(1) + ',' + sy.toFixed(1)); }
+  }
+
+  return { d1: parts1.join(' '), d2: parts2.join(' ') };
+}
+
+function setK(k) {
+  var cx = 260, cy = 240, scale = 44;
+  var paths = hyperbolaPath(k, cx, cy, scale, -5, 5, 0.08);
+  document.getElementById('curve1').setAttribute('d', paths.d1);
+  document.getElementById('curve2').setAttribute('d', paths.d2);
+
+  var expr = 'y = ' + k + '/x';
+  if (k === 1) expr = 'y = 1/x';
+  if (k === -1) expr = 'y = −1/x';
+  document.getElementById('legendK').textContent = expr;
+
+  ['bk6','bk3','bk1','bk05','bkm1','bkm3','bkm6'].forEach(function(id){
+    document.getElementById(id).classList.remove('active');
+  });
+  var idMap = {6:'bk6',3:'bk3',1:'bk1',0.5:'bk05','-1':'bkm1','-3':'bkm3','-6':'bkm6'};
+  var targetId = idMap[String(k)];
+  if (targetId) document.getElementById(targetId).classList.add('active');
+}
+
+// 初始化默认 k=3 的双曲线
+setK(3);
+</script>
+<script src="../lessons/dt.js"></script>
+</body>
+</html>

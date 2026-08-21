@@ -17,16 +17,13 @@
   .challenge { background: #e8eaf6; border: 2px dashed #0277bd; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .diff-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; color: #fff; margin-left: 8px; }
-  .diff-easy { background: #66bb6a; }
-  .diff-medium { background: #ff9800; }
-  .diff-hard { background: #f44336; }
   .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
   .hint-box.show, .ans-box.show { display: block; }
   .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
   .btn-sm:hover { background: #e8e8e8; }
   @media (max-width: 720px) {
-    article { padding: 20px 12px !important; }
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
     h1 { font-size: 22px; }
     h2 { font-size: 18px; }
     h3 { font-size: 16px; }
@@ -38,7 +35,7 @@
 <body>
 <article>
   <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：课件 10（几何图形——点、线、面、体）</p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./geometry-basics.html">课件 10（几何图形——点、线、面、体）</a></p>
   <h1>直线、射线、线段</h1>
 
   <h2>起源：拉直的绳子与欧几里得的定义</h2>
@@ -146,7 +143,7 @@
   <h2>习题</h2>
 
   <div class="exercise">
-    <p><strong>1.</strong> 判断：手电筒发出的光可以看作一条射线。对还是错？<span class="diff-tag diff-easy">简单</span></p>
+    <p><strong>1.</strong> 判断：手电筒发出的光可以看作一条射线。对还是错？</p>
     <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
     <div class="hint-box" id="h1">射线有一个端点，向一个方向无限延伸。</div>
@@ -154,7 +151,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>2.</strong> 平面上有 4 个不在同一直线上的点。连接任意两点，最多能画出多少条线段？<span class="diff-tag diff-easy">简单</span></p>
+    <p><strong>2.</strong> 平面上有 4 个不在同一直线上的点。连接任意两点，最多能画出多少条线段？</p>
     <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
     <div class="hint-box" id="h2">4 个点两两连线：从 4 个中选 2 个的组合数。</div>
@@ -162,7 +159,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>3.</strong> 一条直线上有 5 个点 A、B、C、D、E（按顺序排列）。请写出以 A 为端点的所有线段。<span class="diff-tag diff-medium">中等</span></p>
+    <p><strong>3.</strong> 一条直线上有 5 个点 A、B、C、D、E（按顺序排列）。请写出以 A 为端点的所有线段。</p>
     <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
     <div class="hint-box" id="h3">线段有两个端点。以 A 为一个端点，另一个端点可以是 B、C、D、E。</div>
@@ -170,7 +167,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>4.</strong> 平面上有 n 个点，任意三点不共线。连接任意两点得到一条线段。总共有多少条线段？用 n 的代数式表示。<span class="diff-tag diff-hard">较难</span></p>
+    <p><strong>4.</strong> 平面上有 n 个点，任意三点不共线。连接任意两点得到一条线段。总共有多少条线段？用 n 的代数式表示。</p>
     <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
     <div class="hint-box" id="h4">每个点与其余 n-1 个点相连，但每条线段被算了两次。</div>

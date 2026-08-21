@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模拟考试 — 阶段一 — 自学课件</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../lessons/style.css">
+<style>
+  :root { --accent: #2e7d32; }
+  .exam-header { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .section-title { color: #2e7d32; font-size: 18px; font-weight: 700; margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #c8e6c9; }
+  .q-item { padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+  .q-item:last-child { border-bottom: none; }
+  .btn-row { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-hint, .btn-ans { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; }
+  .btn-hint:hover { background: #fff3e0; border-color: #ff9800; }
+  .btn-ans:hover { background: #e8f5e9; border-color: #4caf50; }
+  .hint-box, .ans-box { display: none; margin-top: 8px; padding: 10px 14px; border-radius: 6px; font-size: 14px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .hint-box { background: #fff8e1; border-left: 3px solid #ff9800; }
+  .ans-box { background: #e8f5e9; border-left: 3px solid #4caf50; }
+  .opt-row { margin: 4px 0; padding-left: 8px; }
+  .opt { display: inline-block; min-width: 24px; font-weight: 600; }
+  @media (max-width: 720px) {
+    article { padding-bottom: 100px !important; }
+    article { padding: 20px 12px 100px 12px !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    .q-item { padding: 10px 0; }
+    .exam-header { padding: 12px 14px; margin: 12px 0; }
+  }
+  .opt-btn { display: inline-block; padding: 6px 16px; margin: 3px 4px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .opt-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .opt-btn.selected { border-color: #1976d2; background: #e3f2fd; }
+  .opt-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .opt-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .tf-btn { display: inline-block; padding: 6px 20px; margin: 3px 6px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .tf-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .tf-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .tf-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .fill-input { padding: 6px 12px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 15px; width: 160px; }
+  .fill-input:focus { outline: none; border-color: #1976d2; }
+  .check-btn { padding: 6px 16px; border: 1px solid #1976d2; border-radius: 6px; background: #1976d2; color: #fff; font-size: 13px; cursor: pointer; margin-left: 8px; }
+  .check-btn:hover { background: #1565c0; }
+  .feedback { display: none; margin-left: 8px; font-size: 14px; font-weight: 600; }
+  .feedback.show { display: inline; }
+  .feedback.correct-fb { color: #2e7d32; }
+  .feedback.wrong-fb { color: #c62828; }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="../index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="../geometry-basics.html">课件1（几何图形）</a>、<a href="../lines-rays-segments.html">课件2（直线、射线、线段）</a>、<a href="../angles.html">课件3（角）</a></p>
+  <h1>模拟考试 — 阶段一：几何图形初步</h1>
+  <div class="exam-header">
+    <p>⏱ 时间：30 分钟 | ✅ 判断题 10 题 | 🔘 单选题 10 题 | ☑️ 多选题 5 题 | ✏️ 其他题型 5 题 | 共 30 题</p>
+  </div>
+
+  <p class="section-title">一、判断题（每题 1 分，共 10 分）</p>
+
+  <div class="q-item">
+    <p><strong>1.</strong> 几何图形都是由点、线、面、体组成的。</p>
+    <div id="tf-4-1"><button class="tf-btn" onclick="checkTF(this, true, '4-1')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '4-1')">错误</button><span class="feedback" id="fb-4-1"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-1')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-1')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-1"><p>点动成线，线动成面，面动成体。任何几何图形都是由这些基本元素构成的。</p></div>
+    <div class="ans-box" id="a1-1"><p>✅ <strong>正确</strong>。点、线、面、体是几何图形的基本组成元素，所有几何图形都可以归结为它们。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>2.</strong> 两点之间，线段最短。</p>
+    <div id="tf-4-2"><button class="tf-btn" onclick="checkTF(this, true, '4-2')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '4-2')">错误</button><span class="feedback" id="fb-4-2"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-2')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-2')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-2"><p>在所有连接两点的线中，直线的线段是最短的。这是欧几里得几何的一条基本事实（公理）。</p></div>
+    <div class="ans-box" id="a1-2"><p>✅ <strong>正确</strong>。这是线段的基本性质——"两点之间，线段最短"，也叫"两点间线段最短"。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>3.</strong> 射线有一个端点，可以向一端无限延伸。</p>
+    <div id="tf-4-3"><button class="tf-btn" onclick="checkTF(this, true, '4-3')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '4-3')">错误</button><span class="feedback" id="fb-4-3"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-3')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-3')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-3"><p>回忆射线、线段、直线的区别：线段有两个端点，射线只有一个端点，直线没有端点。</p></div>
+    <div class="ans-box" id="a1-3"><p>✅ <strong>正确</strong>。射线有一个端点，从端点出发向一个方向无限延伸。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>4.</strong> 大于 90° 的角一定是钝角。</p>
+    <div id="tf-4-4"><button class="tf-btn" onclick="checkTF(this, true, '4-4')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '4-4')">错误</button><span class="feedback" id="fb-4-4"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-4')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-4')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-4"><p>想一想大于 90° 的角都有哪些？180° 的角是平角，大于 180° 的角是优角（或叫反射角）。钝角只是其中一种。</p></div>
+    <div class="ans-box" id="a1-4"><p>❌ <strong>错误</strong>。钝角是大于 90° 且小于 180° 的角。但 180° 是平角，大于 180° 小于 360° 的角也不是钝角。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>5.</strong> 一个正方体有 6 个面，12 条棱，8 个顶点。</p>
+    <div id="tf-4-5"><button class="tf-btn" onclick="checkTF(this, true, '4-5')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '4-5')">错误</button><span class="feedback" id="fb-4-5"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-5')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-5')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-5"><p>在脑海中想象一个正方体：上下左右前后 6 个面，每条边都是棱，棱的交点是顶点。</p></div>
+    <div class="ans-box" id="a1-5"><p>✅ <strong>正确</strong>。正方体有 6 个面、12 条棱、8 个顶点，这是正方体的基本特征。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>6.</strong> 如果 ∠A 和 ∠B 互余，那么 ∠A + ∠B = 180°。</p>
+    <div id="tf-4-6"><button class="tf-btn" onclick="checkTF(this, true, '4-6')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '4-6')">错误</button><span class="feedback" id="fb-4-6"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-6')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-6')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-6"><p>互余的两个角相加是 90°，互补的两个角相加才是 180°。不要混淆！</p></div>
+    <div class="ans-box" id="a1-6"><p>❌ <strong>错误</strong>。互余的两个角之和为 90°（直角），互补的两个角之和才是 180°（平角）。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>7.</strong> 点动成线，线动成面，面动成体。</p>
+    <div id="tf-4-7"><button class="tf-btn" onclick="checkTF(this, true, '4-7')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '4-7')">错误</button><span class="feedback" id="fb-4-7"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-7')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-7')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-7"><p>想象一支笔尖在纸上移动——点动成线；一条线在空间中平移——线动成面；一个面在空间中平移——面动成体。</p></div>
+    <div class="ans-box" id="a1-7"><p>✅ <strong>正确</strong>。这是几何中"点线面体"之间关系的基本描述，揭示了图形是如何由更基本的元素运动生成的。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>8.</strong> 过两点可以画无数条直线。</p>
+    <div id="tf-4-8"><button class="tf-btn" onclick="checkTF(this, true, '4-8')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '4-8')">错误</button><span class="feedback" id="fb-4-8"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-8')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-8')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-8"><p>用两个手指按住桌面上的一张纸，试着在这两点之间画线——你能画出几条不同的直线？</p></div>
+    <div class="ans-box" id="a1-8"><p>❌ <strong>错误</strong>。过两点只能画出一条直线（"两点确定一条直线"），这是几何的基本公理。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>9.</strong> 1 周角 = 2 平角 = 4 直角。</p>
+    <div id="tf-4-9"><button class="tf-btn" onclick="checkTF(this, true, '4-9')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '4-9')">错误</button><span class="feedback" id="fb-4-9"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-9')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-9')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-9"><p>周角是 360°，平角是 180°，直角是 90°。算一下它们之间的倍数关系。</p></div>
+    <div class="ans-box" id="a1-9"><p>✅ <strong>正确</strong>。1 周角 = 360°，1 平角 = 180°，1 直角 = 90°，所以 360° = 2 × 180° = 4 × 90°。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>10.</strong> 线段 AB 和线段 BA 是同一条线段。</p>
+    <div id="tf-4-10"><button class="tf-btn" onclick="checkTF(this, true, '4-10')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '4-10')">错误</button><span class="feedback" id="fb-4-10"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-10')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-10')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-10"><p>线段有两个端点，不管从哪个端点开始说，同一条线段指的是连接同样两个点的线段。</p></div>
+    <div class="ans-box" id="a1-10"><p>✅ <strong>正确</strong>。线段由两个端点确定，端点相同就是同一条线段。线段 AB 和线段 BA 的端点都是 A 和 B。</p></div>
+  </div>
+
+  <p class="section-title">二、单选题（每题 2 分，共 20 分）</p>
+
+  <div class="q-item">
+    <p><strong>11.</strong> 平面上有 5 个点，任意三点不共线，连接任意两点得到一条线段，一共能画出多少条线段？</p>
+    <div id="opt-4-11"><button class="opt-btn" onclick="checkSingle(this, false, '4-11')">A. 5 条</button><button class="opt-btn" onclick="checkSingle(this, false, '4-11')">B. 8 条</button><button class="opt-btn" onclick="checkSingle(this, true, '4-11')" data-correct="true">C. 10 条</button><button class="opt-btn" onclick="checkSingle(this, false, '4-11')">D. 15 条</button><span class="feedback" id="fb-4-11"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-1')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-1')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-1"><p>从 5 个点中任选 2 个点，有多少种选法？第一个点有 5 种选择，第二个点有 4 种选择，但每条线段算了两次（AB 和 BA），所以除以 2。</p></div>
+    <div class="ans-box" id="a2-1"><p><strong>C（10 条）</strong>。从 5 个点中任选 2 个：5 × 4 ÷ 2 = 10 条线段。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>12.</strong> 一个角的度数是 35°，它的余角是多少度？</p>
+    <div id="opt-4-12"><button class="opt-btn" onclick="checkSingle(this, false, '4-12')">A. 35°</button><button class="opt-btn" onclick="checkSingle(this, false, '4-12')">B. 45°</button><button class="opt-btn" onclick="checkSingle(this, true, '4-12')" data-correct="true">C. 55°</button><button class="opt-btn" onclick="checkSingle(this, false, '4-12')">D. 145°</button><span class="feedback" id="fb-4-12"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-2')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-2')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-2"><p>两个角互余，它们的和是 90°。所以余角 = 90° − 35°。</p></div>
+    <div class="ans-box" id="a2-2"><p><strong>C（55°）</strong>。余角 = 90° − 35° = 55°。注意不要和补角（180° − 35° = 145°）混淆。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>13.</strong> 时钟在 3:00 时，时针和分针的夹角是多少度？</p>
+    <div id="opt-4-13"><button class="opt-btn" onclick="checkSingle(this, false, '4-13')">A. 30°</button><button class="opt-btn" onclick="checkSingle(this, false, '4-13')">B. 60°</button><button class="opt-btn" onclick="checkSingle(this, true, '4-13')" data-correct="true">C. 90°</button><button class="opt-btn" onclick="checkSingle(this, false, '4-13')">D. 120°</button><span class="feedback" id="fb-4-13"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-3')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-3')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-3"><p>3:00 时，时针指向 3，分针指向 12。钟面一圈 360°，12 个刻度，每个大格 30°。从 12 到 3 跨越了 3 个大格。</p></div>
+    <div class="ans-box" id="a2-3"><p><strong>C（90°）</strong>。钟面一圈 360°，分 12 大格，每格 30°。从 12 到 3 是 3 大格，3 × 30° = 90°，是直角。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>14.</strong> 从一个角的顶点出发，在角的内部画 3 条射线，连同原来的两条边，一共有多少条射线？这些射线一共可以组成多少个不同的角？</p>
+    <div id="opt-4-14"><button class="opt-btn" onclick="checkSingle(this, true, '4-14')" data-correct="true">A. 5 条射线，10 个角</button><button class="opt-btn" onclick="checkSingle(this, false, '4-14')">B. 5 条射线，15 个角</button><button class="opt-btn" onclick="checkSingle(this, false, '4-14')">C. 3 条射线，10 个角</button><button class="opt-btn" onclick="checkSingle(this, false, '4-14')">D. 5 条射线，6 个角</button><span class="feedback" id="fb-4-14"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-4')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-4')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-4"><p>原来有 2 条边，加 3 条内部射线，共 5 条射线。角的个数：从 5 条射线中任选 2 条，每两条射线组成一个角，共 5 × 4 ÷ 2 = 10 个角。</p></div>
+    <div class="ans-box" id="a2-4"><p><strong>A（5 条射线，10 个角）</strong>。原来 2 条边 + 3 条射线 = 5 条射线。从中任选 2 条组成角：5 × 4 ÷ 2 = 10 个角。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>15.</strong> 在直线 l 上依次有 A、B、C、D 四个点，图中共有多少条线段？</p>
+    <div id="opt-4-15"><button class="opt-btn" onclick="checkSingle(this, false, '4-15')">A. 4 条</button><button class="opt-btn" onclick="checkSingle(this, false, '4-15')">B. 5 条</button><button class="opt-btn" onclick="checkSingle(this, true, '4-15')" data-correct="true">C. 6 条</button><button class="opt-btn" onclick="checkSingle(this, false, '4-15')">D. 8 条</button><span class="feedback" id="fb-4-15"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-5')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-5')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-5"><p>4 个点，任选 2 个构成一条线段：4 × 3 ÷ 2 = 6。也可以列举：AB、AC、AD、BC、BD、CD。</p></div>
+    <div class="ans-box" id="a2-5"><p><strong>C（6 条）</strong>。4 个点中任选 2 个：4 × 3 ÷ 2 = 6 条线段（AB、AC、AD、BC、BD、CD）。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>16.</strong> 下列哪个图形不是立体图形？</p>
+    <div id="opt-4-16"><button class="opt-btn" onclick="checkSingle(this, false, '4-16')">A. 正方体</button><button class="opt-btn" onclick="checkSingle(this, false, '4-16')">B. 圆柱</button><button class="opt-btn" onclick="checkSingle(this, true, '4-16')" data-correct="true">C. 三角形</button><button class="opt-btn" onclick="checkSingle(this, false, '4-16')">D. 圆锥</button><span class="feedback" id="fb-4-16"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-6')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-6')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-6"><p>立体图形占有空间，平面图形只在一个平面上。三角形是平面图形。</p></div>
+    <div class="ans-box" id="a2-6"><p><strong>C（三角形）</strong>。三角形是平面图形，只有长度和宽度，没有厚度。正方体、圆柱、圆锥都是立体图形。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>17.</strong> 一个角是 120°，它的补角是多少度？</p>
+    <div id="opt-4-17"><button class="opt-btn" onclick="checkSingle(this, false, '4-17')">A. 30°</button><button class="opt-btn" onclick="checkSingle(this, true, '4-17')" data-correct="true">B. 60°</button><button class="opt-btn" onclick="checkSingle(this, false, '4-17')">C. 90°</button><button class="opt-btn" onclick="checkSingle(this, false, '4-17')">D. 240°</button><span class="feedback" id="fb-4-17"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-7')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-7')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-7"><p>两个角互补，和为 180°。补角 = 180° − 120°。</p></div>
+    <div class="ans-box" id="a2-7"><p><strong>B（60°）</strong>。补角 = 180° − 120° = 60°。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>18.</strong> 用一副三角尺（含 30°-60°-90° 和 45°-45°-90°）不能直接画出的角度是？</p>
+    <div id="opt-4-18"><button class="opt-btn" onclick="checkSingle(this, false, '4-18')">A. 75°</button><button class="opt-btn" onclick="checkSingle(this, false, '4-18')">B. 105°</button><button class="opt-btn" onclick="checkSingle(this, false, '4-18')">C. 135°</button><button class="opt-btn" onclick="checkSingle(this, true, '4-18')" data-correct="true">D. 80°</button><span class="feedback" id="fb-4-18"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-8')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-8')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-8"><p>三角尺上有的角度：30°、45°、60°、90°。通过加或减，能拼出 15° 的倍数。75° = 30° + 45°，105° = 60° + 45°，135° = 90° + 45°。80° 能拼出来吗？</p></div>
+    <div class="ans-box" id="a2-8"><p><strong>D（80°）</strong>。三角尺能拼出的角都是 15° 的倍数（通过加减组合 30°、45°、60°、90°）。80° 不是 15° 的倍数，不能直接画出。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>19.</strong> 将一张长方形纸对折一次，折痕所在的直线是？</p>
+    <div id="opt-4-19"><button class="opt-btn" onclick="checkSingle(this, false, '4-19')">A. 射线</button><button class="opt-btn" onclick="checkSingle(this, true, '4-19')" data-correct="true">B. 线段</button><button class="opt-btn" onclick="checkSingle(this, false, '4-19')">C. 直线</button><button class="opt-btn" onclick="checkSingle(this, false, '4-19')">D. 曲线</button><span class="feedback" id="fb-4-19"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-9')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-9')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-9"><p>折痕是一条笔直的线，它从纸的一边延伸到另一边，可以看作线段。但它的数学本质属于直线的一部分。</p></div>
+    <div class="ans-box" id="a2-9"><p><strong>B（线段）</strong>。折痕有起点和终点（纸的两个边缘），所以它是线段。当然，折痕所在的"那条线"在数学上属于直线，但折痕本身是有限长的。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>20.</strong> 一个角的补角比它的余角大多少？</p>
+    <div id="opt-4-20"><button class="opt-btn" onclick="checkSingle(this, false, '4-20')">A. 45°</button><button class="opt-btn" onclick="checkSingle(this, false, '4-20')">B. 60°</button><button class="opt-btn" onclick="checkSingle(this, true, '4-20')" data-correct="true">C. 90°</button><button class="opt-btn" onclick="checkSingle(this, false, '4-20')">D. 无法确定</button><span class="feedback" id="fb-4-20"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-10')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-10')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-10"><p>补角 = 180° − 角，余角 = 90° − 角。两者相减：(180° − 角) − (90° − 角) = 180° − 90° = 90°，与角本身无关！</p></div>
+    <div class="ans-box" id="a2-10"><p><strong>C（90°）</strong>。不管这个角是多少度，补角永远比余角大 90°。因为补角 = 180° − 角，余角 = 90° − 角，相差恒为 90°。</p></div>
+  </div>
+
+  <p class="section-title">三、多选题（每题 3 分，共 15 分）</p>
+
+  <div class="q-item">
+    <p><strong>21.</strong> 下列关于角的说法，正确的有哪些？（多选）</p>
+    <div id="opt-4-21"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 锐角小于 90°</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 直角等于 90°</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 钝角大于 90° 且小于 180°</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 大于 180° 的角是钝角</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMulti('4-21')">提交</button><span class="feedback" id="fb-4-21"></span>
+      <button class="btn-hint" onclick="toggleHint('h3-1')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-1')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-1"><p>回忆角的分类：锐角 &lt; 90°、直角 = 90°、钝角在 90° 到 180° 之间、平角 = 180°、大于 180° 小于 360° 的叫优角。</p></div>
+    <div class="ans-box" id="a3-1"><p><strong>A、B、C</strong>。D 错误：大于 180° 且小于 360° 的角不是钝角，钝角严格大于 90° 且小于 180°。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>22.</strong> 关于线段、射线、直线，下列说法正确的有哪些？（多选）</p>
+    <div id="opt-4-22"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 线段有两个端点</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 射线有一个端点，向一端无限延伸</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 直线没有端点，向两端无限延伸</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 射线比线段长</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMulti('4-22')">提交</button><span class="feedback" id="fb-4-22"></span>
+      <button class="btn-hint" onclick="toggleHint('h3-2')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-2')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-2"><p>A、B、C 都是定义。D 有问题：射线是无限长的，线段是有限长的，但不能简单说"射线比线段长"——因为射线没有长度（无限长），"比较长短"没有意义。</p></div>
+    <div class="ans-box" id="a3-2"><p><strong>A、B、C</strong>。D 不准确：射线无限延伸，不能与有限线段比较长短。"无限"和"有限"之间不能直接比较大小。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>23.</strong> 关于正方体的展开图，下列说法正确的有哪些？（多选）</p>
+    <div id="opt-4-23"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 正方体展开图共有 11 种</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 展开图中相对的两个面不相邻</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 展开图一定是 6 个正方形连在一起</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 展开图分为"一四一""二三一""二二二""三三"四种类型</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMulti('4-23')">提交</button><span class="feedback" id="fb-4-23"></span>
+      <button class="btn-hint" onclick="toggleHint('h3-3')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-3')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-3"><p>正方体展开图有 11 种，分为四类：一四一型（6 种）、二三一型（3 种）、二二二型（1 种）、三三型（1 种）。展开图中相对的面永远不会相邻（中间一定隔着一个面）。</p></div>
+    <div class="ans-box" id="a3-3"><p><strong>A、B、C、D</strong>。全部正确。正方体展开图共 11 种，分四类，相对的面在展开图中不相邻，且都是 6 个正方形相连。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>24.</strong> 下列哪些角可以组成互余关系？（多选）</p>
+    <div id="opt-4-24"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 30° 和 60°</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 45° 和 45°</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 50° 和 40°</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 20° 和 70°</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMulti('4-24')">提交</button><span class="feedback" id="fb-4-24"></span>
+      <button class="btn-hint" onclick="toggleHint('h3-4')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-4')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-4"><p>互余就是两个角的和等于 90°。逐一检查每对角的和。</p></div>
+    <div class="ans-box" id="a3-4"><p><strong>A、B、C、D</strong>。全部正确。30° + 60° = 90°，45° + 45° = 90°，50° + 40° = 90°，20° + 70° = 90°。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>25.</strong> 关于"点、线、面、体"的关系，下列说法正确的有哪些？（多选）</p>
+    <div id="opt-4-25"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 点动成线</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 线动成面</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 面动成体</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 体动成点</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMulti('4-25')">提交</button><span class="feedback" id="fb-4-25"></span>
+      <button class="btn-hint" onclick="toggleHint('h3-5')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-5')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-5"><p>A、B、C 是几何图形运动生成的基本规律。D 是一个搞笑的干扰项——体运动不会变成点。</p></div>
+    <div class="ans-box" id="a3-5"><p><strong>A、B、C</strong>。D 明显错误，没有"体动成点"的说法。基本规律是：点动成线，线动成面，面动成体。</p></div>
+  </div>
+
+  <p class="section-title">四、其他题型（每题 3 分，共 15 分）</p>
+
+  <div class="q-item">
+    <p><strong>26.</strong> 如图，已知 ∠AOB = 80°，OC 是 ∠AOB 内部的一条射线，且 ∠AOC = 30°。求 ∠BOC 的度数。</p>
+    <div id="fill-4-26"><input class="fill-input" id="inp-4-26" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('4-26', '50°')">提交</button><span class="feedback" id="fb-4-26"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-1')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-1')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-1"><p>OC 在 ∠AOB 内部，所以 ∠AOB = ∠AOC + ∠BOC。已知 ∠AOB = 80°，∠AOC = 30°，用减法即可。</p></div>
+    <div class="ans-box" id="a4-1"><p>∠BOC = ∠AOB − ∠AOC = 80° − 30° = <strong>50°</strong>。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>27.</strong> 时钟在 4:00 时，时针和分针的夹角是多少度？</p>
+    <div id="fill-4-27"><input class="fill-input" id="inp-4-27" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('4-27', '120°')">提交</button><span class="feedback" id="fb-4-27"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-2')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-2')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-2"><p>钟面一圈 360°，分 12 大格，每格 30°。4:00 时，时针指向 4，分针指向 12，跨越 4 大格。</p></div>
+    <div class="ans-box" id="a4-2"><p>钟面每大格 360° ÷ 12 = 30°。从 12 到 4 是 4 大格：4 × 30° = <strong>120°</strong>。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>28.</strong> 一个角的补角是 150°，求这个角的余角。</p>
+    <div id="fill-4-28"><input class="fill-input" id="inp-4-28" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('4-28', '60°')">提交</button><span class="feedback" id="fb-4-28"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-3')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-3')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-3"><p>先通过补角求出这个角本身：角 = 180° − 150° = 30°。再求它的余角：90° − 30° = 60°。</p></div>
+    <div class="ans-box" id="a4-3"><p>这个角 = 180° − 150° = 30°。余角 = 90° − 30° = <strong>60°</strong>。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>29.</strong> 平面上有 4 个点，任意三点不共线。连接任意两点得到一条线段，最多能画出多少条线段？</p>
+    <div id="fill-4-29"><input class="fill-input" id="inp-4-29" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('4-29', '6条')">提交</button><span class="feedback" id="fb-4-29"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-4')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-4')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-4"><p>4 个点中任选 2 个构成一条线段，即 4 × 3 ÷ 2 = 6。</p></div>
+    <div class="ans-box" id="a4-4"><p>从 4 个点中任选 2 个：4 × 3 ÷ 2 = <strong>6 条线段</strong>。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>30.</strong> 已知 ∠A 和 ∠B 互补，且 ∠A = 2 倍的 ∠B。求 ∠A 和 ∠B 各是多少度？</p>
+    <div id="fill-4-30"><input class="fill-input" id="inp-4-30" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('4-30', '120°,60°')">提交</button><span class="feedback" id="fb-4-30"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-5')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-5')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-5"><p>互补说明 ∠A + ∠B = 180°。又知道 ∠A 是 ∠B 的 2 倍，所以 2 个 ∠B 加上 1 个 ∠B 等于 180°，即 3 个 ∠B 等于 180°。</p></div>
+    <div class="ans-box" id="a4-5"><p>∠A + ∠B = 180°，且 ∠A 是 ∠B 的 2 倍。所以 3 个 ∠B = 180°，∠B = 180° ÷ 3 = <strong>60°</strong>。∠A = 2 × 60° = <strong>120°</strong>。</p></div>
+  </div>
+
+</article>
+<script>
+function checkTF(btn, isCorrect, qid) {
+  const container = document.getElementById('tf-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.tf-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function checkSingle(btn, isCorrect, qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.opt-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function toggleMultiOpt(btn) {
+  btn.classList.toggle('selected');
+}
+function checkMulti(qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  const opts = container.querySelectorAll('.opt-btn');
+  let allCorrect = true;
+  opts.forEach(o => {
+    o.style.pointerEvents = 'none';
+    const isCorrect = o.dataset.correct === 'true';
+    const isSelected = o.classList.contains('selected');
+    if (isCorrect && isSelected) o.classList.add('correct');
+    else if (!isCorrect && isSelected) { o.classList.add('wrong'); allCorrect = false; }
+    else if (isCorrect && !isSelected) { o.classList.add('correct'); allCorrect = false; }
+  });
+  const fb = document.getElementById('fb-' + qid);
+  if (fb) { fb.textContent = allCorrect ? '✓ 正确' : '✗ 错误'; fb.className = 'feedback show ' + (allCorrect ? 'correct-fb' : 'wrong-fb'); }
+}
+function checkFill(qid, correctAns) {
+  const container = document.getElementById('fill-' + qid);
+  if (!container || container.dataset.done) return;
+  const input = document.getElementById('inp-' + qid);
+  const fb = document.getElementById('fb-' + qid);
+  const userAns = input.value.trim();
+  if (!userAns) return;
+  container.dataset.done = '1';
+  input.disabled = true;
+  const checkBtn = container.querySelector('.check-btn');
+  if (checkBtn) checkBtn.style.display = 'none';
+  const normalized = userAns.replace(/\s+/g, '');
+  const normalizedCorrect = correctAns.replace(/\s+/g, '');
+  if (normalized === normalizedCorrect) {
+    input.style.borderColor = '#4caf50';
+    input.style.background = '#e8f5e9';
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    input.style.borderColor = '#f44336';
+    input.style.background = '#ffebee';
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+</body>
+</html>

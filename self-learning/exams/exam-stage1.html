@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模拟考试 — 阶段一 — 自学课件</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../lessons/style.css">
+<style>
+  :root { --accent: #2e7d32; }
+  .exam-header { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .section-title { color: #2e7d32; font-size: 18px; font-weight: 700; margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #c8e6c9; }
+  .q-item { padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+  .q-item:last-child { border-bottom: none; }
+  .btn-row { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-hint, .btn-ans { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; }
+  .btn-hint:hover { background: #fff3e0; border-color: #ff9800; }
+  .btn-ans:hover { background: #e8f5e9; border-color: #4caf50; }
+  .hint-box, .ans-box { display: none; margin-top: 8px; padding: 10px 14px; border-radius: 6px; font-size: 14px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .hint-box { background: #fff8e1; border-left: 3px solid #ff9800; }
+  .ans-box { background: #e8f5e9; border-left: 3px solid #4caf50; }
+  .opt-row { margin: 4px 0; padding-left: 8px; }
+  .opt { display: inline-block; min-width: 24px; font-weight: 600; }
+  @media (max-width: 720px) {
+    article { padding-bottom: 100px !important; }
+    article { padding: 20px 12px 100px 12px !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    .q-item { padding: 10px 0; }
+    .exam-header { padding: 12px 14px; margin: 12px 0; }
+  }
+  .opt-btn { display: inline-block; padding: 6px 16px; margin: 3px 4px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .opt-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .opt-btn.selected { border-color: #1976d2; background: #e3f2fd; }
+  .opt-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .opt-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .tf-btn { display: inline-block; padding: 6px 20px; margin: 3px 6px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .tf-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .tf-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .tf-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .fill-input { padding: 6px 12px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 15px; width: 160px; }
+  .fill-input:focus { outline: none; border-color: #1976d2; }
+  .check-btn { padding: 6px 16px; border: 1px solid #1976d2; border-radius: 6px; background: #1976d2; color: #fff; font-size: 13px; cursor: pointer; margin-left: 8px; }
+  .check-btn:hover { background: #1565c0; }
+  .feedback { display: none; margin-left: 8px; font-size: 14px; font-weight: 600; }
+  .feedback.show { display: inline; }
+  .feedback.correct-fb { color: #2e7d32; }
+  .feedback.wrong-fb { color: #c62828; }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="../index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：无（第一课）</p>
+  <h1>模拟考试 — 阶段一：数与计算</h1>
+  <div class="exam-header">
+    <p>⏱ 时间：30 分钟 | ✅ 判断题 10 题 | 🔘 单选题 10 题 | ☑️ 多选题 5 题 | ✏️ 其他题型 5 题 | 共 30 题</p>
+    <p style="font-size:13px;color:#888;">考查范围：自然数、零与十进制 · 分数 · 负数</p>
+  </div>
+
+  <p class="section-title">一、判断题（每题 1 分，共 10 分）</p>
+
+  <!-- 判 1 -->
+  <div class="q-item">
+    <p><strong>1.</strong> 0 是最小的自然数。</p>
+    <div id="tf-1-1">
+      <button class="tf-btn" onclick="checkTF(this, true, '1-1')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '1-1')">错误</button>
+      <span class="feedback" id="fb-1-1"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-1">自然数从 0 开始，每加 1 得到下一个。想一想：有没有比 0 更小的自然数？</div>
+    <div class="ans-box" id="a1-1"><strong>✅ 正确。</strong>自然数包括 0, 1, 2, 3, … 0 是自然数的起点，没有比 0 更小的自然数。</div>
+  </div>
+
+  <!-- 判 2 -->
+  <div class="q-item">
+    <p><strong>2.</strong> 在十进制中，数字"5"在 352 和 527 中代表的值相同。</p>
+    <div id="tf-1-2">
+      <button class="tf-btn" onclick="checkTF(this, false, '1-2')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '1-2')">错误</button>
+      <span class="feedback" id="fb-1-2"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-2">回顾位值制的概念：同一个数字在不同位置，代表的值一样吗？在 352 中，5 在什么位？在 527 中呢？</div>
+    <div class="ans-box" id="a1-2"><strong>❌ 错误。</strong>在 352 中，5 在十位，代表 50；在 527 中，5 在百位，代表 500。这就是位值制——同一个数字在不同位置，代表不同的值。</div>
+  </div>
+
+  <!-- 判 3 -->
+  <div class="q-item">
+    <p><strong>3.</strong> 分数 3/4 和 6/8 表示的大小相同。</p>
+    <div id="tf-1-3">
+      <button class="tf-btn" onclick="checkTF(this, true, '1-3')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '1-3')">错误</button>
+      <span class="feedback" id="fb-1-3"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-3">把分子和分母同时乘或除以一个相同的非零数，分数的大小会变吗？试试用通分或约分的方法验证。</div>
+    <div class="ans-box" id="a1-3"><strong>✅ 正确。</strong>6/8 的分子分母同时除以 2 得到 3/4。根据分数的基本性质，分子分母同乘或同除以一个非零数，分数的值不变。</div>
+  </div>
+
+  <!-- 判 4 -->
+  <div class="q-item">
+    <p><strong>4.</strong> 在数轴上，-3 在 -1 的右边。</p>
+    <div id="tf-1-4">
+      <button class="tf-btn" onclick="checkTF(this, false, '1-4')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '1-4')">错误</button>
+      <span class="feedback" id="fb-1-4"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-4">在数轴上，越往右数越大，越往左数越小。-3 和 -1 哪个更大？负数的比较和正数有什么不同？</div>
+    <div class="ans-box" id="a1-4"><strong>❌ 错误。</strong>在数轴上，-3 在 -1 的左边。因为 -3 &lt; -1，越小的数越靠左。负数比较："绝对值大的反而小"。</div>
+  </div>
+
+  <!-- 判 5 -->
+  <div class="q-item">
+    <p><strong>5.</strong> 零的发明是印度数学家对数学最重要的贡献之一。</p>
+    <div id="tf-1-5">
+      <button class="tf-btn" onclick="checkTF(this, true, '1-5')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '1-5')">错误</button>
+      <span class="feedback" id="fb-1-5"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-5">零有什么作用？它不仅仅是"没有"，还是占位符。有了零，十进制才真正完善。</div>
+    <div class="ans-box" id="a1-5"><strong>✅ 正确。</strong>印度数学家约在公元 5 世纪发明了零作为占位符，使得十进制位值制真正完善。没有零，就无法区分 35 和 305。</div>
+  </div>
+
+  <!-- 判 6 -->
+  <div class="q-item">
+    <p><strong>6.</strong> 真分数的值一定小于 1。</p>
+    <div id="tf-1-6">
+      <button class="tf-btn" onclick="checkTF(this, true, '1-6')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '1-6')">错误</button>
+      <span class="feedback" id="fb-1-6"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-6')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-6')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-6">真分数的定义是分子小于分母。这样的分数，比如 3/4，比 1 大还是小？</div>
+    <div class="ans-box" id="a1-6"><strong>✅ 正确。</strong>真分数是分子小于分母的分数，如 3/4、2/5。因为分子 &lt; 分母，所以真分数的值一定小于 1（但大于 0）。</div>
+  </div>
+
+  <!-- 判 7 -->
+  <div class="q-item">
+    <p><strong>7.</strong> 两个负数相加，结果一定是正数。</p>
+    <div id="tf-1-7">
+      <button class="tf-btn" onclick="checkTF(this, false, '1-7')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '1-7')">错误</button>
+      <span class="feedback" id="fb-1-7"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-7')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-7')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-7">用欠债的比喻：欠了 3 元，又欠了 5 元，一共欠了多少？用数轴想：从 -3 往左走 5 步，到达哪里？</div>
+    <div class="ans-box" id="a1-7"><strong>❌ 错误。</strong>两个负数相加，结果还是负数。例如 (-3) + (-5) = -8。用欠债理解：欠 3 元 + 欠 5 元 = 共欠 8 元。</div>
+  </div>
+
+  <!-- 判 8 -->
+  <div class="q-item">
+    <p><strong>8.</strong> 分数 5/5 等于 1。</p>
+    <div id="tf-1-8">
+      <button class="tf-btn" onclick="checkTF(this, true, '1-8')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '1-8')">错误</button>
+      <span class="feedback" id="fb-1-8"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-8')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-8')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-8">分数表示"把整体分成若干份，取其中几份"。5/5 表示把整体分成 5 份，取了 5 份——相当于取了全部。</div>
+    <div class="ans-box" id="a1-8"><strong>✅ 正确。</strong>5/5 表示把整体分成 5 份，取 5 份，即取全部，等于 1。当分子等于分母时，分数等于 1。</div>
+  </div>
+
+  <!-- 判 9 -->
+  <div class="q-item">
+    <p><strong>9.</strong> 任何数加上它的相反数等于 0。</p>
+    <div id="tf-1-9">
+      <button class="tf-btn" onclick="checkTF(this, true, '1-9')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '1-9')">错误</button>
+      <span class="feedback" id="fb-1-9"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-9')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-9')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-9">相反数的定义是什么？在数轴上，一个数和它的相反数关于 0 对称。比如 3 和 -3，加起来是多少？</div>
+    <div class="ans-box" id="a1-9"><strong>✅ 正确。</strong>相反数的定义就是"和为 0 的两个数"。例如 3 + (-3) = 0，-5 + 5 = 0。</div>
+  </div>
+
+  <!-- 判 10 -->
+  <div class="q-item">
+    <p><strong>10.</strong> 分数的分母可以为 0。</p>
+    <div id="tf-1-10">
+      <button class="tf-btn" onclick="checkTF(this, false, '1-10')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '1-10')">错误</button>
+      <span class="feedback" id="fb-1-10"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-10')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-10')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-10">分母表示"分成了几份"。如果分母是 0，意味着"把整体分成了 0 份"，这有实际意义吗？</div>
+    <div class="ans-box" id="a1-10"><strong>❌ 错误。</strong>分母不能为 0。分母表示"分成几份"，分成 0 份没有意义。而且，除以 0 在数学中没有定义。</div>
+  </div>
+
+  <p class="section-title">二、单选题（每题 2 分，共 20 分）</p>
+
+  <!-- 选 1 -->
+  <div class="q-item">
+    <p><strong>11.</strong> 在 7053 中，数字"0"表示什么？</p>
+    <div id="opt-1-11">
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-11')" data-correct="false">A. 没有意义</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '1-11')" data-correct="true">B. 百位没有数，起占位作用</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-11')" data-correct="false">C. 从这个位置开始都是零</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-11')" data-correct="false">D. 表示这个数等于 753</button>
+      <span class="feedback" id="fb-1-11"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-11')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-11')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-11">7053 的千位是 7，百位是 0，十位是 5，个位是 3。如果没有百位上的 0，这个数会变成什么？</div>
+    <div class="ans-box" id="a1-11"><strong>B。</strong>百位上的 0 表示"百位没有数"，它起占位作用。没有它，7053 就变成了 753，意义完全不同。零是位值制的核心。</div>
+  </div>
+
+  <!-- 选 2 -->
+  <div class="q-item">
+    <p><strong>12.</strong> 下列哪个分数最大？</p>
+    <div id="opt-1-12">
+      <button class="opt-btn" onclick="checkSingle(this, true, '1-12')" data-correct="true">A. 2/3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-12')" data-correct="false">B. 3/5</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-12')" data-correct="false">C. 5/8</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-12')" data-correct="false">D. 7/12</button>
+      <span class="feedback" id="fb-1-12"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-12')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-12')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-12">比较分数大小的方法：通分，化为同分母后比较分子；或者和 1/2 比较，看哪个比 1/2 大更多。</div>
+    <div class="ans-box" id="a1-12"><strong>A。</strong>通分后：2/3 = 40/60，3/5 = 36/60，5/8 = 37.5/60，7/12 = 35/60。2/3 = 40/60 最大。或者和 1/2 比较：2/3 - 1/2 = 1/6，3/5 - 1/2 = 1/10，5/8 - 1/2 = 1/8，7/12 - 1/2 = 1/12，1/6 最大。</div>
+  </div>
+
+  <!-- 选 3 -->
+  <div class="q-item">
+    <p><strong>13.</strong> (-5) - (-3) 的结果是：</p>
+    <div id="opt-1-13">
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-13')" data-correct="false">A. -8</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '1-13')" data-correct="true">B. -2</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-13')" data-correct="false">C. 2</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-13')" data-correct="false">D. 8</button>
+      <span class="feedback" id="fb-1-13"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-13')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-13')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-13">减去一个负数，等于加上它的相反数。(-5) - (-3) = (-5) + 3。用欠债比喻：欠 5 元，减少了 3 元欠债，还欠多少？</div>
+    <div class="ans-box" id="a1-13"><strong>B。</strong>(-5) - (-3) = (-5) + 3 = -2。减去负数等于加上它的相反数。用欠债理解：欠 5 元，免掉 3 元欠债，还欠 2 元。</div>
+  </div>
+
+  <!-- 选 4 -->
+  <div class="q-item">
+    <p><strong>14.</strong> 3/5 + 1/2 的结果是：</p>
+    <div id="opt-1-14">
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-14')" data-correct="false">A. 4/7</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '1-14')" data-correct="true">B. 11/10</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-14')" data-correct="false">C. 4/10</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-14')" data-correct="false">D. 1</button>
+      <span class="feedback" id="fb-1-14"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-14')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-14')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-14">异分母分数相加，先通分，找出公分母。3/5 和 1/2 的公分母是多少？</div>
+    <div class="ans-box" id="a1-14"><strong>B。</strong>通分：3/5 = 6/10，1/2 = 5/10。6/10 + 5/10 = 11/10 = 1又1/10。注意：分数相加不能直接加分子加分母！</div>
+  </div>
+
+  <!-- 选 5 -->
+  <div class="q-item">
+    <p><strong>15.</strong> 在数轴上，-2 和 4 之间的距离是：</p>
+    <div id="opt-1-15">
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-15')" data-correct="false">A. 2</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-15')" data-correct="false">B. 4</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '1-15')" data-correct="true">C. 6</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-15')" data-correct="false">D. -6</button>
+      <span class="feedback" id="fb-1-15"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-15')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-15')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-15">距离永远是正数。数轴上两点之间的距离 = 较大数 - 较小数。4 和 -2 哪个大？</div>
+    <div class="ans-box" id="a1-15"><strong>C。</strong>距离 = 4 - (-2) = 4 + 2 = 6。距离永远是正数，所以不可能是 -6。从 -2 走到 4，需要走 6 个单位。</div>
+  </div>
+
+  <!-- 选 6 -->
+  <div class="q-item">
+    <p><strong>16.</strong> 下列哪个数是 3/4 的倒数？</p>
+    <div id="opt-1-16">
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-16')" data-correct="false">A. 3/4</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '1-16')" data-correct="true">B. 4/3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-16')" data-correct="false">C. -3/4</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-16')" data-correct="false">D. 1/4</button>
+      <span class="feedback" id="fb-1-16"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-16')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-16')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-16">倒数的定义：两个数相乘等于 1。3/4 乘以哪个数等于 1？把分子分母交换一下。</div>
+    <div class="ans-box" id="a1-16"><strong>B。</strong>倒数的定义：乘积为 1 的两个数互为倒数。3/4 × 4/3 = 1，所以 4/3 是 3/4 的倒数。</div>
+  </div>
+
+  <!-- 选 7 -->
+  <div class="q-item">
+    <p><strong>17.</strong> (-2) × (-3) × (-1) 的结果是：</p>
+    <div id="opt-1-17">
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-17')" data-correct="false">A. 6</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '1-17')" data-correct="true">B. -6</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-17')" data-correct="false">C. 5</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-17')" data-correct="false">D. -5</button>
+      <span class="feedback" id="fb-1-17"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-17')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-17')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-17">先算 (-2) × (-3) = 6（负负得正），再算 6 × (-1) = ？正数乘负数得什么？</div>
+    <div class="ans-box" id="a1-17"><strong>B。</strong>(-2) × (-3) = 6（负负得正），6 × (-1) = -6（正负得负）。三个负数相乘，负号个数为奇数（3 个），结果为负。</div>
+  </div>
+
+  <!-- 选 8 -->
+  <div class="q-item">
+    <p><strong>18.</strong> 把 2/3 化成小数，结果是：</p>
+    <div id="opt-1-18">
+      <button class="opt-btn" onclick="checkSingle(this, true, '1-18')" data-correct="true">A. 0.666...（无限循环小数）</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-18')" data-correct="false">B. 0.6</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-18')" data-correct="false">C. 0.66</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-18')" data-correct="false">D. 0.67</button>
+      <span class="feedback" id="fb-1-18"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-18')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-18')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-18">分数化小数：用分子除以分母。2 ÷ 3 = ? 注意观察商是否无限循环。</div>
+    <div class="ans-box" id="a1-18"><strong>A。</strong>2 ÷ 3 = 0.666...，6 无限循环。这是一个无限循环小数，不是 0.6（有限小数），也不是四舍五入后的近似值 0.67。</div>
+  </div>
+
+  <!-- 选 9 -->
+  <div class="q-item">
+    <p><strong>19.</strong> 下列哪个说法正确？</p>
+    <div id="opt-1-19">
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-19')" data-correct="false">A. 自然数包括负数</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-19')" data-correct="false">B. 0 不是自然数</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-19')" data-correct="false">C. 分数都可以化为有限小数</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '1-19')" data-correct="true">D. 正数一定大于负数</button>
+      <span class="feedback" id="fb-1-19"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-19')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-19')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-19">逐一分析每个选项。A：自然数从 0 开始，包括负数吗？B：在我们课程中，0 算自然数吗？C：2/3 能化成有限小数吗？D：正数大于 0，负数小于 0，它们之间谁大谁小？</div>
+    <div class="ans-box" id="a1-19"><strong>D。</strong>正数都大于 0，负数都小于 0，所以正数一定大于负数。A 错：自然数不包括负数。B 错：本课程中 0 是自然数。C 错：2/3 = 0.666... 是无限循环小数。</div>
+  </div>
+
+  <!-- 选 10 -->
+  <div class="q-item">
+    <p><strong>20.</strong> 温度从 -5°C 上升到 3°C，上升了多少度？</p>
+    <div id="opt-1-20">
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-20')" data-correct="false">A. 2°C</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '1-20')" data-correct="true">B. 8°C</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-20')" data-correct="false">C. -2°C</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '1-20')" data-correct="false">D. -8°C</button>
+      <span class="feedback" id="fb-1-20"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-20')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-20')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-20">上升量 = 后来的温度 - 原来的温度 = 3 - (-5)。减去负数等于加上什么？</div>
+    <div class="ans-box" id="a1-20"><strong>B。</strong>上升 = 3 - (-5) = 3 + 5 = 8°C。从 -5 到 3，实际上跨越了 8 个温度单位。上升量一定是正数，不可能是负数。</div>
+  </div>
+
+  <p class="section-title">三、多选题（每题 3 分，共 15 分）</p>
+
+  <!-- 多 1 -->
+  <div class="q-item">
+    <p><strong>21.</strong> 下列分数中，大于 1/2 的有：（多选）</p>
+    <div id="opt-1-21">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 3/5</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">B. 2/7</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 5/9</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 4/8</button>
+      <br>
+      <button class="check-btn" onclick="checkMulti('1-21')">提交</button>
+      <span class="feedback" id="fb-1-21"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-21')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-21')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-21">把每个分数和 1/2 比较。通分（分母都变成 2×分母）或交叉相乘比较：对于 a/b 和 1/2，比较 2a 和 b 的大小。</div>
+    <div class="ans-box" id="a1-21"><strong>A、C。</strong>A：3/5，2×3=6 > 5，大于 1/2。B：2/7，2×2=4 < 7，小于 1/2。C：5/9，2×5=10 > 9，大于 1/2。D：4/8 = 1/2，等于 1/2，不是大于。</div>
+  </div>
+
+  <!-- 多 2 -->
+  <div class="q-item">
+    <p><strong>22.</strong> 关于负数，下列说法正确的有：（多选）</p>
+    <div id="opt-1-22">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 负数都比 0 小</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 两个负数相加，和一定是负数</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 负数乘以负数得正数</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 负数的绝对值是负数</button>
+      <br>
+      <button class="check-btn" onclick="checkMulti('1-22')">提交</button>
+      <span class="feedback" id="fb-1-22"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-22')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-22')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-22">逐一检查：A 是负数的定义。B 用欠债理解。C 是乘法法则。D 绝对值是"到 0 的距离"，永远是正数或 0。</div>
+    <div class="ans-box" id="a1-22"><strong>A、B、C。</strong>A：负数定义就是小于 0 的数。B：两个负数相加，如 (-2)+(-3)=-5，仍是负数。C：负负得正，如 (-2)×(-3)=6。D 错：-3 的绝对值是 3，是正数，不是负数。</div>
+  </div>
+
+  <!-- 多 3 -->
+  <div class="q-item">
+    <p><strong>23.</strong> 关于位值制和十进制，下列说法正确的有：（多选）</p>
+    <div id="opt-1-23">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 十进制中，每一位的权是 10 的幂</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">B. 罗马数字也是一种位值制</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 零在十进制中起占位作用</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 十进制起源于印度，经阿拉伯传到欧洲</button>
+      <br>
+      <button class="check-btn" onclick="checkMulti('1-23')">提交</button>
+      <span class="feedback" id="fb-1-23"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-23')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-23')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-23">位值制的核心：数字的位置决定它的大小。罗马数字中 I 和 V 等符号，位置变了值会变吗？</div>
+    <div class="ans-box" id="a1-23"><strong>A、C、D。</strong>A：个位是 10⁰，十位是 10¹，百位是 10²... 正确。B 错：罗马数字如 IV=4，VI=6，不是位值制（没有固定的位权）。C 正确。D 正确：印度发明，经阿拉伯传到欧洲，故称"阿拉伯数字"。</div>
+  </div>
+
+  <!-- 多 4 -->
+  <div class="q-item">
+    <p><strong>24.</strong> 下列运算结果为正数的有：（多选）</p>
+    <div id="opt-1-24">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. (-4) + 7</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. (-2) × (-5)</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">C. (-8) ÷ 2</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 3 - (-2)</button>
+      <br>
+      <button class="check-btn" onclick="checkMulti('1-24')">提交</button>
+      <span class="feedback" id="fb-1-24"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-24')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-24')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-24">逐项计算：A：负+正，绝对值大的符号决定。B：负×负得正。C：负÷正得负。D：减去负数等于加正数。</div>
+    <div class="ans-box" id="a1-24"><strong>A、B、D。</strong>A：(-4)+7=3 > 0。B：(-2)×(-5)=10 > 0。C：(-8)÷2=-4 < 0。D：3-(-2)=3+2=5 > 0。</div>
+  </div>
+
+  <!-- 多 5 -->
+  <div class="q-item">
+    <p><strong>25.</strong> 关于分数，下列说法正确的有：（多选）</p>
+    <div id="opt-1-25">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 分数可以表示小于 1 的量</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">B. 分数加减必须先通分</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 假分数的值一定大于或等于 1</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 分数的分子分母同时加上同一个数，分数值不变</button>
+      <br>
+      <button class="check-btn" onclick="checkMulti('1-25')">提交</button>
+      <span class="feedback" id="fb-1-25"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-25')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-25')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-25">A：分数可以表示"半个"等。B：同分母可以直接加减，异分母才需要通分。C：假分数分子≥分母。D：分数的基本性质是乘除，不是加减。</div>
+    <div class="ans-box" id="a1-25"><strong>A、C。</strong>A 正确：分数可以表示小于 1 的量（如 1/2）。B 错：同分母分数可以直接加减，不需要通分。C 正确：假分数分子≥分母，所以值≥1。D 错：分子分母同时加同一个数，分数值会变（如 1/2，分子分母都加 1 变成 2/3≠1/2）。</div>
+  </div>
+
+  <p class="section-title">四、其他题型（每题 3 分，共 15 分）</p>
+
+  <!-- 其他 1 -->
+  <div class="q-item">
+    <p><strong>26.</strong> 计算：2/3 - 1/4 = ？</p>
+    <div id="fill-1-26">
+      <input class="fill-input" id="inp-1-26" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('1-26', '5/12')">提交</button>
+      <span class="feedback" id="fb-1-26"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-26')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-26')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-26">先通分：3 和 4 的最小公倍数是 12。2/3 = ?/12，1/4 = ?/12，然后相减。</div>
+    <div class="ans-box" id="a1-26"><strong>5/12。</strong>通分：2/3 = 8/12，1/4 = 3/12。8/12 - 3/12 = 5/12。</div>
+  </div>
+
+  <!-- 其他 2 -->
+  <div class="q-item">
+    <p><strong>27.</strong> 计算：(-7) + 12 - (-3) = ？</p>
+    <div id="fill-1-27">
+      <input class="fill-input" id="inp-1-27" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('1-27', '8')">提交</button>
+      <span class="feedback" id="fb-1-27"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-27')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-27')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-27">从左到右：(-7) + 12 = 5，然后减去 (-3) —— 减去负数等于加上它的相反数。5 - (-3) = ？</div>
+    <div class="ans-box" id="a1-27"><strong>8。</strong>(-7) + 12 = 5，5 - (-3) = 5 + 3 = 8。</div>
+  </div>
+
+  <!-- 其他 3 -->
+  <div class="q-item">
+    <p><strong>28.</strong> 计算：(-15) ÷ 3 × (-2) = ？</p>
+    <div id="fill-1-28">
+      <input class="fill-input" id="inp-1-28" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('1-28', '10')">提交</button>
+      <span class="feedback" id="fb-1-28"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-28')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-28')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-28">从左到右依次计算：(-15) ÷ 3 = -5，然后 (-5) × (-2) = ？负负得正。</div>
+    <div class="ans-box" id="a1-28"><strong>10。</strong>(-15) ÷ 3 = -5，(-5) × (-2) = 10。</div>
+  </div>
+
+  <!-- 其他 4 -->
+  <div class="q-item">
+    <p><strong>29.</strong> 计算：1/2 + 2/3 × 3/4 = ？</p>
+    <div id="fill-1-29">
+      <input class="fill-input" id="inp-1-29" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('1-29', '1')">提交</button>
+      <span class="feedback" id="fb-1-29"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-29')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-29')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-29">注意运算顺序：先乘除后加减。先算 2/3 × 3/4，再和 1/2 相加。</div>
+    <div class="ans-box" id="a1-29"><strong>1。</strong>2/3 × 3/4 = 6/12 = 1/2。1/2 + 1/2 = 1。</div>
+  </div>
+
+  <!-- 其他 5 -->
+  <div class="q-item">
+    <p><strong>30.</strong> 比较大小：-2/3 和 -3/4，哪个更大？</p>
+    <div id="fill-1-30">
+      <input class="fill-input" id="inp-1-30" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('1-30', '-2/3')">提交</button>
+      <span class="feedback" id="fb-1-30"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-30')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-30')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-30">两个负数比较大小：绝对值大的反而小。先比较 2/3 和 3/4 的大小（通分），然后这个大小关系反过来。</div>
+    <div class="ans-box" id="a1-30"><strong>-2/3 更大。</strong>通分：2/3 = 8/12，3/4 = 9/12。因为 8/12 < 9/12，所以 2/3 < 3/4。但因为是负数比较，绝对值大的反而小：-2/3 > -3/4。</div>
+  </div>
+
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+function checkTF(btn, isCorrect, qid) {
+  const container = document.getElementById('tf-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.tf-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function checkSingle(btn, isCorrect, qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.opt-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function toggleMultiOpt(btn) {
+  btn.classList.toggle('selected');
+}
+function checkMulti(qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  const opts = container.querySelectorAll('.opt-btn');
+  let allCorrect = true;
+  opts.forEach(o => {
+    o.style.pointerEvents = 'none';
+    const isCorrect = o.dataset.correct === 'true';
+    const isSelected = o.classList.contains('selected');
+    if (isCorrect && isSelected) o.classList.add('correct');
+    else if (!isCorrect && isSelected) { o.classList.add('wrong'); allCorrect = false; }
+    else if (isCorrect && !isSelected) { o.classList.add('correct'); allCorrect = false; }
+  });
+  const fb = document.getElementById('fb-' + qid);
+  if (fb) { fb.textContent = allCorrect ? '✓ 正确' : '✗ 错误'; fb.className = 'feedback show ' + (allCorrect ? 'correct-fb' : 'wrong-fb'); }
+}
+function checkFill(qid, correctAns) {
+  const container = document.getElementById('fill-' + qid);
+  if (!container || container.dataset.done) return;
+  const input = document.getElementById('inp-' + qid);
+  const fb = document.getElementById('fb-' + qid);
+  const userAns = input.value.trim();
+  if (!userAns) return;
+  container.dataset.done = '1';
+  input.disabled = true;
+  const checkBtn = container.querySelector('.check-btn');
+  if (checkBtn) checkBtn.style.display = 'none';
+  const normalized = userAns.replace(/\s+/g, '');
+  const normalizedCorrect = correctAns.replace(/\s+/g, '');
+  if (normalized === normalizedCorrect) {
+    input.style.borderColor = '#4caf50';
+    input.style.background = '#e8f5e9';
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    input.style.borderColor = '#f44336';
+    input.style.background = '#ffebee';
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+</script>
+</body>
+</html>

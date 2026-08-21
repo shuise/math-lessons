@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据的收集与整理 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #33691e; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed #33691e; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  .bar-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  .bar-table td, .bar-table th { border: 1px solid #ddd; padding: 8px 12px; text-align: center; }
+  .bar-table th { background: #e8f5e9; }
+
+  @media (max-width: 720px) {
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./natural-numbers.html">课件 1（自然数——计数基础）</a></p>
+  <h1>数据的收集与整理</h1>
+
+  <h2>起源：人类为什么要统计？</h2>
+  <div class="origin">
+    <p><strong>公元前 3000 年，</strong>古埃及法老要做一件大事：建金字塔。他需要知道：全国有多少人？多少人能干活？仓库里有多少粮食能养活工人？于是，最早的"人口普查"就诞生了——官员挨家挨户登记人数、牲畜和粮食。</p>
+    <p>在中国，大禹治水（约公元前 2000 年）时，也统计了全国的土地和人口。《尚书·禹贡》就记载了各地的物产和赋税。到了周朝，更有了专门的"司民"官职，负责统计人口。</p>
+    <p>到了现代，美国总统大选、奥运奖牌榜、天气预报、疫情数据……<strong>统计无处不在。</strong>数据就像侦探的眼睛，帮我们看清世界的真相。</p>
+    <p>但收集数据只是第一步——<strong>一堆杂乱的数据毫无用处，必须整理才能看出规律。</strong>这就是本课要学的内容。</p>
+  </div>
+
+  <h2>一、统计调查：普查与抽样调查</h2>
+  <div class="story">
+    <p>想知道全班 50 个同学的身高，最好的办法是<strong>每个人都量一遍</strong>。这就是<strong>普查</strong>——对全体对象逐一调查。</p>
+    <p>但有些事不可能普查：你想知道全国人民最喜欢吃什么口味的方便面，难道要问遍 14 亿人？太慢了，也太贵了！</p>
+    <p>这时候就用<strong>抽样调查</strong>——从总体中选出一部分作为<strong>样本</strong>，用样本的情况来推测总体。</p>
+
+    <div class="key">
+      <p><strong>普查 vs 抽样调查：</strong></p>
+      <ul>
+        <li><strong>普查</strong>：对全体对象逐一调查。结果准确，但费时费力。</li>
+        <li><strong>抽样调查</strong>：只调查一部分对象。省时省力，但有误差。</li>
+      </ul>
+      <p><strong>什么时候用普查？</strong>对象不多、结果必须精确的时候。比如：全班同学的身高、学校运动会的报名人数。</p>
+      <p><strong>什么时候用抽样调查？</strong>对象太多、或者调查会破坏对象的时候。比如：灯泡寿命测试（测完灯泡就坏了！）、全国收视率调查。</p>
+    </div>
+
+    <div class="example">
+      <strong>想一想：</strong>以下情况适合普查还是抽样调查？<br>
+      ① 检查一批炮弹的射程——<strong>抽样调查</strong>（炮弹打出去就没了！）<br>
+      ② 了解全班同学周末的作业时间——<strong>普查</strong>（才几十个人，不难）<br>
+      ③ 了解某品牌汽车的安全性能——<strong>抽样调查</strong>（碰撞测试会毁掉车）<br>
+      ④ 全国人口数量——<strong>普查</strong>（国家每 10 年搞一次，虽然辛苦但必须准确）
+    </div>
+  </div>
+
+  <h2>二、总体、个体、样本、样本容量</h2>
+  <div class="formula">
+    <p>这四个概念是统计学的"四大金刚"，一定要分清：</p>
+    <div class="key">
+      <p><strong>总体</strong>：要考察的<strong>全体对象</strong>。<br>
+      <strong>个体</strong>：总体中的<strong>每一个</strong>考察对象。<br>
+      <strong>样本</strong>：从总体中抽取的<strong>一部分个体</strong>。<br>
+      <strong>样本容量</strong>：样本中个体的<strong>数目</strong>（注意：不是带单位，只是一个数字）。</p>
+    </div>
+
+    <div class="example">
+      <strong>例子：</strong>为了了解某校七年级 800 名学生的体重情况，从中抽查了 50 名学生的体重。<br><br>
+      <strong>总体：</strong>该校七年级 800 名学生的体重<br>
+      <strong>个体：</strong>该校七年级<strong>每一名</strong>学生的体重<br>
+      <strong>样本：</strong>被抽查的 50 名学生的体重<br>
+      <strong>样本容量：</strong>50（注意：只写 50，不写"50 名"！）
+    </div>
+
+    <p><strong>特别提醒：</strong>总体、个体、样本说的都是"体重"这个数据，而不是"学生"这个人！我们考察的是<strong>数据</strong>，不是人。所以总体是"800 名学生的体重"，不是"800 名学生"。</p>
+  </div>
+
+  <h2>三、数据的整理：频数与频率</h2>
+  <div class="story">
+    <p>收集数据只是第一步，一堆杂乱的数据什么也看不出来。得整理。</p>
+    <p>假设我们调查了全班 30 个同学最喜欢的运动，得到一堆数据：</p>
+    <p style="font-family:monospace;background:#f5f5f5;padding:8px;border-radius:4px;">篮球、足球、乒乓球、篮球、羽毛球、篮球、足球、乒乓球、篮球、篮球、跑步、足球、篮球、羽毛球、乒乓球、篮球、足球、篮球、乒乓球、跑步、篮球、足球、羽毛球、篮球、乒乓球、篮球、跑步、篮球、足球、乒乓球</p>
+    <p>乱不乱？太乱了！我们得把它们"分类计数"——这叫做<strong>频数统计</strong>。</p>
+
+    <p><strong>频数</strong>：就是某个数据出现的次数。</p>
+    <p><strong>频率</strong>：频数 ÷ 总数（通常用百分数表示）。</p>
+
+    <div class="formula">
+      <p style="text-align:center;font-size:18px;"><strong>频率 = 频数 ÷ 数据总数</strong></p>
+    </div>
+
+    <p>用"正"字法来统计（每画一笔算一个，一个"正"字正好 5 笔）：</p>
+
+    <table class="bar-table">
+      <tr><th>运动项目</th><th>画"正"字</th><th>频数</th><th>频率</th></tr>
+      <tr><td>篮球</td><td>正正正</td><td>13</td><td>13 ÷ 30 ≈ 43.3%</td></tr>
+      <tr><td>足球</td><td>正一</td><td>6</td><td>6 ÷ 30 = 20%</td></tr>
+      <tr><td>乒乓球</td><td>正</td><td>5</td><td>5 ÷ 30 ≈ 16.7%</td></tr>
+      <tr><td>跑步</td><td>下</td><td>3</td><td>3 ÷ 30 = 10%</td></tr>
+      <tr><td>羽毛球</td><td>下</td><td>3</td><td>3 ÷ 30 = 10%</td></tr>
+      <tr><td><strong>合计</strong></td><td></td><td><strong>30</strong></td><td><strong>100%</strong></td></tr>
+    </table>
+
+    <div class="key">
+      <p><strong>看清规律：</strong>整理前，30 个数据杂乱无章；整理后，一眼就能看出——篮球最受欢迎（43.3%），跑步和羽毛球最少（各 10%）。这就是数据整理的力量！</p>
+    </div>
+  </div>
+
+  <h2>四、直方图：用图形展示数据分布</h2>
+  <div class="story">
+    <p>表格能看出频数，但不够直观。如果数据是连续的数值（比如身高、体重、考试分数），我们常用<strong>直方图</strong>来展示。</p>
+
+    <p><strong>做直方图的步骤：</strong></p>
+    <ol>
+      <li>找出最大值和最小值，算出<strong>极差</strong>（最大值 - 最小值）</li>
+      <li>决定<strong>分组</strong>（分成几组，每组叫一个"组距"）</li>
+      <li>统计每组的<strong>频数</strong></li>
+      <li>画图：横轴是组别，纵轴是频数，每组的柱子<strong>紧紧挨在一起</strong></li>
+    </ol>
+
+    <div class="example">
+      <strong>例子：</strong>某班 30 名同学的数学测验成绩如下（满分 100）：<br>
+      <p style="font-family:monospace;background:#f5f5f5;padding:8px;border-radius:4px;">58, 62, 65, 68, 70, 72, 73, 75, 76, 78, 78, 80, 81, 82, 83, 84, 85, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 98</p>
+      <p>极差 = 98 - 58 = 40。按每 10 分一组，可以分成 4 组。</p>
+    </div>
+
+    <table class="bar-table">
+      <tr><th>分数段</th><th>频数</th></tr>
+      <tr><td>50 ~ 60</td><td>1</td></tr>
+      <tr><td>60 ~ 70</td><td>3</td></tr>
+      <tr><td>70 ~ 80</td><td>7</td></tr>
+      <tr><td>80 ~ 90</td><td>12</td></tr>
+      <tr><td>90 ~ 100</td><td>7</td></tr>
+    </table>
+
+    <div class="graphic">
+      <div style="text-align:center;margin-bottom:8px;font-size:14px;color:#888;">直方图：点击柱子查看详细数据 ↓</div>
+      <svg viewBox="0 0 600 360" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+        <defs>
+          <style>
+            .bar { fill: #33691e; stroke: #255d15; stroke-width: 1.5; cursor: pointer; transition: fill 0.3s; }
+            .bar:hover { fill: #558b2f; }
+            .bar.highlight { fill: #ff9800; }
+            .bar-label { font-size: 13px; fill: #555; text-anchor: middle; }
+            .bar-value { font-size: 15px; fill: #33691e; font-weight: bold; text-anchor: middle; opacity: 0; transition: opacity 0.3s; }
+            .bar-value.show { opacity: 1; }
+            .axis-label { font-size: 13px; fill: #888; text-anchor: middle; }
+            .axis-title { font-size: 15px; fill: #333; text-anchor: middle; font-weight: bold; }
+            .grid-line { stroke: #e0e0e0; stroke-width: 0.5; }
+            @keyframes growBar { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+            .bar-group { transform-origin: bottom; animation: growBar 0.8s ease-out; }
+          </style>
+        </defs>
+        <!-- 底色 -->
+        <rect x="0" y="0" width="600" height="360" fill="#fff" rx="8"/>
+        <!-- 标题 -->
+        <text x="300" y="28" text-anchor="middle" font-size="16" fill="#333" font-weight="bold">某班数学成绩分布直方图</text>
+        <!-- 纵轴 -->
+        <line x1="80" y1="40" x2="80" y2="300" stroke="#555" stroke-width="2"/>
+        <polygon points="80,35 76,44 84,44" fill="#555"/>
+        <text x="25" y="170" text-anchor="middle" font-size="14" fill="#333" font-weight="bold" transform="rotate(-90,25,170)">频数（人）</text>
+        <!-- 横轴 -->
+        <line x1="80" y1="300" x2="570" y2="300" stroke="#555" stroke-width="2"/>
+        <polygon points="575,300 566,296 566,304" fill="#555"/>
+        <text x="325" y="345" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">分数段</text>
+        <!-- 横轴刻度标签 -->
+        <text x="145" y="320" class="axis-label">50~60</text>
+        <text x="245" y="320" class="axis-label">60~70</text>
+        <text x="345" y="320" class="axis-label">70~80</text>
+        <text x="445" y="320" class="axis-label">80~90</text>
+        <text x="545" y="320" class="axis-label">90~100</text>
+        <!-- 纵轴刻度 + 网格线 -->
+        <g font-size="11" fill="#888" text-anchor="end">
+          <line x1="80" y1="300" x2="570" y2="300" class="grid-line"/><text x="73" y="304">0</text>
+          <line x1="80" y1="276" x2="570" y2="276" class="grid-line"/><text x="73" y="280">2</text>
+          <line x1="80" y1="252" x2="570" y2="252" class="grid-line"/><text x="73" y="256">4</text>
+          <line x1="80" y1="228" x2="570" y2="228" class="grid-line"/><text x="73" y="232">6</text>
+          <line x1="80" y1="204" x2="570" y2="204" class="grid-line"/><text x="73" y="208">8</text>
+          <line x1="80" y1="180" x2="570" y2="180" class="grid-line"/><text x="73" y="184">10</text>
+          <line x1="80" y1="156" x2="570" y2="156" class="grid-line"/><text x="73" y="160">12</text>
+          <text x="73" y="140">14</text>
+        </g>
+        <!-- 柱子 (每单位 12px, 从 y=300 向上) -->
+        <!-- 50-60: 频数1, 高度12px, x中心=145 -->
+        <g class="bar-group" onclick="highlightBar(this, 'bar50_60')">
+          <rect id="bar50_60" x="108" y="288" width="74" height="12" class="bar"/>
+          <text x="145" y="280" class="bar-value" id="bv50_60">1</text>
+        </g>
+        <!-- 60-70: 频数3, 高度36px, x中心=245 -->
+        <g class="bar-group" onclick="highlightBar(this, 'bar60_70')">
+          <rect id="bar60_70" x="208" y="264" width="74" height="36" class="bar"/>
+          <text x="245" y="256" class="bar-value" id="bv60_70">3</text>
+        </g>
+        <!-- 70-80: 频数7, 高度84px, x中心=345 -->
+        <g class="bar-group" onclick="highlightBar(this, 'bar70_80')">
+          <rect id="bar70_80" x="308" y="216" width="74" height="84" class="bar"/>
+          <text x="345" y="208" class="bar-value" id="bv70_80">7</text>
+        </g>
+        <!-- 80-90: 频数12, 高度144px, x中心=445 -->
+        <g class="bar-group" onclick="highlightBar(this, 'bar80_90')">
+          <rect id="bar80_90" x="408" y="156" width="74" height="144" class="bar"/>
+          <text x="445" y="148" class="bar-value" id="bv80_90">12</text>
+        </g>
+        <!-- 90-100: 频数7, 高度84px, x中心=545 -->
+        <g class="bar-group" onclick="highlightBar(this, 'bar90_100')">
+          <rect id="bar90_100" x="508" y="216" width="74" height="84" class="bar"/>
+          <text x="545" y="208" class="bar-value" id="bv90_100">7</text>
+        </g>
+        <!-- 底部说明 -->
+        <text x="325" y="355" text-anchor="middle" font-size="12" fill="#aaa">注：每个柱子代表一个分数段中的人数，柱高 = 频数</text>
+      </svg>
+    </div>
+
+    <div class="key">
+      <p><strong>直方图 vs 条形图（注意区分！）：</strong></p>
+      <ul>
+        <li><strong>直方图</strong>：柱子紧挨在一起，表示连续数据（如身高、分数），横轴是数值范围</li>
+        <li><strong>条形图</strong>：柱子分开，表示分类数据（如喜欢的运动项目），横轴是类别</li>
+      </ul>
+      <p>简单说：<strong>连续的数值用直方图，分类的数据用条形图。</strong></p>
+    </div>
+  </div>
+
+  <h2>五、画直方图的完整步骤</h2>
+  <div class="formula">
+    <p><strong>第 1 步：计算极差</strong></p>
+    <p style="text-align:center;">极差 = 最大值 - 最小值</p>
+
+    <p><strong>第 2 步：决定组距和组数</strong></p>
+    <p>组距 = 极差 ÷ 组数（通常取整数，组数一般在 5~12 组之间）</p>
+
+    <p><strong>第 3 步：确定分点</strong></p>
+    <p>每组的数据范围，要确保每个数据恰好属于一组。</p>
+
+    <p><strong>第 4 步：列频数分布表</strong></p>
+    <p>用"正"字法统计每组的数据个数。</p>
+
+    <p><strong>第 5 步：画直方图</strong></p>
+    <p>横轴标组别，纵轴标频数，柱子紧挨着画。</p>
+
+    <div class="example">
+      <strong>完整示范：</strong>以下是 40 名学生的身高数据（cm）：<br>
+      <p style="font-family:monospace;font-size:13px;background:#f5f5f5;padding:8px;border-radius:4px;">148, 152, 155, 156, 158, 159, 160, 161, 162, 163, 163, 164, 165, 165, 166, 166, 167, 167, 168, 168, 169, 169, 170, 170, 171, 171, 172, 172, 173, 173, 174, 175, 175, 176, 177, 178, 179, 180, 182, 185</p>
+      <p>极差 = 185 - 148 = 37。取组距为 5，则组数 = 37 ÷ 5 ≈ 7.4 → 取 8 组。</p>
+      <table class="bar-table">
+        <tr><th>身高段（cm）</th><th>频数</th></tr>
+        <tr><td>148 ~ 153</td><td>2</td></tr>
+        <tr><td>153 ~ 158</td><td>3</td></tr>
+        <tr><td>158 ~ 163</td><td>5</td></tr>
+        <tr><td>163 ~ 168</td><td>8</td></tr>
+        <tr><td>168 ~ 173</td><td>10</td></tr>
+        <tr><td>173 ~ 178</td><td>7</td></tr>
+        <tr><td>178 ~ 183</td><td>4</td></tr>
+        <tr><td>183 ~ 188</td><td>1</td></tr>
+      </table>
+      <p>从中可以看出：身高集中在 168~173cm 这段的人数最多（10 人），大部分同学身高在 158~183cm 之间。</p>
+    </div>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>有人说"抽样调查的结果一定比普查差"，你同意吗？为什么？（提示：想想测灯泡寿命的情况）</p>
+    <p><strong>问题 2：</strong>如果样本容量太小，会产生什么问题？假设你只想通过 3 个同学的身高来推测全班 50 人的平均身高，这样做靠谱吗？</p>
+    <p><strong>问题 3：</strong>直方图的柱子为什么要紧挨在一起，而条形图的柱子是分开的？想一想背后的道理。</p>
+  </div>
+
+  <h2>拓展阅读</h2>
+  <div class="extend">
+    <p><strong>统计学的"开山鼻祖"：</strong>英国数学家约翰·格朗特（John Graunt）在 1662 年写了一本书《关于死亡表的自然与政治观察》，这是历史上第一本用数据说话的书。他整理了伦敦几十年的死亡记录，发现：男孩出生率略高于女孩，但男性死亡率也更高，所以男女比例大致平衡。他还发现了某些疾病的流行规律——这是人类第一次用"数据"而不是"感觉"来理解世界。</p>
+    <p><strong>有趣的统计事实：</strong>如果你在大街上随机问 1000 个人的喜好，结果就已经相当准确了——误差通常不超过 ±3%。这就是为什么美国总统大选的民调通常只问几千人，就能预测几亿人的投票结果。当然，前提是<strong>样本选得足够随机</strong>。</p>
+    <p><strong>推荐阅读：</strong>《中小学数学要义》中关于统计的章节——用通俗的语言讲明白了普查、抽样、频数分布这些概念。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 下列调查中，适合用普查还是抽样调查？<br>
+    （1）了解一批灯泡的使用寿命<br>
+    （2）了解全班同学的身高<br>
+    （3）检查飞机上乘客是否携带违禁物品<br>
+    （4）了解全国初中生的课外阅读时间</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">想一想：调查会不会破坏对象？对象多不多？</div>
+    <div class="ans-box" id="a1">（1）抽样调查（测完灯泡就坏了）；（2）普查（全班人不多）；（3）普查（安全问题必须逐一检查）；（4）抽样调查（全国初中生太多，不可能全问）</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 为了解某校八年级 600 名学生的视力情况，从中抽取了 50 名学生进行视力检测。请指出总体、个体、样本和样本容量。</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">注意：总体、个体、样本说的都是"视力"这个数据，不是"学生"。</div>
+    <div class="ans-box" id="a2">总体：该校八年级 600 名学生的视力；个体：每一名学生的视力；样本：被抽取的 50 名学生的视力；样本容量：50</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 在 30 次掷硬币实验中，正面朝上出现了 18 次。正面朝上的频数和频率各是多少？</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">频数就是出现的次数，频率 = 频数 ÷ 总数。</div>
+    <div class="ans-box" id="a3">频数 = 18；频率 = 18 ÷ 30 = 0.6 = 60%</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 某班 40 人数学测验成绩如下：<br>
+    <span style="font-family:monospace;font-size:13px;">65, 72, 78, 81, 85, 88, 90, 66, 73, 79, 82, 85, 88, 91, 68, 74, 79, 83, 86, 89, 92, 70, 75, 80, 84, 87, 89, 93, 71, 76, 80, 84, 87, 90, 94, 69, 72, 77, 81, 82</span><br>
+    按 60~70, 70~80, 80~90, 90~100 分组，列出频数分布表。</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">注意每组包含下限不包含上限（如 60~70 包含 60，不包含 70）。用"正"字法逐一统计。</div>
+    <div class="ans-box" id="a4">60~70：5 人；70~80：12 人；80~90：17 人；90~100：6 人。合计 40 人。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 一组数据的最大值是 95，最小值是 42。如果组距取 10，可以分成几组？</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">极差 = 95 - 42 = 53。组数 = 极差 ÷ 组距，结果向上取整。</div>
+    <div class="ans-box" id="a5">极差 = 95 - 42 = 53。53 ÷ 10 = 5.3，向上取整为 6 组。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 判断下列说法是否正确，并说明理由：<br>
+    （1）样本容量越大越好<br>
+    （2）抽样调查的结果一定有误差<br>
+    （3）要了解全校学生的睡眠情况，只调查了七年级学生，这个样本具有代表性</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">考虑样本的代表性——样本越随机、越全面，结果越可靠。</div>
+    <div class="ans-box" id="a6">（1）不对。样本容量越大越精确，但成本也越高，要在精确度和成本之间平衡。（2）对。抽样调查是用部分推测整体，必然有误差，但可以通过科学抽样来减小误差。（3）不对。只调查七年级，没有覆盖八年级和九年级，样本不具有代表性，结果不可靠。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>7.</strong> 某校七年级 500 名学生，要了解他们对校服的满意度。下面哪种抽样方法最合理？<br>
+    A. 只调查男生 &nbsp; B. 只调查成绩好的学生 &nbsp; C. 随机抽取学号末尾为 3 的学生 &nbsp; D. 只调查班干部</p>
+    <button class="btn-sm" onclick="toggleHint('h7')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a7')">查看答案</button>
+    <div class="hint-box" id="h7">好的抽样要"随机"——每个个体被抽到的机会相等，不能有偏向。</div>
+    <div class="ans-box" id="a7">C。随机抽取学号末尾为 3 的学生，每个学生被抽到的机会相等，没有偏向性。A（只调查男生）、B（只调查成绩好的）、D（只调查班干部）都有偏向，样本没有代表性。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>8.</strong> 下表是某班 50 名学生的体重频数分布：</p>
+    <table class="bar-table">
+      <tr><th>体重（kg）</th><th>40~45</th><th>45~50</th><th>50~55</th><th>55~60</th><th>60~65</th></tr>
+      <tr><td>频数</td><td>3</td><td>10</td><td>18</td><td>14</td><td>5</td></tr>
+    </table>
+    <p>（1）体重在 50~55kg 的人数占总人数的百分之几？<br>
+    （2）体重在 55kg 及以上的有多少人？</p>
+    <button class="btn-sm" onclick="toggleHint('h8')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a8')">查看答案</button>
+    <div class="hint-box" id="h8">（1）频率 = 频数 ÷ 总数；（2）每组的频数对应的是"含下限不含上限"，所以 55kg 及以上 = 55~60 组 + 60~65 组。</div>
+    <div class="ans-box" id="a8">（1）18 ÷ 50 = 0.36 = 36%；（2）14 + 5 = 19 人</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>9.</strong> 小华想了解小区居民每天锻炼的时间，他在小区门口从早上 8 点到 9 点调查了路过的 50 位居民。他的调查结果能代表整个小区的情况吗？为什么？</p>
+    <button class="btn-sm" onclick="toggleHint('h9')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a9')">查看答案</button>
+    <div class="hint-box" id="h9">考虑调查的时间段是否合理——早上 8~9 点出现在小区门口的都是什么人？</div>
+    <div class="ans-box" id="a9">不能代表。早上 8~9 点在小区门口出现的，大多是上班族或送孩子上学的家长，而退休老人、夜班工作者等可能在其他时间出现。这个调查存在"时间偏差"，样本不具有代表性。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>10.</strong> 某校调查了 200 名学生的零花钱情况，得到以下数据：</p>
+    <table class="bar-table">
+      <tr><th>每周零花钱（元）</th><th>0~20</th><th>20~40</th><th>40~60</th><th>60~80</th><th>80~100</th></tr>
+      <tr><td>频数</td><td>30</td><td>50</td><td>60</td><td>40</td><td>20</td></tr>
+    </table>
+    <p>（1）每周零花钱在 40 元以上的学生占比是多少？<br>
+    （2）如果该校共有 1000 名学生，请你估计全校每周零花钱在 40~60 元的大约有多少人？</p>
+    <button class="btn-sm" onclick="toggleHint('h10')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a10')">查看答案</button>
+    <div class="hint-box" id="h10">（1）40 元以上 = 40~60 + 60~80 + 80~100 三组；（2）用样本比例来估计总体：先算样本中 40~60 元的频率，再乘以 1000。</div>
+    <div class="ans-box" id="a10">（1）(60 + 40 + 20) ÷ 200 = 120 ÷ 200 = 0.6 = 60%；（2）样本中 40~60 元的频率 = 60 ÷ 200 = 0.3，估计全校：1000 × 0.3 = 300 人。</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>普查</strong>和<strong>抽样调查</strong>是两种收集数据的方式——普查全面但费力，抽样省力但有误差</li>
+      <li><strong>总体 → 个体 → 样本 → 样本容量</strong>：四个概念要分清，注意说的是"数据"不是"人"</li>
+      <li><strong>频数</strong> = 出现的次数，<strong>频率</strong> = 频数 ÷ 总数</li>
+      <li><strong>直方图</strong>用柱子的高度展示数据分布，柱子紧挨在一起（与条形图不同！）</li>
+      <li>画直方图五步走：算极差 → 定组距 → 定分点 → 列频数表 → 画图</li>
+      <li>好的抽样调查要<strong>随机</strong>和有<strong>代表性</strong>，不能有偏向</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="data-analysis.html">下一课：数据分析 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+
+// 直方图交互：点击柱子高亮并显示数值
+var activeBar = null;
+var activeGroup = null;
+function highlightBar(group, barId) {
+  if (activeGroup === group) {
+    // 取消选中
+    document.getElementById('bv' + barId.slice(3)).classList.remove('show');
+    document.getElementById(barId).classList.remove('highlight');
+    activeGroup = null;
+    activeBar = null;
+    return;
+  }
+  // 重置上一个
+  if (activeGroup) {
+    document.getElementById('bv' + activeBar.slice(3)).classList.remove('show');
+    document.getElementById(activeBar).classList.remove('highlight');
+  }
+  // 设置新的
+  document.getElementById('bv' + barId.slice(3)).classList.add('show');
+  document.getElementById(barId).classList.add('highlight');
+  activeGroup = group;
+  activeBar = barId;
+}
+</script>
+<script src="../lessons/dt.js"></script>
+</body>
+</html>

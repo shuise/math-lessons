@@ -17,10 +17,6 @@
   .challenge { background: #e8eaf6; border: 2px dashed #43a047; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .diff-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; color: #fff; margin-left: 8px; }
-  .diff-easy { background: #66bb6a; }
-  .diff-medium { background: #ff9800; }
-  .diff-hard { background: #f44336; }
   .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
   .hint-box.show, .ans-box.show { display: block; }
   .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
@@ -30,7 +26,8 @@
   .num-table th { background: #e8f5e9; }
 
   @media (max-width: 720px) {
-    article { padding: 20px 12px !important; }
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
     h1 { font-size: 22px; }
     h2 { font-size: 18px; }
     h3 { font-size: 16px; }
@@ -167,7 +164,7 @@
   <h2>习题</h2>
 
   <div class="exercise">
-    <p><strong>1.</strong> 把 3056 写成"位值展开"的形式（像 111 = 1×100 + 1×10 + 1×1 那样）。<span class="diff-tag diff-easy">简单</span></p>
+    <p><strong>1.</strong> 把 3056 写成"位值展开"的形式（像 111 = 1×100 + 1×10 + 1×1 那样）。</p>
     <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
     <div class="hint-box" id="h1">千位是 3，百位是 0，十位是 5，个位是 6。</div>
@@ -175,7 +172,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>2.</strong> 在自然数中，5 - 9 有答案吗？为什么？<span class="diff-tag diff-easy">简单</span></p>
+    <p><strong>2.</strong> 在自然数中，5 - 9 有答案吗？为什么？</p>
     <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
     <div class="hint-box" id="h2">自然数从 0 开始，减法对应"拿走"。</div>
@@ -183,7 +180,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>3.</strong> 罗马数字中没有零。如果罗马人想写"二百零五"，他们只能写成 CCV（205）。你能看出这有什么问题吗？（提示：CCV 也可能是 205，也可能被误解为其他意思）<span class="diff-tag diff-medium">中等</span></p>
+    <p><strong>3.</strong> 罗马数字中没有零。如果罗马人想写"二百零五"，他们只能写成 CCV（205）。你能看出这有什么问题吗？（提示：CCV 也可能是 205，也可能被误解为其他意思）</p>
     <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
     <div class="hint-box" id="h3">CCV 中 C=100, V=5，加起来是 205。但用位值制写 205 和 250 有本质区别。</div>
@@ -191,7 +188,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>4.</strong> 一个三位数，百位数字是 a，十位数字是 b，个位数字是 c。用 a、b、c 写出这个数的"位值展开"表达式。<span class="diff-tag diff-hard">较难</span></p>
+    <p><strong>4.</strong> 一个三位数，百位数字是 a，十位数字是 b，个位数字是 c。用 a、b、c 写出这个数的"位值展开"表达式。</p>
     <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
     <div class="hint-box" id="h4">百位是 10²=100，十位是 10¹=10，个位是 10⁰=1。</div>

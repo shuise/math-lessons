@@ -17,17 +17,14 @@
   .challenge { background: #e8eaf6; border: 2px dashed #5c6bc0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .diff-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; color: #fff; margin-left: 8px; }
-  .diff-easy { background: #66bb6a; }
-  .diff-medium { background: #ff9800; }
-  .diff-hard { background: #f44336; }
   .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
   .hint-box.show, .ans-box.show { display: block; }
   .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
   .btn-sm:hover { background: #e8e8e8; }
 
   @media (max-width: 720px) {
-    article { padding: 20px 12px !important; }
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
     h1 { font-size: 22px; }
     h2 { font-size: 18px; }
     h3 { font-size: 16px; }
@@ -39,7 +36,7 @@
 <body>
 <article>
   <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：课件 1-4（自然数、分数、负数、代数式）、课件 5（整式运算·分配律与合并同类项）</p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./natural-numbers.html">课件 1</a>、<a href="./fractions.html">课件 2</a>、<a href="./negative-numbers.html">课件 3</a>、<a href="./algebraic-expressions.html">课件 4</a>（自然数、分数、负数、代数式）、<a href="./polynomials.html">课件 5（整式运算·分配律与合并同类项）</a></p>
   <h1>一元一次方程</h1>
 
   <h2>起源：人类为什么要发明方程？</h2>
@@ -174,7 +171,7 @@
   <h2>习题</h2>
 
   <div class="exercise">
-    <p><strong>1.</strong> 解方程：2x + 5 = 13 <span class="diff-tag diff-easy">简单</span></p>
+    <p><strong>1.</strong> 解方程：2x + 5 = 13</p>
     <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
     <div class="hint-box" id="h1">先把 5 移到右边：2x = 13 - 5，再除以 2。</div>
@@ -182,7 +179,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>2.</strong> 解方程：3(x - 2) = 2x + 1 <span class="diff-tag diff-easy">简单</span></p>
+    <p><strong>2.</strong> 解方程：3(x - 2) = 2x + 1</p>
     <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
     <div class="hint-box" id="h2">先去括号：3x - 6 = 2x + 1，然后移项合并。</div>
@@ -190,7 +187,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>3.</strong> 解方程：(x+1)/2 - (x-2)/3 = 1 <span class="diff-tag diff-medium">中等</span></p>
+    <p><strong>3.</strong> 解方程：(x+1)/2 - (x-2)/3 = 1</p>
     <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
     <div class="hint-box" id="h3">先找公分母 6，两边乘 6：3(x+1) - 2(x-2) = 6。</div>
@@ -198,7 +195,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>4.</strong> 小明今年 x 岁，爸爸的年龄是小明的 3 倍还多 2 岁。5 年后，爸爸的年龄正好是小明的 2 倍。求小明今年几岁？ <span class="diff-tag diff-hard">较难</span></p>
+    <p><strong>4.</strong> 小明今年 x 岁，爸爸的年龄是小明的 3 倍还多 2 岁。5 年后，爸爸的年龄正好是小明的 2 倍。求小明今年几岁？</p>
     <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
     <div class="hint-box" id="h4">爸爸现在 3x+2 岁。5 年后：小明 x+5，爸爸 3x+7。列方程：3x+7 = 2(x+5)。</div>

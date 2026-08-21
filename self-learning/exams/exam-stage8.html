@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模拟考试 — 阶段三 — 自学课件</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../lessons/style.css">
+<style>
+  :root { --accent: #2e7d32; }
+  .exam-header { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .section-title { color: #2e7d32; font-size: 18px; font-weight: 700; margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #c8e6c9; }
+  .q-item { padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+  .q-item:last-child { border-bottom: none; }
+  .btn-row { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-hint, .btn-ans { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; }
+  .btn-hint:hover { background: #fff3e0; border-color: #ff9800; }
+  .btn-ans:hover { background: #e8f5e9; border-color: #4caf50; }
+  .hint-box, .ans-box { display: none; margin-top: 8px; padding: 10px 14px; border-radius: 6px; font-size: 14px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .hint-box { background: #fff8e1; border-left: 3px solid #ff9800; }
+  .ans-box { background: #e8f5e9; border-left: 3px solid #4caf50; }
+  .opt-row { margin: 4px 0; padding-left: 8px; }
+  .opt { display: inline-block; min-width: 24px; font-weight: 600; }
+  @media (max-width: 720px) {
+    article { padding-bottom: 100px !important; }
+    article { padding: 20px 12px 100px 12px !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    .q-item { padding: 10px 0; }
+    .exam-header { padding: 12px 14px; margin: 12px 0; }
+  }
+  .opt-btn { display: inline-block; padding: 6px 16px; margin: 3px 4px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .opt-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .opt-btn.selected { border-color: #1976d2; background: #e3f2fd; }
+  .opt-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .opt-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .tf-btn { display: inline-block; padding: 6px 20px; margin: 3px 6px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .tf-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .tf-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .tf-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .fill-input { padding: 6px 12px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 15px; width: 160px; }
+  .fill-input:focus { outline: none; border-color: #1976d2; }
+  .check-btn { padding: 6px 16px; border: 1px solid #1976d2; border-radius: 6px; background: #1976d2; color: #fff; font-size: 13px; cursor: pointer; margin-left: 8px; }
+  .check-btn:hover { background: #1565c0; }
+  .feedback { display: none; margin-left: 8px; font-size: 14px; font-weight: 600; }
+  .feedback.show { display: inline; }
+  .feedback.correct-fb { color: #2e7d32; }
+  .feedback.wrong-fb { color: #c62828; }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="../index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="../geometry-basics.html">课件1（几何图形）</a>、<a href="../lines-rays-segments.html">课件2（直线、射线、线段）</a>、<a href="../angles.html">课件3（角）</a>、<a href="../parallel-lines.html">课件4（相交线与平行线）</a>、<a href="../triangle.html">课件5（三角形）</a>、<a href="../congruent-triangles.html">课件6（全等三角形）</a>、<a href="../symmetry.html">课件7（轴对称）</a>、<a href="../pythagorean.html">课件8（勾股定理）</a>、<a href="../parallelogram.html">课件9（平行四边形）</a></p>
+  <h1>模拟考试 — 阶段三：几何深化</h1>
+  <div class="exam-header">
+    <p>⏱ 时间：30 分钟 | ✅ 判断题 10 题 | 🔘 单选题 10 题 | ☑️ 多选题 5 题 | ✏️ 其他题型 5 题 | 共 30 题</p>
+  </div>
+
+  <p class="section-title">一、判断题（每题 1 分，共 10 分）</p>
+
+  <div class="q-item">
+    <p><strong>1.</strong> 轴对称图形中，对称轴两侧的对应点到对称轴的距离相等。</p>
+    <div id="tf-8-1"><button class="tf-btn" onclick="checkTF(this, true, '8-1')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '8-1')">错误</button><span class="feedback" id="fb-8-1"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-1')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-1')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-1"><p>轴对称就是对折后完全重合，所以对应点到对称轴的距离必须相等，否则无法重合。</p></div>
+    <div class="ans-box" id="a1-1"><p>✅ <strong>正确</strong>。这是轴对称的基本性质：对称轴两侧的对应点到对称轴的距离相等，对应点的连线被对称轴垂直平分。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>2.</strong> 在直角三角形中，勾股定理的表达式是 a² + b² = c²，其中 c 是任意一条边。</p>
+    <div id="tf-8-2"><button class="tf-btn" onclick="checkTF(this, true, '8-2')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '8-2')">错误</button><span class="feedback" id="fb-8-2"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-2')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-2')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-2"><p>勾股定理：直角三角形的两条直角边的平方和等于斜边的平方。c 必须是斜边，不是任意一条边。</p></div>
+    <div class="ans-box" id="a1-2"><p>❌ <strong>错误</strong>。勾股定理中，c 是斜边（直角所对的边），a 和 b 是两条直角边。a² + b² = c² 中 c 必须是最长的那条边（斜边）。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>3.</strong> 平行四边形的对角线互相平分。</p>
+    <div id="tf-8-3"><button class="tf-btn" onclick="checkTF(this, true, '8-3')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '8-3')">错误</button><span class="feedback" id="fb-8-3"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-3')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-3')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-3"><p>平行四边形两条对角线的交点，把每条对角线都分成相等的两段。这是平行四边形的重要性质，也是判定方法之一。</p></div>
+    <div class="ans-box" id="a1-3"><p>✅ <strong>正确</strong>。平行四边形对角线互相平分，即两条对角线的交点将每条对角线分成相等的两段。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>4.</strong> 线段是轴对称图形，它有两条对称轴。</p>
+    <div id="tf-8-4"><button class="tf-btn" onclick="checkTF(this, true, '8-4')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '8-4')">错误</button><span class="feedback" id="fb-8-4"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-4')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-4')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-4"><p>线段有两条对称轴：一条是它本身所在的直线（线段上的每个点关于这条直线对称就是它自己），另一条是线段的垂直平分线。</p></div>
+    <div class="ans-box" id="a1-4"><p>✅ <strong>正确</strong>。线段有两条对称轴：一条是线段所在的直线，另一条是线段的垂直平分线。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>5.</strong> 勾股数是 3、4、5，那么 6、8、10 也是勾股数。</p>
+    <div id="tf-8-5"><button class="tf-btn" onclick="checkTF(this, true, '8-5')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '8-5')">错误</button><span class="feedback" id="fb-8-5"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-5')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-5')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-5"><p>6、8、10 是 3、4、5 的 2 倍。验证：6² + 8² = 36 + 64 = 100 = 10²。如果把勾股数同比例放大，仍然满足勾股定理。</p></div>
+    <div class="ans-box" id="a1-5"><p>✅ <strong>正确</strong>。6² + 8² = 36 + 64 = 100 = 10²，满足勾股定理。勾股数同比例放大后仍是勾股数。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>6.</strong> 矩形是特殊的平行四边形。</p>
+    <div id="tf-8-6"><button class="tf-btn" onclick="checkTF(this, true, '8-6')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '8-6')">错误</button><span class="feedback" id="fb-8-6"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-6')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-6')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-6"><p>矩形满足平行四边形的所有条件（两组对边分别平行），而且多了一个条件——四个角都是直角。所以矩形是特殊的平行四边形。</p></div>
+    <div class="ans-box" id="a1-6"><p>✅ <strong>正确</strong>。矩形满足平行四边形的所有性质（对边平行且相等，对角线互相平分），是有一个角是直角的平行四边形。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>7.</strong> 等腰三角形不是轴对称图形。</p>
+    <div id="tf-8-7"><button class="tf-btn" onclick="checkTF(this, true, '8-7')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '8-7')">错误</button><span class="feedback" id="fb-8-7"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-7')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-7')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-7"><p>等腰三角形沿底边上的高（也是顶角的平分线、底边的中线）对折，两边完全重合。所以等腰三角形是轴对称图形。</p></div>
+    <div class="ans-box" id="a1-7"><p>❌ <strong>错误</strong>。等腰三角形是轴对称图形，对称轴是底边上的高所在的直线（也是顶角的平分线、底边的中线，三线合一）。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>8.</strong> 菱形的对角线互相垂直。</p>
+    <div id="tf-8-8"><button class="tf-btn" onclick="checkTF(this, true, '8-8')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '8-8')">错误</button><span class="feedback" id="fb-8-8"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-8')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-8')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-8"><p>菱形是四条边都相等的平行四边形。它的对角线不仅互相平分，而且互相垂直。这是菱形独有的性质。</p></div>
+    <div class="ans-box" id="a1-8"><p>✅ <strong>正确</strong>。菱形对角线互相垂直，这是菱形区别于一般平行四边形的重要性质。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>9.</strong> 三角形三边长分别为 5、12、13，这是一个直角三角形。</p>
+    <div id="tf-8-9"><button class="tf-btn" onclick="checkTF(this, true, '8-9')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '8-9')">错误</button><span class="feedback" id="fb-8-9"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-9')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-9')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-9"><p>用勾股定理的逆定理判断：如果最长边的平方等于另外两条边的平方和，就是直角三角形。5² + 12² = 25 + 144 = 169 = 13²。</p></div>
+    <div class="ans-box" id="a1-9"><p>✅ <strong>正确</strong>。5² + 12² = 25 + 144 = 169 = 13²，满足勾股定理的逆定理，所以是直角三角形。（5, 12, 13 是经典的勾股数）</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>10.</strong> 一组对边平行、另一组对边相等的四边形一定是平行四边形。</p>
+    <div id="tf-8-10"><button class="tf-btn" onclick="checkTF(this, true, '8-10')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '8-10')">错误</button><span class="feedback" id="fb-8-10"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-10')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-10')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-10"><p>反例：等腰梯形。等腰梯形也满足"一组对边平行、另一组对边相等"，但它不是平行四边形（两组对边没有都平行）。</p></div>
+    <div class="ans-box" id="a1-10"><p>❌ <strong>错误</strong>。等腰梯形也是一组对边平行、另一组对边相等，但它不是平行四边形。平行四边形的定义是"两组对边分别平行"。</p></div>
+  </div>
+
+  <p class="section-title">二、单选题（每题 2 分，共 20 分）</p>
+
+  <div class="q-item">
+    <p><strong>11.</strong> 直角三角形两条直角边长分别为 6 和 8，斜边长为多少？</p>
+    <div id="opt-8-11"><button class="opt-btn" onclick="checkSingle(this, false, '8-11')">A. 9</button><button class="opt-btn" onclick="checkSingle(this, true, '8-11')" data-correct="true">B. 10</button><button class="opt-btn" onclick="checkSingle(this, false, '8-11')">C. 14</button><button class="opt-btn" onclick="checkSingle(this, false, '8-11')">D. 12</button><span class="feedback" id="fb-8-11"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-1')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-1')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-1"><p>勾股定理：斜边² = 6² + 8² = 36 + 64 = 100。斜边 = 10。</p></div>
+    <div class="ans-box" id="a2-1"><p><strong>B（10）</strong>。6² + 8² = 36 + 64 = 100 = 10²，斜边 = 10。这是经典的勾股数 6-8-10（3-4-5 的 2 倍）。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>12.</strong> 下面哪个图形不一定是轴对称图形？</p>
+    <div id="opt-8-12"><button class="opt-btn" onclick="checkSingle(this, false, '8-12')">A. 线段</button><button class="opt-btn" onclick="checkSingle(this, false, '8-12')">B. 等腰三角形</button><button class="opt-btn" onclick="checkSingle(this, true, '8-12')" data-correct="true">C. 平行四边形</button><button class="opt-btn" onclick="checkSingle(this, false, '8-12')">D. 圆</button><span class="feedback" id="fb-8-12"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-2')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-2')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-2"><p>线段有 2 条对称轴，等腰三角形有 1 条，圆有无数条。一般的平行四边形不是轴对称图形（除非是特殊的如菱形、矩形）。</p></div>
+    <div class="ans-box" id="a2-2"><p><strong>C（平行四边形）</strong>。一般的平行四边形不是轴对称图形。只有特殊的平行四边形（菱形、矩形、正方形）才是轴对称图形。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>13.</strong> 平行四边形 ABCD 中，∠A = 70°，则 ∠B 等于多少度？</p>
+    <div id="opt-8-13"><button class="opt-btn" onclick="checkSingle(this, false, '8-13')">A. 70°</button><button class="opt-btn" onclick="checkSingle(this, true, '8-13')" data-correct="true">B. 110°</button><button class="opt-btn" onclick="checkSingle(this, false, '8-13')">C. 20°</button><button class="opt-btn" onclick="checkSingle(this, false, '8-13')">D. 140°</button><span class="feedback" id="fb-8-13"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-3')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-3')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-3"><p>平行四边形中，邻角互补（因为对边平行，同旁内角互补）。∠A 和 ∠B 是邻角，所以 ∠B = 180° − 70° = 110°。对角相等（∠A = ∠C，∠B = ∠D）。</p></div>
+    <div class="ans-box" id="a2-3"><p><strong>B（110°）</strong>。平行四边形邻角互补，∠B = 180° − ∠A = 180° − 70° = 110°。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>14.</strong> 一个直角三角形的斜边长为 13，一条直角边长为 5，则另一条直角边长为多少？</p>
+    <div id="opt-8-14"><button class="opt-btn" onclick="checkSingle(this, false, '8-14')">A. 8</button><button class="opt-btn" onclick="checkSingle(this, false, '8-14')">B. 10</button><button class="opt-btn" onclick="checkSingle(this, true, '8-14')" data-correct="true">C. 12</button><button class="opt-btn" onclick="checkSingle(this, false, '8-14')">D. 18</button><span class="feedback" id="fb-8-14"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-4')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-4')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-4"><p>勾股定理：直角边² = 斜边² − 已知直角边² = 13² − 5² = 169 − 25 = 144。直角边 = 12。</p></div>
+    <div class="ans-box" id="a2-4"><p><strong>C（12）</strong>。13² − 5² = 169 − 25 = 144 = 12²，另一条直角边 = 12。这是经典的 5-12-13 勾股数。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>15.</strong> 菱形的对角线长分别为 6 和 8，它的边长是多少？</p>
+    <div id="opt-8-15"><button class="opt-btn" onclick="checkSingle(this, true, '8-15')" data-correct="true">A. 5</button><button class="opt-btn" onclick="checkSingle(this, false, '8-15')">B. 7</button><button class="opt-btn" onclick="checkSingle(this, false, '8-15')">C. 10</button><button class="opt-btn" onclick="checkSingle(this, false, '8-15')">D. 14</button><span class="feedback" id="fb-8-15"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-5')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-5')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-5"><p>菱形对角线互相垂直且平分。对角线的一半分别是 3 和 4，它们与边长构成直角三角形。边长² = 3² + 4² = 25，边长 = 5。</p></div>
+    <div class="ans-box" id="a2-5"><p><strong>A（5）</strong>。菱形对角线互相垂直平分，所以对角线的一半是 3 和 4，构成直角边。边长² = 3² + 4² = 25，边长 = 5。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>16.</strong> 下列哪个条件不能判定四边形是平行四边形？</p>
+    <div id="opt-8-16"><button class="opt-btn" onclick="checkSingle(this, false, '8-16')">A. 两组对边分别平行</button><button class="opt-btn" onclick="checkSingle(this, false, '8-16')">B. 两组对边分别相等</button><button class="opt-btn" onclick="checkSingle(this, false, '8-16')">C. 一组对边平行且相等</button><button class="opt-btn" onclick="checkSingle(this, true, '8-16')" data-correct="true">D. 一组对边平行，另一组对边相等</button><span class="feedback" id="fb-8-16"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-6')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-6')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-6"><p>A、B、C 都是平行四边形的判定方法。D 是等腰梯形也满足的条件，不能判定平行四边形。</p></div>
+    <div class="ans-box" id="a2-6"><p><strong>D</strong>。D 是等腰梯形的特征，不能判定平行四边形。平行四边形判定必须满足：两组对边平行 / 两组对边相等 / 一组对边平行且相等 / 对角线互相平分 / 两组对角分别相等。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>17.</strong> 一个等腰三角形的顶角是 80°，它的对称轴将顶角平分。平分后的每个角是多少度？</p>
+    <div id="opt-8-17"><button class="opt-btn" onclick="checkSingle(this, false, '8-17')">A. 20°</button><button class="opt-btn" onclick="checkSingle(this, true, '8-17')" data-correct="true">B. 40°</button><button class="opt-btn" onclick="checkSingle(this, false, '8-17')">C. 50°</button><button class="opt-btn" onclick="checkSingle(this, false, '8-17')">D. 80°</button><span class="feedback" id="fb-8-17"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-7')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-7')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-7"><p>等腰三角形的对称轴就是顶角的平分线，它把顶角平分成相等的两部分。80° ÷ 2 = 40°。</p></div>
+    <div class="ans-box" id="a2-7"><p><strong>B（40°）</strong>。对称轴是顶角的平分线，80° ÷ 2 = 40°。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>18.</strong> 矩形 ABCD 中，AB = 5，BC = 12，对角线 AC 的长是多少？</p>
+    <div id="opt-8-18"><button class="opt-btn" onclick="checkSingle(this, true, '8-18')" data-correct="true">A. 13</button><button class="opt-btn" onclick="checkSingle(this, false, '8-18')">B. 17</button><button class="opt-btn" onclick="checkSingle(this, false, '8-18')">C. 7</button><button class="opt-btn" onclick="checkSingle(this, false, '8-18')">D. 60</button><span class="feedback" id="fb-8-18"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-8')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-8')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-8"><p>矩形每个角都是直角，所以对角线 AC 是直角三角形 ABC 的斜边。AC² = AB² + BC² = 5² + 12² = 25 + 144 = 169。AC = 13。</p></div>
+    <div class="ans-box" id="a2-8"><p><strong>A（13）</strong>。矩形对角线等于 √(5² + 12²) = √(25 + 144) = √169 = 13。经典勾股数 5-12-13。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>19.</strong> 正方形的对称轴有几条？</p>
+    <div id="opt-8-19"><button class="opt-btn" onclick="checkSingle(this, false, '8-19')">A. 2 条</button><button class="opt-btn" onclick="checkSingle(this, false, '8-19')">B. 3 条</button><button class="opt-btn" onclick="checkSingle(this, true, '8-19')" data-correct="true">C. 4 条</button><button class="opt-btn" onclick="checkSingle(this, false, '8-19')">D. 无数条</button><span class="feedback" id="fb-8-19"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-9')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-9')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-9"><p>正方形有 4 条对称轴：两条是对角线所在的直线，两条是过对边中点的直线。</p></div>
+    <div class="ans-box" id="a2-9"><p><strong>C（4 条）</strong>。正方形有 4 条对称轴：两条对角线，两条对边中点的连线。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>20.</strong> 一个直角三角形的两条直角边分别为 9 和 12，它的面积是多少？</p>
+    <div id="opt-8-20"><button class="opt-btn" onclick="checkSingle(this, true, '8-20')" data-correct="true">A. 54</button><button class="opt-btn" onclick="checkSingle(this, false, '8-20')">B. 108</button><button class="opt-btn" onclick="checkSingle(this, false, '8-20')">C. 21</button><button class="opt-btn" onclick="checkSingle(this, false, '8-20')">D. 58</button><span class="feedback" id="fb-8-20"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-10')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-10')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-10"><p>直角三角形面积 = 两条直角边乘积的一半 = 9 × 12 ÷ 2。</p></div>
+    <div class="ans-box" id="a2-10"><p><strong>A（54）</strong>。直角三角形面积 = 直角边 × 直角边 ÷ 2 = 9 × 12 ÷ 2 = 108 ÷ 2 = 54。</p></div>
+  </div>
+
+  <p class="section-title">三、多选题（每题 3 分，共 15 分）</p>
+
+  <div class="q-item">
+    <p><strong>21.</strong> 下列哪些图形一定是轴对称图形？（多选）</p>
+    <div id="opt-8-21"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 等腰三角形</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 等边三角形</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">C. 平行四边形</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 菱形</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMulti('8-21')">提交</button><span class="feedback" id="fb-8-21"></span>
+      <button class="btn-hint" onclick="toggleHint('h3-1')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-1')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-1"><p>等腰三角形有 1 条对称轴（底边上的高）；等边三角形有 3 条对称轴；菱形有 2 条对称轴（两条对角线）；一般平行四边形不是轴对称的。</p></div>
+    <div class="ans-box" id="a3-1"><p><strong>A、B、D</strong>。C 不一定：一般的平行四边形不是轴对称图形，只有特殊的平行四边形（菱形、矩形、正方形）才是。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>22.</strong> 关于矩形，下列说法正确的有哪些？（多选）</p>
+    <div id="opt-8-22"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 四个角都是直角</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 对角线相等</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 对角线互相平分</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 对角线互相垂直</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMulti('8-22')">提交</button><span class="feedback" id="fb-8-22"></span>
+      <button class="btn-hint" onclick="toggleHint('h3-2')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-2')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-2"><p>A、B、C 都是矩形的性质。D 是菱形的性质，矩形对角线不一定垂直（正方形除外）。</p></div>
+    <div class="ans-box" id="a3-2"><p><strong>A、B、C</strong>。D 错误：矩形对角线不一定互相垂直，只有正方形（既是矩形又是菱形）对角线才互相垂直。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>23.</strong> 下列哪些条件可以判定一个四边形是菱形？（多选）</p>
+    <div id="opt-8-23"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 四条边都相等</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 对角线互相垂直的平行四边形</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 有一组邻边相等的平行四边形</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 对角线相等的平行四边形</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMulti('8-23')">提交</button><span class="feedback" id="fb-8-23"></span>
+      <button class="btn-hint" onclick="toggleHint('h3-3')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-3')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-3"><p>A 是菱形的定义；B 和 C 是菱形的判定方法。D 对角线相等的平行四边形是矩形，不是菱形。</p></div>
+    <div class="ans-box" id="a3-3"><p><strong>A、B、C</strong>。D 错误：对角线相等的平行四边形是矩形，不是菱形。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>24.</strong> 关于勾股定理，下列说法正确的有哪些？（多选）</p>
+    <div id="opt-8-24"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 勾股定理只适用于直角三角形</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 3、4、5 是一组勾股数</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 勾股定理的逆定理是：如果三角形三边满足 a² + b² = c²，则这个三角形是直角三角形</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 勾股定理是毕达哥拉斯发现的，所以也叫毕达哥拉斯定理</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMulti('8-24')">提交</button><span class="feedback" id="fb-8-24"></span>
+      <button class="btn-hint" onclick="toggleHint('h3-4')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-4')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-4"><p>A、B、C、D 都是正确的。在中国叫勾股定理，在西方叫毕达哥拉斯定理。勾股定理及其逆定理是几何中最重要的定理之一。</p></div>
+    <div class="ans-box" id="a3-4"><p><strong>A、B、C、D</strong>。全部正确。勾股定理只适用于直角三角形，逆定理可用来判断直角三角形，中国称为勾股定理，西方称为毕达哥拉斯定理。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>25.</strong> 关于特殊四边形之间的关系，下列说法正确的有哪些？（多选）</p>
+    <div id="opt-8-25"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 正方形是特殊的矩形</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 正方形是特殊的菱形</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 菱形是特殊的平行四边形</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 矩形是特殊的正方形</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMulti('8-25')">提交</button><span class="feedback" id="fb-8-25"></span>
+      <button class="btn-hint" onclick="toggleHint('h3-5')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-5')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-5"><p>A、B、C 正确。D 错误：正方形是特殊的矩形（邻边相等的矩形），但矩形不一定是正方形（邻边不一定相等）。</p></div>
+    <div class="ans-box" id="a3-5"><p><strong>A、B、C</strong>。D 错误：正方形是特殊的矩形，但矩形不一定是正方形。特殊四边形的关系：四边形 ⊃ 平行四边形 ⊃ 矩形/菱形 ⊃ 正方形。</p></div>
+  </div>
+
+  <p class="section-title">四、其他题型（每题 3 分，共 15 分）</p>
+
+  <div class="q-item">
+    <p><strong>26.</strong> 直角三角形的两条直角边长分别为 7 和 24，求斜边长。</p>
+    <div id="fill-8-26"><input class="fill-input" id="inp-8-26" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('8-26', '25')">提交</button><span class="feedback" id="fb-8-26"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-1')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-1')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-1"><p>勾股定理：斜边² = 7² + 24² = 49 + 576 = 625。625 是谁的平方？25 × 25 = 625。</p></div>
+    <div class="ans-box" id="a4-1"><p>斜边² = 7² + 24² = 49 + 576 = 625 = 25²。斜边 = <strong>25</strong>。（7-24-25 也是经典的勾股数）</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>27.</strong> 平行四边形 ABCD 中，周长是 40，AB = 12。求 BC 的长。</p>
+    <div id="fill-8-27"><input class="fill-input" id="inp-8-27" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('8-27', '8')">提交</button><span class="feedback" id="fb-8-27"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-2')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-2')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-2"><p>平行四边形对边相等：AB = CD，BC = AD。周长 = AB + BC + CD + AD = 2 × AB + 2 × BC = 2 × 12 + 2 × BC = 40。所以 2 × BC = 40 − 24 = 16，BC = 8。</p></div>
+    <div class="ans-box" id="a4-2"><p>周长 = 2 × (AB + BC) = 40，AB + BC = 20，BC = 20 − 12 = <strong>8</strong>。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>28.</strong> 菱形的一条对角线长为 10，另一条对角线长为 24。求菱形的面积。</p>
+    <div id="fill-8-28"><input class="fill-input" id="inp-8-28" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('8-28', '120')">提交</button><span class="feedback" id="fb-8-28"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-3')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-3')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-3"><p>菱形面积 = 对角线乘积的一半 = 10 × 24 ÷ 2 = 120。因为菱形被对角线分成 4 个全等的直角三角形，每个小三角形面积 = (对角线一半 × 另一对角线一半) ÷ 2，4 个总共 = 对角线乘积 ÷ 2。</p></div>
+    <div class="ans-box" id="a4-3"><p>菱形面积 = 对角线乘积 ÷ 2 = 10 × 24 ÷ 2 = <strong>120</strong>。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>29.</strong> 等腰三角形的一个底角是 65°，这个等腰三角形是轴对称图形。它的对称轴是什么？</p>
+    <div id="fill-8-29"><input class="fill-input" id="inp-8-29" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('8-29', '底边上的高')">提交</button><span class="feedback" id="fb-8-29"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-4')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-4')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-4"><p>等腰三角形的对称轴是底边上的高所在的直线，也是顶角的平分线、底边的中线所在的直线（三线合一）。</p></div>
+    <div class="ans-box" id="a4-4"><p>对称轴是<strong>底边上的高所在的直线</strong>（也是顶角的平分线、底边上的中线所在的直线，三线合一）。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>30.</strong> 一根旗杆高 8 米，在离旗杆底部 6 米处拉一根绳子到旗杆顶部。绳子至少需要多长？</p>
+    <div id="fill-8-30"><input class="fill-input" id="inp-8-30" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('8-30', '10米')">提交</button><span class="feedback" id="fb-8-30"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-5')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-5')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-5"><p>旗杆垂直于地面，旗杆高 8 米，地面距离 6 米，构成直角三角形。绳子是斜边。绳子长² = 8² + 6² = 64 + 36 = 100。绳子长 = 10 米。</p></div>
+    <div class="ans-box" id="a4-5"><p>绳子长² = 8² + 6² = 64 + 36 = 100。绳子长 = <strong>10 米</strong>。（经典 6-8-10 勾股数）</p></div>
+  </div>
+
+</article>
+<script>
+function checkTF(btn, isCorrect, qid) {
+  const container = document.getElementById('tf-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.tf-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function checkSingle(btn, isCorrect, qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.opt-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function toggleMultiOpt(btn) {
+  btn.classList.toggle('selected');
+}
+function checkMulti(qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  const opts = container.querySelectorAll('.opt-btn');
+  let allCorrect = true;
+  opts.forEach(o => {
+    o.style.pointerEvents = 'none';
+    const isCorrect = o.dataset.correct === 'true';
+    const isSelected = o.classList.contains('selected');
+    if (isCorrect && isSelected) o.classList.add('correct');
+    else if (!isCorrect && isSelected) { o.classList.add('wrong'); allCorrect = false; }
+    else if (isCorrect && !isSelected) { o.classList.add('correct'); allCorrect = false; }
+  });
+  const fb = document.getElementById('fb-' + qid);
+  if (fb) { fb.textContent = allCorrect ? '✓ 正确' : '✗ 错误'; fb.className = 'feedback show ' + (allCorrect ? 'correct-fb' : 'wrong-fb'); }
+}
+function checkFill(qid, correctAns) {
+  const container = document.getElementById('fill-' + qid);
+  if (!container || container.dataset.done) return;
+  const input = document.getElementById('inp-' + qid);
+  const fb = document.getElementById('fb-' + qid);
+  const userAns = input.value.trim();
+  if (!userAns) return;
+  container.dataset.done = '1';
+  input.disabled = true;
+  const checkBtn = container.querySelector('.check-btn');
+  if (checkBtn) checkBtn.style.display = 'none';
+  const normalized = userAns.replace(/\s+/g, '');
+  const normalizedCorrect = correctAns.replace(/\s+/g, '');
+  if (normalized === normalizedCorrect) {
+    input.style.borderColor = '#4caf50';
+    input.style.background = '#e8f5e9';
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    input.style.borderColor = '#f44336';
+    input.style.background = '#ffebee';
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+</body>
+</html>

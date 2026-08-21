@@ -17,16 +17,13 @@
   .challenge { background: #e8eaf6; border: 2px dashed #c62828; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .diff-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; color: #fff; margin-left: 8px; }
-  .diff-easy { background: #66bb6a; }
-  .diff-medium { background: #ff9800; }
-  .diff-hard { background: #f44336; }
   .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
   .hint-box.show, .ans-box.show { display: block; }
   .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
   .btn-sm:hover { background: #e8e8e8; }
   @media (max-width: 720px) {
-    article { padding: 20px 12px !important; }
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
     h1 { font-size: 22px; }
     h2 { font-size: 18px; }
     h3 { font-size: 16px; }
@@ -38,7 +35,7 @@
 <body>
 <article>
   <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：课件 10（几何图形）、课件 11（直线、射线、线段）</p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./geometry-basics.html">课件 10（几何图形）</a>、<a href="./lines-rays-segments.html">课件 11（直线、射线、线段）</a></p>
   <h1>角</h1>
 
   <h2>起源：为什么要把圆分成 360 度？</h2>
@@ -197,7 +194,7 @@
   <h2>习题</h2>
 
   <div class="exercise">
-    <p><strong>1.</strong> 判断：120° 的角是钝角。对还是错？<span class="diff-tag diff-easy">简单</span></p>
+    <p><strong>1.</strong> 判断：120° 的角是钝角。对还是错？</p>
     <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
     <div class="hint-box" id="h1">钝角：大于 90° 且小于 180°。</div>
@@ -205,7 +202,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>2.</strong> 一个角是 35°，它的余角是多少度？补角是多少度？<span class="diff-tag diff-easy">简单</span></p>
+    <p><strong>2.</strong> 一个角是 35°，它的余角是多少度？补角是多少度？</p>
     <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
     <div class="hint-box" id="h2">余角 = 90° - 35°；补角 = 180° - 35°。</div>
@@ -213,7 +210,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>3.</strong> 时钟在 2:30 时，时针和分针的夹角是多少度？<span class="diff-tag diff-medium">中等</span></p>
+    <p><strong>3.</strong> 时钟在 2:30 时，时针和分针的夹角是多少度？</p>
     <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
     <div class="hint-box" id="h3">分针在 6（180°）。时针在 2 和 3 之间的正中间：2 是 60°，30 分钟走了一半 → 60° + 15° = 75°。</div>
@@ -221,7 +218,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>4.</strong> 两条直线相交，其中一个角是 50°。求另外三个角的度数。<span class="diff-tag diff-hard">较难</span></p>
+    <p><strong>4.</strong> 两条直线相交，其中一个角是 50°。求另外三个角的度数。</p>
     <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
     <div class="hint-box" id="h4">对顶角相等，邻补角之和为 180°。</div>

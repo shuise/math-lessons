@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模拟考试 — 阶段二 — 自学课件</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../lessons/style.css">
+<style>
+  :root { --accent: #2e7d32; }
+  .exam-header { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .section-title { color: #2e7d32; font-size: 18px; font-weight: 700; margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #c8e6c9; }
+  .q-item { padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+  .q-item:last-child { border-bottom: none; }
+  .btn-row { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-hint, .btn-ans { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; }
+  .btn-hint:hover { background: #fff3e0; border-color: #ff9800; }
+  .btn-ans:hover { background: #e8f5e9; border-color: #4caf50; }
+  .hint-box, .ans-box { display: none; margin-top: 8px; padding: 10px 14px; border-radius: 6px; font-size: 14px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .hint-box { background: #fff8e1; border-left: 3px solid #ff9800; }
+  .ans-box { background: #e8f5e9; border-left: 3px solid #4caf50; }
+  .opt-row { margin: 4px 0; padding-left: 8px; }
+  .opt { display: inline-block; min-width: 24px; font-weight: 600; }
+  @media (max-width: 720px) {
+    article { padding-bottom: 100px !important; }
+    article { padding: 20px 12px 100px 12px !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    .q-item { padding: 10px 0; }
+    .exam-header { padding: 12px 14px; margin: 12px 0; }
+  }
+  .opt-btn { display: inline-block; padding: 6px 16px; margin: 3px 4px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .opt-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .opt-btn.selected { border-color: #1976d2; background: #e3f2fd; }
+  .opt-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .opt-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .tf-btn { display: inline-block; padding: 6px 20px; margin: 3px 6px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .tf-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .tf-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .tf-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .fill-input { padding: 6px 12px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 15px; width: 160px; }
+  .fill-input:focus { outline: none; border-color: #1976d2; }
+  .check-btn { padding: 6px 16px; border: 1px solid #1976d2; border-radius: 6px; background: #1976d2; color: #fff; font-size: 13px; cursor: pointer; margin-left: 8px; }
+  .check-btn:hover { background: #1565c0; }
+  .feedback { display: none; margin-left: 8px; font-size: 14px; font-weight: 600; }
+  .feedback.show { display: inline; }
+  .feedback.correct-fb { color: #2e7d32; }
+  .feedback.wrong-fb { color: #c62828; }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="../index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="../geometry-basics.html">课件1（几何图形）</a>、<a href="../lines-rays-segments.html">课件2（直线、射线、线段）</a>、<a href="../angles.html">课件3（角）</a>、<a href="../parallel-lines.html">课件4（相交线与平行线）</a>、<a href="../triangle.html">课件5（三角形）</a>、<a href="../congruent-triangles.html">课件6（全等三角形）</a></p>
+  <h1>模拟考试 — 阶段二：平行与三角形</h1>
+  <div class="exam-header">
+    <p>⏱ 时间：30 分钟 | ✅ 判断题 10 题 | 🔘 单选题 10 题 | ☑️ 多选题 5 题 | ✏️ 其他题型 5 题 | 共 30 题</p>
+  </div>
+
+  <p class="section-title">一、判断题（每题 1 分，共 10 分）</p>
+
+  <div class="q-item">
+    <p><strong>1.</strong> 两条直线被第三条直线所截，同位角一定相等。</p>
+    <div id="tf-5-1"><button class="tf-btn" onclick="checkTF(this, true, '5-1')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '5-1')">错误</button><span class="feedback" id="fb-5-1"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-1')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-1')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-1"><p>同位角相等是有前提的——只有当两条直线平行时，同位角才相等。如果两条直线不平行，同位角就不相等。</p></div>
+    <div class="ans-box" id="a1-1"><p>❌ <strong>错误</strong>。只有两条直线平行时，同位角才相等。如果被截的两条直线不平行，同位角不相等。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>2.</strong> 三角形三个内角的和等于 180°。</p>
+    <div id="tf-5-2"><button class="tf-btn" onclick="checkTF(this, true, '5-2')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '5-2')">错误</button><span class="feedback" id="fb-5-2"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-2')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-2')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-2"><p>这是三角形最基本也是最重要的性质之一。你可以用平行线的性质来证明：过三角形一个顶点画一条平行于对边的直线，用内错角相等来证明。</p></div>
+    <div class="ans-box" id="a1-2"><p>✅ <strong>正确</strong>。三角形内角和恒等于 180°（一个平角），这是三角形的基本性质。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>3.</strong> 三角形的一个外角等于与它不相邻的两个内角之和。</p>
+    <div id="tf-5-3"><button class="tf-btn" onclick="checkTF(this, true, '5-3')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '5-3')">错误</button><span class="feedback" id="fb-5-3"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-3')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-3')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-3"><p>外角加上相邻的内角 = 180°，而三个内角和 = 180°，所以外角 = 180° − 相邻内角 = 另外两个内角之和。</p></div>
+    <div class="ans-box" id="a1-3"><p>✅ <strong>正确</strong>。这是三角形外角定理：三角形的一个外角等于与它不相邻的两个内角的和。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>4.</strong> 如果两条直线平行，那么内错角互补。</p>
+    <div id="tf-5-4"><button class="tf-btn" onclick="checkTF(this, true, '5-4')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '5-4')">错误</button><span class="feedback" id="fb-5-4"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-4')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-4')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-4"><p>平行线被截时，内错角是相等的，不是互补的。同旁内角才是互补的。</p></div>
+    <div class="ans-box" id="a1-4"><p>❌ <strong>错误</strong>。两直线平行时，内错角相等，同旁内角互补。不要混淆！</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>5.</strong> 三条线段长分别为 3、4、8，可以组成三角形。</p>
+    <div id="tf-5-5"><button class="tf-btn" onclick="checkTF(this, true, '5-5')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '5-5')">错误</button><span class="feedback" id="fb-5-5"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-5')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-5')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-5"><p>三角形三边关系：任意两边之和大于第三边。检查：3 + 4 = 7，7 < 8，不满足要求。</p></div>
+    <div class="ans-box" id="a1-5"><p>❌ <strong>错误</strong>。3 + 4 = 7 < 8，不满足"两边之和大于第三边"，不能组成三角形。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>6.</strong> 全等三角形的对应边相等，对应角相等。</p>
+    <div id="tf-5-6"><button class="tf-btn" onclick="checkTF(this, true, '5-6')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '5-6')">错误</button><span class="feedback" id="fb-5-6"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-6')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-6')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-6"><p>全等三角形就是"能够完全重合"的两个三角形，所以对应边一定相等，对应角也一定相等。这是全等的定义。</p></div>
+    <div class="ans-box" id="a1-6"><p>✅ <strong>正确</strong>。全等三角形就是形状和大小完全相同的三角形，对应边相等，对应角相等。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>7.</strong> 有一个角是 60° 的等腰三角形一定是等边三角形。</p>
+    <div id="tf-5-7"><button class="tf-btn" onclick="checkTF(this, true, '5-7')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '5-7')">错误</button><span class="feedback" id="fb-5-7"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-7')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-7')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-7"><p>等腰三角形中，如果顶角是 60°，两个底角各为 (180° − 60°) ÷ 2 = 60°。如果底角是 60°，另一个底角也是 60°，顶角也是 60°。不管哪种情况，三个角都是 60°。</p></div>
+    <div class="ans-box" id="a1-7"><p>✅ <strong>正确</strong>。等腰三角形中如果有一个角是 60°，无论这个角是顶角还是底角，都能推出三个角都是 60°，即等边三角形。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>8.</strong> 判定两个三角形全等，只需要三个条件就够了。</p>
+    <div id="tf-5-8"><button class="tf-btn" onclick="checkTF(this, true, '5-8')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '5-8')">错误</button><span class="feedback" id="fb-5-8"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-8')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-8')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-8"><p>不是任意三个条件都能判定全等。比如"角角角"（AAA）只能判定相似，不能判定全等。"边边角"（SSA）也不能保证全等。必须是 SSS、SAS、ASA、AAS、HL 这五种组合之一。</p></div>
+    <div class="ans-box" id="a1-8"><p>❌ <strong>错误</strong>。不是任意三个条件都行，必须是特定的组合（SSS、SAS、ASA、AAS、HL），"角角角"和"边边角"不能判定全等。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>9.</strong> 直角三角形中，斜边是最长的边。</p>
+    <div id="tf-5-9"><button class="tf-btn" onclick="checkTF(this, true, '5-9')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '5-9')">错误</button><span class="feedback" id="fb-5-9"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-9')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-9')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-9"><p>直角三角形中，直角是最大的角（90°），根据"大角对大边"，斜边（直角所对的边）就是最长的边。</p></div>
+    <div class="ans-box" id="a1-9"><p>✅ <strong>正确</strong>。直角三角形中，直角最大，根据"大角对大边"，斜边（直角所对的边）最长。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>10.</strong> 两条平行线被第三条直线所截，同旁内角相等。</p>
+    <div id="tf-5-10"><button class="tf-btn" onclick="checkTF(this, true, '5-10')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '5-10')">错误</button><span class="feedback" id="fb-5-10"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-10')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-10')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-10"><p>再回忆一下：平行线被截时，同位角相等、内错角相等、同旁内角互补（和为 180°）。</p></div>
+    <div class="ans-box" id="a1-10"><p>❌ <strong>错误</strong>。两直线平行时，同旁内角是互补（和为 180°），不是相等。</p></div>
+  </div>
+
+  <p class="section-title">二、单选题（每题 2 分，共 20 分）</p>
+
+  <div class="q-item">
+    <p><strong>11.</strong> 在 △ABC 中，∠A = 50°，∠B = 60°，则 ∠C 等于多少度？</p>
+    <div id="opt-5-11"><button class="opt-btn" onclick="checkSingle(this, false, '5-11')">A. 50°</button><button class="opt-btn" onclick="checkSingle(this, false, '5-11')">B. 60°</button><button class="opt-btn" onclick="checkSingle(this, true, '5-11')" data-correct="true">C. 70°</button><button class="opt-btn" onclick="checkSingle(this, false, '5-11')">D. 80°</button><span class="feedback" id="fb-5-11"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-1')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-1')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-1"><p>三角形内角和 = 180°，所以 ∠C = 180° − ∠A − ∠B。</p></div>
+    <div class="ans-box" id="h2-1"><p><strong>C（70°）</strong>。∠C = 180° − 50° − 60° = 70°。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>12.</strong> 如图，直线 a∥b，∠1 = 65°，则 ∠2 等于多少度？（∠1 和 ∠2 是内错角）</p>
+    <div id="opt-5-12"><button class="opt-btn" onclick="checkSingle(this, true, '5-12')" data-correct="true">A. 65°</button><button class="opt-btn" onclick="checkSingle(this, false, '5-12')">B. 115°</button><button class="opt-btn" onclick="checkSingle(this, false, '5-12')">C. 25°</button><button class="opt-btn" onclick="checkSingle(this, false, '5-12')">D. 无法确定</button><span class="feedback" id="fb-5-12"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-2')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-2')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-2"><p>两直线平行，内错角相等。∠1 和 ∠2 是内错角，所以 ∠2 = ∠1。</p></div>
+    <div class="ans-box" id="a2-2"><p><strong>A（65°）</strong>。a∥b 时内错角相等，所以 ∠2 = ∠1 = 65°。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>13.</strong> 等腰三角形的一个底角是 50°，它的顶角是多少度？</p>
+    <div id="opt-5-13"><button class="opt-btn" onclick="checkSingle(this, false, '5-13')">A. 50°</button><button class="opt-btn" onclick="checkSingle(this, false, '5-13')">B. 65°</button><button class="opt-btn" onclick="checkSingle(this, true, '5-13')" data-correct="true">C. 80°</button><button class="opt-btn" onclick="checkSingle(this, false, '5-13')">D. 100°</button><span class="feedback" id="fb-5-13"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-3')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-3')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-3"><p>等腰三角形两个底角相等。内角和 180°，两个底角各 50°，顶角 = 180° − 50° − 50°。</p></div>
+    <div class="ans-box" id="a2-3"><p><strong>C（80°）</strong>。等腰三角形两个底角相等，各 50°。顶角 = 180° − 50° − 50° = 80°。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>14.</strong> 下列哪组线段能组成三角形？</p>
+    <div id="opt-5-14"><button class="opt-btn" onclick="checkSingle(this, false, '5-14')">A. 2, 3, 6</button><button class="opt-btn" onclick="checkSingle(this, false, '5-14')">B. 4, 5, 9</button><button class="opt-btn" onclick="checkSingle(this, true, '5-14')" data-correct="true">C. 5, 7, 11</button><button class="opt-btn" onclick="checkSingle(this, false, '5-14')">D. 3, 3, 7</button><span class="feedback" id="fb-5-14"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-4')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-4')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-4"><p>三角形三边关系：任意两边之和大于第三边。逐一检查：A: 2+3=5<6 ✗; B: 4+5=9=9 ✗; C: 5+7=12>11, 5+11=16>7, 7+11=18>5 ✓; D: 3+3=6<7 ✗。</p></div>
+    <div class="ans-box" id="a2-4"><p><strong>C（5, 7, 11）</strong>。只有 C 满足任意两边之和大于第三边。A: 2+3<6; B: 4+5=9（等于也不行）; D: 3+3<7。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>15.</strong> 在 △ABC 中，∠A 的外角是 110°，∠B = 50°，则 ∠C 等于多少度？</p>
+    <div id="opt-5-15"><button class="opt-btn" onclick="checkSingle(this, true, '5-15')" data-correct="true">A. 60°</button><button class="opt-btn" onclick="checkSingle(this, false, '5-15')">B. 70°</button><button class="opt-btn" onclick="checkSingle(this, false, '5-15')">C. 50°</button><button class="opt-btn" onclick="checkSingle(this, false, '5-15')">D. 40°</button><span class="feedback" id="fb-5-15"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-5')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-5')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-5"><p>外角定理：∠A 的外角 = ∠B + ∠C。所以 110° = 50° + ∠C，∠C = 60°。</p></div>
+    <div class="ans-box" id="a2-5"><p><strong>A（60°）</strong>。由外角定理：∠A 的外角 = ∠B + ∠C，110° = 50° + ∠C，∠C = 60°。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>16.</strong> 两个三角形全等，下列哪个条件不能判定？</p>
+    <div id="opt-5-16"><button class="opt-btn" onclick="checkSingle(this, false, '5-16')">A. 三边对应相等（SSS）</button><button class="opt-btn" onclick="checkSingle(this, false, '5-16')">B. 两边及其夹角对应相等（SAS）</button><button class="opt-btn" onclick="checkSingle(this, true, '5-16')" data-correct="true">C. 三角对应相等（AAA）</button><button class="opt-btn" onclick="checkSingle(this, false, '5-16')">D. 两角及其夹边对应相等（ASA）</button><span class="feedback" id="fb-5-16"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-6')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-6')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-6"><p>SSS、SAS、ASA、AAS、HL 都能判定全等。AAA 只能判定相似（形状相同），不能判定全等（大小不一定相同）。</p></div>
+    <div class="ans-box" id="a2-6"><p><strong>C（AAA）</strong>。三角对应相等只能说明两个三角形形状相同（相似），无法确定大小相等，不能判定全等。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>17.</strong> 直角三角形的两个锐角的关系是？</p>
+    <div id="opt-5-17"><button class="opt-btn" onclick="checkSingle(this, false, '5-17')">A. 互补</button><button class="opt-btn" onclick="checkSingle(this, true, '5-17')" data-correct="true">B. 互余</button><button class="opt-btn" onclick="checkSingle(this, false, '5-17')">C. 相等</button><button class="opt-btn" onclick="checkSingle(this, false, '5-17')">D. 没有固定关系</button><span class="feedback" id="fb-5-17"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-7')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-7')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-7"><p>直角三角形中，直角 = 90°，内角和 = 180°，所以两个锐角之和 = 180° − 90° = 90°。两个角和为 90° 就是互余。</p></div>
+    <div class="ans-box" id="a2-7"><p><strong>B（互余）</strong>。直角三角形内角和 180°，直角占 90°，剩下两个锐角之和为 90°，即互余。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>18.</strong> 如图所示，直线 a∥b，∠1 = 120°，则 ∠2 等于多少度？（∠1 和 ∠2 是同旁内角）</p>
+    <div id="opt-5-18"><button class="opt-btn" onclick="checkSingle(this, true, '5-18')" data-correct="true">A. 60°</button><button class="opt-btn" onclick="checkSingle(this, false, '5-18')">B. 120°</button><button class="opt-btn" onclick="checkSingle(this, false, '5-18')">C. 30°</button><button class="opt-btn" onclick="checkSingle(this, false, '5-18')">D. 无法确定</button><span class="feedback" id="fb-5-18"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-8')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-8')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-8"><p>两直线平行，同旁内角互补（和为 180°）。所以 ∠2 = 180° − 120°。</p></div>
+    <div class="ans-box" id="a2-8"><p><strong>A（60°）</strong>。a∥b 时同旁内角互补，∠2 = 180° − 120° = 60°。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>19.</strong> 三角形按角分类，可以分为哪几类？</p>
+    <div id="opt-5-19"><button class="opt-btn" onclick="checkSingle(this, true, '5-19')" data-correct="true">A. 锐角三角形、直角三角形、钝角三角形</button><button class="opt-btn" onclick="checkSingle(this, false, '5-19')">B. 等腰三角形、等边三角形</button><button class="opt-btn" onclick="checkSingle(this, false, '5-19')">C. 锐角三角形、等腰三角形</button><button class="opt-btn" onclick="checkSingle(this, false, '5-19')">D. 直角三角形、等边三角形</button><span class="feedback" id="fb-5-19"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-9')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-9')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-9"><p>按角分类看最大角：锐角三角形（三个角都是锐角）、直角三角形（有一个直角）、钝角三角形（有一个钝角）。等腰/等边是按边分类。</p></div>
+    <div class="ans-box" id="a2-9"><p><strong>A</strong>。按角分类分为锐角三角形、直角三角形、钝角三角形。B 是按边分类。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>20.</strong> 在 △ABC 中，∠A : ∠B : ∠C = 1 : 2 : 3，这个三角形是什么三角形？</p>
+    <div id="opt-5-20"><button class="opt-btn" onclick="checkSingle(this, false, '5-20')">A. 锐角三角形</button><button class="opt-btn" onclick="checkSingle(this, true, '5-20')" data-correct="true">B. 直角三角形</button><button class="opt-btn" onclick="checkSingle(this, false, '5-20')">C. 钝角三角形</button><button class="opt-btn" onclick="checkSingle(this, false, '5-20')">D. 无法确定</button><span class="feedback" id="fb-5-20"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-10')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-10')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-10"><p>三个角的比是 1:2:3，总共 1 + 2 + 3 = 6 份，180° ÷ 6 = 30°，所以三个角分别是 30°、60°、90°。最大角是 90°，是直角三角形。</p></div>
+    <div class="ans-box" id="a2-10"><p><strong>B（直角三角形）</strong>。总份数 = 1+2+3 = 6，每份 180°÷6 = 30°。三个角分别为 30°、60°、90°，是直角三角形。</p></div>
+  </div>
+
+  <p class="section-title">三、多选题（每题 3 分，共 15 分）</p>
+
+  <div class="q-item">
+    <p><strong>21.</strong> 两直线平行时，下列哪些角的关系是正确的？（多选）</p>
+    <div id="opt-5-21"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 同位角相等</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 内错角相等</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 同旁内角互补</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 对顶角相等</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMulti('5-21')">提交</button><span class="feedback" id="fb-5-21"></span>
+      <button class="btn-hint" onclick="toggleHint('h3-1')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-1')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-1"><p>A、B、C 是平行线的三条性质。D 对顶角相等是两条直线相交的普遍性质，与是否平行无关，但它是正确的。</p></div>
+    <div class="ans-box" id="a3-1"><p><strong>A、B、C、D</strong>。全部正确。A、B、C 是平行线的性质，D 对顶角相等也是正确的几何事实。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>22.</strong> 下列哪些条件可以判定两个三角形全等？（多选）</p>
+    <div id="opt-5-22"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 三边对应相等（SSS）</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 两边及夹角对应相等（SAS）</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">C. 两边及其中一边的对角对应相等（SSA）</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 两角及一边对应相等（ASA / AAS）</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMulti('5-22')">提交</button><span class="feedback" id="fb-5-22"></span>
+      <button class="btn-hint" onclick="toggleHint('h3-2')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-2')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-2"><p>SSS、SAS、ASA、AAS、HL 都能判定全等。SSA（边边角）不能：两边和一角，如果这个角不是夹角，可能有两种情况，不能唯一确定三角形。</p></div>
+    <div class="ans-box" id="a3-2"><p><strong>A、B、D</strong>。C（SSA）不能判定全等，因为已知两边和其中一边的对角时，可能画出两个不同的三角形。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>23.</strong> 关于等腰三角形，下列说法正确的有哪些？（多选）</p>
+    <div id="opt-5-23"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 两腰相等</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 两底角相等</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 顶角的平分线、底边上的中线、底边上的高互相重合（三线合一）</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 一定是锐角三角形</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMulti('5-23')">提交</button><span class="feedback" id="fb-5-23"></span>
+      <button class="btn-hint" onclick="toggleHint('h3-3')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-3')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-3"><p>A、B、C 都是等腰三角形的性质。D 错误：等腰三角形可以是钝角三角形（比如顶角 120° 的等腰三角形）。</p></div>
+    <div class="ans-box" id="a3-3"><p><strong>A、B、C</strong>。D 错误：等腰三角形可以是锐角、直角或钝角三角形。例如顶角为 120° 的等腰三角形是钝角三角形。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>24.</strong> 在 △ABC 中，下列哪些关系一定成立？（多选）</p>
+    <div id="opt-5-24"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. ∠A + ∠B + ∠C = 180°</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 三角形的一个外角大于任何一个与它不相邻的内角</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 任意两边之和大于第三边</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 任意两边之差小于第三边</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMulti('5-24')">提交</button><span class="feedback" id="fb-5-24"></span>
+      <button class="btn-hint" onclick="toggleHint('h3-4')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-4')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-4"><p>A 是内角和定理；B 是外角定理的推论（外角 = 两个不相邻内角之和，当然大于其中任意一个）；C 和 D 是三角形三边的关系。</p></div>
+    <div class="ans-box" id="a3-4"><p><strong>A、B、C、D</strong>。全部正确。这些都是三角形最基本、最重要的性质。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>25.</strong> 关于直角三角形的性质，下列说法正确的有哪些？（多选）</p>
+    <div id="opt-5-25"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 两个锐角互余</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 斜边上的中线等于斜边的一半</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 斜边是最长的边</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 30° 角所对的直角边等于斜边的一半</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMulti('5-25')">提交</button><span class="feedback" id="fb-5-25"></span>
+      <button class="btn-hint" onclick="toggleHint('h3-5')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-5')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-5"><p>A 由内角和 180° 推出；B 是直角三角形斜边中线的特殊性质；C 是"大角对大边"的推论；D 是含 30° 角的直角三角形的特殊性质。</p></div>
+    <div class="ans-box" id="a3-5"><p><strong>A、B、C、D</strong>。全部正确。这些都是直角三角形的重要性质，在解题中经常用到。</p></div>
+  </div>
+
+  <p class="section-title">四、其他题型（每题 3 分，共 15 分）</p>
+
+  <div class="q-item">
+    <p><strong>26.</strong> 在 △ABC 中，∠A = 40°，∠B = 70°。求 ∠C 的度数，并判断这个三角形按边分类是什么三角形。</p>
+    <div id="fill-5-26"><input class="fill-input" id="inp-5-26" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('5-26', '70°')">提交</button><span class="feedback" id="fb-5-26"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-1')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-1')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-1"><p>先求 ∠C = 180° − 40° − 70° = 70°。发现 ∠B = ∠C = 70°，两个角相等，根据"等角对等边"，这个三角形是等腰三角形。</p></div>
+    <div class="ans-box" id="a4-1"><p>∠C = 180° − 40° − 70° = <strong>70°</strong>。因为 ∠B = ∠C = 70°，所以 AB = AC，是<strong>等腰三角形</strong>。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>27.</strong> 如图，直线 a∥b，∠1 = 55°，∠2 = 75°。求 ∠3 的度数。（∠1、∠2、∠3 构成一个三角形）</p>
+    <div id="fill-5-27"><input class="fill-input" id="inp-5-27" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('5-27', '50°')">提交</button><span class="feedback" id="fb-5-27"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-2')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-2')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-2"><p>∠1、∠2、∠3 是同一个三角形的三个内角，三角形内角和为 180°。所以 ∠3 = 180° − 55° − 75°。</p></div>
+    <div class="ans-box" id="a4-2"><p>∠3 = 180° − 55° − 75° = <strong>50°</strong>。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>28.</strong> 等腰三角形的一个外角是 100°，这个外角是与底角相邻的外角。求这个等腰三角形三个内角各是多少度？</p>
+    <div id="fill-5-28"><input class="fill-input" id="inp-5-28" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('5-28', '80°,80°,20°')">提交</button><span class="feedback" id="fb-5-28"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-3')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-3')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-3"><p>外角与相邻内角互补，所以底角 = 180° − 100° = 80°。等腰三角形两个底角相等，各 80°。顶角 = 180° − 80° − 80° = 20°。</p></div>
+    <div class="ans-box" id="a4-3"><p>底角 = 180° − 100° = 80°。两个底角各 80°，顶角 = 180° − 80° − 80° = <strong>20°</strong>。三个内角为 <strong>80°、80°、20°</strong>。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>29.</strong> 在 △ABC 中，AB = 5，BC = 8，AC 的长度是整数。AC 可能是哪些值？</p>
+    <div id="fill-5-29"><input class="fill-input" id="inp-5-29" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('5-29', '4,5,6,7,8,9,10,11,12')">提交</button><span class="feedback" id="fb-5-29"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-4')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-4')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-4"><p>三角形三边关系：AC 必须满足 5 + 8 > AC 且 5 + AC > 8。即 AC < 13 且 AC > 3。AC 是整数，所以 AC 可以是 4、5、6、7、8、9、10、11、12。</p></div>
+    <div class="ans-box" id="a4-4"><p>由两边之和大于第三边：AC < 5 + 8 = 13，且 AC > 8 − 5 = 3。AC 为整数，所以 AC 可以是 <strong>4、5、6、7、8、9、10、11、12</strong>。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>30.</strong> 如图，在 △ABC 中，D 是 BC 边上一点，∠B = 40°，∠BAD = 30°，∠C = 50°。求 ∠ADC 的度数。</p>
+    <div id="fill-5-30"><input class="fill-input" id="inp-5-30" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('5-30', '70°')">提交</button><span class="feedback" id="fb-5-30"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-5')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-5')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-5"><p>在 △ABD 中，∠ADB = 180° − ∠B − ∠BAD = 180° − 40° − 30° = 110°。∠ADC 是 ∠ADB 的补角，∠ADC = 180° − 110° = 70°。或者用外角定理：∠ADC = ∠B + ∠BAD = 40° + 30° = 70°。</p></div>
+    <div class="ans-box" id="a4-5"><p>方法一：在 △ABD 中，∠ADB = 180° − 40° − 30° = 110°，∠ADC = 180° − 110° = 70°。<br>方法二：∠ADC 是 △ABD 的外角，∠ADC = ∠B + ∠BAD = 40° + 30° = <strong>70°</strong>。</p></div>
+  </div>
+
+</article>
+<script>
+function checkTF(btn, isCorrect, qid) {
+  const container = document.getElementById('tf-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.tf-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function checkSingle(btn, isCorrect, qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.opt-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function toggleMultiOpt(btn) {
+  btn.classList.toggle('selected');
+}
+function checkMulti(qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  const opts = container.querySelectorAll('.opt-btn');
+  let allCorrect = true;
+  opts.forEach(o => {
+    o.style.pointerEvents = 'none';
+    const isCorrect = o.dataset.correct === 'true';
+    const isSelected = o.classList.contains('selected');
+    if (isCorrect && isSelected) o.classList.add('correct');
+    else if (!isCorrect && isSelected) { o.classList.add('wrong'); allCorrect = false; }
+    else if (isCorrect && !isSelected) { o.classList.add('correct'); allCorrect = false; }
+  });
+  const fb = document.getElementById('fb-' + qid);
+  if (fb) { fb.textContent = allCorrect ? '✓ 正确' : '✗ 错误'; fb.className = 'feedback show ' + (allCorrect ? 'correct-fb' : 'wrong-fb'); }
+}
+function checkFill(qid, correctAns) {
+  const container = document.getElementById('fill-' + qid);
+  if (!container || container.dataset.done) return;
+  const input = document.getElementById('inp-' + qid);
+  const fb = document.getElementById('fb-' + qid);
+  const userAns = input.value.trim();
+  if (!userAns) return;
+  container.dataset.done = '1';
+  input.disabled = true;
+  const checkBtn = container.querySelector('.check-btn');
+  if (checkBtn) checkBtn.style.display = 'none';
+  const normalized = userAns.replace(/\s+/g, '');
+  const normalizedCorrect = correctAns.replace(/\s+/g, '');
+  if (normalized === normalizedCorrect) {
+    input.style.borderColor = '#4caf50';
+    input.style.background = '#e8f5e9';
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    input.style.borderColor = '#f44336';
+    input.style.background = '#ffebee';
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+</body>
+</html>

@@ -17,17 +17,14 @@
   .challenge { background: #e8eaf6; border: 2px dashed #e91e63; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .diff-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; color: #fff; margin-left: 8px; }
-  .diff-easy { background: #66bb6a; }
-  .diff-medium { background: #ff9800; }
-  .diff-hard { background: #f44336; }
   .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
   .hint-box.show, .ans-box.show { display: block; }
   .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
   .btn-sm:hover { background: #e8e8e8; }
 
   @media (max-width: 720px) {
-    article { padding: 20px 12px !important; }
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
     h1 { font-size: 22px; }
     h2 { font-size: 18px; }
     h3 { font-size: 16px; }
@@ -39,7 +36,7 @@
 <body>
 <article>
   <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：课件 1-4（自然数、分数、负数、代数式）</p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./natural-numbers.html">课件 1</a>、<a href="./fractions.html">课件 2</a>、<a href="./negative-numbers.html">课件 3</a>、<a href="./algebraic-expressions.html">课件 4</a>（自然数、分数、负数、代数式）</p>
   <h1>整式运算</h1>
 
   <h2>起源：花拉子米的"对消"</h2>
@@ -190,7 +187,7 @@
   <h2>习题</h2>
 
   <div class="exercise">
-    <p><strong>1.</strong> 合并同类项：4x² - 3x + 7 - 2x² + 5x - 3 <span class="diff-tag diff-easy">简单</span></p>
+    <p><strong>1.</strong> 合并同类项：4x² - 3x + 7 - 2x² + 5x - 3</p>
     <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
     <div class="hint-box" id="h1">x² 项：4-2=2；x 项：-3+5=2；常数项：7-3=4。</div>
@@ -198,7 +195,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>2.</strong> 展开 (x + 4)(x - 3) <span class="diff-tag diff-easy">简单</span></p>
+    <p><strong>2.</strong> 展开 (x + 4)(x - 3)</p>
     <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
     <div class="hint-box" id="h2">FOIL：x·x + x·(-3) + 4·x + 4·(-3)。</div>
@@ -206,7 +203,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>3.</strong> 用平方差公式计算：103 × 97 <span class="diff-tag diff-medium">中等</span></p>
+    <p><strong>3.</strong> 用平方差公式计算：103 × 97</p>
     <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
     <div class="hint-box" id="h3">103 = 100+3，97 = 100-3。用 (a+b)(a-b) = a²-b²。</div>
@@ -214,7 +211,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>4.</strong> 已知 (x + y)² = 49, xy = 6。求 x² + y² 的值。<span class="diff-tag diff-hard">较难</span></p>
+    <p><strong>4.</strong> 已知 (x + y)² = 49, xy = 6。求 x² + y² 的值。</p>
     <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
     <div class="hint-box" id="h4">展开 (x+y)² = x² + 2xy + y²。所以 x² + y² = (x+y)² - 2xy。</div>

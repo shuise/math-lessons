@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>勾股定理 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #3e2723; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #efebe9; border-left: 4px solid #795548; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  .graphic { margin: 16px 0; text-align: center; }
+  @media (max-width: 720px) {
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./triangle.html">课件 14（三角形）</a>、15（全等三角形）、16（实数）、17（二次根式）</p>
+  <h1>勾股定理 — a² + b² = c²</h1>
+
+  <h2>起源：两块大陆上的同一个发现</h2>
+  <div class="origin">
+    <p>如果说数学里有一个定理，全世界的人都听说过，那一定是<strong>勾股定理</strong>。</p>
+
+    <h3>古希腊：毕达哥拉斯的发现</h3>
+    <p>公元前 6 世纪，古希腊数学家<strong>毕达哥拉斯</strong>（Pythagoras）发现了一个惊人的规律：在任何一个直角三角形中，<strong>两条直角边的平方和，恰好等于斜边的平方</strong>。</p>
+    <p>传说毕达哥拉斯发现这个规律后欣喜若狂，宰了一百头牛来庆祝——所以勾股定理在西方又被称为"<strong>百牛定理</strong>"。</p>
+
+    <h3>中国：《周髀算经》的智慧</h3>
+    <p>但毕达哥拉斯并不是第一个发现这个规律的人。早在他之前约 500 年，中国的《<strong>周髀算经</strong>》中就记载了周公与商高的对话：</p>
+    <div class="quote">
+      <p>"故折矩，以为<strong>勾</strong>广三，<strong>股</strong>修四，<strong>径隅</strong>五。"</p>
+    </div>
+    <p>翻译成现代汉语：把一根直尺折成直角，如果短直角边（勾）长 3，长直角边（股）长 4，那么斜边（弦）长就是 5。这就是著名的"<strong>勾三股四弦五</strong>"。</p>
+    <p>所以，中国人把这条定理叫做<strong>勾股定理</strong>。有趣的是，古代中国人把直角三角形中较短的直角边叫"<strong>勾</strong>"，较长的直角边叫"<strong>股</strong>"，斜边叫"<strong>弦</strong>"——这三个名字来自古代乐器"琴"的弦和弦柱。</p>
+    <p>《数学简史》中写道："勾股定理是人类文明史上最古老的数学定理之一，它独立地出现在巴比伦、中国、印度和希腊的文明中——这说明它不是某个天才的偶然发现，而是所有文明在探索空间时必然遇到的真理。"</p>
+  </div>
+
+  <h2>一、什么是勾股定理？</h2>
+  <div class="story">
+    <p>先来看一个最简单的例子：画一个直角三角形，两条直角边分别是 3cm 和 4cm，量一量斜边——你会发现它恰好是 5cm。</p>
+    <p>算一下：3² + 4² = 9 + 16 = 25，而 5² = 25。刚好相等！</p>
+    <p>这不是巧合。换一个直角三角形试试：直角边 5 和 12，斜边一定是 13（因为 5² + 12² = 25 + 144 = 169 = 13²）。</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 500 300" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text.tlabel { font-size:15px; fill:#333; font-family:serif; font-style:italic; }
+            text.tsmall { font-size:13px; fill:#3e2723; text-anchor:middle; }
+          </style>
+        </defs>
+        <!-- 3-4-5 三角形 -->
+        <polygon points="80,260 240,260 80,100" fill="rgba(62,39,35,0.1)" stroke="#3e2723" stroke-width="2.5"/>
+        <rect x="80" y="252" width="8" height="8" fill="none" stroke="#3e2723" stroke-width="1.5"/>
+        <circle cx="80" cy="260" r="3" fill="#3e2723"/>
+        <circle cx="240" cy="260" r="3" fill="#3e2723"/>
+        <circle cx="80" cy="100" r="3" fill="#3e2723"/>
+        <text x="70" y="282" class="tlabel">A</text>
+        <text x="246" y="282" class="tlabel">B</text>
+        <text x="70" y="90" class="tlabel">C</text>
+        <!-- 边标注 -->
+        <text x="165" y="278" class="tsmall">勾 = 3</text>
+        <text x="40" y="178" class="tsmall" transform="rotate(-90,40,178)">股 = 4</text>
+        <text x="178" y="175" class="tsmall">弦 = 5</text>
+        <!-- 边长小格 -->
+        <line x1="80" y1="268" x2="80" y2="272" stroke="#999" stroke-width="0.5"/>
+        <text x="155" y="255" font-size="11" fill="#888">3² + 4² = 5²</text>
+        <text x="155" y="268" font-size="11" fill="#888">9 + 16 = 25 ✓</text>
+
+        <!-- 5-12-13 三角形 -->
+        <polygon points="340,260 460,260 340,120" fill="rgba(62,39,35,0.1)" stroke="#3e2723" stroke-width="2.5"/>
+        <rect x="340" y="252" width="8" height="8" fill="none" stroke="#3e2723" stroke-width="1.5"/>
+        <circle cx="340" cy="260" r="3" fill="#3e2723"/>
+        <circle cx="460" cy="260" r="3" fill="#3e2723"/>
+        <circle cx="340" cy="120" r="3" fill="#3e2723"/>
+        <text x="400" y="278" class="tsmall">5² + 12² = 13²</text>
+        <text x="400" y="291" font-size="11" fill="#888">25 + 144 = 169 ✓</text>
+      </svg>
+    </div>
+
+    <div class="formula">
+      <p><strong>勾股定理：</strong></p>
+      <p style="font-size:1.3em;text-align:center;color:#3e2723;"><strong>直角三角形两条直角边的平方和，等于斜边的平方。</strong></p>
+      <p style="font-size:1.2em;text-align:center;color:#3e2723;"><strong>a² + b² = c²</strong></p>
+      <p style="text-align:center;">（其中 a、b 是直角边，c 是斜边）</p>
+    </div>
+
+    <div class="key">
+      <p><strong>重要提醒：</strong>勾股定理<strong>只适用于直角三角形</strong>！对于锐角三角形或钝角三角形，这个等式不成立。</p>
+      <p>在直角三角形中，斜边是最长的边——这从 a² + b² = c² 也能看出来：c² 等于 a² 加上 b² 之后的和，肯定比单独的 a² 或 b² 大，所以 c 也最大。</p>
+    </div>
+  </div>
+
+  <h2>二、定理的两种用法：求边长</h2>
+  <div class="story">
+    <p>勾股定理最常见的用途就是"<strong>知二求一</strong>"——知道直角三角形的任意两条边，就能求出第三条边。</p>
+
+    <div class="formula">
+      <p><strong>用法一：已知两直角边，求斜边</strong></p>
+      <p style="text-align:center;font-size:1.1em;">c = √(a² + b²)</p>
+      <div class="example">
+        <p><strong>例：</strong>直角边 a = 6，b = 8，求斜边 c。</p>
+        <p>c = √(6² + 8²) = √(36 + 64) = √100 = <strong>10</strong>。</p>
+      </div>
+
+      <p style="margin-top:16px;"><strong>用法二：已知斜边和一条直角边，求另一条直角边</strong></p>
+      <p style="text-align:center;font-size:1.1em;">a = √(c² − b²) &nbsp;或&nbsp; b = √(c² − a²)</p>
+      <div class="example">
+        <p><strong>例：</strong>斜边 c = 13，直角边 a = 5，求 b。</p>
+        <p>b = √(13² − 5²) = √(169 − 25) = √144 = <strong>12</strong>。</p>
+      </div>
+    </div>
+
+    <div class="key">
+      <p><strong>常见勾股数（都是整数，记下来很有用）：</strong></p>
+      <p>(3, 4, 5) &nbsp; (5, 12, 13) &nbsp; (6, 8, 10) &nbsp; (7, 24, 25) &nbsp; (8, 15, 17) &nbsp; (9, 12, 15) &nbsp; (9, 40, 41)</p>
+      <p>注意：(6, 8, 10) 就是把 (3, 4, 5) 的每条边都乘以 2 得到的，所以它们也是勾股数。</p>
+    </div>
+  </div>
+
+  <h2>三、证明一：赵爽弦图（面积法）</h2>
+  <div class="story">
+    <p>公元 3 世纪，中国数学家<strong>赵爽</strong>在《周髀算经》的注释中，用一幅绝妙的图证明了勾股定理。这幅图叫做"<strong>弦图</strong>"，被 2002 年国际数学家大会选为会徽。</p>
+    <p>赵爽的思路很简单：<strong>用两种不同的方法计算同一个大正方形的面积，让它们相等。</strong></p>
+
+    <h3>弦图的构造</h3>
+    <p>取四个完全相同的直角三角形（直角边为 a 和 b，斜边为 c），把它们拼成一个大正方形，中间会空出一个小正方形。</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 600 400" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+          <!-- 直角三角形模板 -->
+          <g id="tri">
+            <polygon points="0,0 120,0 0,50" fill="rgba(62,39,35,0.18)" stroke="#3e2723" stroke-width="2"/>
+            <rect x="0" y="0" width="6" height="6" fill="none" stroke="#3e2723" stroke-width="1.2"/>
+          </g>
+        </defs>
+        <!-- 弦图 -->
+        <g transform="translate(80, 60)">
+          <!-- 大正方形边框 -->
+          <rect x="0" y="0" width="320" height="320" fill="none" stroke="#3e2723" stroke-width="2.5"/>
+
+          <!-- 四个直角三角形 -->
+          <!-- 左上 -->
+          <polygon points="0,120 120,120 0,0" fill="rgba(62,39,35,0.15)" stroke="#3e2723" stroke-width="2"/>
+          <rect x="0" y="112" width="8" height="8" fill="none" stroke="#3e2723" stroke-width="1.2"/>
+          <!-- 右上 -->
+          <polygon points="200,0 320,120 320,0" fill="rgba(62,39,35,0.15)" stroke="#3e2723" stroke-width="2"/>
+          <rect x="312" y="0" width="8" height="8" fill="none" stroke="#3e2723" stroke-width="1.2"/>
+          <!-- 右下 -->
+          <polygon points="200,320 320,200 320,320" fill="rgba(62,39,35,0.15)" stroke="#3e2723" stroke-width="2"/>
+          <rect x="312" y="312" width="8" height="8" fill="none" stroke="#3e2723" stroke-width="1.2"/>
+          <!-- 左下 -->
+          <polygon points="0,200 120,320 0,320" fill="rgba(62,39,35,0.15)" stroke="#3e2723" stroke-width="2"/>
+          <rect x="0" y="312" width="8" height="8" fill="none" stroke="#3e2723" stroke-width="1.2"/>
+
+          <!-- 中间小正方形 -->
+          <rect x="120" y="120" width="80" height="80" fill="rgba(255,193,7,0.2)" stroke="#ff8f00" stroke-width="2.5" stroke-dasharray="6 3"/>
+
+          <!-- 标注 -->
+          <text x="55" y="60" font-size="14" fill="#3e2723" font-weight="bold">a</text>
+          <text x="140" y="20" font-size="14" fill="#3e2723" font-weight="bold">b</text>
+          <text x="55" y="175" font-size="14" fill="#3e2723" font-weight="bold">c</text>
+
+          <text x="240" y="60" font-size="14" fill="#3e2723" font-weight="bold">a</text>
+          <text x="150" y="145" font-size="14" fill="#3e2723" font-weight="bold">c</text>
+
+          <text x="240" y="260" font-size="14" fill="#3e2723" font-weight="bold">a</text>
+          <text x="55" y="260" font-size="14" fill="#3e2723" font-weight="bold">a</text>
+
+          <!-- 中间小正方形标注 -->
+          <text x="160" y="165" font-size="14" fill="#ff8f00" font-weight="bold">(b−a)</text>
+
+          <!-- 大正方形标注 -->
+          <text x="160" y="345" font-size="14" fill="#3e2723" text-anchor="middle" font-weight="bold">大正方形边长 = a + b</text>
+        </g>
+
+        <!-- 右侧说明 -->
+        <g transform="translate(440, 80)">
+          <text x="0" y="0" font-size="14" fill="#333" font-weight="bold">方法一：</text>
+          <text x="0" y="22" font-size="13" fill="#333">大正方形面积 = (a+b)²</text>
+          <text x="0" y="48" font-size="14" fill="#333" font-weight="bold">方法二：</text>
+          <text x="0" y="70" font-size="13" fill="#333">4个三角形 + 中间小正方形</text>
+          <text x="0" y="92" font-size="13" fill="#333">= 4×(½ab) + (b−a)²</text>
+          <text x="0" y="118" font-size="14" fill="#3e2723" font-weight="bold">相等：</text>
+          <text x="0" y="142" font-size="13" fill="#3e2723">(a+b)² = 2ab + (b−a)²</text>
+          <text x="0" y="165" font-size="13" fill="#3e2723">a²+2ab+b² = 2ab + b²−2ab+a²</text>
+          <text x="0" y="188" font-size="13" fill="#3e2723">a² + b² = c²</text>
+          <text x="0" y="215" font-size="13" fill="#4caf50" font-weight="bold">✓ 证毕！</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="key">
+      <p><strong>赵爽弦图的巧妙之处：</strong></p>
+      <p>大正方形面积 = (a + b)²</p>
+      <p>同时也等于：4 个直角三角形面积 + 中间小正方形面积 = 4 × (½ab) + (b − a)² = 2ab + (b² − 2ab + a²) = a² + b²</p>
+      <p>但由图可知，中间小正方形的边长是 b − a，而四个三角形拼起来后，大正方形的边长还可以看成是 c（斜边）的某种排列……实际上，赵爽的另一个拼法直接把四个三角形拼在外围，中间空出一个边长为 c 的正方形，从而得出 c² = a² + b²。</p>
+    </div>
+  </div>
+
+  <h2>四、证明二：总统证法（梯形面积法）</h2>
+  <div class="story">
+    <p>1876 年，美国第 20 任总统<strong>詹姆斯·加菲尔德</strong>（James Garfield）在当选总统之前，给出了一个非常漂亮的勾股定理证明。他的证法只用了<strong>一个梯形</strong>，简单到连中学生都能看懂。</p>
+
+    <h3>加菲尔德的思路</h3>
+    <p>把两个完全相同的直角三角形和一个等腰直角三角形拼在一起，形成一个<strong>直角梯形</strong>。然后用两种方法计算这个梯形的面积。</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 600 380" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <!-- 梯形图 -->
+        <g transform="translate(40, 30)">
+          <!-- 梯形填充 -->
+          <polygon points="0,300 400,300 300,0 0,0" fill="rgba(62,39,35,0.08)" stroke="#3e2723" stroke-width="2.5"/>
+
+          <!-- 左下直角三角形（直角边 a, b） -->
+          <polygon points="0,300 0,0 300,0" fill="rgba(62,39,35,0.15)" stroke="#3e2723" stroke-width="2"/>
+          <rect x="0" y="0" width="8" height="8" fill="none" stroke="#3e2723" stroke-width="1.2"/>
+
+          <!-- 右下直角三角形（直角边 b, a） -->
+          <polygon points="300,0 400,300 300,300" fill="rgba(62,39,35,0.15)" stroke="#3e2723" stroke-width="2"/>
+          <rect x="300" y="292" width="8" height="8" fill="none" stroke="#3e2723" stroke-width="1.2"/>
+
+          <!-- 中间等腰直角三角形（斜边 c, c, 底边...） -->
+          <polygon points="0,0 300,0 300,300" fill="rgba(255,193,7,0.2)" stroke="#ff8f00" stroke-width="2.5" stroke-dasharray="6 3"/>
+
+          <!-- 标注边 -->
+          <text x="150" y="-12" font-size="15" fill="#3e2723" font-weight="bold">b</text>
+          <text x="-30" y="150" font-size="15" fill="#3e2723" font-weight="bold" transform="rotate(-90,-30,150)">a</text>
+          <text x="150" y="320" font-size="15" fill="#3e2723" font-weight="bold">a</text>
+          <text x="410" y="150" font-size="15" fill="#3e2723" font-weight="bold" transform="rotate(-90,410,150)">b</text>
+
+          <!-- 斜边标注 c -->
+          <text x="120" y="170" font-size="15" fill="#ff8f00" font-weight="bold">c</text>
+          <text x="180" y="120" font-size="15" fill="#ff8f00" font-weight="bold">c</text>
+
+          <!-- 梯形上底和下底标注 -->
+          <text x="200" y="345" font-size="14" fill="#3e2723" text-anchor="middle">上底 = a，下底 = b，高 = a + b</text>
+        </g>
+
+        <!-- 右侧推导 -->
+        <g transform="translate(460, 40)">
+          <text x="0" y="0" font-size="14" fill="#333" font-weight="bold">方法一：梯形面积</text>
+          <text x="0" y="22" font-size="13" fill="#333">S = ½(a+b)(a+b)</text>
+          <text x="0" y="44" font-size="13" fill="#333">S = ½(a+b)²</text>
+
+          <text x="0" y="78" font-size="14" fill="#333" font-weight="bold">方法二：三个三角形之和</text>
+          <text x="0" y="100" font-size="13" fill="#333">S = ½ab + ½ab + ½c²</text>
+          <text x="0" y="122" font-size="13" fill="#333">S = ab + ½c²</text>
+
+          <text x="0" y="156" font-size="14" fill="#3e2723" font-weight="bold">相等：</text>
+          <text x="0" y="178" font-size="13" fill="#3e2723">½(a+b)² = ab + ½c²</text>
+          <text x="0" y="200" font-size="13" fill="#3e2723">½(a²+2ab+b²) = ab + ½c²</text>
+          <text x="0" y="222" font-size="13" fill="#3e2723">½a² + ab + ½b² = ab + ½c²</text>
+          <text x="0" y="244" font-size="13" fill="#3e2723">½a² + ½b² = ½c²</text>
+          <text x="0" y="270" font-size="15" fill="#4caf50" font-weight="bold">a² + b² = c² ✓</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="quote">
+      <p>加菲尔德总统后来在回忆录中写道，这个证明是他在国会任职期间，和同事们在数学讨论中"玩"出来的。他说："<strong>数学的思考让我们在政治辩论的间隙找到了纯粹的乐趣。</strong>"</p>
+    </div>
+  </div>
+
+  <h2>五、勾股定理的逆定理：判定直角</h2>
+  <div class="story">
+    <p>勾股定理说的是：<strong>如果一个三角形是直角三角形，那么 a² + b² = c²。</strong></p>
+    <p>反过来也对吗？也就是说：<strong>如果一个三角形的三边满足 a² + b² = c²，那么这个三角形一定是直角三角形吗？</strong></p>
+    <p>答案是：<strong>对！</strong>这就是勾股定理的<strong>逆定理</strong>。</p>
+
+    <div class="formula">
+      <p><strong>勾股定理的逆定理：</strong></p>
+      <p style="font-size:1.1em;text-align:center;color:#3e2723;"><strong>如果三角形的三边长 a、b、c 满足 a² + b² = c²，那么这个三角形是直角三角形。其中 c 所对的角是直角。</strong></p>
+    </div>
+
+    <div class="example">
+      <p><strong>例：</strong>判断边长分别为 8、15、17 的三角形是不是直角三角形。</p>
+      <p>最长边是 17，检查：8² + 15² = 64 + 225 = 289，而 17² = 289。相等！所以是直角三角形，17 所对的角是直角。</p>
+    </div>
+
+    <div class="key">
+      <p><strong>逆定理有什么用？</strong>古代埃及人就用它来画直角！他们在地上打一个绳结，把绳子分成 3、4、5 三段，拉直后就是一个直角三角形。这样就能画出精确的直角，用来建造金字塔。</p>
+      <p>所以，勾股定理（正定理）用来<strong>已知直角求边长</strong>，逆定理用来<strong>已知边长判直角</strong>。两者互为"逆命题"。</p>
+    </div>
+  </div>
+
+  <h2>六、勾股定理的几何意义：正方形面积</h2>
+  <div class="story">
+    <p>勾股定理不仅是代数公式，还有一个非常直观的<strong>几何解释</strong>：</p>
+
+    <div class="key">
+      <p style="font-size:1.1em;text-align:center;color:#3e2723;"><strong>直角三角形的三条边上各画一个正方形，两个小正方形的面积之和，恰好等于大正方形的面积。</strong></p>
+    </div>
+
+    <div class="graphic">
+      <svg viewBox="0 0 600 360" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <!-- 直角三角形 -->
+        <polygon points="250,220 400,220 250,70" fill="rgba(62,39,35,0.12)" stroke="#3e2723" stroke-width="2.5"/>
+        <rect x="250" y="212" width="8" height="8" fill="none" stroke="#3e2723" stroke-width="1.5"/>
+
+        <!-- 直角边 a 上的正方形（竖边） -->
+        <rect x="100" y="70" width="150" height="150" fill="rgba(244,67,54,0.15)" stroke="#c62828" stroke-width="2.5"/>
+        <text x="175" y="150" font-size="16" fill="#c62828" text-anchor="middle" font-weight="bold">a²</text>
+        <text x="175" y="240" font-size="13" fill="#c62828" text-anchor="middle">a</text>
+
+        <!-- 直角边 b 上的正方形（底边） -->
+        <rect x="250" y="220" width="150" height="150" fill="rgba(33,150,243,0.15)" stroke="#1565c0" stroke-width="2.5"/>
+        <text x="325" y="300" font-size="16" fill="#1565c0" text-anchor="middle" font-weight="bold">b²</text>
+        <text x="400" y="375" font-size="13" fill="#1565c0" text-anchor="middle">b</text>
+
+        <!-- 斜边 c 上的正方形 -->
+        <polygon points="250,70 400,220 490,130 340,-20" fill="rgba(76,175,80,0.15)" stroke="#2e7d32" stroke-width="2.5"/>
+        <text x="370" y="110" font-size="16" fill="#2e7d32" text-anchor="middle" font-weight="bold">c²</text>
+        <text x="370" y="130" font-size="13" fill="#2e7d32" text-anchor="middle">c</text>
+
+        <!-- 等号说明 -->
+        <text x="300" y="400" font-size="15" fill="#3e2723" text-anchor="middle" font-weight="bold">a² + b² = c²</text>
+      </svg>
+    </div>
+
+    <p>这个几何解释让你"看到"勾股定理在说什么：<strong>两个小正方形拼起来，面积刚好等于那个斜着的大正方形！</strong></p>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>赵爽弦图中，如果 a = 3，b = 4，那么中间小正方形的面积是多少？它和 c² 有什么关系？</p>
+    <p><strong>问题 2：</strong>加菲尔德总统的梯形证明中，为什么中间那个三角形一定是等腰直角三角形？它的腰长是多少？</p>
+    <p><strong>问题 3：</strong>一个直角三角形的两条直角边分别是 7 和 24，你能不用计算器，凭记忆说出斜边是多少吗？（提示：想想常见勾股数。）</p>
+    <p><strong>问题 4：</strong>如果把一个直角三角形的各边都扩大 3 倍，新三角形还是直角三角形吗？a² + b² = c² 还成立吗？</p>
+  </div>
+
+  <h2>拓展阅读：费马大定理 — 从勾股定理到三百年悬案</h2>
+  <div class="extend">
+    <p>勾股定理说的是 a² + b² = c² 有无数个正整数解，比如 (3,4,5)、(5,12,13)……</p>
+    <p>1637 年，法国数学家<strong>费马</strong>（Pierre de Fermat）在读一本数学书时，在页边空白处写下了这样一段话：</p>
+    <div class="quote">
+      <p>"当 n &gt; 2 时，方程 aⁿ + bⁿ = cⁿ 没有正整数解。对此，我已经找到了一个美妙的证明，可惜这里的空白太小，写不下。"</p>
+    </div>
+    <p>费马随手一写，却让全世界数学家头疼了<strong>350 年</strong>。无数数学家前赴后继地尝试证明，始终没人成功。这个猜想被称为"<strong>费马大定理</strong>"。</p>
+    <p>直到 1994 年，英国数学家<strong>安德鲁·怀尔斯</strong>（Andrew Wiles）在闭关七年之后，终于给出了完整的证明。据说他在宣布结果的那一刻，全场鸦雀无声，然后爆发出雷鸣般的掌声——一个 350 年的谜题终于被解开了。</p>
+    <p>《数学简史》中写道："费马大定理的故事告诉我们，数学中最简单的问题，有时需要最深刻的理论才能解决。它连接了勾股定理、椭圆曲线和模形式这三个看似毫不相干的领域。"</p>
+    <p>所以，勾股定理不仅是 a² + b² = c²，它还是一个更大的数学故事的起点。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 在直角三角形中，两条直角边分别是 6 和 8，求斜边长。</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">直接代入 c = √(a² + b²)，注意 6、8、10 就是一组勾股数。</div>
+    <div class="ans-box" id="a1">c = √(6² + 8²) = √(36 + 64) = √100 = 10。斜边长为 10。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 在直角三角形中，斜边长为 15，一条直角边长为 9，求另一条直角边长。</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">用 b = √(c² − a²)，即 √(15² − 9²)。</div>
+    <div class="ans-box" id="a2">b = √(15² − 9²) = √(225 − 81) = √144 = 12。另一条直角边长为 12。（注意 9、12、15 是 3、4、5 的 3 倍。）</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 判断下列各组数是否构成勾股数：① 10, 24, 26 &nbsp; ② 12, 16, 20 &nbsp; ③ 1, 2, 3</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">找出最长边，检查是否满足 a² + b² = c²。</div>
+    <div class="ans-box" id="a3">① 10²+24²=100+576=676=26² ✓（是 5,12,13 的 2 倍）。② 12²+16²=144+256=400=20² ✓（是 3,4,5 的 4 倍）。③ 1²+2²=1+4=5，3²=9，不相等 ✗，不能构成直角三角形。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 一个梯子长 5 米，底部离墙 3 米，斜靠在墙上。梯子顶端离地面多高？</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">梯子、墙、地面形成一个直角三角形。梯子是斜边，高是直角边。用 h = √(5² − 3²)。</div>
+    <div class="ans-box" id="a4">h = √(5² − 3²) = √(25 − 9) = √16 = 4 米。顶端离地面 4 米高。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 一个直角三角形的三边长分别是 x、x+1、x+2（x 为正整数），且最长的边是斜边。求 x 的值。</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">最长边是 x+2（斜边），所以 x² + (x+1)² = (x+2)²。展开解方程。</div>
+    <div class="ans-box" id="a5">x² + (x+1)² = (x+2)² → x² + x² + 2x + 1 = x² + 4x + 4 → x² − 2x − 3 = 0 → (x−3)(x+1)=0。x>0，所以 x=3。三边长为 3、4、5。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 赵爽弦图中，中间小正方形的边长是什么？用 a 和 b 表示。它的面积是多少？</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">大正方形边长 = a + b，直角三角形在每条边上占据了 a 和 b 的长度。观察中间小正方形的边两端。</div>
+    <div class="ans-box" id="a6">中间小正方形的边长 = b − a（假设 b ≥ a）。面积 = (b−a)² = b² − 2ab + a²。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>7.</strong> 一个三角形的三边长分别是 5、12、13。判断它是不是直角三角形，并说明理由。</p>
+    <button class="btn-sm" onclick="toggleHint('h7')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a7')">查看答案</button>
+    <div class="hint-box" id="h7">用勾股定理的逆定理：检查最长边的平方是否等于另外两边的平方和。</div>
+    <div class="ans-box" id="a7">12² + 5² = 144 + 25 = 169 = 13²。满足逆定理，是直角三角形。13 所对的角是直角。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>8.</strong> 一个等腰直角三角形的直角边长为 1，求斜边长。这个数有什么特别之处？</p>
+    <button class="btn-sm" onclick="toggleHint('h8')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a8')">查看答案</button>
+    <div class="hint-box" id="h8">a = b = 1，c = √(1² + 1²)。</div>
+    <div class="ans-box" id="a8">c = √(1² + 1²) = √2。斜边是 √2，这是一个无理数——它不能写成两个整数的比。这正是希帕索斯当年发现的那个"可怕的数"！（见课件 16 实数）</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>9.</strong> 小明从家出发，向东走了 3 公里，再向北走了 4 公里。他离家有多远？（假设出发点、向东和向北的路径构成直角三角形。）</p>
+    <button class="btn-sm" onclick="toggleHint('h9')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a9')">查看答案</button>
+    <div class="hint-box" id="h9">向东和向北是直角方向，两条路径是直角边，离家距离是斜边。</div>
+    <div class="ans-box" id="a9">距离 = √(3² + 4²) = √(9 + 16) = √25 = 5 公里。所以小明离家 5 公里。（这就是经典的"勾三股四弦五"！）</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>10.</strong> 一个长方形的长是 8cm，宽是 6cm。它的对角线长是多少？</p>
+    <button class="btn-sm" onclick="toggleHint('h10')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a10')">查看答案</button>
+    <div class="hint-box" id="h10">长方形相邻两边和对角线构成直角三角形。长和宽是直角边，对角线是斜边。</div>
+    <div class="ans-box" id="a10">对角线 = √(8² + 6²) = √(64 + 36) = √100 = 10 cm。长方形对角线长 10 cm。</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>勾股定理：</strong>直角三角形中，a² + b² = c²（a、b 是直角边，c 是斜边）</li>
+      <li><strong>起源：</strong>中国《周髀算经》"勾三股四弦五"，古希腊毕达哥拉斯"百牛定理"</li>
+      <li><strong>用途：</strong>知二求一——已知两条边求第三条边</li>
+      <li><strong>赵爽弦图：</strong>用四个全等直角三角形拼成正方形，面积法证明</li>
+      <li><strong>总统证法：</strong>用两个直角三角形拼成梯形，面积法证明</li>
+      <li><strong>逆定理：</strong>如果三边满足 a² + b² = c²，则是直角三角形（用于判定直角）</li>
+      <li><strong>几何意义：</strong>斜边上的正方形面积 = 两直角边上的正方形面积之和</li>
+      <li><strong>常见勾股数：</strong>(3,4,5)、(5,12,13)、(6,8,10)、(7,24,25)、(8,15,17)</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="parallelogram.html">下一课：平行四边形 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+<script src="../lessons/dt.js"></script>
+</body>
+</html>

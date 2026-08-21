@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模拟考试 — 阶段二 — 自学课件</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../lessons/style.css">
+<style>
+  :root { --accent: #2e7d32; }
+  .exam-header { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .section-title { color: #2e7d32; font-size: 18px; font-weight: 700; margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #c8e6c9; }
+  .q-item { padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+  .q-item:last-child { border-bottom: none; }
+  .btn-row { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-hint, .btn-ans { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; }
+  .btn-hint:hover { background: #fff3e0; border-color: #ff9800; }
+  .btn-ans:hover { background: #e8f5e9; border-color: #4caf50; }
+  .hint-box, .ans-box { display: none; margin-top: 8px; padding: 10px 14px; border-radius: 6px; font-size: 14px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .hint-box { background: #fff8e1; border-left: 3px solid #ff9800; }
+  .ans-box { background: #e8f5e9; border-left: 3px solid #4caf50; }
+  .opt-row { margin: 4px 0; padding-left: 8px; }
+  .opt { display: inline-block; min-width: 24px; font-weight: 600; }
+  @media (max-width: 720px) {
+    article { padding-bottom: 100px !important; }
+    article { padding: 20px 12px 100px 12px !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    .q-item { padding: 10px 0; }
+    .exam-header { padding: 12px 14px; margin: 12px 0; }
+  }
+  .opt-btn { display: inline-block; padding: 6px 16px; margin: 3px 4px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .opt-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .opt-btn.selected { border-color: #1976d2; background: #e3f2fd; }
+  .opt-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .opt-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .tf-btn { display: inline-block; padding: 6px 20px; margin: 3px 6px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .tf-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .tf-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .tf-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .fill-input { padding: 6px 12px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 15px; width: 160px; }
+  .fill-input:focus { outline: none; border-color: #1976d2; }
+  .check-btn { padding: 6px 16px; border: 1px solid #1976d2; border-radius: 6px; background: #1976d2; color: #fff; font-size: 13px; cursor: pointer; margin-left: 8px; }
+  .check-btn:hover { background: #1565c0; }
+  .feedback { display: none; margin-left: 8px; font-size: 14px; font-weight: 600; }
+  .feedback.show { display: inline; }
+  .feedback.correct-fb { color: #2e7d32; }
+  .feedback.wrong-fb { color: #c62828; }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="../index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：课件1-3（自然数、分数、负数）</p>
+  <h1>模拟考试 — 阶段二：代数式与整式</h1>
+  <div class="exam-header">
+    <p>⏱ 时间：30 分钟 | ✅ 判断题 10 题 | 🔘 单选题 10 题 | ☑️ 多选题 5 题 | ✏️ 其他题型 5 题 | 共 30 题</p>
+    <p style="font-size:13px;color:#888;">考查范围：代数式与字母表示数 · 整式运算 · 因式分解与分式</p>
+  </div>
+
+  <p class="section-title">一、判断题（每题 1 分，共 10 分）</p>
+
+  <!-- 判 1 -->
+  <div class="q-item">
+    <p><strong>1.</strong> 3x 和 5x 是同类项。</p>
+    <div id="tf-2-1">
+      <button class="tf-btn" onclick="checkTF(this, true, '2-1')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '2-1')">错误</button>
+      <span class="feedback" id="fb-2-1"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-1">同类项的定义：字母部分完全相同。3x 的字母部分是 x，5x 的字母部分也是 x，它们一样吗？</div>
+    <div class="ans-box" id="a2-1"><strong>✅ 正确。</strong>3x 和 5x 的字母部分都是 x（都是 x 的一次方），所以它们是同类项，可以合并为 8x。</div>
+  </div>
+
+  <!-- 判 2 -->
+  <div class="q-item">
+    <p><strong>2.</strong> 代数式 2(a + b) 展开后等于 2a + b。</p>
+    <div id="tf-2-2">
+      <button class="tf-btn" onclick="checkTF(this, false, '2-2')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '2-2')">错误</button>
+      <span class="feedback" id="fb-2-2"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-2">分配律：a(b + c) = ab + ac。2 要分别乘以括号里的每一项。2 乘以 a，还要乘以谁？</div>
+    <div class="ans-box" id="a2-2"><strong>❌ 错误。</strong>根据分配律，2(a + b) = 2a + 2b，而不是 2a + b。括号里的每一项都要乘以 2。</div>
+  </div>
+
+  <!-- 判 3 -->
+  <div class="q-item">
+    <p><strong>3.</strong> (x + 3)(x - 3) = x² - 9。</p>
+    <div id="tf-2-3">
+      <button class="tf-btn" onclick="checkTF(this, true, '2-3')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '2-3')">错误</button>
+      <span class="feedback" id="fb-2-3"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-3">这是平方差公式：(a + b)(a - b) = a² - b²。这里 a = x，b = 3，代入公式。</div>
+    <div class="ans-box" id="a2-3"><strong>✅ 正确。</strong>根据平方差公式 (a + b)(a - b) = a² - b²，令 a = x，b = 3，得 (x + 3)(x - 3) = x² - 9。</div>
+  </div>
+
+  <!-- 判 4 -->
+  <div class="q-item">
+    <p><strong>4.</strong> 3x² 和 3x³ 是同类项。</p>
+    <div id="tf-2-4">
+      <button class="tf-btn" onclick="checkTF(this, false, '2-4')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '2-4')">错误</button>
+      <span class="feedback" id="fb-2-4"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-4">同类项要求字母部分完全相同。x² 和 x³ 的指数一样吗？</div>
+    <div class="ans-box" id="a2-4"><strong>❌ 错误。</strong>3x² 的字母部分是 x²，3x³ 的字母部分是 x³，指数不同，不是同类项，不能直接合并。</div>
+  </div>
+
+  <!-- 判 5 -->
+  <div class="q-item">
+    <p><strong>5.</strong> 因式分解是整式乘法的逆运算。</p>
+    <div id="tf-2-5">
+      <button class="tf-btn" onclick="checkTF(this, true, '2-5')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '2-5')">错误</button>
+      <span class="feedback" id="fb-2-5"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-5">整式乘法是把因式展开成多项式，如 (x+2)(x+3) → x²+5x+6。因式分解是反过来，把多项式拆成因式乘积。</div>
+    <div class="ans-box" id="a2-5"><strong>✅ 正确。</strong>整式乘法：(x+2)(x+3) = x²+5x+6。因式分解：x²+5x+6 = (x+2)(x+3)。它们互为逆运算。</div>
+  </div>
+
+  <!-- 判 6 -->
+  <div class="q-item">
+    <p><strong>6.</strong> 分式 1/(x-2) 中，x 可以取任何值。</p>
+    <div id="tf-2-6">
+      <button class="tf-btn" onclick="checkTF(this, false, '2-6')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '2-6')">错误</button>
+      <span class="feedback" id="fb-2-6"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-6')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-6')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-6">分式的分母不能为 0。当 x 取什么值时，分母 x-2 会等于 0？</div>
+    <div class="ans-box" id="a2-6"><strong>❌ 错误。</strong>当 x = 2 时，分母 x-2 = 0，分式无意义。所以 x 不能取 2，x 的取值范围是 x ≠ 2。</div>
+  </div>
+
+  <!-- 判 7 -->
+  <div class="q-item">
+    <p><strong>7.</strong> (a + b)² = a² + b²。</p>
+    <div id="tf-2-7">
+      <button class="tf-btn" onclick="checkTF(this, false, '2-7')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '2-7')">错误</button>
+      <span class="feedback" id="fb-2-7"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-7')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-7')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-7">完全平方公式：(a + b)² = a² + 2ab + b²。注意中间还有一项 2ab。用面积图想：边长为 (a+b) 的正方形，面积是四个小矩形之和。</div>
+    <div class="ans-box" id="a2-7"><strong>❌ 错误。</strong>完全平方公式是 (a + b)² = a² + 2ab + b²，不是 a² + b²。例如 (1+2)² = 3² = 9，但 1² + 2² = 1+4 = 5，不相等。</div>
+  </div>
+
+  <!-- 判 8 -->
+  <div class="q-item">
+    <p><strong>8.</strong> 提公因式法分解 3x² + 6x 的结果是 3x(x + 2)。</p>
+    <div id="tf-2-8">
+      <button class="tf-btn" onclick="checkTF(this, true, '2-8')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '2-8')">错误</button>
+      <span class="feedback" id="fb-2-8"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-8')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-8')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-8">找出 3x² 和 6x 的公因式：系数 3 和 6 的最大公约数是 3，字母部分 x² 和 x 的公因式是 x。所以公因式是 3x。提出来后括号里是什么？</div>
+    <div class="ans-box" id="a2-8"><strong>✅ 正确。</strong>3x² 和 6x 的公因式是 3x。3x² ÷ 3x = x，6x ÷ 3x = 2。所以 3x² + 6x = 3x(x + 2)。</div>
+  </div>
+
+  <!-- 判 9 -->
+  <div class="q-item">
+    <p><strong>9.</strong> 在代数式 5x²y 中，系数是 5，次数是 2。</p>
+    <div id="tf-2-9">
+      <button class="tf-btn" onclick="checkTF(this, false, '2-9')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '2-9')">错误</button>
+      <span class="feedback" id="fb-2-9"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-9')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-9')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-9">单项式的次数 = 所有字母的指数之和。x²y 中，x 的指数是 2，y 的指数是 1，次数是多少？</div>
+    <div class="ans-box" id="a2-9"><strong>❌ 错误。</strong>系数是 5 正确。但次数 = 2 + 1 = 3（x 的指数 2 加上 y 的指数 1），不是 2。</div>
+  </div>
+
+  <!-- 判 10 -->
+  <div class="q-item">
+    <p><strong>10.</strong> 十字相乘法分解 x² - 5x + 6 的结果是 (x - 2)(x - 3)。</p>
+    <div id="tf-2-10">
+      <button class="tf-btn" onclick="checkTF(this, true, '2-10')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '2-10')">错误</button>
+      <span class="feedback" id="fb-2-10"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-10')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-10')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-10">十字相乘：找两个数，和为 -5，积为 6。这两个数是 -2 和 -3。验证：(-2) + (-3) = -5，(-2)×(-3) = 6。因式是 (x-2)(x-3) 吗？</div>
+    <div class="ans-box" id="a2-10"><strong>✅ 正确。</strong>和为 -5，积为 6 的两个数是 -2 和 -3。所以 x² - 5x + 6 = (x - 2)(x - 3)。展开验证：(x-2)(x-3) = x² - 5x + 6 ✓。</div>
+  </div>
+
+  <p class="section-title">二、单选题（每题 2 分，共 20 分）</p>
+
+  <!-- 选 1 -->
+  <div class="q-item">
+    <p><strong>11.</strong> 合并同类项：3x + 2y - x + 5y 的结果是：</p>
+    <div id="opt-2-11">
+      <button class="opt-btn" onclick="checkSingle(this, true, '2-11')" data-correct="true">A. 2x + 7y</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-11')" data-correct="false">B. 4x + 7y</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-11')" data-correct="false">C. 2x + 3y</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-11')" data-correct="false">D. 3x + 7y</button>
+      <span class="feedback" id="fb-2-11"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-11')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-11')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-11">把含 x 的项放一起：3x - x = ?；把含 y 的项放一起：2y + 5y = ?。</div>
+    <div class="ans-box" id="a2-11"><strong>A。</strong>3x - x = 2x，2y + 5y = 7y。合并后得 2x + 7y。</div>
+  </div>
+
+  <!-- 选 2 -->
+  <div class="q-item">
+    <p><strong>12.</strong> 展开 (2x + 1)(x - 3) 的结果是：</p>
+    <div id="opt-2-12">
+      <button class="opt-btn" onclick="checkSingle(this, true, '2-12')" data-correct="true">A. 2x² - 5x - 3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-12')" data-correct="false">B. 2x² + 5x - 3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-12')" data-correct="false">C. 2x² - 7x - 3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-12')" data-correct="false">D. 2x² - x - 3</button>
+      <span class="feedback" id="fb-2-12"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-12')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-12')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-12">用分配律逐项展开：2x 乘以 x 和 -3，1 乘以 x 和 -3。然后合并同类项。</div>
+    <div class="ans-box" id="a2-12"><strong>A。</strong>(2x+1)(x-3) = 2x·x + 2x·(-3) + 1·x + 1·(-3) = 2x² - 6x + x - 3 = 2x² - 5x - 3。</div>
+  </div>
+
+  <!-- 选 3 -->
+  <div class="q-item">
+    <p><strong>13.</strong> 因式分解 x² - 4 的结果是：</p>
+    <div id="opt-2-13">
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-13')" data-correct="false">A. (x - 2)²</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '2-13')" data-correct="true">B. (x + 2)(x - 2)</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-13')" data-correct="false">C. (x + 4)(x - 1)</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-13')" data-correct="false">D. x(x - 4)</button>
+      <span class="feedback" id="fb-2-13"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-13')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-13')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-13">x² - 4 可以写成 x² - 2²。这是平方差公式 a² - b² = (a+b)(a-b) 的形式。</div>
+    <div class="ans-box" id="a2-13"><strong>B。</strong>x² - 4 = x² - 2² = (x + 2)(x - 2)。平方差公式：a² - b² = (a + b)(a - b)。</div>
+  </div>
+
+  <!-- 选 4 -->
+  <div class="q-item">
+    <p><strong>14.</strong> 化简 (a²b)³ 的结果是：</p>
+    <div id="opt-2-14">
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-14')" data-correct="false">A. a⁵b⁴</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '2-14')" data-correct="true">B. a⁶b³</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-14')" data-correct="false">C. a⁶b⁶</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-14')" data-correct="false">D. a⁵b³</button>
+      <span class="feedback" id="fb-2-14"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-14')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-14')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-14">幂的乘方：(a^m)^n = a^(m×n)。a² 的 3 次方 = a^(2×3) = a^6。b 的 3 次方 = b^3。</div>
+    <div class="ans-box" id="a2-14"><strong>B。</strong>(a²b)³ = (a²)³ × b³ = a^(2×3) × b³ = a⁶b³。</div>
+  </div>
+
+  <!-- 选 5 -->
+  <div class="q-item">
+    <p><strong>15.</strong> 下列哪个是 x² + 6x + 9 的因式分解结果？</p>
+    <div id="opt-2-15">
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-15')" data-correct="false">A. (x + 3)(x - 3)</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '2-15')" data-correct="true">B. (x + 3)²</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-15')" data-correct="false">C. (x + 9)(x + 1)</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-15')" data-correct="false">D. x(x + 6) + 9</button>
+      <span class="feedback" id="fb-2-15"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-15')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-15')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-15">观察：x² + 6x + 9，常数项 9 是 3²，一次项 6x = 2×3×x。这符合完全平方公式 a² + 2ab + b² = (a+b)²。</div>
+    <div class="ans-box" id="a2-15"><strong>B。</strong>x² + 6x + 9 = x² + 2·x·3 + 3² = (x + 3)²。这是完全平方公式。</div>
+  </div>
+
+  <!-- 选 6 -->
+  <div class="q-item">
+    <p><strong>16.</strong> 化简分式 (x² - 1)/(x + 1)（x ≠ -1）的结果是：</p>
+    <div id="opt-2-16">
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-16')" data-correct="false">A. x + 1</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '2-16')" data-correct="true">B. x - 1</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-16')" data-correct="false">C. x</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-16')" data-correct="false">D. x² - 1</button>
+      <span class="feedback" id="fb-2-16"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-16')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-16')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-16">先把分子 x² - 1 因式分解：这是平方差公式。然后看分子分母有没有公因式可以约掉。</div>
+    <div class="ans-box" id="a2-16"><strong>B。</strong>x² - 1 = (x + 1)(x - 1)。所以 (x² - 1)/(x + 1) = (x+1)(x-1)/(x+1) = x - 1（x ≠ -1）。</div>
+  </div>
+
+  <!-- 选 7 -->
+  <div class="q-item">
+    <p><strong>17.</strong> 展开 (x - 5)² 的结果是：</p>
+    <div id="opt-2-17">
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-17')" data-correct="false">A. x² - 25</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-17')" data-correct="false">B. x² + 25</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '2-17')" data-correct="true">C. x² - 10x + 25</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-17')" data-correct="false">D. x² + 10x + 25</button>
+      <span class="feedback" id="fb-2-17"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-17')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-17')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-17">完全平方公式：(a - b)² = a² - 2ab + b²。这里 a = x，b = 5。注意中间项是 -2ab。</div>
+    <div class="ans-box" id="a2-17"><strong>C。</strong>(x - 5)² = x² - 2·x·5 + 5² = x² - 10x + 25。注意不是 x² - 25（遗漏了 -10x 项）。</div>
+  </div>
+
+  <!-- 选 8 -->
+  <div class="q-item">
+    <p><strong>18.</strong> 把 2x² - 8 分解因式，结果是：</p>
+    <div id="opt-2-18">
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-18')" data-correct="false">A. 2(x - 2)²</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '2-18')" data-correct="true">B. 2(x + 2)(x - 2)</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-18')" data-correct="false">C. (2x + 4)(x - 2)</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-18')" data-correct="false">D. 2(x² - 4)</button>
+      <span class="feedback" id="fb-2-18"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-18')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-18')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-18">先提公因式 2：2x² - 8 = 2(x² - 4)。然后 x² - 4 还能继续分解吗？</div>
+    <div class="ans-box" id="a2-18"><strong>B。</strong>先提公因式：2x² - 8 = 2(x² - 4) = 2(x + 2)(x - 2)。D 选项没有分解彻底，x² - 4 还可以用平方差公式继续分解。</div>
+  </div>
+
+  <!-- 选 9 -->
+  <div class="q-item">
+    <p><strong>19.</strong> 若 x² + mx + 12 可以分解为 (x + 3)(x + n)，则 m 的值是：</p>
+    <div id="opt-2-19">
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-19')" data-correct="false">A. 4</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '2-19')" data-correct="true">B. 7</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-19')" data-correct="false">C. 12</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-19')" data-correct="false">D. -7</button>
+      <span class="feedback" id="fb-2-19"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-19')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-19')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-19">展开 (x+3)(x+n) = x² + (3+n)x + 3n。与 x² + mx + 12 比较：3n = 12，所以 n = ?；m = 3 + n = ?</div>
+    <div class="ans-box" id="a2-19"><strong>B。</strong>(x+3)(x+n) = x² + (3+n)x + 3n。与 x² + mx + 12 对比：3n = 12 → n = 4；m = 3 + n = 3 + 4 = 7。</div>
+  </div>
+
+  <!-- 选 10 -->
+  <div class="q-item">
+    <p><strong>20.</strong> 下列哪个代数式不是整式？</p>
+    <div id="opt-2-20">
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-20')" data-correct="false">A. 3x² + 2x - 1</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '2-20')" data-correct="true">B. 5/(x + 1)</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-20')" data-correct="false">C. -2a³b</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '2-20')" data-correct="false">D. (x + y)/2</button>
+      <span class="feedback" id="fb-2-20"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-20')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-20')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-20">整式的分母中不能含有字母。逐一检查每个选项的分母：A 没有分母，B 的分母是 x+1（含字母），C 没有分母，D 的分母是 2（常数）。</div>
+    <div class="ans-box" id="a2-20"><strong>B。</strong>B 选项 5/(x+1) 的分母中含有字母 x，是分式，不是整式。A、C、D 都是整式（D 的分母是常数 2，仍是整式）。</div>
+  </div>
+
+  <p class="section-title">三、多选题（每题 3 分，共 15 分）</p>
+
+  <!-- 多 1 -->
+  <div class="q-item">
+    <p><strong>21.</strong> 下列各项中，与 2x²y 是同类项的有：（多选）</p>
+    <div id="opt-2-21">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. -x²y</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">B. 3xy²</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 5x²y</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 2x²</button>
+      <br>
+      <button class="check-btn" onclick="checkMulti('2-21')">提交</button>
+      <span class="feedback" id="fb-2-21"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-21')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-21')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-21">同类项要求字母部分完全相同。2x²y 的字母部分是 x²y（x 的指数是 2，y 的指数是 1）。逐一检查每个选项的字母部分。</div>
+    <div class="ans-box" id="a2-21"><strong>A、C。</strong>A：-x²y，字母部分 x²y，是同类项。B：3xy²，字母部分 xy²，x 指数为 1，不是同类项。C：5x²y，字母部分 x²y，是同类项。D：2x²，字母部分 x²，缺少 y，不是同类项。</div>
+  </div>
+
+  <!-- 多 2 -->
+  <div class="q-item">
+    <p><strong>22.</strong> 下列因式分解正确的有：（多选）</p>
+    <div id="opt-2-22">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. x² - 9 = (x + 3)(x - 3)</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. x² + 4x + 4 = (x + 2)²</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">C. 2x² + 4x = 2x(x + 4)</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. x² - 2x - 3 = (x - 3)(x + 1)</button>
+      <br>
+      <button class="check-btn" onclick="checkMulti('2-22')">提交</button>
+      <span class="feedback" id="fb-2-22"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-22')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-22')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-22">逐一验证：A 用平方差公式，B 用完全平方公式，C 提公因式后检查括号里的内容，D 用十字相乘找和为 -2、积为 -3 的两个数。</div>
+    <div class="ans-box" id="a2-22"><strong>A、B、D。</strong>A：x²-9 = (x+3)(x-3) ✓。B：x²+4x+4 = (x+2)² ✓。C 错：2x²+4x = 2x(x+2)，不是 2x(x+4)。D：和为 -2，积为 -3 的两个数是 1 和 -3，所以 (x-3)(x+1) ✓。</div>
+  </div>
+
+  <!-- 多 3 -->
+  <div class="q-item">
+    <p><strong>23.</strong> 关于代数式，下列说法正确的有：（多选）</p>
+    <div id="opt-2-23">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 字母可以代表任何数，使一个式子描述无数种情况</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 用字母表示数是韦达和笛卡儿的重要贡献</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 单项式的次数是字母指数之和</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 所有代数式都可以合并同类项</button>
+      <br>
+      <button class="check-btn" onclick="checkMulti('2-23')">提交</button>
+      <span class="feedback" id="fb-2-23"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-23')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-23')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-23">D 选项：合并同类项的前提是有同类项。如果一个代数式里没有同类项（如 x + y + z），还需要合并吗？还是说"没法合并"？</div>
+    <div class="ans-box" id="a2-23"><strong>A、B、C。</strong>A 正确：代数式的威力就在于此。B 正确：韦达率先用字母代表未知数，笛卡儿规范了用 x,y,z 表示未知数。C 正确：次数 = 所有字母指数之和。D 错：有些代数式没有同类项可合并（如 x+y），但不代表它"不能"作为代数式存在。</div>
+  </div>
+
+  <!-- 多 4 -->
+  <div class="q-item">
+    <p><strong>24.</strong> 下列乘法公式计算正确的有：（多选）</p>
+    <div id="opt-2-24">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. (a + b)(a - b) = a² - b²</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">B. (a + b)² = a² + b²</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. (a - b)² = a² - 2ab + b²</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. (x + 1)(x + 2) = x² + 3x + 2</button>
+      <br>
+      <button class="check-btn" onclick="checkMulti('2-24')">提交</button>
+      <span class="feedback" id="fb-2-24"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-24')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-24')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-24">A 是平方差公式。B 和 C 是两种完全平方公式，注意区别。D 用 FOIL 展开验证。</div>
+    <div class="ans-box" id="a2-24"><strong>A、C、D。</strong>A：平方差公式 ✓。B 错：(a+b)² = a² + 2ab + b²，不是 a² + b²。C：完全平方公式 ✓。D：展开 (x+1)(x+2) = x² + 2x + x + 2 = x² + 3x + 2 ✓。</div>
+  </div>
+
+  <!-- 多 5 -->
+  <div class="q-item">
+    <p><strong>25.</strong> 关于因式分解的方法，下列说法正确的有：（多选）</p>
+    <div id="opt-2-25">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 提公因式法是因式分解的第一步</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">B. 十字相乘法适用于所有二次三项式</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 平方差公式 a² - b² = (a+b)(a-b) 是因式分解的重要工具</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 因式分解要分解到不能再分解为止</button>
+      <br>
+      <button class="check-btn" onclick="checkMulti('2-25')">提交</button>
+      <span class="feedback" id="fb-2-25"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-25')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-25')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-25">B 选项：十字相乘法需要找到两个整数满足和为 p、积为 q。如果 x² + x + 1，能找到这样的整数吗？</div>
+    <div class="ans-box" id="a2-25"><strong>A、C、D。</strong>A 正确：先看有没有公因式可提。B 错：十字相乘法要求能找到两个整数满足条件，x² + x + 1 在有理数范围内就不能分解。C 正确。D 正确：要分解彻底，如 2x²-8 = 2(x²-4) = 2(x+2)(x-2)。</div>
+  </div>
+
+  <p class="section-title">四、其他题型（每题 3 分，共 15 分）</p>
+
+  <!-- 其他 1 -->
+  <div class="q-item">
+    <p><strong>26.</strong> 化简：(3x² - 2x + 5) - (x² + 3x - 1) = ？</p>
+    <div id="fill-2-26">
+      <input class="fill-input" id="inp-2-26" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('2-26', '2x²-5x+6')">提交</button>
+      <span class="feedback" id="fb-2-26"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-26')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-26')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-26">去括号时注意：减号后面括号里的每一项都要变号。-(x² + 3x - 1) = -x² - 3x + 1。</div>
+    <div class="ans-box" id="a2-26"><strong>2x² - 5x + 6。</strong>原式 = 3x² - 2x + 5 - x² - 3x + 1 = (3x² - x²) + (-2x - 3x) + (5 + 1) = 2x² - 5x + 6。</div>
+  </div>
+
+  <!-- 其他 2 -->
+  <div class="q-item">
+    <p><strong>27.</strong> 展开并化简：(x + 2)(x - 3) + (x - 1)² = ？</p>
+    <div id="fill-2-27">
+      <input class="fill-input" id="inp-2-27" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('2-27', '2x²-3x-5')">提交</button>
+      <span class="feedback" id="fb-2-27"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-27')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-27')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-27">分两步：(x+2)(x-3) 用分配律展开；(x-1)² 用完全平方公式展开。然后合并同类项。</div>
+    <div class="ans-box" id="a2-27"><strong>2x² - 3x - 5。</strong>(x+2)(x-3) = x² - 3x + 2x - 6 = x² - x - 6。(x-1)² = x² - 2x + 1。相加：(x² - x - 6) + (x² - 2x + 1) = 2x² - 3x - 5。</div>
+  </div>
+
+  <!-- 其他 3 -->
+  <div class="q-item">
+    <p><strong>28.</strong> 因式分解：3x² - 12 = ？</p>
+    <div id="fill-2-28">
+      <input class="fill-input" id="inp-2-28" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('2-28', '3(x+2)(x-2)')">提交</button>
+      <span class="feedback" id="fb-2-28"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-28')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-28')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-28">先提公因式 3，再观察括号里是什么形式。3(x² - 4)，x² - 4 还能继续分解吗？</div>
+    <div class="ans-box" id="a2-28"><strong>3(x + 2)(x - 2)。</strong>3x² - 12 = 3(x² - 4) = 3(x + 2)(x - 2)。要分解彻底！</div>
+  </div>
+
+  <!-- 其他 4 -->
+  <div class="q-item">
+    <p><strong>29.</strong> 因式分解：x² - 7x + 10 = ？</p>
+    <div id="fill-2-29">
+      <input class="fill-input" id="inp-2-29" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('2-29', '(x-2)(x-5)')">提交</button>
+      <span class="feedback" id="fb-2-29"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-29')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-29')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-29">用十字相乘法：找两个数，和为 -7，积为 10。这两个数是 -2 和 -5。</div>
+    <div class="ans-box" id="a2-29"><strong>(x - 2)(x - 5)。</strong>和为 -7，积为 10 的两个数是 -2 和 -5。验证：(-2)+(-5) = -7，(-2)×(-5) = 10。所以 x² - 7x + 10 = (x - 2)(x - 5)。</div>
+  </div>
+
+  <!-- 其他 5 -->
+  <div class="q-item">
+    <p><strong>30.</strong> 先化简再求值：(x + 1)(x - 1) - x(x - 2)，其中 x = 3。</p>
+    <div id="fill-2-30">
+      <input class="fill-input" id="inp-2-30" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('2-30', '5')">提交</button>
+      <span class="feedback" id="fb-2-30"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-30')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-30')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-30">先展开：(x+1)(x-1) = x² - 1（平方差公式），x(x-2) = x² - 2x。原式 = (x² - 1) - (x² - 2x) = ? 化简后再代入 x = 3。</div>
+    <div class="ans-box" id="a2-30"><strong>5。</strong>化简：原式 = (x² - 1) - (x² - 2x) = x² - 1 - x² + 2x = 2x - 1。代入 x = 3：2×3 - 1 = 5。</div>
+  </div>
+
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+function checkTF(btn, isCorrect, qid) {
+  const container = document.getElementById('tf-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.tf-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function checkSingle(btn, isCorrect, qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.opt-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function toggleMultiOpt(btn) {
+  btn.classList.toggle('selected');
+}
+function checkMulti(qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  const opts = container.querySelectorAll('.opt-btn');
+  let allCorrect = true;
+  opts.forEach(o => {
+    o.style.pointerEvents = 'none';
+    const isCorrect = o.dataset.correct === 'true';
+    const isSelected = o.classList.contains('selected');
+    if (isCorrect && isSelected) o.classList.add('correct');
+    else if (!isCorrect && isSelected) { o.classList.add('wrong'); allCorrect = false; }
+    else if (isCorrect && !isSelected) { o.classList.add('correct'); allCorrect = false; }
+  });
+  const fb = document.getElementById('fb-' + qid);
+  if (fb) { fb.textContent = allCorrect ? '✓ 正确' : '✗ 错误'; fb.className = 'feedback show ' + (allCorrect ? 'correct-fb' : 'wrong-fb'); }
+}
+function checkFill(qid, correctAns) {
+  const container = document.getElementById('fill-' + qid);
+  if (!container || container.dataset.done) return;
+  const input = document.getElementById('inp-' + qid);
+  const fb = document.getElementById('fb-' + qid);
+  const userAns = input.value.trim();
+  if (!userAns) return;
+  container.dataset.done = '1';
+  input.disabled = true;
+  const checkBtn = container.querySelector('.check-btn');
+  if (checkBtn) checkBtn.style.display = 'none';
+  const normalized = userAns.replace(/\s+/g, '');
+  const normalizedCorrect = correctAns.replace(/\s+/g, '');
+  if (normalized === normalizedCorrect) {
+    input.style.borderColor = '#4caf50';
+    input.style.background = '#e8f5e9';
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    input.style.borderColor = '#f44336';
+    input.style.background = '#ffebee';
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+</script>
+</body>
+</html>

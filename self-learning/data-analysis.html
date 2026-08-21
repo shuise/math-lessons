@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据的分析 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #c62828; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed #5c6bc0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; line-height: 1.8; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 0.93em; }
+  th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: center; }
+  th { background: var(--accent); color: #fff; }
+  .svg-container { text-align: center; margin: 16px 0; }
+  .svg-container svg { max-width: 100%; height: auto; }
+
+  @media (max-width: 720px) {
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./data-collection.html">课件 32（数据的收集与整理）</a>—— 普查与抽样调查、总体/个体/样本、频数分布表、直方图</p>
+  <h1>数据的分析 — 第 33 课</h1>
+
+  <h2>起源：古人怎么"算"平均数？</h2>
+  <div class="origin">
+    <p><strong>平均数的思想，</strong>比"平均数"这个词古老得多。早在公元前 3000 年，古埃及的官员在测量尼罗河两岸的土地时就发现：每年洪水退去后，地界石被冲走了，需要重新分配土地。怎么分？他们用<strong>"所有地块面积加起来，除以人数"</strong>的方法——也就是求平均数。</p>
+    <p>到了 17 世纪，天文学家发现了一个令人头疼的问题：不同的人在同一时间用同一台望远镜观察同一颗星，测出来的位置却不一样。怎么办？<strong>把所有观测值加起来除以观测次数</strong>——这就是今天"算术平均数"的由来。英国数学家托马斯·辛普森在 1755 年写了一封信，正式提出：<strong>多次观测的平均值比单次观测更可靠。</strong></p>
+    <p>而"中位数"最早是法国数学家罗杰·博斯科维奇在 1757 年提出来的，但真正推广它的是弗朗西斯·高尔顿（达尔文的表弟）。高尔顿在研究人类身高时发现：<strong>用平均数容易受极端值影响，中位数反而更稳定。</strong></p>
+    <p>到了 20 世纪初，英国统计学家<strong>卡尔·皮尔逊</strong>和<strong>罗纳德·费希尔</strong>把方差、标准差等概念系统化，统计学的"数据分析工具箱"正式成型。</p>
+    <p><strong>数据分析要解决的核心问题：</strong>收集完数据之后，怎么用一个数概括一群数？怎么看这群数"散不散"？</p>
+  </div>
+
+  <h2>一、集中趋势：用一个数概括一群数</h2>
+  <div class="story">
+    <p>假设你参加了一场数学考试，全班 5 个人的成绩是：<strong>78, 85, 90, 92, 95</strong>。你想用<strong>一个数</strong>来描述"我们班考得怎么样"。这个数有三种选法：</p>
+  </div>
+
+  <h3>1. 平均数（算术平均数）</h3>
+  <div class="formula">
+    <p><strong>定义：</strong>把所有数据加起来，除以数据的个数。</p>
+    <p style="text-align:center;font-size:1.1em;"><strong>平均数 = (数据之和) ÷ (数据个数)</strong></p>
+    <p>用符号写：设有 n 个数据 x₁, x₂, ..., xₙ，则</p>
+    <p style="text-align:center;font-size:1.2em;font-weight:bold;">x̄ = (x₁ + x₂ + ... + xₙ) / n</p>
+    <p>上面那个"x̄"读作"x bar"——在 x 上面加一横，表示平均值。</p>
+  </div>
+
+  <div class="example">
+    <strong>例子：</strong>78, 85, 90, 92, 95 的平均数 = (78+85+90+92+95) ÷ 5 = 440 ÷ 5 = <strong>88</strong>。<br>
+    <span style="color:#888;">解读：这五个同学的平均分是 88 分。</span>
+  </div>
+
+  <div class="svg-container">
+    <svg viewBox="0 0 600 180" style="max-width:600px;height:auto;">
+      <defs>
+        <style>
+          .bar { fill: #c62828; transition: height 0.5s; }
+          .bar-light { fill: #ef9a9a; }
+          .mean-line { stroke: #2e7d32; stroke-width: 2.5; stroke-dasharray: 6,3; }
+        </style>
+      </defs>
+      <!-- 坐标轴 -->
+      <line x1="60" y1="140" x2="580" y2="140" stroke="#333" stroke-width="2"/>
+      <line x1="60" y1="140" x2="60" y2="10" stroke="#333" stroke-width="2"/>
+      <!-- Y轴刻度 -->
+      <text x="50" y="144" text-anchor="end" font-size="11">0</text>
+      <text x="50" y="104" text-anchor="end" font-size="11">20</text>
+      <text x="50" y="64" text-anchor="end" font-size="11">40</text>
+      <text x="50" y="24" text-anchor="end" font-size="11">60</text>
+      <line x1="55" y1="140" x2="60" y2="140" stroke="#333" stroke-width="1"/>
+      <line x1="55" y1="100" x2="60" y2="100" stroke="#ccc" stroke-width="1"/>
+      <line x1="55" y1="60" x2="60" y2="60" stroke="#ccc" stroke-width="1"/>
+      <line x1="55" y1="20" x2="60" y2="20" stroke="#ccc" stroke-width="1"/>
+      <!-- 柱状图：5个成绩，每格宽80 -->
+      <rect x="85" y="62" width="50" height="78" class="bar" rx="2"/>
+      <text x="110" y="55" text-anchor="middle" font-size="12" fill="#666">78</text>
+      <rect x="165" y="48" width="50" height="92" class="bar" rx="2"/>
+      <text x="190" y="41" text-anchor="middle" font-size="12" fill="#666">85</text>
+      <rect x="245" y="38" width="50" height="102" class="bar" rx="2"/>
+      <text x="270" y="31" text-anchor="middle" font-size="12" fill="#666">90</text>
+      <rect x="325" y="34" width="50" height="106" class="bar" rx="2"/>
+      <text x="350" y="27" text-anchor="middle" font-size="12" fill="#666">92</text>
+      <rect x="405" y="28" width="50" height="112" class="bar" rx="2"/>
+      <text x="430" y="21" text-anchor="middle" font-size="12" fill="#666">95</text>
+      <!-- 平均数线 -->
+      <line x1="60" y1="42" x2="480" y2="42" class="mean-line"/>
+      <text x="490" y="38" text-anchor="start" font-size="12" fill="#2e7d32" font-weight="bold">平均数 88</text>
+      <!-- X轴标签 -->
+      <text x="110" y="158" text-anchor="middle" font-size="11" fill="#888">学生A</text>
+      <text x="190" y="158" text-anchor="middle" font-size="11" fill="#888">学生B</text>
+      <text x="270" y="158" text-anchor="middle" font-size="11" fill="#888">学生C</text>
+      <text x="350" y="158" text-anchor="middle" font-size="11" fill="#888">学生D</text>
+      <text x="430" y="158" text-anchor="middle" font-size="11" fill="#888">学生E</text>
+    </svg>
+    <p style="color:#888;font-size:13px;text-align:center;">绿色虚线：平均数 = 88。有的高于它，有的低于它。</p>
+  </div>
+
+  <div class="note">
+    <strong>注意：</strong>平均数有一个"软肋"——容易被极端值拉偏。如果班上突然转来一个学霸考了 100 分，或者一个同学考了 20 分，平均数就会明显变化。
+  </div>
+
+  <h3>2. 中位数</h3>
+  <div class="formula">
+    <p><strong>定义：</strong>把数据从小到大排好队，<strong>站在最中间的那个数</strong>，就是中位数。如果数据个数是偶数，中间两个数的平均数就是中位数。</p>
+    <p>一句话：<strong>中位数把数据分成两半，一半比它大，一半比它小。</strong></p>
+  </div>
+
+  <div class="example">
+    <strong>例子：</strong>78, 85, 90, 92, 95 已经排好序，中间是第 3 个数 → 中位数 = <strong>90</strong>。<br>
+    <strong>偶数个：</strong>78, 85, 90, 92 → 中间两个是 85 和 90 → 中位数 = (85+90) ÷ 2 = <strong>87.5</strong>。
+  </div>
+
+  <div class="note">
+    <strong>想一想：</strong>如果班上 5 个同学的成绩是 78, 85, 90, 92, 20（有个人只考了 20 分），平均数 = (78+85+90+92+20)÷5 = 73，而中位数还是 85。<strong>哪个数更能代表"大多数同学"的水平？</strong>——显然中位数更靠谱，因为它不受 20 这个极端值的影响。
+  </div>
+
+  <h3>3. 众数</h3>
+  <div class="formula">
+    <p><strong>定义：</strong>数据中出现次数最多的那个数，就是众数。一组数据可能有多个众数（复众数），也可能没有众数。</p>
+  </div>
+
+  <div class="example">
+    <strong>例子：</strong>鞋店老板统计了一天卖出的鞋码：36, 38, 38, 38, 39, 40, 40, 41。<br>
+    38 码出现了 3 次，最多 → 众数 = <strong>38</strong>。<br>
+    <span style="color:#888;">老板进货时，38 码的鞋肯定要多进一些！</span>
+  </div>
+
+  <div class="key">
+    <p><strong>小结：平均数、中位数、众数——各有什么用处？</strong></p>
+    <table style="margin:8px 0;">
+      <tr><th>指标</th><th>优点</th><th>缺点</th><th>适合场景</th></tr>
+      <tr><td>平均数</td><td>用了全部数据，信息最全</td><td>容易被极端值影响</td><td>数据比较均匀时（如身高、体重）</td></tr>
+      <tr><td>中位数</td><td>不受极端值影响</td><td>没有用到全部数据的信息</td><td>有极端值时（如工资、房价）</td></tr>
+      <tr><td>众数</td><td>直观，一看就懂</td><td>可能不存在或不唯一</td><td>分类数据（如鞋码、颜色偏好）</td></tr>
+    </table>
+  </div>
+
+  <div class="svg-container">
+    <svg viewBox="0 0 600 220" style="max-width:600px;height:auto;">
+      <!-- 标题 -->
+      <text x="300" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">平均数 vs 中位数：极端值的影响</text>
+      <!-- 正常数据 -->
+      <rect x="20" y="38" width="260" height="170" rx="8" fill="#e8f5e9" stroke="#a5d6a7" stroke-width="1.5"/>
+      <text x="150" y="60" text-anchor="middle" font-size="13" font-weight="bold" fill="#2e7d32">正常数据：78, 85, 90, 92, 95</text>
+      <line x1="40" y1="130" x2="260" y2="130" stroke="#333" stroke-width="1.5"/>
+      <circle cx="82" cy="130" r="4" fill="#c62828"/>
+      <text x="82" y="122" text-anchor="middle" font-size="10">78</text>
+      <circle cx="126" cy="120" r="4" fill="#c62828"/>
+      <text x="126" y="112" text-anchor="middle" font-size="10">85</text>
+      <circle cx="170" cy="108" r="4" fill="#c62828"/>
+      <text x="170" y="100" text-anchor="middle" font-size="10">90</text>
+      <circle cx="214" cy="102" r="4" fill="#c62828"/>
+      <text x="214" y="94" text-anchor="middle" font-size="10">92</text>
+      <circle cx="258" cy="96" r="4" fill="#c62828"/>
+      <text x="258" y="88" text-anchor="middle" font-size="10">95</text>
+      <text x="150" y="155" text-anchor="middle" font-size="12" fill="#2e7d32">平均数 = 88 / 中位数 = 90</text>
+      <text x="150" y="172" text-anchor="middle" font-size="11" fill="#888">两者接近</text>
+
+      <!-- 有极端值 -->
+      <rect x="310" y="38" width="260" height="170" rx="8" fill="#fff3e0" stroke="#ffcc80" stroke-width="1.5"/>
+      <text x="440" y="60" text-anchor="middle" font-size="13" font-weight="bold" fill="#e65100">有极端值：78, 85, 90, 92, 20</text>
+      <line x1="330" y1="130" x2="550" y2="130" stroke="#333" stroke-width="1.5"/>
+      <circle cx="372" cy="130" r="4" fill="#c62828"/>
+      <text x="372" y="122" text-anchor="middle" font-size="10">78</text>
+      <circle cx="416" cy="120" r="4" fill="#c62828"/>
+      <text x="416" y="112" text-anchor="middle" font-size="10">85</text>
+      <circle cx="460" cy="108" r="4" fill="#c62828"/>
+      <text x="460" y="100" text-anchor="middle" font-size="10">90</text>
+      <circle cx="504" cy="102" r="4" fill="#c62828"/>
+      <text x="504" y="94" text-anchor="middle" font-size="10">92</text>
+      <circle cx="548" cy="175" r="4" fill="#e65100"/>
+      <text x="548" y="192" text-anchor="middle" font-size="10" fill="#e65100">20</text>
+      <text x="440" y="155" text-anchor="middle" font-size="12" fill="#e65100">平均数 = 73 / 中位数 = 85</text>
+      <text x="440" y="172" text-anchor="middle" font-size="11" fill="#888">平均数被拉低，中位数稳如泰山！</text>
+    </svg>
+  </div>
+
+  <h2>二、波动程度：数据"散不散"？</h2>
+  <div class="story">
+    <p>光看平均数还不够！假设两个班的平均分都是 80 分，但 A 班成绩是 79, 80, 81，B 班成绩是 50, 80, 110。虽然平均分一样，但显然 B 班的成绩"更散"——<strong>我们需要一个数字来衡量这种"散"的程度。</strong></p>
+  </div>
+
+  <h3>1. 方差</h3>
+  <div class="formula">
+    <p><strong>直观想法：</strong>每个数据离平均数有多远？把这些"距离"平均一下。</p>
+    <p>但"距离"有正有负，直接加会抵消。怎么办？<strong>平方！</strong>——平方后全是正数，而且"远"的数据被放大得更厉害。</p>
+    <p><strong>方差的定义：</strong>每个数据与平均数的差的平方的平均值。</p>
+    <p style="text-align:center;font-size:1.1em;font-weight:bold;">s² = [(x₁ − x̄)² + (x₂ − x̄)² + ... + (xₙ − x̄)²] / n</p>
+    <p style="font-size:0.9em;color:#888;">（注：样本方差有时除以 n−1，初中阶段先学除以 n 的版本。）</p>
+  </div>
+
+  <div class="example">
+    <strong>用手算一遍：</strong>数据 2, 4, 6<br>
+    平均数 x̄ = (2+4+6) ÷ 3 = 4<br>
+    每个数与平均数的差：2−4=−2, 4−4=0, 6−4=2<br>
+    平方：(−2)²=4, 0²=0, 2²=4<br>
+    方差 = (4+0+4) ÷ 3 = <strong>8/3 ≈ 2.67</strong>
+  </div>
+
+  <div class="svg-container">
+    <svg viewBox="0 0 600 280" style="max-width:600px;height:auto;">
+      <text x="300" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">方差：衡量数据"散不散"的直观理解</text>
+      <!-- 两组数据对比 -->
+      <!-- A组：2,4,6 方差小 -->
+      <text x="120" y="50" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">A组：2, 4, 6（方差小）</text>
+      <line x1="20" y1="80" x2="220" y2="80" stroke="#333" stroke-width="1.5"/>
+      <circle cx="60" cy="80" r="6" fill="#43a047"/>
+      <text x="60" y="72" text-anchor="middle" font-size="11">2</text>
+      <circle cx="120" cy="80" r="6" fill="#43a047"/>
+      <text x="120" y="72" text-anchor="middle" font-size="11">4</text>
+      <circle cx="180" cy="80" r="6" fill="#43a047"/>
+      <text x="180" y="72" text-anchor="middle" font-size="11">6</text>
+      <!-- 平均数线 -->
+      <line x1="20" y1="95" x2="220" y2="95" stroke="#333" stroke-width="2" stroke-dasharray="4,3"/>
+      <text x="230" y="98" font-size="11" fill="#333">x̄=4</text>
+      <!-- 偏差线 -->
+      <line x1="60" y1="80" x2="60" y2="130" stroke="#e65100" stroke-width="1.5" marker-end="url(#arrowA)"/>
+      <text x="60" y="142" text-anchor="middle" font-size="9" fill="#e65100">差-2</text>
+      <line x1="120" y1="80" x2="120" y2="130" stroke="#e65100" stroke-width="1.5" marker-end="url(#arrowA)"/>
+      <text x="120" y="142" text-anchor="middle" font-size="9" fill="#e65100">差0</text>
+      <line x1="180" y1="80" x2="180" y2="130" stroke="#e65100" stroke-width="1.5" marker-end="url(#arrowA)"/>
+      <text x="180" y="142" text-anchor="middle" font-size="9" fill="#e65100">差+2</text>
+      <text x="120" y="165" text-anchor="middle" font-size="11" fill="#2e7d32">方差 = (4+0+4)/3 ≈ 2.67</text>
+
+      <!-- B组：1,4,7 方差大 -->
+      <text x="420" y="50" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">B组：1, 4, 7（方差大）</text>
+      <line x1="320" y1="80" x2="520" y2="80" stroke="#333" stroke-width="1.5"/>
+      <circle cx="340" cy="80" r="6" fill="#e53935"/>
+      <text x="340" y="72" text-anchor="middle" font-size="11">1</text>
+      <circle cx="420" cy="80" r="6" fill="#e53935"/>
+      <text x="420" y="72" text-anchor="middle" font-size="11">4</text>
+      <circle cx="500" cy="80" r="6" fill="#e53935"/>
+      <text x="500" y="72" text-anchor="middle" font-size="11">7</text>
+      <line x1="320" y1="95" x2="520" y2="95" stroke="#333" stroke-width="2" stroke-dasharray="4,3"/>
+      <text x="530" y="98" font-size="11" fill="#333">x̄=4</text>
+      <line x1="340" y1="80" x2="340" y2="130" stroke="#e65100" stroke-width="1.5" marker-end="url(#arrowB)"/>
+      <text x="340" y="142" text-anchor="middle" font-size="9" fill="#e65100">差-3</text>
+      <line x1="420" y1="80" x2="420" y2="130" stroke="#e65100" stroke-width="1.5" marker-end="url(#arrowB)"/>
+      <text x="420" y="142" text-anchor="middle" font-size="9" fill="#e65100">差0</text>
+      <line x1="500" y1="80" x2="500" y2="130" stroke="#e65100" stroke-width="1.5" marker-end="url(#arrowB)"/>
+      <text x="500" y="142" text-anchor="middle" font-size="9" fill="#e65100">差+3</text>
+      <text x="420" y="165" text-anchor="middle" font-size="11" fill="#c62828">方差 = (9+0+9)/3 = 6</text>
+
+      <!-- 结论 -->
+      <line x1="20" y1="185" x2="580" y2="185" stroke="#ddd" stroke-width="1"/>
+      <text x="300" y="210" text-anchor="middle" font-size="13" fill="#333">结论：平均数相同（都是4），但B组方差更大 → 数据更分散。</text>
+      <text x="300" y="235" text-anchor="middle" font-size="13" fill="#333">方差越大 → 数据越"散"；方差越小 → 数据越"集中"。</text>
+
+      <defs>
+        <marker id="arrowA" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#e65100"/>
+        </marker>
+        <marker id="arrowB" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#e65100"/>
+        </marker>
+      </defs>
+    </svg>
+  </div>
+
+  <h3>2. 标准差</h3>
+  <div class="formula">
+    <p><strong>定义：</strong>方差的<strong>算术平方根</strong>。</p>
+    <p style="text-align:center;font-size:1.2em;font-weight:bold;">s = √(s²)</p>
+    <p><strong>为什么要开方？</strong>方差是"平方"后的结果，单位也被平方了。比如数据的单位是"分"，方差的单位就是"分²"——这很别扭。开方之后，标准差又回到了"分"，和原始数据同一个单位，更容易理解。</p>
+  </div>
+
+  <div class="example">
+    <strong>接上例：</strong>A 组方差 ≈ 2.67，标准差 = √2.67 ≈ <strong>1.63</strong>；B 组方差 = 6，标准差 = √6 ≈ <strong>2.45</strong>。<br>
+    <span style="color:#888;">解读：B 组的标准差更大，说明 B 组数据更分散。</span>
+  </div>
+
+  <div class="key">
+    <p><strong>一句话对比：</strong></p>
+    <table style="margin:8px 0;">
+      <tr><th></th><th>方差</th><th>标准差</th></tr>
+      <tr><td>计算</td><td>差的平方的平均</td><td>方差的平方根</td></tr>
+      <tr><td>单位</td><td>原始单位²</td><td>与原始单位相同</td></tr>
+      <tr><td>用途</td><td>数学推导中更方便</td><td>解释数据时更直观</td></tr>
+      <tr><td>关系</td><td colspan="2">同一个东西的两个面貌，就像"面积"和"边长"</td></tr>
+    </table>
+  </div>
+
+  <h2>三、逻辑推导：为什么方差公式长这样？</h2>
+  <div class="story">
+    <p>你可能想问：为什么不是直接算"偏差的平均值"？也就是 (|x₁−x̄| + ... + |xₙ−x̄|) / n？</p>
+    <p>这个叫<strong>平均绝对偏差</strong>，确实存在！但数学家们选了方差，有三个原因：</p>
+    <ol>
+      <li><strong>绝对值不好求导：</strong>绝对值函数在 0 处有一个"尖角"，不光滑，微积分处理起来很麻烦。平方函数是光滑的抛物线，处处可导。</li>
+      <li><strong>平方放大极端值：</strong>偏离 2 的贡献是 4，偏离 4 的贡献是 16——方差对"离群点"特别敏感，这恰好符合我们"极端值要引起重视"的直觉。</li>
+      <li><strong>可加性：</strong>独立数据的方差可以相加，这条性质在概率论中极其重要。</li>
+    </ol>
+    <p style="color:#888;font-size:0.9em;">（你现在不需要完全理解微积分，但知道"选方差不是随意决定的"就够了。）</p>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>一组数据：5, 7, 9, 11, 13。不用计算，你能猜出平均数是多少吗？方差呢？</p>
+    <p><strong>问题 2：</strong>如果一组数据的每个数都加上 10，平均数、中位数、众数、方差、标准差分别会怎么变化？</p>
+    <p><strong>问题 3：</strong>小明说："我们班的中位数是 85，平均数也是 85，所以大家的成绩都一样。"他的说法对吗？为什么？</p>
+    <p><strong>问题 4：</strong>如果一组数据只有一个数，比如 [7]，它的方差是多少？你能从方差公式推导出来吗？</p>
+  </div>
+
+  <h2>拓展阅读</h2>
+  <div class="extend">
+    <h3>1. 数据波动程度的几种度量</h3>
+    <p>除了方差和标准差，统计学家们还发明了其他度量数据波动的方法：</p>
+    <ul>
+      <li><strong>极差（Range）：</strong>最大值 − 最小值。最简单，但只看两个数，信息太少。</li>
+      <li><strong>四分位距（IQR）：</strong>上四分位数（Q₃）− 下四分位数（Q₁），即中间 50% 数据的范围。不受极端值影响，比极差稳健。</li>
+      <li><strong>平均绝对偏差（MAD）：</strong>每个数据与平均数的差的绝对值的平均。比方差直观，但数学性质不如方差好。</li>
+      <li><strong>变异系数（CV）：</strong>标准差 ÷ 平均数。用于比较不同单位或不同量级的数据的波动程度。比如，比较"身高"和"体重"的变异程度，不能直接用标准差比。</li>
+    </ul>
+    <p>这些方法各有各的用处，就像工具箱里有不同型号的螺丝刀——看你要拧什么螺丝。</p>
+
+    <h3>2. 课题学习：体质健康测试中的数据分析</h3>
+    <p>假设你们班进行了一次体质健康测试，测了 50 米跑、坐位体前屈、1 分钟跳绳、肺活量等项目。现在你拿到了全班的数据，你会怎么分析？</p>
+    <p><strong>第一步：</strong>计算每个项目的平均数和标准差——看看全班整体水平如何，哪个项目大家差距最大（标准差最大）。</p>
+    <p><strong>第二步：</strong>画出每个项目的直方图——看看数据分布是什么形状。是"中间高两边低"的钟形，还是偏向一边的歪斜形？</p>
+    <p><strong>第三步：</strong>对比男女生数据——分别计算平均数和中位数，看有没有明显差异。用中位数比用平均数更可靠，因为总有几个同学特别强或特别弱。</p>
+    <p><strong>第四步：</strong>把自己的数据和全班对比——你的 50 米跑成绩在班里排第几？用中位数和标准差，你就能知道自己的位置：是在"大多数"中间，还是"领先"或"落后"了。</p>
+    <p style="color:#888;font-size:0.9em;">试试用学过的这些方法，分析一次你们班的真实数据吧！</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 数据：12, 15, 18, 21, 24。求这组数据的平均数、中位数和众数。</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">平均数：全部加起来除以 5；中位数：5 个数排好序，取第 3 个；众数：每个数都只出现一次，所以没有众数。</div>
+    <div class="ans-box" id="a1">平均数 = (12+15+18+21+24)÷5 = 90÷5 = <strong>18</strong>；中位数 = <strong>18</strong>；众数：<strong>无</strong>（每个数出现次数相同）。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 某小组 6 名同学的身高（cm）：155, 158, 160, 160, 162, 165。求平均数、中位数和众数。</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">平均数：全部加起来除以 6；中位数：偶数个数据，取中间两个的平均数；众数：出现次数最多的数。</div>
+    <div class="ans-box" id="a2">平均数 = (155+158+160+160+162+165)÷6 = 960÷6 = <strong>160</strong>；中位数 = (160+160)÷2 = <strong>160</strong>；众数 = <strong>160</strong>（出现 2 次）。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 一组数据：3, 3, 5, 7, 7, 7, 9。求平均数、中位数和众数。</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">7 出现了 3 次，是最多的；中位数：7 个数，第 4 个；平均数：全部加起来除以 7。</div>
+    <div class="ans-box" id="a3">平均数 = (3+3+5+7+7+7+9)÷7 = 41÷7 ≈ <strong>5.86</strong>；中位数 = <strong>7</strong>（第 4 个数）；众数 = <strong>7</strong>。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 小明 5 次数学测验成绩：88, 92, 85, 90, ？。已知平均分是 89 分，求第 5 次成绩。</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">设第 5 次为 x，则 (88+92+85+90+x)÷5 = 89。解出 x。</div>
+    <div class="ans-box" id="a4">88+92+85+90 = 355，355 + x = 89×5 = 445，x = 445−355 = <strong>90</strong>。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 以下数据中，哪个指标最能代表"大多数"？为什么？<br>某公司员工月薪（元）：3000, 3200, 3500, 3500, 3800, 4000, 50000。</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">先算平均数和中位数，比较一下。50000 是一个极端值，看它把谁拉偏了。</div>
+    <div class="ans-box" id="a5">平均数 = (3000+3200+3500+3500+3800+4000+50000)÷7 = 71000÷7 ≈ <strong>10143</strong>；中位数 = <strong>3500</strong>。平均数被 50000 拉到了 1 万多，而实际上 6 个人都在 4000 以下。所以<strong>中位数 3500 元</strong>更能代表大多数。众数 = 3500，也合理。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 数据：2, 4, 4, 6, 8, 10。求方差和标准差（精确到小数点后一位）。</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">先求平均数，再算每个数与平均数的差的平方，求平均得方差，最后开方得标准差。</div>
+    <div class="ans-box" id="a6">平均数 = (2+4+4+6+8+10)÷6 = 34÷6 ≈ 5.67。<br>偏差平方： (2−5.67)²=13.47, (4−5.67)²=2.79, (4−5.67)²=2.79, (6−5.67)²=0.11, (8−5.67)²=5.43, (10−5.67)²=18.75。<br>方差 = (13.47+2.79+2.79+0.11+5.43+18.75)÷6 = 43.34÷6 ≈ <strong>7.2</strong>；标准差 = √7.2 ≈ <strong>2.7</strong>。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>7.</strong> 两组数据：A 组 1, 3, 5, 7, 9；B 组 4, 4, 5, 6, 6。不用计算，哪组方差大？为什么？</p>
+    <button class="btn-sm" onclick="toggleHint('h7')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a7')">查看答案</button>
+    <div class="hint-box" id="h7">观察两组数据的"散开"程度。A 组从 1 到 9 跨度很大，B 组集中在 4~6 之间。</div>
+    <div class="ans-box" id="a7"><strong>A 组方差更大。</strong>因为 A 组数据从 1 到 9，跨度大，数据分散；B 组都在 4~6 之间，非常集中。验证：A 组平均数=5，方差=8；B 组平均数=5，方差=0.8。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>8.</strong> 一组数据每个数都乘以 2，方差会变成原来的几倍？为什么？</p>
+    <button class="btn-sm" onclick="toggleHint('h8')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a8')">查看答案</button>
+    <div class="hint-box" id="h8">设原数据为 x₁, x₂, ..., xₙ，新数据为 2x₁, 2x₂, ..., 2xₙ。新平均数 = 2x̄，每个新偏差 = 2xᵢ−2x̄ = 2(xᵢ−x̄)，平方后变成 4(xᵢ−x̄)²。</div>
+    <div class="ans-box" id="a8">方差变成原来的 <strong>4 倍</strong>。因为每个偏差都乘以 2，平方之后就乘以 4。标准差变成原来的 <strong>2 倍</strong>。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>9.</strong> 小红记录了上周每天的最高气温（℃）：28, 30, 29, 31, 32, 30, 30。求这组数据的平均数、中位数、众数、方差和标准差（方差精确到一位小数）。</p>
+    <button class="btn-sm" onclick="toggleHint('h9')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a9')">查看答案</button>
+    <div class="hint-box" id="h9">先排序：28, 29, 30, 30, 30, 31, 32。再依次计算平均数、中位数、众数，然后算方差和标准差。</div>
+    <div class="ans-box" id="a9">平均数 = (28+29+30+30+30+31+32)÷7 = 210÷7 = <strong>30</strong>；中位数 = <strong>30</strong>；众数 = <strong>30</strong>。<br>偏差平方：(28−30)²=4, (29−30)²=1, (30−30)²=0, (30−30)²=0, (30−30)²=0, (31−30)²=1, (32−30)²=4。<br>方差 = (4+1+0+0+0+1+4)÷7 = 10÷7 ≈ <strong>1.4</strong>；标准差 = √1.4 ≈ <strong>1.2</strong>。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>10.</strong> 某次数学测验，全班 40 人。小红考了 88 分，全班平均分 82 分，标准差 6 分。小红的成绩在全班处于什么水平？（提示：通常认为，在平均数上下 1 个标准差范围内是"正常水平"，超出 1 个标准差算"偏上"，超出 2 个标准差算"优秀"。）</p>
+    <button class="btn-sm" onclick="toggleHint('h10')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a10')">查看答案</button>
+    <div class="hint-box" id="h10">小红比平均分高 88−82 = 6 分，正好是 1 个标准差。也就是说，小红在平均分上方 1 个标准差的位置。</div>
+    <div class="ans-box" id="a10">小红比平均分高 6 分，正好等于 1 个标准差。所以小红处于<strong>偏上水平</strong>（"正常范围"上界）。<br>如果分数近似正态分布，大约有 68% 的同学在 82±6（即 76~88）之间，小红刚好在边界上，大约比 84% 的同学考得好。</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>集中趋势三兄弟：</strong>平均数（最常用，但怕极端值）、中位数（不怕极端值，排序取中间）、众数（出现最多的，适合分类数据）</li>
+      <li><strong>方差：</strong>每个数据与平均数的差的平方的平均值。衡量数据"散不散"。</li>
+      <li><strong>标准差：</strong>方差的平方根，和原始数据同一单位，更容易解释。</li>
+      <li><strong>方差越大 → 数据越分散；方差越小 → 数据越集中。</strong></li>
+      <li><strong>注意：</strong>平均数相同 ≠ 数据分布相同。方差和标准差能告诉我们平均数"藏不住"的信息。</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="probability.html">下一课：概率初步 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+<script src="../lessons/dt.js"></script>
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模拟考试 — 阶段四 — 自学课件</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../lessons/style.css">
+<style>
+  :root { --accent: #2e7d32; }
+  .exam-header { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .section-title { color: #2e7d32; font-size: 18px; font-weight: 700; margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #c8e6c9; }
+  .q-item { padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+  .q-item:last-child { border-bottom: none; }
+  .btn-row { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-hint, .btn-ans { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; }
+  .btn-hint:hover { background: #fff3e0; border-color: #ff9800; }
+  .btn-ans:hover { background: #e8f5e9; border-color: #4caf50; }
+  .hint-box, .ans-box { display: none; margin-top: 8px; padding: 10px 14px; border-radius: 6px; font-size: 14px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .hint-box { background: #fff8e1; border-left: 3px solid #ff9800; }
+  .ans-box { background: #e8f5e9; border-left: 3px solid #4caf50; }
+  .opt-row { margin: 4px 0; padding-left: 8px; }
+  .opt { display: inline-block; min-width: 24px; font-weight: 600; }
+  @media (max-width: 720px) {
+    article { padding-bottom: 100px !important; }
+    article { padding: 20px 12px 100px 12px !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    .q-item { padding: 10px 0; }
+    .exam-header { padding: 12px 14px; margin: 12px 0; }
+  }
+  .opt-btn { display: inline-block; padding: 6px 16px; margin: 3px 4px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .opt-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .opt-btn.selected { border-color: #1976d2; background: #e3f2fd; }
+  .opt-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .opt-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .tf-btn { display: inline-block; padding: 6px 20px; margin: 3px 6px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .tf-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .tf-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .tf-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .fill-input { padding: 6px 12px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 15px; width: 160px; }
+  .fill-input:focus { outline: none; border-color: #1976d2; }
+  .check-btn { padding: 6px 16px; border: 1px solid #1976d2; border-radius: 6px; background: #1976d2; color: #fff; font-size: 13px; cursor: pointer; margin-left: 8px; }
+  .check-btn:hover { background: #1565c0; }
+  .feedback { display: none; margin-left: 8px; font-size: 14px; font-weight: 600; }
+  .feedback.show { display: inline; }
+  .feedback.correct-fb { color: #2e7d32; }
+  .feedback.wrong-fb { color: #c62828; }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="../index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="../geometry-basics.html">课件1（几何图形）</a>、<a href="../lines-rays-segments.html">课件2（直线射线线段）</a>、<a href="../angles.html">课件3（角）</a>、<a href="../parallel-lines.html">课件4（平行线）</a>、<a href="../triangle.html">课件5（三角形）</a>、<a href="../congruent-triangles.html">课件6（全等三角形）</a>、<a href="../symmetry.html">课件7（轴对称）</a>、<a href="../pythagorean.html">课件8（勾股定理）</a>、<a href="../parallelogram.html">课件9（平行四边形）</a>、<a href="../rotation.html">课件10（旋转）</a>、<a href="../circle.html">课件11（圆）</a>、<a href="../similarity.html">课件12（相似）</a>、<a href="../trigonometry.html">课件13（锐角三角函数）</a>、<a href="../projection-views.html">课件14（投影与视图）</a></p>
+  <h1>模拟考试 — 阶段四：几何综合</h1>
+  <div class="exam-header">
+    <p>⏱ 时间：30 分钟 | ✅ 判断题 10 题 | 🔘 单选题 10 题 | ☑️ 多选题 5 题 | ✏️ 其他题型 5 题 | 共 30 题</p>
+  </div>
+
+  <p class="section-title">一、判断题（每题 1 分，共 10 分）</p>
+
+  <div class="q-item">
+    <p><strong>1.</strong> 旋转不改变图形的大小和形状，只改变图形的位置。</p>
+    <div id="tf-10-1"><button class="tf-btn" onclick="checkTF(this, true, '10-1')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '10-1')">错误</button><span class="feedback" id="fb-10-1"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-1')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-1')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-1"><p>旋转是刚体运动（等距变换）的一种，图形绕旋转中心旋转一定角度后，大小和形状保持不变，只有方向和位置变了。</p></div>
+    <div class="ans-box" id="a1-1"><p>✅ <strong>正确</strong>。旋转是刚体运动，不改变图形的大小和形状，只改变位置和方向。旋转前后对应线段相等，对应角相等。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>2.</strong> 圆的半径都相等。</p>
+    <div id="tf-10-2"><button class="tf-btn" onclick="checkTF(this, true, '10-2')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '10-2')">错误</button><span class="feedback" id="fb-10-2"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-2')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-2')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-2"><p>这是圆的定义：圆是到定点（圆心）距离等于定长（半径）的所有点的集合。所以同一个圆中，所有半径都相等。</p></div>
+    <div class="ans-box" id="a1-2"><p>✅ <strong>正确</strong>。同一个圆中，所有半径都相等，这是圆的定义决定的。不同圆之间的半径可以不同。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>3.</strong> 两个三角形相似，它们的面积比等于相似比的平方。</p>
+    <div id="tf-10-3"><button class="tf-btn" onclick="checkTF(this, true, '10-3')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '10-3')">错误</button><span class="feedback" id="fb-10-3"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-3')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-3')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-3"><p>相似比是 k 时，对应边长都是 k 倍，面积（底 × 高 ÷ 2）中底和高都变成 k 倍，所以面积变成 k² 倍。</p></div>
+    <div class="ans-box" id="h1-3"><p>✅ <strong>正确</strong>。相似三角形的面积比等于相似比的平方，因为面积涉及两个方向（底和高）的缩放。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>4.</strong> sin 30° = 1/2。</p>
+    <div id="tf-10-4"><button class="tf-btn" onclick="checkTF(this, true, '10-4')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '10-4')">错误</button><span class="feedback" id="fb-10-4"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-4')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-4')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-4"><p>在 30°-60°-90° 的直角三角形中，30° 角所对的直角边是斜边的一半，所以 sin 30° = 对边/斜边 = 1/2。</p></div>
+    <div class="ans-box" id="a1-4"><p>✅ <strong>正确</strong>。sin 30° = 对边/斜边 = 1/2。这是特殊角三角函数值，需要牢记。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>5.</strong> 任意两个等边三角形都相似。</p>
+    <div id="tf-10-5"><button class="tf-btn" onclick="checkTF(this, true, '10-5')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '10-5')">错误</button><span class="feedback" id="fb-10-5"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-5')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-5')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-5"><p>等边三角形的三个角都是 60°。两个三角形如果三个角都对应相等，它们就相似。大小可以不同，但形状相同。</p></div>
+    <div class="ans-box" id="a1-5"><p>✅ <strong>正确</strong>。所有等边三角形的三个角都是 60°，三角对应相等，因此任意两个等边三角形都相似。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>6.</strong> 圆周角等于它所对弧的圆心角的两倍。</p>
+    <div id="tf-10-6"><button class="tf-btn" onclick="checkTF(this, true, '10-6')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '10-6')">错误</button><span class="feedback" id="fb-10-6"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-6')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-6')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-6"><p>圆周角定理：圆周角等于它所对弧的圆心角的一半。反过来说，圆心角是圆周角的两倍——但题目说反了。</p></div>
+    <div class="ans-box" id="a1-6"><p>❌ <strong>错误</strong>。恰好说反了！圆周角等于它所对弧的圆心角的<strong>一半</strong>。圆心角才是圆周角的两倍。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>7.</strong> 旋转 180° 和中心对称是同一个概念。</p>
+    <div id="tf-10-7"><button class="tf-btn" onclick="checkTF(this, true, '10-7')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '10-7')">错误</button><span class="feedback" id="fb-10-7"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-7')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-7')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-7"><p>中心对称的定义就是：图形绕某一点旋转 180° 后能与自身重合。所以旋转 180° 就是中心对称的本质。</p></div>
+    <div class="ans-box" id="a1-7"><p>✅ <strong>正确</strong>。中心对称就是绕对称中心旋转 180° 后与原图形重合，两者本质相同。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>8.</strong> 直径是圆中最长的弦。</p>
+    <div id="tf-10-8"><button class="tf-btn" onclick="checkTF(this, true, '10-8')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '10-8')">错误</button><span class="feedback" id="fb-10-8"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-8')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-8')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-8"><p>弦是圆上任意两点的连线。直径是过圆心的弦，长度为 2r。任意弦的长度不超过 2r（因为两点间线段最短，圆心到弦的距离越大，弦越短）。</p></div>
+    <div class="ans-box" id="a1-8"><p>✅ <strong>正确</strong>。直径是过圆心的弦，长度等于 2r，是圆中最长的弦。任何不过圆心的弦长度都小于 2r。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>9.</strong> 相似三角形的判定条件中，"两边对应成比例且夹角相等"可以判定相似。</p>
+    <div id="tf-10-9"><button class="tf-btn" onclick="checkTF(this, true, '10-9')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '10-9')">错误</button><span class="feedback" id="fb-10-9"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-9')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-9')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-9"><p>相似三角形的判定方法：①两角对应相等（AA）；②两边对应成比例且夹角相等（SAS相似）；③三边对应成比例（SSS相似）。</p></div>
+    <div class="ans-box" id="a1-9"><p>✅ <strong>正确</strong>。这是相似三角形的判定方法之一，类似于全等判定中的 SAS，但这里"边"改成"对应成比例"。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>10.</strong> 主视图、左视图、俯视图统称为三视图。</p>
+    <div id="tf-10-10"><button class="tf-btn" onclick="checkTF(this, true, '10-10')">正确</button><button class="tf-btn" onclick="checkTF(this, false, '10-10')">错误</button><span class="feedback" id="fb-10-10"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-10')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a1-10')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h1-10"><p>三视图是工程图学中描述立体图形的基本方法：从正面看（主视图）、从左面看（左视图）、从上面看（俯视图）。</p></div>
+    <div class="ans-box" id="a1-10"><p>✅ <strong>正确</strong>。主视图（从正面看）、左视图（从左面看）、俯视图（从上面看）统称为三视图。</p></div>
+  </div>
+
+  <p class="section-title">二、单选题（每题 2 分，共 20 分）</p>
+
+  <div class="q-item">
+    <p><strong>11.</strong> 半径为 5 的圆中，一条弦长为 8，圆心到这条弦的距离是多少？</p>
+    <div id="opt-10-11"><button class="opt-btn" onclick="checkSingle(this, false, '10-11')">A. 2</button><button class="opt-btn" onclick="checkSingle(this, true, '10-11')" data-correct="true">B. 3</button><button class="opt-btn" onclick="checkSingle(this, false, '10-11')">C. 4</button><button class="opt-btn" onclick="checkSingle(this, false, '10-11')">D. 5</button><span class="feedback" id="fb-10-11"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-1')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-1')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-1"><p>从圆心向弦作垂线，垂足平分弦。弦长 8，一半是 4。半径 5、弦的一半 4、弦心距构成直角三角形：5² = 4² + 弦心距²，弦心距 = 3。</p></div>
+    <div class="ans-box" id="a2-1"><p><strong>B（3）</strong>。弦心距² = 5² − 4² = 25 − 16 = 9，弦心距 = 3。这是经典的 3-4-5 勾股数。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>12.</strong> 一个三角形三边长分别为 6、8、12，另一个三角形三边长分别为 9、12、18。这两个三角形相似吗？相似比是多少？</p>
+    <div id="opt-10-12"><button class="opt-btn" onclick="checkSingle(this, false, '10-12')">A. 不相似</button><button class="opt-btn" onclick="checkSingle(this, true, '10-12')" data-correct="true">B. 相似，相似比 2:3</button><button class="opt-btn" onclick="checkSingle(this, false, '10-12')">C. 相似，相似比 3:2</button><button class="opt-btn" onclick="checkSingle(this, false, '10-12')">D. 相似，相似比 1:2</button><span class="feedback" id="fb-10-12"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-2')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-2')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-2"><p>检查三边对应成比例：6/9 = 2/3，8/12 = 2/3，12/18 = 2/3。三边比例都相等，所以相似，相似比为 2:3（第一个三角形:第二个三角形）。</p></div>
+    <div class="ans-box" id="a2-2"><p><strong>B（相似，相似比 2:3）</strong>。6:9 = 8:12 = 12:18 = 2:3，三边对应成比例，满足 SSS 相似条件。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>13.</strong> 在 Rt△ABC 中，∠C = 90°，AB = 10，BC = 6。sin A 的值是多少？</p>
+    <div id="opt-10-13"><button class="opt-btn" onclick="checkSingle(this, true, '10-13')" data-correct="true">A. 3/5</button><button class="opt-btn" onclick="checkSingle(this, false, '10-13')">B. 4/5</button><button class="opt-btn" onclick="checkSingle(this, false, '10-13')">C. 3/4</button><button class="opt-btn" onclick="checkSingle(this, false, '10-13')">D. 4/3</button><span class="feedback" id="fb-10-13"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-3')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-3')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-3"><p>sin A = 对边/斜边。∠A 的对边是 BC = 6，斜边是 AB = 10。所以 sin A = 6/10 = 3/5。先验证是直角三角形：AC = √(10² − 6²) = 8。</p></div>
+    <div class="ans-box" id="a2-3"><p><strong>A（3/5）</strong>。sin A = ∠A 的对边/斜边 = BC/AB = 6/10 = 3/5。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>14.</strong> 圆 O 中，∠AOB = 80°（圆心角），则弧 AB 所对的圆周角是多少度？</p>
+    <div id="opt-10-14"><button class="opt-btn" onclick="checkSingle(this, false, '10-14')">A. 20°</button><button class="opt-btn" onclick="checkSingle(this, true, '10-14')" data-correct="true">B. 40°</button><button class="opt-btn" onclick="checkSingle(this, false, '10-14')">C. 80°</button><button class="opt-btn" onclick="checkSingle(this, false, '10-14')">D. 160°</button><span class="feedback" id="fb-10-14"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-4')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-4')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-4"><p>圆周角定理：同弧所对的圆周角等于圆心角的一半。圆心角 80°，圆周角 = 80° ÷ 2 = 40°。</p></div>
+    <div class="ans-box" id="a2-4"><p><strong>B（40°）</strong>。圆周角 = 圆心角 ÷ 2 = 80° ÷ 2 = 40°。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>15.</strong> 在 △ABC 中，DE∥BC，AD = 3，DB = 6，AE = 4。求 EC 的长。</p>
+    <div id="opt-10-15"><button class="opt-btn" onclick="checkSingle(this, false, '10-15')">A. 4</button><button class="opt-btn" onclick="checkSingle(this, false, '10-15')">B. 6</button><button class="opt-btn" onclick="checkSingle(this, true, '10-15')" data-correct="true">C. 8</button><button class="opt-btn" onclick="checkSingle(this, false, '10-15')">D. 12</button><span class="feedback" id="fb-10-15"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-5')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-5')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-5"><p>平行线分线段成比例：AD/DB = AE/EC。所以 3/6 = 4/EC，EC = 4 × 6 ÷ 3 = 8。</p></div>
+    <div class="ans-box" id="a2-5"><p><strong>C（8）</strong>。由平行线分线段成比例：AD/DB = AE/EC，3/6 = 4/EC，EC = 8。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>16.</strong> 一个圆锥的底面半径为 3，高为 4。它的主视图是什么形状？</p>
+    <div id="opt-10-16"><button class="opt-btn" onclick="checkSingle(this, false, '10-16')">A. 圆</button><button class="opt-btn" onclick="checkSingle(this, false, '10-16')">B. 三角形</button><button class="opt-btn" onclick="checkSingle(this, true, '10-16')" data-correct="true">C. 等腰三角形</button><button class="opt-btn" onclick="checkSingle(this, false, '10-16')">D. 梯形</button><span class="feedback" id="fb-10-16"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-6')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-6')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-6"><p>主视图是从正面看。圆锥从正面看，看到的是一个等腰三角形，底边是底面直径（6），高是圆锥的高（4）。</p></div>
+    <div class="ans-box" id="a2-6"><p><strong>C（等腰三角形）</strong>。圆锥从正面看是等腰三角形，底边为底面直径 6，高为 4。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>17.</strong> 将点 A(2, 3) 绕原点逆时针旋转 90°，得到的点的坐标是？</p>
+    <div id="opt-10-17"><button class="opt-btn" onclick="checkSingle(this, false, '10-17')">A. (3, 2)</button><button class="opt-btn" onclick="checkSingle(this, true, '10-17')" data-correct="true">B. (−3, 2)</button><button class="opt-btn" onclick="checkSingle(this, false, '10-17')">C. (−2, −3)</button><button class="opt-btn" onclick="checkSingle(this, false, '10-17')">D. (2, −3)</button><span class="feedback" id="fb-10-17"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-7')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-7')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-7"><p>绕原点逆时针旋转 90°： (x, y) → (−y, x)。所以 (2, 3) → (−3, 2)。可以在纸上画一下验证。</p></div>
+    <div class="ans-box" id="a2-7"><p><strong>B（(−3, 2)）</strong>。绕原点逆时针旋转 90°，变换规则为 (x, y) → (−y, x)。(2, 3) → (−3, 2)。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>18.</strong> 在圆中，直径所对的圆周角是多少度？</p>
+    <div id="opt-10-18"><button class="opt-btn" onclick="checkSingle(this, false, '10-18')">A. 45°</button><button class="opt-btn" onclick="checkSingle(this, false, '10-18')">B. 60°</button><button class="opt-btn" onclick="checkSingle(this, true, '10-18')" data-correct="true">C. 90°</button><button class="opt-btn" onclick="checkSingle(this, false, '10-18')">D. 180°</button><span class="feedback" id="fb-10-18"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-8')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-8')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-8"><p>直径所对的圆心角是 180°（平角），根据圆周角定理，圆周角 = 圆心角 ÷ 2 = 180° ÷ 2 = 90°。</p></div>
+    <div class="ans-box" id="a2-8"><p><strong>C（90°）</strong>。直径是过圆心的弦，所对的圆心角是 180°，圆周角是圆心角的一半，即 90°。这是"直径所对的圆周角是直角"定理。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>19.</strong> 已知 tan A = 1，∠A 是锐角，则 ∠A 等于多少度？</p>
+    <div id="opt-10-19"><button class="opt-btn" onclick="checkSingle(this, false, '10-19')">A. 30°</button><button class="opt-btn" onclick="checkSingle(this, true, '10-19')" data-correct="true">B. 45°</button><button class="opt-btn" onclick="checkSingle(this, false, '10-19')">C. 60°</button><button class="opt-btn" onclick="checkSingle(this, false, '10-19')">D. 90°</button><span class="feedback" id="fb-10-19"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-9')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-9')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-9"><p>tan A = 对边/邻边 = 1，说明对边和邻边相等，即等腰直角三角形。所以 ∠A = 45°。</p></div>
+    <div class="ans-box" id="a2-9"><p><strong>B（45°）</strong>。tan A = 1，说明对边 = 邻边，这是等腰直角三角形，锐角为 45°。tan 45° = 1。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>20.</strong> 两个相似三角形的相似比是 1:3，较小三角形的面积是 4，较大三角形的面积是多少？</p>
+    <div id="opt-10-20"><button class="opt-btn" onclick="checkSingle(this, false, '10-20')">A. 12</button><button class="opt-btn" onclick="checkSingle(this, false, '10-20')">B. 16</button><button class="opt-btn" onclick="checkSingle(this, false, '10-20')">C. 24</button><button class="opt-btn" onclick="checkSingle(this, true, '10-20')" data-correct="true">D. 36</button><span class="feedback" id="fb-10-20"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-10')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a2-10')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h2-10"><p>面积比 = 相似比的平方 = (1:3)² = 1:9。较大三角形面积 = 4 × 9 = 36。</p></div>
+    <div class="ans-box" id="a2-10"><p><strong>D（36）</strong>。面积比 = 相似比的平方 = 1²:3² = 1:9。较大三角形面积 = 4 × 9 = 36。</p></div>
+  </div>
+
+  <p class="section-title">三、多选题（每题 3 分，共 15 分）</p>
+
+  <div class="q-item">
+    <p><strong>21.</strong> 关于圆的性质，下列说法正确的有哪些？（多选）</p>
+    <div id="opt-10-21"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 同圆或等圆中，等弧所对的圆心角相等</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 同圆或等圆中，等弦所对的圆心角相等</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 垂直于弦的直径平分这条弦</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 平分弦的直径垂直于这条弦</button><button class="check-btn" onclick="checkMulti('10-21')">提交</button><span class="feedback" id="fb-10-21"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-1')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-1')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-1"><p>A、B、C 都是正确的。D 有问题：平分弦的直径，如果这条弦本身就是直径呢？平分直径的直径不一定垂直于它。所以 D 需要加上"不是直径的弦"这个条件才正确。</p></div>
+    <div class="ans-box" id="a3-1"><p><strong>A、B、C</strong>。D 不严谨：如果弦是直径，平分它的直径（即另一条直径）不一定垂直于它。正确说法是"平分弦（不是直径）的直径垂直于弦"。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>22.</strong> 下列哪些条件可以判定两个三角形相似？（多选）</p>
+    <div id="opt-10-22"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 两角分别对应相等（AA）</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 两边对应成比例且夹角相等</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 三边对应成比例</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 两边对应成比例且其中一边的对角相等</button><button class="check-btn" onclick="checkMulti('10-22')">提交</button><span class="feedback" id="fb-10-22"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-2')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-2')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-2"><p>A、B、C 是相似三角形的三种判定方法。D 类似于全等中的 SSA，不能保证相似（可能对应不同的角）。</p></div>
+    <div class="ans-box" id="a3-2"><p><strong>A、B、C</strong>。D 不能判定相似，类似于全等判定中 SSA 不能判定全等，这里"两边成比例 + 一边对角"也不能保证相似。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>23.</strong> 关于旋转的性质，下列说法正确的有哪些？（多选）</p>
+    <div id="opt-10-23"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 旋转前后，对应点到旋转中心的距离相等</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 旋转前后，对应点与旋转中心连线的夹角等于旋转角</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 旋转前后的图形全等</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 旋转中心一定在图形内部</button><button class="check-btn" onclick="checkMulti('10-23')">提交</button><span class="feedback" id="fb-10-23"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-3')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-3')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-3"><p>A、B、C 都是旋转的基本性质。D 错误：旋转中心可以在图形内部、边界上，也可以在图形外部。</p></div>
+    <div class="ans-box" id="a3-3"><p><strong>A、B、C</strong>。D 错误：旋转中心可以在图形上的任意位置，不一定要在图形内部。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>24.</strong> 下列特殊角的三角函数值，正确的有哪些？（多选）</p>
+    <div id="opt-10-24"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. sin 30° = 1/2</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. cos 60° = 1/2</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. tan 45° = 1</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. sin 45° = 1</button><button class="check-btn" onclick="checkMulti('10-24')">提交</button><span class="feedback" id="fb-10-24"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-4')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-4')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-4"><p>A: sin 30° = 1/2 ✓；B: cos 60° = 1/2 ✓；C: tan 45° = 1 ✓；D: sin 45° = √2/2 ≈ 0.707，不是 1。sin 90° = 1。</p></div>
+    <div class="ans-box" id="a3-4"><p><strong>A、B、C</strong>。D 错误：sin 45° = √2/2，不是 1。sin 90° 才等于 1。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>25.</strong> 关于三视图，下列说法正确的有哪些？（多选）</p>
+    <div id="opt-10-25"><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 主视图反映物体的高度和长度</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 俯视图反映物体的长度和宽度</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 左视图反映物体的高度和宽度</button><button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 三视图中，主视图和俯视图的长对正</button><button class="check-btn" onclick="checkMulti('10-25')">提交</button><span class="feedback" id="fb-10-25"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-5')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a3-5')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h3-5"><p>三视图的投影规律：主视图和俯视图"长对正"，主视图和左视图"高平齐"，俯视图和左视图"宽相等"。A、B、C、D 都是正确的。</p></div>
+    <div class="ans-box" id="a3-5"><p><strong>A、B、C、D</strong>。全部正确。三视图口诀：长对正、高平齐、宽相等。主视图反映长和高，俯视图反映长和宽，左视图反映高和宽。</p></div>
+  </div>
+
+  <p class="section-title">四、其他题型（每题 3 分，共 15 分）</p>
+
+  <div class="q-item">
+    <p><strong>26.</strong> 在 Rt△ABC 中，∠C = 90°，AC = 8，BC = 6。求 sin A、cos A、tan A 的值。</p>
+    <div id="fill-10-26"><input class="fill-input" id="inp-10-26" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('10-26', '3/5,4/5,3/4')">提交</button><span class="feedback" id="fb-10-26"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-1')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-1')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-1"><p>先求斜边 AB = √(8² + 6²) = √(64 + 36) = √100 = 10。sin A = 对边/斜边 = BC/AB = 6/10 = 3/5。cos A = 邻边/斜边 = AC/AB = 8/10 = 4/5。tan A = 对边/邻边 = BC/AC = 6/8 = 3/4。</p></div>
+    <div class="ans-box" id="a4-1"><p>AB = √(8² + 6²) = 10（勾股定理）。<br>sin A = 6/10 = <strong>3/5</strong><br>cos A = 8/10 = <strong>4/5</strong><br>tan A = 6/8 = <strong>3/4</strong></p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>27.</strong> 一个圆的半径为 10，一条弦 AB 长为 16。求圆心 O 到弦 AB 的距离。</p>
+    <div id="fill-10-27"><input class="fill-input" id="inp-10-27" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('10-27', '6')">提交</button><span class="feedback" id="fb-10-27"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-2')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-2')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-2"><p>从圆心向弦作垂线，垂足为 M，则 AM = BM = 16 ÷ 2 = 8。在 Rt△OAM 中，OA = 10（半径），AM = 8，OM² = 10² − 8² = 100 − 64 = 36，OM = 6。</p></div>
+    <div class="ans-box" id="a4-2"><p>弦心距² = 10² − 8² = 100 − 64 = 36。弦心距 = <strong>6</strong>。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>28.</strong> 两个相似三角形的相似比是 2:5，较小三角形的周长是 12。求较大三角形的周长。</p>
+    <div id="fill-10-28"><input class="fill-input" id="inp-10-28" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('10-28', '30')">提交</button><span class="feedback" id="fb-10-28"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-3')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-3')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-3"><p>相似三角形的周长比等于相似比。较小:较大 = 2:5，所以较大周长 = 12 × 5 ÷ 2 = 30。</p></div>
+    <div class="ans-box" id="a4-3"><p>周长比 = 相似比 = 2:5。较大周长 = 12 × 5 ÷ 2 = <strong>30</strong>。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>29.</strong> 一个圆柱的底面半径为 3，高为 5。它的主视图是什么形状？该形状的尺寸是多少？</p>
+    <div id="fill-10-29"><input class="fill-input" id="inp-10-29" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('10-29', '矩形,6,5')">提交</button><span class="feedback" id="fb-10-29"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-4')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-4')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-4"><p>圆柱从正面看是矩形。宽是底面直径 = 2 × 3 = 6，高是圆柱的高 = 5。</p></div>
+    <div class="ans-box" id="a4-4"><p>圆柱的主视图是<strong>矩形</strong>。宽 = 底面直径 = 6，高 = 5。尺寸为 <strong>6 × 5 的矩形</strong>。</p></div>
+  </div>
+
+  <div class="q-item">
+    <p><strong>30.</strong> 在 △ABC 中，D、E 分别是 AB、AC 上的点，且 DE∥BC。AD = 4，DB = 6，BC = 15。求 DE 的长。</p>
+    <div id="fill-10-30"><input class="fill-input" id="inp-10-30" placeholder="输入你的答案"><button class="check-btn" onclick="checkFill('10-30', '6')">提交</button><span class="feedback" id="fb-10-30"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-5')">💡 思路提示</button>
+      <button class="btn-ans" onclick="toggleAns('a4-5')">✅ 查看答案</button>
+    </div>
+    <div class="hint-box" id="h4-5"><p>DE∥BC，所以 △ADE ∽ △ABC。相似比 = AD/AB = 4/(4+6) = 4/10 = 2/5。DE/BC = 2/5，DE = 15 × 2/5 = 6。</p></div>
+    <div class="ans-box" id="a4-5"><p>△ADE ∽ △ABC，相似比 = AD/AB = 4/10 = 2/5。<br>DE = BC × 2/5 = 15 × 2/5 = <strong>6</strong>。</p></div>
+  </div>
+
+</article>
+<script>
+function checkTF(btn, isCorrect, qid) {
+  const container = document.getElementById('tf-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.tf-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function checkSingle(btn, isCorrect, qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.opt-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function toggleMultiOpt(btn) {
+  btn.classList.toggle('selected');
+}
+function checkMulti(qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  const opts = container.querySelectorAll('.opt-btn');
+  let allCorrect = true;
+  opts.forEach(o => {
+    o.style.pointerEvents = 'none';
+    const isCorrect = o.dataset.correct === 'true';
+    const isSelected = o.classList.contains('selected');
+    if (isCorrect && isSelected) o.classList.add('correct');
+    else if (!isCorrect && isSelected) { o.classList.add('wrong'); allCorrect = false; }
+    else if (isCorrect && !isSelected) { o.classList.add('correct'); allCorrect = false; }
+  });
+  const fb = document.getElementById('fb-' + qid);
+  if (fb) { fb.textContent = allCorrect ? '✓ 正确' : '✗ 错误'; fb.className = 'feedback show ' + (allCorrect ? 'correct-fb' : 'wrong-fb'); }
+}
+function checkFill(qid, correctAns) {
+  const container = document.getElementById('fill-' + qid);
+  if (!container || container.dataset.done) return;
+  const input = document.getElementById('inp-' + qid);
+  const fb = document.getElementById('fb-' + qid);
+  const userAns = input.value.trim();
+  if (!userAns) return;
+  container.dataset.done = '1';
+  input.disabled = true;
+  const checkBtn = container.querySelector('.check-btn');
+  if (checkBtn) checkBtn.style.display = 'none';
+  const normalized = userAns.replace(/\s+/g, '');
+  const normalizedCorrect = correctAns.replace(/\s+/g, '');
+  if (normalized === normalizedCorrect) {
+    input.style.borderColor = '#4caf50';
+    input.style.background = '#e8f5e9';
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    input.style.borderColor = '#f44336';
+    input.style.background = '#ffebee';
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+</body>
+</html>

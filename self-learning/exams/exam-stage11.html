@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模拟考试 — 统计与概率 — 自学课件</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../lessons/style.css">
+<style>
+  :root { --accent: #2e7d32; }
+  .exam-header { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .section-title { color: #2e7d32; font-size: 18px; font-weight: 700; margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #c8e6c9; }
+  .q-item { padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+  .q-item:last-child { border-bottom: none; }
+  .btn-row { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-hint, .btn-ans { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; }
+  .btn-hint:hover { background: #fff3e0; border-color: #ff9800; }
+  .btn-ans:hover { background: #e8f5e9; border-color: #4caf50; }
+  .hint-box, .ans-box { display: none; margin-top: 8px; padding: 10px 14px; border-radius: 6px; font-size: 14px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .hint-box { background: #fff8e1; border-left: 3px solid #ff9800; }
+  .ans-box { background: #e8f5e9; border-left: 3px solid #4caf50; }
+  .opt-row { margin: 4px 0; padding-left: 8px; }
+  .opt { display: inline-block; min-width: 24px; font-weight: 600; }
+  @media (max-width: 720px) {
+    article { padding-bottom: 100px !important; }
+    article { padding: 20px 12px 100px 12px !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    .q-item { padding: 10px 0; }
+    .exam-header { padding: 12px 14px; margin: 12px 0; }
+  }
+  .opt-btn { display: inline-block; padding: 6px 16px; margin: 3px 4px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .opt-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .opt-btn.selected { border-color: #1976d2; background: #e3f2fd; }
+  .opt-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .opt-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .tf-btn { display: inline-block; padding: 6px 20px; margin: 3px 6px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .tf-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .tf-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .tf-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .fill-input { padding: 6px 12px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 15px; width: 160px; }
+  .fill-input:focus { outline: none; border-color: #1976d2; }
+  .check-btn { padding: 6px 16px; border: 1px solid #1976d2; border-radius: 6px; background: #1976d2; color: #fff; font-size: 13px; cursor: pointer; margin-left: 8px; }
+  .check-btn:hover { background: #1565c0; }
+  .feedback { display: none; margin-left: 8px; font-size: 14px; font-weight: 600; }
+  .feedback.show { display: inline; }
+  .feedback.correct-fb { color: #2e7d32; }
+  .feedback.wrong-fb { color: #c62828; }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="../index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="../data-collection.html">课件 1（数据收集与整理）</a>、<a href="../data-analysis.html">课件 2（数据分析）</a>、<a href="../probability.html">课件 3（概率初步）</a></p>
+  <h1>模拟考试 — 统计与概率</h1>
+  <div class="exam-header">
+    <p>⏱ 时间：30 分钟 | ✅ 判断题 10 题 | 🔘 单选题 10 题 | ☑️ 多选题 5 题 | ✏️ 其他题型 5 题 | 共 30 题</p>
+  </div>
+
+  <p class="section-title">一、判断题（每题 1 分，共 10 分）</p>
+
+  <div class="q-item"><p><strong>1.</strong> 普查和抽样调查是收集数据的两种基本方式。</p>
+    <div id="tf-11-1"><span class="tf-btn" onclick="checkTF(this, true, '11-1')">正确</span><span class="tf-btn" onclick="checkTF(this, false, '11-1')">错误</span><span class="feedback" id="fb-11-1"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-1"><p>普查是对全体对象进行调查，抽样调查是从总体中抽取部分样本进行调查。这是两种基本的数据收集方式。</p></div>
+    <div class="ans-box" id="a1-1"><p><strong>✅ 正确。</strong>普查（全面调查）和抽样调查是数据收集的两种基本方式。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>2.</strong> 中位数一定等于数据中的某个数。</p>
+    <div id="tf-11-2"><span class="tf-btn" onclick="checkTF(this, false, '11-2')">正确</span><span class="tf-btn" onclick="checkTF(this, true, '11-2')">错误</span><span class="feedback" id="fb-11-2"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-2"><p>当数据个数为偶数时，中位数是中间两个数的平均数，可能不是原数据中的数。例如 {1, 2, 3, 4} 的中位数是 (2+3)/2 = 2.5。</p></div>
+    <div class="ans-box" id="a1-2"><p><strong>❌ 错误。</strong>当数据个数为偶数时，中位数是中间两个数的平均数，可能不在原数据中。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>3.</strong> 方差越小，数据越稳定。</p>
+    <div id="tf-11-3"><span class="tf-btn" onclick="checkTF(this, true, '11-3')">正确</span><span class="tf-btn" onclick="checkTF(this, false, '11-3')">错误</span><span class="feedback" id="fb-11-3"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-3"><p>方差衡量数据偏离平均数的程度。方差越小，数据越集中在平均数附近，波动越小，越稳定。</p></div>
+    <div class="ans-box" id="a1-3"><p><strong>✅ 正确。</strong>方差反映数据的离散程度，方差越小，数据越集中、越稳定。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>4.</strong> 掷一枚硬币，正面朝上的概率是 1/2，所以掷两次一定有一次正面朝上。</p>
+    <div id="tf-11-4"><span class="tf-btn" onclick="checkTF(this, false, '11-4')">正确</span><span class="tf-btn" onclick="checkTF(this, true, '11-4')">错误</span><span class="feedback" id="fb-11-4"></span></div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-4"><p>概率是大量重复试验中事件发生的频率的稳定值，不能用来预测单次或少数几次试验的确定结果。掷两次可能都是反面。</p></div>
+    <div class="ans-box" id="a1-4"><p><strong>❌ 错误。</strong>概率 1/2 是大量试验的频率趋势，不保证具体某两次一定有一次正面。掷两次可能全是反面（概率 1/4）。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>5.</strong> 平均数、中位数和众数都是描述数据集中趋势的统计量。</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-5"><p>平均数、中位数、众数都是用来描述一组数据"中心位置"的统计量，属于集中趋势的度量。</p></div>
+    <div class="ans-box" id="a1-5"><p><strong>✅ 正确。</strong>平均数、中位数和众数都是描述数据集中趋势的统计量。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>6.</strong> 必然事件的概率为 1，不可能事件的概率为 0。</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-6')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-6')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-6"><p>概率的取值范围是 0 ≤ P ≤ 1。必然事件一定发生，概率为 1；不可能事件一定不发生，概率为 0。</p></div>
+    <div class="ans-box" id="a1-6"><p><strong>✅ 正确。</strong>P(必然事件) = 1，P(不可能事件) = 0，任何事件的概率在 0 到 1 之间。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>7.</strong> 一组数据的众数只有一个。</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-7')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-7')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-7"><p>众数是出现次数最多的数据。如果多个数据出现次数相同且都是最多，则它们都是众数。如 {1, 1, 2, 2, 3} 有两个众数 1 和 2。</p></div>
+    <div class="ans-box" id="a1-7"><p><strong>❌ 错误。</strong>一组数据可以有多个众数（如 {1, 1, 2, 2, 3} 的众数是 1 和 2），也可能没有众数（每个数据出现次数都相同）。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>8.</strong> 扇形统计图可以清楚地表示各部分数量与总数之间的关系。</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-8')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-8')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-8"><p>扇形统计图用扇形的圆心角大小表示各部分所占的百分比，直观展示部分与整体的关系。</p></div>
+    <div class="ans-box" id="a1-8"><p><strong>✅ 正确。</strong>扇形统计图用扇形面积（圆心角）表示各部分占总体的百分比，直观展示部分与整体的关系。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>9.</strong> 从一副扑克牌中抽到大王的概率是 1/54。</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-9')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-9')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-9"><p>一副标准扑克牌共 54 张（含大小王），大王只有 1 张。等可能条件下，P(抽到大王) = 1/54。</p></div>
+    <div class="ans-box" id="a1-9"><p><strong>✅ 正确。</strong>一副扑克牌 54 张，大王只有 1 张，P = 1/54。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>10.</strong> 加权平均数中，权重越大，对应的数据对平均数的影响越大。</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-10')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-10')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-10"><p>加权平均数 = (x₁w₁ + x₂w₂ + …)/(w₁ + w₂ + …)，权重 w 越大，对应的数据 x 在平均数中的占比越大。</p></div>
+    <div class="ans-box" id="a1-10"><p><strong>✅ 正确。</strong>权重越大，该数据在加权平均数中所占的比重越大，对结果的影响越大。</p></div>
+  </div>
+
+  <p class="section-title">二、单选题（每题 2 分，共 20 分）</p>
+
+  <div class="q-item"><p><strong>11.</strong> 数据 3, 5, 2, 8, 2, 7 的中位数是（　）</p>
+    <p class="opt-row"><span class="opt">A.</span> 2</p>
+    <p class="opt-row"><span class="opt">B.</span> 4</p>
+    <p class="opt-row"><span class="opt">C.</span> 5</p>
+    <p class="opt-row"><span class="opt">D.</span> 4.5</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-1"><p>先排序：2, 2, 3, 5, 7, 8。共 6 个数据（偶数），中位数是第 3 和第 4 个数的平均数：(3 + 5)/2 = 4。</p></div>
+    <div class="ans-box" id="a2-1"><p><strong>答案：B。</strong>排序后为 2, 2, 3, 5, 7, 8，中位数 = (3 + 5)/2 = 4。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>12.</strong> 一个袋子里有 3 个红球和 2 个白球，随机摸出一个球，摸到红球的概率是（　）</p>
+    <p class="opt-row"><span class="opt">A.</span> 1/5</p>
+    <p class="opt-row"><span class="opt">B.</span> 2/5</p>
+    <p class="opt-row"><span class="opt">C.</span> 3/5</p>
+    <p class="opt-row"><span class="opt">D.</span> 1/2</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-2"><p>总球数 = 3 + 2 = 5，红球有 3 个。P(红球) = 红球数/总球数 = 3/5。</p></div>
+    <div class="ans-box" id="a2-2"><p><strong>答案：C。</strong>P(红球) = 3/5。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>13.</strong> 数据 2, 4, 4, 6, 4, 8 的众数是（　）</p>
+    <p class="opt-row"><span class="opt">A.</span> 2</p>
+    <p class="opt-row"><span class="opt">B.</span> 4</p>
+    <p class="opt-row"><span class="opt">C.</span> 6</p>
+    <p class="opt-row"><span class="opt">D.</span> 没有众数</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-3"><p>统计各数出现次数：2 出现 1 次，4 出现 3 次，6 出现 1 次，8 出现 1 次。4 出现次数最多。</p></div>
+    <div class="ans-box" id="a2-3"><p><strong>答案：B。</strong>4 出现了 3 次，出现次数最多，是众数。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>14.</strong> 掷一个骰子，点数为偶数的概率是（　）</p>
+    <p class="opt-row"><span class="opt">A.</span> 1/6</p>
+    <p class="opt-row"><span class="opt">B.</span> 1/3</p>
+    <p class="opt-row"><span class="opt">C.</span> 1/2</p>
+    <p class="opt-row"><span class="opt">D.</span> 2/3</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-4"><p>骰子有 6 个面，点数为 1~6。偶数点数有 2, 4, 6 共 3 个。P(偶数) = 3/6 = 1/2。</p></div>
+    <div class="ans-box" id="a2-4"><p><strong>答案：C。</strong>偶数点有 2, 4, 6 共 3 个，P = 3/6 = 1/2。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>15.</strong> 某班 5 名学生的数学成绩为 85, 90, 92, 88, 95，则平均分是（　）</p>
+    <p class="opt-row"><span class="opt">A.</span> 88</p>
+    <p class="opt-row"><span class="opt">B.</span> 89</p>
+    <p class="opt-row"><span class="opt">C.</span> 90</p>
+    <p class="opt-row"><span class="opt">D.</span> 91</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-5"><p>平均数 = (85 + 90 + 92 + 88 + 95)/5 = 450/5 = 90。</p></div>
+    <div class="ans-box" id="a2-5"><p><strong>答案：C。</strong>(85 + 90 + 92 + 88 + 95)/5 = 450/5 = 90。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>16.</strong> 下列事件中，是随机事件的是（　）</p>
+    <p class="opt-row"><span class="opt">A.</span> 太阳从东方升起</p>
+    <p class="opt-row"><span class="opt">B.</span> 明天会下雨</p>
+    <p class="opt-row"><span class="opt">C.</span> 1 + 1 = 2</p>
+    <p class="opt-row"><span class="opt">D.</span> 抛出的石头会落地</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-6')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-6')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-6"><p>A 是必然事件（每天都会发生）；C 是必然事件（数学真理）；D 是必然事件（重力作用）；B 明天可能下雨也可能不下雨，是随机事件。</p></div>
+    <div class="ans-box" id="a2-6"><p><strong>答案：B。</strong>明天是否下雨是不确定的，属于随机事件。A、C、D 都是必然事件。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>17.</strong> 一个袋子里有 5 个红球、3 个蓝球、2 个绿球，摸到蓝球的概率是（　）</p>
+    <p class="opt-row"><span class="opt">A.</span> 1/10</p>
+    <p class="opt-row"><span class="opt">B.</span> 3/10</p>
+    <p class="opt-row"><span class="opt">C.</span> 1/2</p>
+    <p class="opt-row"><span class="opt">D.</span> 3/5</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-7')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-7')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-7"><p>总球数 = 5 + 3 + 2 = 10，蓝球 3 个。P(蓝球) = 3/10。</p></div>
+    <div class="ans-box" id="a2-7"><p><strong>答案：B。</strong>P(蓝球) = 3/10。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>18.</strong> 下列统计图中，最适合表示气温变化趋势的是（　）</p>
+    <p class="opt-row"><span class="opt">A.</span> 条形统计图</p>
+    <p class="opt-row"><span class="opt">B.</span> 扇形统计图</p>
+    <p class="opt-row"><span class="opt">C.</span> 折线统计图</p>
+    <p class="opt-row"><span class="opt">D.</span> 直方图</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-8')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-8')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-8"><p>折线统计图用线段连接各数据点，能直观展示数据随时间的变化趋势（上升还是下降）。</p></div>
+    <div class="ans-box" id="a2-8"><p><strong>答案：C。</strong>折线统计图最擅长表示数据的变化趋势。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>19.</strong> 数据 1, 3, 5, 7, 9 的方差与数据 11, 13, 15, 17, 19 的方差相比（　）</p>
+    <p class="opt-row"><span class="opt">A.</span> 前者大</p>
+    <p class="opt-row"><span class="opt">B.</span> 后者大</p>
+    <p class="opt-row"><span class="opt">C.</span> 一样大</p>
+    <p class="opt-row"><span class="opt">D.</span> 无法比较</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-9')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-9')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-9"><p>第二组数据 = 第一组数据 + 10。方差衡量的是数据偏离平均数的程度，整体加一个常数不改变方差。</p></div>
+    <div class="ans-box" id="a2-9"><p><strong>答案：C。</strong>第二组数据是第一组数据每个加 10，方差不变，两组方差相等。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>20.</strong> 同时掷两枚硬币，两枚都正面朝上的概率是（　）</p>
+    <p class="opt-row"><span class="opt">A.</span> 1/2</p>
+    <p class="opt-row"><span class="opt">B.</span> 1/3</p>
+    <p class="opt-row"><span class="opt">C.</span> 1/4</p>
+    <p class="opt-row"><span class="opt">D.</span> 1/8</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-10')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-10')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-10"><p>用列表法或树状图：共有 4 种等可能结果：(正,正)、(正,反)、(反,正)、(反,反)。两枚都正面的只有 1 种，P = 1/4。</p></div>
+    <div class="ans-box" id="a2-10"><p><strong>答案：C。</strong>共有 4 种等可能结果，只有 (正, 正) 满足，P = 1/4。</p></div>
+  </div>
+
+  <p class="section-title">三、多选题（每题 3 分，共 15 分）</p>
+
+  <div class="q-item"><p><strong>21.</strong> 下列统计图中，能直观表示数据变化趋势的有（　）</p>
+    <p class="opt-row"><span class="opt">A.</span> 折线统计图</p>
+    <p class="opt-row"><span class="opt">B.</span> 条形统计图</p>
+    <p class="opt-row"><span class="opt">C.</span> 扇形统计图</p>
+    <p class="opt-row"><span class="opt">D.</span> 频数分布直方图</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-1"><p>折线统计图用线段连接数据点，最能反映变化趋势。条形统计图主要用于比较数量大小。扇形统计图展示比例。直方图展示分布。</p></div>
+    <div class="ans-box" id="a3-1"><p><strong>答案：A。</strong>折线统计图最能直观表示数据的变化趋势。条形图用于比较，扇形图展示比例，直方图展示分布。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>22.</strong> 下列事件中，属于必然事件的有（　）</p>
+    <p class="opt-row"><span class="opt">A.</span> 在一个装着全是红球的袋子里摸出红球</p>
+    <p class="opt-row"><span class="opt">B.</span> 掷一枚骰子，点数大于 0</p>
+    <p class="opt-row"><span class="opt">C.</span> 明天是晴天</p>
+    <p class="opt-row"><span class="opt">D.</span> 三角形内角和为 180°</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-2"><p>A: 袋中只有红球，摸出红球是必然的；B: 骰子点数 1~6 都大于 0，是必然事件；C: 明天天气不确定，是随机事件；D: 三角形内角和一定是 180°，是必然事件。</p></div>
+    <div class="ans-box" id="a3-2"><p><strong>答案：ABD。</strong>A 必然，B 必然，D 必然。C 是随机事件，天气不确定。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>23.</strong> 关于平均数、中位数和众数，下列说法正确的有（　）</p>
+    <p class="opt-row"><span class="opt">A.</span> 平均数受极端值影响较大</p>
+    <p class="opt-row"><span class="opt">B.</span> 中位数不受极端值影响</p>
+    <p class="opt-row"><span class="opt">C.</span> 一组数据一定有众数</p>
+    <p class="opt-row"><span class="opt">D.</span> 中位数一定是数据排序后中间位置的数</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-3"><p>A: 平均数受极端值影响大 ✓；B: 中位数只与位置有关，不受极端值影响 ✓；C: 可能有多个众数或没有 ✗；D: 偶数个数据时中位数是中间两数的平均数，不一定在数据中 ✗。</p></div>
+    <div class="ans-box" id="a3-3"><p><strong>答案：AB。</strong>A 正确，B 正确。C 错误（可能没有众数），D 不严谨（偶数个时是中间两数的平均数）。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>24.</strong> 某班 40 名学生，体重数据的频数分布直方图中，下列说法正确的有（　）</p>
+    <p class="opt-row"><span class="opt">A.</span> 各小组的频数之和等于 40</p>
+    <p class="opt-row"><span class="opt">B.</span> 各小组的频率之和等于 1</p>
+    <p class="opt-row"><span class="opt">C.</span> 频数越大，对应的频率越小</p>
+    <p class="opt-row"><span class="opt">D.</span> 直方图可以反映数据的分布情况</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-4"><p>A: 频数总和 = 总数 ✓；B: 频率 = 频数/总数，频率之和 = 1 ✓；C: 频数越大，频率 = 频数/总数 也越大 ✗；D: 直方图显示各区间数据分布 ✓。</p></div>
+    <div class="ans-box" id="a3-4"><p><strong>答案：ABD。</strong>A、B、D 正确。C 错误，频数越大频率也越大（频率 = 频数/总数）。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>25.</strong> 关于概率，下列说法正确的有（　）</p>
+    <p class="opt-row"><span class="opt">A.</span> 概率为 0 的事件一定不会发生</p>
+    <p class="opt-row"><span class="opt">B.</span> 概率为 1 的事件一定会发生</p>
+    <p class="opt-row"><span class="opt">C.</span> 随机事件的概率在 0 和 1 之间</p>
+    <p class="opt-row"><span class="opt">D.</span> 概率可以通过大量重复试验的频率来估计</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-5"><p>A: 不可能事件概率为 0 ✓；B: 必然事件概率为 1 ✓；C: 随机事件概率 0 &lt; P &lt; 1 ✓；D: 频率稳定于概率，可用于估计 ✓。</p></div>
+    <div class="ans-box" id="a3-5"><p><strong>答案：ABCD。</strong>四个说法都是概率的基本性质，全部正确。</p></div>
+  </div>
+
+  <p class="section-title">四、其他题型（每题 3 分，共 15 分）</p>
+
+  <div class="q-item"><p><strong>26.</strong> 计算数据 2, 4, 6, 8, 10 的平均数和方差。</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-1"><p>平均数 = (2+4+6+8+10)/5 = 30/5 = 6。方差 = [(2−6)² + (4−6)² + (6−6)² + (8−6)² + (10−6)²]/5 = (16+4+0+4+16)/5 = 40/5 = 8。</p></div>
+    <div class="ans-box" id="a4-1"><p><strong>答案：平均数 = 6，方差 = 8。</strong>平均数 = 30/5 = 6；方差 = [(−4)² + (−2)² + 0² + 2² + 4²]/5 = (16+4+0+4+16)/5 = 8。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>27.</strong> 一个口袋中有 2 个红球、3 个白球，从中随机摸出两个球，求摸到两个都是红球的概率。</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-2"><p>总共有 5 个球，从中选 2 个，共有 C(5,2) = 10 种等可能结果。两个都是红球：从 2 个红球中选 2 个，有 C(2,2) = 1 种。P = 1/10。</p></div>
+    <div class="ans-box" id="a4-2"><p><strong>答案：1/10。</strong>总情况数 C(5,2) = 10，两红的情况数 C(2,2) = 1，P = 1/10。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>28.</strong> 某次考试，小明语文 85 分、数学 92 分、英语 88 分，若按 3:4:3 的权重计算加权平均分，求小明的加权平均分。</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-3"><p>加权平均分 = (85×3 + 92×4 + 88×3)/(3+4+3) = (255 + 368 + 264)/10 = 887/10 = 88.7。</p></div>
+    <div class="ans-box" id="a4-3"><p><strong>答案：88.7 分。</strong>(85×3 + 92×4 + 88×3)/10 = (255 + 368 + 264)/10 = 887/10 = 88.7。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>29.</strong> 掷两个骰子，求点数之和为 7 的概率。</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-4"><p>总共有 6×6 = 36 种等可能结果。和为 7 的组合：(1,6)、(2,5)、(3,4)、(4,3)、(5,2)、(6,1) 共 6 种。P = 6/36 = 1/6。</p></div>
+    <div class="ans-box" id="a4-4"><p><strong>答案：1/6。</strong>总情况数 36，和为 7 的有 6 种：(1,6), (2,5), (3,4), (4,3), (5,2), (6,1)。P = 6/36 = 1/6。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>30.</strong> 一组数据 3, 5, 7, a, 9 的平均数是 6，求 a 的值和这组数据的中位数。</p>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-5"><p>由平均数 = 6 得：(3+5+7+a+9)/5 = 6 → 24 + a = 30 → a = 6。排序：3, 5, 6, 7, 9，中位数为第 3 个数 6。</p></div>
+    <div class="ans-box" id="a4-5"><p><strong>答案：a = 6，中位数 = 6。</strong>(24 + a)/5 = 6 → a = 6。排序后为 3, 5, 6, 7, 9，中位数 = 6。</p></div>
+  </div>
+
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+function checkTF(btn, isCorrect, qid) {
+  const container = document.getElementById('tf-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.tf-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function checkSingle(btn, isCorrect, qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.opt-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function toggleMultiOpt(btn) {
+  btn.classList.toggle('selected');
+}
+function checkMulti(qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  const opts = container.querySelectorAll('.opt-btn');
+  let allCorrect = true;
+  opts.forEach(o => {
+    o.style.pointerEvents = 'none';
+    const isCorrect = o.dataset.correct === 'true';
+    const isSelected = o.classList.contains('selected');
+    if (isCorrect && isSelected) o.classList.add('correct');
+    else if (!isCorrect && isSelected) { o.classList.add('wrong'); allCorrect = false; }
+    else if (isCorrect && !isSelected) { o.classList.add('correct'); allCorrect = false; }
+  });
+  const fb = document.getElementById('fb-' + qid);
+  if (fb) { fb.textContent = allCorrect ? '✓ 正确' : '✗ 错误'; fb.className = 'feedback show ' + (allCorrect ? 'correct-fb' : 'wrong-fb'); }
+}
+function checkFill(qid, correctAns) {
+  const container = document.getElementById('fill-' + qid);
+  if (!container || container.dataset.done) return;
+  const input = document.getElementById('inp-' + qid);
+  const fb = document.getElementById('fb-' + qid);
+  const userAns = input.value.trim();
+  if (!userAns) return;
+  container.dataset.done = '1';
+  input.disabled = true;
+  const checkBtn = container.querySelector('.check-btn');
+  if (checkBtn) checkBtn.style.display = 'none';
+  const normalized = userAns.replace(/\s+/g, '');
+  const normalizedCorrect = correctAns.replace(/\s+/g, '');
+  if (normalized === normalizedCorrect) {
+    input.style.borderColor = '#4caf50';
+    input.style.background = '#e8f5e9';
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    input.style.borderColor = '#f44336';
+    input.style.background = '#ffebee';
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+</script>
+</body>
+</html>

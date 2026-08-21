@@ -25,7 +25,8 @@
   .method-card h3 { margin-top: 0; color: #4a148c; }
   .graphic { text-align: center; margin: 12px 0; }
   @media (max-width: 720px) {
-    article { padding: 20px 12px !important; }
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
     h1 { font-size: 22px; }
     h2 { font-size: 18px; }
     h3 { font-size: 16px; }
@@ -37,7 +38,7 @@
 <body>
 <article>
   <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：课件 10（几何图形）、11（直线射线线段）、12（角）、13（相交线与平行线）、14（三角形）</p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./geometry-basics.html">课件 10（几何图形）</a>、11（直线射线线段）、12（角）、13（相交线与平行线）、14（三角形）</p>
   <h1>全等三角形</h1>
 
   <h2>起源：泰勒斯测船距</h2>
@@ -463,7 +464,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="real-numbers.html">下一课：实数 →</a></p>
+  <p style="text-align:right;margin-top:32px;"><a href="symmetry.html">下一课：轴对称 →</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }

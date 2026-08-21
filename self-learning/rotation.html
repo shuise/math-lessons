@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>旋转 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔄</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #1b5e20; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #43a047; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fff9c4; border-left: 4px solid #f9a825; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  .graphic { margin: 16px 0; text-align: center; }
+  @media (max-width: 720px) {
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./triangle.html">课件 14（三角形）</a>、22（平行四边形）</p>
+  <h1>旋转 — 让图形"转起来"的变换</h1>
+
+  <h2>起源：从风车到陀螺</h2>
+  <div class="origin">
+    <p>你有没有玩过<strong>陀螺</strong>？用力一拧，它就飞快地旋转起来，只要不停地转，它就能稳稳地立着。这就是旋转的魔力。</p>
+    <p>还有<strong>风车</strong>——风吹过，叶片绕着中间的轴转动，把风能变成动能。你注意过吗？风车的每片叶子转一圈，都会经过完全相同的位置，只是时间不同。</p>
+    <p>旋转在我们身边无处不在：<strong>摩天轮</strong>绕中心缓缓转动，<strong>时钟的指针</strong>绕轴心走了一圈又一圈，<strong>汽车的方向盘</strong>、<strong>自行车的脚踏板</strong>……这些都是旋转。</p>
+    <p>在数学中，旋转是三种最基本的<strong>图形变换</strong>之一（另外两种是平移和轴对称）。它不只是"转一下"，更是一种严谨的数学操作——每一个点都按照相同的规则移动。掌握了旋转，你就能理解很多几何图形为什么"长成那样"。</p>
+    <p>今天，我们就来学习旋转的数学定义、它的性质，以及一个特别重要的特殊情况——<strong>中心对称</strong>。</p>
+  </div>
+
+  <h2>一、旋转的三要素：怎么转？</h2>
+  <div class="story">
+    <p>在数学里说"旋转"，必须说清楚三件事，缺一不可。想象你正在指挥一个图形旋转：</p>
+
+    <div class="key">
+      <p><strong>旋转的三要素：</strong></p>
+      <ol>
+        <li><strong>旋转中心：</strong>绕哪个点转？</li>
+        <li><strong>旋转方向：</strong>顺时针转还是逆时针转？</li>
+        <li><strong>旋转角度：</strong>转多少度？</li>
+      </ol>
+    </div>
+
+    <p>举个例子：说"把三角形 ABC 绕点 O 逆时针旋转 60°"，三要素就全了——旋转中心是 O，方向是逆时针，角度是 60°。</p>
+    <p>这三个要素就像"地址"一样，缺了任何一个，旋转就没法确定。试试看：如果只说"旋转 90°"，你都不知道绕哪个点转、往哪个方向转，对不对？</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 640 380" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+          <marker id="arrowGreen" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#1b5e20"/>
+          </marker>
+          <marker id="arrowOrange" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#e65100"/>
+          </marker>
+        </defs>
+        <text x="320" y="28" text-anchor="middle" font-size="16" fill="#333" font-weight="bold">旋转三要素演示</text>
+
+        <!-- 旋转中心 -->
+        <circle cx="300" cy="200" r="6" fill="#c62828"/>
+        <text x="312" y="196" font-size="15" fill="#c62828" font-weight="bold">O</text>
+        <text x="312" y="215" font-size="12" fill="#c62828">旋转中心</text>
+
+        <!-- 原三角形 -->
+        <polygon points="300,200 220,120 200,160" fill="rgba(27,94,32,0.15)" stroke="#1b5e20" stroke-width="2"/>
+        <text x="310" y="210" font-size="13" fill="#1b5e20" font-weight="bold">A</text>
+        <text x="208" y="115" font-size="13" fill="#1b5e20" font-weight="bold">B</text>
+        <text x="188" y="170" font-size="13" fill="#1b5e20" font-weight="bold">C</text>
+
+        <!-- 旋转后的三角形（逆时针 90°） -->
+        <polygon points="300,200 380,120 340,100" fill="rgba(230,81,0,0.15)" stroke="#e65100" stroke-width="2"/>
+        <text x="388" y="115" font-size="13" fill="#e65100" font-weight="bold">B'</text>
+        <text x="345" y="93" font-size="13" fill="#e65100" font-weight="bold">C'</text>
+
+        <!-- 旋转弧线 -->
+        <path d="M235,135 A110,110 0 0,1 365,115" fill="none" stroke="#1b5e20" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#arrowGreen)"/>
+        <text x="270" y="90" font-size="12" fill="#1b5e20">逆时针</text>
+        <text x="260" y="104" font-size="13" fill="#1b5e20" font-weight="bold">90°</text>
+
+        <!-- 旋转方向标注 -->
+        <path d="M330,170 A50,50 0 0,1 350,150" fill="none" stroke="#e65100" stroke-width="1.5" marker-end="url(#arrowOrange)"/>
+        <text x="370" y="168" font-size="12" fill="#e65100">方向</text>
+
+        <!-- 三要素说明框 -->
+        <rect x="420" y="70" width="200" height="130" rx="8" fill="#f1f8e9" stroke="#1b5e20" stroke-width="1.5"/>
+        <text x="520" y="95" text-anchor="middle" font-size="14" fill="#1b5e20" font-weight="bold">三要素</text>
+        <text x="440" y="118" font-size="13" fill="#333">① 旋转中心：点 O</text>
+        <text x="440" y="140" font-size="13" fill="#333">② 旋转方向：逆时针</text>
+        <text x="440" y="162" font-size="13" fill="#333">③ 旋转角度：90°</text>
+        <text x="440" y="184" font-size="12" fill="#666">△ABC → △A'B'C'</text>
+
+        <!-- 连接线 OA -->
+        <line x1="300" y1="200" x2="220" y2="120" stroke="#999" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="300" y1="200" x2="380" y2="120" stroke="#999" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="255" y="155" font-size="12" fill="#999">OA=OA'</text>
+        <text x="340" y="155" font-size="12" fill="#999">OB=OB'</text>
+
+        <!-- 底部说明 -->
+        <text x="320" y="365" text-anchor="middle" font-size="13" fill="#555">旋转后，图形的大小和形状不变，只有位置变了。旋转前后的图形是全等的。</text>
+      </svg>
+    </div>
+
+    <div class="example">
+      <p><strong>想一想：</strong>时钟上的分针从 12 走到 3，分针绕钟表的中心旋转了多少度？方向是什么？</p>
+      <p>答：分针从 12 走到 3，走了 15 分钟，也就是 ¼ 圈。一圈是 360°，¼ 圈就是 360° × ¼ = <strong>90°</strong>。方向是<strong>顺时针</strong>。</p>
+    </div>
+  </div>
+
+  <h2>二、旋转的性质：什么变了，什么没变？</h2>
+  <div class="story">
+    <p>旋转是一种"刚体变换"——图形旋转后，它的大小和形状都保持不变，只是位置变了。这就像你拿着一张透明的纸，用大头针钉住一个点，然后转动这张纸——纸上的图形还是那个图形，但方向变了。</p>
+
+    <div class="key">
+      <p><strong>旋转的性质：</strong></p>
+      <ol>
+        <li><strong>对应点到旋转中心的距离相等。</strong>也就是说，如果点 P 旋转后变成了 P'，那么 OP = OP'。</li>
+        <li><strong>对应点与旋转中心连线的夹角等于旋转角。</strong>即 ∠POP' = 旋转角。</li>
+        <li><strong>旋转前后的图形全等。</strong>形状和大小完全不变。</li>
+      </ol>
+    </div>
+
+    <p>性质 1 是最核心的——所有对应点都在以旋转中心为圆心的<strong>同一个圆</strong>上。这很好理解：旋转中心就像"钉子"，每个点都被"绳子"拴在钉子上，转的时候绳子的长度不变，所以点到中心的距离不变。</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 640 340" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+          <marker id="arrowProp" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#1b5e20"/>
+          </marker>
+        </defs>
+        <text x="320" y="28" text-anchor="middle" font-size="16" fill="#333" font-weight="bold">旋转的性质：距离不变</text>
+
+        <!-- 旋转中心 -->
+        <circle cx="320" cy="170" r="5" fill="#c62828"/>
+        <text x="332" y="165" font-size="15" fill="#c62828" font-weight="bold">O</text>
+
+        <!-- 虚线圆（轨迹） -->
+        <circle cx="320" cy="170" r="100" fill="none" stroke="#ccc" stroke-width="1" stroke-dasharray="4,4"/>
+        <circle cx="320" cy="170" r="140" fill="none" stroke="#ccc" stroke-width="1" stroke-dasharray="4,4"/>
+
+        <!-- 原图形：三角形 -->
+        <polygon points="320,170 250,100 290,80" fill="rgba(27,94,32,0.15)" stroke="#1b5e20" stroke-width="2"/>
+        <text x="325" y="180" font-size="13" fill="#1b5e20" font-weight="bold">A</text>
+        <text x="235" y="95" font-size="13" fill="#1b5e20" font-weight="bold">B</text>
+        <text x="295" y="72" font-size="13" fill="#1b5e20" font-weight="bold">C</text>
+
+        <!-- 旋转后的图形（逆时针 80°） -->
+        <polygon points="320,170 398,115 362,90" fill="rgba(230,81,0,0.15)" stroke="#e65100" stroke-width="2"/>
+        <text x="408" y="110" font-size="13" fill="#e65100" font-weight="bold">B'</text>
+        <text x="370" y="82" font-size="13" fill="#e65100" font-weight="bold">C'</text>
+
+        <!-- 连接线 OB -->
+        <line x1="320" y1="170" x2="250" y2="100" stroke="#1b5e20" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <line x1="320" y1="170" x2="398" y2="115" stroke="#e65100" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+        <!-- 等长标记 -->
+        <line x1="275" y1="130" x2="285" y2="125" stroke="#c62828" stroke-width="2"/>
+        <line x1="278" y1="128" x2="288" y2="123" stroke="#c62828" stroke-width="2"/>
+        <line x1="365" y1="138" x2="370" y2="128" stroke="#c62828" stroke-width="2"/>
+        <line x1="368" y1="136" x2="373" y2="126" stroke="#c62828" stroke-width="2"/>
+
+        <!-- 旋转角标注 -->
+        <path d="M270,150 A72,72 0 0,1 350,130" fill="none" stroke="#1b5e20" stroke-width="1.8" stroke-dasharray="4,2" marker-end="url(#arrowProp)"/>
+        <text x="290" y="125" font-size="14" fill="#1b5e20" font-weight="bold">旋转角</text>
+
+        <!-- 说明文字 -->
+        <text x="320" y="330" text-anchor="middle" font-size="13" fill="#555">
+          OB = OB'（对应点到旋转中心距离相等）&nbsp;&nbsp;|&nbsp;&nbsp;∠BOB' = 旋转角
+        </text>
+      </svg>
+    </div>
+
+    <div class="example">
+      <p><strong>例：</strong>点 A 绕点 O 顺时针旋转 120° 得到点 A'。已知 OA = 5cm，求 OA' 的长度。</p>
+      <p><strong>解：</strong>根据旋转的性质，对应点到旋转中心的距离相等，所以 OA' = OA = <strong>5cm</strong>。无论转多少度，这个距离都不变。</p>
+    </div>
+  </div>
+
+  <h2>三、中心对称：旋转 180° 的特殊情况</h2>
+  <div class="story">
+    <p>当旋转角恰好是<strong>180°</strong>时，旋转就有了一个特别的名字——<strong>中心对称</strong>。</p>
+
+    <div class="key">
+      <p><strong>中心对称：</strong>把一个图形绕着某一个点旋转<strong>180°</strong>，如果它能够与另一个图形重合，那么就说这两个图形<strong>关于这个点对称</strong>（或<strong>中心对称</strong>）。这个点叫做<strong>对称中心</strong>。</p>
+    </div>
+
+    <p>你可以这样理解：中心对称就像"旋转半圈"。如果把一个图形绕点 O 转 180° 后，和你看到的另一个图形完全重合，这两个图形就是中心对称的。</p>
+
+    <h3>中心对称的性质</h3>
+    <p>因为中心对称是旋转的特殊情况（旋转角 = 180°），所以它继承了旋转的所有性质。但中心对称还有一个极其重要的额外性质：</p>
+
+    <div class="formula">
+      <p style="font-size:1.1em;text-align:center;color:#1b5e20;"><strong>对称中心是对应点连线的中点！</strong></p>
+      <p style="text-align:center;">也就是说，如果点 A 和点 A' 关于点 O 对称，那么 O 就是线段 AA' 的中点。</p>
+    </div>
+
+    <div class="graphic">
+      <svg viewBox="0 0 640 340" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+          <marker id="arrow180" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#1b5e20"/>
+          </marker>
+        </defs>
+        <text x="320" y="28" text-anchor="middle" font-size="16" fill="#333" font-weight="bold">中心对称：旋转 180°</text>
+
+        <!-- 对称中心 -->
+        <circle cx="320" cy="170" r="6" fill="#c62828"/>
+        <text x="332" y="165" font-size="15" fill="#c62828" font-weight="bold">O</text>
+        <text x="332" y="185" font-size="12" fill="#c62828">对称中心</text>
+
+        <!-- 原三角形 -->
+        <polygon points="200,120 240,80 280,130" fill="rgba(27,94,32,0.15)" stroke="#1b5e20" stroke-width="2.5"/>
+        <text x="190" y="115" font-size="14" fill="#1b5e20" font-weight="bold">A</text>
+        <text x="245" y="72" font-size="14" fill="#1b5e20" font-weight="bold">B</text>
+        <text x="288" y="140" font-size="14" fill="#1b5e20" font-weight="bold">C</text>
+
+        <!-- 旋转 180° 后的三角形 -->
+        <polygon points="440,220 400,260 360,210" fill="rgba(230,81,0,0.15)" stroke="#e65100" stroke-width="2.5"/>
+        <text x="448" y="228" font-size="14" fill="#e65100" font-weight="bold">A'</text>
+        <text x="390" y="270" font-size="14" fill="#e65100" font-weight="bold">B'</text>
+        <text x="350" y="210" font-size="14" fill="#e65100" font-weight="bold">C'</text>
+
+        <!-- 对应点连线（经过 O） -->
+        <line x1="200" y1="120" x2="440" y2="220" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <line x1="240" y1="80" x2="400" y2="260" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <line x1="280" y1="130" x2="360" y2="210" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="6,3"/>
+
+        <!-- 中点标记（都在 O） -->
+        <text x="255" y="245" font-size="12" fill="#1565c0">对应点连线都经过 O</text>
+        <text x="255" y="260" font-size="12" fill="#1565c0">且 O 是它们的中点</text>
+
+        <!-- 旋转弧线 -->
+        <path d="M230,100 A120,120 0 0,1 410,200" fill="none" stroke="#1b5e20" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow180)"/>
+        <text x="280" y="100" font-size="13" fill="#1b5e20" font-weight="bold">旋转 180°</text>
+
+        <!-- 底部总结 -->
+        <text x="320" y="330" text-anchor="middle" font-size="14" fill="#1b5e20" font-weight="bold">
+          中心对称 = 旋转 180°&nbsp;&nbsp;|&nbsp;&nbsp;对称中心 = 对应点连线的中点
+        </text>
+      </svg>
+    </div>
+
+    <div class="example">
+      <p><strong>快速判断：</strong>如何判断两个图形是否中心对称？</p>
+      <p>方法：把两个图形的对应点连起来，如果所有连线都经过<strong>同一个点</strong>，且这个点<strong>平分</strong>每条连线，那么这两个图形就是中心对称的，这个点就是对称中心。</p>
+    </div>
+  </div>
+
+  <h2>四、中心对称图形：自己和自己对称</h2>
+  <div class="story">
+    <p>如果一个图形绕某个点旋转 180° 后，能和<strong>自身</strong>重合，它就是<strong>中心对称图形</strong>。这个点就是它的<strong>对称中心</strong>。</p>
+
+    <div class="key">
+      <p><strong>中心对称图形：</strong>把一个图形绕着某个点旋转 180°，如果旋转后的图形能与原来的图形<strong>重合</strong>，那么这个图形叫做<strong>中心对称图形</strong>。</p>
+    </div>
+
+    <p>注意区分两个概念：</p>
+    <ul>
+      <li><strong>两个图形成中心对称</strong>——说的是两个图形之间的关系</li>
+      <li><strong>中心对称图形</strong>——说的是一个图形自身的性质</li>
+    </ul>
+
+    <h3>常见的中心对称图形</h3>
+    <p>来，我们一起看看哪些图形是中心对称的：</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 700 400" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <text x="350" y="25" text-anchor="middle" font-size="16" fill="#333" font-weight="bold">常见的中心对称图形</text>
+
+        <!-- 平行四边形 -->
+        <text x="115" y="55" text-anchor="middle" font-size="13" fill="#1b5e20" font-weight="bold">平行四边形 ✓</text>
+        <polygon points="40,170 220,170 190,75 10,75" fill="rgba(27,94,32,0.12)" stroke="#1b5e20" stroke-width="2"/>
+        <circle cx="115" cy="122" r="4" fill="#c62828"/>
+        <text x="125" y="118" font-size="12" fill="#c62828">O</text>
+        <line x1="40" y1="170" x2="190" y2="75" stroke="#c62828" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="220" y1="170" x2="10" y2="75" stroke="#c62828" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="115" y="195" text-anchor="middle" font-size="11" fill="#666">对称中心 = 对角线交点</text>
+
+        <!-- 圆 -->
+        <text x="350" y="55" text-anchor="middle" font-size="13" fill="#1b5e20" font-weight="bold">圆 ✓</text>
+        <circle cx="350" cy="122" r="47" fill="rgba(27,94,32,0.08)" stroke="#1b5e20" stroke-width="2"/>
+        <circle cx="350" cy="122" r="4" fill="#c62828"/>
+        <text x="360" y="118" font-size="12" fill="#c62828">O</text>
+        <text x="350" y="195" text-anchor="middle" font-size="11" fill="#666">对称中心 = 圆心</text>
+
+        <!-- 正六边形 -->
+        <text x="585" y="55" text-anchor="middle" font-size="13" fill="#1b5e20" font-weight="bold">正六边形 ✓</text>
+        <polygon points="585,85 625,105 625,140 585,160 545,140 545,105" fill="rgba(27,94,32,0.12)" stroke="#1b5e20" stroke-width="2"/>
+        <circle cx="585" cy="122" r="4" fill="#c62828"/>
+        <text x="595" y="118" font-size="12" fill="#c62828">O</text>
+        <text x="585" y="195" text-anchor="middle" font-size="11" fill="#666">对称中心 = 中心</text>
+
+        <!-- 第二行 -->
+        <!-- 线段 -->
+        <text x="115" y="235" text-anchor="middle" font-size="13" fill="#1b5e20" font-weight="bold">线段 ✓</text>
+        <line x1="40" y1="280" x2="190" y2="280" stroke="#1b5e20" stroke-width="3"/>
+        <circle cx="115" cy="280" r="4" fill="#c62828"/>
+        <text x="125" y="276" font-size="12" fill="#c62828">O</text>
+        <text x="115" y="310" text-anchor="middle" font-size="11" fill="#666">对称中心 = 中点</text>
+
+        <!-- 非中心对称图形：等边三角形 -->
+        <text x="350" y="235" text-anchor="middle" font-size="13" fill="#c62828" font-weight="bold">等边三角形 ✗</text>
+        <polygon points="350,260 315,318 385,318" fill="rgba(198,40,40,0.08)" stroke="#c62828" stroke-width="2"/>
+        <circle cx="350" cy="298" r="3" fill="#c62828"/>
+        <text x="350" y="340" text-anchor="middle" font-size="11" fill="#c62828">转 180° 后不能重合</text>
+        <text x="350" y="355" text-anchor="middle" font-size="11" fill="#666">（但它有 3 条对称轴）</text>
+
+        <!-- 非中心对称图形：等腰梯形 -->
+        <text x="585" y="235" text-anchor="middle" font-size="13" fill="#c62828" font-weight="bold">等腰梯形 ✗</text>
+        <polygon points="555,260 615,260 635,318 535,318" fill="rgba(198,40,40,0.08)" stroke="#c62828" stroke-width="2"/>
+        <circle cx="585" cy="289" r="3" fill="#c62828"/>
+        <text x="585" y="340" text-anchor="middle" font-size="11" fill="#c62828">转 180° 后不能重合</text>
+        <text x="585" y="355" text-anchor="middle" font-size="11" fill="#666">（但它有 1 条对称轴）</text>
+
+        <!-- 底部说明 -->
+        <text x="350" y="390" text-anchor="middle" font-size="13" fill="#555">
+          注意：轴对称和中心对称是不同的概念。有些图形既有轴对称又有中心对称（如圆、正方形），有些只有其中一种。
+        </text>
+      </svg>
+    </div>
+
+    <div class="key">
+      <p><strong>中心对称图形总结：</strong></p>
+      <ul>
+        <li><strong>平行四边形</strong>（包括矩形、菱形、正方形）——对称中心是对角线交点</li>
+        <li><strong>圆</strong>——对称中心是圆心</li>
+        <li><strong>正六边形</strong>（以及所有正偶数边形）——对称中心是中心</li>
+        <li><strong>线段</strong>——对称中心是中点</li>
+        <li><strong>直线</strong>——对称中心是直线上任意一点（有无穷多个对称中心！）</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <p><strong>想一想：</strong>正五边形是中心对称图形吗？正三角形呢？</p>
+      <p>答：<strong>都不是。</strong>正五边形和正三角形（正奇数边形）绕中心旋转 180° 后，顶点位置和原来的不重合，所以不是中心对称图形。但它们有旋转对称性——正三角形绕中心旋转 120° 就能重合，正五边形旋转 72° 就能重合，只是不是 180°。</p>
+    </div>
+  </div>
+
+  <h2>五、中心对称与平行四边形</h2>
+  <div class="story">
+    <p>平行四边形是中心对称图形中最典型的代表。它的对称中心就是<strong>两条对角线的交点</strong>。</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 640 340" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+          <marker id="arrowHalf" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#1b5e20"/>
+          </marker>
+        </defs>
+        <text x="320" y="25" text-anchor="middle" font-size="16" fill="#333" font-weight="bold">平行四边形是中心对称图形</text>
+
+        <!-- 平行四边形 -->
+        <polygon points="100,240 360,240 460,100 200,100" fill="rgba(27,94,32,0.12)" stroke="#1b5e20" stroke-width="2.5"/>
+        <text x="88" y="262" font-size="14" fill="#333" font-weight="bold" font-family="serif">A</text>
+        <text x="368" y="262" font-size="14" fill="#333" font-weight="bold" font-family="serif">B</text>
+        <text x="470" y="95" font-size="14" fill="#333" font-weight="bold" font-family="serif">C</text>
+        <text x="185" y="95" font-size="14" fill="#333" font-weight="bold" font-family="serif">D</text>
+
+        <!-- 对角线 -->
+        <line x1="100" y1="240" x2="460" y2="100" stroke="#c62828" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <line x1="360" y1="240" x2="200" y2="100" stroke="#c62828" stroke-width="1.5" stroke-dasharray="6,3"/>
+
+        <!-- 对称中心 O -->
+        <circle cx="280" cy="170" r="5" fill="#c62828"/>
+        <text x="292" y="165" font-size="14" fill="#c62828" font-weight="bold">O</text>
+
+        <!-- 旋转标记 -->
+        <path d="M130,220 A100,100 0 0,1 380,140" fill="none" stroke="#1b5e20" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrowHalf)"/>
+        <text x="220" y="160" font-size="13" fill="#1b5e20" font-weight="bold">绕 O 旋转 180°</text>
+
+        <!-- 对应关系标注 -->
+        <text x="180" y="285" text-anchor="middle" font-size="12" fill="#1565c0">A 绕 O 转 180° → C</text>
+        <text x="380" y="285" text-anchor="middle" font-size="12" fill="#1565c0">B 绕 O 转 180° → D</text>
+
+        <!-- 底部说明 -->
+        <text x="320" y="330" text-anchor="middle" font-size="13" fill="#555">
+          对角线的交点 O 就是对称中心。这也解释了为什么平行四边形的对角线互相平分——因为 O 是 "半圈旋转" 的中心，必须平分每条对角线。
+        </text>
+      </svg>
+    </div>
+
+    <div class="key">
+      <p><strong>平行四边形的中心对称性质：</strong></p>
+      <ul>
+        <li>绕对角线交点旋转 180° 后，平行四边形与自身重合</li>
+        <li>顶点 A 与 C 是对应点，顶点 B 与 D 是对应点</li>
+        <li>对角线交点 O 平分两条对角线（这就是"对角线互相平分"的直观解释！）</li>
+      </ul>
+    </div>
+
+    <p>现在你明白为什么平行四边形的对角线互相平分了吗？<strong>因为平行四边形的对角线交点就是它的对称中心，绕这个点旋转 180°，每条对角线的两个端点互换，所以交点必须是每条对角线的中点。</strong>这种"从旋转角度理解性质"的思维方式，在几何中非常有用。</p>
+  </div>
+
+  <h2>六、图案设计：用旋转创造美</h2>
+  <div class="story">
+    <p>旋转不只是数学概念，它也是<strong>设计工具</strong>。很多美丽的图案，都是通过旋转一个基本图形得到的。</p>
+
+    <h3>旋转图案的基本原理</h3>
+    <p>选一个基本图形（比如一片花瓣、一个三角形），绕一个中心点，每次旋转相同的角度，重复多次，就能得到一个美丽的旋转对称图案。</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 640 340" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <text x="320" y="25" text-anchor="middle" font-size="16" fill="#333" font-weight="bold">旋转图案设计</text>
+
+        <!-- 示例1：旋转四次（花瓣） -->
+        <text x="160" y="55" text-anchor="middle" font-size="13" fill="#1b5e20" font-weight="bold">旋转 4 次（每次 90°）</text>
+        <circle cx="160" cy="150" r="5" fill="#c62828"/>
+        <!-- 花瓣1 -->
+        <ellipse cx="160" cy="100" rx="15" ry="30" fill="rgba(27,94,32,0.2)" stroke="#1b5e20" stroke-width="1.5" transform="rotate(0,160,150)"/>
+        <!-- 花瓣2 -->
+        <ellipse cx="160" cy="100" rx="15" ry="30" fill="rgba(27,94,32,0.2)" stroke="#1b5e20" stroke-width="1.5" transform="rotate(90,160,150)"/>
+        <!-- 花瓣3 -->
+        <ellipse cx="160" cy="100" rx="15" ry="30" fill="rgba(27,94,32,0.2)" stroke="#1b5e20" stroke-width="1.5" transform="rotate(180,160,150)"/>
+        <!-- 花瓣4 -->
+        <ellipse cx="160" cy="100" rx="15" ry="30" fill="rgba(27,94,32,0.2)" stroke="#1b5e20" stroke-width="1.5" transform="rotate(270,160,150)"/>
+        <circle cx="160" cy="150" r="8" fill="rgba(27,94,32,0.3)" stroke="#1b5e20" stroke-width="1.5"/>
+
+        <!-- 示例2：旋转6次（雪花） -->
+        <text x="320" y="55" text-anchor="middle" font-size="13" fill="#1b5e20" font-weight="bold">旋转 6 次（每次 60°）</text>
+        <circle cx="320" cy="150" r="5" fill="#c62828"/>
+        <line x1="320" y1="150" x2="320" y2="70" stroke="#1b5e20" stroke-width="2"/>
+        <line x1="320" y1="150" x2="320" y2="70" stroke="#1b5e20" stroke-width="2" transform="rotate(60,320,150)"/>
+        <line x1="320" y1="150" x2="320" y2="70" stroke="#1b5e20" stroke-width="2" transform="rotate(120,320,150)"/>
+        <line x1="320" y1="150" x2="320" y2="70" stroke="#1b5e20" stroke-width="2" transform="rotate(180,320,150)"/>
+        <line x1="320" y1="150" x2="320" y2="70" stroke="#1b5e20" stroke-width="2" transform="rotate(240,320,150)"/>
+        <line x1="320" y1="150" x2="320" y2="70" stroke="#1b5e20" stroke-width="2" transform="rotate(300,320,150)"/>
+        <!-- 小分叉 -->
+        <line x1="320" y1="110" x2="308" y2="98" stroke="#1b5e20" stroke-width="1.5"/>
+        <line x1="320" y1="110" x2="332" y2="98" stroke="#1b5e20" stroke-width="1.5"/>
+        <line x1="320" y1="110" x2="308" y2="98" stroke="#1b5e20" stroke-width="1.5" transform="rotate(60,320,150)"/>
+        <line x1="320" y1="110" x2="332" y2="98" stroke="#1b5e20" stroke-width="1.5" transform="rotate(60,320,150)"/>
+        <line x1="320" y1="110" x2="308" y2="98" stroke="#1b5e20" stroke-width="1.5" transform="rotate(120,320,150)"/>
+        <line x1="320" y1="110" x2="332" y2="98" stroke="#1b5e20" stroke-width="1.5" transform="rotate(120,320,150)"/>
+        <line x1="320" y1="110" x2="308" y2="98" stroke="#1b5e20" stroke-width="1.5" transform="rotate(180,320,150)"/>
+        <line x1="320" y1="110" x2="332" y2="98" stroke="#1b5e20" stroke-width="1.5" transform="rotate(180,320,150)"/>
+        <line x1="320" y1="110" x2="308" y2="98" stroke="#1b5e20" stroke-width="1.5" transform="rotate(240,320,150)"/>
+        <line x1="320" y1="110" x2="332" y2="98" stroke="#1b5e20" stroke-width="1.5" transform="rotate(240,320,150)"/>
+        <line x1="320" y1="110" x2="308" y2="98" stroke="#1b5e20" stroke-width="1.5" transform="rotate(300,320,150)"/>
+        <line x1="320" y1="110" x2="332" y2="98" stroke="#1b5e20" stroke-width="1.5" transform="rotate(300,320,150)"/>
+        <circle cx="320" cy="150" r="8" fill="rgba(27,94,32,0.3)" stroke="#1b5e20" stroke-width="1.5"/>
+
+        <!-- 示例3：旋转8次（星形） -->
+        <text x="480" y="55" text-anchor="middle" font-size="13" fill="#1b5e20" font-weight="bold">旋转 8 次（每次 45°）</text>
+        <circle cx="480" cy="150" r="5" fill="#c62828"/>
+        <polygon points="480,90 488,115 515,115 493,132 500,158 480,145 460,158 467,132 445,115 472,115" fill="rgba(27,94,32,0.15)" stroke="#1b5e20" stroke-width="1.5"/>
+        <circle cx="480" cy="150" r="8" fill="rgba(27,94,32,0.3)" stroke="#1b5e20" stroke-width="1.5"/>
+
+        <!-- 底部说明 -->
+        <text x="320" y="280" text-anchor="middle" font-size="13" fill="#555">一个基本图形 + 旋转 = 无限可能</text>
+        <text x="320" y="300" text-anchor="middle" font-size="12" fill="#888">
+          试试看：取一个简单图形，绕一个点每次旋转 360°÷n（n 是旋转次数），重复 n 次，你会得到一个旋转对称图案！
+        </text>
+
+        <!-- 动手试试 -->
+        <rect x="180" y="315" width="280" height="22" rx="5" fill="#e8f5e9" stroke="#a5d6a7" stroke-width="1"/>
+        <text x="320" y="331" text-anchor="middle" font-size="12" fill="#1b5e20">🔬 课题学习：设计你自己的旋转图案</text>
+      </svg>
+    </div>
+
+    <div class="key">
+      <p><strong>旋转图案设计步骤：</strong></p>
+      <ol>
+        <li>选择一个<strong>基本图形</strong>（三角形、花瓣、箭头……任何你喜欢的形状）</li>
+        <li>确定<strong>旋转中心</strong>和<strong>旋转次数</strong> n</li>
+        <li><strong>每次旋转角度 = 360° ÷ n</strong>（这样转完 n 次刚好回到起点）</li>
+        <li>把基本图形每次旋转这个角度，画出所有副本</li>
+      </ol>
+    </div>
+
+    <div class="example">
+      <p><strong>试一试：</strong>用圆规画一个圆，然后在圆上取一个点，以圆心为旋转中心，每次旋转 72°，旋转 5 次，把这些点连起来——你得到了什么？</p>
+      <p>答：你得到了一个<strong>正五边形</strong>！正多边形的所有顶点，都可以通过旋转一个顶点得到。</p>
+    </div>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>如果一个图形既是轴对称图形，又是中心对称图形，你能举出三个例子吗？如果一个图形是中心对称图形但不是轴对称图形，你能举出一个例子吗？</p>
+    <p><strong>问题 2：</strong>时钟的时针每小时转多少度？分针每分钟转多少度？想一想，时针和分针的旋转速度有什么关系？</p>
+    <p><strong>问题 3：</strong>正三角形不是中心对称图形。但如果我们把两个全等的正三角形拼在一起，能不能拼出一个中心对称图形？怎么拼？</p>
+    <p><strong>问题 4：</strong>设计题：只用圆规（不用直尺），你能画出正六边形吗？提示：圆的半径恰好等于六边形的边长，而且正六边形可以通过旋转得到。</p>
+  </div>
+
+  <h2>拓展阅读</h2>
+  <div class="extend">
+    <p><strong>旋转与群论：</strong>在高等数学中，旋转被抽象为一种"变换"。所有绕同一个点的旋转构成一个<strong>群</strong>（group）——这是现代数学中最重要的代数结构之一。两个旋转可以"复合"（先转一次再转一次，效果等于一次大旋转），而且每个旋转都有"逆旋转"（往反方向转回来）。这种"旋转群"的思想，在晶体学、量子力学和计算机图形学中都有广泛应用。</p>
+    <p><strong>万花筒的数学原理：</strong>万花筒里美丽的图案，其实是<strong>反射</strong>（轴对称）和<strong>旋转</strong>共同作用的结果。三面镜子围成一个三角形，图案在镜子之间反复反射和旋转，形成无穷无尽的对称图案。每一次反射相当于一次轴对称，两次反射的组合相当于一次旋转。</p>
+    <p><strong>风车的秘密：</strong>荷兰风车的叶片通常有 4 片，每片之间相差 90°。这是旋转对称的完美体现——无论风从哪个方向吹来，总有一片叶片能最大程度地"抓住"风力。如果只有 2 片叶片，会有死角；如果有 3 片，虽然也能平衡，但 4 片在结构上最容易制造。</p>
+    <p><strong>推荐阅读：</strong>《对称》——外尔（Hermann Weyl）著，从数学、艺术和自然的角度探讨对称，包括旋转对称（书中称为"循环对称"）。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 旋转的三要素是什么？小明说"把这个三角形旋转 60°"，他的说法完整吗？为什么？</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">回想旋转的定义：旋转需要明确绕哪个点、往哪个方向、转多少度。</div>
+    <div class="ans-box" id="a1">旋转的三要素是：<strong>旋转中心、旋转方向、旋转角度</strong>。小明的说法不完整，因为他只说了旋转角度（60°），没有说旋转中心（绕哪个点转）和旋转方向（顺时针还是逆时针）。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 点 A 绕点 O 逆时针旋转 90° 得到点 A'。已知 OA = 3cm，OA' = ？∠AOA' = ？</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">旋转的性质：对应点到旋转中心的距离相等；对应点与旋转中心连线的夹角等于旋转角。</div>
+    <div class="ans-box" id="a2">OA' = OA = <strong>3cm</strong>（距离不变）。∠AOA' = <strong>90°</strong>（等于旋转角）。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 下列图形中，<strong>不是</strong>中心对称图形的是（　）</p>
+    <p>A. 平行四边形 &nbsp; B. 矩形 &nbsp; C. 等边三角形 &nbsp; D. 圆</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">中心对称图形绕某点旋转 180° 后能与自身重合。等边三角形旋转 180° 后顶点朝下，不能和原来的重合。</div>
+    <div class="ans-box" id="a3"><strong>C</strong>。等边三角形不是中心对称图形。平行四边形、矩形和圆都是中心对称图形。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 时钟的分针从 12 走到 5，分针旋转了多少度？方向是什么？</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">时钟上每个大格（数字之间）是 30°（360° ÷ 12 = 30°）。从 12 到 5，经过了 5 个大格。</div>
+    <div class="ans-box" id="a4">5 × 30° = <strong>150°</strong>。方向是<strong>顺时针</strong>。注意：时钟指针永远是顺时针旋转的。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 点 A 和点 B 关于点 O 中心对称。已知 OA = 4cm，那么 AB = ？</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">中心对称中，对称中心是对应点连线的中点。所以 O 是 AB 的中点，OB = OA = 4cm。</div>
+    <div class="ans-box" id="a5">AB = OA + OB = 4 + 4 = <strong>8cm</strong>。因为 O 是 AB 的中点，所以 AB = 2 × OA。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 在 ▱ABCD 中，对角线 AC 和 BD 相交于点 O。△AOB 绕点 O 旋转多少度后能与 △COD 重合？</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">平行四边形是中心对称图形，对称中心是对角线交点 O。A 和 C 是对应点，B 和 D 是对应点，所以 △AOB 和 △COD 关于 O 中心对称。</div>
+    <div class="ans-box" id="a6">旋转 <strong>180°</strong>（逆时针或顺时针都可以）。因为平行四边形的对角线交点 O 是它的对称中心，△AOB 绕 O 旋转 180° 后恰好与 △COD 重合。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>7.</strong> 下列说法正确的是（　）</p>
+    <p>A. 旋转后的图形和原图形一定全等</p>
+    <p>B. 旋转 90° 就是中心对称</p>
+    <p>C. 所有四边形都是中心对称图形</p>
+    <p>D. 中心对称就是轴对称</p>
+    <button class="btn-sm" onclick="toggleHint('h7')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a7')">查看答案</button>
+    <div class="hint-box" id="h7">逐条分析：旋转不改变图形的大小和形状，所以旋转前后的图形全等。中心对称是旋转 180°，不是 90°。一般四边形（如梯形）不是中心对称图形。中心对称和轴对称是不同的概念。</div>
+    <div class="ans-box" id="a7"><strong>A</strong>。旋转是刚体变换，旋转前后的图形全等。B 错，中心对称是旋转 180°。C 错，一般四边形不一定是中心对称图形。D 错，中心对称和轴对称是两个不同的概念（中心对称是旋转 180°，轴对称是沿直线对折）。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>8.</strong> 正六边形绕其中心至少旋转多少度，才能与自身重合？这个旋转角是 360° 的几分之几？</p>
+    <button class="btn-sm" onclick="toggleHint('h8')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a8')">查看答案</button>
+    <div class="hint-box" id="h8">正六边形有 6 条边，旋转 360° ÷ 6 = 60° 就能让一个顶点移动到下一个顶点的位置，图形与自身重合。</div>
+    <div class="ans-box" id="a8">至少旋转 <strong>60°</strong>。这是 360° 的 <strong>⅙</strong>。正 n 边形绕中心至少旋转 360°÷n 就能与自身重合。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>9.</strong> 设计题：小明想用旋转设计一个图案。他选了一个小三角形作为基本图形，计划绕中心点 O 旋转 5 次。每次应该旋转多少度？设计完成后，这个图案绕点 O 旋转多少度能与自身重合？</p>
+    <button class="btn-sm" onclick="toggleHint('h9')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a9')">查看答案</button>
+    <div class="hint-box" id="h9">旋转 5 次要覆盖一整圈（360°），每次旋转角度 = 360° ÷ 5。图案完成后，它有 5 个副本，绕中心旋转 360° ÷ 5 就能与自身重合。</div>
+    <div class="ans-box" id="a9">每次旋转 <strong>72°</strong>（360° ÷ 5 = 72°）。设计完成后，这个图案绕 O 旋转 <strong>72°</strong>（或其整数倍：144°、216°、288°）就能与自身重合。注意：旋转 180° 不一定能重合，因为 5 是奇数。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>10.</strong> 用旋转的知识解释：为什么平行四边形的对角线互相平分？</p>
+    <button class="btn-sm" onclick="toggleHint('h10')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a10')">查看答案</button>
+    <div class="hint-box" id="h10">平行四边形是中心对称图形，对称中心是对角线的交点 O。绕 O 旋转 180° 后，每条对角线的两个端点互换位置。</div>
+    <div class="ans-box" id="a10">平行四边形是中心对称图形，对称中心是两条对角线的交点 O。绕 O 旋转 180° 后，顶点 A 和 C 互换，B 和 D 互换。因此 O 到 A 和 C 的距离相等（OA = OC），O 到 B 和 D 的距离也相等（OB = OD）。也就是说，O 同时是 AC 和 BD 的中点——即对角线互相平分。这就是"中心对称"视角下对平行四边形性质的直观理解。</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>旋转三要素：</strong>旋转中心、旋转方向、旋转角度——缺一不可</li>
+      <li><strong>旋转的性质：</strong>对应点到旋转中心距离相等；对应点与旋转中心连线的夹角等于旋转角；旋转前后图形全等</li>
+      <li><strong>中心对称：</strong>旋转 180° 的特殊情况。对称中心是对应点连线的中点</li>
+      <li><strong>中心对称图形：</strong>绕某点旋转 180° 后能与自身重合的图形（平行四边形、圆、正六边形、线段……）</li>
+      <li><strong>区别：</strong>中心对称 ≠ 轴对称。中心对称是"转半圈"，轴对称是"对折"。有些图形同时具有两种对称性（如圆），有些只有一种（如平行四边形是中心对称但不是轴对称）</li>
+      <li><strong>图案设计：</strong>基本图形 + 等角度旋转 = 美丽的旋转对称图案。旋转次数 n，每次旋转 360°÷n</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="circle.html">下一课：圆 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+<script src="../lessons/dt.js"></script>
+</body>
+</html>

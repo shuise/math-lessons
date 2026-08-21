@@ -17,17 +17,14 @@
   .challenge { background: #e8eaf6; border: 2px dashed #5c6bc0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .diff-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; color: #fff; margin-left: 8px; }
-  .diff-easy { background: #66bb6a; }
-  .diff-medium { background: #ff9800; }
-  .diff-hard { background: #f44336; }
   .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
   .hint-box.show, .ans-box.show { display: block; }
   .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
   .btn-sm:hover { background: #e8e8e8; }
 
   @media (max-width: 720px) {
-    article { padding: 20px 12px !important; }
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
     h1 { font-size: 22px; }
     h2 { font-size: 18px; }
     h3 { font-size: 16px; }
@@ -39,7 +36,7 @@
 <body>
 <article>
   <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：课件 1（自然数）、课件 2（分数）</p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./natural-numbers.html">课件 1（自然数）</a>、<a href="./fractions.html">课件 2（分数）</a></p>
   <h1>负数</h1>
 
   <h2>起源："比零还小"的数</h2>
@@ -177,7 +174,7 @@
   <h2>习题</h2>
 
   <div class="exercise">
-    <p><strong>1.</strong> 计算：(-8) + 3 = ？<span class="diff-tag diff-easy">简单</span></p>
+    <p><strong>1.</strong> 计算：(-8) + 3 = ？</p>
     <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
     <div class="hint-box" id="h1">从 -8 往右走 3 步：-8 → -7 → -6 → -5。</div>
@@ -185,7 +182,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>2.</strong> 计算：(-4) × (-6) = ？<span class="diff-tag diff-easy">简单</span></p>
+    <p><strong>2.</strong> 计算：(-4) × (-6) = ？</p>
     <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
     <div class="hint-box" id="h2">负负得正，然后算 4 × 6。</div>
@@ -193,7 +190,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>3.</strong> 计算：(-12) ÷ 3 + (-2) × (-5) = ？<span class="diff-tag diff-medium">中等</span></p>
+    <p><strong>3.</strong> 计算：(-12) ÷ 3 + (-2) × (-5) = ？</p>
     <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
     <div class="hint-box" id="h3">(-12)÷3 = -4（异号得负）；(-2)×(-5) = 10（同号得正）。-4 + 10 = 6。</div>
@@ -201,7 +198,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>4.</strong> 已知 |x| = 5，且 x < 0。求 x 的值，并计算 x + |x|。<span class="diff-tag diff-hard">较难</span></p>
+    <p><strong>4.</strong> 已知 |x| = 5，且 x < 0。求 x 的值，并计算 x + |x|。</p>
     <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
     <div class="hint-box" id="h4">|x| = 5 意味着 x = 5 或 x = -5。x < 0 所以 x = -5。</div>

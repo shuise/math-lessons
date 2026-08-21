@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>平面直角坐标系 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #0d47a1; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed #5c6bc0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  svg text { font-family: "PingFang SC","Microsoft YaHei","Helvetica Neue",sans-serif; }
+
+  @media (max-width: 720px) {
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./negative-numbers.html">课件 3（负数——数轴概念）</a></p>
+  <h1>平面直角坐标系</h1>
+
+  <h2>起源：笛卡儿和蜘蛛网</h2>
+  <div class="origin">
+    <p><strong>一个生病的早晨，改变了数学。</strong>1619 年，法国数学家勒内·笛卡儿因病躺在床上。他盯着天花板，看到一只蜘蛛在墙角爬来爬去。突然，一个念头闪过他的脑海：</p>
+    <p><strong>"我能不能用两个数字，就确定蜘蛛在墙上的位置？"</strong></p>
+    <p>他想到：把墙角的两条线当作"数轴"——一条水平的，一条竖直的。蜘蛛离左边墙的距离是第一个数，离地面的距离是第二个数。这样一来，蜘蛛在任何位置，都能用两个数字写出来！</p>
+    <p>这就是<strong>平面直角坐标系</strong>的诞生。笛卡儿的这个想法，把<strong>几何问题变成了代数问题</strong>——图形可以用方程描述，方程可以画出图形。从此，代数和几何不再分家，合在一起叫"解析几何"。</p>
+    <p>所以，今天的坐标系也叫<strong>"笛卡儿坐标系"</strong>。下次看到数学题里的坐标系，想象一只蜘蛛在上面爬，你就和笛卡儿想到一块儿去了！</p>
+  </div>
+
+  <h2>一、概念与定义</h2>
+
+  <h3>1. 什么是平面直角坐标系？</h3>
+  <div class="story">
+    <p>在平面上画两条互相垂直的数轴，它们的交点叫<strong>原点</strong>。水平的那条叫 <strong>x 轴（横轴）</strong>，竖直的那条叫 <strong>y 轴（纵轴）</strong>。这就构成了平面直角坐标系。</p>
+    <p>平面上的任何一个点，都可以用<strong>两个数</strong>来表示：</p>
+    <div class="key">
+      <p style="text-align:center;font-size:18px;"><strong>（横坐标，纵坐标）→ 写成 (x, y)</strong></p>
+      <p style="text-align:center;">第一个数 x 对应 x 轴上的位置，第二个数 y 对应 y 轴上的位置。</p>
+    </div>
+    <p>这种"有顺序的一对数"就叫<strong>有序数对</strong>。顺序很重要！(2, 3) 和 (3, 2) 是完全不同的两个点。</p>
+  </div>
+
+  <!-- SVG 1: 坐标系基础图 —— 标注原点、两轴、点的坐标 -->
+  <div class="formula">
+    <p style="text-align:center;font-weight:bold;margin-bottom:6px;">↓ 坐标系基础结构：两轴、原点、点的坐标 ↓</p>
+    <svg viewBox="0 0 520 420" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+      <defs>
+        <marker id="arrowX" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#555"/>
+        </marker>
+        <marker id="arrowY" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#555"/>
+        </marker>
+      </defs>
+      <!-- 网格线 -->
+      <g stroke="#e8e8e8" stroke-width="0.5">
+        <line x1="60" y1="50" x2="460" y2="50"/>
+        <line x1="60" y1="100" x2="460" y2="100"/>
+        <line x1="60" y1="150" x2="460" y2="150"/>
+        <line x1="60" y1="200" x2="460" y2="200"/>
+        <line x1="60" y1="250" x2="460" y2="250"/>
+        <line x1="60" y1="300" x2="460" y2="300"/>
+        <line x1="60" y1="350" x2="460" y2="350"/>
+        <line x1="110" y1="50" x2="110" y2="350"/>
+        <line x1="160" y1="50" x2="160" y2="350"/>
+        <line x1="210" y1="50" x2="210" y2="350"/>
+        <line x1="260" y1="50" x2="260" y2="350"/>
+        <line x1="310" y1="50" x2="310" y2="350"/>
+        <line x1="360" y1="50" x2="360" y2="350"/>
+        <line x1="410" y1="50" x2="410" y2="350"/>
+      </g>
+      <!-- x 轴 -->
+      <line x1="50" y1="200" x2="470" y2="200" stroke="#555" stroke-width="2" marker-end="url(#arrowX)"/>
+      <!-- y 轴 -->
+      <line x1="260" y1="370" x2="260" y2="40" stroke="#555" stroke-width="2" marker-end="url(#arrowY)"/>
+      <!-- 刻度 -->
+      <g font-size="11" fill="#777" text-anchor="middle">
+        <line x1="110" y1="197" x2="110" y2="203" stroke="#777"/><text x="110" y="218">-3</text>
+        <line x1="160" y1="197" x2="160" y2="203" stroke="#777"/><text x="160" y="218">-2</text>
+        <line x1="210" y1="197" x2="210" y2="203" stroke="#777"/><text x="210" y="218">-1</text>
+        <line x1="310" y1="197" x2="310" y2="203" stroke="#777"/><text x="310" y="218">1</text>
+        <line x1="360" y1="197" x2="360" y2="203" stroke="#777"/><text x="360" y="218">2</text>
+        <line x1="410" y1="197" x2="410" y2="203" stroke="#777"/><text x="410" y="218">3</text>
+        <line x1="255" y1="150" x2="265" y2="150" stroke="#777"/><text x="248" y="154">1</text>
+        <line x1="255" y1="100" x2="265" y2="100" stroke="#777"/><text x="248" y="104">2</text>
+        <line x1="255" y1="250" x2="265" y2="250" stroke="#777"/><text x="248" y="254">-1</text>
+        <line x1="255" y1="300" x2="265" y2="300" stroke="#777"/><text x="248" y="304">-2</text>
+      </g>
+      <!-- 原点标注 -->
+      <circle cx="260" cy="200" r="4" fill="#e65100"/>
+      <text x="260" y="235" text-anchor="middle" font-size="13" fill="#e65100" font-weight="bold">O (0,0) 原点</text>
+      <!-- 轴标注 -->
+      <text x="478" y="195" font-size="14" fill="#555" font-weight="bold">x</text>
+      <text x="268" y="38" font-size="14" fill="#555" font-weight="bold">y</text>
+      <!-- 点 A(3,2) -->
+      <circle cx="410" cy="100" r="6" fill="#d32f2f" stroke="#fff" stroke-width="2"/>
+      <text x="410" y="90" text-anchor="middle" font-size="13" fill="#d32f2f" font-weight="bold">A(3,2)</text>
+      <line x1="410" y1="100" x2="410" y2="200" stroke="#d32f2f" stroke-width="0.8" stroke-dasharray="3,3"/>
+      <line x1="410" y1="100" x2="260" y2="100" stroke="#d32f2f" stroke-width="0.8" stroke-dasharray="3,3"/>
+      <text x="415" y="158" font-size="11" fill="#d32f2f">x=3</text>
+      <text x="320" y="95" font-size="11" fill="#d32f2f">y=2</text>
+      <!-- 点 B(-2,1) -->
+      <circle cx="160" cy="150" r="6" fill="#1565c0" stroke="#fff" stroke-width="2"/>
+      <text x="160" y="140" text-anchor="middle" font-size="13" fill="#1565c0" font-weight="bold">B(-2,1)</text>
+      <line x1="160" y1="150" x2="160" y2="200" stroke="#1565c0" stroke-width="0.8" stroke-dasharray="3,3"/>
+      <line x1="160" y1="150" x2="260" y2="150" stroke="#1565c0" stroke-width="0.8" stroke-dasharray="3,3"/>
+      <!-- 点 C(-3,-2) -->
+      <circle cx="110" cy="300" r="6" fill="#2e7d32" stroke="#fff" stroke-width="2"/>
+      <text x="110" y="320" text-anchor="middle" font-size="13" fill="#2e7d32" font-weight="bold">C(-3,-2)</text>
+      <line x1="110" y1="300" x2="110" y2="200" stroke="#2e7d32" stroke-width="0.8" stroke-dasharray="3,3"/>
+      <line x1="110" y1="300" x2="260" y2="300" stroke="#2e7d32" stroke-width="0.8" stroke-dasharray="3,3"/>
+      <!-- 点 D(1,-2) -->
+      <circle cx="310" cy="300" r="6" fill="#e65100" stroke="#fff" stroke-width="2"/>
+      <text x="310" y="320" text-anchor="middle" font-size="13" fill="#e65100" font-weight="bold">D(1,-2)</text>
+      <line x1="310" y1="300" x2="310" y2="200" stroke="#e65100" stroke-width="0.8" stroke-dasharray="3,3"/>
+      <line x1="310" y1="300" x2="260" y2="300" stroke="#e65100" stroke-width="0.8" stroke-dasharray="3,3"/>
+    </svg>
+    <p style="text-align:center;margin-top:8px;font-size:13px;color:#888;">从 A 点出发：先看 x 轴（横坐标 3），再看 y 轴（纵坐标 2）→ A(3, 2)。虚线帮你看到"投影"。</p>
+  </div>
+
+  <h3>2. 四个象限</h3>
+  <div class="story">
+    <p>x 轴和 y 轴把平面分成了<strong>四个区域</strong>，每个区域叫一个<strong>象限</strong>。从右上角开始，<strong>逆时针</strong>编号：</p>
+
+    <!-- SVG 2: 四象限图 —— 标注各象限符号特征 -->
+    <svg viewBox="0 0 520 420" style="max-width:100%;height:auto;display:block;margin:16px auto;">
+      <defs>
+        <marker id="arrowX2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#555"/>
+        </marker>
+        <marker id="arrowY2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#555"/>
+        </marker>
+      </defs>
+      <!-- 象限背景色 -->
+      <rect x="260" y="40" width="210" height="160" fill="#e3f2fd" rx="4" opacity="0.6"/>
+      <rect x="50" y="40" width="210" height="160" fill="#fce4ec" rx="4" opacity="0.6"/>
+      <rect x="50" y="200" width="210" height="170" fill="#e8f5e9" rx="4" opacity="0.6"/>
+      <rect x="260" y="200" width="210" height="170" fill="#fff3e0" rx="4" opacity="0.6"/>
+      <!-- 轴 -->
+      <line x1="50" y1="200" x2="470" y2="200" stroke="#555" stroke-width="2" marker-end="url(#arrowX2)"/>
+      <line x1="260" y1="370" x2="260" y2="40" stroke="#555" stroke-width="2" marker-end="url(#arrowY2)"/>
+      <!-- 刻度 -->
+      <g font-size="11" fill="#777" text-anchor="middle">
+        <line x1="110" y1="197" x2="110" y2="203" stroke="#777"/><text x="110" y="218">-3</text>
+        <line x1="160" y1="197" x2="160" y2="203" stroke="#777"/><text x="160" y="218">-2</text>
+        <line x1="210" y1="197" x2="210" y2="203" stroke="#777"/><text x="210" y="218">-1</text>
+        <line x1="310" y1="197" x2="310" y2="203" stroke="#777"/><text x="310" y="218">1</text>
+        <line x1="360" y1="197" x2="360" y2="203" stroke="#777"/><text x="360" y="218">2</text>
+        <line x1="410" y1="197" x2="410" y2="203" stroke="#777"/><text x="410" y="218">3</text>
+        <line x1="255" y1="150" x2="265" y2="150" stroke="#777"/><text x="248" y="154">1</text>
+        <line x1="255" y1="100" x2="265" y2="100" stroke="#777"/><text x="248" y="104">2</text>
+        <line x1="255" y1="250" x2="265" y2="250" stroke="#777"/><text x="248" y="254">-1</text>
+        <line x1="255" y1="300" x2="265" y2="300" stroke="#777"/><text x="248" y="304">-2</text>
+      </g>
+      <circle cx="260" cy="200" r="4" fill="#e65100"/>
+      <!-- 象限标注 -->
+      <text x="420" y="80" font-size="26" fill="#0d47a1" font-weight="bold">第一象限</text>
+      <text x="420" y="100" font-size="18" fill="#0d47a1">(+, +)</text>
+      <text x="90" y="80" font-size="26" fill="#c62828" font-weight="bold">第二象限</text>
+      <text x="90" y="100" font-size="18" fill="#c62828">(−, +)</text>
+      <text x="90" y="340" font-size="26" fill="#2e7d32" font-weight="bold">第三象限</text>
+      <text x="90" y="360" font-size="18" fill="#2e7d32">(−, −)</text>
+      <text x="400" y="340" font-size="26" fill="#ef6c00" font-weight="bold">第四象限</text>
+      <text x="400" y="360" font-size="18" fill="#ef6c00">(+, −)</text>
+      <!-- 逆时针箭头 -->
+      <path d="M 380 120 A 120 120 0 1 0 140 120" fill="none" stroke="#7b1fa2" stroke-width="2" stroke-dasharray="6,3"/>
+      <text x="230" y="35" font-size="12" fill="#7b1fa2" text-anchor="middle">逆时针编号</text>
+      <!-- 轴上的点 -->
+      <circle cx="360" cy="200" r="4" fill="#888"/>
+      <text x="360" y="192" font-size="11" fill="#888" text-anchor="middle">(2,0)</text>
+      <circle cx="260" cy="100" r="4" fill="#888"/>
+      <text x="275" y="104" font-size="11" fill="#888">(0,2)</text>
+    </svg>
+
+    <div class="key">
+      <p><strong>象限口诀：</strong></p>
+      <p style="text-align:center;font-size:16px;"><strong>一象限 (+,+) ，二象限 (−,+) ，三象限 (−,−) ，四象限 (+,−)</strong></p>
+      <p style="text-align:center;font-size:14px;color:#888;">横坐标看右左，纵坐标看上下——先看 x 再看 y！</p>
+    </div>
+    <p><strong>注意：</strong>坐标轴上的点不属于任何象限！比如 (3, 0) 在 x 轴上，(0, -2) 在 y 轴上——它们恰好骑在"分界线"上。</p>
+  </div>
+
+  <h2>二、逻辑推导</h2>
+
+  <h3>1. 坐标轴上的点有什么特征？</h3>
+  <div class="formula">
+    <p>观察一下：</p>
+    <ul>
+      <li>x 轴上的点，纵坐标 y 都是 0。比如 (5, 0)、(-3, 0)、原点 (0, 0)。</li>
+      <li>y 轴上的点，横坐标 x 都是 0。比如 (0, 4)、(0, -1)。</li>
+    </ul>
+    <p><strong>为什么？</strong>因为 x 轴就是"y = 0 这条线"，y 轴就是"x = 0 这条线"。这是坐标系里最简单的两条"方程"——以后你会发现，每条线都可以用一个方程表示！</p>
+  </div>
+
+  <h3>2. 关于原点对称</h3>
+  <div class="formula">
+    <p>点 P(3, 2) 关于原点对称的点在哪里？</p>
+    <p>想象一下：把 P 点沿着原点"翻"过去——横坐标变号，纵坐标也变号。</p>
+    <p>所以 P(3, 2) 关于原点的对称点是 <strong>P'(-3, -2)</strong>。</p>
+    <p>一般规律：点 (x, y) 关于原点对称的点是 <strong>(-x, -y)</strong>——两个坐标都取相反数。</p>
+  </div>
+
+  <h3>3. 用坐标表示地理位置</h3>
+  <div class="story">
+    <p>坐标系不只是数学里的工具，它每天都在帮你导航！</p>
+    <p><strong>经纬度：</strong>地球仪上的经纬度其实就是球面上的坐标。经度是"横坐标"（东西），纬度是"纵坐标"（南北）。你手机上每一次导航，背后都是坐标计算。</p>
+    <p><strong>棋盘：</strong>国际象棋棋盘上，每个格子都有坐标——列用字母 a~h，行用数字 1~8。马从 (b, 1) 跳到 (c, 3)，就是坐标变化。</p>
+    <p><strong>座位表：</strong>教室里的座位——"第 3 排第 5 列"，就是 (3, 5)。只不过 x 和 y 的定义可能和数学不同，但你已经在用"有序数对"了！</p>
+  </div>
+
+  <!-- SVG 3: 用坐标表示平移 -->
+  <h3>4. 用坐标表示平移</h3>
+  <div class="formula">
+    <p>平移是最简单的图形变换。在坐标系中，平移就是<strong>给坐标加上（或减去）某个数</strong>。</p>
+
+    <p style="text-align:center;font-weight:bold;margin-top:12px;">↓ 三角形平移示例：向右平移 4 格，向上平移 2 格 ↓</p>
+    <svg viewBox="0 0 580 420" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+      <defs>
+        <marker id="arrowX3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#555"/>
+        </marker>
+        <marker id="arrowY3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#555"/>
+        </marker>
+      </defs>
+      <!-- 网格 -->
+      <g stroke="#e8e8e8" stroke-width="0.5">
+        <line x1="60" y1="90" x2="540" y2="90"/>
+        <line x1="60" y1="130" x2="540" y2="130"/>
+        <line x1="60" y1="170" x2="540" y2="170"/>
+        <line x1="60" y1="210" x2="540" y2="210"/>
+        <line x1="60" y1="250" x2="540" y2="250"/>
+        <line x1="60" y1="290" x2="540" y2="290"/>
+        <line x1="60" y1="330" x2="540" y2="330"/>
+        <line x1="100" y1="90" x2="100" y2="330"/>
+        <line x1="140" y1="90" x2="140" y2="330"/>
+        <line x1="180" y1="90" x2="180" y2="330"/>
+        <line x1="220" y1="90" x2="220" y2="330"/>
+        <line x1="260" y1="90" x2="260" y2="330"/>
+        <line x1="300" y1="90" x2="300" y2="330"/>
+        <line x1="340" y1="90" x2="340" y2="330"/>
+        <line x1="380" y1="90" x2="380" y2="330"/>
+        <line x1="420" y1="90" x2="420" y2="330"/>
+        <line x1="460" y1="90" x2="460" y2="330"/>
+        <line x1="500" y1="90" x2="500" y2="330"/>
+      </g>
+      <!-- 轴 -->
+      <line x1="50" y1="210" x2="550" y2="210" stroke="#555" stroke-width="2" marker-end="url(#arrowX3)"/>
+      <line x1="300" y1="350" x2="300" y2="80" stroke="#555" stroke-width="2" marker-end="url(#arrowY3)"/>
+      <!-- 刻度 -->
+      <g font-size="10" fill="#999" text-anchor="middle">
+        <text x="100" y="226">-5</text><text x="140" y="226">-4</text><text x="180" y="226">-3</text><text x="220" y="226">-2</text><text x="260" y="226">-1</text>
+        <text x="340" y="226">1</text><text x="380" y="226">2</text><text x="420" y="226">3</text><text x="460" y="226">4</text><text x="500" y="226">5</text>
+        <text x="288" y="134">2</text><text x="288" y="174">1</text>
+        <text x="286" y="254">-1</text><text x="286" y="294">-2</text><text x="286" y="334">-3</text>
+      </g>
+      <circle cx="300" cy="210" r="3" fill="#e65100"/>
+      <text x="478" y="205" font-size="13" fill="#555" font-weight="bold">x</text>
+      <text x="308" y="86" font-size="13" fill="#555" font-weight="bold">y</text>
+
+      <!-- 原三角形 △ABC -->
+      <polygon points="100,290 140,290 100,250" fill="#1565c0" fill-opacity="0.3" stroke="#1565c0" stroke-width="2"/>
+      <circle cx="100" cy="290" r="3" fill="#1565c0"/>
+      <text x="100" y="306" font-size="11" fill="#1565c0" font-weight="bold" text-anchor="middle">A(-5,-2)</text>
+      <circle cx="140" cy="290" r="3" fill="#1565c0"/>
+      <text x="140" y="306" font-size="11" fill="#1565c0" font-weight="bold" text-anchor="middle">B(-4,-2)</text>
+      <circle cx="100" cy="250" r="3" fill="#1565c0"/>
+      <text x="100" y="242" font-size="11" fill="#1565c0" font-weight="bold" text-anchor="middle">C(-5,-1)</text>
+      <text x="130" y="278" font-size="12" fill="#1565c0" font-weight="bold" text-anchor="middle">△ABC</text>
+
+      <!-- 平移后的三角形 △A'B'C' -->
+      <polygon points="260,210 300,210 260,170" fill="#d32f2f" fill-opacity="0.3" stroke="#d32f2f" stroke-width="2"/>
+      <circle cx="260" cy="210" r="3" fill="#d32f2f"/>
+      <text x="260" y="198" font-size="11" fill="#d32f2f" font-weight="bold" text-anchor="middle">A'(-1,0)</text>
+      <circle cx="300" cy="210" r="3" fill="#d32f2f"/>
+      <text x="300" y="226" font-size="11" fill="#d32f2f" font-weight="bold" text-anchor="middle">B'(0,0)</text>
+      <circle cx="260" cy="170" r="3" fill="#d32f2f"/>
+      <text x="260" y="162" font-size="11" fill="#d32f2f" font-weight="bold" text-anchor="middle">C'(-1,1)</text>
+      <text x="290" y="195" font-size="12" fill="#d32f2f" font-weight="bold" text-anchor="middle">△A'B'C'</text>
+
+      <!-- 平移箭头 -->
+      <path d="M 175 270 L 235 190" fill="none" stroke="#7b1fa2" stroke-width="2" marker-end="url(#arrowX3)" stroke-dasharray="5,3"/>
+      <text x="210" y="222" font-size="12" fill="#7b1fa2" font-weight="bold" text-anchor="middle">→平移</text>
+
+      <!-- 平移规则说明 -->
+      <text x="440" y="140" font-size="13" fill="#7b1fa2" font-weight="bold">平移规则：</text>
+      <text x="440" y="160" font-size="12" fill="#7b1fa2">向右移 → x 增加</text>
+      <text x="440" y="178" font-size="12" fill="#7b1fa2">向左移 → x 减少</text>
+      <text x="440" y="196" font-size="12" fill="#7b1fa2">向上移 → y 增加</text>
+      <text x="440" y="214" font-size="12" fill="#7b1fa2">向下移 → y 减少</text>
+
+      <text x="380" y="260" font-size="12" fill="#7b1fa2" text-anchor="middle">A(-5,-2) + (4,2) = A'(-1,0)</text>
+      <text x="380" y="278" font-size="12" fill="#7b1fa2" text-anchor="middle">B(-4,-2) + (4,2) = B'(0,0)</text>
+      <text x="380" y="296" font-size="12" fill="#7b1fa2" text-anchor="middle">C(-5,-1) + (4,2) = C'(-1,1)</text>
+    </svg>
+
+    <p style="margin-top:12px;"><strong>平移的核心规律：</strong></p>
+    <div class="key">
+      <p>点 (x, y) 经过平移后，新坐标 = <strong>(x + a, y + b)</strong></p>
+      <ul>
+        <li>a &gt; 0 → 向右移；a &lt; 0 → 向左移</li>
+        <li>b &gt; 0 → 向上移；b &lt; 0 → 向下移</li>
+      </ul>
+      <p>平移不改变图形的形状和大小，只改变位置。每个点的坐标变化都一样！</p>
+    </div>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>点 P(x, y) 在第二象限。如果把它向右平移 3 个单位，再向下平移 2 个单位，得到的新点可能在哪个象限？分情况讨论。</p>
+    <p><strong>问题 2：</strong>一个点 A(a, b) 满足 a + b = 0。这个点一定在什么位置？画出几个例子看看。</p>
+    <p><strong>问题 3：</strong>已知点 M(2, 3) 和点 N(2, -3)。这两个点关于什么对称？如果点 P(x, y) 和点 Q(x, -y)，它们关于什么对称？</p>
+  </div>
+
+  <h2>拓展阅读</h2>
+  <div class="extend">
+    <p><strong>笛卡儿的"我思故我在"：</strong>笛卡儿不仅是坐标系之父，还是近代哲学的开创者。他有一句名言："我思故我在。"意思是：我可以怀疑一切，但我在怀疑这件事本身，说明我存在。这种追问精神，也是他发明坐标系的思维基础。</p>
+    <p><strong>笛卡儿坐标系不只是平面的：</strong>在高中和大学，你会学到三维坐标系——加上一个 z 轴（高度），用三个数 (x, y, z) 就能确定空间中的任意一点。3D 游戏、建筑设计、卫星定位都离不开它！</p>
+    <p><strong>推荐阅读：</strong>《笛卡儿的秘密笔记本》—— 了解笛卡儿如何把哲学和数学融为一本书；《数学恩仇录》—— 牛顿和莱布尼茨关于微积分的争论，笛卡儿和费马关于解析几何的竞争。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 点 A(3, -4) 在第几象限？</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">横坐标 x=3 是正数，纵坐标 y=-4 是负数。正横 + 负纵 → 第几象限？</div>
+    <div class="ans-box" id="a1">第四象限（x 正，y 负）</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 点 P(-2, 0) 在什么位置？</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">纵坐标 y = 0，说明它不在任何象限——它在哪条轴上？</div>
+    <div class="ans-box" id="a2">在 x 轴上（x 轴的负半轴）。x 轴上的点纵坐标都是 0。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 点 M(5, -2) 关于原点对称的点的坐标是什么？</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">关于原点对称，两个坐标都取相反数：(x, y) → (-x, -y)。</div>
+    <div class="ans-box" id="a3">(-5, 2)</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 点 A(a, b) 在第三象限，那么 a 和 b 的符号分别是什么？</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">第三象限：横坐标为负，纵坐标为负。口诀：三象限 (−, −)。</div>
+    <div class="ans-box" id="a4">a &lt; 0（负），b &lt; 0（负）</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 点 P(-3, 4) 向右平移 5 个单位，再向下平移 3 个单位，得到点 P'。求 P' 的坐标。</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">向右移 → x 加 5：-3 + 5 = 2；向下移 → y 减 3：4 - 3 = 1。</div>
+    <div class="ans-box" id="a5">P'(2, 1)</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 点 Q 在 y 轴上，且到 x 轴的距离为 4。写出 Q 的所有可能坐标。</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">在 y 轴上 → 横坐标 x = 0。到 x 轴的距离为 4 → 到 x 轴的距离就是 |y|，所以 |y| = 4。y 可能是 4 或 -4。</div>
+    <div class="ans-box" id="a6">(0, 4) 和 (0, -4)</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>7.</strong> 点 A(2, -1) 和点 B(2, 5) 的连线有什么特点？线段 AB 的长度是多少？</p>
+    <button class="btn-sm" onclick="toggleHint('h7')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a7')">查看答案</button>
+    <div class="hint-box" id="h7">A 和 B 的横坐标都是 2，说明它们的连线是竖直的（平行于 y 轴）。长度 = 两个纵坐标的差：5 - (-1) = 6。</div>
+    <div class="ans-box" id="a7">连线是竖直的（平行于 y 轴），长度为 6。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>8.</strong> 点 C(-1, 3) 和点 D(3, 3) 的连线有什么特点？线段 CD 的长度是多少？</p>
+    <button class="btn-sm" onclick="toggleHint('h8')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a8')">查看答案</button>
+    <div class="hint-box" id="h8">C 和 D 的纵坐标都是 3，说明连线是水平的（平行于 x 轴）。长度 = 两个横坐标的差：3 - (-1) = 4。</div>
+    <div class="ans-box" id="a8">连线是水平的（平行于 x 轴），长度为 4。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>9.</strong> 一个三角形三个顶点分别是 A(-2, 1)、B(3, 1)、C(-2, 5)。这个三角形是什么形状？</p>
+    <button class="btn-sm" onclick="toggleHint('h9')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a9')">查看答案</button>
+    <div class="hint-box" id="h9">A 和 B 纵坐标相同（y=1），所以 AB 是水平的。A 和 C 横坐标相同（x=-2），所以 AC 是竖直的。两条边互相垂直 → 什么三角形？</div>
+    <div class="ans-box" id="a9">直角三角形（∠A = 90°）。AB 是水平边，AC 是竖直边，两条直角边互相垂直。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>10.</strong> 把点 P(1, -2) 先向左平移 3 个单位，再向上平移 4 个单位，得到点 P'。再把 P' 关于原点对称，得到点 P''。求 P'' 的坐标。</p>
+    <button class="btn-sm" onclick="toggleHint('h10')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a10')">查看答案</button>
+    <div class="hint-box" id="h10">第一步：P(1, -2) 向左 3 → x 减 3 → (1-3, -2) = (-2, -2)；向上 4 → y 加 4 → (-2, -2+4) = (-2, 2) = P'。<br>第二步：P'(-2, 2) 关于原点对称 → 两个坐标都取相反数 → (2, -2)。</div>
+    <div class="ans-box" id="a10">P''(2, -2)</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>平面直角坐标系</strong> = 两条互相垂直的数轴（x 轴和 y 轴），交点是原点 O(0, 0)</li>
+      <li>平面上的每个点对应一个<strong>有序数对 (x, y)</strong>——先横后纵，顺序不能乱</li>
+      <li>两轴把平面分成<strong>四个象限</strong>：一(+,+)、二(−,+)、三(−,−)、四(+,−)，逆时针编号</li>
+      <li>坐标轴上的点不属于任何象限：x 轴上 y=0，y 轴上 x=0</li>
+      <li>关于原点对称：<strong>(x, y) → (-x, -y)</strong></li>
+      <li>平移：<strong>(x, y) → (x+a, y+b)</strong>，a 控制左右，b 控制上下</li>
+      <li>同一水平线上点的纵坐标相同；同一竖直线上的点横坐标相同</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="linear-equations.html">下一课：一元一次方程 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+<script src="../lessons/dt.js"></script>
+</body>
+</html>

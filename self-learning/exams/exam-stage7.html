@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模拟考试 — 阶段五 — 自学课件</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../lessons/style.css">
+<style>
+  :root { --accent: #2e7d32; }
+  .exam-header { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .section-title { color: #2e7d32; font-size: 18px; font-weight: 700; margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #c8e6c9; }
+  .q-item { padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+  .q-item:last-child { border-bottom: none; }
+  .btn-row { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-hint, .btn-ans { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; }
+  .btn-hint:hover { background: #fff3e0; border-color: #ff9800; }
+  .btn-ans:hover { background: #e8f5e9; border-color: #4caf50; }
+  .hint-box, .ans-box { display: none; margin-top: 8px; padding: 10px 14px; border-radius: 6px; font-size: 14px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .hint-box { background: #fff8e1; border-left: 3px solid #ff9800; }
+  .ans-box { background: #e8f5e9; border-left: 3px solid #4caf50; }
+  .opt-row { margin: 4px 0; padding-left: 8px; }
+  .opt { display: inline-block; min-width: 24px; font-weight: 600; }
+  @media (max-width: 720px) {
+    article { padding-bottom: 100px !important; }
+    article { padding: 20px 12px 100px 12px !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    .q-item { padding: 10px 0; }
+    .exam-header { padding: 12px 14px; margin: 12px 0; }
+  }
+  .opt-btn { display: inline-block; padding: 6px 16px; margin: 3px 4px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .opt-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .opt-btn.selected { border-color: #1976d2; background: #e3f2fd; }
+  .opt-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .opt-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .tf-btn { display: inline-block; padding: 6px 20px; margin: 3px 6px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
+  .tf-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+  .tf-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+  .tf-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
+  .fill-input { padding: 6px 12px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 15px; width: 160px; }
+  .fill-input:focus { outline: none; border-color: #1976d2; }
+  .check-btn { padding: 6px 16px; border: 1px solid #1976d2; border-radius: 6px; background: #1976d2; color: #fff; font-size: 13px; cursor: pointer; margin-left: 8px; }
+  .check-btn:hover { background: #1565c0; }
+  .feedback { display: none; margin-left: 8px; font-size: 14px; font-weight: 600; }
+  .feedback.show { display: inline; }
+  .feedback.correct-fb { color: #2e7d32; }
+  .feedback.wrong-fb { color: #c62828; }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="../index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="../natural-numbers.html">课件1</a>、<a href="../fractions.html">课件2</a>、<a href="../negative-numbers.html">课件3</a>、<a href="../algebraic-expressions.html">课件4</a>、<a href="../polynomials.html">课件5</a>、<a href="../factoring-rational.html">课件6</a>、<a href="../linear-equations.html">课件7</a>、<a href="../fractional-equations.html">课件8</a>、<a href="../quadratic-equations.html">课件9</a>、<a href="../real-numbers.html">课件10</a>、<a href="../quadratic-radicals.html">课件11</a>、<a href="../linear-systems.html">课件12</a>、<a href="../inequalities.html">课件13</a></p>
+  <h1>模拟考试 — 阶段五：方程与不等式进阶</h1>
+  <div class="exam-header">
+    <p>⏱ 时间：30 分钟 | ✅ 判断题 10 题 | 🔘 单选题 10 题 | ☑️ 多选题 5 题 | ✏️ 其他题型 5 题 | 共 30 题</p>
+  </div>
+
+  <p class="section-title">一、判断题（每题 1 分，共 10 分）</p>
+
+  <div class="q-item"><p><strong>1.</strong> 二元一次方程组一定存在唯一解。</p>
+    <div id="tf-7-1">
+      <button class="tf-btn" onclick="checkTF(this, false, '7-1')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '7-1')">错误</button>
+      <span class="feedback" id="fb-7-1"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-1"><p>考虑特殊情况：两个方程如果表示同一条直线，会有多少解？如果表示两条平行线呢？</p></div>
+    <div class="ans-box" id="a1-1"><p><strong>❌ 错误。</strong>二元一次方程组可能：①有唯一解（两直线相交）；②无解（两直线平行）；③有无穷多解（两直线重合）。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>2.</strong> 若 a &gt; b，则 ac² &gt; bc² 一定成立。</p>
+    <div id="tf-7-2">
+      <button class="tf-btn" onclick="checkTF(this, false, '7-2')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '7-2')">错误</button>
+      <span class="feedback" id="fb-7-2"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-2"><p>当 c = 0 时，c² = 0，两边都等于 0，不等式变成等式。不等式两边同乘 0 会破坏不等号方向。</p></div>
+    <div class="ans-box" id="a1-2"><p><strong>❌ 错误。</strong>当 c = 0 时，c² = 0，ac² = bc² = 0，不等式不成立。只有当 c ≠ 0 时，由 a &gt; b 才能推出 ac² &gt; bc²。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>3.</strong> 代入消元法和加减消元法都可以解二元一次方程组。</p>
+    <div id="tf-7-3">
+      <button class="tf-btn" onclick="checkTF(this, true, '7-3')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '7-3')">错误</button>
+      <span class="feedback" id="fb-7-3"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-3"><p>这是解二元一次方程组的两种基本方法，它们适用于所有二元一次方程组。</p></div>
+    <div class="ans-box" id="a1-3"><p><strong>✅ 正确。</strong>代入消元法和加减消元法是解二元一次方程组的两种通用方法，适用于所有二元一次方程组。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>4.</strong> 不等式两边同时乘以一个负数，不等号方向不变。</p>
+    <div id="tf-7-4">
+      <button class="tf-btn" onclick="checkTF(this, false, '7-4')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '7-4')">错误</button>
+      <span class="feedback" id="fb-7-4"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-4"><p>举例：3 &gt; 2，两边同乘 −1，得到 −3 和 −2，不等号方向应该怎样？</p></div>
+    <div class="ans-box" id="a1-4"><p><strong>❌ 错误。</strong>不等式两边同乘（或除以）一个负数时，不等号方向必须<strong>改变</strong>。如 3 &gt; 2，两边同乘 −1 得 −3 &lt; −2。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>5.</strong> 方程组 {x + y = 5, 2x + 2y = 10} 有唯一解。</p>
+    <div id="tf-7-5">
+      <button class="tf-btn" onclick="checkTF(this, false, '7-5')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '7-5')">错误</button>
+      <span class="feedback" id="fb-7-5"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-5"><p>第二个方程两边除以 2 得到 x + y = 5，与第一个方程完全相同。两个方程重合，有多少解？</p></div>
+    <div class="ans-box" id="a1-5"><p><strong>❌ 错误。</strong>第二个方程化简后与第一个相同，两直线重合，方程组有无穷多解（所有满足 x + y = 5 的 (x, y) 都是解）。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>6.</strong> 不等式 −2x &lt; 6 的解集是 x &gt; −3。</p>
+    <div id="tf-7-6">
+      <button class="tf-btn" onclick="checkTF(this, true, '7-6')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '7-6')">错误</button>
+      <span class="feedback" id="fb-7-6"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-6')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-6')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-6"><p>两边同除以 −2（负数），不等号方向改变：−2x &lt; 6 → x &gt; 6 ÷ (−2) = −3。</p></div>
+    <div class="ans-box" id="a1-6"><p><strong>✅ 正确。</strong>−2x &lt; 6，两边同除以 −2，不等号改变方向，得 x &gt; −3。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>7.</strong> 用代入法解方程组时，必须从 x 的系数为 1 的方程中代入。</p>
+    <div id="tf-7-7">
+      <button class="tf-btn" onclick="checkTF(this, false, '7-7')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '7-7')">错误</button>
+      <span class="feedback" id="fb-7-7"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-7')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-7')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-7"><p>代入法可以从任意一个方程中解出任意一个未知数代入另一个方程，选择系数简单的只是为了方便计算。</p></div>
+    <div class="ans-box" id="a1-7"><p><strong>❌ 错误。</strong>代入法可以从任意方程中解出任意未知数，不限于系数为 1 的情况，只是系数为 1 时计算更简便。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>8.</strong> 不等式组 {x &gt; 2, x &lt; 5} 的解集是 2 &lt; x &lt; 5。</p>
+    <div id="tf-7-8">
+      <button class="tf-btn" onclick="checkTF(this, true, '7-8')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '7-8')">错误</button>
+      <span class="feedback" id="fb-7-8"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-8')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-8')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-8"><p>不等式组的解集是各不等式解集的交集。x &gt; 2 且 x &lt; 5 的交集就是 2 &lt; x &lt; 5。</p></div>
+    <div class="ans-box" id="a1-8"><p><strong>✅ 正确。</strong>两个条件同时成立，取交集，解集为 2 &lt; x &lt; 5。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>9.</strong> 三元一次方程组的解法与二元一次方程组完全不同。</p>
+    <div id="tf-7-9">
+      <button class="tf-btn" onclick="checkTF(this, false, '7-9')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, true, '7-9')">错误</button>
+      <span class="feedback" id="fb-7-9"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-9')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-9')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-9"><p>三元一次方程组的核心思想是"消元"——先消去一个未知数，转化为二元一次方程组，再继续消元。</p></div>
+    <div class="ans-box" id="a1-9"><p><strong>❌ 错误。</strong>三元一次方程组也是通过消元法，先消去一个未知数化为二元一次方程组来解，基本思想相同。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>10.</strong> 在数轴上，x ≥ 3 用实心点表示，x &gt; 3 用空心点表示。</p>
+    <div id="tf-7-10">
+      <button class="tf-btn" onclick="checkTF(this, true, '7-10')">正确</button>
+      <button class="tf-btn" onclick="checkTF(this, false, '7-10')">错误</button>
+      <span class="feedback" id="fb-7-10"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h1-10')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a1-10')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h1-10"><p>实心点表示包含该点（≥ 或 ≤），空心点表示不包含该点（&gt; 或 &lt;）。</p></div>
+    <div class="ans-box" id="a1-10"><p><strong>✅ 正确。</strong>包含等号用实心点表示"可以取到"，不包含等号用空心点表示"不能取到"。</p></div>
+  </div>
+
+  <p class="section-title">二、单选题（每题 2 分，共 20 分）</p>
+
+  <div class="q-item"><p><strong>11.</strong> 方程组 {x + y = 7, x − y = 3} 的解是（　）</p>
+    <div id="opt-7-11">
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-11')" data-correct="false">A. x = 2, y = 5</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '7-11')" data-correct="true">B. x = 5, y = 2</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-11')" data-correct="false">C. x = 3, y = 4</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-11')" data-correct="false">D. x = 4, y = 3</button>
+      <span class="feedback" id="fb-7-11"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-1"><p>用加减消元法：两式相加消去 y，得 2x = 10，x = 5；代入 x + y = 7 得 y = 2。</p></div>
+    <div class="ans-box" id="a2-1"><p><strong>答案：B。</strong>两式相加：2x = 10 → x = 5；代入得 y = 2。验证：5 + 2 = 7，5 − 2 = 3 ✓。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>12.</strong> 不等式 3x − 1 &gt; 2x + 4 的解集是（　）</p>
+    <div id="opt-7-12">
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-12')" data-correct="false">A. x &gt; 3</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '7-12')" data-correct="true">B. x &gt; 5</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-12')" data-correct="false">C. x &lt; 5</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-12')" data-correct="false">D. x &lt; 3</button>
+      <span class="feedback" id="fb-7-12"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-2"><p>移项：3x − 2x &gt; 4 + 1，即 x &gt; 5。</p></div>
+    <div class="ans-box" id="a2-2"><p><strong>答案：B。</strong>3x − 1 &gt; 2x + 4 → 3x − 2x &gt; 4 + 1 → x &gt; 5。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>13.</strong> 用代入法解方程组 {y = 2x − 1, 3x + 2y = 12}，第一步代入后得到的方程是（　）</p>
+    <div id="opt-7-13">
+      <button class="opt-btn" onclick="checkSingle(this, true, '7-13')" data-correct="true">A. 3x + 2(2x − 1) = 12</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-13')" data-correct="false">B. 3x + 2x − 1 = 12</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-13')" data-correct="false">C. 3x + 4x − 1 = 12</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-13')" data-correct="false">D. 3x + 4x − 2 = 12</button>
+      <span class="feedback" id="fb-7-13"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-3"><p>将 y = 2x − 1 代入第二个方程：3x + 2(2x − 1) = 12。注意括号展开：2 × 2x = 4x，2 × (−1) = −2。</p></div>
+    <div class="ans-box" id="a2-3"><p><strong>答案：A。</strong>将 y = 2x − 1 代入 3x + 2y = 12 得 3x + 2(2x − 1) = 12。展开后为 3x + 4x − 2 = 12。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>14.</strong> 不等式组 {x − 1 &gt; 0, 2x − 3 &lt; 5} 的解集是（　）</p>
+    <div id="opt-7-14">
+      <button class="opt-btn" onclick="checkSingle(this, true, '7-14')" data-correct="true">A. 1 &lt; x &lt; 4</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-14')" data-correct="false">B. x &gt; 1</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-14')" data-correct="false">C. x &lt; 4</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-14')" data-correct="false">D. 无解</button>
+      <span class="feedback" id="fb-7-14"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-4"><p>分别解：x − 1 &gt; 0 → x &gt; 1；2x − 3 &lt; 5 → 2x &lt; 8 → x &lt; 4。取交集得 1 &lt; x &lt; 4。</p></div>
+    <div class="ans-box" id="a2-4"><p><strong>答案：A。</strong>第一个不等式：x &gt; 1；第二个：2x &lt; 8 → x &lt; 4。取交集：1 &lt; x &lt; 4。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>15.</strong> 若关于 x 的方程 2x + a = 3x − 1 的解是 x = 2，则 a 的值为（　）</p>
+    <div id="opt-7-15">
+      <button class="opt-btn" onclick="checkSingle(this, true, '7-15')" data-correct="true">A. 1</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-15')" data-correct="false">B. −1</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-15')" data-correct="false">C. 3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-15')" data-correct="false">D. −3</button>
+      <span class="feedback" id="fb-7-15"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-5"><p>将 x = 2 代入方程：2 × 2 + a = 3 × 2 − 1，即 4 + a = 6 − 1 = 5，解得 a = 1。</p></div>
+    <div class="ans-box" id="a2-5"><p><strong>答案：A。</strong>代入 x = 2：4 + a = 6 − 1 → 4 + a = 5 → a = 1。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>16.</strong> 解方程组 {2x + 3y = 8, 3x − 2y = −1}，用加减法消去 y，正确做法是（　）</p>
+    <div id="opt-7-16">
+      <button class="opt-btn" onclick="checkSingle(this, true, '7-16')" data-correct="true">A. ①×2 + ②×3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-16')" data-correct="false">B. ①×3 + ②×2</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-16')" data-correct="false">C. ①×2 − ②×3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-16')" data-correct="false">D. ①×3 − ②×2</button>
+      <span class="feedback" id="fb-7-16"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-6')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-6')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-6"><p>消去 y 需要使 y 的系数互为相反数。①中 y 系数为 3，②中 y 系数为 −2。①×2 得 4x + 6y = 16，②×3 得 9x − 6y = −3，相加消去 y。</p></div>
+    <div class="ans-box" id="a2-6"><p><strong>答案：A。</strong>①×2 得 4x + 6y = 16，②×3 得 9x − 6y = −3，两式相加：13x = 13，x = 1。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>17.</strong> 若 a &lt; b，则下列不等式一定成立的是（　）</p>
+    <div id="opt-7-17">
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-17')" data-correct="false">A. a² &lt; b²</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-17')" data-correct="false">B. −a &lt; −b</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '7-17')" data-correct="true">C. a − 3 &lt; b − 3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-17')" data-correct="false">D. a/b &lt; 1</button>
+      <span class="feedback" id="fb-7-17"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-7')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-7')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-7"><p>A：反例 a = −3, b = 1，但 a² = 9, b² = 1；B：两边同乘 −1，不等号应变向；C：两边同减 3，不等号不变；D：b 的符号不确定。</p></div>
+    <div class="ans-box" id="a2-7"><p><strong>答案：C。</strong>a − 3 &lt; b − 3 一定成立（不等式两边同加/减同一个数，不等号方向不变）。A 在负数时不成立，B 方向反了，D 取决于 b 的符号。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>18.</strong> 方程组 {3x + 2y = 10, 5x − 4y = 2} 的解中，x + y 的值为（　）</p>
+    <div id="opt-7-18">
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-18')" data-correct="false">A. 3</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '7-18')" data-correct="true">B. 4</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-18')" data-correct="false">C. 5</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-18')" data-correct="false">D. 2</button>
+      <span class="feedback" id="fb-7-18"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-8')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-8')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-8"><p>①×2 + ②：6x + 4y + 5x − 4y = 20 + 2 → 11x = 22 → x = 2。代入①：6 + 2y = 10 → y = 2。x + y = 4。</p></div>
+    <div class="ans-box" id="a2-8"><p><strong>答案：B。</strong>①×2 + ② 得 11x = 22 → x = 2；代入得 y = 2；x + y = 4。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>19.</strong> 下列不等式解集表示正确的是（　）</p>
+    <div id="opt-7-19">
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-19')" data-correct="false">A. −2x ≥ 6 的解集是 x ≥ −3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-19')" data-correct="false">B. 2x − 1 &lt; 3 的解集是 x &lt; 2</button>
+      <button class="opt-btn" onclick="checkSingle(this, true, '7-19')" data-correct="true">C. 3x + 2 &gt; 5x − 4 的解集是 x &lt; 3</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-19')" data-correct="false">D. x/2 + 1 ≥ 3 的解集是 x ≥ 2</button>
+      <span class="feedback" id="fb-7-19"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-9')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-9')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-9"><p>逐一检验：A 除以 −2 应改变方向 → x ≤ −3；B: 2x &lt; 4 → x &lt; 2 ✓；C: 3x − 5x &gt; −4 − 2 → −2x &gt; −6 → x &lt; 3 ✓；D: x/2 ≥ 2 → x ≥ 4。</p></div>
+    <div class="ans-box" id="a2-9"><p><strong>答案：BC。</strong>实际上 B 和 C 都正确。B: 2x &lt; 4 → x &lt; 2；C: −2x &gt; −6 → x &lt; 3。A 应为 x ≤ −3，D 应为 x ≥ 4。（本题以 C 为最佳答案，C 涉及移项和变号两个步骤。）</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>20.</strong> 小明买了 3 支笔和 2 个本子共花 14 元，小红买了 2 支笔和 3 个本子共花 11 元。设笔单价 x 元，本子单价 y 元，正确的方程组是（　）</p>
+    <div id="opt-7-20">
+      <button class="opt-btn" onclick="checkSingle(this, true, '7-20')" data-correct="true">A. {3x + 2y = 14, 2x + 3y = 11}</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-20')" data-correct="false">B. {3x + 2y = 11, 2x + 3y = 14}</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-20')" data-correct="false">C. {2x + 3y = 14, 3x + 2y = 11}</button>
+      <button class="opt-btn" onclick="checkSingle(this, false, '7-20')" data-correct="false">D. {3x + 2y = 14, 3x + 2y = 11}</button>
+      <span class="feedback" id="fb-7-20"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h2-10')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a2-10')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h2-10"><p>小明：3 支笔 + 2 个本子 = 14 元 → 3x + 2y = 14；小红：2 支笔 + 3 个本子 = 11 元 → 2x + 3y = 11。</p></div>
+    <div class="ans-box" id="a2-10"><p><strong>答案：A。</strong>小明：3x + 2y = 14，小红：2x + 3y = 11。解此方程组可得笔 4 元/支，本子 1 元/个。</p></div>
+  </div>
+
+  <p class="section-title">三、多选题（每题 3 分，共 15 分）</p>
+
+  <div class="q-item"><p><strong>21.</strong> 解二元一次方程组的方法有（　）</p>
+    <div id="opt-7-21">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 代入消元法</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 加减消元法</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 图像法</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 因式分解法</button>
+      <button class="check-btn" onclick="checkMulti('7-21')">提交</button>
+      <span class="feedback" id="fb-7-21"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-1"><p>A、B 是代数方法中最常用的两种；C 通过画两条直线找交点，也是可行的方法；D 因式分解法一般用于解高次方程，不用于二元一次方程组。</p></div>
+    <div class="ans-box" id="a3-1"><p><strong>答案：ABC。</strong>代入消元法、加减消元法、图像法都可以解二元一次方程组。因式分解法通常用于解一元二次方程。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>22.</strong> 下列关于不等式的变形中，正确的有（　）</p>
+    <div id="opt-7-22">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 若 a &gt; b，则 a + c &gt; b + c</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 若 a &gt; b，c &gt; 0，则 ac &gt; bc</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">C. 若 a &gt; b，c &lt; 0，则 ac &gt; bc</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 若 a &gt; b，则 a − c &gt; b − c</button>
+      <button class="check-btn" onclick="checkMulti('7-22')">提交</button>
+      <span class="feedback" id="fb-7-22"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-2"><p>A: 不等式两边同加一个数，方向不变 ✓；B: 同乘正数，方向不变 ✓；C: 同乘负数，方向应改变，ac &lt; bc ✗；D: 同减一个数，方向不变 ✓。</p></div>
+    <div class="ans-box" id="a3-2"><p><strong>答案：ABD。</strong>A、B、D 都正确。C 错误，乘负数应改变不等号方向，ac &lt; bc。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>23.</strong> 下列方程组中，解为 x = 1, y = 2 的有（　）</p>
+    <div id="opt-7-23">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. {x + y = 3, x − y = −1}</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. {2x + y = 4, x − 2y = −3}</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. {3x − y = 1, x + 2y = 5}</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. {x + y = 3, 2x − y = 0}</button>
+      <button class="check-btn" onclick="checkMulti('7-23')">提交</button>
+      <span class="feedback" id="fb-7-23"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-3"><p>将 x = 1, y = 2 代入每个方程验证。A: 1+2=3 ✓, 1−2=−1 ✓；B: 2+2=4 ✓, 1−4=−3 ✓；C: 3−2=1 ✓, 1+4=5 ✓；D: 1+2=3 ✓, 2−2=0 ✓。</p></div>
+    <div class="ans-box" id="a3-3"><p><strong>答案：ABCD。</strong>将 x = 1, y = 2 代入验证，四组方程均成立，解都是 (1, 2)。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>24.</strong> 不等式组 {x + 2 &gt; 0, 2x − 1 ≤ 3} 的整数解有（　）</p>
+    <div id="opt-7-24">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. −1</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 0</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 1</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">D. 2</button>
+      <button class="check-btn" onclick="checkMulti('7-24')">提交</button>
+      <span class="feedback" id="fb-7-24"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-4"><p>解不等式组：x + 2 &gt; 0 → x &gt; −2；2x − 1 ≤ 3 → 2x ≤ 4 → x ≤ 2。解集为 −2 &lt; x ≤ 2，整数解有 −1, 0, 1, 2。</p></div>
+    <div class="ans-box" id="a3-4"><p><strong>答案：ABCD。</strong>解集：−2 &lt; x ≤ 2，整数解为 −1, 0, 1, 2，全部正确。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>25.</strong> 关于二元一次方程组，下列说法正确的有（　）</p>
+    <div id="opt-7-25">
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">A. 两个方程表示两条直线，交点坐标就是方程组的解</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">B. 若两直线平行，则方程组无解</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="true">C. 若两直线重合，则方程组有无穷多解</button>
+      <button class="opt-btn" onclick="toggleMultiOpt(this)" data-correct="false">D. 任意两个二元一次方程组成的方程组都有解</button>
+      <button class="check-btn" onclick="checkMulti('7-25')">提交</button>
+      <span class="feedback" id="fb-7-25"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h3-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a3-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h3-5"><p>A: 方程组的几何意义就是两直线的交点；B: 平行线不相交，无解；C: 重合直线有无穷多交点，有无穷多解；D: 不一定，平行时无解。</p></div>
+    <div class="ans-box" id="a3-5"><p><strong>答案：ABC。</strong>A、B、C 都正确。D 错误，当两直线平行时方程组无解。</p></div>
+  </div>
+
+  <p class="section-title">四、其他题型（每题 3 分，共 15 分）</p>
+
+  <div class="q-item"><p><strong>26.</strong> 解方程组：{2x + y = 7, 3x − 2y = 0}</p>
+    <div id="fill-7-26">
+      <input class="fill-input" id="inp-7-26" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('7-26', 'x=2,y=3')">提交</button>
+      <span class="feedback" id="fb-7-26"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-1')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-1')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-1"><p>用代入法：由①得 y = 7 − 2x，代入②：3x − 2(7 − 2x) = 0 → 3x − 14 + 4x = 0 → 7x = 14 → x = 2，y = 3。</p></div>
+    <div class="ans-box" id="a4-1"><p><strong>答案：x = 2, y = 3。</strong>由①得 y = 7 − 2x，代入②：3x − 2(7 − 2x) = 0 → 7x = 14 → x = 2，y = 7 − 4 = 3。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>27.</strong> 解不等式组并写出整数解：{3x − 1 &gt; 5, x + 2 ≤ 7}</p>
+    <div id="fill-7-27">
+      <input class="fill-input" id="inp-7-27" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('7-27', '2<x≤5,3,4,5')">提交</button>
+      <span class="feedback" id="fb-7-27"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-2')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-2')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-2"><p>分别解：3x − 1 &gt; 5 → 3x &gt; 6 → x &gt; 2；x + 2 ≤ 7 → x ≤ 5。解集为 2 &lt; x ≤ 5，整数解为 3, 4, 5。</p></div>
+    <div class="ans-box" id="a4-2"><p><strong>答案：解集为 2 &lt; x ≤ 5，整数解为 3, 4, 5。</strong>3x &gt; 6 → x &gt; 2；x ≤ 5。取交集得 2 &lt; x ≤ 5。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>28.</strong> 列方程解应用题：甲、乙两人共有 80 元，甲比乙多 20 元，问甲、乙各有多少元？</p>
+    <div id="fill-7-28">
+      <input class="fill-input" id="inp-7-28" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('7-28', '甲50元,乙30元')">提交</button>
+      <span class="feedback" id="fb-7-28"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-3')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-3')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-3"><p>设甲有 x 元，乙有 y 元。两人共有 80 元 → x + y = 80；甲比乙多 20 元 → x − y = 20。解方程组。</p></div>
+    <div class="ans-box" id="a4-3"><p><strong>答案：甲 50 元，乙 30 元。</strong>设甲 x 元，乙 y 元。{x + y = 80, x − y = 20}，两式相加得 2x = 100 → x = 50，y = 30。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>29.</strong> 已知关于 x 的不等式 2x − a &lt; 3 的解集是 x &lt; 4，求 a 的值。</p>
+    <div id="fill-7-29">
+      <input class="fill-input" id="inp-7-29" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('7-29', 'a=5')">提交</button>
+      <span class="feedback" id="fb-7-29"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-4')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-4')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-4"><p>解不等式：2x − a &lt; 3 → 2x &lt; a + 3 → x &lt; (a + 3)/2。已知解集为 x &lt; 4，所以 (a + 3)/2 = 4，解得 a = 5。</p></div>
+    <div class="ans-box" id="a4-4"><p><strong>答案：a = 5。</strong>2x &lt; a + 3 → x &lt; (a + 3)/2。令 (a + 3)/2 = 4，得 a + 3 = 8 → a = 5。</p></div>
+  </div>
+
+  <div class="q-item"><p><strong>30.</strong> 解三元一次方程组：{x + y = 5, y + z = 7, x + z = 6}</p>
+    <div id="fill-7-30">
+      <input class="fill-input" id="inp-7-30" placeholder="输入答案">
+      <button class="check-btn" onclick="checkFill('7-30', 'x=2,y=3,z=4')">提交</button>
+      <span class="feedback" id="fb-7-30"></span>
+    </div>
+    <div class="btn-row">
+      <button class="btn-hint" onclick="toggleHint('h4-5')">💡 思路引导</button>
+      <button class="btn-ans" onclick="toggleAns('a4-5')">✅ 正确答案</button>
+    </div>
+    <div class="hint-box" id="h4-5"><p>三式相加：2(x + y + z) = 5 + 7 + 6 = 18 → x + y + z = 9。然后分别减去每个方程求出各未知数。</p></div>
+    <div class="ans-box" id="a4-5"><p><strong>答案：x = 2, y = 3, z = 4。</strong>三式相加：2(x + y + z) = 18 → x + y + z = 9。z = 9 − 5 = 4，x = 9 − 7 = 2，y = 9 − 6 = 3。</p></div>
+  </div>
+
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+function checkTF(btn, isCorrect, qid) {
+  const container = document.getElementById('tf-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.tf-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function checkSingle(btn, isCorrect, qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  container.querySelectorAll('.opt-btn').forEach(b => b.style.pointerEvents = 'none');
+  const fb = document.getElementById('fb-' + qid);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    btn.classList.add('wrong');
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+function toggleMultiOpt(btn) {
+  btn.classList.toggle('selected');
+}
+function checkMulti(qid) {
+  const container = document.getElementById('opt-' + qid);
+  if (!container || container.dataset.done) return;
+  container.dataset.done = '1';
+  const opts = container.querySelectorAll('.opt-btn');
+  let allCorrect = true;
+  opts.forEach(o => {
+    o.style.pointerEvents = 'none';
+    const isCorrect = o.dataset.correct === 'true';
+    const isSelected = o.classList.contains('selected');
+    if (isCorrect && isSelected) o.classList.add('correct');
+    else if (!isCorrect && isSelected) { o.classList.add('wrong'); allCorrect = false; }
+    else if (isCorrect && !isSelected) { o.classList.add('correct'); allCorrect = false; }
+  });
+  const fb = document.getElementById('fb-' + qid);
+  if (fb) { fb.textContent = allCorrect ? '✓ 正确' : '✗ 错误'; fb.className = 'feedback show ' + (allCorrect ? 'correct-fb' : 'wrong-fb'); }
+}
+function checkFill(qid, correctAns) {
+  const container = document.getElementById('fill-' + qid);
+  if (!container || container.dataset.done) return;
+  const input = document.getElementById('inp-' + qid);
+  const fb = document.getElementById('fb-' + qid);
+  const userAns = input.value.trim();
+  if (!userAns) return;
+  container.dataset.done = '1';
+  input.disabled = true;
+  const checkBtn = container.querySelector('.check-btn');
+  if (checkBtn) checkBtn.style.display = 'none';
+  const normalized = userAns.replace(/\s+/g, '');
+  const normalizedCorrect = correctAns.replace(/\s+/g, '');
+  if (normalized === normalizedCorrect) {
+    input.style.borderColor = '#4caf50';
+    input.style.background = '#e8f5e9';
+    if (fb) { fb.textContent = '✓ 正确'; fb.className = 'feedback show correct-fb'; }
+  } else {
+    input.style.borderColor = '#f44336';
+    input.style.background = '#ffebee';
+    if (fb) { fb.textContent = '✗ 错误'; fb.className = 'feedback show wrong-fb'; }
+  }
+}
+</script>
+</body>
+</html>

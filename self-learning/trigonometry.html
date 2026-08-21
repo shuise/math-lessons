@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>锐角三角函数 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #004d40; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #e0f2f1; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  .method-card { background: #fafafa; border: 2px solid #e0e0e0; border-radius: 10px; padding: 16px 18px; margin: 14px 0; }
+  .method-card h3 { margin-top: 0; color: var(--accent); }
+  .graphic { margin: 16px 0; text-align: center; }
+  .compare { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+  .compare > div { flex: 1; min-width: 250px; }
+  table { border-collapse: collapse; width: 100%; max-width: 600px; margin: 12px auto; }
+  th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: center; }
+  th { background: #e0f2f1; color: var(--accent); }
+  tr:nth-child(even) { background: #f9f9f9; }
+  @media (max-width: 720px) {
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./triangle.html">课件 14（三角形）</a>、21（勾股定理）、29（相似）</p>
+  <h1>锐角三角函数 — 边与角的关系</h1>
+
+  <h2>起源：尼罗河边的测量术</h2>
+  <div class="origin">
+    <p>在古埃及，每年尼罗河泛滥之后，田地的边界都会被冲毁。法老派出的<strong>测量师</strong>（rope stretcher，拉绳人）需要重新划分土地。他们手里只有一根打了结的绳子——但他们能测量出任何一块田地的面积，甚至能计算出金字塔的高度。</p>
+    <p>他们的秘密武器是什么？<strong>直角三角形中边与角之间的固定比例关系</strong>。比如，只要知道一个锐角的大小，就能推算出三条边之间的比例。这个思想，就是<strong>三角函数</strong>的起源。</p>
+    <div class="quote">
+      <p>"三角学（Trigonometry）这个词源自希腊语 trigōnon（三角形）和 metron（测量）——字面意思就是'测量三角形'。"</p>
+    </div>
+    <p>到了公元前 2 世纪，古希腊天文学家<strong>喜帕恰斯</strong>（Hipparchus）编制了人类历史上第一张"弦表"——也就是最早的三角函数表。他用这张表来计算天体位置，被誉为"三角学之父"。</p>
+    <p>《古今数学思想》中写道："三角学的诞生，标志着人类从'测量具体物体'走向了'用数学关系描述世界'。"</p>
+  </div>
+
+  <h2>概念与定义</h2>
+  <div class="story">
+    <h3>一、从直角三角形说起</h3>
+    <p>拿出一个直角三角形，我们来认识它的各个部分：</p>
+    <div class="graphic">
+      <svg viewBox="0 0 600 320" style="max-width:100%;height:auto;">
+        <defs>
+          <style>text.tlabel{font-size:16px;fill:#333;font-family:serif;font-style:italic}</style>
+        </defs>
+        <!-- 直角三角形 ABC，∠C=90° -->
+        <polygon points="80,280 320,280 80,80" fill="rgba(0,77,64,0.1)" stroke="#004d40" stroke-width="2.5"/>
+        <rect x="80" y="272" width="8" height="8" fill="none" stroke="#004d40" stroke-width="1.5"/>
+        <circle cx="80" cy="280" r="3" fill="#004d40"/>
+        <circle cx="320" cy="280" r="3" fill="#004d40"/>
+        <circle cx="80" cy="80" r="3" fill="#004d40"/>
+        <text x="70" y="300" class="tlabel">A</text>
+        <text x="328" y="300" class="tlabel">B</text>
+        <text x="70" y="70" class="tlabel">C</text>
+        <!-- 直角标记 -->
+        <text x="88" y="98" font-size="20" fill="#004d40">◻</text>
+        <!-- ∠A 标记 -->
+        <path d="M100,260 A20,20 0 0,0 118,236" fill="none" stroke="#c62828" stroke-width="2"/>
+        <text x="120" y="252" font-size="14" fill="#c62828" font-weight="bold">∠A</text>
+        <!-- 边标注 -->
+        <text x="195" y="298" font-size="14" fill="#1565c0" text-anchor="middle" font-weight="bold">∠A 的邻边 b</text>
+        <text x="52" y="185" font-size="14" fill="#c62828" text-anchor="middle" transform="rotate(-90,52,185)" font-weight="bold">∠A 的对边 a</text>
+        <text x="215" y="175" font-size="14" fill="#2e7d32" text-anchor="middle" font-weight="bold">斜边 c</text>
+        <!-- 口诀 -->
+        <text x="300" y="145" font-size="12" fill="#666">斜边是直角所对的边</text>
+        <text x="300" y="162" font-size="12" fill="#666">对边是∠A所对的边</text>
+        <text x="300" y="179" font-size="12" fill="#666">邻边是夹∠A(非斜边)的边</text>
+      </svg>
+    </div>
+    <div class="key">
+      <p><strong>三个关键概念（以 ∠A 为例）：</strong></p>
+      <ul>
+        <li><strong>斜边</strong>：直角所对的边（最长的那条，记作 c）</li>
+        <li><strong>对边</strong>：∠A 所对的直角边（记作 a）</li>
+        <li><strong>邻边</strong>：夹着 ∠A 的另一条直角边（记作 b）</li>
+      </ul>
+      <p>注意：<strong>对边和邻边是相对于哪个角来说的</strong>。以 ∠A 为参考，a 是对边，b 是邻边；以 ∠B 为参考，b 是对边，a 是邻边。</p>
+    </div>
+
+    <h3>二、正弦、余弦、正切</h3>
+    <p>如果两个直角三角形有一个锐角相等，根据相似三角形的知识，它们的三边比例是固定的——不管三角形画得多大，这些比例都不会变。这就引出了三个最重要的比值：</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 600 400" style="max-width:100%;height:auto;">
+        <defs>
+          <style>text.tlabel{font-size:16px;fill:#333;font-family:serif;font-style:italic}</style>
+        </defs>
+        <!-- 大三角形 -->
+        <polygon points="80,350 380,350 80,80" fill="rgba(0,77,64,0.08)" stroke="#004d40" stroke-width="2"/>
+        <rect x="80" y="342" width="8" height="8" fill="none" stroke="#004d40" stroke-width="1.5"/>
+        <circle cx="80" cy="350" r="3" fill="#004d40"/>
+        <circle cx="380" cy="350" r="3" fill="#004d40"/>
+        <circle cx="80" cy="80" r="3" fill="#004d40"/>
+        <text x="70" y="370" class="tlabel">A</text>
+        <text x="388" y="370" class="tlabel">B</text>
+        <text x="70" y="70" class="tlabel">C</text>
+        <text x="88" y="98" font-size="20" fill="#004d40">◻</text>
+        <!-- ∠A 标记 -->
+        <path d="M105,330 A24,24 0 0,0 126,300" fill="none" stroke="#c62828" stroke-width="2"/>
+        <text x="130" y="320" font-size="14" fill="#c62828" font-weight="bold">∠A</text>
+        <!-- 边标注 -->
+        <text x="230" y="368" font-size="14" fill="#1565c0" text-anchor="middle" font-weight="bold">邻边</text>
+        <text x="48" y="215" font-size="14" fill="#c62828" text-anchor="middle" transform="rotate(-90,48,215)" font-weight="bold">对边</text>
+        <text x="245" y="210" font-size="14" fill="#2e7d32" text-anchor="middle" font-weight="bold">斜边</text>
+
+        <!-- 公式区域 -->
+        <text x="520" y="100" font-size="14" fill="#c62828" font-weight="bold">sin A =</text>
+        <text x="520" y="120" font-size="14" fill="#c62828" text-anchor="middle">∠A的对边</text>
+        <line x1="460" y1="125" x2="580" y2="125" stroke="#c62828" stroke-width="1"/>
+        <text x="520" y="140" font-size="14" fill="#c62828" text-anchor="middle">斜边</text>
+        <text x="520" y="160" font-size="12" fill="#999" text-anchor="middle">= a/c</text>
+        <text x="520" y="180" font-size="12" fill="#999" text-anchor="middle">读作 "赛因 A"</text>
+
+        <text x="520" y="220" font-size="14" fill="#1565c0" font-weight="bold">cos A =</text>
+        <text x="520" y="240" font-size="14" fill="#1565c0" text-anchor="middle">∠A的邻边</text>
+        <line x1="460" y1="245" x2="580" y2="245" stroke="#1565c0" stroke-width="1"/>
+        <text x="520" y="260" font-size="14" fill="#1565c0" text-anchor="middle">斜边</text>
+        <text x="520" y="280" font-size="12" fill="#999" text-anchor="middle">= b/c</text>
+        <text x="520" y="300" font-size="12" fill="#999" text-anchor="middle">读作 "扣赛因 A"</text>
+
+        <text x="520" y="340" font-size="14" fill="#2e7d32" font-weight="bold">tan A =</text>
+        <text x="520" y="360" font-size="14" fill="#2e7d32" text-anchor="middle">∠A的对边</text>
+        <line x1="460" y1="365" x2="580" y2="365" stroke="#2e7d32" stroke-width="1"/>
+        <text x="520" y="380" font-size="14" fill="#2e7d32" text-anchor="middle">∠A的邻边</text>
+        <text x="520" y="400" font-size="12" fill="#999" text-anchor="middle">= a/b</text>
+        <text x="520" y="420" font-size="12" fill="#999" text-anchor="middle">读作 "坦振特 A"</text>
+      </svg>
+    </div>
+
+    <div class="formula">
+      <p style="text-align:center;font-size:1.15em;font-weight:bold;">在 Rt△ABC 中，∠C = 90°，则对于锐角 A：</p>
+      <table>
+        <tr><th>名称</th><th>符号</th><th>定义</th><th>记忆口诀</th></tr>
+        <tr>
+          <td>正弦</td>
+          <td style="color:#c62828;font-weight:bold;">sin A</td>
+          <td>对边 / 斜边 = a/c</td>
+          <td>正对斜</td>
+        </tr>
+        <tr>
+          <td>余弦</td>
+          <td style="color:#1565c0;font-weight:bold;">cos A</td>
+          <td>邻边 / 斜边 = b/c</td>
+          <td>余邻斜</td>
+        </tr>
+        <tr>
+          <td>正切</td>
+          <td style="color:#2e7d32;font-weight:bold;">tan A</td>
+          <td>对边 / 邻边 = a/b</td>
+          <td>正对邻</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="key">
+      <p><strong>记忆口诀：</strong></p>
+      <p style="text-align:center;font-size:1.1em;"><strong>正弦对斜，余弦邻斜，正切对邻。</strong></p>
+      <p>还可以用英文缩写记：<strong>SOH-CAH-TOA</strong>（Sin = Opposite/Hypotenuse, Cos = Adjacent/Hypotenuse, Tan = Opposite/Adjacent）。</p>
+    </div>
+
+    <div class="example">
+      <p><strong>例：</strong>在 Rt△ABC 中，∠C = 90°，AC = 3，BC = 4，AB = 5。求 sin A、cos A、tan A 和 sin B、cos B、tan B。</p>
+      <p><strong>解：</strong></p>
+      <ul>
+        <li>sin A = 对边/斜边 = BC/AB = <strong>4/5</strong></li>
+        <li>cos A = 邻边/斜边 = AC/AB = <strong>3/5</strong></li>
+        <li>tan A = 对边/邻边 = BC/AC = <strong>4/3</strong></li>
+        <li>sin B = 对边/斜边 = AC/AB = <strong>3/5</strong>（注意：sin B = cos A！）</li>
+        <li>cos B = 邻边/斜边 = BC/AB = <strong>4/5</strong>（注意：cos B = sin A！）</li>
+        <li>tan B = 对边/邻边 = AC/BC = <strong>3/4</strong></li>
+      </ul>
+      <p>发现了吗？<strong>sin A = cos B，cos A = sin B</strong>。这是因为 A + B = 90°，两个角互余。</p>
+    </div>
+  </div>
+
+  <h2>逻辑推导</h2>
+
+  <h3>一、互余关系</h3>
+  <div class="story">
+    <p>从上面的例子，我们发现了什么？当 A + B = 90° 时：</p>
+    <div class="formula">
+      <p style="text-align:center;font-size:1.1em;"><strong>sin A = cos (90° – A)</strong>　　<strong>cos A = sin (90° – A)</strong></p>
+      <p style="text-align:center;font-size:1.1em;"><strong>tan A = 1 / tan (90° – A)</strong></p>
+    </div>
+    <p>这很容易理解：以 ∠A 为参考，对边是 a，邻边是 b；以 ∠B = 90° – A 为参考，对边变成了 b，邻边变成了 a。所以正弦和余弦互换了，正切取倒数。</p>
+  </div>
+
+  <h3>二、同角三角函数的关系</h3>
+  <div class="story">
+    <p>从定义出发，我们还能推导出两个重要关系：</p>
+    <div class="formula">
+      <p><strong>平方关系：</strong>sin²A + cos²A = (a/c)² + (b/c)² = (a² + b²)/c² = c²/c² = <strong>1</strong></p>
+      <p style="text-align:center;font-size:1.15em;font-weight:bold;">sin²A + cos²A = 1</p>
+      <p><strong>商的关系：</strong>tan A = sin A / cos A = (a/c) / (b/c) = a/b</p>
+      <p style="text-align:center;font-size:1.15em;font-weight:bold;">tan A = sin A / cos A</p>
+    </div>
+    <div class="key">
+      <p><strong>这两个关系非常有用：</strong>已知 sin A 就能求出 cos A（用平方关系），进而求出 tan A（用商的关系）。</p>
+    </div>
+  </div>
+
+  <h3>三、特殊角的三角函数值</h3>
+  <div class="story">
+    <p>有两个特殊的直角三角形，你需要记住它们的边长比例。一旦记住，30°、45°、60° 的三角函数值随手可得。</p>
+
+    <div class="compare">
+      <div class="method-card">
+        <h3>45°-45°-90°（等腰直角三角形）</h3>
+        <div class="graphic">
+          <svg viewBox="0 0 260 200" style="max-width:100%;height:auto;">
+            <polygon points="40,180 200,180 40,20" fill="rgba(0,77,64,0.1)" stroke="#004d40" stroke-width="2.5"/>
+            <rect x="40" y="172" width="8" height="8" fill="none" stroke="#004d40" stroke-width="1.5"/>
+            <text x="30" y="200" font-size="15" font-family="serif" font-style="italic" fill="#333">A</text>
+            <text x="208" y="200" font-size="15" font-family="serif" font-style="italic" fill="#333">B</text>
+            <text x="30" y="15" font-size="15" font-family="serif" font-style="italic" fill="#333">C</text>
+            <text x="48" y="38" font-size="18" fill="#004d40">◻</text>
+            <!-- 45° 标记 -->
+            <path d="M58,162 A18,18 0 0,0 74,142" fill="none" stroke="#c62828" stroke-width="1.5"/>
+            <text x="80" y="158" font-size="12" fill="#c62828" font-weight="bold">45°</text>
+            <path d="M182,162 A18,18 0 0,1 198,142" fill="none" stroke="#c62828" stroke-width="1.5"/>
+            <text x="198" y="158" font-size="12" fill="#c62828" font-weight="bold">45°</text>
+            <!-- 边 -->
+            <text x="120" y="198" font-size="13" fill="#1565c0" text-anchor="middle">1</text>
+            <text x="22" y="105" font-size="13" fill="#c62828" text-anchor="middle" transform="rotate(-90,22,105)">1</text>
+            <text x="137" y="95" font-size="13" fill="#2e7d32" text-anchor="middle">√2</text>
+          </svg>
+        </div>
+        <p>三边比例：<strong>1 : 1 : √2</strong></p>
+        <p>sin 45° = 1/√2 = <strong>√2/2</strong></p>
+        <p>cos 45° = 1/√2 = <strong>√2/2</strong></p>
+        <p>tan 45° = 1/1 = <strong>1</strong></p>
+      </div>
+
+      <div class="method-card">
+        <h3>30°-60°-90°（半个等边三角形）</h3>
+        <div class="graphic">
+          <svg viewBox="0 0 260 200" style="max-width:100%;height:auto;">
+            <polygon points="40,180 240,180 40,20" fill="rgba(0,77,64,0.1)" stroke="#004d40" stroke-width="2.5"/>
+            <rect x="40" y="172" width="8" height="8" fill="none" stroke="#004d40" stroke-width="1.5"/>
+            <text x="30" y="200" font-size="15" font-family="serif" font-style="italic" fill="#333">A</text>
+            <text x="248" y="200" font-size="15" font-family="serif" font-style="italic" fill="#333">B</text>
+            <text x="30" y="15" font-size="15" font-family="serif" font-style="italic" fill="#333">C</text>
+            <text x="48" y="38" font-size="18" fill="#004d40">◻</text>
+            <!-- 30° 标记 -->
+            <path d="M58,162 A18,18 0 0,0 74,142" fill="none" stroke="#c62828" stroke-width="1.5"/>
+            <text x="80" y="158" font-size="12" fill="#c62828" font-weight="bold">30°</text>
+            <!-- 60° 标记 -->
+            <path d="M222,162 A18,18 0 0,1 238,141" fill="none" stroke="#1565c0" stroke-width="1.5"/>
+            <text x="230" y="158" font-size="12" fill="#1565c0" font-weight="bold">60°</text>
+            <!-- 边 -->
+            <text x="140" y="198" font-size="13" fill="#1565c0" text-anchor="middle">√3</text>
+            <text x="22" y="105" font-size="13" fill="#c62828" text-anchor="middle" transform="rotate(-90,22,105)">1</text>
+            <text x="155" y="95" font-size="13" fill="#2e7d32" text-anchor="middle">2</text>
+          </svg>
+        </div>
+        <p>三边比例：<strong>1 : √3 : 2</strong>（30° 对边最短，为 1）</p>
+        <p>sin 30° = 1/2，cos 30° = √3/2，tan 30° = 1/√3 = <strong>√3/3</strong></p>
+        <p>sin 60° = √3/2，cos 60° = 1/2，tan 60° = √3/1 = <strong>√3</strong></p>
+      </div>
+    </div>
+
+    <div class="key">
+      <p><strong>一张表全记住：</strong></p>
+      <table>
+        <tr><th>角度</th><th>sin</th><th>cos</th><th>tan</th></tr>
+        <tr><td>30°</td><td>1/2</td><td>√3/2</td><td>√3/3</td></tr>
+        <tr><td>45°</td><td>√2/2</td><td>√2/2</td><td>1</td></tr>
+        <tr><td>60°</td><td>√3/2</td><td>1/2</td><td>√3</td></tr>
+      </table>
+      <p><strong>记忆技巧：</strong>sin 30°、45°、60° = √1/2、√2/2、√3/2（分子依次是 √1、√2、√3，分母都是 2）。cos 反过来：√3/2、√2/2、√1/2。tan = sin/cos。</p>
+    </div>
+  </div>
+
+  <h3>四、解直角三角形</h3>
+  <div class="story">
+    <p>"解直角三角形"就是：已知直角三角形中的<strong>部分元素</strong>（边或角），求出<strong>其余所有未知元素</strong>。</p>
+    <p>一个直角三角形共有 6 个元素：3 条边 + 3 个角（其中一个是直角 90°）。除去直角，还有 5 个"自由"元素：2 个锐角 + 3 条边。</p>
+    <p><strong>只要知道其中 2 个元素（至少有一个是边），就能求出其余元素。</strong></p>
+
+    <div class="compare">
+      <div class="method-card">
+        <h3>已知一边一角，求其余</h3>
+        <p><strong>例：</strong>在 Rt△ABC 中，∠C = 90°，∠A = 30°，AB = 10。求 BC、AC 和 ∠B。</p>
+        <p><strong>解：</strong></p>
+        <ul>
+          <li>∠B = 90° – 30° = <strong>60°</strong></li>
+          <li>sin A = BC/AB → BC = AB·sin 30° = 10 × 1/2 = <strong>5</strong></li>
+          <li>cos A = AC/AB → AC = AB·cos 30° = 10 × √3/2 = <strong>5√3</strong></li>
+        </ul>
+      </div>
+      <div class="method-card">
+        <h3>已知两边，求其余</h3>
+        <p><strong>例：</strong>在 Rt△ABC 中，∠C = 90°，BC = 6，AC = 8。求 AB 和 ∠A、∠B。</p>
+        <p><strong>解：</strong></p>
+        <ul>
+          <li>AB = √(6² + 8²) = √100 = <strong>10</strong>（勾股定理）</li>
+          <li>tan A = BC/AC = 6/8 = 3/4 → ∠A ≈ <strong>36.9°</strong></li>
+          <li>∠B = 90° – ∠A ≈ <strong>53.1°</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h3>五、实际问题：测高与测距</h3>
+  <div class="story">
+    <p>三角函数最酷的应用就是<strong>不直接测量，用计算代替</strong>。你想知道一棵树有多高？不用爬上去，站在地上就能算出来。</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 600 340" style="max-width:100%;height:auto;">
+        <defs>
+          <style>text{font-family:sans-serif}</style>
+        </defs>
+        <!-- 地面 -->
+        <line x1="30" y1="290" x2="570" y2="290" stroke="#999" stroke-width="1.5"/>
+        <!-- 树 -->
+        <rect x="280" y="90" width="12" height="200" fill="#4e342e" rx="2"/>
+        <ellipse cx="286" cy="85" rx="40" ry="35" fill="#2e7d32"/>
+        <text x="286" y="75" text-anchor="middle" font-size="14" fill="#2e7d32" font-weight="bold">树</text>
+        <!-- 观测者 -->
+        <circle cx="80" cy="280" r="8" fill="#1565c0"/>
+        <line x1="80" y1="272" x2="80" y2="260" stroke="#1565c0" stroke-width="2.5"/>
+        <text x="80" y="310" text-anchor="middle" font-size="12" fill="#1565c0">观测者</text>
+        <!-- 视线 -->
+        <line x1="80" y1="280" x2="286" y2="90" stroke="#c62828" stroke-width="2" stroke-dasharray="8,4"/>
+        <!-- 水平线 -->
+        <line x1="80" y1="280" x2="286" y2="280" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <!-- 角度 -->
+        <path d="M100,280 A20,20 0 0,0 115,260" fill="none" stroke="#c62828" stroke-width="2"/>
+        <text x="120" y="272" font-size="13" fill="#c62828" font-weight="bold">仰角 α</text>
+        <!-- 距离 -->
+        <text x="183" y="275" font-size="13" fill="#1565c0" text-anchor="middle">水平距离 d</text>
+        <text x="183" y="268" font-size="11" fill="#999" text-anchor="middle">← 可以测量 →</text>
+        <!-- 高度 -->
+        <text x="310" y="185" font-size="13" fill="#c62828" text-anchor="middle">树高 h</text>
+        <text x="310" y="200" font-size="11" fill="#999" text-anchor="middle">= ?</text>
+        <!-- 公式 -->
+        <text x="286" y="345" font-size="14" fill="#004d40" text-anchor="middle" font-weight="bold">tan α = h / d  →  h = d · tan α</text>
+      </svg>
+    </div>
+
+    <div class="example">
+      <p><strong>实例：</strong>小明站在离树 20 米远的地方，用测角仪测得树顶的<strong>仰角</strong>为 30°。已知小明的眼睛离地面 1.5 米。求树高。</p>
+      <p><strong>解：</strong>树高 = 1.5 + 20 × tan 30° = 1.5 + 20 × √3/3 ≈ 1.5 + 20 × 0.577 ≈ 1.5 + 11.55 ≈ <strong>13.05 米</strong></p>
+    </div>
+
+    <p>除了仰角（抬头看），还有<strong>俯角</strong>（低头看）。站在山顶看山脚的房子，视线和水平线之间的夹角就是俯角。原理完全一样，只是方向不同。</p>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>不用计算器，你能证明 sin 15° = (√6 – √2)/4 吗？（提示：15° = 45° – 30°，需要用到高中才学的公式，但你可以画一个 30°-60°-90° 三角形，再在 30° 角处作角平分线试试。）</p>
+    <p><strong>问题 2：</strong>sin A 能大于 1 吗？cos A 呢？tan A 呢？请解释原因。</p>
+    <p><strong>问题 3：</strong>在 Rt△ABC 中，∠C = 90°，sin A = 3/5。求 cos A 和 tan A（不用勾股定理，直接用平方关系）。</p>
+    <p><strong>问题 4：</strong>一艘船在海上航行，从灯塔的正东方向开始，向北偏东 30° 方向行驶了 10 海里。此时船在灯塔的什么方向？距离灯塔多远？</p>
+  </div>
+
+  <h2>拓展阅读：一张古老的"三角函数表"</h2>
+  <div class="extend">
+    <p>在计算器和电脑发明之前，人们怎么计算三角函数值呢？答案是：<strong>查表</strong>。</p>
+    <p>公元 2 世纪，古希腊天文学家<strong>托勒密</strong>（Ptolemy）在他的巨著《天文学大成》（Almagest）中，给出了一张从 0° 到 180° 每隔半度的弦表——这相当于最早的三角函数表。他花了大量篇幅描述如何用几何方法算出这些值。</p>
+    <p>到了 16 世纪，德国数学家<strong>雷蒂库斯</strong>（Rheticus）花了 12 年时间，编制了每隔 10 秒（即 1/360 度）的三角函数表——精确到 10 位小数！这在当时是一项极其浩大的计算工程。</p>
+
+    <div class="quote">
+      <p>"在 17 世纪，对数被发明后，天文学家的寿命延长了一倍。"——拉普拉斯</p>
+    </div>
+
+    <p>为什么拉普拉斯这么说？因为天文学家每天要做大量的三角函数乘除运算，非常耗时。而对数将乘除变成加减，将三角函数计算大大简化。再加上精确的三角函数表，天文学家们终于不用整天埋头计算了。</p>
+
+    <p><strong>今天：</strong>你只需要在计算器上按一个键，sin 37° 的结果就出来了。但下次按这个键的时候，不妨想一想：为了这个瞬间的答案，人类走了两千年的路。</p>
+
+    <p><strong>推荐阅读：</strong>《三角之美——正弦、余弦和正切的故事》（Eli Maor 著），这是一本用故事讲述三角函数历史的精彩著作。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 在 Rt△ABC 中，∠C = 90°，AB = 5，BC = 3。求 sin A、cos A、tan A。</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">先用勾股定理求 AC：AC = √(5² – 3²) = 4。然后按定义求：sin A = 对边/斜边 = BC/AB，cos A = 邻边/斜边 = AC/AB，tan A = 对边/邻边 = BC/AC。</div>
+    <div class="ans-box" id="a1">sin A = 3/5，cos A = 4/5，tan A = 3/4。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 求出下列各式的值：<br>(1) sin 30° + cos 60°<br>(2) tan 45° – sin 90°（提示：sin 90° = 1）<br>(3) sin²45° + cos²45°</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">代入特殊角的值：sin 30° = 1/2，cos 60° = 1/2，tan 45° = 1，sin 45° = cos 45° = √2/2。</div>
+    <div class="ans-box" id="a2">(1) 1/2 + 1/2 = <strong>1</strong>；(2) 1 – 1 = <strong>0</strong>；(3) (√2/2)² + (√2/2)² = 1/2 + 1/2 = <strong>1</strong>。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 已知 sin A = 5/13，∠A 为锐角。求 cos A 和 tan A。</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">用平方关系：sin²A + cos²A = 1 → cos²A = 1 – (5/13)² = 1 – 25/169 = 144/169 → cos A = 12/13（锐角取正）。tan A = sin A / cos A。</div>
+    <div class="ans-box" id="a3">cos A = 12/13，tan A = (5/13) / (12/13) = 5/12。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 比较大小：sin 30° 和 sin 45°；cos 30° 和 cos 45°；tan 30° 和 tan 45°。你能发现什么规律？</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">sin 30° = 1/2 = 0.5，sin 45° = √2/2 ≈ 0.707；cos 30° = √3/2 ≈ 0.866，cos 45° ≈ 0.707；tan 30° = √3/3 ≈ 0.577，tan 45° = 1。</div>
+    <div class="ans-box" id="a4">sin 30° <strong>&lt;</strong> sin 45°（角度越大，正弦越大）；cos 30° <strong>&gt;</strong> cos 45°（角度越大，余弦越小）；tan 30° <strong>&lt;</strong> tan 45°（角度越大，正切越大）。规律：锐角范围内，sin 和 tan 随角度增大而增大，cos 随角度增大而减小。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 在 Rt△ABC 中，∠C = 90°，∠A = 30°，AC = 6。求 BC 和 AB。</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">已知 ∠A = 30°，邻边 AC = 6。tan 30° = BC/AC → BC = AC·tan 30°；cos 30° = AC/AB → AB = AC/cos 30°。</div>
+    <div class="ans-box" id="a5">BC = 6 × √3/3 = <strong>2√3</strong>；AB = 6 / (√3/2) = 6 × 2/√3 = 12/√3 = <strong>4√3</strong>。（或直接用 30° 直角三角形比例 1:√3:2，AC 对应 √3，所以 BC = 2√3，AB = 4√3。）</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 在 Rt△ABC 中，∠C = 90°，tan A = 2，BC = 4。求 AC 和 AB。</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">tan A = BC/AC = 2 → AC = BC/2 = 2。再用勾股定理求 AB = √(BC² + AC²)。</div>
+    <div class="ans-box" id="a6">AC = 4/2 = <strong>2</strong>；AB = √(4² + 2²) = √20 = <strong>2√5</strong>。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>7.</strong> 一架梯子长 5 米，斜靠在墙上，梯子与地面夹角为 60°。梯子顶端离地面多高？梯子底端离墙多远？</p>
+    <button class="btn-sm" onclick="toggleHint('h7')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a7')">查看答案</button>
+    <div class="hint-box" id="h7">画出直角三角形：梯子是斜边（5m），地面是邻边，墙高是对边。sin 60° = 墙高/梯长 → 墙高 = 5 × sin 60°；cos 60° = 底端距离/梯长 → 距离 = 5 × cos 60°。</div>
+    <div class="ans-box" id="a7">顶端高度 = 5 × √3/2 ≈ <strong>4.33 米</strong>；底端距离 = 5 × 1/2 = <strong>2.5 米</strong>。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>8.</strong> 小明放风筝，线长 50 米，线与地面夹角为 30°。假设线是拉直的，风筝离地面多高？（忽略小明身高）</p>
+    <button class="btn-sm" onclick="toggleHint('h8')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a8')">查看答案</button>
+    <div class="hint-box" id="h8">线是斜边（50m），高度是对边。sin 30° = 高度/线长 → 高度 = 50 × sin 30°。</div>
+    <div class="ans-box" id="a8">高度 = 50 × 1/2 = <strong>25 米</strong>。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>9.</strong> 下列说法正确的是（　）<br>A. sin A 的值随 ∠A 的增大而减小<br>B. cos A 的值可以大于 1<br>C. tan A = sin A · cos A<br>D. 在 Rt△ABC 中，sin A = cos B</p>
+    <button class="btn-sm" onclick="toggleHint('h9')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a9')">查看答案</button>
+    <div class="hint-box" id="h9">A：sin 在锐角范围内随角度增大而增大，错。B：cos ≤ 1（邻边 ≤ 斜边），错。C：tan = sin/cos，不是 sin·cos，错。D：A + B = 90°，sin A = cos(90° – A) = cos B，对。</div>
+    <div class="ans-box" id="a9"><strong>D</strong>。互余两角的正弦等于余弦。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>10.</strong> 如图，在 △ABC 中，∠C = 90°，∠A = 30°，AB 的垂直平分线交 AC 于 D，交 AB 于 E。若 AC = 6，求 DE 的长。</p>
+    <button class="btn-sm" onclick="toggleHint('h10')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a10')">查看答案</button>
+    <div class="hint-box" id="h10">在 Rt△ABC 中，∠A = 30°，AC = 6，可求出 AB = 4√3。E 是 AB 中点，AE = 2√3。在 Rt△ADE 中，∠A = 30°，tan 30° = DE/AE → DE = AE·tan 30°。</div>
+    <div class="ans-box" id="a10">AB = AC/cos 30° = 6/(√3/2) = 4√3。AE = 2√3。DE = AE·tan 30° = 2√3 × √3/3 = 2 × 3/3 = <strong>2</strong>。</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>正弦、余弦、正切</strong>是直角三角形中边与角的比值，它们只取决于锐角的大小，与三角形大小无关（相似原理）</li>
+      <li><strong>记忆口诀：</strong>正弦对斜，余弦邻斜，正切对邻（SOH-CAH-TOA）</li>
+      <li><strong>重要关系：</strong>sin²A + cos²A = 1；tan A = sin A / cos A；sin A = cos(90° – A)</li>
+      <li><strong>特殊角必背：</strong>30°、45°、60° 的正弦、余弦、正切值——它们来自两个特殊的直角三角形</li>
+      <li><strong>解直角三角形：</strong>已知一边一角（或两边），用三角函数和勾股定理求出所有未知元素</li>
+      <li><strong>实际应用：</strong>测高（仰角）、测距——不直接量，用算的！</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="projection-views.html">下一课：投影与视图 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+<script src="../lessons/dt.js"></script>
+</body>
+</html>

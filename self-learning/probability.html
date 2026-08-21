@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>概率初步 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #e65100; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed #e65100; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  .prob-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  .prob-table td, .prob-table th { border: 1px solid #ddd; padding: 8px 12px; text-align: center; }
+  .prob-table th { background: #fff3e0; }
+  .tree-btn { display: inline-block; margin: 4px 6px; padding: 6px 16px; border: 2px solid #e65100; border-radius: 16px; background: #fff; color: #e65100; cursor: pointer; font-size: 0.9em; transition: 0.15s; }
+  .tree-btn:hover { background: #fff3e0; }
+  .tree-btn.active { background: #e65100; color: #fff; }
+
+  @media (max-width: 720px) {
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./fractions.html">课件 2（分数——概率是分数）</a>、<a href="./data-collection.html">课件 32（数据的收集与整理）</a></p>
+  <h1>第34课 概率初步</h1>
+
+  <h2>起源：赌徒的问题</h2>
+  <div class="origin">
+    <p><strong>1654 年，</strong>一位法国赌徒向数学家帕斯卡请教了一个问题：两个赌徒正在玩掷骰子的游戏，约定先赢够一定局数的人拿走全部赌金。但游戏中途被迫停止，此时两人赢的局数不一样——赌金该怎么分才公平？</p>
+    <p>帕斯卡被这个问题迷住了。他写信给另一位大数学家费马，两人你来我往地讨论，<strong>概率论就这样诞生了。</strong>他们发现：不确定性背后，隐藏着确定的规律。虽然一次掷骰子无法预知结果，但掷很多次，结果就呈现出稳定的比例。</p>
+    <p>今天，概率论已经渗透到生活的每个角落——天气预报说"明天降雨概率 70%"，保险公司用概率计算保费，药品试验用概率判断疗效，人工智能用概率来做决策。<strong>概率帮助我们理解不确定性，做出更明智的选择。</strong></p>
+  </div>
+
+  <h2>一、确定事件与随机事件</h2>
+  <div class="story">
+    <p>有些事情，我们<strong>事先能确定</strong>结果；有些事情，<strong>事先无法确定</strong>结果。这就是事件的分类。</p>
+
+    <div class="key">
+      <p><strong>确定事件：</strong>在条件不变的情况下，结果可以事先确定的事件。</p>
+      <ul>
+        <li><strong>必然事件：</strong>一定会发生。比如"太阳从东方升起"、"一个骰子掷出的点数小于 7"。</li>
+        <li><strong>不可能事件：</strong>一定不会发生。比如"太阳从西方升起"、"一个骰子掷出 7 点"。</li>
+      </ul>
+      <p><strong>随机事件：</strong>在条件不变的情况下，可能发生也可能不发生，事先无法确定的事件。</p>
+      <p>比如："抛一枚硬币，正面朝上"、"明天会下雨"、"掷骰子掷出 6 点"。</p>
+    </div>
+
+    <div class="example">
+      <strong>想一想：</strong>以下哪些是确定事件，哪些是随机事件？<br>
+      ① 水加热到 100℃ 会沸腾（标准大气压下）——<strong>必然事件</strong><br>
+      ② 买一张彩票中大奖——<strong>随机事件</strong><br>
+      ③ 一个正常骰子掷出 8 点——<strong>不可能事件</strong><br>
+      ④ 下周一学校会下雨——<strong>随机事件</strong><br>
+      ⑤ 一个人从 10 楼跳下会落地——<strong>必然事件</strong>
+    </div>
+
+    <p><strong>注意：</strong>判断一个事件是不是确定事件，要看"在给定的条件下"。比如"水在 100℃ 沸腾"在标准大气压下是必然事件，但在高山上（气压低），水不到 100℃ 就沸腾了！</p>
+  </div>
+
+  <h2>二、概率的定义</h2>
+  <div class="story">
+    <p>随机事件虽然不确定，但我们可以用<strong>一个数</strong>来衡量它发生的可能性大小。这个数就是<strong>概率</strong>。</p>
+
+    <div class="formula">
+      <p style="text-align:center;font-size:20px;"><strong>P(A) = 事件 A 发生的次数 / 所有可能结果的总数</strong></p>
+      <p style="text-align:center;color:#888;">（前提：每种结果出现的可能性相等）</p>
+    </div>
+
+    <p>用分数来理解最简单：</p>
+    <ul>
+      <li>抛一枚硬币，正面朝上的概率：P(正面) = 1/2</li>
+      <li>掷一个骰子，掷出 6 点的概率：P(6) = 1/6</li>
+      <li>掷一个骰子，掷出偶数的概率：P(偶数) = 3/6 = 1/2</li>
+    </ul>
+
+    <div class="key">
+      <p><strong>概率的范围：</strong></p>
+      <ul>
+        <li>必然事件的概率 = <strong>1</strong>（100%，一定会发生）</li>
+        <li>不可能事件的概率 = <strong>0</strong>（0%，一定不会发生）</li>
+        <li>随机事件的概率在 <strong>0 到 1 之间</strong>（越大越可能发生）</li>
+      </ul>
+      <p>所以概率永远满足：<strong>0 ≤ P(A) ≤ 1</strong></p>
+    </div>
+
+    <div class="graphic">
+      <div style="text-align:center;margin-bottom:8px;font-size:14px;color:#888;">概率数轴：从不可能到必然 ↓</div>
+      <svg viewBox="0 0 600 120" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+        <defs>
+          <linearGradient id="probGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#4caf50"/>
+            <stop offset="25%" stop-color="#ffeb3b"/>
+            <stop offset="50%" stop-color="#ff9800"/>
+            <stop offset="100%" stop-color="#f44336"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="600" height="120" fill="#fff" rx="8"/>
+        <text x="300" y="22" text-anchor="middle" font-size="15" fill="#333" font-weight="bold">概率数轴</text>
+        <!-- 数轴 -->
+        <line x1="60" y1="60" x2="540" y2="60" stroke="#555" stroke-width="2"/>
+        <polygon points="545,60 536,56 536,64" fill="#555"/>
+        <!-- 刻度 -->
+        <line x1="60" y1="54" x2="60" y2="66" stroke="#555" stroke-width="2"/>
+        <text x="60" y="80" text-anchor="middle" font-size="13" fill="#f44336" font-weight="bold">0</text>
+        <text x="60" y="94" text-anchor="middle" font-size="11" fill="#888">不可能</text>
+        <line x1="220" y1="54" x2="220" y2="66" stroke="#555" stroke-width="2"/>
+        <text x="220" y="80" text-anchor="middle" font-size="13" fill="#ff9800">0.25</text>
+        <text x="220" y="94" text-anchor="middle" font-size="11" fill="#888">不太可能</text>
+        <line x1="380" y1="54" x2="380" y2="66" stroke="#555" stroke-width="2"/>
+        <text x="380" y="80" text-anchor="middle" font-size="13" fill="#ff9800">0.75</text>
+        <text x="380" y="94" text-anchor="middle" font-size="11" fill="#888">很有可能</text>
+        <line x1="540" y1="54" x2="540" y2="66" stroke="#555" stroke-width="2"/>
+        <text x="540" y="80" text-anchor="middle" font-size="13" fill="#4caf50" font-weight="bold">1</text>
+        <text x="540" y="94" text-anchor="middle" font-size="11" fill="#888">必然</text>
+        <!-- 中点 -->
+        <line x1="300" y1="50" x2="300" y2="70" stroke="#1a73e8" stroke-width="2" stroke-dasharray="4,3"/>
+        <text x="300" y="48" text-anchor="middle" font-size="12" fill="#1a73e8" font-weight="bold">0.5 = 1/2</text>
+        <!-- 概率条 -->
+        <rect x="60" y="38" width="480" height="10" rx="5" fill="url(#probGrad)" opacity="0.3"/>
+        <!-- 示例标注 -->
+        <circle cx="60" cy="60" r="4" fill="#f44336"/>
+        <circle cx="300" cy="60" r="4" fill="#1a73e8"/>
+        <circle cx="540" cy="60" r="4" fill="#4caf50"/>
+        <text x="150" y="112" text-anchor="middle" font-size="11" fill="#888">掷骰子得 7 点</text>
+        <text x="300" y="112" text-anchor="middle" font-size="11" fill="#888">抛硬币正面</text>
+        <text x="450" y="112" text-anchor="middle" font-size="11" fill="#888">太阳升起</text>
+      </svg>
+    </div>
+  </div>
+
+  <h2>三、用列举法求概率</h2>
+  <div class="story">
+    <p>当可能的结果不多时，我们可以把<strong>所有可能的结果全部列出来</strong>，然后数一数。这就是<strong>列举法</strong>。常用的列举法有两种：<strong>列表法</strong>和<strong>树状图</strong>。</p>
+
+    <h3>3.1 列表法</h3>
+    <p>同时掷两个骰子，两个骰子的点数之和为 7 的概率是多少？</p>
+    <p>把第一个骰子的点数（1~6）写在一行，第二个骰子的点数（1~6）写在一列，交叉处就是点数之和：</p>
+
+    <table class="prob-table">
+      <tr><th></th><th>骰子2=1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
+      <tr><th>骰子1=1</th><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td style="background:#ffe0b2;font-weight:bold;">7</td></tr>
+      <tr><th>2</th><td>3</td><td>4</td><td>5</td><td>6</td><td style="background:#ffe0b2;font-weight:bold;">7</td><td>8</td></tr>
+      <tr><th>3</th><td>4</td><td>5</td><td>6</td><td style="background:#ffe0b2;font-weight:bold;">7</td><td>8</td><td>9</td></tr>
+      <tr><th>4</th><td>5</td><td>6</td><td style="background:#ffe0b2;font-weight:bold;">7</td><td>8</td><td>9</td><td>10</td></tr>
+      <tr><th>5</th><td>6</td><td style="background:#ffe0b2;font-weight:bold;">7</td><td>8</td><td>9</td><td>10</td><td>11</td></tr>
+      <tr><th>6</th><td style="background:#ffe0b2;font-weight:bold;">7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+    </table>
+
+    <p>总共 6 × 6 = <strong>36</strong> 种等可能的结果。其中和为 7 的有 6 种（斜线方向）。</p>
+    <p style="text-align:center;font-size:18px;">P(和为 7) = 6/36 = <strong>1/6</strong></p>
+
+    <h3>3.2 树状图</h3>
+    <p>抛一枚硬币<strong>三次</strong>，求恰好两次正面朝上的概率。</p>
+    <p>每次抛硬币有两种结果：正（H）或反（T）。用树状图一层层展开：</p>
+
+    <div class="graphic">
+      <div style="text-align:center;margin:10px 0;">
+        <button class="tree-btn active" onclick="drawTree('hhh')">全部展开</button>
+        <button class="tree-btn" onclick="drawTree('2h')">恰好两次正面</button>
+      </div>
+      <svg viewBox="0 0 600 400" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+        <defs>
+          <style>
+            .t-line { stroke: #999; stroke-width: 1.5; fill: none; }
+            .t-line.hl { stroke: #e65100; stroke-width: 2.5; }
+            .t-node { fill: #fff; stroke: #1a73e8; stroke-width: 2; }
+            .t-node.hl { fill: #ffe0b2; stroke: #e65100; stroke-width: 2.5; }
+            .t-label { fill: #333; font-size: 14px; text-anchor: middle; dominant-baseline: central; }
+            .t-label.hl { fill: #e65100; font-weight: bold; }
+            .t-hl-text { fill: #e65100; font-size: 13px; font-weight: bold; text-anchor: middle; }
+          </style>
+        </defs>
+        <rect x="0" y="0" width="600" height="400" fill="#fff" rx="8"/>
+        <text x="300" y="24" text-anchor="middle" font-size="15" fill="#333" font-weight="bold">抛硬币三次的树状图</text>
+
+        <!-- 第 0 层：起点 -->
+        <circle cx="300" cy="50" r="14" class="t-node" id="n0"/>
+        <text x="300" y="50" class="t-label">开始</text>
+
+        <!-- 第 1 层：第一次抛 -->
+        <line x1="296" y1="62" x2="210" y2="110" class="t-line" id="l1_1"/>
+        <line x1="304" y1="62" x2="390" y2="110" class="t-line" id="l1_2"/>
+        <circle cx="200" cy="115" r="14" class="t-node" id="n1_1"/>
+        <text x="200" y="115" class="t-label" id="t1_1">正</text>
+        <circle cx="400" cy="115" r="14" class="t-node" id="n1_2"/>
+        <text x="400" y="115" class="t-label" id="t1_2">反</text>
+
+        <!-- 第 2 层：第二次抛 -->
+        <line x1="193" y1="127" x2="155" y2="175" class="t-line" id="l2_1"/>
+        <line x1="207" y1="127" x2="245" y2="175" class="t-line" id="l2_2"/>
+        <line x1="393" y1="127" x2="355" y2="175" class="t-line" id="l2_3"/>
+        <line x1="407" y1="127" x2="445" y2="175" class="t-line" id="l2_4"/>
+        <circle cx="150" cy="180" r="14" class="t-node" id="n2_1"/>
+        <text x="150" y="180" class="t-label" id="t2_1">正</text>
+        <circle cx="250" cy="180" r="14" class="t-node" id="n2_2"/>
+        <text x="250" y="180" class="t-label" id="t2_2">反</text>
+        <circle cx="350" cy="180" r="14" class="t-node" id="n2_3"/>
+        <text x="350" y="180" class="t-label" id="t2_3">正</text>
+        <circle cx="450" cy="180" r="14" class="t-node" id="n2_4"/>
+        <text x="450" y="180" class="t-label" id="t2_4">反</text>
+
+        <!-- 第 3 层：第三次抛，8 个结果 -->
+        <g id="leaf1">
+          <line x1="143" y1="192" x2="130" y2="240" class="t-line" id="l3_1"/>
+          <circle cx="125" cy="245" r="14" class="t-node" id="n3_1"/>
+          <text x="125" y="245" class="t-label" id="t3_1">正</text>
+          <text x="125" y="272" class="t-label" style="font-size:11px;fill:#888;" id="r1">正正正</text>
+        </g>
+        <g id="leaf2">
+          <line x1="157" y1="192" x2="160" y2="240" class="t-line" id="l3_2"/>
+          <circle cx="160" cy="245" r="14" class="t-node" id="n3_2"/>
+          <text x="160" y="245" class="t-label" id="t3_2">反</text>
+          <text x="160" y="272" class="t-label" style="font-size:11px;fill:#888;" id="r2">正正反</text>
+        </g>
+        <g id="leaf3">
+          <line x1="243" y1="192" x2="230" y2="240" class="t-line" id="l3_3"/>
+          <circle cx="225" cy="245" r="14" class="t-node" id="n3_3"/>
+          <text x="225" y="245" class="t-label" id="t3_3">正</text>
+          <text x="225" y="272" class="t-label" style="font-size:11px;fill:#888;" id="r3">正反正</text>
+        </g>
+        <g id="leaf4">
+          <line x1="257" y1="192" x2="260" y2="240" class="t-line" id="l3_4"/>
+          <circle cx="260" cy="245" r="14" class="t-node" id="n3_4"/>
+          <text x="260" y="245" class="t-label" id="t3_4">反</text>
+          <text x="260" y="272" class="t-label" style="font-size:11px;fill:#888;" id="r4">正反反</text>
+        </g>
+        <g id="leaf5">
+          <line x1="343" y1="192" x2="330" y2="240" class="t-line" id="l3_5"/>
+          <circle cx="325" cy="245" r="14" class="t-node" id="n3_5"/>
+          <text x="325" y="245" class="t-label" id="t3_5">正</text>
+          <text x="325" y="272" class="t-label" style="font-size:11px;fill:#888;" id="r5">反正正</text>
+        </g>
+        <g id="leaf6">
+          <line x1="357" y1="192" x2="360" y2="240" class="t-line" id="l3_6"/>
+          <circle cx="360" cy="245" r="14" class="t-node" id="n3_6"/>
+          <text x="360" y="245" class="t-label" id="t3_6">反</text>
+          <text x="360" y="272" class="t-label" style="font-size:11px;fill:#888;" id="r6">反正反</text>
+        </g>
+        <g id="leaf7">
+          <line x1="443" y1="192" x2="430" y2="240" class="t-line" id="l3_7"/>
+          <circle cx="425" cy="245" r="14" class="t-node" id="n3_7"/>
+          <text x="425" y="245" class="t-label" id="t3_7">正</text>
+          <text x="425" y="272" class="t-label" style="font-size:11px;fill:#888;" id="r7">反反正</text>
+        </g>
+        <g id="leaf8">
+          <line x1="457" y1="192" x2="460" y2="240" class="t-line" id="l3_8"/>
+          <circle cx="460" cy="245" r="14" class="t-node" id="n3_8"/>
+          <text x="460" y="245" class="t-label" id="t3_8">反</text>
+          <text x="460" y="272" class="t-label" style="font-size:11px;fill:#888;" id="r8">反反反</text>
+        </g>
+
+        <!-- 图例 -->
+        <text x="300" y="310" text-anchor="middle" font-size="13" fill="#333" id="legend">共 8 种等可能结果。恰好两次正面的有：正正反、正反正、反正正，共 3 种。</text>
+        <text x="300" y="330" text-anchor="middle" font-size="15" fill="#e65100" font-weight="bold" id="prob-result">P(恰好两次正面) = 3/8</text>
+      </svg>
+    </div>
+
+    <div class="key">
+      <p><strong>列表法 vs 树状图：</strong></p>
+      <ul>
+        <li><strong>列表法</strong>适合"两个因素"的情况（如两个骰子），画成表格一目了然。</li>
+        <li><strong>树状图</strong>适合"多步操作"的情况（如抛三次硬币），一层层展开，不容易漏掉。</li>
+        <li>无论哪种方法，关键是：<strong>不重复、不遗漏</strong>地列出所有等可能的结果。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>四、用频率估计概率</h2>
+  <div class="story">
+    <p>有些情况下，我们<strong>无法直接列举</strong>所有可能的结果。比如：一个图钉扔到地上，钉尖朝上的概率是多少？新研发的疫苗有效概率是多少？</p>
+    <p>这时候，我们就要用<strong>实验</strong>——大量重复做同一个随机实验，用<strong>频率</strong>来估计<strong>概率</strong>。</p>
+
+    <div class="formula">
+      <p style="text-align:center;font-size:18px;"><strong>频率 = 事件发生的次数 ÷ 实验总次数</strong></p>
+      <p style="text-align:center;color:#888;">当实验次数足够多时，频率会稳定在概率附近。</p>
+    </div>
+
+    <p><strong>历史上著名的抛硬币实验：</strong></p>
+    <table class="prob-table">
+      <tr><th>实验者</th><th>抛掷次数</th><th>正面次数</th><th>正面频率</th></tr>
+      <tr><td>蒲丰（Buffon）</td><td>4,040</td><td>2,048</td><td>0.5069</td></tr>
+      <tr><td>皮尔逊（Pearson）</td><td>12,000</td><td>6,019</td><td>0.5016</td></tr>
+      <tr><td>皮尔逊（Pearson）</td><td>24,000</td><td>12,012</td><td>0.5005</td></tr>
+    </table>
+    <p>你看，抛的次数越多，频率越接近 0.5（理论概率）。这就是<strong>大数定律</strong>的思想：当实验次数足够大时，频率稳定于概率。</p>
+
+    <div class="graphic">
+      <div style="text-align:center;margin-bottom:8px;font-size:14px;color:#888;">频率随实验次数变化：越抛越接近 0.5 ↓</div>
+      <svg viewBox="0 0 600 280" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+        <defs>
+          <style>
+            .axis { stroke: #888; stroke-width: 1; }
+            .grid { stroke: #e0e0e0; stroke-width: 0.5; }
+            .data-line { fill: none; stroke: #e65100; stroke-width: 2.5; }
+            .target-line { fill: none; stroke: #1a73e8; stroke-width: 1.5; stroke-dasharray: 6,4; }
+          </style>
+        </defs>
+        <rect x="0" y="0" width="600" height="280" fill="#fff" rx="8"/>
+        <text x="300" y="22" text-anchor="middle" font-size="15" fill="#333" font-weight="bold">抛硬币：正面频率随抛掷次数变化</text>
+
+        <!-- 坐标轴 -->
+        <line x1="60" y1="240" x2="560" y2="240" class="axis"/>
+        <line x1="60" y1="40" x2="60" y2="240" class="axis"/>
+
+        <!-- 网格线 -->
+        <line x1="60" y1="190" x2="560" y2="190" class="grid"/>
+        <line x1="60" y1="140" x2="560" y2="140" class="grid"/>
+        <line x1="60" y1="90" x2="560" y2="90" class="grid"/>
+
+        <!-- 纵轴标签 -->
+        <text x="52" y="244" text-anchor="end" font-size="11" fill="#888">0</text>
+        <text x="52" y="194" text-anchor="end" font-size="11" fill="#888">0.25</text>
+        <text x="52" y="144" text-anchor="end" font-size="11" fill="#888">0.50</text>
+        <text x="52" y="94" text-anchor="end" font-size="11" fill="#888">0.75</text>
+        <text x="52" y="44" text-anchor="end" font-size="11" fill="#888">1.00</text>
+
+        <!-- 横轴标签 -->
+        <text x="160" y="258" text-anchor="middle" font-size="11" fill="#888">100</text>
+        <text x="260" y="258" text-anchor="middle" font-size="11" fill="#888">200</text>
+        <text x="360" y="258" text-anchor="middle" font-size="11" fill="#888">300</text>
+        <text x="460" y="258" text-anchor="middle" font-size="11" fill="#888">400</text>
+        <text x="560" y="258" text-anchor="middle" font-size="11" fill="#888">500</text>
+
+        <!-- 目标线 0.5 -->
+        <line x1="60" y1="140" x2="560" y2="140" class="target-line"/>
+        <text x="545" y="135" text-anchor="end" font-size="10" fill="#1a73e8">理论概率 0.5</text>
+
+        <!-- 模拟数据线（频率震荡收敛） -->
+        <polyline points="60,240 70,200 85,140 100,180 120,160 135,148 150,155 165,150 180,144 195,142 210,144 225,142 240,141 255,140 270,140 285,140 300,140 315,141 330,140 345,140 360,140 375,140 390,140 405,140 420,140 435,140 450,140 465,140 480,140 495,140 510,140 525,140 540,140 555,140" class="data-line"/>
+
+        <!-- 图例 -->
+        <circle cx="80" cy="268" r="4" fill="#e65100"/>
+        <text x="90" y="272" font-size="11" fill="#333">实际频率</text>
+        <line x1="160" y1="268" x2="190" y2="268" class="target-line"/>
+        <text x="196" y="272" font-size="11" fill="#333">理论概率 = 0.5</text>
+      </svg>
+    </div>
+
+    <div class="key">
+      <p><strong>频率与概率的区别：</strong></p>
+      <ul>
+        <li><strong>概率</strong>是理论值，是事件固有的可能性大小（比如抛硬币正面的概率就是 1/2）。</li>
+        <li><strong>频率</strong>是实验值，是实际实验中出现的比例。每次实验的频率可能不同。</li>
+        <li>当实验次数足够多时，频率会<strong>稳定在概率附近</strong>，这就是我们用频率估计概率的依据。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>小明和小红玩一个游戏：同时掷两个骰子，如果点数之和为奇数，小明赢；如果点数之和为偶数，小红赢。这个游戏公平吗？为什么？（提示：列举出所有 36 种结果，数一数奇数和偶数各有多少种。）</p>
+    <p><strong>问题 2：</strong>一个袋子里有 3 个红球和 2 个白球，闭上眼睛摸出两个球。摸出"一红一白"的概率是多少？摸出"两个红球"呢？（提示：给球编号，用树状图或列表法列举所有可能。）</p>
+    <p><strong>问题 3：</strong>天气预报说"明天降雨概率 70%"。这句话到底是什么意思？小明说"明天 70% 的时间会下雨"，小红说"明天 70% 的地区会下雨"，小华说"明天有 70% 的可能性会下雨"。谁说得对？</p>
+  </div>
+
+  <h2>拓展阅读</h2>
+  <div class="extend">
+    <p><strong>帕斯卡和费马的书信：</strong>1654 年，帕斯卡和费马通过书信讨论赌金分配问题，这些书信被认为是概率论的起点。有趣的是，他们从未见面，所有讨论都是通过信件完成的。从这些讨论中诞生了"数学期望"的概念——如果你有 50% 的概率赢 100 元，你的"期望收益"就是 50 元。保险公司就是利用这个原理来定价的：他们计算事故发生的概率，再乘以赔偿金额，得到的数字就是你应该交的保费。</p>
+    <p><strong>概率与决策：</strong>在生活中，我们每天都在不知不觉地使用概率思维。比如：出门带不带伞？如果降雨概率 70%，带伞是明智的；如果只有 10%，不带伞可能也没关系。又比如：要不要买彩票？中头奖的概率大约是千万分之一——比被闪电击中的概率还低！了解概率，能帮你做出更理性的选择。</p>
+    <p><strong>推荐阅读：</strong>《牛津通识读本：概率》——用通俗的语言讲清楚了概率的基本概念和日常应用；《魔鬼数学》——里面有很多关于概率和统计的有趣故事。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 指出下列事件中哪些是必然事件，哪些是不可能事件，哪些是随机事件：<br>
+    （1）从一副扑克牌中抽出一张，这张牌是黑桃<br>
+    （2）367 个人中，至少有两个人的生日相同<br>
+    （3）一个正常骰子掷出 1 点<br>
+    （4）负数大于正数</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">判断标准：一定发生？一定不发生？还是可能发生也可能不发生？注意（2）要用到"抽屉原理"——一年最多 366 天。</div>
+    <div class="ans-box" id="a1">（1）随机事件（抽到黑桃的概率是 13/54，不是 100% 也不是 0%）；（2）必然事件（一年最多 366 天，367 个人必有两人生日相同——抽屉原理）；（3）随机事件；（4）不可能事件（负数永远小于正数）</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 一个袋子里有 5 个球，分别标有数字 1、2、3、4、5。闭上眼睛从中摸出一个球，求：<br>
+    （1）摸到奇数号码的概率<br>
+    （2）摸到号码大于 3 的概率<br>
+    （3）摸到号码是 6 的概率</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">5 个球等可能被摸到。奇数：1、3、5（3 个）；大于 3：4、5（2 个）；6：不存在（0 个）。</div>
+    <div class="ans-box" id="a2">（1）P(奇数) = 3/5；（2）P(大于3) = 2/5；（3）P(号码是6) = 0/5 = 0（不可能事件）</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 同时掷两个骰子，求两个骰子的点数相同的概率。</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">用列表法。总共有 6×6 = 36 种结果。点数相同就是（1,1）、（2,2）、（3,3）、（4,4）、（5,5）、（6,6），共 6 种。</div>
+    <div class="ans-box" id="a3">P(点数相同) = 6/36 = 1/6</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 抛一枚硬币两次，求两次都是正面朝上的概率。用树状图来解答。</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">画树状图：第一次→正/反，第二次→正/反。共 4 种结果：正正、正反、反正、反反。只有"正正"符合条件。</div>
+    <div class="ans-box" id="a4">P(两次正面) = 1/4</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 一个不透明的袋子里有 2 个红球和 3 个蓝球（大小、手感完全一样）。闭上眼睛摸出一个球，摸到红球的概率是多少？</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">总共有 5 个球，每个球被摸到的可能性相等。红球有 2 个。</div>
+    <div class="ans-box" id="a5">P(红球) = 2/5</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 小明抛一枚硬币 50 次，正面朝上 28 次。请计算正面朝上的频率。这个频率恰好等于概率 1/2 吗？为什么？</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">频率 = 28/50 = 0.56。概率是理论值，频率是实验值，两者不一定相等，但随着实验次数增多，频率会接近概率。</div>
+    <div class="ans-box" id="a6">频率 = 28/50 = 0.56 = 56%。这并不等于概率 1/2 = 50%。因为频率是实验结果，有随机波动；概率是理论值。抛的次数越多，频率越接近 0.5。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>7.</strong> 一个转盘被分成 8 个相等的扇形，其中 3 个涂红色、2 个涂蓝色、3 个涂绿色。转动转盘，指针停止后，停在红色区域的概率是多少？</p>
+    <button class="btn-sm" onclick="toggleHint('h7')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a7')">查看答案</button>
+    <div class="hint-box" id="h7">8 个扇形面积相等，指针停在每个扇形的可能性相等。红色占 3 个扇形。</div>
+    <div class="ans-box" id="a7">P(红色) = 3/8</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>8.</strong> 从一副去掉大小王的扑克牌（共 52 张）中随机抽一张，求：<br>
+    （1）抽到红桃的概率<br>
+    （2）抽到 A（Ace）的概率<br>
+    （3）抽到红桃 A 的概率</p>
+    <button class="btn-sm" onclick="toggleHint('h8')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a8')">查看答案</button>
+    <div class="hint-box" id="h8">52 张牌中，红桃有 13 张，A 有 4 张（每种花色一张），红桃 A 只有 1 张。</div>
+    <div class="ans-box" id="a8">（1）P(红桃) = 13/52 = 1/4；（2）P(A) = 4/52 = 1/13；（3）P(红桃A) = 1/52</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>9.</strong> 小明做了一个实验：抛一枚硬币 100 次，正面朝上 45 次。他得出结论说"这枚硬币正面朝上的概率是 45%"。他的说法对吗？请说明理由。</p>
+    <button class="btn-sm" onclick="toggleHint('h9')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a9')">查看答案</button>
+    <div class="hint-box" id="h9">频率和概率是不同的概念。一次实验的频率不能直接当作概率，除非实验次数非常大。</div>
+    <div class="ans-box" id="a9">不对。他算出的是频率（45%），不是概率。概率是理论值（1/2 = 50%），频率是实验值。只有在实验次数非常大时，频率才接近概率。100 次实验的波动是正常的，如果继续抛 1000 次、10000 次，频率会更接近 50%。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>10.</strong> 一个家庭有两个孩子。已知其中一个是女孩，求另一个孩子也是女孩的概率。（假设生男生女的概率各为 1/2）</p>
+    <button class="btn-sm" onclick="toggleHint('h10')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a10')">查看答案</button>
+    <div class="hint-box" id="h10">两个孩子有四种等可能的情况：男男、男女、女男、女女。"已知其中一个是女孩"排除了"男男"，剩下三种情况中只有"女女"符合"另一个也是女孩"。</div>
+    <div class="ans-box" id="a10">P(另一个也是女孩) = 1/3。注意：这里不是 1/2！因为"已知一个是女孩"这个条件缩小了可能的结果范围，只剩下{男女, 女男, 女女}，其中只有"女女"满足条件。</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>确定事件</strong>（必然事件 + 不可能事件）vs <strong>随机事件</strong>——区别在于结果是否事先确定</li>
+      <li><strong>概率的定义：</strong>P(A) = 事件 A 发生的次数 ÷ 所有等可能结果的总数，概率永远在 0 到 1 之间</li>
+      <li><strong>列举法：</strong>列表法（适合两个因素）和树状图（适合多步操作），关键是<strong>不重复、不遗漏</strong></li>
+      <li><strong>频率估计概率：</strong>大量实验后，频率稳定在概率附近——这就是大数定律的思想</li>
+      <li><strong>概率 ≠ 频率：</strong>概率是理论值，频率是实验值，两者不一定相等，但实验次数越多越接近</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="index.html">返回课程列表</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+
+/* 树状图交互：高亮恰好两次正面的路径 */
+function drawTree(mode) {
+  var btns = document.querySelectorAll('.tree-btn');
+  btns.forEach(function(b){ b.classList.remove('active'); });
+  if (mode === 'hhh') {
+    document.querySelectorAll('.tree-btn')[0].classList.add('active');
+    // 全部复原
+    resetTree();
+  } else if (mode === '2h') {
+    document.querySelectorAll('.tree-btn')[1].classList.add('active');
+    resetTree();
+    // 高亮恰好两次正面的路径：正正反(leaf2), 正反正(leaf3), 反正正(leaf5)
+    highlightLeaf([2, 3, 5]);
+  }
+}
+
+function resetTree() {
+  var all = document.querySelectorAll('[id^="l"],[id^="n"],[id^="t"],[id^="r"]');
+  all.forEach(function(el){ el.classList.remove('hl'); });
+  document.getElementById('legend').textContent = '共 8 种等可能结果。恰好两次正面的有：正正反、正反正、反正正，共 3 种。';
+  document.getElementById('prob-result').textContent = 'P(恰好两次正面) = 3/8';
+}
+
+function highlightLeaf(nums) {
+  var names = ['','正正正','正正反','正反正','正反反','反正正','反正反','反反正','反反反'];
+  var hlNames = [];
+  nums.forEach(function(n){
+    ['l3_' + n, 'n3_' + n, 't3_' + n, 'r' + n].forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) el.classList.add('hl');
+    });
+    hlNames.push(names[n]);
+  });
+  document.getElementById('legend').textContent = '共 8 种等可能结果。高亮的是恰好两次正面的：' + hlNames.join('、') + '，共 ' + nums.length + ' 种。';
+}
+</script>
+<script src="../lessons/dt.js"></script>
+</body>
+</html>

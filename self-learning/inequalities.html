@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>不等式与不等式组 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #880e4f; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .warn { background: #fff3e0; border-left: 4px solid #ff5722; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  .compare-table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  .compare-table th, .compare-table td { border: 1px solid #ddd; padding: 10px 14px; text-align: center; }
+  .compare-table th { background: var(--accent); color: #fff; }
+  .compare-table td:first-child { background: #f5f5f5; font-weight: bold; }
+  .numberline-svg { display: block; max-width: 100%; height: auto; margin: 8px auto; }
+  @media (max-width: 720px) {
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote, .warn { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="linear-equations.html">课件 7（一元一次方程）</a>—— 移项、去括号、合并同类项、系数化 1</p>
+  <h1>不等式与不等式组</h1>
+
+  <!-- ==================== 前置知识 ==================== -->
+  <h2>前置知识：从方程到不等式</h2>
+  <div class="story">
+    <p>在课件 7 中，我们学会了用<strong>等式</strong>来表示"相等"关系：天平的左边等于右边，写成 x + 3 = 10。解方程时，我们在两边同时加减乘除同一个数，天平始终平衡。</p>
+    <p>但在生活中，很多问题不是"等于"而是"大于"或"小于"。</p>
+    <ul>
+      <li>"妈妈给的零花钱<strong>够</strong>买一本 15 元的笔记本吗？"—— 这是在问：钱包里的钱 ≥ 15 吗？</li>
+      <li>"身高<strong>超过</strong> 1.2 米才能买全票"—— 这是在问：身高 > 1.2 吗？</li>
+      <li>"这次考试分数<strong>不低于</strong> 90 分"—— 这是在问：分数 ≥ 90 吗？</li>
+    </ul>
+    <p>这一课，我们就来学习<strong>不等式</strong>—— 用 >、<、≥、≤ 来表示大小关系，并像解方程一样解出未知数的范围。</p>
+  </div>
+
+  <!-- ==================== 起源 ==================== -->
+  <h2>起源：人类什么时候开始比较大小的？</h2>
+  <div class="origin">
+    <p><strong>比较大小的意识，比等式更古老。</strong>原始人分猎物，就知道"这块肉更大"；古埃及人丈量土地，就知道"这块地比我那块大"。</p>
+    <p>但不等式作为一种<strong>数学工具</strong>，它的发展比方程晚得多。古希腊数学家欧几里得在《几何原本》中就已经用到了不等式推理，比如"三角形两边之和大于第三边"。但他没有专门的符号，全用文字叙述。</p>
+    <p><strong>符号的革命：</strong>我们现在用的 >（大于）和 <（小于）符号，是英国数学家<strong>托马斯·哈里奥特</strong>（Thomas Harriot，1560–1621）在 1631 年发明的。他也许只是觉得写"大于""小于"太麻烦，就画了两个像箭头的东西。≥ 和 ≤ 则是后来法国数学家<strong>布盖</strong>（Pierre Bouguer）在 1734 年引入的，意思是"大于或等于"和"小于或等于"。</p>
+    <p>有趣的是，哈里奥特也是第一个把不等式符号引入代数学的人。从此，人们不再说"x 比 5 大"，而是简洁地写成 <strong>x > 5</strong>。</p>
+  </div>
+
+  <!-- ==================== 概念与定义 ==================== -->
+  <h2>一、什么是不等式？</h2>
+  <div class="story">
+    <p><strong>不等式</strong>就是用 >、<、≥、≤ 连接两个式子，表示它们之间的大小关系。</p>
+
+    <div class="compare-table">
+      <table>
+        <tr><th>符号</th><th>读法</th><th>含义</th><th>举例</th></tr>
+        <tr><td><strong>&gt;</strong></td><td>大于</td><td>左边比右边大</td><td>x > 3：x 比 3 大</td></tr>
+        <tr><td><strong>&lt;</strong></td><td>小于</td><td>左边比右边小</td><td>y < 5：y 比 5 小</td></tr>
+        <tr><td><strong>≥</strong></td><td>大于或等于</td><td>左边不小于右边</td><td>x ≥ 3：x 至少是 3</td></tr>
+        <tr><td><strong>≤</strong></td><td>小于或等于</td><td>左边不大于右边</td><td>y ≤ 5：y 最多是 5</td></tr>
+      </table>
+    </div>
+
+    <p><strong>不等式的解</strong>和方程的解不一样。方程 x + 3 = 10 只有一个解 x = 7。但不等式 x + 3 > 10 的解是 <strong>x > 7</strong>，有无数个！x 可以是 7.1、8、100、1000……只要比 7 大就行。</p>
+    <p>所以，不等式的解通常是一个<strong>范围</strong>，我们把它画在数轴上。</p>
+  </div>
+
+  <h2>二、不等式的基本性质（与等式对比）</h2>
+  <div class="story">
+    <p>解方程时，我们在两边同时加减乘除同一个数，等式不变。不等式也有类似的规则，但<strong>有一条要特别小心</strong>！</p>
+
+    <div class="compare-table">
+      <table>
+        <tr><th>操作</th><th>等式</th><th>不等式</th></tr>
+        <tr><td>两边加同一个数</td><td>方向不变<br>a = b → a + c = b + c</td><td>方向不变<br>a > b → a + c > b + c</td></tr>
+        <tr><td>两边减同一个数</td><td>方向不变<br>a = b → a - c = b - c</td><td>方向不变<br>a > b → a - c > b - c</td></tr>
+        <tr><td>两边乘同一个<strong>正数</strong></td><td>方向不变<br>a = b → ac = bc</td><td>方向不变<br>a > b → ac > bc（c > 0）</td></tr>
+        <tr><td>两边除以同一个<strong>正数</strong></td><td>方向不变<br>a = b → a/c = b/c</td><td>方向不变<br>a > b → a/c > b/c（c > 0）</td></tr>
+        <tr style="background:#ffebee;"><td>两边乘同一个<strong>负数</strong></td><td>方向不变<br>a = b → ac = bc</td><td><strong>方向反转！</strong><br>a > b → ac < bc（c < 0）</td></tr>
+        <tr style="background:#ffebee;"><td>两边除以同一个<strong>负数</strong></td><td>方向不变<br>a = b → a/c = b/c</td><td><strong>方向反转！</strong><br>a > b → a/c < b/c（c < 0）</td></tr>
+      </table>
+    </div>
+
+    <div class="warn">
+      <p><strong>⚠️ 重点记忆：乘除负数，不等号方向反转！</strong></p>
+      <p>为什么？用具体的数来感受一下：</p>
+      <p>3 > 2，两边乘 -1：左边变成 -3，右边变成 -2。<br>但 -3 < -2（在数轴上，-3 在 -2 左边，更小）。<br>所以 3 > 2 变成 -3 < -2，方向反了！</p>
+    </div>
+
+    <div class="key">
+      <p><strong>口诀：</strong>加减不用愁，方向照旧走；乘除正数没事，乘除负数要回头！</p>
+    </div>
+
+    <!-- SVG 动画：负数反转演示 -->
+    <div style="text-align:center;margin:20px 0;">
+      <div style="margin-bottom:8px;font-size:14px;color:#888;">数轴演示：3 > 2，乘以 -1 后变成 -3 < -2 ↓</div>
+      <button onclick="flipDemo(0)" class="btn-sm" id="fd0" style="font-weight:bold;">原始：3 > 2</button>
+      <button onclick="flipDemo(1)" class="btn-sm" id="fd1">乘 -1：-3 < -2</button>
+      <svg viewBox="0 0 600 160" style="max-width:100%;height:auto;display:block;margin:12px auto;">
+        <defs>
+          <marker id="arrowRight" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <path d="M0,0 L8,3 L0,6 Z" fill="#880e4f"/>
+          </marker>
+          <marker id="arrowLeft" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+            <path d="M8,0 L0,3 L8,6 Z" fill="#880e4f"/>
+          </marker>
+        </defs>
+        <!-- 数轴 -->
+        <line x1="40" y1="60" x2="560" y2="60" stroke="#333" stroke-width="2" marker-end="url(#arrowRight)"/>
+        <line x1="560" y1="60" x2="40" y2="60" stroke="#333" stroke-width="2" marker-end="url(#arrowLeft)"/>
+        <!-- 刻度 -->
+        <g font-size="12" fill="#555" text-anchor="middle">
+          <line x1="100" y1="55" x2="100" y2="65" stroke="#333" stroke-width="2"/>
+          <text x="100" y="80">-3</text>
+          <line x1="180" y1="55" x2="180" y2="65" stroke="#333" stroke-width="2"/>
+          <text x="180" y="80">-2</text>
+          <line x1="260" y1="55" x2="260" y2="65" stroke="#333" stroke-width="2"/>
+          <text x="260" y="80">-1</text>
+          <line x1="340" y1="55" x2="340" y2="65" stroke="#333" stroke-width="2"/>
+          <text x="340" y="80">0</text>
+          <line x1="420" y1="55" x2="420" y2="65" stroke="#333" stroke-width="2"/>
+          <text x="420" y="80">1</text>
+          <line x1="500" y1="55" x2="500" y2="65" stroke="#333" stroke-width="2"/>
+          <text x="500" y="80">2</text>
+          <line x1="540" y1="55" x2="540" y2="65" stroke="#333" stroke-width="2"/>
+          <text x="540" y="80">3</text>
+        </g>
+        <!-- 原始：3 > 2 -->
+        <g id="originalGroup">
+          <circle cx="540" cy="60" r="7" fill="#e91e63" stroke="#880e4f" stroke-width="2"/>
+          <text x="540" y="48" text-anchor="middle" font-size="14" fill="#e91e63" font-weight="bold">3</text>
+          <circle cx="500" cy="60" r="7" fill="#5c6bc0" stroke="#3f51b5" stroke-width="2"/>
+          <text x="500" y="48" text-anchor="middle" font-size="14" fill="#5c6bc0" font-weight="bold">2</text>
+          <text x="300" y="32" text-anchor="middle" font-size="18" fill="#e91e63" font-weight="bold">3 &gt; 2 ✓</text>
+        </g>
+        <!-- 乘-1后：-3 < -2 -->
+        <g id="flippedGroup" style="display:none;">
+          <circle cx="100" cy="60" r="7" fill="#e91e63" stroke="#880e4f" stroke-width="2"/>
+          <text x="100" y="48" text-anchor="middle" font-size="14" fill="#e91e63" font-weight="bold">-3</text>
+          <circle cx="180" cy="60" r="7" fill="#5c6bc0" stroke="#3f51b5" stroke-width="2"/>
+          <text x="180" y="48" text-anchor="middle" font-size="14" fill="#5c6bc0" font-weight="bold">-2</text>
+          <text x="300" y="32" text-anchor="middle" font-size="18" fill="#e91e63" font-weight="bold">-3 &lt; -2 ✓（方向反转！）</text>
+        </g>
+        <!-- 底部说明 -->
+        <text x="300" y="145" text-anchor="middle" font-size="14" fill="#666" id="flipDesc">数轴上 3 在 2 的右边 → 3 > 2</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ==================== 逻辑推导 ==================== -->
+  <h2>三、一元一次不等式</h2>
+  <div class="story">
+    <p>一元一次不等式和一元一次方程很像，只不过等号变成了不等号。解法也几乎一样，只要记住<strong>乘除负数时方向反转</strong>就行。</p>
+
+    <div class="example">
+      <strong>例 1：</strong>解不等式 2x - 3 > 5<br><br>
+      <strong>移项：</strong>2x > 5 + 3 → 2x > 8<br>
+      <strong>系数化 1：</strong>两边除以 2（正数，方向不变）→ x > 4<br>
+      <strong>解集：</strong>x > 4，即所有大于 4 的数
+    </div>
+
+    <div class="example">
+      <strong>例 2：</strong>解不等式 -3x + 1 ≤ 10<br><br>
+      <strong>移项：</strong>-3x ≤ 10 - 1 → -3x ≤ 9<br>
+      <strong>系数化 1：</strong>两边除以 -3（<strong>负数，方向反转！</strong>）→ x ≥ -3<br>
+      <strong>解集：</strong>x ≥ -3，即所有大于或等于 -3 的数
+    </div>
+
+    <!-- SVG 数轴：x > 4 -->
+    <div style="text-align:center;margin:20px 0;">
+      <div style="margin-bottom:6px;font-size:14px;color:#888;">数轴表示：x > 4</div>
+      <svg viewBox="0 0 600 100" class="numberline-svg">
+        <defs>
+          <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <path d="M0,0 L8,3 L0,6 Z" fill="#880e4f"/>
+          </marker>
+        </defs>
+        <line x1="30" y1="40" x2="580" y2="40" stroke="#333" stroke-width="2" marker-end="url(#arr)"/>
+        <g font-size="12" fill="#555" text-anchor="middle">
+          <line x1="100" y1="35" x2="100" y2="45" stroke="#333" stroke-width="2"/><text x="100" y="62">0</text>
+          <line x1="200" y1="35" x2="200" y2="45" stroke="#333" stroke-width="2"/><text x="200" y="62">1</text>
+          <line x1="300" y1="35" x2="300" y2="45" stroke="#333" stroke-width="2"/><text x="300" y="62">2</text>
+          <line x1="400" y1="35" x2="400" y2="45" stroke="#333" stroke-width="2"/><text x="400" y="62">3</text>
+          <line x1="500" y1="35" x2="500" y2="45" stroke="#333" stroke-width="2"/><text x="500" y="62">4</text>
+        </g>
+        <!-- 空心圆表示不包含 -->
+        <circle cx="500" cy="40" r="8" fill="#fff" stroke="#880e4f" stroke-width="3"/>
+        <!-- 向右的加粗线 -->
+        <line x1="500" y1="40" x2="570" y2="40" stroke="#880e4f" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <p style="font-size:13px;color:#888;">空心圆表示不包含 4，向右的线表示所有大于 4 的数</p>
+    </div>
+
+    <!-- SVG 数轴：x ≥ -3 -->
+    <div style="text-align:center;margin:20px 0;">
+      <div style="margin-bottom:6px;font-size:14px;color:#888;">数轴表示：x ≥ -3</div>
+      <svg viewBox="0 0 600 100" class="numberline-svg">
+        <defs>
+          <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <path d="M0,0 L8,3 L0,6 Z" fill="#880e4f"/>
+          </marker>
+        </defs>
+        <line x1="30" y1="40" x2="580" y2="40" stroke="#333" stroke-width="2" marker-end="url(#arr2)"/>
+        <g font-size="12" fill="#555" text-anchor="middle">
+          <line x1="100" y1="35" x2="100" y2="45" stroke="#333" stroke-width="2"/><text x="100" y="62">-4</text>
+          <line x1="200" y1="35" x2="200" y2="45" stroke="#333" stroke-width="2"/><text x="200" y="62">-3</text>
+          <line x1="300" y1="35" x2="300" y2="45" stroke="#333" stroke-width="2"/><text x="300" y="62">-2</text>
+          <line x1="400" y1="35" x2="400" y2="45" stroke="#333" stroke-width="2"/><text x="400" y="62">-1</text>
+          <line x1="500" y1="35" x2="500" y2="45" stroke="#333" stroke-width="2"/><text x="500" y="62">0</text>
+        </g>
+        <!-- 实心圆表示包含 -->
+        <circle cx="200" cy="40" r="8" fill="#880e4f" stroke="#880e4f" stroke-width="2"/>
+        <line x1="200" y1="40" x2="570" y2="40" stroke="#880e4f" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <p style="font-size:13px;color:#888;">实心圆表示包含 -3，向右的线表示所有大于 -3 的数</p>
+    </div>
+  </div>
+
+  <h2>四、一元一次不等式组</h2>
+  <div class="story">
+    <p>有时候一个问题需要同时满足<strong>两个</strong>不等式条件。比如："小明身高超过 1.2 米，但不超过 1.5 米"，写成不等式组就是：</p>
+    <p style="text-align:center;font-size:18px;"><strong>x > 1.2 且 x ≤ 1.5</strong></p>
+    <p>这组不等式的解就是两个条件的<strong>交集</strong>（公共部分）：1.2 < x ≤ 1.5。</p>
+
+    <div class="key">
+      <p><strong>解不等式组的方法：</strong></p>
+      <ol>
+        <li>分别解出每个不等式的解集</li>
+        <li>把每个解集画在数轴上</li>
+        <li>找出它们的<strong>公共部分</strong>（交集）</li>
+      </ol>
+    </div>
+
+    <div class="example">
+      <strong>例 3：</strong>解不等式组
+      <div style="text-align:center;margin:10px 0;">
+        <span style="font-size:20px;">{</span>
+        <span style="font-size:18px;"> 2x - 1 &gt; 3<br> x + 2 ≤ 8</span>
+      </div>
+      <strong>解第一个：</strong>2x - 1 > 3 → 2x > 4 → x > 2<br>
+      <strong>解第二个：</strong>x + 2 ≤ 8 → x ≤ 6<br>
+      <strong>取交集：</strong>2 < x ≤ 6
+    </div>
+
+    <!-- SVG 数轴：不等式组的交集 -->
+    <div style="text-align:center;margin:20px 0;">
+      <div style="margin-bottom:6px;font-size:14px;color:#888;">数轴表示：x > 2 且 x ≤ 6 → 交集为 2 < x ≤ 6</div>
+      <svg viewBox="0 0 600 180" class="numberline-svg">
+        <defs>
+          <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <path d="M0,0 L8,3 L0,6 Z" fill="#333"/>
+          </marker>
+        </defs>
+        <!-- x > 2 -->
+        <text x="20" y="28" font-size="13" fill="#e91e63" font-weight="bold">x > 2</text>
+        <line x1="80" y1="32" x2="580" y2="32" stroke="#999" stroke-width="1.5" marker-end="url(#arr3)"/>
+        <g font-size="11" fill="#777" text-anchor="middle">
+          <line x1="160" y1="28" x2="160" y2="36" stroke="#999" stroke-width="1"/><text x="160" y="50">0</text>
+          <line x1="240" y1="28" x2="240" y2="36" stroke="#999" stroke-width="1"/><text x="240" y="50">1</text>
+          <line x1="320" y1="28" x2="320" y2="36" stroke="#999" stroke-width="1"/><text x="320" y="50">2</text>
+          <line x1="400" y1="28" x2="400" y2="36" stroke="#999" stroke-width="1"/><text x="400" y="50">3</text>
+          <line x1="480" y1="28" x2="480" y2="36" stroke="#999" stroke-width="1"/><text x="480" y="50">4</text>
+          <line x1="560" y1="28" x2="560" y2="36" stroke="#999" stroke-width="1"/><text x="560" y="50">5</text>
+        </g>
+        <circle cx="320" cy="32" r="7" fill="#fff" stroke="#e91e63" stroke-width="2.5"/>
+        <line x1="320" y1="32" x2="580" y2="32" stroke="#e91e63" stroke-width="3.5" stroke-linecap="round"/>
+
+        <!-- x ≤ 6 -->
+        <text x="20" y="80" font-size="13" fill="#5c6bc0" font-weight="bold">x ≤ 6</text>
+        <line x1="80" y1="84" x2="580" y2="84" stroke="#999" stroke-width="1.5" marker-end="url(#arr3)"/>
+        <g font-size="11" fill="#777" text-anchor="middle">
+          <line x1="160" y1="80" x2="160" y2="88" stroke="#999" stroke-width="1"/><text x="160" y="102">3</text>
+          <line x1="240" y1="80" x2="240" y2="88" stroke="#999" stroke-width="1"/><text x="240" y="102">4</text>
+          <line x1="320" y1="80" x2="320" y2="88" stroke="#999" stroke-width="1"/><text x="320" y="102">5</text>
+          <line x1="400" y1="80" x2="400" y2="88" stroke="#999" stroke-width="1"/><text x="400" y="102">6</text>
+          <line x1="480" y1="80" x2="480" y2="88" stroke="#999" stroke-width="1"/><text x="480" y="102">7</text>
+          <line x1="560" y1="80" x2="560" y2="88" stroke="#999" stroke-width="1"/><text x="560" y="102">8</text>
+        </g>
+        <circle cx="400" cy="84" r="7" fill="#5c6bc0" stroke="#5c6bc0" stroke-width="2"/>
+        <line x1="80" y1="84" x2="400" y2="84" stroke="#5c6bc0" stroke-width="3.5" stroke-linecap="round"/>
+
+        <!-- 交集 -->
+        <text x="20" y="132" font-size="13" fill="#880e4f" font-weight="bold">交集</text>
+        <line x1="80" y1="136" x2="580" y2="136" stroke="#999" stroke-width="1.5" marker-end="url(#arr3)"/>
+        <g font-size="11" fill="#777" text-anchor="middle">
+          <line x1="160" y1="132" x2="160" y2="140" stroke="#999" stroke-width="1"/><text x="160" y="154">0</text>
+          <line x1="240" y1="132" x2="240" y2="140" stroke="#999" stroke-width="1"/><text x="240" y="154">2</text>
+          <line x1="320" y1="132" x2="320" y2="140" stroke="#999" stroke-width="1"/><text x="320" y="154">4</text>
+          <line x1="400" y1="132" x2="400" y2="140" stroke="#999" stroke-width="1"/><text x="400" y="154">6</text>
+          <line x1="480" y1="132" x2="480" y2="140" stroke="#999" stroke-width="1"/><text x="480" y="154">8</text>
+        </g>
+        <circle cx="240" cy="136" r="7" fill="#fff" stroke="#880e4f" stroke-width="3"/>
+        <circle cx="400" cy="136" r="7" fill="#880e4f" stroke="#880e4f" stroke-width="2"/>
+        <line x1="240" y1="136" x2="400" y2="136" stroke="#880e4f" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+      <p style="font-size:13px;color:#888;">上面两条线的重叠部分，就是下面的交集</p>
+    </div>
+  </div>
+
+  <!-- ==================== 挑战性问题 ==================== -->
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>你能证明"三角形任意两边之和大于第三边"这个不等式吗？提示：想一想"两点之间线段最短"。</p>
+    <p><strong>问题 2：</strong>如果 a > b，那么 1/a 和 1/b 谁大？分情况讨论（a、b 的正负）。</p>
+    <p><strong>问题 3：</strong>解不等式组并画图：
+      { 3x - 7 < 2x + 1<br>
+      { 2(x - 1) ≥ x - 3
+    </p>
+  </div>
+
+  <!-- ==================== 拓展阅读 ==================== -->
+  <h2>拓展阅读：用求差法比较大小</h2>
+  <div class="extend">
+    <p>除了解不等式，还有一种更直接的比较两个数大小的方法——<strong>求差法</strong>。</p>
+    <p>如果想知道 a 和 b 谁大谁小，做一个简单的减法：</p>
+    <div class="formula">
+      <p>如果 <strong>a - b > 0</strong>，那么 a > b</p>
+      <p>如果 <strong>a - b = 0</strong>，那么 a = b</p>
+      <p>如果 <strong>a - b < 0</strong>，那么 a < b</p>
+    </div>
+    <p>这个道理听起来简单得不能再简单，但它是数学中比较大小的<strong>基本方法</strong>。很多看起来复杂的不等式证明，归根结底就是"做差看正负"。</p>
+
+    <div class="example">
+      <strong>例：</strong>比较 2/3 和 3/5 的大小。<br><br>
+      <strong>求差：</strong>2/3 - 3/5 = 10/15 - 9/15 = 1/15<br>
+      <strong>判断：</strong>1/15 > 0，所以 2/3 > 3/5 ✓
+    </div>
+
+    <p>求差法的威力在于：它把"比较大小"这个难题，转化成了"判断正负"这个简单问题。在高中和大学，你会反复用到这个技巧！</p>
+  </div>
+
+  <!-- ==================== 习题 ==================== -->
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 用不等号（>、<、≥、≤）填空：</p>
+    <p>(1) -5 ___ 3&emsp;(2) 0 ___ -2&emsp;(3) -3 ___ -7&emsp;(4) |x| ___ 0</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">在数轴上，右边的数更大。负数比较：绝对值大的反而小。|x| 表示 x 到原点的距离，永远 ≥ 0。</div>
+    <div class="ans-box" id="a1">(1) -5 < 3&emsp;(2) 0 > -2&emsp;(3) -3 > -7&emsp;(4) |x| ≥ 0</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 解不等式，并在数轴上表示解集：3x + 1 > 10</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">移项：3x > 10 - 1，再除以 3（正数，方向不变）。</div>
+    <div class="ans-box" id="a2">x > 3。数轴上画空心圆在 3 处，向右画线。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 解不等式：-2x + 5 ≤ 1</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">移项：-2x ≤ 1 - 5 → -2x ≤ -4。两边除以 -2（负数！方向反转！）。</div>
+    <div class="ans-box" id="a3">-2x ≤ -4，两边除以 -2 得 x ≥ 2。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 解不等式：2(x - 3) - 3(x + 1) > -8</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">先去括号：2x - 6 - 3x - 3 > -8，合并：-x - 9 > -8，移项：-x > 1，两边乘 -1。</div>
+    <div class="ans-box" id="a4">-x > 1，两边乘 -1 得 x < -1。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 解不等式：(x - 1)/2 - (2x + 1)/3 ≤ 1</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">去分母（两边乘 6）：3(x - 1) - 2(2x + 1) ≤ 6，再去括号合并。</div>
+    <div class="ans-box" id="a5">3x - 3 - 4x - 2 ≤ 6 → -x - 5 ≤ 6 → -x ≤ 11 → x ≥ -11。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 解不等式组：
+      { x - 2 > 0<br>
+      { 2x - 3 ≤ 7
+    </p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">分别解：x > 2 和 2x ≤ 10 → x ≤ 5，取交集。</div>
+    <div class="ans-box" id="a6">2 < x ≤ 5。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>7.</strong> 解不等式组：
+      { 3x + 1 ≥ 2x - 3<br>
+      { 4 - x > 2x - 5
+    </p>
+    <button class="btn-sm" onclick="toggleHint('h7')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a7')">查看答案</button>
+    <div class="hint-box" id="h7">第一个：3x + 1 ≥ 2x - 3 → x ≥ -4。第二个：4 - x > 2x - 5 → 9 > 3x → x < 3。取交集。</div>
+    <div class="ans-box" id="a7">-4 ≤ x < 3。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>8.</strong> 用求差法比较大小：5/8 和 7/11，哪个大？</p>
+    <button class="btn-sm" onclick="toggleHint('h8')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a8')">查看答案</button>
+    <div class="hint-box" id="h8">计算 5/8 - 7/11 = 55/88 - 56/88 = -1/88，看正负。</div>
+    <div class="ans-box" id="a8">5/8 - 7/11 = -1/88 < 0，所以 5/8 < 7/11。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>9.</strong> 小明带了 50 元去文具店，买一支钢笔花了 15 元，剩下的钱要买每本 8 元的笔记本，他最多能买几本？请用不等式解决。</p>
+    <button class="btn-sm" onclick="toggleHint('h9')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a9')">查看答案</button>
+    <div class="hint-box" id="h9">设买 x 本笔记本，则 15 + 8x ≤ 50。解不等式，注意 x 必须是整数。</div>
+    <div class="ans-box" id="a9">15 + 8x ≤ 50 → 8x ≤ 35 → x ≤ 4.375。x 为整数，最多买 4 本。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>10.</strong> 已知 a > b，判断下列各式是否正确（对打 ✓，错打 ✗，并说明理由）：</p>
+    <p>(1) a + 3 > b + 3&emsp;(2) -2a > -2b&emsp;(3) a - b > 0&emsp;(4) a/c > b/c（c ≠ 0）</p>
+    <button class="btn-sm" onclick="toggleHint('h10')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a10')">查看答案</button>
+    <div class="hint-box" id="h10">(1) 加同一个数，方向不变。(2) 乘负数，方向反转。(3) 移项即可。(4) 需要分 c > 0 和 c < 0 讨论。</div>
+    <div class="ans-box" id="a10">(1) ✓&emsp;(2) ✗，乘 -2 方向反转，应为 -2a < -2b&emsp;(3) ✓，a - b > 0 就是 a > b&emsp;(4) ✗，当 c > 0 时正确，当 c < 0 时方向反转。</div>
+  </div>
+
+  <!-- ==================== 小结 ==================== -->
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li>不等式用 >、<、≥、≤ 表示大小关系，解集通常是一个范围</li>
+      <li>不等式的基本性质与等式类似，但<strong>乘除负数时方向反转</strong></li>
+      <li>一元一次不等式解法类比方程，只需注意方向反转</li>
+      <li>不等式组取各解集的交集，用数轴画图一目了然</li>
+      <li>求差法：a - b > 0 ⇔ a > b，是数学中比较大小的基本方法</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="index.html">返回课程列表 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+
+function flipDemo(step) {
+  var og = document.getElementById('originalGroup');
+  var fg = document.getElementById('flippedGroup');
+  var desc = document.getElementById('flipDesc');
+  ['fd0','fd1'].forEach(function(id){ document.getElementById(id).style.fontWeight='normal'; });
+  document.getElementById('fd'+step).style.fontWeight = 'bold';
+  if (step === 0) {
+    og.style.display = '';
+    fg.style.display = 'none';
+    desc.textContent = '数轴上 3 在 2 的右边 → 3 > 2';
+  } else {
+    og.style.display = 'none';
+    fg.style.display = '';
+    desc.textContent = '数轴上 -3 在 -2 的左边 → -3 < -2（方向反转！）';
+  }
+}
+</script>
+<script src="../lessons/dt.js"></script>
+</body>
+</html>
