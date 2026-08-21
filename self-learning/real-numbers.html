@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>实数 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔢</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #bf360c; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed #bf360c; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .diff-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; color: #fff; margin-left: 8px; }
+  .diff-easy { background: #66bb6a; }
+  .diff-medium { background: #ff9800; }
+  .diff-hard { background: #f44336; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  .number-line-svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+  .proof-svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+  @media (max-width: 720px) {
+    article { padding: 20px 12px !important; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：课件 1（自然数——数是怎样产生的？）、2（分数——分披萨的学问）、3（负数——比零还小的数）</p>
+  <h1>实数</h1>
+
+  <h2>起源：数不够用了</h2>
+  <div class="origin">
+    <p>我们学过了<strong>自然数</strong>（0, 1, 2, 3, …）——用来"数数"。后来发现光有自然数不够，比如 3 个人分 2 个苹果，每人分多少？于是有了<strong>分数</strong>。再后来，发现有时候比零还少，比如欠了别人 5 块钱，怎么表示？于是有了<strong>负数</strong>。</p>
+    <p>自然数、零、负数、分数，加起来统称为<strong>有理数</strong>。为什么叫"有理数"？这个翻译来自英文 "rational number"，而 "rational" 的词根是 "ratio"（比例）。所谓有理数，就是<strong>能写成两个整数之比的数</strong>。</p>
+    <p>你可能会想：有了有理数，是不是世界上所有的数都齐了？</p>
+    <p>两千五百年前的古希腊人也这么想。毕达哥拉斯学派有一句格言：<strong>"万物皆数"</strong>——他们相信，世界上的一切都可以用整数和整数之比（也就是有理数）来描述。这听起来很合理，对吧？</p>
+    <p>但真相是：<strong>有理数远远不够。</strong>数的世界比他们想象的要大得多。</p>
+  </div>
+
+  <h2>一、平方根与算术平方根</h2>
+  <div class="story">
+    <p>先从一个简单的问题开始：</p>
+    <div class="key">
+      <p>如果一个正方形的面积是 9，它的边长是多少？</p>
+      <p>我们知道 3 × 3 = 9，所以边长是 3。</p>
+      <p>如果一个正方形的面积是 4，边长是 2。面积是 25，边长是 5。</p>
+    </div>
+    <p>这个"边长"和"面积"的关系，就是我们今天要学的第一个概念：<strong>平方根</strong>。</p>
+    <div class="formula">
+      <p><strong>定义：</strong>如果 <em>x</em>² = <em>a</em>，那么 <em>x</em> 叫做 <em>a</em> 的<strong>平方根</strong>。</p>
+      <p>记作：<em>x</em> = ±√<em>a</em></p>
+    </div>
+    <p>注意：一个正数有<strong>两个</strong>平方根，互为相反数。比如 9 的平方根是 3 和 −3，因为 3² = 9，(−3)² = 9。</p>
+    <div class="example">
+      <strong>例：</strong><br>
+      • 4 的平方根是 ±2（因为 2² = 4，(−2)² = 4）<br>
+      • 1 的平方根是 ±1<br>
+      • 0 的平方根是 0（只有一个，因为 −0 = 0）<br>
+      • −4 在实数范围内<strong>没有</strong>平方根（任何实数平方都不可能是负数）
+    </div>
+    <p>正数 a 的<strong>正</strong>的平方根，有一个专门的名称：<strong>算术平方根</strong>，记作 √a（不带负号）。</p>
+    <div class="key">
+      <p><strong>核心要点：</strong></p>
+      <ul>
+        <li>√a 是算术平方根——总是 ≥ 0</li>
+        <li>±√a 才是平方根——有两个（除非 a = 0）</li>
+        <li>√0 = 0</li>
+        <li>负数没有实数平方根</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>二、立方根</h2>
+  <div class="story">
+    <p>平方根和"面积"有关，那和"体积"有关的是什么呢？</p>
+    <div class="key">
+      <p>如果一个正方体的体积是 8，它的棱长是多少？</p>
+      <p>我们知道 2 × 2 × 2 = 8，所以棱长是 2。</p>
+    </div>
+    <div class="formula">
+      <p><strong>定义：</strong>如果 <em>x</em>³ = <em>a</em>，那么 <em>x</em> 叫做 <em>a</em> 的<strong>立方根</strong>。</p>
+      <p>记作：<em>x</em> = ∛<em>a</em></p>
+    </div>
+    <p>和平方根不同，立方根只有一个（每个实数都有唯一的立方根），而且负数也有立方根！</p>
+    <div class="example">
+      <strong>例：</strong><br>
+      • ∛8 = 2（因为 2³ = 8）<br>
+      • ∛27 = 3（因为 3³ = 27）<br>
+      • ∛(−8) = −2（因为 (−2)³ = −8）<br>
+      • ∛0 = 0
+    </div>
+    <div class="key">
+      <p><strong>平方根 vs 立方根：</strong></p>
+      <table>
+        <tr><th></th><th>平方根</th><th>立方根</th></tr>
+        <tr><td>正数</td><td>有两个（±）</td><td>有一个（正）</td></tr>
+        <tr><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>负数</td><td>没有实数根</td><td>有一个（负）</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h2>三、无理数的发现：希帕索斯的悲剧</h2>
+  <div class="story">
+    <p>现在回到那个致命的问题：</p>
+    <div class="key">
+      <p><strong>面积是 2 的正方形，边长是多少？</strong></p>
+      <p>也就是说，什么数的平方等于 2？</p>
+    </div>
+    <p>你可能会试着猜：1.4² = 1.96，太小了。1.5² = 2.25，又太大了。1.41² = 1.9881，1.42² = 2.0164……你会发现，无论你找到多少位小数，永远不能精确地等于 2。</p>
+    <p>这个数就是 √2——读作"根号二"。它确实存在（你可以画一个直角边为 1 的等腰直角三角形，它的斜边长度就是 √2），但它<strong>不能写成两个整数的比</strong>。</p>
+
+    <div class="quote">
+      <p><strong>希帕索斯的悲剧</strong></p>
+      <p>公元前 5 世纪，古希腊有一个叫<strong>毕达哥拉斯</strong>的数学家和哲学家。他创立了一个学派，信奉"万物皆数"——世界上的一切都可以用整数及其比例来解释。音乐是弦长比例，天文是轨道比例，美是黄金比例。毕达哥拉斯学派甚至把"数"当作宗教来崇拜。</p>
+      <p>毕达哥拉斯有一个学生，名叫<strong>希帕索斯</strong>（Hippasus）。他在研究边长为 1 的正方形的对角线时，发现了一个惊人的事实：<strong>这个对角线的长度 √2，无论如何都不能写成两个整数之比。</strong></p>
+      <p>希帕索斯兴奋地把这个发现告诉了学派的其他成员。但等待他的不是掌声，而是愤怒和恐惧——因为这个发现<strong>摧毁了"万物皆数"的信仰</strong>。如果 √2 不是有理数，那么世界上就存在着"不能用整数比例描述"的东西，毕达哥拉斯学派的整个哲学基础就崩塌了。</p>
+      <p>据传说，毕达哥拉斯学派将希帕索斯<strong>扔进了大海</strong>，试图将这个"丑闻"连同发现者一起埋葬。</p>
+      <p>但真理不会被淹死。√2 这样的数后来被称为<strong>无理数</strong>（irrational number），"irrational"这个词本身就暗示了古希腊人认为这种数"不合逻辑"、"不可理喻"。</p>
+      <p>从希帕索斯的死到今天，两千多年过去了。无理数不仅没有被遗忘，反而成为了数学中最重要的概念之一。正如《尖叫的数学》中所说："这是一桩逻辑上的丑闻——但正是这个丑闻，让数学的眼睛睁开了。"</p>
+    </div>
+  </div>
+
+  <h2>图说：√2 不是有理数的几何证明</h2>
+  <div class="formula">
+    <p>下面这个著名的几何证明，用图形直观地展示了为什么 √2 不能写成两个整数之比。它用的是<strong>反证法</strong>——先假设 √2 可以写成最简分数，然后推出一对矛盾。</p>
+    <svg class="proof-svg" viewBox="0 0 520 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <style>
+          text { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+          .label { font-size: 14px; fill: #333; text-anchor: middle; }
+          .title { font-size: 15px; fill: #bf360c; font-weight: bold; text-anchor: middle; }
+          .small { font-size: 12px; fill: #666; text-anchor: middle; }
+        </style>
+      </defs>
+
+      <!-- 左边：等腰直角三角形 -->
+      <text x="160" y="25" class="title">边长为 1 的等腰直角三角形</text>
+      <polygon points="160,50 40,190 160,190" fill="rgba(191,54,12,0.12)" stroke="#bf360c" stroke-width="2.5"/>
+      <!-- 直角标记 -->
+      <polyline points="160,175 145,175 145,190" fill="none" stroke="#bf360c" stroke-width="1.5"/>
+      <!-- 标注 -->
+      <text x="95" y="125" class="label">1</text>
+      <text x="105" y="210" class="label">1</text>
+      <text x="210" y="125" class="label" fill="#bf360c" font-weight="bold">√2</text>
+
+      <!-- 右边：正方形对角线 -->
+      <text x="380" y="25" class="title">边长为 1 的正方形</text>
+      <rect x="300" y="50" width="120" height="120" fill="rgba(191,54,12,0.08)" stroke="#bf360c" stroke-width="2.5"/>
+      <line x1="300" y1="50" x2="420" y2="170" stroke="#bf360c" stroke-width="2.5" stroke-dasharray="6 3"/>
+      <text x="300" y="40" class="small">1</text>
+      <text x="425" y="115" class="small">1</text>
+      <text x="350" y="120" class="label" fill="#bf360c" font-weight="bold">√2</text>
+
+      <!-- 反证法步骤 -->
+      <text x="260" y="220" class="title" style="font-size:14px;">反证法：假设 √2 = p/q（p, q 互质），推出矛盾</text>
+
+      <rect x="30" y="240" width="460" height="145" rx="10" fill="#fafafa" stroke="#ddd" stroke-width="1"/>
+
+      <text x="50" y="265" style="font-size:13px;fill:#333;">① 假设 √2 = p/q，其中 p、q 是正整数，且 p/q 已经约分到最简（互质）</text>
+      <text x="50" y="288" style="font-size:13px;fill:#333;">② 两边平方：2 = p²/q²  →  p² = 2q²  →  p² 是偶数  →  p 是偶数</text>
+      <text x="50" y="311" style="font-size:13px;fill:#333;">③ 设 p = 2k，代入：4k² = 2q²  →  q² = 2k²  →  q² 是偶数  →  q 也是偶数</text>
+      <text x="50" y="334" style="font-size:13px;fill:#333;">④ p 和 q 都是偶数，说明 p/q 不是最简分数——与"已约分"矛盾！</text>
+      <text x="50" y="362" style="font-size:14px;fill:#bf360c;font-weight:bold;">结论：√2 不能写成两个整数之比，所以 √2 是无理数。</text>
+    </svg>
+    <p style="text-align:center;color:#888;font-size:13px;">图：几何直观 + 反证法证明 √2 是无理数</p>
+  </div>
+
+  <h2>数轴上的有理数和无理数</h2>
+  <div class="formula">
+    <p>下面这张数轴图展示了有理数和无理数在数轴上的分布。你会发现，<strong>数轴上的每一个点都对应一个实数</strong>——有理数密密麻麻，但无理数同样密密麻麻，而且无理数其实比有理数"多得多"。</p>
+    <svg class="number-line-svg" viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <style>
+          text { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+          .tick-label { font-size: 13px; fill: #333; text-anchor: middle; }
+          .rational-label { font-size: 11px; fill: #1a73e8; text-anchor: middle; font-weight: bold; }
+          .irrational-label { font-size: 11px; fill: #bf360c; text-anchor: middle; font-weight: bold; }
+        </style>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#333"/>
+        </marker>
+      </defs>
+
+      <!-- 数轴 -->
+      <line x1="30" y1="80" x2="680" y2="80" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+      <!-- 刻度 -->
+      <line x1="30" y1="80" x2="30" y2="95" stroke="#333" stroke-width="2"/>
+      <text x="30" y="112" class="tick-label">0</text>
+
+      <line x1="110" y1="80" x2="110" y2="95" stroke="#333" stroke-width="2"/>
+      <text x="110" y="112" class="tick-label">1</text>
+
+      <line x1="190" y1="80" x2="190" y2="95" stroke="#333" stroke-width="2"/>
+      <text x="190" y="112" class="tick-label">2</text>
+
+      <line x1="270" y1="80" x2="270" y2="95" stroke="#333" stroke-width="2"/>
+      <text x="270" y="112" class="tick-label">3</text>
+
+      <line x1="350" y1="80" x2="350" y2="95" stroke="#333" stroke-width="2"/>
+      <text x="350" y="112" class="tick-label">4</text>
+
+      <line x1="430" y1="80" x2="430" y2="95" stroke="#333" stroke-width="2"/>
+      <text x="430" y="112" class="tick-label">5</text>
+
+      <!-- 负数刻度 -->
+      <line x1="70" y1="80" x2="70" y2="95" stroke="#333" stroke-width="1.5"/>
+      <text x="70" y="112" class="tick-label" font-size="11">½</text>
+
+      <line x1="150" y1="80" x2="150" y2="95" stroke="#333" stroke-width="1.5"/>
+      <text x="150" y="112" class="tick-label" font-size="11">1½</text>
+
+      <line x1="230" y1="80" x2="230" y2="95" stroke="#333" stroke-width="1.5"/>
+      <text x="230" y="112" class="tick-label" font-size="11">2⅓</text>
+
+      <!-- 有理数点（蓝色） -->
+      <circle cx="70" cy="80" r="6" fill="#1a73e8" stroke="#fff" stroke-width="1"/>
+      <text x="70" y="68" class="rational-label">½</text>
+
+      <circle cx="150" cy="80" r="6" fill="#1a73e8" stroke="#fff" stroke-width="1"/>
+      <text x="150" y="68" class="rational-label">3/2</text>
+
+      <circle cx="230" cy="80" r="6" fill="#1a73e8" stroke="#fff" stroke-width="1"/>
+      <text x="230" y="68" class="rational-label">7/3</text>
+
+      <circle cx="310" cy="80" r="6" fill="#1a73e8" stroke="#fff" stroke-width="1"/>
+      <text x="310" y="68" class="rational-label">3</text>
+
+      <!-- 无理数点（红色标注，深红圆点） -->
+      <!-- √2 ≈ 1.414，位置在 110 + 0.414*80 = 143.12 -->
+      <circle cx="143" cy="80" r="7" fill="#bf360c" stroke="#fff" stroke-width="1.5"/>
+      <text x="143" y="132" class="irrational-label">√2≈1.414</text>
+
+      <!-- √3 ≈ 1.732，位置在 110 + 0.732*80 = 168.56 -->
+      <circle cx="169" cy="80" r="7" fill="#bf360c" stroke="#fff" stroke-width="1.5"/>
+      <text x="169" y="132" class="irrational-label">√3≈1.732</text>
+
+      <!-- π ≈ 3.1416，位置在 270 + 0.1416*80 = 281.3 -->
+      <circle cx="281" cy="80" r="7" fill="#bf360c" stroke="#fff" stroke-width="1.5"/>
+      <text x="281" y="132" class="irrational-label">π≈3.142</text>
+
+      <!-- 画从 0 到 √2 的虚线弧，展示 √2 的几何构造 -->
+      <path d="M 30,80 Q 30,20 143,80" fill="none" stroke="#bf360c" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+
+      <!-- 图例 -->
+      <rect x="480" y="40" width="14" height="14" rx="3" fill="#1a73e8"/>
+      <text x="500" y="53" style="font-size:12px;fill:#333;">有理数</text>
+      <rect x="480" y="62" width="14" height="14" rx="3" fill="#bf360c"/>
+      <text x="500" y="75" style="font-size:12px;fill:#333;">无理数</text>
+
+      <text x="350" y="160" style="font-size:11px;fill:#999;text-anchor:middle;">数轴上的每一个点都对应一个实数</text>
+    </svg>
+    <p style="text-align:center;color:#888;font-size:13px;">图：数轴上有理数（蓝色）和无理数（红色）的分布</p>
+  </div>
+
+  <h2>四、实数：有理数 + 无理数</h2>
+  <div class="story">
+    <p>现在我们可以给"数"做一个完整的分类了：</p>
+    <div class="key">
+      <p><strong>实数</strong> = <strong>有理数</strong> ∪ <strong>无理数</strong></p>
+      <p>也就是说，实数就是数轴上<strong>每一个点</strong>所对应的数。有理数能写成两个整数之比，无理数不能。</p>
+    </div>
+    <div class="formula">
+      <p><strong>实数的完整分类树：</strong></p>
+      <div style="text-align:center;line-height:2.4;">
+        <div style="display:inline-block;border:2px solid #bf360c;border-radius:10px;padding:10px 24px;margin:8px;background:#fff3e0;">实数</div>
+        <div style="display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-top:8px;">
+          <div>
+            <div style="border:2px solid #1a73e8;border-radius:8px;padding:6px 16px;background:#e3f2fd;">有理数</div>
+            <div style="margin-top:6px;font-size:13px;color:#555;">
+              整数（…, −2, −1, 0, 1, 2, …）<br>
+              分数（¾, −⅖, 0.7, …）<br>
+              有限小数（0.25, 3.14）<br>
+              无限循环小数（0.333…, 0.142857…）
+            </div>
+          </div>
+          <div>
+            <div style="border:2px solid #bf360c;border-radius:8px;padding:6px 16px;background:#fbe9e7;">无理数</div>
+            <div style="margin-top:6px;font-size:13px;color:#555;">
+              无限不循环小数<br>
+              √2, √3, √5, …<br>
+              π（圆周率）<br>
+              e（自然常数）
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="key">
+      <p><strong>判断一个数是不是有理数，看它能不能写成分数形式：</strong></p>
+      <ul>
+        <li>0.5 = ½ → 有理数 ✓</li>
+        <li>0.333… = ⅓ → 有理数 ✓（无限循环小数）</li>
+        <li>√4 = 2 → 有理数 ✓（虽然带根号，但结果是整数）</li>
+        <li>√2 = 1.41421356… → 无理数 ✗（无限不循环）</li>
+        <li>π = 3.14159265… → 无理数 ✗</li>
+        <li>∛8 = 2 → 有理数 ✓</li>
+      </ul>
+    </div>
+    <p>一个容易混淆的地方：<strong>不是所有带根号的数都是无理数</strong>。√4 = 2、√9 = 3、∛27 = 3，这些结果都是有理数。只有那些<strong>开方开不尽的</strong>才是无理数，比如 √2、√3、√5、∛2 等。</p>
+  </div>
+
+  <h2>五、实数的运算</h2>
+  <div class="story">
+    <p>实数的运算和有理数的运算规则基本一致，但有一些特别需要注意的地方：</p>
+
+    <h3>（一）无理数的近似计算</h3>
+    <p>在实际计算中，我们通常用无理数的近似值。比如 √2 ≈ 1.414，π ≈ 3.14。但注意，这只是近似，不是精确值。在数学中，我们通常保留根号形式，如 √2，而不是写成 1.414。</p>
+
+    <h3>（二）根式的运算规则</h3>
+    <div class="formula">
+      <p><strong>乘法：</strong>√a × √b = √(a×b)（a ≥ 0, b ≥ 0）</p>
+      <p><strong>除法：</strong>√a ÷ √b = √(a÷b)（a ≥ 0, b > 0）</p>
+      <p><strong>平方：</strong>(√a)² = a（a ≥ 0）</p>
+    </div>
+    <div class="example">
+      <strong>例：</strong><br>
+      • √2 × √3 = √6<br>
+      • √8 = √(4×2) = √4 × √2 = 2√2<br>
+      • √18 ÷ √2 = √9 = 3<br>
+      • (√5)² = 5<br>
+      • √12 = √(4×3) = 2√3
+    </div>
+
+    <h3>（三）同类根式可以合并</h3>
+    <p>和合并同类项类似，带有相同根号部分的项可以合并：</p>
+    <div class="example">
+      <strong>例：</strong><br>
+      • 3√2 + 5√2 = 8√2<br>
+      • 2√3 − √3 + 4√3 = 5√3<br>
+      • √2 + √3 不能合并（根号下的数不同）<br>
+      • √8 + √2 = 2√2 + √2 = 3√2（先化简，再合并）
+    </div>
+
+    <h3>（四）分母有理化</h3>
+    <p>如果分母中含有根号，通常需要把分母"有理化"——去掉分母中的根号。</p>
+    <div class="example">
+      <strong>例：</strong><br>
+      • 1/√2 = √2/2（分子分母同乘 √2）<br>
+      • 1/(√3+1) = (√3−1)/(3−1) = (√3−1)/2（利用平方差公式）<br>
+      • 3/√5 = 3√5/5
+    </div>
+
+    <h3>（五）实数的大小比较</h3>
+    <p>比较无理数的大小，通常用平方法：</p>
+    <div class="example">
+      <strong>例：比较 √5 和 √7 的大小</strong><br>
+      (√5)² = 5，(√7)² = 7，因为 5 < 7，所以 √5 < √7。<br><br>
+      <strong>例：比较 √2 和 1.5 的大小</strong><br>
+      (√2)² = 2，1.5² = 2.25，因为 2 < 2.25，所以 √2 < 1.5。
+    </div>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>√2 是无理数已用反证法证明。你能用类似的方法证明 √3 也是无理数吗？试试看！</p>
+    <p><strong>问题 2：</strong>有理数在数轴上"密密麻麻"，无理数也在数轴上"密密麻麻"。那么，两个有理数之间一定存在无理数吗？两个无理数之间一定存在有理数吗？试着举例说明。</p>
+    <p><strong>问题 3：</strong>如果 a 和 b 是有理数，b ≠ 0，且 a + b√2 = 0，那么 a 和 b 必须满足什么条件？为什么？</p>
+  </div>
+
+  <h2>拓展阅读</h2>
+  <div class="extend">
+    <p><strong>毕达哥拉斯学派：</strong>毕达哥拉斯（约公元前 570—495 年）不仅是数学家，还是哲学家和宗教领袖。他的学派像一个秘密社团，成员相信灵魂转世，禁食豆子，崇拜数字。他们发现了勾股定理，并将音乐和声与简单的整数比例联系起来——这就是为什么和声听起来"和谐"。</p>
+    <p><strong>无理数的历史意义：</strong>希帕索斯的发现是数学史上第一次"数学危机"。它迫使数学家们认识到，直观和信仰不足以作为数学的基础——必须依赖严格的逻辑证明。这次危机最终催生了欧几里得的《几何原本》和公理化方法。</p>
+    <p><strong>康托尔的惊人发现：</strong>19 世纪，德国数学家康托尔证明了一个惊人的事实：有理数虽然无穷多，但它们是"可数无穷"（可以一个一个地数出来）；而无理数比有理数"多得多"——它们是"不可数无穷"。在数轴上随便点一个点，它几乎肯定是无理数！</p>
+    <p><strong>推荐阅读：</strong>《尖叫的数学》——了解无理数发现的历史故事；《古今数学思想》——了解数系的扩展过程；《数学简史》——了解从自然数到实数的完整旅程。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 下列各数中，哪些是有理数，哪些是无理数？0, −3, ½, √4, √5, π, 0.333…, 0.1010010001…（每两个 1 之间依次多一个 0）</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">有理数：能写成整数之比的；无限循环小数也是有理数。无理数：无限不循环小数。</div>
+    <div class="ans-box" id="a1">有理数：0, −3, ½, √4(=2), 0.333…(=⅓)<br>无理数：√5, π, 0.1010010001…（无限不循环）</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 求下列各数的算术平方根：<br>(1) 36　(2) 0.25　(3) 1/4　(4) 0</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">算术平方根是正的那个平方根，记作 √a。</div>
+    <div class="ans-box" id="a2">(1) √36 = 6　(2) √0.25 = 0.5　(3) √(1/4) = 1/2　(4) √0 = 0</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 求下列各数的立方根：<br>(1) 64　(2) −125　(3) 0.001　(4) 0</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">找一个数，它的三次方等于给定的数。负数也有立方根。</div>
+    <div class="ans-box" id="a3">(1) ∛64 = 4　(2) ∛(−125) = −5　(3) ∛0.001 = 0.1　(4) ∛0 = 0</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 化简：<br>(1) √50　(2) √72　(3) √(12/25)</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">把根号下的数分解成"完全平方数 × 其他数"，利用 √(a×b) = √a × √b。</div>
+    <div class="ans-box" id="a4">(1) √50 = √(25×2) = 5√2<br>(2) √72 = √(36×2) = 6√2<br>(3) √(12/25) = √12/√25 = 2√3/5</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 计算：<br>(1) √2 × √8　(2) √27 ÷ √3　(3) 3√5 + 2√5 − √5</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">(1)(2)用乘除法公式；(3)合并同类根式，像合并同类项一样。</div>
+    <div class="ans-box" id="a5">(1) √2 × √8 = √16 = 4<br>(2) √27 ÷ √3 = √9 = 3<br>(3) 3√5 + 2√5 − √5 = 4√5</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 分母有理化：<br>(1) 2/√3　(2) 1/(√5 − 1)</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">(1) 分子分母同乘 √3；(2) 分子分母同乘 (√5+1)，利用平方差公式 (a−b)(a+b) = a²−b²。</div>
+    <div class="ans-box" id="a6">(1) 2/√3 = 2√3/3<br>(2) 1/(√5−1) = (√5+1)/(5−1) = (√5+1)/4</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>7.</strong> 比较大小：√6 和 2.5，哪个更大？请说明理由。</p>
+    <button class="btn-sm" onclick="toggleHint('h7')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a7')">查看答案</button>
+    <div class="hint-box" id="h7">用平方法：分别平方后比较。</div>
+    <div class="ans-box" id="a7">(√6)² = 6，2.5² = 6.25，因为 6 < 6.25，所以 √6 < 2.5。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>8.</strong> 判断下列说法是否正确：<br>① 无理数都是无限小数。<br>② 无限小数都是无理数。<br>③ 带根号的数都是无理数。<br>④ 无理数都可以用数轴上的点表示。</p>
+    <button class="btn-sm" onclick="toggleHint('h8')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a8')">查看答案</button>
+    <div class="hint-box" id="h8">注意"无限循环小数 vs 无限不循环小数"的区别，以及 √4 = 2 这类特殊情况。</div>
+    <div class="ans-box" id="a8">① 正确（无理数都是无限不循环小数）<br>② 错误（无限循环小数是有理数，如 0.333…）<br>③ 错误（√4=2 是有理数）<br>④ 正确（实数 = 数轴上的点，无理数是实数）</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>9.</strong> 已知一个正方形的面积是 20 cm²，求它的边长（保留根号形式）。如果改成一个正方体，体积是 20 cm³，求它的棱长（保留根号形式）。</p>
+    <button class="btn-sm" onclick="toggleHint('h9')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a9')">查看答案</button>
+    <div class="hint-box" id="h9">正方形面积 = 边长²，正方体体积 = 棱长³。注意化简根式。</div>
+    <div class="ans-box" id="a9">正方形边长 = √20 = 2√5 cm<br>正方体棱长 = ∛20 cm（不能化简，保留 ∛20）</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>10.</strong> 希帕索斯因为发现 √2 是无理数而被投入大海。如果当时毕达哥拉斯学派的人问他："你怎么证明 √2 不能写成分数？"请你用 3 句话以内简要说明反证法的核心思路。</p>
+    <button class="btn-sm" onclick="toggleHint('h10')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a10')">查看答案</button>
+    <div class="hint-box" id="h10">反证法三步：假设、推导、找矛盾。</div>
+    <div class="ans-box" id="a10">假设 √2 = p/q（p, q 互质），平方得 p² = 2q²，推出 p 和 q 都是偶数，与"互质"矛盾。所以假设不成立，√2 不能写成分数。</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>平方根：</strong>若 x² = a，则 x = ±√a。算术平方根 √a 是正的那个（≥ 0）</li>
+      <li><strong>立方根：</strong>若 x³ = a，则 x = ∛a。每个实数都有唯一立方根，负数也有</li>
+      <li><strong>无理数：</strong>不能写成两个整数之比的数，是无限不循环小数（√2, √3, π, …）</li>
+      <li><strong>实数 = 有理数 + 无理数：</strong>数轴上的每一个点都对应一个实数</li>
+      <li><strong>希帕索斯的悲剧：</strong>发现 √2 是无理数，动摇了"万物皆数"的信仰，被投入大海</li>
+      <li><strong>根式运算：</strong>√a × √b = √(ab)，同类根式可以合并，分母有理化去分母中的根号</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="quadratic-radicals.html">下一课：二次根式 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+<script src="../lessons/dt.js"></script>
+</body>
+</html>

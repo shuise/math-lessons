@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三角形 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔺</text></svg>">
+<link rel="stylesheet" href="../lessons/style.css">
+<style>
+  :root { --accent: #e65100; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #ffe0b2; border-left: 4px solid #e65100; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  .graphic { margin: 16px 0; text-align: center; }
+  @media (max-width: 720px) {
+    article { padding: 20px 12px !important; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：课件 10（几何图形）、11（直线、射线、线段）、12（角）、13（相交线与平行线）</p>
+  <h1>三角形 — 最稳定的图形</h1>
+
+  <h2>起源：金字塔的秘密</h2>
+  <div class="origin">
+    <p>你有没有注意到，世界上很多最古老的建筑都是<strong>三角形</strong>的形状？</p>
+    <p>四千多年前，古埃及人在沙漠中建造了巨大的<strong>金字塔</strong>。为什么是三角形？因为只有三角形这个形状，才能让几百万吨的石头稳稳地堆叠在一起，屹立几千年不倒。</p>
+    <p>古希腊的数学家<strong>泰勒斯</strong>（约公元前 600 年）是第一个用三角形解决实际问题的人。据说他站在海边，仅仅用三角形的知识，就测量出了远处一艘船离岸边的距离。他是怎么做到的？秘密就藏在三角形里：<strong>只要知道一个三角形的一条边和两个角，整个三角形就完全确定了。</strong></p>
+    <p>《一个数学家的叹息》中写道："三角形是最简单的多边形——只要三条线段首尾相连，一个封闭的形状就诞生了。它是所有多边形中最基本的'原子'，任何复杂的多边形都可以拆成很多个三角形。"</p>
+    <p>三角形到底有什么神奇之处？为什么它是最稳定的图形？让我们从零开始，认识这个看似简单却充满奥秘的图形。</p>
+  </div>
+
+  <h2>一、什么是三角形？</h2>
+  <div class="story">
+    <p><strong>三角形</strong>：由<strong>不在同一条直线上的三条线段</strong>首尾顺次相连所组成的图形。</p>
+    <p>请注意"<strong>不在同一条直线上</strong>"这个词——如果三个点排成一条直线，那它们首尾相连得到的是一条线段，不是一个三角形。</p>
+    <div class="key">
+      <p><strong>三角形的三个基本要素：</strong></p>
+      <ul>
+        <li><strong>三个顶点：</strong>用大写字母表示，如 A、B、C。三角形记作"△ABC"，读作"三角形 ABC"。</li>
+        <li><strong>三条边：</strong>顶点之间的线段，如 AB、BC、CA（或用小写字母 a、b、c 表示，a 对应顶点 A 的对边，以此类推）。</li>
+        <li><strong>三个内角：</strong>相邻两边在三角形内部形成的角，如 ∠A、∠B、∠C。</li>
+      </ul>
+    </div>
+    <div class="graphic">
+      <svg viewBox="0 0 440 300" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text.label { font-size:16px; fill:#333; font-family:serif; font-style:italic; }
+            text.desc { font-size:13px; fill:#555; text-anchor:middle; }
+          </style>
+        </defs>
+        <!-- 三角形 -->
+        <polygon points="100,240 340,240 220,60" fill="rgba(230,81,0,0.12)" stroke="#e65100" stroke-width="2.5"/>
+        <!-- 顶点 -->
+        <circle cx="100" cy="240" r="4" fill="#e65100"/>
+        <circle cx="340" cy="240" r="4" fill="#e65100"/>
+        <circle cx="220" cy="60" r="4" fill="#e65100"/>
+        <text x="90" y="265" class="label">A</text>
+        <text x="348" y="265" class="label">B</text>
+        <text x="220" y="45" class="label">C</text>
+        <!-- 边标注 -->
+        <text x="220" y="258" class="desc">边 AB = c</text>
+        <text x="175" y="155" class="desc">边 AC = b</text>
+        <text x="290" y="155" class="desc">边 BC = a</text>
+        <!-- 角标注 -->
+        <text x="130" y="222" class="desc" font-size="12">∠A</text>
+        <text x="310" y="222" class="desc" font-size="12">∠B</text>
+        <text x="220" y="80" class="desc" font-size="12">∠C</text>
+      </svg>
+    </div>
+  </div>
+
+  <h2>二、三角形中的重要线段</h2>
+  <div class="story">
+    <p>三角形里除了三条边和三个角，还有三条特别重要的线段，它们各自有独特的性质。</p>
+
+    <h3>1. 高 — 从顶点到对面的垂线</h3>
+    <p>从三角形的一个顶点向它的<strong>对边所在的直线</strong>作垂线，顶点和垂足之间的线段叫做三角形的<strong>高</strong>。</p>
+    <p>每个三角形都有<strong>三条高</strong>，它们（或它们的延长线）相交于一点，这个点叫做<strong>垂心</strong>。</p>
+    <div class="graphic">
+      <svg viewBox="0 0 440 280" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text.lbl { font-size:14px; fill:#333; font-family:serif; font-style:italic; }
+            text.small { font-size:12px; fill:#e65100; text-anchor:middle; }
+          </style>
+        </defs>
+        <polygon points="120,240 340,240 220,60" fill="rgba(230,81,0,0.08)" stroke="#e65100" stroke-width="2"/>
+        <circle cx="120" cy="240" r="3" fill="#e65100"/>
+        <circle cx="340" cy="240" r="3" fill="#e65100"/>
+        <circle cx="220" cy="60" r="3" fill="#e65100"/>
+        <text x="110" y="262" class="lbl">A</text>
+        <text x="348" y="262" class="lbl">B</text>
+        <text x="220" y="45" class="lbl">C</text>
+        <!-- 高 AD -->
+        <line x1="120" y1="240" x2="120" y2="240" stroke="#c62828" stroke-width="2" stroke-dasharray="6 3"/>
+        <!-- 实际上从C到底边的高是垂线段 -->
+        <line x1="220" y1="60" x2="220" y2="240" stroke="#c62828" stroke-width="2"/>
+        <circle cx="220" cy="240" r="3" fill="#c62828"/>
+        <text x="225" y="155" class="small" fill="#c62828">高</text>
+        <text x="230" y="258" class="lbl" font-size="12">D</text>
+        <!-- 直角标记 -->
+        <rect x="220" y="232" width="8" height="8" fill="none" stroke="#c62828" stroke-width="1.5"/>
+      </svg>
+    </div>
+
+    <h3>2. 中线 — 连接顶点和对边中点</h3>
+    <p>连接三角形一个顶点和它的<strong>对边中点</strong>的线段，叫做三角形的<strong>中线</strong>。</p>
+    <p>三条中线相交于一点，这个点叫做<strong>重心</strong>。有趣的是，重心把每条中线分成 2:1 的两段——从顶点到重心的距离是从重心到对边中点距离的<strong>两倍</strong>。</p>
+    <div class="graphic">
+      <svg viewBox="0 0 440 280" style="max-width:100%;height:auto;">
+        <polygon points="120,240 340,240 220,60" fill="rgba(230,81,0,0.08)" stroke="#e65100" stroke-width="2"/>
+        <circle cx="120" cy="240" r="3" fill="#e65100"/>
+        <circle cx="340" cy="240" r="3" fill="#e65100"/>
+        <circle cx="220" cy="60" r="3" fill="#e65100"/>
+        <text x="110" y="262" font-size="14" fill="#333" font-family="serif" font-style="italic">A</text>
+        <text x="348" y="262" font-size="14" fill="#333" font-family="serif" font-style="italic">B</text>
+        <text x="220" y="45" font-size="14" fill="#333" font-family="serif" font-style="italic">C</text>
+        <!-- 中线 -->
+        <line x1="120" y1="240" x2="280" y2="150" stroke="#1565c0" stroke-width="1.8" stroke-dasharray="6 3"/>
+        <line x1="340" y1="240" x2="170" y2="150" stroke="#1565c0" stroke-width="1.8" stroke-dasharray="6 3"/>
+        <line x1="220" y1="60" x2="230" y2="240" stroke="#1565c0" stroke-width="1.8" stroke-dasharray="6 3"/>
+        <!-- 重心 -->
+        <circle cx="220" cy="180" r="4" fill="#1565c0"/>
+        <text x="230" y="175" font-size="12" fill="#1565c0">重心</text>
+      </svg>
+    </div>
+
+    <h3>3. 角平分线 — 把角分成两等份</h3>
+    <p>三角形一个内角的<strong>平分线</strong>与对边相交，顶点和交点之间的线段叫做三角形的<strong>角平分线</strong>。</p>
+    <p>三条角平分线也相交于一点，这个点叫做<strong>内心</strong>。内心到三角形三条边的距离相等——正因为如此，内心是三角形<strong>内切圆</strong>的圆心。</p>
+
+    <div class="key">
+      <p><strong>总结：</strong>三角形有三条高、三条中线、三条角平分线，它们各自的交点分别叫做<strong>垂心、重心、内心</strong>。这些"心"在更高级的几何学习中会反复出现。</p>
+    </div>
+  </div>
+
+  <h2>三、三角形的分类</h2>
+  <div class="story">
+    <p>三角形可以按<strong>角</strong>分类，也可以按<strong>边</strong>分类。</p>
+
+    <h3>按角分类</h3>
+    <div class="graphic">
+      <svg viewBox="0 0 720 240" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text.tcat { font-size:15px; fill:#333; text-anchor:middle; font-weight:bold; }
+            text.tdesc { font-size:12px; fill:#666; text-anchor:middle; }
+          </style>
+        </defs>
+        <!-- 锐角三角形 -->
+        <polygon points="70,200 180,200 125,60" fill="rgba(76,175,80,0.15)" stroke="#4caf50" stroke-width="2.5"/>
+        <text x="125" y="230" class="tcat" fill="#4caf50">锐角三角形</text>
+        <text x="125" y="248" class="tdesc">三个角都 &lt; 90°</text>
+        <!-- 钝角三角形 -->
+        <polygon points="290,200 430,200 310,70" fill="rgba(255,152,0,0.15)" stroke="#ff9800" stroke-width="2.5"/>
+        <text x="355" y="230" class="tcat" fill="#ff9800">钝角三角形</text>
+        <text x="355" y="248" class="tdesc">有一个角 &gt; 90°</text>
+        <!-- 直角三角形 -->
+        <polygon points="500,200 600,200 500,80" fill="rgba(244,67,54,0.15)" stroke="#f44336" stroke-width="2.5"/>
+        <rect x="500" y="192" width="8" height="8" fill="none" stroke="#f44336" stroke-width="1.5"/>
+        <text x="548" y="230" class="tcat" fill="#f44336">直角三角形</text>
+        <text x="548" y="248" class="tdesc">有一个角 = 90°</text>
+      </svg>
+    </div>
+
+    <h3>按边分类</h3>
+    <div class="graphic">
+      <svg viewBox="0 0 720 240" style="max-width:100%;height:auto;">
+        <!-- 不等边三角形 -->
+        <polygon points="70,200 200,200 120,65" fill="rgba(33,150,243,0.12)" stroke="#2196f3" stroke-width="2.5"/>
+        <text x="135" y="230" font-size="15" fill="#2196f3" text-anchor="middle" font-weight="bold">不等边三角形</text>
+        <text x="135" y="248" font-size="12" fill="#666" text-anchor="middle">三条边都不相等</text>
+        <!-- 等腰三角形 -->
+        <polygon points="305,200 415,200 360,60" fill="rgba(156,39,176,0.12)" stroke="#9c27b0" stroke-width="2.5"/>
+        <text x="360" y="230" font-size="15" fill="#9c27b0" text-anchor="middle" font-weight="bold">等腰三角形</text>
+        <text x="360" y="248" font-size="12" fill="#666" text-anchor="middle">有两条边相等</text>
+        <!-- 等边三角形 -->
+        <polygon points="535,200 665,200 600,60" fill="rgba(0,150,136,0.12)" stroke="#00897b" stroke-width="2.5"/>
+        <text x="600" y="230" font-size="15" fill="#00897b" text-anchor="middle" font-weight="bold">等边三角形</text>
+        <text x="600" y="248" font-size="12" fill="#666" text-anchor="middle">三条边都相等</text>
+      </svg>
+    </div>
+
+    <div class="example">
+      <p><strong>想一想：</strong>等边三角形是等腰三角形吗？</p>
+      <p>是的！等腰三角形定义为"至少有两条边相等"，等边三角形三条边都相等，当然满足"至少有两条边相等"。所以<strong>等边三角形是特殊的等腰三角形</strong>，就像正方形是特殊的长方形一样。</p>
+    </div>
+  </div>
+
+  <h2>四、三角形三边关系：两边之和大于第三边</h2>
+  <div class="story">
+    <p>给你三根小棒，长度分别是 3cm、4cm、10cm。你能把它们拼成一个三角形吗？</p>
+    <p>试试看——3cm 和 4cm 加起来才 7cm，还没有 10cm 长，根本够不着！所以<strong>不是任意三条线段都能组成三角形</strong>。</p>
+
+    <div class="formula">
+      <p><strong>三角形三边关系定理：</strong></p>
+      <p style="font-size:1.1em;text-align:center;color:#e65100;"><strong>三角形任意两边之和大于第三边。</strong></p>
+      <p style="text-align:center;">即：<strong>a + b &gt; c，&nbsp; b + c &gt; a，&nbsp; a + c &gt; b</strong></p>
+    </div>
+
+    <p><strong>为什么？</strong>想象你从家走到学校。走直线（一条边）肯定比绕路（走另外两条边）要短——这就是"两点之间线段最短"在三角形中的体现。</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 500 220" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <!-- 可以构成三角形的例子 -->
+        <text x="130" y="25" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">3 + 4 &gt; 6 ✓ 可以！</text>
+        <polygon points="70,180 190,180 130,50" fill="rgba(76,175,80,0.15)" stroke="#4caf50" stroke-width="2.5"/>
+        <text x="60" y="105" font-size="13" fill="#4caf50">3cm</text>
+        <text x="200" y="105" font-size="13" fill="#4caf50">4cm</text>
+        <text x="125" y="198" font-size="13" fill="#4caf50">6cm</text>
+
+        <!-- 不能构成三角形的例子 -->
+        <text x="370" y="25" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">3 + 4 &lt; 10 ✗ 不行！</text>
+        <line x1="290" y1="180" x2="350" y2="50" stroke="#f44336" stroke-width="2.5"/>
+        <line x1="350" y1="50" x2="440" y2="180" stroke="#f44336" stroke-width="2.5"/>
+        <line x1="290" y1="180" x2="440" y2="180" stroke="#f44336" stroke-width="2.5" stroke-dasharray="8 4"/>
+        <text x="280" y="120" font-size="13" fill="#f44336">3cm</text>
+        <text x="455" y="120" font-size="13" fill="#f44336">4cm</text>
+        <text x="360" y="198" font-size="13" fill="#f44336">10cm</text>
+        <text x="350" y="130" font-size="12" fill="#f44336">够不着！</text>
+      </svg>
+    </div>
+
+    <div class="example">
+      <p><strong>推论：</strong>三角形任意两边之差小于第三边。</p>
+      <p>从 a + b &gt; c 可以推出 a &gt; c − b（即第三边大于两边之差）。</p>
+      <p><strong>所以三角形第三边的范围是：</strong>|a − b| &lt; c &lt; a + b</p>
+    </div>
+
+    <div class="key">
+      <p><strong>快速判断法：</strong>要判断三条线段能否组成三角形，只需看<strong>较短的两条边之和是否大于最长边</strong>即可。因为如果较短的两条加起来都大于最长的，那么其他组合肯定也大于。</p>
+    </div>
+  </div>
+
+  <h2>五、三角形内角和 = 180°</h2>
+  <div class="story">
+    <p>这是三角形最重要的性质之一：<strong>无论三角形长什么样，三个内角加起来永远等于 180°</strong>。</p>
+    <p>锐角三角形、直角三角形、钝角三角形——大的、小的、胖的、瘦的——<strong>内角和永远不变</strong>。</p>
+
+    <h3>撕角法证明</h3>
+    <p>这是一个不需要任何公式的证明方法——你甚至可以自己动手做！</p>
+    <p>拿一张纸，画一个三角形，然后把三个角撕下来，拼在一起——你会发现它们恰好拼成一个<strong>平角</strong>（180°）。</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 720 340" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <!-- 步骤1：原始三角形 -->
+        <text x="130" y="25" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">步骤1：画一个三角形</text>
+        <polygon points="60,210 200,210 130,70" fill="rgba(230,81,0,0.12)" stroke="#e65100" stroke-width="2"/>
+        <text x="125" y="100" font-size="14" fill="#e65100" font-weight="bold">∠1</text>
+        <text x="50" y="225" font-size="14" fill="#e65100" font-weight="bold">∠2</text>
+        <text x="195" y="225" font-size="14" fill="#e65100" font-weight="bold">∠3</text>
+
+        <!-- 步骤2：撕下三个角 -->
+        <text x="400" y="25" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">步骤2：撕下三个角</text>
+        <!-- 角1 -->
+        <polygon points="320,150 380,150 350,90" fill="rgba(230,81,0,0.2)" stroke="#e65100" stroke-width="1.5"/>
+        <text x="350" y="125" font-size="12" fill="#e65100">∠1</text>
+        <!-- 角2 -->
+        <polygon points="390,150 450,150 420,90" fill="rgba(230,81,0,0.2)" stroke="#e65100" stroke-width="1.5"/>
+        <text x="420" y="125" font-size="12" fill="#e65100">∠2</text>
+        <!-- 角3 -->
+        <polygon points="460,150 520,150 490,90" fill="rgba(230,81,0,0.2)" stroke="#e65100" stroke-width="1.5"/>
+        <text x="490" y="125" font-size="12" fill="#e65100">∠3</text>
+
+        <!-- 步骤3：拼在一起 -->
+        <text x="360" y="200" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">步骤3：拼在一起 → 一个平角！</text>
+        <!-- 平角底边 -->
+        <line x1="120" y1="280" x2="560" y2="280" stroke="#333" stroke-width="1.5"/>
+        <circle cx="340" cy="280" r="3" fill="#333"/>
+        <!-- 角1 -->
+        <line x1="340" y1="280" x2="230" y2="230" stroke="#e65100" stroke-width="2"/>
+        <text x="260" y="248" font-size="13" fill="#e65100" font-weight="bold">∠1</text>
+        <!-- 角2 -->
+        <line x1="340" y1="280" x2="340" y2="220" stroke="#e65100" stroke-width="2"/>
+        <text x="348" y="245" font-size="13" fill="#e65100" font-weight="bold">∠2</text>
+        <!-- 角3 -->
+        <line x1="340" y1="280" x2="450" y2="230" stroke="#e65100" stroke-width="2"/>
+        <text x="420" y="248" font-size="13" fill="#e65100" font-weight="bold">∠3</text>
+        <!-- 平角弧线 -->
+        <path d="M 220 280 A 120 120 0 0 1 460 280" fill="none" stroke="#999" stroke-width="1.5" stroke-dasharray="5 3"/>
+        <text x="340" y="305" text-anchor="middle" font-size="15" fill="#e65100" font-weight="bold">∠1 + ∠2 + ∠3 = 180°</text>
+      </svg>
+    </div>
+
+    <p>这个"撕角法"不是一个严格的数学证明，但它让你直观地感受到：<strong>三个角拼出来确实是一个平角</strong>。</p>
+    <p>严格的证明用的是<strong>平行线</strong>的知识：过三角形的一个顶点作对边的平行线，利用"两直线平行，内错角相等"和"两直线平行，同位角相等"就能证明三个角之和等于一个平角。这个证明我们会在课堂上学到。</p>
+  </div>
+
+  <h2>六、多边形及其内角和</h2>
+  <div class="story">
+    <p>既然三角形内角和是 180°，那四边形呢？五边形呢？</p>
+    <p>一个巧妙的思路是：<strong>把多边形拆成三角形！</strong></p>
+
+    <div class="key">
+      <p><strong>核心方法：</strong>从一个顶点出发，向其他不相邻的顶点画对角线，把多边形分成若干个三角形。每个三角形内角和 180°，加在一起就是多边形的内角和。</p>
+    </div>
+
+    <div class="graphic">
+      <svg viewBox="0 0 720 280" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <!-- 四边形 -->
+        <text x="140" y="28" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">四边形</text>
+        <polygon points="80,220 200,220 220,80 100,80" fill="rgba(33,150,243,0.1)" stroke="#2196f3" stroke-width="2"/>
+        <line x1="80" y1="220" x2="220" y2="80" stroke="#f44336" stroke-width="1.5" stroke-dasharray="6 3"/>
+        <text x="140" y="248" text-anchor="middle" font-size="13" fill="#333">2个三角形</text>
+        <text x="140" y="264" text-anchor="middle" font-size="13" fill="#2196f3">2 × 180° = 360°</text>
+
+        <!-- 五边形 -->
+        <text x="420" y="28" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">五边形</text>
+        <polygon points="340,220 500,220 530,110 420,60 370,110" fill="rgba(156,39,176,0.1)" stroke="#9c27b0" stroke-width="2"/>
+        <line x1="340" y1="220" x2="420" y2="60" stroke="#f44336" stroke-width="1.5" stroke-dasharray="6 3"/>
+        <line x1="340" y1="220" x2="530" y2="110" stroke="#f44336" stroke-width="1.5" stroke-dasharray="6 3"/>
+        <text x="420" y="248" text-anchor="middle" font-size="13" fill="#333">3个三角形</text>
+        <text x="420" y="264" text-anchor="middle" font-size="13" fill="#9c27b0">3 × 180° = 540°</text>
+
+        <!-- 公式说明 -->
+        <text x="360" y="135" text-anchor="middle" font-size="13" fill="#666">n 边形：分成 (n−2) 个三角形</text>
+      </svg>
+    </div>
+
+    <div class="formula">
+      <p><strong>n 边形内角和公式：</strong></p>
+      <p style="font-size:1.3em;text-align:center;color:#e65100;"><strong>(n − 2) × 180°</strong></p>
+      <p style="text-align:center;">（n ≥ 3，n 为整数）</p>
+    </div>
+
+    <div class="example">
+      <p><strong>验证：</strong></p>
+      <ul>
+        <li>三角形 (n=3)：(3−2) × 180° = <strong>180°</strong> ✓</li>
+        <li>四边形 (n=4)：(4−2) × 180° = <strong>360°</strong> ✓</li>
+        <li>五边形 (n=5)：(5−2) × 180° = <strong>540°</strong> ✓</li>
+        <li>六边形 (n=6)：(6−2) × 180° = <strong>720°</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>七、三角形的稳定性</h2>
+  <div class="story">
+    <p>你有没有注意过，自行车车架、屋顶的桁架、电线塔，为什么都是三角形的结构？</p>
+    <p>因为<strong>三角形具有稳定性</strong>——当三角形的三条边长度确定后，三角形的形状和大小就<strong>完全确定</strong>了，不会变形。</p>
+    <p>而四边形就不一样了——四条边长度确定后，四边形还可以"扭来扭去"，形状不固定。</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 720 220" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <!-- 三角形稳定性 -->
+        <text x="140" y="25" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">三角形：稳定！</text>
+        <polygon points="70,190 210,190 140,60" fill="rgba(76,175,80,0.15)" stroke="#4caf50" stroke-width="3"/>
+        <circle cx="70" cy="190" r="5" fill="#4caf50"/>
+        <circle cx="210" cy="190" r="5" fill="#4caf50"/>
+        <circle cx="140" cy="60" r="5" fill="#4caf50"/>
+        <text x="140" y="215" text-anchor="middle" font-size="13" fill="#4caf50">三边确定 → 形状唯一</text>
+
+        <!-- 四边形不稳定性 -->
+        <text x="420" y="25" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">四边形：可以变形！</text>
+        <polygon points="320,190 440,180 520,190 440,60" fill="rgba(244,67,54,0.15)" stroke="#f44336" stroke-width="3"/>
+        <circle cx="320" cy="190" r="5" fill="#f44336"/>
+        <circle cx="440" cy="180" r="5" fill="#f44336"/>
+        <circle cx="520" cy="190" r="5" fill="#f44336"/>
+        <circle cx="440" cy="60" r="5" fill="#f44336"/>
+        <!-- 箭头表示可变形 -->
+        <text x="420" y="215" text-anchor="middle" font-size="13" fill="#f44336">四边确定 → 可以压扁</text>
+
+        <!-- 加对角线变稳定 -->
+        <text x="580" y="100" text-anchor="middle" font-size="12" fill="#333">加一根斜杆</text>
+        <text x="580" y="116" text-anchor="middle" font-size="12" fill="#333">→ 变成两个三角形</text>
+        <text x="580" y="132" text-anchor="middle" font-size="12" fill="#4caf50">→ 稳定了！</text>
+      </svg>
+    </div>
+
+    <div class="key">
+      <p><strong>生活中的应用：</strong></p>
+      <ul>
+        <li><strong>自行车车架</strong>——三角形结构让车身不摇晃</li>
+        <li><strong>屋顶桁架</strong>——用三角形格子支撑整个屋顶</li>
+        <li><strong>电线塔</strong>——高压电线塔都是三角形网格结构</li>
+        <li><strong>相机三脚架</strong>——三个脚着地，稳稳当当</li>
+        <li><strong>伸缩门</strong>——正是利用了四边形的<strong>不稳定性</strong>，才能拉伸和收缩</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题 1：</strong>一个三角形两条边的长分别是 5cm 和 8cm，第三条边的长可能是多少？（取整数）</p>
+    <p><strong>问题 2：</strong>一个多边形的内角和是 1800°，它是几边形？</p>
+    <p><strong>问题 3：</strong>三角形的三个内角中，最多能有几个钝角？几个直角？为什么？</p>
+    <p><strong>问题 4：</strong>用 12 根同样长的小棒，能拼出几种不同的三角形？（边长都是整数根小棒）</p>
+  </div>
+
+  <h2>拓展阅读</h2>
+  <div class="extend">
+    <p><strong>泰勒斯测量金字塔：</strong>传说泰勒斯在埃及旅行时，用一个简单的方法测量了金字塔的高度——他在金字塔旁边立了一根木棍，等到木棍的影子长度等于木棍高度的时候，金字塔影子的长度就等于金字塔的高度。他利用的是<strong>等腰直角三角形</strong>的性质。</p>
+    <p><strong>三角形的"五心"：</strong>除了本课提到的垂心、重心、内心，三角形还有<strong>外心</strong>（外接圆圆心）和<strong>旁心</strong>，合称"五心"。在更高级的几何中，这些心有着奇妙的关系——比如，欧拉发现：重心、外心、垂心三点共线（称为"欧拉线"），而且重心到外心的距离是重心到垂心距离的一半。</p>
+    <p><strong>推荐阅读：</strong>《古今数学思想》——了解几何学从古埃及到古希腊的演变；《一个数学家的叹息》—— Lockhart 对三角形之美的赞叹。</p>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 下列长度的三条线段，能组成三角形的是（　）</p>
+    <p>A. 1cm，2cm，3cm &nbsp; B. 2cm，3cm，4cm &nbsp; C. 3cm，4cm，8cm &nbsp; D. 5cm，5cm，11cm</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">看较短的两条边之和是否大于最长边。A: 1+2=3（等于，不行），B: 2+3=5&gt;4 ✓，C: 3+4=7&lt;8 ✗，D: 5+5=10&lt;11 ✗。</div>
+    <div class="ans-box" id="a1">B。2+3=5 &gt; 4，满足两边之和大于第三边。其他选项都不满足。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 在△ABC 中，∠A = 50°，∠B = 60°，则∠C = ？</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">三角形内角和 = 180°，∠C = 180° − ∠A − ∠B。</div>
+    <div class="ans-box" id="a2">∠C = 180° − 50° − 60° = 70°。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 一个三角形中最多有几个直角？为什么？</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">一个直角 = 90°，两个直角 = 180°，还剩多少度给第三个角？</div>
+    <div class="ans-box" id="a3">最多 1 个直角。因为两个直角之和已经是 180°，第三个角就只能是 0°，这不是一个真正的角。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 已知三角形两边长分别为 4 和 9，则第三边 x 的取值范围是？</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">|9−4| &lt; x &lt; 9+4。两边之差小于第三边，第三边小于两边之和。</div>
+    <div class="ans-box" id="a4">5 &lt; x &lt; 13。即第三边大于 5 且小于 13。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 等腰三角形的一个底角是 40°，它的顶角是多少度？</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">等腰三角形两个底角相等。内角和 180°，顶角 = 180° − 2 × 40°。</div>
+    <div class="ans-box" id="a5">顶角 = 180° − 2 × 40° = 100°。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 一个十边形的内角和是多少度？</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">用公式 (n−2) × 180°，n = 10。</div>
+    <div class="ans-box" id="a6">(10−2) × 180° = 8 × 180° = 1440°。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>7.</strong> 一个多边形的内角和是 1260°，它是几边形？</p>
+    <button class="btn-sm" onclick="toggleHint('h7')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a7')">查看答案</button>
+    <div class="hint-box" id="h7">设边数为 n，则 (n−2) × 180° = 1260°，解出 n。</div>
+    <div class="ans-box" id="a7">(n−2) × 180° = 1260°，n−2 = 7，n = 9。是九边形。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>8.</strong> 下列物品中，利用三角形稳定性的是（　），利用四边形不稳定性的是（　）。</p>
+    <p>① 自行车车架 &nbsp; ② 伸缩门 &nbsp; ③ 屋顶桁架 &nbsp; ④ 折叠椅</p>
+    <button class="btn-sm" onclick="toggleHint('h8')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a8')">查看答案</button>
+    <div class="hint-box" id="h8">稳定的结构用三角形，需要变形/伸缩的结构用四边形。</div>
+    <div class="ans-box" id="a8">利用三角形稳定性：①③。利用四边形不稳定性：②④。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>9.</strong> 在△ABC 中，∠A = ∠B = 2∠C，求∠A、∠B、∠C 各是多少度。</p>
+    <button class="btn-sm" onclick="toggleHint('h9')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a9')">查看答案</button>
+    <div class="hint-box" id="h9">设∠C = x，则∠A = ∠B = 2x。内角和：x + 2x + 2x = 180°，即 5x = 180°。</div>
+    <div class="ans-box" id="a9">5x = 180°，x = 36°。所以∠C = 36°，∠A = ∠B = 72°。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>10.</strong> 用长度分别为 2、3、4、5、6（单位：cm）的五根小棒，每次取三根拼三角形，最多能拼出几种不同的三角形？</p>
+    <button class="btn-sm" onclick="toggleHint('h10')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a10')">查看答案</button>
+    <div class="hint-box" id="h10">从 5 根中选 3 根，共有 10 种组合。逐一检查是否满足"两边之和大于第三边"。</div>
+    <div class="ans-box" id="a10">满足条件的组合：(2,3,4)、(2,4,5)、(2,5,6)、(3,4,5)、(3,4,6)、(3,5,6)、(4,5,6)。不满足的：(2,3,5) 2+3=5（等于，不行）、(2,3,6) 2+3&lt;6、(2,4,6) 2+4=6（等于，不行）。共 7 种。</div>
+  </div>
+
+  <h2>小结</h2>
+  <div class="key">
+    <ul>
+      <li><strong>三角形</strong>由三条不在同一直线上的线段首尾相连组成，有三个顶点、三条边、三个内角</li>
+      <li><strong>三边关系：</strong>任意两边之和大于第三边，任意两边之差小于第三边</li>
+      <li><strong>内角和：</strong>三角形三个内角之和恒等于 180°（撕角法直观感受）</li>
+      <li><strong>多边形内角和：</strong>(n−2) × 180°（把多边形拆成三角形）</li>
+      <li><strong>稳定性：</strong>三边长度确定后三角形形状唯一（稳定），四边形则不然（可变形）</li>
+      <li><strong>重要线段：</strong>高、中线、角平分线，各有三条，各交于一点</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="congruent-triangles.html">下一课：全等三角形 →</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+<script src="../lessons/dt.js"></script>
+</body>
+</html>
