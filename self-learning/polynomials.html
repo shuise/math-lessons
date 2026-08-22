@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>整式运算 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
-<link rel="stylesheet" href="../lessons/style.css">
+<link rel="stylesheet" href="./style.css">
 <style>
   :root { --accent: #e91e63; }
   .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
@@ -46,8 +46,15 @@
     <p>《古今数学思想》中写道："花拉子米的'对消'，是代数运算中第一个真正具有普遍性的方法。"</p>
   </div>
 
-  <h2>一、同类项与合并</h2>
+  <h2>一、整式、常数项与同类项</h2>
   <div class="story">
+    <p><strong>整式</strong> = 单项式与多项式的统称。单项式是数与字母的乘积（如 3x、-5a²b、7）；多项式是几个单项式的和（如 3x² + 2x - 5）。</p>
+    <p>在多项式中，每一项都叫作这个多项式的<strong>项</strong>。其中<strong>不含字母的项</strong>，叫作<strong>常数项</strong>。</p>
+    <div class="formula">
+      <p>例：3x² + 2x - 5 中，项有 3x²、2x、-5；常数项是 <strong>-5</strong>（注意符号）。</p>
+      <p>例：x² + 7x + 4 的常数项是 <strong>4</strong>。</p>
+      <p>例：单项式 8（单独一个数字）也算单项式，常数项就是它本身 <strong>8</strong>。</p>
+    </div>
     <p><strong>同类项：</strong>字母部分完全相同的项。</p>
     <div class="formula">
       <p>3x² 和 -5x² 是同类项（字母部分都是 x²）</p>
@@ -57,8 +64,8 @@
     <p><strong>合并同类项：</strong>把同类项的系数加起来，字母部分不变。</p>
     <div class="example">
       <strong>例：</strong>3x² + 5x - 2x² + 7 - 3x + 1<br>
-      = (3x² - 2x²) + (5x - 3x) + (7 + 1)<br>
-      = x² + 2x + 8
+      = (3x² - 2x²) + (5x - 3x) + (7 + 1)　← 把常数项 7 和 1 单独分一组<br>
+      = x² + 2x + 8　（其中 <strong>8</strong> 就是合并后的常数项）
     </div>
     <div class="key">
       <p><strong>为什么能合并？</strong>3x² 和 2x² 就像 3 个苹果和 2 个苹果——你可以把它们加起来变成 5 个苹果。但 3x² 和 2x 是"苹果"和"橘子"——不能直接加。</p>
@@ -69,26 +76,56 @@
   <div class="formula">
     <p><strong>分配律：</strong>a(b + c) = ab + ac</p>
     <p><strong>为什么？</strong>用面积图来理解：一个长方形，宽是 a，长是 (b + c)。面积 = a × (b + c)。也可以把长方形切成两块：一块面积是 a×b，另一块是 a×c。所以 a(b + c) = ab + ac。</p>
+
+    <div class="graphic">
+      <div style="text-align:left;margin:12px 0 8px 0;font-size:14px;color:#888;">下图中取 a=8, b=3, c=2。整个长方形面积 = a×(b+c) = 8×5 = 40；拆成两块：8×3=24（粉色，较高）和 8×2=16（蓝色，较矮），加起来正好 40。两块高度差很大，面积差异一眼就能看出来。</div>
+      <svg viewBox="0 0 460 300" style="max-width:100%;height:auto;display:block;margin:0;">
+        <defs>
+          <style>
+            .area-ab { fill: rgba(233, 30, 99, 0.22); stroke: #e91e63; stroke-width: 2; }
+            .area-ac { fill: rgba(33, 150, 243, 0.22); stroke: #2196f3; stroke-width: 2; }
+            .area-outer { fill: none; stroke: #333; stroke-width: 2.5; stroke-dasharray: 8 4; }
+            .label-center { font-size: 15px; font-weight: bold; text-anchor: middle; dominant-baseline: central; }
+            .label-side { font-size: 14px; font-weight: bold; text-anchor: middle; dominant-baseline: central; }
+          </style>
+        </defs>
+        <!-- 上块：ab = 8×3 = 24 -->
+        <rect x="60" y="30" width="320" height="120" class="area-ab"/>
+        <text x="220" y="90" class="label-center" fill="#c2185b">ab = 8 × 3 = 24</text>
+        <!-- 下块：ac = 8×2 = 16 -->
+        <rect x="60" y="150" width="320" height="80" class="area-ac"/>
+        <text x="220" y="190" class="label-center" fill="#1565c0">ac = 8 × 2 = 16</text>
+        <!-- 外框 -->
+        <rect x="60" y="30" width="320" height="200" class="area-outer"/>
+        <!-- 底边：a = 8 -->
+        <text x="220" y="252" class="label-side" fill="#333">a = 8（宽）</text>
+        <!-- 左侧：b = 3 -->
+        <text x="35" y="90" class="label-side" fill="#e91e63" transform="rotate(-90,35,90)">b = 3</text>
+        <!-- 左侧：c = 2 -->
+        <text x="35" y="190" class="label-side" fill="#2196f3" transform="rotate(-90,35,190)">c = 2</text>
+        <!-- 右侧：b + c = 5 -->
+        <text x="410" y="130" class="label-side" fill="#333" transform="rotate(90,410,130)">b + c = 5（长）</text>
+        <!-- 公式 -->
+        <text x="230" y="285" class="label-side" fill="#333">a(b + c) = ab + ac → 8 × 5 = 24 + 16 = 40</text>
+      </svg>
+    </div>
+
     <div class="example">
       <strong>例：</strong>3(x + 2) = 3x + 6<br>
       <strong>例：</strong>-2(3x - 5) = -6x + 10（注意：负号分配进去，各项都要变号）
     </div>
   </div>
 
-  <h2>三、多项式乘法：FOIL 和面积图</h2>
+  <h2>三、多项式乘法：分配律的反复使用</h2>
   <div class="story">
-    <p><strong>两个多项式相乘，</strong>用分配律逐项展开：</p>
+    <p><strong>两个多项式相乘，</strong>就是反复使用分配律。先把第一个括号里的每一项，分别去乘第二个括号，再展开：</p>
     <div class="formula">
-      <p style="text-align:center;">(a + b)(c + d) = a×c + a×d + b×c + b×d</p>
-      <p>这就是 FOIL 规则：</p>
-      <p>F（First 首项）：a × c<br>
-      O（Outer 外项）：a × d<br>
-      I（Inner 内项）：b × c<br>
-      L（Last 末项）：b × d</p>
+      <p style="text-align:left;">(a + b)(c + d) = a(c + d) + b(c + d) = ac + ad + bc + bd</p>
+      <p><strong>思路：</strong>先把 (a + b) 当作一个整体，对 (c + d) 用一次分配律；再对每一项分别用分配律展开，最后合并同类项。</p>
     </div>
     <div class="example">
       <strong>例：</strong>(x + 2)(x + 3)<br>
-      = x·x + x·3 + 2·x + 2·3<br>
+      = x(x + 3) + 2(x + 3)<br>
       = x² + 3x + 2x + 6<br>
       = x² + 5x + 6
     </div>
@@ -97,7 +134,7 @@
   <h2>四、三大乘法公式（用面积图证明）</h2>
   <div class="formula">
     <p><strong>公式 1：完全平方公式</strong></p>
-    <p style="text-align:center;font-size:18px;">(a + b)² = a² + 2ab + b²</p>
+    <p style="text-align:left;font-size:18px;">(a + b)² = a² + 2ab + b²</p>
     <p><strong>为什么？</strong>画一个边长为 (a+b) 的大正方形，面积 = (a+b)²。把它切成四块：</p>
     <ul>
       <li>一块 a×a = a²</li>
@@ -107,14 +144,14 @@
     <p>总面积 = a² + 2ab + b²。这就是面积图的证明——不需要背公式，看图就懂了。</p>
 
     <div class="graphic">
-      <div style="text-align:center;margin-bottom:8px;font-size:14px;color:#888;">拖动滑块改变 a 和 b，看正方形怎么变化 ↓</div>
-      <div style="text-align:center;margin:8px 0;">
+      <div style="text-align:left;margin-bottom:8px;font-size:14px;color:#888;">拖动滑块改变 a 和 b，看正方形怎么变化 ↓</div>
+      <div style="text-align:left;margin:8px 0;">
         <label style="font-size:14px;">a = <span id="valA" style="font-weight:bold;color:#e91e63;">3</span></label>
         <input type="range" id="sliderA" min="1" max="5" value="3" oninput="updateSquare()" style="vertical-align:middle;margin:0 8px;width:120px;">
         <label style="font-size:14px;margin-left:12px;">b = <span id="valB" style="font-weight:bold;color:#2196f3;">2</span></label>
         <input type="range" id="sliderB" min="1" max="5" value="2" oninput="updateSquare()" style="vertical-align:middle;margin:0 8px;width:120px;">
       </div>
-      <svg viewBox="0 0 520 380" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+      <svg viewBox="0 0 520 380" style="max-width:100%;height:auto;display:block;margin:0;">
         <defs>
           <style>
             .area-a2 { fill: rgba(233, 30, 99, 0.25); stroke: #e91e63; stroke-width: 2; }
@@ -153,7 +190,7 @@
 
   <div class="formula">
     <p><strong>公式 2：平方差公式</strong></p>
-    <p style="text-align:center;font-size:18px;">(a + b)(a - b) = a² - b²</p>
+    <p style="text-align:left;font-size:18px;">(a + b)(a - b) = a² - b²</p>
     <p><strong>为什么？</strong>展开：(a + b)(a - b) = a² - ab + ab - b² = a² - b²。中间两项 -ab 和 +ab 抵消了。</p>
     <div class="example">
       <strong>例：</strong>(x + 5)(x - 5) = x² - 25<br>
@@ -163,7 +200,7 @@
 
   <div class="formula">
     <p><strong>公式 3：差的完全平方</strong></p>
-    <p style="text-align:center;font-size:18px;">(a - b)² = a² - 2ab + b²</p>
+    <p style="text-align:left;font-size:18px;">(a - b)² = a² - 2ab + b²</p>
     <p><strong>为什么？</strong>(a - b)² = (a + (-b))² = a² + 2a(-b) + (-b)² = a² - 2ab + b²</p>
   </div>
 
@@ -173,7 +210,7 @@
 
   <h2>挑战性问题</h2>
   <div class="challenge">
-    <p><strong>问题 1：</strong>不用 FOIL 公式，用面积图解释：(x + 2)(x + 5) 展开后为什么是 x² + 7x + 10？</p>
+    <p><strong>问题 1：</strong>用面积图解释：(x + 2)(x + 5) 展开后为什么是 x² + 7x + 10？（提示：画一个宽 (x+2)、长 (x+5) 的大长方形，切成四块，分别算面积。）</p>
     <p><strong>问题 2：</strong>201 × 199 用平方差公式怎么快速算出来？</p>
     <p><strong>问题 3：</strong>已知 (x + y)² = 25，(x - y)² = 9。求 xy 的值。（提示：展开两个式子，看它们之间有什么关系。）</p>
   </div>
@@ -181,7 +218,20 @@
   <h2>拓展阅读</h2>
   <div class="extend">
     <p><strong>面积图与代数：</strong>在笛卡儿发明坐标系之前，数学家们用几何图形来证明代数公式。花拉子米解二次方程用的是"拼图法"——把 x² + bx 拼成一个正方形。这种"几何代数"在阿拉伯数学中非常发达，后来的配方法就源于此。</p>
-    <p><strong>推荐阅读：</strong>《代数的历史》—— 花拉子米的几何解法；《古今数学思想》—— 阿拉伯数学中的代数几何结合。</p>
+
+    <p style="margin-top:18px;"><strong>雨伞定律：为什么正数世界的规律能"罩住"所有数？</strong></p>
+    <p>你可能会问：分配律 a(b+c)=ab+ac、完全平方 (a+b)²=a²+2ab+b²，这些公式我们都是用正数和面积图发现的。可如果 a 或 b 是负数、是分数、甚至是一个复杂的字母式子，它还成立吗？</p>
+    <p>答案是：<strong>成立。</strong>这就是数学中一个极其重要的基础思路，我们叫它"雨伞定律"。<strong>务必把这一段读明白，以后很多地方都要用到。</strong></p>
+    <p><strong>思路分三步：</strong></p>
+    <ol>
+      <li><strong>第一步——在正数世界打开伞。</strong>先用正数（或几何图形）把规律发现并证明出来。比如用面积图验证 a(b+c)=ab+ac：当 a、b、c 都是正数时，面积图看得见、摸得着，结论一目了然。这一步是把"伞"在正数的世界里打开。</li>
+      <li><strong>第二步——把伞撑开，罩住负数。</strong>当我们把 b 换成负数（比如算 a(b-c)），面积图就画不出来了——因为"负长度"没有几何意义。但是，我们要求代数运算<strong>保持一致</strong>：既然 a(b+c)=ab+ac 对正数成立，那么把 c 换成 -c 后，a(b+(-c)) = ab + a(-c) = ab - ac 也必须成立。这种"代数一致性"就像伞骨，把规律从正数撑到了负数——不用重新画图，靠"一致性"就能扩展。</li>
+      <li><strong>第三步——把伞再撑大，罩住分数和字母。</strong>同样的道理，把数换成字母、换成分式，规律依然成立。因为字母本来就可以代表任何数——正数、负数、分数都行。只要规律对所有具体的数都成立，那么用字母写出来的式子自然也成立。伞越撑越大，最终覆盖整个数的世界。</li>
+    </ol>
+    <p>所以，"雨伞定律"的核心是：<strong>先用最直观的方式（正数、图形）发现规律，再用"代数一致性"把它扩展到所有数。</strong>就像一把伞，先在正数世界打开，然后越撑越大，最终覆盖负数、分数、字母——覆盖整个数的世界。</p>
+    <p>这个思路以后会反复用到：负数怎么运算、分式怎么约分、根式怎么化简……很多看似复杂的新规则，其实都是"把正数的规律用代数一致性撑开"得到的。理解了这一点，后面的学习会顺利很多。</p>
+
+    <p style="margin-top:18px;"><strong>推荐阅读：</strong>《代数的历史》—— 花拉子米的几何解法；《古今数学思想》—— 阿拉伯数学中的代数几何结合。</p>
   </div>
 
   <h2>习题</h2>
@@ -198,7 +248,7 @@
     <p><strong>2.</strong> 展开 (x + 4)(x - 3)</p>
     <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
-    <div class="hint-box" id="h2">FOIL：x·x + x·(-3) + 4·x + 4·(-3)。</div>
+    <div class="hint-box" id="h2">用分配律：x(x-3) + 4(x-3)，再分别展开。</div>
     <div class="ans-box" id="a2">x² + x - 12</div>
   </div>
 
@@ -222,8 +272,8 @@
   <div class="key">
     <ul>
       <li><strong>同类项</strong> = 字母部分一样的项，合并时只用管系数</li>
-      <li><strong>分配律</strong> a(b+c) = ab+ac 是整式运算的基石</li>
-      <li><strong>FOIL</strong>：(a+b)(c+d) = ac + ad + bc + bd</li>
+      <li><strong>整式</strong> = 单项式与多项式的统称；多项式中不含字母的项叫<strong>常数项</strong></li>
+      <li><strong>分配律</strong> a(b+c) = ab+ac 是整式运算的基石，多项式乘法就是反复用分配律</li>
       <li><strong>完全平方</strong>：(a+b)² = a²+2ab+b² —— 用面积图证明，不靠死记</li>
       <li><strong>平方差</strong>：(a+b)(a-b) = a²-b² —— 中间项抵消，可用于快速心算</li>
       <li>这些公式是后面解二次方程的"钥匙"</li>
@@ -287,6 +337,6 @@ function updateSquare() {
   document.getElementById('formulaDisplay').textContent = '(' + a + '+' + b + ')² = ' + a2 + ' + ' + ab + ' + ' + ab + ' + ' + b2 + ' = ' + result;
 }
 </script>
-<script src="../lessons/dt.js"></script>
+<script src="./dt.js"></script>
 </body>
 </html>

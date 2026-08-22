@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>因式分解与分式 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>">
-<link rel="stylesheet" href="../lessons/style.css">
+<link rel="stylesheet" href="./style.css">
 <style>
   :root { --accent: #00838f; }
   .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
@@ -21,6 +21,13 @@
   .hint-box.show, .ans-box.show { display: block; }
   .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
   .btn-sm:hover { background: #e8e8e8; }
+  /* 分数：分子在上，分母在下，中间横线 */
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px; line-height: 1.25; }
+  .frac .num { border-bottom: 1.5px solid #333; padding: 0 6px 1px; }
+  .frac .den { padding: 1px 6px 0; }
+  /* 十字相乘图解 */
+  .cross-box { background: #fafafa; border-left: 3px solid #00838f; padding: 12px 16px; border-radius: 6px; margin: 10px 0; }
+  .cross-box .calc { font-size: 14px; line-height: 1.7; margin-top: 6px; }
 
   @media (max-width: 720px) {
     article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
@@ -41,7 +48,7 @@
 
   <h2>起源：把乘法"倒过来"</h2>
   <div class="origin">
-    <p>在课件 6 中，我们学了 FOIL 展开：(x + 2)(x + 3) = x² + 5x + 6。</p>
+    <p>在课件 6 中，我们学了用分配律展开：(x + 2)(x + 3) = x² + 5x + 6。</p>
     <p>现在要做<strong>逆运算</strong>——给定 x² + 5x + 6，你能把它"拆回"两个因式 (x + 2)(x + 3) 吗？</p>
     <p>这就是<strong>因式分解</strong>——整式乘法的逆运算。就像把 12 拆成 3×4 一样，把多项式拆成几个因式的乘积。</p>
     <p>因式分解是解方程的关键工具。在课件 8-10 中，你会看到：因式分解能让你一眼看出方程的解！</p>
@@ -67,21 +74,66 @@
   <div class="story">
     <p>对于二次三项式 x² + px + q，如果它能分解成 (x + m)(x + n)，那么：</p>
     <div class="formula">
-      <p style="text-align:center;font-size:18px;">x² + px + q = (x + m)(x + n)</p>
-      <p style="text-align:center;">其中 m + n = p，m × n = q</p>
+      <p style="text-align:left;font-size:18px;">x² + px + q = (x + m)(x + n)</p>
+      <p style="text-align:left;">其中 m + n = p，m × n = q</p>
     </div>
-    <p><strong>核心思路：</strong>找两个数，它们的和等于 p，积等于 q。</p>
-    <div class="example">
-      <strong>例 1：</strong>分解 x² + 5x + 6<br>
-      找两个数，和为 5，积为 6 → 2 和 3<br>
-      x² + 5x + 6 = (x + 2)(x + 3)<br><br>
-      <strong>例 2：</strong>分解 x² - 7x + 12<br>
-      找两个数，和为 -7，积为 12 → -3 和 -4<br>
-      x² - 7x + 12 = (x - 3)(x - 4)<br><br>
-      <strong>例 3：</strong>分解 x² - x - 6<br>
-      找两个数，和为 -1，积为 -6 → -3 和 2<br>
-      x² - x - 6 = (x - 3)(x + 2)
+    <p><strong>核心思路：</strong>找两个数 m 和 n，它们的和等于 p（一次项系数），积等于 q（常数项）。</p>
+    <p><strong>怎么验证找得对？</strong>用"十字交叉图"——左列写两个 x，右列写两个常数，交叉相乘再相加，看是否等于一次项。</p>
+
+    <div class="cross-box">
+      <p><strong>例 1：</strong>分解 x² + 5x + 6（找两个数，和为 5，积为 6 → 2 和 3）</p>
+      <svg viewBox="0 0 200 130" style="max-width:220px; height:auto; display:block; margin:6px 0;">
+        <text x="25" y="32" font-size="18" font-weight="bold" fill="#e91e63" text-anchor="middle" dominant-baseline="central">x</text>
+        <text x="175" y="32" font-size="18" font-weight="bold" fill="#2196f3" text-anchor="middle" dominant-baseline="central">2</text>
+        <text x="25" y="98" font-size="18" font-weight="bold" fill="#e91e63" text-anchor="middle" dominant-baseline="central">x</text>
+        <text x="175" y="98" font-size="18" font-weight="bold" fill="#2196f3" text-anchor="middle" dominant-baseline="central">3</text>
+        <line x1="42" y1="40" x2="158" y2="90" stroke="#999" stroke-width="1.5" stroke-dasharray="5 3"/>
+        <line x1="42" y1="90" x2="158" y2="40" stroke="#999" stroke-width="1.5" stroke-dasharray="5 3"/>
+        <text x="100" y="65" font-size="14" fill="#888" text-anchor="middle" dominant-baseline="central">×</text>
+      </svg>
+      <div class="calc">
+        交叉相乘求和：x·3 + x·2 = 3x + 2x = <strong>5x</strong> ✓（等于一次项）<br>
+        横向相乘：x·x = x²（二次项），2·3 = 6（常数项）<br>
+        所以：<strong>x² + 5x + 6 = (x + 2)(x + 3)</strong>
+      </div>
     </div>
+
+    <div class="cross-box">
+      <p><strong>例 2：</strong>分解 x² - 7x + 12（找两个数，和为 -7，积为 12 → -3 和 -4）</p>
+      <svg viewBox="0 0 200 130" style="max-width:220px; height:auto; display:block; margin:6px 0;">
+        <text x="25" y="32" font-size="18" font-weight="bold" fill="#e91e63" text-anchor="middle" dominant-baseline="central">x</text>
+        <text x="175" y="32" font-size="18" font-weight="bold" fill="#2196f3" text-anchor="middle" dominant-baseline="central">-3</text>
+        <text x="25" y="98" font-size="18" font-weight="bold" fill="#e91e63" text-anchor="middle" dominant-baseline="central">x</text>
+        <text x="175" y="98" font-size="18" font-weight="bold" fill="#2196f3" text-anchor="middle" dominant-baseline="central">-4</text>
+        <line x1="42" y1="40" x2="158" y2="90" stroke="#999" stroke-width="1.5" stroke-dasharray="5 3"/>
+        <line x1="42" y1="90" x2="158" y2="40" stroke="#999" stroke-width="1.5" stroke-dasharray="5 3"/>
+        <text x="100" y="65" font-size="14" fill="#888" text-anchor="middle" dominant-baseline="central">×</text>
+      </svg>
+      <div class="calc">
+        交叉相乘求和：x·(-4) + x·(-3) = -4x - 3x = <strong>-7x</strong> ✓<br>
+        横向相乘：x·x = x²，(-3)·(-4) = 12 ✓<br>
+        所以：<strong>x² - 7x + 12 = (x - 3)(x - 4)</strong>
+      </div>
+    </div>
+
+    <div class="cross-box">
+      <p><strong>例 3：</strong>分解 x² - x - 6（找两个数，和为 -1，积为 -6 → -3 和 2）</p>
+      <svg viewBox="0 0 200 130" style="max-width:220px; height:auto; display:block; margin:6px 0;">
+        <text x="25" y="32" font-size="18" font-weight="bold" fill="#e91e63" text-anchor="middle" dominant-baseline="central">x</text>
+        <text x="175" y="32" font-size="18" font-weight="bold" fill="#2196f3" text-anchor="middle" dominant-baseline="central">-3</text>
+        <text x="25" y="98" font-size="18" font-weight="bold" fill="#e91e63" text-anchor="middle" dominant-baseline="central">x</text>
+        <text x="175" y="98" font-size="18" font-weight="bold" fill="#2196f3" text-anchor="middle" dominant-baseline="central">2</text>
+        <line x1="42" y1="40" x2="158" y2="90" stroke="#999" stroke-width="1.5" stroke-dasharray="5 3"/>
+        <line x1="42" y1="90" x2="158" y2="40" stroke="#999" stroke-width="1.5" stroke-dasharray="5 3"/>
+        <text x="100" y="65" font-size="14" fill="#888" text-anchor="middle" dominant-baseline="central">×</text>
+      </svg>
+      <div class="calc">
+        交叉相乘求和：x·2 + x·(-3) = 2x - 3x = <strong>-x</strong> ✓<br>
+        横向相乘：x·x = x²，(-3)·2 = -6 ✓<br>
+        所以：<strong>x² - x - 6 = (x - 3)(x + 2)</strong>
+      </div>
+    </div>
+
     <div class="key">
       <p><strong>十字相乘法的妙处：</strong>一旦你拆成 (x+m)(x+n)=0，解就一目了然——x = -m 或 x = -n。因为如果两个数相乘得 0，至少有一个是 0。这就是解二次方程最直接的方法！</p>
     </div>
@@ -91,12 +143,35 @@
   <div class="story">
     <p>在课件 2 中，我们学了数字的分数（如 3/4）。现在，<strong>分式</strong>就是分母中含有字母的代数式。</p>
     <div class="formula">
-      <p>例如：1/x，3/(x-2)，(x+1)/(x²-1)</p>
+      <p>例如：</p>
+      <p>
+        <span class="frac"><span class="num">1</span><span class="den">x</span></span>，
+        <span class="frac"><span class="num">3</span><span class="den">x − 2</span></span>，
+        <span class="frac"><span class="num">x + 1</span><span class="den">x² − 1</span></span>
+      </p>
+      <p style="font-size:13px;color:#888;">（分子在上、分母在下，中间横线隔开，方便观察因式）</p>
     </div>
     <p><strong>分式的基本性质：</strong>分子分母同时乘（或除以）同一个非零整式，分式的值不变。</p>
     <div class="example">
-      <strong>约分：</strong> (x²-1)/(x+1) = (x+1)(x-1)/(x+1) = x-1（前提：x ≠ -1）<br>
-      <strong>通分：</strong> 1/x + 1/(x-1) = (x-1)/(x(x-1)) + x/(x(x-1)) = (2x-1)/(x(x-1))
+      <p><strong>约分：</strong></p>
+      <p>
+        <span class="frac"><span class="num">x² − 1</span><span class="den">x + 1</span></span>
+        =
+        <span class="frac"><span class="num">(x + 1)(x − 1)</span><span class="den">x + 1</span></span>
+        = x − 1　（前提：x ≠ −1）
+      </p>
+      <p><strong>通分：</strong></p>
+      <p>
+        <span class="frac"><span class="num">1</span><span class="den">x</span></span>
+        +
+        <span class="frac"><span class="num">1</span><span class="den">x − 1</span></span>
+        =
+        <span class="frac"><span class="num">x − 1</span><span class="den">x(x − 1)</span></span>
+        +
+        <span class="frac"><span class="num">x</span><span class="den">x(x − 1)</span></span>
+        =
+        <span class="frac"><span class="num">2x − 1</span><span class="den">x(x − 1)</span></span>
+      </p>
     </div>
   </div>
 
@@ -109,11 +184,33 @@
     <p>在分式方程中，如果解出来的 x 使分母为零，这个解就是<strong>增根</strong>（伪解），必须舍去！</p>
   </div>
 
+  <div class="example">
+    <p><strong>增根实例：</strong>解分式方程</p>
+    <p style="font-size:17px;">
+      <span class="frac"><span class="num">1</span><span class="den">x − 1</span></span>
+      + 2 =
+      <span class="frac"><span class="num">x</span><span class="den">x − 1</span></span>
+    </p>
+    <p><strong>第一步：去分母</strong>（两边同乘 (x − 1)，注意此时默认 x ≠ 1）：</p>
+    <p>1 + 2(x − 1) = x</p>
+    <p><strong>第二步：展开、移项、求解：</strong></p>
+    <p>1 + 2x − 2 = x<br>
+    2x − 1 = x<br>
+    x = <strong>1</strong></p>
+    <p><strong>第三步：检验！</strong>把 x = 1 代入原方程，分母 x − 1 = 1 − 1 = <strong>0</strong> → 分母为零，原式无意义！</p>
+    <p style="color:#c62828;"><strong>所以 x = 1 是增根（伪解），必须舍去。原方程无解。</strong></p>
+    <p style="font-size:13px;color:#888;">增根是怎么产生的？去分母时两边乘了 (x − 1)，相当于默认了 x ≠ 1；但解出来恰好 x = 1，它让乘的"消去因子"变成了 0。所以<strong>解分式方程必须检验</strong>，把使分母为零的解舍去。</p>
+  </div>
+
   <h2>挑战性问题</h2>
   <div class="challenge">
-    <p><strong>问题 1：</strong>为什么 (x² - 4)/(x - 2) 可以化简为 x + 2？在什么条件下这个化简成立？</p>
+    <p><strong>问题 1：</strong>为什么
+      <span class="frac"><span class="num">x² − 4</span><span class="den">x − 2</span></span>
+      可以化简为 x + 2？在什么条件下这个化简成立？</p>
     <p><strong>问题 2：</strong>分解 x² + 2x - 15，然后解释：为什么这个分解能帮你解方程 x² + 2x - 15 = 0？</p>
-    <p><strong>问题 3：</strong>分式 (x² - 1)/(x² - 3x + 2) 可以化简吗？化简后 x 的取值范围有什么变化？</p>
+    <p><strong>问题 3：</strong>分式
+      <span class="frac"><span class="num">x² − 1</span><span class="den">x² − 3x + 2</span></span>
+      可以化简吗？化简后 x 的取值范围有什么变化？</p>
   </div>
 
   <h2>拓展阅读</h2>
@@ -141,11 +238,15 @@
   </div>
 
   <div class="exercise">
-    <p><strong>3.</strong> 化简分式：(x² - 9)/(x² - x - 6)</p>
+    <p><strong>3.</strong> 化简分式：
+      <span class="frac"><span class="num">x² − 9</span><span class="den">x² − x − 6</span></span>
+    </p>
     <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
     <div class="hint-box" id="h3">分子：x²-9 = (x+3)(x-3)。分母：x²-x-6 = (x-3)(x+2)。约去 (x-3)。</div>
-    <div class="ans-box" id="a3">(x+3)/(x+2)，前提 x ≠ 3</div>
+    <div class="ans-box" id="a3">
+      <span class="frac"><span class="num">x + 3</span><span class="den">x + 2</span></span>，前提 x ≠ 3
+    </div>
   </div>
 
   <div class="exercise">
@@ -174,6 +275,6 @@
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
 function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
 </script>
-<script src="../lessons/dt.js"></script>
+<script src="./dt.js"></script>
 </body>
 </html>

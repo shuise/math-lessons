@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>分式方程 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
-<link rel="stylesheet" href="../lessons/style.css">
+<link rel="stylesheet" href="./style.css">
 <style>
   :root { --accent: #e65100; }
   .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
@@ -22,6 +22,12 @@
   .hint-box.show, .ans-box.show { display: block; }
   .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
   .btn-sm:hover { background: #e8e8e8; }
+
+  /* 分式：上下排列（分子在上、分母在下、中间横线） */
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; line-height: 1.15; margin: 0 2px; }
+  .frac .num { border-bottom: 1.5px solid currentColor; padding: 0 5px 1px; }
+  .frac .den { padding: 1px 5px 0; }
+  .frac.lg { font-size: 1.1em; }
 
   @media (max-width: 720px) {
     article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
@@ -51,8 +57,8 @@
   <h2>一、什么是分式方程？</h2>
   <div class="story">
     <p><strong>分式方程：</strong>分母中含有未知数的方程。</p>
-    <p>比如：1/(x-2) = 3，x/(x+1) = 2，2/(x+1) + 3/(x-1) = 5/(x²-1)。</p>
-    <p><strong>注意：</strong>分母不能为 0！比如 1/(x-2) = 3 中，x 不能等于 2。</p>
+    <p>比如：<span class="frac"><span class="num">1</span><span class="den">x-2</span></span> = 3，<span class="frac"><span class="num">x</span><span class="den">x+1</span></span> = 2，<span class="frac"><span class="num">2</span><span class="den">x+1</span></span> + <span class="frac"><span class="num">3</span><span class="den">x-1</span></span> = <span class="frac"><span class="num">5</span><span class="den">x²-1</span></span>。</p>
+    <p><strong>注意：</strong>分母不能为 0！比如 <span class="frac"><span class="num">1</span><span class="den">x-2</span></span> = 3 中，x 不能等于 2。</p>
   </div>
 
   <h2>二、核心思路：去分母</h2>
@@ -62,12 +68,12 @@
   </div>
 
   <div class="example">
-    <strong>例子：</strong>解 1/(x-2) = 3<br><br>
+    <strong>例子：</strong>解 <span class="frac"><span class="num">1</span><span class="den">x-2</span></span> = 3<br><br>
     <strong>两边乘 (x-2)：</strong>1 = 3(x-2)<br>
     <strong>去括号：</strong>1 = 3x - 6<br>
     <strong>移项：</strong>3x = 7<br>
-    <strong>解出：</strong>x = 7/3<br>
-    <strong>检验：</strong>1/(7/3-2) = 1/(1/3) = 3 ✓
+    <strong>解出：</strong>x = <span class="frac"><span class="num">7</span><span class="den">3</span></span><br>
+    <strong>检验：</strong><span class="frac"><span class="num">7</span><span class="den">3</span></span> - 2 = <span class="frac"><span class="num">1</span><span class="den">3</span></span>，所以 <span class="frac"><span class="num">1</span><span class="den"><span class="frac"><span class="num">1</span><span class="den">3</span></span></span></span> = 3 ✓
   </div>
 
   <h2>三、致命的陷阱：增根</h2>
@@ -77,14 +83,14 @@
   </div>
 
   <div class="example">
-    <strong>有增根的例子：</strong>解 x/(x-1) - 1/(x-1) = 2<br><br>
+    <strong>有增根的例子：</strong>解 <span class="frac"><span class="num">x</span><span class="den">x-1</span></span> - <span class="frac"><span class="num">1</span><span class="den">x-1</span></span> = 2<br><br>
     去分母：x - 1 = 2(x-1) → x - 1 = 2x - 2 → x = 1<br><br>
     <strong>检验：</strong>x=1 代入原方程，分母 x-1 = 0，原方程无意义！<br>
     <strong>结论：</strong>x=1 是增根，这个方程无解。
   </div>
 
   <h2>四、完整解题步骤</h2>
-  <div class="formula">
+  <div class="formula" style="text-align:left;font-size:1em;">
     <p><strong>第 1 步：</strong>找最简公分母（所有分母的最小公倍数）</p>
     <p><strong>第 2 步：</strong>两边同时乘最简公分母，去掉所有分母</p>
     <p><strong>第 3 步：</strong>解得到的整式方程</p>
@@ -92,18 +98,18 @@
   </div>
 
   <div class="example">
-    <strong>综合例子：</strong>解 2/(x+1) + 3/(x-1) = 5/(x²-1)<br><br>
+    <strong>综合例子：</strong>解 <span class="frac"><span class="num">2</span><span class="den">x+1</span></span> + <span class="frac"><span class="num">3</span><span class="den">x-1</span></span> = <span class="frac"><span class="num">5</span><span class="den">x²-1</span></span><br><br>
     x²-1 = (x+1)(x-1)，最简公分母是 (x+1)(x-1)<br><br>
     两边乘 (x+1)(x-1)：2(x-1) + 3(x+1) = 5<br>
-    2x - 2 + 3x + 3 = 5 → 5x + 1 = 5 → x = 4/5<br><br>
-    <strong>检验：</strong>x=4/5 时，x+1 ≠ 0，x-1 ≠ 0，分母都不为 0 ✓
+    2x - 2 + 3x + 3 = 5 → 5x + 1 = 5 → x = <span class="frac"><span class="num">4</span><span class="den">5</span></span><br><br>
+    <strong>检验：</strong>x=<span class="frac"><span class="num">4</span><span class="den">5</span></span> 时，x+1 ≠ 0，x-1 ≠ 0，分母都不为 0 ✓
   </div>
 
   <h2>挑战性问题</h2>
   <div class="challenge">
-    <p><strong>问题 1：</strong>古巴比伦人的"igum/igibum"问题：一个数加上它的倒数等于 5/2。这个数是多少？（提示：设这个数为 x，列方程 x + 1/x = 5/2。）</p>
+    <p><strong>问题 1：</strong>古巴比伦人的"igum/igibum"问题：一个数加上它的倒数等于 <span class="frac"><span class="num">5</span><span class="den">2</span></span>。这个数是多少？（提示：设这个数为 x，列方程 x + <span class="frac"><span class="num">1</span><span class="den">x</span></span> = <span class="frac"><span class="num">5</span><span class="den">2</span></span>。）</p>
     <p><strong>问题 2：</strong>为什么解分式方程要检验？如果忘记检验，可能会有多严重的后果？请举一个例子说明。</p>
-    <p><strong>问题 3：</strong>方程 1/(x-1) + 1/(x-2) = 0 有解吗？如果有，解是多少？如果没有，为什么？</p>
+    <p><strong>问题 3：</strong>方程 <span class="frac"><span class="num">1</span><span class="den">x-1</span></span> + <span class="frac"><span class="num">1</span><span class="den">x-2</span></span> = 0 有解吗？如果有，解是多少？如果没有，为什么？</p>
   </div>
 
   <h2>拓展阅读</h2>
@@ -116,15 +122,15 @@
   <h2>习题</h2>
 
   <div class="exercise">
-    <p><strong>1.</strong> 解方程：1/(x-3) = 2</p>
+    <p><strong>1.</strong> 解方程：<span class="frac"><span class="num">1</span><span class="den">x-3</span></span> = 2</p>
     <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
     <div class="hint-box" id="h1">两边乘 (x-3)：1 = 2(x-3)，解出 x 后检验分母不为 0。</div>
-    <div class="ans-box" id="a1">x = 7/2，检验：x-3 = 1/2 ≠ 0 ✓</div>
+    <div class="ans-box" id="a1">x = <span class="frac"><span class="num">7</span><span class="den">2</span></span>，检验：x-3 = <span class="frac"><span class="num">1</span><span class="den">2</span></span> ≠ 0 ✓</div>
   </div>
 
   <div class="exercise">
-    <p><strong>2.</strong> 解方程：x/(x+1) = 2/3</p>
+    <p><strong>2.</strong> 解方程：<span class="frac"><span class="num">x</span><span class="den">x+1</span></span> = <span class="frac"><span class="num">2</span><span class="den">3</span></span></p>
     <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
     <div class="hint-box" id="h2">交叉相乘：3x = 2(x+1)，然后解方程并检验。</div>
@@ -132,7 +138,7 @@
   </div>
 
   <div class="exercise">
-    <p><strong>3.</strong> 解方程：2/(x-1) = 3/(x+1)</p>
+    <p><strong>3.</strong> 解方程：<span class="frac"><span class="num">2</span><span class="den">x-1</span></span> = <span class="frac"><span class="num">3</span><span class="den">x+1</span></span></p>
     <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
     <div class="hint-box" id="h3">交叉相乘：2(x+1) = 3(x-1)，解出 x 后检验两个分母。</div>
@@ -140,10 +146,10 @@
   </div>
 
   <div class="exercise">
-    <p><strong>4.</strong> 解方程：x/(x-2) - 1 = 2/(x-2)</p>
+    <p><strong>4.</strong> 解方程：<span class="frac"><span class="num">x</span><span class="den">x-2</span></span> - 1 = <span class="frac"><span class="num">2</span><span class="den">x-2</span></span></p>
     <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
-    <div class="hint-box" id="h4">把 1 也写成 (x-2)/(x-2)：x/(x-2) - (x-2)/(x-2) = 2/(x-2)。合并后去分母，注意检验！</div>
+    <div class="hint-box" id="h4">把 1 也写成 <span class="frac"><span class="num">x-2</span><span class="den">x-2</span></span>：<span class="frac"><span class="num">x</span><span class="den">x-2</span></span> - <span class="frac"><span class="num">x-2</span><span class="den">x-2</span></span> = <span class="frac"><span class="num">2</span><span class="den">x-2</span></span>。合并后去分母，注意检验！</div>
     <div class="ans-box" id="a4">去分母得 x - (x-2) = 2 → 2 = 2，恒成立，但 x ≠ 2。所以 x 为 ≠ 2 的任意实数。</div>
   </div>
 
@@ -163,6 +169,6 @@
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
 function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
 </script>
-<script src="../lessons/dt.js"></script>
+<script src="./dt.js"></script>
 </body>
 </html>

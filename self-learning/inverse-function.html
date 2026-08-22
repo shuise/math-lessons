@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>反比例函数 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>↗</text></svg>">
-<link rel="stylesheet" href="../lessons/style.css">
+<link rel="stylesheet" href="./style.css">
 <style>
   :root { --accent: #e65100; }
   .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
@@ -370,8 +370,6 @@
     <p><strong>生活中的反比例关系：</strong></p>
     <ul>
       <li><strong>速度和时间的反比例：</strong>路程固定时，速度越快，时间越短。这就是为什么高速公路上开得快能省时间——速度和时间成反比。</li>
-      <li><strong>压力和面积的反比例：</strong>用同样的力，受力面积越小，压强越大。这就是为什么针尖能轻易刺穿东西——面积小，压强大。图钉、菜刀的原理都与此有关。</li>
-      <li><strong>电阻和电流的反比例（欧姆定律）：</strong>电压固定时，电阻越大，电流越小。I = U / R，就是一个反比例函数。</li>
       <li><strong>工作人数和工作时间的反比例：</strong>一项工作，人数越多，需要的时间越短。（假设每个人工作效率相同）</li>
       <li><strong>单价和数量的反比例：</strong>预算固定时，单价越贵，能买的数量越少。这就是我们开头买笔的例子。</li>
     </ul>
@@ -541,7 +539,7 @@ function hyperbolaPath(k, cx, cy, scale, xMin, xMax, step) {
 
 function setK(k) {
   var cx = 260, cy = 240, scale = 44;
-  var paths = hyperbolaPath(k, cx, cy, scale, -5, 5, 0.08);
+  var paths = hyperbolaPath(k, cx, cy, scale, -5, 5, 0.04);
   document.getElementById('curve1').setAttribute('d', paths.d1);
   document.getElementById('curve2').setAttribute('d', paths.d2);
 
@@ -561,6 +559,6 @@ function setK(k) {
 // 初始化默认 k=3 的双曲线
 setK(3);
 </script>
-<script src="../lessons/dt.js"></script>
+<script src="./dt.js"></script>
 </body>
 </html>

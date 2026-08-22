@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>二次函数 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
-<link rel="stylesheet" href="../lessons/style.css">
+<link rel="stylesheet" href="./style.css">
 <style>
   :root { --accent: #4a148c; }
   .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
@@ -137,26 +137,27 @@
 
       <!-- y = x² 蓝色 -->
       <!-- 公式: x_screen = 360 + 30*x, y_screen = 280 - 30*y -->
-      <g fill="none" stroke="#1565c0" stroke-width="2.5">
-        <polyline points="
-          300,160 315,212.5 330,250 345,272.5 360,280 375,272.5 390,250 405,212.5 420,160
-        "/>
+      <!-- 用二次贝塞尔曲线（Q 命令）精确绘制抛物线，控制点 P1 = 2*顶点 - (起终点中点) -->
+      <!-- 起点 (300,160) 对应 x=-2,y=4；终点 (420,160) 对应 x=2,y=4；顶点 (360,280) 对应 x=0,y=0 -->
+      <!-- 控制点 (360, 400) → 曲线在中点 t=0.5 处经过顶点 (360, 280) -->
+      <g fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 300,160 Q 360,400 420,160"/>
       </g>
       <text x="440" y="170" font-size="13" fill="#1565c0" font-weight="bold">y = x²</text>
 
       <!-- y = -x² 红色 -->
-      <g fill="none" stroke="#c62828" stroke-width="2.5">
-        <polyline points="
-          300,400 315,347.5 330,310 345,287.5 360,280 375,287.5 390,310 405,347.5 420,400
-        "/>
+      <!-- 起点 (300,400) 对应 x=-2,y=-4；终点 (420,400) 对应 x=2,y=-4；顶点 (360,280) 对应 x=0,y=0 -->
+      <!-- 控制点 (360, 160) → 曲线在中点处经过顶点 (360, 280) -->
+      <g fill="none" stroke="#c62828" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 300,400 Q 360,160 420,400"/>
       </g>
       <text x="440" y="390" font-size="13" fill="#c62828" font-weight="bold">y = -x²</text>
 
       <!-- y = (x-2)² + 1 绿色，顶点 (2,1) → 屏幕 (420, 250) -->
-      <g fill="none" stroke="#2e7d32" stroke-width="2.5">
-        <polyline points="
-          360,130 375,182.5 390,220 405,242.5 420,250 435,242.5 450,220 465,182.5 480,130
-        "/>
+      <!-- 起点 (360,130) 对应 x=0,y=5；终点 (480,130) 对应 x=4,y=5；顶点 (420,250) 对应 x=2,y=1 -->
+      <!-- 控制点 (420, 370) → 曲线在中点处经过顶点 (420, 250) -->
+      <g fill="none" stroke="#2e7d32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 360,130 Q 420,370 480,130"/>
       </g>
       <text x="490" y="140" font-size="13" fill="#2e7d32" font-weight="bold">y = (x-2)² + 1</text>
 
@@ -250,8 +251,9 @@
         <line x1="100" y1="-120" x2="100" y2="20" stroke="#333" stroke-width="1.5"/>
         <text x="210" y="4" font-size="11" fill="#333">x</text>
         <text x="95" y="-130" font-size="11" fill="#333">y</text>
-        <g fill="none" stroke="#1565c0" stroke-width="2">
-          <polyline points="30,20 50,-20 70,-40 90,-48 100,-50 110,-48 130,-20 150,20 170,80"/>
+        <!-- 用二次贝塞尔曲线：起点 (30,20)，终点 (170,20)，顶点 (100,-50)；控制点 (100,-120) -->
+        <g fill="none" stroke="#1565c0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 30,20 Q 100,-120 170,20"/>
         </g>
         <circle cx="60" cy="0" r="4" fill="#c62828"/>
         <circle cx="140" cy="0" r="4" fill="#c62828"/>
@@ -263,8 +265,9 @@
       <g transform="translate(260,140)">
         <line x1="0" y1="0" x2="200" y2="0" stroke="#333" stroke-width="1.5"/>
         <line x1="100" y1="-120" x2="100" y2="20" stroke="#333" stroke-width="1.5"/>
-        <g fill="none" stroke="#e65100" stroke-width="2">
-          <polyline points="30,80 50,20 70,-10 90,-20 100,-22 110,-20 130,-10 150,20 170,80"/>
+        <!-- 顶点 (100,0) 恰好切于 x 轴；起点 (30,80)，终点 (170,80)；控制点 (100,-80) -->
+        <g fill="none" stroke="#e65100" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 30,80 Q 100,-80 170,80"/>
         </g>
         <circle cx="100" cy="0" r="4" fill="#c62828"/>
         <text x="100" y="70" font-size="12" fill="#e65100" text-anchor="middle" font-weight="bold">Δ = 0：一个交点</text>
@@ -275,8 +278,9 @@
       <g transform="translate(500,140)">
         <line x1="0" y1="0" x2="200" y2="0" stroke="#333" stroke-width="1.5"/>
         <line x1="100" y1="-120" x2="100" y2="20" stroke="#333" stroke-width="1.5"/>
-        <g fill="none" stroke="#6a1b9a" stroke-width="2">
-          <polyline points="30,25 50,15 70,10 90,9 100,8 110,9 130,10 150,15 170,25"/>
+        <!-- 全程在 x 轴上方：起点 (30,25)，终点 (170,25)，顶点 (100,8)；控制点 (100,-9) -->
+        <g fill="none" stroke="#6a1b9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 30,25 Q 100,-9 170,25"/>
         </g>
         <text x="100" y="70" font-size="12" fill="#6a1b9a" text-anchor="middle" font-weight="bold">Δ &lt; 0：无交点</text>
         <text x="100" y="85" font-size="11" fill="#666" text-anchor="middle">无实数根</text>
@@ -437,12 +441,12 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="index.html">← 返回课程列表</a></p>
+  <p style="text-align:right;margin-top:32px;"><a href="inverse-function.html">下一课：反比例函数 →</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
 function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
 </script>
-<script src="../lessons/dt.js"></script>
+<script src="./dt.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>实数 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔢</text></svg>">
-<link rel="stylesheet" href="../lessons/style.css">
+<link rel="stylesheet" href="./style.css">
 <style>
   :root { --accent: #bf360c; }
   .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
@@ -23,6 +23,15 @@
   .btn-sm:hover { background: #e8e8e8; }
   .number-line-svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
   .proof-svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+  /* 根号渲染：√ + 上划线覆盖整个被开方表达式 */
+  .rad { white-space: nowrap; display: inline; }
+  .rad > .rd {
+    display: inline-block;
+    border-top: 1.5px solid currentColor;
+    padding: 0 2px;
+    vertical-align: baseline;
+    line-height: 1.4;
+  }
   @media (max-width: 720px) {
     article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
     body { padding: 0; }
@@ -60,7 +69,7 @@
     <p>这个"边长"和"面积"的关系，就是我们今天要学的第一个概念：<strong>平方根</strong>。</p>
     <div class="formula">
       <p><strong>定义：</strong>如果 <em>x</em>² = <em>a</em>，那么 <em>x</em> 叫做 <em>a</em> 的<strong>平方根</strong>。</p>
-      <p>记作：<em>x</em> = ±√<em>a</em></p>
+      <p>记作：<em>x</em> = ±<span class="rad">√<span class="rd"><em>a</em></span></span></p>
     </div>
     <p>注意：一个正数有<strong>两个</strong>平方根，互为相反数。比如 9 的平方根是 3 和 −3，因为 3² = 9，(−3)² = 9。</p>
     <div class="example">
@@ -91,7 +100,7 @@
     </div>
     <div class="formula">
       <p><strong>定义：</strong>如果 <em>x</em>³ = <em>a</em>，那么 <em>x</em> 叫做 <em>a</em> 的<strong>立方根</strong>。</p>
-      <p>记作：<em>x</em> = ∛<em>a</em></p>
+      <p>记作：<em>x</em> = <span class="rad">∛<span class="rd"><em>a</em></span></span></p>
     </div>
     <p>和平方根不同，立方根只有一个（每个实数都有唯一的立方根），而且负数也有立方根！</p>
     <div class="example">
@@ -375,7 +384,6 @@
   <div class="extend">
     <p><strong>毕达哥拉斯学派：</strong>毕达哥拉斯（约公元前 570—495 年）不仅是数学家，还是哲学家和宗教领袖。他的学派像一个秘密社团，成员相信灵魂转世，禁食豆子，崇拜数字。他们发现了勾股定理，并将音乐和声与简单的整数比例联系起来——这就是为什么和声听起来"和谐"。</p>
     <p><strong>无理数的历史意义：</strong>希帕索斯的发现是数学史上第一次"数学危机"。它迫使数学家们认识到，直观和信仰不足以作为数学的基础——必须依赖严格的逻辑证明。这次危机最终催生了欧几里得的《几何原本》和公理化方法。</p>
-    <p><strong>康托尔的惊人发现：</strong>19 世纪，德国数学家康托尔证明了一个惊人的事实：有理数虽然无穷多，但它们是"可数无穷"（可以一个一个地数出来）；而无理数比有理数"多得多"——它们是"不可数无穷"。在数轴上随便点一个点，它几乎肯定是无理数！</p>
     <p><strong>推荐阅读：</strong>《尖叫的数学》——了解无理数发现的历史故事；《古今数学思想》——了解数系的扩展过程；《数学简史》——了解从自然数到实数的完整旅程。</p>
   </div>
 
@@ -476,9 +484,56 @@
   <p style="text-align:right;margin-top:32px;"><a href="quadratic-radicals.html">下一课：二次根式 →</a></p>
 </article>
 <script>
+/* 根号渲染增强：自动将文本中的 √X / ∛X 包裹为 .rad > .rd 结构，
+   配合 CSS 的 border-top 形成"上划线覆盖整个被开方表达式"的效果。
+   跳过 SVG/SCRIPT/STYLE 内的文本，不影响已有交互功能。 */
+(function () {
+  function wrapRadicals(root) {
+    var skipTags = { SVG: 1, SCRIPT: 1, STYLE: 1, TEXT: 1, TSPAN: 1, TEXTAREA: 1, INPUT: 1 };
+    if (!root || skipTags[root.nodeName]) return;
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+    var nodes = [], n;
+    while ((n = walker.nextNode())) {
+      var p = n.parentNode;
+      if (!p || skipTags[p.nodeName]) continue;
+      if (p.classList && p.classList.contains('rd')) continue;
+      var v = n.nodeValue;
+      if (v.indexOf('√') === -1 && v.indexOf('∛') === -1) continue;
+      nodes.push(n);
+    }
+    nodes.forEach(function (node) {
+      var text = node.nodeValue;
+      // 匹配 √ 或 ∛ 后跟：[方括号表达式]、(圆括号表达式)、或单个字母/数字（含上标和小数）
+      var regex = /(√|∛)(\[[^\]]*\]|\([^()]*\)|[a-zA-Zπ][a-zA-Z0-9.π]*[⁰¹²³⁴⁵⁶⁷⁸⁹]*|[0-9][0-9.]*[⁰¹²³⁴⁵⁶⁷⁸⁹]*)/g;
+      var m, lastIdx = 0, frag = document.createDocumentFragment(), hasMatch = false;
+      while ((m = regex.exec(text)) !== null) {
+        hasMatch = true;
+        if (m.index > lastIdx) frag.appendChild(document.createTextNode(text.substring(lastIdx, m.index)));
+        var rad = document.createElement('span');
+        rad.className = 'rad';
+        rad.appendChild(document.createTextNode(m[1]));
+        var rd = document.createElement('span');
+        rd.className = 'rd';
+        rd.appendChild(document.createTextNode(m[2]));
+        rad.appendChild(rd);
+        frag.appendChild(rad);
+        lastIdx = m.index + m[0].length;
+      }
+      if (hasMatch) {
+        if (lastIdx < text.length) frag.appendChild(document.createTextNode(text.substring(lastIdx)));
+        node.parentNode.replaceChild(frag, node);
+      }
+    });
+  }
+  function init() { var a = document.querySelector('article'); if (a) wrapRadicals(a); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+<script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
 function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
 </script>
-<script src="../lessons/dt.js"></script>
+<script src="./dt.js"></script>
 </body>
 </html>

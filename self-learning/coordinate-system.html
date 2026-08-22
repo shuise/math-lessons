@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>平面直角坐标系 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>">
-<link rel="stylesheet" href="../lessons/style.css">
+<link rel="stylesheet" href="./style.css">
 <style>
   :root { --accent: #0d47a1; }
   .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
@@ -206,9 +206,9 @@
   <h2>二、逻辑推导</h2>
 
   <h3>1. 坐标轴上的点有什么特征？</h3>
-  <div class="formula">
+  <div class="formula" style="text-align:left;">
     <p>观察一下：</p>
-    <ul>
+    <ul style="text-align:left;">
       <li>x 轴上的点，纵坐标 y 都是 0。比如 (5, 0)、(-3, 0)、原点 (0, 0)。</li>
       <li>y 轴上的点，横坐标 x 都是 0。比如 (0, 4)、(0, -1)。</li>
     </ul>
@@ -216,7 +216,7 @@
   </div>
 
   <h3>2. 关于原点对称</h3>
-  <div class="formula">
+  <div class="formula" style="text-align:left;">
     <p>点 P(3, 2) 关于原点对称的点在哪里？</p>
     <p>想象一下：把 P 点沿着原点"翻"过去——横坐标变号，纵坐标也变号。</p>
     <p>所以 P(3, 2) 关于原点的对称点是 <strong>P'(-3, -2)</strong>。</p>
@@ -227,7 +227,7 @@
   <div class="story">
     <p>坐标系不只是数学里的工具，它每天都在帮你导航！</p>
     <p><strong>经纬度：</strong>地球仪上的经纬度其实就是球面上的坐标。经度是"横坐标"（东西），纬度是"纵坐标"（南北）。你手机上每一次导航，背后都是坐标计算。</p>
-    <p><strong>棋盘：</strong>国际象棋棋盘上，每个格子都有坐标——列用字母 a~h，行用数字 1~8。马从 (b, 1) 跳到 (c, 3)，就是坐标变化。</p>
+    <p><strong>棋盘：</strong>中国象棋的棋盘上，每个交叉点都有"坐标"——用列号（红方一二三…、黑方 1 2 3…）和行号就能定位每一颗棋子；马从 (2, 1) 跳到 (3, 3)（"马走日"），就是坐标的规则变化。围棋盘是 19×19 的方格交叉点，每一手棋都落在某个 (列, 行) 上——比如天元是 (10, 10)，星位是 (4, 4)、(4, 16)、(16, 4)、(16, 16)。坐标变化，棋局就跟着变。</p>
     <p><strong>座位表：</strong>教室里的座位——"第 3 排第 5 列"，就是 (3, 5)。只不过 x 和 y 的定义可能和数学不同，但你已经在用"有序数对"了！</p>
   </div>
 
@@ -317,14 +317,14 @@
       <text x="380" y="296" font-size="12" fill="#7b1fa2" text-anchor="middle">C(-5,-1) + (4,2) = C'(-1,1)</text>
     </svg>
 
-    <p style="margin-top:12px;"><strong>平移的核心规律：</strong></p>
-    <div class="key">
-      <p>点 (x, y) 经过平移后，新坐标 = <strong>(x + a, y + b)</strong></p>
-      <ul>
+    <p style="margin-top:12px;text-align:left;"><strong>平移的核心规律：</strong></p>
+    <div class="key" style="text-align:left;">
+      <p style="text-align:left;">点 (x, y) 经过平移后，新坐标 = <strong>(x + a, y + b)</strong></p>
+      <ul style="text-align:left;">
         <li>a &gt; 0 → 向右移；a &lt; 0 → 向左移</li>
         <li>b &gt; 0 → 向上移；b &lt; 0 → 向下移</li>
       </ul>
-      <p>平移不改变图形的形状和大小，只改变位置。每个点的坐标变化都一样！</p>
+      <p style="text-align:left;">平移不改变图形的形状和大小，只改变位置。每个点的坐标变化都一样！</p>
     </div>
   </div>
 
@@ -337,7 +337,6 @@
 
   <h2>拓展阅读</h2>
   <div class="extend">
-    <p><strong>笛卡儿的"我思故我在"：</strong>笛卡儿不仅是坐标系之父，还是近代哲学的开创者。他有一句名言："我思故我在。"意思是：我可以怀疑一切，但我在怀疑这件事本身，说明我存在。这种追问精神，也是他发明坐标系的思维基础。</p>
     <p><strong>笛卡儿坐标系不只是平面的：</strong>在高中和大学，你会学到三维坐标系——加上一个 z 轴（高度），用三个数 (x, y, z) 就能确定空间中的任意一点。3D 游戏、建筑设计、卫星定位都离不开它！</p>
     <p><strong>推荐阅读：</strong>《笛卡儿的秘密笔记本》—— 了解笛卡儿如何把哲学和数学融为一本书；《数学恩仇录》—— 牛顿和莱布尼茨关于微积分的争论，笛卡儿和费马关于解析几何的竞争。</p>
   </div>
@@ -437,12 +436,12 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="linear-equations.html">下一课：一元一次方程 →</a></p>
+  <p style="text-align:right;margin-top:32px;"><a href="linear-function.html">下一课：一次函数 →</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
 function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
 </script>
-<script src="../lessons/dt.js"></script>
+<script src="./dt.js"></script>
 </body>
 </html>

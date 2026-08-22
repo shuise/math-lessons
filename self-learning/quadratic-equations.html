@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>一元二次方程 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
-<link rel="stylesheet" href="../lessons/style.css">
+<link rel="stylesheet" href="./style.css">
 <style>
   :root { --accent: #3949ab; }
   .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
@@ -22,6 +22,16 @@
   .hint-box.show, .ans-box.show { display: block; }
   .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
   .btn-sm:hover { background: #e8e8e8; }
+
+  /* 分式：上下排列（分子在上、分母在下、中间横线） */
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; line-height: 1.15; margin: 0 2px; }
+  .frac .num { border-bottom: 1.5px solid currentColor; padding: 0 5px 1px; }
+  .frac .den { padding: 1px 5px 0; }
+  .frac.lg { font-size: 1.15em; }
+  /* 推导步骤：左对齐、有序 */
+  .derivation { text-align: left; font-size: 1em; }
+  .derivation p { margin: 8px 0; line-height: 2; }
+  .derivation .why { color: #888; font-size: 0.9em; }
 
   @media (max-width: 720px) {
     article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
@@ -44,9 +54,10 @@
 
   <h2>起源：一块泥板上的数学奇迹</h2>
   <div class="origin">
-    <p><strong>4000 年前的古巴比伦，</strong>人们已经在汉谟拉比时代的泥板上解二次方程了。泥板上刻着这样的问题：「一个正方形的面积加上它的边长等于 3/4，求边长。」翻译成现代数学：x² + x = 3/4。</p>
+    <p><strong>4000 年前的古巴比伦，</strong>人们已经在汉谟拉比时代的泥板上解二次方程了。泥板上刻着这样的问题：「一个正方形的面积加上它的边长等于 <span class="frac"><span class="num">3</span><span class="den">4</span></span>，求边长。」翻译成现代数学：x² + x = <span class="frac"><span class="num">3</span><span class="den">4</span></span>。</p>
     <p>古巴比伦人实际上已经知道二次方程求根公式的等价形式，他们用几何方法——"凑完全平方"——来解。但他们的数学全用文字叙述，没有符号，而且只用正数解（那时还没有负数的概念）。</p>
-    <p>到了公元 9 世纪，<strong>花拉子米</strong>在《代数学》中系统总结了二次方程的解法。他把方程分为<strong>六种基本类型</strong>，其中三种是二次方程。花拉子米给出了配方法的<strong>几何解释</strong>——用正方形和长方形的面积来直观理解 x² + bx 为什么能配成 (x + b/2)²。这一步的突破在于：<strong>他把方程本身作为研究对象</strong>，提出了通用的操作法则，而不是像古巴比伦人那样只解决具体问题。</p>
+    <p><strong>在中国，</strong>成书于公元 1 世纪左右的<strong>《九章算术》</strong>同样展现了古人处理二次方程的智慧。书中第九卷<strong>"勾股章"</strong>用勾股定理（即西方所称的毕达哥拉斯定理）解决各种直角三角形问题，其中不少题目本质上就是二次方程。例如著名的"折竹问题"：一根竹子高一丈，折断后竹梢触地，触地点离竹根三尺，问折断处离地多高——设折断处高 x 尺，由勾股定理列出 x² + 3² = (10-x)²，化简后正是一个二次方程。三国时期数学家<strong>赵爽</strong>为《周髀算经》作注，用"勾股圆方图"给出了勾股定理优美的几何证明；魏国<strong>刘徽</strong>为《九章算术》作注，发展了"出入相补"原理——用面积割补来解各种问题，其中就包括等价于配方法的几何操作。中国古人用面积拼合来"凑完全平方"的思路，与几百年后花拉子米的方法异曲同工。</p>
+    <p>到了公元 9 世纪，<strong>花拉子米</strong>在《代数学》中系统总结了二次方程的解法。他把方程分为<strong>六种基本类型</strong>，其中三种是二次方程。花拉子米给出了配方法的<strong>几何解释</strong>——用正方形和长方形的面积来直观理解 x² + bx 为什么能配成 (x + <span class="frac"><span class="num">b</span><span class="den">2</span></span>)²。这一步的突破在于：<strong>他把方程本身作为研究对象</strong>，提出了通用的操作法则，而不是像古巴比伦人那样只解决具体问题。</p>
     <p>又过了 800 年，法国数学家<strong>韦达</strong>（François Viète，1540–1603 年）在《分析引论》中首次系统地用字母代表数——用元音字母表示未知量，辅音字母表示已知量。他还发现了根与系数的美妙关系：不用解方程，就能知道两根之和与两根之积。这就是<strong>韦达定理</strong>。</p>
     <p><strong>一元二次方程要解决的核心问题：</strong>未知数出现了平方，方程最多有两个解。怎么最快、最准地找到它们？</p>
   </div>
@@ -69,17 +80,17 @@
 
   <h3>方法二：配方法 —— 花拉子米的几何解释</h3>
   <div class="quote">
-    <p>花拉子米用几何图形来解释配方法：把 x² + bx 想象成一个边长为 x 的正方形，加上一个宽为 x、长为 b/2 的矩形（再补一个），再加一个边长为 b/2 的小正方形。拼在一起，就是一个边长为 x + b/2 的大正方形，面积是 x² + bx + (b/2)² = (x + b/2)²。所以，要把 x² + bx 变成完全平方，只需加上 (b/2)²。</p>
+    <p>花拉子米用几何图形来解释配方法：把 x² + bx 想象成一个边长为 x 的正方形，加上一个宽为 x、长为 <span class="frac"><span class="num">b</span><span class="den">2</span></span> 的矩形（再补一个），再加一个边长为 <span class="frac"><span class="num">b</span><span class="den">2</span></span> 的小正方形。拼在一起，就是一个边长为 x + <span class="frac"><span class="num">b</span><span class="den">2</span></span> 的大正方形，面积是 x² + bx + (<span class="frac"><span class="num">b</span><span class="den">2</span></span>)² = (x + <span class="frac"><span class="num">b</span><span class="den">2</span></span>)²。所以，要把 x² + bx 变成完全平方，只需加上 (<span class="frac"><span class="num">b</span><span class="den">2</span></span>)²。</p>
   </div>
 
   <div class="graphic">
-    <div style="text-align:center;margin-bottom:8px;font-size:14px;color:#888;">动画演示：花拉子米如何"凑完全平方"解 x² + 6x + 5 = 0 ↓</div>
+    <div style="text-align:center;margin-bottom:8px;font-size:14px;color:#888;">动画演示：花拉子米如何"凑完全平方"解 x² + 6x + 5 = 0（图中 x 远大于 3，可看清矩形比例）↓</div>
     <div style="text-align:center;margin:8px 0;">
       <button onclick="completeStep(0)" class="btn-sm" style="font-size:14px;padding:6px 16px;margin:4px;" id="cs0">第 1 步：x² + 6x</button>
       <button onclick="completeStep(1)" class="btn-sm" style="font-size:14px;padding:6px 16px;margin:4px;" id="cs1">第 2 步：补上小正方形</button>
       <button onclick="completeStep(2)" class="btn-sm" style="font-size:14px;padding:6px 16px;margin:4px;" id="cs2">第 3 步：完全平方！</button>
     </div>
-    <svg viewBox="0 0 520 300" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+    <svg viewBox="0 0 400 260" style="max-width:100%;height:auto;display:block;margin:0 auto;">
       <defs>
         <style>
           .csq-x2 { fill: rgba(233, 30, 99, 0.3); stroke: #e91e63; stroke-width: 2; }
@@ -89,32 +100,32 @@
           .csq-outer { fill: none; stroke: #333; stroke-width: 3; stroke-dasharray: 8 4; }
           .csq-label { font-size: 13px; font-weight: bold; text-anchor: middle; dominant-baseline: central; }
           @keyframes popIn { 0%{transform:scale(0);opacity:0} 100%{transform:scale(1);opacity:1} }
-          .csq-pop { animation: popIn 0.5s ease-out; transform-origin: 280px 180px; }
+          .csq-pop { animation: popIn 0.5s ease-out; transform-origin: 172.5px 157.5px; }
         </style>
       </defs>
-      <g transform="translate(60,20)">
-        <!-- 大正方形边框 -->
-        <rect id="csqOuter" x="0" y="0" width="240" height="240" class="csq-outer" style="opacity:0"/>
-        <!-- x² 正方形 -->
+      <g transform="translate(30,15)">
+        <!-- 大正方形边框（边长 x+3 = 11 单位 = 165px） -->
+        <rect id="csqOuter" x="0" y="0" width="165" height="165" class="csq-outer" style="opacity:0"/>
+        <!-- x² 正方形（边长 x=8 单位 = 120px） -->
         <rect id="csqX2" x="0" y="0" width="120" height="120" class="csq-x2"/>
         <text id="csqX2Lbl" x="60" y="60" class="csq-label" fill="#e91e63">x²</text>
-        <!-- 右侧矩形 3x -->
-        <rect id="csqR1" x="120" y="0" width="120" height="120" class="csq-rect" style="opacity:0"/>
-        <text id="csqR1Lbl" x="180" y="60" class="csq-label" fill="#2196f3" style="opacity:0">3x</text>
-        <!-- 下方矩形 3x -->
-        <rect id="csqR2" x="0" y="120" width="120" height="120" class="csq-rect2" style="opacity:0"/>
-        <text id="csqR2Lbl" x="60" y="180" class="csq-label" fill="#2196f3" style="opacity:0">3x</text>
-        <!-- 右下小正方形 3² -->
-        <rect id="csqSmall" x="120" y="120" width="120" height="120" class="csq-small" style="opacity:0"/>
-        <text id="csqSmallLbl" x="180" y="180" class="csq-label" fill="#4caf50" style="opacity:0">3²</text>
-        <!-- 边长标注 -->
-        <text x="120" y="255" text-anchor="middle" font-size="14" fill="#e91e63" font-weight="bold" id="labelX">x</text>
-        <text x="260" y="60" text-anchor="middle" font-size="14" fill="#2196f3" font-weight="bold" id="label3r" style="opacity:0">3</text>
-        <text x="260" y="180" text-anchor="middle" font-size="14" fill="#4caf50" font-weight="bold" id="label3s" style="opacity:0">3</text>
-        <text x="60" y="270" text-anchor="middle" font-size="14" fill="#e91e63" font-weight="bold" id="labelXb">x</text>
-        <text x="180" y="270" text-anchor="middle" font-size="14" fill="#2196f3" font-weight="bold" id="label3b" style="opacity:0">3</text>
+        <!-- 右侧矩形 3x（宽 3=45px，高 x=120px） -->
+        <rect id="csqR1" x="120" y="0" width="45" height="120" class="csq-rect" style="opacity:0"/>
+        <text id="csqR1Lbl" x="142.5" y="60" class="csq-label" fill="#2196f3" style="opacity:0">3x</text>
+        <!-- 下方矩形 3x（宽 x=120px，高 3=45px） -->
+        <rect id="csqR2" x="0" y="120" width="120" height="45" class="csq-rect2" style="opacity:0"/>
+        <text id="csqR2Lbl" x="60" y="142.5" class="csq-label" fill="#2196f3" style="opacity:0">3x</text>
+        <!-- 右下小正方形 3²（边长 3=45px） -->
+        <rect id="csqSmall" x="120" y="120" width="45" height="45" class="csq-small" style="opacity:0"/>
+        <text id="csqSmallLbl" x="142.5" y="142.5" class="csq-label" fill="#4caf50" style="opacity:0">3²</text>
+        <!-- 底边标注：x | 3 -->
+        <text x="60" y="180" text-anchor="middle" font-size="14" fill="#e91e63" font-weight="bold" id="labelXb">x</text>
+        <text x="142.5" y="180" text-anchor="middle" font-size="14" fill="#4caf50" font-weight="bold" id="label3b" style="opacity:0">3</text>
+        <!-- 右边标注：x | 3 -->
+        <text x="175" y="60" text-anchor="middle" font-size="14" fill="#e91e63" font-weight="bold" id="labelXr">x</text>
+        <text x="175" y="142.5" text-anchor="middle" font-size="14" fill="#4caf50" font-weight="bold" id="label3s" style="opacity:0">3</text>
         <!-- 公式 -->
-        <text x="260" y="290" text-anchor="middle" font-size="15" fill="#333" font-weight="bold" id="csqFormula">x² + 6x</text>
+        <text x="82.5" y="215" text-anchor="middle" font-size="15" fill="#333" font-weight="bold" id="csqFormula">x² + 6x</text>
       </g>
     </svg>
   </div>
@@ -122,7 +133,7 @@
   <div class="example">
     <strong>解 x² + 6x + 5 = 0：</strong><br>
     x² + 6x = -5（常数移到右边）<br>
-    x² + 6x + 9 = -5 + 9（两边加 9，因为 (6/2)² = 9）<br>
+    x² + 6x + 9 = -5 + 9（两边加 9，因为 (<span class="frac"><span class="num">6</span><span class="den">2</span></span>)² = 9）<br>
     (x + 3)² = 4<br>
     x + 3 = ±2 → x = -1 或 x = -5
   </div>
@@ -130,13 +141,33 @@
   <h3>方法三：公式法 —— 从配方法推导出来的万能公式</h3>
   <div class="highlight">
     <p>对于 ax² + bx + c = 0（a ≠ 0），解为：</p>
-    <p style="font-size:18px;text-align:center;font-weight:bold;">x = (-b ± √(b² - 4ac)) / (2a)</p>
-    <p><strong>这个公式的来历：</strong>把配方法的过程写成通用形式。从 ax² + bx + c = 0 出发，两边除以 a，配方，移项，开平方——就得到了这个公式。它适用于所有二次方程！</p>
+    <p style="font-size:18px;text-align:center;font-weight:bold;">x = <span class="frac lg"><span class="num">-b ± √(b² - 4ac)</span><span class="den">2a</span></span></p>
+    <p><strong>这个公式的来历：</strong>把配方法的过程写成通用形式。下面一步一步推导，每一步都标明依据——你会发现，求根公式不是凭空冒出来的，它就是把配方法的五个动作套用到了字母 a、b、c 上。</p>
+  </div>
+
+  <div class="formula derivation" style="text-align:left;font-size:1em;">
+    <p><strong>起点：</strong>ax² + bx + c = 0（a ≠ 0）</p>
+    <p><strong>第 1 步：两边同除以 a。</strong>得 x² + <span class="frac"><span class="num">b</span><span class="den">a</span></span>x + <span class="frac"><span class="num">c</span><span class="den">a</span></span> = 0<br>
+    <span class="why">依据：等式两边同时除以同一个非零数 a，等式仍然成立（a ≠ 0 是前提）。</span></p>
+    <p><strong>第 2 步：移项。</strong>得 x² + <span class="frac"><span class="num">b</span><span class="den">a</span></span>x = -<span class="frac"><span class="num">c</span><span class="den">a</span></span><br>
+    <span class="why">依据：把常数项 <span class="frac"><span class="num">c</span><span class="den">a</span></span> 移到右边，移项要变号（相当于两边同时减 <span class="frac"><span class="num">c</span><span class="den">a</span></span>）。</span></p>
+    <p><strong>第 3 步：两边同加 (<span class="frac"><span class="num">b</span><span class="den">2a</span></span>)²。</strong>得 x² + <span class="frac"><span class="num">b</span><span class="den">a</span></span>x + (<span class="frac"><span class="num">b</span><span class="den">2a</span></span>)² = -<span class="frac"><span class="num">c</span><span class="den">a</span></span> + (<span class="frac"><span class="num">b</span><span class="den">2a</span></span>)²<br>
+    <span class="why">依据：配方的核心——x² + <span class="frac"><span class="num">b</span><span class="den">a</span></span>x 中，一次项系数的一半是 <span class="frac"><span class="num">b</span><span class="den">2a</span></span>，加上它的平方就能凑成完全平方。等式两边加同一个数，等式仍成立。</span></p>
+    <p><strong>第 4 步：左边写成完全平方。</strong>得 (x + <span class="frac"><span class="num">b</span><span class="den">2a</span></span>)² = -<span class="frac"><span class="num">c</span><span class="den">a</span></span> + <span class="frac"><span class="num">b²</span><span class="den">4a²</span></span><br>
+    <span class="why">依据：完全平方公式 (x + m)² = x² + 2mx + m²，这里 m = <span class="frac"><span class="num">b</span><span class="den">2a</span></span>，2m = <span class="frac"><span class="num">b</span><span class="den">a</span></span>，m² = (<span class="frac"><span class="num">b</span><span class="den">2a</span></span>)² = <span class="frac"><span class="num">b²</span><span class="den">4a²</span></span>，正好匹配左边。</span></p>
+    <p><strong>第 5 步：右边通分合并。</strong>得 (x + <span class="frac"><span class="num">b</span><span class="den">2a</span></span>)² = <span class="frac"><span class="num">b² - 4ac</span><span class="den">4a²</span></span><br>
+    <span class="why">依据：公分母是 4a²。-<span class="frac"><span class="num">c</span><span class="den">a</span></span> = -<span class="frac"><span class="num">4ac</span><span class="den">4a²</span></span>，再加 <span class="frac"><span class="num">b²</span><span class="den">4a²</span></span>，合并为 <span class="frac"><span class="num">b² - 4ac</span><span class="den">4a²</span></span>。</span></p>
+    <p><strong>第 6 步：两边开平方。</strong>得 x + <span class="frac"><span class="num">b</span><span class="den">2a</span></span> = ± <span class="frac"><span class="num">√(b² - 4ac)</span><span class="den">2a</span></span><br>
+    <span class="why">依据：右边 <span class="frac"><span class="num">b² - 4ac</span><span class="den">4a²</span></span> = <span class="frac"><span class="num">b² - 4ac</span><span class="den">(2a)²</span></span>，开平方得 <span class="frac"><span class="num">√(b² - 4ac)</span><span class="den">2a</span></span>。正数有两个平方根，所以加 ±。这里记 Δ = b² - 4ac。</span></p>
+    <p><strong>第 7 步：移项。</strong>得 x = -<span class="frac"><span class="num">b</span><span class="den">2a</span></span> ± <span class="frac"><span class="num">√(b² - 4ac)</span><span class="den">2a</span></span><br>
+    <span class="why">依据：把 <span class="frac"><span class="num">b</span><span class="den">2a</span></span> 移到右边，移项变号。</span></p>
+    <p><strong>第 8 步：合并成一个分式。</strong>得 x = <span class="frac"><span class="num">-b ± √(b² - 4ac)</span><span class="den">2a</span></span><br>
+    <span class="why">依据：右边两项分母相同（都是 2a），合并分子即可。这就是<strong>求根公式</strong>！</span></p>
   </div>
 
   <div class="example">
     解 2x² - 4x - 6 = 0：a=2, b=-4, c=-6<br>
-    x = (4 ± √(16 + 48)) / 4 = (4 ± 8) / 4 → x = 3 或 x = -1
+    x = <span class="frac"><span class="num">4 ± √(16 + 48)</span><span class="den">4</span></span> = <span class="frac"><span class="num">4 ± 8</span><span class="den">4</span></span> → x = 3 或 x = -1
   </div>
 
   <h3>方法四：因式分解法（最快，但需要能分解）</h3>
@@ -153,25 +184,25 @@
       <li><strong>Δ = 0：</strong>一个实数解（两个相等，叫"重根"）</li>
       <li><strong>Δ &lt; 0：</strong>没有实数解（因为 √负数 在实数范围内没有意义）</li>
     </ul>
-    <p><strong>为什么？</strong>看求根公式：x = (-b ± √Δ) / (2a)。如果 Δ &lt; 0，√Δ 不存在，就没有实数解。</p>
+    <p><strong>为什么？</strong>看求根公式：x = <span class="frac"><span class="num">-b ± √Δ</span><span class="den">2a</span></span>。如果 Δ &lt; 0，√Δ 不存在，就没有实数解。</p>
   </div>
 
   <h2>四、韦达定理 —— 根与系数的美妙关系</h2>
   <div class="formula">
     <p>如果 ax² + bx + c = 0 的两个根是 x₁ 和 x₂，那么：</p>
-    <p style="text-align:center;font-size:18px;"><strong>x₁ + x₂ = -b/a，x₁ · x₂ = c/a</strong></p>
-    <p><strong>证明：</strong>从求根公式，x₁ = (-b + √Δ)/(2a)，x₂ = (-b - √Δ)/(2a)。两根相加：√Δ 抵消，得 -2b/(2a) = -b/a。两根相乘：用平方差公式 (u+v)(u-v) = u²-v²，得 (b²-Δ)/(4a²) = (b²-(b²-4ac))/(4a²) = 4ac/(4a²) = c/a。</p>
+    <p style="text-align:center;font-size:18px;"><strong>x₁ + x₂ = <span class="frac"><span class="num">-b</span><span class="den">a</span></span>，x₁ · x₂ = <span class="frac"><span class="num">c</span><span class="den">a</span></span></strong></p>
+    <p><strong>证明：</strong>从求根公式，x₁ = <span class="frac"><span class="num">-b + √Δ</span><span class="den">2a</span></span>，x₂ = <span class="frac"><span class="num">-b - √Δ</span><span class="den">2a</span></span>。两根相加：√Δ 抵消，得 <span class="frac"><span class="num">-2b</span><span class="den">2a</span></span> = <span class="frac"><span class="num">-b</span><span class="den">a</span></span>。两根相乘：用平方差公式 (u+v)(u-v) = u²-v²，得 <span class="frac"><span class="num">b²-Δ</span><span class="den">4a²</span></span> = <span class="frac"><span class="num">b²-(b²-4ac)</span><span class="den">4a²</span></span> = <span class="frac"><span class="num">4ac</span><span class="den">4a²</span></span> = <span class="frac"><span class="num">c</span><span class="den">a</span></span>。</p>
   </div>
 
   <div class="example">
     <strong>验证：</strong>x² - 5x + 6 = 0 的根是 2 和 3。<br>
-    2 + 3 = 5 = -(-5)/1 ✓ · · 2 × 3 = 6 = 6/1 ✓
+    2 + 3 = 5 = <span class="frac"><span class="num">-(-5)</span><span class="den">1</span></span> ✓　·　2 × 3 = 6 = <span class="frac"><span class="num">6</span><span class="den">1</span></span> ✓
   </div>
 
   <h2>挑战性问题</h2>
   <div class="challenge">
     <p><strong>问题 1：</strong>花拉子米用几何方法"凑完全平方"来解二次方程。你能用画图的方式解释：x² + 4x = 5 为什么等价于 (x+2)² = 9 吗？</p>
-    <p><strong>问题 2：</strong>韦达定理说：x₁ + x₂ = -b/a，x₁ · x₂ = c/a。如果告诉你两根是 3 和 5，你能反推出原来的二次方程吗？</p>
+    <p><strong>问题 2：</strong>韦达定理说：x₁ + x₂ = <span class="frac"><span class="num">-b</span><span class="den">a</span></span>，x₁ · x₂ = <span class="frac"><span class="num">c</span><span class="den">a</span></span>。如果告诉你两根是 3 和 5，你能反推出原来的二次方程吗？</p>
     <p><strong>问题 3：</strong>为什么 Δ = b² - 4ac 叫"判别式"？如果 Δ = -4，在实数范围内没有解。但 16 世纪的数学家邦贝利发现，如果允许"虚数"（√-1 = i），方程仍然有解。你能试着用求根公式写出 Δ = -4 时方程的解吗？</p>
   </div>
 
@@ -204,8 +235,8 @@
     <p><strong>3.</strong> 用公式法解：2x² - 3x - 2 = 0</p>
     <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
-    <div class="hint-box" id="h3">a=2, b=-3, c=-2。Δ = (-3)² - 4·2·(-2) = 9 + 16 = 25。x = (3 ± 5)/4。</div>
-    <div class="ans-box" id="a3">x = 2 或 x = -1/2</div>
+    <div class="hint-box" id="h3">a=2, b=-3, c=-2。Δ = (-3)² - 4·2·(-2) = 9 + 16 = 25。x = <span class="frac"><span class="num">3 ± 5</span><span class="den">4</span></span>。</div>
+    <div class="ans-box" id="a3">x = 2 或 x = <span class="frac"><span class="num">-1</span><span class="den">2</span></span></div>
   </div>
 
   <div class="exercise">
@@ -219,10 +250,10 @@
   <h2>小结</h2>
   <div class="key">
     <ul>
-      <li>古巴比伦人 4000 年前就会解二次方程，花拉子米用几何解释了配方法，韦达发现了根与系数的关系</li>
+      <li>古巴比伦人 4000 年前就会解二次方程，《九章算术》勾股章中也有二次方程问题，花拉子米用几何解释了配方法，韦达发现了根与系数的关系</li>
       <li>四种解法：直接开平方 → 配方 → 公式 → 因式分解</li>
       <li>Δ = b² - 4ac 判断有几个解</li>
-      <li>韦达定理：x₁ + x₂ = -b/a，x₁ · x₂ = c/a</li>
+      <li>韦达定理：x₁ + x₂ = <span class="frac"><span class="num">-b</span><span class="den">a</span></span>，x₁ · x₂ = <span class="frac"><span class="num">c</span><span class="den">a</span></span></li>
     </ul>
   </div>
 
@@ -241,30 +272,29 @@ function completeStep(step) {
     r1: document.getElementById('csqR1'), r1l: document.getElementById('csqR1Lbl'),
     r2: document.getElementById('csqR2'), r2l: document.getElementById('csqR2Lbl'),
     small: document.getElementById('csqSmall'), sl: document.getElementById('csqSmallLbl'),
-    l3r: document.getElementById('label3r'), l3s: document.getElementById('label3s'), l3b: document.getElementById('label3b'),
+    l3b: document.getElementById('label3b'), l3s: document.getElementById('label3s'),
     formula: document.getElementById('csqFormula')
   };
   var show = function(el){ el.style.opacity = '1'; };
   var hide = function(el){ el.style.opacity = '0'; };
   if (step === 0) {
     hide(ids.outer); hide(ids.r1); hide(ids.r1l); hide(ids.r2); hide(ids.r2l);
-    hide(ids.small); hide(ids.sl); hide(ids.l3r); hide(ids.l3s); hide(ids.l3b);
+    hide(ids.small); hide(ids.sl); hide(ids.l3b); hide(ids.l3s);
     ids.formula.textContent = 'x² + 6x';
   } else if (step === 1) {
     show(ids.r1); show(ids.r1l); show(ids.r2); show(ids.r2l);
-    show(ids.l3r); show(ids.l3b);
-    hide(ids.outer); hide(ids.small); hide(ids.sl); hide(ids.l3s);
+    hide(ids.outer); hide(ids.small); hide(ids.sl); hide(ids.l3b); hide(ids.l3s);
     ids.small.classList.remove('csq-pop');
     ids.formula.textContent = 'x² + 6x = x² + 3x + 3x';
   } else {
     show(ids.r1); show(ids.r1l); show(ids.r2); show(ids.r2l);
-    show(ids.small); show(ids.sl); show(ids.l3r); show(ids.l3s); show(ids.l3b);
+    show(ids.small); show(ids.sl); show(ids.l3b); show(ids.l3s);
     show(ids.outer);
     ids.small.classList.add('csq-pop');
     ids.formula.textContent = 'x² + 6x + 9 = (x + 3)²  ← 完全平方！';
   }
 }
 </script>
-<script src="../lessons/dt.js"></script>
+<script src="./dt.js"></script>
 </body>
 </html>

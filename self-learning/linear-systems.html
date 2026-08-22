@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>二元一次方程组 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
-<link rel="stylesheet" href="../lessons/style.css">
+<link rel="stylesheet" href="./style.css">
 <style>
   :root { --accent: #33691e; }
   .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
@@ -69,7 +69,7 @@
     </div>
 
     <div class="key">
-      <p><strong>类比理解：</strong>一元一次方程就像一条直线上找一个点；二元一次方程就像一张平面上找一条线——满足 x + y = 10 的点有无数个（比如 (0,10), (1,9), (2,8), …），它们排成一条直线。</p>
+      <p><strong>举例理解：</strong>单独看一个二元一次方程 x + y = 10，它的解并不唯一——只要 x 和 y 加起来等于 10 就行：x=1, y=9；x=2, y=8；x=3, y=7……解有成千上万对。所以一个方程定不了 x 和 y 的具体值，必须再加一个方程来"卡住"它们。</p>
     </div>
 
     <h3>什么是二元一次方程组？</h3>
@@ -87,106 +87,25 @@
     <p>只要能找到同时满足这两个方程的 x 和 y，问题就解决了！</p>
   </div>
 
-  <h2>图说：两条直线的交点就是解</h2>
-  <div class="formula">
-    <p>每一个二元一次方程在坐标系里都是一条直线。两个方程就是两条直线，它们的<strong>交点</strong>就是方程组的解——因为交点同时满足两个方程。</p>
-    <svg class="svg-fig" viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <style>
-          text { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
-          .axis-label { font-size: 13px; fill: #555; }
-          .line-label { font-size: 13px; font-weight: bold; }
-          .point-label { font-size: 14px; font-weight: bold; fill: #c62828; }
-          .grid-line { stroke: #e8e8e8; stroke-width: 0.5; }
-        </style>
-        <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-          <path d="M0,0 L8,3 L0,6 Z" fill="#555"/>
-        </marker>
-      </defs>
-
-      <!-- 网格 -->
-      <line x1="50" y1="20" x2="50" y2="320" class="grid-line"/>
-      <line x1="50" y1="70" x2="460" y2="70" class="grid-line"/>
-      <line x1="50" y1="120" x2="460" y2="120" class="grid-line"/>
-      <line x1="50" y1="170" x2="460" y2="170" class="grid-line"/>
-      <line x1="50" y1="220" x2="460" y2="220" class="grid-line"/>
-      <line x1="50" y1="270" x2="460" y2="270" class="grid-line"/>
-      <line x1="50" y1="320" x2="460" y2="320" class="grid-line"/>
-      <line x1="100" y1="20" x2="100" y2="320" class="grid-line"/>
-      <line x1="150" y1="20" x2="150" y2="320" class="grid-line"/>
-      <line x1="200" y1="20" x2="200" y2="320" class="grid-line"/>
-      <line x1="250" y1="20" x2="250" y2="320" class="grid-line"/>
-      <line x1="300" y1="20" x2="300" y2="320" class="grid-line"/>
-      <line x1="350" y1="20" x2="350" y2="320" class="grid-line"/>
-      <line x1="400" y1="20" x2="400" y2="320" class="grid-line"/>
-      <!-- x 轴 -->
-      <line x1="50" y1="270" x2="460" y2="270" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
-      <text x="466" y="274" class="axis-label">x</text>
-      <!-- y 轴 -->
-      <line x1="50" y1="320" x2="50" y2="20" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
-      <text x="46" y="16" class="axis-label">y</text>
-      <!-- 原点 -->
-      <text x="40" y="288" class="axis-label" font-size="11">O</text>
-
-      <!-- 刻度标注 -->
-      <text x="95" y="288" class="axis-label" font-size="10">1</text>
-      <text x="145" y="288" class="axis-label" font-size="10">2</text>
-      <text x="195" y="288" class="axis-label" font-size="10">3</text>
-      <text x="245" y="288" class="axis-label" font-size="10">4</text>
-      <text x="295" y="288" class="axis-label" font-size="10">5</text>
-      <text x="345" y="288" class="axis-label" font-size="10">6</text>
-      <text x="395" y="288" class="axis-label" font-size="10">7</text>
-      <text x="40" y="265" class="axis-label" font-size="10">1</text>
-      <text x="40" y="215" class="axis-label" font-size="10">2</text>
-      <text x="40" y="165" class="axis-label" font-size="10">3</text>
-      <text x="40" y="115" class="axis-label" font-size="10">4</text>
-      <text x="40" y="65" class="axis-label" font-size="10">5</text>
-
-      <!-- 直线 L1: x + y = 10 → y = 10 - x -->
-      <!-- 通过 (0,10) → (50, -230) 和 (10,0) → (450, 270) 但画布限制 -->
-      <!-- 画布坐标: x_pixel = 50 + x*50, y_pixel = 270 - y*50 -->
-      <!-- (0,10): (50, 270-500=-230) 超出画布 -->
-      <!-- (2,8): (150, 270-400=-130) 超出 -->
-      <!-- (4,6): (250, 270-300=-30) 超出 -->
-      <!-- (6,4): (350, 270-200=70) -->
-      <!-- (8,2): (450, 270-100=170) -->
-      <!-- (10,0): (550, 270) 超出 -->
-      <line x1="200" y1="20" x2="450" y2="170" stroke="#1a73e8" stroke-width="2.5"/>
-      <text x="400" y="100" class="line-label" fill="#1a73e8">L₁: x + y = 10</text>
-
-      <!-- 直线 L2: 2x - y = 5 → y = 2x - 5 -->
-      <!-- (0,-5): (50, 270+250=520) 超出 -->
-      <!-- (2,-1): (150, 270+50=320) 超出 -->
-      <!-- (3,1): (200, 270-50=220) -->
-      <!-- (4,3): (250, 270-150=120) -->
-      <!-- (5,5): (300, 270-250=20) -->
-      <!-- (6,7): (350, 270-350=-80) 超出 -->
-      <line x1="200" y1="220" x2="300" y2="20" stroke="#e65100" stroke-width="2.5"/>
-      <text x="240" y="145" class="line-label" fill="#e65100">L₂: 2x − y = 5</text>
-
-      <!-- 交点 (5,5): (300, 20) -->
-      <circle cx="300" cy="20" r="7" fill="#c62828" stroke="#fff" stroke-width="2"/>
-      <line x1="300" y1="20" x2="300" y2="270" stroke="#c62828" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
-      <line x1="50" y1="20" x2="300" y2="20" stroke="#c62828" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
-      <text x="310" y="16" class="point-label">(5, 5)</text>
-
-      <!-- 图例 -->
-      <rect x="80" y="338" width="14" height="14" rx="3" fill="#1a73e8"/>
-      <text x="100" y="350" style="font-size:12px;fill:#555;">x + y = 10</text>
-      <rect x="190" y="338" width="14" height="14" rx="3" fill="#e65100"/>
-      <text x="210" y="350" style="font-size:12px;fill:#555;">2x − y = 5</text>
-      <circle cx="340" cy="345" r="6" fill="#c62828"/>
-      <text x="352" y="350" style="font-size:12px;fill:#555;">交点 = 解</text>
-
-      <text x="260" y="375" style="font-size:11px;fill:#999;text-anchor:middle;">两条直线的交点就是方程组的解</text>
-    </svg>
-    <p style="text-align:center;color:#888;font-size:13px;">图：方程组 { x + y = 10, 2x − y = 5 } 的几何意义——两条直线交于 (5, 5)</p>
-  </div>
-
   <h2>二、消元法：为什么能消？</h2>
   <div class="story">
-    <p>现在我们面临一个实际问题：<strong>怎么找到那个交点？</strong>也就是怎么解方程组？</p>
+    <p>现在我们面临一个实际问题：<strong>怎么找到那个同时满足两个方程的解？</strong>也就是怎么解方程组？</p>
     <p>核心思想只有三个字：<strong>消元法</strong>。把两个未知数的问题"降维"成一个未知数——就像先把两个纠缠的绳结解开一个，剩下的就好办了。</p>
+
+    <div class="key">
+      <p><strong>消元法的本质：把二元变一元。</strong>二元一次方程组里有两个未知数，我们没法直接解。但只要把其中一个未知数"换掉"——用一个未知数的式子表示另一个未知数，再代入第二个方程——二元方程就化成了一元一次方程，剩下的工作就只是解一元方程了。</p>
+      <p>换句话说：<strong>解二元方程组的本质，就是通过换元把"二元"变成"一元"</strong>。学会这一招，不管几元方程组，思路都是"消元→消元→……→最后剩一个未知数"。</p>
+    </div>
+
+    <div class="key">
+      <p><strong>解方程的通用思路：</strong></p>
+      <ul>
+        <li><strong>多元 → 一元：</strong>无论有几个未知数，逐个消元，最后只剩一个未知数</li>
+        <li><strong>多次 → 一次：</strong>遇到二次或更高次的方程，用因式分解、配方、换元等方法化成一次方程</li>
+        <li><strong>最后落地：</strong>化成一元一次方程后，用<strong>开方 + 加减乘除</strong>把未知数的值求出来</li>
+      </ul>
+      <p>记住这条主线：多元化一元、多次化一次、最后开方加加减乘除得解。任何方程，无论看上去多复杂，都是沿着这条路一步步走下来的。</p>
+    </div>
 
     <div class="key">
       <p><strong>消元法的"通行证"——等式的性质：</strong></p>
@@ -234,74 +153,9 @@
       <ul>
         <li><strong>代入法：</strong>当某个未知数的系数是 1 或 −1 时很方便（比如 x + y = 10 中，直接得到 y = 10 − x）</li>
         <li><strong>加减法：</strong>当两个方程中同一个未知数的系数已经互为相反数或相等，或者容易通过乘以一个数变成那样时，非常快</li>
-        <li><strong>其实无所谓：</strong>两种方法永远都能用，只是熟练后你会自然选择更省力的那种</li>
+        <li><strong>其实都不一样：</strong>两种方法永远都能用，只是熟练后你会自然选择更省力的那种</li>
       </ul>
     </div>
-  </div>
-
-  <h2>图说：代入消元法的几何直观</h2>
-  <div class="formula">
-    <p>下面这张图展示了代入消元法的本质：从一条直线（方程①）上取一个"动点"，沿着这条线滑动，直到它恰好也落在另一条直线上（满足方程②）。</p>
-    <svg class="svg-fig" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <style>
-          text { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
-        </style>
-        <marker id="arrow2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-          <path d="M0,0 L8,3 L0,6 Z" fill="#555"/>
-        </marker>
-      </defs>
-
-      <!-- 坐标轴 -->
-      <line x1="40" y1="280" x2="470" y2="280" stroke="#555" stroke-width="1.5" marker-end="url(#arrow2)"/>
-      <text x="476" y="284" style="font-size:13px;fill:#555;">x</text>
-      <line x1="40" y1="290" x2="40" y2="30" stroke="#555" stroke-width="1.5" marker-end="url(#arrow2)"/>
-      <text x="36" y="26" style="font-size:13px;fill:#555;">y</text>
-
-      <!-- 直线 L1: y = 10 - x (蓝色) -->
-      <line x1="40" y1="30" x2="460" y2="280" stroke="#1a73e8" stroke-width="2.5" opacity="0.4"/>
-      <text x="420" y="290" style="font-size:13px;fill:#1a73e8;font-weight:bold;">L₁: y = 10 − x</text>
-
-      <!-- 直线 L2: y = 2x - 5 (橙色) -->
-      <line x1="130" y1="280" x2="300" y2="30" stroke="#e65100" stroke-width="2.5" opacity="0.4"/>
-      <text x="240" y="55" style="font-size:13px;fill:#e65100;font-weight:bold;">L₂: y = 2x − 5</text>
-
-      <!-- 在 L1 上标几个点，展示"代入"的思想 -->
-      <!-- L1 上的点: (1,9), (3,7), (5,5), (7,3), (9,1) -->
-      <!-- 像素坐标: x_pixel = 40 + x*40, y_pixel = 280 - y*30 -->
-
-      <!-- (1,9): (80, 10) -->
-      <circle cx="80" cy="10" r="5" fill="#1a73e8" opacity="0.6"/>
-      <text x="70" y="8" style="font-size:11px;fill:#1a73e8;">(1,9)</text>
-
-      <!-- (3,7): (160, 70) -->
-      <circle cx="160" cy="70" r="5" fill="#1a73e8" opacity="0.6"/>
-      <text x="135" y="65" style="font-size:11px;fill:#1a73e8;">(3,7)</text>
-
-      <!-- (5,5): (240, 130) → 交点! -->
-      <circle cx="240" cy="130" r="9" fill="#c62828" stroke="#fff" stroke-width="2.5"/>
-      <text x="252" y="126" style="font-size:14px;fill:#c62828;font-weight:bold;">(5,5) ✓</text>
-      <text x="252" y="142" style="font-size:11px;fill:#c62828;">交点=解</text>
-
-      <!-- (7,3): (320, 190) -->
-      <circle cx="320" cy="190" r="5" fill="#1a73e8" opacity="0.6"/>
-      <text x="330" y="195" style="font-size:11px;fill:#1a73e8;">(7,3)</text>
-
-      <!-- (9,1): (400, 250) -->
-      <circle cx="400" cy="250" r="5" fill="#1a73e8" opacity="0.6"/>
-      <text x="410" y="255" style="font-size:11px;fill:#1a73e8;">(9,1)</text>
-
-      <!-- 标注: 代入过程 -->
-      <text x="260" y="170" style="font-size:13px;fill:#555;text-anchor:middle;">代入 L₂ 检验</text>
-      <text x="260" y="188" style="font-size:13px;fill:#555;text-anchor:middle;">2x − y = 5 ?</text>
-
-      <!-- 箭头从 (1,9) 到 (3,7) -->
-      <path d="M 85 15 Q 120 40 155 65" fill="none" stroke="#1a73e8" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
-      <path d="M 165 75 Q 200 100 230 120" fill="none" stroke="#1a73e8" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
-
-      <text x="40" y="320" style="font-size:11px;fill:#999;">沿 L₁ 滑动，逐个代入 L₂ 检验，直到 (5,5) 同时满足两个方程</text>
-    </svg>
-    <p style="text-align:center;color:#888;font-size:13px;">图：沿 L₁ 上的点逐个"代入"L₂ 检验——只有 (5,5) 同时满足两个方程</p>
   </div>
 
   <h2>三、实际问题：鸡兔同笼</h2>
@@ -325,65 +179,6 @@
     </div>
 
     <p><strong>为什么用加减法？</strong>因为两个方程中 x 的系数已经相同（都是 1），只需给①乘以 2，就能消去 x——这比代入法更快捷。</p>
-  </div>
-
-  <h2>图说：鸡兔同笼的几何意义</h2>
-  <div class="formula">
-    <svg class="svg-fig" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <style>
-          text { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
-        </style>
-        <marker id="arrow3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-          <path d="M0,0 L8,3 L0,6 Z" fill="#555"/>
-        </marker>
-      </defs>
-
-      <!-- 坐标轴 -->
-      <line x1="50" y1="300" x2="460" y2="300" stroke="#555" stroke-width="1.5" marker-end="url(#arrow3)"/>
-      <text x="466" y="304" style="font-size:13px;fill:#555;">鸡 x</text>
-      <line x1="50" y1="310" x2="50" y2="40" stroke="#555" stroke-width="1.5" marker-end="url(#arrow3)"/>
-      <text x="46" y="36" style="font-size:13px;fill:#555;">兔 y</text>
-
-      <!-- 刻度 -->
-      <text x="30" y="135" style="font-size:10px;fill:#888;">35</text>
-      <text x="30" y="95" style="font-size:10px;fill:#888;">40</text>
-      <text x="42" y="295" style="font-size:10px;fill:#888;">0</text>
-      <text x="145" y="295" style="font-size:10px;fill:#888;">10</text>
-      <text x="195" y="295" style="font-size:10px;fill:#888;">20</text>
-      <text x="245" y="295" style="font-size:10px;fill:#888;">30</text>
-      <text x="295" y="295" style="font-size:10px;fill:#888;">40</text>
-
-      <!-- 头数线: x + y = 35 → y = 35 - x -->
-      <!-- 像素: x_pixel = 50 + x*5, y_pixel = 300 - y*4 -->
-      <!-- (0,35): (50, 300-140=160) -->
-      <!-- (35,0): (225, 300) -->
-      <line x1="50" y1="160" x2="390" y2="300" stroke="#1a73e8" stroke-width="2.5"/>
-      <text x="340" y="270" style="font-size:13px;fill:#1a73e8;font-weight:bold;">头数: x + y = 35</text>
-
-      <!-- 脚数线: 2x + 4y = 94 → y = (94 - 2x)/4 = 23.5 - 0.5x -->
-      <!-- (0,23.5): (50, 300-94=206) -->
-      <!-- (47,0): (285, 300) -->
-      <line x1="50" y1="206" x2="285" y2="300" stroke="#e65100" stroke-width="2.5"/>
-      <text x="180" y="240" style="font-size:13px;fill:#e65100;font-weight:bold;">脚数: 2x + 4y = 94</text>
-
-      <!-- 交点 (23,12): x_pixel = 50+23*5=165, y_pixel = 300-12*4=252 -->
-      <circle cx="165" cy="252" r="8" fill="#c62828" stroke="#fff" stroke-width="2.5"/>
-      <line x1="165" y1="252" x2="165" y2="300" stroke="#c62828" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
-      <line x1="50" y1="252" x2="165" y2="252" stroke="#c62828" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
-      <text x="175" y="248" style="font-size:14px;fill:#c62828;font-weight:bold;">(23, 12)</text>
-
-      <!-- 标注 -->
-      <text x="295" y="340" style="font-size:12px;fill:#555;">鸡 23 只，兔 12 只</text>
-      <text x="295" y="356" style="font-size:12px;fill:#555;">脚：23×2 + 12×4 = 94 ✓</text>
-
-      <!-- 图例 -->
-      <rect x="50" y="328" width="14" height="14" rx="3" fill="#1a73e8"/>
-      <text x="70" y="340" style="font-size:12px;fill:#555;">x + y = 35</text>
-      <rect x="160" y="328" width="14" height="14" rx="3" fill="#e65100"/>
-      <text x="180" y="340" style="font-size:12px;fill:#555;">2x + 4y = 94</text>
-    </svg>
-    <p style="text-align:center;color:#888;font-size:13px;">图：鸡兔同笼方程组的几何表示——两条直线交于 (23, 12)</p>
   </div>
 
   <h2>四、更多实际问题</h2>
@@ -432,13 +227,14 @@
   <div class="story">
     <p>既然二元一次方程组能解决两个未知数的问题，那如果遇到<strong>三个</strong>未知数呢？自然就有了三元一次方程组。</p>
 
-    <div class="formula">
-      <p><strong>类比：</strong></p>
-      <ul>
-        <li>一元一次方程 → 一个点（在数轴上）</li>
-        <li>二元一次方程组 → 两条直线的交点（在平面上）</li>
-        <li>三元一次方程组 → 三个平面的交点（在空间中）</li>
+    <div class="formula" style="text-align:left;">
+      <p><strong>思路类比：</strong></p>
+      <ul style="text-align:left;">
+        <li>一元一次方程 → 一个未知数，一个方程</li>
+        <li>二元一次方程组 → 两个未知数，两个方程</li>
+        <li>三元一次方程组 → 三个未知数，三个方程</li>
       </ul>
+      <p style="text-align:left;">未知数变多了，但<strong>思路不变</strong>：消元，再消元，直到只剩一个未知数。</p>
     </div>
 
     <div class="example">
@@ -453,21 +249,34 @@
       <span class="answer">解：x = 1, y = 2, z = 3</span>
     </div>
 
-    <p><strong>核心思想：降维打击。</strong>三元→二元→一元，逐层消元。就像剥洋葱，一层一层剥开，最后总能看到"芯"。</p>
+    <p><strong>核心思想：逐层消元。</strong>三元→二元→一元，逐层消去。就像剥洋葱，一层一层剥开，最后总能看到"芯"。</p>
   </div>
 
   <h2>挑战性问题</h2>
   <div class="challenge">
-    <p><strong>问题 1：</strong>如果二元一次方程组中两个方程代表的两条直线平行（没有交点），这意味着什么？方程组有解吗？试着用消元法推导一下会发生什么。</p>
-    <p><strong>问题 2：</strong>一个两位数，十位数字与个位数字之和为 9，且这个两位数比它的个位数字与十位数字交换位置后得到的数大 27。求这个两位数。你能用两种方法（设两个未知数 vs 设一个未知数）解吗？哪种更自然？</p>
-    <p><strong>问题 3：</strong>三元一次方程组在空间中代表三个平面的交点。你能想象出三个平面可能有哪些位置关系吗？（提示：可能交于一点、交于一条线、没有公共交点……）</p>
+    <p><strong>问题 1：</strong>一个两位数，十位数字与个位数字之和为 9，且这个两位数比它的个位数字与十位数字交换位置后得到的数大 27。求这个两位数。你能用两种方法（设两个未知数 vs 设一个未知数）解吗？哪种更自然？</p>
   </div>
 
   <h2>拓展阅读：一次方程组的古今表示</h2>
   <div class="extend">
-    <p><strong>中国古代的"方程术"：</strong>早在两千多年前的《九章算术》第八章"方程"中，就系统地介绍了线性方程组的解法。古人是把方程组的系数排成一个方阵，用算筹（小竹棍）摆成矩阵的形式，然后进行类似于今天"加减消元"的操作。这种方法比西方早了 1500 多年！</p>
-    <p><strong>古希腊的"辗转相消法"：</strong>公元 3 世纪，古希腊数学家丢番图（Diophantus）在《算术》一书中也研究了多元一次方程。但他主要关注整数解，开创了"不定方程"的研究方向。</p>
-    <p><strong>现代的"高斯消元法"：</strong>19 世纪，德国数学家高斯（Gauss）将消元法系统化，发展出了"高斯消元法"——这是今天计算机解线性方程组最常用的算法。从天气预报到 3D 游戏渲染，背后都有高斯消元法的影子！</p>
+    <p><strong>中国古代的"方程术"：</strong>早在两千多年前的《九章算术》第八章"方程"中，就系统地介绍了线性方程组的解法。古人是把方程组的系数排成一个方阵（叫"方程"），用算筹（小竹棍）摆成矩阵的形式，然后进行类似于今天"加减消元"的操作。这种方法比西方早了 1500 多年！</p>
+    <p><strong>具体例子（《九章算术》方程章第一题，"禾谷问题"）：</strong>上等禾 3 捆、中等禾 2 捆、下等禾 1 捆，共打出 39 斗谷子；上等禾 2 捆、中等禾 3 捆、下等禾 1 捆，共打出 34 斗；上等禾 1 捆、中等禾 2 捆、下等禾 3 捆，共打出 26 斗。问三种禾每捆各打多少斗？</p>
+    <p>列成方程组（设上、中、下禾每捆分别打 x、y、z 斗）：</p>
+    <p style="text-align:left;">
+      { 3x + 2y + z = 39 ……①<br>
+      　2x + 3y + z = 34 ……②<br>
+      　x + 2y + 3z = 26 ……③ }
+    </p>
+    <p><strong>古人做法（"遍乘直除"法）：</strong>把三个方程的系数列成三行方阵。用第一行（3, 2, 1, 39）遍乘第二行整体，再从其中反复减去第一行，直到第二行首项变 0；对第三行同样处理。结果第二行化成 (0, 5, 1, 24)，第三行化成 (0, 4, 8, 39)。再用第二行遍乘第三行并消元，第三行变成 (0, 0, 36, 99)，立即得 z = 99/36 = 11/4 斗（古人为避免分数，会再"遍乘"扩大若干倍）。回代求出 y 和 x。</p>
+    <p>这本质上就是今天的加减消元——只不过古人不用字母，而是直接在算筹方阵上做"消减"。把方程组解成阶梯形再回代，思路和今天的加减消元完全一致，只是早了 1800 年。</p>
+    <p><strong>古希腊的"辗转相消法"：</strong>公元 3 世纪，古希腊数学家丢番图（Diophantus）在《算术》一书中也研究了多元一次方程。他最擅长的是<strong>"辗转相消"——反复用大方程减去小方程，把未知数一个一个消掉</strong>，本质上还是加减消元，但更注重求整数解（这就是"不定方程"的研究起点）。</p>
+    <p><strong>具体例子（丢番图《算术》卷 I 第 5 题简化）：</strong>设有两个数，和为 20，差为 4，求这两个数。</p>
+    <p style="text-align:left;">
+      { x + y = 20 ……①<br>
+      　x − y = 4 ……② }
+    </p>
+    <p><strong>丢番图的做法：</strong>把① + ②得 2x = 24，所以 x = 12；再回代①得 y = 8。这就是最朴素的加减消元。丢番图不止于此——遇到更复杂的方程，他会反复做这种"两两相减消元"的操作，直到只剩一个未知数。比如他处理 x + y = a, 2x + 3y = b 类问题时，先把第一式乘 2 得 2x + 2y = 2a，再用第二式减去它：y = b − 2a，于是 y 直接求出，再代回求 x。这一招今天叫"加减消元法"，丢番图叫它"对方相消"。</p>
+    <p>虽然丢番图主要关注整数解，但他的"相消"思想启发了后世的代数学家，是今天我们学习的加减消元法的源头之一。</p>
     <p><strong>推荐阅读：</strong>《九章算术》——了解中国古代数学的辉煌成就；《数学之美》——了解线性方程组在现代科技中的应用（推荐系统、搜索引擎、图像处理）。</p>
   </div>
 
@@ -550,8 +359,8 @@
     <p><strong>10.</strong> 思考题：如果方程组 { ax + by = c, dx + ey = f } 中，a、b、d、e 满足什么比例关系时，方程组无解？满足什么比例关系时，有无穷多解？</p>
     <button class="btn-sm" onclick="toggleHint('h10')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a10')">查看答案</button>
-    <div class="hint-box" id="h10">回想两条直线在平面上的位置关系：相交、平行、重合。用系数的比例关系来判断。</div>
-    <div class="ans-box" id="a10"><strong>无解（两直线平行）：</strong>a/d = b/e ≠ c/f<br>（两条直线斜率相同但截距不同，永远不会相交）<br><strong>无穷多解（两直线重合）：</strong>a/d = b/e = c/f<br>（两个方程本质上是同一个方程，整条直线上的点都是解）<br><strong>唯一解（两直线相交）：</strong>a/d ≠ b/e</div>
+    <div class="hint-box" id="h10">用加减消元试试：让两式中 x 的系数相同，看 y 的系数是否也相同。再比较常数项 c、f 的比例关系。</div>
+    <div class="ans-box" id="a10"><strong>唯一解：</strong>a/d ≠ b/e<br>（消元时能消去一个未知数，剩一个一元一次方程，能解出唯一解）<br><strong>无解：</strong>a/d = b/e ≠ c/f<br>（消元时两个未知数都消掉了，但剩下 0 = 一个非零数，矛盾）<br><strong>无穷多解：</strong>a/d = b/e = c/f<br>（两个方程本质上是同一个方程，一个方程定不了两个未知数，所以有无数组解）</div>
   </div>
 
   <h2>小结</h2>
@@ -559,13 +368,14 @@
     <ul>
       <li><strong>二元一次方程：</strong>含有两个未知数，未知数次数都是 1 的整式方程，一般形式 ax + by = c</li>
       <li><strong>二元一次方程组：</strong>两个二元一次方程联立，它们的公共解是方程组的解</li>
-      <li><strong>几何意义：</strong>每个方程是一条直线，方程组的解就是两条直线的交点</li>
+      <li><strong>解方程的通用思路：</strong>多元→一元，多次→一次，最后用开方 + 加减乘除求出未知数的值</li>
+      <li><strong>消元法的本质：</strong>通过换元把"二元"变成"一元"——这是解二元方程组的关键</li>
       <li><strong>代入消元法：</strong>从一个方程解出一个未知数，代入另一个方程——像侦探套线索</li>
       <li><strong>加减消元法：</strong>让系数互为相反数后相加（或相等后相减），消去一个未知数——像天平称重</li>
       <li><strong>为什么能消？</strong>等式的基本性质保证了我们做的一切变形都不会破坏等式</li>
       <li><strong>三步法解实际问题：</strong>设未知数 → 列方程 → 解方程并检验</li>
-      <li><strong>三元一次方程组：</strong>逐层消元，三元→二元→一元，降维打击</li>
-      <li><strong>解的三种情况：</strong>唯一解（相交）、无解（平行）、无穷多解（重合）</li>
+      <li><strong>三元一次方程组：</strong>逐层消元，三元→二元→一元</li>
+      <li><strong>解的三种情况：</strong>唯一解、无解、无穷多解</li>
     </ul>
   </div>
 
@@ -575,6 +385,6 @@
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
 function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
 </script>
-<script src="../lessons/dt.js"></script>
+<script src="./dt.js"></script>
 </body>
 </html>
