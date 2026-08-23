@@ -27,6 +27,9 @@
   .tree-btn { display: inline-block; margin: 4px 6px; padding: 6px 16px; border: 2px solid #1565c0; border-radius: 16px; background: #fff; color: #1565c0; cursor: pointer; font-size: 0.9em; transition: 0.15s; }
   .tree-btn:hover { background: #e3f2fd; }
   .tree-btn.active { background: #1565c0; color: #fff; }
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 2px; }
+  .frac .num { border-bottom: 1.5px solid #333; padding: 0 6px 1px; font-size: 0.95em; }
+  .frac .den { padding: 1px 6px 0; font-size: 0.95em; }
 
   @media (max-width: 720px) {
     article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
@@ -42,7 +45,7 @@
 <body>
 <article>
   <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./fractions.html">课件 2（分数——概率是分数）</a>、<a href="./data-collection.html">课件 32（数据的收集与整理）</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./fractions.html">课件 2（分数——概率是分数）</a>、<a href="./data-collection.html">课件 1 统计（数据的收集与整理）</a></p>
   <h1>第34课 概率初步</h1>
 
   <h2>起源：赌徒的问题</h2>
@@ -83,7 +86,7 @@
       ② 买一张彩票中大奖——<strong>随机事件</strong><br>
       ③ 一个正常骰子掷出 8 点——<strong>不可能事件</strong><br>
       ④ 下周一学校会下雨——<strong>随机事件</strong><br>
-      ⑤ 一个人从 10 楼跳下会落地——<strong>必然事件</strong>
+      ⑤ 向上抛一块石头，它会落回地面——<strong>必然事件</strong>
     </div>
 
     <p><strong>注意：</strong>判断一个事件是不是确定事件，要看"在给定的条件下"。比如"水在 100℃ 沸腾"在标准大气压下是必然事件，但在高山上（气压低），水不到 100℃ 就沸腾了！</p>
@@ -94,7 +97,7 @@
     <p>随机事件虽然不确定，但我们可以用<strong>一个数</strong>来衡量它发生的可能性大小。这个数就是<strong>概率</strong>。</p>
 
     <div class="formula">
-      <p style="text-align:center;font-size:20px;"><strong>P(A) = 事件 A 发生的次数 / 所有可能结果的总数</strong></p>
+      <p style="text-align:center;font-size:20px;"><strong>P(A) = <span class="frac"><span class="num"></span>事件 A 发生的结果数</span><span class="den">所有可能结果的总数</span></span></strong></p>
       <p style="text-align:center;color:#888;">（前提：每种结果出现的可能性相等）</p>
     </div>
 
@@ -414,9 +417,9 @@
     <p>这里有个容易混淆的点：<strong>每一年的概率都是独立的</strong>，就像掷骰子一样——今年掷过了，明年还是同样的概率。</p>
     <div class="example">
       <strong>算一算：</strong>假设某地"百年一遇"的暴雨概率真是每年 1%。那么连续 10 年里，至少发生一次这种暴雨的概率是多少？<br>
-      <span style="color:#888;">思路：先算"10 年一次都不发生"的概率 = 0.99¹⁰ ≈ 0.904，所以"至少发生一次"的概率 ≈ 1 − 0.904 = <strong>9.6%</strong>——差不多十分之一！</span>
+      <span style="color:#888;">思路：先算"10 年一次都不发生"的概率 = 0.99<sup>10</sup> ≈ 0.904，所以"至少发生一次"的概率 ≈ 1 − 0.904 = <strong>9.6%</strong>——差不多十分之一！</span>
     </div>
-    <p>所以"百年一遇"并不意味着一百年内只会来一次。事实上，在一百年的时间里，至少遇到一次"百年一遇"暴雨的概率大约是 1 − 0.99¹⁰⁰ ≈ <strong>63%</strong>——比"扔硬币正面朝上"的可能性还大！</p>
+    <p>所以"百年一遇"并不意味着一百年内只会来一次。事实上，在一百年的时间里，至少遇到一次"百年一遇"暴雨的概率大约是 1 − 0.99<sup>100</sup> ≈ <strong>63%</strong>——比"扔硬币正面朝上"的可能性还大！</p>
 
     <h3>5.3 气候变化让"百年一遇"越来越频繁</h3>
     <p>这里还有一个重要的问题：<strong>"百年一遇"的标准不是一成不变的</strong>。</p>
@@ -604,7 +607,7 @@ function drawTree(mode) {
 }
 
 function resetTree() {
-  var all = document.querySelectorAll('[id^="l"],[id^="n"],[id^="t"],[id^="r"]');
+  var all = document.querySelectorAll('svg [id^="l"],svg [id^="n"],svg [id^="t"],svg [id^="r"]');
   all.forEach(function(el){ el.classList.remove('hl'); });
   document.getElementById('legend').textContent = '共 8 种等可能结果。恰好两次正面的有：正正反、正反正、反正正，共 3 种。';
   document.getElementById('prob-result').textContent = 'P(恰好两次正面) = 3/8';
