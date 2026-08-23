@@ -7,15 +7,15 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
 <link rel="stylesheet" href="./style.css">
 <style>
-  :root { --accent: #c62828; }
+  :root { --accent: #1565c0; }
   .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
   .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #e3f2fd; border-left: 4px solid #1565c0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
   .challenge { background: #e8eaf6; border: 2px dashed #5c6bc0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #f1f8e9; border: 2px solid #689f38; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; line-height: 1.8; }
   .hint-box.show, .ans-box.show { display: block; }
@@ -76,8 +76,8 @@
     <svg viewBox="0 0 600 180" style="max-width:600px;height:auto;">
       <defs>
         <style>
-          .bar { fill: #c62828; transition: height 0.5s; }
-          .bar-light { fill: #ef9a9a; }
+          .bar { fill: #1565c0; transition: height 0.5s; }
+          .bar-light { fill: #90caf9; }
           .mean-line { stroke: #2e7d32; stroke-width: 2.5; stroke-dasharray: 6,3; }
         </style>
       </defs>
@@ -165,34 +165,34 @@
       <rect x="20" y="38" width="260" height="170" rx="8" fill="#e8f5e9" stroke="#a5d6a7" stroke-width="1.5"/>
       <text x="150" y="60" text-anchor="middle" font-size="13" font-weight="bold" fill="#2e7d32">正常数据：78, 85, 90, 92, 95</text>
       <line x1="40" y1="130" x2="260" y2="130" stroke="#333" stroke-width="1.5"/>
-      <circle cx="82" cy="130" r="4" fill="#c62828"/>
+      <circle cx="82" cy="130" r="4" fill="#1565c0"/>
       <text x="82" y="122" text-anchor="middle" font-size="10">78</text>
-      <circle cx="126" cy="120" r="4" fill="#c62828"/>
+      <circle cx="126" cy="120" r="4" fill="#1565c0"/>
       <text x="126" y="112" text-anchor="middle" font-size="10">85</text>
-      <circle cx="170" cy="108" r="4" fill="#c62828"/>
+      <circle cx="170" cy="108" r="4" fill="#1565c0"/>
       <text x="170" y="100" text-anchor="middle" font-size="10">90</text>
-      <circle cx="214" cy="102" r="4" fill="#c62828"/>
+      <circle cx="214" cy="102" r="4" fill="#1565c0"/>
       <text x="214" y="94" text-anchor="middle" font-size="10">92</text>
-      <circle cx="258" cy="96" r="4" fill="#c62828"/>
+      <circle cx="258" cy="96" r="4" fill="#1565c0"/>
       <text x="258" y="88" text-anchor="middle" font-size="10">95</text>
       <text x="150" y="155" text-anchor="middle" font-size="12" fill="#2e7d32">平均数 = 88 / 中位数 = 90</text>
       <text x="150" y="172" text-anchor="middle" font-size="11" fill="#888">两者接近</text>
 
       <!-- 有极端值 -->
-      <rect x="310" y="38" width="260" height="170" rx="8" fill="#fff3e0" stroke="#ffcc80" stroke-width="1.5"/>
-      <text x="440" y="60" text-anchor="middle" font-size="13" font-weight="bold" fill="#e65100">有极端值：78, 85, 90, 92, 20</text>
+      <rect x="310" y="38" width="260" height="170" rx="8" fill="#f3e5f5" stroke="#ce93d8" stroke-width="1.5"/>
+      <text x="440" y="60" text-anchor="middle" font-size="13" font-weight="bold" fill="#6a1b9a">有极端值：78, 85, 90, 92, 20</text>
       <line x1="330" y1="130" x2="550" y2="130" stroke="#333" stroke-width="1.5"/>
-      <circle cx="372" cy="130" r="4" fill="#c62828"/>
+      <circle cx="372" cy="130" r="4" fill="#1565c0"/>
       <text x="372" y="122" text-anchor="middle" font-size="10">78</text>
-      <circle cx="416" cy="120" r="4" fill="#c62828"/>
+      <circle cx="416" cy="120" r="4" fill="#1565c0"/>
       <text x="416" y="112" text-anchor="middle" font-size="10">85</text>
-      <circle cx="460" cy="108" r="4" fill="#c62828"/>
+      <circle cx="460" cy="108" r="4" fill="#1565c0"/>
       <text x="460" y="100" text-anchor="middle" font-size="10">90</text>
-      <circle cx="504" cy="102" r="4" fill="#c62828"/>
+      <circle cx="504" cy="102" r="4" fill="#1565c0"/>
       <text x="504" y="94" text-anchor="middle" font-size="10">92</text>
-      <circle cx="548" cy="175" r="4" fill="#e65100"/>
-      <text x="548" y="192" text-anchor="middle" font-size="10" fill="#e65100">20</text>
-      <text x="440" y="155" text-anchor="middle" font-size="12" fill="#e65100">平均数 = 73 / 中位数 = 85</text>
+      <circle cx="548" cy="175" r="4" fill="#6a1b9a"/>
+      <text x="548" y="192" text-anchor="middle" font-size="10" fill="#6a1b9a">20</text>
+      <text x="440" y="155" text-anchor="middle" font-size="12" fill="#6a1b9a">平均数 = 73 / 中位数 = 85</text>
       <text x="440" y="172" text-anchor="middle" font-size="11" fill="#888">平均数被拉低，中位数稳如泰山！</text>
     </svg>
   </div>
@@ -203,7 +203,7 @@
   </div>
 
   <h3>1. 方差</h3>
-  <div class="formula">
+  <div class="formula" style="text-align:left;">
     <p><strong>直观想法：</strong>每个数据离平均数有多远？把这些"距离"平均一下。</p>
     <p>但"距离"有正有负，直接加会抵消。怎么办？<strong>平方！</strong>——平方后全是正数，而且"远"的数据被放大得更厉害。</p>
     <p><strong>方差的定义：</strong>每个数据与平均数的差的平方的平均值。</p>
@@ -236,32 +236,32 @@
       <line x1="20" y1="95" x2="220" y2="95" stroke="#333" stroke-width="2" stroke-dasharray="4,3"/>
       <text x="230" y="98" font-size="11" fill="#333">x̄=4</text>
       <!-- 偏差线 -->
-      <line x1="60" y1="80" x2="60" y2="130" stroke="#e65100" stroke-width="1.5" marker-end="url(#arrowA)"/>
-      <text x="60" y="142" text-anchor="middle" font-size="9" fill="#e65100">差-2</text>
-      <line x1="120" y1="80" x2="120" y2="130" stroke="#e65100" stroke-width="1.5" marker-end="url(#arrowA)"/>
-      <text x="120" y="142" text-anchor="middle" font-size="9" fill="#e65100">差0</text>
-      <line x1="180" y1="80" x2="180" y2="130" stroke="#e65100" stroke-width="1.5" marker-end="url(#arrowA)"/>
-      <text x="180" y="142" text-anchor="middle" font-size="9" fill="#e65100">差+2</text>
+      <line x1="60" y1="80" x2="60" y2="130" stroke="#6a1b9a" stroke-width="1.5" marker-end="url(#arrowA)"/>
+      <text x="60" y="142" text-anchor="middle" font-size="9" fill="#6a1b9a">差-2</text>
+      <line x1="120" y1="80" x2="120" y2="130" stroke="#6a1b9a" stroke-width="1.5" marker-end="url(#arrowA)"/>
+      <text x="120" y="142" text-anchor="middle" font-size="9" fill="#6a1b9a">差0</text>
+      <line x1="180" y1="80" x2="180" y2="130" stroke="#6a1b9a" stroke-width="1.5" marker-end="url(#arrowA)"/>
+      <text x="180" y="142" text-anchor="middle" font-size="9" fill="#6a1b9a">差+2</text>
       <text x="120" y="165" text-anchor="middle" font-size="11" fill="#2e7d32">方差 = (4+0+4)/3 ≈ 2.67</text>
 
       <!-- B组：1,4,7 方差大 -->
-      <text x="420" y="50" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">B组：1, 4, 7（方差大）</text>
+      <text x="420" y="50" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">B组：1, 4, 7（方差大）</text>
       <line x1="320" y1="80" x2="520" y2="80" stroke="#333" stroke-width="1.5"/>
-      <circle cx="340" cy="80" r="6" fill="#e53935"/>
+      <circle cx="340" cy="80" r="6" fill="#1565c0"/>
       <text x="340" y="72" text-anchor="middle" font-size="11">1</text>
-      <circle cx="420" cy="80" r="6" fill="#e53935"/>
+      <circle cx="420" cy="80" r="6" fill="#1565c0"/>
       <text x="420" y="72" text-anchor="middle" font-size="11">4</text>
-      <circle cx="500" cy="80" r="6" fill="#e53935"/>
+      <circle cx="500" cy="80" r="6" fill="#1565c0"/>
       <text x="500" y="72" text-anchor="middle" font-size="11">7</text>
       <line x1="320" y1="95" x2="520" y2="95" stroke="#333" stroke-width="2" stroke-dasharray="4,3"/>
       <text x="530" y="98" font-size="11" fill="#333">x̄=4</text>
-      <line x1="340" y1="80" x2="340" y2="130" stroke="#e65100" stroke-width="1.5" marker-end="url(#arrowB)"/>
-      <text x="340" y="142" text-anchor="middle" font-size="9" fill="#e65100">差-3</text>
-      <line x1="420" y1="80" x2="420" y2="130" stroke="#e65100" stroke-width="1.5" marker-end="url(#arrowB)"/>
-      <text x="420" y="142" text-anchor="middle" font-size="9" fill="#e65100">差0</text>
-      <line x1="500" y1="80" x2="500" y2="130" stroke="#e65100" stroke-width="1.5" marker-end="url(#arrowB)"/>
-      <text x="500" y="142" text-anchor="middle" font-size="9" fill="#e65100">差+3</text>
-      <text x="420" y="165" text-anchor="middle" font-size="11" fill="#c62828">方差 = (9+0+9)/3 = 6</text>
+      <line x1="340" y1="80" x2="340" y2="130" stroke="#6a1b9a" stroke-width="1.5" marker-end="url(#arrowB)"/>
+      <text x="340" y="142" text-anchor="middle" font-size="9" fill="#6a1b9a">差-3</text>
+      <line x1="420" y1="80" x2="420" y2="130" stroke="#6a1b9a" stroke-width="1.5" marker-end="url(#arrowB)"/>
+      <text x="420" y="142" text-anchor="middle" font-size="9" fill="#6a1b9a">差0</text>
+      <line x1="500" y1="80" x2="500" y2="130" stroke="#6a1b9a" stroke-width="1.5" marker-end="url(#arrowB)"/>
+      <text x="500" y="142" text-anchor="middle" font-size="9" fill="#6a1b9a">差+3</text>
+      <text x="420" y="165" text-anchor="middle" font-size="11" fill="#1565c0">方差 = (9+0+9)/3 = 6</text>
 
       <!-- 结论 -->
       <line x1="20" y1="185" x2="580" y2="185" stroke="#ddd" stroke-width="1"/>
@@ -270,10 +270,10 @@
 
       <defs>
         <marker id="arrowA" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-          <path d="M0,0 L6,3 L0,6 Z" fill="#e65100"/>
+          <path d="M0,0 L6,3 L0,6 Z" fill="#6a1b9a"/>
         </marker>
         <marker id="arrowB" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-          <path d="M0,0 L6,3 L0,6 Z" fill="#e65100"/>
+          <path d="M0,0 L6,3 L0,6 Z" fill="#6a1b9a"/>
         </marker>
       </defs>
     </svg>
@@ -305,13 +305,87 @@
   <h2>三、逻辑推导：为什么方差公式长这样？</h2>
   <div class="story">
     <p>你可能想问：为什么不是直接算"偏差的平均值"？也就是 (|x₁−x̄| + ... + |xₙ−x̄|) / n？</p>
-    <p>这个叫<strong>平均绝对偏差</strong>，确实存在！但数学家们选了方差，有三个原因：</p>
+    <p>这个叫<strong>平均绝对偏差</strong>，确实存在！但数学家们选了方差，有两个主要原因：</p>
     <ol>
-      <li><strong>绝对值不好求导：</strong>绝对值函数在 0 处有一个"尖角"，不光滑，微积分处理起来很麻烦。平方函数是光滑的抛物线，处处可导。</li>
       <li><strong>平方放大极端值：</strong>偏离 2 的贡献是 4，偏离 4 的贡献是 16——方差对"离群点"特别敏感，这恰好符合我们"极端值要引起重视"的直觉。</li>
       <li><strong>可加性：</strong>独立数据的方差可以相加，这条性质在概率论中极其重要。</li>
     </ol>
-    <p style="color:#888;font-size:0.9em;">（你现在不需要完全理解微积分，但知道"选方差不是随意决定的"就够了。）</p>
+  </div>
+
+  <h2>四、智商是怎么测出来的？</h2>
+  <div class="story">
+    <p>我们常说"某某智商 130"，那这个数字到底是怎么算出来的？它真的能衡量一个人的聪明程度吗？</p>
+
+    <h3>4.1 智商测试的由来</h3>
+    <p>1904 年，法国心理学家<strong>比奈</strong>（Alfred Binet）受政府委托，设计一套方法来识别需要特殊帮助的学生。他和同事西蒙编制了世界上第一份智力测验量表——<strong>比奈-西蒙量表</strong>。后来美国心理学家<strong>特曼</strong>把它引进美国，修订成"斯坦福-比奈量表"，并正式提出了"智商"（IQ，Intelligence Quotient）这个概念。</p>
+
+    <h3>4.2 智商分数是怎么算出来的？</h3>
+    <p>早期的算法很简单：<strong>智商 = 智力年龄 ÷ 实际年龄 × 100</strong>。比如一个 10 岁的孩子，做题水平相当于 12 岁的平均水平，那他的 IQ = 12 ÷ 10 × 100 = 120。</p>
+    <p>但这个方法有个问题：智力年龄的增长不是匀速的，成年后基本停顿。所以现在的智商测试用的是<strong>统计方法</strong>——把你的成绩和同龄人的成绩做比较。</p>
+
+    <h3>4.3 正态分布：智商的"钟形曲线"</h3>
+    <p>统计学家发现，如果对大量人群做智力测试，成绩分布会呈现一条"中间高、两边低"的钟形曲线——这就是<strong>正态分布</strong>。很多自然现象都符合正态分布：身高、考试成绩、测量误差……智商也是其中之一。</p>
+
+    <div class="formula" style="text-align:left;">
+      <p>现代智商的定义基于两个关键数字：</p>
+      <p style="text-align:center;font-size:1.15em;font-weight:bold;">平均值 = 100，标准差 = 15</p>
+    </div>
+
+    <p>意思是：所有人的智商平均是 100，标准差是 15。利用上一节学过的知识，就能解读各种智商分数：</p>
+
+    <table>
+      <tr><th>智商范围</th><th>与平均值的关系</th><th>人群占比（约）</th><th>常见说法</th></tr>
+      <tr><td>85 ~ 115</td><td>平均值 ± 1 个标准差</td><td><strong>68%</strong></td><td>大多数人的水平</td></tr>
+      <tr><td>70 ~ 130</td><td>平均值 ± 2 个标准差</td><td><strong>95%</strong></td><td>覆盖绝大多数人</td></tr>
+      <tr><td>130 以上</td><td>高于平均值 2 个标准差</td><td>约 2.2%</td><td>通常称为"超常"</td></tr>
+      <tr><td>70 以下</td><td>低于平均值 2 个标准差</td><td>约 2.2%</td><td>需要特别关注</td></tr>
+    </table>
+
+    <div class="svg-container">
+      <svg viewBox="0 0 600 240" style="max-width:600px;height:auto;">
+        <rect x="0" y="0" width="600" height="240" fill="#fff" rx="8"/>
+        <text x="300" y="22" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">智商分布（正态分布的钟形曲线）</text>
+        <!-- 坐标轴 -->
+        <line x1="60" y1="200" x2="560" y2="200" stroke="#555" stroke-width="2"/>
+        <line x1="60" y1="200" x2="60" y2="50" stroke="#555" stroke-width="2"/>
+        <!-- 钟形曲线（高斯函数采样，sigma=55，更平滑更竖直） -->
+        <path d="M 60,200 L 90,200 L 120,200 L 150,200 L 165,200 L 180,199 L 195,196 L 210,190 L 225,178 L 240,157 L 255,128 L 270,96 L 285,70 L 300,60 L 315,70 L 330,96 L 345,128 L 360,157 L 375,178 L 390,190 L 405,196 L 420,199 L 435,200 L 450,200 L 480,200 L 510,200 L 540,200 L 560,200 L 560,200 L 60,200 Z"
+              fill="rgba(21,101,192,0.15)" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+        <!-- 平均值线 (100) -->
+        <line x1="300" y1="60" x2="300" y2="200" stroke="#333" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="300" y="215" text-anchor="middle" font-size="12" fill="#333" font-weight="bold">100</text>
+        <text x="300" y="55" text-anchor="middle" font-size="11" fill="#333">平均值</text>
+        <!-- ±1 标准差 (85 和 115) -->
+        <line x1="245" y1="149" x2="245" y2="200" stroke="#6a1b9a" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="245" y="215" text-anchor="middle" font-size="11" fill="#6a1b9a">85</text>
+        <line x1="355" y1="149" x2="355" y2="200" stroke="#6a1b9a" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="355" y="215" text-anchor="middle" font-size="11" fill="#6a1b9a">115</text>
+        <!-- ±2 标准差 (70 和 130) -->
+        <line x1="190" y1="198" x2="190" y2="200" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="190" y="215" text-anchor="middle" font-size="11" fill="#888">70</text>
+        <line x1="410" y1="198" x2="410" y2="200" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="410" y="215" text-anchor="middle" font-size="11" fill="#888">130</text>
+        <!-- 68% 区域标注 -->
+        <text x="300" y="130" text-anchor="middle" font-size="14" fill="#1565c0" font-weight="bold">68%</text>
+        <text x="300" y="148" text-anchor="middle" font-size="10" fill="#888">(85~115)</text>
+        <!-- 纵轴标签 -->
+        <text x="20" y="125" text-anchor="middle" font-size="11" fill="#888" transform="rotate(-90,20,125)">人数比例</text>
+      </svg>
+      <p style="color:#888;font-size:13px;text-align:center;">钟形曲线下，85~115 之间约占总面积的 68%——这就是"大多数人的智商"。</p>
+    </div>
+
+    <div class="key">
+      <p><strong>关键解读：</strong></p>
+      <ul>
+        <li><strong>智商 100</strong>不是"满分的一半"，而是<strong>人群的平均水平</strong>。</li>
+        <li><strong>标准差 15</strong>告诉我们"大部分人离平均值有多远"——约 68% 的人在 85~115 之间。</li>
+        <li>智商 130 意味着比 97.7% 的人都高，并不是"100 分考了 130 分"。</li>
+      </ul>
+    </div>
+
+    <div class="key">
+      <strong>温馨提示：</strong>智商测试只是衡量某些认知能力（如逻辑推理、语言理解、空间想象）的一种工具，并不能代表一个人的全部价值。情商、创造力、动手能力……这些都是智商测试测不出来的。把智商当成一个参考数字就好，别太当真。
+    </div>
   </div>
 
   <h2>挑战性问题</h2>
@@ -433,6 +507,7 @@
       <li><strong>标准差：</strong>方差的平方根，和原始数据同一单位，更容易解释。</li>
       <li><strong>方差越大 → 数据越分散；方差越小 → 数据越集中。</strong></li>
       <li><strong>注意：</strong>平均数相同 ≠ 数据分布相同。方差和标准差能告诉我们平均数"藏不住"的信息。</li>
+      <li><strong>应用：</strong>智商分数就是用统计方法定义的——平均值 100、标准差 15，约 68% 的人在 85~115 之间。</li>
     </ul>
   </div>
 

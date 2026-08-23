@@ -7,15 +7,15 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>">
 <link rel="stylesheet" href="./style.css">
 <style>
-  :root { --accent: #e65100; }
+  :root { --accent: #1565c0; }
   .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
   .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #e3f2fd; border-left: 4px solid #1565c0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed #e65100; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .challenge { background: #e8eaf6; border: 2px dashed #1565c0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #f1f8e9; border: 2px solid #689f38; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
   .hint-box.show, .ans-box.show { display: block; }
@@ -23,10 +23,10 @@
   .btn-sm:hover { background: #e8e8e8; }
   .prob-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
   .prob-table td, .prob-table th { border: 1px solid #ddd; padding: 8px 12px; text-align: center; }
-  .prob-table th { background: #fff3e0; }
-  .tree-btn { display: inline-block; margin: 4px 6px; padding: 6px 16px; border: 2px solid #e65100; border-radius: 16px; background: #fff; color: #e65100; cursor: pointer; font-size: 0.9em; transition: 0.15s; }
-  .tree-btn:hover { background: #fff3e0; }
-  .tree-btn.active { background: #e65100; color: #fff; }
+  .prob-table th { background: #e8eaf6; color: #000; }
+  .tree-btn { display: inline-block; margin: 4px 6px; padding: 6px 16px; border: 2px solid #1565c0; border-radius: 16px; background: #fff; color: #1565c0; cursor: pointer; font-size: 0.9em; transition: 0.15s; }
+  .tree-btn:hover { background: #e3f2fd; }
+  .tree-btn.active { background: #1565c0; color: #fff; }
 
   @media (max-width: 720px) {
     article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
@@ -47,8 +47,19 @@
 
   <h2>起源：赌徒的问题</h2>
   <div class="origin">
-    <p><strong>1654 年，</strong>一位法国赌徒向数学家帕斯卡请教了一个问题：两个赌徒正在玩掷骰子的游戏，约定先赢够一定局数的人拿走全部赌金。但游戏中途被迫停止，此时两人赢的局数不一样——赌金该怎么分才公平？</p>
-    <p>帕斯卡被这个问题迷住了。他写信给另一位大数学家费马，两人你来我往地讨论，<strong>概率论就这样诞生了。</strong>他们发现：不确定性背后，隐藏着确定的规律。虽然一次掷骰子无法预知结果，但掷很多次，结果就呈现出稳定的比例。</p>
+    <p><strong>1654 年，</strong>一位法国赌徒向数学家帕斯卡请教了一个问题：两个赌徒正在玩掷骰子的游戏，约定先赢够 3 局的人拿走全部赌金。但游戏中途被迫停止，此时甲赢了 2 局，乙赢了 1 局——赌金该怎么分才公平？</p>
+    <p>有人按已赢局数分：甲 2 局、乙 1 局，所以甲拿 2/3，乙拿 1/3。但帕斯卡觉得不对——甲只差 1 局就赢了，而乙还差 2 局，甲的优势应该更大才对。</p>
+    <p>帕斯卡写信给另一位大数学家费马。两人讨论后发现：<strong>正确的分法是看"如果继续下去，谁赢的可能性更大"。</strong>最多再玩 2 局就一定分出胜负。所有可能的结果是：</p>
+    <div class="formula" style="text-align:left;">
+      <ul>
+        <li>甲甲 → 甲赢（甲再赢 1 局就够 3 局了）</li>
+        <li>甲乙 → 甲赢（甲 3 局，乙 2 局，甲先到 3 局）</li>
+        <li>乙甲 → 甲赢（乙 2 局，甲 3 局，甲先到 3 局）</li>
+        <li>乙乙 → 乙赢（乙追平 3 局，甲仍 2 局）</li>
+      </ul>
+    </div>
+    <p>4 种可能中，甲赢 3 种，乙赢 1 种。所以赌金应该按 <strong>3 : 1</strong> 分——甲拿 3/4，乙拿 1/4。这比按 2:1 分对甲更公平，因为甲离胜利只差一步。</p>
+    <p>帕斯卡被这个问题迷住了。他写信给费马，两人你来我往地讨论，<strong>概率论就这样诞生了。</strong>他们发现：不确定性背后，隐藏着确定的规律。虽然一次掷骰子无法预知结果，但掷很多次，结果就呈现出稳定的比例。</p>
     <p>今天，概率论已经渗透到生活的每个角落——天气预报说"明天降雨概率 70%"，保险公司用概率计算保费，药品试验用概率判断疗效，人工智能用概率来做决策。<strong>概率帮助我们理解不确定性，做出更明智的选择。</strong></p>
   </div>
 
@@ -109,10 +120,10 @@
       <svg viewBox="0 0 600 120" style="max-width:100%;height:auto;display:block;margin:0 auto;">
         <defs>
           <linearGradient id="probGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#4caf50"/>
-            <stop offset="25%" stop-color="#ffeb3b"/>
-            <stop offset="50%" stop-color="#ff9800"/>
-            <stop offset="100%" stop-color="#f44336"/>
+            <stop offset="0%" stop-color="#9e9e9e"/>
+            <stop offset="25%" stop-color="#64b5f6"/>
+            <stop offset="50%" stop-color="#26a69a"/>
+            <stop offset="100%" stop-color="#4caf50"/>
           </linearGradient>
         </defs>
         <rect x="0" y="0" width="600" height="120" fill="#fff" rx="8"/>
@@ -122,13 +133,13 @@
         <polygon points="545,60 536,56 536,64" fill="#555"/>
         <!-- 刻度 -->
         <line x1="60" y1="54" x2="60" y2="66" stroke="#555" stroke-width="2"/>
-        <text x="60" y="80" text-anchor="middle" font-size="13" fill="#f44336" font-weight="bold">0</text>
+        <text x="60" y="80" text-anchor="middle" font-size="13" fill="#9e9e9e" font-weight="bold">0</text>
         <text x="60" y="94" text-anchor="middle" font-size="11" fill="#888">不可能</text>
         <line x1="220" y1="54" x2="220" y2="66" stroke="#555" stroke-width="2"/>
-        <text x="220" y="80" text-anchor="middle" font-size="13" fill="#ff9800">0.25</text>
+        <text x="220" y="80" text-anchor="middle" font-size="13" fill="#1565c0">0.25</text>
         <text x="220" y="94" text-anchor="middle" font-size="11" fill="#888">不太可能</text>
         <line x1="380" y1="54" x2="380" y2="66" stroke="#555" stroke-width="2"/>
-        <text x="380" y="80" text-anchor="middle" font-size="13" fill="#ff9800">0.75</text>
+        <text x="380" y="80" text-anchor="middle" font-size="13" fill="#1565c0">0.75</text>
         <text x="380" y="94" text-anchor="middle" font-size="11" fill="#888">很有可能</text>
         <line x1="540" y1="54" x2="540" y2="66" stroke="#555" stroke-width="2"/>
         <text x="540" y="80" text-anchor="middle" font-size="13" fill="#4caf50" font-weight="bold">1</text>
@@ -139,7 +150,7 @@
         <!-- 概率条 -->
         <rect x="60" y="38" width="480" height="10" rx="5" fill="url(#probGrad)" opacity="0.3"/>
         <!-- 示例标注 -->
-        <circle cx="60" cy="60" r="4" fill="#f44336"/>
+        <circle cx="60" cy="60" r="4" fill="#9e9e9e"/>
         <circle cx="300" cy="60" r="4" fill="#1a73e8"/>
         <circle cx="540" cy="60" r="4" fill="#4caf50"/>
         <text x="150" y="112" text-anchor="middle" font-size="11" fill="#888">掷骰子得 7 点</text>
@@ -159,12 +170,12 @@
 
     <table class="prob-table">
       <tr><th></th><th>骰子2=1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
-      <tr><th>骰子1=1</th><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td style="background:#ffe0b2;font-weight:bold;">7</td></tr>
-      <tr><th>2</th><td>3</td><td>4</td><td>5</td><td>6</td><td style="background:#ffe0b2;font-weight:bold;">7</td><td>8</td></tr>
-      <tr><th>3</th><td>4</td><td>5</td><td>6</td><td style="background:#ffe0b2;font-weight:bold;">7</td><td>8</td><td>9</td></tr>
-      <tr><th>4</th><td>5</td><td>6</td><td style="background:#ffe0b2;font-weight:bold;">7</td><td>8</td><td>9</td><td>10</td></tr>
-      <tr><th>5</th><td>6</td><td style="background:#ffe0b2;font-weight:bold;">7</td><td>8</td><td>9</td><td>10</td><td>11</td></tr>
-      <tr><th>6</th><td style="background:#ffe0b2;font-weight:bold;">7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+      <tr><th>骰子1=1</th><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td style="background:#e3f2fd;font-weight:bold;">7</td></tr>
+      <tr><th>2</th><td>3</td><td>4</td><td>5</td><td>6</td><td style="background:#e3f2fd;font-weight:bold;">7</td><td>8</td></tr>
+      <tr><th>3</th><td>4</td><td>5</td><td>6</td><td style="background:#e3f2fd;font-weight:bold;">7</td><td>8</td><td>9</td></tr>
+      <tr><th>4</th><td>5</td><td>6</td><td style="background:#e3f2fd;font-weight:bold;">7</td><td>8</td><td>9</td><td>10</td></tr>
+      <tr><th>5</th><td>6</td><td style="background:#e3f2fd;font-weight:bold;">7</td><td>8</td><td>9</td><td>10</td><td>11</td></tr>
+      <tr><th>6</th><td style="background:#e3f2fd;font-weight:bold;">7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
     </table>
 
     <p>总共 6 × 6 = <strong>36</strong> 种等可能的结果。其中和为 7 的有 6 种（斜线方向）。</p>
@@ -183,12 +194,12 @@
         <defs>
           <style>
             .t-line { stroke: #999; stroke-width: 1.5; fill: none; }
-            .t-line.hl { stroke: #e65100; stroke-width: 2.5; }
+            .t-line.hl { stroke: #1565c0; stroke-width: 2.5; }
             .t-node { fill: #fff; stroke: #1a73e8; stroke-width: 2; }
-            .t-node.hl { fill: #ffe0b2; stroke: #e65100; stroke-width: 2.5; }
+            .t-node.hl { fill: #e3f2fd; stroke: #1565c0; stroke-width: 2.5; }
             .t-label { fill: #333; font-size: 14px; text-anchor: middle; dominant-baseline: central; }
-            .t-label.hl { fill: #e65100; font-weight: bold; }
-            .t-hl-text { fill: #e65100; font-size: 13px; font-weight: bold; text-anchor: middle; }
+            .t-label.hl { fill: #1565c0; font-weight: bold; }
+            .t-hl-text { fill: #1565c0; font-size: 13px; font-weight: bold; text-anchor: middle; }
           </style>
         </defs>
         <rect x="0" y="0" width="600" height="400" fill="#fff" rx="8"/>
@@ -272,7 +283,7 @@
 
         <!-- 图例 -->
         <text x="300" y="310" text-anchor="middle" font-size="13" fill="#333" id="legend">共 8 种等可能结果。恰好两次正面的有：正正反、正反正、反正正，共 3 种。</text>
-        <text x="300" y="330" text-anchor="middle" font-size="15" fill="#e65100" font-weight="bold" id="prob-result">P(恰好两次正面) = 3/8</text>
+        <text x="300" y="330" text-anchor="middle" font-size="15" fill="#1565c0" font-weight="bold" id="prob-result">P(恰好两次正面) = 3/8</text>
       </svg>
     </div>
 
@@ -312,7 +323,7 @@
           <style>
             .axis { stroke: #888; stroke-width: 1; }
             .grid { stroke: #e0e0e0; stroke-width: 0.5; }
-            .data-line { fill: none; stroke: #e65100; stroke-width: 2.5; }
+            .data-line { fill: none; stroke: #1565c0; stroke-width: 2.5; }
             .target-line { fill: none; stroke: #1a73e8; stroke-width: 1.5; stroke-dasharray: 6,4; }
           </style>
         </defs>
@@ -350,7 +361,7 @@
         <polyline points="60,240 70,200 85,140 100,180 120,160 135,148 150,155 165,150 180,144 195,142 210,144 225,142 240,141 255,140 270,140 285,140 300,140 315,141 330,140 345,140 360,140 375,140 390,140 405,140 420,140 435,140 450,140 465,140 480,140 495,140 510,140 525,140 540,140 555,140" class="data-line"/>
 
         <!-- 图例 -->
-        <circle cx="80" cy="268" r="4" fill="#e65100"/>
+        <circle cx="80" cy="268" r="4" fill="#1565c0"/>
         <text x="90" y="272" font-size="11" fill="#333">实际频率</text>
         <line x1="160" y1="268" x2="190" y2="268" class="target-line"/>
         <text x="196" y="272" font-size="11" fill="#333">理论概率 = 0.5</text>
@@ -364,6 +375,91 @@
         <li><strong>频率</strong>是实验值，是实际实验中出现的比例。每次实验的频率可能不同。</li>
         <li>当实验次数足够多时，频率会<strong>稳定在概率附近</strong>，这就是我们用频率估计概率的依据。</li>
       </ul>
+    </div>
+
+    <div class="key">
+      <p><strong>深入想一步：为什么"次数足够多"，频率就会稳定？</strong></p>
+      <p>这背后的道理其实很朴素，可以用一句话概括：<strong>个别的偏差会相互抵消</strong>。</p>
+      <p>拿掷硬币来说。每次掷硬币都是<strong>独立</strong>的——这一掷的结果不影响下一掷。正面朝上的"真实概率"是 0.5，但任何一次具体投掷，要么是正面（+0.5 的偏差），要么是反面（−0.5 的偏差），绝不会恰好是 0.5。</p>
+      <p>关键在于：这些偏差<strong>正负交替出现</strong>，没有偏向哪一边的倾向。掷 10 次时，可能碰巧多出几次正面，频率变成 0.7；但继续掷下去，那些"多出来的正面"不会一直累积——后面的反面会把多余的正面"抵消"掉。</p>
+      <ul>
+        <li>掷 10 次：可能 7 正 3 反，频率 0.7，偏离 0.5 有 0.2</li>
+        <li>掷 100 次：可能 55 正 45 反，频率 0.55，偏离 0.5 只有 0.05</li>
+        <li>掷 10000 次：可能 5012 正 4988 反，频率 0.5012，几乎就是 0.5</li>
+      </ul>
+      <p>次数越多，正负偏差抵消得越彻底，频率就越接近真实概率。这就是<strong>大数定律</strong>的直觉：<strong>不是哪一次"纠正"了之前的偏差，而是大量的独立实验让偶然的波动互相消平了。</strong></p>
+    </div>
+  </div>
+
+  <h2>五、「百年一遇」的大雨，真的一百年才来一次吗？</h2>
+  <div class="story">
+    <p>新闻里常说"这场暴雨是百年一遇的"——听到这话，很多人以为：这种雨一百年才下一次，下过一次之后，接下来一百年就可以高枕无忧了。<strong>这是大错特错！</strong></p>
+
+    <div class="key">
+      <p><strong>"百年一遇"的真正含义：</strong>不是"恰好每 100 年来一次"，而是<strong>"每一年发生这种强度暴雨的概率是 1%"</strong>。</p>
+    </div>
+
+    <p>换句话说，"百年一遇"是一个<strong>概率</strong>概念，不是时间表。它说的是：在任意一年里，发生这种量级降雨的可能性大约是 1/100。</p>
+
+    <h3>5.1 这个 1% 是怎么算出来的？</h3>
+    <p>气象部门会收集某个地区几十年甚至上百年的降雨记录，找出每年的最大日降雨量。然后把这些数据从小到大排好，用统计方法画出一条"概率分布曲线"——这正是上一课学过的思想：用历史数据估计概率。</p>
+    <p>比如，某城市 50 年的记录显示，日降雨量超过 200 毫米的情况只发生过 1 次。粗略估计：年超越概率 ≈ 1/50 = 2%，那就是"五十年一遇"。如果超过 250 毫米的概率是 1%，那就是"百年一遇"。</p>
+
+    <div class="formula">
+      <p style="text-align:center;font-size:1.1em;font-weight:bold;">重现期 = 1 ÷ 年超越概率</p>
+      <p style="text-align:center;color:#888;font-size:0.9em;">概率 1% → 重现期 100 年 → "百年一遇"</p>
+    </div>
+
+    <h3>5.2 概率不会"记账"</h3>
+    <p>这里有个容易混淆的点：<strong>每一年的概率都是独立的</strong>，就像掷骰子一样——今年掷过了，明年还是同样的概率。</p>
+    <div class="example">
+      <strong>算一算：</strong>假设某地"百年一遇"的暴雨概率真是每年 1%。那么连续 10 年里，至少发生一次这种暴雨的概率是多少？<br>
+      <span style="color:#888;">思路：先算"10 年一次都不发生"的概率 = 0.99¹⁰ ≈ 0.904，所以"至少发生一次"的概率 ≈ 1 − 0.904 = <strong>9.6%</strong>——差不多十分之一！</span>
+    </div>
+    <p>所以"百年一遇"并不意味着一百年内只会来一次。事实上，在一百年的时间里，至少遇到一次"百年一遇"暴雨的概率大约是 1 − 0.99¹⁰⁰ ≈ <strong>63%</strong>——比"扔硬币正面朝上"的可能性还大！</p>
+
+    <h3>5.3 气候变化让"百年一遇"越来越频繁</h3>
+    <p>这里还有一个重要的问题：<strong>"百年一遇"的标准不是一成不变的</strong>。</p>
+    <p>这个 1% 的概率是根据<strong>历史数据</strong>算出来的。但如果气候在变暖、极端天气在增多，那么过去"百年一遇"的暴雨，现在可能十年就来一次——因为底层概率变了。这就好比一颗骰子被悄悄换了，原来掷出 6 的概率是 1/6，现在变成了 1/3。</p>
+    <p>所以气象学家需要不断用新数据更新概率估计。近年来很多地方的"百年一遇"洪水频频发生，并不是统计出了错，而是气候变化正在改写概率的"底牌"。</p>
+
+    <div class="key">
+      <p><strong>一句话总结：</strong></p>
+      <ul>
+        <li>"百年一遇" = 每年 1% 的概率，不是"一百年一次"。</li>
+        <li>每年的概率独立，不会因为今年发了大水，明年就"安全"了。</li>
+        <li>气候变化会改变概率，让极端天气更频繁。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>六、概率计算的最基本原则：弄清"分母"是谁</h2>
+  <div class="key">
+    <p><strong>概率 = 满足条件的情况数 ÷ 所有可能的情况数</strong></p>
+    <p>这句话看起来简单，但很多人算错概率，<strong>几乎都是错在分母上</strong>——把不该算进来的算进来了，或者该算的漏掉了。关键永远是：弄清楚"所有可能的情况"到底包括哪些。</p>
+  </div>
+
+  <div class="example">
+    <p><strong>一个经典的例子：检查呈阳性，就一定患病了吗？</strong></p>
+    <p>在年龄为 40~50 岁、无家族乳腺癌病史、本人无乳腺癌症状的每 1 000 位妇女中，就会有 8 人罹患乳腺癌。这 8 个人中有 7 个人的乳房 X 射线检查结果呈阳性。在没有患上乳腺癌的 992 人中，大约有 70 人的乳房 X 射线检查结果会错误地显示为阳性。现在有一个乳房 X 射线检查结果呈阳性的妇女，请问她实际患有乳腺癌的概率是多少？</p>
+    <button class="btn-sm" onclick="toggleHint('ch4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca4')">查看答案</button>
+    <div class="hint-box" id="ch4">先把所有"检查结果呈阳性"的人找出来——包括真正患病的和误报的，然后看其中真正患病的占多少。关键是：分母不是 1000，而是所有"阳性"的人。</div>
+    <div class="ans-box" id="ca4">
+      <p><strong>第一步：找分母——所有"检查呈阳性"的人。</strong></p>
+      <ul>
+        <li>真正患病且阳性：7 人</li>
+        <li>没患病但误报阳性：70 人</li>
+        <li>阳性总计：7 + 70 = <strong>77 人</strong></li>
+      </ul>
+      <p><strong>第二步：找分子——其中真正患病的。</strong></p>
+      <ul>
+        <li>77 个阳性中，只有 7 人确实患病</li>
+      </ul>
+      <p><strong>第三步：算概率。</strong></p>
+      <p>概率 = 7 ÷ 77 = <strong>1/11 ≈ 9%</strong></p>
+      <p><strong>为什么这么低？</strong>因为乳腺癌的基数很小（1000 人中只有 8 人），即使检查很准，假阳性的人数（70）也会远超真阳性（7）。<strong>分母被 70 个假阳性撑大了</strong>，所以真正患病的比例反而很低。</p>
+      <p><strong>核心教训：</strong>算概率时，第一步永远是问自己——"我的分母是谁？"在这个例子中，分母不是"所有 1000 人"，而是"所有检查呈阳性的人"。<strong>条件变了，分母就变了，概率就变了。</strong></p>
     </div>
   </div>
 
@@ -479,8 +575,9 @@
       <li><strong>确定事件</strong>（必然事件 + 不可能事件）vs <strong>随机事件</strong>——区别在于结果是否事先确定</li>
       <li><strong>概率的定义：</strong>P(A) = 事件 A 发生的次数 ÷ 所有等可能结果的总数，概率永远在 0 到 1 之间</li>
       <li><strong>列举法：</strong>列表法（适合两个因素）和树状图（适合多步操作），关键是<strong>不重复、不遗漏</strong></li>
-      <li><strong>频率估计概率：</strong>大量实验后，频率稳定在概率附近——这就是大数定律的思想</li>
+      <li><strong>频率估计概率：</strong>大量实验后，频率稳定在概率附近——因为独立实验的偏差正负抵消，这就是大数定律的思想</li>
       <li><strong>概率 ≠ 频率：</strong>概率是理论值，频率是实验值，两者不一定相等，但实验次数越多越接近</li>
+      <li><strong>"百年一遇"= 每年 1% 的概率</strong>，不是"一百年才来一次"；气候变化会改变这个概率</li>
     </ul>
   </div>
 
