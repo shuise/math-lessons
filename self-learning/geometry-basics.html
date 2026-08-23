@@ -12,7 +12,7 @@
   .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
   .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #e3f2fd; border-left: 4px solid #1976d2; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
   .challenge { background: #e8eaf6; border: 2px dashed #00897b; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
@@ -84,36 +84,79 @@
     <p><strong>关键转折：</strong>古希腊人把几何从"实用的技术"变成了"逻辑的科学"。他们不再满足于"这样做是对的"，而要追问"为什么这样做是对的"。这就是数学精神的诞生。</p>
   </div>
 
+  <h2>中国古代的几何智慧：《九章算术》</h2>
+  <div class="origin">
+    <p>几何并不是古希腊的专利，中国古代同样有辉煌的几何传统。约公元 1 世纪成书的<strong>《九章算术》</strong>，是古代《算经十书》中最重要的一部。它的第一章就叫<strong>"方田"</strong>——专门讲各种平面图形的面积计算，堪称中国最早的"几何公式手册"。</p>
+    <p>"方田"章里记录的算法，和今天我们学的完全一样，只是用古汉语表达：</p>
+    <ul>
+      <li><strong>方田</strong>（矩形）：广（宽）× 从（长）</li>
+      <li><strong>圭田</strong>（三角形）：半广以乘正纵——即 底 × 高 ÷ 2</li>
+      <li><strong>邪田</strong>（梯形）：并两邪而半之，以乘正纵——即 (上底 + 下底) × 高 ÷ 2</li>
+      <li><strong>圆田</strong>（圆）：半周半径相乘——用周长和半径算面积</li>
+    </ul>
+    <p>可见无论东西方，几何真理是相通的——因为人们丈量的是同一个现实世界。《九章算术》与《几何原本》东西辉映，分别代表了"算法实用"与"逻辑演绎"两大数学传统。</p>
+  </div>
+
   <h2>三、认识常见的几何图形</h2>
   <div class="story">
     <p><strong>平面图形：</strong></p>
     <div class="graphic">
-      <svg viewBox="0 0 500 180" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+      <svg viewBox="0 0 480 260" style="max-width:100%;height:auto;display:block;margin:0 auto;">
         <defs><style>text{font-size:12px;fill:#555;text-anchor:middle}</style></defs>
+        <!-- 第一行 -->
         <!-- 三角形 -->
-        <polygon points="50,140 110,20 170,140" fill="rgba(233,30,99,0.15)" stroke="#e91e63" stroke-width="2"/>
-        <text x="110" y="160">三角形</text>
+        <polygon points="30,100 90,100 60,25" fill="rgba(33,150,243,0.15)" stroke="#2196f3" stroke-width="2"/>
+        <text x="60" y="120" text-anchor="middle">三角形</text>
+        <!-- 矩形 -->
+        <rect x="138" y="30" width="84" height="60" fill="rgba(76,175,80,0.15)" stroke="#4caf50" stroke-width="2"/>
+        <text x="180" y="120" text-anchor="middle">矩形</text>
         <!-- 正方形 -->
-        <rect x="200" y="40" width="100" height="100" fill="rgba(33,150,243,0.15)" stroke="#2196f3" stroke-width="2"/>
-        <text x="250" y="160">正方形</text>
+        <rect x="270" y="30" width="60" height="60" fill="rgba(156,39,176,0.15)" stroke="#9c27b0" stroke-width="2"/>
+        <text x="300" y="120" text-anchor="middle">正方形</text>
+        <!-- 菱形 -->
+        <polygon points="420,25 470,65 420,105 370,65" fill="rgba(63,81,181,0.15)" stroke="#3f51b5" stroke-width="2"/>
+        <text x="420" y="120" text-anchor="middle">菱形</text>
+        <!-- 第二行 -->
+        <!-- 平行四边形 -->
+        <polygon points="20,150 110,150 100,210 10,210" fill="rgba(0,137,123,0.15)" stroke="#00897b" stroke-width="2"/>
+        <text x="60" y="235" text-anchor="middle">平行四边形</text>
+        <!-- 梯形 -->
+        <polygon points="140,150 230,150 215,210 155,210" fill="rgba(92,107,192,0.15)" stroke="#5c6bc0" stroke-width="2"/>
+        <text x="180" y="235" text-anchor="middle">梯形</text>
         <!-- 圆 -->
-        <circle cx="380" cy="90" r="50" fill="rgba(76,175,80,0.15)" stroke="#4caf50" stroke-width="2"/>
-        <text x="380" y="160">圆</text>
+        <circle cx="300" cy="180" r="35" fill="rgba(46,125,50,0.15)" stroke="#2e7d32" stroke-width="2"/>
+        <text x="300" y="235" text-anchor="middle">圆</text>
+        <!-- 椭圆 -->
+        <ellipse cx="420" cy="180" rx="42" ry="26" fill="rgba(123,31,162,0.15)" stroke="#7b1fa2" stroke-width="2"/>
+        <text x="420" y="235" text-anchor="middle">椭圆</text>
       </svg>
     </div>
     <p><strong>立体图形：</strong></p>
     <div class="graphic">
-      <svg viewBox="0 0 500 160" style="max-width:100%;height:auto;display:block;margin:0 auto;">
-        <defs><style>text{font-size:12px;fill:#555;text-anchor:middle}</style></defs>
+      <svg viewBox="0 0 500 200" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+        <defs>
+          <style>text{font-size:12px;fill:#555;text-anchor:middle}</style>
+          <radialGradient id="sphereGrad" cx="35%" cy="30%" r="75%">
+            <stop offset="0%" stop-color="#bbdefb"/>
+            <stop offset="55%" stop-color="#42a5f5"/>
+            <stop offset="100%" stop-color="#1565c0"/>
+          </radialGradient>
+          <radialGradient id="sphereShade" cx="35%" cy="30%" r="75%">
+            <stop offset="60%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="100%" stop-color="rgba(21,101,192,0.45)"/>
+          </radialGradient>
+        </defs>
         <!-- 立方体 -->
         <polygon points="50,40 150,20 250,40 250,120 150,140 50,120" fill="rgba(156,39,176,0.12)" stroke="#9c27b0" stroke-width="2"/>
         <polygon points="50,40 50,120 150,140 150,60" fill="rgba(156,39,176,0.08)" stroke="#9c27b0" stroke-width="2"/>
         <polygon points="50,40 150,60 250,40 150,20" fill="rgba(156,39,176,0.15)" stroke="#9c27b0" stroke-width="2"/>
-        <text x="150" y="160">立方体</text>
-        <!-- 球 -->
-        <circle cx="350" cy="80" r="45" fill="rgba(255,152,0,0.15)" stroke="#ff9800" stroke-width="2"/>
-        <ellipse cx="350" cy="80" rx="15" ry="45" fill="none" stroke="#ff9800" stroke-width="1" stroke-dasharray="4 3"/>
-        <text x="350" y="145">球</text>
+        <text x="150" y="170" text-anchor="middle">立方体</text>
+        <!-- 球（放大 + 立体渐变 + 高光 + 经线） -->
+        <circle cx="370" cy="85" r="65" fill="url(#sphereGrad)" stroke="#1565c0" stroke-width="1.5"/>
+        <circle cx="370" cy="85" r="65" fill="url(#sphereShade)"/>
+        <ellipse cx="350" cy="65" rx="18" ry="10" fill="rgba(255,255,255,0.55)"/>
+        <ellipse cx="370" cy="85" rx="22" ry="65" fill="none" stroke="#1565c0" stroke-width="1" stroke-dasharray="4 3" opacity="0.55"/>
+        <text x="370" y="185" text-anchor="middle">球</text>
       </svg>
     </div>
   </div>
@@ -121,14 +164,29 @@
   <h2>挑战性问题</h2>
   <div class="challenge">
     <p><strong>问题 1：</strong>古埃及人用 3-4-5 绳子拉直角。为什么 3-4-5 能构成直角三角形？你能验证一下吗？</p>
+    <button class="btn-sm" onclick="toggleHint('ch1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca1')">查看答案</button>
+    <div class="hint-box" id="ch1">算一算 3² + 4² 等于多少，再和 5² 比一比。</div>
+    <div class="ans-box" id="ca1">3² + 4² = 9 + 16 = 25 = 5²。两短边的平方和等于最长边的平方，由勾股定理的逆定理可知，它一定是直角三角形，最长边所对的角就是直角。</div>
+
     <p><strong>问题 2：</strong>举出 3 个生活中"点动成线、线动成面、面动成体"的例子。</p>
+    <button class="btn-sm" onclick="toggleHint('ch2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca2')">查看答案</button>
+    <div class="hint-box" id="ch2">想想笔尖、钟摆、硬币运动时分别形成什么。</div>
+    <div class="ans-box" id="ca2">参考：笔尖在纸上移动留下一条线（点动成线）；钟摆扫过一个扇形面（线动成面）；一枚硬币绕直径旋转一周形成球（面动成体）。</div>
+
     <p><strong>问题 3：</strong>平面图形是"平"的，立体图形是"立"的。一张纸上的圆是平面图形，一个足球是立体图形。你能说出一张纸本身是平面图形还是立体图形吗？为什么？</p>
+    <button class="btn-sm" onclick="toggleHint('ch3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca3')">查看答案</button>
+    <div class="hint-box" id="ch3">纸张有没有厚度？</div>
+    <div class="ans-box" id="ca3">一张实际的纸是立体图形——它虽然很薄，但有厚度，是一个很扁的长方体；纸上画的圆才是平面图形。数学中的"平面图形"是理想化的概念。</div>
   </div>
 
   <h2>拓展阅读</h2>
   <div class="extend">
     <p><strong>欧几里得与《几何原本》：</strong>《几何原本》共 13 卷，从 5 条公理出发，推导出 465 个命题。它的逻辑结构影响了整个西方科学——牛顿的《自然哲学的数学原理》、斯宾诺莎的《伦理学》都模仿了《几何原本》的写法。</p>
     <p><strong>推荐阅读：</strong>《古今数学思想》—— 了解几何学的起源和演变；《一个数学家的叹息》—— Lockhart 用诗意的语言描述几何之美。</p>
+    <p><strong>拓展视频：</strong>陶哲轩访谈：宇宙尺度阶梯 —— <a href="https://www.bilibili.com/video/BV1Je81zQEet" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1Je81zQEet</a>。从原子到星系，看数学如何丈量宇宙的尺度阶梯，感受几何与数字的宏大之美。</p>
   </div>
 
   <h2>习题</h2>

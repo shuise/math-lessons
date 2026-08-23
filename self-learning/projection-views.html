@@ -12,7 +12,7 @@
   .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
   .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #ede7f6; border-left: 4px solid #5e35b1; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
   .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
@@ -25,7 +25,7 @@
   .graphic svg { max-width: 100%; height: auto; }
   .three-view-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
   .three-view-item { border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px; text-align: center; }
-  .three-view-item.main { border-color: #e91e63; }
+  .three-view-item.main { border-color: #5e35b1; }
   .three-view-item.top { border-color: #2196f3; }
   .three-view-item.left { border-color: #4caf50; }
   @media (max-width: 720px) {
@@ -72,20 +72,20 @@
         <rect x="0" y="160" width="500" height="40" fill="#e0e0e0" stroke="#999" stroke-width="1"/>
         <text x="250" y="192" text-anchor="middle" fill="#666" font-size="12">投影面（屏幕/墙壁）</text>
         <!-- 光源 -->
-        <circle cx="250" cy="18" r="8" fill="#ff9800" stroke="#e65100" stroke-width="2"/>
-        <text x="250" y="8" text-anchor="middle" fill="#e65100" font-size="11">光源（点）</text>
+        <circle cx="250" cy="18" r="8" fill="#fdd835" stroke="#6d4c41" stroke-width="2"/>
+        <text x="250" y="8" text-anchor="middle" fill="#6d4c41" font-size="11">光源（点）</text>
         <!-- 光线 -->
-        <line x1="250" y1="26" x2="150" y2="160" stroke="#ff9800" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.5"/>
-        <line x1="250" y1="26" x2="350" y2="160" stroke="#ff9800" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.5"/>
-        <line x1="250" y1="26" x2="210" y2="160" stroke="#ff9800" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.5"/>
-        <line x1="250" y1="26" x2="290" y2="160" stroke="#ff9800" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.5"/>
+        <line x1="250" y1="26" x2="150" y2="160" stroke="#fdd835" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.5"/>
+        <line x1="250" y1="26" x2="350" y2="160" stroke="#fdd835" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.5"/>
+        <line x1="250" y1="26" x2="210" y2="160" stroke="#fdd835" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.5"/>
+        <line x1="250" y1="26" x2="290" y2="160" stroke="#fdd835" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.5"/>
         <!-- 物体 -->
         <rect x="220" y="100" width="60" height="60" fill="rgba(49,27,146,0.3)" stroke="#311b92" stroke-width="2"/>
         <text x="250" y="135" text-anchor="middle" fill="#311b92" font-size="12" font-weight="bold">物体</text>
         <!-- 投影 -->
         <polygon points="150,160 350,160 320,160 180,160" fill="rgba(0,0,0,0.2)" stroke="#666" stroke-width="1.5" stroke-dasharray="6 3"/>
         <text x="250" y="178" text-anchor="middle" fill="#666" font-size="11">影子 &gt; 物体</text>
-        <text x="250" y="156" text-anchor="middle" fill="#e65100" font-size="11">中心投影</text>
+        <text x="250" y="156" text-anchor="middle" fill="#6d4c41" font-size="11">中心投影</text>
       </svg>
     </div>
     <div class="key">
@@ -99,23 +99,23 @@
         <rect x="0" y="160" width="500" height="40" fill="#e0e0e0" stroke="#999" stroke-width="1"/>
         <text x="250" y="192" text-anchor="middle" fill="#666" font-size="12">投影面</text>
         <!-- 平行光线 -->
-        <line x1="80" y1="10" x2="80" y2="160" stroke="#ff9800" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.4"/>
-        <line x1="160" y1="10" x2="160" y2="160" stroke="#ff9800" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.4"/>
-        <line x1="240" y1="10" x2="240" y2="160" stroke="#ff9800" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.4"/>
-        <line x1="320" y1="10" x2="320" y2="160" stroke="#ff9800" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.4"/>
-        <line x1="400" y1="10" x2="400" y2="160" stroke="#ff9800" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.4"/>
+        <line x1="80" y1="10" x2="80" y2="160" stroke="#fdd835" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.4"/>
+        <line x1="160" y1="10" x2="160" y2="160" stroke="#fdd835" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.4"/>
+        <line x1="240" y1="10" x2="240" y2="160" stroke="#fdd835" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.4"/>
+        <line x1="320" y1="10" x2="320" y2="160" stroke="#fdd835" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.4"/>
+        <line x1="400" y1="10" x2="400" y2="160" stroke="#fdd835" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.4"/>
         <!-- 太阳 -->
-        <circle cx="250" cy="6" r="6" fill="#ff9800" stroke="#e65100" stroke-width="1.5"/>
-        <text x="250" y="22" text-anchor="middle" fill="#e65100" font-size="10">太阳（很远）</text>
+        <circle cx="250" cy="6" r="6" fill="#fdd835" stroke="#6d4c41" stroke-width="1.5"/>
+        <text x="250" y="22" text-anchor="middle" fill="#6d4c41" font-size="10">太阳（很远）</text>
         <!-- 箭头指示平行 -->
-        <text x="490" y="80" text-anchor="middle" fill="#ff9800" font-size="10" transform="rotate(-90,490,80)">平行光线 ↓</text>
+        <text x="490" y="80" text-anchor="middle" fill="#fdd835" font-size="10" transform="rotate(-90,490,80)">平行光线 ↓</text>
         <!-- 物体 -->
         <rect x="210" y="100" width="60" height="60" fill="rgba(49,27,146,0.3)" stroke="#311b92" stroke-width="2"/>
         <text x="240" y="135" text-anchor="middle" fill="#311b92" font-size="12" font-weight="bold">物体</text>
         <!-- 投影 -->
         <rect x="210" y="160" width="60" height="5" fill="rgba(0,0,0,0.3)" stroke="#666" stroke-width="1"/>
         <text x="240" y="178" text-anchor="middle" fill="#666" font-size="11">影子 = 物体大小</text>
-        <text x="240" y="156" text-anchor="middle" fill="#e65100" font-size="11">平行投影（正投影）</text>
+        <text x="240" y="156" text-anchor="middle" fill="#6d4c41" font-size="11">平行投影（正投影）</text>
       </svg>
     </div>
     <div class="key">
@@ -135,7 +135,7 @@
     <div class="formula">
       <table>
         <tr><th>视图</th><th>观察方向</th><th>看到什么</th></tr>
-        <tr><td><span style="color:#e91e63;font-weight:bold;">主视图</span></td><td>从<span style="color:#e91e63;">正前方</span>看</td><td>物体的<strong>高度</strong>和<strong>长度</strong></td></tr>
+        <tr><td><span style="color:#5e35b1;font-weight:bold;">主视图</span></td><td>从<span style="color:#5e35b1;">正前方</span>看</td><td>物体的<strong>高度</strong>和<strong>长度</strong></td></tr>
         <tr><td><span style="color:#2196f3;font-weight:bold;">俯视图</span></td><td>从<span style="color:#2196f3;">正上方</span>往下看</td><td>物体的<strong>长度</strong>和<strong>宽度</strong></td></tr>
         <tr><td><span style="color:#4caf50;font-weight:bold;">左视图</span></td><td>从<span style="color:#4caf50;">正左方</span>看</td><td>物体的<strong>宽度</strong>和<strong>高度</strong></td></tr>
       </table>
@@ -151,61 +151,64 @@
     </div>
 
     <h3>示例：一个 L 形积木的三视图</h3>
-    <p>想象一个由 3 个正方体搭成的 L 形积木（2 个在下排，1 个在右上角）：</p>
+    <p>想象一个 L 形积木：正面宽 3、高 2（呈 L 形），侧面深 1、高 2，上面宽 3、深 1。我们来画出它的三视图：</p>
     <div class="graphic">
-      <svg viewBox="0 0 620 420" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 620 400" style="max-width:100%;height:auto;">
         <defs>
-          <style>
-            text.label { font-size: 12px; font-weight: bold; }
-          </style>
+          <style>text.label { font-size: 12px; font-weight: bold; }</style>
         </defs>
-        <!-- 立体图（右上方） -->
-        <text x="380" y="18" text-anchor="middle" class="label" fill="#311b92">立体图形</text>
-        <!-- 等距立体图：3个正方体组成的L形 -->
-        <!-- 左下块 -->
-        <polygon points="380,100 480,50 500,60 500,110 480,120 380,120" fill="rgba(49,27,146,0.15)" stroke="#311b92" stroke-width="1.8"/>
-        <polygon points="380,100 380,120 400,130 400,110" fill="rgba(49,27,146,0.25)" stroke="#311b92" stroke-width="1.8"/>
-        <polygon points="380,100 480,50 500,60 400,110" fill="rgba(49,27,146,0.35)" stroke="#311b92" stroke-width="1.8"/>
-        <!-- 右下块 -->
-        <polygon points="500,60 600,20 620,30 620,80 600,90 500,90" fill="rgba(49,27,146,0.15)" stroke="#311b92" stroke-width="1.8"/>
-        <polygon points="500,60 500,90 520,100 520,70" fill="rgba(49,27,146,0.25)" stroke="#311b92" stroke-width="1.8"/>
-        <polygon points="500,60 600,20 620,30 520,70" fill="rgba(49,27,146,0.35)" stroke="#311b92" stroke-width="1.8"/>
-        <!-- 右上块（叠在右下块上方） -->
-        <polygon points="520,10 600,-30 620,-20 620,20 600,30 520,30" fill="rgba(49,27,146,0.2)" stroke="#311b92" stroke-width="1.8"/>
-        <polygon points="520,10 520,30 540,40 540,20" fill="rgba(49,27,146,0.3)" stroke="#311b92" stroke-width="1.8"/>
-        <polygon points="520,10 600,-30 620,-20 540,20" fill="rgba(49,27,146,0.4)" stroke="#311b92" stroke-width="1.8"/>
+        <!-- 立体图（上方）-->
+        <text x="400" y="18" text-anchor="middle" class="label" fill="#311b92">立体图形（L 形积木）</text>
+        <!-- 等距立体图：正面宽3高2，侧面深1高2，上面宽3深1 -->
+        <!-- 前面（L形）-->
+        <polygon points="350,130 470,130 470,90 430,90 430,50 350,50" fill="rgba(49,27,146,0.25)" stroke="#311b92" stroke-width="1.8"/>
+        <!-- 顶面左部（2宽1深）-->
+        <polygon points="350,50 430,50 450,30 370,30" fill="rgba(49,27,146,0.1)" stroke="#311b92" stroke-width="1.8"/>
+        <!-- 顶面右部缺口（1宽1深）-->
+        <polygon points="430,90 470,90 490,70 450,70" fill="rgba(49,27,146,0.1)" stroke="#311b92" stroke-width="1.8"/>
+        <!-- 右侧面（右下块，1深1高）-->
+        <polygon points="470,130 470,90 490,70 490,110" fill="rgba(49,27,146,0.4)" stroke="#311b92" stroke-width="1.8"/>
+        <!-- 缺口右侧面（1深1高）-->
+        <polygon points="430,90 430,50 450,30 450,70" fill="rgba(49,27,146,0.4)" stroke="#311b92" stroke-width="1.8"/>
+        <!-- 标注 -->
+        <text x="410" y="148" text-anchor="middle" font-size="11" fill="#5e35b1">正面：宽3 高2</text>
+        <text x="410" y="24" text-anchor="middle" font-size="10" fill="#311b92">上面：宽3 深1</text>
+        <text x="500" y="95" text-anchor="start" font-size="10" fill="#311b92">侧面：深1 高2</text>
 
-        <!-- 三视图区域（左下方） -->
-        <text x="140" y="140" text-anchor="middle" class="label" fill="#e91e63">主视图（从前面看）</text>
-        <rect x="60" y="152" width="160" height="80" fill="none" stroke="#e91e63" stroke-width="2"/>
-        <line x1="140" y1="152" x2="140" y2="232" stroke="#e91e63" stroke-width="1" stroke-dasharray="4 3"/>
-        <text x="140" y="245" text-anchor="middle" font-size="11" fill="#e91e63">高 ↕</text>
-        <text x="20" y="195" text-anchor="middle" font-size="11" fill="#e91e63" transform="rotate(-90,20,195)">长 ↔</text>
+        <!-- 三视图区域（下方）-->
+        <!-- 主视图 -->
+        <text x="110" y="175" text-anchor="middle" class="label" fill="#5e35b1">主视图（从前面看）</text>
+        <rect x="50" y="185" width="120" height="80" fill="none" stroke="#5e35b1" stroke-width="2"/>
+        <rect x="50" y="225" width="120" height="40" fill="rgba(94,53,177,0.15)" stroke="none"/>
+        <rect x="50" y="185" width="80" height="40" fill="rgba(94,53,177,0.15)" stroke="none"/>
+        <line x1="90" y1="185" x2="90" y2="265" stroke="#5e35b1" stroke-width="0.8" stroke-dasharray="3 3"/>
+        <line x1="130" y1="185" x2="130" y2="265" stroke="#5e35b1" stroke-width="0.8" stroke-dasharray="3 3"/>
+        <line x1="50" y1="225" x2="170" y2="225" stroke="#5e35b1" stroke-width="0.8" stroke-dasharray="3 3"/>
+        <text x="110" y="280" text-anchor="middle" font-size="10" fill="#5e35b1">高 ↕ 2</text>
+        <text x="30" y="230" text-anchor="middle" font-size="10" fill="#5e35b1" transform="rotate(-90,30,230)">长 ↔ 3</text>
 
-        <text x="140" y="280" text-anchor="middle" class="label" fill="#2196f3">俯视图（从上面看）</text>
-        <rect x="60" y="292" width="160" height="80" fill="none" stroke="#2196f3" stroke-width="2"/>
-        <rect x="60" y="292" width="80" height="80" fill="rgba(33,150,243,0.1)" stroke="none"/>
-        <rect x="140" y="292" width="80" height="40" fill="rgba(33,150,243,0.2)" stroke="none"/>
-        <text x="140" y="385" text-anchor="middle" font-size="11" fill="#2196f3">宽 ↕</text>
-        <text x="20" y="335" text-anchor="middle" font-size="11" fill="#2196f3" transform="rotate(-90,20,335)">长 ↔</text>
+        <!-- 俯视图 -->
+        <text x="110" y="305" text-anchor="middle" class="label" fill="#2196f3">俯视图（从上面看）</text>
+        <rect x="50" y="315" width="120" height="40" fill="rgba(33,150,243,0.1)" stroke="#2196f3" stroke-width="2"/>
+        <line x1="90" y1="315" x2="90" y2="355" stroke="#2196f3" stroke-width="0.8" stroke-dasharray="3 3"/>
+        <line x1="130" y1="315" x2="130" y2="355" stroke="#2196f3" stroke-width="0.8" stroke-dasharray="3 3"/>
+        <text x="110" y="370" text-anchor="middle" font-size="10" fill="#2196f3">宽 ↕ 1</text>
+        <text x="30" y="340" text-anchor="middle" font-size="10" fill="#2196f3" transform="rotate(-90,30,340)">长 ↔ 3</text>
 
-        <text x="440" y="140" text-anchor="middle" class="label" fill="#4caf50">左视图（从左面看）</text>
-        <rect x="360" y="152" width="160" height="80" fill="none" stroke="#4caf50" stroke-width="2"/>
-        <line x1="440" y1="152" x2="440" y2="232" stroke="#4caf50" stroke-width="1" stroke-dasharray="4 3"/>
-        <text x="440" y="245" text-anchor="middle" font-size="11" fill="#4caf50">高 ↕</text>
-        <text x="340" y="195" text-anchor="middle" font-size="11" fill="#4caf50" transform="rotate(-90,340,195)">宽 ↔</text>
+        <!-- 左视图 -->
+        <text x="410" y="175" text-anchor="middle" class="label" fill="#4caf50">左视图（从左面看）</text>
+        <rect x="390" y="185" width="40" height="80" fill="rgba(76,175,80,0.1)" stroke="#4caf50" stroke-width="2"/>
+        <line x1="390" y1="225" x2="430" y2="225" stroke="#4caf50" stroke-width="0.8" stroke-dasharray="3 3"/>
+        <text x="410" y="280" text-anchor="middle" font-size="10" fill="#4caf50">高 ↕ 2</text>
+        <text x="375" y="230" text-anchor="middle" font-size="10" fill="#4caf50" transform="rotate(-90,375,230)">宽 ↔ 1</text>
 
         <!-- 对齐参考线 -->
-        <line x1="140" y1="232" x2="140" y2="292" stroke="#999" stroke-width="0.8" stroke-dasharray="2 4"/>
-        <line x1="220" y1="192" x2="360" y2="192" stroke="#999" stroke-width="0.8" stroke-dasharray="2 4"/>
-        <text x="290" y="188" text-anchor="middle" fill="#999" font-size="10">高平齐</text>
-        <text x="140" y="268" text-anchor="middle" fill="#999" font-size="10">长对正</text>
-
-        <line x1="220" y1="332" x2="360" y2="192" stroke="#999" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.5"/>
-        <text x="290" y="270" text-anchor="middle" fill="#999" font-size="10">宽相等</text>
-
-        <!-- 方向标注 -->
-        <text x="250" y="245" text-anchor="middle" font-size="11" fill="#666">长对正</text>
+        <line x1="110" y1="265" x2="110" y2="315" stroke="#999" stroke-width="0.8" stroke-dasharray="2 4"/>
+        <text x="110" y="293" text-anchor="middle" fill="#999" font-size="10">长对正</text>
+        <line x1="170" y1="225" x2="390" y2="225" stroke="#999" stroke-width="0.8" stroke-dasharray="2 4"/>
+        <text x="280" y="221" text-anchor="middle" fill="#999" font-size="10">高平齐</text>
+        <line x1="170" y1="335" x2="390" y2="225" stroke="#999" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.5"/>
+        <text x="280" y="290" text-anchor="middle" fill="#999" font-size="10">宽相等</text>
       </svg>
     </div>
     <div class="key">
@@ -232,54 +235,56 @@
     <h3>例题：还原立体图形</h3>
     <p>根据下面的三视图，想象这个立体图形是什么样子的？它由几个小正方体组成？</p>
     <div class="graphic">
-      <svg viewBox="0 0 600 300" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 520 390" style="max-width:100%;height:auto;">
         <!-- 主视图 -->
-        <text x="100" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#e91e63">主视图</text>
-        <rect x="20" y="30" width="160" height="100" fill="none" stroke="#e91e63" stroke-width="2"/>
-        <!-- 主视图：2列，左列高2，右列高1 -->
-        <rect x="20" y="30" width="80" height="100" fill="rgba(233,30,99,0.15)" stroke="none"/>
-        <rect x="100" y="80" width="80" height="50" fill="rgba(233,30,99,0.2)" stroke="none"/>
-        <line x1="100" y1="30" x2="100" y2="130" stroke="#e91e63" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="75" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#5e35b1">主视图</text>
+        <rect x="30" y="30" width="90" height="90" fill="none" stroke="#5e35b1" stroke-width="2"/>
+        <rect x="30" y="75" width="45" height="45" fill="rgba(94,53,177,0.15)" stroke="none"/>
+        <rect x="75" y="75" width="45" height="45" fill="rgba(94,53,177,0.15)" stroke="none"/>
+        <rect x="30" y="30" width="45" height="45" fill="rgba(94,53,177,0.15)" stroke="none"/>
+        <line x1="75" y1="30" x2="75" y2="120" stroke="#5e35b1" stroke-width="0.8" stroke-dasharray="3 3"/>
+        <line x1="30" y1="75" x2="120" y2="75" stroke="#5e35b1" stroke-width="0.8" stroke-dasharray="3 3"/>
 
         <!-- 俯视图 -->
-        <text x="100" y="160" text-anchor="middle" font-size="13" font-weight="bold" fill="#2196f3">俯视图</text>
-        <rect x="20" y="170" width="160" height="100" fill="none" stroke="#2196f3" stroke-width="2"/>
-        <!-- 俯视图：2×2 全满 -->
-        <rect x="20" y="170" width="80" height="50" fill="rgba(33,150,243,0.15)" stroke="none"/>
-        <rect x="100" y="170" width="80" height="50" fill="rgba(33,150,243,0.15)" stroke="none"/>
-        <rect x="20" y="220" width="80" height="50" fill="rgba(33,150,243,0.15)" stroke="none"/>
-        <rect x="100" y="220" width="80" height="50" fill="rgba(33,150,243,0.15)" stroke="none"/>
-        <line x1="100" y1="170" x2="100" y2="270" stroke="#2196f3" stroke-width="1" stroke-dasharray="3 3"/>
-        <line x1="20" y1="220" x2="180" y2="220" stroke="#2196f3" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="75" y="142" text-anchor="middle" font-size="13" font-weight="bold" fill="#2196f3">俯视图</text>
+        <rect x="30" y="150" width="90" height="90" fill="rgba(33,150,243,0.1)" stroke="#2196f3" stroke-width="2"/>
+        <line x1="75" y1="150" x2="75" y2="240" stroke="#2196f3" stroke-width="0.8" stroke-dasharray="3 3"/>
+        <line x1="30" y1="195" x2="120" y2="195" stroke="#2196f3" stroke-width="0.8" stroke-dasharray="3 3"/>
 
         <!-- 左视图 -->
-        <text x="100" y="300" text-anchor="middle" font-size="13" font-weight="bold" fill="#4caf50">左视图（从左边看）</text>
-        <rect x="20" y="310" width="160" height="100" fill="none" stroke="#4caf50" stroke-width="2"/>
-        <!-- 左视图：2行，前行高2，后行高1 -->
-        <rect x="20" y="310" width="80" height="100" fill="rgba(76,175,80,0.15)" stroke="none"/>
-        <rect x="100" y="360" width="80" height="50" fill="rgba(76,175,80,0.2)" stroke="none"/>
-        <line x1="100" y1="310" x2="100" y2="410" stroke="#4caf50" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="75" y="262" text-anchor="middle" font-size="13" font-weight="bold" fill="#4caf50">左视图（从左边看）</text>
+        <rect x="30" y="270" width="90" height="90" fill="none" stroke="#4caf50" stroke-width="2"/>
+        <rect x="30" y="315" width="45" height="45" fill="rgba(76,175,80,0.1)" stroke="none"/>
+        <rect x="30" y="270" width="45" height="45" fill="rgba(76,175,80,0.1)" stroke="none"/>
+        <rect x="75" y="315" width="45" height="45" fill="rgba(76,175,80,0.1)" stroke="none"/>
+        <line x1="75" y1="270" x2="75" y2="360" stroke="#4caf50" stroke-width="0.8" stroke-dasharray="3 3"/>
+        <line x1="30" y1="315" x2="120" y2="315" stroke="#4caf50" stroke-width="0.8" stroke-dasharray="3 3"/>
 
         <!-- 箭头 -->
-        <text x="260" y="60" text-anchor="middle" font-size="28" fill="#311b92">→</text>
-        <text x="260" y="90" text-anchor="middle" font-size="11" fill="#311b92">还原</text>
+        <text x="190" y="180" text-anchor="middle" font-size="28" fill="#311b92">→</text>
+        <text x="190" y="200" text-anchor="middle" font-size="11" fill="#311b92">还原</text>
 
-        <!-- 还原后的立体图 -->
-        <text x="420" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#311b92">还原结果</text>
-        <!-- 第一层：4个方块 -->
-        <polygon points="350,150 430,110 450,120 450,150 430,160 350,160" fill="rgba(49,27,146,0.1)" stroke="#311b92" stroke-width="1.5"/>
-        <polygon points="350,150 350,160 370,170 370,160" fill="rgba(49,27,146,0.2)" stroke="#311b92" stroke-width="1.5"/>
-        <polygon points="350,150 430,110 450,120 370,160" fill="rgba(49,27,146,0.25)" stroke="#311b92" stroke-width="1.5"/>
-        <!-- 第一层右块 -->
-        <polygon points="430,110 510,70 530,80 530,110 510,120 430,120" fill="rgba(49,27,146,0.1)" stroke="#311b92" stroke-width="1.5"/>
-        <polygon points="430,110 430,120 450,130 450,120" fill="rgba(49,27,146,0.2)" stroke="#311b92" stroke-width="1.5"/>
-        <polygon points="430,110 510,70 530,80 450,120" fill="rgba(49,27,146,0.25)" stroke="#311b92" stroke-width="1.5"/>
-        <!-- 第二层左前块 -->
-        <polygon points="350,90 430,50 450,60 450,90 430,100 350,100" fill="rgba(49,27,146,0.2)" stroke="#311b92" stroke-width="1.5"/>
-        <polygon points="350,90 350,100 370,110 370,100" fill="rgba(49,27,146,0.3)" stroke="#311b92" stroke-width="1.5"/>
-        <polygon points="350,90 430,50 450,60 370,100" fill="rgba(49,27,146,0.4)" stroke="#311b92" stroke-width="1.5"/>
+        <!-- 还原后的立体图（5个小正方体）-->
+        <text x="400" y="90" text-anchor="middle" font-size="13" font-weight="bold" fill="#311b92">还原结果</text>
+        <!-- 顶面（从后往前画）-->
+        <!-- 顶面：右后块 -->
+        <polygon points="400,170 440,170 460,150 420,150" fill="rgba(49,27,146,0.1)" stroke="#311b92" stroke-width="1.5"/>
+        <!-- 右侧面：右后块 -->
+        <polygon points="440,210 440,170 460,150 460,190" fill="rgba(49,27,146,0.4)" stroke="#311b92" stroke-width="1.5"/>
+        <!-- 顶面：左后块 -->
+        <polygon points="360,170 400,170 420,150 380,150" fill="rgba(49,27,146,0.1)" stroke="#311b92" stroke-width="1.5"/>
+        <!-- 顶面：右前块 -->
+        <polygon points="380,190 420,190 440,170 400,170" fill="rgba(49,27,146,0.1)" stroke="#311b92" stroke-width="1.5"/>
+        <!-- 右侧面：右前块 -->
+        <polygon points="420,230 420,190 440,170 440,210" fill="rgba(49,27,146,0.4)" stroke="#311b92" stroke-width="1.5"/>
+        <!-- 顶面：左前上层块 -->
+        <polygon points="340,150 380,150 400,130 360,130" fill="rgba(49,27,146,0.1)" stroke="#311b92" stroke-width="1.5"/>
+        <!-- 右侧面：左前上层块 -->
+        <polygon points="380,190 380,150 400,130 400,170" fill="rgba(49,27,146,0.4)" stroke="#311b92" stroke-width="1.5"/>
+        <!-- 前面（L形）-->
+        <polygon points="340,230 420,230 420,190 380,190 380,150 340,150" fill="rgba(49,27,146,0.25)" stroke="#311b92" stroke-width="1.5"/>
 
-        <text x="440" y="60" text-anchor="middle" fill="#311b92" font-size="11">共 5 个小正方体</text>
+        <text x="400" y="260" text-anchor="middle" fill="#311b92" font-size="11">共 5 个小正方体</text>
       </svg>
     </div>
 
@@ -293,19 +298,19 @@
   </div>
 
   <h2>四、制作立体模型（课题学习）</h2>
-  <div class="story">
-    <p>学了三视图之后，最好的理解方式就是<strong>动手做</strong>。找一些正方体小积木（或者用橡皮切成小方块），来玩一个"设计师游戏"：</p>
-    <div class="formula">
-      <p><strong>游戏规则：</strong></p>
-      <ol>
+  <div class="story" style="text-align:left;">
+    <p style="text-align:left;">学了三视图之后，最好的理解方式就是<strong>动手做</strong>。找一些正方体小积木（或者用橡皮切成小方块），来玩一个"设计师游戏"：</p>
+    <div class="formula" style="text-align:left;">
+      <p style="text-align:left;"><strong>游戏规则：</strong></p>
+      <ol style="text-align:left;">
         <li><strong>角色 A（设计师）：</strong>用 4~8 个小正方体搭出一个立体图形，然后画出它的三视图。</li>
         <li><strong>角色 B（工程师）：</strong>只看三视图（不看实物），用小正方体还原出立体图形。</li>
         <li><strong>检验：</strong>比较两人的模型是否完全一样。</li>
       </ol>
-      <p style="margin-top:12px;">如果没有积木，也可以用<strong>方格纸</strong>画三视图，然后在方格纸上标注每个位置的高度数字（这叫"俯视图标注法"），再用橡皮泥捏出形状。</p>
+      <p style="margin-top:12px;text-align:left;">如果没有积木，也可以用<strong>方格纸</strong>画三视图，然后在方格纸上标注每个位置的高度数字（这叫"俯视图标注法"），再用橡皮泥捏出形状。</p>
     </div>
-    <div class="key">
-      <p><strong>思考：</strong>如果只给主视图和俯视图（不给左视图），你能唯一确定一个立体图形吗？试试看，你会发现有时候<strong>三视图缺一不可</strong>！</p>
+    <div class="key" style="text-align:left;">
+      <p style="text-align:left;"><strong>思考：</strong>如果只给主视图和俯视图（不给左视图），你能唯一确定一个立体图形吗？试试看，你会发现有时候<strong>三视图缺一不可</strong>！</p>
     </div>
   </div>
 
@@ -313,14 +318,67 @@
   <div class="quote">
     <p><strong>加斯帕尔·蒙日（Gaspard Monge，1746—1818）：</strong>法国数学家，"画法几何之父"。他年轻时在军事学校读书，因为出身平民，只能做最枯燥的绘图工作。但他没有抱怨，反而把绘图变成了数学——他从绘制防御工事中总结出了一套精确描述三维形状的方法。后来拿破仑发现了他的才华，任命他为部长。蒙日的画法几何在很长一段时间里是法国的军事机密，直到 1795 年才公开。</p>
     <p><strong>现代应用：</strong>今天你用的所有产品——手机、汽车、椅子、大楼——在制造之前，设计师都用三视图（以及更复杂的投影图）来精确描述每一个零件的形状。计算机辅助设计（CAD）软件的核心原理，就是蒙日 200 多年前发明的画法几何。</p>
+    <p>下面是一个机械零件的三视图实例（来自 CAD 软件），可以看到主视图、俯视图和左视图如何精确描述一个零件的形状：</p>
+    <div class="graphic">
+      <img src="res/cad.png" alt="机械零件三视图（CAD 图纸实例）" style="max-width:100%;height:auto;border:1px solid #e0e0e0;border-radius:8px;"/>
+    </div>
     <p>《一个数学家的叹息》中 Lockhart 说："数学不是计算，而是观察模式。三视图就是观察三维世界的一种模式语言。"</p>
+  </div>
+
+  <h2>中国古代的工程制图</h2>
+  <div class="quote">
+    <p>三视图虽然是蒙日在 18 世纪系统化的，但中国人用"图样"来精确描述工程对象的历史同样悠久。</p>
+    <p>春秋战国时期收录入<strong>《周礼》</strong>的<strong>《考工记》</strong>，是中国现存最早的工艺规范文献。书中记载了车轮、兵器、乐器等器物的制作标准，要求工匠<strong>"审曲面势"</strong>——即观察曲面的形状和走向，这其实已经蕴含了"从不同方向观察、用平面图描述立体"的投影思想。书中对"磬"（一种石制乐器）的描述，要求根据石料的曲直程度来加工，说明古人已懂得用多个视角来描述复杂形状。</p>
+    <p>北宋李诫编撰的<strong>《营造法式》</strong>（1103 年）是中国古代建筑学的集大成之作。书中收录了大量建筑构件的图样，采用了类似现代三视图的画法——用<strong>"正样"</strong>（正面图）、<strong>"侧样"</strong>（侧面图）、<strong>"分样"</strong>（分件图）等多个视角来精确描述斗栱、梁柱的形状和尺寸。图样采用统一的<strong>"材分制"</strong>标注尺寸，这与现代工程图纸按比例标注如出一辙。</p>
+    <p>《营造法式》中的图样被认为是中国古代工程制图的高峰——它比蒙日的画法几何早了 600 多年，足见中国古人在"用二维图描述三维世界"上的智慧。</p>
   </div>
 
   <h2>挑战性问题</h2>
   <div class="challenge">
-    <p><strong>问题 1：</strong>一个圆柱体，分别从正面、上面、左面看，看到的形状分别是什么？（提示：圆柱的顶面和底面是圆形。）</p>
-    <p><strong>问题 2：</strong>如果俯视图是一个圆，主视图和左视图都是矩形，这个立体图形可能是什么？</p>
-    <p><strong>问题 3：</strong>只用主视图和俯视图（不给左视图），你能搭出几种不同的立体图形？试试用 3 个正方体，看看有多少种可能。</p>
+    <p><strong>互动演示：圆柱体的投影</strong></p>
+    <p style="font-size:14px;color:#666;">下面是一个可旋转的圆柱体，配备一个光源和它在地面上的投影（影子）。点击按钮可快速查看正面、上面、左面三个方向的视图。</p>
+    <div class="graphic" style="background:#fafafa;border:1px solid #e0e0e0;border-radius:8px;padding:12px;">
+      <svg id="cyl3d" viewBox="0 0 420 300" style="max-width:100%;height:auto;">
+        <ellipse cx="210" cy="252" rx="178" ry="22" fill="#e0e0e0" opacity="0.5"/>
+        <g id="cylRays"></g>
+        <g id="cylShadow"></g>
+        <g id="cylBody"></g>
+        <circle cx="62" cy="46" r="11" fill="#fdd835" stroke="#6d4c41" stroke-width="2"/>
+        <text x="62" y="29" text-anchor="middle" fill="#6d4c41" font-size="11">光源</text>
+        <text x="210" y="287" text-anchor="middle" fill="#999" font-size="11">地面（投影面）</text>
+      </svg>
+      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn-sm" onclick="setView('front')">正面（主视图）</button>
+        <button class="btn-sm" onclick="setView('top')">上面（俯视图）</button>
+        <button class="btn-sm" onclick="setView('left')">左面（左视图）</button>
+        <button class="btn-sm" onclick="toggleAuto()">暂停/继续旋转</button>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;align-items:center;">
+        <span style="font-size:13px;color:#666;">投影结果：</span>
+        <svg id="cyl2d" viewBox="0 0 170 130" style="width:170px;height:130px;border:1px dashed #ccc;border-radius:6px;background:#fff;">
+          <g id="cyl2dBody"></g>
+        </svg>
+        <span id="cylDesc" style="font-size:13px;color:#311b92;font-weight:bold;">立体透视（自动旋转中）</span>
+      </div>
+    </div>
+
+    <p style="margin-top:16px;"><strong>问题 1：</strong>一个圆柱体，分别从正面、上面、左面看，看到的形状分别是什么？</p>
+    <button class="btn-sm" onclick="toggleHint('ch1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca1')">查看答案</button>
+    <div class="hint-box" id="ch1">圆柱的顶面和底面是圆形，侧面是曲面。从正面看到的是侧面，从上面看到的是顶面。</div>
+    <div class="ans-box" id="ca1">正面看：<strong>矩形</strong>（看到圆柱的侧面）。上面看：<strong>圆</strong>（看到圆柱的顶面）。左面看：<strong>矩形</strong>（与正面看到的形状相同——这正是圆柱体的特点）。</div>
+
+    <p style="margin-top:14px;"><strong>问题 2：</strong>如果俯视图是一个圆，主视图和左视图都是矩形，这个立体图形可能是什么？</p>
+    <button class="btn-sm" onclick="toggleHint('ch2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca2')">查看答案</button>
+    <div class="hint-box" id="ch2">什么样的立体图形从上面看是圆，而从正面和左面看都是矩形？想想底面是圆、侧面平整的立体。</div>
+    <div class="ans-box" id="ca2">圆柱体（底面朝下放置）。</div>
+
+    <p style="margin-top:14px;"><strong>问题 3：</strong>只用主视图和俯视图（不给左视图），你能搭出几种不同的立体图形？试试用 3 个正方体，看看有多少种可能。</p>
+    <button class="btn-sm" onclick="toggleHint('ch3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca3')">查看答案</button>
+    <div class="hint-box" id="ch3">3 个正方体搭立体图形，主视图和俯视图固定时，左视图可能不唯一——这正是"三视图缺一不可"的体现。</div>
+    <div class="ans-box" id="ca3">以主视图为"一排 3 个"、俯视图也是"一排 3 个"为例：第 3 个正方体可以放在底层某个位置的上方，从正面看被挡住、从上面看也被挡住，因此左视图会因第 3 块放在不同位置而不同。可见仅靠主视图和俯视图不能唯一确定立体图形，<strong>三视图缺一不可</strong>。</div>
   </div>
 
   <h2>拓展阅读：视图的产生与应用</h2>
@@ -429,6 +487,122 @@
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
 function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+
+// ===== 圆柱体投影动画 =====
+(function(){
+  // 几何参数
+  var R = 24, H = 58;          // 圆柱半径、高度
+  var CX = 210, BASEY = 252;   // 圆柱轴在屏幕的位置（底，与地面对齐）
+  // 平行光方向（光线行进方向），dy<0 表示向下
+  var Lx = 0.5, Ly = -1, Lz = -0.4;
+  var SUNX = 62, SUNY = 46;    // 光源在屏幕的位置（仅用于绘制太阳）
+
+  var tilt = 0.45;   // 视角俯仰角：0=正侧视(矩形)，π/2=正俯视(圆)
+  var target = null; // 按钮锁定目标
+  var auto = true;   // 是否自动旋转
+  var dir = 1;       // 自动旋转方向
+  var view = '3d';   // 当前选定的视图
+
+  function ellPath(cx, cy, rx, ry){
+    if (rx < 0) rx = -rx;
+    if (ry < 0) ry = -ry;
+    if (rx === 0) rx = 0.01;
+    if (ry === 0) ry = 0.01;
+    return 'M '+(cx-rx)+' '+cy+' a '+rx+' '+ry+' 0 1 0 '+(rx*2)+' 0 a '+rx+' '+ry+' 0 1 0 '+(-rx*2)+' 0 Z';
+  }
+
+  function drawScene(){
+    var sinT = Math.sin(tilt), cosT = Math.cos(tilt);
+    var topY = BASEY - H * cosT;     // 顶面中心屏幕 y
+    var ry = R * sinT;               // 椭圆竖向半轴（俯仰压缩）
+
+    var body = document.getElementById('cylBody');
+    // 顺序：底面后侧弧（虚）→ 侧面 → 底面前侧弧 → 顶面
+    var sBack = 'M '+(CX-R)+' '+BASEY+' A '+R+' '+ry+' 0 0 1 '+(CX+R)+' '+BASEY;  // 后半弧（隐藏）
+    var sFront = 'M '+(CX-R)+' '+BASEY+' A '+R+' '+ry+' 0 0 0 '+(CX+R)+' '+BASEY; // 前半弧（可见）
+    var side = 'M '+(CX-R)+' '+topY+' L '+(CX-R)+' '+BASEY+' L '+(CX+R)+' '+BASEY+' L '+(CX+R)+' '+topY+' Z';
+    body.innerHTML =
+      '<path d="'+sBack+'" fill="none" stroke="#311b92" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.5"/>' +
+      '<path d="'+side+'" fill="rgba(49,27,146,0.35)" stroke="#311b92" stroke-width="1.6"/>' +
+      '<path d="'+sFront+'" fill="none" stroke="#311b92" stroke-width="1.6"/>' +
+      '<path d="'+ellPath(CX, topY, R, ry)+'" fill="rgba(94,53,177,0.65)" stroke="#311b92" stroke-width="1.6"/>';
+
+    // 阴影：圆柱在地面(y=0)上的投影，平行光方向 (Lx,Ly,Lz)
+    // 底面圆心投影→(0,0,0)，顶面圆心投影→(-H*Lx/Ly, 0, -H*Lz/Ly)
+    var Du = -H * Lx / Ly;   // 地面 u 方向位移
+    var Dv = -H * Lz / Ly;   // 地面 v 方向位移（深度）
+    // 地面 (u,0,v) → 屏幕 (CX+u, BASEY - v*sinT)，圆盘投影为椭圆 (rx=R, ry=R*sinT)
+    var sEx = CX + Du;
+    var sEy = BASEY - Dv * sinT;
+    var erx = R, ery = R * sinT;
+    var dx = sEx - CX, dy = sEy - BASEY;
+    var tanPhi = (dy === 0) ? (dx>=0?Infinity:-Infinity) : (-ery*dx/(erx*dy));
+    var phi = Math.atan(tanPhi);
+    var cosP = Math.cos(phi), sinP = Math.sin(phi);
+    var p1x = CX + erx*cosP, p1y = BASEY + ery*sinP;
+    var p2x = CX - erx*cosP, p2y = BASEY - ery*sinP;
+    var p3x = sEx + erx*cosP, p3y = sEy + ery*sinP;
+    var p4x = sEx - erx*cosP, p4y = sEy - ery*sinP;
+    var shadow = document.getElementById('cylShadow');
+    shadow.innerHTML =
+      '<path d="M '+p1x+' '+p1y+' L '+p3x+' '+p3y+' L '+p4x+' '+p4y+' L '+p2x+' '+p2y+' Z" fill="rgba(0,0,0,0.22)"/>' +
+      '<path d="'+ellPath(CX, BASEY, erx, ery)+'" fill="rgba(0,0,0,0.22)"/>' +
+      '<path d="'+ellPath(sEx, sEy, erx, ery)+'" fill="rgba(0,0,0,0.22)"/>';
+
+    // 光线（从太阳指向圆柱顶部和阴影末端，虚线示意）
+    var rays = document.getElementById('cylRays');
+    rays.innerHTML =
+      '<line x1="'+SUNX+'" y1="'+SUNY+'" x2="'+CX+'" y2="'+topY+'" stroke="#fdd835" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.55"/>' +
+      '<line x1="'+CX+'" y1="'+topY+'" x2="'+sEx+'" y2="'+sEy+'" stroke="#6d4c41" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>';
+  }
+
+  function draw2D(v){
+    var g = document.getElementById('cyl2dBody');
+    var desc = document.getElementById('cylDesc');
+    if (v === 'front' || v === 'left'){
+      g.innerHTML = '<rect x="50" y="22" width="70" height="86" fill="rgba(94,53,177,0.3)" stroke="#5e35b1" stroke-width="2"/>';
+    } else if (v === 'top'){
+      g.innerHTML = '<circle cx="85" cy="65" r="42" fill="rgba(33,150,243,0.2)" stroke="#2196f3" stroke-width="2"/>';
+    } else {
+      g.innerHTML = '<text x="85" y="62" text-anchor="middle" font-size="12" fill="#999">3D 透视</text>'+
+                    '<text x="85" y="80" text-anchor="middle" font-size="11" fill="#bbb">旋转中…</text>';
+    }
+    if (v === 'front') desc.textContent = '正面（主视图）：矩形';
+    else if (v === 'top') desc.textContent = '上面（俯视图）：圆';
+    else if (v === 'left') desc.textContent = '左面（左视图）：矩形（与主视图相同）';
+    else desc.textContent = '立体透视（自动旋转中）';
+  }
+
+  window.setView = function(v){
+    view = v;
+    auto = false;
+    if (v === 'front') target = 0.02;
+    else if (v === 'top') target = Math.PI/2 - 0.02;
+    else if (v === 'left') target = 0.02;
+    draw2D(v);
+  };
+  window.toggleAuto = function(){
+    auto = !auto;
+    if (auto){ target = null; view = '3d'; draw2D('3d'); }
+  };
+
+  function animate(){
+    if (target !== null){
+      tilt += (target - tilt) * 0.1;
+      if (Math.abs(target - tilt) < 0.004) tilt = target;
+    } else if (auto){
+      tilt += dir * 0.009;
+      if (tilt > 1.45){ tilt = 1.45; dir = -1; }
+      if (tilt < 0.22){ tilt = 0.22; dir = 1; }
+    }
+    drawScene();
+    requestAnimationFrame(animate);
+  }
+
+  draw2D('3d');
+  drawScene();
+  animate();
+})();
 </script>
 <script src="./dt.js"></script>
 </body>

@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>相交线与平行线 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>∥</text></svg>">
-<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="../lessons/style.css">
 <style>
   :root { --accent: #00695c; }
   .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
   .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #ede7f6; border-left: 4px solid #5e35b1; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
   .challenge { background: #e8eaf6; border: 2px dashed #00695c; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
@@ -39,13 +39,12 @@
   <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./geometry-basics.html">课件 10（几何图形）</a>、<a href="./lines-rays-segments.html">课件 11（直线、射线、线段）</a>、<a href="./angles.html">课件 12（角）</a></p>
   <h1>相交线与平行线</h1>
 
-  <h2>起源：欧几里得的第五公设——争论了两千年的难题</h2>
+  <h2>起源：古人如何画出笔直的平行线</h2>
   <div class="origin">
-    <p>欧几里得的《几何原本》有五条公理（公设）。前四条都很简单，比如"两点之间可以画一条直线"、"所有直角都相等"。但<strong>第五条</strong>（平行公设）却让数学家们纠结了两千年。</p>
-    <p>第五条公设说的是：<strong>如果一条直线与另外两条直线相交，在同一侧的内角之和小于两个直角（180°），那么这两条直线无限延长后，会在这一侧相交。</strong></p>
-    <p>这听起来太绕了！所以后来人们把它改成了更简单的说法：<strong>"过直线外一点，有且只有一条直线与它平行。"</strong></p>
-    <p>《古今数学思想》中写道：从古希腊到 19 世纪，无数数学家试图用前四条公设推出第五条，但全都失败了。直到 19 世纪，罗巴切夫斯基、高斯和黎曼才发现：<strong>如果换一条平行公设，就会得到完全不同的几何学！</strong>这就是"非欧几何"——爱因斯坦的广义相对论就建立在黎曼几何的基础上。</p>
-    <p>《一个数学家的叹息》中 Lockhart 说："平行公设的故事告诉我们：数学不是一堆死板的规则，而是人类对空间本质的探索。这个探索花了 2000 年，但结果是值得的——它让我们重新理解了宇宙。"</p>
+    <p>在没有尺规的年代，古人怎样画出一条笔直的线，又怎样保证两条线"方向一致、永不相交"呢？</p>
+    <p><strong>中国古代</strong>的工匠早就发明了"墨斗"——在绳上蘸满墨汁，两端拉紧后轻轻一弹，木料上便留下一条笔直的墨线。要立一排间距相等的柱子，匠人会先弹两条方向相同、永不相交的墨线，柱子立在两条线之间，整列房屋自然整齐。这种"同向而不相交"的思想，正是<strong>平行线</strong>的雏形。《周礼·考工记》说"审曲面势，以饬五材"，强调的就是审视平直与方向。</p>
+    <p><strong>古埃及</strong>的"拉绳者"（harpedonaptae）则用打结的绳子丈量土地。尼罗河每年泛滥，冲毁田界，洪水退去后，他们要重新拉出笔直的田埂，把田地分成规整的长方形条块——这些条块的对边必须两两平行。古希腊历史学家希罗多德记载，正是这种反复丈量，催生了几何学（"几何"一词本意就是"测地"）。</p>
+    <p>《九章算术》的"方田"章专门讲各种形状田地的面积算法，其中长方形、梯形的计算都离不开"对边平行"这个前提。可以说，<strong>平行线是古人丈量土地、建造房屋时最朴素的几何工具之一</strong>。</p>
   </div>
 
   <h2>一、两条直线相交——对顶角与邻补角</h2>
@@ -56,41 +55,44 @@
       <svg viewBox="0 0 500 380" style="max-width:100%;height:auto;display:block;margin:0 auto;">
         <defs>
           <style>
-            .angle-arc { fill: none; stroke-width: 2.5; }
-            .lbl { font-size: 14px; font-weight: bold; }
+            .lbl { font-size: 15px; font-weight: bold; }
           </style>
           <marker id="arrow1" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#333"/></marker>
           <marker id="arrow2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#333"/></marker>
         </defs>
-        <!-- 直线 AB -->
+        <!-- 直线 AB（左上→右下） -->
         <line x1="60" y1="60" x2="440" y2="300" stroke="#333" stroke-width="2.5" marker-end="url(#arrow1)"/>
         <line x1="440" y1="300" x2="60" y2="60" stroke="#333" stroke-width="2.5" marker-end="url(#arrow2)"/>
-        <!-- 直线 CD -->
+        <!-- 直线 CD（左下→右上） -->
         <line x1="60" y1="300" x2="440" y2="60" stroke="#333" stroke-width="2.5" marker-end="url(#arrow1)"/>
         <line x1="440" y1="60" x2="60" y2="300" stroke="#333" stroke-width="2.5" marker-end="url(#arrow2)"/>
-        <!-- 交点 -->
-        <circle cx="250" cy="180" r="5" fill="#00695c"/>
-        <text x="242" y="198" fill="#00695c" font-weight="bold" font-size="13">O</text>
+        <text x="48" y="54" text-anchor="end" class="lbl" fill="#333">A</text>
+        <text x="452" y="312" text-anchor="start" class="lbl" fill="#333">B</text>
+        <text x="48" y="312" text-anchor="end" class="lbl" fill="#333">C</text>
+        <text x="452" y="54" text-anchor="start" class="lbl" fill="#333">D</text>
+        <!-- 交点 O -->
+        <circle cx="250" cy="180" r="4.5" fill="#00695c"/>
+        <text x="250" y="172" text-anchor="middle" class="lbl" fill="#00695c">O</text>
 
-        <!-- ∠1 (左上) 用红色 -->
-        <path d="M250,180 L250,170 A10,10 0 0,0 240,180 Z" fill="rgba(244,67,54,0.3)" stroke="#f44336" stroke-width="2"/>
-        <text x="250" y="165" text-anchor="middle" fill="#f44336" font-weight="bold" font-size="14">1</text>
+        <!-- ∠1 上方（对顶于∠3）蓝色 -->
+        <path d="M250,180 L231.4,168.2 A22,22 0 0,1 268.6,168.2 Z" fill="rgba(25,118,210,0.30)" stroke="#1976d2" stroke-width="2"/>
+        <text x="250" y="156" text-anchor="middle" class="lbl" fill="#1976d2">1</text>
 
-        <!-- ∠2 (右上) 用蓝色 -->
-        <path d="M250,180 L260,180 A10,10 0 0,0 250,170 Z" fill="rgba(33,150,243,0.3)" stroke="#2196f3" stroke-width="2"/>
-        <text x="265" y="175" text-anchor="start" fill="#2196f3" font-weight="bold" font-size="14">2</text>
+        <!-- ∠2 右侧（对顶于∠4）绿色 -->
+        <path d="M250,180 L268.6,168.2 A22,22 0 0,1 268.6,191.8 Z" fill="rgba(46,125,50,0.30)" stroke="#2e7d32" stroke-width="2"/>
+        <text x="288" y="185" text-anchor="start" class="lbl" fill="#2e7d32">2</text>
 
-        <!-- ∠3 (右下) 对顶角 用红色虚线 -->
-        <path d="M250,180 L250,190 A10,10 0 0,0 260,180 Z" fill="rgba(244,67,54,0.3)" stroke="#f44336" stroke-width="2" stroke-dasharray="4 2"/>
-        <text x="250" y="205" text-anchor="middle" fill="#f44336" font-weight="bold" font-size="14">3</text>
+        <!-- ∠3 下方（与∠1相等）蓝色虚线 -->
+        <path d="M250,180 L268.6,191.8 A22,22 0 0,1 231.4,191.8 Z" fill="rgba(25,118,210,0.30)" stroke="#1976d2" stroke-width="2" stroke-dasharray="5 3"/>
+        <text x="250" y="214" text-anchor="middle" class="lbl" fill="#1976d2">3</text>
 
-        <!-- ∠4 (左下) 用蓝色虚线 -->
-        <path d="M250,180 L240,180 A10,10 0 0,0 250,190 Z" fill="rgba(33,150,243,0.3)" stroke="#2196f3" stroke-width="2" stroke-dasharray="4 2"/>
-        <text x="235" y="195" text-anchor="end" fill="#2196f3" font-weight="bold" font-size="14">4</text>
+        <!-- ∠4 左侧（与∠2相等）绿色虚线 -->
+        <path d="M250,180 L231.4,191.8 A22,22 0 0,1 231.4,168.2 Z" fill="rgba(46,125,50,0.30)" stroke="#2e7d32" stroke-width="2" stroke-dasharray="5 3"/>
+        <text x="212" y="185" text-anchor="end" class="lbl" fill="#2e7d32">4</text>
 
         <!-- 标注 -->
-        <text x="250" y="335" text-anchor="middle" fill="#555" font-size="12">∠1和∠3是对顶角（相等）&nbsp;&nbsp;|&nbsp;&nbsp;∠2和∠4是对顶角（相等）</text>
-        <text x="250" y="355" text-anchor="middle" fill="#555" font-size="12">∠1和∠2是邻补角（和为180°）&nbsp;&nbsp;|&nbsp;&nbsp;∠2和∠3也是邻补角……</text>
+        <text x="250" y="335" text-anchor="middle" fill="#555" font-size="13">∠1 和 ∠3 是对顶角（相等）&nbsp;&nbsp;|&nbsp;&nbsp;∠2 和 ∠4 是对顶角（相等）</text>
+        <text x="250" y="357" text-anchor="middle" fill="#555" font-size="13">∠1 和 ∠2 是邻补角（和为 180°）&nbsp;&nbsp;|&nbsp;&nbsp;∠2 和 ∠3 也是邻补角……</text>
       </svg>
     </div>
 
@@ -114,29 +116,29 @@
       <svg viewBox="0 0 500 280" style="max-width:100%;height:auto;display:block;margin:0 auto;">
         <defs>
           <marker id="arr-h" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#00695c"/></marker>
-          <marker id="arr-v" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e65100"/></marker>
+          <marker id="arr-v" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1565c0"/></marker>
         </defs>
-        <!-- 水平线 -->
+        <!-- 水平线 l₁ -->
         <line x1="80" y1="180" x2="420" y2="180" stroke="#00695c" stroke-width="2.5" marker-end="url(#arr-h)"/>
-        <text x="430" y="195" fill="#00695c" font-weight="bold" font-size="13">l₁</text>
-        <!-- 垂直线 -->
-        <line x1="250" y1="260" x2="250" y2="60" stroke="#e65100" stroke-width="2.5" marker-end="url(#arr-v)"/>
-        <text x="258" y="55" fill="#e65100" font-weight="bold" font-size="13">l₂</text>
+        <text x="430" y="195" text-anchor="start" fill="#00695c" font-weight="bold" font-size="14">l₁</text>
+        <!-- 垂线 l₂ -->
+        <line x1="250" y1="260" x2="250" y2="60" stroke="#1565c0" stroke-width="2.5" marker-end="url(#arr-v)"/>
+        <text x="250" y="52" text-anchor="middle" fill="#1565c0" font-weight="bold" font-size="14">l₂</text>
         <!-- 直角标记 -->
-        <rect x="250" y="165" width="15" height="15" fill="none" stroke="#f44336" stroke-width="2"/>
-        <!-- 交点 -->
-        <circle cx="250" cy="180" r="4" fill="#f44336"/>
-        <text x="235" y="198" fill="#f44336" font-weight="bold" font-size="13">垂足</text>
+        <rect x="250" y="165" width="15" height="15" fill="none" stroke="#1565c0" stroke-width="2"/>
+        <!-- 垂足 -->
+        <circle cx="250" cy="180" r="4" fill="#1565c0"/>
+        <text x="262" y="198" text-anchor="start" fill="#1565c0" font-weight="bold" font-size="13">垂足</text>
 
         <!-- 垂线段最短示意图 -->
         <circle cx="120" cy="80" r="4" fill="#9c27b0"/>
-        <text x="105" y="75" fill="#9c27b0" font-weight="bold" font-size="13">P</text>
+        <text x="112" y="74" text-anchor="end" fill="#9c27b0" font-weight="bold" font-size="13">P</text>
         <line x1="120" y1="80" x2="250" y2="180" stroke="#9c27b0" stroke-width="2.5" stroke-dasharray="5 3"/>
-        <text x="170" y="125" fill="#9c27b0" font-size="11">垂线段（最短）</text>
+        <text x="160" y="120" text-anchor="middle" fill="#9c27b0" font-size="12">垂线段（最短）</text>
         <line x1="120" y1="80" x2="350" y2="180" stroke="#999" stroke-width="2" stroke-dasharray="6 4"/>
-        <text x="260" y="120" fill="#999" font-size="11">斜线段（更长）</text>
+        <text x="270" y="118" text-anchor="middle" fill="#888" font-size="12">斜线段（更长）</text>
         <line x1="120" y1="80" x2="150" y2="180" stroke="#999" stroke-width="2" stroke-dasharray="6 4"/>
-        <text x="80" y="140" fill="#999" font-size="11">斜线段（更长）</text>
+        <text x="100" y="140" text-anchor="middle" fill="#888" font-size="12">斜线段（更长）</text>
       </svg>
     </div>
 
@@ -160,11 +162,11 @@
           <marker id="arr-p1" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#00695c"/></marker>
           <marker id="arr-p2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#00695c"/></marker>
         </defs>
-        <line x1="40" y1="50" x2="460" y2="50" stroke="#00695c" stroke-width="2.5" marker-end="url(#arr-p1)"/>
-        <text x="470" y="45" fill="#00695c" font-weight="bold" font-size="14">a</text>
-        <line x1="40" y1="120" x2="460" y2="120" stroke="#00695c" stroke-width="2.5" marker-end="url(#arr-p2)"/>
-        <text x="470" y="115" fill="#00695c" font-weight="bold" font-size="14">b</text>
-        <text x="250" y="88" text-anchor="middle" fill="#00695c" font-weight="bold" font-size="20">a ∥ b</text>
+        <line x1="40" y1="50" x2="430" y2="50" stroke="#00695c" stroke-width="2.5" marker-end="url(#arr-p1)"/>
+        <text x="442" y="46" text-anchor="start" fill="#00695c" font-weight="bold" font-size="16">a</text>
+        <line x1="40" y1="120" x2="430" y2="120" stroke="#00695c" stroke-width="2.5" marker-end="url(#arr-p2)"/>
+        <text x="442" y="116" text-anchor="start" fill="#00695c" font-weight="bold" font-size="16">b</text>
+        <text x="250" y="92" text-anchor="middle" fill="#00695c" font-weight="bold" font-size="26">a ∥ b</text>
       </svg>
     </div>
 
@@ -182,31 +184,27 @@
     <p><strong>同位角</strong>：在截线的<strong>同一侧</strong>，又在两条被截直线的<strong>同一方向</strong>的两个角。</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 500 320" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+      <svg viewBox="0 0 500 340" style="max-width:100%;height:auto;display:block;margin:0 auto;">
         <defs>
-          <style>.lbl { font-size: 13px; font-weight: bold; }</style>
-          <marker id="ar-iso" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#333"/></marker>
+          <marker id="ar-iso" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#00695c"/></marker>
+          <marker id="ar-tr1" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#455a64"/></marker>
         </defs>
-        <!-- 两条平行线 -->
         <line x1="50" y1="80" x2="450" y2="80" stroke="#00695c" stroke-width="2" marker-end="url(#ar-iso)"/>
-        <text x="460" y="75" fill="#00695c" font-weight="bold" font-size="13">a</text>
+        <text x="460" y="76" text-anchor="start" fill="#00695c" font-weight="bold" font-size="14">a</text>
         <line x1="50" y1="220" x2="450" y2="220" stroke="#00695c" stroke-width="2" marker-end="url(#ar-iso)"/>
-        <text x="460" y="215" fill="#00695c" font-weight="bold" font-size="13">b</text>
-        <!-- 截线 -->
-        <line x1="380" y1="40" x2="120" y2="260" stroke="#e65100" stroke-width="2" marker-end="url(#ar-iso)"/>
-        <text x="380" y="35" fill="#e65100" font-weight="bold" font-size="13">截线 c</text>
-        <!-- 交点 -->
-        <circle cx="250" cy="80" r="3" fill="#333"/>
-        <circle cx="250" cy="220" r="3" fill="#333"/>
-        <!-- ∠1 同位角 (左上) -->
-        <path d="M250,80 L240,78 A12,12 0 0,0 250,68 Z" fill="rgba(244,67,54,0.35)" stroke="#f44336" stroke-width="2"/>
-        <text x="238" y="65" fill="#f44336" font-weight="bold" font-size="14">1</text>
-        <!-- ∠2 同位角 (左下) -->
-        <path d="M250,220 L240,218 A12,12 0 0,0 250,208 Z" fill="rgba(244,67,54,0.35)" stroke="#f44336" stroke-width="2"/>
-        <text x="238" y="205" fill="#f44336" font-weight="bold" font-size="14">2</text>
-        <!-- 标注 F 形 -->
-        <text x="250" y="280" text-anchor="middle" fill="#f44336" font-weight="bold" font-size="14">∠1 和 ∠2 是同位角，它们都在截线的同一侧（左上方）</text>
-        <text x="250" y="300" text-anchor="middle" fill="#888" font-size="12">同位角像字母 "F"</text>
+        <text x="460" y="216" text-anchor="start" fill="#00695c" font-weight="bold" font-size="14">b</text>
+        <line x1="110" y1="290" x2="390" y2="10" stroke="#455a64" stroke-width="2" marker-end="url(#ar-tr1)"/>
+        <text x="396" y="14" text-anchor="start" fill="#455a64" font-weight="bold" font-size="13">截线 c</text>
+        <circle cx="320" cy="80" r="3.5" fill="#333"/>
+        <circle cx="180" cy="220" r="3.5" fill="#333"/>
+        <!-- ∠1 同位角 (a 上右) -->
+        <path d="M320,80 L332.7,67.3 A18,18 0 0,1 338,80 Z" fill="rgba(25,118,210,0.30)" stroke="#1976d2" stroke-width="2"/>
+        <text x="344" y="72" text-anchor="start" fill="#1976d2" font-weight="bold" font-size="14">1</text>
+        <!-- ∠2 同位角 (b 上右) -->
+        <path d="M180,220 L192.7,207.3 A18,18 0 0,1 198,220 Z" fill="rgba(25,118,210,0.30)" stroke="#1976d2" stroke-width="2"/>
+        <text x="204" y="212" text-anchor="start" fill="#1976d2" font-weight="bold" font-size="14">2</text>
+        <text x="250" y="318" text-anchor="middle" fill="#1976d2" font-weight="bold" font-size="14">∠1 和 ∠2 是同位角（截线同侧、两直线同方向）</text>
+        <text x="250" y="336" text-anchor="middle" fill="#888" font-size="12">同位角像字母 "F"</text>
       </svg>
     </div>
 
@@ -221,27 +219,27 @@
     <p><strong>内错角</strong>：在截线的<strong>两侧</strong>，又在两条被截直线<strong>之间</strong>的两个角。</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 500 300" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+      <svg viewBox="0 0 500 340" style="max-width:100%;height:auto;display:block;margin:0 auto;">
         <defs>
-          <marker id="ar-alt" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#333"/></marker>
+          <marker id="ar-alt" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#00695c"/></marker>
+          <marker id="ar-tr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#455a64"/></marker>
         </defs>
-        <line x1="50" y1="70" x2="450" y2="70" stroke="#00695c" stroke-width="2" marker-end="url(#ar-alt)"/>
-        <text x="460" y="65" fill="#00695c" font-weight="bold" font-size="13">a</text>
-        <line x1="50" y1="210" x2="450" y2="210" stroke="#00695c" stroke-width="2" marker-end="url(#ar-alt)"/>
-        <text x="460" y="205" fill="#00695c" font-weight="bold" font-size="13">b</text>
-        <!-- 截线 -->
-        <line x1="380" y1="30" x2="120" y2="250" stroke="#e65100" stroke-width="2" marker-end="url(#ar-alt)"/>
-        <text x="380" y="25" fill="#e65100" font-weight="bold" font-size="13">截线 c</text>
-        <circle cx="250" cy="70" r="3" fill="#333"/>
-        <circle cx="250" cy="210" r="3" fill="#333"/>
-        <!-- ∠3 内错角 (右下，截线左侧) -->
-        <path d="M250,70 L256,74 A10,10 0 0,0 250,80 Z" fill="rgba(33,150,243,0.35)" stroke="#2196f3" stroke-width="2"/>
-        <text x="258" y="85" fill="#2196f3" font-weight="bold" font-size="14">3</text>
-        <!-- ∠4 内错角 (左上，截线右侧) -->
-        <path d="M250,210 L244,206 A10,10 0 0,0 250,200 Z" fill="rgba(33,150,243,0.35)" stroke="#2196f3" stroke-width="2"/>
-        <text x="242" y="195" fill="#2196f3" font-weight="bold" font-size="14">4</text>
-        <text x="250" y="255" text-anchor="middle" fill="#2196f3" font-weight="bold" font-size="14">∠3 和 ∠4 是内错角，它们在截线两侧、两条直线之间</text>
-        <text x="250" y="275" text-anchor="middle" fill="#888" font-size="12">内错角像字母 "Z"</text>
+        <line x1="50" y1="80" x2="450" y2="80" stroke="#00695c" stroke-width="2" marker-end="url(#ar-alt)"/>
+        <text x="460" y="76" text-anchor="start" fill="#00695c" font-weight="bold" font-size="14">a</text>
+        <line x1="50" y1="220" x2="450" y2="220" stroke="#00695c" stroke-width="2" marker-end="url(#ar-alt)"/>
+        <text x="460" y="216" text-anchor="start" fill="#00695c" font-weight="bold" font-size="14">b</text>
+        <line x1="110" y1="290" x2="390" y2="10" stroke="#455a64" stroke-width="2" marker-end="url(#ar-tr2)"/>
+        <text x="396" y="14" text-anchor="start" fill="#455a64" font-weight="bold" font-size="13">截线 c</text>
+        <circle cx="320" cy="80" r="3.5" fill="#333"/>
+        <circle cx="180" cy="220" r="3.5" fill="#333"/>
+        <!-- ∠3 内错角 (a 左下) -->
+        <path d="M320,80 L307.3,92.7 A18,18 0 0,1 302,80 Z" fill="rgba(106,27,154,0.28)" stroke="#6a1b9a" stroke-width="2"/>
+        <text x="296" y="100" text-anchor="end" fill="#6a1b9a" font-weight="bold" font-size="14">3</text>
+        <!-- ∠4 内错角 (b 上右) -->
+        <path d="M180,220 L192.7,207.3 A18,18 0 0,1 198,220 Z" fill="rgba(106,27,154,0.28)" stroke="#6a1b9a" stroke-width="2"/>
+        <text x="204" y="212" text-anchor="start" fill="#6a1b9a" font-weight="bold" font-size="14">4</text>
+        <text x="250" y="318" text-anchor="middle" fill="#6a1b9a" font-weight="bold" font-size="14">∠3 和 ∠4 是内错角（截线两侧、两直线之间）</text>
+        <text x="250" y="336" text-anchor="middle" fill="#888" font-size="12">内错角像字母 "Z"</text>
       </svg>
     </div>
 
@@ -256,27 +254,27 @@
     <p><strong>同旁内角</strong>：在截线的<strong>同一侧</strong>，又在两条被截直线<strong>之间</strong>的两个角。</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 500 300" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+      <svg viewBox="0 0 500 340" style="max-width:100%;height:auto;display:block;margin:0 auto;">
         <defs>
-          <marker id="ar-con" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#333"/></marker>
+          <marker id="ar-con" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#00695c"/></marker>
+          <marker id="ar-tr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#455a64"/></marker>
         </defs>
-        <line x1="50" y1="70" x2="450" y2="70" stroke="#00695c" stroke-width="2" marker-end="url(#ar-con)"/>
-        <text x="460" y="65" fill="#00695c" font-weight="bold" font-size="13">a</text>
-        <line x1="50" y1="210" x2="450" y2="210" stroke="#00695c" stroke-width="2" marker-end="url(#ar-con)"/>
-        <text x="460" y="205" fill="#00695c" font-weight="bold" font-size="13">b</text>
-        <!-- 截线 -->
-        <line x1="380" y1="30" x2="120" y2="250" stroke="#e65100" stroke-width="2" marker-end="url(#ar-con)"/>
-        <text x="380" y="25" fill="#e65100" font-weight="bold" font-size="13">截线 c</text>
-        <circle cx="250" cy="70" r="3" fill="#333"/>
-        <circle cx="250" cy="210" r="3" fill="#333"/>
-        <!-- ∠5 同旁内角 (右下，截线右侧) -->
-        <path d="M250,70 L244,74 A10,10 0 0,0 250,80 Z" fill="rgba(76,175,80,0.35)" stroke="#4caf50" stroke-width="2"/>
-        <text x="240" y="85" fill="#4caf50" font-weight="bold" font-size="14">5</text>
-        <!-- ∠6 同旁内角 (左上，截线右侧) -->
-        <path d="M250,210 L256,206 A10,10 0 0,0 250,200 Z" fill="rgba(76,175,80,0.35)" stroke="#4caf50" stroke-width="2"/>
-        <text x="260" y="195" fill="#4caf50" font-weight="bold" font-size="14">6</text>
-        <text x="250" y="255" text-anchor="middle" fill="#4caf50" font-weight="bold" font-size="14">∠5 和 ∠6 是同旁内角，它们在截线同一侧、两条直线之间</text>
-        <text x="250" y="275" text-anchor="middle" fill="#888" font-size="12">同旁内角像字母 "U"</text>
+        <line x1="50" y1="80" x2="450" y2="80" stroke="#00695c" stroke-width="2" marker-end="url(#ar-con)"/>
+        <text x="460" y="76" text-anchor="start" fill="#00695c" font-weight="bold" font-size="14">a</text>
+        <line x1="50" y1="220" x2="450" y2="220" stroke="#00695c" stroke-width="2" marker-end="url(#ar-con)"/>
+        <text x="460" y="216" text-anchor="start" fill="#00695c" font-weight="bold" font-size="14">b</text>
+        <line x1="110" y1="290" x2="390" y2="10" stroke="#455a64" stroke-width="2" marker-end="url(#ar-tr3)"/>
+        <text x="396" y="14" text-anchor="start" fill="#455a64" font-weight="bold" font-size="13">截线 c</text>
+        <circle cx="320" cy="80" r="3.5" fill="#333"/>
+        <circle cx="180" cy="220" r="3.5" fill="#333"/>
+        <!-- ∠5 同旁内角 (a 下方) -->
+        <path d="M320,80 L338,80 A18,18 0 0,1 307.3,92.7 Z" fill="rgba(46,125,50,0.28)" stroke="#2e7d32" stroke-width="2"/>
+        <text x="330" y="106" text-anchor="middle" fill="#2e7d32" font-weight="bold" font-size="14">5</text>
+        <!-- ∠6 同旁内角 (b 上右) -->
+        <path d="M180,220 L192.7,207.3 A18,18 0 0,1 198,220 Z" fill="rgba(46,125,50,0.28)" stroke="#2e7d32" stroke-width="2"/>
+        <text x="204" y="212" text-anchor="start" fill="#2e7d32" font-weight="bold" font-size="14">6</text>
+        <text x="250" y="318" text-anchor="middle" fill="#2e7d32" font-weight="bold" font-size="14">∠5 和 ∠6 是同旁内角（截线同侧、两直线之间，和为 180°）</text>
+        <text x="250" y="336" text-anchor="middle" fill="#888" font-size="12">同旁内角像字母 "U"</text>
       </svg>
     </div>
 
@@ -328,7 +326,7 @@
     <div class="graphic">
       <svg viewBox="0 0 500 220" style="max-width:100%;height:auto;display:block;margin:0 auto;">
         <defs>
-          <marker id="ar-trans" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#00695c"/></marker>
+          <marker id="ar-trans" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1565c0"/></marker>
         </defs>
         <!-- 原三角形 -->
         <polygon points="80,100 180,40 140,140" fill="rgba(0,105,92,0.15)" stroke="#00695c" stroke-width="2.5"/>
@@ -337,8 +335,8 @@
         <polygon points="290,100 390,40 350,140" fill="rgba(0,105,92,0.15)" stroke="#00695c" stroke-width="2.5" stroke-dasharray="6 3"/>
         <text x="330" y="105" text-anchor="middle" fill="#00695c" font-weight="bold" font-size="13">△A'B'C'</text>
         <!-- 平移箭头 -->
-        <line x1="180" y1="70" x2="290" y2="70" stroke="#e65100" stroke-width="2" marker-end="url(#ar-trans)"/>
-        <text x="235" y="62" text-anchor="middle" fill="#e65100" font-weight="bold" font-size="12">平移</text>
+        <line x1="180" y1="70" x2="290" y2="70" stroke="#1565c0" stroke-width="2" marker-end="url(#ar-trans)"/>
+        <text x="235" y="62" text-anchor="middle" fill="#1565c0" font-weight="bold" font-size="12">平移</text>
         <!-- 对应点连线 -->
         <line x1="80" y1="100" x2="290" y2="100" stroke="#9c27b0" stroke-width="1.5" stroke-dasharray="4 3"/>
         <line x1="180" y1="40" x2="390" y2="40" stroke="#9c27b0" stroke-width="1.5" stroke-dasharray="4 3"/>
@@ -355,14 +353,29 @@
   <h2>挑战性问题</h2>
   <div class="challenge">
     <p><strong>问题 1：</strong>铁轨的两条钢轨是平行的。如果一根枕木与其中一条钢轨垂直，它与另一条钢轨也垂直吗？为什么？</p>
+    <button class="btn-sm" onclick="toggleHint('ch1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca1')">查看答案</button>
+    <div class="hint-box" id="ch1">两条平行线被第三条直线所截，同位角相等。枕木与钢轨的交角是 90°。</div>
+    <div class="ans-box" id="ca1">也垂直。枕木可看作截线，它与一条钢轨成 90°（直角=同位角）。两条钢轨平行，同位角相等，所以枕木与另一条钢轨也成 90°，即垂直。</div>
+
     <p><strong>问题 2：</strong>如果一个角的两边分别平行于另一个角的两边，这两个角有什么关系？画图试试看，你发现了什么？</p>
-    <p><strong>问题 3：</strong>欧几里得的第五公设争论了两千年。如果放弃它，会得到什么样的几何？去查一查"非欧几何"的简单介绍，你会惊讶地发现——在球面上，三角形的内角和大于 180°！</p>
+    <button class="btn-sm" onclick="toggleHint('ch2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca2')">查看答案</button>
+    <div class="hint-box" id="ch2">分两种情况画图：两边方向都相同，或一边方向相同、另一边相反。</div>
+    <div class="ans-box" id="ca2">有两种关系：要么相等，要么互补（和为 180°）。当两个角的对应边方向都相同（或都相反）时，两角相等；当一组对应边方向相同、另一组方向相反时，两角互补。</div>
+
+    <p><strong>问题 3：</strong>用两块同样的三角尺，你能拼出几组互相平行的边？说说你的判断依据。</p>
+    <button class="btn-sm" onclick="toggleHint('ch3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca3')">查看答案</button>
+    <div class="hint-box" id="ch3">两块三角尺全等，对应角相等。试着把两块三角尺的对应边摆成"同位角"或"内错角"的位置。</div>
+    <div class="ans-box" id="ca3">两块全等三角尺拼接时，相等角形成同位角或内错角，由"同位角相等 / 内错角相等 → 两直线平行"可知，能拼出多组平行边（如两直角边互相平行，斜边也互相平行）。</div>
   </div>
 
   <h2>拓展阅读</h2>
   <div class="extend">
-    <p><strong>非欧几何的诞生：</strong>19 世纪初，俄罗斯数学家罗巴切夫斯基和匈牙利数学家鲍耶各自独立地发现：如果假设"过直线外一点可以画不止一条平行线"，会得到一种完全自洽的几何学——双曲几何。与此同时，黎曼假设"不存在平行线"，得到了椭圆几何。后来爱因斯坦发现，我们的宇宙并不是欧几里得式的——大质量天体会弯曲空间，光线在引力场中走的是弯曲的路径。爱因斯坦的广义相对论，正是建立在黎曼几何的基础上。</p>
-    <p><strong>推荐阅读：</strong>《古今数学思想》—— 欧几里得平行公设的千年之争；《数学简史》—— 非欧几何的发现以及它如何改变了物理学的面貌。</p>
+    <p><strong>墨斗与准绳——中国古代的"平行"智慧：</strong>中国传统木工的"墨斗"是画直线的工具，匠人蘸墨一弹便得笔直墨线；"准"取水平、"绳"取竖直，《考工记》所谓"审曲面势"。立柱、铺瓦、挖渠都要求成排的线互相平行，这才有了整齐划一的宫殿与阡陌。</p>
+    <p><strong>古埃及的"拉绳者"：</strong>希罗多德在《历史》中记载，尼罗河泛滥后，"拉绳者"用打结的绳子重新丈量田界，把冲毁的田地分成平行的长条——"几何"（geometry）一词正源于"测地"。他们用 3-4-5 的绳结构造直角，是勾股定理的早期应用。</p>
+    <p><strong>推荐阅读：</strong>《九章算术》"方田"章——古人如何计算各种形状田地的面积；《古今数学思想》——几何学从古埃及、古希腊到现代的演变。</p>
   </div>
 
   <h2>习题</h2>
@@ -455,7 +468,7 @@
       <li>平行线的<strong>判定</strong>（用角推平行）：同位角相等 / 内错角相等 / 同旁内角互补 → 两直线平行</li>
       <li>平行线的<strong>性质</strong>（已知平行推角）：两直线平行 → 同位角相等 / 内错角相等 / 同旁内角互补</li>
       <li><strong>平移</strong>不改变图形的形状和大小，对应点连线平行且相等</li>
-      <li>欧几里得的<strong>平行公设</strong>争论了两千年，最终催生了<strong>非欧几何</strong>——改变了人类对宇宙的认识</li>
+      <li>古人用<strong>墨斗、准绳、拉绳</strong>等工具画直线、保证平行，把平行线用于丈量田地与建造房屋</li>
     </ul>
   </div>
 

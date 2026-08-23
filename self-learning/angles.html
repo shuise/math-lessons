@@ -7,20 +7,21 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
 <link rel="stylesheet" href="./style.css">
 <style>
-  :root { --accent: #c62828; }
+  :root { --accent: #1565c0; }
   .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
   .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #e3f2fd; border-left: 4px solid #1976d2; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed #c62828; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .challenge { background: #e8eaf6; border: 2px dashed #1565c0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
   .hint-box.show, .ans-box.show { display: block; }
   .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
   .btn-sm:hover { background: #e8e8e8; }
+  .zoom-note { color:#1565c0; font-size:13px; margin-left:8px; }
   @media (max-width: 720px) {
     article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
     body { padding: 0; }
@@ -50,6 +51,14 @@
     <p>《古今数学思想》提到：巴比伦的 60 进制通过天文学传到希腊，又通过希腊传到欧洲。今天我们仍然用度、分、秒来量角度，就是巴比伦文明的遗产。</p>
   </div>
 
+  <h2>中国古代的几何智慧：《周髀算经》"径一周三"</h2>
+  <div class="origin">
+    <p>把圆"等分"来量角，不只是古巴比伦人的做法。中国最古老的天文算学著作之一<strong>《周髀算经》</strong>（约公元前 1 世纪）也讨论过圆与角的关系，其中记载：</p>
+    <p style="text-align:center;font-size:1.05em;"><strong>"径一周三。"</strong></p>
+    <p>意思是<strong>圆的周长约为直径的 3 倍</strong>，即圆周率 π ≈ 3——这是中国古代对圆周率的早期近似值。书中还用"勾股各自乘，并而开方除之"记述了勾股定理。</p>
+    <p>古人用"度"量角、用"径一周三"量圆，东方和西方在不同的度量传统里，都把"弯曲"折算成"数字"。后来刘徽"割圆"、祖冲之算出 π 介于 3.1415926 与 3.1415927 之间，把这条追求精确的路推向高峰。</p>
+  </div>
+
   <h2>一、什么是角？</h2>
   <div class="story">
     <p><strong>角</strong> = 从同一点出发的两条射线组成的图形。</p>
@@ -58,13 +67,12 @@
       <svg viewBox="0 0 500 200" style="max-width:100%;height:auto;display:block;margin:0 auto;">
         <defs>
           <style>
-            .angle-arc { fill: none; stroke: #c62828; stroke-width: 2; }
-            .angle-label { font-size: 14px; fill: #c62828; font-weight: bold; }
-            @keyframes rotateRay { from { transform: rotate(0deg); } to { transform: rotate(45deg); } }
+            .angle-arc { fill: none; stroke: #1565c0; stroke-width: 2; }
+            .angle-label { font-size: 14px; fill: #1565c0; font-weight: bold; }
           </style>
         </defs>
         <!-- 角的基本构成 -->
-        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#c62828" font-weight="bold">角 = 顶点 + 两条射线</text>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#1565c0" font-weight="bold">角 = 顶点 + 两条射线</text>
         <!-- 射线1 -->
         <line x1="150" y1="140" x2="350" y2="140" stroke="#333" stroke-width="2"/>
         <polygon points="350,140 342,136 342,144" fill="#333"/>
@@ -72,11 +80,11 @@
         <line x1="150" y1="140" x2="300" y2="60" stroke="#333" stroke-width="2"/>
         <polygon points="300,60 295,68 305,68" fill="#333"/>
         <!-- 顶点 -->
-        <circle cx="150" cy="140" r="6" fill="#c62828"/>
-        <text x="140" y="158" text-anchor="end" font-size="13" fill="#c62828" font-weight="bold">顶点 O</text>
+        <circle cx="150" cy="140" r="6" fill="#1565c0"/>
+        <text x="140" y="158" text-anchor="end" font-size="13" fill="#1565c0" font-weight="bold">顶点 O</text>
         <!-- 弧（角） -->
-        <path d="M200,140 A50,50 0 0,0 230,100" fill="none" stroke="#c62828" stroke-width="2.5"/>
-        <text x="225" y="115" fill="#c62828" font-weight="bold" font-size="14">∠AOB</text>
+        <path d="M200,140 A50,50 0 0,0 230,100" fill="none" stroke="#1565c0" stroke-width="2.5"/>
+        <text x="225" y="115" text-anchor="middle" fill="#1565c0" font-weight="bold" font-size="14">∠AOB</text>
         <!-- 标注 -->
         <text x="350" y="155" text-anchor="start" font-size="12" fill="#555">边（射线 OA）</text>
         <text x="310" y="55" text-anchor="start" font-size="12" fill="#555">边（射线 OB）</text>
@@ -85,11 +93,41 @@
     <p>角的表示：<strong>∠AOB</strong> 或 <strong>∠O</strong>（顶点字母在中间）。</p>
   </div>
 
+  <h2>用放大镜看角——大小不变</h2>
+  <div class="story">
+    <p>角的大小只取决于两条边"张开"的程度，<strong>和图形画得大小无关</strong>。把角放进放大镜下：边变长了、弧变大了，看起来"更占地方"，但它的度数<strong>一点都没变</strong>——这就叫角的<strong>放缩不变性</strong>。</p>
+    <div class="graphic">
+      <svg viewBox="0 0 420 240" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+        <defs><style>text{font-size:13px;fill:#333;text-anchor:middle}</style></defs>
+        <g id="zoomAngle">
+          <!-- 水平边 -->
+          <line x1="120" y1="170" x2="260" y2="170" stroke="#1565c0" stroke-width="3"/>
+          <polygon points="260,170 250,164 250,176" fill="#1565c0"/>
+          <!-- 45° 边 -->
+          <line x1="120" y1="170" x2="220" y2="70" stroke="#1565c0" stroke-width="3"/>
+          <polygon points="220,70 213,78 223,80" fill="#1565c0"/>
+          <!-- 弧 -->
+          <path d="M150,170 A30,30 0 0,0 141,149" fill="none" stroke="#1565c0" stroke-width="2"/>
+          <circle cx="120" cy="170" r="5" fill="#1565c0"/>
+        </g>
+        <!-- 度数标签：不随放大改变 -->
+        <text x="210" y="215" text-anchor="middle" fill="#1565c0" font-weight="bold" font-size="16">∠AOB = 45°</text>
+      </svg>
+      <p style="text-align:center;margin-top:6px;">
+        <button class="btn-sm" onclick="toggleZoom()">🔍 用放大镜放大</button>
+        <span id="zoomNote" class="zoom-note" style="display:none;">看！边变长了、弧变大了，但角的度数还是 45°——角与"大小"无关。</span>
+      </p>
+    </div>
+    <div class="key">
+      <p><strong>结论：</strong>角是"张口"大小的量，放大镜只能放大长度，放大不了"张开的程度"。所以量角的大小时，无论把角画多大多小，量出来的度数都一样。</p>
+    </div>
+  </div>
+
   <h2>二、角的度量：度、分、秒</h2>
-  <div class="formula">
-    <p>角的大小用<strong>度（°）</strong>来度量。</p>
-    <p><strong>1 度</strong> = 把圆分成 360 等份，每一份的圆心角是 1 度。</p>
-    <p>更精细的度量：</p>
+  <div class="formula" style="text-align:left;">
+    <p style="text-align:left;">角的大小用<strong>度（°）</strong>来度量。</p>
+    <p style="text-align:left;"><strong>1 度</strong> = 把圆分成 360 等份，每一份的圆心角是 1 度。</p>
+    <p style="text-align:left;">更精细的度量：</p>
     <ul>
       <li><strong>1° = 60′</strong>（60 分）</li>
       <li><strong>1′ = 60″</strong>（60 秒）</li>
@@ -102,40 +140,38 @@
   <h2>三、角的分类</h2>
   <div class="story">
     <div class="graphic">
-      <svg viewBox="0 0 500 320" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+      <svg viewBox="0 0 500 360" style="max-width:100%;height:auto;display:block;margin:0 auto;">
         <defs><style>text{font-size:12px;text-anchor:middle;fill:#555}</style></defs>
         <!-- 锐角 -->
-        <line x1="60" y1="130" x2="60" y2="50" stroke="#4caf50" stroke-width="2.5"/>
-        <line x1="60" y1="130" x2="150" y2="130" stroke="#4caf50" stroke-width="2.5"/>
-        <path d="M75,130 A15,15 0 0,0 60,115" fill="none" stroke="#4caf50" stroke-width="2"/>
-        <text x="105" y="125" fill="#4caf50" font-weight="bold">锐角</text>
-        <text x="105" y="145" fill="#4caf50">0° < 锐角 < 90°</text>
+        <line x1="60" y1="95" x2="60" y2="25" stroke="#43a047" stroke-width="2.5"/>
+        <line x1="60" y1="95" x2="150" y2="95" stroke="#43a047" stroke-width="2.5"/>
+        <path d="M75,95 A15,15 0 0,0 60,80" fill="none" stroke="#43a047" stroke-width="2"/>
+        <text x="105" y="115" text-anchor="middle" fill="#43a047" font-weight="bold">锐角</text>
+        <text x="105" y="133" text-anchor="middle" fill="#43a047">0° &lt; 锐角 &lt; 90°</text>
 
         <!-- 直角 -->
-        <line x1="210" y1="130" x2="210" y2="50" stroke="#2196f3" stroke-width="2.5"/>
-        <line x1="210" y1="130" x2="300" y2="130" stroke="#2196f3" stroke-width="2.5"/>
-        <rect x="210" y="115" width="15" height="15" fill="none" stroke="#2196f3" stroke-width="2"/>
-        <text x="255" y="125" fill="#2196f3" font-weight="bold">直角</text>
-        <text x="255" y="145" fill="#2196f3">直角 = 90°</text>
+        <line x1="210" y1="95" x2="210" y2="25" stroke="#1976d2" stroke-width="2.5"/>
+        <line x1="210" y1="95" x2="300" y2="95" stroke="#1976d2" stroke-width="2.5"/>
+        <rect x="210" y="80" width="15" height="15" fill="none" stroke="#1976d2" stroke-width="2"/>
+        <text x="255" y="115" text-anchor="middle" fill="#1976d2" font-weight="bold">直角</text>
+        <text x="255" y="133" text-anchor="middle" fill="#1976d2">直角 = 90°</text>
 
         <!-- 钝角 -->
-        <line x1="360" y1="130" x2="360" y2="50" stroke="#ff9800" stroke-width="2.5"/>
-        <line x1="360" y1="130" x2="450" y2="130" stroke="#ff9800" stroke-width="2.5"/>
-        <line x1="360" y1="130" x2="300" y2="80" stroke="#ff9800" stroke-width="2.5"/>
-        <path d="M365,130 A5,5 0 0,0 360,125" fill="none" stroke="none"/>
-        <text x="375" y="125" fill="#ff9800" font-weight="bold">钝角</text>
-        <text x="375" y="145" fill="#ff9800">90° < 钝角 < 180°</text>
+        <line x1="360" y1="95" x2="450" y2="95" stroke="#7b1fa2" stroke-width="2.5"/>
+        <line x1="360" y1="95" x2="300" y2="40" stroke="#7b1fa2" stroke-width="2.5"/>
+        <text x="400" y="115" text-anchor="middle" fill="#7b1fa2" font-weight="bold">钝角</text>
+        <text x="400" y="133" text-anchor="middle" fill="#7b1fa2">90° &lt; 钝角 &lt; 180°</text>
 
         <!-- 平角 -->
-        <text x="250" y="195" text-anchor="middle" font-size="14" fill="#e91e63" font-weight="bold">平角 = 180°</text>
-        <line x1="60" y1="230" x2="440" y2="230" stroke="#e91e63" stroke-width="2.5"/>
-        <circle cx="250" cy="230" r="5" fill="#e91e63"/>
-        <text x="250" y="250" text-anchor="middle" fill="#e91e63">一条直线就是一个平角</text>
+        <text x="250" y="170" text-anchor="middle" font-size="14" fill="#00838f" font-weight="bold">平角 = 180°</text>
+        <line x1="60" y1="205" x2="440" y2="205" stroke="#00838f" stroke-width="2.5"/>
+        <circle cx="250" cy="205" r="5" fill="#00838f"/>
+        <text x="250" y="225" text-anchor="middle" fill="#00838f">一条直线就是一个平角</text>
 
-        <!-- 周角 -->
-        <text x="250" y="275" text-anchor="middle" font-size="14" fill="#9c27b0" font-weight="bold">周角 = 360°</text>
-        <circle cx="250" cy="310" r="10" fill="none" stroke="#9c27b0" stroke-width="2.5"/>
-        <text x="250" y="310" text-anchor="middle" font-size="11" fill="#9c27b0" dominant-baseline="central">360°</text>
+        <!-- 周角（放大 4 倍：半径由 10 变 40） -->
+        <text x="250" y="260" text-anchor="middle" font-size="14" fill="#283593" font-weight="bold">周角 = 360°</text>
+        <circle cx="250" cy="305" r="40" fill="none" stroke="#283593" stroke-width="2.5"/>
+        <text x="250" y="305" text-anchor="middle" dominant-baseline="central" font-size="16" fill="#283593" font-weight="bold">360°</text>
       </svg>
     </div>
     <div class="key">
@@ -151,9 +187,9 @@
   </div>
 
   <h2>四、角的加减与特殊关系</h2>
-  <div class="formula">
-    <p><strong>角的加法：</strong>∠AOB + ∠BOC = ∠AOC（如果 B 在 AOC 内部）</p>
-    <p><strong>特殊关系：</strong></p>
+  <div class="formula" style="text-align:left;">
+    <p style="text-align:left;"><strong>角的加法：</strong>∠AOB + ∠BOC = ∠AOC（如果 B 在 AOC 内部）</p>
+    <p style="text-align:left;"><strong>特殊关系：</strong></p>
     <ul>
       <li><strong>互余：</strong>两个角加起来 = 90°，如 30° 和 60°</li>
       <li><strong>互补：</strong>两个角加起来 = 180°，如 120° 和 60°</li>
@@ -176,18 +212,72 @@
       <li>看另一条边指在哪个刻度上——那就是角的度数</li>
     </ol>
     <p><strong>注意：</strong>量角器上有两圈刻度（内圈和外圈），选对起点是 0° 的那一圈。</p>
+    <div class="graphic">
+      <svg viewBox="0 0 400 240" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+        <defs><style>text{font-size:12px;fill:#37474f;text-anchor:middle}</style></defs>
+        <!-- 量角器本体（半圆） -->
+        <path d="M50,190 A150,150 0 0,1 350,190 Z" fill="rgba(33,150,243,0.10)" stroke="#1976d2" stroke-width="2"/>
+        <!-- 刻度线（0,30,45,60,90,120,135,150,180） -->
+        <line x1="340" y1="190" x2="350" y2="190" stroke="#1976d2" stroke-width="1.5"/>
+        <line x1="321" y1="120" x2="330" y2="115" stroke="#1976d2" stroke-width="1.5"/>
+        <line x1="299" y1="91" x2="306" y2="84" stroke="#1976d2" stroke-width="1.5"/>
+        <line x1="270" y1="69" x2="275" y2="60" stroke="#1976d2" stroke-width="1.5"/>
+        <line x1="200" y1="50" x2="200" y2="40" stroke="#1976d2" stroke-width="1.5"/>
+        <line x1="130" y1="69" x2="125" y2="60" stroke="#1976d2" stroke-width="1.5"/>
+        <line x1="101" y1="91" x2="94" y2="84" stroke="#1976d2" stroke-width="1.5"/>
+        <line x1="79" y1="120" x2="70" y2="115" stroke="#1976d2" stroke-width="1.5"/>
+        <line x1="60" y1="190" x2="50" y2="190" stroke="#1976d2" stroke-width="1.5"/>
+        <!-- 刻度数字 -->
+        <text x="365" y="194" text-anchor="start" fill="#1976d2">0°</text>
+        <text x="343" y="108" text-anchor="middle" fill="#1976d2">30°</text>
+        <text x="317" y="73" text-anchor="middle" fill="#1976d2">45°</text>
+        <text x="283" y="47" text-anchor="middle" fill="#1976d2">60°</text>
+        <text x="200" y="25" text-anchor="middle" fill="#1976d2" font-weight="bold">90°</text>
+        <text x="117" y="47" text-anchor="middle" fill="#1976d2">120°</text>
+        <text x="83" y="73" text-anchor="middle" fill="#1976d2">135°</text>
+        <text x="57" y="108" text-anchor="middle" fill="#1976d2">150°</text>
+        <text x="35" y="194" text-anchor="end" fill="#1976d2">180°</text>
+        <!-- 被测量的角：60° -->
+        <path d="M200,190 L350,190 A150,150 0 0,0 275,60 Z" fill="rgba(46,125,50,0.18)"/>
+        <line x1="200" y1="190" x2="350" y2="190" stroke="#2e7d32" stroke-width="2.5"/>
+        <line x1="200" y1="190" x2="275" y2="60" stroke="#2e7d32" stroke-width="2.5"/>
+        <text x="261" y="158" text-anchor="middle" fill="#2e7d32" font-weight="bold" font-size="14">60°</text>
+        <text x="320" y="178" text-anchor="middle" fill="#2e7d32" font-size="11">一条边对 0°</text>
+        <!-- 中心点 -->
+        <circle cx="200" cy="190" r="5" fill="#fff" stroke="#1976d2" stroke-width="2"/>
+        <line x1="193" y1="190" x2="207" y2="190" stroke="#1976d2" stroke-width="1"/>
+        <line x1="200" y1="183" x2="200" y2="197" stroke="#1976d2" stroke-width="1"/>
+        <text x="200" y="212" text-anchor="middle" fill="#1565c0" font-weight="bold">中心点（对准顶点）</text>
+        <text x="200" y="228" text-anchor="middle" fill="#666" font-size="11">底边即 0° 刻度线，对准角的一条边</text>
+      </svg>
+    </div>
+    <p style="text-align:left;">如图：把量角器中心对准角的顶点，0° 刻度线（底边）对准角的一条边；另一条边所指的刻度就是角的度数——这里读出 <strong>60°</strong>。</p>
   </div>
 
   <h2>挑战性问题</h2>
   <div class="challenge">
     <p><strong>问题 1：</strong>时钟在 3:00 时，时针和分针的夹角是多少度？在 5:00 时呢？</p>
+    <button class="btn-sm" onclick="toggleHint('ch1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca1')">查看答案</button>
+    <div class="hint-box" id="ch1">时钟一圈 360°，共 12 个数字，相邻两个数字间 = 360° ÷ 12。</div>
+    <div class="ans-box" id="ca1">每两个数字之间是 30°。3:00：3 × 30° = 90°（直角）；5:00：5 × 30° = 150°（钝角）。</div>
+
     <p><strong>问题 2：</strong>一个角的补角比它的余角大多少度？这个差值是固定的吗？</p>
+    <button class="btn-sm" onclick="toggleHint('ch2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca2')">查看答案</button>
+    <div class="hint-box" id="ch2">设这个角为 α，补角 = 180° − α，余角 = 90° − α，两者相减。</div>
+    <div class="ans-box" id="ca2">(180° − α) − (90° − α) = 90°。差值固定为 90°，与 α 无关。</div>
+
     <p><strong>问题 3：</strong>为什么古巴比伦人把圆分成 360 等份，而不是 100 等份？如果是你，你会选哪个数？为什么？</p>
+    <button class="btn-sm" onclick="toggleHint('ch3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca3')">查看答案</button>
+    <div class="hint-box" id="ch3">想想哪个数的"约数"更多，等分起来更方便；再想想天文。</div>
+    <div class="ans-box" id="ca3">360 的约数很多（能被 2、3、4、5、6、8、9、10、12、15、18、20、24、30、36、40、45、60、72、90、120、180 整除），等分方便；且 360 接近一年的天数。100 的约数少（2、4、5、10、20、25、50），等分不便。我选 360。</div>
   </div>
 
   <h2>拓展阅读</h2>
   <div class="extend">
-    <p><strong>弧度制：</strong>除了"度"，数学家还发明了另一种度量角的方式——<strong>弧度（radian）</strong>。1 弧度等于"弧长等于半径时的圆心角"。一个圆是 2π 弧度 ≈ 6.28 弧度。为什么用弧度？因为到了高中，三角函数用弧度来算微分和积分会简单得多。</p>
+    <p><strong>弧度制：</strong>除了"度"，数学家还发明了另一种度量角的方式——<strong>弧度（radian）</strong>。1 弧度等于"弧长等于半径时的圆心角"。一个圆是 2π 弧度 ≈ 6.28 弧度。为什么用弧度？更本质地说，<strong>弧度把"角"和"实数"统一了起来——每一个角都对应一个实数（弧长 ÷ 半径），于是角也能像数一样参与运算和比较</strong>。比如"弧长 = 半径 × 弧度"这种公式，在弧度制下简洁而统一；到了高中，三角函数用弧度来算微分和积分也会简单得多。</p>
     <p><strong>推荐阅读：</strong>《古今数学思想》—— 了解角度的由来和巴比伦 60 进制的影响；《极简数学》—— 用生活中的例子理解角度。</p>
   </div>
 
@@ -241,6 +331,12 @@
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
 function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleZoom() {
+  var g = document.getElementById('zoomAngle');
+  var n = document.getElementById('zoomNote');
+  if (g.getAttribute('transform')) { g.removeAttribute('transform'); n.style.display = 'none'; }
+  else { g.setAttribute('transform', 'translate(-72,-102) scale(1.6)'); n.style.display = 'inline'; }
+}
 </script>
 <script src="./dt.js"></script>
 </body>

@@ -12,7 +12,7 @@
   .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
   .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #e3f2fd; border-left: 4px solid #1976d2; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
   .challenge { background: #e8eaf6; border: 2px dashed #0277bd; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
   .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
@@ -45,6 +45,14 @@
     <p>《古今数学思想》中提到：欧几里得的定义看似简单，但蕴含了深刻的洞察——<strong>直线不仅是几何的基本元素，还是"最短"这一概念的载体。</strong>后来的数学家发现，在球面上，两点之间的最短路径不是直线，而是大圆弧——这就是为什么飞机的航线在地图上看起来是弯的。</p>
   </div>
 
+  <h2>中国古代的几何智慧：《墨经》论"端"</h2>
+  <div class="origin">
+    <p>说到"点"的定义，古希腊有欧几里得，中国则有<strong>《墨经》</strong>。墨家学派（约公元前 4 世纪）在《墨经·经上》中给"点"下了一个精妙的定义：</p>
+    <p style="text-align:center;font-size:1.05em;"><strong>"端，体之无序而最前者也。"</strong></p>
+    <p>意思是：<strong>"端"（即点）</strong>是物体的组成部分中无法再分、排在最前面的那一部分——换句话说，<strong>点是没有大小、不可再分的最基本单元</strong>。这与欧几里得"点没有部分"的定义异曲同工。</p>
+    <p>《墨经》还提出"尺（线）前于区（面）"——线比面更基本，与"点动成线、线动成面"的思路一致。可见两千多年前，东西方先哲对几何本源的理解，已在不约而同中相遇。</p>
+  </div>
+
   <h2>一、直线、射线、线段：三兄弟的区别</h2>
   <div class="story">
     <p>我们每天都在和"线"打交道，但"线"有三种不同的身份：</p>
@@ -52,29 +60,29 @@
       <svg viewBox="0 0 500 280" style="max-width:100%;height:auto;display:block;margin:0 auto;">
         <defs><style>text{font-size:13px;text-anchor:middle}</style></defs>
         <!-- 直线 -->
-        <text x="250" y="25" font-size="14" fill="#0277bd" font-weight="bold">直线：没有端点，向两端无限延伸</text>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#0277bd" font-weight="bold">直线：没有端点，向两端无限延伸</text>
         <line x1="30" y1="60" x2="470" y2="60" stroke="#0277bd" stroke-width="2.5"/>
         <polygon points="470,60 462,56 462,64" fill="#0277bd"/>
         <polygon points="30,60 38,56 38,64" fill="#0277bd"/>
         <circle cx="30" cy="60" r="3" fill="none"/>
         <circle cx="250" cy="60" r="3" fill="none"/>
         <circle cx="470" cy="60" r="3" fill="none"/>
-        <text x="250" y="80" fill="#888">用两个大写字母表示：直线 AB 或 直线 l</text>
+        <text x="250" y="80" text-anchor="middle" fill="#888">用两个大写字母表示：直线 AB 或 直线 l</text>
         <!-- 射线 -->
-        <text x="250" y="115" font-size="14" fill="#e65100" font-weight="bold">射线：有一个端点，向一个方向无限延伸</text>
-        <line x1="60" y1="150" x2="440" y2="150" stroke="#e65100" stroke-width="2.5"/>
-        <polygon points="440,150 432,146 432,154" fill="#e65100"/>
-        <circle cx="60" cy="150" r="5" fill="#e65100"/>
-        <text x="60" y="170" fill="#e65100" font-weight="bold">端点</text>
-        <text x="250" y="172" fill="#888">用端点和另一点表示：射线 AB</text>
+        <text x="250" y="115" text-anchor="middle" font-size="14" fill="#7b1fa2" font-weight="bold">射线：有一个端点，向一个方向无限延伸</text>
+        <line x1="60" y1="150" x2="440" y2="150" stroke="#7b1fa2" stroke-width="2.5"/>
+        <polygon points="440,150 432,146 432,154" fill="#7b1fa2"/>
+        <circle cx="60" cy="150" r="5" fill="#7b1fa2"/>
+        <text x="60" y="170" text-anchor="middle" fill="#7b1fa2" font-weight="bold">端点</text>
+        <text x="250" y="172" text-anchor="middle" fill="#888">用端点和另一点表示：射线 AB</text>
         <!-- 线段 -->
-        <text x="250" y="205" font-size="14" fill="#2e7d32" font-weight="bold">线段：有两个端点，长度有限</text>
+        <text x="250" y="205" text-anchor="middle" font-size="14" fill="#2e7d32" font-weight="bold">线段：有两个端点，长度有限</text>
         <line x1="60" y1="240" x2="440" y2="240" stroke="#2e7d32" stroke-width="2.5"/>
         <circle cx="60" cy="240" r="5" fill="#2e7d32"/>
         <circle cx="440" cy="240" r="5" fill="#2e7d32"/>
-        <text x="60" y="260" fill="#2e7d32" font-weight="bold">端点</text>
-        <text x="440" y="260" fill="#2e7d32" font-weight="bold">端点</text>
-        <text x="250" y="262" fill="#888">用两个端点表示：线段 AB</text>
+        <text x="60" y="260" text-anchor="middle" fill="#2e7d32" font-weight="bold">端点</text>
+        <text x="440" y="260" text-anchor="middle" fill="#2e7d32" font-weight="bold">端点</text>
+        <text x="250" y="262" text-anchor="middle" fill="#888">用两个端点表示：线段 AB</text>
       </svg>
     </div>
     <div class="key">
@@ -102,20 +110,33 @@
       <svg viewBox="0 0 500 160" style="max-width:100%;height:auto;display:block;margin:0 auto;">
         <defs><style>text{font-size:12px;text-anchor:middle}</style></defs>
         <circle cx="50" cy="100" r="6" fill="#0277bd"/>
-        <text x="50" y="85" fill="#0277bd" font-weight="bold">A</text>
+        <text x="50" y="85" text-anchor="middle" fill="#0277bd" font-weight="bold">A</text>
         <circle cx="450" cy="100" r="6" fill="#0277bd"/>
-        <text x="450" y="85" fill="#0277bd" font-weight="bold">B</text>
+        <text x="450" y="85" text-anchor="middle" fill="#0277bd" font-weight="bold">B</text>
         <!-- 线段（最短） -->
         <line x1="50" y1="100" x2="450" y2="100" stroke="#2e7d32" stroke-width="3"/>
-        <text x="250" y="95" fill="#2e7d32" font-weight="bold">线段 AB（最短！）</text>
+        <text x="250" y="95" text-anchor="middle" fill="#2e7d32" font-weight="bold">线段 AB（最短！）</text>
         <!-- 曲线（更长） -->
-        <path d="M50,100 Q100,30 250,80 Q400,130 450,100" fill="none" stroke="#e65100" stroke-width="2" stroke-dasharray="6 3"/>
-        <text x="250" y="55" fill="#e65100">曲线（更长）</text>
+        <path d="M50,100 Q100,30 250,80 Q400,130 450,100" fill="none" stroke="#00838f" stroke-width="2" stroke-dasharray="6 3"/>
+        <text x="250" y="55" text-anchor="middle" fill="#00838f">曲线（更长）</text>
         <!-- 折线（更长） -->
         <polyline points="50,100 150,140 350,60 450,100" fill="none" stroke="#9c27b0" stroke-width="2" stroke-dasharray="6 3"/>
-        <text x="250" y="145" fill="#9c27b0">折线（更长）</text>
+        <text x="250" y="145" text-anchor="middle" fill="#9c27b0">折线（更长）</text>
       </svg>
     </div>
+  </div>
+
+  <h2>四、欧几里得的五大公设</h2>
+  <div class="formula" style="text-align:left;">
+    <p style="text-align:left;">欧几里得在《几何原本》开头，列出了五条"不证自明"的基本前提——称为<strong>公设</strong>（postulates）。整座几何大厦都从这五条出发，用逻辑一层层推导出来：</p>
+    <ol style="text-align:left;">
+      <li><strong>公设一：</strong>任意两点之间可以连一条直线段。</li>
+      <li><strong>公设二：</strong>任意一条直线段都可以沿两个方向无限延伸成一条直线。</li>
+      <li><strong>公设三：</strong>以任意一点为中心、任意长为半径，可以画一个圆。</li>
+      <li><strong>公设四：</strong>所有的直角都彼此相等。</li>
+      <li><strong>公设五（平行公设）：</strong>一条直线与另外两条直线相交，若某一同旁内角之和小于两直角（180°），则这两条直线无限延伸后必在这一侧相交。</li>
+    </ol>
+    <p style="text-align:left;">前四条简洁自然，唯独<strong>第五公设</strong>显得啰嗦——两千年来无数数学家试图用前四条推出它，都失败了。直到 19 世纪人们才明白：放弃第五公设，竟能得到同样自洽的"非欧几何"——这正是后来爱因斯坦描述宇宙时空的数学工具。</p>
   </div>
 
   <h2>阅读与思考：长度的测量</h2>
@@ -130,8 +151,22 @@
   <h2>挑战性问题</h2>
   <div class="challenge">
     <p><strong>问题 1：</strong>一条直线上有 3 个点 A、B、C。这条直线上有多少条线段？有多少条射线？</p>
+    <button class="btn-sm" onclick="toggleHint('ch1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca1')">查看答案</button>
+    <div class="hint-box" id="ch1">线段数 = 从 3 个点中任选 2 个的组合数；射线从每个点出发，向两侧各延伸一条。</div>
+    <div class="ans-box" id="ca1">线段 3 条（AB、AC、BC）；射线 6 条（每个点向左、右各延伸 1 条，3×2 = 6）。</div>
+
     <p><strong>问题 2：</strong>为什么"两点之间线段最短"在球面上不成立？在球面上，两点之间的最短路径是什么？</p>
+    <button class="btn-sm" onclick="toggleHint('ch2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca2')">查看答案</button>
+    <div class="hint-box" id="ch2">球面是曲面，没有"平面直线"；想想飞机航线沿着什么走。</div>
+    <div class="ans-box" id="ca2">球面上没有平面直线，"线段最短"只适用于平面。球面上两点的最短路径是过这两点和球心的"大圆"上较短的那段弧——飞机沿大圆飞行，所以在地图上看起来是弯的。</div>
+
     <p><strong>问题 3：</strong>如果不用尺子，你能用什么方法比较两条线段的长度？</p>
+    <button class="btn-sm" onclick="toggleHint('ch3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca3')">查看答案</button>
+    <div class="hint-box" id="ch3">用圆规"截取"，或借助一根绳子/手指做中介。</div>
+    <div class="ans-box" id="ca3">用圆规截取一条线段的长，再移到另一条上比较端点是否重合（"截取法"）；也可借助一根绳子或手指作为中介来比对。</div>
   </div>
 
   <h2>拓展阅读</h2>

@@ -67,28 +67,29 @@
         <defs>
           <style>text.tlabel{font-size:16px;fill:#333;font-family:serif;font-style:italic}</style>
         </defs>
-        <!-- 直角三角形 ABC，∠C=90° -->
+        <!-- 直角三角形 ABC，∠C=90°：C在左下(直角)，A在右下，B在左上 -->
         <polygon points="80,280 320,280 80,80" fill="rgba(0,77,64,0.1)" stroke="#004d40" stroke-width="2.5"/>
+        <!-- 直角标记在 C(80,280) -->
         <rect x="80" y="272" width="8" height="8" fill="none" stroke="#004d40" stroke-width="1.5"/>
         <circle cx="80" cy="280" r="3" fill="#004d40"/>
         <circle cx="320" cy="280" r="3" fill="#004d40"/>
         <circle cx="80" cy="80" r="3" fill="#004d40"/>
-        <text x="70" y="300" class="tlabel">A</text>
-        <text x="328" y="300" class="tlabel">B</text>
-        <text x="70" y="70" class="tlabel">C</text>
-        <!-- 直角标记 -->
-        <text x="88" y="98" font-size="20" fill="#004d40">◻</text>
-        <!-- ∠A 标记 -->
-        <path d="M100,260 A20,20 0 0,0 118,236" fill="none" stroke="#c62828" stroke-width="2"/>
-        <text x="120" y="252" font-size="14" fill="#c62828" font-weight="bold">∠A</text>
-        <!-- 边标注 -->
-        <text x="195" y="298" font-size="14" fill="#1565c0" text-anchor="middle" font-weight="bold">∠A 的邻边 b</text>
-        <text x="52" y="185" font-size="14" fill="#c62828" text-anchor="middle" transform="rotate(-90,52,185)" font-weight="bold">∠A 的对边 a</text>
-        <text x="215" y="175" font-size="14" fill="#2e7d32" text-anchor="middle" font-weight="bold">斜边 c</text>
-        <!-- 口诀 -->
-        <text x="300" y="145" font-size="12" fill="#666">斜边是直角所对的边</text>
-        <text x="300" y="162" font-size="12" fill="#666">对边是∠A所对的边</text>
-        <text x="300" y="179" font-size="12" fill="#666">邻边是夹∠A(非斜边)的边</text>
+        <text x="68" y="300" class="tlabel" text-anchor="end">C</text>
+        <text x="332" y="300" class="tlabel" text-anchor="start">A</text>
+        <text x="68" y="74" class="tlabel" text-anchor="end">B</text>
+        <!-- 直角标记符号 -->
+        <text x="92" y="272" font-size="16" fill="#004d40" text-anchor="start">┐</text>
+        <!-- ∠A 标记（A 在右下角 320,280） -->
+        <path d="M300,280 A20,20 0 0,0 305,267" fill="none" stroke="#6a1b9a" stroke-width="2"/>
+        <text x="288" y="270" font-size="14" fill="#6a1b9a" text-anchor="end" font-weight="bold">∠A</text>
+        <!-- 边标注：邻边 b 在底边(AC)，对边 a 在左边(BC)，斜边 c 在斜边(AB) -->
+        <text x="200" y="300" font-size="14" fill="#1565c0" text-anchor="middle" font-weight="bold">∠A 的邻边 b</text>
+        <text x="52" y="185" font-size="14" fill="#6a1b9a" text-anchor="middle" transform="rotate(-90,52,185)" font-weight="bold">∠A 的对边 a</text>
+        <text x="215" y="170" font-size="14" fill="#2e7d32" text-anchor="middle" font-weight="bold">斜边 c</text>
+        <!-- 说明 -->
+        <text x="400" y="120" font-size="12" fill="#666" text-anchor="start">斜边是直角所对的边</text>
+        <text x="400" y="140" font-size="12" fill="#666" text-anchor="start">对边是∠A所对的边</text>
+        <text x="400" y="160" font-size="12" fill="#666" text-anchor="start">邻边是夹∠A(非斜边)的边</text>
       </svg>
     </div>
     <div class="key">
@@ -104,60 +105,13 @@
     <h3>二、正弦、余弦、正切</h3>
     <p>如果两个直角三角形有一个锐角相等，根据相似三角形的知识，它们的三边比例是固定的——不管三角形画得多大，这些比例都不会变。这就引出了三个最重要的比值：</p>
 
-    <div class="graphic">
-      <svg viewBox="0 0 600 400" style="max-width:100%;height:auto;">
-        <defs>
-          <style>text.tlabel{font-size:16px;fill:#333;font-family:serif;font-style:italic}</style>
-        </defs>
-        <!-- 大三角形 -->
-        <polygon points="80,350 380,350 80,80" fill="rgba(0,77,64,0.08)" stroke="#004d40" stroke-width="2"/>
-        <rect x="80" y="342" width="8" height="8" fill="none" stroke="#004d40" stroke-width="1.5"/>
-        <circle cx="80" cy="350" r="3" fill="#004d40"/>
-        <circle cx="380" cy="350" r="3" fill="#004d40"/>
-        <circle cx="80" cy="80" r="3" fill="#004d40"/>
-        <text x="70" y="370" class="tlabel">A</text>
-        <text x="388" y="370" class="tlabel">B</text>
-        <text x="70" y="70" class="tlabel">C</text>
-        <text x="88" y="98" font-size="20" fill="#004d40">◻</text>
-        <!-- ∠A 标记 -->
-        <path d="M105,330 A24,24 0 0,0 126,300" fill="none" stroke="#c62828" stroke-width="2"/>
-        <text x="130" y="320" font-size="14" fill="#c62828" font-weight="bold">∠A</text>
-        <!-- 边标注 -->
-        <text x="230" y="368" font-size="14" fill="#1565c0" text-anchor="middle" font-weight="bold">邻边</text>
-        <text x="48" y="215" font-size="14" fill="#c62828" text-anchor="middle" transform="rotate(-90,48,215)" font-weight="bold">对边</text>
-        <text x="245" y="210" font-size="14" fill="#2e7d32" text-anchor="middle" font-weight="bold">斜边</text>
-
-        <!-- 公式区域 -->
-        <text x="520" y="100" font-size="14" fill="#c62828" font-weight="bold">sin A =</text>
-        <text x="520" y="120" font-size="14" fill="#c62828" text-anchor="middle">∠A的对边</text>
-        <line x1="460" y1="125" x2="580" y2="125" stroke="#c62828" stroke-width="1"/>
-        <text x="520" y="140" font-size="14" fill="#c62828" text-anchor="middle">斜边</text>
-        <text x="520" y="160" font-size="12" fill="#999" text-anchor="middle">= a/c</text>
-        <text x="520" y="180" font-size="12" fill="#999" text-anchor="middle">读作 "赛因 A"</text>
-
-        <text x="520" y="220" font-size="14" fill="#1565c0" font-weight="bold">cos A =</text>
-        <text x="520" y="240" font-size="14" fill="#1565c0" text-anchor="middle">∠A的邻边</text>
-        <line x1="460" y1="245" x2="580" y2="245" stroke="#1565c0" stroke-width="1"/>
-        <text x="520" y="260" font-size="14" fill="#1565c0" text-anchor="middle">斜边</text>
-        <text x="520" y="280" font-size="12" fill="#999" text-anchor="middle">= b/c</text>
-        <text x="520" y="300" font-size="12" fill="#999" text-anchor="middle">读作 "扣赛因 A"</text>
-
-        <text x="520" y="340" font-size="14" fill="#2e7d32" font-weight="bold">tan A =</text>
-        <text x="520" y="360" font-size="14" fill="#2e7d32" text-anchor="middle">∠A的对边</text>
-        <line x1="460" y1="365" x2="580" y2="365" stroke="#2e7d32" stroke-width="1"/>
-        <text x="520" y="380" font-size="14" fill="#2e7d32" text-anchor="middle">∠A的邻边</text>
-        <text x="520" y="400" font-size="12" fill="#999" text-anchor="middle">= a/b</text>
-        <text x="520" y="420" font-size="12" fill="#999" text-anchor="middle">读作 "坦振特 A"</text>
-      </svg>
-    </div>
-
     <div class="formula">
       <p style="text-align:center;font-size:1.15em;font-weight:bold;">在 Rt△ABC 中，∠C = 90°，则对于锐角 A：</p>
       <table>
         <tr><th>名称</th><th>符号</th><th>定义</th><th>记忆口诀</th></tr>
         <tr>
           <td>正弦</td>
-          <td style="color:#c62828;font-weight:bold;">sin A</td>
+          <td style="color:#6a1b9a;font-weight:bold;">sin A</td>
           <td>对边 / 斜边 = a/c</td>
           <td>正对斜</td>
         </tr>
@@ -179,7 +133,6 @@
     <div class="key">
       <p><strong>记忆口诀：</strong></p>
       <p style="text-align:center;font-size:1.1em;"><strong>正弦对斜，余弦邻斜，正切对邻。</strong></p>
-      <p>还可以用英文缩写记：<strong>SOH-CAH-TOA</strong>（Sin = Opposite/Hypotenuse, Cos = Adjacent/Hypotenuse, Tan = Opposite/Adjacent）。</p>
     </div>
 
     <div class="example">
@@ -233,19 +186,21 @@
         <div class="graphic">
           <svg viewBox="0 0 260 200" style="max-width:100%;height:auto;">
             <polygon points="40,180 200,180 40,20" fill="rgba(0,77,64,0.1)" stroke="#004d40" stroke-width="2.5"/>
+            <!-- 直角标记在 C(40,180) -->
             <rect x="40" y="172" width="8" height="8" fill="none" stroke="#004d40" stroke-width="1.5"/>
-            <text x="30" y="200" font-size="15" font-family="serif" font-style="italic" fill="#333">A</text>
-            <text x="208" y="200" font-size="15" font-family="serif" font-style="italic" fill="#333">B</text>
-            <text x="30" y="15" font-size="15" font-family="serif" font-style="italic" fill="#333">C</text>
-            <text x="48" y="38" font-size="18" fill="#004d40">◻</text>
-            <!-- 45° 标记 -->
-            <path d="M58,162 A18,18 0 0,0 74,142" fill="none" stroke="#c62828" stroke-width="1.5"/>
-            <text x="80" y="158" font-size="12" fill="#c62828" font-weight="bold">45°</text>
-            <path d="M182,162 A18,18 0 0,1 198,142" fill="none" stroke="#c62828" stroke-width="1.5"/>
-            <text x="198" y="158" font-size="12" fill="#c62828" font-weight="bold">45°</text>
-            <!-- 边 -->
+            <!-- 顶点：C 左下(直角)，A 右下，B 左上 -->
+            <text x="30" y="200" font-size="15" font-family="serif" font-style="italic" fill="#333" text-anchor="end">C</text>
+            <text x="210" y="200" font-size="15" font-family="serif" font-style="italic" fill="#333" text-anchor="start">A</text>
+            <text x="30" y="14" font-size="15" font-family="serif" font-style="italic" fill="#333" text-anchor="end">B</text>
+            <!-- 45° 标记在 A(200,180) 右下角 -->
+            <path d="M182,180 A18,18 0 0,0 187,167" fill="none" stroke="#6a1b9a" stroke-width="1.5"/>
+            <text x="178" y="172" font-size="12" fill="#6a1b9a" font-weight="bold" text-anchor="end">45°</text>
+            <!-- 45° 标记在 B(40,20) 左上角 -->
+            <path d="M40,38 A18,18 0 0,0 53,33" fill="none" stroke="#6a1b9a" stroke-width="1.5"/>
+            <text x="58" y="48" font-size="12" fill="#6a1b9a" font-weight="bold" text-anchor="start">45°</text>
+            <!-- 边：底边AC=1，左边BC=1，斜边AB=√2 -->
             <text x="120" y="198" font-size="13" fill="#1565c0" text-anchor="middle">1</text>
-            <text x="22" y="105" font-size="13" fill="#c62828" text-anchor="middle" transform="rotate(-90,22,105)">1</text>
+            <text x="22" y="105" font-size="13" fill="#6a1b9a" text-anchor="middle" transform="rotate(-90,22,105)">1</text>
             <text x="137" y="95" font-size="13" fill="#2e7d32" text-anchor="middle">√2</text>
           </svg>
         </div>
@@ -260,20 +215,21 @@
         <div class="graphic">
           <svg viewBox="0 0 260 200" style="max-width:100%;height:auto;">
             <polygon points="40,180 240,180 40,20" fill="rgba(0,77,64,0.1)" stroke="#004d40" stroke-width="2.5"/>
+            <!-- 直角标记在 C(40,180) -->
             <rect x="40" y="172" width="8" height="8" fill="none" stroke="#004d40" stroke-width="1.5"/>
-            <text x="30" y="200" font-size="15" font-family="serif" font-style="italic" fill="#333">A</text>
-            <text x="248" y="200" font-size="15" font-family="serif" font-style="italic" fill="#333">B</text>
-            <text x="30" y="15" font-size="15" font-family="serif" font-style="italic" fill="#333">C</text>
-            <text x="48" y="38" font-size="18" fill="#004d40">◻</text>
-            <!-- 30° 标记 -->
-            <path d="M58,162 A18,18 0 0,0 74,142" fill="none" stroke="#c62828" stroke-width="1.5"/>
-            <text x="80" y="158" font-size="12" fill="#c62828" font-weight="bold">30°</text>
-            <!-- 60° 标记 -->
-            <path d="M222,162 A18,18 0 0,1 238,141" fill="none" stroke="#1565c0" stroke-width="1.5"/>
-            <text x="230" y="158" font-size="12" fill="#1565c0" font-weight="bold">60°</text>
-            <!-- 边 -->
+            <!-- 顶点：C 左下(直角)，A 右下(30°)，B 左上(60°) -->
+            <text x="30" y="200" font-size="15" font-family="serif" font-style="italic" fill="#333" text-anchor="end">C</text>
+            <text x="250" y="200" font-size="15" font-family="serif" font-style="italic" fill="#333" text-anchor="start">A</text>
+            <text x="30" y="14" font-size="15" font-family="serif" font-style="italic" fill="#333" text-anchor="end">B</text>
+            <!-- 30° 标记在 A(240,180) 右下角 -->
+            <path d="M222,180 A18,18 0 0,0 226,169" fill="none" stroke="#6a1b9a" stroke-width="1.5"/>
+            <text x="218" y="172" font-size="12" fill="#6a1b9a" font-weight="bold" text-anchor="end">30°</text>
+            <!-- 60° 标记在 B(40,20) 左上角 -->
+            <path d="M40,38 A18,18 0 0,0 54,31" fill="none" stroke="#1565c0" stroke-width="1.5"/>
+            <text x="60" y="48" font-size="12" fill="#1565c0" font-weight="bold" text-anchor="start">60°</text>
+            <!-- 边：底边AC=√3，左边BC=1(30°对边)，斜边AB=2 -->
             <text x="140" y="198" font-size="13" fill="#1565c0" text-anchor="middle">√3</text>
-            <text x="22" y="105" font-size="13" fill="#c62828" text-anchor="middle" transform="rotate(-90,22,105)">1</text>
+            <text x="22" y="105" font-size="13" fill="#6a1b9a" text-anchor="middle" transform="rotate(-90,22,105)">1</text>
             <text x="155" y="95" font-size="13" fill="#2e7d32" text-anchor="middle">2</text>
           </svg>
         </div>
@@ -321,6 +277,12 @@
           <li>tan A = BC/AC = 6/8 = 3/4 → ∠A ≈ <strong>36.9°</strong></li>
           <li>∠B = 90° – ∠A ≈ <strong>53.1°</strong></li>
         </ul>
+        <p><strong>为什么 tan A = 3/4 能得出 ∠A ≈ 36.9°？</strong>这里用到的是<strong>"反查"</strong>思想：我们已经知道 tan 30° = √3/3 ≈ 0.577，tan 45° = 1。而 3/4 = 0.75，介于 0.577 和 1 之间，说明 ∠A 在 30°~45° 之间。要精确求出角度，有两种方法：</p>
+        <ul>
+          <li><strong>查三角函数表：</strong>在专门的"正切表"中，找到 tan 值最接近 0.75 的角度，对应约为 36°52'（≈ 36.9°）。</li>
+          <li><strong>用计算器反查：</strong>按计算器上的 <strong>tan⁻¹</strong>（或 arctan、inv tan）键，输入 0.75，即可得到 ∠A ≈ 36.87°，四舍五入为 36.9°。</li>
+        </ul>
+        <p>同理，若已知 sin A = 0.6，用 sin⁻¹ 键反查可得 ∠A ≈ 36.9°（正好与本题一致，因为 sin A = BC/AB = 6/10 = 0.6）。</p>
       </div>
     </div>
   </div>
@@ -330,35 +292,51 @@
     <p>三角函数最酷的应用就是<strong>不直接测量，用计算代替</strong>。你想知道一棵树有多高？不用爬上去，站在地上就能算出来。</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 600 340" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 600 380" style="max-width:100%;height:auto;">
         <defs>
           <style>text{font-family:sans-serif}</style>
         </defs>
         <!-- 地面 -->
-        <line x1="30" y1="290" x2="570" y2="290" stroke="#999" stroke-width="1.5"/>
+        <line x1="20" y1="300" x2="580" y2="300" stroke="#999" stroke-width="2"/>
+        <line x1="20" y1="305" x2="580" y2="305" stroke="#ccc" stroke-width="1" stroke-dasharray="3,2"/>
+        <!-- 观测者（火柴人）-->
+        <circle cx="80" cy="262" r="10" fill="#1565c0"/>
+        <line x1="80" y1="272" x2="80" y2="290" stroke="#1565c0" stroke-width="3"/>
+        <line x1="65" y1="280" x2="95" y2="280" stroke="#1565c0" stroke-width="2.5"/>
+        <line x1="80" y1="290" x2="70" y2="300" stroke="#1565c0" stroke-width="2.5"/>
+        <line x1="80" y1="290" x2="90" y2="300" stroke="#1565c0" stroke-width="2.5"/>
+        <circle cx="80" cy="262" r="2" fill="#fff"/>
+        <text x="80" y="325" text-anchor="middle" font-size="13" fill="#1565c0">观测者</text>
         <!-- 树 -->
-        <rect x="280" y="90" width="12" height="200" fill="#4e342e" rx="2"/>
-        <ellipse cx="286" cy="85" rx="40" ry="35" fill="#2e7d32"/>
-        <text x="286" y="75" text-anchor="middle" font-size="14" fill="#2e7d32" font-weight="bold">树</text>
-        <!-- 观测者 -->
-        <circle cx="80" cy="280" r="8" fill="#1565c0"/>
-        <line x1="80" y1="272" x2="80" y2="260" stroke="#1565c0" stroke-width="2.5"/>
-        <text x="80" y="310" text-anchor="middle" font-size="12" fill="#1565c0">观测者</text>
-        <!-- 视线 -->
-        <line x1="80" y1="280" x2="286" y2="90" stroke="#c62828" stroke-width="2" stroke-dasharray="8,4"/>
-        <!-- 水平线 -->
-        <line x1="80" y1="280" x2="286" y2="280" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="4,3"/>
-        <!-- 角度 -->
-        <path d="M100,280 A20,20 0 0,0 115,260" fill="none" stroke="#c62828" stroke-width="2"/>
-        <text x="120" y="272" font-size="13" fill="#c62828" font-weight="bold">仰角 α</text>
-        <!-- 距离 -->
-        <text x="183" y="275" font-size="13" fill="#1565c0" text-anchor="middle">水平距离 d</text>
-        <text x="183" y="268" font-size="11" fill="#999" text-anchor="middle">← 可以测量 →</text>
-        <!-- 高度 -->
-        <text x="310" y="185" font-size="13" fill="#c62828" text-anchor="middle">树高 h</text>
-        <text x="310" y="200" font-size="11" fill="#999" text-anchor="middle">= ?</text>
+        <rect x="344" y="100" width="12" height="200" fill="#6d4c41" rx="2"/>
+        <ellipse cx="350" cy="85" rx="45" ry="40" fill="#2e7d32"/>
+        <ellipse cx="320" cy="95" rx="30" ry="25" fill="#388e3c"/>
+        <ellipse cx="380" cy="95" rx="30" ry="25" fill="#388e3c"/>
+        <text x="350" y="70" text-anchor="middle" font-size="14" fill="#2e7d32" font-weight="bold">树</text>
+        <!-- 视线（从眼睛到树顶）-->
+        <line x1="80" y1="262" x2="350" y2="85" stroke="#6a1b9a" stroke-width="2" stroke-dasharray="8,4"/>
+        <!-- 水平参考线（眼高水平线）-->
+        <line x1="80" y1="262" x2="350" y2="262" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <!-- 仰角弧线及标注 -->
+        <path d="M100,262 A20,20 0 0,0 97,251" fill="none" stroke="#6a1b9a" stroke-width="2"/>
+        <text x="118" y="255" font-size="13" fill="#6a1b9a" font-weight="bold" text-anchor="start">仰角 α</text>
+        <!-- 水平距离标注（地面）-->
+        <line x1="80" y1="315" x2="350" y2="315" stroke="#1565c0" stroke-width="1.2"/>
+        <line x1="80" y1="311" x2="80" y2="319" stroke="#1565c0" stroke-width="1.2"/>
+        <line x1="350" y1="311" x2="350" y2="319" stroke="#1565c0" stroke-width="1.2"/>
+        <text x="215" y="332" text-anchor="middle" font-size="13" fill="#1565c0">水平距离 d（可测量）</text>
+        <!-- 树高标注（右侧）-->
+        <line x1="375" y1="85" x2="375" y2="300" stroke="#6a1b9a" stroke-width="1.2"/>
+        <line x1="371" y1="85" x2="379" y2="85" stroke="#6a1b9a" stroke-width="1.2"/>
+        <line x1="371" y1="300" x2="379" y2="300" stroke="#6a1b9a" stroke-width="1.2"/>
+        <text x="395" y="195" text-anchor="start" font-size="13" fill="#6a1b9a">树高 H</text>
+        <!-- 眼高标注（观测者侧）-->
+        <line x1="50" y1="262" x2="50" y2="300" stroke="#666" stroke-width="1"/>
+        <line x1="46" y1="262" x2="54" y2="262" stroke="#666" stroke-width="1"/>
+        <line x1="46" y1="300" x2="54" y2="300" stroke="#666" stroke-width="1"/>
+        <text x="40" y="285" text-anchor="end" font-size="11" fill="#666">眼高</text>
         <!-- 公式 -->
-        <text x="286" y="345" font-size="14" fill="#004d40" text-anchor="middle" font-weight="bold">tan α = h / d  →  h = d · tan α</text>
+        <text x="300" y="365" text-anchor="middle" font-size="14" fill="#004d40" font-weight="bold">tan α = h / d  →  h = d · tan α，树高 H = 眼高 + h</text>
       </svg>
     </div>
 
@@ -372,10 +350,29 @@
 
   <h2>挑战性问题</h2>
   <div class="challenge">
-    <p><strong>问题 1：</strong>不用计算器，你能证明 sin 15° = (√6 – √2)/4 吗？（提示：15° = 45° – 30°，需要用到高中才学的公式，但你可以画一个 30°-60°-90° 三角形，再在 30° 角处作角平分线试试。）</p>
+    <p><strong>问题 1：</strong>不用计算器，你能证明 sin 15° = (√6 – √2)/4 吗？</p>
+    <button class="btn-sm" onclick="toggleHint('ch1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca1')">查看答案</button>
+    <div class="hint-box" id="ch1">15° = 45° – 30°，需要用到高中才学的两角差公式。但初中生也可以画一个 30°-60°-90° 三角形，再在 30° 角处作角平分线，利用角平分线性质来推导。</div>
+    <div class="ans-box" id="ca1">利用高中公式 sin(45°–30°) = sin45°cos30° – cos45°sin30° = (√2/2)(√3/2) – (√2/2)(1/2) = (√6–√2)/4。验证：sin 15° ≈ 0.2588，(√6–√2)/4 ≈ (2.449–1.414)/4 ≈ 0.259 ✓</div>
+
     <p><strong>问题 2：</strong>sin A 能大于 1 吗？cos A 呢？tan A 呢？请解释原因。</p>
+    <button class="btn-sm" onclick="toggleHint('ch2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca2')">查看答案</button>
+    <div class="hint-box" id="ch2">直角三角形中，斜边是最长的边。对边和邻边都小于或等于斜边。</div>
+    <div class="ans-box" id="ca2">sin A = 对边/斜边 ≤ 1（对边 ≤ 斜边），cos A = 邻边/斜边 ≤ 1（邻边 ≤ 斜边）。但 tan A = 对边/邻边，邻边可以很短，所以 tan A 可以大于 1，甚至当角度接近 90° 时趋于无穷大。</div>
+
     <p><strong>问题 3：</strong>在 Rt△ABC 中，∠C = 90°，sin A = 3/5。求 cos A 和 tan A（不用勾股定理，直接用平方关系）。</p>
+    <button class="btn-sm" onclick="toggleHint('ch3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca3')">查看答案</button>
+    <div class="hint-box" id="ch3">用平方关系 sin²A + cos²A = 1，求出 cos A，再用 tan A = sin A / cos A。</div>
+    <div class="ans-box" id="ca3">cos²A = 1 – sin²A = 1 – (3/5)² = 1 – 9/25 = 16/25，cos A = 4/5（锐角取正）。tan A = sin A / cos A = (3/5)/(4/5) = 3/4。</div>
+
     <p><strong>问题 4：</strong>一艘船在海上航行，从灯塔的正东方向开始，向北偏东 30° 方向行驶了 10 海里。此时船在灯塔的什么方向？距离灯塔多远？</p>
+    <button class="btn-sm" onclick="toggleHint('ch4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca4')">查看答案</button>
+    <div class="hint-box" id="ch4">画出示意图：灯塔为原点，正东为 x 轴正方向，正北为 y 轴正方向。船从正东出发，向北偏东 30° 行驶 10 海里，构成一个直角三角形。</div>
+    <div class="ans-box" id="ca4">北偏东 30° 意味着从正北方向向东偏 30°，即与正东方向的夹角为 60°。船的东向位移 = 10×cos60° = 5 海里，北向位移 = 10×sin60° = 5√3 海里。起始点在正东方向（设距离为 d₀），最终位置：东 5+d₀，北 5√3。若起始就在灯塔正东 d₀ 处，则最终距灯塔 = √((d₀+5)² + (5√3)²)。方向需根据 d₀ 确定（本题若理解为"从灯塔处出发"，则距离 10 海里，方向北偏东 30°）。</div>
   </div>
 
   <h2>拓展阅读：一张古老的"三角函数表"</h2>
@@ -383,6 +380,46 @@
     <p>在计算器和电脑发明之前，人们怎么计算三角函数值呢？答案是：<strong>查表</strong>。</p>
     <p>公元 2 世纪，古希腊天文学家<strong>托勒密</strong>（Ptolemy）在他的巨著《天文学大成》（Almagest）中，给出了一张从 0° 到 180° 每隔半度的弦表——这相当于最早的三角函数表。他花了大量篇幅描述如何用几何方法算出这些值。</p>
     <p>到了 16 世纪，德国数学家<strong>雷蒂库斯</strong>（Rheticus）花了 12 年时间，编制了每隔 10 秒（即 1/360 度）的三角函数表——精确到 10 位小数！这在当时是一项极其浩大的计算工程。</p>
+
+    <p>下面是两张常用的<strong>三角函数表</strong>，点击按钮即可查看：第一张为<strong>特殊角表</strong>（必背精确值），第二张为 1°~30° 的细密数值表（4 位小数近似值，仅供查表参考）。</p>
+    <button class="btn-sm" onclick="toggleAns('trigtable')">查看三角函数表</button>
+    <div class="ans-box" id="trigtable">
+      <p style="margin-top:16px;"><strong> 1°~30° 三角函数表（4 位小数近似值，仅供查表参考）</strong></p>
+      <table>
+        <tr><th>角度</th><th>sin</th><th>cos</th><th>tan</th></tr>
+        <tr><td>1°</td><td>0.0175</td><td>0.9998</td><td>0.0175</td></tr>
+        <tr><td>2°</td><td>0.0349</td><td>0.9994</td><td>0.0349</td></tr>
+        <tr><td>3°</td><td>0.0523</td><td>0.9986</td><td>0.0524</td></tr>
+        <tr><td>4°</td><td>0.0698</td><td>0.9976</td><td>0.0699</td></tr>
+        <tr><td>5°</td><td>0.0872</td><td>0.9962</td><td>0.0875</td></tr>
+        <tr><td>6°</td><td>0.1045</td><td>0.9945</td><td>0.1051</td></tr>
+        <tr><td>7°</td><td>0.1219</td><td>0.9925</td><td>0.1228</td></tr>
+        <tr><td>8°</td><td>0.1392</td><td>0.9903</td><td>0.1405</td></tr>
+        <tr><td>9°</td><td>0.1564</td><td>0.9877</td><td>0.1584</td></tr>
+        <tr><td>10°</td><td>0.1736</td><td>0.9848</td><td>0.1763</td></tr>
+        <tr><td>11°</td><td>0.1908</td><td>0.9816</td><td>0.1944</td></tr>
+        <tr><td>12°</td><td>0.2079</td><td>0.9781</td><td>0.2126</td></tr>
+        <tr><td>13°</td><td>0.2250</td><td>0.9744</td><td>0.2309</td></tr>
+        <tr><td>14°</td><td>0.2419</td><td>0.9703</td><td>0.2493</td></tr>
+        <tr><td>15°</td><td>0.2588</td><td>0.9659</td><td>0.2679</td></tr>
+        <tr><td>16°</td><td>0.2756</td><td>0.9613</td><td>0.2867</td></tr>
+        <tr><td>17°</td><td>0.2924</td><td>0.9563</td><td>0.3057</td></tr>
+        <tr><td>18°</td><td>0.3090</td><td>0.9511</td><td>0.3249</td></tr>
+        <tr><td>19°</td><td>0.3256</td><td>0.9455</td><td>0.3443</td></tr>
+        <tr><td>20°</td><td>0.3420</td><td>0.9397</td><td>0.3640</td></tr>
+        <tr><td>21°</td><td>0.3584</td><td>0.9336</td><td>0.3839</td></tr>
+        <tr><td>22°</td><td>0.3746</td><td>0.9272</td><td>0.4040</td></tr>
+        <tr><td>23°</td><td>0.3907</td><td>0.9205</td><td>0.4245</td></tr>
+        <tr><td>24°</td><td>0.4067</td><td>0.9135</td><td>0.4452</td></tr>
+        <tr><td>25°</td><td>0.4226</td><td>0.9063</td><td>0.4663</td></tr>
+        <tr><td>26°</td><td>0.4384</td><td>0.8988</td><td>0.4877</td></tr>
+        <tr><td>27°</td><td>0.4540</td><td>0.8910</td><td>0.5095</td></tr>
+        <tr><td>28°</td><td>0.4695</td><td>0.8829</td><td>0.5317</td></tr>
+        <tr><td>29°</td><td>0.4848</td><td>0.8746</td><td>0.5543</td></tr>
+        <tr><td>30°</td><td>1/2 (=0.5000)</td><td>√3/2 (=0.8660)</td><td>√3/3 (=0.5774)</td></tr>
+      </table>
+      <p>观察：在 0°~30° 范围内，角度越大，sin 越大、cos 越小、tan 越大；其中 30° 是特殊角，sin=1/2、cos=√3/2、tan=√3/3。注意小角度时（如 1°~5°），sin ≈ tan ≈ 角度（弧度值）——这是后续"小角度近似"的伏笔。</p>
+    </div>
 
     <div class="quote">
       <p>"在 17 世纪，对数被发明后，天文学家的寿命延长了一倍。"——拉普拉斯</p>
@@ -393,6 +430,15 @@
     <p><strong>今天：</strong>你只需要在计算器上按一个键，sin 37° 的结果就出来了。但下次按这个键的时候，不妨想一想：为了这个瞬间的答案，人类走了两千年的路。</p>
 
     <p><strong>推荐阅读：</strong>《三角之美——正弦、余弦和正切的故事》（Eli Maor 著），这是一本用故事讲述三角函数历史的精彩著作。</p>
+  </div>
+
+  <h2>中国古代的勾股测量术</h2>
+  <div class="quote">
+    <p>三角函数虽起源于古希腊，但中国古人对直角三角形边角关系的研究同样源远流长。早在公元前 1 世纪成书的<strong>《周髀算经》</strong>中，就记载了"勾三股四弦五"的勾股定理，并利用立表测影的方法测量太阳高度——这正是三角函数测高术的中国版本。</p>
+    <p>三国时期数学家<strong>刘徽</strong>（约 225—295 年）在为<strong>《九章算术》</strong>作注时，系统发展了勾股测量的理论。《九章算术》第九章"勾股"中收录了大量利用直角三角形边长比例进行测量的题目，例如：</p>
+    <p>"今有山居木西，不知其高。人立木东三丈，望木末，适与山峰斜平。人去木二十一里，退行一里，木去山十里。问山高几何？"——这类"<strong>退步测远</strong>"问题，本质上就是利用相似直角三角形的边角比例（即正切）来推算未知高度或距离，与西方用 tan α = h/d 测高的原理完全一致。</p>
+    <p>刘徽在注中还提出了"重差术"——通过两次测量（不同距离测同一目标的高度角），利用差值计算远处目标的高度。这种方法比单次测量更精确，是三角测量术的精彩应用。他的著作<strong>《海岛算经》</strong>就是专门论述重差测量的专著，其中"望海岛"一题堪称中国古代三角测量的经典。</p>
+    <p>可以说，<strong>勾股之术</strong>是中国古人对三角学最早的贡献——他们虽未使用"sin、cos、tan"这些符号，却已熟练运用直角三角形的边角比例来解决实际的测高、测远问题。</p>
   </div>
 
   <h2>习题</h2>
@@ -481,7 +527,7 @@
   <div class="key">
     <ul>
       <li><strong>正弦、余弦、正切</strong>是直角三角形中边与角的比值，它们只取决于锐角的大小，与三角形大小无关（相似原理）</li>
-      <li><strong>记忆口诀：</strong>正弦对斜，余弦邻斜，正切对邻（SOH-CAH-TOA）</li>
+      <li><strong>记忆口诀：</strong>正弦对斜，余弦邻斜，正切对邻</li>
       <li><strong>重要关系：</strong>sin²A + cos²A = 1；tan A = sin A / cos A；sin A = cos(90° – A)</li>
       <li><strong>特殊角必背：</strong>30°、45°、60° 的正弦、余弦、正切值——它们来自两个特殊的直角三角形</li>
       <li><strong>解直角三角形：</strong>已知一边一角（或两边），用三角函数和勾股定理求出所有未知元素</li>
