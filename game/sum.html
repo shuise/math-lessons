@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>金钱本色</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --panel2: #1f2630;
+    --line: #2a323c;
+    --gold: #f5c518;
+    --gold2: #e0a800;
+    --green: #2ea043;
+    --red: #f85149;
+    --blue: #388bfd;
+    --txt: #e6edf3;
+    --txt2: #8b949e;
+  }
+  html, body { height: 100%; background: var(--bg); }
+  body {
+    font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--txt);
+    display: flex;
+    justify-content: center;
+    min-height: 100dvh;
+    overscroll-behavior: none;
+  }
+  #app {
+    width: 100%;
+    max-width: 460px;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 14px 50px;
+  }
+
+  /* 顶栏 */
+  .topbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .title { font-weight: 800; font-size: 19px; letter-spacing: .5px; }
+  .topbar .title small { color: var(--gold); font-size: 14px; font-weight: 600; display:block; }
+  .stat { text-align: center; flex: 1; min-width: 64px; }
+  .stat .lab { font-size: 12px; color: var(--txt2); letter-spacing: 1px; }
+  .stat .val { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .stat.goal .val { color: var(--gold); }
+  .stat.now .val { color: var(--green); }
+  .stat.left .val { color: var(--blue); }
+
+  /* 通用面板 */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 16px;
+    margin-top: 14px;
+  }
+  .panel h2 { font-size: 21px; margin-bottom: 6px; }
+  .panel h2 .sub { font-size: 14px; color: var(--txt2); font-weight: 500; }
+  .panel p { font-size: 16px; line-height: 1.7; color: #c9d1d9; }
+  .hint-txt { font-size: 14px; color: var(--txt2); line-height: 1.6; }
+
+  /* 设置页 */
+  .targets { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 14px 0 4px; }
+  .tbtn {
+    background: var(--panel2);
+    border: 1.5px solid var(--line);
+    color: var(--txt);
+    border-radius: 12px;
+    padding: 14px 6px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .15s;
+  }
+  .tbtn small { display:block; font-size: 12px; color: var(--txt2); font-weight: 500; margin-top: 3px; }
+  .tbtn.active { border-color: var(--gold); background: #2a2410; color: var(--gold); }
+  .tbtn:active { transform: scale(.97); }
+
+  /* 主按钮 */
+  .btn {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 19px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .15s;
+  }
+  .btn:active { transform: scale(.98); }
+  .btn-primary { background: var(--gold); color: #1a1300; }
+  .btn-ghost { background: var(--panel2); color: var(--txt); border: 1px solid var(--line); }
+  .btn-stop {
+    background: var(--red);
+    color: #fff;
+    font-size: 24px;
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(248,81,73,.35);
+  }
+  .btn-stop:disabled { background: #4a2a28; box-shadow: none; }
+
+  /* 盒子网格 */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 14px 0;
+  }
+  .box {
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: #fff;
+    font-size: 16px;
+    text-shadow: 0 1px 3px rgba(0,0,0,.5);
+    cursor: pointer;
+    transition: transform .1s, opacity .2s;
+    position: relative;
+  }
+  .box .idx { position:absolute; top:4px; left:6px; font-size: 11px; opacity:.7; font-weight:600; }
+  .box:active { transform: scale(.92); }
+  .box.opened { background: #232a33 !important; border-color: #2a323c; cursor: default; }
+  .box.opened .idx { color: rgba(255,255,255,.35); }
+  .box.opened::after {
+    content: "✓";
+    position: absolute;
+    font-size: 31px;
+    font-weight: 900;
+    color: #4caf50;
+    text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  }
+
+  /* 闪烁区 */
+  .flash-wrap {
+    text-align: center;
+    padding: 8px 0 4px;
+  }
+  .flash-now {
+    font-size: 62px;
+    font-weight: 900;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+    margin: 6px 0 2px;
+    text-shadow: 0 2px 24px rgba(245,197,24,.35);
+  }
+  .flash-now.void { color: var(--red); text-shadow: 0 2px 24px rgba(248,81,73,.35); }
+  .flash-cap { font-size: 14px; color: var(--txt2); margin-bottom: 16px; }
+  .timer-track {
+    height: 8px;
+    background: var(--panel2);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 0 0 18px;
+  }
+  .timer-bar {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, var(--green), var(--gold), var(--red));
+    border-radius: 6px;
+  }
+  .timer-bar.run { animation: drain 1.5s linear forwards; }
+  @keyframes drain { from { width: 100%; } to { width: 0%; } }
+
+  /* 回合结果 */
+  .result {
+    text-align: center;
+    padding: 10px 0 6px;
+  }
+  .result .big { font-size: 36px; font-weight: 900; font-variant-numeric: tabular-nums; }
+  .result .big.win { color: var(--green); }
+  .result .big.void { color: var(--red); }
+  .result .lbl { font-size: 16px; color: var(--txt2); margin-top: 4px; }
+
+  /* 进度条（当前/目标） */
+  .progress {
+    height: 10px;
+    background: var(--panel2);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 12px 0 4px;
+  }
+  .progress > i {
+    display:block; height:100%; width:0%;
+    background: linear-gradient(90deg, var(--green), var(--gold));
+    transition: width .4s ease;
+  }
+  .progress-meta { display:flex; justify-content:space-between; font-size: 12px; color: var(--txt2); }
+
+  /* 策略折叠 */
+  details.strategy { margin-top: 14px; background: var(--panel); border:1px solid var(--line); border-radius: 12px; padding: 4px 14px; }
+  details.strategy summary { cursor: pointer; font-weight: 700; font-size: 17px; padding: 12px 0; list-style: none; }
+  details.strategy summary::-webkit-details-marker { display:none; }
+  details.strategy summary::before { content: "▶ "; color: var(--gold); font-size: 12px; }
+  details.strategy[open] summary::before { content: "▼ "; }
+  .strategy-body { padding: 0 0 14px; font-size: 15px; line-height: 1.75; color: #c9d1d9; }
+  .strategy-body b { color: var(--gold); }
+  .strategy-body .formula { background: var(--panel2); border-left: 3px solid var(--gold); padding: 8px 10px; margin: 8px 0; border-radius: 4px; font-variant-numeric: tabular-nums; }
+  table.k { width:100%; border-collapse: collapse; margin: 8px 0; font-size: 14px; font-variant-numeric: tabular-nums; }
+  table.k th, table.k td { border:1px solid var(--line); padding: 4px 6px; text-align:center; }
+  table.k th { background: var(--panel2); color: var(--txt2); font-weight:600; }
+
+  .foot-note { font-size: 14px; color: var(--txt2); text-align:center; margin-top: 16px; line-height: 1.6; }
+
+  .hidden { display: none !important; }
+
+  /* 终局 */
+  .endscreen { text-align:center; padding: 20px 0; }
+  .endscreen .emoji { font-size: 67px; }
+  .endscreen .ttl { font-size: 29px; font-weight: 900; margin: 8px 0 4px; }
+  .endscreen .ttl.win { color: var(--green); }
+  .endscreen .ttl.lose { color: var(--red); }
+  .endscreen .sum { font-size: 18px; color: var(--txt2); margin-bottom: 18px; }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- 顶栏（游戏中显示） -->
+  <div class="topbar hidden" id="topbar">
+    <div class="title">金钱本色</div>
+    <div class="stat goal"><div class="lab">目标</div><div class="val" id="sGoal">£0</div></div>
+    <div class="stat now"><div class="lab">已攒</div><div class="val" id="sNow">£0</div></div>
+    <div class="stat left"><div class="lab">剩余</div><div class="val" id="sLeft">10</div></div>
+  </div>
+
+  <!-- 进度条 -->
+  <div class="hidden" id="progWrap">
+    <div class="progress"><i id="progBar"></i></div>
+    <div class="progress-meta"><span id="progNow">£0</span><span id="progGoal">£0</span></div>
+  </div>
+
+  <!-- 设置页 -->
+  <section id="setupView">
+    <div class="panel">
+      <h2>金钱本色</h2>
+      <p>£1000、£2000 …… 一直到 £20000，共 20 个金额被随机藏进 20 个不同颜色的盒子。你要攒到<strong>目标金额</strong>才能赢。</p>
+      <p style="margin-top:8px">最多选 <b style="color:var(--blue)">10 个盒子</b>。每选一个，金额会从 £1000 起逐千向上跳动，<b>一直到该盒子所代表的金额</b>；<b style="color:var(--gold)">1.5 秒内点「叫停」</b>即可攒下当时屏幕显示的数字，1.5 秒一过即作废，本轮归零。</p>
+      <p style="margin-top:8px"><b style="color:var(--green)">获胜条件</b>：在 10 次选择内，最终累计金额 <b>≥ 目标金额</b> 即获胜；若 10 次用尽仍未达标，则一无所获。</p>
+    </div>
+
+    <div class="panel">
+      <h2>选择目标</h2>
+      <p class="hint-txt">目标越高越难。默认 £64000。</p>
+      <div class="targets" id="targets">
+        <button class="tbtn" data-goal="40000">£40,000<small>轻松</small></button>
+        <button class="tbtn active" data-goal="64000">£64,000<small>标准</small></button>
+        <button class="tbtn" data-goal="80000">£80,000<small>困难</small></button>
+        <button class="tbtn" data-goal="100000">£100,000<small>地狱</small></button>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" id="startBtn" style="margin-top:14px">开始游戏</button>
+
+    <details class="strategy">
+      <summary>策略分析（数学）</summary>
+      <div class="strategy-body">
+        <p>你不知道盒里的金额 <b>V</b>。设你打算等到 <b>T=£1000k</b> 才叫停：</p>
+        <div class="formula">
+          V ∈ {1000,2000,…,20000} 共 20 个值，均匀分布<br>
+          若 T ≤ V → 得 T；若 T &gt; V → 序列先到顶 → 作废得 0<br>
+          P(V ≥ 1000k) = (21 − k) / 20<br>
+          E(叫停阈值 T=1000k) = 1000k · (21 − k) / 20
+        </div>
+        <p>对 <b>f(k)=k(21−k)</b> 求最大：k=10 或 11，即 <b>T=£10000 或 £11000</b> 时单轮期望最高 <b>£5500</b>。</p>
+        <table class="k">
+          <tr><th>阈值 T</th><th>£4k</th><th>£8k</th><th>£10k</th><th>£11k</th><th>£15k</th><th>£20k</th></tr>
+          <tr><th>单轮期望</th><td>£3400</td><td>£5200</td><td>£5500</td><td>£5500</td><td>£4500</td><td>£1000</td></tr>
+        </table>
+        <p>10 轮总期望仅 <b>£55000 &lt; £64000</b>——所以「保守地」达不到目标。<b>落后时要敢博</b>（提高阈值），<b>领先时要稳</b>（早叫停锁住胜利）。</p>
+      </div>
+    </details>
+
+    <p class="foot-note">叫停 = 1.5 秒内点击「叫停」按钮，过期作废。</p>
+  </section>
+
+  <!-- 游戏页 -->
+  <section id="gameView" class="hidden">
+
+    <!-- 选盒子 -->
+    <div id="gridPanel" class="panel">
+      <h2>选一个盒子 <span class="sub" id="gridSub">第 1 / 10 次</span></h2>
+      <p class="hint-txt">点任意未开的盒子，开始本轮跳动。</p>
+      <div class="grid" id="grid"></div>
+    </div>
+
+    <!-- 闪烁 -->
+    <div id="flashPanel" class="panel hidden">
+      <div class="flash-wrap">
+        <div class="flash-cap" id="flashCap">金额跳动中… 1.5 秒内叫停！</div>
+        <div class="flash-now" id="flashNow">£0</div>
+        <div class="timer-track"><div class="timer-bar" id="timerBar"></div></div>
+        <button class="btn btn-stop" id="stopBtn">叫 停</button>
+      </div>
+    </div>
+
+    <!-- 回合结果 -->
+    <div id="roundPanel" class="panel hidden">
+      <div class="result">
+        <div class="big" id="roundBig">+£0</div>
+        <div class="lbl" id="roundLbl"></div>
+      </div>
+      <button class="btn btn-ghost" id="nextBtn" style="margin-top:14px">继续</button>
+    </div>
+  </section>
+
+  <!-- 终局 -->
+  <section id="endView" class="hidden">
+    <div class="panel">
+      <div class="endscreen">
+        <div class="emoji" id="endEmoji">🏆</div>
+        <div class="ttl" id="endTitle">达成目标！</div>
+        <div class="sum" id="endSum"></div>
+        <button class="btn btn-primary" id="restartBtn">再玩一局</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // 20 个金额与 20 个颜色
+  var AMOUNTS = [];
+  for (var i = 1; i <= 20; i++) AMOUNTS.push(i * 1000); // 1000..20000
+
+  var COLORS = [
+    "#e6194b","#f58231","#ffe119","#bfef45","#3cb44b","#42d4f4","#4363d8",
+    "#911eb4","#f032e6","#9a6324","#800000","#808000","#000075","#469990",
+    "#a9a9a9","#fabed4","#ffd8b1","#dcbeff","#aaffc3","#ffe4ce"
+  ];
+
+  // 状态
+  var S = {
+    goal: 64000,
+    total: 0,
+    picks: 0,
+    maxPicks: 10,
+    boxes: [],          // {value,color,opened}
+    phase: "setup",     // setup | grid | flash | round | end
+    curBox: null,
+    flashVal: 0,
+    flashMax: 0,
+    intervalId: null,
+    timeoutId: null,
+    stopped: false
+  };
+
+  var $ = function(id){ return document.getElementById(id); };
+
+  function fmt(n){ return "£" + n.toLocaleString("en-US"); }
+
+  function setPhase(p){
+    S.phase = p;
+  }
+
+  // ---------- 设置 ----------
+  function initSetup(){
+    var btns = document.querySelectorAll("#targets .tbtn");
+    btns.forEach(function(b){
+      b.onclick = function(){
+        btns.forEach(function(x){ x.classList.remove("active"); });
+        b.classList.add("active");
+        S.goal = parseInt(b.dataset.goal, 10);
+      };
+    });
+    $("startBtn").onclick = startGame;
+  }
+
+  // ---------- 开始 / 重置 ----------
+  function buildBoxes(){
+    var vals = AMOUNTS.slice();
+    var cols = COLORS.slice();
+    // shuffle
+    for (var i = vals.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = vals[i]; vals[i] = vals[j]; vals[j] = t;
+    }
+    for (var k = cols.length - 1; k > 0; k--) {
+      var m = Math.floor(Math.random() * (k + 1));
+      var c = cols[k]; cols[k] = cols[m]; cols[m] = c;
+    }
+    S.boxes = vals.map(function(v, idx){
+      return { value: v, color: cols[idx], opened: false };
+    });
+  }
+
+  function startGame(){
+    S.total = 0;
+    S.picks = 0;
+    buildBoxes();
+    $("setupView").classList.add("hidden");
+    $("endView").classList.add("hidden");
+    $("gameView").classList.remove("hidden");
+    $("topbar").classList.remove("hidden");
+    $("progWrap").classList.remove("hidden");
+    updateHud();
+    toGrid();
+  }
+
+  // ---------- HUD ----------
+  function updateHud(){
+    $("sGoal").textContent = fmt(S.goal);
+    $("sNow").textContent = fmt(S.total);
+    $("sLeft").textContent = (S.maxPicks - S.picks);
+    var pct = Math.min(100, Math.round(S.total / S.goal * 100));
+    $("progBar").style.width = pct + "%";
+    $("progNow").textContent = fmt(S.total);
+    $("progGoal").textContent = fmt(S.goal);
+  }
+
+  // ---------- 网格选盒 ----------
+  function toGrid(){
+    setPhase("grid");
+    $("flashPanel").classList.add("hidden");
+    $("roundPanel").classList.add("hidden");
+    $("gridPanel").classList.remove("hidden");
+    $("gridSub").textContent = "第 " + (S.picks + 1) + " / " + S.maxPicks + " 次";
+
+    var g = $("grid"); g.innerHTML = "";
+    S.boxes.forEach(function(b, idx){
+      var el = document.createElement("div");
+      el.className = "box" + (b.opened ? " opened" : "");
+      el.style.background = b.color;
+      el.innerHTML = '<span class="idx">' + (idx + 1) + '</span>';
+      if (!b.opened) {
+        el.onclick = function(){ pickBox(idx); };
+      }
+      g.appendChild(el);
+    });
+  }
+
+  function pickBox(idx){
+    var b = S.boxes[idx];
+    if (!b || b.opened) return;
+    S.curBox = b;
+    S.picks++;
+    startFlash(b.value);
+  }
+
+  // ---------- 闪烁（定速：每个 +£1000 固定 100ms；最大值=盒值 V；1.5s 窗口）----------
+  function startFlash(maxVal){
+    setPhase("flash");
+    S.flashMax = maxVal;
+    S.flashVal = 1000;
+    S.stopped = false;
+    var STEP = 100;                  // 定速节奏，比 150 稍快
+    var steps = maxVal / 1000;       // 1..20；跳动到 V 即止（最大值=盒值）
+    var seqMs = Math.min(steps * STEP, 1500);  // 序列时长 ≤ 1.5s（叫停窗口）
+
+    $("gridPanel").classList.add("hidden");
+    $("roundPanel").classList.add("hidden");
+    $("flashPanel").classList.remove("hidden");
+
+    $("flashCap").textContent = "金额跳动中… 看准就叫停！";
+    $("flashNow").classList.remove("void");
+    $("flashNow").textContent = fmt(S.flashVal);
+    $("stopBtn").disabled = false;
+
+    // 计时条：1.5 秒叫停窗口
+    var bar = $("timerBar");
+    bar.classList.remove("run");
+    bar.style.width = "";
+    void bar.offsetWidth; // reflow 重启动画
+    bar.classList.add("run");
+
+    // 定速跳动：每 150ms +1000，直到 V
+    S.intervalId = setInterval(function(){
+      if (S.flashVal + 1000 <= S.flashMax) {
+        S.flashVal += 1000;
+        $("flashNow").textContent = fmt(S.flashVal);
+      }
+    }, STEP);
+
+    // 跳到盒值(序列结束)即作废；至多 1.5 秒（叫停窗口）
+    S.timeoutId = setTimeout(function(){
+      if (!S.stopped) voidRound();
+    }, seqMs);
+  }
+
+  function stopNow(){
+    if (S.phase !== "flash" || S.stopped) return;
+    S.stopped = true;
+    clearInterval(S.intervalId);
+    clearTimeout(S.timeoutId);
+    endRound(S.flashVal, false);
+  }
+
+  function voidRound(){
+    S.stopped = true;
+    clearInterval(S.intervalId);
+    clearTimeout(S.timeoutId);
+    // 冻结计时条
+    var bar = $("timerBar");
+    bar.classList.remove("run");
+    bar.style.width = "0%";
+    // 视觉提示
+    $("flashNow").classList.add("void");
+    $("flashNow").textContent = "作废";
+    $("flashCap").textContent = "跳动到顶，本轮作废";
+    // 短暂展示后结算
+    setTimeout(function(){ endRound(0, true); }, 600);
+  }
+
+  // ---------- 回合结算 ----------
+  function endRound(gain, isVoid){
+    S.total += gain;
+    if (S.curBox) S.curBox.opened = true;
+
+    $("flashPanel").classList.add("hidden");
+    $("roundPanel").classList.remove("hidden");
+
+    var big = $("roundBig");
+    if (isVoid) {
+      big.textContent = "£0";
+      big.className = "big void";
+      $("roundLbl").textContent = "本轮作废（盒内 " + fmt(S.flashMax) + "）";
+    } else {
+      big.textContent = "+" + fmt(gain);
+      big.className = "big" + (gain >= S.flashMax ? " win" : "");
+      $("roundLbl").textContent = "盒内 " + fmt(S.flashMax) + "，已攒 " + fmt(S.total) + " / " + fmt(S.goal);
+    }
+
+    updateHud();
+
+    // 是否结束
+    var reached = S.total >= S.goal;
+    var exhausted = S.picks >= S.maxPicks;
+    if (reached || exhausted) {
+      $("nextBtn").textContent = "查看结果";
+    } else {
+      $("nextBtn").textContent = "继续（剩 " + (S.maxPicks - S.picks) + " 次）";
+    }
+    setPhase("round");
+  }
+
+  function nextRound(){
+    if (S.total >= S.goal) { endGame(true); return; }
+    if (S.picks >= S.maxPicks) { endGame(false); return; }
+    toGrid();
+  }
+
+  // ---------- 终局 ----------
+  function endGame(win){
+    setPhase("end");
+    $("gameView").classList.add("hidden");
+    $("endView").classList.remove("hidden");
+    $("endEmoji").textContent = win ? "🏆" : "💔";
+    $("endTitle").textContent = win ? "达成目标！" : "未达成";
+    $("endTitle").className = "ttl " + (win ? "win" : "lose");
+    $("endSum").textContent = "最终攒下 " + fmt(S.total) + " / 目标 " + fmt(S.goal)
+      + "，用了 " + S.picks + " 次";
+  }
+
+  // ---------- 事件 ----------
+  function bind(){
+    $("stopBtn").addEventListener("click", stopNow);
+    $("nextBtn").addEventListener("click", nextRound);
+    $("restartBtn").addEventListener("click", function(){
+      $("endView").classList.add("hidden");
+      $("setupView").classList.remove("hidden");
+      $("topbar").classList.add("hidden");
+      $("progWrap").classList.add("hidden");
+      setPhase("setup");
+    });
+    // 空格 / 回车也可叫停
+    document.addEventListener("keydown", function(e){
+      if (S.phase === "flash" && (e.key === " " || e.key === "Enter")) {
+        e.preventDefault();
+        stopNow();
+      }
+    });
+  }
+
+  initSetup();
+  bind();
+})();
+</script>
+</body>
+</html>
