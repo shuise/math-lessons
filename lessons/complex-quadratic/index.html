@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>复数与一元二次方程</title>
+<link rel="icon" type="image/png" href="../lib/logo.png?version=1.0.0">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .panel { background:#f8f9fa; border:2px solid #e0e0e0; border-radius:10px; padding:16px 18px; margin:16px 0; }
+  .panel h3 { margin:0 0 10px; color:#1565c0; }
+  .ctrl { display:flex; align-items:center; gap:10px; margin:8px 0; flex-wrap:wrap; }
+  .ctrl label { width:120px; font-weight:bold; color:#333; }
+  .ctrl input[type=range] { flex:1; min-width:140px; }
+  .ctrl .val { width:56px; text-align:center; font-family:Menlo,Consolas,monospace; color:#1565c0; font-weight:bold; }
+  .readout { background:#fff; border:1px solid #ddd; border-radius:8px; padding:10px 14px; margin:10px 0; font-size:0.95em; line-height:1.9; }
+  .readout b { color:#1565c0; }
+  .root-expr { font-family:Menlo,Consolas,monospace; font-size:1.05em; }
+  .fig { text-align:center; margin:12px 0; }
+  .fig svg, .fig canvas { max-width:100%; height:auto; background:#fff; border:1px solid #e5e5e5; border-radius:8px; }
+  .fig .cap { font-size:0.88em; color:#666; margin-top:6px; }
+  .status-d { display:inline-block; padding:2px 12px; border-radius:12px; color:#fff; font-weight:bold; font-size:0.9em; }
+  .status-d.pos { background:#2e7d32; } .status-d.zero { background:#f57f17; } .status-d.neg { background:#6a1b9a; }
+  .toggle-btn { display:inline-block; margin:8px 8px 0 0; padding:5px 16px; border:1px solid #bbb; border-radius:6px; background:#fafafa; cursor:pointer; font-size:0.9em; }
+  .toggle-btn:hover { background:#e8f0fe; border-color:#1565c0; }
+  .toggle-box { display:none; margin-top:10px; padding:12px 14px; background:#f5f5f5; border-radius:8px; font-size:0.95em; line-height:1.8; }
+  .toggle-box.show { display:block; }
+  .canvas-wrap { touch-action:none; }
+  @media (max-width:720px){ .two-col{grid-template-columns:1fr;} .ctrl label{width:96px;} }
+</style>
+</head>
+<body>
+<article>
+  <a class="back" href="../index.html">&larr; 返回课程列表</a>
+  <h1>复数与一元二次方程</h1>
+  <p class="tip">前置知识：<a href="../complex-numbers/index.html">复数基础</a>、<a href="../functions/part5/index.html">二次函数</a></p>
+
+  <h2>一、从"无解"说起</h2>
+  <p>在实数范围内，一元二次方程 <b>ax² + bx + c = 0</b>（a ≠ 0）的根由求根公式决定：</p>
+  <div class="formula">x = ( −b ± √Δ ) / (2a)，其中判别式 <b>Δ = b² − 4ac</b></div>
+  <p>当 Δ &lt; 0 时，根号下出现了<b>负数</b>（√(−正数)）。在实数集中，没有任何实数的平方是负数，因此在实数域内方程"<b>无解</b>"。</p>
+  <p>引入复数集（增加虚数单位 <b>i</b>，定义 <b>i² = −1</b>）后，任何负数都可以开平方，例如 √(−4) = √(4·i²) = 2i。这使得求根公式对任意系数<b>永远有效</b>，方程在复数域内<b>一定有解</b>。</p>
+  <div class="key-point">
+    <b>代数基本定理</b>：任何 n 次复系数多项式在复数域内恰好有 n 个根（计重根）。一元二次方程正是它在 n = 2 时的体现：Δ &lt; 0 时两个根是一对<b>共轭复数</b> u + vi 与 u − vi。
+  </div>
+
+  <h2>二、实数视角：抛物线与 x 轴</h2>
+  <p>在实数坐标平面中，y = ax² + bx + c 的图象是一条抛物线。方程有解 ⇔ 抛物线与 x 轴（y = 0）<b>有交点</b>。当 Δ &lt; 0 时，抛物线<b>悬浮</b>在 x 轴上方（或下方），与 x 轴没有交点——这就是"无解"的直观形象。</p>
+
+  <div class="panel">
+    <h3>🔬 交互实验台：拖动滑块，观察两幅图如何联动</h3>
+    <div class="ctrl"><label>a（二次项）</label><input type="range" id="inA" min="-2" max="2" step="0.5" value="1"><span class="val" id="vA">1</span></div>
+    <div class="ctrl"><label>b（一次项）</label><input type="range" id="inB" min="-4" max="4" step="0.5" value="0"><span class="val" id="vB">0</span></div>
+    <div class="ctrl"><label>c（常数项）</label><input type="range" id="inC" min="-4" max="4" step="0.5" value="1"><span class="val" id="vC">1</span></div>
+    <div class="readout" id="readout"></div>
+    <div class="two-col">
+      <div class="fig">
+        <svg id="svgParab" viewBox="0 0 460 340" width="460" height="340"></svg>
+        <div class="cap">实数视角：抛物线 y = ax² + bx + c 与 x 轴的交点（Δ ≥ 0 时出现）</div>
+      </div>
+      <div class="fig">
+        <svg id="svgCplx" viewBox="0 0 460 340" width="460" height="340"></svg>
+        <div class="cap">复数视角：两个根落在复平面上（Δ &lt; 0 时是一对共轭复根）</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>三、视角一：旋转 90° 的"隐形抛物线"</h2>
+  <p>为了给复数根"腾出位置"，把自变量 x 从一维实数轴扩展为<b>二维复平面</b>（x = u + vi），函数定义域变成四维。下面用三维图形理解（以 x² + 1 = 0 为例）：</p>
+  <ol>
+    <li><b>实数视角（v = 0）</b>：x 纯为实数时，图象就是熟悉的抛物线 y = u² + 1，悬浮在半空中，不接触 y = 0 的平面。</li>
+    <li><b>纯虚数方向（u 固定在顶点）</b>：沿虚轴方向（v 方向）延伸，代入展开：y = (vi)² + 1 = <b>1 − v²</b>——i² = −1 把向上开口的抛物线<b>翻转成向下开口</b>！</li>
+    <li><b>寻找交点</b>：于是在顶点正下方"长出"一条开口朝下、穿过 y = 0 平面的新抛物线。它与 y = 0 平面的两个交点 v = ±1，正好对应方程的两个复数根 <b>x = ±i</b>。</li>
+  </ol>
+  <div class="fig">
+    <svg id="svgHidden" viewBox="0 0 560 400" width="560" height="400"></svg>
+    <div class="cap">紫色实抛物线悬浮在 y=0 平面上方；青色"隐形抛物线"由纯虚方向翻转而来，穿过 y=0 平面于 x = ±i 两点</div>
+  </div>
+
+  <h2>四、视角二：模长曲面与"三维漏斗"</h2>
+  <p>把模长 z = |ax² + bx + c|（x = u + vi 取遍复平面）作为高度，在 u-v 平面上方得到一张曲面：</p>
+  <ul>
+    <li>解方程 ax² + bx + c = 0 ⇔ 找曲面上<b>高度 z = 0 的点</b>；</li>
+    <li>曲面在复平面上压出<b>两个深深的漏斗/碗底</b>（Δ &lt; 0 时碗底正位于共轭复根处）；</li>
+    <li>无论 Δ 正负，曲面必定在某两点<b>精准触到 z = 0</b>——这两个触地点就是方程的两个复数解。</li>
+  </ul>
+  <div class="panel">
+    <h3>🧊 模长曲面（与上方实验台的 a、b、c 实时联动，拖动可旋转）</h3>
+    <div class="fig canvas-wrap">
+      <canvas id="cvSurf" width="640" height="420" style="width:100%;max-width:640px;"></canvas>
+      <div class="cap">蓝色越深高度越高；红点为曲面触地之处（z = 0），即方程的两个根（拖动图形改变视角）</div>
+    </div>
+  </div>
+
+  <h2>五、小结</h2>
+  <table>
+    <tr><th>判别式</th><th>实数域</th><th>复数域</th><th>抛物线与 x 轴</th><th>根在复平面上</th></tr>
+    <tr><td>Δ &gt; 0</td><td>两个不相等实根</td><td>同左（虚部为 0）</td><td>两个交点</td><td>实轴上两点</td></tr>
+    <tr><td>Δ = 0</td><td>两个相等实根</td><td>同左</td><td>相切（1 个切点）</td><td>实轴上一点</td></tr>
+    <tr><td>Δ &lt; 0</td><td>无解</td><td>一对共轭复根 u ± vi</td><td>无交点（悬浮）</td><td>关于实轴对称的两点</td></tr>
+  </table>
+  <div class="key-point"><b>一句话总结</b>：复数没有让"无解"的方程突然变得随便有解——它把根安放在实数轴看不见的"复平面"上。抛物线悬浮的位置，恰恰暗示了根的实部与虚部。</div>
+
+  <h2>想一想</h2>
+  <div class="example">
+    <p><b>挑战：</b>当 Δ &lt; 0 时，方程 ax² + bx + c = 0 的两个复数根为 u + vi 与 u − vi。<br>
+    ① 两根之和等于什么？② 两根之积呢？（用韦达定理验证你的答案，并说明它们都是实数）</p>
+    <button class="toggle-btn" onclick="tg('hintBox')">💡 思路提示</button>
+    <button class="toggle-btn" onclick="tg('ansBox')">📖 查看答案</button>
+    <div class="toggle-box" id="hintBox">韦达定理在复数域依然成立：两根之和 = −b/a，两根之积 = c/a。把根写成 u ± vi 代入 (u+vi)+(u−vi) 与 (u+vi)(u−vi) 算一算，注意 i² = −1。</div>
+    <div class="toggle-box" id="ansBox">
+      ① 两根之和：(u + vi) + (u − vi) = <b>2u = −b/a</b>（虚部正好抵消，是实数——这正是 u = −b/(2a) 的来历）。<br>
+      ② 两根之积：(u + vi)(u − vi) = u² + v² = <b>c/a</b>（因为 (vi)(−vi) = −v²i² = +v²）。<br>
+      共轭复根相加、相乘都"消掉"了 i，这解释了为什么实系数方程的虚根总是成对出现。
+    </div>
+  </div>
+
+  <p style="margin-top:28px;">
+    <a href="../complex-vectors-summary/index.html">&larr; 上一课：总结 — 复数·向量·平行四边形·合力</a>
+  </p>
+</article>
+
+<script>
+// ========== 工具 ==========
+function tg(id){ document.getElementById(id).classList.toggle('show'); }
+var A=1, B=0, C=1;
+
+// ========== 实验台：两幅 SVG ==========
+// 坐标映射：x∈[-4.5,4.5] → 230+x*48 ；y∈[-7,7] → 170-y*22
+function px(x){ return 230 + x*48; }
+function py(y){ return 170 - y*22; }
+
+function svgAxes(svg, xLabel, yLabel){
+  var s = '';
+  // 网格
+  for(var gx=-4; gx<=4; gx++) s += '<line x1="'+px(gx)+'" y1="'+py(-7)+'" x2="'+px(gx)+'" y2="'+py(7)+'" stroke="#eee" stroke-width="1"/>';
+  for(var gy=-7; gy<=7; gy++) s += '<line x1="'+px(-4.5)+'" y1="'+py(gy)+'" x2="'+px(4.5)+'" y2="'+py(gy)+'" stroke="#eee" stroke-width="1"/>';
+  // 坐标轴
+  s += '<line x1="'+px(-4.5)+'" y1="'+py(0)+'" x2="'+px(4.5)+'" y2="'+py(0)+'" stroke="#555" stroke-width="1.6"/>';
+  s += '<line x1="'+px(0)+'" y1="'+py(-7)+'" x2="'+px(0)+'" y2="'+py(7)+'" stroke="#555" stroke-width="1.6"/>';
+  // 刻度
+  for(var t=-4; t<=4; t++){ if(t!==0) s += '<text x="'+px(t)+'" y="'+(py(0)+16)+'" text-anchor="middle" font-size="11" fill="#888">'+t+'</text>'; }
+  for(var ty=-6; ty<=6; ty+=2){ if(ty!==0) s += '<text x="'+(px(0)-8)+'" y="'+(py(ty)+4)+'" text-anchor="end" font-size="11" fill="#888">'+ty+'</text>'; }
+  s += '<text x="'+px(4.6)+'" y="'+(py(0)+4)+'" text-anchor="middle" font-size="12" fill="#555">'+xLabel+'</text>';
+  s += '<text x="'+(px(0)+14)+'" y="'+py(7)+6+'" text-anchor="middle" font-size="12" fill="#555">'+yLabel+'</text>';
+  return s;
+}
+
+function f(x){ return A*x*x + B*x + C; }
+
+function renderParab(){
+  var svg = document.getElementById('svgParab');
+  var s = svgAxes(svg, 'x', 'y');
+  // 抛物线（不做边界钳制，超出部分由 viewBox 裁剪，避免出现贴边水平折线）
+  var d = '';
+  for(var x=-4.5; x<=4.5001; x+=0.06){
+    var y = f(x);
+    d += (d==='' ? 'M' : 'L') + px(x).toFixed(1) + ',' + py(y).toFixed(1);
+  }
+  s += '<path d="'+d+'" fill="none" stroke="#6a1b9a" stroke-width="2.6"/>';
+  // 实根
+  if(A !== 0){
+    var D = B*B - 4*A*C;
+    if(D >= 0){
+      var sq = Math.sqrt(D);
+      [(-B-sq)/(2*A), (-B+sq)/(2*A)].forEach(function(r){
+        if(Math.abs(r) <= 4.5){
+          s += '<circle cx="'+px(r)+'" cy="'+py(0)+'" r="5.5" fill="#e65100" stroke="#fff" stroke-width="1.5"/>';
+          s += '<text x="'+px(r)+'" y="'+(py(0)-12)+'" text-anchor="middle" font-size="12" fill="#e65100" font-weight="bold">'+r.toFixed(2)+'</text>';
+        }
+      });
+    }
+  }
+  // 顶点虚线（Δ<0 时展示"悬浮距离"）
+  if(A !== 0){
+    var D2 = B*B - 4*A*C, vx = -B/(2*A), vy = f(vx);
+    if(Math.abs(vx) <= 4.5 && Math.abs(vy) <= 7){
+      s += '<line x1="'+px(vx)+'" y1="'+py(0)+'" x2="'+px(vx)+'" y2="'+py(vy)+'" stroke="#999" stroke-width="1" stroke-dasharray="5 3"/>';
+      s += '<text x="'+(px(vx)+6)+'" y="'+((py(0)+py(vy))/2)+'" text-anchor="start" font-size="11" fill="#888">|f(顶点)|</text>';
+    }
+  }
+  svg.innerHTML = s;
+}
+
+function renderCplx(){
+  var svg = document.getElementById('svgCplx');
+  var s = svgAxes(svg, 'u（实部）', 'v（虚部）');
+  if(A !== 0){
+    var D = B*B - 4*A*C;
+    if(D < 0){
+      var u = -B/(2*A), v = Math.sqrt(-D)/(2*Math.abs(A));
+      [[u, v],[u, -v]].forEach(function(p){
+        if(Math.abs(p[0])<=4.5 && Math.abs(p[1])<=7){
+          s += '<circle cx="'+px(p[0])+'" cy="'+py(p[1])+'" r="6" fill="#1565c0" stroke="#fff" stroke-width="1.5"/>';
+          s += '<line x1="'+px(p[0])+'" y1="'+py(p[1])+'" x2="'+px(p[0])+'" y2="'+py(0)+'" stroke="#1565c0" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/>';
+        }
+      });
+      s += '<text x="'+px(u)+'" y="'+(py(v)-12)+'" text-anchor="middle" font-size="12.5" fill="#1565c0" font-weight="bold">u + vi</text>';
+      s += '<text x="'+px(u)+'" y="'+(py(-v)+22)+'" text-anchor="middle" font-size="12.5" fill="#1565c0" font-weight="bold">u − vi</text>';
+      s += '<text x="'+px(u)+'" y="'+(py(0)-8)+'" text-anchor="middle" font-size="11" fill="#888">u = '+u.toFixed(2)+'</text>';
+    }
+  }
+  svg.innerHTML = s;
+}
+
+function renderReadout(){
+  var el = document.getElementById('readout');
+  var D = B*B - 4*A*C;
+  if(A === 0){
+    el.innerHTML = '<b>a = 0</b>：此时不是二次函数（是一次函数 y = '+B+'x + '+C+'），请把 a 拖离 0。';
+    return;
+  }
+  var badge = D>0 ? '<span class="status-d pos">Δ = '+D.toFixed(2)+' &gt; 0</span>'
+            : D===0 ? '<span class="status-d zero">Δ = 0</span>'
+                    : '<span class="status-d neg">Δ = '+D.toFixed(2)+' &lt; 0</span>';
+  var expr;
+  if(D > 0){
+    var sq = Math.sqrt(D);
+    expr = 'x₁ = '+((-B-sq)/(2*A)).toFixed(2)+'，x₂ = '+((-B+sq)/(2*A)).toFixed(2);
+  } else if(D === 0){
+    expr = 'x₁ = x₂ = '+(-B/(2*A)).toFixed(2);
+  } else {
+    var u = -B/(2*A), v = Math.sqrt(-D)/(2*Math.abs(A));
+    expr = '<span class="root-expr">x = '+u.toFixed(2)+' ± '+v.toFixed(2)+'i</span>';
+  }
+  el.innerHTML = badge + '　方程 '+fmtEq()+' 的根：<b>'+expr+'</b>';
+}
+function fmtEq(){
+  function term(k, sym, first){
+    if(k === 0) return '';
+    var sign = first ? (k < 0 ? '−' : '') : (k < 0 ? ' − ' : ' + ');
+    var ak = Math.abs(k);
+    var coef = (ak === 1 && sym) ? '' : String(ak);
+    return sign + coef + sym;
+  }
+  return 'y = ' + term(A, 'x²', true) + term(B, 'x', false) + term(C, '', false);
+}
+
+function renderAll(){
+  document.getElementById('vA').textContent = A;
+  document.getElementById('vB').textContent = B;
+  document.getElementById('vC').textContent = C;
+  renderParab(); renderCplx(); renderReadout(); drawSurf();
+}
+
+['inA','inB','inC'].forEach(function(id){
+  document.getElementById(id).addEventListener('input', function(){
+    A = parseFloat(document.getElementById('inA').value);
+    B = parseFloat(document.getElementById('inB').value);
+    C = parseFloat(document.getElementById('inC').value);
+    renderAll();
+  });
+});
+
+// ========== 视角一：隐形抛物线（斜二测投影） ==========
+// 3D 点 (X=实轴, V=虚轴, Z=高度) → 2D：sx = ox + X*ex + V*vx ; sy = oy - Z*ez - V*vy
+(function(){
+  var ox=200, oy=300, ex=72, ez=58, vx=34, vy=17;
+  function P(X,V,Z){ return [ox + X*ex + V*vx, oy - Z*ez - V*vy]; }
+  function poly(pts){ return pts.map(function(p,i){ return (i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1); }).join(' '); }
+  var s = '';
+  // y=0 平面（平行四边形）
+  var q = [P(-2.3,-2.3,0), P(2.3,-2.3,0), P(2.3,2.3,0), P(-2.3,2.3,0)];
+  s += '<polygon points="'+q.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' ')+'" fill="rgba(21,101,192,0.06)" stroke="#b0bec5" stroke-width="1.2"/>';
+  s += '<text x="'+P(1.7,-1.9,0)[0]+'" y="'+P(1.7,-1.9,0)[1]+'" text-anchor="middle" font-size="12" fill="#90a4ae">y = 0 平面</text>';
+  // 实轴 / 虚轴
+  var ax0=P(-2.3,0,0), ax1=P(2.3,0,0), av0=P(0,-2.3,0), av1=P(0,2.3,0);
+  s += '<line x1="'+ax0[0]+'" y1="'+ax0[1]+'" x2="'+ax1[0]+'" y2="'+ax1[1]+'" stroke="#757575" stroke-width="1.4"/>';
+  s += '<line x1="'+av0[0]+'" y1="'+av0[1]+'" x2="'+av1[0]+'" y2="'+av1[1]+'" stroke="#757575" stroke-width="1.4" stroke-dasharray="6 3"/>';
+  s += '<text x="'+ax1[0]+8+'" y="'+ax1[1]+'" text-anchor="start" font-size="12" fill="#757575">实轴 u</text>';
+  s += '<text x="'+av1[0]+'" y="'+(av1[1]-8)+'" text-anchor="middle" font-size="12" fill="#757575">虚轴 v</text>';
+  // 实抛物线 y = u²+1（紫）
+  var pu=[]; for(var t=-1.55; t<=1.5501; t+=0.05) pu.push(P(t,0,t*t+1));
+  s += '<path d="'+poly(pu)+'" fill="none" stroke="#6a1b9a" stroke-width="2.8"/>';
+  s += '<text x="'+P(1.45,0,3.2)[0]+'" y="'+P(1.45,0,3.2)[1]+'" text-anchor="start" font-size="12.5" fill="#6a1b9a" font-weight="bold">y = u² + 1（悬浮）</text>';
+  // 隐形抛物线 y = 1 - v²（青，沿虚轴）
+  var ph=[]; for(var w=-1.75; w<=1.7501; w+=0.05) ph.push(P(0,w,1-w*w));
+  s += '<path d="'+poly(ph)+'" fill="none" stroke="#00838f" stroke-width="2.8" stroke-dasharray="7 3"/>';
+  s += '<text x="'+P(0,1.45,-1.9)[0]+'" y="'+P(0,1.45,-1.9)[1]+'" text-anchor="middle" font-size="12.5" fill="#00838f" font-weight="bold">y = 1 − v²（隐形翻转）</text>';
+  // 交点 ±i
+  [[0,-1],[0,1]].forEach(function(p){
+    var pt = P(p[0],p[1],0);
+    s += '<circle cx="'+pt[0]+'" cy="'+pt[1]+'" r="6" fill="#e65100" stroke="#fff" stroke-width="1.5"/>';
+    s += '<text x="'+(pt[0]+(p[1]>0?14:-14))+'" y="'+(pt[1]-10)+'" text-anchor="'+(p[1]>0?'start':'end')+'" font-size="13" fill="#e65100" font-weight="bold">x = '+(p[1]>0?'+':'−')+'i</text>';
+  });
+  // 顶点
+  var tv = P(0,0,1);
+  s += '<circle cx="'+tv[0]+'" cy="'+tv[1]+'" r="4" fill="#6a1b9a"/>';
+  s += '<text x="'+(tv[0]-12)+'" y="'+(tv[1]-8)+'" text-anchor="end" font-size="11.5" fill="#6a1b9a">顶点 (0, 1)</text>';
+  document.getElementById('svgHidden').innerHTML = s;
+})();
+
+// ========== 视角二：模长曲面 Canvas ==========
+var cv = document.getElementById('cvSurf'), ctx = cv.getContext('2d');
+var yaw = -0.62, tilt = 0.46;           // 旋转角 / 俯视角
+var NU = 49, NV = 33;                    // 网格密度
+var U0=-2.4, U1=2.4, V0=-1.7, V1=1.7;    // u-v 范围
+var dragging=false, lastX=0;
+
+function fmod(u,v){ var re = A*u*u - A*v*v + B*u + C, im = v*(2*A*u + B); return Math.sqrt(re*re + im*im); }
+
+function project(u,v,z,zmax){
+  var S = 95, cx = cv.width/2, cy = cv.height/2 + 18;
+  var x1 = u*Math.cos(yaw) - v*Math.sin(yaw);
+  var y1 = u*Math.sin(yaw) + v*Math.cos(yaw);
+  var zz = zmax>0 ? z/zmax : 0;
+  return [ cx + x1*S, cy + (y1*S)*Math.cos(tilt) - zz*170 ];
+}
+
+function drawSurf(){
+  var W=cv.width, H=cv.height;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = '#fff'; ctx.fillRect(0,0,W,H);
+  if(A === 0){ ctx.fillStyle='#888'; ctx.font='16px sans-serif'; ctx.textAlign='center'; ctx.fillText('a = 0：不是二次函数，请调整滑块', W/2, H/2); return; }
+  // 计算 zmax
+  var zmax = 0, iu, iv;
+  for(iu=0; iu<NU; iu++) for(iv=0; iv<NV; iv++){
+    var z = fmod(U0+(U1-U0)*iu/(NU-1), V0+(V1-V0)*iv/(NV-1));
+    if(z>zmax) zmax=z;
+  }
+  if(zmax<=0) zmax=1;
+  // 行（固定 u）
+  for(iu=0; iu<NU; iu++){
+    var u = U0+(U1-U0)*iu/(NU-1);
+    ctx.beginPath();
+    for(iv=0; iv<NV; iv++){
+      var v = V0+(V1-V0)*iv/(NV-1);
+      var z = fmod(u,v), p = project(u,v,z,zmax);
+      iv===0 ? ctx.moveTo(p[0],p[1]) : ctx.lineTo(p[0],p[1]);
+    }
+    var dep = (iu/(NU-1));  // 颜色随位置渐变
+    ctx.strokeStyle = 'rgba(26,115,232,'+(0.35+0.4*dep)+')';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+  // 列（固定 v）
+  for(iv=0; iv<NV; iv++){
+    var v2 = V0+(V1-V0)*iv/(NV-1);
+    ctx.beginPath();
+    for(iu=0; iu<NU; iu++){
+      var u2 = U0+(U1-U0)*iu/(NU-1);
+      var z2 = fmod(u2,v2), p2 = project(u2,v2,z2,zmax);
+      iu===0 ? ctx.moveTo(p2[0],p2[1]) : ctx.lineTo(p2[0],p2[1]);
+    }
+    ctx.strokeStyle = 'rgba(26,115,232,0.28)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+  // 触地点（z=0 的根）—— 画在曲面上
+  var D = B*B - 4*A*C;
+  var u0 = -B/(2*A), vmag = Math.abs(A)>1e-9 ? Math.sqrt(D<0 ? -D : 0)/(2*Math.abs(A)) : 0;
+  [[u0, vmag],[u0, -vmag]].forEach(function(r){
+    if(r[0]<U0||r[0]>U1||Math.abs(r[1])>Math.abs(V1)) return;
+    var p = project(r[0], r[1], 0, zmax);
+    ctx.beginPath(); ctx.arc(p[0], p[1], 7, 0, Math.PI*2);
+    ctx.fillStyle = '#e53935'; ctx.fill();
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#b71c1c'; ctx.font = 'bold 13px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('z = 0', p[0], p[1] - 14);
+  });
+  // 标注轴
+  var o = project(0,0,0,zmax), pu2 = project(2.4,0,0,zmax), pv2 = project(0,1.7,0,zmax);
+  ctx.strokeStyle='#999'; ctx.lineWidth=1.4;
+  ctx.beginPath(); ctx.moveTo(o[0],o[1]); ctx.lineTo(pu2[0],pu2[1]); ctx.moveTo(o[0],o[1]); ctx.lineTo(pv2[0],pv2[1]); ctx.stroke();
+  ctx.fillStyle='#777'; ctx.font='13px sans-serif'; ctx.textAlign='center';
+  ctx.fillText('u', pu2[0]+12, pu2[1]);
+  ctx.fillText('v', pv2[0], pv2[1]-10);
+}
+
+// 拖动旋转（鼠标 + 触摸）
+function down(x){ dragging=true; lastX=x; }
+function move(x){ if(!dragging) return; yaw += (x-lastX)*0.012; lastX=x; drawSurf(); }
+function up(){ dragging=false; }
+cv.addEventListener('mousedown', function(e){ down(e.clientX); });
+window.addEventListener('mousemove', function(e){ move(e.clientX); });
+window.addEventListener('mouseup', up);
+cv.addEventListener('touchstart', function(e){ down(e.touches[0].clientX); e.preventDefault(); }, {passive:false});
+cv.addEventListener('touchmove', function(e){ move(e.touches[0].clientX); e.preventDefault(); }, {passive:false});
+cv.addEventListener('touchend', up);
+
+renderAll();
+</script>
+</body>
+</html>
