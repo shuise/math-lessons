@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>猜概率</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --panel2: #1f2630;
+    --line: #2a323c;
+    --gold: #f5c518;
+    --green: #2ea043;
+    --red: #f85149;
+    --blue: #388bfd;
+    --txt: #e6edf3;
+    --txt2: #8b949e;
+    --spade: #1f1f1f;
+    --heart: #c62828;
+  }
+  html, body { height: 100%; background: var(--bg); }
+  body {
+    font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--txt);
+    display: flex;
+    justify-content: center;
+    min-height: 100dvh;
+    overscroll-behavior: none;
+  }
+  #app {
+    width: 100%;
+    max-width: 460px;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 14px 50px;
+  }
+
+  .topbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 14px;
+  }
+  .topbar .title { font-weight: 800; font-size: 19px; letter-spacing: .5px; }
+  .topbar .title small { color: var(--gold); font-size: 14px; font-weight: 600; display:block; }
+  .stat { text-align: center; flex: 1; min-width: 54px; }
+  .stat .lab { font-size: 11px; color: var(--txt2); letter-spacing: .5px; }
+  .stat .val { font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .stat.good .val { color: var(--green); }
+  .stat.bad .val { color: var(--red); }
+  .stat.g .val { color: var(--gold); }
+  .stat.h .val { color: var(--blue); }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 16px;
+    margin-top: 14px;
+  }
+  .panel h2 { font-size: 21px; margin-bottom: 6px; }
+  .panel h2 .sub { font-size: 14px; color: var(--txt2); font-weight: 500; }
+  .panel p { font-size: 16px; line-height: 1.7; color: #c9d1d9; }
+  .hint-txt { font-size: 14px; color: var(--txt2); line-height: 1.6; }
+
+  /* 迷你牌 */
+  .mini-row {
+    display: flex; gap: 6px; justify-content: center;
+    margin: 12px 0 4px; flex-wrap: wrap;
+  }
+  .pc {
+    width: 38px; height: 54px; border-radius: 6px;
+    background: #fff; color: #111;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 16px;
+    border: 1.5px solid #bbb;
+    box-shadow: 0 2px 6px rgba(0,0,0,.25);
+  }
+  .pc.red { color: var(--heart); }
+
+  /* 手牌 */
+  .hand-row {
+    display: flex; gap: 10px; justify-content: center;
+    margin: 14px 0 8px; flex-wrap: wrap;
+  }
+  .card-big {
+    width: 68px; height: 96px; border-radius: 10px;
+    background: #fff; color: #111;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 24px;
+    border: 2px solid #bbb;
+    box-shadow: 0 4px 14px rgba(0,0,0,.3);
+    position: relative;
+  }
+  .card-big.red { color: var(--heart); }
+  .card-big.back {
+    background:
+      repeating-linear-gradient(45deg, #30363d, #30363d 6px, #21262d 6px, #21262d 12px);
+    color: rgba(255,255,255,.15); font-size: 32px; border-color: #30363d;
+  }
+  .card-big.hi { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .card-big.spade-tag::after {
+    content: "♠A"; position: absolute; top: -10px; right: -10px;
+    background: var(--gold); color: #1a1300; border-radius: 50%;
+    width: 26px; height: 26px; font-size: 11px; font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,.4);
+  }
+
+  /* 问题标签 */
+  .qtag {
+    display: inline-block; padding: 3px 10px; border-radius: 20px;
+    font-size: 12px; font-weight: 700; margin-right: 6px;
+  }
+  .qtag.g { background: #2a2410; color: var(--gold); }
+  .qtag.h { background: #0d1b33; color: var(--blue); }
+
+  .cond-box {
+    background: var(--panel2); border-radius: 10px;
+    padding: 10px 12px; margin: 10px 0; font-size: 15px;
+    color: #c9d1d9; line-height: 1.55;
+  }
+  .cond-box b { color: var(--gold); }
+  .cond-box.h b { color: var(--blue); }
+
+  /* 按钮 */
+  .btn {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 19px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .15s;
+  }
+  .btn:active { transform: scale(.98); }
+  .btn-primary { background: var(--gold); color: #1a1300; }
+  .btn-ghost { background: var(--panel2); color: var(--txt); border: 1px solid var(--line); }
+  .btn-green { background: linear-gradient(135deg, #2ea043, #1a7f37); color: #fff; }
+  .btn-red { background: linear-gradient(135deg, #f85149, #b62324); color: #fff; }
+  .btn[disabled] { opacity: .4; cursor: default; }
+
+  .btn-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+  .btn-row-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+  .btn-row-3 .btn { font-size: 15px; padding: 12px 4px; }
+
+  /* 结果区 */
+  .result-box { text-align: center; padding: 4px 0 10px; }
+  .result-box .emoji { font-size: 50px; }
+  .result-box .lbl { font-size: 26px; font-weight: 900; margin: 6px 0 4px; }
+  .result-box .lbl.good { color: var(--green); }
+  .result-box .lbl.bad { color: var(--red); }
+  .result-box .desc { font-size: 15px; color: #c9d1d9; line-height: 1.7; }
+
+  /* 累计统计条 */
+  .rate-row { display: flex; align-items: center; gap: 10px; margin: 8px 0; }
+  .rate-row .lab { width: 86px; font-size: 13px; color: var(--txt2); font-weight: 700; }
+  .rate-row .lab.g { color: var(--gold); }
+  .rate-row .lab.h { color: var(--blue); }
+  .rate-bar {
+    flex: 1; height: 14px; background: var(--panel2);
+    border-radius: 7px; overflow: hidden; position: relative;
+  }
+  .rate-bar i {
+    display: block; height: 100%; width: 0%;
+    border-radius: 7px; transition: width .4s ease;
+  }
+  .rate-bar i.g { background: linear-gradient(90deg, var(--gold), #ffd740); }
+  .rate-bar i.h { background: linear-gradient(90deg, var(--blue), #79b8ff); }
+  .rate-row .num {
+    width: 68px; text-align: right; font-variant-numeric: tabular-nums;
+    font-weight: 800; font-size: 14px;
+  }
+  .rate-row .num.g { color: var(--gold); }
+  .rate-row .num.h { color: var(--blue); }
+  .truth-tag {
+    display: inline-block; padding: 2px 8px; border-radius: 6px;
+    background: #2ea043; color: #fff; font-size: 11px; font-weight: 700;
+    margin-left: 6px;
+  }
+
+  /* 折叠 */
+  details.ana { margin-top: 14px; background: var(--panel); border:1px solid var(--line); border-radius: 12px; padding: 4px 14px; }
+  details.ana summary { cursor: pointer; font-weight: 700; font-size: 17px; padding: 12px 0; list-style: none; }
+  details.ana summary::-webkit-details-marker { display:none; }
+  details.ana summary::before { content: "▶ "; color: var(--gold); font-size: 12px; }
+  details.ana[open] summary::before { content: "▼ "; }
+  .ana-body { padding: 0 0 14px; font-size: 15px; line-height: 1.75; color: #c9d1d9; }
+  .ana-body b { color: var(--gold); }
+  .ana-body .formula { background: var(--panel2); border-left: 3px solid var(--gold); padding: 8px 10px; margin: 8px 0; border-radius: 4px; font-variant-numeric: tabular-nums; }
+
+  .back-link {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    color: var(--txt2);
+    font-size: 14px;
+    text-decoration: none;
+  }
+  .back-link:hover { color: var(--gold); }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div class="topbar">
+    <div class="title">猜概率<small>A牌的条件概率</small></div>
+    <div class="stat good"><div class="lab">对</div><div class="val" id="sOk">0</div></div>
+    <div class="stat bad"><div class="lab">错</div><div class="val" id="sNo">0</div></div>
+    <div class="stat g"><div class="lab">G类</div><div class="val" id="sG">0/0</div></div>
+    <div class="stat h"><div class="lab">H类</div><div class="val" id="sH">0/0</div></div>
+  </div>
+
+  <!-- 规则 -->
+  <div class="panel">
+    <h2>设置（简化版桥牌）</h2>
+    <p>用 <b>6 张牌</b>（A♠, A♥, K♠, K♥, Q♠, Q♥）洗匀后随机发 <b>3 张手牌</b>。</p>
+    <div class="mini-row" id="deckMini"></div>
+    <p style="margin-top:4px">对一副已分好的手牌，有两种问法：</p>
+    <div class="cond-box">
+      <span class="qtag g">G 问</span>
+      「你的手牌里<b>至少有一张 A 吗</b>？」→ 回答「是的」
+    </div>
+    <div class="cond-box h">
+      <span class="qtag h">H 问</span>
+      「你的手牌里<b>有黑桃 A（A♠）</b>吗？」→ 回答「是的」
+    </div>
+    <p>问：两种情况下，手牌中 <b>含有 2 张或更多 A</b> 的概率，哪边更大？</p>
+  </div>
+
+  <!-- 初始判断 -->
+  <div class="panel" id="firstPanel">
+    <h2>先选你的直觉</h2>
+    <p class="hint-txt">在看实际数据之前，先做一个判断：你认为两个概率谁大？</p>
+    <div class="btn-row-3">
+      <button class="btn btn-ghost" data-intu="g">G 更大</button>
+      <button class="btn btn-ghost" data-intu="e">差不多/相等</button>
+      <button class="btn btn-ghost" data-intu="h">H 更大</button>
+    </div>
+    <p style="margin-top:12px" id="intuTxt" class="hint-txt">选完后会进入实际发牌环节。</p>
+  </div>
+
+  <!-- 发牌游戏 -->
+  <div class="panel" id="gamePanel">
+    <h2>发牌对局 <span class="sub" id="roundSub">第 1 局</span></h2>
+    <p class="hint-txt">每局随机发 3 张，我们先回答「G 问 / H 问」，再猜这手牌是否有 ≥2 张 A。</p>
+
+    <div class="hand-row" id="handRow"></div>
+    <p class="hint-txt" style="text-align:center" id="dealHint">点击发牌开始</p>
+
+    <div id="dealStage">
+      <button class="btn btn-primary" id="dealBtn">发 牌</button>
+    </div>
+
+    <!-- 条件匹配阶段：若手牌符合G或H条件，展示对应条件 -->
+    <div id="condStage" class="hidden">
+      <div id="condBox" class="cond-box"></div>
+      <p class="hint-txt">基于上面的回答，判断这手牌：</p>
+      <div class="btn-row-2">
+        <button class="btn btn-green" id="judge2">有 ≥2 张 A</button>
+        <button class="btn btn-red" id="judge1">A < 2 张</button>
+      </div>
+    </div>
+
+    <div id="resultStage" class="hidden">
+      <div class="result-box" id="resultBox"></div>
+
+      <div style="margin-top:12px">
+        <p class="hint-txt">累计概率（仅统计符合条件的局）：</p>
+        <div class="rate-row"><div class="lab g">G 类 ≥2A</div>
+          <div class="rate-bar"><i class="g" id="barG"></i></div>
+          <div class="num g" id="numG">—</div></div>
+        <div class="rate-row"><div class="lab h">H 类 ≥2A</div>
+          <div class="rate-bar"><i class="h" id="barH"></i></div>
+          <div class="num h" id="numH">—</div></div>
+      </div>
+
+      <button class="btn btn-ghost" id="nextBtn" style="margin-top:12px">继续发牌</button>
+      <button class="btn btn-ghost" id="autoBtn" style="margin-top:8px">自动再发 30 局（收集数据）</button>
+    </div>
+  </div>
+
+  <details class="ana">
+    <summary>数学分析（精确概率）</summary>
+    <div class="ana-body">
+      <p>6 张牌发 3 张，总共 C(6,3)=<b>20</b> 种等可能手牌。</p>
+      <div class="formula">
+        <b style="color:var(--gold)">G 类：已知「至少 1 张 A」</b><br>
+        无 A 的手牌数 = C(4,3) = 4（从 K♠K♥Q♠Q♥ 中选 3）<br>
+        |≥1A| = 20 − 4 = <b>16</b><br>
+        |≥2A 且 ≥1A| = |≥2A| = C(2,2)×C(4,1) = 4（A♠A♥ + 任意非 A）<br>
+        P = 4/16 = <b>25%</b>
+      </div>
+      <div class="formula">
+        <b style="color:var(--blue)">H 类：已知「有 A♠」</b><br>
+        有 A♠ 的手牌数 = C(5,2) = <b>10</b>（其他 2 张从剩余 5 张任意取）<br>
+        |≥2A 且 有 A♠| = 先固定 A♠，再至少有一张 A（只能是 A♥）<br>
+        = A♠+A♥+任意非A = C(4,1) = 4<br>
+        P = 4/10 = <b>40%</b>
+      </div>
+      <p><b style="color:var(--gold)">40% > 25%，H 类明显更大。</b></p>
+      <p>直觉误区：很多人觉得"有一张具体牌"和"至少有一张"差不多——但条件的特异性越强，条件空间被压缩得越集中，多 A 的比例反而越大。H 类把样本砍到一半（16→10），但多 A 的成功样本数没变（都是 4），所以概率升高。</p>
+      <p>这和原题 52 张桥牌里的结论一致：给出具体花色信息会让条件下的多 A 概率严格变大。</p>
+    </div>
+  </details>
+
+  <a class="back-link" href="./index.html">← 返回游戏列表</a>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // 6 张牌：rank+suit.  s=黑桃, h=红心.  A=14, K=13, Q=12
+  var DECK = [
+    { r:"A", s:"s", name:"A♠" },
+    { r:"A", s:"h", name:"A♥" },
+    { r:"K", s:"s", name:"K♠" },
+    { r:"K", s:"h", name:"K♥" },
+    { r:"Q", s:"s", name:"Q♠" },
+    { r:"Q", s:"h", name:"Q♥" }
+  ];
+
+  var isRed = function(c){ return c.s === "h"; };
+
+  var S = {
+    round: 0,
+    ok: 0, no: 0,
+    intu: null,       // 用户初始判断 g/e/h
+    hand: null,
+    hasA1: false,     // 至少1张A
+    hasA2: false,     // 至少2张A
+    hasSpadeA: false,
+    mode: null,       // 'G' or 'H'（本局按哪个条件走）
+    // 累计
+    gTot: 0, gGood: 0,
+    hTot: 0, hGood: 0,
+    phase: "idle"     // idle | cond | result
+  };
+
+  var $ = function(id){ return document.getElementById(id); };
+
+  // 渲染迷你牌堆
+  (function showDeck(){
+    var m = $("deckMini"); m.innerHTML = "";
+    DECK.forEach(function(c){
+      var el = document.createElement("div");
+      el.className = "pc" + (isRed(c) ? " red" : "");
+      el.textContent = c.name;
+      m.appendChild(el);
+    });
+  })();
+
+  function fmtFrac(n,d){ return d ? Math.round(n/d*100) + "%" : "—"; }
+
+  function updateHud(){
+    $("sOk").textContent = S.ok;
+    $("sNo").textContent = S.no;
+    $("sG").textContent = S.gGood + "/" + S.gTot;
+    $("sH").textContent = S.hGood + "/" + S.hTot;
+    $("roundSub").textContent = "第 " + S.round + " 局";
+    var pG = S.gTot ? S.gGood/S.gTot*100 : 0;
+    var pH = S.hTot ? S.hGood/S.hTot*100 : 0;
+    $("barG").style.width = pG + "%";
+    $("barH").style.width = pH + "%";
+    $("numG").textContent = S.gTot ? (S.gGood+"/"+S.gTot+" ("+fmtFrac(S.gGood,S.gTot)+")") : "—";
+    $("numH").textContent = S.hTot ? (S.hGood+"/"+S.hTot+" ("+fmtFrac(S.hGood,S.hTot)+")") : "—";
+  }
+
+  function cardEl(c, opts){
+    opts = opts || {};
+    var el = document.createElement("div");
+    el.className = "card-big";
+    if (opts.back) el.className += " back";
+    else {
+      if (isRed(c)) el.className += " red";
+      if (opts.hi) el.className += " hi";
+      if (opts.spadeTag) el.className += " spade-tag";
+    }
+    el.textContent = opts.back ? "?" : c.name;
+    return el;
+  }
+
+  function drawHand(){
+    // Fisher-Yates 6 取 3
+    var a = DECK.slice();
+    for (var i = a.length-1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i+1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    var hand = a.slice(0, 3);
+    // 按花色大小排序：A 在前
+    hand.sort(function(x,y){
+      var rankMap = {A:3,K:2,Q:1};
+      return rankMap[y.r] - rankMap[x.r];
+    });
+    return hand;
+  }
+
+  function analyze(hand){
+    var aCount = 0, spadeA = false;
+    hand.forEach(function(c){
+      if (c.r === "A") aCount++;
+      if (c.r === "A" && c.s === "s") spadeA = true;
+    });
+    return {
+      hasA1: aCount >= 1,
+      hasA2: aCount >= 2,
+      hasSpadeA: spadeA,
+      aCount: aCount
+    };
+  }
+
+  function renderHandRevealed(hand, opts){
+    opts = opts || {};
+    var row = $("handRow"); row.innerHTML = "";
+    hand.forEach(function(c){
+      var hi = opts.hiSpade && c.r === "A" && c.s === "s";
+      row.appendChild(cardEl(c, { back:false, hi: hi, spadeTag: hi }));
+    });
+  }
+
+  function renderHandBack(hand){
+    var row = $("handRow"); row.innerHTML = "";
+    for (var i=0;i<3;i++) row.appendChild(cardEl(null, { back:true }));
+  }
+
+  function startDeal(){
+    S.round++;
+    S.hand = drawHand();
+    var info = analyze(S.hand);
+    S.hasA1 = info.hasA1;
+    S.hasA2 = info.hasA2;
+    S.hasSpadeA = info.hasSpadeA;
+
+    renderHandBack(S.hand);
+    $("dealHint").textContent = "牌已发好（背面朝上）";
+    $("dealStage").classList.add("hidden");
+    $("condStage").classList.add("hidden");
+    $("resultStage").classList.add("hidden");
+
+    // 本局条件：若同时符合 G 和 H，随机挑一个；否则只挑符合的；都不符合就重发
+    var canG = S.hasA1, canH = S.hasSpadeA;
+    if (canG && canH) {
+      S.mode = Math.random() < 0.5 ? "G" : "H";
+    } else if (canG) {
+      S.mode = "G";
+    } else if (canH) {
+      S.mode = "H";
+    } else {
+      // 都不符合条件，直接换一张牌看（无效局），为了流畅直接重发
+      // 不增加 round，不统计
+      S.round--;
+      return startDealQuick();
+    }
+
+    setTimeout(toCond, 400);
+  }
+
+  // 快速重发（不闪烁）
+  function startDealQuick(){
+    S.hand = drawHand();
+    var info = analyze(S.hand);
+    S.hasA1 = info.hasA1; S.hasA2 = info.hasA2; S.hasSpadeA = info.hasSpadeA;
+    var canG = S.hasA1, canH = S.hasSpadeA;
+    if (canG && canH) { S.mode = Math.random()<.5 ? "G" : "H"; }
+    else if (canG) S.mode = "G";
+    else if (canH) S.mode = "H";
+    else return startDealQuick(); // 再抽
+    S.round++;
+    renderHandBack(S.hand);
+    $("dealHint").textContent = "牌已发好（背面朝上）";
+    $("dealStage").classList.add("hidden");
+    $("condStage").classList.add("hidden");
+    $("resultStage").classList.add("hidden");
+    setTimeout(toCond, 260);
+  }
+
+  function toCond(){
+    S.phase = "cond";
+    // 把正面先亮出来给玩家看（就像玩家看了手牌）
+    renderHandRevealed(S.hand, { hiSpade: S.mode === "H" });
+    $("dealHint").textContent = "手牌已翻开，看清楚啦～";
+    // 条件框
+    var cb = $("condBox");
+    if (S.mode === "G") {
+      cb.className = "cond-box";
+      cb.innerHTML = '<span class="qtag g">G 问</span>' +
+        '问："至少有一张 A 吗？"  <b>答：是的</b>。<br>' +
+        '<span class="hint-txt">（本局按 G 条件提问）</span>';
+    } else {
+      cb.className = "cond-box h";
+      cb.innerHTML = '<span class="qtag h">H 问</span>' +
+        '问："有黑桃 A 吗？" <b>答：是的</b>。<br>' +
+        '<span class="hint-txt">（本局按 H 条件提问，已用金色徽章标出 A♠）</span>';
+    }
+    $("condStage").classList.remove("hidden");
+  }
+
+  function judge(guess2A){
+    if (S.phase !== "cond") return;
+    S.phase = "result";
+    var correct = (guess2A === S.hasA2);
+    if (correct) S.ok++; else S.no++;
+
+    // 累计统计
+    if (S.mode === "G") {
+      S.gTot++;
+      if (S.hasA2) S.gGood++;
+    } else {
+      S.hTot++;
+      if (S.hasA2) S.hGood++;
+    }
+    updateHud();
+
+    $("condStage").classList.add("hidden");
+    $("resultStage").classList.remove("hidden");
+
+    var rb = $("resultBox");
+    var modeName = S.mode === "G" ? "G 类（至少1A）" : "H 类（有A♠）";
+    var aWord = S.hasA2 ? "≥2 张 A ✔" : "A < 2 张";
+    rb.innerHTML =
+      '<div class="emoji">' + (correct ? "🎉" : "😵") + '</div>' +
+      '<div class="lbl ' + (correct ? "good" : "bad") + '">' + (correct ? "判断正确" : "判断错误") + '</div>' +
+      '<div class="desc">' +
+      '本局条件：<b>' + modeName + '</b><br>' +
+      '手牌 A 数 = <b style="color:var(--gold)">' + (S.hasA2 ? "2" : (S.hasA1 ? "1" : "0")) + '</b> 张 &nbsp;（' + aWord + '）<br>' +
+      (S.hTot > 0 && S.gTot > 0 ?
+        ('已累计：G=' + fmtFrac(S.gGood,S.gTot) + ' / H=' + fmtFrac(S.hGood,S.hTot) +
+          (S.hGood/S.hTot > S.gGood/S.gTot ? '，<b style="color:var(--blue)">H 类领先</b>' : ''))
+        : "数据还不够，多玩几局就会发现 H 类概率更高～") +
+      '</div>';
+  }
+
+  // 自动再发 N 局（不需要玩家判断，纯粹收集数据）
+  function autoRun(n){
+    for (var i = 0; i < n; i++){
+      var hand = drawHand();
+      var info = analyze(hand);
+      // 随机 G/H 条件，满足就统计
+      var canG = info.hasA1, canH = info.hasSpadeA;
+      var mode;
+      if (canG && canH) mode = Math.random()<.5 ? "G" : "H";
+      else if (canG) mode = "G";
+      else if (canH) mode = "H";
+      else continue; // 都不满足，跳过此局
+      if (mode === "G") { S.gTot++; if (info.hasA2) S.gGood++; }
+      else { S.hTot++; if (info.hasA2) S.hGood++; }
+    }
+    S.round += n;
+    updateHud();
+  }
+
+  // 初始判断
+  document.querySelectorAll("#firstPanel [data-intu]").forEach(function(b){
+    b.onclick = function(){
+      document.querySelectorAll("#firstPanel [data-intu]").forEach(function(x){
+        x.classList.remove("active"); x.style.background = ""; x.style.color = ""; x.style.borderColor = "";
+      });
+      b.classList.add("active");
+      b.style.background = "#2a2410"; b.style.color = "var(--gold)"; b.style.borderColor = "var(--gold)";
+      S.intu = b.dataset.intu;
+      var map = { g: "直觉：G 类 ≥2A 概率更大。", e: "直觉：两者差不多。", h: "直觉：H 类 ≥2A 概率更大。" };
+      $("intuTxt").innerHTML = map[S.intu] + " <b>继续打牌来验证吧！</b>";
+    };
+  });
+
+  $("dealBtn").onclick = startDeal;
+  $("judge2").onclick = function(){ judge(true); };
+  $("judge1").onclick = function(){ judge(false); };
+  $("nextBtn").onclick = startDeal;
+  $("autoBtn").onclick = function(){
+    autoRun(30);
+    alert("已追加 30 局统计，看看上面两条进度条！\n理论值：G=25%  H=40%");
+  };
+
+  updateHud();
+})();
+</script>
+</body>
+</html>

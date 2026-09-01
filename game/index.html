@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>数学游戏 · 目录</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --panel2: #1f2630;
+    --line: #2a323c;
+    --gold: #f5c518;
+    --green: #2ea043;
+    --red: #f85149;
+    --blue: #388bfd;
+    --txt: #e6edf3;
+    --txt2: #8b949e;
+  }
+  html, body { height: 100%; background: var(--bg); }
+  body {
+    font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--txt);
+    display: flex;
+    justify-content: center;
+    min-height: 100dvh;
+    overscroll-behavior: none;
+  }
+  #app {
+    width: 100%;
+    max-width: 460px;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 14px 50px;
+  }
+
+  .hero {
+    padding: 18px 4px 16px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 4px;
+  }
+  .hero h1 {
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: .5px;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero p {
+    font-size: 15px;
+    color: var(--txt2);
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+
+  .card {
+    display: block;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 16px;
+    margin-top: 14px;
+    text-decoration: none;
+    color: var(--txt);
+    transition: border-color .2s, transform .15s;
+  }
+  .card:hover, .card:active { border-color: var(--gold); transform: translateY(-2px); }
+
+  .card .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .card .name {
+    font-size: 20px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card .emoji {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--panel2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .card .tag {
+    font-size: 12px; font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: #2a2410;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .card .tag.blue { background: #0d1b33; color: var(--blue); }
+  .card .tag.green { background: #0d2717; color: var(--green); }
+  .card .desc {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #c9d1d9;
+  }
+  .card .foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+  }
+  .card .meta {
+    font-size: 12px;
+    color: var(--txt2);
+  }
+  .card .go {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--gold);
+  }
+  .card .go::after { content: " →"; }
+
+  .foot-note {
+    margin-top: 26px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--txt2);
+    line-height: 1.6;
+  }
+  .foot-note a { color: var(--gold); text-decoration: none; }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div class="hero">
+    <h1>数学<span>游戏</span>目录</h1>
+    <p>把经典概率悖论做成小游戏。选一个，挑战你的直觉！</p>
+  </div>
+
+  <a class="card" href="./sum.html">
+    <div class="head">
+      <div class="name"><span class="emoji">💰</span>金钱本色</div>
+      <div class="tag green">期望 + 策略</div>
+    </div>
+    <p class="desc">20 个盒子藏着 £1k~£20k。每选一个，金额从 £1k 向上跳动到盒值；1.5 秒内叫停攒下当时数字，10 次内达标即赢。阈值越高期望越大，却越容易作废。</p>
+    <div class="foot">
+      <div class="meta">10 轮 · 4 档难度 · 含策略分析</div>
+      <div class="go">进入</div>
+    </div>
+  </a>
+
+  <a class="card" href="./card.html">
+    <div class="head">
+      <div class="name"><span class="emoji">🎴</span>猜卡片</div>
+      <div class="tag">条件概率</div>
+    </div>
+    <p class="desc">三张卡：蓝蓝 / 粉粉 / 蓝粉。随机抽一张，朝上一面是粉色。另一面更可能是蓝还是粉？直觉说 1/2，但正确答案是粉色 2/3——条件概率第一坑。</p>
+    <div class="foot">
+      <div class="meta">多轮抽卡 · 对错统计 · 含数学证明</div>
+      <div class="go">进入</div>
+    </div>
+  </a>
+
+  <a class="card" href="./porker.html">
+    <div class="head">
+      <div class="name"><span class="emoji">🂡</span>猜概率</div>
+      <div class="tag blue">A牌悖论</div>
+    </div>
+    <p class="desc">6 张简化牌堆发 3 张：G 问"至少有一张 A 吗？是" vs H 问"有黑桃 A 吗？是"——哪种情况下包含 2+ 张 A 的概率更大？特异性越强，条件空间越集中。</p>
+    <div class="foot">
+      <div class="meta">可自动补 30 局 · 实时 G/H 概率对比</div>
+      <div class="go">进入</div>
+    </div>
+  </a>
+
+  <p class="foot-note">
+    题目原型来自《数学之美》《概率闲聊》等经典。<br>
+    每局末尾可展开「数学分析」查看精确推导。
+  </p>
+
+</div>
+</body>
+</html>

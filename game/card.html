@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>猜卡片</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --panel2: #1f2630;
+    --line: #2a323c;
+    --gold: #f5c518;
+    --green: #2ea043;
+    --red: #f85149;
+    --blue: #388bfd;
+    --txt: #e6edf3;
+    --txt2: #8b949e;
+    --pink: #ec4899;
+    --pink2: #be185d;
+  }
+  html, body { height: 100%; background: var(--bg); }
+  body {
+    font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--txt);
+    display: flex;
+    justify-content: center;
+    min-height: 100dvh;
+    overscroll-behavior: none;
+  }
+  #app {
+    width: 100%;
+    max-width: 460px;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 14px 50px;
+  }
+
+  /* 顶栏 */
+  .topbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 14px;
+  }
+  .topbar .title { font-weight: 800; font-size: 19px; letter-spacing: .5px; }
+  .topbar .title small { color: var(--gold); font-size: 14px; font-weight: 600; display:block; }
+  .stat { text-align: center; flex: 1; min-width: 64px; }
+  .stat .lab { font-size: 12px; color: var(--txt2); letter-spacing: 1px; }
+  .stat .val { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .stat.correct .val { color: var(--green); }
+  .stat.wrong .val { color: var(--red); }
+  .stat.rate .val { color: var(--gold); }
+
+  /* 通用面板 */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 16px;
+    margin-top: 14px;
+  }
+  .panel h2 { font-size: 21px; margin-bottom: 6px; }
+  .panel h2 .sub { font-size: 14px; color: var(--txt2); font-weight: 500; }
+  .panel p { font-size: 16px; line-height: 1.7; color: #c9d1d9; }
+  .hint-txt { font-size: 14px; color: var(--txt2); line-height: 1.6; }
+
+  /* 卡片展示 */
+  .card-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 16px 0 8px;
+  }
+  .card-mini {
+    width: 62px; height: 88px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 12px;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,.4);
+    border: 2px solid rgba(255,255,255,.2);
+    position: relative;
+  }
+  .card-mini .lbl { position:absolute; bottom: 2px; font-size: 10px; opacity: .75; }
+  .bk-blue { background: linear-gradient(135deg, #388bfd, #1f6feb); }
+  .bk-pink { background: linear-gradient(135deg, #ec4899, #be185d); }
+  .bk-half { background: linear-gradient(90deg, #388bfd 0%, #388bfd 50%, #ec4899 50%, #ec4899 100%); }
+
+  /* 主游戏卡 */
+  .bigcard {
+    width: 200px;
+    height: 280px;
+    border-radius: 18px;
+    margin: 10px auto 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,.4);
+    border: 3px solid rgba(255,255,255,.25);
+    box-shadow: 0 10px 30px rgba(0,0,0,.4);
+    transition: transform .5s ease, background .5s ease;
+    position: relative;
+  }
+  .bigcard.back {
+    background:
+      repeating-linear-gradient(45deg, #30363d, #30363d 8px, #21262d 8px, #21262d 16px);
+    color: rgba(255,255,255,.15);
+    font-size: 80px;
+  }
+  .bigcard.reveal-front { color: transparent; text-shadow: none; }
+  .bigcard .front-txt {
+    position: absolute;
+    inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; font-weight: 900; color: #fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,.4);
+    opacity: 0; transition: opacity .4s ease .2s;
+  }
+  .bigcard.reveal-front .front-txt { opacity: 1; }
+  .bigcard.reveal-back .front-txt { opacity: 1; }
+
+  .pink-side { background: linear-gradient(135deg, #ec4899, #be185d); }
+  .blue-side { background: linear-gradient(135deg, #388bfd, #1f6feb); }
+
+  .card-caption {
+    text-align: center;
+    font-size: 14px;
+    color: var(--txt2);
+    margin-bottom: 10px;
+    min-height: 22px;
+  }
+
+  /* 按钮 */
+  .btn {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 19px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .15s;
+  }
+  .btn:active { transform: scale(.98); }
+  .btn-primary { background: var(--gold); color: #1a1300; }
+  .btn-ghost { background: var(--panel2); color: var(--txt); border: 1px solid var(--line); }
+  .btn-pink { background: linear-gradient(135deg, #ec4899, #be185d); color: #fff; }
+  .btn-blue { background: linear-gradient(135deg, #388bfd, #1f6feb); color: #fff; }
+  .btn[disabled] { opacity: .45; cursor: default; }
+
+  .choose-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+
+  /* 结果区 */
+  .result-box {
+    text-align: center;
+    padding: 4px 0 10px;
+  }
+  .result-box .emoji { font-size: 50px; }
+  .result-box .lbl { font-size: 26px; font-weight: 900; margin: 6px 0 4px; }
+  .result-box .lbl.good { color: var(--green); }
+  .result-box .lbl.bad { color: var(--red); }
+  .result-box .desc { font-size: 15px; color: #c9d1d9; line-height: 1.7; }
+
+  /* 分析折叠 */
+  details.ana { margin-top: 14px; background: var(--panel); border:1px solid var(--line); border-radius: 12px; padding: 4px 14px; }
+  details.ana summary { cursor: pointer; font-weight: 700; font-size: 17px; padding: 12px 0; list-style: none; }
+  details.ana summary::-webkit-details-marker { display:none; }
+  details.ana summary::before { content: "▶ "; color: var(--gold); font-size: 12px; }
+  details.ana[open] summary::before { content: "▼ "; }
+  .ana-body { padding: 0 0 14px; font-size: 15px; line-height: 1.75; color: #c9d1d9; }
+  .ana-body b { color: var(--gold); }
+  .ana-body .formula { background: var(--panel2); border-left: 3px solid var(--gold); padding: 8px 10px; margin: 8px 0; border-radius: 4px; font-variant-numeric: tabular-nums; }
+
+  .back-link {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    color: var(--txt2);
+    font-size: 14px;
+    text-decoration: none;
+  }
+  .back-link:hover { color: var(--gold); }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div class="topbar">
+    <div class="title">猜卡片<small>条件概率悖论</small></div>
+    <div class="stat correct"><div class="lab">对</div><div class="val" id="sOk">0</div></div>
+    <div class="stat wrong"><div class="lab">错</div><div class="val" id="sNo">0</div></div>
+    <div class="stat rate"><div class="lab">胜率</div><div class="val" id="sRt">0%</div></div>
+  </div>
+
+  <!-- 规则 -->
+  <div class="panel">
+    <h2>规则</h2>
+    <p>袋中有 <b>3 张双面卡片</b>：一张<b style="color:#388bfd">两面蓝色</b>、一张<b style="color:var(--pink)">两面粉色</b>、一张<b>一面粉一面蓝</b>。</p>
+    <p style="margin-top:8px">随机抽一张放在桌上，你只能看到<b>朝上的一面是粉色</b>。请判断：<b style="color:var(--gold)">朝下的另一面更可能是什么颜色？</b></p>
+    <div class="card-row">
+      <div class="card-mini bk-blue"><span class="lbl">蓝蓝</span></div>
+      <div class="card-mini bk-pink"><span class="lbl">粉粉</span></div>
+      <div class="card-mini bk-half"><span class="lbl">粉蓝</span></div>
+    </div>
+  </div>
+
+  <!-- 游戏区 -->
+  <div class="panel" id="gamePanel">
+    <h2>本轮抽取 <span class="sub" id="roundSub">第 1 局</span></h2>
+    <p class="hint-txt">卡已从袋中随机抽好，请仔细观察朝上的面再作答。</p>
+
+    <div id="drawStage">
+      <div class="bigcard back" id="bigCard">?<div class="front-txt" id="frontTxt"></div></div>
+      <div class="card-caption" id="capTxt">正在从袋中抽卡…</div>
+      <button class="btn btn-primary" id="revealBtn" style="margin-top:6px">翻出朝上的一面</button>
+    </div>
+
+    <div id="chooseStage" class="hidden">
+      <div class="choose-row">
+        <button class="btn btn-pink" id="optPink">另一面是粉色</button>
+        <button class="btn btn-blue" id="optBlue">另一面是蓝色</button>
+      </div>
+      <p class="hint-txt" style="text-align:center;margin-top:10px">直觉 vs 条件概率，你站哪边？</p>
+    </div>
+
+    <div id="resultStage" class="hidden">
+      <div class="result-box" id="resultBox"></div>
+      <button class="btn btn-ghost" id="nextBtn">再来一局</button>
+    </div>
+  </div>
+
+  <details class="ana">
+    <summary>数学分析（答案与原理）</summary>
+    <div class="ana-body">
+      <p><b style="color:var(--pink)">正确答案：另一面是粉色的概率 = 2/3</b>，蓝色概率 = 1/3。</p>
+      <p>很多人直觉是"粉粉卡 vs 粉蓝卡，两张卡二选一，各 1/2"——错在<b>把"卡片"当样本而不是"面"</b>。</p>
+      <div class="formula">
+        三张卡共 6 个面：蓝1,蓝2, 粉1,粉2, 粉3,蓝3<br>
+        条件"看到粉色面"排除了蓝蓝卡的两面，剩 <b>粉1,粉2,粉3</b> 3 个等可能样本<br>
+        → 粉1 和 粉2 的反面都是粉色（来自粉粉卡）<br>
+        → 粉3 的反面是蓝色（来自粉蓝卡）<br>
+        ∴ P(另一面=粉) = <b>2/3</b>，P(另一面=蓝) = 1/3
+      </div>
+      <p>等价表述：粉粉卡被抽出时 <b>无论从哪一面抽出来都是粉色</b>，而粉蓝卡<b>只有一半概率能抽出粉色朝上</b>——所以在"粉色朝上"的条件下，手里那张卡是粉粉卡的可能性大一倍。</p>
+    </div>
+  </details>
+
+  <a class="back-link" href="./index.html">← 返回游戏列表</a>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // 三张卡片：[面A, 面B, 标签]
+  var CARDS = [
+    { a: "blue", b: "blue", name: "蓝蓝卡" },
+    { a: "pink", b: "pink", name: "粉粉卡" },
+    { a: "pink", b: "blue", name: "粉蓝卡" }
+  ];
+
+  var S = {
+    round: 0,
+    ok: 0,
+    no: 0,
+    curCard: null,
+    upSide: null,   // 'a' or 'b'
+    upColor: null,  // seen
+    downColor: null,
+    phase: "draw"   // draw | choose | result
+  };
+
+  var $ = function(id){ return document.getElementById(id); };
+
+  function updateStats(){
+    $("sOk").textContent = S.ok;
+    $("sNo").textContent = S.no;
+    var tot = S.ok + S.no;
+    $("sRt").textContent = tot ? Math.round(S.ok/tot*100) + "%" : "0%";
+    $("roundSub").textContent = "第 " + S.round + " 局";
+  }
+
+  function drawCard(){
+    S.phase = "draw";
+    S.round++;
+    S.curCard = CARDS[Math.floor(Math.random() * CARDS.length)];
+    S.upSide = Math.random() < 0.5 ? "a" : "b";
+    S.upColor = S.upSide === "a" ? S.curCard.a : S.curCard.b;
+    S.downColor = S.upSide === "a" ? S.curCard.b : S.curCard.a;
+
+    $("drawStage").classList.remove("hidden");
+    $("chooseStage").classList.add("hidden");
+    $("resultStage").classList.add("hidden");
+
+    var bc = $("bigCard");
+    bc.className = "bigcard back";
+    $("frontTxt").textContent = "";
+    $("capTxt").textContent = "点击「翻出朝上的一面」查看卡面颜色";
+    $("revealBtn").disabled = false;
+    updateStats();
+  }
+
+  function revealUp(){
+    if (S.phase !== "draw") return;
+    var bc = $("bigCard");
+    bc.className = "bigcard reveal-front " + (S.upColor === "pink" ? "pink-side" : "blue-side");
+    $("frontTxt").textContent = (S.upColor === "pink" ? "粉色" : "蓝色") + " · 朝上";
+    $("capTxt").textContent = "已知：朝上一面是" + (S.upColor === "pink" ? "粉色" : "蓝色") + "。另一面呢？";
+
+    // 若朝上是蓝色，题目条件虽不成立，依然可做（蓝色对称题）
+    setTimeout(function(){
+      S.phase = "choose";
+      $("drawStage").classList.add("hidden");
+      $("chooseStage").classList.remove("hidden");
+      // 按钮颜色必须始终匹配"答案颜色"：
+      // 条件=粉题时，左=粉答案(pink+btn-pink) / 右=蓝答案(blue+btn-blue)
+      // 条件=蓝题时(对称)，左=蓝答案(blue+btn-blue) / 右=粉答案(pink+btn-pink)
+      var opPink = $("optPink"), opBlue = $("optBlue");
+      if (S.upColor === "blue") {
+        // 左按钮承载"蓝色答案"，右按钮承载"粉色答案"——同步文案+背景色
+        opPink.textContent = "另一面是蓝色";
+        opPink.className = "btn btn-blue";
+        opPink.dataset.ans = "blue";
+        opBlue.textContent = "另一面是粉色";
+        opBlue.className = "btn btn-pink";
+        opBlue.dataset.ans = "pink";
+      } else {
+        opPink.textContent = "另一面是粉色";
+        opPink.className = "btn btn-pink";
+        opPink.dataset.ans = "pink";
+        opBlue.textContent = "另一面是蓝色";
+        opBlue.className = "btn btn-blue";
+        opBlue.dataset.ans = "blue";
+      }
+    }, 900);
+  }
+
+  function choose(ans){
+    // ans = 用户实际选择的颜色答案（直接取自按钮 dataset.ans，与按钮背景色一致）
+    if (S.phase !== "choose") return;
+    S.phase = "result";
+
+    var correct = ans === S.downColor;
+    if (correct) S.ok++; else S.no++;
+    updateStats();
+
+    // 翻出另一面
+    var bc = $("bigCard");
+    bc.className = "bigcard reveal-front " + (S.downColor === "pink" ? "pink-side" : "blue-side");
+    $("frontTxt").textContent = (S.downColor === "pink" ? "粉色" : "蓝色") + " · 朝下";
+
+    $("chooseStage").classList.add("hidden");
+    $("resultStage").classList.remove("hidden");
+
+    var rb = $("resultBox");
+    var downName = S.downColor === "pink" ? "粉色" : "蓝色";
+    rb.innerHTML =
+      '<div class="emoji">' + (correct ? "🎉" : "😵") + '</div>' +
+      '<div class="lbl ' + (correct ? "good" : "bad") + '">' + (correct ? "答对了！" : "答错了") + '</div>' +
+      '<div class="desc">' +
+      '这张卡是 <b>' + S.curCard.name + '</b>（' +
+      (S.curCard.a === "pink" ? "粉" : "蓝") + ' + ' +
+      (S.curCard.b === "pink" ? "粉" : "蓝") + '），<br>' +
+      '朝上面=' + (S.upColor === "pink" ? "粉" : "蓝") + '，另一面= <b style="color:var(--gold)">' + downName + '</b>。<br>' +
+      (correct
+        ? "你的条件概率感不错～坚持下去就能看出为什么不是 1/2。"
+        : "掉进直觉陷阱啦！展开下方分析看看为什么不是各一半。") +
+      '</div>';
+  }
+
+  // 事件
+  $("revealBtn").onclick = revealUp;
+  $("optPink").onclick = function(){ choose(this.dataset.ans || "pink"); };
+  $("optBlue").onclick = function(){ choose(this.dataset.ans || "blue"); };
+  $("nextBtn").onclick = drawCard;
+
+  drawCard();
+})();
+</script>
+</body>
+</html>
