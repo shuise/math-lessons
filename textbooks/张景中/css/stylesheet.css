@@ -5,6 +5,13 @@
 body
 {
 	/*font-family:'Times New Roman',Times,NSimSun,SimSun;*/
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 12px 12px 112px 12px;
+  color: #333;
+  line-height: 1.9;
+  font-size: 16px;
 }
 img
 {
@@ -458,4 +465,68 @@ img
     text-justify:inter-ideograph;
     font-size: 0.8em;
     padding-left:10.0em;
+}
+
+/* ============ 移动端响应式优化（max-width: 720px） ============ */
+@media (max-width: 720px) {
+  /* 页边距与基础字号 — 移动端阅读舒适度优先 */
+  body {
+    max-width: 100%;
+    margin: 0;
+    padding: 8px 10px 100px 10px;
+    font-size: 19px;
+    line-height: 1.7;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  /* 书名 / 丛书名 / 作者 / 出版社 — 等比缩字号 */
+  .bookTitle { font-size: 1.3em; }
+  .bookname { font-size: 1.6em; margin: 1.2em 0 0 0; }
+  .booksubname { font-size: 1.2em; }
+  .author { font-size: 1.2em; margin: 0.6em 0 0 0; }
+  .publish { font-size: 1.2em; margin: 3em 0 0.6em 0; }
+  /* 篇 / 章节标题 — 缩字号、收紧间距 */
+  .classTitle { font-size: 1.6em; margin: 0.6em 0 1em 0; }
+  .chapterTitle { font-size: 1.4em; margin: 0.8em 0 0.6em 0; }
+  .sectionTitle { font-size: 1.3em; margin: 0.6em 0 0.5em 0; }
+  .listTitle1 { font-size: 1.2em; margin: 0.6em 0 0.5em 0; }
+  .listTitle2 { font-size: 1.1em; margin: 0.5em 0 0.4em 0; }
+  /* 正文 — 提行高、保首行缩进 */
+  .content { font-size: 1.0em; line-height: 1.8em; text-indent: 2.0em; }
+  .postil { font-size: 1.0em; line-height: 1.7em; }
+  /* 引文 — 缩边距、略增字号 */
+  .reference {
+    font-size: 0.9em;
+    line-height: 1.7em;
+    padding-left: 1.2em;
+    padding-right: 1.2em;
+  }
+  /* 诗词 — 收窄左右留白 */
+  .poem { padding-left: 2em; padding-right: 2em; }
+  .content_poem_center, .content_poem_left, .content_poem_right {
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+  /* 特殊显示 — 同步提行高 */
+  .left-content, .center-content, .right-content { line-height: 1.8em; }
+  .left-reference, .center-reference, .right-reference {
+    line-height: 1.7em;
+    padding-left: 1.2em;
+    padding-right: 1.2em;
+  }
+  /* 目录缩进 — 等比收窄，避免窄屏溢出 */
+  .toc_classTitle { font-size: 1.1em; }
+  .toc_chapterTitle { font-size: 1.1em; }
+  .toc_sectionTitle { padding-left: 0.6em; padding-right: 0.6em; }
+  .toc_listTitle1 { padding-left: 1.2em; padding-right: 1.2em; }
+  .toc_listTitle2 { padding-left: 1.8em; padding-right: 1.8em; }
+  .toc_part { font-size: 1.1em; }
+  .toc_sect1 { padding-left: 1.2em; }
+  .toc_sect2 { padding-left: 2.4em; }
+  .toc_sect3 { padding-left: 3.6em; }
+  .toc_sect4 { padding-left: 4.8em; }
+  .toc_sect5 { padding-left: 5.4em; font-size: 0.9em; }
+  .toc_sect6 { padding-left: 6.0em; font-size: 0.9em; }
 }
