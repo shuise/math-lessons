@@ -441,3 +441,33 @@ section.sec.c-sum { border-left: 6px solid var(--accent, #3949ab); }
   padding: 16px 20px; margin: 16px 0;
 }
 .foot-note { text-align: center; color: #aaa; font-size: 0.85em; margin-top: 26px; }
+
+/* ============================================================
+   5. 移动端适配：所有文字增大 2px
+   基准 16px → 18px（em 相对字号等比放大）；
+   各页面内联 @media 固定了 px 字号（p,li 15px / h1 22px / h2 18px /
+   h3 16px），此处用两级选择器（特异性高于页面内联单级选择器）
+   统一覆盖并同步 +2px。
+   ============================================================ */
+@media (max-width: 720px) {
+  body { font-size: 18px; }
+  /* !important 用于压过页面行内 style="font-size:.." 的固定 px（面包屑、元信息行等） */
+  article p, article li { font-size: 17px !important; }
+  article h1 { font-size: 24px !important; }
+  article h2 { font-size: 20px !important; }
+  article h3 { font-size: 18px !important; }
+  /* 页面内联固定 px 的交互组件同步 +2px（两级选择器特异性已高于页面内联类选择器，
+     无需 !important；不触碰 SVG 内 text，保证图形标注精度） */
+  article .btn-sm, article .btn-hint, article .btn-ans, article .check-btn { font-size: 15px; }
+  article .opt-btn, article .tf-btn, article .feedback,
+  article .hint-box, article .ans-box { font-size: 16px; }
+  article .fill-input, article .calc-input { font-size: 17px; }
+  /* 内容与屏幕边缘的间距：左右 10px、底部 100px。
+     两级选择器 + !important 压过各页内联的
+     article { padding: ... !important }（特异性 0,0,2 > 0,0,1） */
+  body article {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    padding-bottom: 100px !important;
+  }
+}
