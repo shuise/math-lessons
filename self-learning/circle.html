@@ -475,7 +475,86 @@
     </div>
   </div>
 
-  <h2>七、正多边形和圆</h2>
+  <h2>七、三角形的内切圆与内心</h2>
+  <div class="story">
+    <p>前面我们学过：一个圆和一条直线相切时，切点处的半径垂直于切线。那么，如果一个三角形的三条边<strong>都</strong>和同一个圆相切呢？</p>
+    <p>想象你有一块三角形的蛋糕，想在正中间放一颗最大的樱桃——这颗樱桃就是一个圆，它要"胖"到刚好碰到三条边，又不能挤出蛋糕外面。这个圆就是三角形的<strong>内切圆</strong>。</p>
+
+    <div class="key">
+      <p><strong>内切圆：</strong>与三角形的三条边都相切的圆。</p>
+      <p><strong>内心：</strong>内切圆的<strong>圆心</strong>，记作 I。它是三角形三条<strong>角平分线</strong>的交点。</p>
+      <p><strong>重要性质（要一字不差地记住）：</strong>内心到三角形<strong>三条边的距离相等</strong>，都等于内切圆的半径 r。</p>
+    </div>
+
+    <div class="graphic">
+      <svg viewBox="0 0 500 340" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <!-- 三角形 ABC -->
+        <polygon points="220,40 60,260 400,260" fill="rgba(1,87,155,0.05)" stroke="#333" stroke-width="2.5"/>
+        <circle cx="220" cy="40" r="3.5" fill="#01579b"/>
+        <text x="220" y="28" text-anchor="middle" font-size="15" fill="#01579b" font-weight="bold" font-family="serif">A</text>
+        <circle cx="60" cy="260" r="3.5" fill="#01579b"/>
+        <text x="42" y="275" text-anchor="start" font-size="15" fill="#01579b" font-weight="bold" font-family="serif">B</text>
+        <circle cx="400" cy="260" r="3.5" fill="#01579b"/>
+        <text x="410" y="275" text-anchor="start" font-size="15" fill="#01579b" font-weight="bold" font-family="serif">C</text>
+
+        <!-- 内切圆 -->
+        <circle cx="224" cy="176" r="84" fill="rgba(46,125,50,0.08)" stroke="#2e7d32" stroke-width="2.5"/>
+        <!-- 内心 I -->
+        <circle cx="224" cy="176" r="4" fill="#9c27b0"/>
+        <text x="234" y="172" text-anchor="start" font-size="15" fill="#9c27b0" font-weight="bold" font-family="serif">I（内心）</text>
+
+        <!-- 角平分线：三个顶点连到内心 -->
+        <line x1="220" y1="40" x2="224" y2="176" stroke="#9c27b0" stroke-width="1.8" stroke-dasharray="6,3"/>
+        <line x1="60" y1="260" x2="224" y2="176" stroke="#9c27b0" stroke-width="1.8" stroke-dasharray="6,3"/>
+        <line x1="400" y1="260" x2="224" y2="176" stroke="#9c27b0" stroke-width="1.8" stroke-dasharray="6,3"/>
+        <text x="130" y="245" text-anchor="middle" font-size="12" fill="#9c27b0">角平分线</text>
+        <text x="345" y="245" text-anchor="middle" font-size="12" fill="#9c27b0">角平分线</text>
+
+        <!-- 半径 r：I 向 BC 作垂线 -->
+        <line x1="224" y1="176" x2="224" y2="260" stroke="#2e7d32" stroke-width="2"/>
+        <rect x="224" y="248" width="12" height="12" fill="none" stroke="#2e7d32" stroke-width="1.5"/>
+        <text x="232" y="222" text-anchor="start" font-size="14" fill="#2e7d32" font-weight="bold">r</text>
+        <!-- 切点 -->
+        <circle cx="224" cy="260" r="3.5" fill="#2e7d32"/>
+        <text x="218" y="292" text-anchor="middle" font-size="13" fill="#2e7d32" font-weight="bold">切点（半径 ⊥ 边）</text>
+
+        <text x="250" y="335" text-anchor="middle" font-size="13" fill="#555">内切圆与三边都相切，内心 I 到三边的距离都等于 r</text>
+      </svg>
+    </div>
+
+    <div class="example">
+      <p><strong>为什么内心到三边的距离相等？</strong></p>
+      <p>因为内心是三条<strong>角平分线</strong>的交点。回忆角平分线的性质：<strong>角平分线上的点到角两边的距离相等</strong>。</p>
+      <p>点 I 在 ∠A 的平分线上 → I 到 AB、AC 的距离相等；I 在 ∠B 的平分线上 → I 到 BA、BC 的距离相等。所以 I 到三条边的距离<strong>全部相等</strong>——这个公共距离，正好就是内切圆的半径 r（圆心到切线的距离 = 半径，且半径 ⊥ 切线）。</p>
+    </div>
+
+    <div class="formula">
+      <p><strong>内切圆半径公式：</strong>三角形的面积 S、周长 C（三边之和 a + b + c）与内切圆半径 r 之间有一个漂亮的关系：</p>
+      <p style="text-align:center;font-size:1.2em;color:#01579b;"><strong>S = ½ C r，即 r = 2S ÷ (a + b + c)</strong></p>
+      <p>道理很简单：把三角形按三个顶点切成三个小三角形，它们的高都是 r，底分别是 a、b、c——S = ½ar + ½br + ½cr = ½(a + b + c)r。</p>
+    </div>
+
+    <div class="example">
+      <p><strong>例：求 3、4、5 直角三角形的内切圆半径。</strong></p>
+      <p>面积 S = ½ × 3 × 4 = 6，周长 = 3 + 4 + 5 = 12。</p>
+      <p>所以 r = 2 × 6 ÷ 12 = <strong>1</strong>。直角边 3、4、斜边 5 的三角形，内切圆半径恰好是 1，非常整齐。</p>
+    </div>
+
+    <div class="extend">
+      <p><strong>内心 vs 外心（别混淆）：</strong></p>
+      <ul>
+        <li><strong>内心</strong>：三条角平分线的交点，到<strong>三条边</strong>等距离，是<strong>内切圆</strong>的圆心——永远在三角形<strong>内部</strong>。</li>
+        <li><strong>外心</strong>：三边垂直平分线的交点，到<strong>三个顶点</strong>等距离，是<strong>外接圆</strong>的圆心——可能在三角形外部（钝角三角形时）。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>八、正多边形和圆</h2>
   <div class="story">
     <p>圆和正多边形有着天然的联系。把圆<strong>等分</strong>，然后依次连接各分点，就得到了一个<strong>正多边形</strong>。</p>
 
@@ -694,6 +773,23 @@
     <div class="ans-box" id="a10">∠APC = (80° + 40°) / 2 = <strong>60°</strong>。这个公式是圆周角定理的推广——可以把 ∠APC 看成两个圆周角的和。</div>
   </div>
 
+  <div class="exercise">
+    <p><strong>11.</strong> 三角形的内心是哪三条线的交点？</p>
+    <p>A. 三条中线 &nbsp; B. 三条高 &nbsp; C. 三条角平分线 &nbsp; D. 三边的垂直平分线</p>
+    <button class="btn-sm" onclick="toggleHint('h11')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a11')">查看答案</button>
+    <div class="hint-box" id="h11">想清楚四个"心"：中线交点是重心，高线交点是垂心，角平分线交点是内心，垂直平分线交点是外心。内心到三边等距离。</div>
+    <div class="ans-box" id="a11"><strong>C</strong>。内心是三条角平分线的交点，到三条边的距离相等（都等于内切圆半径）；D 选项的交点是外心，到三个顶点距离相等。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>12.</strong> 直角三角形的两条直角边分别为 5 和 12，斜边为 13，求它的内切圆半径。</p>
+    <button class="btn-sm" onclick="toggleHint('h12')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a12')">查看答案</button>
+    <div class="hint-box" id="h12">先算面积 S = ½ × 5 × 12，再算周长 = 5 + 12 + 13，最后用公式 r = 2S ÷ (a + b + c)。</div>
+    <div class="ans-box" id="a12">S = ½ × 5 × 12 = 30，周长 = 5 + 12 + 13 = 30。r = 2 × 30 ÷ 30 = <strong>2</strong>。</div>
+  </div>
+
   <div class="key" style="margin-top:32px;">
     <p><strong>本课要点总结：</strong></p>
     <ul>
@@ -703,6 +799,7 @@
       <li><strong>圆周角定理：</strong>圆周角 = 圆心角的一半。推论：直径所对圆周角 = 90°</li>
       <li><strong>位置关系：</strong>点和圆（内/上/外）；直线和圆（相离/相切/相交），比较 d 和 r</li>
       <li><strong>切线长定理：</strong>圆外一点引两条切线，切线长相等，PO 平分夹角</li>
+      <li><strong>内切圆与内心：</strong>内心是三条角平分线的交点，到三边距离相等（= 内切圆半径 r）；r = 2S ÷ 周长</li>
       <li><strong>正多边形和圆：</strong>正 n 边形的中心角 = 360° ÷ n</li>
       <li><strong>弧长与扇形面积：</strong>l = nπr/180，S = nπr²/360 = ½lr</li>
     </ul>

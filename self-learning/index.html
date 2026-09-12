@@ -74,6 +74,8 @@
   .n16 { background: #bf360c; }
   .n17 { background: #1a237e; }
   .n18 { background: #01579b; }
+  .sp { background: #607d8b; font-size: 13px; }
+  .review-banner a { color: #bf360c; text-decoration: underline; font-weight: 600; }
   /* 底部留白 + 固定提示 */
   article { padding-bottom: 50px !important; }
   .review-banner {
@@ -173,6 +175,12 @@
       <li class="olympiad-item"><a href="./exams/olympiad-stage9.html" class="olympiad-link">🏆 奥数挑战 — 6</a></li>
     </ul>
 
+    <p class="stage">专题精讲 — 跨阶段的工具与概念</p>
+    <ul class="course-list">
+      <li><a href="./number-line.html"><span class="num sp">专</span> 数轴详解 — 数与形的第一座桥</a></li>
+      <li><a href="./calc-toolbox.html"><span class="num sp">专</span> 计算工具箱 — 六件运算工具与估算技巧</a></li>
+    </ul>
+
   </div>
 
   <!-- 几何 Tab -->
@@ -216,6 +224,11 @@
       <li class="olympiad-item"><a href="./exams/olympiad-stage10.html" class="olympiad-link">🏆 奥数挑战 — 4</a></li>
     </ul>
 
+    <p class="stage">专题精讲 — 跨阶段的工具与概念</p>
+    <ul class="course-list">
+      <li><a href="./solid-plane.html"><span class="num sp">专</span> 立体与平面转化 — 三维与二维的互译</a></li>
+    </ul>
+
   </div>
 
   <!-- 统计 Tab -->
@@ -232,7 +245,7 @@
 
   </div>
 </article>
-<div class="review-banner">课件审核中，问题反馈至微信 shuiseshuise</div>
+<div class="review-banner">课件审核中（<a href="./revision-log.html">修订记录</a>），问题反馈至微信 shuiseshuise</div>
 <script>
 function switchTab(name) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));

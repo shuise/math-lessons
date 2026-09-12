@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>计算工具箱 — 数学专题</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>">
+<link rel="stylesheet" href="./style.css">
+<style>
+  :root { --accent: #0277bd; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #e1f5fe; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #e3f2fd; border-left: 4px solid #0288d1; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  .graphic { margin: 16px 0; text-align: center; }
+  @media (max-width: 720px) {
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./natural-numbers.html">课件 1（自然数）</a>、<a href="./rational-operations.html">课件 4（有理数的加减乘除）</a></p>
+  <h1>计算工具箱 — 方法、特殊数字、估算与单位</h1>
+
+  <h2>起源：从算筹到计算器</h2>
+  <div class="origin">
+    <p>两千年前，中国人用小棍子（<strong>算筹</strong>）在桌面上摆数计算；后来又发明了<strong>算盘</strong>，噼里啪啦一拨，答案就出来了。1614 年，英国数学家<strong>纳皮尔</strong>发明了<strong>对数表</strong>——一本厚厚的查表手册，能把"乘法"变成"加法"，天文学家开普勒用它计算行星轨道，省下的时间"相当于延长了天文学家的寿命"。1970 年代之后，袖珍计算器普及，这些"手工工具"渐渐退到了博物馆。</p>
+    <p>但是工具变了，<strong>数学没变</strong>。计算器不会告诉你：该用哪种运算？答案大概是多少？单位对不对？这些判断力，只能长在你自己脑子里。</p>
+    <p>这一讲就是给你的大脑装一个"计算工具箱"：先盘点有哪些<strong>可用的计算方法</strong>，再认识三个<strong>特殊数字</strong>（1、0、-1），然后练习<strong>估算</strong>，了解<strong>科学计数法</strong>，最后搞定<strong>单位转换</strong>。方程、应用题里要用到的"算"的功夫，全在这里了。</p>
+  </div>
+
+  <h2>一、可用的计算方法：六件工具</h2>
+  <div class="story">
+    <p>整个初中的计算，翻来覆去就是这六件工具。解方程、化简式子时，<strong>每一步都必须用它们（或由它们直接推出的规则）</strong>，不能凭感觉"乱来"：</p>
+
+    <div class="key">
+      <p><strong>六种基本运算（工具箱总览）：</strong></p>
+      <ul>
+        <li><strong>加法</strong>：合并。3 + 5，把两堆并成一堆。</li>
+        <li><strong>减法</strong>：加法的逆运算。比多少、求剩余。</li>
+        <li><strong>乘法</strong>：相同加数的快捷方式。3 × 5 = 5 + 5 + 5。</li>
+        <li><strong>除法</strong>：乘法的逆运算。平均分、求"每份多少"。<strong>除数不能为 0</strong>。</li>
+        <li><strong>乘方</strong>：相同乘数的快捷方式。2³ = 2 × 2 × 2 = 8（第 4 课有专门小节）。</li>
+        <li><strong>开方</strong>：乘方的逆运算。√9 = 3，因为 3² = 9（正数的平方根有两个，互为相反数）。</li>
+      </ul>
+      <p><strong>减、除、开方是"逆运算"：</strong>它们分别是加、乘、乘方的"倒带"。四则运算中先乘方、再乘除、后加减，有括号先算括号。</p>
+    </div>
+
+    <div class="example">
+      <p><strong>解方程时怎么用？</strong>解方程的每一问，本质都是"逆着来"：未知数被加了 → 两边同减；被乘了 → 两边同除（除数非 0）；被平方了 → 两边开方（记得正负两解）。养成习惯：写每一步时心里说出<strong>"我刚才用的是哪件工具"</strong>。</p>
+    </div>
+  </div>
+
+  <h2>二、计算中的特殊数字：1、0、-1</h2>
+  <div class="story">
+    <p>有三个数，出场率极高，脾气也极特别。把它们摸透，很多计算错误可以直接避免。</p>
+
+    <div class="key">
+      <p><strong>1 —— "不变先生"（乘法单位）：</strong></p>
+      <ul>
+        <li>a × 1 = a：乘 1 <strong>什么都不变</strong>（这是 1 的"职责"——乘法单位）。</li>
+        <li>a ÷ a = 1（a ≠ 0）：自己除自己等于 1。</li>
+        <li>1 的任何次方都是 1：1¹⁰⁰⁰ = 1。乘方再多，1 还是 1。</li>
+        <li>分数的"变身术"：分数分子分母同乘 1（的化身，如 2/2、3/3），大小不变——通分和约分的原理就是它。</li>
+      </ul>
+      <p><strong>0 —— "吞饭怪"（加法单位 + 吸收员）：</strong></p>
+      <ul>
+        <li>a + 0 = a：加 0 不变（加法单位）。</li>
+        <li>a × 0 = 0：乘 0 全变 0。0 是"黑洞"，谁乘它谁变 0。</li>
+        <li><strong>0 不能做除数</strong>！5 ÷ 0 没有意义——没有任何数乘 0 能等于 5。这一条是铁律，不是约定俗成的小规矩。</li>
+        <li>0 的相反数是 0，0 的绝对值是 0；a × 0 = 0 也是解方程"因式相乘为 0"的道理来源。</li>
+      </ul>
+      <p><strong>-1 —— "变号精灵"：</strong></p>
+      <ul>
+        <li>a × (-1) = -a：乘 -1 就是<strong>变号</strong>（变成相反数）。</li>
+        <li>(-1)² = 1：变两次号，回到原样。<strong>(-1) 的偶数次方是 1，奇数次方是 -1</strong>。</li>
+        <li>去括号、移项变号，背后的"操作员"都是 -1：-(a - b) = (-1)×(a - b) = -a + b。</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <p><strong>易错警报：</strong></p>
+      <ul>
+        <li>5 + 3 × 0 = ? 不是 0！先乘后加：5 + 0 = <strong>5</strong>。"乘 0 才归零，加 0 只是路过"。</li>
+        <li>(-1)⁴⁰ 是正的（偶次方），(-1)⁴¹ 是负的（奇次方）。判断 1 和 -1 的乘方，只看指数的奇偶。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>三、估算与近似值：心里有个"大概数"</h2>
+  <div class="story">
+    <p>计算器时代，为什么还要学估算？因为<strong>估算能帮你发现错误</strong>。按错一个小数点，计算器会一本正经地给你一个荒唐答案，只有会估算的人才能当场识破。</p>
+
+    <div class="key">
+      <p><strong>四舍五入与精确度：</strong></p>
+      <ul>
+        <li>3.14159… 保留两位小数 ≈ 3.14：看第三位小数，满 5 进 1，不满 5 舍去。</li>
+        <li><strong>精确度</strong>：3.14 精确到百分位（万分位上的数字被四舍五入掉了）。</li>
+        <li>用"≈"表示近似，"="只用于准确值。8 765 ≈ 9 千（精确到千位）？不对——8 765 ≈ <strong>9</strong> 千，百位是 7，四舍五入向千位进 1，是 9 千。</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <p><strong>例 1：估算 48 × 21。</strong></p>
+      <p>把 48 看成 50，21 看成 20：50 × 20 = 1000。精确值 1008——估算 1000，非常接近。若你的精确计算得出 10 080，立刻知道出了错（多乘了一个 10）。</p>
+    </div>
+
+    <div class="example">
+      <p><strong>例 2：手工估算 √10 在哪两个数之间。</strong></p>
+      <p>思路：找两个平方后"夹住" 10 的数。</p>
+      <p>3.1² = 9.61 &lt; 10；3.2² = 10.24 &gt; 10。所以 <strong>3.1 &lt; √10 &lt; 3.2</strong>。</p>
+      <p>想更准？再试 3.16² = 9.9856 &lt; 10，3.17² = 10.0489 &gt; 10，所以 3.16 &lt; √10 &lt; 3.17。像夹逼一样一格一格收紧——不用计算器，也能把无理数"按"到任意精度。（第 11 课拉马努金还有更神奇的算法。）</p>
+    </div>
+
+    <div class="key">
+      <p><strong>估算三招：</strong>① 凑整（把数凑成好算的整十整百）；② 夹逼（找两个一高一低的"包围圈"，如上例的平方）；③ 查量级（先确定答案是"几百"还是"几万"，防止算错位数）。</p>
+    </div>
+  </div>
+
+  <h2>四、科学计数法与对数表</h2>
+  <div class="story">
+    <p>光一年走约 <strong>9 460 800 000 000 米</strong>；一个病毒的直径约 <strong>0.000 000 1 米</strong>。这样写，数着零都能数晕。科学计数法就是给"超大数"和"超小数"设计的紧凑写法。</p>
+
+    <div class="key">
+      <p><strong>科学计数法（规则一字不差）：</strong>把数写成 <strong>a × 10ⁿ</strong> 的形式，其中 <strong>1 ≤ |a| &lt; 10</strong>，n 是整数。</p>
+      <ul>
+        <li>9 460 800 000 000 = <strong>9.4608 × 10¹²</strong>（小数点向左移 12 位，n = 12）</li>
+        <li>0.000 000 1 = <strong>1 × 10⁻⁷</strong>（小数点向右移 7 位，n = -7）</li>
+        <li>口诀：<strong>大数 n 是正的，小数 n 是负的；n 的绝对值 = 小数点移动的位数</strong>。</li>
+      </ul>
+    </div>
+
+    <div class="graphic">
+      <svg viewBox="0 0 660 190" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <text x="330" y="26" text-anchor="middle" font-size="15" fill="#333" font-weight="bold">小数点怎么挪，指数就怎么记</text>
+        <!-- 大数 -->
+        <text x="250" y="70" text-anchor="middle" font-size="16" fill="#0277bd" font-family="serif" font-weight="bold">5 600 000 = 5.6 × 10⁶</text>
+        <path d="M310,80 L310,110 L214,110" fill="none" stroke="#0277bd" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <path d="M214,110 L222,105 M214,110 L222,115" stroke="#0277bd" stroke-width="1.5"/>
+        <text x="255" y="130" text-anchor="middle" font-size="12" fill="#555">左移 6 位 → n = 6</text>
+        <!-- 小数 -->
+        <text x="250" y="168" text-anchor="middle" font-size="16" fill="#2e7d32" font-family="serif" font-weight="bold">0.000 42 = 4.2 × 10⁻⁴</text>
+        <path d="M132,158 L132,140 L165,140" fill="none" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="360" y="152" text-anchor="start" font-size="12" fill="#555">右移 4 位 → n = -4</text>
+      </svg>
+    </div>
+
+    <div class="extend">
+      <p><strong>对数表：把乘法变成加法的"魔法书"。</strong></p>
+      <p>在没有计算器的年代，算 458 × 1 276 要逐位相乘再相加，又慢又容易错。纳皮尔发现：<strong>任何正数都能表示成"10 的多少次方"</strong>。比如 100 = 10²，1000 = 10³。那么：</p>
+      <p style="text-align:center;">458 × 1 276 = 10^x × 10^y = 10^(x + y)</p>
+      <p>乘法就变成了指数相加！先查表（对数表）找到 x、y，做一次加法，再查反表（反对数表）变回原数——<strong>"乘除化加减"</strong>，整整省下一个量级的计算量。开普勒靠它算出行星运行定律，说它"延长了天文学家的寿命"。</p>
+      <p>"10 的多少次方"中的"多少"，就是对数（log）。对数的严格定义和算法要到<strong>高中</strong>才正式学习，初中阶段你只需记住两件事：① 对数是<strong>乘方（指数）的逆运算</strong>之一；② 它和科学计数法一样，都建立在一个朴素想法上——<strong>10ⁿ 的"n"本身就是个好用的数</strong>。</p>
+    </div>
+  </div>
+
+  <h2>五、单位转换：不同单位不能直接运算</h2>
+  <div class="story">
+    <p>"3 米加 5 厘米等于 8 米"对吗？当然不对！<strong>不同单位不能直接加减</strong>，就像"3 个苹果加 5 个鸡蛋"不能说等于"8 个苹果"。做应用题前，先统一单位。</p>
+
+    <div class="key">
+      <p><strong>常用换算（背下来）：</strong></p>
+      <ul>
+        <li><strong>长度</strong>：1 km = 1 000 m，1 m = 10 dm = 100 cm = 1 000 mm</li>
+        <li><strong>面积</strong>：1 m² = 100 dm² = 10 000 cm²（相邻单位间进率是 <strong>100</strong>，因为面积是"两个长度相乘"）；1 公顷 = 10 000 m²</li>
+        <li><strong>体积</strong>：1 m³ = 1 000 dm³ = 1 000 000 cm³（进率是 <strong>1000</strong>）；1 L = 1 dm³，1 mL = 1 cm³</li>
+        <li><strong>时间</strong>：1 h = 60 min = 3 600 s（注意时间是 60 进制！）</li>
+        <li><strong>速度</strong>：km/h 与 m/s 的换算——1 m/s = 3.6 km/h（因为 1 m/s = 3 600 m / 3 600 s…… 推导：1 m/s = 1/1000 km ÷ 1/3600 h = 3.6 km/h）</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <p><strong>例 1：3 米 25 厘米 + 1 米 80 厘米。</strong></p>
+      <p>统一成厘米：325 cm + 180 cm = 505 cm = <strong>5.05 m</strong>。或统一成米：3.25 + 1.80 = 5.05 m。先统一，再运算。</p>
+    </div>
+
+    <div class="example">
+      <p><strong>例 2（易错）：汽车速度 72 km/h，合多少 m/s？</strong></p>
+      <p>72 km/h = 72 000 m ÷ 3 600 s = <strong>20 m/s</strong>。口算技巧：km/h 化 m/s，<strong>除以 3.6</strong>；m/s 化 km/h，<strong>乘 3.6</strong>。72 ÷ 3.6 = 20，和精确计算一致。</p>
+    </div>
+
+    <div class="example">
+      <p><strong>例 3（高频坑）：5 m² 等于多少 cm²？</strong></p>
+      <p>不是 500！面积单位进率是长度进率的<strong>平方</strong>：1 m² = 100 cm × 100 cm = 10 000 cm²。所以 5 m² = <strong>50 000 cm²</strong>。体积再乘一层：1 m³ = 100 × 100 × 100 = 1 000 000 cm³。</p>
+    </div>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题：</strong>不用计算器，判断 2¹⁰ 与 10³ 哪个大？由此估算 2¹⁰⁰ 大约是 10 的多少次方（量级）？</p>
+    <button class="btn-sm" onclick="toggleHint('ch1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca1')">查看答案</button>
+    <div class="hint-box" id="ch1">先把 2¹⁰ 一步步算出来（10 个 2 连乘），和 1000 比一比。2¹⁰⁰ = (2¹⁰)¹⁰，把"每 10 个 2"打包。</div>
+    <div class="ans-box" id="ca1">2¹⁰ = 1 024 &gt; 10³ = 1 000（略大一点）。2¹⁰⁰ = (2¹⁰)¹⁰ ≈ (10³)¹⁰ = 10³⁰。所以 2¹⁰⁰ 的量级约是 <strong>10³⁰</strong>（精确值 1 267 650…≈ 1.27 × 10³⁰，确实在 10³⁰ 附近）。把 2¹⁰ 打包成"≈10³"这个小块，正是估算与科学计数法的联手。</div>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 计算 (-1)²⁰²⁶ + (-1)²⁰²⁵ 的结果是：</p>
+    <p>A. 2 &nbsp; B. 0 &nbsp; C. -2 &nbsp; D. 1</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">-1 的偶数次方是 1，奇数次方是 -1。</div>
+    <div class="ans-box" id="a1"><strong>B</strong>。(-1)²⁰²⁶ = 1（偶次方），(-1)²⁰²⁵ = -1（奇次方），1 + (-1) = 0。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 下列说法正确的是：</p>
+    <p>A. 0 除以任何数都得 0 &nbsp; B. 任何数乘 0 都得 0 &nbsp; C. 0 的相反数不存在 &nbsp; D. -1 的任何次方都是 1</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">注意"除数不能为 0"这条铁律，以及 -1 的奇偶次方。</div>
+    <div class="ans-box" id="a2"><strong>B</strong>。a × 0 = 0 对任何数都成立。A 错：0 不能除以 0（除数不能为 0）；C 错：0 的相反数是 0；D 错：-1 的奇数次方是 -1。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 用科学计数法表示 302 500，正确的是：</p>
+    <p>A. 3.025 × 10⁵ &nbsp; B. 30.25 × 10⁴ &nbsp; C. 3.025 × 10⁶ &nbsp; D. 0.3025 × 10⁶</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">科学计数法要求 1 ≤ a &lt; 10。小数点从 302500 的末尾往左数，数到只剩一位整数。</div>
+    <div class="ans-box" id="a3"><strong>A</strong>。302 500 = 3.025 × 10⁵。B、D 中 a 不满足 1 ≤ a &lt; 10（B 的 30.25 太大，D 的 0.3025 太小）；C 的 n 数错了。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 估算 √15，它在哪两个一位小数之间？</p>
+    <p>A. 3.8 与 3.9 之间 &nbsp; B. 3.7 与 3.8 之间 &nbsp; C. 3.9 与 4.0 之间 &nbsp; D. 4.0 与 4.1 之间</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">用"夹逼"：分别算 3.8²、3.9²，看哪个比 15 小、哪个比 15 大。</div>
+    <div class="ans-box" id="a4"><strong>A</strong>。3.8² = 14.44 &lt; 15，3.9² = 15.21 &gt; 15，所以 3.8 &lt; √15 &lt; 3.9。（√15 ≈ 3.873，确实夹在中间。）</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 一辆汽车以 90 km/h 行驶，它的速度是：</p>
+    <p>A. 25 m/s &nbsp; B. 32.4 m/s &nbsp; C. 9 m/s &nbsp; D. 250 m/s</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">km/h 化 m/s：除以 3.6。</div>
+    <div class="ans-box" id="a5"><strong>A</strong>。90 ÷ 3.6 = 25 m/s。也可以老老实实换算：90 km/h = 90 000 m ÷ 3 600 s = 25 m/s。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 3.5 m² 等于多少 cm²？</p>
+    <p>A. 350 &nbsp; B. 3 500 &nbsp; C. 35 000 &nbsp; D. 35 000 000</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">面积单位的进率是长度进率的平方：1 m² = 100 cm × 100 cm。</div>
+    <div class="ans-box" id="a6"><strong>C</strong>。1 m² = 10 000 cm²，3.5 × 10 000 = 35 000 cm²。D 选项错把体积的进率（10⁶）用到了面积上。</div>
+  </div>
+
+  <div class="key" style="margin-top:32px;">
+    <p><strong>本课要点总结：</strong></p>
+    <ul>
+      <li><strong>六件工具：</strong>加减乘除、乘方、开方；减/除/开方是逆运算；解方程每步都用得上</li>
+      <li><strong>特殊数字：</strong>1 乘不变（乘法单位）；0 加不变、乘归零、<strong>不能做除数</strong>；-1 乘一次变号，偶次方 +1、奇次方 -1</li>
+      <li><strong>估算：</strong>四舍五入看后一位；凑整、夹逼、查量级三招；估算用来"抓住"计算错误</li>
+      <li><strong>科学计数法：</strong>a × 10ⁿ，1 ≤ |a| &lt; 10；大数 n 正、小数 n 负；对数表的思想是"乘除化加减"（高中正式学）</li>
+      <li><strong>单位：</strong>不同单位先统一再运算；面积进率 = 长度进率²，体积进率 = 长度进率³；1 m/s = 3.6 km/h</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="rational-operations.html">相关课件：有理数的运算</a> | <a href="real-numbers.html">实数与开方</a> | <a href="index.html">返回课程列表</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+<script src="./dt.js"></script>
+</body>
+</html>

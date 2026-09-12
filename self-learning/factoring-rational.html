@@ -54,7 +54,34 @@
     <p>因式分解是解方程的关键工具。在课件 8-10 中，你会看到：因式分解能让你一眼看出方程的解！</p>
   </div>
 
-  <h2>一、提公因式法</h2>
+  <h2>一、公式法：把乘法公式倒过来用</h2>
+  <div class="story">
+    <p>课件 6 里我们学过三大乘法公式。乘法公式从左往右是"展开"，<strong>从右往左倒过来读，就是因式分解</strong>——这就是<strong>公式法</strong>。它是"看见形状就出手"的方法：</p>
+    <div class="formula">
+      <p><strong>平方差公式（倒过来）：</strong>a² − b² = (a + b)(a − b)</p>
+      <p>　　形状特征：两个平方项<strong>相减</strong>，中间没有别的项。</p>
+      <p><strong>完全平方公式（倒过来）：</strong>a² + 2ab + b² = (a + b)²；a² − 2ab + b² = (a − b)²</p>
+      <p>　　形状特征：首尾两个平方项，中间项恰好是"2 × 两底数之积"。</p>
+    </div>
+
+    <div class="example">
+      <strong>例 1（平方差）：</strong>x² − 9 = x² − 3² = (x + 3)(x − 3)<br>
+      <strong>例 2（平方差）：</strong>4x² − 25 = (2x)² − 5² = (2x + 5)(2x − 5)<br>
+      <strong>例 3（完全平方）：</strong>x² + 6x + 9 = x² + 2·x·3 + 3² = (x + 3)²<br>
+      <strong>例 4（完全平方）：</strong>x² − 4x + 4 = x² − 2·x·2 + 2² = (x − 2)²
+    </div>
+
+    <div class="key">
+      <p><strong>用公式法的检查口诀："一开二查"。</strong></p>
+      <ul>
+        <li><strong>一开：</strong>首尾两项能不能写成"某数的平方"？（系数要能开方，如 4、9、25、x²…）</li>
+        <li><strong>二查：</strong>首尾同号 → 用平方差；中间项是 2ab → 用完全平方。</li>
+      </ul>
+      <p><strong>实际解题的"三部曲"：</strong>① 先看有没有<strong>公因式</strong>要先提；② 再看形状能否<strong>套公式</strong>；③ 最后才用<strong>十字相乘</strong>慢慢找数。三种方法经常要连着用，比如 2x³ − 8x = 2x(x² − 4) = 2x(x + 2)(x − 2)：先提公因式，再套平方差。</p>
+    </div>
+  </div>
+
+  <h2>二、提公因式法</h2>
   <div class="story">
     <p><strong>公因式：</strong>多项式中各项都含有的相同的因式。</p>
     <div class="formula">
@@ -70,7 +97,7 @@
     </div>
   </div>
 
-  <h2>二、十字相乘法</h2>
+  <h2>三、十字相乘法</h2>
   <div class="story">
     <p>对于二次三项式 x² + px + q，如果它能分解成 (x + m)(x + n)，那么：</p>
     <div class="formula">
@@ -139,7 +166,7 @@
     </div>
   </div>
 
-  <h2>三、分式</h2>
+  <h2>四、分式</h2>
   <div class="story">
     <p>在课件 2 中，我们学了数字的分数（如 3/4）。现在，<strong>分式</strong>就是分母中含有字母的代数式。</p>
     <div class="formula">
@@ -175,7 +202,7 @@
     </div>
   </div>
 
-  <h2>四、分母为什么不能为零？</h2>
+  <h2>五、分母为什么不能为零？</h2>
   <div class="key">
     <p><strong>这是整个数学中最重要的一条规则之一。</strong></p>
     <p>想一想：6 ÷ 3 = 2，因为 2 × 3 = 6。但 6 ÷ 0 = ？</p>
@@ -222,45 +249,62 @@
   <h2>习题</h2>
 
   <div class="exercise">
-    <p><strong>1.</strong> 提公因式：6x³ - 9x² + 3x</p>
+    <p><strong>1.</strong> 用公式法分解：x² − 16</p>
     <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
-    <div class="hint-box" id="h1">各项的公因式是 3x。</div>
-    <div class="ans-box" id="a1">3x(2x² - 3x + 1)</div>
+    <div class="hint-box" id="h1">16 = 4²，两个平方项相减，套平方差公式。</div>
+    <div class="ans-box" id="a1">x² − 16 = x² − 4² = (x + 4)(x − 4)</div>
   </div>
 
   <div class="exercise">
-    <p><strong>2.</strong> 用十字相乘法分解：x² + 8x + 15</p>
+    <p><strong>2.</strong> 用公式法分解：x² − 10x + 25</p>
     <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
-    <div class="hint-box" id="h2">找两个数，和为 8，积为 15。</div>
-    <div class="ans-box" id="a2">(x + 3)(x + 5)</div>
+    <div class="hint-box" id="h2">首尾是 x² 和 5²；中间项 10x = 2·x·5 恰好是 2ab → 完全平方。</div>
+    <div class="ans-box" id="a2">x² − 10x + 25 = (x − 5)²</div>
   </div>
 
   <div class="exercise">
-    <p><strong>3.</strong> 化简分式：
-      <span class="frac"><span class="num">x² − 9</span><span class="den">x² − x − 6</span></span>
-    </p>
+    <p><strong>3.</strong> 提公因式：6x³ - 9x² + 3x</p>
     <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
-    <div class="hint-box" id="h3">分子：x²-9 = (x+3)(x-3)。分母：x²-x-6 = (x-3)(x+2)。约去 (x-3)。</div>
-    <div class="ans-box" id="a3">
+    <div class="hint-box" id="h3">各项的公因式是 3x。</div>
+    <div class="ans-box" id="a3">3x(2x² - 3x + 1)</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 用十字相乘法分解：x² + 8x + 15</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">找两个数，和为 8，积为 15。</div>
+    <div class="ans-box" id="a4">(x + 3)(x + 5)</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 化简分式：
+      <span class="frac"><span class="num">x² − 9</span><span class="den">x² − x − 6</span></span>
+    </p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">分子：x²-9 = (x+3)(x-3)。分母：x²-x-6 = (x-3)(x+2)。约去 (x-3)。</div>
+    <div class="ans-box" id="a5">
       <span class="frac"><span class="num">x + 3</span><span class="den">x + 2</span></span>，前提 x ≠ 3
     </div>
   </div>
 
   <div class="exercise">
-    <p><strong>4.</strong> 分解 2x² + 5x - 3（提示：系数不是 1 时，先找 a×c 的因数配对）。</p>
-    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
-    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
-    <div class="hint-box" id="h4">a=2, c=-3, a×c=-6。找两个数，和为 5，积为 -6：6 和 -1。拆中间项：2x²+6x-x-3。</div>
-    <div class="ans-box" id="a4">2x²+6x-x-3 = 2x(x+3)-1(x+3) = (2x-1)(x+3)</div>
+    <p><strong>6.</strong> 分解 2x² + 5x - 3（提示：系数不是 1 时，先找 a×c 的因数配对）。</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">a=2, c=-3, a×c=-6。找两个数，和为 5，积为 -6：6 和 -1。拆中间项：2x²+6x-x-3。</div>
+    <div class="ans-box" id="a6">2x²+6x-x-3 = 2x(x+3)-1(x+3) = (2x-1)(x+3)</div>
   </div>
 
   <h2>小结</h2>
   <div class="key">
     <ul>
       <li><strong>因式分解</strong> = 整式乘法的逆运算，把多项式拆成几个因式的乘积</li>
+      <li><strong>公式法</strong>：乘法公式倒过来用——平方差 a²−b²=(a+b)(a−b)，完全平方 a²±2ab+b²=(a±b)²</li>
       <li><strong>提公因式法</strong>：找各项的公因式提到括号外</li>
       <li><strong>十字相乘法</strong>：找两个数，和 = p，积 = q，用于分解 x² + px + q</li>
       <li><strong>分式</strong> = 分母含字母的式子，基本性质与数字分数相同</li>

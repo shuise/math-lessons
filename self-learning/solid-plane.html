@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>立体与平面的转化 — 数学专题</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+<link rel="stylesheet" href="./style.css">
+<style>
+  :root { --accent: #7b1fa2; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #f5f0ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #f3e5f5; border-left: 4px solid #8e24aa; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  .graphic { margin: 16px 0; text-align: center; }
+  @media (max-width: 720px) {
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./geometry-basics.html">课件 1（几何图形：点、线、面、体）</a>、<a href="./projection-views.html">课件 14（投影与视图）</a></p>
+  <h1>立体与平面的转化 — 在"降维"和"升维"之间来回</h1>
+
+  <h2>起源：包装盒的秘密</h2>
+  <div class="origin">
+    <p>你有没有观察过快递盒是怎么来的？工厂里印出来的其实是一张<strong>平平的纸板</strong>，上面已经裁好了折痕。工人沿着折痕一折、一粘，一个立体的盒子就"站起来"了。</p>
+    <p>装货、压平、再装货——同一个盒子，在<strong>立体的盒子</strong>和<strong>平面的纸板</strong>之间来回切换。这里面藏着两种"变身魔法"：</p>
+    <ul>
+      <li><strong>立体 → 平面</strong>：把立体图形"剪开摊平"，叫做<strong>展开</strong>；用"影子"看它，叫做<strong>视图</strong>。</li>
+      <li><strong>平面 → 立体</strong>：把平面图形"折起来"，叫做<strong>折叠</strong>；让平面图形"转起来"，就能<strong>旋转成体</strong>。</li>
+    </ul>
+    <p>《一个数学家的叹息》里说："立体图形一点也不神秘——它就是平面图形的三维版本。会拆、会折、会转，你就同时拿到了两个世界的钥匙。"</p>
+    <p>这一讲，我们把所有常见图形的转化过程一次讲透。</p>
+  </div>
+
+  <h2>一、立体 → 平面：展开图</h2>
+  <div class="story">
+    <p>想象一个立体图形的表面是一层"皮"。把这张皮<strong>沿棱剪开、摊平</strong>，得到的平面图形就是它的<strong>展开图</strong>。</p>
+
+    <div class="key">
+      <p><strong>常见立体图形的展开图（要能画出来）：</strong></p>
+      <ul>
+        <li><strong>正方体</strong>：6 个一样的正方形。展开图一共有 <strong>11 种</strong>，最经典的是"1-4-1"型（中间 4 个一排，上下各 1 个）。</li>
+        <li><strong>长方体</strong>：6 个长方形（特殊情况有 2 个面是正方形），相对的面在展开图中隔着一个面。</li>
+        <li><strong>圆柱</strong>：1 个<strong>长方形</strong>（侧面）+ 2 个<strong>一样的圆</strong>（上底、下底）。长方形的长 = 底面圆的周长。</li>
+        <li><strong>圆锥</strong>：1 个<strong>扇形</strong>（侧面）+ 1 个<strong>圆</strong>（底面）。扇形的弧长 = 底面圆的周长。</li>
+        <li><strong>棱柱（如三棱柱）</strong>：3 个长方形（侧面）+ 2 个一样的三角形（底面）。</li>
+        <li><strong>棱锥（如四棱锥）</strong>：1 个多边形（底面）+ 几个三角形（侧面），三角形尖朝同一个点。</li>
+      </ul>
+    </div>
+
+    <div class="graphic">
+      <svg viewBox="0 0 660 250" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <text x="120" y="24" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">正方体（1-4-1 型）</text>
+        <g fill="rgba(123,31,162,0.08)" stroke="#7b1fa2" stroke-width="2">
+          <rect x="40" y="40" width="40" height="40"/>
+          <rect x="80" y="40" width="40" height="40"/>
+          <rect x="120" y="40" width="40" height="40"/>
+          <rect x="160" y="40" width="40" height="40"/>
+          <rect x="120" y="0" width="40" height="40"/>
+          <rect x="120" y="80" width="40" height="40"/>
+        </g>
+        <text x="120" y="150" text-anchor="middle" font-size="12" fill="#555">中间一排 4 个，上下各 1 个</text>
+
+        <text x="330" y="24" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">圆柱</text>
+        <rect x="275" y="35" width="110" height="70" fill="rgba(1,87,155,0.08)" stroke="#01579b" stroke-width="2"/>
+        <ellipse cx="330" cy="25" rx="38" ry="9" fill="rgba(1,87,155,0.12)" stroke="#01579b" stroke-width="2"/>
+        <ellipse cx="330" cy="115" rx="38" ry="9" fill="rgba(1,87,155,0.12)" stroke="#01579b" stroke-width="2"/>
+        <text x="330" y="150" text-anchor="middle" font-size="12" fill="#555">长方形的长 = 圆的周长</text>
+
+        <text x="550" y="24" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">圆锥</text>
+        <path d="M550,15 L498,105 A52,52 0 0,0 602,105 Z" fill="rgba(46,125,50,0.10)" stroke="#2e7d32" stroke-width="2"/>
+        <circle cx="550" cy="135" r="28" fill="rgba(46,125,50,0.10)" stroke="#2e7d32" stroke-width="2"/>
+        <text x="550" y="185" text-anchor="middle" font-size="12" fill="#555">扇形的弧长 = 底面圆的周长</text>
+
+        <text x="330" y="215" text-anchor="middle" font-size="13" fill="#7b1fa2" font-weight="bold">关键：展开图折回去，必须刚好"合体"，不缺面、不重叠、不裂缝</text>
+      </svg>
+    </div>
+
+    <div class="example">
+      <p><strong>判一判：</strong>"田"字形的 6 个正方形（2×3）能折成正方体吗？</p>
+      <p><strong>不能。</strong>折起来后一定有两个面会<strong>重叠</strong>在同一个位置。判断展开图能否折成正方体，有一条速查口诀："一线不过四，田字和凹字，一折就报废"——中间一排超过 4 个正方形的不行，出现"田"字格或"凹"字排列的也不行。</p>
+    </div>
+  </div>
+
+  <h2>二、平面 → 立体：折叠</h2>
+  <div class="story">
+    <p>展开图反过来用，就是<strong>折叠</strong>：沿虚线折，让标了同一个字母（或同一对边）的地方刚好拼在一起。折的时候抓住一条铁律：</p>
+
+    <div class="key">
+      <p><strong>折叠的铁律：</strong>立体图形中，<strong>相对的面永远不会相邻</strong>。展开图里隔着一个面的两个面、或"Z"字两端的面，才是相对面。</p>
+    </div>
+
+    <div class="graphic">
+      <svg viewBox="0 0 560 210" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <g fill="#f3e5f5" stroke="#8e24aa" stroke-width="2">
+          <rect x="40" y="60" width="50" height="50"/>
+          <rect x="90" y="60" width="50" height="50"/>
+          <rect x="140" y="60" width="50" height="50"/>
+          <rect x="190" y="60" width="50" height="50"/>
+          <rect x="140" y="10" width="50" height="50"/>
+          <rect x="140" y="110" width="50" height="50"/>
+        </g>
+        <text x="65" y="90" text-anchor="middle" font-size="15" fill="#7b1fa2" font-weight="bold">上</text>
+        <text x="115" y="90" text-anchor="middle" font-size="15" fill="#333" font-weight="bold">前</text>
+        <text x="165" y="90" text-anchor="middle" font-size="15" fill="#7b1fa2" font-weight="bold">下</text>
+        <text x="215" y="90" text-anchor="middle" font-size="15" fill="#333" font-weight="bold">后</text>
+        <text x="165" y="40" text-anchor="middle" font-size="15" fill="#333" font-weight="bold">左</text>
+        <text x="165" y="140" text-anchor="middle" font-size="15" fill="#333" font-weight="bold">右</text>
+        <text x="150" y="185" text-anchor="middle" font-size="13" fill="#555">"上"隔着一个面遇到"下" → 它们相对</text>
+
+        <text x="430" y="95" text-anchor="middle" font-size="26" fill="#7b1fa2">⟹</text>
+        <text x="430" y="140" text-anchor="middle" font-size="14" fill="#555">折起来</text>
+        <text x="430" y="185" text-anchor="middle" font-size="13" fill="#555">三对相对面：上-下、前-后、左-右</text>
+      </svg>
+    </div>
+
+    <div class="example">
+      <p><strong>解题应用：</strong>正方体展开图中，如果"1"和"2"隔着一个面，那折成正方体后它们就是<strong>相对的面</strong>——相邻的面靠找"公共边"，相对的面靠找"隔一个"。</p>
+    </div>
+  </div>
+
+  <h2>三、面动成体：旋转成体</h2>
+  <div class="story">
+    <p>点动成<strong>线</strong>，线动成<strong>面</strong>，面动成<strong>体</strong>。把一个平面图形绕着一条固定的直线（旋转轴）转一整圈，扫过的空间就是一个立体图形。</p>
+
+    <div class="key">
+      <p><strong>常见"面动成体"（要能对上号）：</strong></p>
+      <ul>
+        <li><strong>长方形</strong> 绕它的一条边旋转一周 → <strong>圆柱</strong></li>
+        <li><strong>直角三角形</strong> 绕一条直角边旋转一周 → <strong>圆锥</strong></li>
+        <li><strong>半圆</strong> 绕直径旋转一周 → <strong>球</strong></li>
+        <li><strong>直角梯形</strong> 绕它的直角腰旋转一周 → <strong>圆台</strong></li>
+      </ul>
+    </div>
+
+    <div class="graphic">
+      <svg viewBox="0 0 660 250" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <!-- 长方形 → 圆柱 -->
+        <line x1="60" y1="30" x2="60" y2="190" stroke="#333" stroke-width="2" stroke-dasharray="6,3"/>
+        <rect x="60" y="70" width="55" height="80" fill="rgba(1,87,155,0.15)" stroke="#01579b" stroke-width="2"/>
+        <text x="87" y="115" text-anchor="middle" font-size="13" fill="#01579b" font-weight="bold">长方形</text>
+        <text x="140" y="115" text-anchor="middle" font-size="18" fill="#555">⟶</text>
+        <ellipse cx="235" cy="70" rx="40" ry="12" fill="none" stroke="#01579b" stroke-width="2"/>
+        <line x1="195" y1="70" x2="195" y2="150" stroke="#01579b" stroke-width="2"/>
+        <line x1="275" y1="70" x2="275" y2="150" stroke="#01579b" stroke-width="2"/>
+        <path d="M195,150 A40,12 0 0,0 275,150" fill="none" stroke="#01579b" stroke-width="2"/>
+        <path d="M195,150 A40,12 0 0,1 275,150" fill="none" stroke="#01579b" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="235" y="195" text-anchor="middle" font-size="13" fill="#01579b" font-weight="bold">圆柱</text>
+
+        <!-- 直角三角形 → 圆锥 -->
+        <line x1="360" y1="30" x2="360" y2="190" stroke="#333" stroke-width="2" stroke-dasharray="6,3"/>
+        <polygon points="360,70 360,150 410,150" fill="rgba(46,125,50,0.15)" stroke="#2e7d32" stroke-width="2"/>
+        <text x="388" y="120" text-anchor="middle" font-size="13" fill="#2e7d32" font-weight="bold">直角△</text>
+        <text x="438" y="115" text-anchor="middle" font-size="18" fill="#555">⟶</text>
+        <polygon points="520,55 485,155 555,155" fill="rgba(46,125,50,0.12)" stroke="#2e7d32" stroke-width="2"/>
+        <ellipse cx="520" cy="155" rx="35" ry="10" fill="rgba(46,125,50,0.10)" stroke="#2e7d32" stroke-width="2"/>
+        <text x="520" y="195" text-anchor="middle" font-size="13" fill="#2e7d32" font-weight="bold">圆锥</text>
+
+        <!-- 半圆 → 球 -->
+        <path d="M575,110 A45,45 0 0,1 665,110" fill="rgba(156,39,176,0.15)" stroke="#7b1fa2" stroke-width="2"/>
+        <line x1="575" y1="110" x2="665" y2="110" stroke="#333" stroke-width="2" stroke-dasharray="6,3"/>
+        <text x="620" y="85" text-anchor="middle" font-size="12" fill="#7b1fa2" font-weight="bold">半圆</text>
+        <text x="620" y="205" text-anchor="middle" font-size="13" fill="#7b1fa2" font-weight="bold">⟶ 球</text>
+
+        <text x="330" y="238" text-anchor="middle" font-size="13" fill="#555">虚线是旋转轴：图形绕轴转一圈，扫过的空间就是立体图形</text>
+      </svg>
+    </div>
+
+    <div class="example">
+      <p><strong>想一想：</strong>一张长 8cm、宽 5cm 的纸（长方形），绕"长"所在的那条边旋转一周，得到什么？</p>
+      <p>得到一个<strong>圆柱</strong>：高是 8cm（转轴方向的边），底面半径是 5cm（另一条边扫出的圆）。如果换成绕"宽"旋转，高和半径就互换——同一个长方形能转出<strong>两种</strong>不同大小的圆柱。</p>
+    </div>
+
+    <div class="extend">
+      <p><strong>为什么转轴很重要？</strong>同一个平面图形，绕不同的轴旋转，得到的立体图形完全不同。比如圆绕它的直径转是球，但一个<strong>圆环</strong>（像游泳圈剪开的样子）绕中间的轴转一周，得到的是一个"甜甜圈"——数学上叫圆环体。所以描述旋转成体时，必须说清楚"绕哪条线转"。</p>
+    </div>
+  </div>
+
+  <h2>四、立体 → 平面：三视图</h2>
+  <div class="story">
+    <p>展开图是"剪开摊平"，三视图则是从三个方向给立体图形<strong>拍"影子"</strong>：</p>
+
+    <div class="key">
+      <ul>
+        <li><strong>主视图</strong>：从<strong>正面</strong>看（正投影）；</li>
+        <li><strong>左视图</strong>：从<strong>左面</strong>看；</li>
+        <li><strong>俯视图</strong>：从<strong>上面</strong>看。</li>
+      </ul>
+      <p>看见的轮廓画实线，被挡住的轮廓画虚线。</p>
+    </div>
+
+    <div class="graphic">
+      <svg viewBox="0 0 620 240" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <!-- 立体圆柱示意 -->
+        <ellipse cx="120" cy="60" rx="55" ry="16" fill="rgba(1,87,155,0.12)" stroke="#01579b" stroke-width="2"/>
+        <line x1="65" y1="60" x2="65" y2="150" stroke="#01579b" stroke-width="2"/>
+        <line x1="175" y1="60" x2="175" y2="150" stroke="#01579b" stroke-width="2"/>
+        <path d="M65,150 A55,16 0 0,0 175,150" fill="none" stroke="#01579b" stroke-width="2"/>
+        <path d="M65,150 A55,16 0 0,1 175,150" fill="none" stroke="#01579b" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="120" y="195" text-anchor="middle" font-size="13" fill="#01579b" font-weight="bold">圆柱</text>
+
+        <!-- 主视图 -->
+        <rect x="250" y="60" width="110" height="90" fill="rgba(1,87,155,0.08)" stroke="#01579b" stroke-width="2"/>
+        <text x="305" y="170" text-anchor="middle" font-size="13" fill="#01579b" font-weight="bold">主视图：长方形</text>
+        <text x="385" y="110" text-anchor="middle" font-size="18" fill="#555">←</text>
+
+        <!-- 左视图 -->
+        <rect x="410" y="60" width="60" height="90" fill="rgba(1,87,155,0.08)" stroke="#01579b" stroke-width="2"/>
+        <text x="440" y="170" text-anchor="middle" font-size="13" fill="#01579b" font-weight="bold">左视图：长方形</text>
+        <text x="495" y="110" text-anchor="middle" font-size="18" fill="#555">←</text>
+
+        <!-- 俯视图 -->
+        <circle cx="555" cy="105" r="40" fill="rgba(1,87,155,0.08)" stroke="#01579b" stroke-width="2"/>
+        <text x="555" y="170" text-anchor="middle" font-size="13" fill="#01579b" font-weight="bold">俯视图：圆</text>
+      </svg>
+    </div>
+
+    <div class="formula" style="text-align:left;">
+      <p><strong>常见图形的三视图速记：</strong></p>
+      <ul>
+        <li><strong>圆柱（竖放）</strong>：主视图、左视图都是长方形，俯视图是圆</li>
+        <li><strong>圆锥（竖放）</strong>：主视图、左视图都是等腰三角形，俯视图是带圆心的圆</li>
+        <li><strong>球</strong>：三个视图都是圆</li>
+        <li><strong>正方体 / 长方体</strong>：三个视图都是正方形 / 长方形</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <p><strong>易错点：</strong>圆锥的俯视图是圆，但别忘了圆心处还有一个点——那是<strong>锥尖</strong>的投影。俯视图画成光秃秃的圆，就丢分了。</p>
+    </div>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题：</strong>一个长方形长 6cm、宽 4cm。分别绕它的"长边"和"宽边"旋转一周，得到两个圆柱。哪个圆柱的体积更大？（圆柱体积 = 底面积 × 高 = π r² h）</p>
+    <button class="btn-sm" onclick="toggleHint('ch1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca1')">查看答案</button>
+    <div class="hint-box" id="ch1">绕哪条边旋转，那条边就是高，另一条边就是底面半径。分别算出两个圆柱的体积再比较。</div>
+    <div class="ans-box" id="ca1">绕长边旋转：r = 4，h = 6，V₁ = π × 4² × 6 = 96π cm³。绕宽边旋转：r = 6，h = 4，V₂ = π × 6² × 4 = 144π cm³。<strong>144π &gt; 96π，绕宽边（短边）旋转得到的圆柱体积更大</strong>——同样的边"变成半径"时，平方一下，差距就被放大了。</div>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 圆柱的展开图是：</p>
+    <p>A. 两个圆和一个三角形 &nbsp; B. 一个长方形和两个圆 &nbsp; C. 一个扇形和一个圆 &nbsp; D. 两个圆和一个长方形加一个扇形</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">圆柱侧面摊开是一个长方形（不是扇形），上下底各一个圆。别和圆锥的展开图弄混。</div>
+    <div class="ans-box" id="a1"><strong>B</strong>。圆柱 = 1 个长方形（侧面）+ 2 个一样的圆（底面）。C 选项是圆锥的展开图。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 直角三角形绕它的一条直角边旋转一周，得到的立体图形是：</p>
+    <p>A. 圆柱 &nbsp; B. 圆锥 &nbsp; C. 球 &nbsp; D. 圆台</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">回忆"面动成体"：长方形转出圆柱，半圆转出球。斜边扫出去会碰到转轴上的一个点。</div>
+    <div class="ans-box" id="a2"><strong>B</strong>。直角三角形绕直角边旋转一周得到圆锥。D 选项圆台是直角梯形绕直角腰旋转得到的。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 竖放的圆锥，它的俯视图是：</p>
+    <p>A. 一个圆 &nbsp; B. 一个三角形 &nbsp; C. 带圆心的圆 &nbsp; D. 一个扇形</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">从正上方往下看，看到底面的圆，还有锥尖的影子落在圆心处。</div>
+    <div class="ans-box" id="a3"><strong>C</strong>。俯视图是带圆心的圆：圆是底面，圆心是锥尖的投影。A 选项漏掉了锥尖。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 下列图形中，不能折成正方体的是：</p>
+    <p>A. 1-4-1 型（中间一排 4 个正方形，上下各 1 个）&nbsp; B. 2-2-2 型（三排各 2 个，阶梯状错开）&nbsp; C. 2×3 的"田字长条"（一排 2 个，共 3 排对齐）&nbsp; D. 1-3-2 型（中间一排 3 个，上下各 2 个错开）</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">记住口诀："一线不过四，田字和凹字，一折就报废"。出现两两对齐的"田"字格排布时，折起来必有两个面重叠。</div>
+    <div class="ans-box" id="a4"><strong>C</strong>。2×3 对齐的排法中总有面会重叠，折不出正方体。正方体的 11 种展开图包括 1-4-1、2-3-1、2-2-2、3-3 型等，但不含这种"对齐两列"的形状。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> 半圆绕它的直径旋转一周，得到的立体图形是：</p>
+    <p>A. 圆柱 &nbsp; B. 圆锥 &nbsp; C. 球 &nbsp; D. 圆台</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">想象一枚硬币（半圆）绕直径飞快旋转，它扫出的空间形状像一个什么球类？</div>
+    <div class="ans-box" id="a5">得到<strong>球</strong>。半圆的直径是旋转轴，半圆弧转一圈扫出整个球的表面。</div>
+  </div>
+
+  <div class="key" style="margin-top:32px;">
+    <p><strong>本课要点总结：</strong></p>
+    <ul>
+      <li><strong>展开（立体→平面）：</strong>正方体 6 正方形（11 种展开图）；圆柱 = 长方形 + 两圆；圆锥 = 扇形 + 圆；棱柱 = 侧长方形 + 两底面；棱锥 = 底面 + 侧面三角形</li>
+      <li><strong>折叠（平面→立体）：</strong>相对的面在展开图中"隔着一个面"，折叠后永不相邻</li>
+      <li><strong>旋转成体（面动成体）：</strong>长方形→圆柱；直角三角形→圆锥；半圆→球；直角梯形→圆台；绕不同的轴转，结果不同</li>
+      <li><strong>三视图（立体→平面）：</strong>主视图、左视图、俯视图；看见画实线，挡住画虚线；圆锥俯视图带圆心</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="geometry-basics.html">相关课件：几何图形</a> | <a href="projection-views.html">投影与视图</a> | <a href="index.html">返回课程列表</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+<script src="./dt.js"></script>
+</body>
+</html>

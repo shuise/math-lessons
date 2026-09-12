@@ -54,14 +54,48 @@
     <p>不过，分式方程有一个<strong>特殊的陷阱</strong>：去分母时，我们假设分母不为 0。如果解出的 x 恰好让某个分母为 0，那么我们就相当于在等式两边乘了 0——这会把假解"制造"出来。这个坑，数学家们也是踩了无数次才总结出来的。</p>
   </div>
 
-  <h2>一、什么是分式方程？</h2>
+  <h2>一、热身：分式的乘除与通分</h2>
+  <div class="story">
+    <p>解分式方程的核心动作是"去分母"，而它用到的全是<strong>分式乘除</strong>的基本功（课件 7 学过，这里先复习热身）。这两招不牢，后面步步是坑。</p>
+
+    <div class="key">
+      <p><strong>分式乘法：</strong>分子乘分子，分母乘分母；能约分的<strong>先约分再乘</strong>，最省力。</p>
+      <p style="text-align:center;font-size:1.15em;"><span class="frac"><span class="num">a</span><span class="den">b</span></span> × <span class="frac"><span class="num">c</span><span class="den">d</span></span> = <span class="frac"><span class="num">a × c</span><span class="den">b × d</span></span></p>
+      <p><strong>分式除法：</strong>除以一个分式，等于乘它的<strong>倒数</strong>（分子分母上下颠倒）。</p>
+      <p style="text-align:center;font-size:1.15em;"><span class="frac"><span class="num">a</span><span class="den">b</span></span> ÷ <span class="frac"><span class="num">c</span><span class="den">d</span></span> = <span class="frac"><span class="num">a</span><span class="den">b</span></span> × <span class="frac"><span class="num">d</span><span class="den">c</span></span>（c ≠ 0）</p>
+      <p><strong>通分：</strong>把几个分式化成<strong>同分母</strong>，公分母取<strong>最简公分母</strong>——各分母系数的最小公倍数 × 所有不同的字母因式（含字母的分母相乘，相同的只取一次）。</p>
+    </div>
+
+    <div class="example">
+      <strong>例 1（乘法）：</strong><span class="frac"><span class="num">x</span><span class="den">x+1</span></span> × <span class="frac"><span class="num">x+1</span><span class="den">x²</span></span>——(x+1) 约掉，x 与 x² 约分，得 <span class="frac"><span class="num">1</span><span class="den">x</span></span>。<br><br>
+      <strong>例 2（除法）：</strong><span class="frac"><span class="num">2</span><span class="den">x-1</span></span> ÷ <span class="frac"><span class="num">3</span><span class="den">x-1</span></span> = <span class="frac"><span class="num">2</span><span class="den">x-1</span></span> × <span class="frac"><span class="num">x-1</span><span class="den">3</span></span> = <span class="frac"><span class="num">2</span><span class="den">3</span></span>。<br><br>
+      <strong>例 3（通分）：</strong><span class="frac"><span class="num">2</span><span class="den">x+1</span></span> 与 <span class="frac"><span class="num">3</span><span class="den">x-1</span></span> 的最简公分母是 (x+1)(x-1)。通分后分别是 <span class="frac"><span class="num">2(x-1)</span><span class="den">(x+1)(x-1)</span></span> 和 <span class="frac"><span class="num">3(x+1)</span><span class="den">(x+1)(x-1)</span></span>。
+    </div>
+
+    <div class="key">
+      <p><strong>为什么先练这个？</strong>解分式方程只做两件事：① 两边同乘<strong>最简公分母</strong>（这是"乘法"）；② 化简时<strong>约分</strong>。约分和找公分母，正是上面三道例题的功夫——先把手感找回来，再上方程。</p>
+    </div>
+  </div>
+
+  <h2>二、什么是分式方程？</h2>
   <div class="story">
     <p><strong>分式方程：</strong>分母中含有未知数的方程。</p>
     <p>比如：<span class="frac"><span class="num">1</span><span class="den">x-2</span></span> = 3，<span class="frac"><span class="num">x</span><span class="den">x+1</span></span> = 2，<span class="frac"><span class="num">2</span><span class="den">x+1</span></span> + <span class="frac"><span class="num">3</span><span class="den">x-1</span></span> = <span class="frac"><span class="num">5</span><span class="den">x²-1</span></span>。</p>
     <p><strong>注意：</strong>分母不能为 0！比如 <span class="frac"><span class="num">1</span><span class="den">x-2</span></span> = 3 中，x 不能等于 2。</p>
   </div>
 
-  <h2>二、核心思路：去分母</h2>
+  <h2>三、核心思路：去分母</h2>
+  <div class="key">
+    <p><strong>解分式方程前，先清点工具箱（专题页：<a href="./calc-toolbox.html">计算工具箱</a>）。</strong></p>
+    <p>解方程的每一步，<strong>只允许使用六件工具：加、减、乘、除、乘方、开方</strong>（以及由它们直接推出的规则）。本课的每一步都来自它们：</p>
+    <ul>
+      <li><strong>通分 / 约分</strong> = 分式等值变形（同乘同除非零数：乘法、除法）</li>
+      <li><strong>去分母</strong> = 两边同乘最简公分母（乘法）</li>
+      <li><strong>解整式方程</strong> = 五步法（加减乘除 + 分配律，课件 8 学过）</li>
+      <li><strong>检验增根</strong> = 把解代入各分母算一算（加减乘除）</li>
+    </ul>
+    <p>特别提醒：去分母时两边乘的是<strong>含 x 的式子</strong>——如果 x 恰好让它等于 0，就等于两边乘了 0，会"制造"出假解。这就是增根的来源，所以分式方程必须检验。</p>
+  </div>
   <div class="key">
     <p>分式方程 → 两边同时乘以最简公分母 → 变成整式方程 → 按一元一次方程解。</p>
     <p>就像把分数方程"翻译"成整数方程，然后再解。这个思路的基础是等式的基本性质：<strong>等式两边同时乘以同一个非零的数，等式仍然成立。</strong></p>
@@ -76,7 +110,7 @@
     <strong>检验：</strong><span class="frac"><span class="num">7</span><span class="den">3</span></span> - 2 = <span class="frac"><span class="num">1</span><span class="den">3</span></span>，所以 <span class="frac"><span class="num">1</span><span class="den"><span class="frac"><span class="num">1</span><span class="den">3</span></span></span></span> = 3 ✓
   </div>
 
-  <h2>三、致命的陷阱：增根</h2>
+  <h2>四、致命的陷阱：增根</h2>
   <div class="danger">
     <p><strong>什么是增根？</strong>解方程时，我们两边乘了一个含有未知数的式子。如果解出的 x 恰好让这个式子等于 0，那么我们就相当于在等式两边乘了 0——0 乘以任何数都等于 0，这样会把原本不成立的等式也变成"成立"的样子，产生假解。</p>
     <p><strong>所以分式方程解完后必须检验！</strong>把解代入原方程，确保每个分母都不为 0。让分母为 0 的解就是增根，必须舍去。</p>
@@ -89,7 +123,7 @@
     <strong>结论：</strong>x=1 是增根，这个方程无解。
   </div>
 
-  <h2>四、完整解题步骤</h2>
+  <h2>五、完整解题步骤</h2>
   <div class="formula" style="text-align:left;font-size:1em;">
     <p><strong>第 1 步：</strong>找最简公分母（所有分母的最小公倍数）</p>
     <p><strong>第 2 步：</strong>两边同时乘最简公分母，去掉所有分母</p>

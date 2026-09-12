@@ -156,6 +156,32 @@
     <p>古巴比伦人称互为倒数的两个数为<strong> igum 和 igibum</strong>。他们制作了详细的倒数表，因为用倒数可以把除法变成乘法——除以一个数，等于乘以它的倒数。这个巧妙的思路，今天的计算机仍然在用！</p>
   </div>
 
+  <h2>六、小数化分数：方法与技巧</h2>
+  <div class="story">
+    <p>小数和分数不是两家人——<strong>有限小数本来就是分数的另一种写法</strong>。0.3 读作"十分之三"，名字里已经藏着分母了：</p>
+    <p style="text-align:center;font-size:18px;">0.3 = 3/10，&nbsp;&nbsp; 0.25 = 25/100，&nbsp;&nbsp; 0.125 = 125/1000</p>
+    <p>小数点后面有几位，分母就是 10、100、1000……（1 后面跟几个 0）。小数点把数按"十、百、千"切好份，分数只是把这件事说得更直白。</p>
+  </div>
+  <div class="key">
+    <p><strong>方法（必须熟练）：有限小数化分数，三步走。</strong></p>
+    <ul>
+      <li><strong>第一步：</strong>去掉小数点，把数字当作分子（0.25 → 25）。</li>
+      <li><strong>第二步：</strong>小数点后有几位，分母就写 1 后面跟几个 0（两位 → 100）。得 25/100。</li>
+      <li><strong>第三步：</strong>约分到最简（25/100 = 1/4）。</li>
+    </ul>
+    <p>最后一步<strong>不能省</strong>：25/100 和 1/4 大小一样，但只有最简分数才算做完。</p>
+  </div>
+  <div class="example">
+    <p><strong>例：</strong>0.6 = 6/10 = <strong>3/5</strong>；&nbsp; 0.08 = 8/100 = <strong>2/25</strong>；&nbsp; 0.375 = 375/1000 = <strong>3/8</strong>（分子分母同除 125）。</p>
+    <p>带整数的照旧：2.5 = 2 + 5/10 = 2 + 1/2，写成假分数是 25/10 = <strong>5/2</strong>。</p>
+  </div>
+  <div class="key">
+    <p><strong>反过来（分数化小数）也不难：</strong>用分子除以分母就行——1/4 = 1 ÷ 4 = 0.25，3/8 = 3 ÷ 8 = 0.375。除不尽的（如 1/3 = 0.333…），就得到循环小数，这时保留分数形式反而更准确。</p>
+  </div>
+  <div class="extend">
+    <p><strong>小技巧：循环小数化分数。</strong>一位循环小数有个漂亮的口诀：<strong>循环节放分子，9 放分母</strong>。0.333… = 3/9 = 1/3；0.777… = 7/9。两位循环节用两个 9：0.121212… = 12/99 = 4/33。道理等到会解方程时你能自己推出来——先记住这个现象，它很神奇。还有一个著名的等式：0.999… = 1，一点不假（因为 9/9 = 1）。</p>
+  </div>
+
   <h2>阿拉伯人分骆驼的故事</h2>
   <div class="story">
     <p>一位阿拉伯老人去世了，留给三个儿子 17 匹骆驼。遗嘱上写着：</p>
@@ -225,6 +251,22 @@
     <div class="ans-box" id="a4">3(x+3) = 2(x+8) → 3x+9 = 2x+16 → x = 7。原分数为 7/12。</div>
   </div>
 
+  <div class="exercise">
+    <p><strong>5.</strong> 把 0.35 化成最简分数。</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">两位小数 → 分母 100；再约分。</div>
+    <div class="ans-box" id="a5">0.35 = 35/100 = <strong>7/20</strong>（分子分母同除 5）。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 把 0.625 化成最简分数；再把得到的分数化回小数验证。</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">三位小数 → 分母 1000。约分时找分子分母的公因数（125 很大，先试 5）。</div>
+    <div class="ans-box" id="a6">0.625 = 625/1000 = <strong>5/8</strong>（同除 125）。验证：5 ÷ 8 = 0.625 ✓。</div>
+  </div>
+
   <h2>小结</h2>
   <div class="key">
     <ul>
@@ -233,6 +275,7 @@
       <li><strong>约分</strong> = 化简分数；<strong>通分</strong> = 统一分母（方便加减和比较）</li>
       <li>加减：先通分；乘：分子乘分子，分母乘分母；除：乘倒数</li>
       <li><strong>倒数</strong>：两个数相乘得 1，古巴比伦人叫 igum/igibum</li>
+      <li><strong>小数化分数</strong>：去小数点当分子，有几位小数分母就是 10ⁿ，最后约到最简；分数化小数用分子除以分母</li>
     </ul>
   </div>
 

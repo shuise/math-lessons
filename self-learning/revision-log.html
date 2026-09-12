@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>修订记录 — 自学课件</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
+<link rel="stylesheet" href="./style.css">
+<style>
+  :root { --accent: #455a64; }
+  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .log-block { background: #fafafa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px 18px; margin: 20px 0; }
+  .log-block h3 { margin-top: 0; }
+  .log-block ul { padding-left: 22px; }
+  .log-block li { margin: 8px 0; }
+  .date-tag { display: inline-block; background: #455a64; color: #fff; font-size: 13px; padding: 2px 10px; border-radius: 10px; margin-right: 8px; }
+
+  @media (max-width: 720px) {
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .log-block { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <h1>修订记录</h1>
+
+  <div class="story">
+    <p>这里记录课件的重要修订：新增了什么、修正了什么、为什么改。每次修订都会写清日期和涉及的页面，方便核对学习内容是否有更新。修订依据来自《改进》清单（初中课程文档设计）。</p>
+  </div>
+
+  <h2><span class="date-tag">2026-09-12</span>第 1 批修订</h2>
+
+  <div class="log-block">
+    <h3>新增专题页（入口在课程列表"专题精讲"）</h3>
+    <ul>
+      <li><a href="./number-line.html">数轴详解</a> — 原点、正方向、单位长度三要素；数与点的对应；用数轴理解相反数、绝对值、加减法（代数 #2）。</li>
+      <li><a href="./calc-toolbox.html">计算工具箱</a> — 六件运算工具（加减乘除、乘方、开方）；特殊数字 1、0、-1；估算与近似值；科学计数法与对数表思想；单位换算（代数 #4 #5 #6 #7 #10）。</li>
+      <li><a href="./solid-plane.html">立体与平面转化</a> — 立体图形展开/折叠为平面图形、平面图形围成立体图形，覆盖柱、锥、台、球等常见图形（几何 #1）。</li>
+    </ul>
+  </div>
+
+  <div class="log-block">
+    <h3>代数部分增补</h3>
+    <ul>
+      <li><a href="./rational-operations.html">有理数的加减乘除</a>：新增"六、乘方：重复的乘法"小节——底数与指数、负数乘方的符号规律、(-2)² 与 -2² 的区别，配套 2 道新习题（代数 #3）。</li>
+      <li><a href="./fractions.html">分数</a>：新增"六、小数化分数：方法与技巧"——三步法（去小数点当分子、按位数定分母、约到最简）、分数化小数、循环小数小技巧，配套 2 道新习题（代数 #9）。</li>
+      <li><a href="./real-numbers.html">实数</a>：新增拉马努金手工估算 √ 值的实际例子（代数 #11）。</li>
+      <li><a href="./natural-numbers.html">自然数</a>：新增质数扩展阅读——定义、筛法、为什么 1 曾经是后来又不是质数（代数 #12）。</li>
+      <li><a href="./polynomials.html">整式运算</a>：新增杨辉三角一节（代数 #13）。</li>
+      <li><a href="./factoring-rational.html">因式分解与分式</a>：新增公式法（平方差、完全平方）并调整为第一种方法（代数 #14）。</li>
+      <li><a href="./fractional-equations.html">分式方程</a>：在讲解分式方程前先加入"分式乘除与通分"热身引导（代数 #15）。</li>
+      <li><a href="./linear-equations.html">一元一次方程</a>、<a href="./linear-systems.html">二元一次方程组</a>、<a href="./fractional-equations.html">分式方程</a>、<a href="./quadratic-equations.html">一元二次方程</a>：解题前新增"清点工具箱"强调框——每一步只允许使用加减乘除、乘方、开方六件工具，并标注每步对应哪件工具（代数 #8）。</li>
+    </ul>
+  </div>
+
+  <div class="log-block">
+    <h3>几何部分增补</h3>
+    <ul>
+      <li><a href="./triangle.html">三角形</a>：新增外角讲解——定义、图示、外角定理及证明、例题与习题，后续章节编号相应顺延（几何 #2）。</li>
+      <li><a href="./circle.html">圆</a>：新增三角形内切圆与内心说明——定义、性质、图示、例题与习题（几何 #3）。</li>
+    </ul>
+  </div>
+
+  <div class="log-block">
+    <h3>修复与其他</h3>
+    <ul>
+      <li><a href="./congruent-triangles.html">全等三角形</a>、<a href="./triangle.html">三角形</a>、<a href="./negative-numbers.html">负数</a>、<a href="./parallel-lines.html">相交线与平行线</a>：修正 CSS 引用错误（指向了不存在的 lessons 目录样式），统一改用本目录 style.css（代数 #1）。</li>
+      <li><a href="./probability.html">概率初步</a>：修复概率公式渲染错误（分子放错位置）；页面末尾新增两个数学游戏链接（其他 #1）。</li>
+      <li><a href="index.html">课程列表</a>：新增"专题精讲"分组，收录 3 个专题页；底部审核横幅加入本"修订记录"入口。</li>
+    </ul>
+  </div>
+
+  <div class="story">
+    <p><strong>说明：</strong>修订遵循两条原则——① 只用朴素方法，不超纲；② 定理与规则要求一字不差地记住，并说明数学的严谨性。后续修订将继续追加在本页顶部。</p>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="index.html">返回课程列表</a></p>
+</article>
+<script src="./dt.js"></script>
+</body>
+</html>

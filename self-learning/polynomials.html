@@ -208,6 +208,75 @@
     <p><strong>这三个公式非常重要！</strong>它们不仅是解二次方程的工具，更是数学中"用几何证明代数"的经典例子。在后面的课件中，你会看到花拉子米如何用完全平方公式来"配方法"解二次方程。</p>
   </div>
 
+  <h2>五、杨辉三角：(a + b)ⁿ 展开的"系数地图"</h2>
+  <div class="story">
+    <p>三大乘法公式都是"两数和的乘积"。如果乘的次数更多呢？比如：</p>
+    <div class="formula">
+      <p>(a + b)¹ = a + b</p>
+      <p>(a + b)² = a² + 2ab + b²</p>
+      <p>(a + b)³ = a³ + 3a²b + 3ab² + b³　（用 (a+b)² × (a+b) 再乘一遍就能得到）</p>
+    </div>
+    <p>把每次展开后各项的<strong>系数</strong>单独抽出来，排成三角形——这就是大名鼎鼎的<strong>杨辉三角</strong>：</p>
+
+    <div class="graphic">
+      <svg viewBox="0 0 660 300" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+            .cnum { font-size: 20px; fill: #333; text-anchor: middle; font-weight: bold; }
+            .cexp { font-size: 12px; fill: #0288d1; text-anchor: middle; }
+          </style>
+        </defs>
+        <!-- 第0行 -->
+        <text x="330" y="30" class="cnum">1</text>
+        <text x="400" y="30" class="cexp">(a+b)⁰ = 1</text>
+        <!-- 第1行 -->
+        <text x="290" y="75" class="cnum">1</text>
+        <text x="370" y="75" class="cnum">1</text>
+        <text x="450" y="75" class="cexp">(a+b)¹</text>
+        <!-- 第2行 -->
+        <text x="250" y="120" class="cnum">1</text>
+        <text x="330" y="120" class="cnum" fill="#e65100">2</text>
+        <text x="410" y="120" class="cnum">1</text>
+        <text x="490" y="120" class="cexp">(a+b)²</text>
+        <!-- 第3行 -->
+        <text x="210" y="165" class="cnum">1</text>
+        <text x="290" y="165" class="cnum" fill="#e65100">3</text>
+        <text x="370" y="165" class="cnum" fill="#e65100">3</text>
+        <text x="450" y="165" class="cnum">1</text>
+        <text x="530" y="165" class="cexp">(a+b)³</text>
+        <!-- 第4行 -->
+        <text x="170" y="210" class="cnum">1</text>
+        <text x="250" y="210" class="cnum" fill="#e65100">4</text>
+        <text x="330" y="210" class="cnum" fill="#e65100">6</text>
+        <text x="410" y="210" class="cnum" fill="#e65100">4</text>
+        <text x="490" y="210" class="cnum">1</text>
+        <text x="570" y="210" class="cexp">(a+b)⁴</text>
+        <!-- 第5行 -->
+        <text x="130" y="255" class="cnum">1</text>
+        <text x="210" y="255" class="cnum" fill="#e65100">5</text>
+        <text x="290" y="255" class="cnum" fill="#e65100">10</text>
+        <text x="370" y="255" class="cnum" fill="#e65100">10</text>
+        <text x="450" y="255" class="cnum" fill="#e65100">5</text>
+        <text x="530" y="255" class="cnum">1</text>
+        <text x="610" y="255" class="cexp">(a+b)⁵</text>
+        <text x="330" y="290" text-anchor="middle" font-size="13" fill="#555">每个数 = 它"肩上"两个数之和（橙色标注的数都是这样加出来的）</text>
+      </svg>
+    </div>
+
+    <div class="key">
+      <ul>
+        <li><strong>怎么加：</strong>每个数等于它上方两数之和。比如第 4 行的 6 = 3 + 3，第 5 行的 10 = 4 + 6。</li>
+        <li><strong>怎么用：</strong>第 n 行的 n+1 个数，恰好就是 (a + b)ⁿ 展开后各项的系数。比如 (a + b)⁴ = 1a⁴ + 4a³b + 6a²b² + 4ab³ + 1b⁴——不用展开乘四遍，看一眼三角形就写出结果。</li>
+        <li><strong>彩蛋：</strong>每一行所有数加起来 = 2ⁿ（第 5 行：1+5+10+10+5+1 = 32 = 2⁵）。</li>
+      </ul>
+    </div>
+
+    <div class="extend">
+      <p><strong>历史：中国人比帕斯卡早了近 400 年。</strong>北宋数学家<strong>贾宪</strong>（约 1050 年）已经使用这张图，所以它也叫"贾宪三角"；南宋<strong>杨辉</strong>在《详解九章算法》（1261 年）中完整记载并注明"贾宪用此术"，流传后世，故称杨辉三角。欧洲直到 1654 年才由<strong>帕斯卡</strong>系统研究它（西方叫帕斯卡三角），比贾宪晚了约 600 年。而且这张图后来被发现在"数的三角形"之外还有大用——它每一行恰好给出组合数的值，是概率论的基础工具之一（第 34 课讲概率时，帕斯卡正是靠它解决分赌金问题的）。</p>
+    </div>
+  </div>
+
   <h2>挑战性问题</h2>
   <div class="challenge">
     <p><strong>问题 1：</strong>用面积图解释：(x + 2)(x + 5) 展开后为什么是 x² + 7x + 10？（提示：画一个宽 (x+2)、长 (x+5) 的大长方形，切成四块，分别算面积。）</p>
@@ -268,6 +337,14 @@
     <div class="ans-box" id="a4">x² + y² = 49 - 2×6 = 49 - 12 = 37</div>
   </div>
 
+  <div class="exercise">
+    <p><strong>5.</strong> 利用杨辉三角，直接写出 (a + b)³ 展开后各项的系数，并写出完整展开式。</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">杨辉三角的第 3 行是 1、3、3、1；字母部分从 a³ 开始，a 的指数逐项减 1、b 的指数逐项加 1。</div>
+    <div class="ans-box" id="a5">(a + b)³ = a³ + 3a²b + 3ab² + b³。系数 1、3、3、1 恰好是杨辉三角第 3 行。</div>
+  </div>
+
   <h2>小结</h2>
   <div class="key">
     <ul>
@@ -276,6 +353,7 @@
       <li><strong>分配律</strong> a(b+c) = ab+ac 是整式运算的基石，多项式乘法就是反复用分配律</li>
       <li><strong>完全平方</strong>：(a+b)² = a²+2ab+b² —— 用面积图证明，不靠死记</li>
       <li><strong>平方差</strong>：(a+b)(a-b) = a²-b² —— 中间项抵消，可用于快速心算</li>
+      <li><strong>杨辉三角</strong>：每数 = 肩上两数之和；第 n 行给出 (a+b)ⁿ 展开的系数</li>
       <li>这些公式是后面解二次方程的"钥匙"</li>
     </ul>
   </div>

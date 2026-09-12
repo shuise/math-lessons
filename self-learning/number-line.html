@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数轴 — 数学专题</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📏</text></svg>">
+<link rel="stylesheet" href="./style.css">
+<style>
+  :root { --accent: #e65100; }
+  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .story { background: #fff3e0; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
+  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .example { background: #ffe0b2; border-left: 4px solid #ef6c00; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
+  .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
+  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
+  .hint-box.show, .ans-box.show { display: block; }
+  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
+  .btn-sm:hover { background: #e8e8e8; }
+  .graphic { margin: 16px 0; text-align: center; }
+  @media (max-width: 720px) {
+    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
+    body { padding: 0; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    h3 { font-size: 16px; }
+    p, li { font-size: 15px; line-height: 1.8; }
+    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
+  }
+</style>
+</head>
+<body>
+<article>
+  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./natural-numbers.html">课件 1（自然数、零与十进制）</a>、<a href="./fractions.html">课件 2（分数）</a>、<a href="./negative-numbers.html">课件 3（负数）</a></p>
+  <h1>数轴 — 让每个数都有"座位号"</h1>
+
+  <h2>起源：一根会说话的温度计</h2>
+  <div class="origin">
+    <p>冬天，温度计的红色液柱降到 <strong>0</strong> 以下，你看到"零下 3 度"。这个温度计其实就是一个天生的<strong>数轴</strong>：中间有个 <strong>0 刻度</strong>，往上温度越高，往下温度越低，每一小格代表同样的温度差。</p>
+    <p>人类用这种"带方向的尺子"解决了大问题：在负数刚出现的年代，人们对"比 0 还小的数"心里发虚——数怎么能比"没有"还少？可一旦把数<strong>放到一条线上</strong>，一切立刻清楚了：负数不是"凭空冒出来的怪数"，它就安安静静地"住"在 0 的另一边。</p>
+    <p>公元 3 世纪，中国魏晋数学家<strong>刘徽</strong>在《九章算术》注中提出"正负术"，用不同颜色的算筹区分正负数；而把"所有的数排在一条直线上"这个想法固化成<strong>数轴</strong>，则要归功于 17 世纪的<strong>笛卡儿</strong>——他在《几何学》中把代数与几何"焊接"在一起，这条直线后来又生长出平面直角坐标系。</p>
+    <p>数轴为什么重要？因为它是<strong>数与形的第一座桥梁</strong>：有了它，每个数都有了自己的"座位号"，数的比较、运算、距离，全都变成看得见的图形。</p>
+  </div>
+
+  <h2>一、什么是数轴：三个要素缺一不可</h2>
+  <div class="story">
+    <div class="key">
+      <p><strong>数轴的定义（请一字不差地记住）：</strong>规定了<strong>原点</strong>、<strong>正方向</strong>和<strong>单位长度</strong>的直线叫做<strong>数轴</strong>。</p>
+      <p>这三样东西叫数轴的<strong>三要素</strong>——一条直线只有同时具备了它们，才有资格叫数轴：</p>
+      <ul>
+        <li><strong>原点</strong>：数轴上表示 0 的点，是整条线的"家底"，所有数都从它出发定位。</li>
+        <li><strong>正方向</strong>：通常规定向<strong>右</strong>为正（用箭头标出）。原点右边是正数，左边是负数。</li>
+        <li><strong>单位长度</strong>：相邻两条刻度线之间的距离必须<strong>处处相等</strong>——1 格就是 1 个单位，不管画多大，"格距一致"是底线。</li>
+      </ul>
+    </div>
+
+    <div class="graphic">
+      <svg viewBox="0 0 660 130" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <!-- 主数轴 -->
+        <line x1="40" y1="70" x2="620" y2="70" stroke="#333" stroke-width="2.5"/>
+        <polygon points="620,70 608,64 608,76" fill="#333"/>
+        <text x="632" y="75" text-anchor="start" font-size="13" fill="#333">正方向</text>
+        <!-- 刻度 -->
+        <g stroke="#333" stroke-width="2">
+          <line x1="130" y1="62" x2="130" y2="78"/>
+          <line x1="210" y1="62" x2="210" y2="78"/>
+          <line x1="290" y1="62" x2="290" y2="78"/>
+          <line x1="370" y1="62" x2="370" y2="78"/>
+          <line x1="450" y1="62" x2="450" y2="78"/>
+          <line x1="530" y1="62" x2="530" y2="78"/>
+        </g>
+        <g font-size="14" fill="#333" text-anchor="middle" font-family="serif" font-weight="bold">
+          <text x="130" y="100">-3</text>
+          <text x="210" y="100">-2</text>
+          <text x="290" y="100">-1</text>
+          <text x="370" y="100">0</text>
+          <text x="450" y="100">1</text>
+          <text x="530" y="100">2</text>
+        </g>
+        <!-- 原点标注 -->
+        <circle cx="370" cy="70" r="4" fill="#e65100"/>
+        <text x="370" y="35" text-anchor="middle" font-size="13" fill="#e65100" font-weight="bold">原点（0）</text>
+        <!-- 单位长度标注 -->
+        <path d="M450,45 L450,40 L530,40 L530,45" fill="none" stroke="#2e7d32" stroke-width="1.5"/>
+        <text x="490" y="33" text-anchor="middle" font-size="12" fill="#2e7d32" font-weight="bold">单位长度（每格相等）</text>
+      </svg>
+    </div>
+
+    <div class="example">
+      <p><strong>判一判：下面哪些是数轴？</strong></p>
+      <ul>
+        <li>画了一条直线，标了刻度，但<strong>没画箭头</strong> → 不是！缺"正方向"。</li>
+        <li>画了箭头、标了刻度，但负数那边的格子<strong>越画越密</strong> → 不是！缺"统一的单位长度"。</li>
+        <li>三样都齐，但 0 没标在刻度上 → 不是！原点必须明确表示 0。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>二、数与点：一一对应</h2>
+  <div class="story">
+    <p>数轴最大的本领，是让<strong>每一个数</strong>都能在直线上找到<strong>唯一的一个点</strong>当"座位"；反过来，数轴上的每个点也都对应一个数。这叫<strong>数与点的"一一对应"</strong>。</p>
+
+    <div class="key">
+      <p><strong>数轴上的三条基本规律：</strong></p>
+      <ul>
+        <li><strong>右边的数总比左边的数大</strong>——这就是"比较大小"的图形化说法（数学语言要严谨：<strong>数轴上右边的点表示的数大于左边的点表示的数</strong>）。</li>
+        <li><strong>正数在原点右边，负数在原点左边，0 是它们的分界。</strong></li>
+        <li>分数和小数同样有座位：1/2 在 0 和 1 的<strong>正中间</strong>，-1.5 在 -1 和 -2 的正中间。</li>
+      </ul>
+    </div>
+
+    <div class="graphic">
+      <svg viewBox="0 0 660 150" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <line x1="50" y1="90" x2="610" y2="90" stroke="#333" stroke-width="2.5"/>
+        <polygon points="610,90 598,84 598,96" fill="#333"/>
+        <g stroke="#333" stroke-width="2">
+          <line x1="120" y1="82" x2="120" y2="98"/>
+          <line x1="190" y1="82" x2="190" y2="98"/>
+          <line x1="260" y1="82" x2="260" y2="98"/>
+          <line x1="330" y1="82" x2="330" y2="98"/>
+          <line x1="400" y1="82" x2="400" y2="98"/>
+          <line x1="470" y1="82" x2="470" y2="98"/>
+          <line x1="540" y1="82" x2="540" y2="98"/>
+        </g>
+        <g font-size="14" fill="#333" text-anchor="middle" font-family="serif" font-weight="bold">
+          <text x="120" y="120">-3</text>
+          <text x="190" y="120">-2</text>
+          <text x="260" y="120">-1</text>
+          <text x="330" y="120">0</text>
+          <text x="400" y="120">1</text>
+          <text x="470" y="120">2</text>
+          <text x="540" y="120">3</text>
+        </g>
+        <!-- 标点：-2.5, 1/2, 2 -->
+        <circle cx="155" cy="90" r="5" fill="#e65100"/>
+        <text x="155" y="70" text-anchor="middle" font-size="13" fill="#e65100" font-weight="bold">-2.5</text>
+        <line x1="155" y1="75" x2="155" y2="84" stroke="#e65100" stroke-width="1.5"/>
+        <circle cx="365" cy="90" r="5" fill="#2e7d32"/>
+        <text x="365" y="70" text-anchor="middle" font-size="13" fill="#2e7d32" font-weight="bold">1/2</text>
+        <line x1="365" y1="75" x2="365" y2="84" stroke="#2e7d32" stroke-width="1.5"/>
+        <circle cx="470" cy="90" r="5" fill="#1565c0"/>
+        <text x="470" y="70" text-anchor="middle" font-size="13" fill="#1565c0" font-weight="bold">2</text>
+        <line x1="470" y1="75" x2="470" y2="84" stroke="#1565c0" stroke-width="1.5"/>
+        <text x="330" y="145" text-anchor="middle" font-size="13" fill="#555">每个数（整数、分数、小数）在数轴上都有唯一的点</text>
+      </svg>
+    </div>
+
+    <div class="example">
+      <p><strong>例：把 -3、-1、0、2 从小到大排列。</strong></p>
+      <p>不用死记"负数比较大小"的规则，往数轴上一站就明白了：<strong>越靠左越小</strong>。所以 -3 &lt; -1 &lt; 0 &lt; 2。注意 -3 在 -1 的<strong>左边</strong>，虽然 3 比 1 大——"离原点越远的负数反而越小"，在数轴上看得一清二楚。</p>
+    </div>
+  </div>
+
+  <h2>三、相反数：关于原点对称</h2>
+  <div class="story">
+    <p>在数轴上，2 和 -2 有一个迷人的关系：它们一个在原点右边 2 格，一个在原点左边 2 格，<strong>分居原点两侧，到原点的距离一样远</strong>。</p>
+
+    <div class="key">
+      <p><strong>相反数（定义要记准）：</strong>只有<strong>符号不同</strong>的两个数叫做互为相反数。数轴上看：互为相反数的两个点关于<strong>原点对称</strong>（在原点两侧，到原点距离相等）。</p>
+      <p>特别规定：<strong>0 的相反数是 0</strong>。</p>
+    </div>
+
+    <div class="graphic">
+      <svg viewBox="0 0 660 140" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+        </defs>
+        <line x1="60" y1="85" x2="600" y2="85" stroke="#333" stroke-width="2.5"/>
+        <polygon points="600,85 588,79 588,91" fill="#333"/>
+        <g stroke="#999" stroke-width="1.5">
+          <line x1="170" y1="77" x2="170" y2="93"/>
+          <line x1="330" y1="77" x2="330" y2="93"/>
+          <line x1="490" y1="77" x2="490" y2="93"/>
+        </g>
+        <circle cx="170" cy="85" r="5" fill="#1565c0"/>
+        <circle cx="490" cy="85" r="5" fill="#1565c0"/>
+        <circle cx="330" cy="85" r="5" fill="#e65100"/>
+        <text x="170" y="112" text-anchor="middle" font-size="14" fill="#1565c0" font-weight="bold" font-family="serif">-3</text>
+        <text x="490" y="112" text-anchor="middle" font-size="14" fill="#1565c0" font-weight="bold" font-family="serif">3</text>
+        <text x="330" y="112" text-anchor="middle" font-size="14" fill="#e65100" font-weight="bold" font-family="serif">0</text>
+        <path d="M170,50 L170,40 L490,40 L490,50" fill="none" stroke="#7b1fa2" stroke-width="1.5"/>
+        <path d="M170,50 L176,44 M170,50 L164,44" stroke="#7b1fa2" stroke-width="1.5"/>
+        <path d="M490,50 L496,44 M490,50 L484,44" stroke="#7b1fa2" stroke-width="1.5"/>
+        <text x="330" y="30" text-anchor="middle" font-size="13" fill="#7b1fa2" font-weight="bold">两侧到原点距离相等 → 互为相反数</text>
+      </svg>
+    </div>
+
+    <div class="example">
+      <p><strong>一个小陷阱：</strong>"a 的相反数是 -a"，这里的 a 可以是任何数。所以"−a 一定是负数"是<strong>错的</strong>——当 a = -5 时，-a = 5，是正数！符号"−"要理解成"取相反数"，不是"负号"。</p>
+    </div>
+  </div>
+
+  <h2>四、绝对值：到原点的距离</h2>
+  <div class="story">
+    <p>如果你家在邮局东边 500 米，同学家在西边 500 米，你们两家"位置"不同（一个 +500，一个 -500），但"离邮局多远"是一样的——都是 500 米。<strong>绝对值量的就是这个"多远"</strong>。</p>
+
+    <div class="key">
+      <p><strong>绝对值（定义要一字不差）：</strong>数轴上，表示数 a 的点与原点的<strong>距离</strong>，叫做数 a 的<strong>绝对值</strong>，记作 |a|。</p>
+      <ul>
+        <li>正数的绝对值是它<strong>本身</strong>：|5| = 5</li>
+        <li>负数的绝对值是它的<strong>相反数</strong>：|-5| = 5</li>
+        <li>0 的绝对值是 <strong>0</strong>：|0| = 0</li>
+      </ul>
+      <p>距离永远不为负，所以<strong>任何数的绝对值都是非负数</strong>（|a| ≥ 0）。</p>
+    </div>
+
+    <div class="example">
+      <p><strong>例：比较 -8 和 -6 的大小。</strong></p>
+      <p>先看绝对值：|-8| = 8，|-6| = 6，8 &gt; 6。两个负数，绝对值大的反而小（它在数轴上离原点更远、更靠左）。所以 <strong>-8 &lt; -6</strong>。</p>
+      <p>这就是"负数比大小"规则的由来——它不是凭空规定的，而是数轴上"位置"的直接反映。</p>
+    </div>
+  </div>
+
+  <h2>五、在数轴上"走路"：运算的图形理解</h2>
+  <div class="story">
+    <p>数轴还能把加减法变成"走路"：你站在一个数的位置上，</p>
+    <ul>
+      <li>加<strong>正数</strong> → 向<strong>右</strong>走；加<strong>负数</strong> → 向<strong>左</strong>走；</li>
+      <li>减一个数 → 向相反方向走（减正数向左，减负数向右）。</li>
+    </ul>
+
+    <div class="graphic">
+      <svg viewBox="0 0 660 190" style="max-width:100%;height:auto;">
+        <defs>
+          <style>
+            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
+          </style>
+          <marker id="walkArrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <path d="M0,0 L8,3 L0,6 Z" fill="#1565c0"/>
+          </marker>
+        </defs>
+        <line x1="60" y1="120" x2="600" y2="120" stroke="#333" stroke-width="2.5"/>
+        <polygon points="600,120 588,114 588,126" fill="#333"/>
+        <g stroke="#333" stroke-width="2">
+          <line x1="160" y1="112" x2="160" y2="128"/>
+          <line x1="230" y1="112" x2="230" y2="128"/>
+          <line x1="300" y1="112" x2="300" y2="128"/>
+          <line x1="370" y1="112" x2="370" y2="128"/>
+          <line x1="440" y1="112" x2="440" y2="128"/>
+          <line x1="510" y1="112" x2="510" y2="128"/>
+        </g>
+        <g font-size="14" fill="#333" text-anchor="middle" font-family="serif" font-weight="bold">
+          <text x="160" y="150">-3</text>
+          <text x="230" y="150">-2</text>
+          <text x="300" y="150">-1</text>
+          <text x="370" y="150">0</text>
+          <text x="440" y="150">1</text>
+          <text x="510" y="150">2</text>
+        </g>
+        <!-- 起点 2，向左走 5 格到 -3 -->
+        <circle cx="510" cy="120" r="5" fill="#2e7d32"/>
+        <text x="510" y="100" text-anchor="middle" font-size="13" fill="#2e7d32" font-weight="bold">起点 2</text>
+        <path d="M505,115 C480,80 290,80 165,112" fill="none" stroke="#1565c0" stroke-width="2.5" marker-end="url(#walkArrow)" stroke-dasharray="7,4"/>
+        <text x="335" y="72" text-anchor="middle" font-size="13" fill="#1565c0" font-weight="bold">加 -5：向左走 5 格</text>
+        <circle cx="160" cy="120" r="5" fill="#e65100"/>
+        <text x="160" y="172" text-anchor="middle" font-size="13" fill="#e65100" font-weight="bold">终点 -3</text>
+        <text x="330" y="182" text-anchor="middle" font-size="13" fill="#555">2 + (-5) = -3 ：站在 2，向左走 5 格</text>
+      </svg>
+    </div>
+
+    <div class="example">
+      <p><strong>例：3 − 5 用"走路"理解。</strong></p>
+      <p>站在 3，减 5 就是向左走 5 格（减正数往左），落在 -2。所以 3 − 5 = -2。小学时"3 减 5 不够减"，是因为当时整条数轴只有右半边；认识负数后，左半边也开放了，<strong>减法永远走得通</strong>。</p>
+    </div>
+
+    <div class="extend">
+      <p><strong>数轴的"后代"们：</strong>数轴只有"左右"一个方向，所以一个数一个座位就够。给平面上的点定位，需要两条互相垂直的数轴——这就是第 15 课要学的<strong>平面直角坐标系</strong>。再进一步，用三条轴可以给空间中的点定位（教室里"第几排、第几列、第几层"）。数轴是一切坐标系的老祖宗。</p>
+    </div>
+  </div>
+
+  <h2>挑战性问题</h2>
+  <div class="challenge">
+    <p><strong>问题：</strong>一只电子蚂蚁在数轴上，从原点出发，先向右爬 4 格，再向左爬 7 格，最后又向右爬 3 格。它停在哪个数上？全程中它到过离原点最远的点是多少？</p>
+    <button class="btn-sm" onclick="toggleHint('ch1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('ca1')">查看答案</button>
+    <div class="hint-box" id="ch1">向右是加正数，向左是加负数；每一步之后都记下当前位置，再比较各位置的绝对值。</div>
+    <div class="ans-box" id="ca1">位置变化：0 → 0+4 = 4 → 4-7 = <strong>-3</strong> → -3+3 = <strong>0</strong>。最后停在 <strong>0</strong>（恰好回到原点）。途中经过的点：4、-3、0，绝对值最大的是 4，所以<strong>离原点最远的点是 4</strong>。</div>
+  </div>
+
+  <h2>习题</h2>
+
+  <div class="exercise">
+    <p><strong>1.</strong> 数轴的三要素是：</p>
+    <p>A. 原点、箭头、刻度 &nbsp; B. 原点、正方向、单位长度 &nbsp; C. 0、1、2 &nbsp; D. 正数、零、负数</p>
+    <button class="btn-sm" onclick="toggleHint('h1')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a1')">查看答案</button>
+    <div class="hint-box" id="h1">回忆定义原文："规定了____、____和____的直线叫做数轴"。</div>
+    <div class="ans-box" id="a1"><strong>B</strong>。数轴的定义："规定了原点、正方向和单位长度的直线叫做数轴"。三个要素缺一不可。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>2.</strong> 在数轴上，-4 这个点位于：</p>
+    <p>A. 原点右边 4 个单位 &nbsp; B. 原点左边 4 个单位 &nbsp; C. 原点左边 8 个单位 &nbsp; D. 无法确定</p>
+    <button class="btn-sm" onclick="toggleHint('h2')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a2')">查看答案</button>
+    <div class="hint-box" id="h2">负数在原点左边，数值的绝对值就是到原点的距离。</div>
+    <div class="ans-box" id="a2"><strong>B</strong>。-4 是负数，在原点左边；|-4| = 4，距离原点 4 个单位长度。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>3.</strong> 下列各组数中，互为相反数的是：</p>
+    <p>A. 3 和 1/3 &nbsp; B. -2 和 2 &nbsp; C. -1 和 0 &nbsp; D. 0 和 0.0</p>
+    <button class="btn-sm" onclick="toggleHint('h3')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a3')">查看答案</button>
+    <div class="hint-box" id="h3">相反数 = 只有符号不同的两个数 = 数轴上关于原点对称的两个点。0 的相反数是几？</div>
+    <div class="ans-box" id="a3"><strong>B</strong>。-2 和 2 只有符号不同，互为相反数。A 是互为<strong>倒数</strong>（别混淆）；C 中 0 不是 -1 的相反数；D 的 0 和 0.0 是同一个数，不是"互为"相反数。记住：0 的相反数是 0，但 0 不能和别的数互为相反数。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>4.</strong> 把 -2、-3.5、0、1 从小到大排列：</p>
+    <p>A. -2 &lt; -3.5 &lt; 0 &lt; 1 &nbsp; B. -3.5 &lt; -2 &lt; 0 &lt; 1 &nbsp; C. 0 &lt; -3.5 &lt; -2 &lt; 1 &nbsp; D. 1 &lt; 0 &lt; -2 &lt; -3.5</p>
+    <button class="btn-sm" onclick="toggleHint('h4')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a4')">查看答案</button>
+    <div class="hint-box" id="h4">在数轴上标出四个数的位置：越靠左的越小。</div>
+    <div class="ans-box" id="a4"><strong>B</strong>。数轴上从左到右依次是 -3.5、-2、0、1，所以 -3.5 &lt; -2 &lt; 0 &lt; 1。负数比大小：绝对值大的反而小。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>5.</strong> |-7| 的值是：</p>
+    <p>A. -7 &nbsp; B. 7 &nbsp; C. ±7 &nbsp; D. 0</p>
+    <button class="btn-sm" onclick="toggleHint('h5')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a5')">查看答案</button>
+    <div class="hint-box" id="h5">绝对值是"到原点的距离"，距离有没有负的？</div>
+    <div class="ans-box" id="a5"><strong>B</strong>。|-7| = 7：-7 的点到原点的距离是 7 个单位。任何数的绝对值都是非负数。</div>
+  </div>
+
+  <div class="exercise">
+    <p><strong>6.</strong> 电子蚂蚁从 2 出发，先向左爬 6 格，再向右爬 4 格，它最终停在哪个数上？</p>
+    <p>A. -4 &nbsp; B. 0 &nbsp; C. 4 &nbsp; D. 8</p>
+    <button class="btn-sm" onclick="toggleHint('h6')">思路提示</button>
+    <button class="btn-sm" onclick="toggleAns('a6')">查看答案</button>
+    <div class="hint-box" id="h6">向左是减，向右是加：2 − 6 + 4 = ?</div>
+    <div class="ans-box" id="a6"><strong>B</strong>。2 − 6 = -4，-4 + 4 = 0，最终停在原点。整个过程就是算式 2 − 6 + 4 = 0。</div>
+  </div>
+
+  <div class="key" style="margin-top:32px;">
+    <p><strong>本课要点总结：</strong></p>
+    <ul>
+      <li><strong>数轴定义：</strong>规定了原点、正方向和单位长度的直线（三要素缺一不可）</li>
+      <li><strong>一一对应：</strong>每个数对应数轴上唯一的点；右边的点表示的数大于左边的点表示的数</li>
+      <li><strong>相反数：</strong>只有符号不同的两个数；数轴上关于原点对称；0 的相反数是 0</li>
+      <li><strong>绝对值：</strong>点到原点的距离，记作 |a|；正数取本身、负数取相反数、0 取 0；|a| ≥ 0</li>
+      <li><strong>负数比大小：</strong>绝对值大的反而小（数轴上更靠左）</li>
+      <li><strong>运算图形化：</strong>加正数右移、加负数左移、减法反向</li>
+    </ul>
+  </div>
+
+  <p style="text-align:right;margin-top:32px;"><a href="negative-numbers.html">相关课件：负数</a> | <a href="coordinate-system.html">平面直角坐标系</a> | <a href="index.html">返回课程列表</a></p>
+</article>
+<script>
+function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
+function toggleAns(id) { document.getElementById(id).classList.toggle('show'); }
+</script>
+<script src="./dt.js"></script>
+</body>
+</html>
