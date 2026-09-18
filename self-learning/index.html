@@ -6,6 +6,7 @@
 <title>初中数学 — 自学课件</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./question-bank.css">
 <style>
   .course-list { list-style: none; padding: 0; }
   .course-list a {
@@ -116,6 +117,7 @@
     <button class="tab-btn active" onclick="switchTab('algebra')">📐 代数</button>
     <button class="tab-btn" onclick="switchTab('geometry')">📏 几何</button>
     <button class="tab-btn" onclick="switchTab('stats')">📊 统计</button>
+    <button class="tab-btn" onclick="switchTab('bank')">📝 我的题库</button>
   </div>
 
   <!-- 代数 Tab -->
@@ -244,6 +246,15 @@
     </ul>
 
   </div>
+
+  <!-- 我的题库 Tab -->
+  <div class="tab-content" id="tab-bank">
+    <div class="qb-head">
+      <p>共收藏 <b id="qb-count">0</b> 道题。答错的题会自动收进来，方便以后复习。</p>
+      <button class="qb-clear-btn" id="qb-clear" type="button">清空题库</button>
+    </div>
+    <div id="qb-list"></div>
+  </div>
 </article>
 <div class="review-banner">课件审核中（<a href="./revision-log.html">修订记录</a>），问题反馈至微信 shuiseshuise</div>
 <script>
@@ -254,6 +265,7 @@ function switchTab(name) {
   document.getElementById('tab-' + name).classList.add('active');
 }
 </script>
+<script src="./question-bank.js"></script>
 <script src="./dt.js"></script>
 </body>
 </html>

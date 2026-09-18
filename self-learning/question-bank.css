@@ -1,0 +1,179 @@
+/* question-bank.css — 题库功能样式
+   仅被引用 question-bank.js 的页面加载，不影响其它页面 */
+
+/* ---------- 题目页：加入题库按钮 ---------- */
+.qb-add-btn {
+  font-size: 13px;
+  padding: 4px 14px;
+  border: 1px solid #ff9800;
+  border-radius: 4px;
+  background: #fff8e1;
+  color: #e65100;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: background 0.15s;
+}
+.qb-add-btn:hover { background: #ffecb3; }
+.qb-add-btn.in-bank {
+  border-color: #4caf50;
+  background: #e8f5e9;
+  color: #2e7d32;
+  cursor: default;
+}
+.exercise .qb-add-btn,
+.challenge .qb-add-btn { margin-top: 4px; }
+
+/* ---------- 题库 tab ---------- */
+.qb-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 18px;
+}
+.qb-head p { margin: 0; color: #555; font-size: 15px; }
+.qb-head b { color: #3949ab; font-size: 17px; }
+.qb-clear-btn {
+  font-size: 13px;
+  padding: 6px 14px;
+  border: 1px solid #e57373;
+  border-radius: 4px;
+  background: #fff;
+  color: #c62828;
+  cursor: pointer;
+}
+.qb-clear-btn:hover { background: #ffebee; }
+.qb-empty {
+  background: #f8fafc;
+  border: 1px dashed #b0bec5;
+  border-radius: 8px;
+  padding: 36px 18px;
+  text-align: center;
+  color: #78909c;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+/* ---------- 题库中的题目卡片（与试卷风格一致） ---------- */
+.qb-card {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin: 14px 0;
+}
+.qb-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.qb-source {
+  font-size: 13px;
+  color: #1976d2;
+  text-decoration: none;
+}
+.qb-source:hover { text-decoration: underline; }
+.qb-badge-wrong {
+  font-size: 12px;
+  background: #ffebee;
+  color: #c62828;
+  border-radius: 10px;
+  padding: 1px 10px;
+}
+.qb-remove-btn {
+  margin-left: auto;
+  font-size: 13px;
+  padding: 3px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fafafa;
+  color: #666;
+  cursor: pointer;
+}
+.qb-remove-btn:hover { border-color: #f44336; color: #c62828; background: #ffebee; }
+.qb-stem { margin: 4px 0 8px; font-size: 15px; }
+
+/* 选项与填空（复刻试卷交互样式） */
+.qb-zone button { margin: 3px 4px 3px 0; }
+.tf-btn, .opt-btn {
+  display: inline-block;
+  padding: 6px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #fff;
+  font-size: 14px;
+  transition: all 0.15s;
+  user-select: none;
+}
+.tf-btn:hover, .opt-btn:hover { border-color: #90caf9; background: #e3f2fd; }
+.opt-btn.selected { border-color: #1976d2; background: #e3f2fd; }
+.tf-btn.correct, .opt-btn.correct {
+  border-color: #4caf50 !important;
+  background: #e8f5e9 !important;
+  color: #2e7d32 !important;
+}
+.tf-btn.wrong, .opt-btn.wrong {
+  border-color: #f44336 !important;
+  background: #ffebee !important;
+  color: #c62828 !important;
+}
+.qb-fill-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.fill-input {
+  padding: 6px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 15px;
+  width: 160px;
+  max-width: 100%;
+}
+.fill-input:focus { outline: none; border-color: #1976d2; }
+.check-btn {
+  padding: 6px 16px;
+  border: 1px solid #1976d2;
+  border-radius: 6px;
+  background: #1976d2;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+.check-btn:hover { background: #1565c0; }
+.feedback { display: none; margin-left: 8px; font-size: 14px; font-weight: 600; }
+.feedback.show { display: inline; }
+.feedback.correct-fb { color: #2e7d32; }
+.feedback.wrong-fb { color: #c62828; }
+
+/* 提示 / 答案 行 */
+.qb-btn-row { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+.qb-mini-btn {
+  font-size: 13px;
+  padding: 4px 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fafafa;
+  cursor: pointer;
+}
+.qb-hint-btn:hover { background: #fff3e0; border-color: #ff9800; }
+.qb-ans-btn:hover { background: #e8f5e9; border-color: #4caf50; }
+.hint-box, .ans-box {
+  display: none;
+  margin-top: 8px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.hint-box.show, .ans-box.show { display: block; }
+.qb-card .hint-box { background: #fff8e1; border-left: 3px solid #ff9800; }
+.qb-card .ans-box { background: #e8f5e9; border-left: 3px solid #4caf50; }
+
+@media (max-width: 720px) {
+  .qb-card { padding: 12px 12px; margin: 10px 0; border-radius: 0; }
+  .qb-stem { font-size: 15px; }
+  .qb-remove-btn { margin-left: 0; }
+  .tf-btn, .opt-btn { padding: 8px 14px; font-size: 15px; }
+  .fill-input { width: 140px; font-size: 16px; }
+}
