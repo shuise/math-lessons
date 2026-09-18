@@ -517,12 +517,50 @@ def write_root_index(out_dir, books):
 # ---------------------------------------------------------------------------
 # 主流程
 # ---------------------------------------------------------------------------
+def dir_size_bytes(path):
+    """递归统计目录总字节数"""
+    total = 0
+    for r, _, files in os.walk(path):
+        for f in files:
+            fp = os.path.join(r, f)
+            try:
+                total += os.path.getsize(fp)
+            except OSError:
+                pass
+    return total
+
+
+def prune_oversized(out_dir, manifest, max_mb):
+    """删除超过 max_mb 的书目录，并在 manifest 标记 deleted（永久排除）。
+    预存目录（source 为空）同样按大小删除。"""
+    limit = max_mb * 1024 * 1024
+    removed = []
+    for name in sorted(os.listdir(out_dir)):
+        full = os.path.join(out_dir, name)
+        if not os.path.isdir(full) or name.startswith('.'):
+            continue
+        size = dir_size_bytes(full)
+        if size > limit:
+            size_mb = size / 1024 / 1024
+            info = manifest.get(name, {'source': '', 'title': name})
+            shutil.rmtree(full)
+            info['deleted'] = True
+            manifest[name] = info
+            removed.append((name, size_mb))
+            print(f'删除(超过 {max_mb:g}MB): {name}  ({size_mb:.1f} MB)')
+    return removed
+
+
 def main():
     parser = argparse.ArgumentParser(
         description='把 books1 中的 EPUB 拆解到 textbooks，生成索引页')
     parser.add_argument('--books-dir', default='books1', help='EPUB 所在目录（默认 books1）')
     parser.add_argument('--out-dir', default='textbooks', help='输出目录（默认 textbooks）')
     parser.add_argument('--force', action='store_true', help='强制重新拆解（覆盖已存在目录）')
+    parser.add_argument('--max-size', type=float, default=None, metavar='MB',
+                        help='删除超过该大小（MB）的书目录并永久排除（重跑不再生成）')
+    parser.add_argument('--exclude', action='append', default=[], metavar='DIRNAME',
+                        help='按书目录名永久排除并删除（可重复使用）')
     args = parser.parse_args()
 
     books_dir = args.books_dir
@@ -533,21 +571,38 @@ def main():
         sys.exit(1)
     os.makedirs(out_dir, exist_ok=True)
 
-    # 加载 manifest，剔除目录已不存在的陈旧条目
-    manifest = load_manifest(out_dir)
-    manifest = {k: v for k, v in manifest.items()
-                if os.path.isdir(os.path.join(out_dir, k))}
+    # 加载 manifest：保留 deleted 标记条目（目录虽不存在但需永久排除），
+    # 剔除其余目录已不存在的陈旧条目
+    manifest = {}
+    for k, v in load_manifest(out_dir).items():
+        if v.get('deleted') or os.path.isdir(os.path.join(out_dir, k)):
+            manifest[k] = v
+
+    # 0) 按目录名永久排除：删除目录并在 manifest 标记 deleted
+    for name in args.exclude:
+        full = os.path.join(out_dir, name)
+        if os.path.isdir(full):
+            size_mb = dir_size_bytes(full) / 1024 / 1024
+            shutil.rmtree(full)
+            print(f'删除(手动排除): {name}  ({size_mb:.1f} MB)')
+        info = manifest.get(name, {'source': '', 'title': name})
+        info['deleted'] = True
+        manifest[name] = info
+
+    deleted_sources = {v['source'] for v in manifest.values()
+                       if v.get('deleted') and v.get('source')}
     # 反向映射 source epub -> dirname，用于增量跳过
     source_to_dir = {}
     for d, info in manifest.items():
         s = info.get('source', '')
-        if s and s not in source_to_dir:
+        if s and not info.get('deleted') and s not in source_to_dir:
             source_to_dir[s] = d
 
     if args.force:
-        # 强制重新拆解：删除所有由 epub 生成的目录（source 非空），保留预存目录
+        # 强制重新拆解：删除所有由 epub 生成的目录（source 非空），
+        # 保留预存目录和已标记 deleted 的永久排除项
         for d in list(manifest):
-            if manifest[d].get('source'):
+            if manifest[d].get('source') and not manifest[d].get('deleted'):
                 full = os.path.join(out_dir, d)
                 if os.path.exists(full):
                     shutil.rmtree(full)
@@ -567,6 +622,9 @@ def main():
     winners = {srcs[-1] for srcs in clean_map.values()}
 
     for i, name in enumerate(epubs, 1):
+        if name in deleted_sources:
+            print(f'[{i}/{len(epubs)}] {name}  跳过(超大小已删除)')
+            continue
         if name not in winners:
             print(f'[{i}/{len(epubs)}] {name}  跳过(同名被覆盖)')
             continue
@@ -601,11 +659,15 @@ def main():
             title = read_title_from_index(idx) or name
             manifest[name] = {'source': '', 'title': title}
 
+    # 2.5) 删除超过大小上限的书目录（仅在 --max-size 指定时执行）
+    if args.max_size is not None:
+        prune_oversized(out_dir, manifest, args.max_size)
+
     save_manifest(out_dir, manifest)
 
-    # 3) 生成根索引
+    # 3) 生成根索引（排除已删除条目）
     books = [(d, info.get('title', d), info.get('source', ''))
-             for d, info in manifest.items()]
+             for d, info in manifest.items() if not info.get('deleted')]
     write_root_index(out_dir, books)
     print(f'\n完成: 共 {len(books)} 本书已索引')
     print(f'根索引: {os.path.join(out_dir, "index.html")}')
