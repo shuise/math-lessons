@@ -6,44 +6,11 @@
 <title>反比例函数 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>↗</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #e65100; }
-  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed #e65100; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-  .btn-sm.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .graph-svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
-  .compare-box { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin: 16px 0; }
-  .compare-box .card { flex: 1; min-width: 220px; background: #fff; border: 2px solid #e0e0e0; border-radius: 10px; padding: 16px; text-align: center; }
-  .compare-box .card .card-title { font-weight: bold; font-size: 15px; color: var(--accent); margin-bottom: 8px; }
-  .compare-box .card svg { max-width: 100%; height: auto; }
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
-    .compare-box { flex-direction: column; }
-  }
-</style>
 </head>
-<body>
+<body class="p-inverse-function">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./linear-function.html">课件 25（一次函数）</a></p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="./linear-function.html">课件 25（一次函数）</a></p>
   <h1>反比例函数</h1>
 
   <h2>起源：为什么需要研究"反着变"的关系？</h2>
@@ -87,7 +54,7 @@
   <h2>二、反比例函数的概念与定义</h2>
   <div class="story">
     <div class="formula">
-      <p><strong>反比例函数：</strong><span style="font-size:1.3em;">y = <span style="display:inline-block;text-align:center;line-height:1.2;"><span style="border-bottom:1.5px solid #333;">k</span><br><span style="font-size:0.8em;">x</span></span></span>（k 是常数，k ≠ 0）</p>
+      <p><strong>反比例函数：</strong><span class="fs-lg">y = <span class="ib-tc"><span class="frac-line">k</span><br><span class="fs-sm">x</span></span></span>（k 是常数，k ≠ 0）</p>
       <p>k 叫做<strong>比例系数</strong>。x 不能等于 0（因为分母不能为 0）。</p>
     </div>
 
@@ -152,8 +119,8 @@
     <p>当 k 是负数时，x 和 y 异号，所以图象在第二象限（x < 0, y > 0）和第四象限（x > 0, y < 0）。</p>
 
     <h3>交互图：点击不同 k 值，观察双曲线如何变化</h3>
-    <div style="text-align:center;margin-bottom:8px;font-size:14px;color:#888;">点击不同 k 值，观察双曲线在哪两个象限 ↓</div>
-    <div style="text-align:center;margin:8px 0;">
+    <div class="caption">点击不同 k 值，观察双曲线在哪两个象限 ↓</div>
+    <div class="tc mt-8 mb-8">
       <button onclick="setK(6)" class="btn-sm" id="bk6">k = 6</button>
       <button onclick="setK(3)" class="btn-sm active" id="bk3">k = 3</button>
       <button onclick="setK(1)" class="btn-sm" id="bk1">k = 1</button>
@@ -204,13 +171,13 @@
       <!-- 图例 -->
       <text id="legendK" x="260" y="470" text-anchor="middle" font-size="15" fill="#e65100" font-weight="bold">y = 3/x</text>
     </svg>
-    <p style="text-align:center;color:#888;font-size:13px;">图：k 取不同值时双曲线的变化。k > 0 在一三象限，k < 0 在二四象限。|k| 越大，曲线离原点越远。</p>
+    <p class="caption">图：k 取不同值时双曲线的变化。k > 0 在一三象限，k < 0 在二四象限。|k| 越大，曲线离原点越远。</p>
 
     <h3>静态对比图：k > 0 和 k < 0 的图象</h3>
     <div class="compare-box">
       <div class="card">
         <div class="card-title">k > 0（一、三象限）</div>
-        <svg viewBox="0 0 240 240" style="max-width:240px;">
+        <svg viewBox="0 0 240 240" class="svg-240">
           <line x1="30" y1="120" x2="220" y2="120" stroke="#555" stroke-width="1.2"/>
           <line x1="120" y1="210" x2="120" y2="20" stroke="#555" stroke-width="1.2"/>
           <text x="215" y="132" font-size="10" fill="#555">x</text>
@@ -230,7 +197,7 @@
       </div>
       <div class="card">
         <div class="card-title">k < 0（二、四象限）</div>
-        <svg viewBox="0 0 240 240" style="max-width:240px;">
+        <svg viewBox="0 0 240 240" class="svg-240">
           <line x1="30" y1="120" x2="220" y2="120" stroke="#555" stroke-width="1.2"/>
           <line x1="120" y1="210" x2="120" y2="20" stroke="#555" stroke-width="1.2"/>
           <text x="215" y="132" font-size="10" fill="#555">x</text>
@@ -249,7 +216,7 @@
         </svg>
       </div>
     </div>
-    <p style="text-align:center;color:#888;font-size:13px;">左：k = 2 > 0，图象在一三象限。右：k = −2 < 0，图象在二四象限。无论哪种情况，两支都关于原点对称，且永远不会碰到坐标轴。</p>
+    <p class="caption">左：k = 2 > 0，图象在一三象限。右：k = −2 < 0，图象在二四象限。无论哪种情况，两支都关于原点对称，且永远不会碰到坐标轴。</p>
 
     <h3>画图的步骤</h3>
     <div class="formula">
@@ -277,7 +244,7 @@
       <p><strong>性质 1：增减性（在每一支内）</strong></p>
       <p>• k > 0 时：在<strong>每一支</strong>内，y 随 x 的增大而<strong>减小</strong>（从左到右，曲线下降）</p>
       <p>• k < 0 时：在<strong>每一支</strong>内，y 随 x 的增大而<strong>增大</strong>（从左到右，曲线上升）</p>
-      <p style="color:#888;font-size:0.9em;">⚠️ 注意：必须说"在每一支内"，不能笼统地说"y 随 x 增大而减小"。因为越过 x = 0 时，y 会从负无穷跳到正无穷。</p>
+      <p class="muted fs-sm">⚠️ 注意：必须说"在每一支内"，不能笼统地说"y 随 x 增大而减小"。因为越过 x = 0 时，y 会从负无穷跳到正无穷。</p>
     </div>
 
     <div class="key">
@@ -495,7 +462,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="index.html">← 返回课程列表</a></p>
+  <p class="back-bottom"><a href="index.html">← 返回课程列表</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }

@@ -6,60 +6,11 @@
 <title>二次根式 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>√</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #1a237e; }
-  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed #1a237e; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-  .graphic { text-align: center; margin: 16px 0; }
-  .graphic svg { display: block; max-width: 100%; height: auto; margin: 0 auto; overflow: visible; }
-  /* 根号渲染：√ + 上划线覆盖整个被开方表达式 */
-  .rad { white-space: nowrap; display: inline; }
-  .rad > .rd {
-    display: inline-block;
-    border-top: 1.5px solid currentColor;
-    padding: 0 2px;
-    vertical-align: baseline;
-    line-height: 1.4;
-  }
-  /* 分式渲染：上下排列 + 横线 */
-  .frac {
-    display: inline-flex;
-    flex-direction: column;
-    vertical-align: middle;
-    text-align: center;
-    margin: 0 3px;
-    font-size: 0.9em;
-    line-height: 1.2;
-  }
-  .frac > .num { border-bottom: 1.5px solid currentColor; padding: 0 5px 1px; }
-  .frac > .den { padding: 1px 5px 0; }
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
-  }
-</style>
 </head>
-<body>
+<body class="p-quadratic-radicals">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./real-numbers.html">课件 17（实数——数轴上的每一个点）</a></p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="./real-numbers.html">课件 17（实数——数轴上的每一个点）</a></p>
   <h1>二次根式</h1>
 
   <h2>起源："√"这个符号是怎么来的？</h2>
@@ -102,20 +53,16 @@
     <p><strong>乘法法则：</strong>√a · √b = √(ab)（a ≥ 0，b ≥ 0）</p>
     <p><strong>除法法则：</strong>√a / √b = √(a/b)（a ≥ 0，b > 0）</p>
 
-    <p style="margin-top:16px;"><strong>为什么 √a · √b = √(ab)？</strong></p>
+    <p class="mt-16"><strong>为什么 √a · √b = √(ab)？</strong></p>
     <p>设 √a = x，√b = y，那么 x² = a，y² = b。</p>
     <p>x²y² = (xy)² = ab，所以 xy = √(ab)。</p>
     <p>而 xy = √a · √b，因此 √a · √b = √(ab)。</p>
 
     <h3>图说：√a · √b = √(ab) 的面积解释</h3>
     <div class="graphic">
-      <div style="text-align:center;margin-bottom:6px;font-size:14px;color:#888;">以 a = 4，b = 9 为例：√4 = 2，√9 = 3，√(4×9) = √36 = 6</div>
-      <svg viewBox="0 0 600 290" style="max-width:100%;height:auto;display:block;margin:0 auto;overflow:visible;">
+      <div class="tc mb-6 fs-14 muted">以 a = 4，b = 9 为例：√4 = 2，√9 = 3，√(4×9) = √36 = 6</div>
+      <svg viewBox="0 0 600 290" class="img-center ov-visible">
         <defs>
-          <style>
-            text.label { font-size: 14px; fill: #333; text-anchor: middle; }
-            text.small { font-size: 12px; fill: #888; text-anchor: middle; }
-          </style>
         </defs>
         <!-- 左：√4 × √9 矩形 -->
         <rect x="20" y="35" width="240" height="160" fill="rgba(26,35,126,0.1)" stroke="#1a237e" stroke-width="2.5"/>
@@ -212,13 +159,9 @@
 
     <h3>图说：分母有理化的几何意义</h3>
     <div class="graphic">
-      <div style="text-align:center;margin-bottom:6px;font-size:14px;color:#888;">分数 1/√2 和 √2/2 表示同一个数</div>
-      <svg viewBox="0 0 600 300" style="max-width:100%;height:auto;display:block;margin:0 auto;overflow:visible;">
+      <div class="tc mb-6 fs-14 muted">分数 1/√2 和 √2/2 表示同一个数</div>
+      <svg viewBox="0 0 600 300" class="img-center ov-visible">
         <defs>
-          <style>
-            text.glabel { font-size: 13px; fill: #333; text-anchor: middle; }
-            text.gsmall { font-size: 11px; fill: #666; text-anchor: middle; }
-          </style>
         </defs>
 
         <!-- 左半边：正方形对角线 = √2 -->
@@ -257,13 +200,13 @@
     <h3>分母有理化的方法</h3>
     <div class="formula">
       <p><strong>类型一：分母为 √a</strong>——分子分母同乘 √a</p>
-      <p style="text-align:center;font-size:1.1em;"><span class="frac"><span class="num">1</span><span class="den">√a</span></span> = <span class="frac"><span class="num">1 × √a</span><span class="den">√a × √a</span></span> = <span class="frac"><span class="num">√a</span><span class="den">a</span></span></p>
+      <p class="tc fs-lg"><span class="frac"><span class="num">1</span><span class="den">√a</span></span> = <span class="frac"><span class="num">1 × √a</span><span class="den">√a × √a</span></span> = <span class="frac"><span class="num">√a</span><span class="den">a</span></span></p>
       <div class="example">
         <p><span class="frac"><span class="num">1</span><span class="den">√3</span></span> = <span class="frac"><span class="num">√3</span><span class="den">3</span></span>，<span class="frac"><span class="num">1</span><span class="den">√5</span></span> = <span class="frac"><span class="num">√5</span><span class="den">5</span></span>，<span class="frac"><span class="num">2</span><span class="den">√2</span></span> = √2</p>
       </div>
 
-      <p style="margin-top:16px;"><strong>类型二：分母为 √a + √b</strong>——利用平方差公式：(√a + √b)(√a - √b) = a - b</p>
-      <p style="text-align:center;font-size:1.1em;"><span class="frac"><span class="num">1</span><span class="den">√a + √b</span></span> = <span class="frac"><span class="num">√a − √b</span><span class="den">a − b</span></span></p>
+      <p class="mt-16"><strong>类型二：分母为 √a + √b</strong>——利用平方差公式：(√a + √b)(√a - √b) = a - b</p>
+      <p class="tc fs-lg"><span class="frac"><span class="num">1</span><span class="den">√a + √b</span></span> = <span class="frac"><span class="num">√a − √b</span><span class="den">a − b</span></span></p>
       <div class="example">
         <p><span class="frac"><span class="num">1</span><span class="den">√3 + 1</span></span> = <span class="frac"><span class="num">√3 − 1</span><span class="den">3 − 1</span></span> = <span class="frac"><span class="num">√3 − 1</span><span class="den">2</span></span></p>
         <p><span class="frac"><span class="num">1</span><span class="den">√5 − √2</span></span> = <span class="frac"><span class="num">√5 + √2</span><span class="den">5 − 2</span></span> = <span class="frac"><span class="num">√5 + √2</span><span class="den">3</span></span></p>
@@ -279,7 +222,7 @@
           <li>√5 − 1 的共轭式是 √5 + 1</li>
         </ul>
         <p><strong>为什么共轭式的乘积能消去根号？</strong>因为它们恰好构成"平方差"的形式：</p>
-        <p style="text-align:center;">(√a + √b)(√a − √b) = (√a)² − (√b)² = a − b</p>
+        <p class="tc">(√a + √b)(√a − √b) = (√a)² − (√b)² = a − b</p>
         <p>两个根号在相乘时被"平方"消掉了，只剩下了有理数 a − b。这就是共轭式的<strong>核心价值</strong>。</p>
         <p><strong>共轭式有什么用？</strong></p>
         <ul>
@@ -305,8 +248,8 @@
   <div class="extend">
     <p>已知三角形的三条边长 a、b、c，怎样求面积？如果没有给出高，好像无从下手。但古希腊数学家<strong>海伦</strong>（约公元 60 年）给出了一个漂亮的公式——<strong>只用三边长就能算面积</strong>：</p>
     <div class="formula">
-      <p style="text-align:center;font-size:1.1em;">S = √[p(p − a)(p − b)(p − c)]</p>
-      <p style="text-align:center;">其中 p = <span class="frac"><span class="num">a + b + c</span><span class="den">2</span></span>（半周长）</p>
+      <p class="tc fs-lg">S = √[p(p − a)(p − b)(p − c)]</p>
+      <p class="tc">其中 p = <span class="frac"><span class="num">a + b + c</span><span class="den">2</span></span>（半周长）</p>
     </div>
 
     <h3>公式是怎么推导出来的？（完整推导）</h3>
@@ -315,53 +258,53 @@
     <div class="formula">
       <p><strong>第 1 步：从基本面积公式出发</strong></p>
       <p>设三角形中，边 a 和 b 的夹角为 C。三角形面积的基本公式是：</p>
-      <p style="text-align:center;font-size:1.1em;">S = <span class="frac"><span class="num">1</span><span class="den">2</span></span> · a · b · sinC　……①</p>
+      <p class="tc fs-lg">S = <span class="frac"><span class="num">1</span><span class="den">2</span></span> · a · b · sinC　……①</p>
       <p>但现在的问题是：我们知道的是三边 a、b、c，<strong>不知道角 C</strong>。所以我们要想办法把 sinC 用边长表示出来。</p>
     </div>
 
     <div class="formula">
       <p><strong>第 2 步：用余弦定理表示 cosC</strong></p>
       <p>余弦定理告诉我们：c² = a² + b² − 2ab·cosC，移项得：</p>
-      <p style="text-align:center;font-size:1.1em;">cosC = <span class="frac"><span class="num">a² + b² − c²</span><span class="den">2ab</span></span>　……②</p>
+      <p class="tc fs-lg">cosC = <span class="frac"><span class="num">a² + b² − c²</span><span class="den">2ab</span></span>　……②</p>
     </div>
 
     <div class="formula">
       <p><strong>第 3 步：用 cosC 表示 sinC</strong></p>
       <p>由三角恒等式 sin²C + cos²C = 1，得 sinC = √(1 − cos²C)（因为 C 是三角形内角，0 &lt; C &lt; 180°，所以 sinC &gt; 0，取正根）。</p>
-      <p style="text-align:center;font-size:1.1em;">sinC = √(1 − cos²C)　……③</p>
+      <p class="tc fs-lg">sinC = √(1 − cos²C)　……③</p>
     </div>
 
     <div class="formula">
       <p><strong>第 4 步：把 cosC 代入 sinC</strong></p>
       <p>把②代入③：</p>
-      <p style="text-align:center;font-size:1.1em;">sinC = <span class="rad">√<span class="rd">(1 − (<span class="frac"><span class="num">a² + b² − c²</span><span class="den">2ab</span></span>)²)</span></span>　……④</p>
+      <p class="tc fs-lg">sinC = <span class="rad">√<span class="rd">(1 − (<span class="frac"><span class="num">a² + b² − c²</span><span class="den">2ab</span></span>)²)</span></span>　……④</p>
     </div>
 
     <div class="formula">
       <p><strong>第 5 步：把 sinC 代入面积公式</strong></p>
       <p>把④代入①：</p>
-      <p style="text-align:center;font-size:1.1em;">S = <span class="frac"><span class="num">1</span><span class="den">2</span></span> · a · b · <span class="rad">√<span class="rd">(1 − (<span class="frac"><span class="num">a² + b² − c²</span><span class="den">2ab</span></span>)²)</span></span></p>
+      <p class="tc fs-lg">S = <span class="frac"><span class="num">1</span><span class="den">2</span></span> · a · b · <span class="rad">√<span class="rd">(1 − (<span class="frac"><span class="num">a² + b² − c²</span><span class="den">2ab</span></span>)²)</span></span></p>
       <p>注意到根号外面有 <span class="frac"><span class="num">1</span><span class="den">2</span></span>·a·b = <span class="frac"><span class="num">ab</span><span class="den">2</span></span>，而根号里面的分母是 (2ab)² = 4a²b²。我们可以把 <span class="frac"><span class="num">ab</span><span class="den">2</span></span> 放进根号：</p>
-      <p style="text-align:center;font-size:1.1em;"><span class="frac"><span class="num">ab</span><span class="den">2</span></span> = <span class="rad">√<span class="rd">(<span class="frac"><span class="num">a²b²</span><span class="den">4</span></span>)</span></span></p>
+      <p class="tc fs-lg"><span class="frac"><span class="num">ab</span><span class="den">2</span></span> = <span class="rad">√<span class="rd">(<span class="frac"><span class="num">a²b²</span><span class="den">4</span></span>)</span></span></p>
       <p>所以面积可以写成：</p>
-      <p style="text-align:center;font-size:1.1em;">S = <span class="rad">√<span class="rd">(<span class="frac"><span class="num">a²b²</span><span class="den">4</span></span> · (1 − (<span class="frac"><span class="num">a² + b² − c²</span><span class="den">2ab</span></span>)²))</span></span></p>
+      <p class="tc fs-lg">S = <span class="rad">√<span class="rd">(<span class="frac"><span class="num">a²b²</span><span class="den">4</span></span> · (1 − (<span class="frac"><span class="num">a² + b² − c²</span><span class="den">2ab</span></span>)²))</span></span></p>
     </div>
 
     <div class="formula">
       <p><strong>第 6 步：通分，化简根号内的式子</strong></p>
       <p>根号内的 1 可以写成 <span class="frac"><span class="num">(2ab)²</span><span class="den">(2ab)²</span></span> = <span class="frac"><span class="num">4a²b²</span><span class="den">4a²b²</span></span>，于是：</p>
-      <p style="text-align:center;font-size:1.1em;">1 − (<span class="frac"><span class="num">a² + b² − c²</span><span class="den">2ab</span></span>)² = <span class="frac"><span class="num">4a²b² − (a² + b² − c²)²</span><span class="den">4a²b²</span></span></p>
+      <p class="tc fs-lg">1 − (<span class="frac"><span class="num">a² + b² − c²</span><span class="den">2ab</span></span>)² = <span class="frac"><span class="num">4a²b² − (a² + b² − c²)²</span><span class="den">4a²b²</span></span></p>
       <p>再乘上外面的 <span class="frac"><span class="num">a²b²</span><span class="den">4</span></span>：</p>
-      <p style="text-align:center;font-size:1.1em;"><span class="frac"><span class="num">a²b²</span><span class="den">4</span></span> · <span class="frac"><span class="num">4a²b² − (a² + b² − c²)²</span><span class="den">4a²b²</span></span> = <span class="frac"><span class="num">4a²b² − (a² + b² − c²)²</span><span class="den">16</span></span></p>
+      <p class="tc fs-lg"><span class="frac"><span class="num">a²b²</span><span class="den">4</span></span> · <span class="frac"><span class="num">4a²b² − (a² + b² − c²)²</span><span class="den">4a²b²</span></span> = <span class="frac"><span class="num">4a²b² − (a² + b² − c²)²</span><span class="den">16</span></span></p>
       <p>所以：</p>
-      <p style="text-align:center;font-size:1.1em;">S = <span class="rad">√<span class="rd">(<span class="frac"><span class="num">4a²b² − (a² + b² − c²)²</span><span class="den">16</span></span>)</span></span> = <span class="frac"><span class="num">1</span><span class="den">4</span></span> · <span class="rad">√<span class="rd">(4a²b² − (a² + b² − c²)²)</span></span>　……⑤</p>
+      <p class="tc fs-lg">S = <span class="rad">√<span class="rd">(<span class="frac"><span class="num">4a²b² − (a² + b² − c²)²</span><span class="den">16</span></span>)</span></span> = <span class="frac"><span class="num">1</span><span class="den">4</span></span> · <span class="rad">√<span class="rd">(4a²b² − (a² + b² − c²)²)</span></span>　……⑤</p>
     </div>
 
     <div class="formula">
       <p><strong>第 7 步：用平方差公式因式分解</strong></p>
       <p>根号里面的 4a²b² − (a² + b² − c²)²，是一个"平方减平方"的形式，可以用平方差公式 A² − B² = (A + B)(A − B) 来分解：</p>
       <p>令 A = 2ab，B = a² + b² − c²，则：</p>
-      <p style="text-align:center;font-size:1.1em;">4a²b² − (a² + b² − c²)² = (2ab + a² + b² − c²)(2ab − a² − b² + c²)</p>
+      <p class="tc fs-lg">4a²b² − (a² + b² − c²)² = (2ab + a² + b² − c²)(2ab − a² − b² + c²)</p>
     </div>
 
     <div class="formula">
@@ -371,41 +314,41 @@
       <p><strong>第二个因式：</strong>2ab − a² − b² + c² = c² − (a² − 2ab + b²) = c² − (a − b)²</p>
       <p>再用平方差：c² − (a − b)² = (c + a − b)(c − a + b)</p>
       <p>所以：</p>
-      <p style="text-align:center;font-size:1.1em;">4a²b² − (a² + b² − c²)² = (a + b + c)(a + b − c)(c + a − b)(c − a + b)　……⑥</p>
+      <p class="tc fs-lg">4a²b² − (a² + b² − c²)² = (a + b + c)(a + b − c)(c + a − b)(c − a + b)　……⑥</p>
     </div>
 
     <div class="formula">
       <p><strong>第 9 步：引入半周长 p，换元</strong></p>
       <p>令 p = <span class="frac"><span class="num">a + b + c</span><span class="den">2</span></span>（半周长），则：</p>
-      <p style="text-align:center;">a + b + c = 2p</p>
-      <p style="text-align:center;">a + b − c = 2(p − c)</p>
-      <p style="text-align:center;">c + a − b = 2(p − b)</p>
-      <p style="text-align:center;">c − a + b = 2(p − a)</p>
+      <p class="tc">a + b + c = 2p</p>
+      <p class="tc">a + b − c = 2(p − c)</p>
+      <p class="tc">c + a − b = 2(p − b)</p>
+      <p class="tc">c − a + b = 2(p − a)</p>
       <p>代入⑥式：</p>
-      <p style="text-align:center;font-size:1.1em;">4a²b² − (a² + b² − c²)² = 2p · 2(p − c) · 2(p − b) · 2(p − a) = 16p(p − a)(p − b)(p − c)</p>
+      <p class="tc fs-lg">4a²b² − (a² + b² − c²)² = 2p · 2(p − c) · 2(p − b) · 2(p − a) = 16p(p − a)(p − b)(p − c)</p>
     </div>
 
     <div class="formula">
       <p><strong>第 10 步：代回面积公式，得到海伦公式</strong></p>
       <p>把⑥'代回⑤式：</p>
-      <p style="text-align:center;font-size:1.1em;">S = <span class="frac"><span class="num">1</span><span class="den">4</span></span> · <span class="rad">√<span class="rd">(16p(p − a)(p − b)(p − c))</span></span></p>
+      <p class="tc fs-lg">S = <span class="frac"><span class="num">1</span><span class="den">4</span></span> · <span class="rad">√<span class="rd">(16p(p − a)(p − b)(p − c))</span></span></p>
       <p>把 16 移出根号（√16 = 4）：</p>
-      <p style="text-align:center;font-size:1.1em;">S = <span class="frac"><span class="num">1</span><span class="den">4</span></span> · 4 · <span class="rad">√<span class="rd">(p(p − a)(p − b)(p − c))</span></span> = <span class="rad">√<span class="rd">(p(p − a)(p − b)(p − c))</span></span></p>
-      <p style="text-align:center;font-size:1.2em;color:#1a237e;font-weight:bold;">✨ S = √[p(p − a)(p − b)(p − c)]，其中 p = (a + b + c) / 2</p>
+      <p class="tc fs-lg">S = <span class="frac"><span class="num">1</span><span class="den">4</span></span> · 4 · <span class="rad">√<span class="rd">(p(p − a)(p − b)(p − c))</span></span> = <span class="rad">√<span class="rd">(p(p − a)(p − b)(p − c))</span></span></p>
+      <p class="tc fs-lg fw-bold">✨ S = √[p(p − a)(p − b)(p − c)]，其中 p = (a + b + c) / 2</p>
       <p>这就是<strong>海伦公式</strong>！推导完成。</p>
     </div>
 
     <h3>秦九韶的"三斜求积术"</h3>
     <p>中国的<strong>秦九韶</strong>（1208—1268）在《数书九章》中也独立发现了等价的公式（称为"三斜求积术"）：</p>
     <div class="formula">
-      <p style="text-align:center;font-size:1.1em;">S = <span class="rad">√<span class="rd">[<span class="frac"><span class="num">1</span><span class="den">4</span></span>(a²c² − (<span class="frac"><span class="num">a² + c² − b²</span><span class="den">2</span></span>)²)]</span></span></p>
+      <p class="tc fs-lg">S = <span class="rad">√<span class="rd">[<span class="frac"><span class="num">1</span><span class="den">4</span></span>(a²c² − (<span class="frac"><span class="num">a² + c² − b²</span><span class="den">2</span></span>)²)]</span></span></p>
     </div>
     <p>这个公式和海伦公式看起来完全不同，但<strong>其实是等价的</strong>。关键在第 5 步：我们已经推出</p>
-    <p style="text-align:center;">S = <span class="frac"><span class="num">1</span><span class="den">4</span></span> · <span class="rad">√<span class="rd">(4a²b² − (a² + b² − c²)²)</span></span></p>
+    <p class="tc">S = <span class="frac"><span class="num">1</span><span class="den">4</span></span> · <span class="rad">√<span class="rd">(4a²b² − (a² + b² − c²)²)</span></span></p>
     <p>如果把 b 和 c 对调（三角形的边可以任意标号），就得到：</p>
-    <p style="text-align:center;">S = <span class="frac"><span class="num">1</span><span class="den">4</span></span> · <span class="rad">√<span class="rd">(4a²c² − (a² + c² − b²)²)</span></span></p>
+    <p class="tc">S = <span class="frac"><span class="num">1</span><span class="den">4</span></span> · <span class="rad">√<span class="rd">(4a²c² − (a² + c² − b²)²)</span></span></p>
     <p>把 <span class="frac"><span class="num">1</span><span class="den">4</span></span> 放进根号（(<span class="frac"><span class="num">1</span><span class="den">4</span></span>)² = <span class="frac"><span class="num">1</span><span class="den">16</span></span>），再把 (a² + c² − b²)² 写成 (<span class="frac"><span class="num">a² + c² − b²</span><span class="den">2</span></span>)² × 4：</p>
-    <p style="text-align:center;">S = <span class="rad">√<span class="rd">(<span class="frac"><span class="num">1</span><span class="den">16</span></span> · (4a²c² − 4 · (<span class="frac"><span class="num">a² + c² − b²</span><span class="den">2</span></span>)²))</span></span> = <span class="rad">√<span class="rd">(<span class="frac"><span class="num">1</span><span class="den">4</span></span>(a²c² − (<span class="frac"><span class="num">a² + c² − b²</span><span class="den">2</span></span>)²))</span></span></p>
+    <p class="tc">S = <span class="rad">√<span class="rd">(<span class="frac"><span class="num">1</span><span class="den">16</span></span> · (4a²c² − 4 · (<span class="frac"><span class="num">a² + c² − b²</span><span class="den">2</span></span>)²))</span></span> = <span class="rad">√<span class="rd">(<span class="frac"><span class="num">1</span><span class="den">4</span></span>(a²c² − (<span class="frac"><span class="num">a² + c² − b²</span><span class="den">2</span></span>)²))</span></span></p>
     <p>这正是秦九韶公式！两个公式是同一个东西的两种写法。</p>
 
     <p>海伦-秦九韶公式把<strong>二次根式</strong>用到了极致——根号里面是一大串乘法和减法。</p>
@@ -515,7 +458,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="index.html">返回课程列表 →</a></p>
+  <p class="back-bottom"><a href="index.html">返回课程列表 →</a></p>
 </article>
 <script>
 /* 根号渲染增强：自动将文本中的 √X / ∛X 包裹为 .rad > .rd 结构，

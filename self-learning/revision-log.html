@@ -6,33 +6,28 @@
 <title>修订记录 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<style>
-  :root { --accent: #455a64; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .log-block { background: #fafafa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px 18px; margin: 20px 0; }
-  .log-block h3 { margin-top: 0; }
-  .log-block ul { padding-left: 22px; }
-  .log-block li { margin: 8px 0; }
-  .date-tag { display: inline-block; background: #455a64; color: #fff; font-size: 13px; padding: 2px 10px; border-radius: 10px; margin-right: 8px; }
-
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .log-block { padding: 12px 14px; margin: 12px 0; }
-  }
-</style>
 </head>
-<body>
+<body class="p-revision-log">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
   <h1>修订记录</h1>
 
   <div class="story">
     <p>这里记录课件的重要修订：新增了什么、修正了什么、为什么改。每次修订都会写清日期和涉及的页面，方便核对学习内容是否有更新。修订依据来自《改进》清单（初中课程文档设计）。</p>
+  </div>
+
+  <h2><span class="date-tag">2026-09-18</span>第 3 批修订</h2>
+
+  <div class="log-block">
+    <h3>界面统一改版（ui 风格 #1 #2 #3 #4 #5）</h3>
+    <ul>
+      <li>全站换成同一套界面样式：正文区域是白底，外围留浅灰色；板块之间用细线分隔，卡片和方框都不加圆角（只有按钮有 2 像素的小圆角），字体更大更清楚。以前每页各自一套颜色（黄色、粉色、紫色…），现在统一成一种，翻页时不再跳来跳去（ui #2）。</li>
+      <li>所有样式集中写进 <a href="style.css">style.css</a> 一个文件。页面里不再直接在标签上写样式，改成用统一的类名（ui #1 #3）。原来题库单独的 question-bank.css 也并了进来，这个文件已删除。</li>
+      <li>手机上看：左右留白一致，内容不会挤出屏幕。电脑上看：内容居中，最宽 720 像素，不会拉得很长难读（ui #4）。</li>
+      <li>标题、段落、表格、按钮、答题框、提示框的大小和间距全部对齐，同一类内容外观一致（ui #2）。</li>
+      <li>逐页检查了所有跳转链接，全部有效；顺手修正了 <a href="./exams/exam-stage11.html">模拟考试 — 统计与概率</a> 引用了错误目录样式文件的问题（ui #5）。</li>
+      <li>所有图形（数轴、几何图、统计图）的颜色和动画保持原样，只把它们的样式挪到了 style.css，没有改动任何内容和功能。</li>
+    </ul>
   </div>
 
   <h2><span class="date-tag">2026-09-18</span>第 2 批修订</h2>
@@ -41,10 +36,10 @@
     <h3>新增功能：我的题库（功能改进 #1 #2 #3）</h3>
     <ul>
       <li>所有带习题的页面（共 60 个，包括 38 个课程页和 22 套模拟卷、奥数卷）：每道题旁边新增「⭐ 加入题库」按钮。觉得哪道题需要多练几遍，点一下就收进题库，再点一次可取消（功能 #1）。</li>
-      <li>答错的题目会自动收进题库，不用自己动手，方便以后复习错题（功能 #2）。</li>
+      <li>答错的题目会自动收进题库，不用自己动手，方便以后复习错题（功能 #2）。同时会记下当时填错或选错的答案，这个记录只存在本地、不会在题库页面显示，留作以后帮你分析错在哪。</li>
       <li><a href="index.html">课程列表</a>：新增「📝 我的题库」标签页。收进来的题目可以重新作答，提示、答案、分析等功能和原页面完全一样；每道题可以随时「移出题库」，也有「清空题库」按钮。题库里不放「加入题库」按钮，避免重复收藏（功能 #3）。</li>
       <li>题库存放在浏览器的本地存储（localStorage）里，关掉浏览器再打开也不会丢。换电脑或换浏览器时题库不会跟着走。</li>
-      <li>新增文件：<a href="question-bank.js">question-bank.js</a>（题库功能脚本）、<a href="question-bank.css">question-bank.css</a>（题库样式），只在使用题库功能的页面加载，不影响其它页面。</li>
+      <li>新增文件：<a href="question-bank.js">question-bank.js</a>（题库功能脚本），只在使用题库功能的页面加载。题库样式已并入 <a href="style.css">style.css</a>，不再单独维护 CSS 文件。</li>
     </ul>
   </div>
 
@@ -94,7 +89,7 @@
     <p><strong>说明：</strong>修订遵循两条原则——① 只用朴素方法，不超纲；② 定理与规则要求一字不差地记住，并说明数学的严谨性。后续修订将继续追加在本页顶部。</p>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="index.html">返回课程列表</a></p>
+  <p class="back-bottom"><a href="index.html">返回课程列表</a></p>
 </article>
 <script src="./dt.js"></script>
 </body>

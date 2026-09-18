@@ -6,38 +6,11 @@
 <title>圆 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⭕</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #01579b; }
-  .origin { background: #e0f7fa; border-left: 4px solid #00838f; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e1f5fe; border-left: 4px solid #0288d1; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #e0f7fa; border-left: 4px solid #00acc1; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #e3f2fd; border: 2px solid #1565c0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-  .graphic { margin: 16px 0; text-align: center; }
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
-  }
-</style>
 </head>
-<body>
+<body class="p-circle">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./triangle.html">课件 14（三角形）</a>、15（全等三角形）、20（轴对称）、27（旋转）</p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="./triangle.html">课件 14（三角形）</a>、15（全等三角形）、20（轴对称）、27（旋转）</p>
   <h1>圆 — 最完美的图形</h1>
 
   <h2>起源：车轮为什么是圆的？</h2>
@@ -64,11 +37,8 @@
     </div>
 
     <div class="graphic">
-      <svg viewBox="0 0 500 320" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 500 320" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
           <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
             <path d="M0,0 L8,3 L0,6 Z" fill="#01579b"/>
           </marker>
@@ -120,11 +90,8 @@
     </div>
 
     <div class="graphic">
-      <svg viewBox="0 0 640 340" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 640 340" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
         </defs>
         <text x="200" y="28" text-anchor="middle" font-size="15" fill="#333" font-weight="bold">弦与弧</text>
         <text x="440" y="28" text-anchor="middle" font-size="15" fill="#333" font-weight="bold">圆心角与圆周角</text>
@@ -197,11 +164,8 @@
     </div>
 
     <div class="graphic">
-      <svg viewBox="0 0 500 360" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 500 360" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
         </defs>
         <!-- 圆 -->
         <circle cx="250" cy="180" r="130" fill="rgba(1,87,155,0.05)" stroke="#01579b" stroke-width="2.5"/>
@@ -261,16 +225,13 @@
 
     <div class="key">
       <p><strong>圆周角定理：</strong>一条弧所对的<strong>圆周角</strong>等于它所对的<strong>圆心角</strong>的一半。</p>
-      <p style="text-align:center;font-size:1.2em;color:#01579b;"><strong>∠ACB = ½ ∠AOB</strong></p>
+      <p class="tc fs-lg text-link"><strong>∠ACB = ½ ∠AOB</strong></p>
       <p>（其中 C 是圆上任意一点，A、B 是弧的两个端点）</p>
     </div>
 
     <div class="graphic">
-      <svg viewBox="0 0 640 340" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 640 340" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
         </defs>
         <text x="320" y="25" text-anchor="middle" font-size="15" fill="#333" font-weight="bold">圆周角定理：∠ACB = ½∠AOB（同弦 AB）</text>
 
@@ -330,11 +291,8 @@
     <p>一个点和圆有三种可能的关系——就像你和学校的关系：你可以在学校里，也可以在学校外，还可以刚好站在校门口。</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 640 220" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 640 220" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
         </defs>
         <!-- 点在圆内 -->
         <circle cx="100" cy="110" r="60" fill="rgba(1,87,155,0.06)" stroke="#01579b" stroke-width="2"/>
@@ -366,11 +324,8 @@
     <p>直线和圆同样有三种关系——用圆心到直线的距离 d 和半径 r 来比较：</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 640 280" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 640 280" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
         </defs>
         <!-- 相离 -->
         <circle cx="100" cy="100" r="50" fill="rgba(1,87,155,0.06)" stroke="#01579b" stroke-width="2"/>
@@ -424,11 +379,8 @@
     </div>
 
     <div class="graphic">
-      <svg viewBox="0 0 420 360" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 420 360" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
         </defs>
         <!-- 圆 -->
         <circle cx="210" cy="150" r="80" fill="rgba(1,87,155,0.05)" stroke="#01579b" stroke-width="2.5"/>
@@ -488,11 +440,8 @@
     </div>
 
     <div class="graphic">
-      <svg viewBox="0 0 500 340" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 500 340" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
         </defs>
         <!-- 三角形 ABC -->
         <polygon points="220,40 60,260 400,260" fill="rgba(1,87,155,0.05)" stroke="#333" stroke-width="2.5"/>
@@ -536,7 +485,7 @@
 
     <div class="formula">
       <p><strong>内切圆半径公式：</strong>三角形的面积 S、周长 C（三边之和 a + b + c）与内切圆半径 r 之间有一个漂亮的关系：</p>
-      <p style="text-align:center;font-size:1.2em;color:#01579b;"><strong>S = ½ C r，即 r = 2S ÷ (a + b + c)</strong></p>
+      <p class="tc fs-lg text-link"><strong>S = ½ C r，即 r = 2S ÷ (a + b + c)</strong></p>
       <p>道理很简单：把三角形按三个顶点切成三个小三角形，它们的高都是 r，底分别是 a、b、c——S = ½ar + ½br + ½cr = ½(a + b + c)r。</p>
     </div>
 
@@ -565,11 +514,8 @@
     </div>
 
     <div class="graphic">
-      <svg viewBox="0 0 640 280" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 640 280" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
         </defs>
         <!-- 正六边形 -->
         <text x="200" y="25" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">正六边形</text>
@@ -610,11 +556,8 @@
   <div class="challenge">
     <p><strong>问题：</strong>如图，AB 是 ⊙O 的直径，C 是圆上一点，CD ⊥ AB 于 D。已知 AB = 10，CD = 4，求 AD 和 BD 的长。</p>
     <div class="graphic">
-      <svg viewBox="0 0 440 280" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 440 280" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
         </defs>
         <circle cx="220" cy="140" r="100" fill="rgba(1,87,155,0.04)" stroke="#01579b" stroke-width="2"/>
         <circle cx="220" cy="140" r="3" fill="#6a1b9a"/>
@@ -674,9 +617,9 @@
     <h3>弧长与扇形面积</h3>
     <div class="formula">
       <p><strong>弧长公式：</strong>在半径为 r 的圆中，n° 的圆心角所对的弧长为：</p>
-      <p style="font-size:1.2em;text-align:center;color:#01579b;"><strong>l = (nπr) / 180</strong></p>
+      <p class="fs-lg tc text-link"><strong>l = (nπr) / 180</strong></p>
       <p><strong>扇形面积公式：</strong></p>
-      <p style="font-size:1.2em;text-align:center;color:#01579b;"><strong>S = (nπr²) / 360 = ½lr</strong></p>
+      <p class="fs-lg tc text-link"><strong>S = (nπr²) / 360 = ½lr</strong></p>
       <p>（其中 l 是弧长，r 是半径）</p>
     </div>
 
@@ -791,7 +734,7 @@
     <div class="ans-box" id="a12">S = ½ × 5 × 12 = 30，周长 = 5 + 12 + 13 = 30。r = 2 × 30 ÷ 30 = <strong>2</strong>。</div>
   </div>
 
-  <div class="key" style="margin-top:32px;">
+  <div class="key mt-32">
     <p><strong>本课要点总结：</strong></p>
     <ul>
       <li><strong>圆的定义：</strong>到定点距离等于定长的所有点的集合</li>
@@ -806,7 +749,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="symmetry.html">上一课：轴对称</a> | <a href="index.html">返回课程列表</a></p>
+  <p class="back-bottom"><a href="symmetry.html">上一课：轴对称</a> | <a href="index.html">返回课程列表</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }

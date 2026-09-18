@@ -6,111 +6,11 @@
 <title>初中数学 — 自学课件</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  .course-list { list-style: none; padding: 0; }
-  .course-list a {
-    display: block;
-    padding: 16px 18px;
-    background: #f8fafc;
-    border-radius: 8px;
-    text-decoration: none;
-    color: #2c3e50;
-    font-size: 17px;
-    transition: background 0.2s;
-    margin-bottom: 10px;
-  }
-  .course-list a:hover { background: #e8f0fe; }
-  .course-list .num {
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-    line-height: 28px;
-    text-align: center;
-    color: #fff;
-    border-radius: 50%;
-    font-size: 14px;
-    margin-right: 12px;
-    vertical-align: middle;
-  }
-  .stage { color: #999; font-size: 14px; margin: 24px 0 12px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
-  .stage:first-of-type { margin-top: 0; }
-
-  /* Tab 样式 */
-  .tab-nav { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 2px solid #e0e0e0; }
-  .tab-btn {
-    flex: 1; text-align: center; padding: 12px 0; cursor: pointer;
-    font-size: 16px; font-weight: 600; color: #888;
-    background: none; border: none; border-bottom: 3px solid transparent;
-    transition: all 0.2s; margin-bottom: -2px;
-  }
-  .tab-btn:hover { color: #555; }
-  .tab-btn.active { color: #3949ab; border-bottom-color: #3949ab; }
-  .tab-content { display: none; }
-  .tab-content.active { display: block; }
-
-  .olympiad-link { color: #1976d2 !important; background: none !important; border: none !important; padding: 16px 18px !important; }
-  .olympiad-link:hover { background: #e3f2fd !important; }
-  .olympiad-item { margin-bottom: 50px; }
-
-  .exam-link { color: #2e7d32 !important; background: none !important; border: none !important; padding: 16px 18px !important; }
-  .exam-link:hover { background: #e8f5e9 !important; }
-  .exam-item { margin-bottom: 0; }
-
-  .n1 { background: #43a047; }
-  .n2 { background: #e65100; }
-  .n3 { background: #5c6bc0; }
-  .n4 { background: #7b1fa2; }
-  .n5 { background: #e91e63; }
-  .n6 { background: #00838f; }
-  .n7 { background: #5c6bc0; }
-  .n8 { background: #e65100; }
-  .n9 { background: #ab47bc; }
-  .n10 { background: #00897b; }
-  .n11 { background: #0277bd; }
-  .n12 { background: #c62828; }
-  .n13 { background: #00695c; }
-  .n14 { background: #e65100; }
-  .n15 { background: #4a148c; }
-  .n16 { background: #bf360c; }
-  .n17 { background: #1a237e; }
-  .n18 { background: #01579b; }
-  .sp { background: #607d8b; font-size: 13px; }
-  .review-banner a { color: #bf360c; text-decoration: underline; font-weight: 600; }
-  /* 底部留白 + 固定提示 */
-  article { padding-bottom: 50px !important; }
-  .review-banner {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 920px;
-    background: #fff3e0;
-    border-top: 1px solid #ffe0b2;
-    color: #e65100;
-    text-align: center;
-    padding: 10px 12px;
-    font-size: 13px;
-    z-index: 100;
-    box-sizing: border-box;
-  }
-  @media (max-width: 720px) {
-    article { padding: 20px 0 50px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; padding: 0 12px; }
-    .course-list a { font-size: 15px; padding: 12px 14px; border-radius: 0; }
-    .tab-btn { font-size: 14px; padding: 10px 0; }
-    .stage { padding: 0 12px 6px; }
-    .tab-nav { padding: 0 12px; }
-    .review-banner { font-size: 12px; padding: 8px 10px; left: 0; right: 0; transform: none; max-width: none; }
-  }
-</style>
 </head>
-<body>
+<body class="p-index">
 <article>
   <h1>初中数学 — 自学课件</h1>
-  <p style="color:#888;margin-bottom:4px;padding: 0 14px">用最简单的语言，从零开始学数学。每个知识点都从起源讲起，按顺序学习，前面的知识是后面知识的基础。</p>
+  <p class="prereq">用最简单的语言，从零开始学数学。每个知识点都从起源讲起，按顺序学习，前面的知识是后面知识的基础。</p>
 
   <!-- Tab 导航 -->
   <div class="tab-nav">
@@ -125,62 +25,62 @@
 
     <p class="stage">阶段一：数 — 从"数数"开始</p>
     <ul class="course-list">
-      <li><a href="./natural-numbers.html"><span class="num n1">1</span> 自然数、零与十进制 — 数是怎么来的？</a></li>
-      <li><a href="./fractions.html"><span class="num n2">2</span> 分数 — 分披萨的学问</a></li>
-      <li><a href="./negative-numbers.html"><span class="num n3">3</span> 负数 — 比零还小的数</a></li>
-      <li><a href="./rational-operations.html"><span class="num n4">4</span> 有理数的加减乘除 — 四则运算的本质</a></li>
+      <li><a href="./natural-numbers.html"><span class="num">1</span> 自然数、零与十进制 — 数是怎么来的？</a></li>
+      <li><a href="./fractions.html"><span class="num">2</span> 分数 — 分披萨的学问</a></li>
+      <li><a href="./negative-numbers.html"><span class="num">3</span> 负数 — 比零还小的数</a></li>
+      <li><a href="./rational-operations.html"><span class="num">4</span> 有理数的加减乘除 — 四则运算的本质</a></li>
       <li class="exam-item"><a href="./exams/exam-stage1.html" class="exam-link">📝 模拟考试 — 1</a></li>
       <li class="olympiad-item"><a href="./exams/olympiad-stage1.html" class="olympiad-link">🏆 奥数挑战 — 1</a></li>
     </ul>
 
     <p class="stage">阶段二：式 — 从"数"到"字母"</p>
     <ul class="course-list">
-      <li><a href="./algebraic-expressions.html"><span class="num n5">5</span> 代数式与字母表示数 — 韦达和笛卡儿的符号革命</a></li>
-      <li><a href="./polynomials.html"><span class="num n6">6</span> 整式运算 — 花拉子米的"对消"与三大乘法公式</a></li>
-      <li><a href="./factoring-rational.html"><span class="num n7">7</span> 因式分解与分式 — 把乘法倒过来</a></li>
+      <li><a href="./algebraic-expressions.html"><span class="num">5</span> 代数式与字母表示数 — 韦达和笛卡儿的符号革命</a></li>
+      <li><a href="./polynomials.html"><span class="num">6</span> 整式运算 — 花拉子米的"对消"与三大乘法公式</a></li>
+      <li><a href="./factoring-rational.html"><span class="num">7</span> 因式分解与分式 — 把乘法倒过来</a></li>
       <li class="exam-item"><a href="./exams/exam-stage2.html" class="exam-link">📝 模拟考试 — 2</a></li>
       <li class="olympiad-item"><a href="./exams/olympiad-stage2.html" class="olympiad-link">🏆 奥数挑战 — 2</a></li>
     </ul>
 
     <p class="stage">阶段三：方程 — 天平上的未知数</p>
     <ul class="course-list">
-      <li><a href="./linear-equations.html"><span class="num n8">8</span> 一元一次方程 — 找到未知数</a></li>
-      <li><a href="./fractional-equations.html"><span class="num n9">9</span> 分式方程 — 分母里有未知数</a></li>
-      <li><a href="./quadratic-equations.html"><span class="num n10">10</span> 一元二次方程 — 未知数的平方</a></li>
+      <li><a href="./linear-equations.html"><span class="num">8</span> 一元一次方程 — 找到未知数</a></li>
+      <li><a href="./fractional-equations.html"><span class="num">9</span> 分式方程 — 分母里有未知数</a></li>
+      <li><a href="./quadratic-equations.html"><span class="num">10</span> 一元二次方程 — 未知数的平方</a></li>
       <li class="exam-item"><a href="./exams/exam-stage3.html" class="exam-link">📝 模拟考试 — 3</a></li>
       <li class="olympiad-item"><a href="./exams/olympiad-stage3.html" class="olympiad-link">🏆 奥数挑战 — 3</a></li>
     </ul>
 
     <p class="stage">阶段四：实数与根式</p>
     <ul class="course-list">
-      <li><a href="./real-numbers.html"><span class="num n11">11</span> 实数 — 数轴上的每一个点</a></li>
-      <li><a href="./quadratic-radicals.html"><span class="num n12">12</span> 二次根式 — 根号下的世界</a></li>
+      <li><a href="./real-numbers.html"><span class="num">11</span> 实数 — 数轴上的每一个点</a></li>
+      <li><a href="./quadratic-radicals.html"><span class="num">12</span> 二次根式 — 根号下的世界</a></li>
       <li class="exam-item"><a href="./exams/exam-stage6.html" class="exam-link">📝 模拟考试 — 4</a></li>
       <li class="olympiad-item"><a href="./exams/olympiad-stage6.html" class="olympiad-link">🏆 奥数挑战 — 4</a></li>
     </ul>
 
     <p class="stage">阶段五：方程与不等式进阶</p>
     <ul class="course-list">
-      <li><a href="./linear-systems.html"><span class="num n13">13</span> 二元一次方程组 — 两个未知数一起解</a></li>
-      <li><a href="./inequalities.html"><span class="num n14">14</span> 不等式与不等式组 — 大于和小于</a></li>
+      <li><a href="./linear-systems.html"><span class="num">13</span> 二元一次方程组 — 两个未知数一起解</a></li>
+      <li><a href="./inequalities.html"><span class="num">14</span> 不等式与不等式组 — 大于和小于</a></li>
       <li class="exam-item"><a href="./exams/exam-stage7.html" class="exam-link">📝 模拟考试 — 5</a></li>
       <li class="olympiad-item"><a href="./exams/olympiad-stage7.html" class="olympiad-link">🏆 奥数挑战 — 5</a></li>
     </ul>
 
     <p class="stage">阶段六：函数 — 描述变化的语言</p>
     <ul class="course-list">
-      <li><a href="./coordinate-system.html"><span class="num n15">15</span> 平面直角坐标系 — 笛卡儿的发明</a></li>
-      <li><a href="./linear-function.html"><span class="num n16">16</span> 一次函数 — 一条直线</a></li>
-      <li><a href="./quadratic-function.html"><span class="num n17">17</span> 二次函数 — 抛物线</a></li>
-      <li><a href="./inverse-function.html"><span class="num n18">18</span> 反比例函数 — 双曲线</a></li>
+      <li><a href="./coordinate-system.html"><span class="num">15</span> 平面直角坐标系 — 笛卡儿的发明</a></li>
+      <li><a href="./linear-function.html"><span class="num">16</span> 一次函数 — 一条直线</a></li>
+      <li><a href="./quadratic-function.html"><span class="num">17</span> 二次函数 — 抛物线</a></li>
+      <li><a href="./inverse-function.html"><span class="num">18</span> 反比例函数 — 双曲线</a></li>
       <li class="exam-item"><a href="./exams/exam-stage9.html" class="exam-link">📝 模拟考试 — 6</a></li>
       <li class="olympiad-item"><a href="./exams/olympiad-stage9.html" class="olympiad-link">🏆 奥数挑战 — 6</a></li>
     </ul>
 
     <p class="stage">专题精讲 — 跨阶段的工具与概念</p>
     <ul class="course-list">
-      <li><a href="./number-line.html"><span class="num sp">专</span> 数轴详解 — 数与形的第一座桥</a></li>
-      <li><a href="./calc-toolbox.html"><span class="num sp">专</span> 计算工具箱 — 六件运算工具与估算技巧</a></li>
+      <li><a href="./number-line.html"><span class="num">专</span> 数轴详解 — 数与形的第一座桥</a></li>
+      <li><a href="./calc-toolbox.html"><span class="num">专</span> 计算工具箱 — 六件运算工具与估算技巧</a></li>
     </ul>
 
   </div>
@@ -190,45 +90,45 @@
 
     <p class="stage">阶段一：几何图形初步 — 从尼罗河到欧几里得</p>
     <ul class="course-list">
-      <li><a href="./geometry-basics.html"><span class="num n1">1</span> 几何图形 — 点、线、面、体</a></li>
-      <li><a href="./lines-rays-segments.html"><span class="num n2">2</span> 直线、射线、线段 — 三兄弟的区别</a></li>
-      <li><a href="./angles.html"><span class="num n3">3</span> 角 — 度数、分类与度量</a></li>
+      <li><a href="./geometry-basics.html"><span class="num">1</span> 几何图形 — 点、线、面、体</a></li>
+      <li><a href="./lines-rays-segments.html"><span class="num">2</span> 直线、射线、线段 — 三兄弟的区别</a></li>
+      <li><a href="./angles.html"><span class="num">3</span> 角 — 度数、分类与度量</a></li>
       <li class="exam-item"><a href="./exams/exam-stage4.html" class="exam-link">📝 模拟考试 — 1</a></li>
       <li class="olympiad-item"><a href="./exams/olympiad-stage4.html" class="olympiad-link">🏆 奥数挑战 — 1</a></li>
     </ul>
 
     <p class="stage">阶段二：几何进阶 — 平行与三角形</p>
     <ul class="course-list">
-      <li><a href="./parallel-lines.html"><span class="num n4">4</span> 相交线与平行线 — 永远不会碰面的线</a></li>
-      <li><a href="./triangle.html"><span class="num n5">5</span> 三角形 — 最稳定的图形</a></li>
-      <li><a href="./congruent-triangles.html"><span class="num n6">6</span> 全等三角形 — 形状相同、大小相等</a></li>
+      <li><a href="./parallel-lines.html"><span class="num">4</span> 相交线与平行线 — 永远不会碰面的线</a></li>
+      <li><a href="./triangle.html"><span class="num">5</span> 三角形 — 最稳定的图形</a></li>
+      <li><a href="./congruent-triangles.html"><span class="num">6</span> 全等三角形 — 形状相同、大小相等</a></li>
       <li class="exam-item"><a href="./exams/exam-stage5.html" class="exam-link">📝 模拟考试 — 2</a></li>
       <li class="olympiad-item"><a href="./exams/olympiad-stage5.html" class="olympiad-link">🏆 奥数挑战 — 2</a></li>
     </ul>
 
     <p class="stage">阶段三：几何深化 — 特殊图形</p>
     <ul class="course-list">
-      <li><a href="./symmetry.html"><span class="num n7">7</span> 轴对称 — 对折完全重合</a></li>
-      <li><a href="./pythagorean.html"><span class="num n8">8</span> 勾股定理 — a² + b² = c²</a></li>
-      <li><a href="./parallelogram.html"><span class="num n9">9</span> 平行四边形 — 两组对边平行</a></li>
+      <li><a href="./symmetry.html"><span class="num">7</span> 轴对称 — 对折完全重合</a></li>
+      <li><a href="./pythagorean.html"><span class="num">8</span> 勾股定理 — a² + b² = c²</a></li>
+      <li><a href="./parallelogram.html"><span class="num">9</span> 平行四边形 — 两组对边平行</a></li>
       <li class="exam-item"><a href="./exams/exam-stage8.html" class="exam-link">📝 模拟考试 — 3</a></li>
       <li class="olympiad-item"><a href="./exams/olympiad-stage8.html" class="olympiad-link">🏆 奥数挑战 — 3</a></li>
     </ul>
 
     <p class="stage">阶段四：几何综合</p>
     <ul class="course-list">
-      <li><a href="./rotation.html"><span class="num n10">10</span> 旋转 — 绕着中心转</a></li>
-      <li><a href="./circle.html"><span class="num n11">11</span> 圆 — 完美的图形</a></li>
-      <li><a href="./similarity.html"><span class="num n12">12</span> 相似 — 形状相同、大小不同</a></li>
-      <li><a href="./trigonometry.html"><span class="num n13">13</span> 锐角三角函数 — 边与角的关系</a></li>
-      <li><a href="./projection-views.html"><span class="num n14">14</span> 投影与视图 — 立体图形的"影子"</a></li>
+      <li><a href="./rotation.html"><span class="num">10</span> 旋转 — 绕着中心转</a></li>
+      <li><a href="./circle.html"><span class="num">11</span> 圆 — 完美的图形</a></li>
+      <li><a href="./similarity.html"><span class="num">12</span> 相似 — 形状相同、大小不同</a></li>
+      <li><a href="./trigonometry.html"><span class="num">13</span> 锐角三角函数 — 边与角的关系</a></li>
+      <li><a href="./projection-views.html"><span class="num">14</span> 投影与视图 — 立体图形的"影子"</a></li>
       <li class="exam-item"><a href="./exams/exam-stage10.html" class="exam-link">📝 模拟考试 — 4</a></li>
       <li class="olympiad-item"><a href="./exams/olympiad-stage10.html" class="olympiad-link">🏆 奥数挑战 — 4</a></li>
     </ul>
 
     <p class="stage">专题精讲 — 跨阶段的工具与概念</p>
     <ul class="course-list">
-      <li><a href="./solid-plane.html"><span class="num sp">专</span> 立体与平面转化 — 三维与二维的互译</a></li>
+      <li><a href="./solid-plane.html"><span class="num">专</span> 立体与平面转化 — 三维与二维的互译</a></li>
     </ul>
 
   </div>
@@ -238,9 +138,9 @@
 
     <p class="stage">阶段一：统计与概率</p>
     <ul class="course-list">
-      <li><a href="./data-collection.html"><span class="num n1">1</span> 数据的收集与整理 — 统计调查</a></li>
-      <li><a href="./data-analysis.html"><span class="num n2">2</span> 数据的分析 — 平均数、方差</a></li>
-      <li><a href="./probability.html"><span class="num n3">3</span> 概率初步 — 可能性有多大？</a></li>
+      <li><a href="./data-collection.html"><span class="num">1</span> 数据的收集与整理 — 统计调查</a></li>
+      <li><a href="./data-analysis.html"><span class="num">2</span> 数据的分析 — 平均数、方差</a></li>
+      <li><a href="./probability.html"><span class="num">3</span> 概率初步 — 可能性有多大？</a></li>
       <li class="exam-item"><a href="./exams/exam-stage11.html" class="exam-link">📝 模拟考试 — 1</a></li>
       <li class="olympiad-item"><a href="./exams/olympiad-stage11.html" class="olympiad-link">🏆 奥数挑战 — 1</a></li>
     </ul>

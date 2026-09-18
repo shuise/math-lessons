@@ -6,39 +6,11 @@
 <title>平面直角坐标系 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #0d47a1; }
-  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed #5c6bc0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-  svg text { font-family: "PingFang SC","Microsoft YaHei","Helvetica Neue",sans-serif; }
-
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
-  }
-</style>
 </head>
-<body>
+<body class="p-coordinate-system">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./negative-numbers.html">课件 3（负数——数轴概念）</a></p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="./negative-numbers.html">课件 3（负数——数轴概念）</a></p>
   <h1>平面直角坐标系</h1>
 
   <h2>起源：笛卡儿和蜘蛛网</h2>
@@ -57,16 +29,16 @@
     <p>在平面上画两条互相垂直的数轴，它们的交点叫<strong>原点</strong>。水平的那条叫 <strong>x 轴（横轴）</strong>，竖直的那条叫 <strong>y 轴（纵轴）</strong>。这就构成了平面直角坐标系。</p>
     <p>平面上的任何一个点，都可以用<strong>两个数</strong>来表示：</p>
     <div class="key">
-      <p style="text-align:center;font-size:18px;"><strong>（横坐标，纵坐标）→ 写成 (x, y)</strong></p>
-      <p style="text-align:center;">第一个数 x 对应 x 轴上的位置，第二个数 y 对应 y 轴上的位置。</p>
+      <p class="tc fs-18"><strong>（横坐标，纵坐标）→ 写成 (x, y)</strong></p>
+      <p class="tc">第一个数 x 对应 x 轴上的位置，第二个数 y 对应 y 轴上的位置。</p>
     </div>
     <p>这种"有顺序的一对数"就叫<strong>有序数对</strong>。顺序很重要！(2, 3) 和 (3, 2) 是完全不同的两个点。</p>
   </div>
 
   <!-- SVG 1: 坐标系基础图 —— 标注原点、两轴、点的坐标 -->
   <div class="formula">
-    <p style="text-align:center;font-weight:bold;margin-bottom:6px;">↓ 坐标系基础结构：两轴、原点、点的坐标 ↓</p>
-    <svg viewBox="0 0 520 420" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+    <p class="tc fw-bold mb-6">↓ 坐标系基础结构：两轴、原点、点的坐标 ↓</p>
+    <svg viewBox="0 0 520 420" class="img-center">
       <defs>
         <marker id="arrowX" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
           <polygon points="0 0, 8 3, 0 6" fill="#555"/>
@@ -138,7 +110,7 @@
       <line x1="310" y1="300" x2="310" y2="200" stroke="#e65100" stroke-width="0.8" stroke-dasharray="3,3"/>
       <line x1="310" y1="300" x2="260" y2="300" stroke="#e65100" stroke-width="0.8" stroke-dasharray="3,3"/>
     </svg>
-    <p style="text-align:center;margin-top:8px;font-size:13px;color:#888;">从 A 点出发：先看 x 轴（横坐标 3），再看 y 轴（纵坐标 2）→ A(3, 2)。虚线帮你看到"投影"。</p>
+    <p class="tc mt-8 fs-13 muted">从 A 点出发：先看 x 轴（横坐标 3），再看 y 轴（纵坐标 2）→ A(3, 2)。虚线帮你看到"投影"。</p>
   </div>
 
   <h3>2. 四个象限</h3>
@@ -146,7 +118,7 @@
     <p>x 轴和 y 轴把平面分成了<strong>四个区域</strong>，每个区域叫一个<strong>象限</strong>。从右上角开始，<strong>逆时针</strong>编号：</p>
 
     <!-- SVG 2: 四象限图 —— 标注各象限符号特征 -->
-    <svg viewBox="0 0 520 420" style="max-width:100%;height:auto;display:block;margin:16px auto;">
+    <svg viewBox="0 0 520 420" class="img-center mt-16">
       <defs>
         <marker id="arrowX2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
           <polygon points="0 0, 8 3, 0 6" fill="#555"/>
@@ -198,8 +170,8 @@
 
     <div class="key">
       <p><strong>象限口诀：</strong></p>
-      <p style="text-align:center;font-size:16px;"><strong>一象限 (+,+) ，二象限 (−,+) ，三象限 (−,−) ，四象限 (+,−)</strong></p>
-      <p style="text-align:center;font-size:14px;color:#888;">横坐标看右左，纵坐标看上下——先看 x 再看 y！</p>
+      <p class="tc fs-16"><strong>一象限 (+,+) ，二象限 (−,+) ，三象限 (−,−) ，四象限 (+,−)</strong></p>
+      <p class="tc fs-14 muted">横坐标看右左，纵坐标看上下——先看 x 再看 y！</p>
     </div>
     <p><strong>注意：</strong>坐标轴上的点不属于任何象限！比如 (3, 0) 在 x 轴上，(0, -2) 在 y 轴上——它们恰好骑在"分界线"上。</p>
   </div>
@@ -207,9 +179,9 @@
   <h2>二、逻辑推导</h2>
 
   <h3>1. 坐标轴上的点有什么特征？</h3>
-  <div class="formula" style="text-align:left;">
+  <div class="formula tl">
     <p>观察一下：</p>
-    <ul style="text-align:left;">
+    <ul class="tl">
       <li>x 轴上的点，纵坐标 y 都是 0。比如 (5, 0)、(-3, 0)、原点 (0, 0)。</li>
       <li>y 轴上的点，横坐标 x 都是 0。比如 (0, 4)、(0, -1)。</li>
     </ul>
@@ -217,7 +189,7 @@
   </div>
 
   <h3>2. 关于原点对称</h3>
-  <div class="formula" style="text-align:left;">
+  <div class="formula tl">
     <p>点 P(3, 2) 关于原点对称的点在哪里？</p>
     <p>想象一下：把 P 点沿着原点"翻"过去——横坐标变号，纵坐标也变号。</p>
     <p>所以 P(3, 2) 关于原点的对称点是 <strong>P'(-3, -2)</strong>。</p>
@@ -237,8 +209,8 @@
   <div class="formula">
     <p>平移是最简单的图形变换。在坐标系中，平移就是<strong>给坐标加上（或减去）某个数</strong>。</p>
 
-    <p style="text-align:center;font-weight:bold;margin-top:12px;">↓ 三角形平移示例：向右平移 4 格，向上平移 2 格 ↓</p>
-    <svg viewBox="0 0 580 420" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+    <p class="tc fw-bold mt-12">↓ 三角形平移示例：向右平移 4 格，向上平移 2 格 ↓</p>
+    <svg viewBox="0 0 580 420" class="img-center">
       <defs>
         <marker id="arrowX3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
           <polygon points="0 0, 8 3, 0 6" fill="#555"/>
@@ -318,14 +290,14 @@
       <text x="380" y="296" font-size="12" fill="#7b1fa2" text-anchor="middle">C(-5,-1) + (4,2) = C'(-1,1)</text>
     </svg>
 
-    <p style="margin-top:12px;text-align:left;"><strong>平移的核心规律：</strong></p>
-    <div class="key" style="text-align:left;">
-      <p style="text-align:left;">点 (x, y) 经过平移后，新坐标 = <strong>(x + a, y + b)</strong></p>
-      <ul style="text-align:left;">
+    <p class="mt-12 tl"><strong>平移的核心规律：</strong></p>
+    <div class="key tl">
+      <p class="tl">点 (x, y) 经过平移后，新坐标 = <strong>(x + a, y + b)</strong></p>
+      <ul class="tl">
         <li>a &gt; 0 → 向右移；a &lt; 0 → 向左移</li>
         <li>b &gt; 0 → 向上移；b &lt; 0 → 向下移</li>
       </ul>
-      <p style="text-align:left;">平移不改变图形的形状和大小，只改变位置。每个点的坐标变化都一样！</p>
+      <p class="tl">平移不改变图形的形状和大小，只改变位置。每个点的坐标变化都一样！</p>
     </div>
   </div>
 
@@ -437,7 +409,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="linear-function.html">下一课：一次函数 →</a></p>
+  <p class="back-bottom"><a href="linear-function.html">下一课：一次函数 →</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }

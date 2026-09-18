@@ -5,55 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>模拟考试 — 统计与概率 — 自学课件</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../../lessons/style.css">
-<link rel="stylesheet" href="../question-bank.css">
-<style>
-  :root { --accent: #2e7d32; }
-  .exam-header { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .section-title { color: #2e7d32; font-size: 18px; font-weight: 700; margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #c8e6c9; }
-  .q-item { padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
-  .q-item:last-child { border-bottom: none; }
-  .btn-row { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
-  .btn-hint, .btn-ans { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; }
-  .btn-hint:hover { background: #fff3e0; border-color: #ff9800; }
-  .btn-ans:hover { background: #e8f5e9; border-color: #4caf50; }
-  .hint-box, .ans-box { display: none; margin-top: 8px; padding: 10px 14px; border-radius: 6px; font-size: 14px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .hint-box { background: #fff8e1; border-left: 3px solid #ff9800; }
-  .ans-box { background: #e8f5e9; border-left: 3px solid #4caf50; }
-  .opt-row { margin: 4px 0; padding-left: 8px; }
-  .opt { display: inline-block; min-width: 24px; font-weight: 600; }
-  @media (max-width: 720px) {
-    article { padding-bottom: 100px !important; }
-    article { padding: 20px 12px 100px 12px !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    .q-item { padding: 10px 0; }
-    .exam-header { padding: 12px 14px; margin: 12px 0; }
-  }
-  .opt-btn { display: inline-block; padding: 6px 16px; margin: 3px 4px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
-  .opt-btn:hover { border-color: #90caf9; background: #e3f2fd; }
-  .opt-btn.selected { border-color: #1976d2; background: #e3f2fd; }
-  .opt-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
-  .opt-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
-  .tf-btn { display: inline-block; padding: 6px 20px; margin: 3px 6px; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; background: #fff; font-size: 14px; transition: all 0.15s; user-select: none; }
-  .tf-btn:hover { border-color: #90caf9; background: #e3f2fd; }
-  .tf-btn.correct { border-color: #4caf50 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
-  .tf-btn.wrong { border-color: #f44336 !important; background: #ffebee !important; color: #c62828 !important; }
-  .fill-input { padding: 6px 12px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 15px; width: 160px; }
-  .fill-input:focus { outline: none; border-color: #1976d2; }
-  .check-btn { padding: 6px 16px; border: 1px solid #1976d2; border-radius: 6px; background: #1976d2; color: #fff; font-size: 13px; cursor: pointer; margin-left: 8px; }
-  .check-btn:hover { background: #1565c0; }
-  .feedback { display: none; margin-left: 8px; font-size: 14px; font-weight: 600; }
-  .feedback.show { display: inline; }
-  .feedback.correct-fb { color: #2e7d32; }
-  .feedback.wrong-fb { color: #c62828; }
-</style>
+<link rel="stylesheet" href="../style.css">
 </head>
-<body>
+<body class="p-exam-stage11">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="../index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="../data-collection.html">课件 1（数据收集与整理）</a>、<a href="../data-analysis.html">课件 2（数据分析）</a>、<a href="../probability.html">课件 3（概率初步）</a></p>
+  <p class="crumb"><a href="../index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="../data-collection.html">课件 1（数据收集与整理）</a>、<a href="../data-analysis.html">课件 2（数据分析）</a>、<a href="../probability.html">课件 3（概率初步）</a></p>
   <h1>模拟考试 — 统计与概率</h1>
   <div class="exam-header">
     <p>⏱ 时间：30 分钟 | ✅ 判断题 10 题 | 🔘 单选题 10 题 | ☑️ 多选题 5 题 | ✏️ 其他题型 5 题 | 共 30 题</p>

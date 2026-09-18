@@ -6,40 +6,11 @@
 <title>全等三角形 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔺</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #4a148c; }
-  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #ede7f6; border-left: 4px solid #5e35b1; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed #4a148c; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-  .method-card { background: #fafafa; border: 2px solid #e0e0e0; border-radius: 10px; padding: 16px 18px; margin: 14px 0; }
-  .method-card h3 { margin-top: 0; color: #4a148c; }
-  .graphic { text-align: center; margin: 12px 0; }
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
-  }
-</style>
 </head>
-<body>
+<body class="p-congruent-triangles">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./geometry-basics.html">课件 10（几何图形）</a>、11（直线射线线段）、12（角）、13（相交线与平行线）、14（三角形）</p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="./geometry-basics.html">课件 10（几何图形）</a>、11（直线射线线段）、12（角）、13（相交线与平行线）、14（三角形）</p>
   <h1>全等三角形</h1>
 
   <h2>起源：泰勒斯测船距</h2>
@@ -67,9 +38,8 @@
     </ul>
     <p>注意：<strong>对应关系很重要！</strong>写"△ABC ≅ △DEF"时，字母的顺序暗示了对应关系——A 对应 D，B 对应 E，C 对应 F。</p>
     <div class="graphic">
-      <svg viewBox="0 0 600 220" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 600 220" class="img-fluid">
         <defs>
-          <style>text{font-size:14px;fill:#333;font-family:serif;text-anchor:middle}</style>
           <marker id="arrowA" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#4a148c"/></marker>
         </defs>
         <!-- 三角形1 -->
@@ -101,7 +71,7 @@
     <p><strong>内容：</strong>如果两个三角形的三条边分别对应相等，那么这两个三角形全等。</p>
     <p><strong>通俗理解：</strong>三角形的三条边长度一旦确定，这个三角形的形状和大小就<strong>唯一确定</strong>了——这就像用三根固定长度的木条钉成一个三角形，你只能钉出一种形状（三角形具有稳定性）。</p>
     <div class="graphic">
-      <svg viewBox="0 0 600 200" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 600 200" class="img-fluid">
         <polygon points="50,160 150,30 280,160" fill="rgba(74,20,140,0.12)" stroke="#4a148c" stroke-width="2.5"/>
         <text x="40" y="185" text-anchor="end">A</text><text x="140" y="20" text-anchor="middle">B</text><text x="285" y="185" text-anchor="start">C</text>
         <!-- 三边标记 -->
@@ -133,7 +103,7 @@
       <p><strong>关键：</strong>必须是<strong>夹角</strong>！如果两边相等，但相等的角不是夹角，则不能判定全等（这就是"边边角"SSA 的陷阱，后面会讲到）。</p>
     </div>
     <div class="graphic">
-      <svg viewBox="0 0 600 190" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 600 190" class="img-fluid">
         <polygon points="50,150 160,20 280,150" fill="rgba(74,20,140,0.12)" stroke="#4a148c" stroke-width="2.5"/>
         <text x="40" y="175" text-anchor="end">A</text><text x="150" y="12" text-anchor="middle">B</text><text x="285" y="175" text-anchor="start">C</text>
         <!-- 两边标记 -->
@@ -162,7 +132,7 @@
     <p><strong>内容：</strong>如果两个三角形的两个角及其夹边分别对应相等，那么这两个三角形全等。</p>
     <p><strong>通俗理解：</strong>如果你知道三角形的一条边，以及这条边两端的两个角，这个三角形的形状就被完全锁定了——从两个端点出发，按各自的角度画射线，它们只能交于一点。</p>
     <div class="graphic">
-      <svg viewBox="0 0 600 190" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 600 190" class="img-fluid">
         <polygon points="50,150 150,20 280,150" fill="rgba(74,20,140,0.12)" stroke="#4a148c" stroke-width="2.5"/>
         <text x="40" y="175" text-anchor="end">A</text><text x="140" y="12" text-anchor="middle">B</text><text x="285" y="175" text-anchor="start">C</text>
         <!-- 底边 -->
@@ -191,7 +161,7 @@
     <p><strong>内容：</strong>如果两个三角形的两个角及其中一个角的对边分别对应相等，那么这两个三角形全等。</p>
     <p><strong>通俗理解：</strong>这其实是 ASA 的推论——因为三角形内角和是 180°，知道两个角就等于知道了第三个角。所以 AAS 等价于 ASA。</p>
     <div class="graphic">
-      <svg viewBox="0 0 600 190" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 600 190" class="img-fluid">
         <polygon points="50,150 150,20 280,150" fill="rgba(74,20,140,0.12)" stroke="#4a148c" stroke-width="2.5"/>
         <text x="40" y="175" text-anchor="end">A</text><text x="140" y="12" text-anchor="middle">B</text><text x="285" y="175" text-anchor="start">C</text>
         <!-- 两个角 -->
@@ -220,7 +190,7 @@
     <p><strong>内容：</strong>如果两个直角三角形的斜边和一条直角边分别对应相等，那么这两个直角三角形全等。</p>
     <p><strong>为什么 HL 特殊？</strong>在直角三角形中，已知斜边和一条直角边，另一条直角边可以通过勾股定理唯一确定。所以 HL 本质上是 SSS 的特殊情况。但 HL 非常实用，因为直角三角形在几何中随处可见。</p>
     <div class="graphic">
-      <svg viewBox="0 0 600 190" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 600 190" class="img-fluid">
         <polygon points="60,155 60,40 240,155" fill="rgba(74,20,140,0.12)" stroke="#4a148c" stroke-width="2.5"/>
         <text x="48" y="180" text-anchor="end">A</text><text x="48" y="32" text-anchor="end">B</text><text x="248" y="180" text-anchor="start">C</text>
         <!-- 直角标记 -->
@@ -250,9 +220,8 @@
     <p><strong>陷阱：</strong>两边和一个<strong>非夹角</strong>对应相等，不能判定全等！</p>
     <p>想象一下：两个三角形都满足<strong>边 AB = 5、边 BC = 4</strong>，且都有一个 30° 的角。但左图 △ABC 中 30° 在 ∠A 处，右图 △ABC′ 中 30° 在 ∠C′ 处。注意 ∠A 和 ∠C′ 都不是 AB 和 BC 的夹角（夹角是 ∠B），所以两个三角形都是"<strong>边边角</strong>"SSA——但它们的形状完全不同！</p>
     <div class="graphic">
-      <svg viewBox="0 0 640 295" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 640 295" class="img-fluid">
         <defs>
-          <style>text{font-family:serif;text-anchor:middle}</style>
         </defs>
         <!-- 左图：△ABC（∠A=30°，钝角在 B） -->
         <polygon points="40,240 190,240 234,128" fill="rgba(74,20,140,0.12)" stroke="#4a148c" stroke-width="2.5"/>
@@ -310,7 +279,7 @@
     <h3>定理：角平分线上任意一点到角两边的距离相等</h3>
     <p>这是一个非常实用的定理。它的证明恰好用到了全等三角形（AAS）。</p>
     <div class="graphic">
-      <svg viewBox="0 0 520 280" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 520 280" class="img-fluid">
         <!-- 角的两边 OA（水平）和 OB（斜向上） -->
         <line x1="60" y1="250" x2="470" y2="250" stroke="#333" stroke-width="2"/>
         <line x1="60" y1="250" x2="328" y2="25" stroke="#333" stroke-width="2"/>
@@ -362,7 +331,7 @@
     <div class="example">
       <p><strong>经典例题：</strong>已知 AB = CD，AD = CB。求证：∠A = ∠C。</p>
       <div class="graphic">
-        <svg viewBox="0 0 400 240" style="max-width:100%;height:auto;">
+        <svg viewBox="0 0 400 240" class="img-fluid">
           <!-- 四边形 ABCD -->
           <polygon points="70,190 150,40 330,55 280,190" fill="rgba(74,20,140,0.08)" stroke="#4a148c" stroke-width="2"/>
           <!-- 顶点 -->
@@ -407,13 +376,13 @@
     <div class="hint-box" id="ch1">泰勒斯在岸上构造了一个与"岸-船"三角形全等的三角形。想想他需要哪些"可测量"的条件——岸上的一段距离、以及从岸上两个点望向船的两个角度。</div>
     <div class="ans-box" id="ca1">泰勒斯用的是 <strong>ASA</strong>。他在岸上取一段已知距离 AB，分别从 A、B 测出望向船 P 的角度 ∠BAP 和 ∠ABP。这样 △ABP 与他在岸上构造的三角形有：一边 AB 相等，且两端的角相等（ASA），故全等，从而 BC = AP（船的距离）。</div>
 
-    <p style="margin-top:16px;"><strong>问题 2：</strong>已知一个三角形的两边长分别为 5 和 7，夹角为 60°。这个三角形是唯一确定的吗？为什么？</p>
+    <p class="mt-16"><strong>问题 2：</strong>已知一个三角形的两边长分别为 5 和 7，夹角为 60°。这个三角形是唯一确定的吗？为什么？</p>
     <button class="btn-sm" onclick="toggleHint('ch2')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('ca2')">查看答案</button>
     <div class="hint-box" id="ch2">两边和它们的夹角——这是哪个判定方法？</div>
     <div class="ans-box" id="ca2">是唯一确定的。两边（5、7）及其<strong>夹角</strong>（60°）对应相等，正是 <strong>SAS</strong> 判定条件，能唯一确定一个三角形。</div>
 
-    <p style="margin-top:16px;"><strong>问题 3：</strong>SSA 不能判定全等，但在什么特殊情况下，SSA 也可以判定全等？（提示：想想 HL 是 SSA 的什么特殊情况）</p>
+    <p class="mt-16"><strong>问题 3：</strong>SSA 不能判定全等，但在什么特殊情况下，SSA 也可以判定全等？（提示：想想 HL 是 SSA 的什么特殊情况）</p>
     <button class="btn-sm" onclick="toggleHint('ch3')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('ca3')">查看答案</button>
     <div class="hint-box" id="ch3">当那个"非夹角"是直角时，SSA 就变成了什么定理？</div>
@@ -529,7 +498,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="symmetry.html">下一课：轴对称 →</a></p>
+  <p class="back-bottom"><a href="symmetry.html">下一课：轴对称 →</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }

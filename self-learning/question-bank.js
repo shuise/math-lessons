@@ -1,7 +1,8 @@
 /* question-bank.js — 我的题库
  * 功能：
  *   1. 给每个题目注入「⭐ 加入题库」按钮
- *   2. 答错的题目自动收入题库（MutationObserver 监听 wrong-fb）
+ *   2. 答错的题目自动收入题库（MutationObserver 监听 wrong-fb），
+ *      同时记录用户提交的错误答案 wrongAnswer（不展示，留作后续 AI 分析）
  *   3. index.html 的「我的题库」tab 渲染全部题目，可答题/看提示/看答案/移除
  * 存储：localStorage，纯前端，无依赖
  */
@@ -32,6 +33,9 @@
     for (var i = 0; i < list.length; i++) {
       if (list[i].key === rec.key) {
         list[i].wrong = list[i].wrong || rec.wrong; // 错题标记一旦有就保留
+        // 记录最近一次提交的错误答案（不展示，供后续 AI 分析）
+        if (rec.wrong && rec.wrongAnswer) list[i].wrongAnswer = rec.wrongAnswer;
+        saveAll(list);
         return;
       }
     }
@@ -222,6 +226,24 @@
   }
 
   /* ---------------- 答错自动收录 ---------------- */
+  // 从题目容器读取用户刚提交的错误答案（判错后的 DOM 状态）
+  function extractWrongAnswer(root) {
+    // 多选：用户实际勾选的选项（提交后 selected 仍保留），多个用顿号连接
+    var sels = root.querySelectorAll('.opt-btn.selected');
+    if (sels.length) {
+      return Array.prototype.map.call(sels, function (b) {
+        return b.textContent.trim();
+      }).join('、');
+    }
+    // 判断 / 单选：被判错的按钮就是用户选的
+    var wrongBtn = root.querySelector('.tf-btn.wrong, .opt-btn.wrong');
+    if (wrongBtn) return wrongBtn.textContent.trim();
+    // 填空：输入框里的内容
+    var inp = root.querySelector('.fill-input');
+    if (inp) return (inp.value || '').trim();
+    return '';
+  }
+
   function watchWrongAnswers() {
     var observer = new MutationObserver(function (muts) {
       muts.forEach(function (m) {
@@ -236,7 +258,8 @@
         var parsed = parseQuestion(root, root.querySelector('p'));
         if (!parsed) return;
         parsed.rec.wrong = true;
-        if (!findRecord(parsed.rec.key)) upsertRecord(parsed.rec);
+        parsed.rec.wrongAnswer = extractWrongAnswer(root);
+        upsertRecord(parsed.rec);
         // 同步该题的星标按钮
         var star = root.querySelector('.qb-add-btn');
         if (star) syncAddBtn(star, parsed.rec.key);

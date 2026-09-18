@@ -6,44 +6,11 @@
 <title>二次函数 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #4a148c; }
-  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .highlight { background: #fff3e0; border-left: 4px solid #ff9800; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed #4a148c; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-  .graphic { margin: 20px 0; text-align: center; }
-  .graphic svg { max-width: 100%; height: auto; }
-  .graphic-label { font-size: 13px; color: #888; margin-bottom: 6px; }
-
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .highlight, .quote { padding: 12px 14px; margin: 12px 0; }
-    .formula table { font-size: 13px; }
-    .formula table th, .formula table td { padding: 4px 6px; }
-  }
-</style>
 </head>
-<body>
+<body class="p-quadratic-function">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./quadratic-equations.html">课件 10（一元二次方程）</a>、<a href="./coordinate-system.html">课件 24（平面直角坐标系）</a>、<a href="./linear-function.html">课件 25（一次函数）</a></p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="./quadratic-equations.html">课件 10（一元二次方程）</a>、<a href="./coordinate-system.html">课件 24（平面直角坐标系）</a>、<a href="./linear-function.html">课件 25（一次函数）</a></p>
   <h1>二次函数 — 抛物线</h1>
 
   <h2>起源：从抛石机到银河</h2>
@@ -86,7 +53,7 @@
   <h3>三个抛物线对比</h3>
   <div class="graphic">
     <div class="graphic-label">蓝色：y = x²（开口向上，顶点在原点）&emsp;红色：y = -x²（开口向下，顶点在原点）&emsp;绿色：y = (x-2)² + 1（顶点在 (2,1)）</div>
-    <svg viewBox="0 0 720 420" style="max-width:100%;height:auto;">
+    <svg viewBox="0 0 720 420" class="img-fluid">
       <defs>
         <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#333"/></marker>
       </defs>
@@ -194,12 +161,12 @@
   <h3>3.1 顶点坐标公式</h3>
   <div class="highlight">
     <p><strong>顶点坐标：</strong></p>
-    <p style="text-align:center;font-size:18px;font-weight:bold;">
+    <p class="tc fs-18 fw-bold">
       x = -b/(2a)，y = (4ac - b²)/(4a)
     </p>
     <p><strong>这个公式是怎么来的？</strong>回忆课件 10 的配方法。把 y = ax² + bx + c 配方：</p>
-    <p style="text-align:center;">y = a(x² + (b/a)x) + c = a[x² + (b/a)x + (b/(2a))²] + c - a·(b/(2a))²</p>
-    <p style="text-align:center;">= a(x + b/(2a))² + (4ac - b²)/(4a)</p>
+    <p class="tc">y = a(x² + (b/a)x) + c = a[x² + (b/a)x + (b/(2a))²] + c - a·(b/(2a))²</p>
+    <p class="tc">= a(x + b/(2a))² + (4ac - b²)/(4a)</p>
     <p>这个形式叫<strong>顶点式</strong>：y = a(x - h)² + k，顶点就是 (h, k)。</p>
     <p>对比得到：h = -b/(2a)，k = (4ac - b²)/(4a)。</p>
   </div>
@@ -245,7 +212,7 @@
 
   <div class="graphic">
     <div class="graphic-label">Δ 与图象和 x 轴交点的关系</div>
-    <svg viewBox="0 0 720 280" style="max-width:100%;height:auto;">
+    <svg viewBox="0 0 720 280" class="img-fluid">
       <!-- 场景1: Δ > 0 两个交点 -->
       <g transform="translate(20,140)">
         <line x1="0" y1="0" x2="200" y2="0" stroke="#333" stroke-width="1.5"/>
@@ -442,7 +409,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="inverse-function.html">下一课：反比例函数 →</a></p>
+  <p class="back-bottom"><a href="inverse-function.html">下一课：反比例函数 →</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }

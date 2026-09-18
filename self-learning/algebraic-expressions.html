@@ -6,38 +6,11 @@
 <title>代数式与字母表示数 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔤</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #7b1fa2; }
-  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed #7b1fa2; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
-  }
-</style>
 </head>
-<body>
+<body class="p-algebraic-expressions">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./natural-numbers.html">课件 1（自然数）</a>、<a href="./fractions.html">课件 2（分数）</a>、<a href="./negative-numbers.html">课件 3（负数）</a></p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="./natural-numbers.html">课件 1（自然数）</a>、<a href="./fractions.html">课件 2（分数）</a>、<a href="./negative-numbers.html">课件 3（负数）</a></p>
   <h1>代数式与字母表示数</h1>
 
   <h2>起源：文字变符号的革命</h2>
@@ -106,45 +79,45 @@
     <p>初中阶段会接触到不少数学符号。把它们记住，阅读和书写都会更顺手。下面分三类列出最常用的符号，每个都配上含义和简单例子。</p>
 
     <h3>1. 运算与关系符号</h3>
-    <table style="width:100%; border-collapse:collapse; margin:12px 0;">
+    <table class="w-full mt-12 mb-12">
       <thead>
-        <tr style="background:#f0f0f0;">
-          <th style="border:1px solid #ccc; padding:8px; text-align:left; width:18%;">符号</th>
-          <th style="border:1px solid #ccc; padding:8px; text-align:left; width:32%;">含义</th>
-          <th style="border:1px solid #ccc; padding:8px; text-align:left;">简单例子</th>
+        <tr class="panel-bg">
+          <th class="tl w-18p">符号</th>
+          <th class="tl w-32p">含义</th>
+          <th class="tl">简单例子</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td style="border:1px solid #ccc; padding:8px;">+</td><td style="border:1px solid #ccc; padding:8px;">加</td><td style="border:1px solid #ccc; padding:8px;">3 + 2 = 5</td></tr>
-        <tr><td style="border:1px solid #ccc; padding:8px;">-</td><td style="border:1px solid #ccc; padding:8px;">减</td><td style="border:1px solid #ccc; padding:8px;">5 - 2 = 3</td></tr>
-        <tr><td style="border:1px solid #ccc; padding:8px;">×</td><td style="border:1px solid #ccc; padding:8px;">乘（代数式中常省略）</td><td style="border:1px solid #ccc; padding:8px;">3 × 2 = 6；3x 表示 3·x</td></tr>
-        <tr><td style="border:1px solid #ccc; padding:8px;">÷</td><td style="border:1px solid #ccc; padding:8px;">除（代数式中常写成分数）</td><td style="border:1px solid #ccc; padding:8px;">6 ÷ 2 = 3；a/b 表示 a÷b</td></tr>
-        <tr><td style="border:1px solid #ccc; padding:8px;">=</td><td style="border:1px solid #ccc; padding:8px;">等于</td><td style="border:1px solid #ccc; padding:8px;">x = 5</td></tr>
-        <tr><td style="border:1px solid #ccc; padding:8px;">≠</td><td style="border:1px solid #ccc; padding:8px;">不等于</td><td style="border:1px solid #ccc; padding:8px;">x ≠ 0（分母不能为零）</td></tr>
-        <tr><td style="border:1px solid #ccc; padding:8px;">≈</td><td style="border:1px solid #ccc; padding:8px;">约等于</td><td style="border:1px solid #ccc; padding:8px;">π ≈ 3.14</td></tr>
-        <tr><td style="border:1px solid #ccc; padding:8px;">&lt;</td><td style="border:1px solid #ccc; padding:8px;">小于</td><td style="border:1px solid #ccc; padding:8px;">2 &lt; 3</td></tr>
-        <tr><td style="border:1px solid #ccc; padding:8px;">&gt;</td><td style="border:1px solid #ccc; padding:8px;">大于</td><td style="border:1px solid #ccc; padding:8px;">5 &gt; 3</td></tr>
-        <tr><td style="border:1px solid #ccc; padding:8px;">≤</td><td style="border:1px solid #ccc; padding:8px;">小于或等于</td><td style="border:1px solid #ccc; padding:8px;">x ≤ 5</td></tr>
-        <tr><td style="border:1px solid #ccc; padding:8px;">≥</td><td style="border:1px solid #ccc; padding:8px;">大于或等于</td><td style="border:1px solid #ccc; padding:8px;">x ≥ 0（非负数）</td></tr>
+        <tr><td>+</td><td>加</td><td>3 + 2 = 5</td></tr>
+        <tr><td>-</td><td>减</td><td>5 - 2 = 3</td></tr>
+        <tr><td>×</td><td>乘（代数式中常省略）</td><td>3 × 2 = 6；3x 表示 3·x</td></tr>
+        <tr><td>÷</td><td>除（代数式中常写成分数）</td><td>6 ÷ 2 = 3；a/b 表示 a÷b</td></tr>
+        <tr><td>=</td><td>等于</td><td>x = 5</td></tr>
+        <tr><td>≠</td><td>不等于</td><td>x ≠ 0（分母不能为零）</td></tr>
+        <tr><td>≈</td><td>约等于</td><td>π ≈ 3.14</td></tr>
+        <tr><td>&lt;</td><td>小于</td><td>2 &lt; 3</td></tr>
+        <tr><td>&gt;</td><td>大于</td><td>5 &gt; 3</td></tr>
+        <tr><td>≤</td><td>小于或等于</td><td>x ≤ 5</td></tr>
+        <tr><td>≥</td><td>大于或等于</td><td>x ≥ 0（非负数）</td></tr>
       </tbody>
     </table>
 
     <h3>2. 其他常见符号</h3>
-    <table style="width:100%; border-collapse:collapse; margin:12px 0;">
+    <table class="w-full mt-12 mb-12">
       <thead>
-        <tr style="background:#f0f0f0;">
-          <th style="border:1px solid #ccc; padding:8px; text-align:left; width:18%;">符号</th>
-          <th style="border:1px solid #ccc; padding:8px; text-align:left; width:32%;">含义</th>
-          <th style="border:1px solid #ccc; padding:8px; text-align:left;">简单例子</th>
+        <tr class="panel-bg">
+          <th class="tl w-18p">符号</th>
+          <th class="tl w-32p">含义</th>
+          <th class="tl">简单例子</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td style="border:1px solid #ccc; padding:8px;">∴</td><td style="border:1px solid #ccc; padding:8px;">所以（推出结论）</td><td style="border:1px solid #ccc; padding:8px;">x = 2，∴ x² = 4</td></tr>
-        <tr><td style="border:1px solid #ccc; padding:8px;">∵</td><td style="border:1px solid #ccc; padding:8px;">因为（给出理由）</td><td style="border:1px solid #ccc; padding:8px;">∵ a &gt; b，∴ a - b &gt; 0</td></tr>
-        <tr><td style="border:1px solid #ccc; padding:8px;">⊥</td><td style="border:1px solid #ccc; padding:8px;">垂直（两条线成 90° 角）</td><td style="border:1px solid #ccc; padding:8px;">直线 AB ⊥ 直线 CD</td></tr>
-        <tr><td style="border:1px solid #ccc; padding:8px;">∥</td><td style="border:1px solid #ccc; padding:8px;">平行（两条线永不相交）</td><td style="border:1px solid #ccc; padding:8px;">直线 AB ∥ 直线 CD</td></tr>
-        <tr><td style="border:1px solid #ccc; padding:8px;">∠</td><td style="border:1px solid #ccc; padding:8px;">角</td><td style="border:1px solid #ccc; padding:8px;">∠ABC = 90°</td></tr>
-        <tr><td style="border:1px solid #ccc; padding:8px;">π</td><td style="border:1px solid #ccc; padding:8px;">圆周率（约等于 3.14159…）</td><td style="border:1px solid #ccc; padding:8px;">圆的周长 = 2πr</td></tr>
+        <tr><td>∴</td><td>所以（推出结论）</td><td>x = 2，∴ x² = 4</td></tr>
+        <tr><td>∵</td><td>因为（给出理由）</td><td>∵ a &gt; b，∴ a - b &gt; 0</td></tr>
+        <tr><td>⊥</td><td>垂直（两条线成 90° 角）</td><td>直线 AB ⊥ 直线 CD</td></tr>
+        <tr><td>∥</td><td>平行（两条线永不相交）</td><td>直线 AB ∥ 直线 CD</td></tr>
+        <tr><td>∠</td><td>角</td><td>∠ABC = 90°</td></tr>
+        <tr><td>π</td><td>圆周率（约等于 3.14159…）</td><td>圆的周长 = 2πr</td></tr>
       </tbody>
     </table>
 
@@ -209,7 +182,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="polynomials.html">下一课：整式运算 →</a></p>
+  <p class="back-bottom"><a href="polynomials.html">下一课：整式运算 →</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }

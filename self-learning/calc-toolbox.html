@@ -6,38 +6,11 @@
 <title>计算工具箱 — 数学专题</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #0277bd; }
-  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #e1f5fe; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #e3f2fd; border-left: 4px solid #0288d1; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-  .graphic { margin: 16px 0; text-align: center; }
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
-  }
-</style>
 </head>
-<body>
+<body class="p-calc-toolbox">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./natural-numbers.html">课件 1（自然数）</a>、<a href="./rational-operations.html">课件 4（有理数的加减乘除）</a></p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="./natural-numbers.html">课件 1（自然数）</a>、<a href="./rational-operations.html">课件 4（有理数的加减乘除）</a></p>
   <h1>计算工具箱 — 方法、特殊数字、估算与单位</h1>
 
   <h2>起源：从算筹到计算器</h2>
@@ -149,11 +122,8 @@
     </div>
 
     <div class="graphic">
-      <svg viewBox="0 0 660 190" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 660 190" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
         </defs>
         <text x="330" y="26" text-anchor="middle" font-size="15" fill="#333" font-weight="bold">小数点怎么挪，指数就怎么记</text>
         <!-- 大数 -->
@@ -171,7 +141,7 @@
     <div class="extend">
       <p><strong>对数表：把乘法变成加法的"魔法书"。</strong></p>
       <p>在没有计算器的年代，算 458 × 1 276 要逐位相乘再相加，又慢又容易错。纳皮尔发现：<strong>任何正数都能表示成"10 的多少次方"</strong>。比如 100 = 10²，1000 = 10³。那么：</p>
-      <p style="text-align:center;">458 × 1 276 = 10^x × 10^y = 10^(x + y)</p>
+      <p class="tc">458 × 1 276 = 10^x × 10^y = 10^(x + y)</p>
       <p>乘法就变成了指数相加！先查表（对数表）找到 x、y，做一次加法，再查反表（反对数表）变回原数——<strong>"乘除化加减"</strong>，整整省下一个量级的计算量。开普勒靠它算出行星运行定律，说它"延长了天文学家的寿命"。</p>
       <p>"10 的多少次方"中的"多少"，就是对数（log）。对数的严格定义和算法要到<strong>高中</strong>才正式学习，初中阶段你只需记住两件事：① 对数是<strong>乘方（指数）的逆运算</strong>之一；② 它和科学计数法一样，都建立在一个朴素想法上——<strong>10ⁿ 的"n"本身就是个好用的数</strong>。</p>
     </div>
@@ -273,7 +243,7 @@
     <div class="ans-box" id="a6"><strong>C</strong>。1 m² = 10 000 cm²，3.5 × 10 000 = 35 000 cm²。D 选项错把体积的进率（10⁶）用到了面积上。</div>
   </div>
 
-  <div class="key" style="margin-top:32px;">
+  <div class="key mt-32">
     <p><strong>本课要点总结：</strong></p>
     <ul>
       <li><strong>六件工具：</strong>加减乘除、乘方、开方；减/除/开方是逆运算；解方程每步都用得上</li>
@@ -284,7 +254,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="rational-operations.html">相关课件：有理数的运算</a> | <a href="real-numbers.html">实数与开方</a> | <a href="index.html">返回课程列表</a></p>
+  <p class="back-bottom"><a href="rational-operations.html">相关课件：有理数的运算</a> | <a href="real-numbers.html">实数与开方</a> | <a href="index.html">返回课程列表</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }

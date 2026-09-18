@@ -6,43 +6,11 @@
 <title>不等式与不等式组 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #880e4f; }
-  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .warn { background: #fff3e0; border-left: 4px solid #ff5722; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-  .compare-table { width: 100%; border-collapse: collapse; margin: 12px 0; }
-  .compare-table th, .compare-table td { border: 1px solid #ddd; padding: 10px 14px; text-align: center; }
-  .compare-table th { background: var(--accent); color: #fff; }
-  .compare-table td:first-child { background: #f5f5f5; font-weight: bold; }
-  .numberline-svg { display: block; max-width: 100%; height: auto; margin: 8px auto; }
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .quote, .warn { padding: 12px 14px; margin: 12px 0; }
-  }
-</style>
 </head>
-<body>
+<body class="p-inequalities">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="linear-equations.html">课件 8（一元一次方程）</a>—— 移项、去括号、合并同类项、系数化 1</p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="linear-equations.html">课件 8（一元一次方程）</a>—— 移项、去括号、合并同类项、系数化 1</p>
   <h1>不等式与不等式组</h1>
 
   <!-- ==================== 前置知识 ==================== -->
@@ -97,8 +65,8 @@
         <tr><td>两边减同一个数</td><td>方向不变<br>a = b → a - c = b - c</td><td>方向不变<br>a > b → a - c > b - c</td></tr>
         <tr><td>两边乘同一个<strong>正数</strong></td><td>方向不变<br>a = b → ac = bc</td><td>方向不变<br>a > b → ac > bc（c > 0）</td></tr>
         <tr><td>两边除以同一个<strong>正数</strong></td><td>方向不变<br>a = b → a/c = b/c</td><td>方向不变<br>a > b → a/c > b/c（c > 0）</td></tr>
-        <tr style="background:#ffebee;"><td>两边乘同一个<strong>负数</strong></td><td>方向不变<br>a = b → ac = bc</td><td><strong>方向反转！</strong><br>a > b → ac < bc（c < 0）</td></tr>
-        <tr style="background:#ffebee;"><td>两边除以同一个<strong>负数</strong></td><td>方向不变<br>a = b → a/c = b/c</td><td><strong>方向反转！</strong><br>a > b → a/c < b/c（c < 0）</td></tr>
+        <tr class="bg-err"><td>两边乘同一个<strong>负数</strong></td><td>方向不变<br>a = b → ac = bc</td><td><strong>方向反转！</strong><br>a > b → ac < bc（c < 0）</td></tr>
+        <tr class="bg-err"><td>两边除以同一个<strong>负数</strong></td><td>方向不变<br>a = b → a/c = b/c</td><td><strong>方向反转！</strong><br>a > b → a/c < b/c（c < 0）</td></tr>
       </table>
     </div>
 
@@ -113,11 +81,11 @@
     </div>
 
     <!-- SVG 动画：负数反转演示 -->
-    <div style="text-align:center;margin:20px 0;">
-      <div style="margin-bottom:8px;font-size:14px;color:#888;">数轴演示：3 > 2，乘以 -1 后变成 -3 < -2 ↓</div>
-      <button onclick="flipDemo(0)" class="btn-sm" id="fd0" style="font-weight:bold;">原始：3 > 2</button>
+    <div class="tc mt-20 mb-20">
+      <div class="mb-8 fs-14 muted">数轴演示：3 > 2，乘以 -1 后变成 -3 < -2 ↓</div>
+      <button onclick="flipDemo(0)" class="btn-sm fw-bold" id="fd0">原始：3 > 2</button>
       <button onclick="flipDemo(1)" class="btn-sm" id="fd1">乘 -1：-3 < -2</button>
-      <svg viewBox="0 0 600 160" style="max-width:100%;height:auto;display:block;margin:12px auto;">
+      <svg viewBox="0 0 600 160" class="img-center mt-12">
         <defs>
           <marker id="arrowRight" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
             <path d="M0,0 L8,3 L0,6 Z" fill="#880e4f"/>
@@ -155,7 +123,7 @@
           <text x="300" y="32" text-anchor="middle" font-size="18" fill="#e91e63" font-weight="bold">3 &gt; 2 ✓</text>
         </g>
         <!-- 乘-1后：-3 < -2 -->
-        <g id="flippedGroup" style="display:none;">
+        <g id="flippedGroup" class="d-none">
           <circle cx="100" cy="60" r="7" fill="#e91e63" stroke="#880e4f" stroke-width="2"/>
           <text x="100" y="48" text-anchor="middle" font-size="14" fill="#e91e63" font-weight="bold">-3</text>
           <circle cx="180" cy="60" r="7" fill="#5c6bc0" stroke="#3f51b5" stroke-width="2"/>
@@ -188,8 +156,8 @@
     </div>
 
     <!-- SVG 数轴：x > 4 -->
-    <div style="text-align:center;margin:20px 0;">
-      <div style="margin-bottom:6px;font-size:14px;color:#888;">数轴表示：x > 4</div>
+    <div class="tc mt-20 mb-20">
+      <div class="mb-6 fs-14 muted">数轴表示：x > 4</div>
       <svg viewBox="0 0 600 100" class="numberline-svg">
         <defs>
           <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
@@ -209,12 +177,12 @@
         <!-- 向右的加粗线 -->
         <line x1="500" y1="40" x2="570" y2="40" stroke="#880e4f" stroke-width="4" stroke-linecap="round"/>
       </svg>
-      <p style="font-size:13px;color:#888;">空心圆表示不包含 4，向右的线表示所有大于 4 的数</p>
+      <p class="fs-13 muted">空心圆表示不包含 4，向右的线表示所有大于 4 的数</p>
     </div>
 
     <!-- SVG 数轴：x ≥ -3 -->
-    <div style="text-align:center;margin:20px 0;">
-      <div style="margin-bottom:6px;font-size:14px;color:#888;">数轴表示：x ≥ -3</div>
+    <div class="tc mt-20 mb-20">
+      <div class="mb-6 fs-14 muted">数轴表示：x ≥ -3</div>
       <svg viewBox="0 0 600 100" class="numberline-svg">
         <defs>
           <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
@@ -233,14 +201,14 @@
         <circle cx="200" cy="40" r="8" fill="#880e4f" stroke="#880e4f" stroke-width="2"/>
         <line x1="200" y1="40" x2="570" y2="40" stroke="#880e4f" stroke-width="4" stroke-linecap="round"/>
       </svg>
-      <p style="font-size:13px;color:#888;">实心圆表示包含 -3，向右的线表示所有大于 -3 的数</p>
+      <p class="fs-13 muted">实心圆表示包含 -3，向右的线表示所有大于 -3 的数</p>
     </div>
   </div>
 
   <h2>四、一元一次不等式组</h2>
   <div class="story">
     <p>有时候一个问题需要同时满足<strong>两个</strong>不等式条件。比如："小明身高超过 1.2 米，但不超过 1.5 米"，写成不等式组就是：</p>
-    <p style="text-align:center;font-size:18px;"><strong>x > 1.2 且 x ≤ 1.5</strong></p>
+    <p class="tc fs-18"><strong>x > 1.2 且 x ≤ 1.5</strong></p>
     <p>这组不等式的解就是两个条件的<strong>交集</strong>（公共部分）：1.2 < x ≤ 1.5。</p>
 
     <div class="key">
@@ -254,9 +222,9 @@
 
     <div class="example">
       <strong>例 3：</strong>解不等式组
-      <div style="display:inline-flex;align-items:center;gap:6px;margin:10px 0;">
-        <span style="font-size:54px;line-height:1;font-family:'Times New Roman',serif;transform:scaleY(1.15);transform-origin:center;display:inline-block;">{</span>
-        <span style="font-size:18px;line-height:1.8;text-align:left;display:inline-block;">
+      <div class="inline-flex-row">
+        <span class="stretch-y fs-54">{</span>
+        <span class="fs-18 tl">
           2x - 1 &gt; 3<br>x + 2 ≤ 8
         </span>
       </div>
@@ -266,8 +234,8 @@
     </div>
 
     <!-- SVG 数轴：不等式组的交集 -->
-    <div style="text-align:center;margin:20px 0;">
-      <div style="margin-bottom:6px;font-size:14px;color:#888;">数轴表示：x > 2 且 x ≤ 6 → 交集为 2 < x ≤ 6</div>
+    <div class="tc mt-20 mb-20">
+      <div class="mb-6 fs-14 muted">数轴表示：x > 2 且 x ≤ 6 → 交集为 2 < x ≤ 6</div>
       <svg viewBox="0 0 600 180" class="numberline-svg">
         <defs>
           <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
@@ -316,7 +284,7 @@
         <circle cx="400" cy="136" r="7" fill="#880e4f" stroke="#880e4f" stroke-width="2"/>
         <line x1="240" y1="136" x2="400" y2="136" stroke="#880e4f" stroke-width="5" stroke-linecap="round"/>
       </svg>
-      <p style="font-size:13px;color:#888;">上面两条线的重叠部分，就是下面的交集</p>
+      <p class="fs-13 muted">上面两条线的重叠部分，就是下面的交集</p>
     </div>
   </div>
 
@@ -455,7 +423,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="index.html">返回课程列表 →</a></p>
+  <p class="back-bottom"><a href="index.html">返回课程列表 →</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }

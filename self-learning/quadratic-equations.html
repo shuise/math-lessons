@@ -6,51 +6,11 @@
 <title>一元二次方程 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #3949ab; }
-  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .highlight { background: #fff3e0; border-left: 4px solid #ff9800; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed #3949ab; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-
-  /* 分式：上下排列（分子在上、分母在下、中间横线） */
-  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; line-height: 1.15; margin: 0 2px; }
-  .frac .num { border-bottom: 1.5px solid currentColor; padding: 0 5px 1px; }
-  .frac .den { padding: 1px 5px 0; }
-  .frac.lg { font-size: 1.15em; }
-  /* 推导步骤：左对齐、有序 */
-  .derivation { text-align: left; font-size: 1em; }
-  .derivation p { margin: 8px 0; line-height: 2; }
-  .derivation .why { color: #888; font-size: 0.9em; }
-
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .highlight, .quote { padding: 12px 14px; margin: 12px 0; }
-    .formula table { font-size: 13px; }
-    .formula table th, .formula table td { padding: 4px 6px; }
-  }
-</style>
 </head>
-<body>
+<body class="p-quadratic-equations">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./natural-numbers.html">课件 1</a>、<a href="./fractions.html">课件 2</a>、<a href="./negative-numbers.html">课件 3</a>、<a href="./algebraic-expressions.html">课件 5</a>（自然数、分数、负数、代数式）、<a href="./polynomials.html">课件 6（整式运算·完全平方公式）</a>、<a href="./factoring-rational.html">课件 7（因式分解·十字相乘）</a>、<a href="./linear-equations.html">课件 8（一元一次方程）</a></p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="./natural-numbers.html">课件 1</a>、<a href="./fractions.html">课件 2</a>、<a href="./negative-numbers.html">课件 3</a>、<a href="./algebraic-expressions.html">课件 5</a>（自然数、分数、负数、代数式）、<a href="./polynomials.html">课件 6（整式运算·完全平方公式）</a>、<a href="./factoring-rational.html">课件 7（因式分解·十字相乘）</a>、<a href="./linear-equations.html">课件 8（一元一次方程）</a></p>
   <h1>一元二次方程</h1>
 
   <h2>起源：一块泥板上的数学奇迹</h2>
@@ -96,46 +56,36 @@
   </div>
 
   <div class="graphic">
-    <div style="text-align:center;margin-bottom:8px;font-size:14px;color:#888;">动画演示：花拉子米如何"凑完全平方"解 x² + 6x + 5 = 0（图中 x 远大于 3，可看清矩形比例）↓</div>
-    <div style="text-align:center;margin:8px 0;">
-      <button onclick="completeStep(0)" class="btn-sm" style="font-size:14px;padding:6px 16px;margin:4px;" id="cs0">第 1 步：x² + 6x</button>
-      <button onclick="completeStep(1)" class="btn-sm" style="font-size:14px;padding:6px 16px;margin:4px;" id="cs1">第 2 步：补上小正方形</button>
-      <button onclick="completeStep(2)" class="btn-sm" style="font-size:14px;padding:6px 16px;margin:4px;" id="cs2">第 3 步：完全平方！</button>
+    <div class="caption">动画演示：花拉子米如何"凑完全平方"解 x² + 6x + 5 = 0（图中 x 远大于 3，可看清矩形比例）↓</div>
+    <div class="tc mt-8 mb-8">
+      <button onclick="completeStep(0)" class="btn-sm" id="cs0">第 1 步：x² + 6x</button>
+      <button onclick="completeStep(1)" class="btn-sm" id="cs1">第 2 步：补上小正方形</button>
+      <button onclick="completeStep(2)" class="btn-sm" id="cs2">第 3 步：完全平方！</button>
     </div>
-    <svg viewBox="0 0 400 260" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+    <svg viewBox="0 0 400 260" class="img-center">
       <defs>
-        <style>
-          .csq-x2 { fill: rgba(233, 30, 99, 0.3); stroke: #e91e63; stroke-width: 2; }
-          .csq-rect { fill: rgba(33, 150, 243, 0.25); stroke: #2196f3; stroke-width: 2; }
-          .csq-rect2 { fill: rgba(33, 150, 243, 0.25); stroke: #2196f3; stroke-width: 2; }
-          .csq-small { fill: rgba(76, 175, 80, 0.3); stroke: #4caf50; stroke-width: 2; }
-          .csq-outer { fill: none; stroke: #333; stroke-width: 3; stroke-dasharray: 8 4; }
-          .csq-label { font-size: 13px; font-weight: bold; text-anchor: middle; dominant-baseline: central; }
-          @keyframes popIn { 0%{transform:scale(0);opacity:0} 100%{transform:scale(1);opacity:1} }
-          .csq-pop { animation: popIn 0.5s ease-out; transform-origin: 172.5px 157.5px; }
-        </style>
       </defs>
       <g transform="translate(30,15)">
         <!-- 大正方形边框（边长 x+3 = 11 单位 = 165px） -->
-        <rect id="csqOuter" x="0" y="0" width="165" height="165" class="csq-outer" style="opacity:0"/>
+        <rect id="csqOuter" x="0" y="0" width="165" height="165" class="csq-outer" opacity="0"/>
         <!-- x² 正方形（边长 x=8 单位 = 120px） -->
         <rect id="csqX2" x="0" y="0" width="120" height="120" class="csq-x2"/>
         <text id="csqX2Lbl" x="60" y="60" class="csq-label" fill="#e91e63">x²</text>
         <!-- 右侧矩形 3x（宽 3=45px，高 x=120px） -->
-        <rect id="csqR1" x="120" y="0" width="45" height="120" class="csq-rect" style="opacity:0"/>
-        <text id="csqR1Lbl" x="142.5" y="60" class="csq-label" fill="#2196f3" style="opacity:0">3x</text>
+        <rect id="csqR1" x="120" y="0" width="45" height="120" class="csq-rect" opacity="0"/>
+        <text id="csqR1Lbl" x="142.5" y="60" class="csq-label" fill="#2196f3" opacity="0">3x</text>
         <!-- 下方矩形 3x（宽 x=120px，高 3=45px） -->
-        <rect id="csqR2" x="0" y="120" width="120" height="45" class="csq-rect2" style="opacity:0"/>
-        <text id="csqR2Lbl" x="60" y="142.5" class="csq-label" fill="#2196f3" style="opacity:0">3x</text>
+        <rect id="csqR2" x="0" y="120" width="120" height="45" class="csq-rect2" opacity="0"/>
+        <text id="csqR2Lbl" x="60" y="142.5" class="csq-label" fill="#2196f3" opacity="0">3x</text>
         <!-- 右下小正方形 3²（边长 3=45px） -->
-        <rect id="csqSmall" x="120" y="120" width="45" height="45" class="csq-small" style="opacity:0"/>
-        <text id="csqSmallLbl" x="142.5" y="142.5" class="csq-label" fill="#4caf50" style="opacity:0">3²</text>
+        <rect id="csqSmall" x="120" y="120" width="45" height="45" class="csq-small" opacity="0"/>
+        <text id="csqSmallLbl" x="142.5" y="142.5" class="csq-label" fill="#4caf50" opacity="0">3²</text>
         <!-- 底边标注：x | 3 -->
         <text x="60" y="180" text-anchor="middle" font-size="14" fill="#e91e63" font-weight="bold" id="labelXb">x</text>
-        <text x="142.5" y="180" text-anchor="middle" font-size="14" fill="#4caf50" font-weight="bold" id="label3b" style="opacity:0">3</text>
+        <text x="142.5" y="180" text-anchor="middle" font-size="14" fill="#4caf50" font-weight="bold" id="label3b" opacity="0">3</text>
         <!-- 右边标注：x | 3 -->
         <text x="175" y="60" text-anchor="middle" font-size="14" fill="#e91e63" font-weight="bold" id="labelXr">x</text>
-        <text x="175" y="142.5" text-anchor="middle" font-size="14" fill="#4caf50" font-weight="bold" id="label3s" style="opacity:0">3</text>
+        <text x="175" y="142.5" text-anchor="middle" font-size="14" fill="#4caf50" font-weight="bold" id="label3s" opacity="0">3</text>
         <!-- 公式 -->
         <text x="82.5" y="215" text-anchor="middle" font-size="15" fill="#333" font-weight="bold" id="csqFormula">x² + 6x</text>
       </g>
@@ -153,11 +103,11 @@
   <h3>方法三：公式法 —— 从配方法推导出来的万能公式</h3>
   <div class="highlight">
     <p>对于 ax² + bx + c = 0（a ≠ 0），解为：</p>
-    <p style="font-size:18px;text-align:center;font-weight:bold;">x = <span class="frac lg"><span class="num">-b ± √(b² - 4ac)</span><span class="den">2a</span></span></p>
+    <p class="fs-18 tc fw-bold">x = <span class="frac lg"><span class="num">-b ± √(b² - 4ac)</span><span class="den">2a</span></span></p>
     <p><strong>这个公式的来历：</strong>把配方法的过程写成通用形式。下面一步一步推导，每一步都标明依据——你会发现，求根公式不是凭空冒出来的，它就是把配方法的五个动作套用到了字母 a、b、c 上。</p>
   </div>
 
-  <div class="formula derivation" style="text-align:left;font-size:1em;">
+  <div class="formula derivation tl">
     <p><strong>起点：</strong>ax² + bx + c = 0（a ≠ 0）</p>
     <p><strong>第 1 步：两边同除以 a。</strong>得 x² + <span class="frac"><span class="num">b</span><span class="den">a</span></span>x + <span class="frac"><span class="num">c</span><span class="den">a</span></span> = 0<br>
     <span class="why">依据：等式两边同时除以同一个非零数 a，等式仍然成立（a ≠ 0 是前提）。</span></p>
@@ -202,7 +152,7 @@
   <h2>四、韦达定理 —— 根与系数的美妙关系</h2>
   <div class="formula">
     <p>如果 ax² + bx + c = 0 的两个根是 x₁ 和 x₂，那么：</p>
-    <p style="text-align:center;font-size:18px;"><strong>x₁ + x₂ = <span class="frac"><span class="num">-b</span><span class="den">a</span></span>，x₁ · x₂ = <span class="frac"><span class="num">c</span><span class="den">a</span></span></strong></p>
+    <p class="tc fs-18"><strong>x₁ + x₂ = <span class="frac"><span class="num">-b</span><span class="den">a</span></span>，x₁ · x₂ = <span class="frac"><span class="num">c</span><span class="den">a</span></span></strong></p>
     <p><strong>证明：</strong>从求根公式，x₁ = <span class="frac"><span class="num">-b + √Δ</span><span class="den">2a</span></span>，x₂ = <span class="frac"><span class="num">-b - √Δ</span><span class="den">2a</span></span>。两根相加：√Δ 抵消，得 <span class="frac"><span class="num">-2b</span><span class="den">2a</span></span> = <span class="frac"><span class="num">-b</span><span class="den">a</span></span>。两根相乘：用平方差公式 (u+v)(u-v) = u²-v²，得 <span class="frac"><span class="num">b²-Δ</span><span class="den">4a²</span></span> = <span class="frac"><span class="num">b²-(b²-4ac)</span><span class="den">4a²</span></span> = <span class="frac"><span class="num">4ac</span><span class="den">4a²</span></span> = <span class="frac"><span class="num">c</span><span class="den">a</span></span>。</p>
   </div>
 
@@ -269,7 +219,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="index.html">← 返回课程列表</a></p>
+  <p class="back-bottom"><a href="index.html">← 返回课程列表</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }

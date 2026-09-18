@@ -6,38 +6,11 @@
 <title>整式运算 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #e91e63; }
-  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed #e91e63; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
-  }
-</style>
 </head>
-<body>
+<body class="p-polynomials">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./natural-numbers.html">课件 1</a>、<a href="./fractions.html">课件 2</a>、<a href="./negative-numbers.html">课件 3</a>、<a href="./algebraic-expressions.html">课件 5</a>（自然数、分数、负数、代数式）</p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="./natural-numbers.html">课件 1</a>、<a href="./fractions.html">课件 2</a>、<a href="./negative-numbers.html">课件 3</a>、<a href="./algebraic-expressions.html">课件 5</a>（自然数、分数、负数、代数式）</p>
   <h1>整式运算</h1>
 
   <h2>起源：花拉子米的"对消"</h2>
@@ -79,16 +52,9 @@
     <p><strong>为什么？</strong>用面积图来理解：一个长方形，宽是 a，长是 (b + c)。面积 = a × (b + c)。也可以把长方形切成两块：一块面积是 a×b，另一块是 a×c。所以 a(b + c) = ab + ac。</p>
 
     <div class="graphic">
-      <div style="text-align:left;margin:12px 0 8px 0;font-size:14px;color:#888;">下图中取 a=8, b=3, c=2。整个长方形面积 = a×(b+c) = 8×5 = 40；拆成两块：8×3=24（粉色，较高）和 8×2=16（蓝色，较矮），加起来正好 40。两块高度差很大，面积差异一眼就能看出来。</div>
-      <svg viewBox="0 0 460 300" style="max-width:100%;height:auto;display:block;margin:0;">
+      <div class="tl mt-12 mb-8 fs-14 muted">下图中取 a=8, b=3, c=2。整个长方形面积 = a×(b+c) = 8×5 = 40；拆成两块：8×3=24（粉色，较高）和 8×2=16（蓝色，较矮），加起来正好 40。两块高度差很大，面积差异一眼就能看出来。</div>
+      <svg viewBox="0 0 460 300" class="img-center">
         <defs>
-          <style>
-            .area-ab { fill: rgba(233, 30, 99, 0.22); stroke: #e91e63; stroke-width: 2; }
-            .area-ac { fill: rgba(33, 150, 243, 0.22); stroke: #2196f3; stroke-width: 2; }
-            .area-outer { fill: none; stroke: #333; stroke-width: 2.5; stroke-dasharray: 8 4; }
-            .label-center { font-size: 15px; font-weight: bold; text-anchor: middle; dominant-baseline: central; }
-            .label-side { font-size: 14px; font-weight: bold; text-anchor: middle; dominant-baseline: central; }
-          </style>
         </defs>
         <!-- 上块：ab = 8×3 = 24 -->
         <rect x="60" y="30" width="320" height="120" class="area-ab"/>
@@ -121,7 +87,7 @@
   <div class="story">
     <p><strong>两个多项式相乘，</strong>就是反复使用分配律。先把第一个括号里的每一项，分别去乘第二个括号，再展开：</p>
     <div class="formula">
-      <p style="text-align:left;">(a + b)(c + d) = a(c + d) + b(c + d) = ac + ad + bc + bd</p>
+      <p class="tl">(a + b)(c + d) = a(c + d) + b(c + d) = ac + ad + bc + bd</p>
       <p><strong>思路：</strong>先把 (a + b) 当作一个整体，对 (c + d) 用一次分配律；再对每一项分别用分配律展开，最后合并同类项。</p>
     </div>
     <div class="example">
@@ -135,7 +101,7 @@
   <h2>四、三大乘法公式（用面积图证明）</h2>
   <div class="formula">
     <p><strong>公式 1：完全平方公式</strong></p>
-    <p style="text-align:left;font-size:18px;">(a + b)² = a² + 2ab + b²</p>
+    <p class="tl fs-18">(a + b)² = a² + 2ab + b²</p>
     <p><strong>为什么？</strong>画一个边长为 (a+b) 的大正方形，面积 = (a+b)²。把它切成四块：</p>
     <ul>
       <li>一块 a×a = a²</li>
@@ -145,24 +111,15 @@
     <p>总面积 = a² + 2ab + b²。这就是面积图的证明——不需要背公式，看图就懂了。</p>
 
     <div class="graphic">
-      <div style="text-align:left;margin-bottom:8px;font-size:14px;color:#888;">拖动滑块改变 a 和 b，看正方形怎么变化 ↓</div>
-      <div style="text-align:left;margin:8px 0;">
-        <label style="font-size:14px;">a = <span id="valA" style="font-weight:bold;color:#e91e63;">3</span></label>
-        <input type="range" id="sliderA" min="1" max="5" value="3" oninput="updateSquare()" style="vertical-align:middle;margin:0 8px;width:120px;">
-        <label style="font-size:14px;margin-left:12px;">b = <span id="valB" style="font-weight:bold;color:#2196f3;">2</span></label>
-        <input type="range" id="sliderB" min="1" max="5" value="2" oninput="updateSquare()" style="vertical-align:middle;margin:0 8px;width:120px;">
+      <div class="tl mb-8 fs-14 muted">拖动滑块改变 a 和 b，看正方形怎么变化 ↓</div>
+      <div class="tl mt-8 mb-8">
+        <label class="fs-14">a = <span id="valA" class="fw-bold">3</span></label>
+        <input type="range" id="sliderA" min="1" max="5" value="3" oninput="updateSquare()" class="input-120">
+        <label class="fs-14 ml-12">b = <span id="valB" class="fw-bold">2</span></label>
+        <input type="range" id="sliderB" min="1" max="5" value="2" oninput="updateSquare()" class="input-120">
       </div>
-      <svg viewBox="0 0 520 380" style="max-width:100%;height:auto;display:block;margin:0;">
+      <svg viewBox="0 0 520 380" class="img-center">
         <defs>
-          <style>
-            .area-a2 { fill: rgba(233, 30, 99, 0.25); stroke: #e91e63; stroke-width: 2; }
-            .area-ab1 { fill: rgba(33, 150, 243, 0.25); stroke: #2196f3; stroke-width: 2; }
-            .area-ab2 { fill: rgba(33, 150, 243, 0.25); stroke: #2196f3; stroke-width: 2; }
-            .area-b2 { fill: rgba(76, 175, 80, 0.25); stroke: #4caf50; stroke-width: 2; }
-            .area-outer { fill: none; stroke: #333; stroke-width: 3; stroke-dasharray: 8 4; }
-            .area-label { font-size: 14px; font-weight: bold; text-anchor: middle; dominant-baseline: central; }
-            @keyframes growWidth { from { width: 0; } }
-          </style>
         </defs>
         <g id="squareGraph" transform="translate(40,20)">
           <!-- 大正方形边框 -->
@@ -191,7 +148,7 @@
 
   <div class="formula">
     <p><strong>公式 2：平方差公式</strong></p>
-    <p style="text-align:left;font-size:18px;">(a + b)(a - b) = a² - b²</p>
+    <p class="tl fs-18">(a + b)(a - b) = a² - b²</p>
     <p><strong>为什么？</strong>展开：(a + b)(a - b) = a² - ab + ab - b² = a² - b²。中间两项 -ab 和 +ab 抵消了。</p>
     <div class="example">
       <strong>例：</strong>(x + 5)(x - 5) = x² - 25<br>
@@ -201,7 +158,7 @@
 
   <div class="formula">
     <p><strong>公式 3：差的完全平方</strong></p>
-    <p style="text-align:left;font-size:18px;">(a - b)² = a² - 2ab + b²</p>
+    <p class="tl fs-18">(a - b)² = a² - 2ab + b²</p>
     <p><strong>为什么？</strong>(a - b)² = (a + (-b))² = a² + 2a(-b) + (-b)² = a² - 2ab + b²</p>
   </div>
 
@@ -220,13 +177,8 @@
     <p>把每次展开后各项的<strong>系数</strong>单独抽出来，排成三角形——这就是大名鼎鼎的<strong>杨辉三角</strong>：</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 660 300" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 660 300" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-            .cnum { font-size: 20px; fill: #333; text-anchor: middle; font-weight: bold; }
-            .cexp { font-size: 12px; fill: #0288d1; text-anchor: middle; }
-          </style>
         </defs>
         <!-- 第0行 -->
         <text x="330" y="30" class="cnum">1</text>
@@ -289,7 +241,7 @@
   <div class="extend">
     <p><strong>面积图与代数：</strong>在笛卡儿发明坐标系之前，数学家们用几何图形来证明代数公式。花拉子米解二次方程用的是"拼图法"——把 x² + bx 拼成一个正方形。这种"几何代数"在阿拉伯数学中非常发达，后来的配方法就源于此。</p>
 
-    <p style="margin-top:18px;"><strong>雨伞定律：为什么正数世界的规律能"罩住"所有数？</strong></p>
+    <p class="mt-18"><strong>雨伞定律：为什么正数世界的规律能"罩住"所有数？</strong></p>
     <p>你可能会问：分配律 a(b+c)=ab+ac、完全平方 (a+b)²=a²+2ab+b²，这些公式我们都是用正数和面积图发现的。可如果 a 或 b 是负数、是分数、甚至是一个复杂的字母式子，它还成立吗？</p>
     <p>答案是：<strong>成立。</strong>这就是数学中一个极其重要的基础思路，我们叫它"雨伞定律"。<strong>务必把这一段读明白，以后很多地方都要用到。</strong></p>
     <p><strong>思路分三步：</strong></p>
@@ -301,7 +253,7 @@
     <p>所以，"雨伞定律"的核心是：<strong>先用最直观的方式（正数、图形）发现规律，再用"代数一致性"把它扩展到所有数。</strong>就像一把伞，先在正数世界打开，然后越撑越大，最终覆盖负数、分数、字母——覆盖整个数的世界。</p>
     <p>这个思路以后会反复用到：负数怎么运算、分式怎么约分、根式怎么化简……很多看似复杂的新规则，其实都是"把正数的规律用代数一致性撑开"得到的。理解了这一点，后面的学习会顺利很多。</p>
 
-    <p style="margin-top:18px;"><strong>推荐阅读：</strong>《代数的历史》—— 花拉子米的几何解法；《古今数学思想》—— 阿拉伯数学中的代数几何结合。</p>
+    <p class="mt-18"><strong>推荐阅读：</strong>《代数的历史》—— 花拉子米的几何解法；《古今数学思想》—— 阿拉伯数学中的代数几何结合。</p>
   </div>
 
   <h2>习题</h2>
@@ -359,7 +311,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="factoring-rational.html">下一课：因式分解与分式 →</a></p>
+  <p class="back-bottom"><a href="factoring-rational.html">下一课：因式分解与分式 →</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }

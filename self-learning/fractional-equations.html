@@ -6,45 +6,11 @@
 <title>分式方程 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #e65100; }
-  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .danger { background: #ffebee; border-left: 4px solid #f44336; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed #e65100; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-
-  /* 分式：上下排列（分子在上、分母在下、中间横线） */
-  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; line-height: 1.15; margin: 0 2px; }
-  .frac .num { border-bottom: 1.5px solid currentColor; padding: 0 5px 1px; }
-  .frac .den { padding: 1px 5px 0; }
-  .frac.lg { font-size: 1.1em; }
-
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .danger, .quote { padding: 12px 14px; margin: 12px 0; }
-  }
-</style>
 </head>
-<body>
+<body class="p-fractional-equations">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./fractions.html">课件 2（分数·倒数）</a>、<a href="./factoring-rational.html">课件 7（因式分解与分式）</a>、<a href="./linear-equations.html">课件 8（一元一次方程）</a></p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="./fractions.html">课件 2（分数·倒数）</a>、<a href="./factoring-rational.html">课件 7（因式分解与分式）</a>、<a href="./linear-equations.html">课件 8（一元一次方程）</a></p>
   <h1>分式方程</h1>
 
   <h2>起源：未知数怎么跑到分母里了？</h2>
@@ -61,9 +27,9 @@
 
     <div class="key">
       <p><strong>分式乘法：</strong>分子乘分子，分母乘分母；能约分的<strong>先约分再乘</strong>，最省力。</p>
-      <p style="text-align:center;font-size:1.15em;"><span class="frac"><span class="num">a</span><span class="den">b</span></span> × <span class="frac"><span class="num">c</span><span class="den">d</span></span> = <span class="frac"><span class="num">a × c</span><span class="den">b × d</span></span></p>
+      <p class="tc fs-lg"><span class="frac"><span class="num">a</span><span class="den">b</span></span> × <span class="frac"><span class="num">c</span><span class="den">d</span></span> = <span class="frac"><span class="num">a × c</span><span class="den">b × d</span></span></p>
       <p><strong>分式除法：</strong>除以一个分式，等于乘它的<strong>倒数</strong>（分子分母上下颠倒）。</p>
-      <p style="text-align:center;font-size:1.15em;"><span class="frac"><span class="num">a</span><span class="den">b</span></span> ÷ <span class="frac"><span class="num">c</span><span class="den">d</span></span> = <span class="frac"><span class="num">a</span><span class="den">b</span></span> × <span class="frac"><span class="num">d</span><span class="den">c</span></span>（c ≠ 0）</p>
+      <p class="tc fs-lg"><span class="frac"><span class="num">a</span><span class="den">b</span></span> ÷ <span class="frac"><span class="num">c</span><span class="den">d</span></span> = <span class="frac"><span class="num">a</span><span class="den">b</span></span> × <span class="frac"><span class="num">d</span><span class="den">c</span></span>（c ≠ 0）</p>
       <p><strong>通分：</strong>把几个分式化成<strong>同分母</strong>，公分母取<strong>最简公分母</strong>——各分母系数的最小公倍数 × 所有不同的字母因式（含字母的分母相乘，相同的只取一次）。</p>
     </div>
 
@@ -125,7 +91,7 @@
   </div>
 
   <h2>五、完整解题步骤</h2>
-  <div class="formula" style="text-align:left;font-size:1em;">
+  <div class="formula tl">
     <p><strong>第 1 步：</strong>找最简公分母（所有分母的最小公倍数）</p>
     <p><strong>第 2 步：</strong>两边同时乘最简公分母，去掉所有分母</p>
     <p><strong>第 3 步：</strong>解得到的整式方程</p>
@@ -198,7 +164,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="quadratic-equations.html">下一课：一元二次方程 →</a></p>
+  <p class="back-bottom"><a href="quadratic-equations.html">下一课：一元二次方程 →</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }

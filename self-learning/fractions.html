@@ -6,38 +6,11 @@
 <title>分数 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍕</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #e65100; }
-  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed #e65100; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
-  }
-</style>
 </head>
-<body>
+<body class="p-fractions">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./natural-numbers.html">课件 1（自然数、零与十进制）</a></p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="./natural-numbers.html">课件 1（自然数、零与十进制）</a></p>
   <h1>分数</h1>
 
   <h2>起源：分披萨的问题</h2>
@@ -53,8 +26,8 @@
   <div class="story">
     <p>分数 = 把"整体 1"分成若干等份，取其中几份。</p>
     <div class="formula">
-      <p style="text-align:center;font-size:20px;"><strong>分数 = 分子 / 分母</strong></p>
-      <p style="text-align:center;">分母 = 分成了几份，分子 = 取了几份</p>
+      <p class="tc fs-20"><strong>分数 = 分子 / 分母</strong></p>
+      <p class="tc">分母 = 分成了几份，分子 = 取了几份</p>
     </div>
     <p>例如：3/4 表示把一块饼分成 4 等份，取了 3 份。</p>
     <p><strong>三种类型：</strong></p>
@@ -81,21 +54,15 @@
     <p><strong>你取的饼的量是一样的！</strong>只是切法和数法不同。这就是<strong>等值分数</strong>。</p>
 
     <div class="graphic">
-      <div style="text-align:center;margin-bottom:8px;font-size:14px;color:#888;">点击按钮切换分数，看饼的大小是否一样 ↓</div>
-      <div style="text-align:center;margin:8px 0;">
-        <button onclick="showFraction(2,1)" class="btn-sm" style="font-size:14px;padding:6px 16px;margin:4px;" id="btn2_1">1/2</button>
-        <button onclick="showFraction(4,2)" class="btn-sm" style="font-size:14px;padding:6px 16px;margin:4px;" id="btn4_2">2/4</button>
-        <button onclick="showFraction(6,3)" class="btn-sm" style="font-size:14px;padding:6px 16px;margin:4px;" id="btn6_3">3/6</button>
-        <button onclick="showFraction(8,4)" class="btn-sm" style="font-size:14px;padding:6px 16px;margin:4px;" id="btn8_4">4/8</button>
+      <div class="caption">点击按钮切换分数，看饼的大小是否一样 ↓</div>
+      <div class="tc mt-8 mb-8">
+        <button onclick="showFraction(2,1)" class="btn-sm" id="btn2_1">1/2</button>
+        <button onclick="showFraction(4,2)" class="btn-sm" id="btn4_2">2/4</button>
+        <button onclick="showFraction(6,3)" class="btn-sm" id="btn6_3">3/6</button>
+        <button onclick="showFraction(8,4)" class="btn-sm" id="btn8_4">4/8</button>
       </div>
-      <svg viewBox="0 0 300 220" style="max-width:300px;height:auto;display:block;margin:0 auto;">
+      <svg viewBox="0 0 300 220" class="img-center svg-300">
         <defs>
-          <style>
-            .slice { transition: all 0.4s ease; }
-            .slice-filled { fill: #ff9800; stroke: #fff; stroke-width: 2; }
-            .slice-empty { fill: #f5f5f5; stroke: #fff; stroke-width: 2; }
-            @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-          </style>
         </defs>
         <g id="pieChart" transform="translate(150,95)">
           <circle cx="0" cy="0" r="65" fill="#f5f5f5" stroke="#ddd" stroke-width="2"/>
@@ -106,7 +73,7 @@
     </div>
     <div class="key">
       <p><strong>分数的基本性质：</strong>分子和分母同时乘（或除以）同一个非零的数，分数的大小不变。</p>
-      <p style="text-align:center;">a/b = (a×k)/(b×k)，其中 k ≠ 0</p>
+      <p class="tc">a/b = (a×k)/(b×k)，其中 k ≠ 0</p>
     </div>
     <p>这个性质是一切分数运算的基础。</p>
   </div>
@@ -141,26 +108,26 @@
   <h2>四、分数四则运算</h2>
   <div class="formula">
     <p><strong>加减法：</strong>先通分，再加减分子，分母不变。</p>
-    <p style="text-align:center;">a/c + b/c = (a+b)/c</p>
+    <p class="tc">a/c + b/c = (a+b)/c</p>
     <p><strong>乘法：</strong>分子乘分子，分母乘分母。</p>
-    <p style="text-align:center;">a/b × c/d = (a×c)/(b×d)</p>
+    <p class="tc">a/b × c/d = (a×c)/(b×d)</p>
     <p><strong>为什么？</strong>1/2 × 1/3 表示"一半的三分之一"，把一块饼先横切两半，再竖切三等份，一共 6 小块，每块是 1/6。</p>
     <p><strong>除法：</strong>除以一个分数 = 乘以它的倒数。</p>
-    <p style="text-align:center;">a/b ÷ c/d = a/b × d/c</p>
+    <p class="tc">a/b ÷ c/d = a/b × d/c</p>
     <p><strong>为什么？</strong>6 ÷ 2 表示"6 里面有几个 2"，答案是 3。同样，1/2 ÷ 1/4 表示"半个饼里面有几个 1/4 个饼"——答案是 2。因为 1/2 = 2/4，所以 2/4 ÷ 1/4 = 2。也就是说：1/2 ÷ 1/4 = 1/2 × 4/1 = 2。</p>
   </div>
 
   <h2>五、倒数</h2>
   <div class="key">
     <p><strong>倒数：</strong>两个数相乘等于 1，它们就互为倒数。</p>
-    <p style="text-align:center;">a/b 的倒数是 b/a（因为 a/b × b/a = 1）</p>
+    <p class="tc">a/b 的倒数是 b/a（因为 a/b × b/a = 1）</p>
     <p>古巴比伦人称互为倒数的两个数为<strong> igum 和 igibum</strong>。他们制作了详细的倒数表，因为用倒数可以把除法变成乘法——除以一个数，等于乘以它的倒数。这个巧妙的思路，今天的计算机仍然在用！</p>
   </div>
 
   <h2>六、小数化分数：方法与技巧</h2>
   <div class="story">
     <p>小数和分数不是两家人——<strong>有限小数本来就是分数的另一种写法</strong>。0.3 读作"十分之三"，名字里已经藏着分母了：</p>
-    <p style="text-align:center;font-size:18px;">0.3 = 3/10，&nbsp;&nbsp; 0.25 = 25/100，&nbsp;&nbsp; 0.125 = 125/1000</p>
+    <p class="tc fs-18">0.3 = 3/10，&nbsp;&nbsp; 0.25 = 25/100，&nbsp;&nbsp; 0.125 = 125/1000</p>
     <p>小数点后面有几位，分母就是 10、100、1000……（1 后面跟几个 0）。小数点把数按"十、百、千"切好份，分数只是把这件事说得更直白。</p>
   </div>
   <div class="key">
@@ -186,14 +153,14 @@
   <h2>阿拉伯人分骆驼的故事</h2>
   <div class="story">
     <p>一位阿拉伯老人去世了，留给三个儿子 17 匹骆驼。遗嘱上写着：</p>
-    <p style="text-align:center;font-size:18px;">老大分 1/2，老二分 1/3，老三分 1/9</p>
+    <p class="tc fs-18">老大分 1/2，老二分 1/3，老三分 1/9</p>
     <p>三个儿子开始发愁：17 匹骆驼，怎么分？</p>
     <p>老大要 17 的 1/2 = 8.5 匹——骆驼能劈成两半吗？<br>
     老二要 17 的 1/3 ≈ 5.67 匹——也不行！<br>
     老三要 17 的 1/9 ≈ 1.89 匹——还是不行！</p>
     <p>三兄弟吵了半天也没结果。这时，一个骑骆驼的智者路过，问清情况后说："借你们一匹骆驼，凑成 18 匹，分完再还我。"</p>
     <p>18 匹骆驼：</p>
-    <p style="text-align:center;font-size:18px;">老大：18 × 1/2 = 9 匹<br>老二：18 × 1/3 = 6 匹<br>老三：18 × 1/9 = 2 匹</p>
+    <p class="tc fs-18">老大：18 × 1/2 = 9 匹<br>老二：18 × 1/3 = 6 匹<br>老三：18 × 1/9 = 2 匹</p>
     <p>9 + 6 + 2 = 17 匹！正好分完了，剩下 1 匹还给智者。三兄弟佩服得五体投地。</p>
   </div>
 
@@ -280,7 +247,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="negative-numbers.html">下一课：负数 →</a></p>
+  <p class="back-bottom"><a href="negative-numbers.html">下一课：负数 →</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
@@ -301,7 +268,7 @@ function showFraction(total, filled) {
     var x2 = 65 * Math.cos(r2), y2 = 65 * Math.sin(r2);
     var large = (angle > 180) ? 1 : 0;
     var fill = i < filled ? colors[i] : '#f0f0f0';
-    html += '<path d="M0,0 L' + x1.toFixed(1) + ',' + y1.toFixed(1) + ' A65,65 0 ' + large + ',1 ' + x2.toFixed(1) + ',' + y2.toFixed(1) + ' Z" fill="' + fill + '" stroke="#fff" stroke-width="1.5" style="transition:fill 0.3s"/>';
+    html += '<path d="M0,0 L' + x1.toFixed(1) + ',' + y1.toFixed(1) + ' A65,65 0 ' + large + ',1 ' + x2.toFixed(1) + ',' + y2.toFixed(1) + ' Z" fill="' + fill + '" stroke="#fff" stroke-width="1.5"/ class="trans-fill">';
   }
   t.innerHTML = html;
   lbl.textContent = filled + '/' + total;

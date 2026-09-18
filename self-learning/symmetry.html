@@ -6,38 +6,11 @@
 <title>轴对称 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦋</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #004d40; }
-  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e0f2f1; border-left: 4px solid #00897b; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #e0f7fa; border-left: 4px solid #00acc1; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-  .graphic { margin: 16px 0; text-align: center; }
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
-  }
-</style>
 </head>
-<body>
+<body class="p-symmetry">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./triangle.html">课件 14（三角形）</a>、15（全等三角形）</p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="./triangle.html">课件 14（三角形）</a>、15（全等三角形）</p>
   <h1>轴对称 — 大自然最爱的设计</h1>
 
   <h2>起源：蝴蝶的翅膀</h2>
@@ -58,12 +31,8 @@
     </div>
 
     <div class="graphic">
-      <svg viewBox="0 0 640 280" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 640 280" class="img-fluid">
         <defs>
-          <style>
-            text.label { font-size:14px; fill:#333; font-family:serif; }
-            text.desc { font-size:13px; fill:#555; text-anchor:middle; }
-          </style>
         </defs>
         <!-- 蝴蝶 -->
         <text x="320" y="32" text-anchor="middle" font-size="16" fill="#333" font-weight="bold">轴对称图形：蝴蝶</text>
@@ -117,11 +86,8 @@
     <p>对应点和对称轴之间有什么关系呢？</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 640 300" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 640 300" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
         </defs>
         <!-- 对称轴 -->
         <line x1="320" y1="30" x2="320" y2="280" stroke="#6a1b9a" stroke-width="2.5" stroke-dasharray="8,4"/>
@@ -187,11 +153,8 @@
     <p>反过来也成立：到线段两端距离相等的点，在这条线段的垂直平分线上。</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 640 280" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 640 280" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
         </defs>
         <!-- 线段AB -->
         <line x1="100" y1="210" x2="460" y2="210" stroke="#333" stroke-width="2.5"/>
@@ -257,11 +220,8 @@
     </div>
 
     <div class="graphic">
-      <svg viewBox="0 0 500 300" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 500 300" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
         </defs>
         <!-- 等腰三角形 -->
         <polygon points="80,250 420,250 250,60" fill="rgba(0,77,64,0.12)" stroke="#004d40" stroke-width="2.5"/>
@@ -301,15 +261,12 @@
     <p>这是等腰三角形最神奇的性质！刚才我们作的顶角平分线 AD，它同时还是<strong>底边上的中线</strong>和<strong>底边上的高</strong>。也就是说：</p>
 
     <div class="formula">
-      <p style="font-size:1.1em;text-align:center;color:#004d40;"><strong>等腰三角形中，顶角平分线、底边上的中线、底边上的高，三条线重合！</strong></p>
+      <p class="fs-lg tc"><strong>等腰三角形中，顶角平分线、底边上的中线、底边上的高，三条线重合！</strong></p>
     </div>
 
     <div class="graphic">
-      <svg viewBox="0 0 500 320" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 500 320" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
         </defs>
         <!-- 等腰三角形 -->
         <polygon points="80,260 420,260 250,60" fill="rgba(0,77,64,0.1)" stroke="#004d40" stroke-width="2.5"/>
@@ -376,11 +333,8 @@
     <p>于是，"从 A 到河边再到 B" 的最短路径，就变成了 "从 A' 到 B 的直线"！</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 700 480" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 700 480" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
         </defs>
         <!-- 标题 -->
         <text x="350" y="28" text-anchor="middle" font-size="16" fill="#333" font-weight="bold">将军饮马：轴对称解法</text>
@@ -469,11 +423,8 @@
     <p>轴对称不只是数学定理，它还是<strong>设计的重要工具</strong>。很多美丽的图案，都是通过轴对称创作出来的。</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 640 240" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 640 240" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
         </defs>
         <text x="320" y="28" text-anchor="middle" font-size="16" fill="#333" font-weight="bold">轴对称设计示例</text>
 
@@ -667,7 +618,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="pythagorean.html">下一课：勾股定理 →</a></p>
+  <p class="back-bottom"><a href="pythagorean.html">下一课：勾股定理 →</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }

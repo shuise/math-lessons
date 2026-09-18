@@ -6,38 +6,11 @@
 <title>二元一次方程组 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #33691e; }
-  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed #33691e; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; line-height: 1.8; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-  .svg-fig { max-width: 100%; height: auto; display: block; margin: 0 auto; }
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
-  }
-</style>
 </head>
-<body>
+<body class="p-linear-systems">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./linear-equations.html">课件 8（一元一次方程——等式的天平）</a></p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="./linear-equations.html">课件 8（一元一次方程——等式的天平）</a></p>
   <h1>二元一次方程组</h1>
 
   <h2>起源：一个未知数不够用了</h2>
@@ -77,7 +50,7 @@
     <p>把两个二元一次方程用大括号联立起来，它们的公共解同时满足两个方程，这就是<strong>二元一次方程组</strong>。</p>
     <div class="formula">
       <p><strong>方程组</strong>就是两个方程"组队"一起约束：</p>
-      <p style="font-size:1.2em;">{ x + y = 10<br>　2x − y = 5 }</p>
+      <p class="fs-lg">{ x + y = 10<br>　2x − y = 5 }</p>
       <p>满足上面所有方程的 x、y 的值，叫做方程组的<strong>解</strong>。</p>
     </div>
 
@@ -238,14 +211,14 @@
   <div class="story">
     <p>既然二元一次方程组能解决两个未知数的问题，那如果遇到<strong>三个</strong>未知数呢？自然就有了三元一次方程组。</p>
 
-    <div class="formula" style="text-align:left;">
+    <div class="formula tl">
       <p><strong>思路类比：</strong></p>
-      <ul style="text-align:left;">
+      <ul class="tl">
         <li>一元一次方程 → 一个未知数，一个方程</li>
         <li>二元一次方程组 → 两个未知数，两个方程</li>
         <li>三元一次方程组 → 三个未知数，三个方程</li>
       </ul>
-      <p style="text-align:left;">未知数变多了，但<strong>思路不变</strong>：消元，再消元，直到只剩一个未知数。</p>
+      <p class="tl">未知数变多了，但<strong>思路不变</strong>：消元，再消元，直到只剩一个未知数。</p>
     </div>
 
     <div class="example">
@@ -273,7 +246,7 @@
     <p><strong>中国古代的"方程术"：</strong>早在两千多年前的《九章算术》第八章"方程"中，就系统地介绍了线性方程组的解法。古人是把方程组的系数排成一个方阵（叫"方程"），用算筹（小竹棍）摆成矩阵的形式，然后进行类似于今天"加减消元"的操作。这种方法比西方早了 1500 多年！</p>
     <p><strong>具体例子（《九章算术》方程章第一题，"禾谷问题"）：</strong>上等禾 3 捆、中等禾 2 捆、下等禾 1 捆，共打出 39 斗谷子；上等禾 2 捆、中等禾 3 捆、下等禾 1 捆，共打出 34 斗；上等禾 1 捆、中等禾 2 捆、下等禾 3 捆，共打出 26 斗。问三种禾每捆各打多少斗？</p>
     <p>列成方程组（设上、中、下禾每捆分别打 x、y、z 斗）：</p>
-    <p style="text-align:left;">
+    <p class="tl">
       { 3x + 2y + z = 39 ……①<br>
       　2x + 3y + z = 34 ……②<br>
       　x + 2y + 3z = 26 ……③ }
@@ -282,7 +255,7 @@
     <p>这本质上就是今天的加减消元——只不过古人不用字母，而是直接在算筹方阵上做"消减"。把方程组解成阶梯形再回代，思路和今天的加减消元完全一致，只是早了 1800 年。</p>
     <p><strong>古希腊的"辗转相消法"：</strong>公元 3 世纪，古希腊数学家丢番图（Diophantus）在《算术》一书中也研究了多元一次方程。他最擅长的是<strong>"辗转相消"——反复用大方程减去小方程，把未知数一个一个消掉</strong>，本质上还是加减消元，但更注重求整数解（这就是"不定方程"的研究起点）。</p>
     <p><strong>具体例子（丢番图《算术》卷 I 第 5 题简化）：</strong>设有两个数，和为 20，差为 4，求这两个数。</p>
-    <p style="text-align:left;">
+    <p class="tl">
       { x + y = 20 ……①<br>
       　x − y = 4 ……② }
     </p>
@@ -390,7 +363,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="inequalities.html">下一课：不等式 →</a></p>
+  <p class="back-bottom"><a href="inequalities.html">下一课：不等式 →</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }

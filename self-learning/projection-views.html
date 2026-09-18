@@ -6,45 +6,11 @@
 <title>投影与视图 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #311b92; }
-  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #ede7f6; border-left: 4px solid #5e35b1; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-  .graphic { text-align: center; margin: 16px 0; }
-  .graphic svg { max-width: 100%; height: auto; }
-  .three-view-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
-  .three-view-item { border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px; text-align: center; }
-  .three-view-item.main { border-color: #5e35b1; }
-  .three-view-item.top { border-color: #2196f3; }
-  .three-view-item.left { border-color: #4caf50; }
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
-    .three-view-grid { grid-template-columns: 1fr; }
-  }
-</style>
 </head>
-<body>
+<body class="p-projection-views">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./geometry-basics.html">课件 10（几何图形——立体图形与视图概念）</a></p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="./geometry-basics.html">课件 10（几何图形——立体图形与视图概念）</a></p>
   <h1>投影与视图</h1>
 
   <h2>起源：当画家开始"看见"三维</h2>
@@ -63,7 +29,7 @@
     <h3>1. 中心投影</h3>
     <p>光线从<strong>一个点</strong>发出（就像路灯、手电筒），照在物体上形成影子。这种投影的特点是：<strong>物体离光源越近，影子越大</strong>。你的影子在路灯下就是这样——你离路灯越近，影子越长。</p>
     <div class="graphic">
-      <svg viewBox="0 0 500 200" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 500 200" class="img-fluid">
         <defs>
           <radialGradient id="light" cx="50%" cy="0%" r="80%">
             <stop offset="0%" stop-color="#fff9c4" stop-opacity="0.8"/>
@@ -96,7 +62,7 @@
     <h3>2. 平行投影</h3>
     <p>光线<strong>互相平行</strong>（就像太阳光——太阳离我们太远，射来的光线几乎平行），照在物体上形成影子。平行投影中，<strong>物体的大小和影子的大小成固定比例</strong>，不会"近大远小"。</p>
     <div class="graphic">
-      <svg viewBox="0 0 500 200" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 500 200" class="img-fluid">
         <rect x="0" y="160" width="500" height="40" fill="#e0e0e0" stroke="#999" stroke-width="1"/>
         <text x="250" y="192" text-anchor="middle" fill="#666" font-size="12">投影面</text>
         <!-- 平行光线 -->
@@ -136,9 +102,9 @@
     <div class="formula">
       <table>
         <tr><th>视图</th><th>观察方向</th><th>看到什么</th></tr>
-        <tr><td><span style="color:#5e35b1;font-weight:bold;">主视图</span></td><td>从<span style="color:#5e35b1;">正前方</span>看</td><td>物体的<strong>高度</strong>和<strong>长度</strong></td></tr>
-        <tr><td><span style="color:#2196f3;font-weight:bold;">俯视图</span></td><td>从<span style="color:#2196f3;">正上方</span>往下看</td><td>物体的<strong>长度</strong>和<strong>宽度</strong></td></tr>
-        <tr><td><span style="color:#4caf50;font-weight:bold;">左视图</span></td><td>从<span style="color:#4caf50;">正左方</span>看</td><td>物体的<strong>宽度</strong>和<strong>高度</strong></td></tr>
+        <tr><td><span class="fw-bold">主视图</span></td><td>从<span>正前方</span>看</td><td>物体的<strong>高度</strong>和<strong>长度</strong></td></tr>
+        <tr><td><span class="fw-bold">俯视图</span></td><td>从<span>正上方</span>往下看</td><td>物体的<strong>长度</strong>和<strong>宽度</strong></td></tr>
+        <tr><td><span class="text-ok fw-bold">左视图</span></td><td>从<span class="text-ok">正左方</span>看</td><td>物体的<strong>宽度</strong>和<strong>高度</strong></td></tr>
       </table>
     </div>
     <div class="key">
@@ -154,9 +120,8 @@
     <h3>示例：一个 L 形积木的三视图</h3>
     <p>想象一个 L 形积木：正面宽 3、高 2（呈 L 形），侧面深 1、高 2，上面宽 3、深 1。我们来画出它的三视图：</p>
     <div class="graphic">
-      <svg viewBox="0 0 620 400" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 620 400" class="img-fluid">
         <defs>
-          <style>text.label { font-size: 12px; font-weight: bold; }</style>
         </defs>
         <!-- 立体图（上方）-->
         <text x="400" y="18" text-anchor="middle" class="label" fill="#311b92">立体图形（L 形积木）</text>
@@ -236,7 +201,7 @@
     <h3>例题：还原立体图形</h3>
     <p>根据下面的三视图，想象这个立体图形是什么样子的？它由几个小正方体组成？</p>
     <div class="graphic">
-      <svg viewBox="0 0 520 390" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 520 390" class="img-fluid">
         <!-- 主视图 -->
         <text x="75" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#5e35b1">主视图</text>
         <rect x="30" y="30" width="90" height="90" fill="none" stroke="#5e35b1" stroke-width="2"/>
@@ -299,19 +264,19 @@
   </div>
 
   <h2>四、制作立体模型（课题学习）</h2>
-  <div class="story" style="text-align:left;">
-    <p style="text-align:left;">学了三视图之后，最好的理解方式就是<strong>动手做</strong>。找一些正方体小积木（或者用橡皮切成小方块），来玩一个"设计师游戏"：</p>
-    <div class="formula" style="text-align:left;">
-      <p style="text-align:left;"><strong>游戏规则：</strong></p>
-      <ol style="text-align:left;">
+  <div class="story tl">
+    <p class="tl">学了三视图之后，最好的理解方式就是<strong>动手做</strong>。找一些正方体小积木（或者用橡皮切成小方块），来玩一个"设计师游戏"：</p>
+    <div class="formula tl">
+      <p class="tl"><strong>游戏规则：</strong></p>
+      <ol class="tl">
         <li><strong>角色 A（设计师）：</strong>用 4~8 个小正方体搭出一个立体图形，然后画出它的三视图。</li>
         <li><strong>角色 B（工程师）：</strong>只看三视图（不看实物），用小正方体还原出立体图形。</li>
         <li><strong>检验：</strong>比较两人的模型是否完全一样。</li>
       </ol>
-      <p style="margin-top:12px;text-align:left;">如果没有积木，也可以用<strong>方格纸</strong>画三视图，然后在方格纸上标注每个位置的高度数字（这叫"俯视图标注法"），再用橡皮泥捏出形状。</p>
+      <p class="mt-12 tl">如果没有积木，也可以用<strong>方格纸</strong>画三视图，然后在方格纸上标注每个位置的高度数字（这叫"俯视图标注法"），再用橡皮泥捏出形状。</p>
     </div>
-    <div class="key" style="text-align:left;">
-      <p style="text-align:left;"><strong>思考：</strong>如果只给主视图和俯视图（不给左视图），你能唯一确定一个立体图形吗？试试看，你会发现有时候<strong>三视图缺一不可</strong>！</p>
+    <div class="key tl">
+      <p class="tl"><strong>思考：</strong>如果只给主视图和俯视图（不给左视图），你能唯一确定一个立体图形吗？试试看，你会发现有时候<strong>三视图缺一不可</strong>！</p>
     </div>
   </div>
 
@@ -321,7 +286,7 @@
     <p><strong>现代应用：</strong>今天你用的所有产品——手机、汽车、椅子、大楼——在制造之前，设计师都用三视图（以及更复杂的投影图）来精确描述每一个零件的形状。计算机辅助设计（CAD）软件的核心原理，就是蒙日 200 多年前发明的画法几何。</p>
     <p>下面是一个机械零件的三视图实例（来自 CAD 软件），可以看到主视图、俯视图和左视图如何精确描述一个零件的形状：</p>
     <div class="graphic">
-      <img src="res/cad.png" alt="机械零件三视图（CAD 图纸实例）" style="max-width:100%;height:auto;border:1px solid #e0e0e0;border-radius:8px;"/>
+      <img src="res/cad.png" alt="机械零件三视图（CAD 图纸实例）"/ class="img-fluid img-framed">
     </div>
     <p>《一个数学家的叹息》中 Lockhart 说："数学不是计算，而是观察模式。三视图就是观察三维世界的一种模式语言。"</p>
   </div>
@@ -337,9 +302,9 @@
   <h2>挑战性问题</h2>
   <div class="challenge">
     <p><strong>互动演示：圆柱体的投影</strong></p>
-    <p style="font-size:14px;color:#666;">下面是一个可旋转的圆柱体，配备一个光源和它在地面上的投影（影子）。点击按钮可快速查看正面、上面、左面三个方向的视图。</p>
-    <div class="graphic" style="background:#fafafa;border:1px solid #e0e0e0;border-radius:8px;padding:12px;">
-      <svg id="cyl3d" viewBox="0 0 420 300" style="max-width:100%;height:auto;">
+    <p class="fs-14 muted-2">下面是一个可旋转的圆柱体，配备一个光源和它在地面上的投影（影子）。点击按钮可快速查看正面、上面、左面三个方向的视图。</p>
+    <div class="graphic panel-bg p-12">
+      <svg id="cyl3d" viewBox="0 0 420 300" class="img-fluid">
         <ellipse cx="210" cy="252" rx="178" ry="22" fill="#e0e0e0" opacity="0.5"/>
         <g id="cylRays"></g>
         <g id="cylShadow"></g>
@@ -348,34 +313,34 @@
         <text x="62" y="29" text-anchor="middle" fill="#6d4c41" font-size="11">光源</text>
         <text x="210" y="287" text-anchor="middle" fill="#999" font-size="11">地面（投影面）</text>
       </svg>
-      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+      <div class="flex-center-row mt-10">
         <button class="btn-sm" onclick="setView('front')">正面（主视图）</button>
         <button class="btn-sm" onclick="setView('top')">上面（俯视图）</button>
         <button class="btn-sm" onclick="setView('left')">左面（左视图）</button>
         <button class="btn-sm" onclick="toggleAuto()">暂停/继续旋转</button>
       </div>
-      <div style="margin-top:12px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;align-items:center;">
-        <span style="font-size:13px;color:#666;">投影结果：</span>
-        <svg id="cyl2d" viewBox="0 0 170 130" style="width:170px;height:130px;border:1px dashed #ccc;border-radius:6px;background:#fff;">
+      <div class="flex-center-row-lg mt-12">
+        <span class="fs-13 muted-2">投影结果：</span>
+        <svg id="cyl2d" viewBox="0 0 170 130" class="thumb-box">
           <g id="cyl2dBody"></g>
         </svg>
-        <span id="cylDesc" style="font-size:13px;color:#311b92;font-weight:bold;">立体透视（自动旋转中）</span>
+        <span id="cylDesc" class="fs-13 fw-bold">立体透视（自动旋转中）</span>
       </div>
     </div>
 
-    <p style="margin-top:16px;"><strong>问题 1：</strong>一个圆柱体，分别从正面、上面、左面看，看到的形状分别是什么？</p>
+    <p class="mt-16"><strong>问题 1：</strong>一个圆柱体，分别从正面、上面、左面看，看到的形状分别是什么？</p>
     <button class="btn-sm" onclick="toggleHint('ch1')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('ca1')">查看答案</button>
     <div class="hint-box" id="ch1">圆柱的顶面和底面是圆形，侧面是曲面。从正面看到的是侧面，从上面看到的是顶面。</div>
     <div class="ans-box" id="ca1">正面看：<strong>矩形</strong>（看到圆柱的侧面）。上面看：<strong>圆</strong>（看到圆柱的顶面）。左面看：<strong>矩形</strong>（与正面看到的形状相同——这正是圆柱体的特点）。</div>
 
-    <p style="margin-top:14px;"><strong>问题 2：</strong>如果俯视图是一个圆，主视图和左视图都是矩形，这个立体图形可能是什么？</p>
+    <p class="mt-14"><strong>问题 2：</strong>如果俯视图是一个圆，主视图和左视图都是矩形，这个立体图形可能是什么？</p>
     <button class="btn-sm" onclick="toggleHint('ch2')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('ca2')">查看答案</button>
     <div class="hint-box" id="ch2">什么样的立体图形从上面看是圆，而从正面和左面看都是矩形？想想底面是圆、侧面平整的立体。</div>
     <div class="ans-box" id="ca2">圆柱体（底面朝下放置）。</div>
 
-    <p style="margin-top:14px;"><strong>问题 3：</strong>只用主视图和俯视图（不给左视图），你能搭出几种不同的立体图形？试试用 3 个正方体，看看有多少种可能。</p>
+    <p class="mt-14"><strong>问题 3：</strong>只用主视图和俯视图（不给左视图），你能搭出几种不同的立体图形？试试用 3 个正方体，看看有多少种可能。</p>
     <button class="btn-sm" onclick="toggleHint('ch3')">思路提示</button>
     <button class="btn-sm" onclick="toggleAns('ca3')">查看答案</button>
     <div class="hint-box" id="ch3">3 个正方体搭立体图形，主视图和俯视图固定时，左视图可能不唯一——这正是"三视图缺一不可"的体现。</div>
@@ -483,7 +448,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="index.html">返回课程列表</a></p>
+  <p class="back-bottom"><a href="index.html">返回课程列表</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }

@@ -6,41 +6,11 @@
 <title>自然数、零与十进制 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔢</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #43a047; }
-  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #fce4ec; border-left: 4px solid #e91e63; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed #43a047; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #fff8e1; border: 2px solid #ffc107; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-  .num-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
-  .num-table td, .num-table th { border: 1px solid #ddd; padding: 8px 12px; text-align: center; }
-  .num-table th { background: #e8f5e9; }
-
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
-  }
-</style>
 </head>
-<body>
+<body class="p-natural-numbers">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：无需任何数学知识，只需要会数数</p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：无需任何数学知识，只需要会数数</p>
   <h1>自然数、零与十进制</h1>
 
   <h2>起源：数是怎么来的？</h2>
@@ -55,7 +25,7 @@
   <div class="story">
     <p><strong>自然数</strong>就是用来"数东西"的数：0, 1, 2, 3, 4, 5, …</p>
     <p>它们"自然"地出现在生活中——数苹果、数人数、数手指。每数一个，就加 1。这个"永远可以加 1"的性质，叫做自然数的<strong>无限性</strong>——没有最大的自然数。</p>
-    <p>注意：有些地方说自然数从 1 开始（不包括 0），有些地方从 0 开始。在我们的课程中，自然数<span style="text-decoration:underline;">从 0 开始</span>，因为 0 太重要了，不能丢掉。</p>
+    <p>注意：有些地方说自然数从 1 开始（不包括 0），有些地方从 0 开始。在我们的课程中，自然数<span class="underline">从 0 开始</span>，因为 0 太重要了，不能丢掉。</p>
   </div>
 
   <h2>二、零：印度人最伟大的发明</h2>
@@ -71,21 +41,21 @@
   <div class="story">
     <p>在零被发明之前，中国古代用<strong>算筹</strong>摆列来记数。算筹是一根根小竹棍或木棍，摆在桌面上表示数字。问题来了：<strong>怎么表示 101？</strong></p>
 
-    <div class="compare-table" style="display:grid;grid-template-columns:1fr 1fr;gap:0;margin:20px 0;border:1px solid #ddd;border-radius:8px;overflow:hidden;">
-      <div style="background:#e8eaf6;padding:12px 14px;border-bottom:2px solid #3f51b5;font-weight:bold;text-align:center;">古代中国（算筹）</div>
-      <div style="background:#e8f5e9;padding:12px 14px;border-bottom:2px solid #66bb6a;border-left:1px solid #ddd;font-weight:bold;text-align:center;">现代记数法（有 0）</div>
+    <div class="compare-table grid-2-joined">
+      <div class="cmp-head fw-bold">古代中国（算筹）</div>
+      <div class="cmp-head fw-bold">现代记数法（有 0）</div>
 
-      <div style="padding:18px 14px;border-bottom:1px solid #eee;">
-        <p style="font-size:13px;color:#888;margin-bottom:8px;">算筹摆列，空列代零</p>
-        <p style="font-size:28px;text-align:center;letter-spacing:12px;margin:16px 0;font-family:serif;">丨 &nbsp;&nbsp;&nbsp; &nbsp; 丨</p>
-        <p style="font-size:13px;color:#666;text-align:center;">竖筹=1 ▢ <strong style="color:#f44336;">空列</strong> ▢ 竖筹=1</p>
-        <p style="font-size:13px;color:#e65100;margin-top:10px;line-height:1.7;"><strong>歧义：</strong>中间空了一列，但这到底是"零"还是"没摆好"？可能是 <strong>101</strong>，也可能是 <strong>11</strong>（空位只是间距），甚至是 <strong>1001</strong>（空了一列还是两列？）。搬桌子碰歪了，空列还在不在？</p>
+      <div class="cmp-cell">
+        <p class="fs-13 muted mb-8">算筹摆列，空列代零</p>
+        <p class="tc fs-28 ls-12 mt-16 mb-16 ff-serif">丨 &nbsp;&nbsp;&nbsp; &nbsp; 丨</p>
+        <p class="fs-13 muted-2 tc">竖筹=1 ▢ <strong class="text-err">空列</strong> ▢ 竖筹=1</p>
+        <p class="fs-13 mt-10 lh-17"><strong>歧义：</strong>中间空了一列，但这到底是"零"还是"没摆好"？可能是 <strong>101</strong>，也可能是 <strong>11</strong>（空位只是间距），甚至是 <strong>1001</strong>（空了一列还是两列？）。搬桌子碰歪了，空列还在不在？</p>
       </div>
-      <div style="padding:18px 14px;border-bottom:1px solid #eee;border-left:1px solid #ddd;">
-        <p style="font-size:13px;color:#888;margin-bottom:8px;">10 个符号，0 占位</p>
-        <p style="font-size:28px;text-align:center;margin:16px 0;letter-spacing:2px;font-family:monospace;font-weight:bold;">1 0 1</p>
-        <p style="font-size:13px;color:#666;text-align:center;">百位=1 ▢ 十位=<strong style="color:#43a047;">0</strong> ▢ 个位=1</p>
-        <p style="font-size:13px;color:#43a047;margin-top:10px;line-height:1.7;"><strong>清晰：</strong>0 是一个写得出来的符号，放在那里就是"十位没有"。不可能跟 11 或 1001 混淆，因为位置被 0 明确占住了。</p>
+      <div class="cmp-cell">
+        <p class="fs-13 muted mb-8">10 个符号，0 占位</p>
+        <p class="tc fs-28 ls-2 mt-16 mb-16 ff-mono fw-bold">1 0 1</p>
+        <p class="fs-13 muted-2 tc">百位=1 ▢ 十位=<strong class="text-ok">0</strong> ▢ 个位=1</p>
+        <p class="fs-13 text-ok mt-10"><strong>清晰：</strong>0 是一个写得出来的符号，放在那里就是"十位没有"。不可能跟 11 或 1001 混淆，因为位置被 0 明确占住了。</p>
       </div>
     </div>
 
@@ -98,22 +68,9 @@
     <p>这就是<strong>位值制</strong>（Positional Numeral System）——同一个数字放在不同位置（数位），代表不同的值。每个位置的值是 10 的幂：</p>
 
     <div class="graphic">
-      <div style="text-align:center;margin-bottom:8px;font-size:14px;color:#888;">点击不同位置的"1"，看它代表多少 ↓</div>
-      <svg viewBox="0 0 500 200" style="max-width:100%;height:auto;cursor:pointer;">
+      <div class="caption">点击不同位置的"1"，看它代表多少 ↓</div>
+      <svg viewBox="0 0 500 200" cursor="pointer" class="img-fluid cursor-pointer">
         <defs>
-          <style>
-            .place-box { fill: #f5f5f5; stroke: #ddd; stroke-width: 2; rx: 8; }
-            .place-box.highlight { fill: #e8f5e9; stroke: #43a047; stroke-width: 3; }
-            .place-digit { font-size: 32px; font-weight: bold; fill: #333; text-anchor: middle; dominant-baseline: central; }
-            .place-label { font-size: 13px; fill: #888; text-anchor: middle; }
-            .place-value { font-size: 14px; fill: #43a047; text-anchor: middle; font-weight: bold; }
-            .plus-sign { font-size: 20px; fill: #e65100; text-anchor: middle; dominant-baseline: central; }
-            .arrow-line { stroke: #43a047; stroke-width: 2; fill: none; marker-end: url(#arrow); }
-            .arrow-line.hidden { opacity: 0; }
-            .formula-text { font-size: 16px; fill: #333; text-anchor: middle; }
-            @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-            .pulse { animation: pulse 1.5s ease-in-out infinite; }
-          </style>
           <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
             <polygon points="0 0, 8 3, 0 6" fill="#43a047"/>
           </marker>
@@ -122,33 +79,33 @@
         <rect x="30" y="30" width="70" height="70" class="place-box" id="box100"/>
         <text x="65" y="65" class="place-digit">1</text>
         <text x="65" y="108" class="place-label">百位</text>
-        <text x="65" y="18" class="place-value" id="val100" style="opacity:0">= 100</text>
+        <text x="65" y="18" class="place-value" id="val100" opacity="0">= 100</text>
         <line x1="65" y1="105" x2="65" y2="150" class="arrow-line hidden" id="arr100"/>
-        <text x="65" y="165" class="formula-text" style="fill:#43a047;font-weight:bold;opacity:0" id="txt100">1 × 100</text>
+        <text x="65" y="165" class="formula-text" fill="#43a047" font-weight="bold" opacity="0" id="txt100">1 × 100</text>
         <text x="110" y="65" class="plus-sign">+</text>
         <!-- 十位 -->
         <rect x="130" y="30" width="70" height="70" class="place-box" id="box10"/>
         <text x="165" y="65" class="place-digit">1</text>
         <text x="165" y="108" class="place-label">十位</text>
-        <text x="165" y="18" class="place-value" id="val10" style="opacity:0">= 10</text>
+        <text x="165" y="18" class="place-value" id="val10" opacity="0">= 10</text>
         <line x1="165" y1="105" x2="165" y2="150" class="arrow-line hidden" id="arr10"/>
-        <text x="165" y="165" class="formula-text" style="fill:#e65100;font-weight:bold;opacity:0" id="txt10">1 × 10</text>
+        <text x="165" y="165" class="formula-text" fill="#e65100" font-weight="bold" opacity="0" id="txt10">1 × 10</text>
         <text x="210" y="65" class="plus-sign">+</text>
         <!-- 个位 -->
         <rect x="230" y="30" width="70" height="70" class="place-box" id="box1"/>
         <text x="265" y="65" class="place-digit">1</text>
         <text x="265" y="108" class="place-label">个位</text>
-        <text x="265" y="18" class="place-value" id="val1" style="opacity:0">= 1</text>
+        <text x="265" y="18" class="place-value" id="val1" opacity="0">= 1</text>
         <line x1="265" y1="105" x2="265" y2="150" class="arrow-line hidden" id="arr1"/>
-        <text x="265" y="165" class="formula-text" style="fill:#7b1fa2;font-weight:bold;opacity:0" id="txt1">1 × 1</text>
+        <text x="265" y="165" class="formula-text" fill="#7b1fa2" font-weight="bold" opacity="0" id="txt1">1 × 1</text>
         <!-- 底部结果 -->
-        <text x="250" y="192" class="formula-text" style="font-weight:bold;fill:#333;font-size:18px" id="result">= 111</text>
+        <text x="250" y="192" class="formula-text" font-weight="bold" fill="#333" font-size="18px" id="result">= 111</text>
       </svg>
     </div>
 
     <div class="formula">
-      <p style="text-align:center;font-size:18px;"><strong>111 = 1×100 + 1×10 + 1×1 = 1×10² + 1×10¹ + 1×10⁰</strong></p>
-      <p style="text-align:center;">个位是 10⁰ = 1，十位是 10¹ = 10，百位是 10² = 100</p>
+      <p class="tc fs-18"><strong>111 = 1×100 + 1×10 + 1×1 = 1×10² + 1×10¹ + 1×10⁰</strong></p>
+      <p class="tc">个位是 10⁰ = 1，十位是 10¹ = 10，百位是 10² = 100</p>
     </div>
     <p>中国古代用中文数字记数时，"一百一十一"里的三个"一"虽然位置不同，但它们的大小是由<strong>量词</strong>（百、十、个）来区分的，而不是由<strong>位置本身</strong>区分。你必须写出"百""十"这些字，才知道每个"一"多大。而位值制的好处是：<strong>不需要写量词，位置本身就告诉你一切。</strong></p>
   </div>
@@ -157,27 +114,27 @@
   <div class="key">
     <p>在数学中，<strong>数位</strong>（Digit Position）以及基于数位建立的<strong>位值制</strong>（Positional Numeral System），是人类文明史上最伟大的数学发明之一。中国古代虽然有算筹和算盘——它们本质上是位值制的工具——但<strong>书写系统</strong>并没有完全采用位值制（要写"三百零五"而不是"305"）。当印度-阿拉伯数字传来后，位值制的全部威力才真正释放：</p>
 
-    <div style="margin-top:16px;">
+    <div class="mt-16">
       <p><strong>① 极其高效的记数能力——用极少符号表示无限数值</strong></p>
-      <p style="padding-left:16px;">只需要 <strong>0-9</strong> 这 10 个符号，通过放在不同数位上，就能表示任意大的数。同一个"5"，在个位是 5，在百位是 500，在万位是 50000。中文数字要写"五万"，而位值制只需要"50000"——五个字符就搞定。</p>
+      <p class="pl-16">只需要 <strong>0-9</strong> 这 10 个符号，通过放在不同数位上，就能表示任意大的数。同一个"5"，在个位是 5，在百位是 500，在万位是 50000。中文数字要写"五万"，而位值制只需要"50000"——五个字符就搞定。</p>
 
-      <p style="margin-top:12px;"><strong>② 彻底变革并简化了数学计算——算法化</strong></p>
-      <p style="padding-left:16px;">有了数位，加减乘除变成了可标准化的<strong>算法流程</strong>：对齐数位、满十进一、退一当十。用中文数字做竖式？"三百二十五加一百七十八"——你怎么对齐？而 325 + 178，对齐数位后逐位相加，连小学生都能算。中国古代要用算盘才能快速计算，而位值制让<strong>纸笔就能完成</strong>。</p>
+      <p class="mt-12"><strong>② 彻底变革并简化了数学计算——算法化</strong></p>
+      <p class="pl-16">有了数位，加减乘除变成了可标准化的<strong>算法流程</strong>：对齐数位、满十进一、退一当十。用中文数字做竖式？"三百二十五加一百七十八"——你怎么对齐？而 325 + 178，对齐数位后逐位相加，连小学生都能算。中国古代要用算盘才能快速计算，而位值制让<strong>纸笔就能完成</strong>。</p>
 
-      <p style="margin-top:12px;"><strong>③ 完美适配"0"的引入——数位的物理载体</strong></p>
-      <p style="padding-left:16px;">数位系统让"0"作为<strong>占位符</strong>发挥了巨大作用。15、105、1005——三个数只差中间多了几个 0，意思完全不同。没有数位结构，"0"就失去了作为位置标尺的意义。反过来说，没有"0"，位值制也无法成立（101 的十位用什么占？）。</p>
+      <p class="mt-12"><strong>③ 完美适配"0"的引入——数位的物理载体</strong></p>
+      <p class="pl-16">数位系统让"0"作为<strong>占位符</strong>发挥了巨大作用。15、105、1005——三个数只差中间多了几个 0，意思完全不同。没有数位结构，"0"就失去了作为位置标尺的意义。反过来说，没有"0"，位值制也无法成立（101 的十位用什么占？）。</p>
 
-      <p style="margin-top:12px;"><strong>④ 轻松扩展至小数与实数——无限延伸</strong></p>
-      <p style="padding-left:16px;">数位不仅可以向左（十、百、千、万……）无限扩展，还可以通过<strong>小数点</strong>向右（十分位、百分位、千分位……）无限延伸。3.14159——小数点后每一位都是 10 的负幂。中文数字说"三点一四一五九"勉强能行，但 π = 3.14159265358979……写起来就太长了。位值制让<strong>连续量</strong>也能精确记录，为微积分和高等数学奠定了基础。</p>
+      <p class="mt-12"><strong>④ 轻松扩展至小数与实数——无限延伸</strong></p>
+      <p class="pl-16">数位不仅可以向左（十、百、千、万……）无限扩展，还可以通过<strong>小数点</strong>向右（十分位、百分位、千分位……）无限延伸。3.14159——小数点后每一位都是 10 的负幂。中文数字说"三点一四一五九"勉强能行，但 π = 3.14159265358979……写起来就太长了。位值制让<strong>连续量</strong>也能精确记录，为微积分和高等数学奠定了基础。</p>
 
-      <p style="margin-top:12px;"><strong>⑤ 无缝兼容任意进制——计算机科学的基石</strong></p>
-      <p style="padding-left:16px;">位值制的原理不局限于十进制。二进制（0 和 1）、八进制、十六进制都建立在相同的数位逻辑之上——只不过"逢几进一"不同。十进制逢十进一，二进制逢二进一。正是因为二进制数位（Bit）在表达与计算上的极简性，现代计算机和数字文明才得以建立。你正在看的屏幕上的每一个字，背后都是 0 和 1 的数位组合。</p>
+      <p class="mt-12"><strong>⑤ 无缝兼容任意进制——计算机科学的基石</strong></p>
+      <p class="pl-16">位值制的原理不局限于十进制。二进制（0 和 1）、八进制、十六进制都建立在相同的数位逻辑之上——只不过"逢几进一"不同。十进制逢十进一，二进制逢二进一。正是因为二进制数位（Bit）在表达与计算上的极简性，现代计算机和数字文明才得以建立。你正在看的屏幕上的每一个字，背后都是 0 和 1 的数位组合。</p>
     </div>
   </div>
 
   <div class="formula">
-    <p style="text-align:center;font-size:16px;"><strong>总结：位值制的好处在于"以简驭繁"</strong></p>
-    <p style="text-align:center;color:#666;">它把复杂的"数量"转化为有规律的"位置"，将繁琐的"计数与算术"简化为标准化的"机械算法"，极大地降低了人类理解与运用数学的门槛。</p>
+    <p class="tc fs-16"><strong>总结：位值制的好处在于"以简驭繁"</strong></p>
+    <p class="tc muted-2">它把复杂的"数量"转化为有规律的"位置"，将繁琐的"计数与算术"简化为标准化的"机械算法"，极大地降低了人类理解与运用数学的门槛。</p>
   </div>
 
   <h2>四、为什么是十进制？</h2>
@@ -191,41 +148,41 @@
   <div class="story">
     <p>你可能觉得十进制是"天经地义"的，但其实生活中到处藏着别的进制——只是你太熟悉了，没注意到：</p>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;">
-      <div style="background:#e8f5e9;padding:14px;border-radius:8px;border-left:4px solid #66bb6a;">
-        <p style="font-size:15px;font-weight:bold;margin-bottom:4px;">⏰ 60 进制——时间</p>
-        <p style="font-size:14px;color:#555;line-height:1.7;">1 分钟 = 60 秒，1 小时 = 60 分钟。这是古巴比伦人留下的遗产——他们用 60 进制，因为 60 能被 2、3、4、5、6、10、12、15、20、30 整除，分东西特别方便。你看时钟：1:30 = 90 分钟，这就是 60 进制的日常。</p>
+    <div class="grid-2">
+      <div class="key">
+        <p class="fs-15 fw-bold mb-4">⏰ 60 进制——时间</p>
+        <p class="fs-14 muted-2 lh-17">1 分钟 = 60 秒，1 小时 = 60 分钟。这是古巴比伦人留下的遗产——他们用 60 进制，因为 60 能被 2、3、4、5、6、10、12、15、20、30 整除，分东西特别方便。你看时钟：1:30 = 90 分钟，这就是 60 进制的日常。</p>
       </div>
-      <div style="background:#e8eaf6;padding:14px;border-radius:8px;border-left:4px solid #3f51b5;">
-        <p style="font-size:15px;font-weight:bold;margin-bottom:4px;">📅 7 进制——星期</p>
-        <p style="font-size:14px;color:#555;line-height:1.7;">一周 7 天，过了 7 天就回到"星期一"——这就是逢七进一。为什么是 7？因为古人看到月亮从圆到缺再到圆大约 28 天，分四段，每段 7 天。</p>
+      <div class="story">
+        <p class="fs-15 fw-bold mb-4">📅 7 进制——星期</p>
+        <p class="fs-14 muted-2 lh-17">一周 7 天，过了 7 天就回到"星期一"——这就是逢七进一。为什么是 7？因为古人看到月亮从圆到缺再到圆大约 28 天，分四段，每段 7 天。</p>
       </div>
-      <div style="background:#fff3e0;padding:14px;border-radius:8px;border-left:4px solid #ff9800;">
-        <p style="font-size:15px;font-weight:bold;margin-bottom:4px;">📦 12 进制——打</p>
-        <p style="font-size:14px;color:#555;line-height:1.7;">"一打"鸡蛋 = 12 个。为什么是 12？因为 12 能被 2、3、4、6 整除，分东西方便（一半 6 个，三分之一 4 个，四分之一 3 个）。中文里"打"这个字就是从英语"dozen"借来的。</p>
+      <div class="note">
+        <p class="fs-15 fw-bold mb-4">📦 12 进制——打</p>
+        <p class="fs-14 muted-2 lh-17">"一打"鸡蛋 = 12 个。为什么是 12？因为 12 能被 2、3、4、6 整除，分东西方便（一半 6 个，三分之一 4 个，四分之一 3 个）。中文里"打"这个字就是从英语"dozen"借来的。</p>
       </div>
-      <div style="background:#fce4ec;padding:14px;border-radius:8px;border-left:4px solid #e91e63;">
-        <p style="font-size:15px;font-weight:bold;margin-bottom:4px;">🥚 24 进制——鸡蛋</p>
-        <p style="font-size:14px;color:#555;line-height:1.7;">超市里一板鸡蛋 = 24 个（两打）。这也是 12 进制的延伸。中国古代的"斤"= 16 两（半斤八两），用的是 16 进制——半斤正好 8 两。</p>
+      <div class="example">
+        <p class="fs-15 fw-bold mb-4">🥚 24 进制——鸡蛋</p>
+        <p class="fs-14 muted-2 lh-17">超市里一板鸡蛋 = 24 个（两打）。这也是 12 进制的延伸。中国古代的"斤"= 16 两（半斤八两），用的是 16 进制——半斤正好 8 两。</p>
       </div>
-      <div style="background:#f3e5f5;padding:14px;border-radius:8px;border-left:4px solid #9c27b0;">
-        <p style="font-size:15px;font-weight:bold;margin-bottom:4px;">💻 2 进制——计算机</p>
-        <p style="font-size:14px;color:#555;line-height:1.7;">计算机内部只用 0 和 1。因为电路只有两种状态：通电/断电（开/关）。逢二进一：1 + 1 = 10（二进制的"10"就是十进制的 2）。你手机里的每一张照片，都是成千上万个 0 和 1 的组合。</p>
+      <div class="quote">
+        <p class="fs-15 fw-bold mb-4">💻 2 进制——计算机</p>
+        <p class="fs-14 muted-2 lh-17">计算机内部只用 0 和 1。因为电路只有两种状态：通电/断电（开/关）。逢二进一：1 + 1 = 10（二进制的"10"就是十进制的 2）。你手机里的每一张照片，都是成千上万个 0 和 1 的组合。</p>
       </div>
-      <div style="background:#e0f7fa;padding:14px;border-radius:8px;border-left:4px solid #00acc1;">
-        <p style="font-size:15px;font-weight:bold;margin-bottom:4px;">📐 360 进制——角度</p>
-        <p style="font-size:14px;color:#555;line-height:1.7;">一个圆 = 360°。这也是古巴比伦人的遗产。他们发现一年大约 360 天，所以把圆分成 360 份。直角 = 90°，正好是 360 的四分之一。</p>
+      <div class="story">
+        <p class="fs-15 fw-bold mb-4">📐 360 进制——角度</p>
+        <p class="fs-14 muted-2 lh-17">一个圆 = 360°。这也是古巴比伦人的遗产。他们发现一年大约 360 天，所以把圆分成 360 份。直角 = 90°，正好是 360 的四分之一。</p>
       </div>
     </div>
 
-    <div class="formula" style="text-align:left">
-      <p style="font-size:15px;color:#333;line-height:2;">
+    <div class="formula tl">
+      <p class="fs-15 lh-2">
         <strong>用 10 进制和 2 进制对比理解"3"：</strong><br>
         十进制下，3 就是 3——3 个 1。<br>
         二进制下，逢二进一：1 是 1，2 写成 10（个位满 2 进一位），3 写成 11（个位 1 + 二位 1 = 2+1 = 3）。<br>
         所以<strong>同一个"3"，十进制写作 3，二进制写作 11</strong>——数字没变，变的是逢几进一。
       </p>
-      <p style="font-size:15px;color:#333;line-height:2;margin-top:14px;">
+      <p class="fs-15 lh-2 mt-14">
         <strong>用 12 进制对比理解"9"和"13"：</strong><br>
         十进制的 9，在 12 进制里还不到 12，所以写作 <strong>9</strong>。<br>
         十进制的 13，在 12 进制里满了 12 进一位：13 = 12×1 + 1，写作 <strong>11</strong>（"十位"1 表示 1 个 12，个位 1 表示多 1）。<br>
@@ -234,7 +191,7 @@
     </div>
 
 
-      <div style="background:#fff3e0;border-left:4px solid #ff9800;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0;font-size:15px;color:#e65100;">
+      <div class="note">
         <strong>⚠ 请严格注意：</strong>这里的"数字"有两个含义——一个是<strong>数量</strong>（"3 个苹果"的"3"），一个是<strong>表示数量的符号</strong>（"3"这个符号）。二者有时相同（十进制的 3 就是 3），有时不同（二进制的 11 也是 3）。
       </div>
 
@@ -266,12 +223,12 @@
     <p><strong>印度-阿拉伯数字的传播：</strong>公元 8 世纪，阿拉伯商人把印度数字带到了巴格达。花拉子米写了一本书介绍印度计数法，后来这本书被翻译成拉丁文，印度-阿拉伯数字才开始在欧洲传播。但许多欧洲人抗拒它——他们觉得罗马数字"更正规"。直到 13 世纪，意大利数学家斐波那契大力推广，才逐渐普及。</p>
     <p><strong>推荐阅读：</strong>《中小学数学要义》第一章——从数数讲到十进制，特别适合理解数的本质；《古今数学思想》——了解各个文明对数的贡献。</p>
 
-    <hr style="border:none;border-top:1px dashed #ccc;margin:20px 0;">
+    <hr>
 
     <p><strong>皮亚诺公理——数学家如何"严格定义"自然数</strong></p>
     <p>我们说"自然数就是 0, 1, 2, 3, …"，但数学家不满足于这种"省略号"——他们要问：<strong>凭什么说 0 后面一定是 1？凭什么 1 后面一定是 2？</strong>能不能用几条最基本的规则，把自然数"搭"出来？</p>
     <p>1889 年，意大利数学家<strong>皮亚诺</strong>（Giuseppe Peano）给出了答案。他只用<strong>五条公理</strong>，就把整个自然数体系像盖楼一样建起来了：</p>
-    <ol style="line-height:2;color:#333;">
+    <ol class="lh-2">
       <li><strong>0 是自然数。</strong>——这是"第一块砖"。</li>
       <li>每一个自然数 n，都有<strong>唯一</strong>的后继数 n⁺（读作 "n 的下一个"）。——这是"接砖"的规则：每个数后面都跟着一个。</li>
       <li>0 不是任何自然数的后继数。——0 是起点，没有数能"回到"0。这保证了自然数有起点、不会成环。</li>
@@ -284,14 +241,14 @@
     <p>这就是数学的严谨之美：<strong>用最少的砖，盖最大的楼。</strong></p>
     <p><strong>推荐阅读：</strong>《数学颂》——皮亚诺公理的通俗讲解；《怎样解题》——波利亚教你用归纳法思考问题。</p>
 
-    <hr style="border:none;border-top:1px dashed #ccc;margin:20px 0;">
+    <hr>
 
     <p><strong>质数——数世界的"原子"，以及 1 的"资格"风波</strong></p>
     <p>有些数很特别：2、3、5、7、11、13……它们<strong>只能被 1 和自己整除</strong>。</p>
-    <p style="margin-left:1em;"><strong>定义（要记准）：</strong>一个大于 1 的自然数，如果只有 1 和它本身两个因数，就叫<strong>质数</strong>（也叫素数）。否则就叫<strong>合数</strong>。</p>
+    <p class="ml-1em"><strong>定义（要记准）：</strong>一个大于 1 的自然数，如果只有 1 和它本身两个因数，就叫<strong>质数</strong>（也叫素数）。否则就叫<strong>合数</strong>。</p>
     <p>质数是所有整数的"积木"：任何大于 1 的自然数，要么是质数，要么能<strong>唯一地</strong>拆成几个质数的乘积（比如 12 = 2 × 2 × 3）。就像化学里的元素、物理里的原子——所以有人说，质数是数世界的"原子"。</p>
     <p><strong>怎么找出质数？——两千多年前就有了"筛子"。</strong>古希腊数学家<strong>埃拉托色尼</strong>发明了一个笨办法，却好用得惊人：</p>
-    <ol style="line-height:2;color:#333;">
+    <ol class="lh-2">
       <li>把 2 到 N 的所有数排成一排；</li>
       <li>从 2 开始：留下 2，把后面所有 2 的倍数（4, 6, 8, …）全部<strong>划掉</strong>；</li>
       <li>轮到下一个没被划掉的数 3：留下 3，划掉所有 3 的倍数（6, 9, 12, …）；</li>
@@ -349,7 +306,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="fractions.html">下一课：分数 →</a></p>
+  <p class="back-bottom"><a href="fractions.html">下一课：分数 →</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }

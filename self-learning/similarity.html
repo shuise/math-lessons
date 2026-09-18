@@ -6,42 +6,11 @@
 <title>相似 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔺</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #01579b; }
-  .origin { background: #e0f7fa; border-left: 4px solid #00838f; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #e0f7fa; border-left: 4px solid #00acc1; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #e3f2fd; border: 2px solid #1565c0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-  .method-card { background: #fafafa; border: 2px solid #e0e0e0; border-radius: 10px; padding: 16px 18px; margin: 14px 0; }
-  .method-card h3 { margin-top: 0; color: var(--accent); }
-  .graphic { margin: 16px 0; text-align: center; }
-  .compare { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
-  .compare > div { flex: 1; min-width: 250px; }
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
-  }
-</style>
 </head>
-<body>
+<body class="p-similarity">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./triangle.html">课件 14（三角形）</a>、15（全等三角形）、20（轴对称）</p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="./triangle.html">课件 14（三角形）</a>、15（全等三角形）、20（轴对称）</p>
   <h1>相似 — 形状相同，大小不同</h1>
 
   <h2>起源：泰勒斯再测金字塔</h2>
@@ -69,9 +38,8 @@
     </div>
 
     <div class="graphic">
-      <svg viewBox="0 0 660 230" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 660 230" class="img-fluid">
         <defs>
-          <style>text{font-size:14px;fill:#333;font-family:serif}</style>
         </defs>
         <!-- 三角形1（小）: A(40,190) B(140,90) C(240,190), 等腰, AC=200 -->
         <polygon points="40,190 140,90 240,190" fill="rgba(1,87,155,0.10)" stroke="#01579b" stroke-width="2.5"/>
@@ -101,7 +69,7 @@
       </div>
       <div class="formula">
         <p><strong>相似比（比例因子）：</strong></p>
-        <p style="font-size:1.1em;text-align:center;">k = <sup>对应边</sup>⁄<sub>对应边</sub></p>
+        <p class="fs-lg tc">k = <sup>对应边</sup>⁄<sub>对应边</sub></p>
         <p>如果 k &gt; 1，放大；如果 0 &lt; k &lt; 1，缩小；如果 k = 1，全等。</p>
       </div>
     </div>
@@ -118,9 +86,8 @@
     <p><strong>通俗理解：</strong>三角形内角和是 180°，两个角相等就意味着第三个角也相等。三个角都相等，形状就确定了——大小可以不同，但形状一定一样。</p>
     <p><strong>这是最常用的判定方法！</strong>因为只需要两个角，比全等少多了。</p>
     <div class="graphic">
-      <svg viewBox="0 0 660 220" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 660 220" class="img-fluid">
         <defs>
-          <style>text{font-size:14px;fill:#333;font-family:serif}</style>
         </defs>
         <!-- 三角形1: A(40,190) B(140,90) C(240,190) -->
         <polygon points="40,190 140,90 240,190" fill="rgba(1,87,155,0.10)" stroke="#01579b" stroke-width="2.5"/>
@@ -159,9 +126,8 @@
     <p><strong>内容：</strong>如果两个三角形的<strong>两边对应成比例</strong>且<strong>夹角相等</strong>，那么这两个三角形相似。</p>
     <p><strong>通俗理解：</strong>两边长度虽然不同，但它们的比例相同，而且这两条边张开的"角度"也一样——这时候，第三条边也会按相同的比例变化，整个形状就锁定了。</p>
     <div class="graphic">
-      <svg viewBox="0 0 600 225" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 600 225" class="img-fluid">
         <defs>
-          <style>text{font-size:14px;fill:#333;font-family:serif}</style>
         </defs>
         <!-- 三角形1: A(40,190) B(150,60) C(250,190) -->
         <polygon points="40,190 150,60 250,190" fill="rgba(1,87,155,0.10)" stroke="#01579b" stroke-width="2.5"/>
@@ -200,9 +166,8 @@
     <p><strong>内容：</strong>如果两个三角形的<strong>三条边对应成比例</strong>，那么这两个三角形相似。</p>
     <p><strong>通俗理解：</strong>三条边的长度等比例缩放——比如每条边都变为原来的 2 倍或 1/3——整个三角形的形状不会变，只是大小变了。</p>
     <div class="graphic">
-      <svg viewBox="0 0 600 225" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 600 225" class="img-fluid">
         <defs>
-          <style>text{font-size:14px;fill:#333;font-family:serif}</style>
         </defs>
         <!-- 三角形1: A(40,190) B(150,60) C(250,190) -->
         <polygon points="40,190 150,60 250,190" fill="rgba(1,87,155,0.10)" stroke="#01579b" stroke-width="2.5"/>
@@ -250,28 +215,27 @@
 
     <div class="formula">
       <p><strong>性质 1（对应边成比例）：</strong></p>
-      <p style="text-align:center;font-size:1.1em;">若 △ABC ∽ △DEF，则 AB : DE = BC : EF = CA : FD = <strong>k</strong>（相似比）</p>
+      <p class="tc fs-lg">若 △ABC ∽ △DEF，则 AB : DE = BC : EF = CA : FD = <strong>k</strong>（相似比）</p>
     </div>
 
     <div class="formula">
       <p><strong>性质 2（对应角相等）：</strong></p>
-      <p style="text-align:center;font-size:1.1em;">∠A = ∠D，∠B = ∠E，∠C = ∠F</p>
+      <p class="tc fs-lg">∠A = ∠D，∠B = ∠E，∠C = ∠F</p>
     </div>
 
     <div class="formula">
       <p><strong>性质 3（周长比 = 相似比）：</strong></p>
-      <p style="text-align:center;font-size:1.1em;">周长(△ABC) : 周长(△DEF) = k</p>
+      <p class="tc fs-lg">周长(△ABC) : 周长(△DEF) = k</p>
     </div>
 
     <div class="formula">
       <p><strong>性质 4（面积比 = 相似比的平方）：</strong></p>
-      <p style="text-align:center;font-size:1.1em;">面积(△ABC) : 面积(△DEF) = k²</p>
+      <p class="tc fs-lg">面积(△ABC) : 面积(△DEF) = k²</p>
     </div>
 
     <div class="graphic">
-      <svg viewBox="0 0 560 220" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 560 220" class="img-fluid">
         <defs>
-          <style>text{font-family:sans-serif}</style>
         </defs>
         <!-- 三角形1: 3-4-5 直角三角形 A(40,190) B(40,100) C(160,190) -->
         <polygon points="40,190 40,100 160,190" fill="rgba(1,87,155,0.10)" stroke="#01579b" stroke-width="2.5"/>
@@ -313,9 +277,8 @@
     <p><strong>位似</strong>（homothety）是一种特殊的相似关系。两个图形不仅相似，而且<strong>对应点的连线都经过同一个点</strong>——这个点叫做<strong>位似中心</strong>。</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 600 290" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 600 290" class="img-fluid">
         <defs>
-          <style>text{font-family:sans-serif}</style>
         </defs>
         <!-- 位似中心 O(100,160) -->
         <circle cx="100" cy="160" r="5" fill="#01579b"/>
@@ -354,9 +317,8 @@
     <p><strong>生活中的位似：</strong>投影仪放大的画面、手电筒照出的影子——光从一点发出，把物体"放大"到屏幕上，这就是位似。地图上的缩放也是位似（只不过地图的位似中心在无穷远处）。</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 600 280" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 600 280" class="img-fluid">
         <defs>
-          <style>text{font-family:sans-serif}</style>
         </defs>
         <!-- 光源（位似中心）(300,30) -->
         <circle cx="300" cy="30" r="8" fill="#ffc107" stroke="#00838f" stroke-width="2"/>
@@ -413,9 +375,8 @@
     <p><strong>分形</strong>（fractal）是数学中最迷人的概念之一。一个图形如果<strong>它的每个部分都和整体形状相似</strong>，就叫做分形。这就是"自相似性"——你放大分形图形的任何一个角落，看到的图案都和整体一模一样。</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 600 240" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 600 240" class="img-fluid">
         <defs>
-          <style>text{font-family:sans-serif}</style>
         </defs>
         <!-- 科赫雪花（一次迭代）: 正三角形每边三等分后中间段外凸 -->
         <text x="140" y="25" text-anchor="middle" font-size="13" fill="#333" font-weight="bold">科赫雪花</text>
@@ -546,7 +507,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="trigonometry.html">下一课：锐角三角函数 →</a></p>
+  <p class="back-bottom"><a href="trigonometry.html">下一课：锐角三角函数 →</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }

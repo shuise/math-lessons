@@ -6,42 +6,11 @@
 <title>平行四边形 — 自学课件</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▱</text></svg>">
 <link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="./question-bank.css">
-<style>
-  :root { --accent: #827717; }
-  .origin { background: #fdf6e3; border-left: 4px solid #b58900; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .story { background: #f0f4ff; border-left: 4px solid var(--accent); padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .formula { background: #fafafa; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 16px 0; }
-  .key { background: #e8f5e9; border-left: 4px solid #66bb6a; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .example { background: #e8f5e9; border-left: 4px solid #43a047; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-  .quote { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 16px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; }
-  .challenge { background: #e8eaf6; border: 2px dashed var(--accent); padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .extend { background: #f3e5f5; border: 2px solid #7b1fa2; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .exercise { background: #fff; border: 1px solid #e0e0e0; padding: 16px 18px; border-radius: 8px; margin: 24px 0; }
-  .hint-box, .ans-box { display: none; background: #f5f5f5; padding: 12px 16px; border-radius: 6px; margin-top: 10px; }
-  .hint-box.show, .ans-box.show { display: block; }
-  .btn-sm { font-size: 13px; padding: 4px 14px; border: 1px solid #ccc; border-radius: 4px; background: #fafafa; cursor: pointer; margin-right: 8px; }
-  .btn-sm:hover { background: #e8e8e8; }
-  .graphic { margin: 16px 0; text-align: center; }
-  .rel-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
-  .rel-table th, .rel-table td { border: 1px solid #ddd; padding: 8px 12px; text-align: center; }
-  .rel-table th { background: var(--accent); color: #fff; }
-  .rel-table tr:nth-child(even) { background: #f9fbe7; }
-  @media (max-width: 720px) {
-    article { padding: 20px 0 100px 0 !important; border-radius: 0 !important; }
-    body { padding: 0; }
-    h1 { font-size: 22px; }
-    h2 { font-size: 18px; }
-    h3 { font-size: 16px; }
-    p, li { font-size: 15px; line-height: 1.8; }
-    .origin, .story, .formula, .key, .example, .quote { padding: 12px 14px; margin: 12px 0; }
-  }
-</style>
 </head>
-<body>
+<body class="p-parallelogram">
 <article>
-  <p style="color:#999;font-size:14px;margin-bottom:4px;"><a href="index.html">← 课程列表</a></p>
-  <p style="color:#999;font-size:13px;margin-bottom:8px;">前置知识：<a href="./parallel-lines.html">课件 13（相交线与平行线）</a>、14（三角形）、15（全等三角形）、20（轴对称）</p>
+  <p class="crumb"><a href="index.html">← 课程列表</a></p>
+  <p class="prereq">前置知识：<a href="./parallel-lines.html">课件 13（相交线与平行线）</a>、14（三角形）、15（全等三角形）、20（轴对称）</p>
   <h1>平行四边形 — 两组对边平行的四边形</h1>
 
   <h2>起源：从埃及的农田到欧几里得的书桌</h2>
@@ -60,12 +29,8 @@
     <p>平行四边形用符号"▱"表示，如 ▱ABCD，读作"平行四边形 ABCD"。</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 500 320" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 500 320" class="img-fluid">
         <defs>
-          <style>
-            text.lbl { font-size:15px; fill:#333; font-family:serif; font-style:italic; text-anchor:start; }
-            text.desc { font-size:13px; fill:#555; text-anchor:middle; }
-          </style>
         </defs>
         <!-- 平行四边形 -->
         <polygon points="80,240 340,240 440,100 180,100" fill="rgba(130,119,23,0.12)" stroke="#827717" stroke-width="2.5"/>
@@ -113,7 +78,7 @@
     <p><strong>为什么"对边相等"？</strong>连接对角线 AC，会在平行四边形中形成两个三角形 △ABC 和 △CDA。因为 AB ∥ DC，所以 ∠BAC = ∠DCA（内错角）；因为 AD ∥ BC，所以 ∠BCA = ∠DAC（内错角）。又 AC 是公共边，根据 ASA，△ABC ≌ △CDA。所以 AB = DC，AD = BC。</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 500 310" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 500 310" class="img-fluid">
         <polygon points="80,240 340,240 440,100 180,100" fill="rgba(130,119,23,0.08)" stroke="#827717" stroke-width="2"/>
         <line x1="80" y1="240" x2="440" y2="100" stroke="#1565c0" stroke-width="2"/>
         <circle cx="80" cy="240" r="3" fill="#827717"/>
@@ -158,13 +123,8 @@
     <p>这五种判定方法中，最常用的是前三种。<strong>记住：判定是"反过来用"——性质告诉你"如果是平行四边形，就会怎样"；判定告诉你"如果怎样，就是平行四边形"。</strong></p>
 
     <div class="graphic">
-      <svg viewBox="0 0 760 295" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 760 295" class="img-fluid">
         <defs>
-          <style>
-            text.tt { font-size:15px; fill:#333; text-anchor:middle; font-weight:bold; }
-            text.ts { font-size:12px; fill:#666; text-anchor:middle; }
-            text.eq { font-size:14px; fill:#00838f; text-anchor:middle; font-weight:bold; }
-          </style>
         </defs>
         <!-- 判定1：两组对边平行 -->
         <polygon points="40,220 200,220 240,100 80,100" fill="rgba(130,119,23,0.12)" stroke="#827717" stroke-width="2"/>
@@ -211,7 +171,7 @@
     </div>
 
     <div class="graphic">
-      <svg viewBox="0 0 440 280" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 440 280" class="img-fluid">
         <rect x="60" y="40" width="320" height="200" fill="rgba(130,119,23,0.12)" stroke="#827717" stroke-width="2.5"/>
         <line x1="60" y1="40" x2="380" y2="240" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="6 3"/>
         <line x1="380" y1="40" x2="60" y2="240" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="6 3"/>
@@ -233,8 +193,8 @@
     </div>
 
     <div class="graphic">
-      <p style="text-align:center;font-size:13px;color:#666;margin-bottom:4px;">平行四边形 ↔ 矩形（角度变化动画）</p>
-      <svg viewBox="0 0 320 220" style="max-width:100%;height:auto;">
+      <p class="tc fs-13 muted-2 mb-4">平行四边形 ↔ 矩形（角度变化动画）</p>
+      <svg viewBox="0 0 320 220" class="img-fluid">
         <polygon fill="rgba(33,150,243,0.15)" stroke="#1976d2" stroke-width="2.5">
           <animate attributeName="points"
             values="60,170 220,170 260,70 100,70;
@@ -266,7 +226,7 @@
     </div>
 
     <div class="graphic">
-      <svg viewBox="0 0 440 300" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 440 300" class="img-fluid">
         <polygon points="220,30 390,150 220,270 50,150" fill="rgba(130,119,23,0.12)" stroke="#827717" stroke-width="2.5"/>
         <line x1="220" y1="30" x2="220" y2="270" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="6 3"/>
         <line x1="50" y1="150" x2="390" y2="150" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="6 3"/>
@@ -287,8 +247,8 @@
     </div>
 
     <div class="graphic">
-      <p style="text-align:center;font-size:13px;color:#666;margin-bottom:4px;">菱形 ↔ 正方形（角度变化，四条边始终相等）</p>
-      <svg viewBox="0 0 320 220" style="max-width:100%;height:auto;">
+      <p class="tc fs-13 muted-2 mb-4">菱形 ↔ 正方形（角度变化，四条边始终相等）</p>
+      <svg viewBox="0 0 320 220" class="img-fluid">
         <polygon fill="rgba(156,39,176,0.15)" stroke="#7b1fa2" stroke-width="2.5">
           <animate attributeName="points"
             values="160,25 210,110 160,195 110,110;
@@ -310,11 +270,8 @@
     <p>正方形是"最完美的四边形"——它同时拥有矩形和菱形的所有性质：四个角都是直角，四条边都相等，对角线相等且互相垂直平分。</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 500 420" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 500 420" class="img-fluid">
         <defs>
-          <style>
-            text { font-family: -apple-system, 'PingFang SC', sans-serif; }
-          </style>
         </defs>
         <text x="250" y="22" text-anchor="middle" font-size="16" fill="#333" font-weight="bold">平行四边形家族</text>
         <!-- 平行四边形（最外层） -->
@@ -375,12 +332,12 @@
 
     <div class="formula">
       <p><strong>三角形中位线定理：</strong></p>
-      <p style="font-size:1.1em;text-align:center;color:#827717;"><strong>三角形的中位线平行于第三边，且等于第三边的一半。</strong></p>
-      <p style="text-align:center;">即：若 D、E 分别是 AB、AC 的中点，则 <strong>DE ∥ BC</strong> 且 <strong>DE = ½ BC</strong>。</p>
+      <p class="fs-lg tc"><strong>三角形的中位线平行于第三边，且等于第三边的一半。</strong></p>
+      <p class="tc">即：若 D、E 分别是 AB、AC 的中点，则 <strong>DE ∥ BC</strong> 且 <strong>DE = ½ BC</strong>。</p>
     </div>
 
     <div class="graphic">
-      <svg viewBox="0 0 500 340" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 500 340" class="img-fluid">
         <polygon points="80,280 420,280 250,60" fill="rgba(130,119,23,0.08)" stroke="#827717" stroke-width="2"/>
         <circle cx="80" cy="280" r="4" fill="#827717"/>
         <circle cx="420" cy="280" r="4" fill="#827717"/>
@@ -433,7 +390,7 @@
     <p>正方形有<strong>4 条对称轴</strong>：两条是对边中点的连线，两条是对角线。在所有四边形中，正方形的对称轴是最多的。</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 440 280" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 440 280" class="img-fluid">
         <rect x="120" y="40" width="200" height="200" fill="rgba(130,119,23,0.08)" stroke="#827717" stroke-width="2.5"/>
         <!-- 4条对称轴 -->
         <line x1="220" y1="40" x2="220" y2="240" stroke="#1976d2" stroke-width="1.5" stroke-dasharray="6 3"/>
@@ -446,7 +403,7 @@
 
     <h3>正方形的面积</h3>
     <p>正方形的面积公式是 <strong>S = a²</strong>（a 为边长），这很简单。但还有一个有趣的公式：</p>
-    <p style="text-align:center;font-size:1.1em;"><strong>S = ½ × 对角线²</strong></p>
+    <p class="tc fs-lg"><strong>S = ½ × 对角线²</strong></p>
     <p>为什么？因为正方形的对角线互相垂直且相等，正方形的面积可以看作两个全等的等腰直角三角形拼成的，每个三角形的面积 = ½ × 对角线 × (½ × 对角线) = ¼ × 对角线²，两个加起来就是 ½ × 对角线²。</p>
 
     <h3>一张纸折出正方形</h3>
@@ -457,7 +414,7 @@
     <p>在数学中，用一种或几种形状无缝拼接、覆盖整个平面（没有重叠、没有缝隙），叫做<strong>密铺</strong>（也叫"镶嵌"或"铺嵌"）。这是平行四边形家族的一个重要应用——<strong>任意四边形都可以密铺</strong>！</p>
 
     <div class="graphic">
-      <svg viewBox="0 0 540 130" style="max-width:100%;height:auto;">
+      <svg viewBox="0 0 540 130" class="img-fluid">
         <!-- 正三角形密铺 -->
         <g transform="translate(10, 10)">
           <polygon points="0,60 40,60 20,20" fill="rgba(76,175,80,0.2)" stroke="#4caf50" stroke-width="1.5"/>
@@ -638,7 +595,7 @@
     </ul>
   </div>
 
-  <p style="text-align:right;margin-top:32px;"><a href="rotation.html">下一课：旋转 →</a></p>
+  <p class="back-bottom"><a href="rotation.html">下一课：旋转 →</a></p>
 </article>
 <script>
 function toggleHint(id) { document.getElementById(id).classList.toggle('show'); }
