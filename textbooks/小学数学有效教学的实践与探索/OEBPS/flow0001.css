@@ -1,0 +1,62 @@
+/* CSS Document */
+body
+{
+	font-family: 宋体;
+}
+ @charset "utf-8";
+*{ margin:0; padding:0;}
+/**/
+.cover{height:100%;}
+
+/*书名页*/
+.bookTitle{font-size:2.5em;font-family:黑体;margin-top:2em;margin-bottom:0em;text-align:center;font-weight:normal;}
+/*书名页副书名*/
+.booksubname{font-size:1.8em;font-family:黑体;margin-bottom:0em;margin-top:0.5em;text-align:center;font-weight:normal;}
+/*作者*/
+.author{font-size:1.6m;font-family:黑体;margin-top:1em;margin-bottom:0em;text-align:center;font-weight:normal;}
+/*出版社*/
+.publish{font-size:1.4em;font-family:黑体;margin-top:6em;text-align:center;font-weight:normal;}
+
+/*目录*/
+/*目录一级标题*/
+.contents1{font-size:1.0em;margin-left:0em;font-family:MicrosoftYaHei;line-height:200%;text-align:justify;}
+/*目录二级标题*/
+.contents2{font-size:1.0em;margin-left:1em;font-family:MicrosoftYaHei;line-height:200%;text-align:justify;}
+/*目录三级标题*/
+.contents3{font-size:1.0em;margin-left:2em;font-family:MicrosoftYaHei;line-height:200%;text-align:justify;}
+/*目录四级标题*/
+.contents4{font-size:1.0em;margin-left:3em;font-family:MicrosoftYaHei;line-height:200%;text-align:justify;}
+
+/*正文*/
+/*一级标题*/
+.contentTitle1{font-size:2em;font-family:黑体;line-height:1.5em;text-align:center;font-weight:800;}
+/*二级标题*/
+.contentTitle2{font-size:1.7em;font-family:黑体;line-height:1.5em;text-align:center;font-weight:800;}
+/*三级标题*/
+.contentTitle3{font-size:1.5em;font-family:黑体;line-height:1.5em;text-align:center;font-weight:800;}
+/*四级标题*/
+.contentTitle4{font-size:1.3em;font-family:黑体;line-height:1.5em;text-align:center;font-weight:800;}
+
+/*正文*/
+.content{font-size:1em;text-align:justify;text-indent:2em;line-height:1.5em;}
+.inscribe{margin-right:2em; text-align:right;margin-top:1em;}
+
+/*特殊正文字体是楷体*/
+.special{font-size:1.0000em;line-height:1.4em;font-family:"kaiti";text-indent:2em;}
+
+/*附注标题*/
+.fnote-title{font-size:1em;text-indent:0em;line-height:1.5em;margin-top:2em;font-weight:bold;text-align:justify;}
+.postil{font-size:0.8em;line-height:1em;text-indent:0em;text-align:left;}
+/*图说*/
+.imgIntro{font-size:0.8em;line-height:2em;text-align:center;margin-top:10px;margin-bottom:10px;}
+/*图片*/
+.picture{text-align:center;margin-top:10px;margin-bottom:10px;}
+
+.center{text-align:center;}
+
+hr{width:100%;color:"#000000";size:"1px";}
+.margin-top2{margin-top:2em;}
+.margin-bottom2{margin-bottom:2em;}
+.noindent{text-indent:0em;}/**/
+/**/
+.indent{text-indent:2em;}/**/

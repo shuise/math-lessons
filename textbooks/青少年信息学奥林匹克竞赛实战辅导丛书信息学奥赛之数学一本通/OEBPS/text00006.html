@@ -1,0 +1,1072 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="flow0001.css" />
+<title>第2章　群论</title>
+</head>
+<body><div></div>
+<h1 class="kindle-cn-heading-2">第2章　群论</h1>
+<p>群论是法国数学家伽罗瓦（Galois）的发明。他用该理论，具体来说是伽罗瓦群，解决了五次方程问题。在此之前，柯西（Augustin-Louis Cauchy）、阿贝尔（Niels Henrik Abel）等人也对群论做出了贡献。</p>
+<p>群的概念已经普遍地被认为是数学及其许多应用中最基本的概念之一。它不但渗透到诸如几何学、代数拓扑学、函数论、泛函分析及其他许多数学分支中而起着重要的作用，还形成了一些新学科如拓扑群、李群、代数群、算术群等，它们还具有与群结构相联系的其他结构如拓扑、解析流形、代数簇等，并在结晶学、理论物理、量子化学以及自动机理论等方面，都有重要的应用。</p>
+<p>在信息学竞赛中，主要利用群论以及其中的Polya原理，进行组合计数。</p>
+<h2 class="kindle-cn-heading2"><a id="sec001"></a>
+ 2.1　置换</h2>
+<h3 class="kindle-cn-heading2"><a id="sec002"></a>
+ 2.1.1　群的定义</h3>
+<p>给定一个集合G={a，b，c，…}和集合G上的二元运算“*”，并满足:</p>
+<p>（1）封闭性：<img class="kindle-cn-inline-image" alt="" src="Image00053.jpg" />
+ a，b∈G，<img class="kindle-cn-inline-image" alt="" src="Image00054.jpg" />
+ c∈G，a*b=c。</p>
+<p>（2）结合律：<img class="kindle-cn-inline-image" alt="" src="Image00055.jpg" />
+ a，b，c∈G，（a*b）*c=a*（b*c）。</p>
+<p>（3）单位元：<img class="kindle-cn-inline-image" alt="" src="Image00056.jpg" />
+ e∈G，<img class="kindle-cn-inline-image" alt="" src="Image00057.jpg" />
+ a∈G，a*e=e*a=a。</p>
+<p>（4）逆元：<img class="kindle-cn-inline-image" alt="" src="Image00058.jpg" />
+ a∈G，<img class="kindle-cn-inline-image" alt="" src="Image00059.jpg" />
+ b∈G，a*b=b*a=e，记b=a<span class="math-super">-1</span>
+ 。</p>
+<p>则称集合G在运算“*”之下是一个群，简称G是群，一般a*b简写成ab。“*”可以是任意运算，如果是具体的乘法“×”，则称为乘法群，如果是具体的加法“+”，则称为加法群。若群G中元素个数是有限的，则G称为有限群，否则称为无限群。有限群的元素个数称为有限群的阶。</p>
+<h3 class="kindle-cn-heading2"><a id="sec003"></a>
+ 2.1.2　群的运算</h3>
+<p>对于g∈G，对于G的子集H，定义g*H={gh｜h∈H}，简写为gH；H*g={hg｜h∈H}，简写为Hg。</p>
+<p>对于G的子集A、B，定义A*B={ab｜a∈A，b∈B}，简写为AB。</p>
+<p>对于G的子集H，记H<span class="math-super">-1</span>
+ ={h<span class="math-super">-1</span>
+ ｜h∈H}。</p>
+<p>定理1：若（G，*）是群，则对于任一g∈G，gG=Gg=G。</p>
+<p>定理2：若（G，*）是群，H是G的非空子集，并且（H，*）也是群，那么称H为G的子群。</p>
+<p>根据定理2可以判断子集是否为一个子群：HH=H且H<span class="math-super">-1</span>
+ =H等价于H是G的子群。</p>
+<h3 class="kindle-cn-heading2"><a id="sec004"></a>
+ 2.1.3　置换</h3>
+<p>n个元素1，2，…n之间的一个置换<img class="kindle-cn-inline-image2" alt="" src="Image00060.jpg" />
+ 表示1被1到n中的某个数a<span class="math-sub">1</span>
+ 取代，2被1到n中的某个数a<span class="math-sub">2</span>
+ 取代，…直到n被1到n中的某个数a<span class="math-sub">n</span>
+ 取代，且a<span class="math-sub">1</span>
+ ，a<span class="math-sub">2</span>
+ ，…a<span class="math-sub">n</span>
+ 互不相同。</p>
+<h3 class="kindle-cn-heading2"><a id="sec005"></a>
+ 2.1.4　置换群</h3>
+<p>置换群的元素是置换，运算是置换的连接。例如：</p>
+<div class="kindle-cn-bodycontent-div-alone100"><img class="kindle-cn-bodycontent-image-alone80" alt="" src="Image00061.jpg" />
+</div>
+<p>可以验证置换群满足群的4个条件。</p>
+<p>
+<span class="kindle-cn-bold">【例2.1-1】</span>
+ 　He's Circles（SGU294）</p>
+<p>
+<span class="kindle-cn-bold">【问题描述】</span>
+</p>
+<p>有一个长度为N的环，上面写着“X”和“E”，问本质不同的环有多少种。如图2.1-1所示，以下3种是本质相同的环：XXE、XEX、EXX，N为不超过200000的正整数。</p>
+<div class="kindle-cn-bodycontent-div-alone100"><img class="kindle-cn-bodycontent-image-alone80-withnote" alt="" src="Image00062.jpg" />
+<p class="kindle-cn-picture-txt-withfewcharactors kindle-cn-bold">图2.1-1　字符环</p>
+</div>
+<p>
+<span class="kindle-cn-bold">【输入样例】</span>
+</p>
+<p>4</p>
+<p>
+<span class="kindle-cn-bold">【输出样例】</span>
+</p>
+<p>6</p>
+<p>
+<span class="kindle-cn-bold">【问题分析】</span>
+</p>
+<p>本题中的置换群G={转0格、转1格、转2格、…转（n-1）格}。</p>
+<div class="kindle-cn-bodycontent-div-alone100"><img class="kindle-cn-bodycontent-image-alone80" alt="" src="Image00063.jpg" />
+</div>
+<p>具体怎么求解，我们在后面陆续阐述。</p>
+<h2 class="kindle-cn-heading2"><a id="sec006"></a>
+ 2.2　拟阵</h2>
+<p>拟阵（Matroid）又称矩阵胚，是组合优化与图论的重要内容。主要是用来求解最优化问题，是研究贪心算法的数学基础。可以这么说，一个问题如果可以转换为拟阵，那么一定可以用贪心算法进行求解；但是并不是所有的可用贪心算法求解的问题都能转换为拟阵。</p>
+<h3 class="kindle-cn-heading2"><a id="sec007"></a>
+ 2.2.1　拟阵的概念</h3>
+<p>子集系统是一个二元组M=(S,L)，它必须满足以下3个条件：</p>
+<p>（1）S是一个有限集；</p>
+<p>（2）L是由S的一些子集组成的有限非空集；</p>
+<p>（3）遗传性：对任意B∈L，任意A<img class="kindle-cn-inline-image" alt="" src="Image00064.jpg" />
+ B，有A∈L（可知φ必须是L的元素）。</p>
+<p>拟阵是一个子集系统，它还必须满足第4个条件：交换性，即对任意A∈L,B∈L,|A|&lt;|B|，存在一个x∈B-A，使A∪{x}∈L。</p>
+<p>我们把S看成一个班级所有的同学，L看成若干张名单的集合。一张名单记录了若干个同学，表示他们能够组成一个团队。遗传性说明，从一张名单中选出若干个同学组成的子名单仍存在于我们的名单集合，这是一种包容性。交换性说明，名单A上的人数如果少于名单B，则必然可以从B中选出一个人，该人不属于A，将该人加到A里形成的新名单仍然存在于我们的名单集合中，要注意，我们加到A中的人必须本来不是A的，并且必须是B的人，而不能是2张名单以外的人。</p>
+<p>遗传性和交换性是拟阵最根本的两条性质，拟阵上的其他性质都是基于这两条性质发展出来的。拟阵是一种组合结构，研究组合结构的意义正如研究代数结构，一旦我们发现某个问题具有拟阵结构（符合4个基本条件，前2条比较显然，因为构造时就已完成，所以后面2个条件的成立是关键），则我们已研究出的有关拟阵的性质都可以直接应用于该问题，而不需重新证明。下面，我们就利用拟阵来讨论两个实例：背包问题和最小生成树问题。</p>
+<p>对于背包问题，我们首先进行一步转化：将体积为V，单位价值为W的物品变成V个体积为1，价值为W的物品，这样物品就全是单位体积的了。我们可以定义这样一个M=(S,L)：</p>
+<p>（1）S是所有物品的集合</p>
+<p>（2）L={x:x<img class="kindle-cn-inline-image" alt="" src="Image00065.jpg" />
+ S,|x|≤MAX}</p>
+<p>这个M显然满足子集系统的前2个条件。根据L的定义，对任意x∈L，任意y<img class="kindle-cn-inline-image" alt="" src="Image00066.jpg" />
+ x，满足|y|≤|x|≤MAX，有y∈L，因此M满足遗传性，是一个子集系统。对任意A∈L,B∈L,|A|&lt;|B|,随意选取一个x∈B-A，令C=A∪x，显然有|C|=|A|+1≤|B|，所以M满足交换性。因此M也是一个拟阵，称为背包问题的拟阵。</p>
+<p>最小生成树问题是在无向图上进行的，因此考虑对于无向图G=(V,E)，我们可以定义这样一个M=(S,L)：</p>
+<p>（1）S是边集E</p>
+<p>（2）L={x:x<img class="kindle-cn-inline-image" alt="" src="Image00067.jpg" />
+ E且x组成的图无环}</p>
+<p>这个M显然满足子集系统的前2个条件。根据L的定义，对任意x∈L，任意y<img class="kindle-cn-inline-image" alt="" src="Image00068.jpg" />
+ x，假设y形成环，则x形成环，矛盾，所以y不形成环，所以y∈L，因此M满足遗传性。接下来证明M满足交换性：考虑任意A∈L,B∈L,|A|&lt;|B|，我们将A组成的森林命名为G<span class="math-sub">A</span>
+ ，B组成的森林命名为G<span class="math-sub">B</span>
+ 。G<span class="math-sub">A</span>
+ 有|V|-|A|个连通分量，G<span class="math-sub">B</span>
+ 有|V|-|B|个连通分量。（这是根据一个基本事实：n个点k条边的森林有n-k个连通分量）。|A|&lt;|B|，所以|V|-|B|&lt;|V|-|A|，所以G<span class="math-sub">B</span>
+ 中存在一个连通分量T，T中的点在G<span class="math-sub">A</span>
+ 中不连通（如果对G<span class="math-sub">B</span>
+ 中的每个连通分量的点在G<span class="math-sub">A</span>
+ 中也连通，则|V|-|B|≥|V|-|A|）。那么T中必然存在一条边x连接G<span class="math-sub">A</span>
+ 中不同连通分量的边，显然x<img class="kindle-cn-inline-image" alt="" src="Image00069.jpg" />
+ A且x∈B，即x∈B-A，且A∪{x}无环，即A∪{x}∈L。所以M满足交换性。因此M是一个拟阵，称为无向图G=(V,E)的拟阵。</p>
+<p>为了方便讨论，下面给出这样一些命名：</p>
+<p>（1）对于U<img class="kindle-cn-inline-image" alt="" src="Image00070.jpg" />
+ S，如果U∈L，那么称U为独立集。</p>
+<p>（2）对于独立集A，若存在x∈S，满足x<img class="kindle-cn-inline-image" alt="" src="Image00071.jpg" />
+ A且A∪x∈L，则称A为可扩展的。不可扩展的独立集称为极大独立集。</p>
+<p>（3）对于U<img class="kindle-cn-inline-image" alt="" src="Image00072.jpg" />
+ S，如果r(u)=max{|x|:x<img class="kindle-cn-inline-image" alt="" src="Image00073.jpg" />
+ U,且x是独立集}，则称r（U）为U的秩，r称为拟阵的秩函数。</p>
+<p>定理：拟阵的极大独立集大小相同。</p>
+<p>证明：假设A和B是拟阵的2个极大独立集，如果|A|≠|B|，不失一般性，我们可以设|A|&lt;|B|，那么根据交换性，A是可扩展的，不是极大独立集，矛盾。所以命题成立。</p>
+<h3 class="kindle-cn-heading2"><a id="sec008"></a>
+ 2.2.2　拟阵上的最优化问题</h3>
+<p>对于拟阵M=(S,L)，我们对S的每个元素x赋予一个正整数权值w(x)，S的任意子集U的权值<img class="kindle-cn-inline-image" alt="" src="Image00074.jpg" />
+ ，即为其所有元素的权值和。对于M，我们希望求出它的一个权值最大独立集。</p>
+<p>背包问题是希望求出一种方案使得带走的物品价值和最大。那么，上面提到了我们的S是所有物品的集合（物品是单位体积的），将S的任意元素x的权值w(x)定义为x的价值（价值总为正的），那么问题就转化为了求背包问题的拟阵的权值最大独立集。显然权值最大的独立集是极大独立集。</p>
+<p>最小生成树问题的目标是使权值最小，如何将一个权值最小问题转化为一个权值最大的问题呢？一般方法就是对权值取负，但对权值取负以后会出现负数，不满足拟阵权值的前提条件，怎么办？由于权值只是个相对概念，我们可以将所有权值先取负，然后再统一加上一个足够大的值，使得权值都是正的，那么问题就等价转化为在新的权值下求一棵最大生成树了。即对于S的每个元素x（x是图的一条边），使w(x)=-g(x)+delta，其中g(x)为x的边权，delta=图中边权最大值+1。显然w(x)&gt;0。这样，求最小生成树的问题就等价为求图的拟阵的权值最大独立集了。</p>
+<p>下面给出求拟阵最大权值独立集的贪心算法：这个算法的输入是一个加权拟阵M=(S,L)和一个正权函数w，返回的是一个最大权值独立集A。在下面的伪代码描述中，用S［M］和L［M］表示M的组成，用w表示权函数。算法的基本思想是按权值的非增序来依次考虑每个元素x∈S，如果A∪{x}是独立集，就立刻把x加入A。</p>
+<pre class="color4">
+    Greedy（M，w）｛
+        A :=空集;
+        根据w按非增长顺序对S[M]排序;
+            for 每个x∈S[M]，根据权w(x)的非增长顺序 do
+              if （A∪{x}∈L[M]） then A:=A∪{x};
+        return A;
+    ｝
+</pre>
+<p>再分析上面的两个例子：按该算法做背包问题，相当于每次取价值最大的物品，如果背包还没满（说明A∪{x}∈L［M］），那么该物品就放入背包了。按该算法做最小生成树问题，相当于每次取权值最小的边，如果该边加入A不形成环（说明A∪{x}∈L［M］），则将该边加入。我们发现两个算法只在判断是否为独立集这一步是不同的。</p>
+<p>该算法的时间复杂度是很容易分析的。设n表示|S|。排序阶段的时间复杂度为Θ(nlog<span class="math-sub">2</span>
+ n)，贪心阶段要进行Θ(n)次判断是否为独立集的操作，若判断是否为独立集的时间复杂度为Θ(f(n))，那么总的时间复杂度就为Θ(nlog<span class="math-sub">2</span>
+ n+n×f(n))。我们发现该算法的时间复杂度的瓶颈在判断是否为独立集。</p>
+<p>其实，这个算法的关键也就在于判断是否为独立集这一步，因为该算法虽然是针对拟阵的算法，但可以归结为拟阵的实际问题是各不相同的，而拟阵体现了它们的一种共性，正是由于这种共性，它们才能够使用这个贪心算法，而它们的不同之处也就集中体现在判定独立集这一步了。</p>
+<p>接下来就讨论这个算法的正确性。</p>
+<p>我们只需证明在算法的每一步A都是某个最优解的子集，那么当算法结束时A就为一个最优解（因为无法扩展了）。</p>
+<p>初始时，A为空集，显然是任何集合的子集，即是某个最优解T的子集。我们只需证明下面的命题：</p>
+<p>定理：对于拟阵M=(S,L)，A是L的一个元素，且A是该拟阵的某个权值最大独立集T的子集，x满足A∪{x}∈L，且没有其他满足A∪{y}∈L的y使得w(y)&gt;w(x)，即x是能使A扩展的元素中的权值最大的。令A′=A∪{x}，那么存在一个包含A′的最优解。</p>
+<p>证明：我们用证明贪心的常用方法“反证法”来证明。假设A′不是任何最优解的子集，我们来构造一个包含A′的独立集T′，并说明这个T′不会比T差，即T′也是最优解，以推出矛盾。我们这样得到T′：首先令T′=A′，当｜T′｜&lt;｜T｜时，根据交换性，必然可以找到一个属于T但不属于T′的元素z，使得T′∪{z}∈L，于是就令T′=T∪{z}，直到|T′|=|T|，显然T′∈L。此时T′=(T-{y})∪{x}，其中y为T-A中未被加入T′的元素，所以w(y)≤w(x)，所以w(T′)=w(T)-w(y)+w(x)≥w(T)。如果w(T′)&gt;w(T)，则T不是最优解，矛盾。如果w(T′)=w(T)，即也是最优解，且A′是T′的子集，矛盾。所以存在一个最优解使得A′是其子集。</p>
+<p>我们发现以上证明中T′的构造是关键，而构造T′的过程中交换性起了关键作用。因此子集系统上是无法贪心的，只有给子集系统赋予交换性，才能派上用处，这就是拟阵。</p>
+<p>可以将该证明和最小生成树算法的正确性证明做一个比较，发现最小生成树证明中也是采用了构造一个T′的方法，构造方法是：把边x加到T里，那么T中必然形成一个环，这个环上必然有一条边权值大于x，去掉以后得到生成树T′。这与我们拟阵的T′的构造方法是本质相同的。拟阵的T′的构造方法是最小生成树的构造方法的抽象形式，而最小生成树的构造方法是拟阵的构造方法的具体表现之一。</p>
+<h2 class="kindle-cn-heading2"><a id="sec009"></a>
+ 2.3　Burnside引理</h2>
+<p>Burnsid引理是群论中的一个结论，在组合数学中可用于计算等价类的个数，常用于Polya计数。</p>
+<p>Burnside引理：用D（a<span class="math-sub">j</span>
+ ）表示在置换a<span class="math-sub">j</span>
+ 下不变的元素的个数。L表示本质不同的方案数。</p>
+<p class="kindle-cn-para-center"><img class="kindle-cn-inline-image2" alt="" src="Image00075.jpg" />
+</p>
+<p>对于“例2.1-1”，N=4的情况下一共有4个置换：</p>
+<div class="kindle-cn-bodycontent-div-alone100"><img class="kindle-cn-bodycontent-image-alone80" alt="" src="Image00076.jpg" />
+</div>
+<p>所有方案在置换a<span class="math-sub">1</span>
+ 下都不变，D（a<span class="math-sub">1</span>
+ ）=16</p>
+<p>XXXX和EEEE在置换a<span class="math-sub">2</span>
+ 下不变，D（a<span class="math-sub">2</span>
+ ）=2</p>
+<p>XXXX和EEEE以及XEXE与EXEX在置换a<span class="math-sub">3</span>
+ 下不变，D（a<span class="math-sub">3</span>
+ ）=4</p>
+<p>XXXX和EEEE在置换a<span class="math-sub">4</span>
+ 下不变，D（a<span class="math-sub">4</span>
+ ）=2</p>
+<p>所以，计算出：<img class="kindle-cn-inline-image2" alt="" src="Image00077.jpg" />
+</p>
+<p>
+<span class="kindle-cn-bold">【例2.3-1】</span>
+ 　方阵着色</p>
+<p>
+<span class="kindle-cn-bold">【问题描述】</span>
+</p>
+<p>对2*2的方阵用黑白两种颜色涂色，问能得到多少种不同的图像？经过旋转使之吻合的两种方案，算是同一种方案。</p>
+<p>
+<span class="kindle-cn-bold">【问题分析】</span>
+</p>
+<p>由于该问题规模很小，我们可以先把所有的涂色方案列举出来。如图2.3-1所示。</p>
+<div class="kindle-cn-bodycontent-div-alone100"><img class="kindle-cn-bodycontent-image-alone80-withnote" alt="" src="Image00078.jpg" />
+<p class="kindle-cn-picture-txt-withfewcharactors kindle-cn-bold">图2.3-1　列举出的16种方案</p>
+</div>
+<p>一个2*2的方阵的旋转方法（假设用顺时针旋转）一共有4种：旋转0度、旋转90度、旋转180度和旋转270度。经过比较发现其中互异的一共只有6种：C3、C4、C5、C6是可以通过旋转相互变化而得，算作同一种；C7、C8、C9、C10是同一种；C11、C12是同一种；C13、C14、C15、C16也是同一种；C1和C2是各自独立的两种。于是，我们得到了下列6种不同的方案，如图2.3-2所示。</p>
+<div class="kindle-cn-bodycontent-div-alone100"><img class="kindle-cn-bodycontent-image-alone80-withnote" alt="" src="Image00079.jpg" />
+<p class="kindle-cn-picture-txt-withfewcharactors kindle-cn-bold">图2.3-2　不同的6种方案</p>
+</div>
+<p>但是，一旦这个问题由2*2的方阵变成20*20甚至200*200的方阵，我们就不能再一一枚举了。下面，我们通过置换、置换群等具体概念的进一步分析，梳理、体会应用Burnside引理解题的一般过程和方法。</p>
+<p>首先，每个格子一共有两种颜色可以选择，所以共有16种图像。本题共有4个置换，置换群G={转0°、转90°、转180°、转270°}</p>
+<div class="kindle-cn-bodycontent-div-alone100"><img class="kindle-cn-bodycontent-image-alone80" alt="" src="Image00080.jpg" />
+</div>
+<p>该定理的一个很重要的研究对象是群的元素个数，下面解释一下其中的E<span class="math-sub">k</span>
+ 和Z<span class="math-sub">k</span>
+ 。</p>
+<p>Z<span class="math-sub">k</span>
+ （K不动置换类）：设G是1，2，…n的置换群。若K是1，2，…n中某个元素，G中使K保持不变的置换的全体，记以Z<span class="math-sub">k</span>
+ ，叫做G中使K保持不动的置换类，简称K不动置换类。</p>
+<p>本例中：G是涂色方案1～16的置换群。如图2.3-3所示，对于方案1，四个置换都使方案1保持不变，所以Z<span class="math-sub">1</span>
+ ={a<span class="math-sub">1</span>
+ ，a<span class="math-sub">2</span>
+ ，a<span class="math-sub">3</span>
+ ，a<span class="math-sub">4</span>
+ }；对于方案3，只有置换a<span class="math-sub">1</span>
+ 使其不变，所以Z<span class="math-sub">3</span>
+ ={a<span class="math-sub">1</span>
+ }；对于方案11，置换a<span class="math-sub">1</span>
+ 和a<span class="math-sub">3</span>
+ 使其方案保持不变，所以Z<span class="math-sub">11</span>
+ ={a<span class="math-sub">1</span>
+ ，a<span class="math-sub">3</span>
+ }。</p>
+<div class="kindle-cn-bodycontent-div-alone100"><img class="kindle-cn-bodycontent-image-alone80-withnote" alt="" src="Image00081.jpg" />
+<p class="kindle-cn-picture-txt-withfewcharactors kindle-cn-bold">图2.3-3　置换群</p>
+</div>
+<p>E<span class="math-sub">k</span>
+ （等价类）：设G是1，2，…n的置换群。若K是1，2，…n中某个元素，K在G作用下的轨迹，记作E<span class="math-sub">k</span>
+ 。即K在G的作用下所能变化成的所有元素的集合。</p>
+<p>本例中：方案1在四个置换作用下都是方案1，所以E<span class="math-sub">1</span>
+ ={1}；方案3，在a<span class="math-sub">1</span>
+ 下是3，在a<span class="math-sub">2</span>
+ 下变成6，在a<span class="math-sub">3</span>
+ 下变成5，在a<span class="math-sub">4</span>
+ 下变成4，所以E<span class="math-sub">3</span>
+ ={3，4，5，6}；方案11，在a<span class="math-sub">1</span>
+ 、a<span class="math-sub">3</span>
+ 下是11，在a<span class="math-sub">2</span>
+ 、a<span class="math-sub">4</span>
+ 下变成12，所以E<span class="math-sub">11</span>
+ ={11，12}。</p>
+<p>所以，根据公式│E<span class="math-sub">k</span>
+ │*│Z<span class="math-sub">k</span>
+ │=│G│，可以得出：</p>
+<p>│E<span class="math-sub">1</span>
+ │*│Z<span class="math-sub">1</span>
+ │=1*4=4=│G│</p>
+<p>│E<span class="math-sub">3</span>
+ │*│Z<span class="math-sub">3</span>
+ │=4*1=4=│G│</p>
+<p>│E<span class="math-sub">11</span>
+ │*│Z<span class="math-sub">11</span>
+ │=2*2=4=│G│</p>
+<p>接下来，研究每个元素（1～16）在各个置换（a<span class="math-sub">1</span>
+ ～a<span class="math-sub">4</span>
+ ）下不变的次数的总和。见下表：</p>
+<div class="kindle-cn-bodycontent-div-alone100"><img class="kindle-cn-bodycontent-image-alone80-1" alt="" src="Image00082.jpg" />
+</div>
+<p>其中:</p>
+<p><img class="kindle-cn-inline-image2" alt="" src="Image00083.jpg" />
+</p>
+<p>D（a<span class="math-sub">j</span>
+ ）表示在置换a<span class="math-sub">j</span>
+ 下不变的元素的个数</p>
+<p>本例中：方案1在a<span class="math-sub">1</span>
+ 下没变动，S<span class="math-sub">1，1</span>
+ =1；方案3在a<span class="math-sub">3</span>
+ 变动了，S<span class="math-sub">3，3</span>
+ =0；在置换a<span class="math-sub">1</span>
+ 的变化下16种方案都没变动，D（a<span class="math-sub">1</span>
+ ）=16；在置换a<span class="math-sub">2</span>
+ 下只有1、2这两种方案没变动，D（a<span class="math-sub">2</span>
+ ）=2。一般情况下，可以得出这样的结论：</p>
+<p class="kindle-cn-para-center"><img class="kindle-cn-inline-image2" alt="" src="Image00084.jpg" />
+</p>
+<p>我们对等式的左式进行进一步研究，不妨设N={1，2，…n}中共有L个等价类，N=E<span class="math-sub">1</span>
+ +E<span class="math-sub">2</span>
+ +…E<span class="math-sub">L</span>
+ ，则当j和k属于同一等价类时，有│Z<span class="math-sub">j</span>
+ │=│Z<span class="math-sub">k</span>
+ │。所以:</p>
+<p class="kindle-cn-para-center"><img class="kindle-cn-inline-image2" alt="" src="Image00085.jpg" />
+</p>
+<p>这里的L就是我们要求的互异的组合状态的个数。于是得出：</p>
+<p class="kindle-cn-para-center"><img class="kindle-cn-inline-image2" alt="" src="Image00086.jpg" />
+</p>
+<p>利用这个式子直接得到本题的解：L=（16+2+4+2）/4=6。这与前面枚举得到的结果是吻合的。</p>
+<h2 class="kindle-cn-heading2"><a id="sec010"></a>
+ 2.4　Polya定理</h2>
+<p>我们发现要计算D（a<span class="math-sub">j</span>
+ ）的值不是很容易，如果采用搜索的方法，总的时间规模为Θ（nsp），其中：n表示元素个数，s表示置换个数，p表示格子数，这里n的规模是很大的。下一步就是要找到一种简便的计算D（a<span class="math-sub">j</span>
+ ）的方法。</p>
+<p>先介绍一个循环的概念：</p>
+<p class="kindle-cn-para-center"><img class="kindle-cn-inline-image2" alt="" src="Image00087.jpg" />
+</p>
+<p class="kindle-cn-para-no-indent">称为n阶循环。每个置换都可以写若干互不相交的循环的乘积，两个循环（a<span class="math-sub">1</span>
+ a<span class="math-sub">2</span>
+ …a<span class="math-sub">n</span>
+ ）和（b<span class="math-sub">1</span>
+ b<span class="math-sub">2</span>
+ …b<span class="math-sub">n</span>
+ ）互不相交是指a<span class="math-sub">i</span>
+ ≠b<span class="math-sub">j</span>
+ ，i，j=1，2，…n。例如：</p>
+<p class="kindle-cn-para-center"><img class="kindle-cn-inline-image2" alt="" src="Image00088.jpg" />
+</p>
+<p class="kindle-cn-para-no-indent">这样的表示是唯一的。置换的循环节数是上述表示中循环的个数。例如（13）（25）（4）的循环节数为3。</p>
+<p>Polya定理：设G是p个对象的一个置换群，用m种颜色涂染p个对象，则不同染色方案为：</p>
+<p class="kindle-cn-para-center"><img class="kindle-cn-inline-image2" alt="" src="Image00089.jpg" />
+</p>
+<p class="kindle-cn-para-no-indent">其中：G={g<span class="math-sub">1</span>
+ ，g<span class="math-sub">2</span>
+ ，…g<span class="math-sub">s</span>
+ }　c（g<span class="math-sub">i</span>
+ ）为置换g<span class="math-sub">i</span>
+ 的循环节数（i=1，2，…s）</p>
+<p>对于“例2.1-1”，我们给N=4的环标号：</p>
+<p class="kindle-cn-para-2em-indent">1　　2</p>
+<p class="kindle-cn-para-2em-indent">4　　3</p>
+<p>构造置换群G′={g<span class="math-sub">1</span>
+ ，g<span class="math-sub">2</span>
+ ，g<span class="math-sub">3</span>
+ ，g<span class="math-sub">4</span>
+ }，｜G′｜=4，令g<span class="math-sub">i</span>
+ 的循环节数为c（g<span class="math-sub">i</span>
+ ）（i=1，2，3，4），在G′的作用下，其中：</p>
+<div class="kindle-cn-bodycontent-div-alone100"><img class="kindle-cn-bodycontent-image-alone80" alt="" src="Image00090.jpg" />
+</div>
+<p>我们发现利用Polya定理的时间复杂度为Θ(sp)，其中：s表示置换个数，p表示格子数。与前面得到的Burnside引理相比之下，又有了很大的改进，其优越性是十分明显的。Polya定理充分挖掘了研究对象的内在联系，总结了规律，省去了许多不必要的盲目搜索，把解决这类问题的时间规模降到了一个非常低的水平，但是，在信息学竞赛中应用Polya定理，并不能简单地直接套用公式计算，而需要更细致地分析。</p>
+<p>可以简单地证明一下：要得到在置换下稳定不动的方案，即把置换的每个循环节都染上相同的颜色，所以<img class="kindle-cn-inline-image" alt="" src="Image00091.jpg" />
+ 。</p>
+<p>根据前面的分析，下面给出例2.1-1的参考程序，需要说明的是本题的数比较大，除了高精度运算外，还有一个优化就是不要依次计算GCD（n，i）（1≤i≤n），而是直接枚举L=n/i，这样求出L的欧拉函数K，则答案为<img class="kindle-cn-inline-image2" alt="" src="Image00092.jpg" />
+ 。</p>
+<p>
+<span class="kindle-cn-bold">【参考程序】</span>
+</p>
+<pre class="color4">
+    #include&lt;iostream&gt;
+    #include&lt;stdio.h&gt;
+    #include&lt;stdlib.h&gt;
+    #include&lt;string.h&gt;
+    #include&lt;math.h&gt;
+    #include&lt;algorithm&gt;
+    using namespace std;
+    int n，m=100000000，a[200001];
+    
+    class num{
+        public:
+        long long a[10000];
+    
+        num operator+（num b）{
+            int i;
+            num x;
+            x.a[0]=max（a[0]，b.a[0]）;
+            for（i=1;i&lt;=x.a[0];i++）
+              x.a[i]=a[i]+b.a[i];
+            x.a[x.a[0]+1]=0;
+            for（i=1;i&lt;=x.a[0];i++）
+              if（x.a[i]&gt;=m）{
+                x.a[i]-=m;
+                x.a[i+1]++;
+              }
+            if（x.a[x.a[0]+1]&gt;0）
+              x.a[0]++;
+            return x;
+        }
+    
+        num operator*（num b）{
+            int i，j;
+            num x;
+            x.a[0]=a[0]+b.a[0];
+                for（i=1;i&lt;=x.a[0];i++）
+              x.a[i]=0;
+            for（i=1;i&lt;=a[0];i++）
+              for（j=1;j&lt;=b.a[0];j++）
+                x.a[i+j-1]+=a[i]*b.a[j];
+            for（i=1;i&lt;x.a[0];i++）{
+                x.a[i+1]+=x.a[i]/m;
+                x.a[i]%=m;
+            }
+            if（x.a[x.a[0]]==0）
+              x.a[0]--;
+            return x;
+        }
+    
+        num operator*（int b）{
+            int i;
+            num x，y;
+            y.a[0]=1;
+            y.a[1]=b;
+            for（i=0;i&lt;=a[0];i++）
+              x.a[i]=a[i];
+            x=x*y;
+            return x;
+        }
+    
+        num operator/（int b）{
+            int i;
+            num x;
+            for（i=0;i&lt;=a[0];i++）
+              x.a[i]=a[i];
+            for（i=x.a[0];i&gt;0;i--）{
+              x.a[i-1]+=x.a[i]%b*m;
+              x.a[i]/=b;
+            }
+            while（x.a[0]&gt;1 &amp;&amp; x.a[x.a[0]]==0）
+              x.a[0]--;
+            return x;
+        }
+    
+            num operator^（int b）{
+            int i;
+            num x，y;
+            x.a[0]=x.a[1]=1;
+            for（i=0;i&lt;=a[0];i++）
+              y.a[i]=a[i];
+            for（i=1;i&lt;=b;i*=2）{
+              if（b&amp;i）
+                x=x*y;
+              y=y*y;
+            }
+            return x;
+        }
+    
+        num print（）{
+            int i，j;
+            cout&lt;&lt;a[a[0]];
+            for（i=a[0]-1;i&gt;0;i--）{
+              for（j=m/10;j&gt;=10 &amp;&amp; j&gt;a[i];j/=10）
+                cout&lt;&lt;0;
+              cout&lt;&lt;a[i];
+            }
+            cout&lt;&lt;"＼n";
+        }
+    }x，y;
+    
+    inline int gcd（int a，int b）{
+          if（b==0）
+            return a;
+          else
+            return gcd（b，a%b）;
+    }
+    
+    int main（）{
+      int i;
+      scanf（"%d"，&amp;n）;
+      for（i=1;i&lt;=n;i++）
+        a[gcd（n，i）]++;
+      x.a[0]=y.a[0]=1;
+          x.a[1]=0;
+      y.a[1]=2;
+      for（i=1;i&lt;=n;i++）
+        if（a[i]&gt;0）
+          x=x+（y^i）*a[i];
+      x=x/n;
+      x.print（）;
+      system（"pause"）;
+      return 0;
+    }
+</pre>
+<p>
+<span class="kindle-cn-bold">【例2.4-1】</span>
+ 　三角形着色</p>
+<p>
+<span class="kindle-cn-bold">【问题描述】</span>
+</p>
+<p>等边三角形的三个顶点用红绿蓝三种颜色来着色，有多少种不同的方案？</p>
+<p>
+<span class="kindle-cn-bold">【问题分析】</span>
+</p>
+<p>保持不变的变换群包括：</p>
+<p>（1）沿中心旋转0，120，240度；</p>
+<p>（2）沿三条中线的翻转。</p>
+<p>G={(1)(2)(3),(123),(321),(1)(23),(2)(13),(3)(12)}。</p>
+<p>因此，由Polya定理可知不同的方案数为：</p>
+<p><img class="kindle-cn-inline-image2" alt="" src="Image00093.jpg" />
+</p>
+<p>
+<span class="kindle-cn-bold">【例2.4-2】</span>
+ 　Cubes（UVA10601）</p>
+<p>
+<span class="kindle-cn-bold">【问题描述】</span>
+</p>
+<p>有12根等长的小木棍，然后每根木棍，输入每根木棍颜色的编号，你的任务是统计出用它们拼出多少种不同的立方体，旋转之后完全相同的立方体被认定相同。</p>
+<p>
+<span class="kindle-cn-bold">【问题分析】</span>
+</p>
+<p>这个问题是求对正方体的染色，且要求旋转后不变，很容易联想到Polya计数法。</p>
+<p>一个正方体共有24种旋转。根据这些不同的旋转方法，构造对应的关于边的置换群。</p>
+<p>（1）不旋转（still）：1组，循环长度为12；</p>
+<p>（2）以对顶点为轴（rot_point）：4组，循环长度为3；</p>
+<p>（3）以对面中心为轴（rot_plane）：3组，分别有90，180，270度旋转，分别对应循环长度3、2、3；</p>
+<p>（4）以对边为轴（rot_edge）：6组，除了两条边循环长度为1，其他为2。</p>
+<p>如果直接使用Polya计数法的计算公式来做，不能保证它每种颜色使用的个数与题目要求的匹配。因此，需要一些改进。</p>
+<p>回顾一下Polya计数法的公式的推导过程：</p>
+<p>根据Burnside定理，本质不同的方案数为在每个置换下稳定不动的方案的总合除以总置换数。</p>
+<p>而要得到在置换下稳定不动的方案，即把置换的每个循环节都染上相同的颜色，所以D（g<span class="math-sub">i</span>
+ ）=m<span class="math-super">c</span>
+ （g<span class="math-sub">i</span>
+ ）。</p>
+<p>本题也是如此，也是要把置换的每个循环节都染上相同的颜色。</p>
+<p>因此只需要对于每个置换，求出每个循环节的点的个数，用状态压缩动态规划求出每个循环节都染上相同的颜色，并且每种颜色的总和符合题目要求的方案总数即可。</p>
+<p>
+<span class="kindle-cn-bold">【参考程序】</span>
+</p>
+<pre class="color4">
+    #include&lt;iostream&gt;
+    #include&lt;stdio.h&gt;
+    #include&lt;stdlib.h&gt;
+    #include&lt;string.h&gt;
+    #include&lt;math.h&gt;
+    #include&lt;algorithm&gt;
+    #define x_ x.dp（），x=x*q，x.dp（），x=x*q，x.dp（），x=x*q，x.dp（）
+    using namespace std;
+    int t，n[13]，p2[13]={0，3，11，10，8，4，1，2，9，5，6，12，7}，
+      q2[13]={0，5，4，8，9，6，7，1，10，12，11，3，2};
+    long long ans;
+    
+    inline long long c（int n，int m）{
+          int i;
+          long long p=1;
+          for（i=n;i&gt;n-m;i--）
+            p*=i;
+          for（i=2;i&lt;=m;i++）
+            p/=i;
+          return p;
+    }
+    
+    class per{
+        public:
+        int a[13];
+    
+        per operator*（per b）{
+            int i;
+            per x;
+            for（i=1;i&lt;=12;i++）
+              x.a[i]=b.a[a[i]];
+            return x;
+        }
+    
+            long long dp（int k，int p）{
+                int i，j=12/k-p;
+                long long l=1;
+                for（i=1;i&lt;=12 &amp;&amp; （n[i]%k==0 ｜｜ p）;i++）{
+                  l*=c（j，n[i]/k）;
+                  j-=n[i]/k;
+                }
+                if（i&gt;12）
+                  return l;
+                else
+                  return 0;
+        }
+    
+        void dp（）{
+              int i，j，k，l;
+              for（i=1;i&lt;=12;i++）{
+                for（j=a[i]，k=1;j!=i;j=a[j]）
+                  k++;
+                if（i&gt;1 &amp;&amp; k!=l）
+                  break;
+                l=k;
+              }
+              if（i&lt;=12）{
+                for（i=1，j=0;i&lt;=12;i++）
+                  j+=n[i]&amp;1;
+                if（j==0）
+                  ans+=dp（2，0）;
+                if（j==2）
+                  ans+=dp（2，1）*2;
+              }
+              else
+                ans+=dp（k，0）;
+        }
+    }x，p，q;
+    
+    int main（）{
+      int i，j;
+      scanf（"%d"，&amp;t）;
+      for（i=1;i&lt;=12;i++）{
+            p.a[i]=p2[i];
+        q.a[i]=q2[i];
+      }
+      while（t--）{
+        ans=0;
+        for（i=1;i&lt;=12;i++）
+          n[i]=0;
+        for（i=1;i&lt;=12;i++）{
+          scanf（"%d"，&amp;j）;
+          n[j]++;
+          x.a[i]=i;
+        }
+        x_;
+        x=x*p*p;
+        x_;
+        x=x*p;
+        x_;
+        x=x*p*p;
+        x_;
+        x=x*q*p;
+        x_;
+        x=x*p*p;
+        x_;
+        cout&lt;&lt;ans/24&lt;&lt;"＼n";
+      }
+      system（"pause"）;
+      return 0;
+    }
+</pre>
+<p>
+<span class="kindle-cn-bold">【例2.4-3】</span>
+ 　Transportation is fun（SPOJ419，SPOJ422）</p>
+<p>
+<span class="kindle-cn-bold">【问题描述】</span>
+</p>
+<p>给你一个2<span class="math-super">a</span>
+ *2<span class="math-super">b</span>
+ 的矩阵，在内存中的存放方式是先存第一行，再存第二行，…每行也是从左到右存放。现在想求它的转置矩阵（也是一样的储存方式），但是只能用交换操作，问需要交换多少步。</p>
+<p>
+<span class="kindle-cn-bold">【输入格式】</span>
+</p>
+<p>第1行1个整数，表示测试数据的组数。</p>
+<p>以下每行2个整数，表示a和b，0≤a+b≤1000000。</p>
+<p>SPOJ419有100组输入数据；SPOJ422有400000组输入数据。</p>
+<p>
+<span class="kindle-cn-bold">【输出格式】</span>
+</p>
+<p>对于每组测试数据，输出一行一个数，表示最少的交换步数。</p>
+<p>由于答案很大，请模1000003后输出。</p>
+<p>
+<span class="kindle-cn-bold">【输入样例】</span>
+</p>
+<p>3</p>
+<p>1 1</p>
+<p>2 2</p>
+<p>5 7</p>
+<p>
+<span class="kindle-cn-bold">【输出样例】</span>
+</p>
+<p>1</p>
+<p>6</p>
+<p>3744</p>
+<p>
+<span class="kindle-cn-bold">【问题分析】</span>
+</p>
+<p>为了描述方便起见，先看一个例子：假设a=5，b=3，考虑元素（12，1），用二进制表示是（01010，001），那么它原来的地址就是01010 001，而新的地址就是001 01010。可见这个转置操作其实就是把每个元素的地址循环向右移动了b位。</p>
+<p>考虑地址的循环节如果有k个，那么答案就是2<span class="math-super">a+b</span>
+ -k。而地址循环节的个数可以看成是应用对地址的“循环移动b位”后本质不同的地址个数，这个可以用Polya原理算出。</p>
+<p>由于SPOJ422数据组数增多，我们要寻求更好的算法。</p>
+<p>对于a和b，首先求出a和b的最大公约数g，答案可以写成：</p>
+<p><img class="kindle-cn-inline-image3" alt="" src="Image00094.jpg" />
+</p>
+<p><img class="kindle-cn-inline-image3" alt="" src="Image00095.jpg" />
+</p>
+<p>首先预处理出2的k次幂（因为Polya只要用到2的若干次幂）。然后用筛法求素数“顺便”找出每个合数的最小质因数。</p>
+<p>可见，问题的瓶颈是计算各个<img class="kindle-cn-inline-image2" alt="" src="Image00096.jpg" />
+ 。</p>
+<p>考虑到<img class="kindle-cn-inline-image2" alt="" src="Image00097.jpg" />
+ ，那么用f（x）表示满足<img class="kindle-cn-inline-image2" alt="" src="Image00098.jpg" />
+ 的i的个数即可。</p>
+<p>首先考虑怎么找出所有合法的x。因为前面预处理了“每个合数的最小质因数”，现在可以在Θ(log<span class="math-sub">2</span>
+ n)时间内找到<img class="kindle-cn-inline-image2" alt="" src="Image00099.jpg" />
+ 的所有质因数。有了质因数，再去找它的所有因子，就很容易了。</p>
+<p>再看f（x）怎么求。其实办法很简单，在刚才推算<img class="kindle-cn-inline-image2" alt="" src="Image00100.jpg" />
+ 的因子的时候，首先把<img class="kindle-cn-inline-image2" alt="" src="Image00101.jpg" />
+ 个数全部分配给1，然后每次由数字x得到xp的时候，就把f（x）的1/p“分”给f（xp）。这样，在找到所有因子的同时，也就找到了f（x）的值。这样，代入前面公式计算，就很简单了。</p>
+<p>
+<span class="kindle-cn-bold">【参考程序】</span>
+</p>
+<pre class="color4">
+    #include&lt;iostream&gt;
+    #include&lt;stdio.h&gt;
+    #include&lt;stdlib.h&gt;
+    #include&lt;string.h&gt;
+    #include&lt;math.h&gt;
+    #include&lt;algorithm&gt;
+    #define L long long
+    using namespace std;
+    int t，n，m，a[1000001]，b[100000]，c[100000]，
+      x[1000001]，r[1000001]，f[1000001]，u[100000]，s，p，q=1000003，ans;
+    
+    inline int gcd（int a，int b）{
+          if（b==0）
+            return a;
+          else
+            return gcd（b，a%b）;
+    }
+    
+    inline void ss（int i，int j）{
+          if（i&gt;p）{
+            u[++s]=j;
+            return;
+          }
+          int k;
+          for（k=0;k&lt;=c[i];k++，j*=b[i]）
+            ss（i+1，j）;
+    }
+    
+    int main（）{
+      int i，j;
+      n=1000000;
+      for（i=2;i&lt;=n;i++）{
+        if（a[i]==0）{
+            a[i]=i;
+            b[++p]=i;
+        }
+        for（j=1;j&lt;=p &amp;&amp; i*b[j]&lt;=n;j++）{
+            a[i*b[j]]=b[j];
+            if（i%b[j]==0）
+              break;
+        }
+          }
+      for（i=1，x[0]=1;i&lt;=n;i++）
+        x[i]=（x[i-1]&lt;&lt;1）%q;
+      for（i=2，r[1]=1;i&lt;=n;i++）
+        r[i]=（（L）（-q/i）*r[q%i]%q+q）%q;
+      scanf（"%d"，&amp;t）;
+      while（t--）{
+        scanf（"%d%d"，&amp;n，&amp;m）;
+        i=gcd（n，m）;
+        n=（n+m）/i;
+        m=i;
+        p=0;
+        for（i=n;i&gt;1;i/=a[i]）
+          if（a[i]!=b[p]）{
+            b[++p]=a[i];
+            c[p]=1;
+          }
+          else
+            c[p]++;
+        s=0;
+        ss（1，1）;
+        f[1]=n;
+        for（i=2;i&lt;=s;i++）{
+          f[u[i]]=f[u[i]/a[u[i]]]/a[u[i]];
+          f[u[i]/a[u[i]]]-=f[u[i]/a[u[i]]]/a[u[i]];
+        }
+        ans=0;
+        for（i=1;i&lt;=s;i++）
+          ans=（ans+（L）f[u[i]]*x[u[i]*m]）%q;
+        ans=（L）ans*r[n]%q;
+        ans=（x[n*m]-ans+q）%q;
+        printf（"%d＼n"，ans）;
+      }
+      system（"pause"）;
+      return 0;
+    }
+</pre>
+<p>
+<span class="kindle-cn-bold">【例2.4-4】</span>
+ 　Isomorphism（SGU282）</p>
+<p>
+<span class="kindle-cn-bold">【问题描述】</span>
+</p>
+<p>染色图是无向完全图，且每条边可被染成M种颜色中的一种。两个染色图是同构的，当且仅当可以改变一个图的顶点的编号，使得两个染色图完全相同。问N个顶点，M种颜色，本质不同（两两互不同构）的染色图个数（模质数P）。</p>
+<p>1≤N≤53，1≤M≤1000，N&lt;P≤10<span class="math-super">9</span>
+ 。</p>
+<p>
+<span class="kindle-cn-bold">【输入格式】</span>
+</p>
+<p>一行3个数，依次表示N、M、P。</p>
+<p>
+<span class="kindle-cn-bold">【输出样例】</span>
+</p>
+<p>一行1个数，表示答案。</p>
+<p>
+<span class="kindle-cn-bold">【输入样例】</span>
+</p>
+<p>3 4 97</p>
+<p>
+<span class="kindle-cn-bold">【输出样例】</span>
+</p>
+<p>20</p>
+<p>
+<span class="kindle-cn-bold">【问题分析】</span>
+</p>
+<p>根据Polya原理，本题置换群中的对象就是<img class="kindle-cn-inline-image" alt="" src="Image00102.jpg" />
+ 条边，k种颜色就是M，G就是由点的置换引起的边的置换的群。</p>
+<p>同时我们知道，用Polya定理直接计算可以在Θ(ps)的时间解决问题，其中s=｜G｜。但是对这个问题，｜G｜的数量达到N!，当N=53时，这个数量相当惊人的，因此我们需要对问题进行更深入的分析。</p>
+<p>考虑一个对点的置换f=i→P［i］</p>
+<p>那么，它对应的对边的置换就是f′=（i，j）→（P［i］，P［j］）</p>
+<p>我们考虑这两个不同类型的置换各自的循环节个数c（f）与c（f′）的关系，可以得到如下结论：</p>
+<p>假设点i与点j同属于一个长度为L的循环中，那么这样的边（i，j）组成的置换中循环节个数为<img class="kindle-cn-inline-image2" alt="" src="Image00103.jpg" />
+ 。</p>
+<p>假设点i与点j各属于长L<span class="math-sub">1</span>
+ 和L<span class="math-sub">2</span>
+ 的两个不同循环中，那么这样的边（i，j）组成的置换中循环节个数为（L<span class="math-sub">1</span>
+ ，L<span class="math-sub">2</span>
+ ），即L<span class="math-sub">1</span>
+ 与L<span class="math-sub">2</span>
+ 的最大公约数。</p>
+<p>我们不妨设L<span class="math-sub">1</span>
+ ≥L<span class="math-sub">2</span>
+ ≥…≥L<span class="math-sub">m</span>
+ &gt;0，且由L<span class="math-sub">1</span>
+ +L<span class="math-sub">2</span>
+ +…+L<span class="math-sub">m</span>
+ =N</p>
+<p>所以L<span class="math-sub">1</span>
+ ，L<span class="math-sub">2</span>
+ ，…L<span class="math-sub">m</span>
+ 恰组成N的一种划分，由先前分析，每种划分对应的置换的循环节个数相同，为一个关于L<span class="math-sub">1</span>
+ ，L<span class="math-sub">2</span>
+ ，…L<span class="math-sub">m</span>
+ 的函数。</p>
+<p>由于N≤53，所以N的划分方案总数并不大，我们可以用回朔法枚举N的所有划分，然后对每一种划分，求出该划分对应的置换个数和每个置换的循环节个数。</p>
+<p>循环节个数上面已经讨论过了，那么置换个数是多少呢？</p>
+<p>假设已确定了L<span class="math-sub">1</span>
+ ≥L<span class="math-sub">2</span>
+ ≥…≥L<span class="math-sub">m</span>
+ &gt;0，接下来就是将1…N这N个点分别放入这m个循环节中，满足第i个循环中恰含有L<span class="math-sub">i</span>
+ 个点，这一部分可以看作一个简单的组合问题，易知共：<img class="kindle-cn-inline-image2" alt="" src="Image00104.jpg" />
+ 有种不同方式。</p>
+<p>又对于每一个循环，确定了第一个点，那么剩下各点的排列方式不同，其实对应的置换也是不同的，所以还要乘以（L<span class="math-sub">1</span>
+ -1）!（L<span class="math-sub">2</span>
+ -1）!…（L<span class="math-sub">m</span>
+ -1）!</p>
+<p>又如果有L<span class="math-sub">i</span>
+ =L<span class="math-sub">i+1</span>
+ =…=L<span class="math-sub">j</span>
+ ，那么每（j-i+1）!种方案又是重复的，所以还要除以（j-i+1）!</p>
+<p>所以总的置换个数就是：<img class="kindle-cn-inline-image2" alt="" src="Image00105.jpg" />
+ 。</p>
+<p>其中：t表示共有t种不同的L值，每种值有k<span class="math-sub">i</span>
+ 个。这些值在枚举划分的时候都是可以计算的，因此，整个问题的答案可以根据不同类别的置换的循环数以及置换数算出。</p>
+<p>下面讨论一下如何计算：</p>
+<p>一部分是<img class="kindle-cn-inline-image" alt="" src="Image00106.jpg" />
+ ，其中T<span class="math-sub">1</span>
+ 并不大，足以用一个longint表示，而<img class="kindle-cn-inline-image" alt="" src="Image00107.jpg" />
+ mod P可以用倍增的思想在log<span class="math-sub">2</span>
+ （T<span class="math-sub">1</span>
+ ）时间内计算。</p>
+<p>另一部分是<img class="kindle-cn-inline-image" alt="" src="Image00108.jpg" />
+ ，其中T<span class="math-sub">2</span>
+ 很大，而且是-1次的，难道要分解质因数了吗？不是，注意问题的一个很不起眼但又很重要条件：P是质数，且满足N&lt;P，这有什么用呢？</p>
+<p>显然L<span class="math-sub">1</span>
+ ，…L<span class="math-sub">m</span>
+ ，k<span class="math-sub">1</span>
+ ，…k<span class="math-sub">t</span>
+ 都≤N，当然&lt;P，因此L<span class="math-sub">1</span>
+ ，…L<span class="math-sub">m</span>
+ ，k<span class="math-sub">1</span>
+ ，…k<span class="math-sub">t</span>
+ 均与P互质，所以T<span class="math-sub">2</span>
+ 也与P互质。另一方面，由于P是质数，由数论知识可知：</p>
+<p><img class="kindle-cn-inline-image" alt="" src="Image00109.jpg" />
+</p>
+<p><img class="kindle-cn-inline-image" alt="" src="Image00110.jpg" />
+</p>
+<p>所以可以把<img class="kindle-cn-inline-image" alt="" src="Image00111.jpg" />
+ 转化为求<img class="kindle-cn-inline-image" alt="" src="Image00112.jpg" />
+ ，就于<img class="kindle-cn-inline-image" alt="" src="Image00113.jpg" />
+ 求法相同了。</p>
+<p>
+<span class="kindle-cn-bold">【参考程序】</span>
+</p>
+<pre class="color4">
+    #include&lt;iostream&gt;
+    #include&lt;stdio.h&gt;
+    #include&lt;stdlib.h&gt;
+    #include&lt;string.h&gt;
+    #include&lt;math.h&gt;
+    #include&lt;algorithm&gt;
+    #define L long long
+    using namespace std;
+    int n，m，p，x[54]，t，gcd[54][54]，q;
+    long long w，f[54]，g[54]，h[54]，ans，u;
+    
+    inline void ss（int i）{
+          int j;
+          if（i==n）{
+            u=w;
+            for（i=1;i&lt;=t;i++）
+              u=u*f[x[i]]%p;
+            for（i=1;i&lt;=t;i=j）{
+              for（j=i+1;j&lt;=t &amp;&amp; x[i]==x[j];j++）;
+              u=u*g[j-i]%p;
+            }
+            q=（q+u）%p;
+            for（i=1;i&lt;=t;i++）
+              u=u*h[x[i]&gt;&gt;1]%p;
+                for（i=1;i&lt;t;i++）
+              for（j=i+1;j&lt;=t;j++）
+                u=u*h[gcd[x[j]][x[i]]]%p;
+            ans=（ans+u）%p;
+            return;
+          }
+          for（j=x[t];i+j&lt;=n;j++）{
+            x[++t]=j;
+            ss（i+j）;
+            t--;
+          }
+    }
+    
+    inline long long power（int a，int b）{
+          if（b==0）
+            return 1;
+          long long c=power（a，b&gt;&gt;1）;
+          c=c*c%p;
+          if（b&amp;1）
+            c=c*a%p;
+          return c;
+    }
+    
+    int main（）{
+      int i，j;
+      scanf（"%d%d%d"，&amp;n，&amp;m，&amp;p）;
+      for（i=1;i&lt;=n;i++）{
+        gcd[i][0]=i;
+        for（j=i;j&gt;0;j--）
+          gcd[i][j]=gcd[j][i%j];
+      }
+      w=1;
+      f[1]=1;
+      g[1]=1;
+      for（i=2;i&lt;=n;i++）{
+        w=w*i%p;
+        f[i]=（p-p/i）*f[p%i]%p;
+        g[i]=f[i]*g[i-1]%p;
+      }
+          h[0]=1;
+      for（i=1;i&lt;=n;i++）
+        h[i]=h[i-1]*m%p;
+      x[0]=1;
+      ss（0）;
+      ans=ans*power（q，p-2）%p;
+      cout&lt;&lt;ans;
+      system（"pause"）;
+      return 0;
+    }
+</pre>
+<h2 class="kindle-cn-heading2"><a id="sec011"></a>
+ 2.5　本章习题</h2>
+<p>1．对正四面体的四个顶点用四种不同的颜色来着色，有多少种不同的方案？</p>
+<p>2．对正六面体的六个面用红蓝两种颜色来着色，有多少种不同的方案？</p>
+<p>3． Cipher（POJ1026）</p>
+<p>
+<span class="kindle-cn-bold">【问题描述】</span>
+</p>
+<p>Bob and Alice started to use a brand-new encoding scheme. Surprisingly it is not a Public Key Cryptosystem，but their encoding and decoding is based on secret keys. They chose the secret key at their last meeting in Philadelphia on February 16th，1996. They chose as a secret key a sequence of n distinct integers，a1…an，greater than zero and less or equal to n. The encoding is based on the following principle. The message is written down below the key，so that characters in the message and numbers in the key are correspondingly aligned. Character in the message at the position i is written in the encoded message at the position ai，where ai is the corresponding number in the key. And then the encoded message is encoded in the same way. This process is repeated k times. After kth encoding they exchange their message.</p>
+<p>The length of the message is always less or equal than n. If the message is shorter than n，then spaces are added to the end of the message to get the message with the length n.</p>
+<p>Help Alice and Bob and write program which reads the key and then a sequence of pairs consisting of k and message to be encoded k times and produces a list of encoded messages．</p>
+<p>
+<span class="kindle-cn-bold">【输入格式】</span>
+</p>
+<p>The input file consists of several blocks. Each block has a number 0≤n≤200 in the first line. The next line contains a sequence of n numbers pairwise distinct and each greater than zero and less or equal than n. Next lines contain integer number k and one message of ascii characters separated by one space. The lines are ended with eol，this eol does not belong to the message. The block ends with the separate line with the number 0. After the last block there is in separate line the number 0．</p>
+<p>
+<span class="kindle-cn-bold">【输出格式】</span>
+</p>
+<p>Output is divided into blocks corresponding to the input blocks. Each block contains the encoded input messages in the same order as in input file. Each encoded message in the output file has the lenght n. After each block there is one empty line．</p>
+<p>
+<span class="kindle-cn-bold">【输入样例】</span>
+</p>
+<p>10</p>
+<p>4 5 3 7 2 8 1 6 10 9</p>
+<p>1 Hello Bob</p>
+<p>1995 CERC</p>
+<p>0</p>
+<p>0</p>
+<p>
+<span class="kindle-cn-bold">【输出样例】</span>
+</p>
+<p>BolHeol　b</p>
+<p>C RCE</p>
+<div class="empty"></div>
+<p>4． Magic Bracelet（POJ2888）</p>
+<p>
+<span class="kindle-cn-bold">【问题描述】</span>
+</p>
+<p>Ginny's birthday is coming soon. Harry Potter is preparing a birthday present for his new girlfriend. The present is a magic bracelet which consists of n magic beads. The are m kinds of different magic beads. Each kind of beads has its unique characteristic. Stringing many beads together a beautiful circular magic bracelet will be made. As Harry Potter's friend Hermione has pointed out，beads of certain pairs of kinds will interact with each other and explode，Harry Potter must be very careful to make sure that beads of these pairs are not stringed next to each other．</p>
+<p>There infinite beads of each kind. How many different bracelets can Harry make if repetitions produced by rotation around the center of the bracelet are neglected？Find the answer taken modulo 9973．</p>
+<p>
+<span class="kindle-cn-bold">【输入格式】</span>
+</p>
+<p>The first line of the input contains the number of test cases．</p>
+<p>Each test cases starts with a line containing three integers n（1≤n≤10<span class="math-super">9</span>
+ ，gcd（n，9973）=1），m（1≤m≤10），k（1≤k≤m（m-1）/2）. The next k lines each contain two integers a and b（1≤a，b≤m），indicating beads of kind a cannot be stringed to beads of kind b．</p>
+<p>
+<span class="kindle-cn-bold">【输出格式】</span>
+</p>
+<p>Output the answer of each test case on a separate line．</p>
+<p>
+<span class="kindle-cn-bold">【输入样例】</span>
+</p>
+<p>4</p>
+<p>3 2 0</p>
+<p>3 2 1</p>
+<p>1 2</p>
+<p>3 2 2</p>
+<p>1 1</p>
+<p>1 2</p>
+<p>3 2 3</p>
+<p>1 1</p>
+<p>1 2</p>
+<p>2 2</p>
+<p>
+<span class="kindle-cn-bold">【输出样例】</span>
+</p>
+<p>4</p>
+<p>2</p>
+<p>1</p>
+<p>0</p>
+<div class="empty"></div>
+<p>5． Let it Bead（POJ2409）</p>
+<p>
+<span class="kindle-cn-bold">【问题描述】</span>
+</p>
+<p>“Let it Bead” company is located upstairs at 700 Cannery Row in Monterey，CA. As you can deduce from the company name，their business is beads. Their PR department found out that customers are interested in buying colored bracelets. However，over 90 percent of the target audience insists that the bracelets be unique.（Just imagine what happened if two women showed up at the same party wearing identical bracelets!）It's a good thing that bracelets can have different lengths and need not be made of beads of one color. Help the boss estimating maximum profit by calculating how many different bracelets can be produced.</p>
+<p>A bracelet is a ring-like sequence of s beads each of which can have one of c distinct colors. The ring is closed，i.e. has no beginning or end，and has no direction. Assume an unlimited supply of beads of each color. For different values of s and c，calculate the number of different bracelets that can be made．</p>
+<p>
+<span class="kindle-cn-bold">【输入格式】</span>
+</p>
+<p>Every line of the input file defines a test case and contains two integers: the number of available colors c followed by the length of the bracelets s. Input is terminated by c=s=0. Otherwise，both are positive，and，due to technical difficulties in the bracelet-fabrication-machine，cs≤32，i.e. their product does not exceed 32．</p>
+<p>
+<span class="kindle-cn-bold">【输出格式】</span>
+</p>
+<p>For each test case output on a single line the number of unique bracelets. The figure below（图2.5-1）shows the 8 different bracelets that can be made with 2 colors and 5 beads．</p>
+<div class="kindle-cn-bodycontent-div-alone100"><img class="kindle-cn-bodycontent-image-alone80-withnote" alt="" src="Image00114.jpg" />
+<p class="kindle-cn-picture-txt-withfewcharactors kindle-cn-bold">图2.5-1</p>
+</div>
+<p>
+<span class="kindle-cn-bold">【输入样例】</span>
+</p>
+<p>1 1</p>
+<p>2 1</p>
+<p>2 2</p>
+<p>5 1</p>
+<p>2 5</p>
+<p>2 6</p>
+<p>6 2</p>
+<p>0 0</p>
+<p>
+<span class="kindle-cn-bold">【输出样例】</span>
+</p>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>5</p>
+<p>8</p>
+<p>13</p>
+<p>21</p>
+<div class="empty"></div>
+<p>6． Cow Sorting（POJ3270）</p>
+<p>
+<span class="kindle-cn-bold">【问题描述】</span>
+</p>
+<p>Farmer John's N（1≤N≤10000）cows are lined up to be milked in the evening. Each cow has a unique "grumpiness" level in the range 1..100000. Since grumpy cows are more likely to damage FJ's milking equipment，FJ would like to reorder the cows in line so they are lined up in increasing order of grumpiness. During this process，the places of any two cows（not necessarily adjacent）can be interchanged. Since grumpy cows are harder to move，it takes FJ a total of X+Y units of time to exchange two cows whose grumpiness levels are X and Y．</p>
+<p>Please help FJ calculate the minimal time required to reorder the cows．</p>
+<p>
+<span class="kindle-cn-bold">【输入格式】</span>
+</p>
+<p>Line 1: A single integer: N.</p>
+<p>Lines 2..N+1: Each line contains a single integer: line i+1 describes the grumpiness of cow i．</p>
+<p>
+<span class="kindle-cn-bold">【输出格式】</span>
+</p>
+<p>Line 1: A single line with the minimal time required to reorder the cows in increasing order of grumpiness．</p>
+<p>
+<span class="kindle-cn-bold">【输入样例】</span>
+</p>
+<p>3</p>
+<p>2</p>
+<p>3</p>
+<p>1</p>
+<p>
+<span class="kindle-cn-bold">【输出样例】</span>
+</p>
+<p>7</p>
+<p>
+<span class="kindle-cn-bold">【样例解释】</span>
+</p>
+<p>2 3 1: Initial order.</p>
+<p>2 1 3: After interchanging cows with grumpiness 3 and 1（time=1+3=4）.</p>
+<p>1 2 3: After interchanging cows with grumpiness 1 and 2（time=2+1=3）．</p>
+<script src="../../math.js"></script></body>
+</html>

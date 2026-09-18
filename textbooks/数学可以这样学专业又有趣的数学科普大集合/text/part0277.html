@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="885BQ0-7fb6169c724040fabc00d7e2dab9522e" class="calibre">
+  <h3 class="bodycontent-second-title">赞成票？反对票？</h3>
+
+  <p class="bodytext">委员会要对现有税收议案进行投票，如果一项议案要获得委员会的通过，3张选票中必须至少有2张赞成票。</p>
+
+  <p class="bodytext">现在要设计一个这样的电路，它以三位投票人各自的投票结果作为输入，以议案是否通过作为输出。用1表示投票人投赞成票或议案获得通过，0表示投票人反对、弃权或者议案未获通过，电路真值表如下表（A、B、C分别表示以下三个命题：A投赞成票、B投赞成票、C投赞成票）：</p>
+
+  <div class="tupian"><img alt="" class="image-alone" src="../images/04237.jpeg"/></div>
+
+  <p class="bodytext">以下四种情况中的任一种为真都可以使议案通过：</p>
+
+  <p class="bodytext">1）A反对，B、C赞成，对应的逻辑表达式为：～A∧B∧C；</p>
+
+  <p class="bodytext">2）B反对，A、C赞成，对应的表达式为：A∧～B∧C；</p>
+
+  <p class="bodytext">3）C反对，A、B赞成，对应的表达式为：A∧B∧～C；</p>
+
+  <p class="bodytext">4）A、B、C都赞成，对应的表达式为：A∧B∧C。</p>
+
+  <p class="bodytext">所以表决器的输出是：</p>
+
+  <p class="bodytext">（～A∧B∧C）∨（A∧～B∧C）∨（A∧B∧～C）∨（A∧B∧C）</p>
+
+  <p class="bodytext">对应的电路是这样的：</p>
+
+  <div class="tupian"><img alt="" class="image-alone" src="../images/04238.jpeg"/></div>
+
+  <p class="bodytext">一般说来，考虑到设计与制造电路的紧凑性和经济性，如果功能一致，我们希望某个电路所包含的“门”尽可能少。</p>
+
+  <p class="bodytext">减少芯片上“门”的数量，可以使电路更可靠、并降低成本。</p>
+
+  <p class="bodytext">采用逻辑等价演算的方法可以简化上面的电路图，化简的方法可以是这样的：</p>
+
+  <div class="tupian"><img alt="" class="image-alone" src="../images/04239.jpeg"/></div>
+
+  <p class="bodytext">最后通过交换律得到化简的逻辑表达式：（A∧B）∨（A∧C）∨（B∧C）。</p>
+
+  <p class="bodytext">这样一来，对应的电路可以简化成这样：</p>
+
+  <div class="tupian"><img alt="" class="image-alone" src="../images/04240.jpeg"/></div>
+
+  <p class="bodytext">对于一些更复杂的电路，化简的过程往往很复杂。人们希望有一种系统化的化简方法，卡诺图（Karnaugh Map）的出现，在当时解决了这个问题。</p>
+
+  <p class="bodytext">卡诺图看上去像方格图，填入方格的是一些特定的逻辑表达式，通过相邻方格的合并化简，可以将逻辑表达式化简。</p>
+
+  <p class="bodytext">不过，当输入变量超过4个，卡诺图简化电路就显得不那么灵便了。</p>
+
+  <p class="bodytext">简化电路的另一种方法还有奎因（Willard Van Orman Quine）提出的一种列表法。1956年，麦克拉斯基（Edward McCluskey）改进了这种方法。</p>
+<script src="../../math.js"></script></body></html>

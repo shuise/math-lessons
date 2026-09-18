@@ -1,0 +1,267 @@
+/* HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11 and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ * hgroup has been removed from the HTML5 (W3C) specification
+ *        https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hgroup
+ */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+  display: block;
+}
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome.
+ */
+b, strong {
+  font-weight: bold;
+}
+/**
+ * Improve readability of pre-formatted text in all browsers.
+ */
+pre {
+  white-space: pre-wrap;
+}
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+small {
+  font-size: 80%;
+}
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+/*
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+*/
+body {
+  font-weight: normal;
+  line-height: 1.6;
+}
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 1.6rem 0;
+  font-weight: 600;
+  font-size: 100%;
+}
+h1 {
+  font-size: 1.5em;
+}
+h2 {
+  font-size: 1.25em;
+}
+p {
+  margin: 0 0 0.5rem 0;
+  line-height: 1.8em;
+}
+/* */
+p {
+  text-indent: 2em;
+}
+section {
+  margin-bottom: 4em;
+}
+/* Quotes */
+.erc-chapter-title {
+  font-size: 2em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+.erc-chapter-header {
+  font-size: 0.8em;
+  text-align: left;
+  margin-left: 3em;
+  margin-right: 3em;
+}
+.erc-chapter-ending {
+  font-size: 0.9em;
+  margin-top: 0.5em;
+}
+.erc-section-title {
+  padding-top: 1em;
+  padding-bottom: 0.5em;
+  font-size: 1.5em;
+}
+.erc-section-header {
+  padding-top: 0.6em;
+  font-size: 0.8em;
+  margin-left: 3em;
+  margin-right: 3em;
+}
+.erc-section-ending {
+  padding-top: 0.6em;
+  font-size: 0.9em;
+}
+.erc-LC-title {
+  padding-top: 1em;
+  padding-bottom: 0.5em;
+  font-size: 1.1em;
+}
+.erc-CB-header {
+  padding-top: 1em;
+}
+.erc-CE-ending {
+  padding-top: 1em;
+  text-align: left;
+}
+.erc-LD-title {
+  padding-top: 0.5em;
+  font-size: 1.1em;
+  padding-bottom: 0.5em;
+}
+.erc-DE-content {
+  padding-top: 1em;
+}
+.erc-LE-title {
+  padding-top: 1em;
+  font-size: 1.1em;
+}
+.erc-SA-content {
+  padding-top: 1em;
+  padding-left: 2em;
+  font-size: 0.9em;
+  margin-right: 3em;
+  margin-left: 1em;
+  border-left: 4px solid #ddd;
+  margin-bottom: 1em;
+}
+.erc-AR-content {
+  text-align: right;
+  font-size: 0.8em;
+  margin-top: 1.2em;
+  margin-left: 3em;
+  margin-right: 3em;
+}
+.erc-SB-content {
+  margin-left: 2em;
+  margin-right: 2em;
+}
+.erc-SC-content {
+  margin-left: 2em;
+  margin-right: 2em;
+}
+.erc-SD-content {
+  margin-left: 2em;
+  margin-right: 2em;
+}
+.erc-AC-content {
+  margin-top: 1.2em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+/*
+sup {
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+*/
+div.erc-section-footer {
+  text-align: right;
+}
+div.erc-section-footer h3 {
+  margin: 0;
+}
+div.erc-table-container, div.erc-image-container {
+  padding: 15px 5px;
+  text-align: center;
+}
+div.erc-table-container .title, div.erc-image-container .title {
+  display: block;
+  font-weight: 600;
+  font-size: 0.81rem;
+  /*font-family: "Times New Roman", Times, Hei, "HeiTi SC", HeiTi, serif;*/
+  margin-left: 50px;
+  margin-right: 50px;
+  line-height: 200%;
+}
+div.erc-table-container .title {
+  margin-bottom: 10px;
+}
+div.erc-image-container .title {
+  margin-top: 10px;
+}
+div.erc-table-container table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+div.erc-table-container table thead th {
+  border-top: 1px solid #333;
+  border-bottom: 2px solid #333;
+  padding: 5px 0;
+}
+div.erc-table-container table tbody td {
+  padding: 5px 0;
+  border-bottom: 1px solid #333;
+}
+div.erc-table-container table thead th, div.erc-table-container table tbody td {
+  border-right: 1px solid #666;
+}
+div.erc-table-container table thead tr th:last-child, div.erc-table-container table tbody tr td:last-child {
+  border-right: none;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 4em;
+}
+h2.title_1 {
+  margin-bottom: 0;
+  text-align: center;
+}
+h2.title_2 {
+  text-align: center;
+}
+.erc-chapter-body {
+  line-height: 1.8em;
+}
+/*div.erc-chapter-body{
+  
+  border-top: 1px dotted #666;
+  border-bottom: 1px dotted #666;
+  border-left: 1px dotted #666;
+  border-right: 1px dotted #666;
+  padding: 10px;
+  border-radius: 10px;
+}*/
+.erc-chapter-footer {
+  text-align: right;
+}
+/*.erc-chapter-body{
+  
+  margin-bottom: 4em;
+}*/
+.image {
+  width: 100%;
+}
+.imgINp {
+  position: relative;
+  top: 10px;
+}
+.erc_teshuwenzi {
+  border-left: 2px solid #ddd;
+  padding-left: 1em;
+  margin-left: 2em;
+  margin-right: 3em;
+  font-size: 0.9em;
+}
+.erc-IT-content {
+  font-size: 0.6em;
+  text-align: center;
+}

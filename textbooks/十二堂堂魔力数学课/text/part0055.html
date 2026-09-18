@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="../stylesheet.css" rel="stylesheet" type="text/css"/>
+<link href="../page_styles.css" rel="stylesheet" type="text/css"/>
+</head>
+  <body class="calibre" id="CCNA0-c0a03bb820f64a13aa49402e231bdebc">
+<h2 class="calibre9" id="sigil_toc_id_42">e、复利与里氏震级</h2>
+
+  <p class="calibre6">如果你有科学计算器，请做一做下面这个实验。</p>
+
+  <blockquote class="calibre14">
+    <p class="calibre15">1．在计算器里输入一个你熟悉的七位数（可以是电话号码、证件号码，也可以将你喜欢的某个一位数字连续输入7次）。</p>
+
+    <p class="calibre15">2．取这个数字的倒数（按下计算器的“1 / <span class="italic1">x</span>”键）。</p>
+
+    <p class="calibre15">3．将得到的结果加上1。</p>
+
+    <p class="calibre15">4．对得数进行幂运算，指数为最初的那个七位数（按下“<span class="italic1">xy</span>”键，然后输入最初的那个七位数，再按下等号键）。</p>
+  </blockquote>
+
+  <p class="calibre16">最终得数的前几位是不是2.718？如果得数的前几位与无理数e = 2.718 281 828 459 045…一致，我不会感到奇怪。</p>
+
+  <p class="calibre6">这个神秘数字e到底有什么特殊之处？它为什么非常重要？在上面的小实验里，你实际上是在计算(1 + 1 / <span class="italic">n</span> ) <span class="sbiaoxt">n</span>的值，且<span class="italic">n</span>是一个比较大的数字。如果<span class="italic">n</span>不断增大，得数又会发生什么变化呢？一方面，随着<span class="italic">n</span>不断增大，数字 (1 + 1 / <span class="italic">n</span>) 将会越来越接近1。当1为底数时，无论指数是多少，幂运算的结果都是1。因此，有理由相信，对于大数<span class="italic">n</span>，(1 + 1 /<span class="italic">n</span>)<span class="sbiaoxt">n</span>的值约等于1。例如，(1.001)<span class="sbiao">100</span> ≈ 1.105。</p>
+
+  <p class="calibre6">另一方面，即使<span class="italic">n</span>非常大，(1 + 1 / <span class="italic">n</span> ) 仍然略大于1。如果底数是一个大于1的值，随着指数不断增大，得数将变成一个任意大的值。例如，(1.001)<span class="sbiao">10 000</span> 的结果就大于20 000。</p>
+
+  <p class="calibre6">问题是，在指数<span class="italic">n</span>增大的同时，底数 (1 + 1 / <span class="italic">n</span>) 正在减小。在1与无穷大的相持过程中，答案会逐渐接近于e = 2.718 28…。例如，(1.001)<span class="sbiao">1 000</span> ≈ 2.717。下表列出了函数 (1 + 1 / <span class="italic">n</span> )<span class="sbiaoxt">n</span>在<span class="italic">n</span>取较大值时的结果。</p>
+
+  <div class="chatu"><img alt="p115" class="calibre8" src="../images/00650.jpeg"/></div>
+
+  <p class="calibre11">我们把e定义为(1 + 1 / <span class="italic">n</span>)<span class="sbiaoxt">n</span>在<span class="italic">n</span>不断增大时逐渐接近的数字。数学界把它称作当<span class="italic">n</span>趋于无穷大时(1 + 1 / <span class="italic">n</span>)<span class="sbiaoxt">n</span>的极限值，记作：</p>
+
+  <p class="center1">e = <span class="sbiao"><img alt="" class="h-pic" src="../images/00201.jpeg"/></span>(1 + 1<span class="italic">/ n</span>)<span class="sbiaoxt">n</span></p>
+
+  <p class="calibre6">如果用<span class="italic">x</span> / <span class="italic">n</span> 替代1 / <span class="italic">n</span>，其中<span class="italic">x</span>为任意实数，那么随着 <span class="italic">n</span> / <span class="italic">x</span>不断增大，(1 + <span class="italic">x</span> / <span class="italic">n</span>)<span class="sbiaoxt">n/x</span>这个数字将会不断接近e。两边同时求<span class="italic">x</span>次幂[你还记得这个公式吧：(<span class="italic">a</span><span class="sbiaoxt">b</span> )<span class="sbiaoxt">c</span> = <span class="italic">a</span><span class="sbiaoxt">bc</span> ]，就会得到所谓的“指数公式”（exponential formula）：</p>
+
+  <p class="center1"><span class="sbiao"><img alt="" class="h-pic" src="../images/00201.jpeg"/></span>(1 + <span class="italic">x / n</span>)<span class="sbiaoxt">n</span> = e<span class="sbiaoxt">x</span></p>
+
+  <p class="calibre6">指数公式有很多非常“有利可图”的应用。假设你的储蓄账户里有10 000美元，年利率为0.06。如果每年结算一次利息，那么截至第一年年底，你的账户里将会有10 000 ×1.06 = 10 600美元。截至第二年年底，你账户里的钱又会变成10 000 ×(1.06)<span class="sbiao">2</span> = 11 236美元。截至第三年年底，你的账户里有10 000 ×(1.06)<span class="sbiao">3</span> = 11 910.16美元。以此类推，到第<span class="italic">t</span>年年底，你的存款将会变成10 000 ×(1.06)<span class="sbiaoxt">t</span>美元。一般来说，如果我们用利率<span class="italic">r</span>来替代6%，一开始时的本金是<span class="italic">P</span>美元，那么截至第<span class="italic">t</span>年年底，你的存款将会变成<span class="italic">P</span>(1 + <span class="italic">r</span> ) <span class="sbiaoxt">t</span>美元。</p>
+
+  <p class="calibre6">现在，我们假设6%的利率是按半年复利的形式计算的，也就是说每6个月可得到3%的利息。那么，到第一年年底，你的存款为10 000× (1.03)<span class="sbiao">2</span> = 10 609美元，比年复利时的10 600美元多一点儿。如果是季度复利，那么每年可以结算4次利息，利率为1.5%，一年后的账户金额为10 000 ×(1.015)<span class="sbiao">4</span> = 10 613.63美元。一般而言，如果每年结算利息<span class="italic">n</span>次，那么一年后的金额是：</p>
+
+  <p class="center1">10 000美元×（1+<img alt="" class="h-pic" src="../images/00655.jpeg"/>）<span class="sbiaoxt">n</span>美元</p>
+
+  <p class="calibre6">当<span class="italic">n</span>取非常大的值时，就叫作连续复利。如下表所示，根据指数公式，一年后的金额就会变成：</p>
+
+  <p class="center1">10 000 <span class="sbiao"><img alt="" class="h-pic" src="../images/00201.jpeg"/></span>（1+<img alt="" class="h-pic" src="../images/00655.jpeg"/>）<span class="sbiaoxt">n</span> =10 000e<span class="sbiao">0.06</span> = 10 618.36美元</p>
+
+  <div class="chatu"><img alt="p117" class="calibre8" src="../images/00108.jpeg"/></div>
+
+  <p class="calibre11">一般而言，如果你最初的本金是<span class="italic">P</span>美元，利率为<span class="italic">r</span>，以连续复利的方式结算利息，那么<span class="italic">t</span>年后，你的存款金额<span class="italic">A</span>就可以用下面这个美丽的公式计算出来：</p>
+
+  <p class="center1"><span class="italic">A</span> = <span class="italic">P</span>e<span class="sbiaoxt">rt</span></p>
+
+  <p class="calibre6">从下图可以看出，函数 <span class="italic">y</span> = e<span class="sbiaoxt">x</span> 增长得非常快。同时，我还给出了e<span class="sbiao">2</span><span class="sbiaoxt">x</span> 和e<span class="sbiao">0.06</span><span class="sbiaoxt">x</span> 的图像。我们说，这些函数呈“指数增长”。函数 <span class="italic">y</span> = e<span class="sbiao">–</span><span class="sbiaoxt">x</span> 的图像趋近0的速度非常快，呈“指数衰减”。</p>
+
+  <div class="chatu">
+    <img alt="" class="calibre8" src="../images/00660.jpeg"/>
+
+    <h5 class="calibre10">一些指数函数</h5>
+  </div>
+
+  <p class="calibre11">5<span class="sbiaoxt">x</span>的图像有什么特点呢？由于e &lt; 5 &lt; e<span class="sbiao">2</span>，因此5<span class="sbiaoxt">x</span> 的图像肯定位于e<span class="sbiaoxt">x</span> 和e<span class="sbiao">2</span><span class="sbiaoxt">x</span> 的图像之间。事实的确如此，因为e<span class="sbiao">1.609…</span>= 5，因此5<span class="sbiaoxt">x</span> ≈ e<span class="sbiao">1.609</span><span class="sbiaoxt">x</span>。一般情况下，只要我们找到指数<span class="italic">k</span>，使 <span class="italic">a</span> = e<span class="sbiaoxt">k</span>，函数 <span class="italic">a</span><span class="sbiaoxt">x</span> 就可以表示成指数函数e<span class="sbiaoxt">kx</span> 的形式。我们如何才能找到<span class="italic">k</span>呢？答案是利用“对数”（logarithms）。</p>
+
+  <p class="calibre6">就像平方根是平方的反函数（这两个函数相互抵消），对数是指数函数的反函数。最常见的对数是以10为底的对数，记作log <span class="italic">x</span>。我们说,如果10<span class="sbiaoxt">y</span> = <span class="italic">x</span>，那么 <span class="italic">y</span> = log <span class="sbiaoxt">x</span>，或者10<span class="sbiao">log</span> <span class="sbiaoxt">x</span> = <span class="italic">x</span>。</p>
+
+  <p class="calibre6">例如，由于10<span class="sbiao">2</span> = 100，因此log 100 = 2。下面是常用对数表。</p>
+
+  <div class="chatu"><img alt="p118" class="calibre8" src="../images/00519.jpeg"/></div>
+
+  <p class="calibre11">对数的用途很多，其中之一是可以将大数转化成我们容易理解的小数。例如，里氏震级利用对数将地震的大小分为1~10级。对数还可以用来测量声音的强度（分贝）、化学溶液的酸碱度（pH值），以及通过谷歌的PageRank算法来评估网页的受欢迎程度。</p>
+
+  <p class="calibre6">Log 512是多少呢？利用科学计算器就可以算出log 512 = 2.709…（大多数的搜索引擎也可以胜任这项工作）。这个得数很容易理解，因为512位于10<span class="sbiao">2</span> 和10<span class="sbiao">3</span>之间，它的对数肯定在2和3之间。对数的目的就是将乘法问题转化为简单的加法问题，它依据的是下面这条定理。</p>
+
+  <p class="calibre6"><b class="calibre5">定理：</b>对于任意正数<span class="italic">x</span>和<span class="italic">y</span>，都有：</p>
+
+  <p class="center1">log <span class="italic">xy</span> = log <span class="italic">x</span> + log <span class="italic">y</span></p>
+
+  <p class="calibre6">换句话说，积的对数就是对数的和。</p>
+
+  <p class="calibre6"><b class="calibre5">证明：</b>利用指数法则，很容易就能证明这条定理。因为：</p>
+
+  <p class="center1">10<span class="sbiao">log</span> <span class="sbiaoxt">x</span> <span class="sbiao">+ log</span> <span class="sbiaoxt">y</span> = 10<span class="sbiao">log</span> <span class="sbiaoxt">x</span> 10<span class="sbiao">log</span> <span class="sbiaoxt">y</span> = <span class="italic">xy</span> = 10<span class="sbiao">log</span> <span class="sbiaoxt">xy</span></p>
+
+  <p class="calibre6">所以，10的log <span class="italic">x</span> + log <span class="italic">y</span> 次幂等于<span class="italic">xy</span>。证明完毕。 □</p>
+
+  <p class="calibre6">“指数规则”是另一个有用的特性。</p>
+
+  <p class="calibre6"><b class="calibre5">定理：</b>对于任意正数<span class="italic">x</span>和<span class="italic">y</span>，都有：</p>
+
+  <p class="center1">log <span class="italic">x</span><span class="sbiaoxt">n</span> = <span class="italic">n</span> log <span class="italic">x</span></p>
+
+  <p class="calibre6"><b class="calibre5">证明：</b>根据指数法则，<span class="italic">a</span><span class="sbiaoxt">bc</span> = ( <span class="italic">a</span> <span class="sbiaoxt">b</span> )<span class="sbiaoxt">c</span>。因此：</p>
+
+  <p class="center1">10<span class="sbiaoxt">n</span> <span class="sbiao">log</span><span class="sbiaoxt">x</span> = (10<span class="sbiao">l</span><span class="sbiao">og</span> <span class="sbiaoxt">x</span>)<span class="sbiaoxt">n</span> = <span class="italic">x</span><span class="sbiaoxt">n</span></p>
+
+  <p class="calibre6">也就是说，<span class="italic">x</span><span class="sbiaoxt">n</span>的对数等于<span class="italic">n</span> log <span class="italic">x</span>。 □</p>
+
+  <p class="calibre6">尽管以10为底的对数在化学和物理科学（如地质学）中的应用非常广泛，但是它本身并没有什么特别之处。在计算机科学与离散数学中，以2为底的对数受欢迎的程度更高。对于任意 <span class="italic">b</span> &gt; 0，以<span class="italic">b</span>为底的对数log<span class="xbiaoxt">b</span> 都要遵循下面这条规则：</p>
+
+  <p class="center1">如果 <span class="italic">b</span><span class="sbiaoxt">y</span> = <span class="italic">x</span>，那么<span class="italic">y</span> = log<span class="xbiaoxt">b</span> <span class="italic">x</span></p>
+
+  <p class="calibre6">例如，log<sub class="calibre22">2</sub> 32 = 5，因为2<span class="sbiao">5</span> = 32。底为任意数字<span class="italic">b</span>时，前面讨论的对数属性都成立。例如：</p>
+
+  <p class="center1"><span class="italic">b</span><span class="sbiao">log</span><span class="sbiaoxt">bx</span> = <span class="italic">x</span> log<span class="xbiaoxt">b</span><span class="italic">xy</span> = log<span class="xbiaoxt">b</span> <span class="italic">x</span> + log<span class="xbiaoxt">b</span> <span class="italic">y</span> log<span class="xbiaoxt">b</span><span class="italic">x</span><span class="sbiaoxt">n</span> = <span class="italic">n</span> log<span class="xbiaoxt">b</span> <span class="italic">x</span></p>
+
+  <p class="calibre6">不过，在数学、物理学和工程学的大多数领域里，应用最广泛的还是以e为底的对数。这种对数叫作“自然对数”（natural logarithm），记作ln <span class="italic">x</span>。也就是说：</p>
+
+  <p class="center1">如果e<span class="sbiaoxt">y</span> = <span class="italic">x</span>，那么 <span class="italic">y</span> = ln <span class="italic">x</span></p>
+
+  <p class="calibre6">或者说，对于任意实数<span class="italic">x</span>：</p>
+
+  <p class="center1">ln e<span class="sbiaoxt">x</span> = <span class="italic">x</span></p>
+
+  <p class="calibre6">例如，利用计算器就可以算出ln 5 = 1.609…，我们在前文中也算出e<span class="sbiao">1.609</span> ≈ 5。在本书第11章，我们将更深入地讨论自然对数。</p>
+
+  <div class="solidgrey">
+    <h4 class="calibre12">延伸阅读</h4>
+
+    <p class="calibre7">所有科学计算器都可以计算自然对数和以10为底的对数值，但是大多数计算器对其他对数却无能为力。不过，大家不用着急，因为我们可以很轻松地改变对数的底。如果知道某个对数的值，基本上也就知道了所有不同底的对数的值。具体来说，我们可以利用下面这个规则，依据以10为底的对数值得出以<span class="italic">b</span>为底的对数值。</p>
+
+    <p class="calibre7"><b class="calibre5">定理：</b>对于任意正数<span class="italic">x</span>和<span class="italic">y</span>，都有：</p>
+
+    <p class="center">log<span class="xbiaoxt">b</span><span class="italic">x</span> = <img alt="" class="h-pic" src="../images/00667.jpeg"/></p>
+
+    <p class="calibre7"><b class="calibre5">证明：</b>令 <span class="italic">y</span> = log<span class="xbiaoxt">b</span> <span class="italic">x</span>，则 <span class="italic">b</span><span class="sbiaoxt">y</span> = <span class="italic">x</span>。两边取对数，即log <span class="italic">b</span><span class="sbiaoxt">y</span> = log <span class="italic">x</span>。根据指数规则，我们可以得出 <span class="italic">y</span> log <span class="italic">b</span> = log <span class="italic">x</span>。也就是说，<span class="italic">y</span> =(log <span class="italic">x</span>) / (log <span class="italic">b</span>)。证明完毕。 □</p>
+
+    <p class="calibre7">例如，对于任意<span class="italic">x</span> &gt; 0，都有：</p>
+
+    <p class="center">ln <span class="italic">x</span> = (log <span class="italic">x</span>) / (log e) = (log <span class="italic">x</span>) / (0.434…) ≈ 2.30 log <span class="italic">x</span></p>
+
+    <p class="center">log<sub class="calibre22">2</sub> <span class="italic">x</span> = (log <span class="italic">x</span>) / (log 2) = (log <span class="italic">x</span>) / (0.301…) ≈ 3.32 log <span class="italic">x</span></p>
+  </div>
+
+  <script src="../../math.js"></script></body>
+</html>

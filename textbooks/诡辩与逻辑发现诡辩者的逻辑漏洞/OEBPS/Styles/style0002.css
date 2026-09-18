@@ -1,0 +1,31 @@
+/* Global setting */
+/* 全局设定 */
+body {
+	font-size: 1em;
+	text-align: justify;
+	line-height: 1.618em;
+}
+
+/* Recommended Text indent */
+/* 全文首行缩进2各个中文字符 */
+p {
+	text-indent: 2em;
+}
+
+/* 版权信息页正文 */
+/* Copyright page text */
+p.kindle-cn-copyright-text {
+	line-height: 1.618em;
+	text-indent: 0em;
+}
+
+/* Quote */
+/* 引用框 */
+blockquote.kindle-cn-blockquote {
+  background: #f9f9f9;
+  border-left: 0.5em solid #ccc;
+  margin: 1.5em;
+  padding: 1em;
+  text-indent:2em;
+  line-height:1.5em;
+}

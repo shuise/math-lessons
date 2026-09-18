@@ -1,0 +1,824 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="../stylesheet.css" rel="stylesheet" type="text/css"/>
+<link href="../page_styles.css" rel="stylesheet" type="text/css"/>
+</head>
+  <body id="23MNU0-d8db722f337647359222aeb8f03017e4" class="calibre2">
+  <h3 class="chapter-two" title="《关于数学基本原理及相关体系的形式不可判定命题》">《关于数学基本原理及相关体系的形式不可判定命题》<a id="zw1" href="part0071.html#zhu1"><sup class="calibre8">[1]</sup></a></h3>
+
+  <h4 class="chapter-four">1</h4>
+
+  <p class="bodytext">众所周知，由于数学朝着更高精确性方面的发展，促成了对它大范围地形式化，从而使证明可以仅依据几个机械的规则来进行，一方面有业已建立的最广泛的数学基本原理（Principia Mathematica，记为（PM））<a id="zw2" href="part0071.html#zhu2"><sup class="calibre5">[2]</sup></a>的形式体系，以及另一方面的策梅洛-弗兰克尔（Zemelo-Frankel）的集合论公理体系［后来，被冯·诺伊曼（J.v．Neumann）推广］．<a id="zw3" href="part0071.html#zhu3"><sup class="calibre5">[3]</sup></a>这两个体系是如此之广泛，以至于当今的数学中所使用的所有证明方法都在它们中被形式化了，就是说被归结到了几个公理和几个推理规则上了．因此人们或许会推测说，这些公理和规则足以决定<span class="jiacu">所有</span>那些完全可以在所涉及体系中按任意一种方式形式表达的数学问题，我们下面将证明，情况并非如此，事实上就在前面所提及的这两个体系中便有在通常整数理论里相对简单的问题，它不能由这些公理判定．<a id="zw4" href="part0071.html#zhu4"><sup class="calibre5">[4]</sup></a>而出现这种情形也并非由于以某种方式能归结到所建体系的特殊性质，而是对于非常广泛的一类形式体系都成立，特别地，包括了所有那些由对所提及的这两个体系添加了有限个公理所产生的体系<a id="zw5" href="part0071.html#zhu5"><sup class="calibre5">[5]</sup></a>，但这时还需假定这种添加不会因此而出现在脚注［4］中所描述的那种命题，尽管它是假的却成为可证明的．</p>
+
+  <p class="bodytext">在进行详细讨论之前，我们首先简要说明证明的主要思路，自然并不自以为是完全准确的．在这里我们只局限于PM体系；一个形式体系的公式从外部看，是些基本符号（变量，逻辑常量以及括号或分号）的有限序列，并且可以容易地而完全准确地说出<span class="jiacu">哪些</span>基本符号序列是有意义的而哪些不是<a id="zw6" href="part0071.html#zhu6"><sup class="calibre5">[6]</sup></a>从形式的观点看，所谓证明也不过是公式（带有明确特征）的有限序列．对于元数学的目标而言，将什么对象取作基本符号自然不是本质性的，而我们则建议对它们使用自然数<a id="zw7" href="part0071.html#zhu7"><sup class="calibre5">[7]</sup></a>．于是，一个公式因而是自然数的一个有限序列<a id="zw8" href="part0071.html#zhu8"><sup class="calibre5">[8]</sup></a>，从而一个证明模式（proof-schema）是自然数的有限序列的一个有限序列．数学概念和命题因而成为关于自然数或者它们的序列的概念和命题<a id="zw9" href="part0071.html#zhu9"><sup class="calibre5">[9]</sup></a>，因此至少部分地可用PM体系自身的符号来表达．特别地，可以证明“公式”，“证明模式”，“可证明的公式”的概念在PM体系中是可定义的，即可以给出<a id="zw10" href="part0071.html#zhu10"><sup class="calibre5">[10]</sup></a>PM的一个，例如，具一个变量v的（数序列形式的）公式F（v），使得F（v）（根据内包赋予解释）陈述的是：v是个可证明的公式．我们现在按以下方式得到PM体系的一个不可判定的命题，即一个命题A，对它既不是A也不是<span class="jiacu">非</span>A是可以证明的：</p>
+
+  <p class="bodytext">我们将给PM的一个只具自由变量的公式，以及自然数类型的公式（类的类）指派一个<span class="jiacu">组符号</span>（class-sign）．我们把这些组符号想成己按某种方式安排成了序列<a id="zw11" href="part0071.html#zhu11"><sup class="calibre5">[11]</sup></a>，并且以R（n）表示它的第n个组符号；并且我们注意到，“组符号”的概念同样还有有序关系R都在PM体系中可定义，设α为任一组符号；我们以［α；n］指定为那个由将组符号a中的自由变量置换成对于自然数n的符号而导出的公式．三项关系x=［y；z］也证明在PM中是可定义的，我们现在定义一个自然数的类K如下：</p>
+
+  <p class="bodytext-c">n∈K≡<span class="overline">Bew</span>［R（n）；n］<a id="zw12" href="part0071.html#zhu12"><sup class="calibre5">[12]</sup></a>，　（1）</p>
+
+  <p class="bodytext">其中Bew x的意思是：x是一个可证明的公式．因为出现在此定义中的概念都是在PM中可定义的，故由它们构成的概念K也是可定义的，即有一个组符号S<a id="zw13" href="part0071.html#zhu13"><sup class="calibre5">[13]</sup></a>，使得公式［S；n］（根据内包赋予解释）陈述的是：自然数n属于K．作为一个组符号的S等同于一个确定的R（q），即</p>
+
+  <p class="bodytext-c">S=R（q）</p>
+
+  <p class="bodytext">对某个确定的自然数q成立，我们现在要证明命题［R（q）；q］<a id="zw14" href="part0071.html#zhu14"><sup class="calibre5">[14]</sup></a>是在PM中不可判定的．因为如果假定命题［R（q）；q］是可证明的，那么它也就会是正确的了；但是像已说过的那样，那就意味着q便会属于K，即根据（1），<span class="overline">Bew</span>［R（q）；q］就会成立，这与我们的假设相矛盾，反之，如果［R（q）；q］的否定是可证明的，于是<span class="overline">n∈K</span>，即Bew［R（q）；q］就会成立．因此［R（q）；q］像它的否定一样也是可证明的了，这仍然是不可能的．</p>
+
+  <p class="bodytext">这个结果与理查德悖论（Richard’s Paradox）的相似性立刻显现出来．这也与“说谎者”悖论<a id="zw15" href="part0071.html#zhu15"><sup class="calibre5">[15]</sup></a>紧密相关，这是因为不可判定命题［R（q）；q］准确陈述的是，q属于K，即根据（1），［R（q）；q］是不可证明的．因此我们直面了一个断言它自己的不可证明性的命题<a id="zw16" href="part0071.html#zhu16"><sup class="calibre5">[16]</sup></a>．刚才显示的证明方法明显可用于每一个具有下述特征的形式体系：首先按内包进行解释，并具有用来定义出现在上面论证中概念（特别是“可证明公式”的概念）的充足的表达手段；其次，它中间的每个可证明公式就其内包而言是正确的．现在将要给出对上述证明的准确陈述中有一项任务，即要将这些假定条件的第二个替换成一个纯粹形式的而且很弱的条件．</p>
+
+  <p class="bodytext">由［R（q）；q］是断言它自己的不可证明性的解释，可立即推导出［R（q）；q］的正确性，这是因为［R（q）；q］确实是不可证明的（因为是不可判定的）．所以在PM<span class="jiacu">体系中</span>不可判定的命题原来竟是由元数学的思考所决定，对这个不平凡的事实的仔细分析引出了有关形式体系相容性证明的令人吃惊的结果，对此我们将在第4节（命题XI）中详细处理．</p>
+
+  <h4 class="chapter-four">2</h4>
+
+  <p class="bodytext">我们现在将前面所概述的证明严格地展开，并以给出形式体系P的精确描述为起点，而这个体系是我们用来证明不可判定命题的存在性的．P本质上是由在佩亚诺公理上添加PM的逻辑公理<a id="zw17" href="part0071.html#zhu17"><sup class="calibre5">[17]</sup></a>（作为个体的数，作为非定义基本概念的后继关系）得到的．</p>
+
+  <p class="bodytext">体系P的基本符号如下：</p>
+
+  <p class="bodytext">Ⅰ．常量：“～”（非）．“∨”（或），“∏”（对所有的），“0”（零），“f”（…的后继元），“（”，“）”（括号）．</p>
+
+  <p class="bodytext">Ⅱ．第一型变量（对于个体，即包括0的自然数）“x<sub class="calibre9">1</sub>”，“y<sub class="calibre9">1</sub>”，“z<sub class="calibre9">1</sub>”，…，</p>
+
+  <p class="bodytext">第二型变量（对于个体的类）“x<sub class="calibre9">2</sub>”，“y<sub class="calibre9">2</sub>”，“z<sub class="calibre9">2</sub>”，…，</p>
+
+  <p class="bodytext">第三型变量（对于个体的类的类）“x<sub class="calibre9">3</sub>”，“y<sub class="calibre9">3</sub>”，“z<sub class="calibre9">3</sub>”，…，</p>
+
+  <p class="bodytext">等等对于所有自然数为型的变量<a id="zw18" href="part0071.html#zhu18"><sup class="calibre5">[18]</sup></a>．</p>
+
+  <p class="bodytext">注：将2项和多项函数（关系）变量作为基本符号是不必要的，这是因为关系式可以定义为有序偶的类，而有序偶又可以作为类的类，譬如，a，b的有序偶对（（a），（a，b）），其中（x，y）表明是仅具元素x和y的类，而（x）表示是仅具元素x的类．<a id="zw19" href="part0071.html#zhu19"><sup class="calibre5">[19]</sup></a></p>
+
+  <p class="bodytext">我们将<span class="jiacu">第一型符号</span>（sign of first type）理解为形如</p>
+
+  <p class="bodytext-c">a，fa，ffa，fffa，…</p>
+
+  <p class="bodytext">的符号的一个组合，其中的a或是0或是一个第一型变量．在前一种情形我们称这样一个符号为一个<span class="jiacu">数符号</span>（number-sign）．对于n<img alt="" class="zaozi" src="../images/02593.jpeg"/>1，我们对于一个第n型符号（sign of n-th type）理解为与<span class="jiacu">第n型变量</span>（variable of n-th type）一样的意思．称形如a（b）的符号的组合为<span class="jiacu">初等公式</span>（elementary formulae），其中的b是一个第n型符号，而a是个第（n+1）型符号，定义<span class="jiacu">公式</span>（formulae）的类为包含下面符号的最小类<a id="zw20" href="part0071.html#zhu20"><sup class="calibre5">[20]</sup></a>：～（a），（a）∨（b），x∏（a）（其中x是任何一个已给变量<a id="zw21" href="part0071.html#zhu21"><sup class="calibre5">[21]</sup></a>）a．我们称（a）∨（b）为a和b的<span class="jiacu">析取</span>（disjunction），～（a）为<span class="jiacu">否定</span>（negation），以及x∏（a）为a的一个<span class="jiacu">推广</span>（generalization）．称一个没有自由变量的公式为一个<span class="jiacu">命题公式</span>（propositional formulae）（<span class="jiacu">自由变量</span>（free variable）以通常方式定义）．称一个正好具有n个自由个体变量的公式（否则便没有自由变量）为一个<span class="jiacu">n位关系符号</span>（n-place relation-sign）而对于n=1也叫做一个<span class="jiacu">组符号</span>（class-sign）．</p>
+
+  <p class="bodytext">对于Subst <img alt="" class="zaozi1" src="../images/03010.jpeg"/>（其中a代表一个公式v为一个变量，而b是一个与v有同一类型的符号）我们理解为由a推导出的公式，它的意思是指，当在a中一旦v为自由时便将v置换为b<a id="zw22" href="part0071.html#zhu22"><sup class="calibre5">[22]</sup></a>．我们称一个公式a是另一个公式b的一个<span class="jiacu">型提升</span>（type-lift）是指，如果当我们增加出现在b中所有变量型总和时，a是由b推导出的．</p>
+
+  <p class="bodytext">以下的公式（Ⅰ-Ⅴ）被称做<span class="jiacu">公理</span>（它们是借助于一些习惯上定义的简略记号建立的：.，⊃，≡，（Ex）＝，<a id="zw23" href="part0071.html#zhu23"><sup class="calibre5">[23]</sup></a>并且遵从于关于括号省略的约定）<a id="zw24" href="part0071.html#zhu24"><sup class="calibre5">[24]</sup></a>：</p>
+
+  <p class="bodytext">Ⅰ．</p>
+
+  <p class="bodytext-c">1.~（fx<sub class="calibre9">1</sub>=0）．</p>
+
+  <p class="bodytext-c">2.fx<sub class="calibre9">1</sub>=fy<sub class="calibre9">1</sub>⊃x<sub class="calibre9">1</sub>=y<sub class="calibre9">1</sub>．</p>
+
+  <p class="bodytext-c">3.x<sub class="calibre9">2</sub>（0）·x<sub class="calibre9">1</sub>∏（x<sub class="calibre9">2</sub>（x<sub class="calibre9">1</sub>）⊃x<sub class="calibre9">2</sub>（fx<sub class="calibre9">1</sub>））⊃x<sub class="calibre9">1</sub>∏（x<sub class="calibre9">2</sub>（x<sub class="calibre9">1</sub>））.</p>
+
+  <p class="bodytext">Ⅱ．每一个由下列格经由关于p，q及r公式的替换导出的公式．</p>
+
+  <p class="bodytext-c">1.p∨p⊃p.</p>
+
+  <p class="bodytext-c">2.p⊃p∨q.</p>
+
+  <p class="bodytext-c">3.p∨q⊃q∨p．</p>
+
+  <p class="bodytext-c">4.（p⊃q）⊃（r∨p⊃r∨q）.</p>
+
+  <p class="bodytext">Ⅲ．由两个格</p>
+
+  <div class="zhong"><img alt="" class="image-tuzhu" src="../images/03011.jpeg"/></div>
+
+  <p class="bodytext">经由对于a，v，b，c的如下替换（且在1．中施行记作“Subst”的运算）得到的每个公式：对a以任意已知公式替换，对b以其中v不是自由变量的任意公式替换，对c以一个与v同类型的符号替换，但假定c不含有在a中v为自由位置的是约束的变量<a id="zw25" href="part0071.html#zhu25"><sup class="calibre5">[25]</sup></a>．</p>
+
+  <p class="bodytext">Ⅳ．由模式</p>
+
+  <p class="bodytext-c">1．（Eu）（v∏（u（v）≡a））</p>
+
+  <p class="bodytext">经以下替换导出的每个公式：将v或u分别替换为第n型或第n+1型的任意变量，将a替换为不含有作为自由变量的u的公式．这个公理代表了可约性公理（集合论的概括公理）．</p>
+
+  <p class="bodytext">Ⅴ．由</p>
+
+  <p class="bodytext-c">1．x<sub class="calibre9">1</sub>∏（x<sub class="calibre9">2</sub>（x<sub class="calibre9">1</sub>）≡y<sub class="calibre9">2</sub>（x<sub class="calibre9">1</sub>））⊃x<sub class="calibre9">2</sub>=y<sub class="calibre9">2</sub></p>
+
+  <p class="bodytext">经型提升（以及该公式自己）推导出的每个公式．这个公理陈述的是，一个类完全由它的元素决定．</p>
+
+  <p class="bodytext">称一个公式c是a和b的一个<span class="jiacu">直接推论</span>是说，如果a是公式（～（b））∨（c）；是a的一个<span class="jiacu">直接推</span>论是说，如果c是公式v∏（a），其中v代表任意变量．定义<span class="jiacu">可证明公式</span>的类为包含这些公理，并对于“为……直接推论”这个关系的最小的公式类<a id="zw26" href="part0071.html#zhu26"><sup class="calibre5">[26]</sup></a>．</p>
+
+  <p class="bodytext">体系P的基本符号现在一一对应于自然数，将其列于下：</p>
+
+  <p class="bodytext-c">“0”…1　　“∨”…7　　“（”…11</p>
+
+  <p class="bodytext-c">“f”…3　　“∏”…9　　“）”…13</p>
+
+  <p class="bodytext-c">“~”…5</p>
+
+  <p class="bodytext">另外，n型变量被给予形如p<sup class="calibre5">n</sup>的数（p是一个<img alt="" class="zaozi" src="../images/02593.jpeg"/>13的素数）．在这里，对于每一个基本符号的有限序列（还有对于每个公式）存在到自然数的有限序列的1-1对应，我们现在将这些自然数的有限序列映射到自然数（还是以1-1对应的方式），这个映射将数2<sup class="calibre5">n<sub class="calibre11">1</sub></sup>．3<sup class="calibre5">n<sub class="calibre11">2</sub></sup>…p<sup class="calibre5">n<sub class="calibre11">k</sub></sup>对应于n<sub class="calibre9">1</sub>，n<sub class="calibre9">2</sub>，…，n<sub class="calibre9">k</sub>，其中p<sub class="calibre9">k</sub>是按大小排列的第k个素数，因此一个自然数以一一的方式不仅被指派给了基本符号而且也指派给了每一个这些符号的有限序列．我们以Φ（a）表示对应于其本符号或基本符号的序列a的那个数．现假定我们有了一个基本符号或它们的序列的类或关系R（a<sub class="calibre9">1</sub>，a<sub class="calibre9">2</sub>，…，a<sub class="calibre9">n</sub>）．我们指派给它以一个自然数的类（关系）R′（x<sub class="calibre9">1</sub>，x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>），使它对于x<sub class="calibre9">1</sub>，x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>成立当且仅当存在a<sub class="calibre9">1</sub>，a<sub class="calibre9">2</sub>，…，a<sub class="calibre9">n</sub>使得x<sub class="calibre9">i</sub>=Φ（a<sub class="calibre9">i</sub>）（i=1，2，…，n）且R（a<sub class="calibre9">i</sub>，a<sub class="calibre9">2</sub>，…，a<sub class="calibre9">n</sub>）成立．我们以同一些字的黑体表示业已以这种方式指派给那些前面定义过的诸如“变量”，“公式”，“命题公式”，“公理”，“可证明公式”，等数学概念的自然数的类和关系，“在体系P中有不可判定问题”这个命题因而可按如下读作：存在<span class="jiacu">命题公式</span>a使得既非a也非a<span class="jiacu">的否定</span>是<span class="jiacu">可证明公式</span>.</p>
+
+  <p class="bodytext">我们现在引进一个与形式体系没有直接关系的插入性的考虑，并首先给出下面的定义：称一个数论函数<a id="zw27" href="part0071.html#zhu27"><sup class="calibre5">[27]</sup></a>φ（x<sub class="calibre9">1</sub>，x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>）是由数论函数ψ（x<sub class="calibre9">1</sub>，x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n-1</sub>）和数论函数μ（x<sub class="calibre9">1</sub>，x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n+1</sub>）<span class="jiacu">递归定义的</span>（recursively defined）是说，如果对所有的x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>，k<a id="zw28" href="part0071.html#zhu28"><sup class="calibre5">[28]</sup></a>成立如下的关系：</p>
+
+  <p class="bodytext">φ（0，x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>）＝ψ（x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>），</p>
+
+  <p class="bodytext">φ（k+1，x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>）=μ（k，φ（k，x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>），x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>）.　（2）</p>
+
+  <p class="bodytext">称一个数论函数φ为<span class="jiacu">递归的</span>是说，存在一个数论函数的有限序列φ<sub class="calibre9">1</sub>，φ<sub class="calibre9">2</sub>，…，φ<sub class="calibre9">n</sub>，它以φ为尾项并具有性质：序列中每个φ<sub class="calibre9">k</sub>或者由其前面中的两项递归地定义，或者由前面中的某项经替换导出<a id="zw29" href="part0071.html#zhu29"><sup class="calibre5">[29]</sup></a>，或者最后的情形：一个常值或后继元函数x+1．称属于一个递归函数φ的最短序列φ<sub class="calibre9">i</sub>的长度为它的次．称自然数之间的一个关系式为递归的<a id="zw30" href="part0071.html#zhu30"><sup class="calibre5">[30]</sup></a>是说，存在一个递归函数φ（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>）使得对于所有的x<sub class="calibre9">1</sub>，x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>有</p>
+
+  <p class="bodytext-c">R（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>）～［φ（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>）=0］.<a id="zw31" href="part0071.html#zhu31"><sup class="calibre5">[31]</sup></a></p>
+
+  <p class="bodytext">以下命题成立：</p>
+
+  <p class="bodytext"><span class="jiacu">Ⅰ　由递归函数（或关系）经由在变量位置的递归函数的替换导出的每个函数（或者关系）是递归的，同样由递归函数经递归函数按照模式（2）推导出的每个函数也是递归的．</span></p>
+
+  <p class="bodytext"><span class="jiacu">Ⅱ.如果R和S为递归关系，则<span class="overline">R</span>，R∨S（从而R＆S）也是．</span></p>
+
+  <p class="bodytext"><span class="jiacu">Ⅲ.如果函数φ（X）和ψ（y）是递归的，则关系φ（X）=ψ（y）也是．<a id="zw32" href="part0071.html#zhu32"><sup class="calibre5">[32]</sup></a></span></p>
+
+  <p class="bodytext"><span class="jiacu">Ⅳ.如果函数φ（X）和关系R（X，y）为递归的，则下面的关系也是：</span></p>
+
+  <div class="zhong2"><img alt="" class="image-tuzhu" src="../images/03012.jpeg"/></div>
+
+  <p class="bodytext"><span class="jiacu">并且同样地，函数ψ</span></p>
+
+  <div class="zhong2"><img alt="" class="image-tuzhu" src="../images/03013.jpeg"/></div>
+
+  <p class="bodytext"><span class="jiacu">也是</span>．其中εxF（x）表示：当F（x）成立时为使其成立的最小的x，如果没有这样的数则为0．</p>
+
+  <p class="bodytext">命题Ⅰ立即由“递归”的定义得出，命题Ⅱ和Ⅲ则基于一个容易确定的事实．对应逻辑概念，-，∨，=的数论函数</p>
+
+  <p class="bodytext-c">α（x），β（x，y），γ（x，y），</p>
+
+  <p class="bodytext">即</p>
+
+  <p class="bodytext-c">α（0）=1；α（x）=0对于n≠0</p>
+
+  <p class="bodytext-c">β（0，x）=β（x，0）=0；β（x，y）=1，如果x，y全≠0</p>
+
+  <p class="bodytext-c">γ（x，y）=0，如果x=y；γ（x，y）=1，如果x≠0</p>
+
+  <p class="bodytext">是递归的，命题Ⅳ的证明可简述于后：根据假定，存在一个递归ρ（x，y）使得</p>
+
+  <p class="bodytext-c">R（x，y）～［ρ（x，y）=0］．</p>
+
+  <p class="bodytext">我们现在根据递归模式（2）以如下方式定义一个函数χ（x，y）：</p>
+
+  <p class="bodytext-c">χ（0，y）=0，</p>
+
+  <p class="bodytext-c">χ（n+1，η）=（n+1）·a+χ（n，η）·α（a）<a id="zw33" href="part0071.html#zhu33"><sup class="calibre5">[33]</sup></a>，</p>
+
+  <p class="bodytext">其中a=α［α（ρ（0，η）］·α［χ（n，η）］．</p>
+
+  <p class="bodytext">因此，χ（n+1，η）或者=n+1（如果a=1）或者=χ（n，η）（如果a=0）<a id="zw34" href="part0071.html#zhu34"><sup class="calibre5">[34]</sup></a>．显然，出现第一种情形当且仅当a的所有构成因子为1，即如果</p>
+
+  <p class="bodytext-c"><span class="overline">R</span>（0，η）＆R（n+1，η）＆［χ（n，η）=0］．</p>
+
+  <p class="bodytext">由此得出函数χ（n，η）（看成是n的函数）一直到是R（n，η）成立的最小n前保持为0，而后则等于这个值（如果R（0，η）已经是这种情形了，那么对应的χ（x，η）为常数并=0）．因此，</p>
+
+  <p class="bodytext-c">ψ（χ，η）=χ（φ（χ），η），</p>
+
+  <p class="bodytext-c">S（χ，η）～R［ψ（χ，η），η］．</p>
+
+  <p class="bodytext">关系T通过否定可化成类似于S情形，故而命题Ⅳ得证．</p>
+
+  <p class="bodytext">对于函数x+y，x，y，x<sup class="calibre5">y</sup>，还有关系x<img alt="" class="zaozi" src="../images/02586.jpeg"/>y，x=y，容易发现它们是递归的；从这些概念出发，我们现在定义一系列的函数（和关系）1-45，它们中的每一个都由此系列前面的那些，通过在命题Ⅰ-Ⅳ中提到的运算来定义．一般说来，这个过程将命题Ⅰ-Ⅳ所允许的定义步骤汇拢了一起．包含了，例如，诸如“<span class="jiacu">公式</span>”，“<span class="jiacu">公理</span>”，以及“<span class="jiacu">直接推论</span>”这些概念的1-45中的每一个函数（关系）因而都是递归的．</p>
+
+  <p class="bodytext">1.x/y≡（Ez）［z≤x＆x=y.z］<a id="zw35" href="part0071.html#zhu35"><sup class="calibre5">[35]</sup></a>．</p>
+
+  <p class="bodytext">x被y除尽．<a id="zw36" href="part0071.html#zhu36"><sup class="calibre5">[36]</sup></a></p>
+
+  <p class="bodytext">2.Prim（x）≡（<span class="overline">Ez</span>）［z≤x＆z≠x＆x/z］＆x<img alt="" class="zaozi" src="../images/02593.jpeg"/>1．</p>
+
+  <p class="bodytext">x是个素数．</p>
+
+  <p class="bodytext">3.0Pr x≡0，</p>
+
+  <p class="bodytext">（n+1）Pr x≡εy［y≤x＆Prim（y）＆x/y＆y&gt;nPrx］．</p>
+
+  <p class="bodytext">nPr x是包含在x中的（按大小排序）第n个素数．<a id="zw37" href="part0071.html#zhu37"><sup class="calibre5">[37]</sup></a></p>
+
+  <p class="bodytext">4.0！=1，</p>
+
+  <p class="bodytext">（n+1）！≡（n+1）．n！．</p>
+
+  <p class="bodytext">5．Pr（0）≡0，</p>
+
+  <p class="bodytext">Pr（n+1）≡εy［y≤{Pr（n）}！+1＆Prim（y）＆y<img alt="" class="zaozi" src="../images/02593.jpeg"/>Pr（n）］．</p>
+
+  <p class="bodytext">Pr（n）是第n个素数（按大小排序）．</p>
+
+  <div class="zhong1"><img alt="" class="image-tuzhu" src="../images/03014.jpeg"/></div>
+
+  <p class="bodytext">nGlx是指派绐数x的数序列的第n项（对于n&gt;0且n不大于该序列的长）．</p>
+
+  <p class="bodytext">7.l（x）=εy［y≤x＆yPrx&gt;0＆（y+1）Prx=0］．</p>
+
+  <p class="bodytext">l（x）是指派给x的序列的长．</p>
+
+  <p class="bodytext">8．x*y≡εz［≤［Pr{l（x）+l（y）}］<sup class="calibre5">x+y</sup></p>
+
+  <p class="bodytext">＆（n）n≤l（x）→nGl z=nGl x］</p>
+
+  <p class="bodytext">＆（n）［0≤l（y）→{n+l（x）}Gf z=nGl y］</p>
+
+  <p class="bodytext">x*y对应于将两个数的有限序列“联合一起”的运算．</p>
+
+  <p class="bodytext">9．R（x）=2<sup class="calibre5">x</sup>．</p>
+
+  <p class="bodytext">R（x）对应于只由数x（对于x&gt;0）组成的数序．</p>
+
+  <p class="bodytext">10.E（x）≡R（11）*x*R（13）．</p>
+
+  <p class="bodytext">E（x）对应于“括号运算”［11和13被指派给了基本符号“（”和“）”］．</p>
+
+  <p class="bodytext">11．nVarx≡（Ez）［13<img alt="" class="zaozi" src="../images/02586.jpeg"/>z≤x＆Prim（z）＆x=z<sup class="calibre5">n</sup>］＆n≠0．</p>
+
+  <p class="bodytext">x是个<span class="jiacu">第n型变量</span>．</p>
+
+  <p class="bodytext">12．Var（x）≡（En）［n≤x＆nVar x］．</p>
+
+  <p class="bodytext">x是个<span class="jiacu">变量</span>．</p>
+
+  <p class="bodytext">13．Neg（x）≡R（5）*E（x）．</p>
+
+  <p class="bodytext">Neg（x）是x的<span class="jiacu">否定</span>．</p>
+
+  <p class="bodytext">14．xDisy≡E（x）*R（7）*E（y）．</p>
+
+  <p class="bodytext">xDisy是x与y的<span class="jiacu">析取</span>．</p>
+
+  <p class="bodytext">15.xGeny≡R（x）*R（9）*（y）．</p>
+
+  <p class="bodytext">xCeny是y以<span class="jiacu">变量</span>x所做的推广（假定x是个变量）．</p>
+
+  <p class="bodytext">16.0Nx≡x，</p>
+
+  <p class="bodytext">（n+1）Nx≡R（3）*nNx．</p>
+
+  <p class="bodytext">nNx对应于符号f在x做“n重前缀”的运算．</p>
+
+  <p class="bodytext">17．Z（n）≡nN［R（1）］．</p>
+
+  <p class="bodytext">Z（n）是数n的<span class="jiacu">数符号</span>．</p>
+
+  <p class="bodytext">18.Typ′<sub class="calibre9">1</sub>（x）≡（Em，n）{m，n≤x＆［m=1 V 1Varm］</p>
+
+  <p class="bodytext">＆x=nN［R（m）］}<a id="zw38" href="part0071.html#zhu38"><sup class="calibre5">[38]</sup></a>．</p>
+
+  <p class="bodytext">x是<span class="jiacu">第1型符号</span>．</p>
+
+  <p class="bodytext">19.Typ<sub class="calibre9">n</sub>（x）≡［n=1＆Typ′<sub class="calibre9">1</sub>（x）］V［n&gt;1＆（Ev）{v≤x＆nVar v＆x=R（v）}］．</p>
+
+  <p class="bodytext">x是<span class="jiacu">第n型符号</span>．</p>
+
+  <p class="bodytext">20.Elf（x）≡（Ey，z，n）［y，z，n≤x＆Typn（y）</p>
+
+  <p class="bodytext">＆Typ<sub class="calibre9">n+1</sub>（z）＆x=z*E（y）］．</p>
+
+  <p class="bodytext">x是个<span class="jiacu">初等公式</span>．</p>
+
+  <p class="bodytext">21.Op（x，y，z）≡x=Neg（y）∨x=yDis z∨（Ev）v≤x</p>
+
+  <p class="bodytext">＆Var（v）＆x=vGeny］．</p>
+
+  <p class="bodytext">22.FR（x）≡（n）{0&lt;n≤l（x）→Elf（nGl（x）∨（Ep，q）</p>
+
+  <p class="bodytext">［0&lt;p，q&lt;n＆Op（nGlx，pClx，qGlx）］}＆l（x）&gt;0．</p>
+
+  <p class="bodytext">x是一个<span class="jiacu">公式</span>的序列，它中的每一个或者是个<span class="jiacu">初等公式</span>或者通过<span class="jiacu">否定</span>，<span class="jiacu">析取</span>以及<span class="jiacu">推广</span>有前面的那些公式f关系）产生．</p>
+
+  <p class="bodytext">23.Form（x）≡（En）{n≤（Pr［l（x）<sup class="calibre5">2</sup>］）<sup class="calibre5">x［l（x）］</sup><sup class="calibre5">2</sup>＆FR（n）＆x=［l（n）］Gln}.<a id="zw39" href="part0071.html#zhu39"><sup class="calibre5">[39]</sup></a></p>
+
+  <p class="bodytext">x是一个<span class="jiacu">公式</span>（即n的公式序列的最后一项）．</p>
+
+  <p class="bodytext">24.vBebn，x≡Var（v）＆Form（x）＆（Ea，b，c）［a，b，c≤x</p>
+
+  <p class="bodytext">＆n=a*（vGen b}c＆Form（b）</p>
+
+  <p class="bodytext">l（a）+1≤n≤l（a）+l（vGen b）］．</p>
+
+  <p class="bodytext"><span class="jiacu">变量</span>v在x的第n位是<span class="jiacu">约束</span>的．</p>
+
+  <p class="bodytext">25.vFrn，z≡Var（v）＆Form（x）＆v=nhGl x</p>
+
+  <p class="bodytext">＆n≤l（x）＆vGebn，x．</p>
+
+  <p class="bodytext">变量v在x的第n位是<span class="jiacu">自由</span>的．</p>
+
+  <p class="bodytext">26．vFrx≡（En）［n≤l（x）＆vFrn，x］．</p>
+
+  <p class="bodytext">v在x中以<span class="jiacu">自由变量</span>出现．</p>
+
+  <p class="bodytext">27．Su x<img alt="" class="zaozi1" src="../images/03015.jpeg"/>≡εz{z≤［Pr（l（x）+l（y））］<sup class="calibre5">x+y</sup></p>
+
+  <p class="bodytext">＆［（Eu，v）u，v≤x＆x=*R（nGlx）*v</p>
+
+  <p class="bodytext">＆z=u*y*v＆n=l（u）+1］｝．</p>
+
+  <p class="bodytext">Sux<img alt="" class="zaozi1" src="../images/03016.jpeg"/>从x以y替换x的第n项进行推导（假设了0<img alt="" class="zaozi" src="../images/02586.jpeg"/>n≤l（x））．</p>
+
+  <p class="bodytext">28.0Stv，x≡εn{n≤l（x）＆vFrn，x＆<span class="overline">（Ep）</span>［n&lt;p≤l（x）＆vFrp，x］}</p>
+
+  <p class="bodytext">（k+1）Stv，x≡εn{n&lt;kStv，x＆vFrn，x＆（Ep）［n&lt;p&lt;kSt vx＆vFrp，x］}．</p>
+
+  <p class="bodytext">kStv，x是x中的第（k+1）位（从公式x的尾部数起），而在此位置，v在x中是自由的（如果没有这样的位置，则为0）．</p>
+
+  <p class="bodytext">29．A（v，x）≡εn{n≤l（x）＆nSt，v，x=0}．</p>
+
+  <p class="bodytext">A（v，x）是在x中v为<span class="jiacu">自由</span>的位置的个数．</p>
+
+  <p class="bodytext">30．Sbo<img alt="" class="zaozi1" src="../images/03017.jpeg"/>≡x，</p>
+
+  <div class="zhong1"><img alt="" class="image-tuzhu" src="../images/03018.jpeg"/></div>
+
+  <p class="bodytext">31.Sb<img alt="" class="zaozi1" src="../images/03019.jpeg"/>≡<img alt="" class="zaozi1" src="../images/03020.jpeg"/>.<a id="zw40" href="part0071.html#zhu40"><sup class="calibre5">[40]</sup></a></p>
+
+  <p class="bodytext"><img alt="" class="zaozi1" src="../images/03021.jpeg"/>是上面所定义的概念Subst <img alt="" class="zaozi1" src="../images/03022.jpeg"/>．<a id="zw41" href="part0071.html#zhu41"><sup class="calibre5">[41]</sup></a></p>
+
+  <p class="bodytext">32.xlmpy≡［Neg（x）］lDisy，</p>
+
+  <p class="bodytext">xCony≡Neg{［Neg（x）lDis［Neg（y）］}，</p>
+
+  <p class="bodytext">xAeqy≡（xlmp y）Con（ylmpx），</p>
+
+  <p class="bodytext">vExy≡Neg{vGen［Neg（y）］}．</p>
+
+  <p class="bodytext">33.nThx≡εy{y≤x<sup class="calibre5">x</sup><sup class="calibre5">n</sup>＆（k）［k≤l（x）→（kGl x≤13</p>
+
+  <p class="bodytext">＆kGly=kGlx）V（kGlx&gt;13＆kCly=kGl x［1Pr（kGt x）］<sup class="calibre5">n</sup>）］}．</p>
+
+  <p class="bodytext">nThx是x的第n个<span class="jiacu">型提升</span>（如果x和nThx均为公式）．</p>
+
+  <p class="bodytext">对应于公理Ⅰ的1到3，有三个确定的数，我们将其记为z<sub class="calibre9">1</sub>，z<sub class="calibre9">2</sub>，z<sub class="calibre9">3</sub>，并定义：</p>
+
+  <p class="bodytext">34.Z-Ax（x）≡（x=z<sub class="calibre9">1</sub>∨x=z<sub class="calibre9">2</sub>∨x=z<sub class="calibre9">3</sub>）．</p>
+
+  <p class="bodytext">35．A<sub class="calibre9">1</sub>-Ax（x）≡（Ey）［y≤x＆Form（y）＆x=（yDis y）lmpy］．</p>
+
+  <p class="bodytext">x是一个公式，它由公理Ⅱ，1中的替换导出．类似地，A<sub class="calibre9">2</sub>-Ax，A<sub class="calibre9">3</sub>-Ax，A<sub class="calibre9">4</sub>-Ax按照公理Ⅱ的2到4定义．</p>
+
+  <p class="bodytext">36.A-Ax（x）≡A<sub class="calibre9">1</sub>-Ax（x）∨A<sub class="calibre9">2</sub>-Ax（x）∨A<sub class="calibre9">3</sub>-Ax（x）∨A<sub class="calibre9">4</sub>-Ax（x）．</p>
+
+  <p class="bodytext">x是一个<span class="jiacu">公式</span>，它由语句运算中一个公理的替换导出．</p>
+
+  <p class="bodytext">37.Q（z，y，v）≡（En，m，w）［n≤l（y）＆m≤l（z）＆w≤z</p>
+
+  <p class="bodytext">＆w=mGL x＆wGebn，y＆vFrn，y］．</p>
+
+  <p class="bodytext">z不包含在y中v为<span class="jiacu">自由的</span>位置上的<span class="jiacu">约束变量</span>．</p>
+
+  <p class="bodytext">38．L<sub class="calibre9">1</sub>-Ax（x）≡（Ev，y，z，n）{v，y，z，n≤x＆nVarv</p>
+
+  <p class="bodytext">＆Typn（z）＆Form（y）＆Q（z，y，v）</p>
+
+  <p class="bodytext">＆x=（vGeny）Imp［Sb<img alt="" class="zaozi1" src="../images/03023.jpeg"/>］}．</p>
+
+  <p class="bodytext">x是一个<span class="jiacu">公式</span>，它由公理模式Ⅲ，1经替换导出．</p>
+
+  <p class="bodytext">39.L<sub class="calibre9">2</sub>-Ax（x）≡（Ev，q，p）{v，q，p≤x＆Var（v）</p>
+
+  <p class="bodytext">＆Form（p）＆vFrp＆Form（q）</p>
+
+  <p class="bodytext">＆x=［vGen（pDis q）］lmp［pDis（vGenq］）}．</p>
+
+  <p class="bodytext">x是一个<span class="jiacu">公式</span>，它由公理模式Ⅲ，2经替换导出．</p>
+
+  <p class="bodytext">40.R-Ax（x）≡（Eu，v，y，n）［u，v，y，n≤x＆nVarv</p>
+
+  <p class="bodytext">＆（n+1）Var u＆uFr y＆Form（y）</p>
+
+  <p class="bodytext">＆x=uEx{vGen［［R（u）*E（R（v））］Aeq可］}］．</p>
+
+  <p class="bodytext">x是一个<span class="jiacu">公式</span>，它由公理模式Ⅳ，1经替换导出．</p>
+
+  <p class="bodytext">对应于公理Ⅴ，1有一个确定的数z<sub class="calibre9">4</sub>，我们定义</p>
+
+  <p class="bodytext">41．M-Ax（x）≡（En）［≤x＆x=nTh z<sub class="calibre9">4</sub>］．</p>
+
+  <p class="bodytext">42.Ax（x）≡Z-Ax（x）∨A-Ax（x）∨L<sub class="calibre9">1</sub>-Ax（x）∨</p>
+
+  <p class="bodytext">L<sub class="calibre9">2</sub>-Ax（x）∨RAx（x）∨M-Ax（x）．</p>
+
+  <p class="bodytext">x是一个<span class="jiacu">公理</span>．</p>
+
+  <p class="bodytext">43．Fl（xyz）≡y=zImpz∨（Ev）［v≤x＆Var（v）＆x=vGen y］．</p>
+
+  <p class="bodytext">x是y和z的一个<span class="jiacu">直接推论</span>．</p>
+
+  <p class="bodytext">44.Bw（x）≡（n）{0<img alt="" class="zaozi" src="../images/02586.jpeg"/>n≤l（x）→Ax（nGf x）］}＆l（x）＞0．</p>
+
+  <p class="bodytext">x是个<span class="jiacu">证明模式</span>（一个<span class="jiacu">公式</span>的有限序列，它的每一项或者是个公理，或者是前两个的<span class="jiacu">直接推论</span>．</p>
+
+  <p class="bodytext">45．xBy≡Bw（x）＆［l（x）］Gl x=y．</p>
+
+  <p class="bodytext">x是<span class="jiacu">公式</span>y的一个<span class="jiacu">证明</span>．</p>
+
+  <p class="bodytext">46．Bew（x）=（Ey）yBx．</p>
+
+  <p class="bodytext">x是个<span class="jiacu">可证明公式</span>［Bew（x）是1-46这些概念中唯一不能断言为递归的一个概念．］</p>
+
+  <p class="bodytext">下面的命题是模糊阐述的事实“每个递推关系在体系P（按不同内包解释）是可定义的”的准确表达，而不管对于P的公式作了何种解释．</p>
+
+  <p class="bodytext"><span class="jiacu">命题Ⅴ：对应于每个递归关系R（x<sub class="calibre9">1</sub>…x<sub class="calibre9">n</sub>）有一个n位的关系符号（relation-sign）r（具有自由变量<a id="zw42" href="part0071.html#zhu42"><sup class="calibre5">[42]</sup></a>u<sub class="calibre9">1</sub>，u<sub class="calibre9">2</sub>，…，u<sub class="calibre9">n</sub>）使得对于每个数的n元组（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>）成立：</span></p>
+
+  <div class="zhong1"><img alt="" class="image-tuzhu" src="../images/03024.jpeg"/></div>
+
+  <p class="bodytext">在这里我们只需给出该命题的证明概述就可以了，这是因为它并没有什么原则上的困难，只是有点繁杂而已．<a id="zw43" href="part0071.html#zhu43"><sup class="calibre5">[43]</sup></a>我们对于所有具有形式x<sub class="calibre9">1</sub>=φ（x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>）的关系R（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>）来证明此命题．<a id="zw44" href="part0071.html#zhu44"><sup class="calibre5">[44]</sup></a>（其中φ为递归函数）并应用对于φ的次数的数学归纳法．对于一次的函数（即常数以及函数x+1）命题是平凡的．那么设φ为m次的．用替换运算或者递归的定义，它可从较低次的函数φ<sub class="calibre9">1</sub>，…，φ<sub class="calibre9">n</sub>得出．由于归纳假定，每个对于φ<sub class="calibre9">1</sub>，…，φ<sub class="calibre9">n</sub>已经证明了的事实，存在有相应的<span class="jiacu">关系符号</span>r<sub class="calibre9">1</sub>，…，r<sub class="calibre9">n</sub>使得（3）和（4）成立．从而从φ<sub class="calibre9">1</sub>，…，φ<sub class="calibre9">n</sub>推导出φ的定义的过程（替换和递归定义）完全可以被形式地映入到体系P中，如果这样做了，那么我们便从r<sub class="calibre9">1</sub>，…，r<sub class="calibre9">n</sub>得到了一个新的<span class="jiacu">关系符号</span>r，<a id="zw45" href="part0071.html#zhu45"><sup class="calibre5">[45]</sup></a>于是我们容易使用归纳假定讧明（3）和（4）对于它是成立的．称按照这种方式指派给一个递归关系<a id="zw46" href="part0071.html#zhu46"><sup class="calibre5">[46]</sup></a>的一个<span class="jiacu">关系符号</span>r为递归的．</p>
+
+  <p class="bodytext">我们现在来谈我们这样做的目的：</p>
+
+  <p class="bodytext">设c为任一<span class="jiacu">公式</span>的类．以Flg（c）（c的推论的集合）表示包含了所有c的<span class="jiacu">公式</span>以及所有<span class="jiacu">公理</span>的，且对于关系“…的直接推论”是封闭的最小的公式的集合．称c是w相容的是说，如果没有<span class="jiacu">组符号</span>a使得</p>
+
+  <div class="zhong1"><img alt="" class="image-tuzhu" src="../images/03025.jpeg"/></div>
+
+  <p class="bodytext">其中v是<span class="jiacu">组符号</span>a的<span class="jiacu">自由变量</span>．</p>
+
+  <p class="bodytext">每个w相容体系自然也是相容的．然而反过来则不如此，我们后面将证明它．</p>
+
+  <p class="bodytext">关于不可判定命题的存在性的一般结果可叙述如下：</p>
+
+  <p class="bodytext"><span class="jiacu">命题Ⅵ　对于公式的每个w相容的递归类c对应有递归的组符号r，使得既不是vGenr也不是Neg（vGen r）属于Flg（c）（其中v是r的自由变量</span>）．</p>
+
+  <p class="bodytext"><span class="jiacu">证明　</span>设c为任一的<span class="jiacu">公式</span>的递归ω相容类，我们定义</p>
+
+  <p class="bodytext">Bw<sub class="calibre9">c</sub>（x）≡（n）［n≤L（x）→Ax（nGlz）∨（nGlx）εc∨</p>
+
+  <p class="bodytext">（Ep，q）{0&lt;p，q&lt;n＆Fl（nGl x，pGl x，qGlx）}］＆l（x）＞0（5）</p>
+
+  <p class="bodytext">（参看类比的概念44），</p>
+
+  <p class="bodytext-c">xBcy≡Bwc（x）＆［l（x）］Glx=y，　（6）</p>
+
+  <p class="bodytext-c">Bewc（x）≡（Ey）yBcx　（6.1）</p>
+
+  <p class="bodytext">（参看类比的概念45，46）．</p>
+
+  <p class="bodytext">下面的显然成立：</p>
+
+  <p class="bodytext-c">（x）［Bewc（x）～xεFlg（c）］，　（7）</p>
+
+  <p class="bodytext-c">（x）［Bew（x）→Bewc（x）］.　（8）</p>
+
+  <p class="bodytext">我们现在定义关系：</p>
+
+  <div class="zhong1"><img alt="" class="image-tuzhu" src="../images/03026.jpeg"/></div>
+
+  <p class="bodytext">由于xBcy［根据（6），（5）］和Sb<img alt="" class="zaozi1" src="../images/03027.jpeg"/>（根据定义17，31）是递归的，故Q（x，y）也是．根据命题Ⅴ和（Ⅷ）存在一个<span class="jiacu">关系符号</span>q（具有<span class="jiacu">自由变量</span>17，19）使得</p>
+
+  <div class="zhong1"><img alt="" class="image-tuzhu" src="../images/03028.jpeg"/></div>
+
+  <p class="bodytext">令</p>
+
+  <p class="bodytext-c">p=17Gen g　（11）</p>
+
+  <p class="bodytext">（p是具有<span class="jiacu">自由变量</span>19的<span class="jiacu">组符号</span>）以及</p>
+
+  <div class="zhong1"><img alt="" class="image-tuzhu" src="../images/03029.jpeg"/></div>
+
+  <p class="bodytext">（r是具有<span class="jiacu">自由变量</span>17的递归<span class="jiacu">组符号</span>），<a id="zw47" href="part0071.html#zhu47"><sup class="calibre5">[47]</sup></a>于是</p>
+
+  <div class="zhong1"><img alt="" class="image-tuzhu" src="../images/03030.jpeg"/></div>
+
+  <p class="yinwen">注：运算Gen和Sb自然数总是可交换的，虽然它们是不同的变量．</p>
+
+  <p class="bodytext">［因为（11）和（12）］.另外还有</p>
+
+  <div class="zhong1"><img alt="" class="image-tuzhu" src="../images/03031.jpeg"/></div>
+
+  <p class="bodytext">［根据（12）］．由于（13）和（14），如果我们在（9）和（10）中将y替换为p，则有</p>
+
+  <div class="zhong1"><img alt="" class="image-tuzhu" src="../images/03032.jpeg"/></div>
+
+  <p class="bodytext">从而：</p>
+
+  <p class="bodytext">1.17Gen r不是c<span class="jiacu">可证的</span>．<a id="zw48" href="part0071.html#zhu48"><sup class="calibre5">[48]</sup></a>因为倘若相反，就会有（根据6.1）一个n使得nBc（17Gen r）．</p>
+
+  <p class="bodytext">由（16）从而会有</p>
+
+  <div class="zhong"><img alt="" class="image-tuzhu" src="../images/03033.jpeg"/></div>
+
+  <p class="bodytext">而另一方面，由17Genr的c<span class="jiacu">可证性</span>也会推出<img alt="" class="gongshi1" src="../images/03034.jpeg"/>的可证性．因此c就会是相容的了（更不用说w相容了）．</p>
+
+  <p class="bodytext">2．Neg（17Gen r）不是c<span class="jiacu">可证的</span>.证明：如上所证，17Genr不是c<span class="jiacu">可证的</span>，即（按照6.1）成立（n）nBc（17Cenr）．由此用（15）推出，（n）Bewc<img alt="" class="gongshi1" src="../images/03035.jpeg"/>，它连同Bewc［Neg（17Genr）］就与c的w相容性矛盾．</p>
+
+  <p class="bodytext">17Gen r因此在c中是不可判定的，故而命题VI得证．</p>
+
+  <p class="bodytext">人们容易使自己相信上面的证明是构造性的，<a id="zw49" href="part0071.html#zhu49"><sup class="calibre5">[49]</sup></a>即下面以一种直观的无异议的方式所证明的：给出任一递归地定义的<span class="jiacu">公式</span>的类c：于是如果对于（有效可证的）<span class="jiacu">命题公式</span>17Genr给出了一个（c中的）形式判定，我们则可以有效地陈述：</p>
+
+  <p class="bodytext">1．对于Neg（17Genr）的一个<span class="jiacu">证明</span>．</p>
+
+  <p class="bodytext">2．对于任意给定的n，对<img alt="" class="gongshi1" src="../images/03036.jpeg"/>的一个<span class="jiacu">证明</span>，即17Cen r的一个形式判定会导致一个w相容性有效的可证明性．</p>
+
+  <p class="bodytext">我们称一个自然数的关系（类）R（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>）为可算的（calculable）［entscheidungdefinit］是说，如果有一个n位的<span class="jiacu">关系符号</span>r使得（3）和（4）成立（参看命题Ⅴ）．因此特别地，由命题Ⅴ，每个递归关系式可算的，相似地，称一个<span class="jiacu">关系符号</span>是可算的是说，如果它以这种方式指派给一个可算关系．那么对于具有w相容和可算的类c的不可判定命题的存在性而言这也足够了．对于是可算的这个性质从c可传递到xBcy［（参看（5），（6））和Q（x，y）］（参看8.1）并且也只有这些能应用到上面的证明中．在这种情形不可判定命题具有形式vGenr，其中r是可算的<span class="jiacu">组符号</span>（事实上，c应在在添加c而扩张的体系中是可算的就足够了）．</p>
+
+  <p class="bodytext">如果不是w相容，而仅仅是像对c所假定的那种相容性，的确，得到的不再是一个不可判定命题的存在性而是一个性质（r）的存在性了，但这个性质它可能既不能给出一个反例，也不能证明它对所有的数都成立．由于在证明17Gen r不是c<span class="jiacu">可证的</span>中，只有c的相容性被用到了，并且根据（15），从<span class="overline">Bewc</span>（17Gen r）得出对于每个数n，Sb<img alt="" class="gongshi1" src="../images/03037.jpeg"/>，是c<span class="jiacu">可证的</span>，从而Neg Sb<img alt="" class="gongshi1" src="../images/03038.jpeg"/>对于任何数不是c<span class="jiacu">可证的</span>．</p>
+
+  <p class="bodytext">将Neg（17Gen r）添加到c，我们得到一个相容的然而不是w相容的<span class="jiacu">公式类</span>c．c′是相容的，这是因为否则的话，17Genr就会是c可证的了，但c′不是w可证的，这是由于<span class="overline">Bewc</span>（17Genr）和（15）我们有（x）Sb<img alt="" class="gongshi1" src="../images/03039.jpeg"/>的缘故，故而更有：<img alt="" class="gongshi1" src="../images/03040.jpeg"/>，而另一方面，自然有Bewc′［Neg（17Genr）］．<a id="zw50" href="part0071.html#zhu50"><sup class="calibre5">[50]</sup></a></p>
+
+  <p class="bodytext">命题Ⅵ的一个特殊情形是，其中类c由有限个<span class="jiacu">公式</span>组成（不管有没有用<span class="jiacu">提升型</span>导出的那些公式）．每个有限的类α自然是递归的．设a是包含在α中的最大数．于是对c成立：</p>
+
+  <p class="bodytext-c">xεc～（Em，n）［m≤x＆n≤a＆nεx=mThn］．</p>
+
+  <p class="bodytext">c因而是递归的．这使我们可得出结论，例如，甚至在选择公理（所有类型的）或广义的连续统假定的帮助下，也不是所有的命题都是可判定的，在这里我们已假定了这些假设条件是w相容的．</p>
+
+  <p class="bodytext">在命题Ⅵ的证明中用到的体系P的性质仅仅是下面这些：</p>
+
+  <p class="bodytext">1．公理的类以及推理的规则（即关系“…的直接推诠”）是递归可定义的（这要基本符号以任意方式被置换成自然数）．</p>
+
+  <p class="bodytext">2．每一个递归关系在体系P中是可定义的（在命题Ⅴ的意义下）．</p>
+
+  <p class="bodytext">于是在每个满足假设1和2并且是w相容的形式体系中，不可判定命题以（x）l′（x）的形式存在，其中的F是一个自然数递归定义的性质，并且这种体系经由添加一个归纳可定义的w相容的公理类得到的每个扩张也都是如此，容易确认，满足假设1和2的体系包括有策梅洛-弗兰克尔以及冯·诺伊曼的集合论公理体系，<a id="zw51" href="part0071.html#zhu51"><sup class="calibre5">[51]</sup></a>也包括了有佩亚诺公理，递归定义的运算［按照模式（2）］以及逻辑规则的数论公理体系．<a id="zw52" href="part0071.html#zhu52"><sup class="calibre5">[52]</sup></a>一般说来，假设1其逻辑规则为普通的，而它的公理（像P的那样）为有限个格经替换导出的每个体系所满足．<a id="zw53" href="part0071.html#zhu53"><sup class="calibre5">[53]</sup></a></p>
+
+  <h4 class="chapter-four">3</h4>
+
+  <p class="bodytext">由命题Ⅵ我们现在能得到进一步的结果，为此给出以下定义：称一个关系（类）是<span class="jiacu">算术的</span>（arithmetical）是说，如果它可以单独地依靠概念+.［应用于自然数的加法和乘法］<a id="zw54" href="part0071.html#zhu54"><sup class="calibre5">[54]</sup></a>以及逻辑常量∨，-，（x），=，其中的（x）和=仅仅与自然数相关联．<a id="zw55" href="part0071.html#zhu55"><sup class="calibre5">[55]</sup></a>“算术命题”的概念以一种相应的方式定义，特别，关系“大于”以及“模……的同余”都是算术的，这是因为</p>
+
+  <p class="bodytext-c">x&gt;y~<span class="overline">（Ez）</span>［y=x+z］，</p>
+
+  <p class="bodytext-c">z≡y（mod n）～（Ez）［x=y．n∨y=y=x+z．n］．</p>
+
+  <p class="bodytext">现在我们有</p>
+
+  <p class="bodytext"><span class="jiacu">命题Ⅶ　每个递归关系是算术的．</span></p>
+
+  <p class="bodytext">我们以下面的形式证明该命题：形式x<sub class="calibre9">0</sub>=φ（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>），其中φ为递归的，每个关系是算术的，并对φ的次数应用数学归纳法．设φ具次数s（s&gt;1）．于是或者</p>
+
+  <p class="bodytext">1．φ（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>）=p［χ<sub class="calibre9">1</sub>（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>），χ<sub class="calibre9">2</sub>（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>），…，χ<sub class="calibre9">m</sub>（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>）］<a id="zw56" href="part0071.html#zhu56"><sup class="calibre5">[56]</sup></a></p>
+
+  <p class="bodytext">（其中ρ即所有的χ具有的次数均小于s）或者</p>
+
+  <p class="bodytext">2．φ（0，x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>）=ψ（x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>），</p>
+
+  <p class="bodytext">φ（k+1，x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>）=μ［k，φ（k，x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>），x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>］</p>
+
+  <p class="bodytext">（其中ψ，μ的次数小于s）．</p>
+
+  <p class="bodytext">在第一种情形我们有：</p>
+
+  <p class="bodytext">x<sub class="calibre9">0</sub>=φ（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>）～（Zy<sub class="calibre9">1</sub>，…，ym）［R（x<sub class="calibre9">0</sub>，y<sub class="calibre9">1</sub>，…，ym＆S<sub class="calibre9">1</sub>（y<sub class="calibre9">1</sub>，x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>）＆…＆Sm（y<sub class="calibre9">m</sub>，x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>）］，其中R和S<sub class="calibre9">i</sub>分别是算术关系，归纳假定它们存在且等价于x0ρ（y<sub class="calibre9">1</sub>，…，y<sub class="calibre9">m</sub>和y<sub class="calibre9">i</sub>=χ（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>）．</p>
+
+  <p class="bodytext">因此这时x<sub class="calibre9">0</sub>=φ（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>）是算术的．</p>
+
+  <p class="bodytext">在第二种情形我们应用如下步骤：关系x<sub class="calibre9">0</sub>=φ（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>）可借助于“数的序列”（f）的概念<a id="zw57" href="part0071.html#zhu57"><sup class="calibre5">[57]</sup></a>表达如下：</p>
+
+  <div class="zhong1"><img alt="" class="image-tuzhu" src="../images/03041.jpeg"/></div>
+
+  <p class="bodytext">如果S（y，x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>）和T（z，x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n+1</sub>）分别为等价于</p>
+
+  <p class="bodytext-c">y=ψ（x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">n</sub>，和z=μ（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n+1</sub>）</p>
+
+  <p class="bodytext">的算术关系，而他们由归纳假定是存在的，于是成立下面的</p>
+
+  <div class="zhong1"><img alt="" class="image-tuzhu" src="../images/03042.jpeg"/></div>
+
+  <p class="bodytext">我们现在将概念“数的序列”置换为“一对数”，这只要指派数偶n，d给f<sup class="calibre5">（n，d）</sup>即可<img alt="" class="zaozi1" src="../images/03043.jpeg"/>，其中［n］<sub class="calibre9">p</sub>表示n模p的最小非负剩余，</p>
+
+  <p class="bodytext">于是我们有</p>
+
+  <p class="bodytext"><span class="jiacu">引理1　如果f是任一自然数序列，k是任一自然数，则存在一对自然数n，d使得f<sup class="calibre5">（n，d）</sup>与f在前k项相同．</span></p>
+
+  <p class="bodytext"><span class="jiacu">证明　</span>设l是数k，f<sub class="calibre9">0</sub>，f<sub class="calibre9">1</sub>，…，f<sub class="calibre9">k-1</sub>中最大的数．设n由以下方式决定：</p>
+
+  <p class="bodytext-c">n=f<sub class="calibre9">i</sub>［mod（1+（i+1）l！）］，i=0，1，…，k-1，</p>
+
+  <p class="bodytext">这是可能的，因为数1+（i+1）l！，（i=0，1，…，k-1中的每两个都互素．对一个包含在这些数中两个的一个素数也就包含在差（i<sub class="calibre9">1</sub>-i<sub class="calibre9">2</sub>）l！中，从而因为|i<sub class="calibre9">1</sub>-i<sub class="calibre9">2</sub>|&lt;l，它也就在l！中这是不可能的，因此数偶n，l！满足我们的要求．</p>
+
+  <p class="bodytext">由于关系x=［n］<sub class="calibre9">p</sub>，由x≡n（mod p）＆x&lt;p定义，从而是算术的，且如下定义的关系P（x<sub class="calibre9">0</sub>，x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>）也是算术的：</p>
+
+  <div class="zhong1"><img alt="" class="image-tuzhu" src="../images/03044.jpeg"/></div>
+
+  <p class="bodytext">根据（17）及引理1，它等价于x<sub class="calibre9">0</sub>=φ（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">n</sub>）（我们设计序列f仅仅在直到第x<sub class="calibre9">1</sub>+1项前的过程中）．因而命题Ⅶ得证．</p>
+
+  <p class="bodytext">按照命题Ⅶ，对应于形如（x）F（x）（F为递归）的每个问题有一个等价的算术问题，并因为命题Ⅶ的整个证明都可以在体系P中被形式化（对每个特定的F），这个等价性在P中因而是可证明的．于是有</p>
+
+  <p class="bodytext"><span class="jiacu">命题Ⅷ　在涉及命题Ⅵ中的形式体系里【53】都有不可判定的算术命题．</span></p>
+
+  <p class="bodytext">对于集合论公理体系及它的用w相容的递归公理类的扩张也成立相同的结果（借助于在第3节末尾的注解）．</p>
+
+  <p class="bodytext">我们最后也将证明下面的结果：</p>
+
+  <p class="bodytext"><span class="jiacu">命题Ⅸ　在涉及命题Ⅵ中的所有形式体系里<a id="zw58" href="part0071.html#zhu58"><sup class="calibre5">[58]</sup></a>存在限制谓词演算的不可判定问题<a id="zw59" href="part0071.html#zhu59"><sup class="calibre5">[59]</sup></a>（即那些它们的普遍有效性和反例存在性均不能证明的限制谓词演算的公式）．<a id="zw60" href="part0071.html#zhu60"><sup class="calibre5">[60]</sup></a></span></p>
+
+  <p class="bodytext">它基于下面的</p>
+
+  <p class="bodytext"><span class="jiacu">命题Ⅹ　每个形如（x）F（x）（F递归）的问题可以化为限制性谓词演算公式的可满足性问题（即对于每个递归F可以给出一个谓词演算公式，它的可满意性等价于（x）F（x）的有效性）．</span></p>
+
+  <p class="bodytext">我们将限制谓词演算（r.p.c.）看为由那样一些公式组成的，即有基本符号-，V（x），=；x，y，…（个体变量）以及F（x），G（x，y），H（x，y，z），…（性质和关系变量），<a id="zw61" href="part0071.html#zhu61"><sup class="calibre5">[61]</sup></a>其中（x）及=只与个体相关，我们在这些符号上再添加了第三类变量φ（x），ψ（x，y），χ（x，y，z），…，它们代表了函数对象；就是说，φ（x），ψ（x，y）等表示单值函数，其变量和值都是个体．<a id="zw62" href="part0071.html#zhu62"><sup class="calibre5">[62]</sup></a>称除了第一个提到的r.p.c．符号外，还包含了第三类的变量的公式为更广意义下（i.w.s.）的公式．<a id="zw63" href="part0071.html#zhu63"><sup class="calibre5">[63]</sup></a>．“可满足的”和“普遍有效”这些概念立即可转移到i.w.s.的公式上，并且我们有命题说，对于每个i.w.s.的公式A我们可以给出一个r.p.c.的通常公式B.使得A的可满足性等等价于B的．我们从A得到B使用了以下的方法：用形如（η<sup class="calibre5">z</sup>）F（zx），（η<sup class="calibre5">z</sup>）G（z，xy），…置换出现在A中的第三类变量φ（x），ψ（x，y），…用消去PMI*14的文字中的“描述性的”函功能，并用逻辑地乘以<a id="zw64" href="part0071.html#zhu64"><sup class="calibre5">[64]</sup></a>所得到的结果，而该结果陈述的是所有由φ，ψ，…替换的F，G，…关于第一个空位是严格单值的．</p>
+
+  <p class="bodytext">我们现在证明，对于形如（x）F（x）（F为递归的）的每个问题有一个等价的涉及一个i.w.s.公式的可满足性，由此命题X以一种刚说过的那些相一致方式得到．</p>
+
+  <p class="bodytext">由于F是递归的，故有一个递归函数Φ（x），使得F（x）～［Φ（x）=0］，并且对于Φ有一个序列Φ<sub class="calibre9">1</sub>，Φ<sub class="calibre9">2</sub>，…，Φ<sub class="calibre9">n</sub>，使得Φ<sub class="calibre9">n</sub>=Φ，Φ<sub class="calibre9">1</sub>（x）=x+1.而对于每个Φ<sub class="calibre9">k</sub>（1&lt;k≤n），或者</p>
+
+  <p class="bodytext">1．</p>
+
+  <div class="zhong1"><img alt="" class="image-tuzhu" src="../images/03045.jpeg"/></div>
+
+  <p class="bodytext">或者</p>
+
+  <p class="bodytext">2．</p>
+
+  <div class="zhong1"><img alt="" class="image-tuzhu" src="../images/03046.jpeg"/></div>
+
+  <p class="yinwen">注：X<sub class="calibre9">i</sub>，（i=1，…，s）表示变量x<sub class="calibre9">1</sub>，x<sub class="calibre9">2</sub>，…，x<sub class="calibre9">m</sub>的任意组，譬如x<sub class="calibre9">1</sub>，x<sub class="calibre9">3</sub>，x<sub class="calibre9">2</sub>．</p>
+
+  <p class="bodytext">或者</p>
+
+  <p class="bodytext">3．</p>
+
+  <p class="bodytext">（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">m</sub>）［Φ<sub class="calibre9">k</sub>（x<sub class="calibre9">1</sub>，…，x<sub class="calibre9">m</sub>）=Φ<sub class="calibre9">1</sub>，…Φ<sub class="calibre9">1</sub>（0））］.（20）</p>
+
+  <p class="bodytext">除此之外，我们形成了命题</p>
+
+  <div class="zhong1"><img alt="" class="image-tuzhu" src="../images/03047.jpeg"/></div>
+
+  <p class="bodytext">在所有的公式（18），（19）．（20）（对于k=2，3，…，n）中，以及在（21），（22）中，我们现在用函数变量φ<sub class="calibre9">i</sub>置换函数Φ<sub class="calibre9">i</sub>，用其余一个未出现的个体变量x<sub class="calibre9">0</sub>置换数0并形成如此得到的公式的合取C．</p>
+
+  <p class="bodytext">公式（Ex<sub class="calibre9">0</sub>）C于是有所需要的性质，即</p>
+
+  <p class="bodytext">1．如果（x）［Φ（x）=0］是这种情形，则（Ex<sub class="calibre9">0</sub>）C是可满足的，这是因为当函数Φ<sub class="calibre9">1</sub>，Φ<sub class="calibre9">2</sub>，…，Φ<sub class="calibre9">n</sub>在（Ex<sub class="calibre9">0</sub>）C被φ<sub class="calibre9">1</sub>，φ<sub class="calibre9">2</sub>，…，φ<sub class="calibre9">n</sub>置换，他们显然产生了正确的命题．</p>
+
+  <p class="bodytext">2．如果（Ex<sub class="calibre9">0</sub>）C为可满足的，则（x）［Φ（x）=0］即如此．</p>
+
+  <p class="bodytext"><span class="jiacu">证明　</span>设Ψ<sub class="calibre9">1</sub>，Ψ<sub class="calibre9">2</sub>，…，Ψ<sub class="calibre9">n</sub>为那些假定存在的函数，使得当将它们在（Ex<sub class="calibre9">0</sub>）C中替换为φ<sub class="calibre9">1</sub>，φ<sub class="calibre9">2</sub>，…，φ<sub class="calibre9">n</sub>时产生正确的命题．设他的个体的范围为I．由于（Ex<sub class="calibre9">0</sub>）C对于所有函数Ψ<sub class="calibre9">i</sub>的正确性，于是有一个个体a（在I内）使得所有从（18）到（22）的公式在将φ置换为Ψ<sub class="calibre9">i</sub>，0置换为a时变换成正确的公式（18′）到（22′）．我们现在构建一个I的最小子类，使得它包含a并在关于运算Ψ<sub class="calibre9">1</sub>（x）下封闭．这个子类（I′）具有性质：函数Ψ<sub class="calibre9">i</sub>中的每一个当被用于I′的元素时仍旧产生出I′的元素．这是由于I′的定义对Ψ<sub class="calibre9">1</sub>成立；由于（18′），（19′），（20′），这个性质从Ψ<sub class="calibre9">i</sub>中的低指标传到高指标．从Φ<sub class="calibre9">i</sub>用到I′的个体范围的限制导出的函数记为Ψ′<sub class="calibre9">i</sub>，对于这些函数公式（18）到（22）依然全都成立（再讲0置换为a，Φ置换为Ψ′<sub class="calibre9">i</sub>）．</p>
+
+  <p class="bodytext">由于（21）对于Ψ′<sub class="calibre9">i</sub>和a的正确性，我们可以将I′的个体以1-1对应的方式映射到自然数中，而以这样的方式它将a变换为0，而函数Ψ′<sub class="calibre9">1</sub>变换成后继函数Φ<sub class="calibre9">1</sub>，但是，在此映射下，所有的函数Ψ′<sub class="calibre9">i</sub>变换成了Φ<sub class="calibre9">i</sub>，又由于（22）对于Ψ′<sub class="calibre9">n</sub>和a的正确性，我们得到（x）［Φ<sub class="calibre9">n</sub>（x）=0］或者（x）［Φ（x）=0］，它已被证明过了．<a id="zw65" href="part0071.html#zhu65"><sup class="calibre5">[65]</sup></a></p>
+
+  <p class="bodytext">由于引向命题X的思考（对于每个特定的F）也可以在体系P中复述，故在一个形如（x）F（x）（F是递归的）的命题与对应的r.p.c.公式之间的可满足性之间的等价性便是在P中可证明的，从而在命题Ⅸ已证明了的那里推出的这个r.p.c.的不可判定性也就是可证明的了．<a id="zw66" href="part0071.html#zhu66"><sup class="calibre5">[66]</sup></a></p>
+
+  <h4 class="chapter-four">4</h4>
+
+  <p class="bodytext">由第2节的结论得到一个有关体系P（及其拓展）的一个相容性的突出结果，它可表达成如下的命题；</p>
+
+  <p class="bodytext"><span class="jiacu">命题Ⅺ　如果c是一个已知的公式的递归的相容类<a id="zw67" href="part0071.html#zhu67"><sup class="calibre5">[67]</sup></a>．则陈述c是相容的这个命题公式不是c可证的：特别，P的相容性在P中是不可证明的，<a id="zw68" href="part0071.html#zhu68"><sup class="calibre5">[68]</sup></a>这里假定了P是相容的（若非如此，当然每个陈述都是可证明的）．</span></p>
+
+  <p class="bodytext">证明如下（概要）：设c为任一给出的<span class="jiacu">公式</span>的递归类，这是对于我们的目的选出的并一经选出就加以固定的类（最简单的情形是空类）．为了证明17Gen r不是c<span class="jiacu">可证的</span>，<a id="zw69" href="part0071.html#zhu69"><sup class="calibre5">[69]</sup></a>就像在第2节公式（16）下面的1中那样，只有c的相容性被用到，即</p>
+
+  <div class="zhong1"><img alt="" class="image-tuzhu" src="../images/03048.jpeg"/></div>
+
+  <p class="bodytext">即由（6.1）</p>
+
+  <div class="zhong"><img alt="" class="image-tuzhu" src="../images/03049.jpeg"/></div>
+
+  <p class="bodytext">由（13），17Cen r=<img alt="" class="gongshi" src="../images/03050.jpeg"/>从而</p>
+
+  <div class="zhong2"><img alt="" class="image-tuzhu" src="../images/03051.jpeg"/></div>
+
+  <p class="bodytext">即由（8.1）</p>
+
+  <p class="bodytext-c">Wid（c）→（x）Q（x，p）.　（24）</p>
+
+  <p class="bodytext">我们现在要建立如下论断：所有在第2节<a id="zw70" href="part0071.html#zhu70"><sup class="calibre5">[70]</sup></a>和第4节定义的概念（或证明了的断言）也是在P中可表达的（或可证明的）．由于我们通篇只用了正规的定义方法和经典数学所能接受的证明，他们都可在体系P被北形式化．特别是c（所有递归类均如此）在P中可定义．设w为在P中表达了Wid（c）的<span class="jiacu">命题公式</span>．关系Q（x，y）按照（8.1），（9）及（10）由<span class="jiacu">关系符号</span>q表达．从而Q（x，p）由r表达因为由（12），r=<img alt="" class="gongshi" src="../images/03052.jpeg"/>，而命题（x）Q（x，p）则有17Gen r表达．</p>
+
+  <p class="bodytext">由于（24），wlmp（17Gen r）因而是在P中<span class="jiacu">可证的</span><a id="zw71" href="part0071.html#zhu71"><sup class="calibre5">[71]</sup></a>（更不用说是c<span class="jiacu">可证的</span>了）．现在，如果w是c<span class="jiacu">可证的</span>，那么17Gen r就会也是c可证的从而由（23）推出c不是相容的．</p>
+
+  <p class="bodytext">可以注意一下：这个证明是构造性的，即如果一个对于w的<span class="jiacu">证明</span>是由c产生的，则它允许由一个由c的归谬有效导出．命题Ⅺ的整个证明也可以逐字逐句地带到集合论的公理体系M上，也可带到经典的数学A上，<a id="zw72" href="part0071.html#zhu72"><sup class="calibre5">[72]</sup></a>而且在此它还产生这样的结果，即对于M或者A没有相容的证明可以各自在M或A中被形式化，这自然是在假定M和A是相容的条件下．必须清楚地注意到，命题Ⅺ（以及对子M和A的相应结果）代表与希尔伯特的形式主义观点没有矛盾．这是因为这个观点预先只假定了一个由有限手段影响的一个相容证明的存在性，并且使人相信或许有有限的证明<span class="jiacu">不能</span>在P中陈述（或在M，或在A中）．</p>
+
+  <p class="bodytext">因为对于每个相容类c，w不是c<span class="jiacu">可证的</span>，故总有（由c）不能判定的命题，即只要Neg（w）不是c<span class="jiacu">可证的</span>，w便是不可判定的；换句话说，人们可以在命题Ⅵ中置换w相容性的假定为：陈述句“c是不相容的”不是c可证的．（注意，存在相容的c，对于它这个陈述是c可证的．）</p>
+
+  <p class="bodytext">本文通篇我们几乎将自己局限于体系P，而仅仅简单地提及到对于其他体系的应用．这些结果将在随后的文章中以更完全的一般形式加以叙述和证明，我们在此只给出了证明概要的命题Ⅺ也将在那里得到详细论述．</p>
+
+  <p class="bodytext">（1930，9，17收到）</p>
+
+  <p class="bodytext-right">（胥鸣伟　译<a id="zw73" href="part0071.html#zhu73"><sup class="calibre5">[73]</sup></a>）</p>
+  <hr class="calibre7"/>
+
+  <p class="notecontent"><a id="zhu1" href="part0071.html#zw1">[1]</a>参看该工作的结果的摘要，发表在Anzeige der Akad．d．Wiss（math-naturw K1），1930，No．19．</p>
+
+  <p class="notecontent"><a id="zhu2" href="part0071.html#zw2">[2]</a>A.Whitehead及B．Russell，Principia Mathematica，第二版，Cambridge 1925．特别地，我们把无限性公理（其形式为：存在有可数多个个体），可约性公理以及选择公理（所有类型的）都算进到PM的公理之中．</p>
+
+  <p class="notecontent"><a id="zhu3" href="part0071.html#zw3">[3]</a>A.Frankel．‘Zehn Vorlesungen über die Grundlegung der Mengenlehre’，Wissensch．u Hyp．，Vol.XXXI；v.Neumann，‘Die Axiomatisirung der Mengenlehre’．Math Zeitschr.27，1928，journ.f.reine u angew Math 154（1925），160（1929）．我们或许可注意到，为了完成这个形式化，这些公理以及逻辑演算的推理规则必须要添加到前面所提及那些文章中去．这些注解也应用到了近年来由D.xierbote和他的同事们提出的体系上（就已经发表了的而言）．参看D，Hilbert，Math Ann 88，Abh aus d math，Semder Univ.Hamburg Ⅰ（1922），VI（1928）．P.Bernnays，Math Ann 90；J.v.Neumann，Math.Zeitschr.26（1927）；W.Ackermann.Math Ann 93．</p>
+
+  <p class="notecontent"><a id="zhu4" href="part0071.html#zw4">[4]</a>更准确地说，存在有不可判定命题，在其中除了逻辑常数：-（非），v（或），（x）（对所有的），以及=（恒等于）之外，再没有超出+（加）和．（乘）的其他概念，后面这两个也都指的是自然数，而前缀（x）也只只涉及自然数．</p>
+
+  <p class="notecontent"><a id="zhu5" href="part0071.html#zw5">[5]</a>在此背景下，只有这样的PM中的公理可以算作是独立的，不是由相互改变类型而产生的．</p>
+
+  <p class="notecontent"><a id="zhu6" href="part0071.html#zw6">[6]</a>由此之后，我们理解“PM的公式”总认为是一个没有缩写的公式（即没有使用定义的）．定义仅仅用作精简所写的文本，从而原则上说，是多余的．</p>
+
+  <p class="notecontent"><a id="zhu7" href="part0071.html#zw7">[7]</a>即我们将基本符号1-1地映射到自然数上．</p>
+
+  <p class="notecontent"><a id="zhu8" href="part0071.html#zw8">[8]</a>即包含了由自然数构成的数序列的一个截断（事实上，数不能被排列成一个空间序）．</p>
+
+  <p class="notecontent"><a id="zhu9" href="part0071.html#zw9">[9]</a>换句话说，以上所描述的步骤给出了PM体系在算术领域中的一个同构像，从而所有的数学论证可以同等有效地在这个同构像中进行．这出现在以下概述的证明中，即“公式”，“命题”，“变量”等<span class="jiacu">总被理解为该同构像的相应对象．</span></p>
+
+  <p class="notecontent"><a id="zhu10" href="part0071.html#zw10">[10]</a>实际上写出这个公式会非常简单（但相当花精力）．</p>
+
+  <p class="notecontent"><a id="zhu11" href="part0071.html#zw11">[11]</a>或许按照它们的项的和的大小排序，而相等时则按字母式排序．</p>
+
+  <p class="notecontent"><a id="zhu12" href="part0071.html#zw12">[12]</a>符号-表示否定．</p>
+
+  <p class="notecontent"><a id="zhu13" href="part0071.html#zw13">[13]</a>实际上写出公式S还是没有一点难度．</p>
+
+  <p class="notecontent"><a id="zhu14" href="part0071.html#zw14">[14]</a>注意：“［R（q）；q］”（或者一样的“［S；q］”）仅仅是这个不可判定性命题的数学描述，但是一旦人们确定公式S，那么自然也就可以决定数q了，从而有效地写出这个不可判定命题自身．</p>
+
+  <p class="notecontent"><a id="zhu15" href="part0071.html#zw15">[15]</a>每个认识论的悖论同样可用作一个相似的不可判定性证明．</p>
+
+  <p class="notecontent"><a id="zhu16" href="part0071.html#zw16">[16]</a>不管表面看起来怎样，对于这样一个命题并不存在任何循环推断，这是因为它的起点是断言一个完全确定的公式（即在一个有确定替换并按字母式排序中的第n个）的不可证明性，而且只是到后来（有些偶然的成分）才显现出该命题自己是被这个公式准确地表达出来的这个事实．</p>
+
+  <p class="notecontent"><a id="zhu17" href="part0071.html#zw17">[17]</a>对佩亚诺公理系的添加就像在PM体系中所做的所有其他变化一样，只是为了简化证明，原则上是可以被摒弃的．</p>
+
+  <p class="notecontent"><a id="zhu18" href="part0071.html#zw18">[18]</a>假定了可使用可数多个符号的的变量型．</p>
+
+  <p class="notecontent"><a id="zhu19" href="part0071.html#zw19">[19]</a>非齐性关系也可按这样的意义定义，譬如，在个体与类之间的如下形式的关系：（（x<sub class="calibre11">2</sub>），（x<sub class="calibre11">1</sub>），（x<sub class="calibre11">2</sub>））．一个简单的思考表明，关于PM中关系的所有可证明命题也都是按这种方式可证明的．</p>
+
+  <p class="notecontent"><a id="zhu20" href="part0071.html#zw20">[20]</a>因此如果x在a中不出现或者不是作为自由的出现，x∏（a）也是一个公式．在那种情形下x∏（a）自然意味着与a相同．</p>
+
+  <p class="notecontent"><a id="zhu21" href="part0071.html#zw21">[21]</a>有关这个定义（以及以后将出现的类似于它的定义），可参看J．Lukasiewicz和A．Tarski的‘Untersuchungen über den Aussagenkalkül’，Comptes Rendus des séances de la Société des Scienceset des Lettres de Varsovie XXIII，1930，Cl.III．</p>
+
+  <p class="notecontent"><a id="zhu22" href="part0071.html#zw22">[22]</a>其中的v在a中不以自由变量出现时，我们必须令Subst <img alt="" class="zaozi1" src="../images/03053.jpeg"/>=a．注意：“Subst”是一个属于元数学的符号．</p>
+
+  <p class="notecontent"><a id="zhu23" href="part0071.html#zw23">[23]</a>在PMI中，*13，x<sub class="calibre11">1</sub>=y<sub class="calibre11">1</sub>被想成是如同x<sub class="calibre11">2</sub>∏（x<sub class="calibre11">2</sub>（x<sub class="calibre11">1</sub>）⊃x<sub class="calibre11">2</sub>（y<sub class="calibre11">1</sub>））所定义一样（对于较高类型是相似的）．</p>
+
+  <p class="notecontent"><a id="zhu24" href="part0071.html#zw24">[24]</a>要由所提出的（三段论法的）格（schemata）（并进行了可允许替换后的情形Ⅱ，Ⅲ和Ⅳ）得到这些公理，因此仍需</p>
+
+  <p class="notecontent">1．消去简略记号，</p>
+
+  <p class="notecontent">2．添加抑制性括号．</p>
+
+  <p class="notecontent">注意，所得到的结果必定是上面所说意义下的“公式”．</p>
+
+  <p class="notecontent"><a id="zhu25" href="part0071.html#zw25">[25]</a>因此c或为一个变量，或为0，或为1，或为f形式的符号或者fu，其中u或为0或为关于“在a中一个位置上自由（约束）”这个概念的第1型变量．参看在脚注24所引著作的§1 A5．</p>
+
+  <p class="notecontent"><a id="zhu26" href="part0071.html#zw26">[26]</a>这里替换规则是多余的，这是因为我们已经处理了在这些公理自身中的所有可能的替换（就像在J．冯·诺伊曼的‘Zur Hilbertschen Beweistheorie’，Math．Zeitschr．26，（1927）中那样）．</p>
+
+  <p class="notecontent"><a id="zhu27" href="part0071.html#zw27">[27]</a>即它的定义领域是非负整数类（或这样的n一数组），同时它的值也为非负整数．</p>
+
+  <p class="notecontent"><a id="zhu28" href="part0071.html#zw28">[28]</a>此后，小的斜体字母（不管是否有指标）总是非负整数变量（如果没有相反地陈述表达）．</p>
+
+  <p class="notecontent"><a id="zhu29" href="part0071.html#zw29">[29]</a>更准确的，经由在前面空位中一些前述函数的替换，即φ<sub class="calibre11">k</sub>（x<sub class="calibre11">1</sub>，x<sub class="calibre11">2</sub>）=φ<sub class="calibre11">p</sub>［x<sub class="calibre11">q</sub>（x<sub class="calibre11">1</sub>，x<sub class="calibre11">2</sub>），φ<sub class="calibre11">r</sub>（x<sub class="calibre11">2</sub>）］（p，q，r<img alt="" class="zaozi" src="../images/02586.jpeg"/>k）．并不是所有左端中的变量都必定会出现在右端（对递归模式（2）也相似）．</p>
+
+  <p class="notecontent"><a id="zhu30" href="part0071.html#zw30">[30]</a>我们把关系中的类（1-位关系）也包括在内．递归关系R自然具有性质：对于每个特定的数的n元组可以判定R（x<sub class="calibre11">1</sub>，…，x<sub class="calibre11">n</sub>）是否成立．</p>
+
+  <p class="notecontent"><a id="zhu31" href="part0071.html#zw31">[31]</a>对于涉及内容的（更特别地也是一类数学的）的所有描述，使用了希尔伯特符号系统（Hilbertiansymbolism），参看Hilbert-Ackermann，Grundzüge der theoretischen Logik，Berlin 1928．</p>
+
+  <p class="notecontent"><a id="zhu32" href="part0071.html#zw32">[32]</a>我们用哥特体字母X，y作为所给变量的n元组，譬如x<sub class="calibre11">1</sub>，x<sub class="calibre11">2</sub>，…，x<sub class="calibre11">n</sub>，的简略表示．</p>
+
+  <p class="notecontent"><a id="zhu33" href="part0071.html#zw33">[33]</a>我们认定函数x+y（加）和x·y（乘）是递归的．</p>
+
+  <p class="notecontent"><a id="zhu34" href="part0071.html#zw34">[34]</a>a不能取0和1以外的值，由α的定义这是显见的．</p>
+
+  <p class="notecontent"><a id="zhu35" href="part0071.html#zw35">[35]</a>所用符号≡的意思是“由定义等价”，因而它在定义中行使的功能或为=或为～（不同于在希尔伯特的符号体系中的）．</p>
+
+  <p class="notecontent"><a id="zhu36" href="part0071.html#zw36">[36]</a>在以下定义中只要出现符号（x），（Ex），εx的地方，它总跟随着一个对x值的限制，这个限制仅仅起着保证所定义概念的递归性（参看命题Ⅳ）．另一方面，所定义概念的范围几乎总不会受到它被省略的影响．</p>
+
+  <p class="notecontent"><a id="zhu37" href="part0071.html#zw37">[37]</a>对0&lt;n≤z，其中z是除尽x的不同素数的个数，注意，对n=z+1，nPrx=0．</p>
+
+  <p class="notecontent"><a id="zhu38" href="part0071.html#zw38">[38]</a>m，n≤x对于m≤x＆n≤z成立（对于多余两个变量的情形类似）．</p>
+
+  <p class="notecontent"><a id="zhu39" href="part0071.html#zw39">[39]</a>限制n≤（Pr［l（x）］<sup class="calibre10">2</sup>）<sup class="calibre10">x［l（x）］</sup><sup class="calibre10">2</sup>的意思大体上是：属于x的公式序列的最短长度最多可等于x的构成公式的个数．但是存在有最多l（x）个长度为1的构成公式最多l（x）-1个长度为2的，等等，因此总体上，最多<img alt="" class="gongshi" src="../images/03054.jpeg"/>［l（x）{l（x）+1）］≤［l（x）］<sup class="calibre10">2</sup>．n中的素数因而可以全都假定为小于Pr{l（x）］<sup class="calibre10">2</sup>）}，它们的个数≤［l（x）］<sup class="calibre10">2</sup>且它们的幂指数（它们为x的构成公式）≤x．</p>
+
+  <p class="notecontent"><a id="zhu40" href="part0071.html#zw40">[40]</a>其中若v不是一个变量，x也不是一个公式，则<img alt="" class="zaozi1" src="../images/03055.jpeg"/>=x．</p>
+
+  <p class="notecontent"><a id="zhu41" href="part0071.html#zw41">[41]</a>替代<img alt="" class="zaozi1" src="../images/03056.jpeg"/>我们写为：<img alt="" class="zaozi1" src="../images/03057.jpeg"/>（对于多于两个变量的情形类似）．</p>
+
+  <p class="notecontent"><a id="zhu42" href="part0071.html#zw42">[42]</a>变量u<sub class="calibre11">1</sub>，…，u<sub class="calibre11">n</sub>可以任意分配，譬如，总有一个具有自由变量17，19，23，…，等的r，使得（3）和（4）对他们成立．</p>
+
+  <p class="notecontent"><a id="zhu43" href="part0071.html#zw43">[43]</a>命题Ⅴ自然是基于这样的事实，即任意递归关系R，对于每个数的n元组，<span class="jiacu">从体系P的公理看</span>不管关系R是否成立，它都是可判定的．</p>
+
+  <p class="notecontent"><a id="zhu44" href="part0071.html#zw44">[44]</a>由此立即可得出它对于每个递归关系均成立，这是因为任何这样的关系等价于0=φ（x<sub class="calibre11">1</sub>，…，x<sub class="calibre11">n</sub>），其中φ为递归的．</p>
+
+  <p class="notecontent"><a id="zhu45" href="part0071.html#zw45">[45]</a>在此证明的准确叙述中，r是被自然定义的，用了纯粹形式的构造而不是以一种概述其内容的迂回方法．</p>
+
+  <p class="notecontent"><a id="zhu46" href="part0071.html#zw46">[46]</a>因此它按照其内包表达了这个关系的存在性．</p>
+
+  <p class="notecontent"><a id="zhu47" href="part0071.html#zw47">[47]</a>事实上，r是由递归关系符号q经由一个确定的数（p）置换了一个变量导出的．</p>
+
+  <p class="notecontent"><a id="zhu48" href="part0071.html#zw48">[48]</a>c可证的意味着：xεFlg（c），由（7），它陈述的同于Bewc（x）的．</p>
+
+  <p class="notecontent"><a id="zhu49" href="part0071.html#zw49">[49]</a>因为所有出现在证明中的存在性断言都建立在命题Ⅴ的基础之上的，而它可容易看出，从直观上说是无异议的．</p>
+
+  <p class="notecontent"><a id="zhu50" href="part0071.html#zw50">[50]</a>因此这种既相容又不w相容的c的存在性，一般说来，只有在假定了c的相容性后（即P是相容的）才被证明．</p>
+
+  <p class="notecontent"><a id="zhu51" href="part0071.html#zw51">[51]</a>假设1的证明在这里甚至比对体系P更简单，这是因为一类基本变量（或者对冯·诺伊曼的两类）．</p>
+
+  <p class="notecontent"><a id="zhu52" href="part0071.html#zw52">[52]</a>参看希尔伯特的演讲“Probleme der Grundlegung der Mathematik”的问题Ⅲ，math，Ann．102．</p>
+
+  <p class="notecontent"><a id="zhu53" href="part0071.html#zw53">[53]</a>加在所有数学形式体系的不完全性的真正源头被发现（将在这文章的第Ⅱ部分指明）在于这样的事实，即持续高阶类型的形成可以延拓到超限（参看希尔伯特的“Über das Unendliche”，Math．Ann．95，因而在每个形式体系最多出现可数多个类型．可以证明，这里提及的不可判定命题总可经添加适当高阶类型成为可判定的（例如对体系P添加w类型）．相似的结果也对集合论公理体系成立．</p>
+
+  <p class="notecontent"><a id="zhu54" href="part0071.html#zw54">[54]</a>从此之后，零总被包含在自然数之内．</p>
+
+  <p class="notecontent"><a id="zhu55" href="part0071.html#zw55">[55]</a>这样一个概念的定义因而必定构造性的，它单独地依靠了所陈述过的符号，自然数的变量x；y，以及符号0和1（函数及集合变量必不出现）（任意其他的数-变量自然可出现在x位置的前缀中）．</p>
+
+  <p class="notecontent"><a id="zhu56" href="part0071.html#zw56">[56]</a>当然不必所有x<sub class="calibre11">1</sub>，…，x<sub class="calibre11">n</sub>实际上都出现在x<sub class="calibre11">i</sub>中（参看脚注27中的例子）．</p>
+
+  <p class="notecontent"><a id="zhu57" href="part0071.html#zw57">[57]</a>在这里f表示一个变量，其值域有自然数序列组成．f<sub class="calibre11">k</sub>代表序列f的第k+1个项（f<sub class="calibre11">0</sub>为首项）．</p>
+
+  <p class="notecontent"><a id="zhu58" href="part0071.html#zw58">[58]</a>这是些从P用添加一个递归可定义的公理类导出的w相容体系．</p>
+
+  <p class="notecontent"><a id="zhu59" href="part0071.html#zw59">[59]</a>参看Hilbert-Ackermann，Grundzüge der theoretischen Logik.在P体系中，限制谓词演算被认定为那些从PM的限制谓词演算用较高类型置换导出的公式．</p>
+
+  <p class="notecontent"><a id="zhu60" href="part0071.html#zw60">[60]</a>在我的论文“Die Vollst adigkeit der Axiome des logischen Funktionkalküls”，Monatsh f Math u Phys XXX VⅡ，2中，我已证明了每个限制谓词演算的公式它或者作为普遍成立而可证，否则就存在一个反例；但是根据命题Ⅸ，这个反例的存在性不再总是可证的（在这里所考虑的形式体系中）．</p>
+
+  <p class="notecontent"><a id="zhu61" href="part0071.html#zw61">[61]</a>在上面引述的Hilbert和Ackermann的文章中没有将符号=包括在谓词演算中，但是对于=出现的每个公式中，存在一个没有这个符号的公式，它与原来的那个同时是可满足的（参看在脚注55众所引述的文章）．</p>
+
+  <p class="notecontent"><a id="zhu62" href="part0071.html#zw62">[62]</a>自然它们的定义域为全部个体．</p>
+
+  <p class="notecontent"><a id="zhu63" href="part0071.html#zw63">[63]</a>第三类变量因而可以出现在所有的空位置上而不是个体变量的位置，例如，y=φ（x），F（x，φ（x）），；G［ψ（x，φ（y）），x］等．</p>
+
+  <p class="notecontent"><a id="zhu64" href="part0071.html#zw64">[64]</a>逻辑积，即形成合取．</p>
+
+  <p class="notecontent"><a id="zhu65" href="part0071.html#zw65">[65]</a>由命题Ⅹ得到，例如，如果人们解决了对于r.p.c.的判定性问题，那么费马及哥德巴赫问题就是可解的．</p>
+
+  <p class="notecontent"><a id="zhu66" href="part0071.html#zw66">[66]</a>命题Ⅸ对于集合论的公理体系以及用可证明的w相容的公理体系所做的拓展自然地也都成立．</p>
+
+  <p class="notecontent"><a id="zhu67" href="part0071.html#zw67">[67]</a>c是相容的（简记为Wid（c））定义如下：Wid（c）=（Ex）{Form（x）＆<span class="overline">Bew</span>（x）}．</p>
+
+  <p class="notecontent"><a id="zhu68" href="part0071.html#zw68">[68]</a>如果c被公式的空类置换则就得到断言．</p>
+
+  <p class="notecontent"><a id="zhu69" href="part0071.html#zw69">[69]</a>自然依赖于c（正如p那样）．</p>
+
+  <p class="notecontent"><a id="zhu70" href="part0071.html#zw70">[70]</a>从“递归”的定义直到命题Ⅵ（包括它）前．</p>
+
+  <p class="notecontent"><a id="zhu71" href="part0071.html#zw71">[71]</a>可以由（23）导出的wlmp（17Genr）的正确性直接建立在以下事实上：不可判定性命题17Gen r断言了它自己的不可判定性，这是我们一开始就说到的．</p>
+
+  <p class="notecontent"><a id="zhu72" href="part0071.html#zw72">[72]</a>参看J.von Neumann，“Zur Hilbertschen Beweistheorie”，Math.Zeitschr.26，1927．</p>
+
+  <p class="notecontent"><a id="zhu73" href="part0071.html#zw73">[73]</a>本篇是根据哥德尔论文的英译本翻译的，该英译本属于Bernnade Meltzer，是这篇论文的的第一件正式译文，发表于1963年．曾被指出有若干不足之处．</p>
+<script src="../../math.js"></script></body></html>

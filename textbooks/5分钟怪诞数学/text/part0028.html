@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn" xml:lang="zh-cn">
+  <head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5分钟怪诞数学：那些看似不可能的生活真相</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="../stylesheet.css" rel="stylesheet" type="text/css"/>
+<link href="../page_styles.css" rel="stylesheet" type="text/css"/>
+</head>
+  <body id="QMFO0-85462c8be2ce4d2982af7cd3bbdd53e7" class="calibre">
+<h1 id="isbn9787572208522_25" class="prefacetitle-c">数据是如何加密的</h1>
+<p class="bodycontent">在斯诺登事件即国家安全局窃听丑闻曝光后，很多人开始关注自己的个人信息安全以及利益安全。他们对个人数据更加敏感，并且开始利用各种方式加密自己的数据，保护个人信息安全。</p>
+<p class="bodycontent">数据加密是一个复杂的数学过程。根据对称原则，数据加密过程和破译过程都需要同一个密钥。密钥可以理解成一串密码，加密者通过这串密码将原文加密变成密文，接收者再根据密钥将密文解码，破译出明文。</p>
+<p class="bodycontent">只有密钥安全才能使加密的数据安全，因此密钥在传递过程中绝对安全（没有泄露）就至关重要。这段密钥必须最初就在发送者与接收者之间秘密地达成共识——可以提前秘密地传递或是秘密地生成只有两人知道的密钥。此时，“迪菲－赫尔曼密钥交换”便应运而生。</p>
+<p class="bodycontent">在“迪菲－赫尔曼密钥交换”中，即使通信双方通过不安全（被窃听）的渠道互发消息，最终也不会使得密码泄露。通信双方可以从通信中得到只有双方理解的密钥。</p>
+<h3 class="txtheading" id="isbn9787572208522_25_1_1">用色彩表示“迪菲－赫尔曼密钥交换”</h3>
+<p class="bodycontent">“迪菲－赫尔曼密钥交换”用数据表示非常复杂，因此这里用色彩来表示这个过程，以便大家理解。“迪菲－赫尔曼密钥交换”主要基于公开传递的数据极难被窃听者分解，即把两种颜色混合起来非常容易，但将一种混合后的颜色分离成具体的两种单色几乎是不可能的事情。</p>
+<p class="bodycontent">在“迪菲－赫尔曼密钥交换”中，首先交换双方（安娜和伯特）就最初的颜色达成一致（比如红色），这个颜色可以公开，可以窃取。之后每个人再随机选择一个自己的颜色（如安娜：黄色；伯特：蓝色），并且将自己选择的颜色与最初的颜色混在一起（此时安娜得到了橙色，伯特得到了浅紫色）。</p>
+<p class="bodycontent">接着双方都把自己混合过的颜色通过不安全的频道发送给彼此，并记住最初协商的颜色和自己选择的颜色。然后双方把自己选择的颜色和接收到的混合色再次混合。比如，安娜选择的是黄色，安娜第二轮接收到的伯特的颜色是浅紫色（蓝色与红色的混合色），此时她需要将黄色与浅紫色混合。</p>
+<p class="bodycontent">最后双方会得到一个相同的三色混合后的结果（灰色）作为双方共有的信息。</p>
+<p class="bodycontent">此时，灰色就是两者的密钥。即使有窃听者拦截到了两色混合后的色彩，他也无法破译出密钥，因为他没有办法把混合后的颜色重新分解开。</p>
+<script src="../../math.js"></script></body>
+</html>

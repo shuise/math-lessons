@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="../stylesheet.css" rel="stylesheet" type="text/css"/>
+<link href="../page_styles.css" rel="stylesheet" type="text/css"/>
+</head>
+  <body class="calibre8">
+<h1 class="calibre12" id="K0RQ1-1bca2dba059b4731b57b0e30bd377399">附录四</h1>
+<p class="calibre13">海斯韦特的数列背后的原理是，在数列前面的所有项中寻找重复的数字块。“块”必须位于数列的前一项的末尾，到前一项为止该数字块重复的次数将成为下一项。</p>
+<p class="calibre13">数学上对数列的描述如下。从1开始，设下一项的值是k，将之前的项按顺序相乘并写作xy<sup class="calibre14">k</sup>
+ ，其中k是可能的最大值。</p>
+<p class="calibre13">数列是1，1，2，1，1，2，2，2，3，1，1，2，2，2，3，2，1，…</p>
+<p class="calibre13">我认为，理解该数项的规则的最容易的方法是，考虑第一次出现的3，也就是第9个位置。之前的项按顺序相乘是1×1×2×1×1×2×2×2。海斯韦特要求我们将这个和转换为xy<sup class="calibre14">k</sup>
+ ，其中k是最大值。在这种情况下，我们得到的是（1×1×2×1×1）×2<sup class="calibre14">3</sup>
+ 。所以，下一项是3。我们寻找的是之前项的数列末尾的最大重复块，但在这个例子中，这个块是一个数字，那就是2，它重复了三次。</p>
+<p class="calibre13">但通常，块中会有几个数字。考虑第16个位置，前面的项是1×1×2×1×1×2×2×2×3×1×1×2×1×1×2。这可以写为（1×1×2×1×1×2×2×3）×（1×1×2）<sup class="calibre14">2</sup>
+ 。所以，第16项是2。</p>
+<p class="calibre13">现在我们回到开头，第二项是1，因为前一项1没有乘以任何数字。第三项是2，因为前面的项按顺序相乘是1×1=1<sup class="calibre14">2</sup>
+ ；第五项是1，因为前面的项得到的是（1×1×2）×1，其中最后的1没有和自身相乘。</p>
+<script src="../../math.js"></script></body>
+</html>

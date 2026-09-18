@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn" xml:lang="zh-cn">
+  <head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5分钟怪诞数学：那些看似不可能的生活真相</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="../stylesheet.css" rel="stylesheet" type="text/css"/>
+<link href="../page_styles.css" rel="stylesheet" type="text/css"/>
+</head>
+  <body id="1FLS40-85462c8be2ce4d2982af7cd3bbdd53e7" class="calibre">
+<h1 id="isbn9787572208522_47" class="prefacetitle-c">瓦鲁法克斯，博弈论与债务清算</h1>
+<p class="bodycontent">希腊财政部长雅尼斯·瓦鲁法克斯（Yanis Varoufakis）在接管国家数十亿的负债之前，曾经是一位数学家。同时，他也是一名经济学教授，主攻博弈论方向。博弈论中有一种有趣的清算债务的方法，如果足够幸运，人们便可以借此清除所有的债务；但如果没有那么幸运，则会使债务翻倍。[书ji分 享V 信jnztxy]</p>
+<p class="bodycontent">我们假设安妮欠伯特20欧分。她向伯特提议，用这笔钱来做一个游戏，如果她赢了，就能免除所有债务；但如果她输了，她的债务将增加到1欧元。当然，现实情况中安妮的欠款也可能是200欧元，这里1欧元也能象征性地代表1000欧元。我们通常用<i class="calibre3">S</i>来表示债务，在这个游戏中，<i class="calibre3">S</i>=0.2欧元。</p>
+<p class="bodycontent">安妮有一枚1欧元硬币，她向伯特提议用它进行这个游戏来偿还债务：安妮和伯特轮流抛掷硬币，第一个掷到<b class="calibre1">头像面</b>的人可以保留这枚硬币。游戏只有两个步骤，但有时可能两人一直掷不到头像面，所以需要反复进行游戏，直到有人掷到头像面，赢得胜利。</p>
+<p class="bodycontent"><b class="calibre1">第一步：</b>我们首先要检查一下，拿着硬币的一方现有的债务不大于0.5（就像在开始时我们提到的<i class="calibre3">S</i>=0.2。然而债务可能在游戏进行当中变化，我们会在第二步时讲解）。如果<i class="calibre3">S</i>不大于0.5，那么现在持有硬币的人可以再掷一次；但如果现有的债务大于0.5，安妮就要将这枚硬币交给伯特（或者伯特交给安妮），新拿到硬币的人此时负债1－<i class="calibre3">S</i>欧元，这个数字同样不能大于0.5。这样进行游戏就可以确保现有的债务值不会高于0.5，但是债务人在游戏过程中却有可能发生变化。</p>
+<p class="bodycontent"><b class="calibre1">第二步：</b>持有硬币的人可以掷硬币，如果掷到头像面就可以幸运地获得这枚硬币，其债务也可以免除，游戏结束。但如果掷到数字面，他的债务将不幸加倍。游戏又重新回到第一个步骤，开始新的一轮，直到有人掷出头像面。</p>
+<p class="bodycontent">因此，如果<i class="calibre3">S</i>=0.2，一开始安妮持有硬币并掷到了头像面，那么她可以一次性地免掉所有债务；但如果她掷到数字面，债务将会加倍变成<i class="calibre3">S</i>=0.4。由于<i class="calibre3">S</i>的值始终小于0.5，硬币不会易主，安妮可以再掷一次。掷到头像面债务消除，掷到数字面债务加倍，<i class="calibre3">S</i>就会变成0.8。因为0.8大于0.5，下一轮就要由伯特来掷硬币，此时伯特欠安妮1－0.8=0.2欧元。如果伯特掷到头像面，那他就能拿走这枚硬币并且再没有债务负担；但如果掷到数字面，他的债务就会加倍，如此循环往复。</p>
+<p class="bodycontent">这个游戏公平吗？伯特能否拿到最开始安妮欠他的0.2欧元呢？</p>
+<p class="bodycontent">我们可以借用一个小技巧来算一下，将<i class="calibre3">S</i>的数值写成1/2<a id="jzyy_1_183" href="part0050.html#jz_1_183"><sup class="calibre4">(1)</sup></a>的乘方的和，每一个乘方最多只出现一次，然后我们将掷到头像面和数字面用二进制的0和1表示，就能写出数学期望<i class="calibre3">S</i><a id="jzyy_2_183" href="part0050.html#jz_2_183"><sup class="calibre4">(2)</sup></a>的二进制公式：</p>
+<p class="bodycontent"><i class="calibre3">S</i>=<i class="calibre3">s</i>(1)×1/2+<i class="calibre3">s</i>(2)×1/4+<i class="calibre3">s</i>(3)×1/8+…</p>
+<h3 class="txtheading" id="isbn9787572208522_47_1_1">硬币决定谁是主人</h3>
+<p class="bodycontent">公式中<i class="calibre3">s</i>(1)、<i class="calibre3">s</i>(2)、<i class="calibre3">s</i>(3)……代表的含义要么是二进制中的1，要么是二进制中的0。如果在前<i class="calibre3">n</i>－1次中一直都是掷出数字面，直到第<i class="calibre3">n</i>次才出现头像面，那么第<i class="calibre3">n</i>次掷硬币的结果才能决定最终硬币的归属。这个概率为(1/2)<i class="calibre3"><sup class="calibre4">n</sup></i>，即2<sup class="calibre4">－</sup><i class="calibre3"><sup class="calibre4">n</sup></i>。</p>
+<p class="bodycontent">伯特在第<i class="calibre3">n</i>次幸运地掷到头像面并拥有这枚硬币的数学期望可以写为<i class="calibre3">s</i>(<i class="calibre3">n</i>)×2<sup class="calibre4">－</sup><i class="calibre3"><sup class="calibre4">n</sup></i>。该决定最终对伯特有利的数学期望是<i class="calibre3">n</i>=1、2、3……时结果的总和。因此就可以算出上述公式，并得出数学期望<i class="calibre3">S</i>。</p>
+<p class="bodycontent">如果伯特想要在第<i class="calibre3">n</i>次之前就直接拿到这枚硬币，他需要做什么呢？这个问题可以借用上述公式的基本运算来回答。第一，债务从<i class="calibre3">S</i>到2<i class="calibre3">S</i>的翻倍需要从数列<i class="calibre3">s</i>(1)、<i class="calibre3">s</i>(2)、<i class="calibre3">s</i>(3)……中删掉<i class="calibre3">s</i>(1)；第二，硬币从一个人手里到另一个人手里意味着债务值从<i class="calibre3">S</i>变为1－<i class="calibre3">S</i>，套入公式后，即上述的每个<i class="calibre3">s</i>(<i class="calibre3">n</i>)变成1－<i class="calibre3">s</i>(<i class="calibre3">n</i>)。由此可以得出结论，当且仅当<i class="calibre3">s</i>(<i class="calibre3">n</i>)=1时，安妮输掉比赛，伯特可以拥有这枚硬币。到这里能搞清楚的话，剩下的就很简单了。</p>
+<p class="bodycontent">至此我们差不多就要得出答案了。对伯特来说最终只有两种结果：获得1欧元或者失去1欧元。假设他拿到1欧元的数学期望是<i class="calibre3">S</i>，那么安妮在此游戏中支付给伯特的期望金额为1×<i class="calibre3">S</i>+0×(1－<i class="calibre3">S</i>)=<i class="calibre3">S</i>。这其实正是安妮在一开始欠伯特的钱数。</p>
+<p class="bodycontent">这样看来，即使这是一场冒险的赌博，但是安妮提议的这个清算债务的游戏按概率来讲还是公平的。但这是不是解决希腊债务问题合适的方法呢？对此我还是持怀疑态度。</p>
+<hr class="calibre2"/>
+<p class="fncontent"><a id="jz_1_183" href="part0050.html#jzyy_1_183">(1)</a>　这里的1/2指连续掷硬币掷到指定结果的概率。
+</p>
+<p class="fncontent"><a id="jz_2_183" href="part0050.html#jzyy_2_183">(2)</a>　自此以后的<i class="calibre3">S</i>皆表示数学期望，在概率论中，数学期望是试验中每次可能结果的概率乘以其结果的总和，在重复次数接近无穷大时，数值的算术平均值几乎肯定地收敛于期望值。
+</p>
+<script src="../../math.js"></script></body>
+</html>

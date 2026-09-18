@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn" xml:lang="zh-cn">
+  <head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5分钟怪诞数学：那些看似不可能的生活真相</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="../stylesheet.css" rel="stylesheet" type="text/css"/>
+<link href="../page_styles.css" rel="stylesheet" type="text/css"/>
+</head>
+  <body id="1KEEU0-85462c8be2ce4d2982af7cd3bbdd53e7" class="calibre">
+<h1 id="isbn9787572208522_52" class="prefacetitle-c">请这样计算复活节在哪一天</h1>
+<p class="bodycontent">复活节不仅是基督教中最盛大的节日，也是一个“移动”的节日。与圣诞节不同，复活节可能每年的日期都不一样。公元325年，尼西亚（Nicäa）在天主教宗教大会上将复活节定在了春分（每年第一个昼夜平分日）后第一个满月后的周日。这看起来太复杂了，事实上也的确很复杂。因为在计算复活节过程中需要考虑地球绕着太阳公转、月球绕着地球公转的平均运动轨迹。</p>
+<p class="bodycontent">那从数学的角度看这个问题会怎么样呢？有没有一个公式可以一下子就计算出复活节的日期呢？卡尔·弗里德里希·高斯（Carl Friedrich Gauß）致力于研究这个问题。高斯在刚23岁的时候就在当年8月刊的《每月通信：地球与宇宙科学》<a id="jzyy_1_197" href="part0055.html#jz_1_197"><sup class="calibre4">(1)</sup></a>上发表了他的“复活节公式”。计算高斯的“复活节公式”只需要掌握带余除法“mod”。mod是数学上表示余数的符号，比如17 mod 4=1，因为17除以4得4余1。高斯“复活节公式”的运算过程只需要对年份<i class="calibre3">J</i>进行多次带余除法就可以实现：</p>
+<p class="bodycontent"><i class="calibre3">A</i>=<i class="calibre3">J</i> mod 19</p>
+<p class="bodycontent"><i class="calibre3">B</i>=<i class="calibre3">J</i> mod 4</p>
+<p class="bodycontent"><i class="calibre3">C</i>=<i class="calibre3">J</i> mod 7</p>
+<p class="bodycontent"><i class="calibre3">D</i>=(19×<i class="calibre3">A</i>+<i class="calibre3">M</i>)mod 30</p>
+<p class="bodycontent"><i class="calibre3">E</i>=(2×<i class="calibre3">B</i>+4×<i class="calibre3">C</i>+6×<i class="calibre3">D</i>+<i class="calibre3">N</i>)mod 7</p>
+<p class="bodycontent">上述式子中的<i class="calibre3">M</i>与<i class="calibre3">N</i>是常数，一个世纪变一次。21世纪2000─2099年中<i class="calibre3">M</i>=24、<i class="calibre3">N</i>=5。</p>
+<p class="bodycontent">按照此步骤计算出<i class="calibre3">D</i>与<i class="calibre3">E</i>的值后，复活节的日期就是3月的第（22+<i class="calibre3">D</i>+<i class="calibre3">E</i>）天。如果数字超过31，就进到下一个月，比如3月32日就是4月1日。</p>
+<p class="bodycontent">该公式能精确计算宗教大会中规定的复活节的日期。但其中有两个例外：第一个例外是，当复活节在4月19日的时候，按照公式计算是4月26日。在2000─2099年间只有2076年会出现这种情况。另一个例外出现的情况是，当<i class="calibre3">D</i>=28、<i class="calibre3">E</i>=6时，11×<i class="calibre3">M</i>+11 mod 30&lt;19，按照公式计算复活节在4月25日，事实上复活节在4月18日。同样，这个例外只会在2049年的时候出现。</p>
+<p class="bodycontent">现在我们试着用公式计算2016年的复活节在哪一天。</p>
+<p class="bodycontent">因为2016=19×106+2，所以<i class="calibre3">A</i>=2。</p>
+<p class="bodycontent">因为2016=4×504+0，所以<i class="calibre3">B</i>=0。</p>
+<p class="bodycontent">因为2016=7×288+0，所以<i class="calibre3">C</i>=0。</p>
+<p class="bodycontent">因为19×<i class="calibre3">A</i>+<i class="calibre3">M</i>=19×2+24=62=30×2+2，所以<i class="calibre3">D</i>=2。</p>
+<p class="bodycontent">因为2×<i class="calibre3">B</i>+4×<i class="calibre3">C</i>+6×<i class="calibre3">D</i>+<i class="calibre3">N</i>=2×0+4×0+6×2+5=17=7×2+3，所以<i class="calibre3">E</i>=3。</p>
+<p class="bodycontent">最终，我们得出2016年的复活节会在3月（22+2+3）日，即3月27日，毫厘不差。</p>
+<hr class="calibre2"/>
+<p class="fncontent"><a id="jz_1_197" href="part0055.html#jzyy_1_197">(1)</a>　杂志的德语全名为<i class="calibre3">Monatliche Correspondenz zur Beförderung der Erd-und Himmelskunde</i>，是德国最早的专业性科学杂志。
+</p>
+<script src="../../math.js"></script></body>
+</html>

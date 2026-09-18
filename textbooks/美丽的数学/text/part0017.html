@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="../stylesheet.css" rel="stylesheet" type="text/css"/>
+<link href="../page_styles.css" rel="stylesheet" type="text/css"/>
+</head>
+  <body id="G6PI0-462d6883e8f64207860fe9aebece3b0f" class="calibre">
+  <h2 class="chapter-two1" id="calibre_pb_0">14.毕达哥拉斯和费马</h2>
+
+  <h3 class="chapter-three" id="sigil_toc_id_63">毕达哥拉斯定理<a id="b2" href="part0009.html#a2" class="calibre13"><sup class="calibre11">[a]</sup></a></h3>
+
+  <p class="bodytext">在《绿野仙踪》的结尾，稻草人并没有得到大脑，但他获得了智慧。通过彻底篡改毕达哥拉斯定理来炫耀自己的新知识，他自豪地说：</p>
+
+  <p class="yinwen">“等腰三角形任意一个两边的平方根的和等于剩余一边的平方根。”</p>
+
+  <p class="bodytext">事实上，毕达哥拉斯定理没有提到等腰三角形，而是指出直角三角形——其中一个是直角（90°）的三角形——的边长之间的关系。</p>
+
+  <div class="kuang">
+    <p class="bule">等腰三角形是有两条边相等的三角形。</p>
+  </div>
+
+  <div class="zhong"><img alt="" class="image-tuzhu" src="../images/00323.jpeg"/></div>
+
+  <p class="bodytext">假设有一个直角三角形，我们用字母a和b表示直角边的长度（形成直角的两边），我们用c表示斜边长度（剩下的一边）。</p>
+
+  <p class="bodytext">毕达哥拉斯定理认为这三个长度的关系可以表示为等式</p>
+
+  <p class="center">a<sup class="calibre6">2</sup>+b<sup class="calibre6">2</sup>=c<sup class="calibre6">2</sup></p>
+
+  <p class="bodytext">以下是这个定理正确的陈述（如同稻草人想要陈述的那样）：</p>
+
+  <p class="bodytext"><span class="calibre4">毕达哥拉斯定理</span>：<i class="calibre5">在直角三角形中，斜边长</i><i class="calibre5">度的平方等于另外两边长度的平方之和。</i></p>
+
+  <div class="kuang">
+    <p class="bule">毕达哥拉斯定理表明大小为1×1的正方形的对角线长度为2。证明过程如下：注意这样一个正方形的对角线创建了两个直角三角形，它们的直角边的长度都是1，对角线的长度是未知的，设为<i class="calibre5">c</i>；根据毕达哥拉斯定理，<i class="calibre5">c</i><sup class="calibre6">2</sup>=1<sup class="calibre6">2</sup>+1<sup class="calibre6">2</sup>=2；取平方根得出<i class="calibre5">c</i>=2；我们在第4章讨论了数字2。</p>
+  </div>
+
+  <p class="bodytext">我们提出的论证是基于几何分割的思想：我们画一个图形，以两种不同的方式来计算它的面积，然后——好啦——毕达哥拉斯定理出现了。证明如下。</p>
+
+  <p class="bodytext">从四个相同的直角三角形开始，它们的直角边长度为a和b，斜边长度为c。把这四个图形排列，形成一个大的（a+b）×（a+b）的正方形，如下图所示：</p>
+
+  <div class="zhong"><img alt="" class="image-tuzhu" src="../images/00324.jpeg"/></div>
+
+  <p class="bodytext">这个大正方形的面积是(a+b)<sup class="calibre6">2</sup>=a<sup class="calibre6">2</sup>+2ab+b<sup class="calibre6">2</sup>。</p>
+
+  <p class="bodytext">现在我们把这个图解分割为五个部分：四个直角三角形加一个c×c的正方形。这里是重新排列后的图形，以方便查看：</p>
+
+  <div class="zhong"><img alt="" class="image-tuzhu" src="../images/00325.jpeg"/></div>
+
+  <p class="bodytext">我们已经将四个直角三角形组合成两个矩形，以使得总面积的计算尽可能简单：正方形的面积是c<sup class="calibre6">2</sup>，两个矩形的面积都是ab。所以这些部分的总面积是c<sup class="calibre6">2</sup>+2ab。</p>
+
+  <p class="bodytext">我们用两种方法确定了图的面积：一种得出的面积是a<sup class="calibre6">2</sup>+2ab+b<sup class="calibre6">2</sup>（从原图得出），另一种是<sup class="calibre6">2</sup>c+2ab（来自重新排列的图形）。由于这些都是正确的计算图形面积的方法，我们得出结论：</p>
+
+  <p class="center">a<sup class="calibre6">2</sup>+2ab+b<sup class="calibre6">2</sup>=c<sup class="calibre6">2</sup>+2ab</p>
+
+  <p class="bodytext">从这个等式的两边减去2ab得到：</p>
+
+  <p class="center">a<sup class="calibre6">2</sup>+b<sup class="calibre6">2</sup>=c<sup class="calibre6">2</sup></p>
+
+  <p class="bodytext">毕达哥拉斯定理得到了证明。</p>
+
+  <p class="bodytext">毕达哥拉斯定理还有其他的分割证明法，具有相同的形式。我们将一些直角三角形组合成一个形状，计算出该形状的面积，将其与组成部分的面积进行比较，得到一个方程：a<sup class="calibre6">2</sup>+b<sup class="calibre6">2</sup>=c<sup class="calibre6">2</sup>。</p>
+
+  <p class="bodytext">例如，将四个直角三角形排列成一个大小为c×c的正方形，如下所示：</p>
+
+  <div class="zhong"><img alt="" class="image-tuzhu" src="../images/00326.jpeg"/></div>
+
+  <div class="kuang">
+    <p class="bule">这个证明归功于12世纪的印度数学家巴斯卡拉（Bhaskara）。</p>
+  </div>
+
+  <p class="bodytext">这个图形的总面积是c<sup class="calibre6">2</sup>。现在请求出小的内部正方形加上四个三角形的面积。详见<a id="222" href="part0017.html#111"><sup class="calibre6">[1]</sup></a>。</p>
+
+  <p class="bodytext">这是美国第20任总统詹姆斯·加菲尔德提出的另一种分割证明。</p>
+
+  <p class="bodytext">使用两个直角三角形和一条线段构成一个梯形。</p>
+
+  <div class="zhong"><img alt="" class="image-tuzhu" src="../images/00327.jpeg"/></div>
+
+  <div class="kuang">
+    <p class="bule">梯形是一个四边形，其中两边是平行的，而另外两边是不平行的。平行的两边被称为梯形的底边。梯形的面积公式是<img alt="" class="zaozi1" src="../images/00328.jpeg"/>，其中<i class="calibre5">b</i><sub class="calibre9">1</sub>，<i class="calibre5">b</i><sub class="calibre9">2</sub>是底边的长度，<i class="calibre5">h</i>是底边之间的距离。</p>
+
+    <p class="bule">注意，加菲尔德的图解可以看作我们第一次证明中所用图的一半。</p>
+  </div>
+
+  <p class="bodytext">直接计算梯形的面积，然后用三个三角形的面积相加再计算一次。答案见<a href="part0017.html#111"><sup class="calibre6">[1]</sup></a>。</p>
+
+  <h3 class="chapter-three" id="sigil_toc_id_64">复数的绝对值</h3>
+
+  <div class="kuang">
+    <p class="bule">本节讨论复数，我们曾在第5章中介绍过。</p>
+  </div>
+
+  <p class="bodytext">数字的绝对值是删除数字负号的结果（如果有的话）。例如，|–5|等于5。我们可以把–5这个数字看成是“大小为5”，但是是在负的方向上。更严格地说，绝对值是这样定义的：</p>
+
+  <div class="zhong"><img alt="" class="image" src="../images/00329.jpeg"/></div>
+
+  <p class="bodytext">因此|12|=12，|–7|=7，且|0|=0。</p>
+
+  <p class="bodytext">这里有一个几何解释：数字x的绝对值是数字线上x和0之间的距离。</p>
+
+  <div class="zhong"><img alt="" class="image1" src="../images/00330.jpeg"/></div>
+
+  <p class="bodytext">数字的绝对值是数字从左边或右边距离0的距离，数字（正数或负数）的符号并不重要。</p>
+
+  <p class="bodytext">我们如何将绝对值的概念扩展到复数？|3+4i|是什么意思？我们不能说3+4i是正的或负的——这些描述不适用于此类情况。相反，我们的目标是将复数的绝对值定义为到0的距离。为此，我们需要复数的一个几何图形。就像实数可以在一条线上可视化那样，复数也能被表示为平面上的点。假设复数3+4i位于原点右侧3个单位，然后向上4个单位，如图所示。</p>
+
+  <div class="kuang">
+    <p class="bule">将复数3+4<i class="calibre5">i</i>可视化为平面上的一个点。</p>
+  </div>
+
+  <div class="zhong"><img alt="" class="image-tuzhu" src="../images/00331.jpeg"/></div>
+
+  <p class="bodytext">现在我们计算从3+4i到原点的距离。这由图中的双向箭头表示。注意，这个箭头是边长为3和4的直角三角形的斜边。设c为该斜边的长度。根据毕达哥拉斯定理</p>
+
+  <p class="center">c<sup class="calibre6">2</sup>=32<sup class="calibre6">+</sup>42<sup class="calibre6">=</sup>9+16=25</p>
+
+  <p class="bodytext">因此c=<img alt="" class="zaozi" src="../images/00332.jpeg"/>=5。结论：|3+4i|=5。</p>
+
+  <div class="kuang">
+    <p class="bule">难题！数字1，–1，<i class="calibre5">i</i>和–<i class="calibre5">i</i>的绝对值都等于1，但它们不是所有绝对值为1的数字。以几何形式描述绝对值等于1的所有复数。答案见<a id="555" href="part0017.html#444"><sup class="calibre6">[1]</sup></a>。</p>
+  </div>
+
+  <p class="bodytext">一般情况下，复数a+bi位于一个点，a位于0的水平单位，b位于0的垂直单位。将原点和a+bi相连的线段是直角三角形的直角边，其长度为a和b。用c来表示斜边的长度，根据毕达哥拉斯定理c<sup class="calibre6">2</sup>=a<sup class="calibre6">2</sup>+b<sup class="calibre6">2</sup>，因此</p>
+
+  <div class="zhong"><img alt="" class="image1" src="../images/00333.jpeg"/></div>
+
+  <p class="bodytext">注意，该公式适用于实数以及复数。例如，要计算|–4|的笨办法是，我们把–4看作–4+0i。将a=–4和b=0代入方程（A）中，得</p>
+
+  <div class="zhong"><img alt="" class="image1" src="../images/00334.jpeg"/></div>
+
+  <h3 class="chapter-three" id="sigil_toc_id_65">毕达哥拉斯三元数组</h3>
+
+  <p class="bodytext">一个直角三角形，其直角边长度为3和4，斜边长度为5。三个长度都是整数。另外，如果直角边的长度是5和12，那么斜边长度是</p>
+
+  <div class="zhong"><img alt="" class="image1" src="../images/00335.jpeg"/></div>
+
+  <div class="kuang">
+    <p class="bule">边长为3，4，5的直角三角形为古埃及人所知。</p>
+  </div>
+
+  <p class="bodytext">这也是一个整数。我们并不总是那么幸运。如果直角边的长度是2和3，则斜边长度是13，这不是一个整数。</p>
+
+  <p class="bodytext">形成直角三角形边长的三个正整数a，b，c，称为<span class="calibre4">毕达哥拉斯三元数组</span>（Pythagorean triple）。</p>
+
+  <p class="bodytext">最简单的例子是3，4，5和5，12，13。还有其他的吗？我们如何找到它们？令人惊讶的是，产生毕达哥拉斯三元数组的关键在于复数！</p>
+
+  <p class="bodytext">在我们深入细节之前，让我们看看复数z=2+i如何产生3，4，5这个三元数组：</p>
+
+  <p class="bodytext">●步骤1：计算z<sup class="calibre6">2</sup>。</p>
+
+  <p class="center">z<sup class="calibre6">2</sup>=(2+i)×(2+i)=(4–1)+(2+2)i=3+4i</p>
+
+  <p class="bodytext">●步骤2：计算|z<sup class="calibre6">2</sup>|。因为z<sup class="calibre6">2</sup>=3+4i所以</p>
+
+  <p class="center">|z<sup class="calibre6">2</sup>|=32+42=25=5</p>
+
+  <p class="bodytext">步骤2中的计算表明3，4，5是毕达哥拉斯三元数组：在复平面中从0到3+4i的线段形成直角边长为3和4的直角三角形的斜边，其长度为5。</p>
+
+  <p class="bodytext">我们再次用复数z=3+2i来尝试这个过程。我们计算z<sup class="calibre6">2</sup>，然后它的绝对值是：</p>
+
+  <p class="center">z<sup class="calibre6">2</sup>=(3+2i)×(3+2i)=(9–4)+(6+6)i=5+12i</p>
+
+  <p class="center">|z<sup class="calibre6">2</sup>|=|5+12i|=<img alt="" class="zaozi1" src="../images/00336.jpeg"/>=169=13</p>
+
+  <p class="bodytext">我们找到了5，12，13三元数组！</p>
+
+  <p class="bodytext">再举一个例子，然后我们将探讨它的原理。</p>
+
+  <p class="bodytext">从z=5+2i开始，求它的平方并计算结果的绝对值：</p>
+
+  <p class="center">z<sup class="calibre6">2</sup>=（5+2i）×（5+2i）=（25–4）+（10+10）i=21+20i</p>
+
+  <div class="zhong"><img alt="" class="image1" src="../images/00337.jpeg"/></div>
+
+  <p class="bodytext">我们发现了另外一个毕达哥拉斯三元数组：20，21，29。</p>
+
+  <p class="bodytext">让我们通过回到第一个例子来探索这个工作原理：z=2+i。注意<img alt="" class="zaozi1" src="../images/00338.jpeg"/>现在，如果我们平方z，我们得到z<sub class="calibre9">2</sub>=3+4i，其绝对值是|<img alt="" class="zaozi1" src="../images/00339.jpeg"/>，总结：</p>
+
+  <p class="center">|z|=5 且 |z<sup class="calibre6">2</sup>|=5</p>
+
+  <p class="bodytext">至少在这个例子中，我们得出|z<sup class="calibre6">2</sup>|=|z|<sup class="calibre6">2</sup>。</p>
+
+  <p class="bodytext">|z<sup class="calibre6">2</sup>|=|z|<sup class="calibre6">2</sup>永远可行吗？当然，对于实数是这样的（例如，|（–4）<sup class="calibre6">2</sup>|=|16|=|–4|<sup class="calibre6">2</sup>），但是验证是否适用于复数则需要一点代数的知识<a id="444" href="part0017.html#333"><sup class="calibre6">[z1]</sup></a>。</p>
+
+  <div class="kuang">
+    <p class="bule">如果你愿意，最开始可以认为|<i class="calibre5">z</i><sup class="calibre6">2</sup>|=|<i class="calibre5">z</i>|<sup class="calibre6">2</sup>适用于所有复数。之后你可以用复杂的代数研究出来。</p>
+  </div>
+
+  <p class="bodytext">让我们回到创建毕达哥拉斯三元数组的过程。我们从一个复数z=x+yi开始，其中x和y都是整数。其绝对值<span class="calibre4">|z|可能</span>不是整数，但它是一个整数的平方根：<img alt="" class="zaozi1" src="../images/00340.gif"/>。但是，z<sup class="calibre6">2</sup>的绝对值必定是整数：|z<sup class="calibre6">2</sup>|=|z|<sup class="calibre6">2</sup>=x<sup class="calibre6">2</sup>+y<sup class="calibre6">2</sup>。扩展z<sup class="calibre6">2</sup>得</p>
+
+  <div class="kuang">
+    <p class="bule">一个复数<i class="calibre5">x</i>+<i class="calibre5">yi</i>，其中<i class="calibre5">x</i>和<i class="calibre5">y</i>都是整数，称为高斯整数。</p>
+  </div>
+
+  <p class="center">z<sup class="calibre6">2</sup>=(x+yi)×(x+yi)=(x<sup class="calibre6">2</sup>–y<sup class="calibre6">2</sup>)+(2xy)i</p>
+
+  <p class="bodytext">取a=x<sup class="calibre6">2</sup>–y<sup class="calibre6">2</sup>，b=2xy，c=x<sup class="calibre6">2</sup>+y<sup class="calibre6">2</sup>，得出|a+bi|=c，因此a<sup class="calibre6">2</sup>+b<sup class="calibre6">2</sup>=c<sup class="calibre6">2</sup>。</p>
+
+  <p class="bodytext">最后一个例子：令z=7+4i。其平方等于33+56i，其绝对值|z<sup class="calibre6">2</sup>|=<img alt="" class="zaozi1" src="../images/00341.jpeg"/>=<img alt="" class="zaozi1" src="../images/00342.jpeg"/>=<img alt="" class="zaozi1" src="../images/00343.jpeg"/>=65，我们得到另一个毕达哥拉斯三元数组：33，56，65。</p>
+
+  <p class="bodytext">我们已经证明这个过程创造了毕达哥拉斯三元数组。我们会很自然地问：每个毕达哥拉斯三元数组都可以这样创建吗？答案是肯定的，但是论证更为复杂，我们建议参考一本关于数论的书来获取更多信息。</p>
+
+  <h3 class="chapter-three" id="sigil_toc_id_66">费马大定理</h3>
+
+  <p class="bodytext">我们刚刚考虑了满足毕达哥拉斯定理的三个整数。这个讨论与直角三角形的世界只有微小的联系。我们现在完全抛开几何，并思考a<sup class="calibre6">2</sup>+b<sup class="calibre6">2</sup>=c<sup class="calibre6">2</sup>关系的扩展。</p>
+
+  <p class="bodytext">很容易找到满足关系a+b=c的整数a，b，c的三元数组。上一节给出了一个找到满足<sup class="calibre6">2</sup>a+b<sup class="calibre6">2</sup>=c<sup class="calibre6">2</sup>的整数三元数组的方法。我们现在的任务是扩展到更高的指数：我们可以找到满足a<sup class="calibre6">3</sup>+b<sup class="calibre6">3</sup>=c<sup class="calibre6">3</sup>的整数的三元数组吗？……或者<sup class="calibre6">4</sup>a+b<sup class="calibre6">4</sup>=c<sup class="calibre6">4</sup>？……或a<sup class="calibre6">5</sup>+b<sup class="calibre6">5</sup>=c<sup class="calibre6">5</sup>，依此类推？</p>
+
+  <p class="bodytext">这里有两个关于方程a<sup class="calibre6">3</sup>+b<sup class="calibre6">3</sup>=c<sup class="calibre6">3</sup>的无趣的整数解：</p>
+
+  <p class="center">5<sup class="calibre6">3</sup>+0<sup class="calibre6">3</sup>=5<sup class="calibre6">3</sup>以及5<sup class="calibre6">3</sup>+(–5)<sup class="calibre6">3</sup>=0<sup class="calibre6">3</sup></p>
+
+  <p class="bodytext">有趣的挑战是找到三个整数a，b，c，其中每个符合<i class="calibre5">a</i><sup class="calibre6">3</sup>+<i class="calibre5">b</i><sup class="calibre6">3</sup>=<i class="calibre5">c</i><sup class="calibre6">3</sup>的整数都不为零。这样的解被称为非平凡的（nontrivial）。</p>
+
+  <p class="bodytext">这个问题是皮埃尔·德·费马（Pierre de Fermat）于1637年提出的。费马在一本书的边缘上写道，方程a<sup class="calibre6">n</sup>+b<sup class="calibre6">n</sup>=c<sup class="calibre6">n</sup>没有非平凡的整数解。他写下这句名言（原文为拉丁文）：</p>
+
+  <p class="yinwen">关于此，我确信已发现了一种美妙的证法，可惜这里空白的地方太小，写不下。</p>
+
+  <div class="kuang">
+    <p class="bule">这则逸事在数学界是一个神圣的神话，许多书籍和文章都对此有过记述。</p>
+
+    <p class="bule">费马有证据吗？这是令人怀疑的。一个更有趣的问题：费马相信他有证据还是他在开玩笑？我更喜欢后一个解释。</p>
+  </div>
+
+  <p class="bodytext">由于他的论断，这个结果被称为<span class="calibre4">费马大定理</span>（Fermat’s Last Theorem），尽管人们怀疑费马是否真的有证据证明了，但这个问题的解决用了三个多世纪，在20世纪90年代中期由安德鲁·威尔斯（Andrew Wiles）证明了。费马大定理的确是一个定理，正如威尔斯的研究所表明的那样，对于任何指数n≥3的方程，a<sup class="calibre6">n</sup>+b<sup class="calibre6">n</sup>=c<sup class="calibre6">n</sup>都没有非平凡的解。</p>
+  <hr class="calibre7"/>
+
+  <p class="bodytext"><a id="333" href="part0017.html#444"><sup class="calibre6">[z1]</sup></a><a id="111" href="part0017.html#222">[1]</a>在巴斯卡拉图中，小正方形的面积是（<i class="calibre5">b</i>–<i class="calibre5">a</i>）<sup class="calibre6">2</sup>。由此得出等式</p>
+
+  <p class="center"><sup class="calibre6">2</sup><i class="calibre5">c</i>=(<i class="calibre5">b</i>–<i class="calibre5">a</i>)<sup class="calibre6">2</sup>+2<i class="calibre5">ab</i></p>
+
+  <p class="bodytext">注意(<i class="calibre5">b</i>–<i class="calibre5">a</i>)<sup class="calibre6">2</sup>=<i class="calibre5">a</i><sup class="calibre6">2</sup>+<i class="calibre5">b</i><sup class="calibre6">2</sup>–2<i class="calibre5">ab</i>，所以这个方程变成</p>
+
+  <p class="center"><sup class="calibre6">2</sup><i class="calibre5">c</i>=(<i class="calibre5">a</i>2+<i class="calibre5">b</i><sup class="calibre6">2</sup>–2<i class="calibre5">ab</i>)+2<i class="calibre5">ab</i>=<i class="calibre5">a</i><sup class="calibre6">2</sup>+<i class="calibre5">b</i><sup class="calibre6">2</sup></p>
+
+  <p class="bodytext">加菲尔德证明，梯形的面积是</p>
+
+  <div class="zhong"><img alt="" class="image1" src="../images/00344.jpeg"/></div>
+
+  <p class="bodytext">而这些部分的总面积是<img alt="" class="zaozi1" src="../images/00345.jpeg"/>（<i class="calibre5">ab</i>为两个原始的直角三角形的直角边，<img alt="" class="zaozi1" src="../images/00346.gif"/>为另一个直角三角形的直角边）。设定这些相等得出</p>
+
+  <div class="zhong"><img alt="" class="image4" src="../images/00347.jpeg"/></div>
+
+  <p class="bodytext">两边的<i class="calibre5">ab</i>抵消，然后乘2，得<i class="calibre5">a</i><sup class="calibre6">2</sup>+<i class="calibre5">b</i><sup class="calibre6">2</sup>=<i class="calibre5">c</i><sup class="calibre6">2</sup>。</p>
+
+  <p class="bodytext"><a href="part0017.html#555">[1]</a><b class="calibre8"><i class="calibre5">证明：</i>| <i class="calibre5">z</i><sup class="calibre6">2</sup>|=| <i class="calibre5">z</i> |<sup class="calibre6">2</sup></b></p>
+
+  <p class="bodytext">策略是考虑复数<i class="calibre5">z</i>=<i class="calibre5">x</i>+<i class="calibre5">yi</i>，然后求出|<i class="calibre5">z</i><sup class="calibre6">2</sup>|=|<i class="calibre5">z</i>|<sup class="calibre6">2</sup>；幸运的是，它们都是相等的。</p>
+
+  <p class="bodytext">我们从|<i class="calibre5">z</i>|<sup class="calibre6">2</sup>开始。记住|<i class="calibre5">x</i>+<i class="calibre5">yi</i>|=<img alt="" class="zaozi1" src="../images/00348.jpeg"/></p>
+
+  <p class="bodytext">因此</p>
+
+  <div class="zhong"><img alt="" class="image4" src="../images/00349.jpeg"/></div>
+
+  <p class="bodytext">接下来我们计算<i class="calibre5">z</i><sup class="calibre6">2</sup></p>
+
+  <p class="center"><sup class="calibre6">2</sup><i class="calibre5">z</i>=(<i class="calibre5">x</i>+<i class="calibre5">yi</i>)×(<i class="calibre5">x</i>+<i class="calibre5">yi</i>)=(<i class="calibre5">x</i><sup class="calibre6">2</sup>–<i class="calibre5">y</i><sup class="calibre6">2</sup>)+(2<i class="calibre5">xy</i>)<i class="calibre5">i</i></p>
+
+  <p class="bodytext">最后，我们计算|<i class="calibre5">z</i><sup class="calibre6">2</sup>|</p>
+
+  <div class="zhong"><img alt="" class="image-tuzhu" src="../images/00350.jpeg"/></div>
+
+  <p class="bodytext">注意，|<i class="calibre5">z</i>|<sup class="calibre6">2</sup>和|<i class="calibre5">z</i><sup class="calibre6">2</sup>|都等于<i class="calibre5">x</i><sup class="calibre6">2</sup>+<i class="calibre5">y</i><sup class="calibre6">2</sup>，因此它们是相等的。这完成了对于复数<i class="calibre5">z</i>的|<i class="calibre5">z</i><sup class="calibre6">2</sup>|=|<i class="calibre5">z</i>|<sup class="calibre6">2</sup>的证明。</p>
+
+  <p class="bodytext"><a href="part0017.html#222">[1]</a><b class="calibre8"><i class="calibre5">难题的答案</i>：</b>一个复数的绝对值等于它到原点的距离。所以这些数字形成一个以原点0+0<i class="calibre5">i</i>为中心的半径为1的圆。</p>
+<script src="../../math.js"></script></body></html>

@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="../stylesheet.css" rel="stylesheet" type="text/css"/>
+<link href="../page_styles.css" rel="stylesheet" type="text/css"/>
+</head>
+  <body class="calibre" id="5N3C0-c0a03bb820f64a13aa49402e231bdebc">
+<h2 class="calibre9" id="sigil_toc_id_11">书号、互联网金融与模运算</h2>
+
+  <p class="calibre6">数字9的很多特点都可以扩展至其他数字。在使用弃九法时，我们实际上是用一个数字被9除得到的余数来代替这个数字。用余数代替某个数字的做法，对于大多数人而言并不陌生。从学会看时间开始，我们就在这样做。例如，如果时钟指向8点钟（无论是上午8点还是晚上8点），那么3个小时之后是几点？15个小时之后呢？27个小时之后呢？9个小时之前呢？尽管你的第一反应可能是11、23、35或者 –1，但是就时间而言，这些都表示11点。这是因为这些时间点之间相差12个小时或者12个小时的倍数，数学界将其表示为：</p>
+
+  <p class="center1">11≡23≡35≡–1（mod 12）</p>
+
+  <div class="chatu">
+    <img alt="" class="width" src="../images/00630.jpeg"/>
+
+    <h5 class="calibre10">3个小时后、5个小时后、27个小时后或9个小时前，时钟指向几点？</h5>
+  </div>
+
+  <p class="calibre11">一般而言，如果<span class="italic">a</span>、<span class="italic">b</span>之间的差是12的整数倍，那么我们说<span class="italic">a</span> ≡ <span class="italic">b</span>（mod 12）。同理，如果<span class="italic">a</span>和<span class="italic">b</span>被12除的余数相同，我们也说<span class="italic">a</span> ≡ <span class="italic">b</span>（mod 12）。推而广之，对于任意正整数<span class="italic">m</span>，如果<span class="italic">a</span>和<span class="italic">b</span>之间的差是<span class="italic">m</span>的整数倍，那么我们说<span class="italic">a</span>与<span class="italic">b</span>对模<sup class="calibre18"><a class="calibre19" href="part0018.html#note5n" id="note5">[1]</a></sup><span class="italic">m</span>同余，记作<span class="italic">a</span> ≡ <span class="italic">b</span>（mod <span class="italic">m</span>）。同理，如果<span class="italic">a</span> = <span class="italic">b</span> + <span class="italic">qm</span>，<span class="italic">q</span>是整数，那么<span class="italic">a</span> ≡ <span class="italic">b</span>（mod <span class="italic">m</span>）。</p>
+
+  <p class="calibre6">同余的好处是它们彼此之间可以通过加法、减法和乘法等进行模运算，这与普通方程式几乎没有区别。如果<span class="italic">a</span> ≡ <span class="italic">b</span>（mod <span class="italic">m</span>），<span class="italic">c</span>是任意整数，那么<span class="italic">a</span> + <span class="italic">c</span> ≡ <span class="italic">b</span> + <span class="italic">c</span>，且<span class="italic">ac</span> ≡ <span class="italic">bc</span> (mod <span class="italic">m</span>)成立。如果<span class="italic">a</span> ≡ <span class="italic">b</span>（mod <span class="italic">m</span>），且<span class="italic">c</span> ≡ <span class="italic">d</span>（mod <span class="italic">m</span>），那么<span class="italic">a</span> + <span class="italic">c</span> ≡ <span class="italic">b</span> + <span class="italic">d</span>，且<span class="italic">ac</span> ≡ <span class="italic">bd</span> (mod <span class="italic">m</span>)。</p>
+
+  <p class="calibre6">例如，14 ≡ 2且17 ≡ 5（mod 12），所以14×17 ≡ 2×5（mod 12），因为238 = 10 + (12×19)。有了这条规则之后，我们就可以对同余进行升幂处理。如果<span class="italic">a</span> ≡ <span class="italic">b</span>（mod <span class="italic">m</span>），就有以下这条幂法则：</p>
+
+  <p class="center1"><span class="italic">a</span><span class="sbiao">2</span> ≡ <span class="italic">b</span><span class="sbiao">2</span>，<span class="italic">a</span><span class="sbiao">3</span> ≡ <span class="italic">b</span><span class="sbiao">3</span> ，…，<span class="italic">a</span><span class="sbiaoxt">n</span> ≡ <span class="italic">b</span><span class="sbiaoxt">n</span>（mod <span class="italic">m</span>）</p>
+
+  <p class="calibre6">其中，<span class="italic">n</span>是任意正整数。</p>
+
+  <div class="solidgrey">
+    <h4 class="calibre12">延伸阅读</h4>
+
+    <p class="calibre7">模运算为什么成立呢？如果<span class="italic">a</span> ≡ <span class="italic">b</span>（mod <span class="italic">m</span>），且<span class="italic">c</span> ≡ <span class="italic">d</span>（mod <span class="italic">m</span>），那么<span class="italic">a</span> = <span class="italic">b</span> + <span class="italic">pm</span>，<span class="italic">c</span> = <span class="italic">d</span> + <span class="italic">qm</span>，<span class="italic">p</span>、<span class="italic">q</span>是整数。于是，<span class="italic">a</span> + <span class="italic">c</span> = (<span class="italic">b</span> + <span class="italic">d</span>) +(<span class="italic">p</span> + <span class="italic">q</span>) <span class="italic">m</span>，所以，<span class="italic">a</span> + <span class="italic">c</span> ≡ <span class="italic">b</span> + <span class="italic">d</span>（mod <span class="italic">m</span>）。根据FOIL法则，有：</p>
+
+    <p class="center"><span class="italic">ac</span> = (<span class="italic">b</span> + <span class="italic">pm</span>) (<span class="italic">d</span> + <span class="italic">qm</span>) = <span class="italic">bd</span> + (<span class="italic">bq</span> + <span class="italic">pd</span> + <span class="italic">pqm</span>) <span class="italic">m</span></p>
+
+    <p class="calibre7">因此，<span class="italic">ac</span>与<span class="italic">bd</span>的差是<span class="italic">m</span>的倍数，也就是说<span class="italic">ac</span> ≡ <span class="italic">bd</span>（mod <span class="italic">m</span>）。同余关系<span class="italic">a</span> ≡ <span class="italic">b</span> （mod <span class="italic">m</span>）与自身相乘就会得到<span class="italic">a</span><span class="sbiao">2</span> ≡ <span class="italic">b</span><span class="sbiao">2</span>（mod <span class="italic">m</span>），继续与自身相乘就会推导出幂法则。</p>
+  </div>
+
+  <p class="calibre6">正是因为这条幂法则，使得十进制下的9变成了一个非常特殊的数字。由于10 ≡ 1 (mod 9)，根据幂法则，10<span class="sbiaoxt">n</span> ≡ 1<span class="sbiaoxt">n</span> ≡ 1 (mod 9)。因此，像3 456这样的数字满足：</p>
+
+  <p class="calibre6">3 456 = 3×1 000+4×100+5×10+6</p>
+
+  <p class="calibre6">≡ 3×1 + 4×1 + 5×1 + 6 = 3 + 4 + 5 + 6 (mod 9)</p>
+
+  <p class="calibre6">由于10 ≡ 1 (mod 3)，因此我们把某个数字的各个数位上的数字相加，就可以判断出这个数字是不是3的倍数（或者说出该数被3除的余数）。在不同的进制下，比如十六进制（常用于电气工程和计算机科学），由于16 ≡ 1 (mod 15)，因此我们可以把某个数字的各个数位上的数字相加，判断这个数字是不是15（或者3、5）的倍数，或者说出该数字被15除的余数。</p>
+
+  <p class="calibre6">现在，我们回到十进制。判断一个数字是不是11的倍数，有一个非常简便的方法。它的依据是：由于10 ≡ –1 (mod 11)，10<span class="sbiaoxt">n</span> ≡ (–1)<span class="sbiaoxt">n</span>(mod 11)，所以10<span class="sbiao">2</span> ≡ 1 (mod 11)，10<span class="sbiao">3</span> ≡ (–1) (mod 11)，以此类推。以3 456这个数字为例，该数字满足：</p>
+
+  <p class="calibre6">3 456 = 3×1 000 + 4×100 + 5×10 + 6</p>
+
+  <p class="calibre6">≡ –3 + 4 – 5 + 6 = 2 (mod 11)</p>
+
+  <p class="calibre6">也就是说，3 456被11除的余数是2。因此，判断一个数字是不是11的倍数的一般规则是：当且仅当某个数字各个数位上的数字交替进行减法和加法运算后的结果是11的倍数（例如：0，±11，±22，…）时，这个数字就是11的倍数。31 415是11的倍数吗？通过计算3 – 1 + 4 – 1 + 5 = 10，我们知道它不是11的倍数。但是，31 416这个数字对应的计算结果是11，因此它肯定是11的倍数。</p>
+
+  <p class="calibre6">事实上，在生成和验证ISBN码（国际标准书号）时经常会用到与11有关的模运算。假设你的书号是一个十位数（2007年之前出版的图书大多如此），书号的前几位数字表示该书的国别、出版者和书名，但是最后一位数（校验号）的作用是让这些数字满足某种特殊关系。具体来说，如果这个十位数书号符合<span class="italic">a</span>–<span class="italic">bcd</span>–<span class="italic">efghi–j</span>的形式，那么<span class="italic">j</span>的作用是确保这个书号满足以下关系：</p>
+
+  <p class="center1">10<span class="italic">a</span> + 9<span class="italic">b</span> + 8<span class="italic">c</span> + 7<span class="italic">d</span> + 6<span class="italic">e</span> + 5<span class="italic">f</span> + 4<span class="italic">g</span> + 3<span class="italic">h</span> + 2<span class="italic">i</span> + <span class="italic">j</span> ≡ 0 (mod 11)</p>
+
+  <p class="calibre6">例如，我写作的《心算的秘密》（<span class="italic">Secrets of Mental Math</span>）出版于2006年，它的书号是0–307–33840–1。由于154 = 11×14，因此：</p>
+
+  <p class="center1">10×0 + 9×3 + 8×0 + 7×7 + 6×3 + 5×3 + 4×8 + 3×4 + 2×0 + 1</p>
+
+  <p class="center1">= 154 ≡ 0 (mod 11)</p>
+
+  <p class="calibre6">也许你有一个疑问：如果根据这个规则，校验号必须是10，应该怎么办呢？在这种情况下，校验号会变成Ⅹ，因为这个罗马数字的意思就是10。有了这个特点之后，如果在输入ISBN时输错了某个数字，系统就可以自动检测出来。例如，如果我的书号第三位数被输错，最后的检验结果就会产生8的倍数的偏差，即偏差为±8，±16，…，±80。但是，由于所有这些数字都不是11的倍数（11是质数），因此发生偏差后的检验结果也不可能是11的倍数。事实上，利用代数运算我们可以方便地证明，如果其中两位数字发生错位，系统是可以检验出这个错误的。例如，其他数位都没有错误，但是<span class="italic">c</span>和<span class="italic">f</span>这两个数位上的数字彼此交换了位置，那么计算结果的偏差全部来自<span class="italic">c</span>和<span class="italic">f</span>这两项。计算结果本应是8<span class="italic">c</span> + 5<span class="italic">f</span>，而现在的结果是8<span class="italic">f</span> + 5<span class="italic">c</span>。两者之间的差是(8<span class="italic">f</span> + 5<span class="italic">c</span>) – (8<span class="italic">c</span> + 5<span class="italic">f</span>) = 3 (<span class="italic">f</span> – <span class="italic">c</span>)，它不是11的倍数。因此，新的计算结果也不是11的倍数。</p>
+
+  <p class="calibre6">2007年，出版界启用了13位ISBN编码系统，所有的书号都是十三位数，而且采用的是模为10的模运算，而不是之前的模为11的模运算。在这种新的体系下，书号<span class="italic">abc</span>–<span class="italic">d</span>–<span class="italic">efg</span>–<span class="italic">hijkl</span>–<span class="italic">m</span>必须满足：</p>
+
+  <p class="center1"><span class="italic">a</span> + 3<span class="italic">b</span> + <span class="italic">c</span> +3<span class="italic">d</span> + <span class="italic">e</span> + 3<span class="italic">f</span> + <span class="italic">g</span> + 3<span class="italic">h</span> + <span class="italic">i</span> + 3<span class="italic">j</span> + <span class="italic">k</span> + 3<span class="italic">l</span> + <span class="italic">m</span> ≡ 0 (mod 10)</p>
+
+  <p class="calibre6">例如，本书英文版的ISBN是978–0–465–05472–5。简便的验证方法是把奇数位与偶数位上的数字分开，即：</p>
+
+  <p class="center1">(9 + 8 + 4 + 5 + 5 + 7 + 5) + 3×(7 + 0 + 6 + 0 + 4 + 2)</p>
+
+  <p class="center1">= 43 + 3×19 = 43 + 57 = 100 ≡ 0 (mod 10)</p>
+
+  <p class="calibre6">13位ISBN编码系统可以检测出任何单个数位的错误和大多数（不是全部）连续项位置颠倒的错误。例如，在上面的例子中，如果最后的三位数725误写成275，系统就无法检测到这个错误，因为错位之后的计算结果是110，也是10的倍数。目前，条形码、信用卡和借记卡都采用了模为10的号码验证系统。模运算还在电路和互联网金融安全等方面发挥着重要作用。</p>
+
+  <script src="../../math.js"></script></body>
+</html>

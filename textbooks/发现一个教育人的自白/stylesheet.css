@@ -1,0 +1,229 @@
+.calibre {
+    display: block;
+    font-size: 1em;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 5pt
+    }
+.calibre1 {
+    display: block;
+    text-align: center;
+    margin: 0;
+    padding: 0
+    }
+.calibre2 {
+    display: block;
+    font-size: 1em;
+    line-height: 1.618em;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: justify;
+    margin: 0 5pt
+    }
+.calibre3 {
+    display: block
+    }
+.calibre4 {
+    color: gray;
+    display: block;
+    height: 2px;
+    border: currentColor inset 1px;
+    margin: 0.5em auto
+    }
+.calibre5 {
+    display: block;
+    font-size: 1em;
+    line-height: 1.618em;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 5pt
+    }
+.calibre6 {
+    color: #00C
+    }
+.calibre7 {
+    display: block;
+    font-family: "MYing Hei S", Hei, "黑体";
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+    width: 100%;
+    border-top: #c7c7c7 dashed 2px;
+    border-bottom: #c7c7c7 dashed 2px;
+    margin: 0.67em 0;
+    padding: 0.75em 0
+    }
+.calibre8 {
+    display: block;
+    text-indent: 2em;
+    margin: 1em 0
+    }
+.calibre9 {
+    display: block;
+    line-height: 1.2
+    }
+.calibre10 {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+    margin: 0.83em 0
+    }
+.calibre11 {
+    font-size: 0.70833em;
+    line-height: 1.2
+    }
+.calibre12 {
+    display: block;
+    font-size: 0.75em;
+    text-indent: 2em;
+    margin: 1em 0
+    }
+.calibre13 {
+    font-size: 0.91667em;
+    line-height: 1.2
+    }
+.kindle-cn-bodycontent-div-alone {
+    display: block;
+    text-align: center;
+    width: 100%
+    }
+.kindle-cn-bodycontent-div-left {
+    display: block;
+    float: left;
+    font-size: 1em;
+    margin-right: 1em;
+    width: 45%
+    }
+.kindle-cn-bodycontent-div-right {
+    display: block;
+    float: right;
+    font-size: 1em;
+    margin-left: 1em;
+    width: 45%
+    }
+.kindle-cn-bodycontent-divright-image-withnote {
+    height: auto;
+    margin-bottom: 0;
+    width: 100%
+    }
+.kindle-cn-bodycontent-image-alone80-withnote {
+    height: auto;
+    margin-bottom: 0;
+    width: 80%
+    }
+.kindle-cn-bold {
+    font-weight: bold
+    }
+.kindle-cn-bold1 {
+    display: block;
+    font-size: 1.125em;
+    font-weight: bold;
+    text-indent: 2em;
+    margin: 1em 0
+    }
+.kindle-cn-copyright-text {
+    display: block;
+    line-height: 1.618em;
+    text-indent: 0;
+    margin: 1em 0
+    }
+.kindle-cn-exam-choice {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    font-size: 1em;
+    text-indent: 0;
+    margin: 1em 0 1em 2em
+    }
+.kindle-cn-hei {
+    font-family: MYing Hei, "MYing Hei S", Hei, "黑体"
+    }
+.kindle-cn-hei1 {
+    font-family: MYing Hei, "MYing Hei S", Hei, "黑体";
+    font-size: 1.125em
+    }
+.kindle-cn-inline-image {
+    height: 2em;
+    margin-left: 0;
+    margin-right: 0;
+    vertical-align: middle;
+    width: auto
+    }
+.kindle-cn-kai {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    text-indent: 2em;
+    margin: 1em 0
+    }
+.kindle-cn-kai1 {
+    font-family: STKai, "MKai PRC", Kai, "楷体"
+    }
+.kindle-cn-para-center {
+    display: block;
+    text-align: center;
+    text-indent: 0;
+    margin: 1em 0
+    }
+.kindle-cn-para-center1 {
+    display: block;
+    font-size: 1.125em;
+    text-align: center;
+    text-indent: 0;
+    margin: 1em 0
+    }
+.kindle-cn-para-no-indent {
+    display: block;
+    text-indent: 0;
+    margin: 1em 0
+    }
+.kindle-cn-picture-txt-right {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    font-size: 0.75em;
+    text-align: left;
+    text-indent: 0;
+    margin: -0.5em 0 1em
+    }
+.kindle-cn-picture-txt-withfewcharactors {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    font-size: 0.75em;
+    text-align: center;
+    text-indent: 0;
+    margin: 0.3em 0 1em
+    }
+.kindle-cn-picture-txt-withmanycharactors {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    font-size: 0.75em;
+    text-align: left;
+    text-indent: 0;
+    margin: 0.3em 0 1em
+    }
+.kindle-cn-signature {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    text-align: right;
+    text-indent: 2em;
+    margin: 1em 0
+    }
+.kindle-cn-toc-level {
+    display: block;
+    margin-left: 0
+    }
+.kindle-cn-toc-level1 {
+    display: block;
+    margin-left: 2em
+    }
+.kindle-cn-toc-title {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    letter-spacing: 1em;
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+    text-align: center;
+    border-bottom: #000 dotted 1.5px
+    }

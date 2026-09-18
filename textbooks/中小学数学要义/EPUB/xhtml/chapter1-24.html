@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head><link rel="stylesheet" href="../../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第二节 鸡兔同笼问题与二元一次方程组</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../../page_styles.css"/>
+</head>
+  <body class="calibre2">
+<h2 class="calibre15"><span id="" class="calibre16"><b class="calibre14">第</b><b class="calibre14">二</b><b class="calibre14">节</b></span></h2>
+<h2 class="calibre15"><span id="sigil_toc_id_25" class="calibre17"><b class="calibre6">鸡</b><b class="calibre6">兔</b><b class="calibre6">同</b><b class="calibre6">笼</b><b class="calibre6">问</b><b class="calibre6">题</b><b class="calibre6">与</b><b class="calibre6">二</b><b class="calibre6">元</b><b class="calibre6">一</b><b class="calibre6">次</b><b class="calibre6">方</b><b class="calibre6">程</b><b class="calibre6">组</b></span></h2>
+	<p class="calibre3"><span id="" class="calibre8">为了继续展示方程方法的威力，我们来介绍中国古代的鸡兔同笼问题：笼子里有若干只鸡和兔，从上面数，有35个头，从下面数有94只脚，问鸡和兔分别有多少只？</span></p>
+	<p class="calibre3"><span id="" class="calibre8">对于没有学过方程方法的小学生而言，这种题目最能直接想到的就是枚举法，15只兔子20只鸡行不行？10只兔子25只鸡行不行？多猜几个数字，答案就差不多出来了。</span></p>
+	<p class="calibre3"><span id="" class="calibre8">更高明一点的想法就是假设把每只兔子都砍掉两只脚，这时笼子里脚的个数是头的两倍，也就是70只脚。由此可以推断出总共砍了94-70=24只脚，因此兔子的数量就是24÷2=12。如果觉得砍脚太血腥可以假设每只鸡都长出两条腿或者每只兔子都又长出一个头。如果直接把这种假设的方法教给小学生，是不是就万事大吉了？</span></p>
+	<p class="calibre3"><span id="" class="calibre8">不是的！题型一变又不行了，比如下面这道题：</span></p>
+	<p class="calibre3"><span id="" class="calibre8">奶奶今年的年龄是小红的8倍，去年的年龄是小红的9倍，小红和奶奶今年的年龄分别是多少？</span></p>
+	<p class="calibre3"><span id="" class="calibre8">这个时候，处理鸡兔同笼问题的长腿或者长头的方法已经无法再用了。实际上这类涉及两个未知量的应用题题型非常繁多，相关的解题技巧也五花八门，比如和倍、和差、差倍、变倍……</span></p>
+	<p class="calibre3"><span id="" class="calibre8">一旦使用了方程方法抓住问题的数学本质，这些五花八门的玩意将统统消散。为此需要引进两个未知数<span class="calibre97"><i class="calibre98">x</i></span>与<span class="calibre97"><i class="calibre98">y</i></span>，在第一道题中，<span class="calibre97"><i class="calibre98">x</i></span>与<span class="calibre97"><i class="calibre98">y</i></span>分别表示鸡和兔的数量。根据头和脚的数量，可以列出两个方程</span></p>
+<div class="calibre4">
+	<img src="../images/image_227.svg" alt="" class="calibre101"/></div>
+	<p class="calibre3"><span id="" class="calibre4"></span></p>
+	<p class="calibre3"><span id="" class="calibre8">因为涉及两个未知量，我们把这两个联立方程称为二元一次方程组。接下来，忘掉鸡兔、头脚，专注解方程组。</span></p>
+	<p class="calibre3"><span id="" class="calibre8">将第一个方程两边同时乘以2，变为2<span class="calibre97"><i class="calibre98">x</i></span>+2<span class="calibre97"><i class="calibre98">y</i></span>=70。用第二个方程的两边分别去减这个新方程的两边，得到2<span class="calibre97"><i class="calibre98">y</i></span>=24。这种通过两个方程相加减消去一个未知量得到一元一次方程的方法称为消元法。</span></p>
+	<p class="calibre3"><span id="" class="calibre8">在第二道关于小红和奶奶年龄的应用题中，<span class="calibre97"><i class="calibre98">x</i></span>与<span class="calibre97"><i class="calibre98">y</i></span>分别表示小红和奶奶的年龄。列成方程就是</span></p>
+<div class="calibre4">
+	<img src="../images/image_228.svg" alt="" class="calibre162"/></div>
+	<p class="calibre3"><span id="" class="calibre4"></span></p>
+	<p class="calibre3"><span id="" class="calibre8">化简后变成</span></p>
+<div class="calibre4">
+	<img src="../images/image_229.svg" alt="" class="calibre163"/></div>
+	<p class="calibre3"><span id="" class="calibre4"></span></p>
+	<p class="calibre3"><span id="" class="calibre8">运用消元法就可以轻松解出<span class="calibre97"><i class="calibre98">x</i></span>=8，<span class="calibre97"><i class="calibre98">y</i></span>=64。</span></p>
+	<p class="calibre3"><span id="" class="calibre8">消元法还可以将更复杂的三元一次方程组转化为二元一次方程组，</span></p>
+	<img src="../images/image_230.svg" alt="" class="calibre164"/>
+	<p class="calibre3"><span id=""></span></p>
+	<p class="calibre3"><span id="" class="calibre8">例如关于<span class="calibre97"><i class="calibre98">x</i></span>，<span class="calibre97"><i class="calibre98">y</i></span>，<span class="calibre97"><i class="calibre98">z</i></span>的方程组。</span></p>
+	<p class="calibre3"><span id="" class="calibre8">将第一个方程与第二个方程相加得到3<span class="calibre97"><i class="calibre98">x</i></span>-3<span class="calibre97"><i class="calibre98">y</i></span>=3；将第二个方程两边同时乘以2，再与第三个方程相加得到5<span class="calibre97"><i class="calibre98">x</i></span>-3<span class="calibre97"><i class="calibre98">y</i></span>=11。如此消去<span class="calibre97"><i class="calibre98">z</i></span>就得到</span></p>
+<div class="calibre4">
+	<img src="../images/image_231.svg" alt="" class="calibre101"/></div>
+	<p class="calibre3"><span id="" class="calibre4"></span></p>
+	<p class="calibre3"><span id="" class="calibre8">通过解二元一次方程组和三元一次方程组，我们发现多个未知数，多个字母符号，包括带下标的字母，比如<span class="calibre97"><i class="calibre98">a</i></span>，<span class="calibre97"><i class="calibre98">b</i></span>，<span class="calibre97"><i class="calibre98">c</i></span>，<span class="calibre97"><i class="calibre98">x</i></span>，<span class="calibre97"><i class="calibre98">y</i></span>，<span class="calibre97"><i class="calibre98">z</i></span>，<span class="calibre97"><i class="calibre98">x</i></span><span><sub class="calibre7">1</sub></span>，<span class="calibre97"><i class="calibre98">x</i></span><span><sub class="calibre7">2</sub></span>，<span class="calibre97"><i class="calibre98">x</i></span><span><sub class="calibre7">3</sub></span>，<span class="calibre97"><i class="calibre98">y</i></span><span><sub class="calibre7">1</sub></span>，<span class="calibre97"><i class="calibre98">z</i></span><span><sub class="calibre7">2</sub></span>，<span class="calibre97"><i class="calibre98">M</i></span>，<span class="calibre97"><i class="calibre98">L</i></span>…都可以同时和数一起参与到加减与乘法运算之中。实际上，它们不但可以和数相乘，多个字母之间也可以彼此相加减，相乘，例如长和宽分别是<span class="calibre97"><i class="calibre98">a</i></span>和<span class="calibre97"><i class="calibre98">b</i></span>的长方形的面积就是<span class="calibre97"><i class="calibre98">a</i></span>×<span class="calibre97"><i class="calibre98">b</i></span>，简写为<span class="calibre97"><i class="calibre98">a</i><i class="calibre98">b</i></span>。至此，代数的大门已经彻底打开了！</span></p>
+	<p class="calibre3"><span id="" class="calibre28"><b class="calibre14">提</b><b class="calibre14">问</b><b class="calibre14">时</b><b class="calibre14">间</b></span></p>
+	<p class="calibre3"><span id="" class="calibre8">3.2.1&#160;六一儿童节，老师将100本笔记本全部分给全班39位同学，有些同学分到两本，其他同学分到3本，请问分到3本笔记本的同学人数是多少。</span></p>
+	<img src="../images/image_232.svg" alt="" class="calibre165"/>
+	<p class="calibre3"><span id=""></span></p>
+	<p class="calibre3"><span id="" class="calibre8">3.2.2&#160;解方程组</span></p>
+	<img src="../images/image_233.svg" alt="" class="calibre166"/>
+	<p class="calibre3"><span id=""></span></p>
+	<p class="calibre3"><span id="" class="calibre8">3.2.3&#160;解方程组</span></p>
+<script src="../../../math.js"></script></body>
+</html>

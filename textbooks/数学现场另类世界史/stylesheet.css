@@ -1,0 +1,171 @@
+.biaoge {
+    display: block;
+    text-align: center;
+    width: 80%;
+    margin: 1em auto
+    }
+.bodycontent-first-title {
+    display: block;
+    font-family: "MYing Hei S", Hei;
+    font-size: 1.66667em;
+    font-weight: bold;
+    line-height: 1.45;
+    text-align: center;
+    margin: 0.5em 0 2.5em
+    }
+.bodycontent-text {
+    display: block;
+    text-indent: 2em;
+    margin: 1em 0
+    }
+.bodycontent-text_center {
+    display: block;
+    font-family: "MYing Hei S", Hei;
+    font-weight: bold;
+    text-align: center;
+    margin: 1em 0
+    }
+.bodycontent-text_left {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai;
+    font-weight: bold;
+    text-align: left;
+    text-indent: 2em;
+    margin: 1em 0
+    }
+.bodycontent-text_right {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai;
+    text-align: right;
+    margin: 1em 0
+    }
+.bodycontent-text-tushuo {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai;
+    text-align: center;
+    margin: 0.2em 0 1em
+    }
+.calibre {
+    display: block;
+    font-size: 1em;
+    line-height: 1.5;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: justify;
+    margin: 0 5pt
+    }
+.calibre1 {
+    display: block
+    }
+.calibre2 {
+    font-size: 0.75em;
+    line-height: 1.45;
+    vertical-align: super
+    }
+.calibre3 {
+    font-size: 0.75em;
+    line-height: 1.45;
+    vertical-align: sub
+    }
+.calibre4 {
+    font-size: 1em;
+    line-height: 1.5
+    }
+.calibre5 {
+    font-size: 1em;
+    line-height: 1.5;
+    text-indent: 2em
+    }
+.calibre6 {
+    display: block;
+    font-size: 1em;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 5pt
+    }
+.calibre7 {
+    display: block;
+    font-size: 1.41667em;
+    font-weight: bold;
+    line-height: 1.2;
+    margin: 0.83em 0
+    }
+.calibre8 {
+    display: block;
+    list-style-type: disc;
+    margin-bottom: 1em;
+    margin-right: 0;
+    margin-top: 1em
+    }
+.calibre9 {
+    display: list-item;
+    list-style-type: none
+    }
+.calibre10 {
+    text-decoration: none
+    }
+.image-alone {
+    height: auto;
+    margin-bottom: 0.2em;
+    width: 100%
+    }
+.image-alonesz {
+    height: auto;
+    width: auto
+    }
+.kindle-cn-copyright-text {
+    display: block;
+    margin: 1em 0
+    }
+.kindle-cn-copyright-text1 {
+    display: block;
+    line-height: 1.5;
+    text-indent: 0;
+    margin: 1em 0
+    }
+.kindle-cn-copyright-title {
+    border-bottom-style: solid;
+    border-bottom-width: 1.5px;
+    border-left-style: none;
+    border-left-width: 1.5px;
+    border-right-style: none;
+    border-right-width: 1.5px;
+    border-top-style: none;
+    border-top-width: 1.5px;
+    display: block;
+    font-size: 1.41667em;
+    font-weight: bold;
+    line-height: 1.45;
+    text-align: center;
+    margin: 0.5em 0
+    }
+.kindle-cn-copyright-title1 {
+    border-bottom-style: solid;
+    border-bottom-width: 1.5px;
+    border-left-style: none;
+    border-left-width: 1.5px;
+    border-right-style: none;
+    border-right-width: 1.5px;
+    border-top-style: none;
+    border-top-width: 1.5px;
+    display: block;
+    font-size: 1.41667em;
+    line-height: 1.45;
+    text-align: center;
+    margin: 0.5em 0
+    }
+.tupian {
+    display: block;
+    text-align: center;
+    width: 60%;
+    margin: 1em auto
+    }
+.tupian-float-right {
+    display: block;
+    float: right;
+    width: 49.5%;
+    margin: 0.6em auto
+    }
+.pcalibre:hover {
+    color: red
+    }

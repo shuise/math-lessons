@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN"
+   "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:8eae6154-044d-4eda-8512-7b7528b4da28"/>
+    <meta name="dtb:depth" content="2"/>
+    <meta name="dtb:totalPageCount" content="0"/>
+    <meta name="dtb:maxPageNumber" content="0"/>
+  </head>
+  <docTitle>
+    <text>逻辑的引擎</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="navPoint-1" playOrder="1">
+      <navLabel>
+        <text>版权信息</text>
+      </navLabel>
+      <content src="Text/Copyright.html"/>
+    </navPoint>
+    <navPoint id="navPoint-2" playOrder="2">
+      <navLabel>
+        <text>总序</text>
+      </navLabel>
+      <content src="Text/Section0002_0001.html"/>
+    </navPoint>
+    <navPoint id="navPoint-3" playOrder="3">
+      <navLabel>
+        <text>前言</text>
+      </navLabel>
+      <content src="Text/Section0002_0002.html"/>
+    </navPoint>
+    <navPoint id="navPoint-4" playOrder="4">
+      <navLabel>
+        <text>引言</text>
+      </navLabel>
+      <content src="Text/Section0002_0003.html"/>
+    </navPoint>
+    <navPoint id="navPoint-5" playOrder="5">
+      <navLabel>
+        <text>第一章 莱布尼茨之梦</text>
+      </navLabel>
+      <content src="Text/Section0002_0004.html"/>
+      <navPoint id="navPoint-6" playOrder="6">
+        <navLabel>
+          <text>莱布尼茨的奇思妙想</text>
+        </navLabel>
+        <content src="Text/Section0002_0004.html#sigil_toc_id_1"/>
+      </navPoint>
+      <navPoint id="navPoint-7" playOrder="7">
+        <navLabel>
+          <text>巴黎</text>
+        </navLabel>
+        <content src="Text/Section0002_0004.html#sigil_toc_id_2"/>
+      </navPoint>
+      <navPoint id="navPoint-8" playOrder="8">
+        <navLabel>
+          <text>汉诺威</text>
+        </navLabel>
+        <content src="Text/Section0002_0004.html#sigil_toc_id_3"/>
+      </navPoint>
+      <navPoint id="navPoint-9" playOrder="9">
+        <navLabel>
+          <text>普遍文字</text>
+        </navLabel>
+        <content src="Text/Section0002_0004.html#sigil_toc_id_4"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-10" playOrder="10">
+      <navLabel>
+        <text>第二章 布尔把逻辑变成代数</text>
+      </navLabel>
+      <content src="Text/Section0002_0005.html"/>
+      <navPoint id="navPoint-11" playOrder="11">
+        <navLabel>
+          <text>乔治·布尔的艰辛岁月</text>
+        </navLabel>
+        <content src="Text/Section0002_0005.html#sigil_toc_id_5"/>
+      </navPoint>
+      <navPoint id="navPoint-12" playOrder="12">
+        <navLabel>
+          <text>乔治·布尔的逻辑代数</text>
+        </navLabel>
+        <content src="Text/Section0002_0005.html#sigil_toc_id_6"/>
+      </navPoint>
+      <navPoint id="navPoint-13" playOrder="13">
+        <navLabel>
+          <text>布尔与莱布尼茨之梦</text>
+        </navLabel>
+        <content src="Text/Section0002_0005.html#sigil_toc_id_7"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-14" playOrder="14">
+      <navLabel>
+        <text>第三章 弗雷格：从突破到绝望</text>
+      </navLabel>
+      <content src="Text/Section0002_0006.html"/>
+      <navPoint id="navPoint-15" playOrder="15">
+        <navLabel>
+          <text>弗雷格的概念文字</text>
+        </navLabel>
+        <content src="Text/Section0002_0006.html#sigil_toc_id_8"/>
+      </navPoint>
+      <navPoint id="navPoint-16" playOrder="16">
+        <navLabel>
+          <text>弗雷格发明形式句法</text>
+        </navLabel>
+        <content src="Text/Section0002_0006.html#sigil_toc_id_9"/>
+      </navPoint>
+      <navPoint id="navPoint-17" playOrder="17">
+        <navLabel>
+          <text>伯特兰·罗素的信为何如此具有毁灭性</text>
+        </navLabel>
+        <content src="Text/Section0002_0006.html#sigil_toc_id_10"/>
+      </navPoint>
+      <navPoint id="navPoint-18" playOrder="18">
+        <navLabel>
+          <text>弗雷格和语言哲学</text>
+        </navLabel>
+        <content src="Text/Section0002_0006.html#sigil_toc_id_11"/>
+      </navPoint>
+      <navPoint id="navPoint-19" playOrder="19">
+        <navLabel>
+          <text>弗雷格与莱布尼茨之梦</text>
+        </navLabel>
+        <content src="Text/Section0002_0006.html#sigil_toc_id_12"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-20" playOrder="20">
+      <navLabel>
+        <text>第四章 康托尔：在无限中摸索</text>
+      </navLabel>
+      <content src="Text/Section0002_0007.html"/>
+      <navPoint id="navPoint-21" playOrder="21">
+        <navLabel>
+          <text>工程师还是数学家</text>
+        </navLabel>
+        <content src="Text/Section0002_0007.html#sigil_toc_id_13"/>
+      </navPoint>
+      <navPoint id="navPoint-22" playOrder="22">
+        <navLabel>
+          <text>无穷集的大小是不同的</text>
+        </navLabel>
+        <content src="Text/Section0002_0007.html#sigil_toc_id_14"/>
+      </navPoint>
+      <navPoint id="navPoint-23" playOrder="23">
+        <navLabel>
+          <text>康托尔对无限数的探求</text>
+        </navLabel>
+        <content src="Text/Section0002_0007.html#sigil_toc_id_15"/>
+      </navPoint>
+      <navPoint id="navPoint-24" playOrder="24">
+        <navLabel>
+          <text>对角线方法</text>
+        </navLabel>
+        <content src="Text/Section0002_0007.html#sigil_toc_id_16"/>
+      </navPoint>
+      <navPoint id="navPoint-25" playOrder="25">
+        <navLabel>
+          <text>沮丧和悲剧</text>
+        </navLabel>
+        <content src="Text/Section0002_0007.html#sigil_toc_id_17"/>
+      </navPoint>
+      <navPoint id="navPoint-26" playOrder="26">
+        <navLabel>
+          <text>一场决定性的战斗？</text>
+        </navLabel>
+        <content src="Text/Section0002_0007.html#sigil_toc_id_18"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-27" playOrder="27">
+      <navLabel>
+        <text>第五章 希尔伯特的营救</text>
+      </navLabel>
+      <content src="Text/Section0002_0008.html"/>
+      <navPoint id="navPoint-28" playOrder="28">
+        <navLabel>
+          <text>希尔伯特早期的胜利</text>
+        </navLabel>
+        <content src="Text/Section0002_0008.html#sigil_toc_id_19"/>
+      </navPoint>
+      <navPoint id="navPoint-29" playOrder="29">
+        <navLabel>
+          <text>面向一个新世纪</text>
+        </navLabel>
+        <content src="Text/Section0002_0008.html#sigil_toc_id_20"/>
+      </navPoint>
+      <navPoint id="navPoint-30" playOrder="30">
+        <navLabel>
+          <text>克隆内克的幽灵</text>
+        </navLabel>
+        <content src="Text/Section0002_0008.html#sigil_toc_id_21"/>
+      </navPoint>
+      <navPoint id="navPoint-31" playOrder="31">
+        <navLabel>
+          <text>元数学</text>
+        </navLabel>
+        <content src="Text/Section0002_0008.html#sigil_toc_id_22"/>
+      </navPoint>
+      <navPoint id="navPoint-32" playOrder="32">
+        <navLabel>
+          <text>灾难</text>
+        </navLabel>
+        <content src="Text/Section0002_0008.html#sigil_toc_id_23"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-33" playOrder="33">
+      <navLabel>
+        <text>第六章 哥德尔使计划落空</text>
+      </navLabel>
+      <content src="Text/Section0002_0009.html"/>
+      <navPoint id="navPoint-34" playOrder="34">
+        <navLabel>
+          <text>克隆内克的幽灵的回归</text>
+        </navLabel>
+        <content src="Text/Section0002_0009.html#sigil_toc_id_24"/>
+      </navPoint>
+      <navPoint id="navPoint-35" playOrder="35">
+        <navLabel>
+          <text>不可判定命题</text>
+        </navLabel>
+        <content src="Text/Section0002_0009.html#sigil_toc_id_25"/>
+      </navPoint>
+      <navPoint id="navPoint-36" playOrder="36">
+        <navLabel>
+          <text>库尔特·哥德尔，计算机程序设计师</text>
+        </navLabel>
+        <content src="Text/Section0002_0009.html#sigil_toc_id_26"/>
+      </navPoint>
+      <navPoint id="navPoint-37" playOrder="37">
+        <navLabel>
+          <text>柯尼斯堡会议</text>
+        </navLabel>
+        <content src="Text/Section0002_0009.html#sigil_toc_id_27"/>
+      </navPoint>
+      <navPoint id="navPoint-38" playOrder="38">
+        <navLabel>
+          <text>爱与恨</text>
+        </navLabel>
+        <content src="Text/Section0002_0009.html#sigil_toc_id_28"/>
+      </navPoint>
+      <navPoint id="navPoint-39" playOrder="39">
+        <navLabel>
+          <text>希尔伯特的宣言</text>
+        </navLabel>
+        <content src="Text/Section0002_0009.html#sigil_toc_id_29"/>
+      </navPoint>
+      <navPoint id="navPoint-40" playOrder="40">
+        <navLabel>
+          <text>一个奇特的人和一个悲哀的结局</text>
+        </navLabel>
+        <content src="Text/Section0002_0009.html#sigil_toc_id_30"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-41" playOrder="41">
+      <navLabel>
+        <text>第七章 图灵构想通用计算机</text>
+      </navLabel>
+      <content src="Text/Section0002_0010.html"/>
+      <navPoint id="navPoint-42" playOrder="42">
+        <navLabel>
+          <text>帝国的孩子</text>
+        </navLabel>
+        <content src="Text/Section0002_0010.html#sigil_toc_id_31"/>
+      </navPoint>
+      <navPoint id="navPoint-43" playOrder="43">
+        <navLabel>
+          <text>希尔伯特的判定问题</text>
+        </navLabel>
+        <content src="Text/Section0002_0010.html#sigil_toc_id_32"/>
+      </navPoint>
+      <navPoint id="navPoint-44" playOrder="44">
+        <navLabel>
+          <text>图灵对计算过程的分析</text>
+        </navLabel>
+        <content src="Text/Section0002_0010.html#sigil_toc_id_33"/>
+      </navPoint>
+      <navPoint id="navPoint-45" playOrder="45">
+        <navLabel>
+          <text>运转的图灵机</text>
+        </navLabel>
+        <content src="Text/Section0002_0010.html#sigil_toc_id_34"/>
+      </navPoint>
+      <navPoint id="navPoint-46" playOrder="46">
+        <navLabel>
+          <text>图灵应用康托尔的对角线方法</text>
+        </navLabel>
+        <content src="Text/Section0002_0010.html#sigil_toc_id_35"/>
+      </navPoint>
+      <navPoint id="navPoint-47" playOrder="47">
+        <navLabel>
+          <text>不可解问题</text>
+        </navLabel>
+        <content src="Text/Section0002_0010.html#sigil_toc_id_36"/>
+      </navPoint>
+      <navPoint id="navPoint-48" playOrder="48">
+        <navLabel>
+          <text>图灵的通用机</text>
+        </navLabel>
+        <content src="Text/Section0002_0010.html#sigil_toc_id_37"/>
+      </navPoint>
+      <navPoint id="navPoint-49" playOrder="49">
+        <navLabel>
+          <text>阿兰·图灵在普林斯顿</text>
+        </navLabel>
+        <content src="Text/Section0002_0010.html#sigil_toc_id_38"/>
+      </navPoint>
+      <navPoint id="navPoint-50" playOrder="50">
+        <navLabel>
+          <text>阿兰·图灵的战争</text>
+        </navLabel>
+        <content src="Text/Section0002_0010.html#sigil_toc_id_39"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-51" playOrder="51">
+      <navLabel>
+        <text>第八章 研制第一批通用计算机</text>
+      </navLabel>
+      <content src="Text/Section0002_0011.html"/>
+      <navPoint id="navPoint-52" playOrder="52">
+        <navLabel>
+          <text>谁发明了计算机？</text>
+        </navLabel>
+        <content src="Text/Section0002_0011.html#sigil_toc_id_40"/>
+      </navPoint>
+      <navPoint id="navPoint-53" playOrder="53">
+        <navLabel>
+          <text>约翰·冯·诺依曼与摩尔学院</text>
+        </navLabel>
+        <content src="Text/Section0002_0011.html#sigil_toc_id_41"/>
+      </navPoint>
+      <navPoint id="navPoint-54" playOrder="54">
+        <navLabel>
+          <text>阿兰·图灵的ACE（自动计算机）</text>
+        </navLabel>
+        <content src="Text/Section0002_0011.html#sigil_toc_id_42"/>
+      </navPoint>
+      <navPoint id="navPoint-55" playOrder="55">
+        <navLabel>
+          <text>埃克特、冯·诺依曼和图灵</text>
+        </navLabel>
+        <content src="Text/Section0002_0011.html#sigil_toc_id_43"/>
+      </navPoint>
+      <navPoint id="navPoint-56" playOrder="56">
+        <navLabel>
+          <text>知恩的民族对其英雄的回报</text>
+        </navLabel>
+        <content src="Text/Section0002_0011.html#sigil_toc_id_44"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-57" playOrder="57">
+      <navLabel>
+        <text>第九章 超越莱布尼茨之梦</text>
+      </navLabel>
+      <content src="Text/Section0002_0012.html"/>
+      <navPoint id="navPoint-58" playOrder="58">
+        <navLabel>
+          <text>计算机、大脑和心灵</text>
+        </navLabel>
+        <content src="Text/Section0002_0012.html#sigil_toc_id_45"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-59" playOrder="59">
+      <navLabel>
+        <text>尾声</text>
+      </navLabel>
+      <content src="Text/Section0002_0013.html"/>
+    </navPoint>
+    <navPoint id="navPoint-60" playOrder="60">
+      <navLabel>
+        <text>注释</text>
+      </navLabel>
+      <content src="Text/Section0002_0014.html"/>
+    </navPoint>
+    <navPoint id="navPoint-61" playOrder="61">
+      <navLabel>
+        <text>参考书目</text>
+      </navLabel>
+      <content src="Text/Section0002_0015.html"/>
+    </navPoint>
+    <navPoint id="navPoint-62" playOrder="62">
+      <navLabel>
+        <text>译后记</text>
+      </navLabel>
+      <content src="Text/Section0002_0017.html"/>
+    </navPoint>
+  </navMap>
+</ncx>

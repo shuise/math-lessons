@@ -1,0 +1,622 @@
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookID" version="3.0">
+<metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <dc:title>Math Makers</dc:title>
+    <dc:creator id="creator01">Posamentier, Alfred S.; Spreitzer, Christian,; </dc:creator>
+    <dc:creator id="creator02">Christian Spreitzer</dc:creator>
+    <dc:language>en-US</dc:language>
+    <dc:identifier id="BookID">6012371</dc:identifier>
+    <dc:publisher>Prometheus</dc:publisher>
+    <dc:rights>© 2020 by Alfred S. Posamentier and Christian Spreitzer</dc:rights>
+    <dc:source id="isbn">urn:isbn:9781633885219</dc:source>
+    <meta property="source-of" refines="#isbn">pagination</meta>
+    <dc:date>2019-12-17</dc:date>
+    <meta property="dcterms:modified">2019-12-17T12:28:00Z</meta>
+    <meta content="cover-image" name="cover"/>
+  </metadata>
+  <manifest>
+    <item href="toc.ncx" id="ncx" media-type="application/x-dtbncx+xml"/>
+    <item href="Styles/stylesheet.css" id="stylesheet.css" media-type="text/css"/>
+    <item href="Text/Appendix01.html" id="Appendix01" media-type="application/xhtml+xml"/>
+    <item href="Text/Copyright.html" id="Copyright" media-type="application/xhtml+xml"/>
+    <item href="Text/Cover.html" id="Cover" media-type="application/xhtml+xml"/>
+    <item href="Text/Dedication.html" id="Dedication" media-type="application/xhtml+xml"/>
+    <item href="Text/Epilogue.html" id="Epilogue" media-type="application/xhtml+xml"/>
+    <item href="Text/FrontOther01.html" id="FrontOther01" media-type="application/xhtml+xml"/>
+    <item href="Text/Introduction.html" id="Introduction" media-type="application/xhtml+xml"/>
+    <item href="Text/Notes.html" id="Notes" media-type="application/xhtml+xml"/>
+    <item href="Text/References.html" id="References" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter05.html" id="Chapter05" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter06.html" id="Chapter06" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter07.html" id="Chapter07" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter08.html" id="Chapter08" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter09.html" id="Chapter09" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter10.html" id="Chapter10" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter11.html" id="Chapter11" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter12.html" id="Chapter12" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter13.html" id="Chapter13" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter14.html" id="Chapter14" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter15.html" id="Chapter15" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter16.html" id="Chapter16" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter17.html" id="Chapter17" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter18.html" id="Chapter18" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter19.html" id="Chapter19" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter20.html" id="Chapter20" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter21.html" id="Chapter21" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter22.html" id="Chapter22" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter23.html" id="Chapter23" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter24.html" id="Chapter24" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter25.html" id="Chapter25" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter26.html" id="Chapter26" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter27.html" id="Chapter27" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter28.html" id="Chapter28" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter29.html" id="Chapter29" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter30.html" id="Chapter30" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter31.html" id="Chapter31" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter32.html" id="Chapter32" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter33.html" id="Chapter33" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter34.html" id="Chapter34" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter35.html" id="Chapter35" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter36.html" id="Chapter36" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter37.html" id="Chapter37" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter38.html" id="Chapter38" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter39.html" id="Chapter39" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter40.html" id="Chapter40" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter41.html" id="Chapter41" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter42.html" id="Chapter42" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter43.html" id="Chapter43" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter44.html" id="Chapter44" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter45.html" id="Chapter45" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter46.html" id="Chapter46" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter47.html" id="Chapter47" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter48.html" id="Chapter48" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter49.html" id="Chapter49" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter50.html" id="Chapter50" media-type="application/xhtml+xml"/>
+    <item href="Text/TitlePage.html" id="TitlePage" media-type="application/xhtml+xml"/>
+    <item href="Text/nav.html" id="nav" media-type="application/xhtml+xml" properties="nav"/>
+    <item href="Text/Chapter01.html" id="Chapter01" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter02.html" id="Chapter02" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter03.html" id="Chapter03" media-type="application/xhtml+xml"/>
+    <item href="Text/Chapter04.html" id="Chapter04" media-type="application/xhtml+xml"/>
+    <item href="Images/bck_fig_001.png" id="bck_fig_001.png" media-type="image/png"/>
+    <item href="Images/bck_fig_002.png" id="bck_fig_002.png" media-type="image/png"/>
+    <item href="Images/bck_fig_003.jpg" id="bck_fig_003.jpg" media-type="image/jpeg"/>
+    <item href="Images/bck_fig_004.png" id="bck_fig_004.png" media-type="image/png"/>
+    <item href="Images/bck_fig_005.png" id="bck_fig_005.png" media-type="image/png"/>
+    <item href="Images/bck_fig_006.png" id="bck_fig_006.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_001.png" id="chpt_fig_001.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_002.jpg" id="chpt_fig_002.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_003.jpg" id="chpt_fig_003.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_004.png" id="chpt_fig_004.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_005.jpg" id="chpt_fig_005.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_006.jpg" id="chpt_fig_006.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_007.jpg" id="chpt_fig_007.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_008.jpg" id="chpt_fig_008.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_009.png" id="chpt_fig_009.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_010.png" id="chpt_fig_010.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_011.jpg" id="chpt_fig_011.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_012.jpg" id="chpt_fig_012.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_013.png" id="chpt_fig_013.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_014.png" id="chpt_fig_014.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_015.png" id="chpt_fig_015.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_016.jpg" id="chpt_fig_016.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_017.jpg" id="chpt_fig_017.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_018.jpg" id="chpt_fig_018.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_019.png" id="chpt_fig_019.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_020.png" id="chpt_fig_020.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_021.png" id="chpt_fig_021.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_022.png" id="chpt_fig_022.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_023.png" id="chpt_fig_023.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_024.png" id="chpt_fig_024.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_025.png" id="chpt_fig_025.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_026.png" id="chpt_fig_026.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_027.png" id="chpt_fig_027.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_028.png" id="chpt_fig_028.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_029.jpg" id="chpt_fig_029.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_030.jpg" id="chpt_fig_030.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_031.jpg" id="chpt_fig_031.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_032.jpg" id="chpt_fig_032.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_033.jpg" id="chpt_fig_033.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_034.jpg" id="chpt_fig_034.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_035.jpg" id="chpt_fig_035.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_036.jpg" id="chpt_fig_036.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_037.jpg" id="chpt_fig_037.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_038.png" id="chpt_fig_038.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_039.png" id="chpt_fig_039.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_040.png" id="chpt_fig_040.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_041.png" id="chpt_fig_041.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_042.png" id="chpt_fig_042.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_043.png" id="chpt_fig_043.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_044.png" id="chpt_fig_044.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_045.png" id="chpt_fig_045.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_046.png" id="chpt_fig_046.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_047.png" id="chpt_fig_047.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_048.png" id="chpt_fig_048.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_049.jpg" id="chpt_fig_049.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_050.jpg" id="chpt_fig_050.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_051.png" id="chpt_fig_051.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_052.png" id="chpt_fig_052.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_053.png" id="chpt_fig_053.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_054.jpg" id="chpt_fig_054.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_055.jpg" id="chpt_fig_055.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_056.png" id="chpt_fig_056.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_057.png" id="chpt_fig_057.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_058.png" id="chpt_fig_058.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_059.jpg" id="chpt_fig_059.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_060.jpg" id="chpt_fig_060.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_061.png" id="chpt_fig_061.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_062.png" id="chpt_fig_062.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_063.png" id="chpt_fig_063.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_064.jpg" id="chpt_fig_064.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_065.jpg" id="chpt_fig_065.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_066.png" id="chpt_fig_066.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_067.png" id="chpt_fig_067.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_068.png" id="chpt_fig_068.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_069.jpg" id="chpt_fig_069.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_070.jpg" id="chpt_fig_070.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_071.png" id="chpt_fig_071.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_072.jpg" id="chpt_fig_072.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_073.jpg" id="chpt_fig_073.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_074.png" id="chpt_fig_074.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_075.png" id="chpt_fig_075.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_076.jpg" id="chpt_fig_076.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_077.jpg" id="chpt_fig_077.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_078.png" id="chpt_fig_078.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_079.png" id="chpt_fig_079.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_080.jpg" id="chpt_fig_080.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_081.jpg" id="chpt_fig_081.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_082.png" id="chpt_fig_082.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_083.png" id="chpt_fig_083.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_084.png" id="chpt_fig_084.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_085.png" id="chpt_fig_085.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_086.png" id="chpt_fig_086.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_087.png" id="chpt_fig_087.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_088.png" id="chpt_fig_088.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_089.png" id="chpt_fig_089.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_090.jpg" id="chpt_fig_090.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_091.png" id="chpt_fig_091.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_092.png" id="chpt_fig_092.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_093.png" id="chpt_fig_093.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_094.png" id="chpt_fig_094.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_095.png" id="chpt_fig_095.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_096.png" id="chpt_fig_096.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_097.png" id="chpt_fig_097.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_098.png" id="chpt_fig_098.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_099.jpg" id="chpt_fig_099.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_100.png" id="chpt_fig_100.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_101.png" id="chpt_fig_101.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_102.png" id="chpt_fig_102.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_103.png" id="chpt_fig_103.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_104.jpg" id="chpt_fig_104.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_105.jpg" id="chpt_fig_105.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_106.jpg" id="chpt_fig_106.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_107.png" id="chpt_fig_107.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_108.png" id="chpt_fig_108.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_109.png" id="chpt_fig_109.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_110.png" id="chpt_fig_110.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_111.png" id="chpt_fig_111.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_112.png" id="chpt_fig_112.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_113.png" id="chpt_fig_113.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_114.png" id="chpt_fig_114.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_115.png" id="chpt_fig_115.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_116.png" id="chpt_fig_116.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_117.png" id="chpt_fig_117.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_118.png" id="chpt_fig_118.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_119.png" id="chpt_fig_119.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_120.png" id="chpt_fig_120.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_121.png" id="chpt_fig_121.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_122.png" id="chpt_fig_122.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_123.png" id="chpt_fig_123.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_124.png" id="chpt_fig_124.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_125.png" id="chpt_fig_125.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_126.png" id="chpt_fig_126.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_127.jpg" id="chpt_fig_127.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_128.png" id="chpt_fig_128.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_129.jpg" id="chpt_fig_129.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_130.jpg" id="chpt_fig_130.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_131.jpg" id="chpt_fig_131.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_132.jpg" id="chpt_fig_132.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_133.png" id="chpt_fig_133.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_134.png" id="chpt_fig_134.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_135.png" id="chpt_fig_135.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_136.png" id="chpt_fig_136.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_137.png" id="chpt_fig_137.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_138.png" id="chpt_fig_138.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_139.png" id="chpt_fig_139.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_140.png" id="chpt_fig_140.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_141.png" id="chpt_fig_141.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_142.png" id="chpt_fig_142.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_143.png" id="chpt_fig_143.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_144.jpg" id="chpt_fig_144.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_145.jpg" id="chpt_fig_145.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_146.jpg" id="chpt_fig_146.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_147.jpg" id="chpt_fig_147.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_148.jpg" id="chpt_fig_148.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_149.jpg" id="chpt_fig_149.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_150.jpg" id="chpt_fig_150.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_151.jpg" id="chpt_fig_151.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_152.jpg" id="chpt_fig_152.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_153.jpg" id="chpt_fig_153.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_154.jpg" id="chpt_fig_154.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_155.jpg" id="chpt_fig_155.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_156.jpg" id="chpt_fig_156.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_157.jpg" id="chpt_fig_157.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_158.jpg" id="chpt_fig_158.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_159.png" id="chpt_fig_159.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_160.png" id="chpt_fig_160.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_161.png" id="chpt_fig_161.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_162.png" id="chpt_fig_162.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_163.png" id="chpt_fig_163.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_164.png" id="chpt_fig_164.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_165.png" id="chpt_fig_165.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_166.png" id="chpt_fig_166.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_167.png" id="chpt_fig_167.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_168.png" id="chpt_fig_168.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_169.png" id="chpt_fig_169.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_170.jpg" id="chpt_fig_170.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_171.png" id="chpt_fig_171.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_172.png" id="chpt_fig_172.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_173.jpg" id="chpt_fig_173.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_174.jpg" id="chpt_fig_174.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_175.jpg" id="chpt_fig_175.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_176.jpg" id="chpt_fig_176.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_177.jpg" id="chpt_fig_177.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_178.jpg" id="chpt_fig_178.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_179.jpg" id="chpt_fig_179.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_180.jpg" id="chpt_fig_180.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_181.jpg" id="chpt_fig_181.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_182.png" id="chpt_fig_182.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_183.jpg" id="chpt_fig_183.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_184.jpg" id="chpt_fig_184.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_185.jpg" id="chpt_fig_185.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_186.jpg" id="chpt_fig_186.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_187.jpg" id="chpt_fig_187.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_188.jpg" id="chpt_fig_188.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_189.jpg" id="chpt_fig_189.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_190.png" id="chpt_fig_190.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_191.png" id="chpt_fig_191.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_192.png" id="chpt_fig_192.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_193.png" id="chpt_fig_193.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_194.png" id="chpt_fig_194.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_195.png" id="chpt_fig_195.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_196.png" id="chpt_fig_196.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_197.png" id="chpt_fig_197.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_198.png" id="chpt_fig_198.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_199.png" id="chpt_fig_199.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_200.png" id="chpt_fig_200.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_201.png" id="chpt_fig_201.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_202.png" id="chpt_fig_202.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_203.png" id="chpt_fig_203.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_204.png" id="chpt_fig_204.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_205.png" id="chpt_fig_205.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_206.png" id="chpt_fig_206.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_207.png" id="chpt_fig_207.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_208.png" id="chpt_fig_208.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_209.jpg" id="chpt_fig_209.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_210.jpg" id="chpt_fig_210.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_211.jpg" id="chpt_fig_211.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_212.jpg" id="chpt_fig_212.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_213.jpg" id="chpt_fig_213.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_214.jpg" id="chpt_fig_214.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_215.png" id="chpt_fig_215.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_216.png" id="chpt_fig_216.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_217.png" id="chpt_fig_217.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_218.png" id="chpt_fig_218.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_219.png" id="chpt_fig_219.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_220.png" id="chpt_fig_220.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_221.png" id="chpt_fig_221.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_222.png" id="chpt_fig_222.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_223.png" id="chpt_fig_223.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_224.png" id="chpt_fig_224.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_225.png" id="chpt_fig_225.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_226.png" id="chpt_fig_226.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_227.png" id="chpt_fig_227.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_228.png" id="chpt_fig_228.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_229.png" id="chpt_fig_229.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_230.jpg" id="chpt_fig_230.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_231.jpg" id="chpt_fig_231.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_232.jpg" id="chpt_fig_232.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_233.jpg" id="chpt_fig_233.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_234.png" id="chpt_fig_234.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_235.jpg" id="chpt_fig_235.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_236.jpg" id="chpt_fig_236.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_237.png" id="chpt_fig_237.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_238.png" id="chpt_fig_238.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_239.png" id="chpt_fig_239.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_240.png" id="chpt_fig_240.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_241.png" id="chpt_fig_241.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_242.png" id="chpt_fig_242.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_243.png" id="chpt_fig_243.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_244.png" id="chpt_fig_244.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_245.png" id="chpt_fig_245.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_246.png" id="chpt_fig_246.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_247.jpg" id="chpt_fig_247.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_248.jpg" id="chpt_fig_248.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_249.jpg" id="chpt_fig_249.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_250.jpg" id="chpt_fig_250.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_251.png" id="chpt_fig_251.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_252.png" id="chpt_fig_252.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_253.jpg" id="chpt_fig_253.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_254.png" id="chpt_fig_254.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_255.png" id="chpt_fig_255.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_256.png" id="chpt_fig_256.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_257.png" id="chpt_fig_257.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_258.png" id="chpt_fig_258.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_259.png" id="chpt_fig_259.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_260.png" id="chpt_fig_260.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_261.png" id="chpt_fig_261.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_262.jpg" id="chpt_fig_262.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_263.jpg" id="chpt_fig_263.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_264.jpg" id="chpt_fig_264.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_265.png" id="chpt_fig_265.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_266.png" id="chpt_fig_266.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_267.png" id="chpt_fig_267.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_268.png" id="chpt_fig_268.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_269.png" id="chpt_fig_269.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_270.png" id="chpt_fig_270.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_271.png" id="chpt_fig_271.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_272.png" id="chpt_fig_272.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_273.png" id="chpt_fig_273.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_274.jpg" id="chpt_fig_274.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_275.jpg" id="chpt_fig_275.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_276.jpg" id="chpt_fig_276.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_277.jpg" id="chpt_fig_277.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_278.png" id="chpt_fig_278.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_279.jpg" id="chpt_fig_279.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_280.jpg" id="chpt_fig_280.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_281.png" id="chpt_fig_281.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_282.jpg" id="chpt_fig_282.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_283.png" id="chpt_fig_283.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_284.jpg" id="chpt_fig_284.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_285.jpg" id="chpt_fig_285.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_286.jpg" id="chpt_fig_286.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_287.png" id="chpt_fig_287.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_288.png" id="chpt_fig_288.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_289.png" id="chpt_fig_289.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_290.jpg" id="chpt_fig_290.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_291.png" id="chpt_fig_291.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_292.png" id="chpt_fig_292.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_293.jpg" id="chpt_fig_293.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_294.jpg" id="chpt_fig_294.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_295.jpg" id="chpt_fig_295.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_296.jpg" id="chpt_fig_296.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_297.jpg" id="chpt_fig_297.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_298.jpg" id="chpt_fig_298.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_299.jpg" id="chpt_fig_299.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_300.jpg" id="chpt_fig_300.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_301.png" id="chpt_fig_301.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_302.jpg" id="chpt_fig_302.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_303.jpg" id="chpt_fig_303.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_304.jpg" id="chpt_fig_304.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_305.jpg" id="chpt_fig_305.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_306.jpg" id="chpt_fig_306.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_307.jpg" id="chpt_fig_307.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_308.png" id="chpt_fig_308.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_309.jpg" id="chpt_fig_309.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_310.png" id="chpt_fig_310.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_311.jpg" id="chpt_fig_311.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_312.jpg" id="chpt_fig_312.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_313.jpg" id="chpt_fig_313.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_314.png" id="chpt_fig_314.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_315.png" id="chpt_fig_315.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_316.png" id="chpt_fig_316.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_317.png" id="chpt_fig_317.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_318.jpg" id="chpt_fig_318.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_319.jpg" id="chpt_fig_319.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_320.jpg" id="chpt_fig_320.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_321.jpg" id="chpt_fig_321.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_322.png" id="chpt_fig_322.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_323.jpg" id="chpt_fig_323.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_324.jpg" id="chpt_fig_324.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_325.jpg" id="chpt_fig_325.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_326.jpg" id="chpt_fig_326.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_327.jpg" id="chpt_fig_327.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_328.png" id="chpt_fig_328.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_329.png" id="chpt_fig_329.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_330.png" id="chpt_fig_330.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_331.png" id="chpt_fig_331.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_332.png" id="chpt_fig_332.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_333.png" id="chpt_fig_333.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_334.png" id="chpt_fig_334.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_335.jpg" id="chpt_fig_335.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_336.jpg" id="chpt_fig_336.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_337.png" id="chpt_fig_337.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_338.jpg" id="chpt_fig_338.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_339.png" id="chpt_fig_339.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_340.jpg" id="chpt_fig_340.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_341.png" id="chpt_fig_341.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_342.png" id="chpt_fig_342.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_343.png" id="chpt_fig_343.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_344.jpg" id="chpt_fig_344.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_345.jpg" id="chpt_fig_345.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_346.jpg" id="chpt_fig_346.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_347.jpg" id="chpt_fig_347.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_348.jpg" id="chpt_fig_348.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_349.png" id="chpt_fig_349.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_350.jpg" id="chpt_fig_350.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_351.jpg" id="chpt_fig_351.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_352.jpg" id="chpt_fig_352.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_353.png" id="chpt_fig_353.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_354.png" id="chpt_fig_354.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_355.jpg" id="chpt_fig_355.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_356.jpg" id="chpt_fig_356.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_357.jpg" id="chpt_fig_357.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_358.jpg" id="chpt_fig_358.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_359.jpg" id="chpt_fig_359.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_360.jpg" id="chpt_fig_360.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_361.jpg" id="chpt_fig_361.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_362.jpg" id="chpt_fig_362.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_363.png" id="chpt_fig_363.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_364.png" id="chpt_fig_364.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_365.png" id="chpt_fig_365.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_366.png" id="chpt_fig_366.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_367.jpg" id="chpt_fig_367.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_368.jpg" id="chpt_fig_368.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_369.png" id="chpt_fig_369.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_370.jpg" id="chpt_fig_370.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_371.jpg" id="chpt_fig_371.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_372.jpg" id="chpt_fig_372.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_373.jpg" id="chpt_fig_373.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_374.jpg" id="chpt_fig_374.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_375.jpg" id="chpt_fig_375.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_376.jpg" id="chpt_fig_376.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_377.jpg" id="chpt_fig_377.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_378.jpg" id="chpt_fig_378.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_379.jpg" id="chpt_fig_379.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_380.jpg" id="chpt_fig_380.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_381.jpg" id="chpt_fig_381.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_382.png" id="chpt_fig_382.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_383.jpg" id="chpt_fig_383.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_384.png" id="chpt_fig_384.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_385.png" id="chpt_fig_385.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_386.png" id="chpt_fig_386.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_387.png" id="chpt_fig_387.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_388.png" id="chpt_fig_388.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_389.png" id="chpt_fig_389.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_390.png" id="chpt_fig_390.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_391.png" id="chpt_fig_391.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_392.png" id="chpt_fig_392.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_393.png" id="chpt_fig_393.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_394.png" id="chpt_fig_394.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_395.jpg" id="chpt_fig_395.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_396.jpg" id="chpt_fig_396.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_397.jpg" id="chpt_fig_397.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_398.jpg" id="chpt_fig_398.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_399.png" id="chpt_fig_399.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_400.png" id="chpt_fig_400.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_401.jpg" id="chpt_fig_401.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_402.jpg" id="chpt_fig_402.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_403.jpg" id="chpt_fig_403.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_404.jpg" id="chpt_fig_404.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_405.jpg" id="chpt_fig_405.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_406.jpg" id="chpt_fig_406.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_407.jpg" id="chpt_fig_407.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_408.jpg" id="chpt_fig_408.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_409.jpg" id="chpt_fig_409.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_410.jpg" id="chpt_fig_410.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_411.jpg" id="chpt_fig_411.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_412.jpg" id="chpt_fig_412.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_413.jpg" id="chpt_fig_413.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_414.png" id="chpt_fig_414.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_415.png" id="chpt_fig_415.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_416.png" id="chpt_fig_416.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_417.png" id="chpt_fig_417.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_418.png" id="chpt_fig_418.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_419.png" id="chpt_fig_419.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_420.png" id="chpt_fig_420.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_421.jpg" id="chpt_fig_421.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_422.jpg" id="chpt_fig_422.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_423.jpg" id="chpt_fig_423.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_424.jpg" id="chpt_fig_424.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_425.jpg" id="chpt_fig_425.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_426.jpg" id="chpt_fig_426.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_427.jpg" id="chpt_fig_427.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_428.jpg" id="chpt_fig_428.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_429.jpg" id="chpt_fig_429.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_430.jpg" id="chpt_fig_430.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_431.jpg" id="chpt_fig_431.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_432.png" id="chpt_fig_432.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_433.jpg" id="chpt_fig_433.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_434.jpg" id="chpt_fig_434.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_435.jpg" id="chpt_fig_435.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_436.jpg" id="chpt_fig_436.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_437.jpg" id="chpt_fig_437.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_438.jpg" id="chpt_fig_438.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_439.jpg" id="chpt_fig_439.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_440.jpg" id="chpt_fig_440.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_441.jpg" id="chpt_fig_441.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_442.jpg" id="chpt_fig_442.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_443.jpg" id="chpt_fig_443.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_444.jpg" id="chpt_fig_444.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_445.jpg" id="chpt_fig_445.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_446.jpg" id="chpt_fig_446.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_447.jpg" id="chpt_fig_447.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_448.jpg" id="chpt_fig_448.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_449.jpg" id="chpt_fig_449.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_450.jpg" id="chpt_fig_450.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_451.jpg" id="chpt_fig_451.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_452.jpg" id="chpt_fig_452.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_453.jpg" id="chpt_fig_453.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_454.jpg" id="chpt_fig_454.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_455.jpg" id="chpt_fig_455.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_456.jpg" id="chpt_fig_456.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_457.jpg" id="chpt_fig_457.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_458.jpg" id="chpt_fig_458.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_459.jpg" id="chpt_fig_459.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_460.png" id="chpt_fig_460.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_461.png" id="chpt_fig_461.png" media-type="image/png"/>
+    <item href="Images/chpt_fig_462.jpg" id="chpt_fig_462.jpg" media-type="image/jpeg"/>
+    <item href="Images/chpt_fig_463.jpg" id="chpt_fig_463.jpg" media-type="image/jpeg"/>
+    <item href="Images/frn_fig_001.jpg" id="cover-image" media-type="image/jpeg" properties="cover-image"/>
+    <item href="Images/frn_fig_002.png" id="frn_fig_002.png" media-type="image/png"/>
+    <item href="Images/frn_fig_003.png" id="frn_fig_003.png" media-type="image/png"/>
+    <item href="Images/frn_fig_004.png" id="frn_fig_004.png" media-type="image/png"/>
+    <item href="Images/frn_fig_005.png" id="frn_fig_005.png" media-type="image/png"/>
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="Cover"/>
+    <itemref idref="TitlePage"/>
+    <itemref idref="Copyright"/>
+    <itemref idref="FrontOther01"/>
+    <itemref idref="Dedication"/>
+    <itemref idref="nav"/>
+    <itemref idref="Introduction"/>
+    <itemref idref="Chapter01"/>
+    <itemref idref="Chapter02"/>
+    <itemref idref="Chapter03"/>
+    <itemref idref="Chapter04"/>
+    <itemref idref="Chapter05"/>
+    <itemref idref="Chapter06"/>
+    <itemref idref="Chapter07"/>
+    <itemref idref="Chapter08"/>
+    <itemref idref="Chapter09"/>
+    <itemref idref="Chapter10"/>
+    <itemref idref="Chapter11"/>
+    <itemref idref="Chapter12"/>
+    <itemref idref="Chapter13"/>
+    <itemref idref="Chapter14"/>
+    <itemref idref="Chapter15"/>
+    <itemref idref="Chapter16"/>
+    <itemref idref="Chapter17"/>
+    <itemref idref="Chapter18"/>
+    <itemref idref="Chapter19"/>
+    <itemref idref="Chapter20"/>
+    <itemref idref="Chapter21"/>
+    <itemref idref="Chapter22"/>
+    <itemref idref="Chapter23"/>
+    <itemref idref="Chapter24"/>
+    <itemref idref="Chapter25"/>
+    <itemref idref="Chapter26"/>
+    <itemref idref="Chapter27"/>
+    <itemref idref="Chapter28"/>
+    <itemref idref="Chapter29"/>
+    <itemref idref="Chapter30"/>
+    <itemref idref="Chapter31"/>
+    <itemref idref="Chapter32"/>
+    <itemref idref="Chapter33"/>
+    <itemref idref="Chapter34"/>
+    <itemref idref="Chapter35"/>
+    <itemref idref="Chapter36"/>
+    <itemref idref="Chapter37"/>
+    <itemref idref="Chapter38"/>
+    <itemref idref="Chapter39"/>
+    <itemref idref="Chapter40"/>
+    <itemref idref="Chapter41"/>
+    <itemref idref="Chapter42"/>
+    <itemref idref="Chapter43"/>
+    <itemref idref="Chapter44"/>
+    <itemref idref="Chapter45"/>
+    <itemref idref="Chapter46"/>
+    <itemref idref="Chapter47"/>
+    <itemref idref="Chapter48"/>
+    <itemref idref="Chapter49"/>
+    <itemref idref="Chapter50"/>
+    <itemref idref="Epilogue"/>
+    <itemref idref="Appendix01"/>
+    <itemref idref="Notes"/>
+    <itemref idref="References"/>
+  </spine>
+<guide>
+<reference href="Text/Cover.html" title="Cover" type="cover"/>
+<reference href="Text/nav.html" title="Table of Contents" type="toc"/>
+</guide>
+</package>

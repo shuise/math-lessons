@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="../stylesheet.css" rel="stylesheet" type="text/css"/>
+<link href="../page_styles.css" rel="stylesheet" type="text/css"/>
+</head>
+  <body class="calibre" id="7K4G0-c0a03bb820f64a13aa49402e231bdebc">
+<h2 class="calibre9" id="sigil_toc_id_18">兔子、音乐与拼图</h2>
+
+  <p class="calibre6">到目前为止，我们已经讨论了斐波那契数列的若干规律，但也只能算点到为止。你也许会想，这些数字的作用肯定不限于计算有多少对兔子吧。的确，斐波那契数列是很多计数问题的答案。1150年（比萨的利奥纳多还没有开始研究那些兔子呢），印度数学家赫马查德拉问，如果音乐的终止式只包含长度为1或2的音节，那么长度为<span class="italic">n</span>的终止式共有多少种呢？我们用简单的数学语言来表述这个问题。</p>
+
+  <p class="calibre6"><b class="calibre5">问题：</b>如果把数字<span class="italic">n</span>写成1与2的和的形式，一共有多少种写法？</p>
+
+  <p class="calibre6">我们把答案记作<span class="italic">f</span><span class="xbiaoxt">n</span>，然后考虑<span class="italic">n</span>取较小值时<span class="italic">f</span><span class="xbiaoxt">n</span>的值。</p>
+
+  <div class="chatu"><img alt="016" class="calibre8" src="../images/00434.jpeg"/></div>
+
+  <p class="calibre11">和为1的情况只有一种，和为2有两种情况（1 + 1和2），和为3有三种情况（1 + 1+ 1, 1 + 2，2 + 1）。注意，只可以使用1和2这两个数字。此外，数字的先后次序是需要考虑的重要因素，因此1 + 2与2 + 1不同。和为4有5种情况（1 + 1 + 1 + 1, 1 + 1 + 2, 1 + 2 + 1, 2 + 1 + 1, 2 + 2），上表中给出的答案似乎都是斐波那契数列中的数字，事实也确实如此。</p>
+
+  <p class="calibre6">我们以<span class="italic">f</span><sub class="calibre22">5</sub> = 8为例，看看和为5的情况为什么有8种。求和时，第1项只能是1或者2。第1项是1的情况一共有多少种呢？在1之后，我们必须再给出一系列的1和2，而且这些数之和等于4。我们知道，这样的序列共有<span class="italic">f</span><sub class="calibre22">4</sub> = 5种。同理，第1项是2且各项之和是5的情况共有多少种呢？在第一个数字2之后，剩余各项之和必须是3，一共有<span class="italic">f</span><sub class="calibre22">3</sub> = 3种情况。因此，和为5的情况一共有5 + 3 = 8种。同理，和为6的序列一共有13种，因为第1项数字是1的情况共有<span class="italic">f</span><sub class="calibre22">5</sub> = 8种，第1项数字是2的情况共有<span class="italic">f</span><sub class="calibre22">4</sub> = 5种。一般而言，和为<span class="italic">n</span>的序列共有<span class="italic">f</span><span class="xbiaoxt">n</span>种，其中，以1开始的序列有<span class="italic">f</span><span class="xbiaoxt">n</span><sub class="calibre22">–1</sub>种，以2开始的序列有<span class="italic">f</span><span class="xbiaoxt">n</span><sub class="calibre22">–2</sub>种，因此：</p>
+
+  <p class="center1"><span class="italic">f</span><span class="xbiaoxt">n</span> = <span class="italic">f</span><span class="xbiaoxt">n</span><sub class="calibre22">–1</sub> + <span class="italic">f</span><span class="xbiaoxt">n</span><sub class="calibre22">–2</sub></p>
+
+  <p class="calibre6">也就是说，<span class="italic">f</span><span class="xbiaoxt">n</span>的前几个数字与斐波那契数列相似，随后各项的增长方式也与斐波那契数列相似。因此，这些数字构成的就是斐波那契数列，不过两者之间还存在一个小差异，或者更准确地说是发生了位移。请注意，<span class="italic">f</span><sub class="calibre22">1</sub> = 1 = <span class="italic">F</span><sub class="calibre22">2</sub>，<span class="italic">f</span><sub class="calibre22">2</sub>= 2 = <span class="italic">F</span><sub class="calibre22">3</sub>，<span class="italic">f</span><sub class="calibre22">3</sub> = 3 = <span class="italic">F</span><sub class="calibre22">4</sub>，以此类推。（为方便起见，我们定义<span class="italic">f</span><sub class="calibre22">0</sub> = <span class="italic">F</span><sub class="calibre22">1</sub> = 1，<span class="italic">f</span><sub class="calibre22">–1</sub> = <span class="italic">F</span><sub class="calibre22">0</sub> = 0。）一般而言，对于<span class="italic">n</span>≥1，有：</p>
+
+  <p class="center1"><span class="italic">f</span><sub class="calibre22">n</sub> = <span class="italic">F</span><span class="xbiaoxt">n</span><sub class="calibre22">+1</sub></p>
+
+  <p class="calibre6">了解斐波那契数列的应用价值之后，我们可以利用这方面的知识，对它的很多美丽的规律加以证明。大家还记得我们在第4章结尾部分讨论的帕斯卡三角形的对角线方向的数字之和吧。</p>
+
+  <div class="chatu"><img alt="017" class="calibre8" src="../images/00015.jpeg"/></div>
+
+  <p class="calibre11">例如，第8条对角线方向的数字之和是：</p>
+
+  <p class="center1">1 + 7 + 15 + 10 + 1 = 34 = <span class="italic">F</span><sub class="calibre22">9</sub></p>
+
+  <p class="calibre6">如果表述成“<span class="italic">n</span>选几”的形式，就是：</p>
+
+  <div class="chatu"><img alt="" class="width" src="../images/00442.jpeg"/></div>
+
+  <p class="calibre11">为了帮助大家理解这个规律，我们用两个办法来解决下面这个计数问题。</p>
+
+  <p class="calibre6"><b class="calibre5">问题：</b>和为8的1–2序列有多少种？</p>
+
+  <p class="calibre6"><b class="calibre5">第一种方法：</b>根据定义，有<span class="italic">f</span><sub class="calibre22">8</sub> = <span class="italic">F</span><sub class="calibre22">9</sub>种。</p>
+
+  <p class="calibre6"><b class="calibre5">第二种方法：</b>根据序列中2的个数，把这个问题分成5种情况加以考虑。</p>
+
+  <p class="calibre6">没有2的序列有多少种？显然只有1种，即11111111，毫无疑问<img alt="" class="h-pic1" src="../images/00446.jpeg"/> = 1。</p>
+
+  <p class="calibre6">只有1个2的序列有多少种？有7种，即2111111，1211111，1121111，1112111，1111211，1111121，1111112。这些序列包含7个数字，数字2在其中有<img alt="" class="h-pic1" src="../images/00451.jpeg"/> = 7种不同的位置。</p>
+
+  <p class="calibre6">有2个2的序列有多少种？符合这个条件的代表性序列是221111，我在这里就不一一列出全部15种序列了。提醒大家注意一点：符合条件的序列都有2个2和4个1，共包含6个数。因此，2个2在这些序列中一共有<img alt="" class="h-pic1" src="../images/00025.jpeg"/> = 15种不同的位置。同理，含有3个2的序列还必须包含2个1，共有5个数字，这样的序列有<img alt="" class="h-pic1" src="../images/00457.jpeg"/> = 10种。最后，含有4个2的序列只有<img alt="" class="h-pic1" src="../images/00461.jpeg"/> = 1种，即2222。</p>
+
+  <p class="calibre6">比较这两个答案，就能得出令人满意的解释。一般而言，帕斯卡三角形的第<span class="italic">n</span>条对角线方向的数字之和，一定是一个斐波那契数列中的数字。具体地说，对于所有的<span class="italic">n</span>≥0，在求第<span class="italic">n</span>条对角线方向的数字之和（从第1项加到第<span class="italic">n</span> / 2项，以保证求和的行为限制在三角形范围之内）时，我们都会得到：</p>
+
+  <div class="chatu"><img alt="" class="width1" src="../images/00465.jpeg"/></div>
+
+  <p class="calibre11">我们还可以通过拼图来理解斐波那契数列，这个方法的效果与前几种差不多，却更加直观。例如，<span class="italic">f</span><sub class="calibre22">4</sub> = 5表明，在利用方块（长度为1）和双方块（长度为2）拼成长度为4的长条时共有5种拼法。比如，1 + 1 + 2表示方块—方块—双方块的拼法。</p>
+
+  <div class="chatu">
+    <img alt="" class="width1" src="../images/00469.jpeg"/>
+
+    <h5 class="calibre10">利用方块和双方块拼成长度为4的长条共有5种拼法，证明<span class="italic1">f</span><sub class="calibre22">4</sub> = 5成立</h5>
+  </div>
+
+  <p class="calibre11">利用拼图法，我们还可以理解斐波那契数列的另一个重要规律。观察下表，找出斐波那契数列进行平方运算之后的规律。</p>
+
+  <p class="calibre6">把斐波那契数列中两个连续的数字相加，和为下一个数字，这个结果并不令人吃惊。（毕竟，斐波那契数列就是这样定义的。）但是，你绝对想不到它们的二次幂竟然也有一些非常有意思的规律。我们先把连续数字的二次幂相加，看看它们的和有什么规律。</p>
+
+  <div class="chatu">
+    <img alt="018" class="calibre8" src="../images/00473.jpeg"/>
+
+    <h5 class="calibre10">斐波那契数列中<span class="italic1">f</span><sub class="calibre22">0</sub>至<span class="italic1">f</span><sub class="calibre22">10</sub>的二次幂</h5>
+  </div>
+
+  <div class="chatu"><img alt="" class="width1" src="../images/00478.jpeg"/></div>
+
+  <p class="calibre11">我们利用计数的方法来解释其中的规律。最后一个等式表明：</p>
+
+  <div class="chatu"><img alt="019" class="width2" src="../images/00482.jpeg"/></div>
+
+  <p class="calibre11">为什么会这样？通过一个简单的计数问题，我们就能理解其中的缘由。</p>
+
+  <p class="calibre6"><b class="calibre5">问题：</b>利用方块和双方块拼成长度为10的长条，共有多少种方法？</p>
+
+  <p class="calibre6"><b class="calibre5">第一种方法：</b>根据定义，有<span class="italic">f</span><sub class="calibre22">10</sub>种拼法。下图所示是一种典型的拼法，即2 + 1 + 1 + 2 + 1 + 2 + 1。</p>
+
+  <div class="chatu"><img alt="" class="calibre8" src="../images/00487.jpeg"/></div>
+
+  <p class="calibre11">我们说这种拼法在第2、3、4、6、7、9和10单元处是可以拆分的。（也就是说，除了双方块的中间位置，其他地方都是可以拆分的。）而在第1、5、8单元处是不可拆分的。</p>
+
+  <p class="calibre6"><b class="calibre5">第二种方法：</b>我们分两种情况考虑，即在第5单元处可以拆分的拼图和在该处不可拆分的拼图。在第5单元处可以拆分、长度为10的拼图共有多少种呢？这样的拼图可以一分为二，前一半有<span class="italic">f</span><sub class="calibre22">5</sub> = 8种拼法，后一半也有<span class="italic">f</span><sub class="calibre22">5</sub> = 8种拼法。因此，根据第4章介绍的乘法法则，如下图所示，共有<span class="italic">f</span> <span class="sbiao">2</span><sub class="calibre22">5</sub> = 8<span class="sbiao">2</span> 种拼法。</p>
+
+  <div class="chatu">
+    <img alt="" class="calibre8" src="../images/00492.jpeg"/>
+
+    <h5 class="calibre10">长度为10且在第5单元处可以拆分的拼图有<span class="italic1">f</span><span class="italic1"><img alt="" class="h-pic2" src="../images/00496.jpeg"/></span> 种</h5>
+  </div>
+
+  <p class="calibre11">长度为10且在第5单元处不可拆分的拼图有多少种？在这样的拼图中，第5、6单元必然是一个双方块，如下图所示。在这种情况下，左右两边各有<span class="italic">f</span><span class="xbiaoxt">4</span> = 5种拼法，因此，在第5单元处不可拆分的长条共有<span class="italic">f</span> <span class="sbiao">2</span><sub class="calibre22">4</sub> = 5<span class="sbiao">2</span> 种拼法。把这两种情况加总，就会得到 <span class="italic">f</span><sub class="calibre22">10</sub> =<span class="italic">f</span> <span class="sbiao">2</span><sub class="calibre22">5</sub> + <span class="italic">f</span> <span class="sbiao">2</span><sub class="calibre22">4</sub>。证明完毕。</p>
+
+  <div class="chatu">
+    <img alt="" class="calibre8" src="../images/00245.jpeg"/>
+
+    <h5 class="calibre10">长度为10且在第5单元处不可拆分的拼图有<span class="italic1">f</span><span class="italic1"><img alt="" class="h-pic2" src="../images/00250.jpeg"/></span> 种</h5>
+  </div>
+
+  <p class="calibre11">一般而言，取长度为2<span class="italic">n</span>的拼图，考虑中间位置可以拆分与不可拆分的情况，就可以得出下面这个美观简练的规律：</p>
+
+  <p class="center1"><span class="italic">f</span><sub class="calibre22">2</sub><span class="xbiaoxt">n</span> =<span class="italic">f</span> <span class="sbiao">2</span><span class="xbiaoxt">n</span> + <span class="italic">f</span> <span class="sbiao">2</span><span class="xbiaoxt">n</span> <sub class="calibre22">– 1</sub></p>
+
+  <div class="solidgrey">
+    <h4 class="calibre12">延伸阅读</h4>
+
+    <p class="calibre7">有了上面这个等式之后，我们可能希望推而广之，以便在类似情况下也可以使用它。例如，长度为<span class="italic">m</span> + <span class="italic">n</span>的拼图。在第<span class="italic">m</span>单元处可以拆分的拼图有多少种？左边有<span class="italic">f</span><sub class="calibre22">m</sub>种拼法，右边有<span class="italic">f</span><sub class="calibre22">n</sub>种拼法，因此共有<span class="italic">f</span><sub class="calibre22">m</sub> <span class="italic">f</span><sub class="calibre22">n</sub>种拼法。在第<span class="italic">m</span>单元处不可拆分的拼图有多少种呢？这种拼图的第<span class="italic">m</span>和<span class="italic">m</span> + 1单元必然是一个双方块，因此其余的位置有<span class="italic">f</span><span class="xbiaoxt">m</span><sub class="calibre22">–1</sub> <span class="italic">f</span><span class="xbiaoxt">n</span><sub class="calibre22">–1</sub>种拼法。加到一起，就会得到下面这个非常有用的等式。对于<span class="italic">m</span>, <span class="italic">n</span>≥0：</p>
+
+    <p class="center"><span class="italic">f</span><span class="xbiaoxt">m</span><sub class="calibre22">+</sub><span class="xbiaoxt">n</span> = <span class="italic">f</span><span class="xbiaoxt">m</span> <span class="italic">f</span><span class="xbiaoxt">n</span> + <span class="italic">f</span><span class="xbiaoxt">m</span> <sub class="calibre22">– 1</sub> <span class="italic">f</span><span class="xbiaoxt">n</span> <sub class="calibre22">– 1</sub></p>
+  </div>
+
+  <p class="calibre6">接下来，我们介绍另一个规律。把斐波那契数列中数字的二次幂相加，观察和有什么特征。</p>
+
+  <p class="center1">1<span class="sbiao">2</span> + 1<span class="sbiao">2</span> = 2 = 1×2</p>
+
+  <p class="center1">1<span class="sbiao">2</span> + 1<span class="sbiao">2</span> + 2<span class="sbiao">2</span> = 6 = 2×3</p>
+
+  <p class="center1">1<span class="sbiao">2</span> + 1<span class="sbiao">2</span> + 2<span class="sbiao">2</span> + 3<span class="sbiao">2</span> = 15 = 3×5</p>
+
+  <p class="center1">1<span class="sbiao">2</span> + 1<span class="sbiao">2</span> + 2<span class="sbiao">2</span> + 3<span class="sbiao">2</span> + 5<span class="sbiao">2</span> = 40 = 5×8</p>
+
+  <p class="center1">1<span class="sbiao">2</span> + 1<span class="sbiao">2</span> + 2<span class="sbiao">2</span> + 3<span class="sbiao">2</span> + 5<span class="sbiao">2</span> + 8<span class="sbiao">2</span> = 104 = 8×13</p>
+
+  <p class="center1">…</p>
+
+  <p class="calibre6">哇，太棒了！斐波那契数列中数字的平方和，就是最后一个数字与下一个数字的乘积！为什么1、1、2、3、5、8的平方和等于8×13呢？用几何图形可以“看出”其中的奥秘。取边长分别是1、1、2、3、5、8的正方形，按下图所示的方式拼到一起。</p>
+
+  <div class="chatu"><img alt="" class="width" src="../images/00253.jpeg"/></div>
+
+  <p class="calibre11">我们先放一个1×1的正方形，再在旁边放另一个1×1的正方形，就会得到一个1×2的长方形。在这个长方形的下面，放一个2×2的正方形，就会得到一个3×2的长方形。沿着长方形的长边，放一个3×3的正方形（得到一个3×5的长方形）。然后，在下面放置一个5×5的正方形（得到一个8×5的长方形）。最后，在旁边放置一个8×8的正方形，就会得到一个8×13的长方形。现在，我们考虑一个简单的问题。</p>
+
+  <p class="calibre6"><b class="calibre5">问题：</b>这个大长方形的面积是多少？</p>
+
+  <p class="calibre6"><b class="calibre5">第一种方法：</b>这个长方形的面积是所有正方形的面积之和。换句话说，大长方形的面积必然是1<span class="sbiao">2</span> + 1<span class="sbiao">2</span> + 2<span class="sbiao">2</span> + 3<span class="sbiao">2</span> + 5<span class="sbiao">2</span> + 8<span class="sbiao">2</span>。</p>
+
+  <p class="calibre6"><b class="calibre5">第二种方法：</b>这个大长方形的高是8，底边长度为5 + 8 = 13，因此它的面积必然是8×13。</p>
+
+  <p class="calibre6">由于这两种方法都是正确的，所以算出的面积必然相等，上面的等式得以证明。事实上，回头去看这个大长方形的构建过程，你就会发现上面列出的关于这个规律的所有关系（例如，1<span class="sbiao">2</span> + 1<span class="sbiao">2</span> + 2<span class="sbiao">2</span> + 3<span class="sbiao">2</span> + 5<span class="sbiao">2</span> = 5×8）都已经得到了证明。沿着这个思路，你还可以构建大小为13×21、21×34…的长方形。由此可知，这个规律永远成立，其一般表达式为：</p>
+
+  <p class="center1">1<span class="sbiao">2</span> + 1<span class="sbiao">2</span> + 2<span class="sbiao">2</span> + 3<span class="sbiao">2</span> + 5<span class="sbiao">2</span> + 8<span class="sbiao">2</span> + … + <span class="italic">F</span><span class="sbiao">2</span><span class="xbiaoxt">n</span> =<span class="italic">F</span><span class="xbiaoxt">n</span> <span class="italic">F</span><span class="xbiaoxt">n</span><sub class="calibre22">+1</sub></p>
+
+  <p class="calibre6">接下来，我们将斐波那契数列中与某个数字左右相邻的两个数字相乘，看看乘积有什么规律。例如，在斐波那契数列中，与5相邻的两个数字分别是3和8，乘积是3×8 = 24，比5<span class="sbiao">2</span>小1；与8相邻的两个数字分别是5和13，乘积是5×13 = 65，比8<span class="sbiao">2</span>大1。认真观察下表，很容易得出：在斐波那契数列中，与某个数字左右相邻的两个数字相乘，乘积与该数字的二次幂相差1。换句话说：</p>
+
+  <p class="center1"><span class="italic">F</span><span class="sbiao">2</span><span class="xbiaoxt">n</span> – <span class="italic">F</span><span class="xbiaoxt">n</span><sub class="calibre22">–1</sub> <span class="italic">F</span><span class="xbiaoxt">n</span><sub class="calibre22">+1</sub> = ±1</p>
+
+  <div class="chatu">
+    <img alt="020" class="calibre8" src="../images/00257.jpeg"/>
+
+    <h5 class="calibre10">与某个数字左右相邻的两数乘积与该数字的二次幂之间相差1</h5>
+  </div>
+
+  <p class="calibre11">利用归纳法（一种证明方法，我们将在下一章学习这种方法）可以证明，对于<span class="italic">n</span>≥1：</p>
+
+  <p class="center1"><span class="italic">F<img alt="" class="h-pic1" src="../images/00263.jpeg"/></span> – <span class="italic">F</span><span class="xbiaoxt">n</span><sub class="calibre22">–1</sub> <span class="italic">F</span><span class="xbiaoxt">n</span><sub class="calibre22">+1</sub> = (–1)<span class="sbiaoxt">n</span><span class="sbiao">+1</span></p>
+
+  <p class="calibre6">接下来，我们研究与某个数字距离较大的两个数字的乘积，以便把这个规律推而广之。以<span class="italic">F</span><sub class="calibre22">5</sub> = 5为例，我们发现，与之紧密相邻的两个斐波那契数字的乘积是3×8 = 24，与5<span class="sbiao">2</span>相差1。与5相距2个数字的左右两数相乘时，也会得到相同的结果，即2×13 = 26同样与5<span class="sbiao">2</span>相差1。与5相距3、4或5个数字的左右两数相乘呢？它们的乘积分别是1×21 = 21，1×34 = 34，0×55 = 0。这些乘积与25相差多少呢？它们的距离分别是4、9、25，都是完全平方数。而且，它们不是没有任何规律的完全平方数，而是斐波那契数列中数字的二次幂！下表给出了更多的证据，证明这个规律确实存在，其一般表达式为：</p>
+
+  <p class="center1"><span class="italic">F</span><span class="sbiao">2</span><span class="xbiaoxt">n</span> – <span class="italic">F</span><span class="xbiaoxt">n</span><sub class="calibre22">–</sub><span class="xbiaoxt">r</span> <span class="italic">F</span><span class="xbiaoxt">n</span><sub class="calibre22">+</sub><span class="xbiaoxt">r</span> =± <span class="italic">F</span><span class="sbiao">2</span><span class="xbiaoxt">r</span></p>
+
+  <div class="chatu">
+    <img alt="021" class="calibre8" src="../images/00267.jpeg"/>
+
+    <h5 class="calibre10">在斐波那契数列中，某个数字的两个远邻的乘积一定与该数字的二次幂相距较近，该距离一定是某个数字的二次幂</h5>
+  </div>
+
+  <script src="../../math.js"></script></body>
+</html>

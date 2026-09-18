@@ -1,0 +1,308 @@
+.calibre {
+    display: block;
+    font-size: 1em;
+    line-height: 1.618em;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 5pt
+    }
+.calibre1 {
+    color: #00C
+    }
+.calibre2 {
+    display: block;
+    font-size: 1em;
+    line-height: 1.618em;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: justify;
+    margin: 0 5pt
+    }
+.calibre3 {
+    color: gray;
+    display: block;
+    height: 2px;
+    border: currentColor inset 1px;
+    margin: 0.5em auto
+    }
+.calibre4 {
+    display: block
+    }
+.calibre5 {
+    line-height: 1.2
+    }
+.calibre6 {
+    display: block;
+    text-indent: 2em;
+    margin: 1em 0
+    }
+.calibre7 {
+    font-size: 0.75em;
+    line-height: 1.2;
+    vertical-align: super
+    }
+.empty {
+    display: block;
+    margin-bottom: 2.2em;
+    margin-top: 2.2em
+    }
+.fnote {
+    display: block;
+    font-size: 0.875em;
+    line-height: 1.2;
+    text-align: justify;
+    text-indent: 2em;
+    margin: 0.5em 0
+    }
+.kindle-cn-bodycontent-div-alone {
+    display: block;
+    text-align: center;
+    width: 100%
+    }
+.kindle-cn-bodycontent-image-alone {
+    height: auto;
+    margin-bottom: 0.5em;
+    width: 80%
+    }
+.kindle-cn-bodycontent-image-alone1 {
+    height: auto;
+    margin-bottom: 0.5em;
+    width: 50%
+    }
+.kindle-cn-bodycontent-image-alone50-withnote {
+    height: auto;
+    margin-bottom: 0;
+    width: 50%
+    }
+.kindle-cn-bodycontent-image-alone80-withnote {
+    height: auto;
+    margin-bottom: 0;
+    width: 80%
+    }
+.kindle-cn-bold {
+    font-weight: bold
+    }
+.kindle-cn-bold1 {
+    font-size: 1.125em;
+    font-weight: bold;
+    line-height: 1.2
+    }
+.kindle-cn-copyright-text {
+    display: block;
+    font-weight: bold;
+    line-height: 1.618em;
+    text-indent: 0;
+    margin: 1em 0
+    }
+.kindle-cn-copyright-text1 {
+    display: block;
+    line-height: 1.618em;
+    text-indent: 0;
+    margin: 1em 0
+    }
+.kindle-cn-heading {
+    color: #767676;
+    display: block;
+    font-family: "MYing Hei S", Hei, "黑体";
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+    width: 100%;
+    border-bottom: #c7c7c7 dashed 2px;
+    margin: 0.67em 0 0
+    }
+.kindle-cn-heading1 {
+    color: #767676;
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: left;
+    text-indent: 0;
+    width: 100%;
+    margin: 0.83em 0
+    }
+.kindle-cn-heading2 {
+    color: #767676;
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: left;
+    text-indent: 0;
+    width: 100%;
+    margin: 0.83em 0
+    }
+.kindle-cn-inline-image {
+    height: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    vertical-align: middle;
+    width: auto
+    }
+.kindle-cn-inline-image1 {
+    height: 2em;
+    margin-left: 0;
+    margin-right: 0;
+    vertical-align: middle;
+    width: auto
+    }
+.kindle-cn-inline-image2 {
+    height: 3em;
+    margin-left: 0;
+    margin-right: 0;
+    vertical-align: middle;
+    width: auto
+    }
+.kindle-cn-inline-image3 {
+    height: 1em;
+    line-height: 1.2;
+    margin-left: 0;
+    margin-right: 0;
+    vertical-align: middle;
+    width: auto
+    }
+.kindle-cn-inline-image4 {
+    height: 4em;
+    margin-left: 0;
+    margin-right: 0;
+    vertical-align: middle;
+    width: auto
+    }
+.kindle-cn-inline-image5 {
+    height: 9em;
+    margin-left: 0;
+    margin-right: 0;
+    vertical-align: middle;
+    width: auto
+    }
+.kindle-cn-italic {
+    font-style: italic
+    }
+.kindle-cn-kai {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    text-indent: 2em;
+    margin: 1em 0
+    }
+.kindle-cn-para-2em-indent {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    text-indent: 2em;
+    margin: 1em 0 1em 6em
+    }
+.kindle-cn-para-2em-indent1 {
+    display: block;
+    text-indent: 2em;
+    margin: 1em 0 1em 6em
+    }
+.kindle-cn-para-center {
+    display: block;
+    text-align: center;
+    text-indent: 0;
+    margin: 1em 0
+    }
+.kindle-cn-para-center1 {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    text-align: center;
+    text-indent: 0;
+    margin: 1em 0
+    }
+.kindle-cn-picture-txt-withfewcharactors {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    font-size: 0.875em;
+    text-align: center;
+    text-indent: 0;
+    margin: 0.3em 0 1em
+    }
+.kindle-cn-picture-txt-withfewcharactors1 {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    font-size: 0.875em;
+    font-weight: bold;
+    text-align: center;
+    text-indent: 0;
+    margin: 0.3em 0 1em
+    }
+.kindle-cn-ref {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    text-indent: 2em;
+    margin: 0 2em
+    }
+.kindle-cn-toc-level {
+    display: block;
+    margin-left: 0
+    }
+.kindle-cn-toc-level1 {
+    display: block;
+    margin-left: 2em
+    }
+.kindle-cn-toc-title {
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: 1em;
+    line-height: 1.2;
+    text-align: center;
+    border-bottom: #000 dotted 1.5px;
+    margin: 0.67em 0 0.5em
+    }
+.kindle-en-toc-title {
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+    margin: 0.67em 0
+    }
+.math-sub {
+    font-size: 0.75em;
+    vertical-align: sub
+    }
+.math-super {
+    font-size: 0.75em;
+    vertical-align: super
+    }
+.smy-cbs {
+    display: block;
+    font-family: "MYing Hei S", Hei, "黑体";
+    font-size: 1.25em;
+    font-weight: normal;
+    line-height: 1.2;
+    margin-top: 15%;
+    text-align: center
+    }
+.smy-csm {
+    display: block;
+    font-family: "MYing Hei S", Hei, "黑体";
+    font-size: 1.5em;
+    font-weight: normal;
+    line-height: 1.2;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-align: center
+    }
+.smy-sm {
+    display: block;
+    font-family: "MYing Hei S", Hei, "黑体";
+    font-size: 1.5em;
+    font-weight: normal;
+    line-height: 1.2;
+    margin-bottom: 0;
+    margin-top: 2em;
+    text-align: center
+    }
+.smy-zz {
+    display: block;
+    font-family: "MYing Hei S", Hei, "黑体";
+    font-size: 1.25em;
+    font-weight: normal;
+    line-height: 1.2;
+    margin-bottom: 0;
+    margin-top: 1em;
+    text-align: center
+    }

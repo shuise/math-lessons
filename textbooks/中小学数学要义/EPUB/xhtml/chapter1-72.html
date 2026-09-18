@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head><link rel="stylesheet" href="../../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第四节 集合与计数</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../../page_styles.css"/>
+</head>
+  <body class="calibre2">
+<h2 class="calibre15"><span id="" class="calibre16"><b class="calibre14">第</b><b class="calibre14">四</b><b class="calibre14">节</b></span></h2>
+<h2 class="calibre15"><span id="sigil_toc_id_76" class="calibre17"><b class="calibre6">集</b><b class="calibre6">合</b><b class="calibre6">与</b><b class="calibre6">计</b><b class="calibre6">数</b></span></h2>
+	<p class="calibre3"><span id="" class="calibre8">计数问题，比如排列组合问题，本质上都是计算某些特定对象的个数，或者集合的元素个数。所以几乎所有的计数问题都可以用集合的观点来描述。</span></p>
+	<img src="../images/image_877.svg" alt="" class="calibre163"/>
+	<p class="calibre3"><span id=""></span></p>
+	<img src="../images/image_878.svg" alt="" class="calibre191"/>
+	<p class="calibre3"><span id=""></span></p>
+	<p class="calibre3"><span id="" class="calibre8">首先，组合数表示从<span class="calibre97"><i class="calibre98">n</i></span>个对象中选<span class="calibre97"><i class="calibre98">m</i></span>个对象的选法个数，而这正是一个<span class="calibre97"><i class="calibre98">n</i></span>元集合<span class="calibre97"><i class="calibre98">U</i></span>中，<span class="calibre97"><i class="calibre98">m</i></span>元子集的个数。为什么会有等式呢？因为<span class="calibre97"><i class="calibre98">U</i></span>中的所有<span class="calibre97"><i class="calibre98">m</i></span>元子集和所有(<span class="calibre97"><i class="calibre98">n</i></span>-<span class="calibre97"><i class="calibre98">m</i></span>)元子集之间可以建立一一对应关系</span></p>
+<div class="calibre4">
+	<img src="../images/image_879.svg" alt="" class="calibre412"/></div>
+	<p class="calibre3"><span id="" class="calibre4"></span></p>
+	<img src="../images/image_880.svg" alt="" class="calibre191"/>
+	<p class="calibre3"><span id=""></span></p>
+	<img src="../images/image_881.svg" alt="" class="calibre73"/>
+	<p class="calibre3"><span id=""></span></p>
+	<img src="../images/image_882.svg" alt="" class="calibre376"/>
+	<p class="calibre3"><span id=""></span></p>
+	<p class="calibre3"><span id="" class="calibre8">等式也可以从集合的角度解释。令<span class="calibre97"><i class="calibre98">U</i></span>={<span class="calibre97"><i class="calibre98">a</i></span><span><sub class="calibre7">1</sub></span>,<span class="calibre97"><i class="calibre98">a</i></span><span><sub class="calibre7">2</sub></span>,…，<span class="calibre97"><i class="calibre98">a</i></span><span><sub class="calibre7">n</sub></span>,<span class="calibre97"><i class="calibre98">a</i></span><span><sub class="calibre7">n</sub><sub class="calibre7">+</sub><sub class="calibre7">1</sub></span>}是一个(<span class="calibre97"><i class="calibre98">n</i></span>+1)元集合，<span class="calibre97"><i class="calibre98">U</i></span>'={<span class="calibre97"><i class="calibre98">a</i></span><span><sub class="calibre7">1</sub></span>,<span class="calibre97"><i class="calibre98">a</i></span><span><sub class="calibre7">2</sub></span>,…，<span class="calibre97"><i class="calibre98">a</i></span><span><sub class="calibre7">n</sub></span>}。则<span class="calibre97"><i class="calibre98">U</i></span>的(<span class="calibre97"><i class="calibre98">m</i></span>+1)元子集可以分成两类：其中不包含<span class="calibre97"><i class="calibre98">a</i></span><span><sub class="calibre7">n</sub><sub class="calibre7">+</sub><sub class="calibre7">1</sub></span>的(<span class="calibre97"><i class="calibre98">m</i></span>+1)元子集正是<span class="calibre97"><i class="calibre98">U</i></span>'的所有(<span class="calibre97"><i class="calibre98">m</i></span>+1)元子集，所以总共有个；其中包含<span class="calibre97"><i class="calibre98">a</i></span><span><sub class="calibre7">n</sub><sub class="calibre7">+</sub><sub class="calibre7">1</sub></span>的(<span class="calibre97"><i class="calibre98">m</i></span>+1)元子集与<span class="calibre97"><i class="calibre98">U</i></span>'的所有<span class="calibre97"><i class="calibre98">m</i></span>元子集一一对应，所以总共有个。</span></p>
+	<img src="../images/image_883.svg" alt="" class="calibre116"/>
+	<img src="../images/image_884.svg" alt="" class="calibre54"/>
+	<p class="calibre3"><span id=""></span></p>
+	<p class="calibre3"><span id="" class="calibre8">排列数也可以用集合的语言描述，在第九章讲过是将<span class="calibre97"><i class="calibre98">m</i></span>个不同的小球放入<span class="calibre97"><i class="calibre98">n</i></span>个不同的抽屉中，要求每个抽屉最多只能放一个球的放法个数，而这正是从一个<span class="calibre97"><i class="calibre98">m</i></span>元集合<span class="calibre97"><i class="calibre98">A</i></span>到一个<span class="calibre97"><i class="calibre98">n</i></span>元集合<span class="calibre97"><i class="calibre98">B</i></span>的所有单射的个数。</span></p>
+	<p class="calibre3"><span id="" class="calibre8">那么从一个<span class="calibre97"><i class="calibre98">m</i></span>元集合<span class="calibre97"><i class="calibre98">A</i></span>到一个<span class="calibre97"><i class="calibre98">n</i></span>元集合<span class="calibre97"><i class="calibre98">B</i></span>的所有映射的个数是多少呢？这等于问把<span class="calibre97"><i class="calibre98">m</i></span>个不同的球放入<span class="calibre97"><i class="calibre98">n</i></span>个抽屉中，有多少种放法，而第九章第一节已经回答了这个问题，答案是<span class="calibre97"><i class="calibre98">n</i></span><span><sup class="calibre35">m</sup></span>种。特别地，0个球放入<span class="calibre97"><i class="calibre98">n</i></span>个抽屉中只有一种放法，所以空集<span class="calibre221">∅</span>到<span class="calibre97"><i class="calibre98">n</i></span>元集合<span class="calibre97"><i class="calibre98">B</i></span>只有一个映射，实际上空集<span class="calibre221">∅</span>到任何集合<span class="calibre97"><i class="calibre98">B</i></span>都只有一个映射。对于任意两个集合<span class="calibre97"><i class="calibre98">A</i></span>和<span class="calibre97"><i class="calibre98">B</i></span>，从<span class="calibre97"><i class="calibre98">A</i></span>到<span class="calibre97"><i class="calibre98">B</i></span>的所有映射也构成一个集合，记作<span class="calibre97"><i class="calibre98">H</i><i class="calibre98">o</i><i class="calibre98">m</i></span>()<span class="calibre97"><i class="calibre98">A</i></span>,<span class="calibre97"><i class="calibre98">B</i></span>，这种集合运算与自然数的指数运算相对应。</span></p>
+	<p class="calibre3"><span id="" class="calibre8">最后，给出二项式定理的一个集合解释。假设<span class="calibre97"><i class="calibre98">A</i></span>是一个<span class="calibre97"><i class="calibre98">n</i></span>元集合，<span class="calibre97"><i class="calibre98">B</i></span>是一个<span class="calibre97"><i class="calibre98">a</i></span>元集合<span class="calibre97"><i class="calibre98">B</i></span><span><sub class="calibre7">1</sub></span>和一个<span class="calibre97"><i class="calibre98">b</i></span>元集合<span class="calibre97"><i class="calibre98">B</i></span><span><sub class="calibre7">2</sub></span>的无交并，<span class="calibre97"><i class="calibre98">B</i></span>=<span class="calibre97"><i class="calibre98">B</i></span><span><sub class="calibre7">1</sub></span><span class="calibre221">⋃</span><span class="calibre97"><i class="calibre98">B</i></span><span><sub class="calibre7">2</sub></span>，则从<span class="calibre97"><i class="calibre98">A</i></span>到<span class="calibre97"><i class="calibre98">B</i></span>共有(<span class="calibre97"><i class="calibre98">a</i></span>+<span class="calibre97"><i class="calibre98">b</i></span>)<span><sup class="calibre35">n</sup></span>个映射。</span></p>
+	<p class="calibre3"><span id="" class="calibre8">从<span class="calibre97"><i class="calibre98">A</i></span>到<span class="calibre97"><i class="calibre98">B</i></span>的每个映射还可以用如下方式构造，其中0≤<span class="calibre97"><i class="calibre98">k</i></span>≤<span class="calibre97"><i class="calibre98">n</i></span>，</span></p>
+	<p class="calibre3"><span id="" class="calibre8">（1）在<span class="calibre97"><i class="calibre98">A</i></span>中选取一个<span class="calibre97"><i class="calibre98">k</i></span>元子集<span class="calibre97"><i class="calibre98">S</i></span>；</span></p>
+	<p class="calibre3"><span id="" class="calibre8">（2）构成一个从<span class="calibre97"><i class="calibre98">S</i></span>到<span class="calibre97"><i class="calibre98">B</i></span><span><sub class="calibre7">2</sub></span>的映射；</span></p>
+	<img src="../images/image_885.svg" alt="" class="calibre170"/>
+	<p class="calibre3"><span id=""></span></p>
+	<p class="calibre3"><span id="" class="calibre8">（3）构成一个从补集到<span class="calibre97"><i class="calibre98">B</i></span><span><sub class="calibre7">1</sub></span>的映射。</span></p>
+	<img src="../images/image_886.svg" alt="" class="calibre246"/>
+	<p class="calibre3"><span id=""></span></p>
+	<p class="calibre3"><span id="" class="calibre8">对于每个<span class="calibre97"><i class="calibre98">k</i></span>，根据计数乘法原理，通过这种方式构造的映射有个。每个映射都可以如此构造，所以从<span class="calibre97"><i class="calibre98">A</i></span>到<span class="calibre97"><i class="calibre98">B</i></span>的所有映射个数是</span></p>
+<div class="calibre4">
+	<img src="../images/image_887.svg" alt="" class="calibre385"/></div>
+	<p class="calibre3"><span id="" class="calibre4"></span></p>
+	<p class="calibre3"><span id="" class="calibre28"><b class="calibre14">提</b><b class="calibre14">问</b><b class="calibre14">时</b><b class="calibre14">间</b></span></p>
+	<p class="calibre3"><span id="" class="calibre8">11.4.1&#160;请用集合的观点解释指数运算的3个法则：</span></p>
+<div class="calibre4">
+	<img src="../images/image_888.svg" alt="" class="calibre413"/></div>
+	<p class="calibre3"><span id="" class="calibre4"></span></p>
+<script src="../../../math.js"></script></body>
+</html>

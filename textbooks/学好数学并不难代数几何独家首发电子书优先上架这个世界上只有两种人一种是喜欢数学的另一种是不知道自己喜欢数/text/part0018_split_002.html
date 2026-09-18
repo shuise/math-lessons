@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+  <head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>十三　因式分解</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="../stylesheet.css" rel="stylesheet" type="text/css"/>
+<link href="../page_styles.css" rel="stylesheet" type="text/css"/>
+</head>
+  <body class="calibre2">
+<h2 class="kindle-cn-heading2" id="calibre_pb_2"><a id="sec003" class="calibre5"></a>
+ ◎ 十字相乘：分解二次三项式</h2>
+<p class="calibre6">在前文中，我们介绍了因式分解的两种思路，提取公因式法和套用公式法．我们发现，总是有那么一类多项式无法解决，它既不含公因式，又不能直接套用任何公式，这类题目我们应该怎么求解呢？接下来我们就介绍分解二次三项式的另一种常用办法：十字相乘法．</p>
+<p class="calibre6">所谓二次三项式是指多项式有三个加减项，同时各项的最高次数是二次．比如我们上面提到的<span class="kindle-cn-italic">x</span>
+ <span class="math-super">2</span>
+ ＋10<span class="kindle-cn-italic">x</span>
+ ＋16，首先，它有三个加减项；其次，它的三个项中，<span class="kindle-cn-italic">x</span>
+ <span class="math-super">2</span>
+ 的次数是二，是各项中次数最高的，所以它就是个二次三项式．那么这个多项式怎么分解呢？我们还得先学一个新的公式：（<span class="kindle-cn-italic">x</span>
+ ＋<span class="kindle-cn-italic">m</span>
+ ）（<span class="kindle-cn-italic">x</span>
+ ＋<span class="kindle-cn-italic">n</span>
+ ），下面我们就把这个公式展开：</p>
+<p class="kindle-cn-para-2em-indent">　（<span class="kindle-cn-italic">x</span>
+ ＋<span class="kindle-cn-italic">m</span>
+ ）（<span class="kindle-cn-italic">x</span>
+ ＋<span class="kindle-cn-italic">n</span>
+ ）</p>
+<p class="kindle-cn-para-2em-indent">＝<span class="kindle-cn-italic">x</span>
+ <span class="math-super">2</span>
+ ＋<span class="kindle-cn-italic">x</span>
+ <span class="kindle-cn-italic">n</span>
+ ＋<span class="kindle-cn-italic">m</span>
+ <span class="kindle-cn-italic">x</span>
+ ＋<span class="kindle-cn-italic">m</span>
+ <span class="kindle-cn-italic">n</span>
+</p>
+<p class="kindle-cn-para-2em-indent">＝<span class="kindle-cn-italic">x</span>
+ <span class="math-super">2</span>
+ ＋（<span class="kindle-cn-italic">m</span>
+ ＋<span class="kindle-cn-italic">n</span>
+ ）<span class="kindle-cn-italic">x</span>
+ ＋<span class="kindle-cn-italic">m</span>
+ <span class="kindle-cn-italic">n</span>
+</p>
+<p class="calibre6">它的结果显然就是一个标准的二次三项式，对<span class="kindle-cn-italic">x</span>
+ <span class="math-super">2</span>
+ ＋（<span class="kindle-cn-italic">m</span>
+ ＋<span class="kindle-cn-italic">n</span>
+ ）<span class="kindle-cn-italic">x</span>
+ ＋<span class="kindle-cn-italic">m</span>
+ <span class="kindle-cn-italic">n</span>
+ 进行因式分解，结果肯定只能是（<span class="kindle-cn-italic">x</span>
+ ＋<span class="kindle-cn-italic">m</span>
+ ）（<span class="kindle-cn-italic">x</span>
+ ＋<span class="kindle-cn-italic">n</span>
+ ）．这个题目当然是很容易看出来的，可问题在于，当我们遇到实际问题的时候，这些系数的数量关系不可能那么明显地摆在眼前．比如我们之前提到的<span class="kindle-cn-italic">x</span>
+ <span class="math-super">2</span>
+ ＋10<span class="kindle-cn-italic">x</span>
+ ＋16，就是个标准的二次三项式，它又如何通过这个公式分解呢？如果我们把它跟<span class="kindle-cn-italic">x</span>
+ <span class="math-super">2</span>
+ ＋（<span class="kindle-cn-italic">m</span>
+ ＋<span class="kindle-cn-italic">n</span>
+ ）<span class="kindle-cn-italic">x</span>
+ ＋<span class="kindle-cn-italic">m</span>
+ <span class="kindle-cn-italic">n</span>
+ 对照一下就会发现，其中的10对应的就是一次项系数<span class="kindle-cn-italic">m</span>
+ ＋<span class="kindle-cn-italic">n</span>
+ ，数字16对应的就是常数项<span class="kindle-cn-italic">m</span>
+ <span class="kindle-cn-italic">n</span>
+ ．这就意味着，我们只要找到这样两个数字，它们相加等于10，并且乘积等于16，就可以知道这个因式怎么分解了．那么我们就试试看吧！</p>
+<p class="calibre6">好在相加等于10的数字没有几组，比如4＋6等于10，但是4×6＝24，它并不等于16，所以肯定不是这一组数字．同样，3＋7也等于10，但是3×7也不等于16．接着往下试试，2＋8＝10，巧了2×8正好等于16．所以，这个多项式分解开来就是（<span class="kindle-cn-italic">x</span>
+ ＋2）·（<span class="kindle-cn-italic">x</span>
+ ＋8），结果对不对呢？我们可以反过来验算一下：如果<span class="kindle-cn-italic">m</span>
+ ＝2，<span class="kindle-cn-italic">n</span>
+ ＝8，一次项系数<span class="kindle-cn-italic">m</span>
+ ＋<span class="kindle-cn-italic">n</span>
+ 是不是等于10呢，常数项<span class="kindle-cn-italic">m</span>
+ <span class="kindle-cn-italic">n</span>
+ 是不是等于16呢？没错，所以它们展开相乘以后一定等于<span class="kindle-cn-italic">x</span>
+ <span class="math-super">2</span>
+ ＋10<span class="kindle-cn-italic">x</span>
+ ＋16．这种分解因式的方法就叫作十字相乘法，它是根据一次项系数和常数项系数这两个数字反复试错得到的．</p>
+<p class="calibre6">接下来我们再试一个：<span class="kindle-cn-italic">x</span>
+ <span class="math-super">2</span>
+ ＋4<span class="kindle-cn-italic">x</span>
+ －5，这个多项式怎么分解因式呢？它的一次项系数是4，常数项是－5，请注意，这里的常数项不是5，而是－5，我们不能把负号弄丢了．那么，我们就得找出两个数来，使这两个数字相加等于4，相乘等于－5，4等于哪两个数相加呢？1和3，但是1和3相乘不等于－5．那2和2呢？2×2也不等于－5，那它是不是就不能用十字相乘法分解了呢？4这边找不到，我们就到－5那边碰一碰运气：有哪两个数相乘等于－5呢？－1和5，那么－1和5相加等于4吗？没错，正好等于4，这就对了，所以原式分解因式以后的结果就是（<span class="kindle-cn-italic">x</span>
+ －1）（<span class="kindle-cn-italic">x</span>
+ ＋5）．</p>
+<p class="calibre6">怎么样，这个十字相乘不算太难吧？可是我们总觉得多少有点瞎蒙的意思，如果这个数字挺大，我们怎么知道哪两个数相加相乘能蒙对呢？比如：<span class="kindle-cn-italic">x</span>
+ <span class="math-super">2</span>
+ ＋60<span class="kindle-cn-italic">x</span>
+ ＋779，请你来猜猜，哪两个数相加等于60，并且相乘等于779呢？这两个数字这么大，再这么瞎猜就不行了吧，那怎么办？有什么快速猜数的秘诀吗？接下来我们深入研究一下这个问题．</p>
+<p class="calibre6">我们不就是想找出<span class="kindle-cn-italic">m</span>
+ 和<span class="kindle-cn-italic">n</span>
+ 来吗？这<span class="kindle-cn-italic">m</span>
+ ＋<span class="kindle-cn-italic">n</span>
+ ＝60，<span class="kindle-cn-italic">m</span>
+ <span class="kindle-cn-italic">n</span>
+ ＝779对不对，<span class="kindle-cn-italic">m</span>
+ 和<span class="kindle-cn-italic">n</span>
+ 两个数字不好找不要紧，我可以假设<span class="kindle-cn-italic">m</span>
+ ＋<span class="kindle-cn-italic">n</span>
+ ＝2p，同时继续假设<span class="kindle-cn-italic">m</span>
+ ＝p＋q，<span class="kindle-cn-italic">n</span>
+ ＝p－q，这样它俩相加还是2p，如果我们把p和q求出来了，是不是就很容易找到<span class="kindle-cn-italic">m</span>
+ 和<span class="kindle-cn-italic">n</span>
+ 的值了呢？为什么我们要这么考虑问题呢？很简单，因为这p是现成的，因为<span class="kindle-cn-italic">m</span>
+ ＋<span class="kindle-cn-italic">n</span>
+ ＝60，所以，这p就是60的一半等于30，那么q是多少呢？我们再看看<span class="kindle-cn-italic">m</span>
+ 和<span class="kindle-cn-italic">n</span>
+ 的乘积，因为<span class="kindle-cn-italic">m</span>
+ ＝p＋q，<span class="kindle-cn-italic">n</span>
+ ＝p－q，所以<span class="kindle-cn-italic">m</span>
+ <span class="kindle-cn-italic">n</span>
+ ＝（p＋q）·（p－q）＝p<span class="math-super">2</span>
+ －q<span class="math-super">2</span>
+ ，其中<span class="kindle-cn-italic">m</span>
+ <span class="kindle-cn-italic">n</span>
+ ＝779，p＝30，代入得到779＝30<span class="math-super">2</span>
+ －q<span class="math-super">2</span>
+ ，移项得到q<span class="math-super">2</span>
+ ＝900－779，计算得到q<span class="math-super">2</span>
+ ＝121，哪个数字的平方是121呢？11的平方，因此，q＝±11，前面我们已经知道p＝30，所以，<span class="kindle-cn-italic">m</span>
+ ＝p＋q＝30＋11＝41，<span class="kindle-cn-italic">n</span>
+ ＝p－q＝30－11＝19．当然，因为<span class="kindle-cn-italic">m</span>
+ 、<span class="kindle-cn-italic">n</span>
+ 的关系是对称的，我们也可以认为<span class="kindle-cn-italic">m</span>
+ ＝19，<span class="kindle-cn-italic">n</span>
+ ＝41，因此原式分解以后的结果为：<span class="kindle-cn-italic">x</span>
+ <span class="math-super">2</span>
+ ＋60<span class="kindle-cn-italic">x</span>
+ ＋779＝（<span class="kindle-cn-italic">x</span>
+ ＋41）（<span class="kindle-cn-italic">x</span>
+ ＋19）．</p>
+<p class="calibre6">让我们重新回顾一下这个过程：为了确认<span class="kindle-cn-italic">m</span>
+ 、<span class="kindle-cn-italic">n</span>
+ 的具体数值，我们结合使用了十字相乘法和平方差公式，它可以帮我们快速地找到<span class="kindle-cn-italic">m</span>
+ 、<span class="kindle-cn-italic">n</span>
+ 的具体值．当遇到系数很大的时候，我们需要先找到一次项系数的一半p，把它作为<span class="kindle-cn-italic">m</span>
+ 、<span class="kindle-cn-italic">n</span>
+ 的中间数，然后用p的平方减去常数项系数，减完以后再开平方就得到差值q，通过p±q就可以确定<span class="kindle-cn-italic">m</span>
+ 和<span class="kindle-cn-italic">n</span>
+ 的具体值．不过一般在此类题目中，一次项和常数项的系数都不会很大，通过试错的方法也可以快速地找到答案．</p>
+<p class="calibre6">原则上来说，十字相乘法只能解决二次三项式的问题，但实际上，如果某些高次多项式，通过化简可以看作二次式，同样可以通过这种方法解决．比如<span class="kindle-cn-italic">x</span>
+ <span class="math-super">6</span>
+ ＋2<span class="kindle-cn-italic">x</span>
+ <span class="math-super">3</span>
+ －8，虽然题目存在6次方和3次方，但显然两者之间的关系是平方关系．我们只要把<span class="kindle-cn-italic">x</span>
+ <span class="math-super">3</span>
+ 看作一个整体，同样可以通过十字相乘法解决问题，两数相加是2，相乘是－8，很容易想到这两个数是－2和4，那么我们就可以得到最终结果：（<span class="kindle-cn-italic">x</span>
+ <span class="math-super">3</span>
+ -2）（<span class="kindle-cn-italic">x</span>
+ <span class="math-super">3</span>
+ +4）．</p>
+<p class="calibre6">我们在本节学习了十字相乘法，这是一种专门分解二次三项式的方法．在处理过程中，我们只要把一次项系数看作两数之和，把常数项系数看作两数之积，反复试算就可以求得两个数的值，然后就可以让变量分别跟这两个数相加相乘．那么，十字相乘法是不是可以解决所有二次三项式的问题呢？仍然不是，不信我们来看一下这个问题：<span class="kindle-cn-italic">x</span>
+ <span class="math-super">2</span>
+ ＋10<span class="kindle-cn-italic">x</span>
+ ＋18，它分解因式的结果是什么呢？按照十字相乘的规则，两数相加是10，两数相乘是18，凑凑数，2×8＝16，3×7＝21，这18上下够不着，不过看样子这两个数好像是在2和3之间的一个数，那么这个问题究竟应该怎么解呢？</p>
+<script src="../../math.js"></script></body>
+</html>

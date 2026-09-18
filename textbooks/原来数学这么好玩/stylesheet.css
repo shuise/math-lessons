@@ -1,0 +1,393 @@
+.calibre {
+    display: block;
+    font-size: 1em;
+    line-height: 1.618em;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: justify;
+    margin: 0 5pt
+    }
+.calibre1 {
+    height: auto;
+    width: 100%
+    }
+.calibre2 {
+    display: block
+    }
+.calibre3 {
+    color: gray;
+    display: block;
+    height: 2px;
+    border: currentColor inset 1px;
+    margin: 0.5em auto
+    }
+.calibre4 {
+    display: block;
+    font-size: 1em;
+    line-height: 1.618em;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 5pt
+    }
+.calibre5 {
+    color: #00C
+    }
+.calibre6 {
+    display: block;
+    height: 0
+    }
+.calibre7 {
+    display: block;
+    line-height: 1.2
+    }
+.calibre8 {
+    display: block;
+    text-indent: 2em;
+    margin: 1em 0
+    }
+.calibre9 {
+    line-height: 1.2
+    }
+.calibre10 {
+    font-size: 0.75em;
+    line-height: normal;
+    vertical-align: super
+    }
+.calibre11 {
+    height: auto;
+    width: auto
+    }
+.calibre12 {
+    display: table-row;
+    vertical-align: middle
+    }
+.calibre13 {
+    font-size: 1em;
+    line-height: normal;
+    vertical-align: super
+    }
+.empty {
+    display: block;
+    margin-bottom: 2.2em;
+    margin-top: 2.2em
+    }
+.fnote {
+    display: block;
+    font-size: 0.75em;
+    line-height: 1.5em;
+    text-align: justify;
+    text-indent: 2em;
+    margin: 0.5em 0
+    }
+.font {
+    font-size: 1.125em
+    }
+.font1 {
+    font-size: 0.75em
+    }
+.font2 {
+    font-size: 0.83333em;
+    line-height: 1.2
+    }
+.kindle-cn-bodycontent-div-alone {
+    display: block;
+    text-align: center;
+    width: 100%
+    }
+.kindle-cn-bodycontent-image-alone {
+    height: auto;
+    margin-top: 0.3em;
+    width: 80%
+    }
+.kindle-cn-bodycontent-image-alone1 {
+    height: auto;
+    margin-bottom: 0.5em;
+    width: 80%
+    }
+.kindle-cn-bodycontent-image-alone2 {
+    height: auto;
+    margin-bottom: 0.5em;
+    width: 50%
+    }
+.kindle-cn-bodycontent-image-alone50-withnote {
+    height: auto;
+    margin-bottom: 0;
+    width: 50%
+    }
+.kindle-cn-bodycontent-image-alone80-withnote {
+    height: auto;
+    margin-bottom: 0;
+    width: 80%
+    }
+.kindle-cn-bold {
+    font-weight: bold
+    }
+.kindle-cn-bold1 {
+    display: block;
+    font-weight: bold;
+    text-indent: 2em;
+    margin: 1em 0
+    }
+.kindle-cn-copyright-text {
+    display: block;
+    line-height: 1.618em;
+    text-indent: 0;
+    margin: 1em 0
+    }
+.kindle-cn-copyright-text1 {
+    display: block;
+    font-weight: bold;
+    line-height: 1.618em;
+    text-indent: 0;
+    margin: 1em 0
+    }
+.kindle-cn-dotundertext {
+    -moz-text-emphasis-position: under;
+    -moz-text-emphasis-style: dot;
+    -ms-text-emphasis-position: under;
+    -ms-text-emphasis-style: dot;
+    -webkit-text-emphasis-position: under;
+    -webkit-text-emphasis-style: dot;
+    text-emphasis-position: under;
+    text-emphasis-style: dot
+    }
+.kindle-cn-frame-zhijiao {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-style: solid;
+    border-top-width: 1px;
+    display: block;
+    font-size: 1em;
+    padding: 0.5em;
+    margin: 1.5em 0
+    }
+.kindle-cn-heading {
+    color: #767676;
+    display: block;
+    font-family: "MYing Hei S", Hei, "黑体";
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+    width: 100%;
+    border-bottom: #c7c7c7 dashed 2px;
+    margin: 0.67em 0 0
+    }
+.kindle-cn-heading1 {
+    color: #767676;
+    display: block;
+    font-size: 1.66667em;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+    text-indent: 0;
+    width: 100%;
+    margin: 0.83em 0
+    }
+.kindle-cn-heading2 {
+    color: #767676;
+    display: block;
+    font-size: 1.41667em;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+    text-indent: 0;
+    margin: 1em 0
+    }
+.kindle-cn-heading3 {
+    color: #767676;
+    display: block;
+    font-size: 1.41667em;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: left;
+    text-indent: 0;
+    margin: 1.33em 0
+    }
+.kindle-cn-inline-image {
+    height: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    vertical-align: middle;
+    width: auto
+    }
+.kindle-cn-inline-image1 {
+    height: 2em;
+    margin-left: 0;
+    margin-right: 0;
+    vertical-align: middle;
+    width: auto
+    }
+.kindle-cn-italic {
+    font-style: italic
+    }
+.kindle-cn-kai {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    text-indent: 2em;
+    margin: 1em 0
+    }
+.kindle-cn-para-center {
+    display: block;
+    text-align: center;
+    text-indent: 0;
+    margin: 1em 0
+    }
+.kindle-cn-para-center1 {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    text-align: center;
+    text-indent: 0;
+    margin: 1em 0
+    }
+.kindle-cn-para-center2 {
+    display: block;
+    font-weight: bold;
+    text-align: center;
+    text-indent: 0;
+    margin: 1em 0
+    }
+.kindle-cn-para-no-indent {
+    display: block;
+    text-indent: 0;
+    margin: 1em 0
+    }
+.kindle-cn-picture-txt-withfewcharactors {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    font-size: 0.75em;
+    font-weight: bold;
+    text-align: center;
+    text-indent: 0;
+    margin: 0.3em 0 1em
+    }
+.kindle-cn-picture-txt-withfewcharactors1 {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    font-size: 0.75em;
+    text-align: center;
+    text-indent: 0;
+    margin: 0.3em 0 1em
+    }
+.kindle-cn-picture-txt-withmanycharactors {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    font-size: 0.75em;
+    font-weight: bold;
+    text-align: left;
+    text-indent: 0;
+    margin: 0.3em 0 1em
+    }
+.kindle-cn-picture-txt-withmanycharactors1 {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    font-size: 0.75em;
+    text-align: left;
+    text-indent: 0;
+    margin: 0.3em 0 1em
+    }
+.kindle-cn-signature {
+    display: block;
+    font-family: STKai, "MKai PRC", Kai, "楷体";
+    text-align: right;
+    text-indent: 2em;
+    margin: 1em 0
+    }
+.kindle-cn-song {
+    font-family: STSong, "Song S", Song, "宋体";
+    font-weight: bold
+    }
+.kindle-cn-table-body {
+    border-bottom-style: none;
+    border-bottom-width: 1px;
+    border-collapse: separate;
+    border-left-style: none;
+    border-left-width: 1px;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-spacing: 2px;
+    border-top-style: solid;
+    border-top-width: 1px;
+    display: table;
+    font-size: 0.75em;
+    text-indent: 0;
+    width: 100%;
+    margin: 1em auto
+    }
+.kindle-cn-table-dg {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-style: none;
+    border-right-width: 1px;
+    border-top-style: none;
+    border-top-width: 1px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5em
+    }
+.kindle-cn-table-dg1 {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-style: none;
+    border-right-width: 1px;
+    border-top-style: none;
+    border-top-width: 1px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    padding: 0.5em
+    }
+.kindle-cn-table-th {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-style: none;
+    border-right-width: 1px;
+    border-top-style: none;
+    border-top-width: 1px;
+    display: table-cell;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5em
+    }
+.kindle-cn-toc-level {
+    display: block;
+    margin-left: 0
+    }
+.kindle-cn-toc-level1 {
+    display: block;
+    margin-left: 2em
+    }
+.kindle-cn-toc-title {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    letter-spacing: 1em;
+    line-height: 1.2;
+    text-align: center;
+    border-bottom: #000 dotted 1.5px;
+    margin: 0.67em 0 0.5em
+    }
+.math-sub {
+    font-size: 0.75em;
+    vertical-align: sub
+    }
+.math-super {
+    font-size: 0.75em;
+    vertical-align: super
+    }
+.math-super1 {
+    font-size: 0.77778em;
+    vertical-align: super
+    }

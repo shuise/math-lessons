@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body id="8CTUK0-7fb6169c724040fabc00d7e2dab9522e" class="calibre">
+  <h3 class="bodycontent-second-title">让我们用线把这些点连接起来</h3>
+
+  <p class="bodytext">代号“老枪”的特工与另外五个特工组成了一个特别行动小组。老枪被告知，他们相互之间只能单线联系，出发之前“老枪”得到了他与其他五个人联系的接头暗号，并要求牢记在心。</p>
+
+  <p class="bodytext">那么，这个六人特工小组一共有多少个接头暗号呢？</p>
+
+  <p class="bodytext">我们可以将老枪参与的六人特工小组抽象成以下图模型，点表示老枪和他的小伙伴们，线表示互相之间的接头暗号，数一数，一共15条，这就是这六人特工小组互相使用的接头暗号的总数。</p>
+
+  <div class="tupian"><img alt="" class="image-alone" src="../images/04260.jpeg"/></div>
+
+  <p class="bodytext">在上面的图中，每对不同顶点之间恰有一条边，这样的图叫完全图，下面的四个图分别叫三阶、四阶、五阶、六阶无向完全图，也称为K<span class="math-sub">3</span>，K<span class="math-sub">4</span>，K<span class="math-sub">5</span>，K<span class="math-sub">6</span>：</p>
+
+  <div class="tupian">
+    <img alt="" class="image-alone" src="../images/04261.jpeg"/>
+
+    <p class="bodycontent-text-tushuo">无向完全图K<span class="math-sub">3</span>，K<span class="math-sub">4</span>，K<span class="math-sub">5</span>，K<span class="math-sub">6</span></p>
+  </div>
+
+  <p class="bodytext">很多时候，我们可以把现实生活中的离散对象抽象成点，离散对象之间的联系用线表示，有时候这些点用线连接起来后，形状会比较有趣。</p>
+
+  <p class="bodytext">下面的图中，顶点和边的形状总可以围成一个圈，叫圈图。</p>
+
+  <div class="tupian">
+    <img alt="" class="image-alone" src="../images/04262.jpeg"/>
+
+    <p class="bodycontent-text-tushuo">圈图C<span class="math-sub">3</span>，C<span class="math-sub">4</span>，C<span class="math-sub">5</span>，C<span class="math-sub">6</span></p>
+  </div>
+
+  <p class="bodytext">在“圈”中心添加一个顶点，这个新顶点再与原来已有的顶点逐个连接起来，就可得到轮图，新添加的顶点就好像轮子的轴心。</p>
+
+  <div class="tupian">
+    <img alt="" class="image-alone" src="../images/04263.jpeg"/>
+
+    <p class="bodycontent-text-tushuo">轮图W<span class="math-sub">3</span>，W<span class="math-sub">4</span>，W<span class="math-sub">5</span>，W<span class="math-sub">6</span></p>
+  </div>
+
+  <p class="bodytext">轮图去掉“轮子”上的边，可以得到星形图。</p>
+
+  <div class="tupian">
+    <img alt="" class="image-alone" src="../images/04264.jpeg"/>
+
+    <p class="bodycontent-text-tushuo">W<span class="math-sub">5</span>，W<span class="math-sub">6</span>对应的星形图</p>
+  </div>
+
+  <p class="bodytext">星形图、圈图和轮图的形状可以成为计算机局域网的三种拓扑结构，分别对应的是星形、环形、混合型拓扑结构的计算机局域网。</p>
+
+  <p class="bodytext">立方体图，顾名思义有点像立方体，它的顶点可以用位串来表示。</p>
+
+  <p class="bodytext">立方体图Q<span class="math-sub">1</span>有2个顶点，用0、1表示。立方体图Q<span class="math-sub">2</span>有4个顶点，用00、01、10、11表示。</p>
+
+  <div class="tupian">
+    <img alt="" class="image-alone" src="../images/04265.jpeg"/>
+
+    <p class="bodycontent-text-tushuo">立方体图Q<span class="math-sub">1</span></p>
+  </div>
+
+  <div class="tupian">
+    <img alt="" class="image-alone" src="../images/04266.jpeg"/>
+
+    <p class="bodycontent-text-tushuo">立方体图Q<span class="math-sub">2</span></p>
+  </div>
+
+  <p class="bodytext">不过Q<span class="math-sub">1</span>和Q<span class="math-sub">2</span>看起来不太像立方体，但Q<span class="math-sub">3</span>的形状是一个标准的六面体。Q<span class="math-sub">3</span>有8个顶点，每个顶点可以用3位的位串000、001、010、011、100、101、110、111表示。</p>
+
+  <div class="tupian">
+    <img alt="" class="image-alone" src="../images/04267.jpeg"/>
+
+    <p class="bodycontent-text-tushuo">立方体图Q<span class="math-sub">3</span></p>
+  </div>
+
+  <p class="bodytext">从标号为000的点出发，依次经过001-011-010-110-111-101-100-000，这样一条路径正好可以构成三位格雷码，格雷码是以弗兰克·格雷（Frank Gray）名字命名的一种编码。</p>
+
+  <p class="bodytext">格雷码的特征是任意相邻的编码中，只有一位二进制位不同（相邻的两个编码变化最小）。20世纪40年代，格雷在贝尔实验室发明了这种编码，目的是为了减少数字信号传递过程中的错误。</p>
+
+  <p class="bodytext">我们可以用如下方法由Q<span class="math-sub">3</span>构造Q<span class="math-sub">4</span>：先画出两个Q<span class="math-sub">3</span>，一个Q<span class="math-sub">3</span>称为Q<span class="math-sub">3，old</span>，另一个Q<span class="math-sub">3</span>称为Q<span class="math-sub">3，new</span>。</p>
+
+  <div class="tupian"><img alt="" class="image-alone" src="../images/04268.jpeg"/></div>
+
+  <p class="bodytext">在Q<span class="math-sub">3，old</span>每个顶点标记前加0，在Q<span class="math-sub">3，new</span>每个顶点标记前加1。</p>
+
+  <p class="bodytext">连接Q<span class="math-sub">3，old</span>和Q<span class="math-sub">3，new</span>相对应的每个顶点就可得到Q<span class="math-sub">4</span>。</p>
+
+  <div class="tupian"><img alt="" class="image-alone" src="../images/04269.jpeg"/></div>
+
+  <div class="tupian">
+    <img alt="" class="image-alone" src="../images/04270.jpeg"/>
+
+    <p class="bodycontent-text-tushuo">连接Q<span class="math-sub">3，old</span>和Q<span class="math-sub">3，new</span>相对应的每个顶点得到Q<span class="math-sub">4</span></p>
+  </div>
+
+  <p class="bodytext">同样的，从0000出发，依次经过0001-0011-0010-0110-0111-0101-0100-1100-1101-1111-1110-1010-1011-1001-1000，这样一条路径正好构成四位格雷码。</p>
+
+  <p class="bodytext">下面的图有15条边，顶点数是10，每个顶点的度数是3，这样的图叫彼得森图。</p>
+
+  <div class="tupian"><img alt="" class="image-alone" src="../images/04271.jpeg"/></div>
+
+  <p class="bodytext">与之同构的图（什么是同构，下面马上要讲到）多种多样，形状各异，共有100多种。小文你可以一一确认一下，下面的图是不是都是15条边，10个顶点，每个顶点的度数都是3。</p>
+
+  <p class="bodytext">它们都是彼得森图。</p>
+
+  <div class="tupian">
+    <img alt="" class="image-alone" src="../images/04272.jpeg"/>
+
+    <p class="bodycontent-text-tushuo">各种形状的彼得森图</p>
+  </div>
+
+  <p class="bodytext">尤利西斯·彼得森（Julius Petersen）是一个出身贫寒的数学家，出生在美人鱼的故乡——丹麦，他研究的内容很广泛，据说他不愿意读其他数学家的作品，所以他经常发现一些别人已经发现过的“结果”，这让他很头疼。但如果他知道了其他数学家不读他的作品，他会很生气。彼得森去世时，一家报纸称他为科学界的“安徒生”。</p>
+<script src="../../math.js"></script></body></html>

@@ -1,0 +1,271 @@
+@charset "utf-8";
+
+body{font-size:100%;}
+
+/* CSS Document */
+.frontCover {
+	text-align:center;
+	border:0;
+}/*封皮*/
+a {
+	text-decoration:none;
+}
+h1.Sequence, h1.chapterCaption {
+	font-size:2.000em; 
+	
+	text-align:center;
+	font-weight:800;
+	line-height:1.5000em;
+}   /*一级标题*/
+h2.sectionHeading {
+	font-size:1.500em; 
+	
+	text-align:center;
+	font-weight:800;
+	line-height:1.5000em;
+} /*二级标题*/
+.subHead {
+	font-size:1.000em; 
+	
+	text-align:right;
+	font-weight:600;
+	line-height:1.0000em;
+} /*二级副题*/
+h3.listHeadline {
+	font-size:1.200em;
+	
+	text-align:center;
+	font-weight:800;
+	line-height:1.5000em;
+} /*三级标题*/
+h4.lastTitle {
+	font-size:1.300em;
+	
+	text-align:center;
+	font-weight:800;
+	line-height:1.5000em;
+} /*四级标题*/
+h5.fiveTitle {
+	font-size:1.300em;
+	
+	text-align:center;
+	font-weight:800;
+	line-height:1.5000em;
+} /*五级标题*/
+h6.sixTitle {
+	
+	font-size: 0.85em;
+	line-height: 1.3em;
+	text-align: left;
+	text-indent:0;
+	margin:3pt 0;
+	letter-spacing:auto;
+} /*六级标题*/
+.bodyContent {
+	font-size:1.000em;
+	text-indent:2em;
+	text-align:justify;
+	line-height:1.5000em;
+} /*正文内容*/
+.notNaturalParagraph{
+	font-size:1.000em;
+	text-indent:2em;
+	text-align:justify;
+	line-height:1.5000em;
+}/*非自然段落*/
+.dyfirst{
+	
+	font-size: 0.85em;
+	line-height: 1.5em;
+	text-align:left;	
+	margin:10pt 0;
+	letter-spacing:auto;
+}
+.dyfirst:first-letter {
+	font-size:300%;
+	font-weight:bold;
+	color:#ff000;
+	float:left;	
+	color:#c36500;
+}/*首行文字下沉效果*/
+.leftContent {
+	
+	font-size: 0.85em;
+	line-height: 1.5em;
+	text-align:left;
+	text-indent: 0em;
+	margin:10pt 0;
+	letter-spacing:auto;
+} /*顶格正文*/
+.fnoteRight {
+	
+	font-size: 0.8em;
+	line-height: 1.5em;
+	text-align:right;
+	letter-spacing:auto;
+} /*右下角说明*/
+.bodyReference {
+	
+	font-size:0.85em;
+	text-align:left;
+	text-indent:2.0em;
+	line-height: 1.5em;
+	letter-spacing:auto;
+} /*书信称谓*/
+.bodyLetter{
+	
+	font-size:0.75em;
+	text-align:left;
+	text-indent:2.0em;
+	line-height: 1.5em;
+	letter-spacing:auto;
+	font-style:normal;
+}/*书信内容*/
+
+.titleQuot {
+	
+	font-size: 0.8em;
+	line-height: 1.5em;
+	text-align:left;
+	text-indent: 24px;
+	margin:5pt 0;
+	letter-spacing:auto;
+}/*引文标题*/
+.conQuot {
+	font-family:'kaiti';
+	font-size: 1.20em;
+	line-height: 1.5em;
+	text-align:left;
+	text-indent: 48px;
+	margin:5pt 0;
+	letter-spacing:auto;
+}/*引文*/
+.bodyPic {
+	margin-top: 20px;
+	text-align:center;
+	font-size:0%;
+} /*正文图表*/
+.imgDescript {
+	
+	font-size:1.000em;
+	line-height:1.5em;
+	text-align:left;
+	text-indent:0;
+	letter-spacing:auto;
+	margin:20px 30px 20px 30px;
+} /*图表注释*/
+.signImg {
+	text-align:right;
+	font-size:0%;
+}/*正文右下角签名图片*/
+.noteTitle {
+	
+	font-size:0.8em;
+	line-height:1.5em;
+	font-weight:bold;
+	text-align:left;
+	text-indent:0;
+	letter-spacing:auto;
+} /*附注*/
+.noteContent {
+	
+	font-size:0.9em;
+	line-height:1.5em;
+	text-align:left;
+	text-indent:2em;
+	letter-spacing:auto;
+} /*附注说明*/
+.bodyPoem {
+	
+	font-size:1.0em;
+	text-align:center;
+	line-height:1.5em;
+	letter-spacing:auto;
+} /*诗词*/
+.conAuthor {
+	
+	font-size:0.9em;
+	text-align:right;
+	line-height:1.5em;
+	padding-right:4em;
+	letter-spacing:auto;
+} /*诗词作者*/
+.poemText {
+	
+	font-size:0.8em;
+	text-align:center;
+	line-height:1.5em;
+	letter-spacing:auto;
+} /*诗词正文*/
+span.super {
+	font-size:0.7em;
+	vertical-align: super;
+} /*数字上标*/
+span.sub {
+	font-size:0.7em;
+	vertical-align: sub;
+} /*数字下标*/
+span.subScript {
+	font-size:0.7em;
+	vertical-align: super;
+}/*跳转注标*/
+.bold {
+	font-weight:700;
+}/*加粗*/
+.left {
+	text-align:left;
+	text-indent:0;
+}/*左对齐*/
+.center {
+	text-align:center;
+	text-indent:0;
+}/*居中对齐*/
+.right {
+	text-align:right;
+	text-indent:0;
+}/*右对齐*/
+.indentS {
+	text-indent:2em;
+	margin:5pt 0;
+}/*其它缩进24像素*/
+.indentT {
+	text-indent:3em;
+	margin:5pt 0;
+}/*其它缩进36像素*/
+.indentF {
+	text-indent:4em;
+	margin:5pt 0;
+}/*其它缩进48像素*/
+.emphasis {
+	text-decoration:underline;
+}/*着重强调加下划线*/
+.textItalic {
+	font-size:0.800em;
+	text-align:justify;
+	line-height:1.5000em;
+	font-style:normal;
+}/*斜体*/（加标识"I"）
+.conLink {
+}/*正文中网址*/
+.rareFont {
+	width:0.8em;
+}/*正文中生僻字图片代替*/
+.subHead {
+	text-align:right;
+}/*副标题*/
+.tableCaption{
+    
+	font-size:0.85em;
+	line-height:1.5em;
+	text-align:center;
+	text-indent:0;
+	color:#a25400;
+	letter-spacing:auto;
+}/*正文中表格表头样式*/
+.borderColor{
+   border:2px solid #a25400;
+   margin:10px 0px 10px 0px;
+}/*边框样式*/
+.bgroundColor{
+   background:#F8F2DA;
+}/*段落底色*/

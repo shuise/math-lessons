@@ -1,0 +1,119 @@
+@namespace h "http://www.w3.org/1999/xhtml";
+
+.coverpage { text-align: center; padding:0em; margin: 0em; }
+
+.center {text-align: center;}
+.right {text-align: right;}
+h1.btitle {text-align: center;
+	margin-top: 3em;
+	margin-bottom: 0em;
+	font-size: 250%;}
+
+h1.toc {text-align: center;
+	margin-top: 3em;
+	margin-bottom: 0.5em;
+	font-size: 200%;}
+h1.h1a {text-align: center;
+	margin-top: 4em;
+	margin-bottom: 0.5em;
+	font-size: 200%;}
+h1.h1b {text-align: center;
+	margin-top: 0.5em;
+	margin-bottom: 4em;
+	font-size: 200%;}
+h1.h1c {text-align: center;
+	margin-top: 4em;
+	margin-bottom: 4em;
+	font-size: 200%;}
+h1.h1 {text-align: center;
+	margin-top: 0.5em;
+	margin-bottom: 4em;
+	font-size: 180%;}
+
+.textStyle1 {
+    display: block;
+    margin-bottom: 0em;
+    margin-top: 0em;
+    }
+.textStyle1a {
+    display: block;
+    margin-bottom: 0em;
+    margin-top: 0em;
+    text-indent: 1.5em;
+    }
+.textStyle1b {
+    display: block;
+    margin-bottom: 0em;
+    margin-top: 1em;
+    text-indent: 1.5em;
+    }
+.textStyle2 {
+    display: block;
+    margin-bottom: 0em;
+    margin-top: 1em;
+    }
+.textStyle2d {
+    display: block;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    }
+.textStyle2a {
+    display: block;
+    margin-bottom: 0em;
+    margin-top: 0.5em;
+    }
+.textStyle3a {
+    display: block;
+    margin-bottom: 0em;
+    margin-top: 3em;
+    }
+.textStyle4 {
+    display: block;
+    margin-bottom: 0em;
+    margin-top: 12em;
+    }
+.textStyle5 {
+    display: block;
+    margin-bottom: 0em;
+    margin-top: 6em;
+    }
+.textStyle5a {
+    display: block;
+    margin-bottom: 0em;
+    margin-top: 4em;
+    }
+
+  .ind {
+  display: block;
+  text-indent: 1.5em;
+  }
+
+  .indent1 {
+  padding-left: 2em; 
+  }
+.fontsize1 {font-size: 90%;}
+.fontsize2a {font-size: 130%}
+.fontsize2 {font-size: 150%}
+
+.hangingpara {text-indent: -1.5em; margin-left: 1.5em; margin-top: 0em; margin-bottom: 0em;}
+.hangingpara1 {text-indent: -2em; margin-left: 3.5em; margin-top: 0em; margin-bottom: 0em;}
+.hangingpara1a {text-indent: -2em; margin-left: 3.5em; margin-top: 1em; margin-bottom: 0em;}
+
+blockquote{font-size:100%; margin-top:1em; margin-bottom:1em; margin-left:2em; margin-right:2em;}
+sup{font-size:60%}
+
+.floatpara1a {margin-top:0em;
+	 margin-left:3em;
+	 margin-bottom:0em;
+         text-indent: 1.5em;}
+.floatpara1 {margin-top:0em;
+	 margin-left:3em;
+	 margin-bottom:0em;
+}
+.floatstyle1{float:left;
+  margin-left:-1.5em;
+}
+img{max-width:100%}
+body{text-align:justify;}
+.cover{width:100%; height:100%;}
+

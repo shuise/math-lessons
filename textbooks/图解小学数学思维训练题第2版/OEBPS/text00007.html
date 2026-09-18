@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="zh-CN" lang="zh-CN">
+<head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>第四章　多边形内角和</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="flow0001.css" type="text/css" />
+</head>
+<body>
+<div class="chapter" id="chapter">
+<h1 class="kindle-cn-heading-1">第四章　多边形内角和</h1>
+<h4 class="kindle-cn-heading4">
+<span class="kindle-cn-bold">知识导航</span>
+</h4>
+<div class="kindle-cn-frame-yuanjiao">
+<p>在同一平面内，由3条或3条以上不在同一直线上的线段首尾顺次连接组成的平面图形，我们称为多边形。</p>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00043.jpg" width="30%" alt="image" />
+</p>
+</div>
+<p class="kindle-cn-caption1">一个多边形的顶点数、边数、内角数是相等的。</p>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00044.jpg" width="30%" alt="image" />
+</p>
+</div>
+<p class="kindle-cn-caption1">如果不说明，我们一般都指凸多边形。</p>
+<p>如果多边形的各条边都相等，我们称它为正多边形，正多边形所有的内角也相等。如正三角形（等边三角形）、正四边形（正方形）、正五边形……</p>
+<p>多边形所有内角相加得到多边形内角和，它的和是有一定规律的。</p>
+</div>
+<h4 class="kindle-cn-heading4">
+<span class="kindle-cn-bold">图解思维训练题</span>
+</h4>
+<p class="kindle-cn-para-left">
+<span class="kindle-cn-bold">例1</span>
+ 　我们知道多边形中三角形内角和是180°，要求多边形内角的和是多少度，就利用转化思想将多边形内角和转化成求几个三角形内角的和。请同学们分析下面的哪种分法求五边形内角和简单而且无错误。</p>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00045.jpg" width="20%" alt="image" />
+</p>
+<p class="kindle-cn-caption">
+<span class="kindle-cn-bold">图1</span>
+</p>
+</div>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00046.jpg" width="20%" alt="image" />
+</p>
+<p class="kindle-cn-caption">
+<span class="kindle-cn-bold">图2</span>
+</p>
+</div>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00047.jpg" width="20%" alt="image" />
+</p>
+<p class="kindle-cn-caption">
+<span class="kindle-cn-bold">图3</span>
+</p>
+</div>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00048.jpg" width="20%" alt="image" />
+</p>
+<p class="kindle-cn-caption">
+<span class="kindle-cn-bold">图4</span>
+</p>
+</div>
+<a id="pg18"></a>
+<h5 class="kindle-cn-heading5">
+<span class="kindle-cn-bold">图解思路</span>
+</h5>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00049.jpg" width="40%" alt="image" />
+</p>
+</div>
+<h5 class="kindle-cn-heading5">
+<span class="kindle-cn-bold">规范解答</span>
+</h5>
+<p class="kindle-cn-para-left">图2的分法最简单。</p>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00050.jpg" width="20%" alt="image" />
+</p>
+</div>
+<p class="kindle-cn-para-left">图2内角和=∠6+∠7+∠8+∠9+∠11+∠12+∠13+∠14+∠10=(∠6+∠9+∠11)+(∠7+∠12+∠13)+(∠8+∠10+∠11)=180°+180°+180°=180°×3=540°。</p>
+<p class="kindle-cn-para-left">只有从一个顶点引出的所有对角线将多边形分成的三角形个数，才是计算多边形内角和最简便且最无误的方法。<br/>
+<br/>
+</p>
+<p class="kindle-cn-para-left">
+<span class="kindle-cn-bold">例2</span>
+ 　计算四边形、五边形、六边形、七边形等多边形内角和，推出多边形内角和的一般计算方法。</p>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00051.jpg" width="60%" alt="image" />
+</p>
+</div>
+<h5 class="kindle-cn-heading5">
+<span class="kindle-cn-bold">图解思路</span>
+</h5>
+<p>首先要把多边形先转化成三角形，计算出几种多边形的内角和，再通过边数与三角形个数的对应关系，推出求一般多边形内角和的计算方法。为便于直观推理，我们可以利用表格，观察数据间的变与不变关系以发现其规律。</p>
+<a id="pg19"></a>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00052.jpg" width="90%" alt="image" />
+</p>
+</div>
+<h5 class="kindle-cn-heading5">
+<span class="kindle-cn-bold">规范解答</span>
+</h5>
+<p class="kindle-cn-para-left">多（<span class="kindle-cn-italic">n</span>
+ ）边形内角和为：(<span class="kindle-cn-italic">n</span>
+ -2)×180°。<br/>
+<br/>
+</p>
+<p class="kindle-cn-para-left">
+<span class="kindle-cn-bold">例3</span>
+ 　求出下图中<span class="kindle-cn-italic">x</span>
+ 的值。</p>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00053.jpg" width="30%" alt="image" />
+</p>
+</div>
+<h5 class="kindle-cn-heading5">
+<span class="kindle-cn-bold">图解思路</span>
+</h5>
+<p>上图是一个五边形，可以利用公式(<span class="kindle-cn-italic">n</span>
+ -2)×180°求出它的内角和，再用等量关系列出方程，并求出解。</p>
+<h5 class="kindle-cn-heading5">
+<span class="kindle-cn-bold">规范解答</span>
+</h5>
+<p class="kindle-cn-para-left">95°+135°+110°+3<span class="kindle-cn-italic">x</span>
+ +<span class="kindle-cn-italic">x</span>
+ =(5-2)×180°</p>
+<p class="kindle-cn-para-left">340°+4<span class="kindle-cn-italic">x</span>
+ =540°</p>
+<p class="kindle-cn-para-left">4<span class="kindle-cn-italic">x</span>
+ =200°</p>
+<p class="kindle-cn-para-left">
+<span class="kindle-cn-italic">x</span>
+ =50°<br/>
+<br/>
+</p>
+<a id="pg20"></a>
+<p class="kindle-cn-para-left">
+<span class="kindle-cn-bold">例4</span>
+ 　一个多边形的每条边相等，则每个角也相等，这种多边形叫正多边形（如下图所示）。一个正多边形的一个内角是120°，这是一个正几边形？</p>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00054.jpg" width="90%" alt="image" />
+</p>
+</div>
+<h5 class="kindle-cn-heading5">
+<span class="kindle-cn-bold">图解思路</span>
+</h5>
+<p>正多边形的边数与它内角的个数是一样多的，且正多边形不但每条边的长度相等，它的每个内角度数也是相等的。因此，我们就可以从边与角这两个切入点去思考，建立内角和相等的等量关系，从而列出方程求解。</p>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00055.jpg" width="40%" alt="image" />
+</p>
+</div>
+<h5 class="kindle-cn-heading5">
+<span class="kindle-cn-bold">规范解答</span>
+</h5>
+<p class="kindle-cn-para-left">解：设正多边形有<span class="kindle-cn-italic">n</span>
+ 条边。</p>
+<p class="kindle-cn-para-left">(<span class="kindle-cn-italic">n</span>
+ -2)×180°=120°×<span class="kindle-cn-italic">n</span>
+</p>
+<p class="kindle-cn-para-left">180°<span class="kindle-cn-italic">n</span>
+ -360°=120°<span class="kindle-cn-italic">n</span>
+</p>
+<p class="kindle-cn-para-left">180°<span class="kindle-cn-italic">n</span>
+ -120°<span class="kindle-cn-italic">n</span>
+ =360°</p>
+<p class="kindle-cn-para-left">60°<span class="kindle-cn-italic">n</span>
+ =360°</p>
+<p class="kindle-cn-para-left">
+<span class="kindle-cn-italic">n</span>
+ =6°</p>
+<p class="kindle-cn-para-left">答：这是一个正六边形。<br/>
+<br/>
+</p>
+<p class="kindle-cn-para-left">
+<span class="kindle-cn-bold">例5</span>
+ 　前面我们讨论了多边形的内角和，和内角的有关问题，有时我们还求多边形的外角的相关问题，那什么是多边形的外角呢？——多边形的外角是指多边形的内角的一条边与另一条边的反向延长线所组成的角（如下图五边形）。如果在一个四边形的每一个顶点处各取一个外角，它的外角和又是多少度呢？</p>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00056.jpg" width="40%" alt="image" />
+</p>
+</div>
+<a id="pg21"></a>
+<h5 class="kindle-cn-heading5">
+<span class="kindle-cn-bold">图解思路</span>
+</h5>
+<p>四边形每一个顶点处都有两个外角，若只取一个外角，则它与相邻的一个内角和是180°，这样就有4个180°，再减去4个内角的和，就是这4个外角的和。</p>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00057.jpg" width="40%" alt="image" />
+</p>
+</div>
+<p>因为：内角1＋外角1＋内角2＋外角2＋内角3＋外角3＋内角4＋外角4=720°，又因为：内角1＋内角2＋内角3＋内角4＝(4-2)×180°=360°</p>
+<p>所以：<img class="kindle-cn-inline-image1" src="Image00058.jpg" alt="image" />
+ ＋外角1＋<img class="kindle-cn-inline-image1" src="Image00059.jpg" alt="image" />
+ ＋外角2+<img class="kindle-cn-inline-image1" src="Image00060.jpg" alt="image" />
+ +外角3+<img class="kindle-cn-inline-image1" src="Image00061.jpg" alt="image" />
+ +外角4+(<img class="kindle-cn-inline-image1" src="Image00062.jpg" alt="image" />
+ +<img class="kindle-cn-inline-image1" src="Image00063.jpg" alt="image" />
+ +<img class="kindle-cn-inline-image1" src="Image00064.jpg" alt="image" />
+ +<img class="kindle-cn-inline-image1" src="Image00065.jpg" alt="image" />
+ ）=外角1+外角2+外角3+外角4=720°-360°=360°</p>
+<h5 class="kindle-cn-heading5">
+<span class="kindle-cn-bold">规范解答</span>
+</h5>
+<p class="kindle-cn-para-left">180°×4-(4-2)×180°=720°-360°=360°</p>
+<a id="pg22"></a>
+<h4 class="kindle-cn-heading4">
+<span class="kindle-cn-bold">小试身手</span>
+</h4>
+<p>1．一个八边形的内角和是多少度？<br/>
+<br/>
+<br/>
+<br/>
+</p>
+<p>2．求下图中<span class="kindle-cn-italic">x</span>
+ 的值。</p>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00066.jpg" width="70%" alt="image" />
+<br/>
+<br/>
+<br/>
+<br/>
+</p>
+</div>
+<p>3．想一想：每个内角都是锐角的多边形有多少个，是几边形？每个内角都是直角的多边形有多少个，是几边形？每个内角都是钝角的多边形有多少个？<br/>
+<br/>
+<br/>
+<br/>
+</p>
+<p>4．一个多边形的内角和是1620°，它是几边形？<br/>
+<br/>
+<br/>
+<br/>
+</p>
+<p>5．一个八边形剪去三个角后，它的内角和是多少度？</p>
+<a id="pg23"></a>
+<h4 class="kindle-cn-heading4">
+<span class="kindle-cn-bold">拓展提升</span>
+</h4>
+<p>6．一个正十边形的一个内角是多少度？<br/>
+<br/>
+<br/>
+<br/>
+</p>
+<p>7．一个正多边形的一个内角是162°，这是一个正几边形？<br/>
+<br/>
+<br/>
+<br/>
+</p>
+<p>8．五边形外角（每一个顶点取一个外角）的和是多少度？</p>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00067.jpg" width="30%" alt="image" />
+</p>
+</div>
+<p>9．在<span class="kindle-cn-italic">n</span>
+ 边形一边上任取一点<span class="kindle-cn-italic">P</span>
+ ，连接点<span class="kindle-cn-italic">P</span>
+ 与多边形的每一个顶点，想想得到几个三角形？如果<span class="kindle-cn-italic">n</span>
+ =7，你能否根据这样的划分多边形的方法来说明<span class="kindle-cn-italic">n</span>
+ 边形的内角和等于(<span class="kindle-cn-italic">n</span>
+ -2)×180°？</p>
+<div class="kindle-cn-image">
+<p class="kindle-cn-para-center"><img src="Image00068.jpg" width="30%" alt="image" />
+</p>
+</div>
+</div>
+<script src="../../math.js"></script></body>
+</html>

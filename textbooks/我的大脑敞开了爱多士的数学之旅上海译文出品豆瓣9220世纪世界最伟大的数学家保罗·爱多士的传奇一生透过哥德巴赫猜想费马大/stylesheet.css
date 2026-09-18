@@ -1,0 +1,364 @@
+.bodycontent {
+    display: block;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: justify;
+    text-indent: 2em;
+    margin: 0.5em 0
+    }
+.bodycontent-1-c {
+    display: block;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: center;
+    text-indent: 0;
+    margin: 0.5em 0
+    }
+.bodycontent-1-top {
+    display: block;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: justify;
+    text-indent: 2em;
+    margin: 1.3em 0 0.5em
+    }
+.bodycontent-2-kaiti {
+    display: block;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: justify;
+    text-indent: 2em;
+    margin: 0.5em 0 0.5em 2em
+    }
+.bodycontent-2-kaiti-top {
+    display: block;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: justify;
+    text-indent: 2em;
+    margin: 1.3em 0 0.5em 2em
+    }
+.bodycontent-2-top {
+    display: block;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: justify;
+    text-indent: 0;
+    margin: 1.3em 0 0.5em 4em
+    }
+.calibre {
+    display: block;
+    font-size: 1em;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 5pt
+    }
+.calibre1 {
+    background-color: transparent;
+    display: block;
+    font-size: 1em;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 5pt
+    }
+.calibre2 {
+    display: block;
+    line-height: 1.2
+    }
+.calibre3 {
+    display: block
+    }
+.calibre4 {
+    text-decoration: none
+    }
+.calibre5 {
+    font-size: 0.625em;
+    line-height: 1.2;
+    vertical-align: super;
+    margin: 0
+    }
+.calibre6 {
+    color: gray;
+    display: block;
+    height: 2px;
+    margin: 0.5em auto;
+    border: currentColor inset 1px
+    }
+.calibre7 {
+    font-style: italic
+    }
+.calibre8 {
+    font-size: 0.625em;
+    line-height: 1.2;
+    vertical-align: sub;
+    margin: 0
+    }
+.calibre9 {
+    font-size: 0.75em;
+    line-height: 1.2;
+    vertical-align: super;
+    margin: 0
+    }
+.chatu_img {
+    display: block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 1em 0;
+    padding: 0
+    }
+.chatu_img-float-l-w {
+    display: block;
+    float: left;
+    text-align: center;
+    vertical-align: middle;
+    width: 30%;
+    margin: 1em 1em 1em 0;
+    padding: 0
+    }
+.contents {
+    display: block;
+    font-size: 1em;
+    line-height: 1.2em;
+    text-align: left;
+    text-indent: 0;
+    margin: 0.2em 0
+    }
+.fncontent {
+    display: block;
+    font-size: 0.83333em;
+    line-height: 1.5em;
+    text-align: justify;
+    text-indent: -2em;
+    margin: 0.5em 0 0.5em 2em
+    }
+.letter-top {
+    display: block;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: left;
+    text-indent: 0;
+    margin: 1.3em 2em 0.5em
+    }
+.lettercontent {
+    display: block;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: justify;
+    text-indent: 2em;
+    margin: 0.5em 2em 0.5em 4em
+    }
+.noindent-bodycontent {
+    display: block;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: justify;
+    text-indent: 0;
+    margin: 0.5em 0 0.5em 4em
+    }
+.noindent-bodycontent-1-c-top {
+    display: block;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: center;
+    text-indent: 0;
+    margin: 1.3em 0 0.5em
+    }
+.noindent-bodycontent-1-top {
+    display: block;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: justify;
+    text-indent: 0;
+    margin: 1.3em 0 0.5em
+    }
+.noindent-bodycontent1 {
+    display: block;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: justify;
+    text-indent: 0;
+    margin: 0.5em 0
+    }
+.parttitle {
+    display: block;
+    font-size: 1.66667em;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: left;
+    text-indent: 0;
+    margin: 2em 0 1em
+    }
+.pic-h {
+    height: 2.5em;
+    text-align: center;
+    vertical-align: middle;
+    width: auto;
+    margin: 0;
+    padding: 0
+    }
+.pic-img {
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+    margin: 0;
+    padding: 0
+    }
+.pic-img-w {
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 10%;
+    margin: 0;
+    padding: 0
+    }
+.pic-img-w1 {
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 60%;
+    margin: 0;
+    padding: 0
+    }
+.pic-img-w2 {
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 15%;
+    margin: 0;
+    padding: 0
+    }
+.pic-img-w3 {
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 75%;
+    margin: 0;
+    padding: 0
+    }
+.pic-img-w4 {
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 30%;
+    margin: 0;
+    padding: 0
+    }
+.pic-img-w5 {
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 35%;
+    margin: 0;
+    padding: 0
+    }
+.pic-img-w6 {
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 45%;
+    margin: 0;
+    padding: 0
+    }
+.pic-img-w7 {
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 20%;
+    margin: 0;
+    padding: 0
+    }
+.pic-img-w8 {
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 55%;
+    margin: 0;
+    padding: 0
+    }
+.pic-img-w9 {
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 65%;
+    margin: 0;
+    padding: 0
+    }
+.pic-img-w10 {
+    height: auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 70%;
+    margin: 0;
+    padding: 0
+    }
+.pic-s {
+    height: 1em;
+    text-align: center;
+    vertical-align: middle;
+    width: auto;
+    margin: 0;
+    padding: 0
+    }
+.poemcontent {
+    display: block;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: left;
+    text-indent: 0;
+    margin: 0 0 0 4em
+    }
+.poemcontent-1-top {
+    display: block;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: left;
+    text-indent: 0;
+    margin: 1.3em 0 0 4em
+    }
+.prefacetitle-c {
+    display: block;
+    font-size: 1.66667em;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+    text-indent: 0;
+    margin: 1.6em 0 0;
+    border: currentColor none medium
+    }
+.prefacetitle-c1 {
+    display: block;
+    font-size: 1.66667em;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+    text-indent: 0;
+    margin: 1.6em 0 0
+    }
+.signcontent-1-kaiti {
+    display: block;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: right;
+    text-indent: 0;
+    margin: 0
+    }
+.signcontent-1-kaiti-top {
+    display: block;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: right;
+    text-indent: 0;
+    margin: 1.3em 0 0
+    }
+.tuti {
+    display: block;
+    font-size: 0.83333em;
+    line-height: 1.5em;
+    text-align: center;
+    text-indent: 0;
+    margin: 0.5em 0
+    }
+.underline {
+    text-decoration: underline
+    }

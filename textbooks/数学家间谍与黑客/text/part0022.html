@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="../stylesheet.css" rel="stylesheet" type="text/css"/>
+<link href="../page_styles.css" rel="stylesheet" type="text/css"/>
+</head>
+  <body class="calibre3">
+  <h2 class="calibre4" id="KVCC1-80aa98e934db469689808312cf09950c">创新：希尔密码</h2>
+
+  <p class="calibre5">看到这里，我们已经明白，以某种提前设定好的方式替换字符的加密方法，通常很容易被破译者破解。</p>
+
+  <p class="calibre5">1929年，美国数学家莱斯特·S.希尔（Lester S. Hill）结合模运算和线性代数发明了一套新的加密系统，申请专利后意欲销售，但未成功。</p>
+
+  <p class="calibre5">接下来我们可以看到，在加密信息时，矩阵是一个非常有效的工具，可以把文本编为一个个字母对，每个字母都有对应数值。</p>
+
+  <p class="calibre5">我们用矩阵加密一条信息：</p>
+
+  <div class="image-single"><img alt="" src="../images/00052.jpeg" class="calibre2"/></div>
+
+  <p class="calibre5">限制条件是行列式为1，即<span class="italic">ad</span>-<span class="italic">bc</span>=1。使用逆矩阵解密这条信息：</p>
+
+  <div class="image-single"><img alt="" src="../images/00066.jpeg" class="calibre2"/></div>
+
+  <p class="calibre5">对行列式的值的限制条件确定后，逆矩阵就可以作为解译工具进行运算了。通常，含有<span class="italic">n</span>个字符的字母表，其gcd（<span class="italic">A,n</span>的行列式）=1。如果对应结果正确，那么模运算可以逆向就不能确定了。</p>
+
+  <div class="greybg">
+    <p class="heiti">简单了解线性代数</p>
+
+    <p class="kaiti1">矩阵是指先排列“行”再排列“列”的数字表格。比如，2×2矩阵的形式为：</p>
+
+    <div class="image-single"><img alt="" src="../images/00093.jpeg" class="calibre2"/></div>
+
+    <p class="kaiti1">2×1矩阵的形式为：</p>
+
+    <div class="image-single"><img alt="" src="../images/00121.jpeg" class="calibre2"/></div>
+
+    <p class="kaiti1">两个矩阵相乘得到一个新的2×1矩阵，叫作列向量：</p>
+
+    <div class="image-single"><img alt="" src="../images/00107.jpeg" class="calibre2"/></div>
+
+    <p class="kaiti1">在2×2矩阵中，<span class="italic">ad</span>-<span class="italic">bc</span>的值叫作矩阵的行列式。</p>
+  </div>
+
+  <p class="calibre5">继续看刚才的例子，取26个字母的字母表，加上一个代表“空格”的字符（方便起见，我们在此用@表示“空格”）。每个字母都赋予一个数值，如下所示：</p>
+
+  <div class="image-single"><img alt="" src="../images/00080.jpeg" class="calibre2"/></div>
+
+  <p class="calibre5">计算0和26之间的值，要用模27进行运算。</p>
+
+  <p class="calibre5">加密和解密文本的过程如下页所示：首先确定行列式为1的加密矩阵<span class="italic">A</span>。</p>
+
+  <p class="calibre5">比如，</p>
+
+  <div class="image-single"><img alt="" src="../images/00042.jpeg" class="calibre2"/></div>
+
+  <p class="calibre5">解密矩阵就是逆矩阵</p>
+
+  <div class="image-single"><img alt="" src="../images/00135.jpeg" class="calibre2"/></div>
+
+  <p class="calibre5">因此，<span class="italic">A</span>就是加密密钥，而<span class="italic">A</span><sup class="calibre10">−1</sup>是译解密钥。</p>
+
+  <p class="calibre5">下面，我们以信息“BOY”（男孩）为例。信息中的字母成对分为：BOY@。在表中对应的数字也以成对的方式列出来，即（1,14）和（24,26）。接下来，每对数字均乘以矩阵<span class="italic">A</span>：</p>
+
+  <div class="image-single"><img alt="" src="../images/00006.jpeg" class="calibre2"/></div>
+
+  <p class="calibre5">根据表格，所得结果对应的字母为（Q,T）；</p>
+
+  <div class="image-single"><img alt="" src="../images/00018.jpeg" class="calibre2"/></div>
+
+  <p class="calibre5">根据表格，所得结果对应的字母为（V,O）。</p>
+
+  <p class="calibre5">最终，信息“BOY”加密为“QTVO”。</p>
+
+  <p class="calibre5">译解时，使用矩阵进行逆向运算：</p>
+
+  <div class="image-single"><img alt="" src="../images/00032.jpeg" class="calibre2"/></div>
+
+  <p class="calibre5">得到字母对（Q,T），在表格中对应的数值为：(16,19)，然后乘以<span class="italic">A</span><sup class="calibre10">−1</sup>，得到：</p>
+
+  <p class="calibre5"><img alt="" class="hangz-illustrations" src="../images/00073.gif"/>(mod. 27),对应字母对(B, O)；</p>
+
+  <p class="calibre5">同理，第二组字母对（V,O）对应的数字为（21,14），得到：</p>
+
+  <p class="calibre5"><img alt="" class="hangz-illustrations" src="../images/00087.gif"/>(mod.27),对应(Y, @)。</p>
+
+  <p class="calibre5">以上便是译解密钥的过程。</p>
+
+  <p class="calibre5">在这个例子中，我们用的是两个字符对。如果把字母分为三个一组甚至四个一组时，保密性会大大增强。在这些情况中，计算时各自使用3×3矩阵和4×4矩阵，如果手动计算的话，是极为费时耗力的。不过，借助现代计算机，计算大型矩阵及相应的逆矩阵已成为可能。</p>
+
+  <p class="calibre5">但是希尔密码有很大的弱点：信息接收者拿到明文的一个小片段，就有可能破解整个信息。显然探索完美密码的征程远未结束。</p>
+<script src="../../math.js"></script></body>
+</html>

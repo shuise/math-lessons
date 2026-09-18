@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<package version="2.0" unique-identifier="PrimaryID" mlns="http://www.idpf.org/2007/opf">
+<metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+<dc:title>数学:确定性的丧失</dc:title>
+<dc:identifier opf:scheme="ISBN"></dc:identifier>
+<dc:language>简体中文</dc:language>
+<dc:creator>[美] M·克莱因 译者: 李宏魁</dc:creator>
+<dc:publisher>epub掌上书苑</dc:publisher>
+<dc:description>　　绝大多数有知识的人今天仍然认为数学是关于物质世界的不可动摇的知识体系，数学推理是准确无误的。这本专著驳斥了这种神话。作者M·克莱因指出，今天，普遍接受的数学概念已不复存在，事实上，有许多相互矛盾的数学概念；但是，在描述和研究自然与社会现象时，数学的有效性却在持续扩大。这是为什么？
+　　全书在非专业层次上探讨数学尊严的兴衰，详细介绍了数学真理的起源、数学真理的繁荣、科学的数学化、数学向何处去等内容。</dc:description>
+<dc:coverage></dc:coverage>
+<dc:source>http://www.cnepub.com</dc:source>
+<dc:date>2010-09-01</dc:date>
+<dc:rights>本电子书由epubBuilder制作生成，欢迎访问http://www.cnepub.com浏览海量电子书。</dc:rights>
+<dc:subject>专业书籍</dc:subject>
+<dc:contributor></dc:contributor>
+<dc:type>[type]</dc:type>
+<dc:format></dc:format>
+<dc:relation></dc:relation>
+<dc:builder>epubBuilder</dc:builder>
+<dc:builder_version>2.5.8.30</dc:builder_version>
+<meta name="cover" content="cover-image"/>
+</metadata>
+<manifest>
+<!-- Content Documents -->
+<item id="main-css" href="css/main.css" media-type="text/css"/>
+<item id="coverpage"  href="coverpage.html"  media-type="application/xhtml+xml"/>
+<item id="chapter3"  href="chapter3.html"  media-type="application/xhtml+xml"/>
+<item id="chapter4"  href="chapter4.html"  media-type="application/xhtml+xml"/>
+<item id="chapter5"  href="chapter5.html"  media-type="application/xhtml+xml"/>
+<item id="chapter6"  href="chapter6.html"  media-type="application/xhtml+xml"/>
+<item id="chapter8"  href="chapter8.html"  media-type="application/xhtml+xml"/>
+<item id="chapter13"  href="chapter13.html"  media-type="application/xhtml+xml"/>
+<item id="chapter16"  href="chapter16.html"  media-type="application/xhtml+xml"/>
+<item id="chapter21"  href="chapter21.html"  media-type="application/xhtml+xml"/>
+<item id="chapter30"  href="chapter30.html"  media-type="application/xhtml+xml"/>
+<item id="chapter35"  href="chapter35.html"  media-type="application/xhtml+xml"/>
+<item id="chapter49"  href="chapter49.html"  media-type="application/xhtml+xml"/>
+<item id="chapter60"  href="chapter60.html"  media-type="application/xhtml+xml"/>
+<item id="chapter66"  href="chapter66.html"  media-type="application/xhtml+xml"/>
+<item id="chapter80"  href="chapter80.html"  media-type="application/xhtml+xml"/>
+<item id="chapter86"  href="chapter86.html"  media-type="application/xhtml+xml"/>
+<item id="chapter93"  href="chapter93.html"  media-type="application/xhtml+xml"/>
+<item id="chapter104"  href="chapter104.html"  media-type="application/xhtml+xml"/>
+<item id="chapter111"  href="chapter111.html"  media-type="application/xhtml+xml"/>
+
+<item id="ncx"  href="fb.ncx" media-type="application/x-dtbncx+xml"/>
+<item id="css" href="css/main.css" media-type="text/css"/>
+<item id="cover-image" href="images/cover.jpg" media-type="image/jpeg"/>
+<item id="cover-image" href="images/cover.jpg" media-type="image/jpeg"/></manifest>
+<spine toc="ncx">
+<itemref idref="coverpage" linear="yes"/>
+<itemref idref="chapter3" linear="yes"/>
+<itemref idref="chapter4" linear="yes"/>
+<itemref idref="chapter5" linear="yes"/>
+<itemref idref="chapter6" linear="yes"/>
+<itemref idref="chapter8" linear="yes"/>
+<itemref idref="chapter13" linear="yes"/>
+<itemref idref="chapter16" linear="yes"/>
+<itemref idref="chapter21" linear="yes"/>
+<itemref idref="chapter30" linear="yes"/>
+<itemref idref="chapter35" linear="yes"/>
+<itemref idref="chapter49" linear="yes"/>
+<itemref idref="chapter60" linear="yes"/>
+<itemref idref="chapter66" linear="yes"/>
+<itemref idref="chapter80" linear="yes"/>
+<itemref idref="chapter86" linear="yes"/>
+<itemref idref="chapter93" linear="yes"/>
+<itemref idref="chapter104" linear="yes"/>
+<itemref idref="chapter111" linear="yes"/>
+
+</spine>
+<guide>
+<reference type="cover" title="封面"  href="coverpage.html"/>
+<reference type="text" title="总序"  href="chapter3.html"/>
+<reference type="text" title="序言"  href="chapter4.html"/>
+<reference type="text" title="引论"  href="chapter5.html"/>
+<reference type="text" title="第一章 数学真理的起源"  href="chapter6.html"/>
+<reference type="text" title="第二章 数学真理的繁荣"  href="chapter8.html"/>
+<reference type="text" title="第三章 科学的数学化"  href="chapter13.html"/>
+<reference type="text" title="第四章 第一场灾难：真理的丧失"  href="chapter16.html"/>
+<reference type="text" title="第五章 一门逻辑学科不合逻辑的发展我们将不会悲伤，"  href="chapter21.html"/>
+<reference type="text" title="第六章 不合逻辑的发展：分析的困境任何研究工作的开端，几乎都是极不完美的尝试，且通常并不成功。"  href="chapter30.html"/>
+<reference type="text" title="第七章 不合逻辑的发展：19 世纪的困境噢，上帝，为什么二加二等于四？"  href="chapter35.html"/>
+<reference type="text" title="第八章 不合逻辑的发展：天堂之门现在人们可以说，绝对的严格已经达到了。"  href="chapter49.html"/>
+<reference type="text" title="第九章 天堂受阻：理性的新危机"  href="chapter60.html"/>
+<reference type="text" title="第十章 逻辑主义与直觉主义"  href="chapter66.html"/>
+<reference type="text" title="第十一章 形式主义与集合论公理化基础与现代数学的浩翰大海相比，那点可怜的残余算什么。直觉主义者所得到的是一些不完整的、没有联系的孤立的结论。"  href="chapter80.html"/>
+<reference type="text" title="第十二章 灾 难"  href="chapter86.html"/>
+<reference type="text" title="第十三章 数学的孤立"  href="chapter93.html"/>
+<reference type="text" title="第十四章 数学向何处去"  href="chapter104.html"/>
+<reference type="text" title="第十五章 自然的权威"  href="chapter111.html"/>
+
+</guide>
+</package>

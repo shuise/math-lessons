@@ -1,0 +1,137 @@
+.bodycontent {
+    display: block;
+    font-family: "";
+    font-size: 0.75em;
+    letter-spacing: auto;
+    line-height: 1.5em;
+    text-align: left;
+    text-indent: 2em;
+    margin: 0.6em 0
+    }
+.boldf {
+    display: block;
+    font-size: 0.75em;
+    font-weight: bold;
+    text-indent: 2.3em;
+    margin: 1em 0
+    }
+.boldt {
+    font-weight: bold;
+    padding: 0
+    }
+.calibre {
+    display: block;
+    font-size: 1em;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 5pt
+    }
+.calibre1 {
+    font-size: 1em;
+    line-height: normal;
+    vertical-align: super
+    }
+.calibre2 {
+    font-size: 0.75em;
+    line-height: normal;
+    vertical-align: super
+    }
+.calibre3 {
+    font-size: 0.77778em;
+    line-height: normal;
+    vertical-align: super
+    }
+.copyright {
+    color: #000;
+    display: block;
+    font-family: "";
+    font-size: 1.41667em;
+    font-weight: bold;
+    letter-spacing: auto;
+    line-height: 2em;
+    text-align: left;
+    text-indent: 0;
+    margin: 1em 0
+    }
+.dateauthor {
+    display: block;
+    font-family: "FZKTK--GBK1-0", "FZKT--GB1-4", "STKaiti-SC-Regular", "STKAITI" "楷体";
+    font-size: 1em;
+    letter-spacing: auto;
+    line-height: 1.5em;
+    text-align: right;
+    margin: 0.5em 0 1em
+    }
+.illustration {
+    display: block;
+    text-align: center;
+    margin: 1em 0
+    }
+.onetitle {
+    color: #000;
+    display: block;
+    font-family: "";
+    font-size: 1.41667em;
+    font-weight: bold;
+    letter-spacing: auto;
+    line-height: 1.5em;
+    text-align: left;
+    text-indent: 0;
+    margin: 0.8em 0 5em
+    }
+.quotation {
+    display: block;
+    font-family: "FZKTK--GBK1-0", "FZKT--GB1-4", "STKaiti-SC-Regular", "STKAITI" "楷体";
+    font-size: 0.75em;
+    letter-spacing: auto;
+    line-height: 1.4em;
+    text-align: left;
+    text-indent: 2em;
+    margin: 0.5em 1em 0.1em
+    }
+.rarefont {
+    height: 1em;
+    width: auto
+    }
+.sgc-toc-level {
+    display: block;
+    margin-left: 0
+    }
+.sgc-toc-level1 {
+    display: block;
+    margin-left: 2em
+    }
+.sgc-toc-title {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 1em;
+    text-align: center
+    }
+.text {
+    display: block;
+    font-family: "";
+    font-size: 1em;
+    letter-spacing: auto;
+    line-height: 1.5em;
+    text-align: left;
+    text-indent: 2em;
+    margin: 0.6em 0
+    }
+.tp {
+    height: auto;
+    width: 70%
+    }
+.twotitle {
+    color: #000;
+    display: block;
+    font-family: "";
+    font-size: 1.41667em;
+    font-weight: bold;
+    letter-spacing: auto;
+    line-height: 1.5em;
+    text-align: left;
+    text-indent: 0;
+    margin: 1em 0 3em
+    }

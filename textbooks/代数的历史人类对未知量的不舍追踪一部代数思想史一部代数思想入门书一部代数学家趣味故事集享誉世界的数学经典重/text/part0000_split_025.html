@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body class="calibre">
+<h1 id="nav_point_23" class="not-in-toc">数学基础知识：代数几何（AG）</h1>
+<p class="calibre1">我将在第 13 章中介绍的几何对近世代数产生了极其重要的影响。后文将试着沿着其影响的本质和进展展开叙述。我只想在这里介绍与代数几何有关的几个基本思想。按照悠久的数学传统，我将用圆锥截线来介绍。</p>
+<p class="calibre7">※※※</p>
+<p class="calibre1">圆锥截线通常称为“圆锥曲线”，是一些平面曲线的总称，用平面截一个圆锥就可以得到圆锥曲线。（还要注意，在数学上，人们认为圆锥不止于它的顶点，而是向两个方向无限延伸。）在图 AG-1 中，截面是你在读的这张纸面，你必须把它想象成透明的。这个圆锥的顶点在这个截面的后面。在第一幅图中，圆锥的轴正好与纸面成直角，所以截线是圆。然后，我旋转这个圆锥，把圆锥的远端向上提，于是这个圆变成一个椭圆。当我继续把这个圆锥向上提时，这个椭圆的一端“趋于无穷”，我会得到一条抛物线。将这个圆锥继续向上提起，越过顶点时，我会得到两部分曲线，它们被称为双曲线 <span class="zhu_shi_bian_hao">1</span>。</p>
+<p class="zhu_shi_nei_rong"><span class="zhu_shi_bian_hao_xia">1</span>“椭圆”“抛物线”和“双曲线”这些词都是由古希腊数学家阿波罗尼奥斯给出的。</p>
+<p class="calibre7"><img src="../images/00699.jpeg" alt="" width="85%" class="calibre13"/></p>
+<p class="calibre1"><strong class="calibre2">图 AG-1　纸面截圆锥得到的圆锥曲线</strong></p>
+<p class="calibre1">这些当然都是几何。为了得到代数，我们必须跟随笛卡儿。对于定义一条圆锥曲线的无穷多个点，其笛卡儿坐标满足一个关于 <img src="../images/00002.gif" alt="x" class="calibre9"/> 和 <img src="../images/00036.gif" alt="y" class="calibre9"/> 的二次方程，这个方程是</p>
+<p class="calibre7"><img src="../images/00700.gif" alt="a^2+2hxy+by^2+2gx+2fy+c=0" class="calibre9"/></p>
+<p class="calibre1">（上面的方程的系数所选用的字母——<img src="../images/00045.gif" alt="a" class="calibre9"/>、<img src="../images/00444.gif" alt="h" class="calibre9"/>、<img src="../images/00046.gif" alt="b" class="calibre9"/>、<img src="../images/00371.gif" alt="g" class="calibre9"/>、<img src="../images/00443.gif" alt="f" class="calibre9"/> ——可能看起来有点儿奇怪，稍后我会解释。）表述这件事的另一种方法是，一条圆锥曲线就是某个二元二次多项式的<strong class="calibre2">零点集</strong>。它是满足以下条件的点 <img src="../images/00701.gif" alt="(x,y)" class="calibre9"/> 的集合：将 <img src="../images/00701.gif" alt="(x,y)" class="calibre9"/> 代入多项式中，计算结果为 0。</p>
+<p class="calibre1">例如，图 AG-2a 中的椭圆的方程是</p>
+<p class="calibre7"><img src="../images/00702.gif" alt="153x^2-192xy+97y^2+120x-590y+1600=0" class="calibre9"/></p>
+<p class="calibre1">现在，如果把这个椭圆移动到这个平面的其他地方，然后再像图 AG-2b 那样稍微旋转一下，那么这个代数方程会发生什么变化呢？</p>
+<p class="calibre1">这个方程当然会改变。对于这个椭圆，它的新方程是</p>
+<p class="calibre7"><img src="../images/00703.gif" alt="369x^2+960xy+1321y^2+5388x+8402y+18~844=0" class="calibre9"/></p>
+<p class="calibre1">但是，<strong class="calibre2">它仍然代表同一条圆锥曲线</strong>。它的大小和形状都没有改变，它既没有变大也没有变小，既没有变圆也没有变扁。</p>
+<p class="calibre7"><img src="../images/00704.gif" alt="" width="52%" class="calibre45"/></p>
+<p class="calibre1"><strong class="calibre2">图 AG-2a</strong></p>
+<p class="calibre7"><img src="../images/00705.gif" alt="" width="52%" class="calibre45"/></p>
+<p class="calibre1"><strong class="calibre2">图 AG-2b</strong></p>
+<p class="calibre1">于是就出现了下面这个非常有趣的问题：在这两个代数表达式中，是什么告诉我们它们表示的是同一条圆锥曲线呢？在从一个方程变成另一个方程的过程中，什么保持不变？或像数学家说的，<strong class="calibre2">不变量</strong>是什么？</p>
+<p class="calibre1">答案并不是显然的。所有系数的大小都改变了，而且其中两个系数的符号也发生了变化（负号变正号）。但是，不变量还是隐藏于其中。再次给出方程的一般形式：</p>
+<p class="calibre7"><img src="../images/00511.gif" alt="ax^2+2hxy+by^2+2gx+2fy+c=0" class="calibre9"/></p>
+<p class="calibre1">计算以下数值：</p>
+<p class="calibre7"><img src="../images/00706.gif" alt="\begin{matrix}C=ab-h^2\\\Delta=abc+2fgh-af^2-bg^2-ch^2\end{matrix}" class="calibre9"/></p>
+<p class="calibre1">在前面两个椭圆方程中，<img src="../images/00235.gif" alt="C" class="calibre9"/> 分别计算得 5625 和 257 049，<img src="../images/00707.gif" alt="\Delta" class="calibre9"/> 分别为 -1 265 625 和 -390 971 529。显然这些数值也不是不变量。但是注意：计算两种情况下的 <img src="../images/00708.gif" alt="\Delta^2/C^3" class="calibre9"/>，结果都是 9。无论把这个椭圆移动到平面的什么地方，无论怎样旋转它，无论由此得到什么方程，根据方程的系数计算，<img src="../images/00708.gif" alt="\Delta^2/C^3" class="calibre9"/> 的结果都是 9。<img src="../images/00708.gif" alt="\Delta^2/C^3" class="calibre9"/> 是一个<strong class="calibre2">不变量</strong>。事实上，如果先取这个数的平方根，然后再乘以 π，我们就可以得到该椭圆的面积。在平面上移动该椭圆时，它的面积显然是不变的。</p>
+<p class="calibre7">椭圆的面积 <img src="../images/00709.gif" alt="=\pi\times\sqrt{\Delta^2/C^3} " class="calibre9"/></p>
+<p class="calibre1">下面是另一个不变量。使用系数 <img src="../images/00045.gif" alt="a" class="calibre9"/>、<img src="../images/00046.gif" alt="b" class="calibre9"/> 和刚才计算的 <img src="../images/00235.gif" alt="C" class="calibre9"/> 求以下二次方程的两个根：</p>
+<p class="calibre7"><img src="../images/00710.gif" alt="t^2-(a+b)t+C=0" class="calibre9"/></p>
+<p class="calibre1">用较小的根除以较大的根，再用 1 减去这个商，再取平方根，得到的数通常称为 <img src="../images/00413.gif" alt="e" class="calibre9"/>（或者 <img src="../images/00320.gif" alt="\varepsilon" class="calibre9"/>，以便与欧拉常数 <img src="../images/00711.gif" alt="{\rm e=2.718~281~828~459\cdots" class="calibre9"/> 区别，欧拉常数是自然对数的底），它衡量了这个椭圆的<strong class="calibre2">离心率</strong>，即这个椭圆偏离圆的程度。如果 <img src="../images/00712.gif" alt="e=0" class="calibre9"/>，那么这个椭圆就<strong class="calibre2">是</strong>圆；如果 <img src="../images/00712.gif" alt="e=0" class="calibre9"/>，那么这个椭圆实际上是抛物线。显然，这应该是一个不变量，确实如此。如果计算上面给出的椭圆的两个方程的 <img src="../images/00413.gif" alt="e" class="calibre9"/>，那么结果都是 <img src="../images/00713.gif" alt="\dfrac{2}{3}\sqrt{2} " class="calibre9"/>，约等于 0.942 809 04，与圆相比，它更接近抛物线。可以想象，这是一个长长瘦瘦的椭圆。</p>
+<p class="calibre1">这个椭圆的实际大小是多少？当椭圆被移动时，大小不会发生变化。它们也应该是系数背后的不变量吧？是的。将刚才计算的不变量 <img src="../images/00708.gif" alt="\Delta^2/C^3" class="calibre9"/> 记为 <img src="../images/00265.gif" alt="I" class="calibre9"/>，那么这个椭圆的长轴是</p>
+<p class="calibre7"><img src="../images/00714.gif" alt="2\times\sqrt{\sqrt{I\div(1-e^2)}}" class="calibre9"/></p>
+<p class="calibre1">短轴是</p>
+<p class="calibre7"><img src="../images/00715.gif" alt="2\times\sqrt{\sqrt{I\times(1-e^2)}}" class="calibre9"/></p>
+<p class="calibre1">如果对上面那个椭圆的两个方程进行计算，可得其长轴都是 6，短轴都是 2。同我们所期待的一样，这些数都是不变量。</p>
+<p class="calibre7">※※※</p>
+<p class="calibre1">我在前面花了一些时间介绍笛卡儿几何的基本内容，因为它不仅让我们看到了不变量的思想，而且也让我们看到了近世代数中一些其他关键想法。</p>
+<p class="calibre1">例如，关于圆锥曲线的讨论中还隐含着<strong class="calibre2">矩阵</strong>的思想。对于前面给出的圆锥曲线的一般方程，这个重要的矩阵是</p>
+<p class="calibre7"><img src="../images/00716.gif" alt="\begin{pmatrix}a&amp;h&amp;g\\h&amp;b&amp;f\\g&amp;f&amp;c\end{pmatrix}" class="calibre9"/></p>
+<p class="calibre1">学数学的学生通常用下面这句话来帮助记忆这个矩阵中元素的顺序：“<strong class="calibre2">A</strong>ll <strong class="calibre2">h</strong>airy <strong class="calibre2">g</strong>uys <strong class="calibre2">h</strong>ave <strong class="calibre2">b</strong>ig <strong class="calibre2">f</strong>eet.”我们可以用第 9 章所描述的方法求出这个矩阵的行列式。这个矩阵的行列式就是我在上面定义的 <img src="../images/00707.gif" alt="\Delta" class="calibre9"/>。</p>
+<p class="calibre1">如果在某个笛卡儿坐标系下给定一条圆锥曲线的方程，计算出它的 <img src="../images/00707.gif" alt="\Delta" class="calibre9"/> 的值为 0，那么该圆锥曲线是一条“退化”的圆锥曲线：它或者是一对直线，或者是一条直线，或者是一个点。你可以用这个例子来验证：对于点 (0, 0) 和方程 <img src="../images/00717.gif" alt="x^2+y^2=0" class="calibre9"/>，<img src="../images/00707.gif" alt="\Delta" class="calibre9"/> 的确为 0。</p>
+<p class="calibre7">※※※</p>
+<p class="calibre1">为了了解另一个论题，我们回顾一下前面提到的问题：为什么圆锥曲线的一般方程中通常表示系数的字母——<img src="../images/00045.gif" alt="a" class="calibre9"/>、<img src="../images/00444.gif" alt="h" class="calibre9"/>、<img src="../images/00046.gif" alt="b" class="calibre9"/>、<img src="../images/00371.gif" alt="g" class="calibre9"/>、<img src="../images/00443.gif" alt="f" class="calibre9"/>、<img src="../images/00047.gif" alt="c" class="calibre9"/>——这么奇怪？这里没有 <img src="../images/00273.gif" alt="d" class="calibre9"/> 和 <img src="../images/00413.gif" alt="e" class="calibre9"/> 的原因容易解释：<img src="../images/00273.gif" alt="d" class="calibre9"/> 可能与微积分中使用的 <img src="../images/00718.gif" alt="{\rm d}y/{\rm d}x" class="calibre9"/> 相混淆，而 <img src="../images/00413.gif" alt="e" class="calibre9"/> 可能与欧拉常数 e 相混淆。但是为什么这些字母的排列顺序是这样的呢？为什么一般方程不写成下面这种形式呢？</p>
+<p class="calibre7"><img src="../images/00719.gif" alt="ax^2+bxy+cy^2+fx+gy+h=0" class="calibre9"/></p>
+<p class="calibre1">答案是，简单的笛卡儿平面解析几何的确不是研究圆锥曲线的最好的工具。事实上，如果允许存在<strong class="calibre2">无穷远点</strong>，那么圆锥曲线更适合用代数来处理，而这种几何不允许存在无穷远点。我给出的圆锥曲线的一般方程是从一种更复杂的几何中来的，这种几何允许存在无穷远点。</p>
+<p class="calibre1">对非数学专业人士来说，术语“无穷远点”听起来似乎有点儿令人困惑。其实这只是被引入几何 <span class="zhu_shi_bian_hao">2</span> 中来简化事物的一种表达方式而已。例如，如果允许存在无穷远点，那么难以处理平行线的情况就消失了。于是，原来的说法：</p>
+<p class="zhu_shi_nei_rong"><span class="zhu_shi_bian_hao_xia">2</span>尽管文艺复兴时期的画家们在解决透视问题时一定想到了“无穷远点”这个概念，但是大约在 1610 年天文学家开普勒（1571—1630）才把无穷远点引入数学中。开普勒把直线想象成圆，其圆心在无穷远处，这个概念可能来自他的光学研究，在光学里想象无穷远点就变得很自然了。</p>
+<blockquote class="calibre8">
+<p class="calibre1">平面内任意两条不平行的直线都交于一点，两条平行直线不相交，</p>
+</blockquote>
+<p class="calibre1">可以改为：</p>
+<blockquote class="calibre8">
+<p class="calibre1">平面内任意两条直线都交于一点。</p>
+</blockquote>
+<p class="calibre1">我们对此可以理解为，想象成两条平行线在一个无穷远点相交。你现在也许不理解这种做法的重要性，但是不可否认，这是一种简化。</p>
+<p class="calibre1">然而，在平坦的欧几里得平面内，传统且好用的笛卡儿坐标系不能解决这个问题。如果用笛卡儿坐标描述一个无穷远点，你只能想到写成 (∞,∞)。这只是一个点。然而，直觉告诉我们，如果一对平行线在一个无穷远点相交，那么与它们不平行的另外一对平行线应该在另一个<strong class="calibre2">不同的</strong>无穷远点相交。换句话说，我们需要很多无穷远点。</p>
+<p class="calibre1">表示无穷远点的另一种方法，就是用有<strong class="calibre2">三</strong>个坐标的坐标系取代通常的有两个坐标的坐标系。用坐标 <img src="../images/00471.gif" alt="(x,y,z)" class="calibre9"/> 表示平面上的点，而不再用 <img src="../images/00701.gif" alt="(x,y)" class="calibre9"/> 表示。我们在这里需要采取一些预防措施，以防止这种表示方法变成一种三维几何。下面是一个限制条件：我们认为与 <img src="../images/00002.gif" alt="x" class="calibre9"/>、<img src="../images/00036.gif" alt="y" class="calibre9"/>、<img src="../images/00050.gif" alt="z" class="calibre9"/> 具有相同比例的所有坐标 <img src="../images/00471.gif" alt="(x,y,z)" class="calibre9"/> 代表同一个点。例如，(7, 2, 5)、(14, 4, 10) 和 (84, 24, 60) 都代表同一个点。这不是什么新想法，我们在小学时就已经知道 <img src="../images/00682.gif" alt="\dfrac{3}{4} " class="calibre9"/>、<img src="../images/00683.gif" alt="\dfrac{6}{8} " class="calibre9"/>、<img src="../images/00720.gif" alt="\dfrac{9}{12} " class="calibre9"/>、<img src="../images/00721.gif" alt="\dfrac{30}{40} " class="calibre9"/> 等都表示同一个分数。这个限制条件可以把维数压回到二维。</p>
+<p class="calibre1">另一种考虑这种新坐标系的方法是，分别用 <img src="../images/00722.gif" alt="\dfrac{x}{z}" class="calibre9"/> 和 <img src="../images/00723.gif" alt="\dfrac{y}{z}" class="calibre9"/> 代替 <img src="../images/00002.gif" alt="x" class="calibre9"/> 和 <img src="../images/00036.gif" alt="y" class="calibre9"/>。如果 <img src="../images/00050.gif" alt="z" class="calibre9"/> 是 0，<img src="../images/00722.gif" alt="\dfrac{x}{z}" class="calibre9"/> 和 <img src="../images/00723.gif" alt="\dfrac{y}{z}" class="calibre9"/> 当然无法计算：它们就是“无穷远”的。新的三个坐标的坐标系避免了这些小麻烦。我们只需通过让 <img src="../images/00050.gif" alt="z" class="calibre9"/> 等于 0 就可以表示无穷远点。此时，我们可以认为 <img src="../images/00724.gif" alt="(x,y,0)" class="calibre9"/>、<img src="../images/00725.gif" alt="(2x,2y,0)" class="calibre9"/>、<img src="../images/00726.gif" alt="(3x,3y,0)" class="calibre9"/> 以及所有其他 <img src="../images/00727.gif" alt="(kx,ky,0)" class="calibre9"/> 都表示同一个无穷远点，只不过表示方法不同而已；而且这样的无穷远点有很多，不止一个。</p>
+<p class="calibre1">事实上，它们都位于同一条直线上，这条直线的方程是 <img src="../images/00728.gif" alt="z=0" class="calibre9"/>。这条直线被称为“无穷远直线”，如果现在你遇到它，你就应该不会感到惊讶了。只有一条无穷远直线，它是由很多无穷远点组成的，不同的无穷远点可用不同的坐标来表示。</p>
+<p class="calibre1">这种在通常的笛卡儿几何中添加一条无穷远直线的新几何被称为<strong class="calibre2">射影几何</strong>。我描述的新坐标系能让射影几何符合一些算术要求。但最纯粹的射影几何与坐标无关，它只与那些被投影后仍然正确的几何原理有关。想象一张透明投影片上画着一幅几何图形，这张投影片与平面成一定角度，用来自点光源的光照射它，于是投影片上的几何图形就被投影到这个平面上。在此过程中，一些几何性质不再成立了。例如，圆不再是圆，它变成了圆锥曲线。但是，有些性质仍然成立。我将在第 13 章详细讨论这个问题。</p>
+<p class="calibre7">※※※</p>
+<p class="calibre1">在新坐标系下，圆锥曲线的方程会变成什么样子呢？让我们试着在原来的圆锥曲线方程中分别用 <img src="../images/00722.gif" alt="\dfrac{x}{z}" class="calibre9"/> 和 <img src="../images/00723.gif" alt="\dfrac{y}{z}" class="calibre9"/> 代替 <img src="../images/00002.gif" alt="x" class="calibre9"/> 和 <img src="../images/00036.gif" alt="y" class="calibre9"/>：</p>
+<p class="calibre7"><img src="../images/00729.gif" alt="a\left(\dfrac{x}{z}\right)^2+2h\left(\dfrac{x}{z}\right)\left(\dfrac{y}{z}\right)+b\left(\dfrac{y}{z}\right)^2+2g\left(\dfrac{x}{z}\right)+2f\left(\dfrac{y}{z}\right)+c=0" class="calibre9"/></p>
+<p class="calibre1">将上面这个方程的两端同时乘以 <img src="../images/00730.gif" alt="z^2" class="calibre9"/>，就得到</p>
+<p class="calibre7"><img src="../images/00731.gif" alt="ax^2+2hxy+by^2+2gzx+2fyz+cz^2=0" class="calibre9"/></p>
+<p class="calibre1">稍稍改变一下各项的排列顺序可得</p>
+<p class="calibre7"><img src="../images/00732.gif" alt="ax^2+by^2+cz^2+2fyz+2gzx+2hxy=0" class="calibre9"/></p>
+<p class="calibre1">此时，按照 <img src="../images/00045.gif" alt="a" class="calibre9"/>、<img src="../images/00046.gif" alt="b" class="calibre9"/>、<img src="../images/00047.gif" alt="c" class="calibre9"/>、<img src="../images/00443.gif" alt="f" class="calibre9"/>、<img src="../images/00371.gif" alt="g" class="calibre9"/>、<img src="../images/00444.gif" alt="h" class="calibre9"/> 的顺序排列的理由就很清楚了。在这个新坐标系下，出现了 <img src="../images/00052.gif" alt="x^2" class="calibre9"/>、<img src="../images/00733.gif" alt="y^2" class="calibre9"/>、<img src="../images/00730.gif" alt="z^2" class="calibre9"/> 项，还有 <img src="../images/00734.gif" alt="yz" class="calibre9"/>、<img src="../images/00735.gif" alt="zx" class="calibre9"/>、<img src="../images/00736.gif" alt="xy" class="calibre9"/> 项。注意其中的<strong class="calibre2">对称性</strong>！<span class="zhu_shi_bian_hao">3</span></p>
+<p class="zhu_shi_nei_rong"><span class="zhu_shi_bian_hao_xia">3</span>事实上，不是所有作者都使用这种写法。例如，迈尔斯·里德（1947— ）在他的大作《大学代数几何》（<em class="calibre6">Undergraduate Algebraic Geometry</em>，1988 年由剑桥大学出版社出版）中把一般的非齐次二次多项式写成 <img src="../images/00737.gif" alt="ax^2+bxy+cy^2+dx+ey+f" class="calibre9"/> 的形式。</p>
+<p class="calibre1">从严格的数学意义上说，这里得到的不是真正的对称性，而是<strong class="calibre2">齐次性</strong>。事实上，这种类型的坐标被称为<strong class="calibre2">齐次坐标</strong>。尽管如此，这毕竟是朝着正确的方向前进了一步，同时也展示了对称的概念在现代数学中有多么强大的吸引力。</p>
+<p class="calibre7">※※※</p>
+<p class="calibre1">新坐标系引出了现代数学中另外一个极为重要的话题。一旦开始研究这种新布局，也就是我们添加无穷远点和无穷远直线后得到的事物，你就会发现它很精妙，或者说很奇特，不同于我们熟悉的平坦的欧几里得平面。例如，无穷远直线的<strong class="calibre2">另一端</strong>是什么呢？我再问另外一个问题：给定两条平行线，我们已经断言它们在某个无穷远点相交，如果想到达那个点，我们应该沿着直线的哪个方向前进呢？如果这两条平行线是东西向的，那么这个无穷远点离东端更远还是离西端更远呢？</p>
+<p class="calibre1">这类问题表面上看起来很幼稚，像是小孩子提出的问题，但它们非常重要。实际上，这些问题把我们引向了<strong class="calibre2">拓扑学</strong>的领域。</p>
+<p class="calibre1">在数学科普著作中，拓扑学通常被介绍为“橡皮几何学”。拓扑学家对图形的下列性质感兴趣：这些图形在任意方向被任意大的力量拉伸时（只要不被撕裂或割裂）仍然保持不变的性质。例如，在这样的规则下，球面等价于立方体表面，但是它与甜甜圈的表面不等价。而甜甜圈的表面等价于带一个柄的咖啡杯的表面 <span class="zhu_shi_bian_hao">4</span>。</p>
+<p class="zhu_shi_nei_rong"><span class="zhu_shi_bian_hao_xia">4</span>美国明尼苏达大学的几何中心出售了一部视频——《球面外翻》（<em class="calibre6">Outside In</em>），它展示了 20 世纪拓扑学中最吸引人的发现之一：如何将一个球面外翻。互联网上有一个简短的动画，但如果你想学习一点拓扑学，我建议你购买整个视频。有一段时间，我经常把它拿出来播放，给共进晚餐的客人观看，但这可不是一种成功的社交活动。</p>
+<p class="calibre1">在拓扑意义下，传统的欧几里得平面等价于去掉一个点的球面（想象把这个平面“卷”成一个球面，但是它不能覆盖北极点）。然而，添加那个点后得到的完整球面并不会让我们得到新布局 <span class="zhu_shi_bian_hao">5</span>。那个缺少的点对应无穷远点。而在我们的新布局中（即数学术语<strong class="calibre2">射影平面</strong>），这样的点并不是唯一的，而是有无穷多个。所以，射影平面不拓扑等价于完整的球面，它拓扑等价于一个更特殊的对象：一个有折缝的球面（图 AG-3）。</p>
+<p class="zhu_shi_nei_rong"><span class="zhu_shi_bian_hao_xia">5</span>在欧几里得平面上添加那个缺少的点，你就会得到<strong class="calibre2">黎曼球面</strong>，这对思考复变函数很有帮助，多谢这个无穷远点。</p>
+<p class="calibre7"><img src="../images/00738.jpeg" alt="" width="40%" class="calibre46"/></p>
+<p class="calibre1"><strong class="calibre2">图 AG-3　拓扑意义下的射影平面</strong></p>
+<p class="calibre1">注意，这个对象与莫比乌斯带一样，只有一个侧面。如果一只蚂蚁在上面爬行，让它一直向前爬，并且允许它穿过折缝，那么它能到达表面上的每一个点，无论是里面还是外面。看，一个如此幼稚的问题就把你引到了这么远的地方！</p>
+<p class="calibre7">※※※</p>
+<p class="calibre1"><strong class="calibre2">不变量、矩阵及其行列式、对称、拓扑</strong>——这些都是近世代数的关键概念。事实上，我还没有讨论完圆锥曲线的代数处理。</p>
+<p class="calibre1">我在前面提到，椭圆在平面上移动，这是之前观察的方式。还有一种观察的方式，就是将椭圆看作固定在平面内，而坐标系在移动。（你可以这样想，在一张投影片上印上 <img src="../images/00002.gif" alt="x" class="calibre9"/> 轴、<img src="../images/00036.gif" alt="y" class="calibre9"/> 轴以及坐标方格，让它在平面上滑动。）</p>
+<p class="calibre1">这两种方式都是<strong class="calibre2">变换</strong>的例子，这是现代数学中另外一个非常重要的思想。这些特殊的变换，即只改变位置和定向，而不改变距离和形状的变换，被称为<strong class="calibre2">等距变换</strong>。它们本身就构成了一个研究领域，我将在第 13 章中详述。除此之外，还有更复杂的变换：仿射变换（允许把某些直线拉伸和“缩短”——将矩形变成平行四边形）、射影变换（像上文所说的那样对图形进行投影）、拓扑变换（随意拉伸或挤压，但不能割裂）、洛伦兹变换（在狭义相对论中）、莫比乌斯变换（在复变函数论中）以及许多其他变换。</p>
+<p class="calibre7">※※※</p>
+<p class="calibre1">对于前面提到的齐次坐标，我再多说一点，之前我们用<strong class="calibre2">三</strong>个数 <img src="../images/00471.gif" alt="(x,y,z)" class="calibre9"/> 来确定<strong class="calibre2">二</strong>维空间中的一个点。</p>
+<p class="calibre1">在高中代数里，我们知道在笛卡儿坐标系下，直线的方程是 <img src="../images/00739.gif" alt="lx+my+n=0" class="calibre9"/>。那么，直线在齐次坐标系下的方程是什么呢？</p>
+<p class="calibre1">和之前对圆锥曲线的方程做的一样，我们用 <img src="../images/00722.gif" alt="\dfrac{x}{z}" class="calibre9"/> 和 <img src="../images/00723.gif" alt="\dfrac{y}{z}" class="calibre9"/> 分别代替 <img src="../images/00002.gif" alt="x" class="calibre9"/> 和 <img src="../images/00036.gif" alt="y" class="calibre9"/>，然后化简，可以得到下面的方程：</p>
+<p class="calibre7"><img src="../images/00740.gif" alt="lx+my+nz=0" class="calibre9"/></p>
+<p class="calibre1">这就是直线在齐次坐标系下的方程。注意观察：这个方程表明直线是由三个系数 <img src="../images/00741.gif" alt="(l,m,n)" class="calibre9"/> 决定的，就像一个点是由它的三个齐次坐标 <img src="../images/00471.gif" alt="(x,y,z)" class="calibre9"/> 决定的一样。它更加对称了！</p>
+<p class="calibre1">于是，这引出了一个问题：在齐次坐标系下，我们能否围绕直线而不是点来构建几何呢？毕竟，就如直线是由无穷多个满足某个线性方程 <img src="../images/00739.gif" alt="lx+my+n=0" class="calibre9"/>（其中 <img src="../images/00742.gif" alt="l" class="calibre9"/>、<img src="../images/00491.gif" alt="m" class="calibre9"/>、<img src="../images/00117.gif" alt="n" class="calibre9"/> 是定值）的点构成的一样，点是由无穷多条经过这个点的直线构成的。其中每一条直线都满足方程 <img src="../images/00739.gif" alt="lx+my+n=0" class="calibre9"/>，不过现在点的坐标 <img src="../images/00002.gif" alt="x" class="calibre9"/>、<img src="../images/00036.gif" alt="y" class="calibre9"/>、<img src="../images/00050.gif" alt="z" class="calibre9"/> 是固定的，而系数 <img src="../images/00742.gif" alt="l" class="calibre9"/>、<img src="../images/00491.gif" alt="m" class="calibre9"/>、<img src="../images/00117.gif" alt="n" class="calibre9"/> 可以取无穷多个值，组成经过点 <img src="../images/00471.gif" alt="(x,y,z)" class="calibre9"/> 的无穷直线“束”。</p>
+<p class="calibre1">类似地，我们可以不把类似于圆锥曲线的曲线考虑成动点的轨迹，而是把它看成一条动直线的轨迹，如图 AG-4 所示。</p>
+<p class="calibre7"><img src="../images/00743.jpeg" alt="" width="55%" class="calibre44"/></p>
+<p class="calibre1"><strong class="calibre2">图 AG-4　由直线（而不是点）定义的曲线</strong></p>
+<p class="calibre1">我们能够根据这种思想构建几何吗？当然可以。这种“直线几何”实际上是由德国数学家尤利乌斯·普吕克（1801—1868）于 1829 年开创的。这也把我们带回到对历史的叙述中。</p>
+
+<p class="calibre4" style="margin:0pt; border:0pt; height:1em" id="calibre_pb_75"> </p>
+<script src="../../math.js"></script></body></html>

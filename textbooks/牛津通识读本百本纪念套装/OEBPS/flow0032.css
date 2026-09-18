@@ -1,0 +1,329 @@
+/* 版权信息页标题 */
+h1.copyrightpage-title { 
+	
+	font-weight: normal; 
+	text-align: center; 
+	border-style: none none dotted none;
+	border-width: 1.5px;
+	margin:1em 0em 1em 0em;
+}
+
+/* 版权信息页正文 */
+p.copyright-bodytext {
+	
+	margin:2em;
+	text-indent: 0em;
+	duokan-text-indent: 0em;
+}
+
+
+
+
+/* 封面图像居中 */
+img.img-height100{
+	height:100%;
+}
+/* 封面框图像居中 */
+div.img-center{
+	text-align:center;
+	margin:1em 0em;
+	padding:0em;
+}
+
+img.img{
+
+width:60%;
+}
+
+
+
+/* 目录标题 */
+h1.contents-title {
+	
+	font-weight: normal;
+	border-style: none none dotted none;
+	border-width: 1.5px;
+	margin:1em 0em 1em 0em;
+	text-align:left;
+	text-indent: 0em;
+    duokan-text-indent: 0em;
+	
+
+}
+
+
+span.zy2{
+	font-style:italic;
+}
+
+/* p图注中 */
+p.tuzhu-center{
+	font-family:"楷体";
+	font-size:0.8em;
+	text-align:center;
+}
+/* 目录页标题-一级 */
+div.contents-chapter-1 {
+	
+	font-weight: bold;
+	margin-left:0.5em;
+}
+/* 目录页标题-二级 */
+div.contents-chapter-2 {
+	
+	list-style-type:none;
+	font-weight: normal;
+	margin-left:2em;
+}
+/* 目录页标题-三级 */
+div.contents-chapter-3 {
+	
+	list-style-type:none;
+	font-weight: normal;
+	margin-left:3em;
+}
+/* 一级标题 */
+h1.chapter-one1{
+	color:#af5c0c;
+	margin-top:2em;
+	font-weight: bold; 
+	text-align: center; 
+	margin:2em 0em 2em 0em;
+}
+/* 一级标题 */
+h1
+{
+	font-family: "黑体";
+	
+	margin-top:2em;
+	font-weight: bold; 
+	margin:2em 0em 2em 0em;
+	font-size:1.8em;
+	text-align: center; 
+}
+span.ming{
+font-size:0.6em;
+}
+
+
+
+/* 二级标题 */
+h2
+{
+	font-family: "黑体";
+	
+	margin-top:2em;
+	margin-bottom:2em;
+	font-weight: bold;
+	text-align: center; 
+	font-size:1.5em;
+}
+h3
+{
+	font-family: "黑体";
+	margin-top:2em;
+	font-weight: normal;
+	text-indent: 2em;
+    duokan-text-indent: 0em;
+	font-size:1.5em;
+}
+p.chapter-two{
+	
+	margin-top:2em;
+	font-weight: bold;
+	text-indent: 0em;
+	text-align:center;
+}
+
+
+/* 居中标题 */
+p.center{
+	
+	font-weight: bold;
+	margin:1em 0em 0.5em 0em;
+	text-align:center;
+}
+/* 小标题 */
+p.xiaobiao{
+	font-family:"黑体";
+	font-size:1em;
+	font-weight: bold;
+	text-indent:0em;
+	text-align:left;
+	margin:1em 0em 1em 0em;
+}
+p.xiaobiao-r{
+	font-family:"黑体";
+	font-size:1em;
+	font-weight: bold;
+	text-indent:0em;
+	text-align:right;
+	margin:1em 0em 1em 0em;
+}
+/* 正文 */
+p.bodytext {
+	text-indent: 2em;
+}
+/* 文内引文 */
+p.yinwen{
+	font-family:"楷体";
+    text-indent: 2em;
+	margin:0.5em 0em 0.5em 0em;
+}
+p.yinwen-z{
+	font-family:"楷体";
+	text-align:center;
+}
+/* 文内居中 */
+p.yinwen-c{
+	font-size:1.2em;
+	font-family:"楷体";
+	text-align:center;
+}
+
+span.bold
+{
+	font-size:1.0em;
+	font-style: normal;
+	font-weight: bold;
+}
+/* p图注左 */
+p.tuzhu-left{
+	font-family:"楷体";
+	font-size:0.8em;
+	text-align:left;
+}
+/* p图注中 */
+p.tuzhu-center{
+	font-family:"楷体";
+	font-size:0.8em;
+	text-align:center;
+}
+/* 图片-无图注 */
+img.image-wuzhu{
+	width:100%;
+}
+/* 图片-有图注 */
+img.image-tuzhu{
+	width:100%;
+	margin-bottom:0.3em;
+}
+/* div图片左40% */
+div.zuo{
+	width:40%;
+}
+/* div图片中40% */
+div.zhong{
+	width:50%;
+}
+/* div图片右40% */
+div.you{
+	width:3%;
+	margin:1em 0em -2em auto;
+}
+/* div图片左-环绕40% */
+div.float-left{
+	float:left;
+	width:40%;
+	margin-right:0.5em;
+}
+/* div图片右-环绕40% */
+div.float-right{
+	float:right;
+	width:10%;
+	margin-left:0.5em;
+margin-bottom:2em;
+}
+/* 诗居左 */
+p.shi-l {
+	
+	margin-left: 2em;
+	text-indent: 0em;
+	duokan-text-indent: 0em;
+}
+/* 诗居中 */
+p.shi-r {
+	
+	margin-left: 0em;
+	text-indent: 0em;
+	duokan-text-indent: 0em;
+	text-align:center;
+}
+/* 图片40% */
+img.chapter-before-img40 {
+	width:40%;
+}
+
+/* 落款 */
+p.bodytext-right {
+	font-family:"楷体";
+	text-align:right;
+}
+/* 部分加粗 */
+span.jiacu {
+	font-weight:bold;
+} 
+/* 造字 */
+img.zaozi{
+	height:1.1em;
+	vertical-align:middle;
+}
+/* 公式 */
+img.gongshi{
+	height:1.5em;
+	vertical-align:middle;
+}
+span.noteSuper{
+	vertical-align:super;
+	font-size:0.8em;
+}
+p.noteContent{
+	font-size:0.8em;
+	font-family:"楷体";
+}
+span.xbt{
+	background-color:#0A3579;
+	color:white;
+	padding:0.2em 0.4em;
+	border-radius:1em;
+}
+div.bg-blue{
+	background-color:#C9DAEA;
+	padding:0.5em;
+}
+span.lan{
+	color:#0A3579;
+}
+img.u{
+	width:5em;
+	margin:1.5em 0em 1.5em 0em;
+}
+
+
+span.zy16{
+	font-weight: bold;
+}
+
+p.zy11{
+	font-family:"黑体";
+	font-size:1.2em;
+	font-weight: bold;
+	text-indent:0em;
+	text-align:justfy;
+	margin:1em 0em 1em 0em;
+}
+
+
+
+
+
+p.zy55{
+	font-family:"黑体";
+	font-size:1.2em;
+	font-weight: bold;
+	text-indent:2em;
+	text-align:justfy;
+	margin:1em 0em 1em 0em;
+}
+
+

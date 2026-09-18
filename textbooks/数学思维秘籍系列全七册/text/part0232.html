@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="../stylesheet.css" rel="stylesheet" type="text/css"/>
+<link href="../page_styles.css" rel="stylesheet" type="text/css"/>
+</head>
+  <body class="calibre" id="5L6AS0-e8f2a0cf630f40598dce61535fa557c5">
+<h2 class="sigil_not_in_toc6" id="sigil_toc_id_26">多边形的周长和面积</h2>
+
+  <p class="calibre11">多边形的周长是所有边长之和。例如，如果矩形的底边长度为<span class="italic">b</span>，高为<span class="italic">h</span>，它的周长就是2<span class="italic">b</span> + 2<span class="italic">h</span>，这是因为这个矩形有两条长度为<span class="italic">b</span>的边和两条长度为<span class="italic">h</span>的边。那么，这个矩形的面积是多少呢？我们把1×1方格的面积（平方单位）定义为1。如下图所示，如果<span class="italic">b</span>和<span class="italic">h</span>是正整数，那么我们可以把这个图形分割成<span class="italic">bh</span>个1×1方格，因此它的面积是<span class="italic">bh</span>。一般来说，对于底边为<span class="italic">b</span>、高为<span class="italic">h</span>的任意矩形（其中<span class="italic">b</span>和<span class="italic">h</span>是正数，但不一定是整数），我们将它的面积定义为<span class="italic">bh</span>。</p>
+
+  <div class="chatu">
+    <img alt="" class="calibre8" src="../images/01340.jpeg"/>
+
+    <h5 class="sigil_not_in_toc3">底为<span class="italic">b</span>、高为<span class="italic">h</span>的矩形周长是2<span class="italic">b</span> + 2<span class="italic">h</span>，面积是<span class="italic">bh</span></h5>
+  </div>
+
+  <div class="solidgrey">
+    <h4 class="sigil_not_in_toc1">延伸阅读</h4>
+
+    <p class="calibre9">在本章中，我们一直在利用代数知识解释几何问题。不过，几何学有时候也可以帮助我们解释代数问题。思考一下这样一个代数问题：如果<span class="italic">x</span> 可以取任意正数，那么<span class="italic">x +</span> 1/<span class="italic">x</span>的最小值是多少？如果<span class="italic">x</span> = 1，上式就等于2；如果<span class="italic">x</span> = 1.25，上式就等于1.25 + 0.8 = 2.05；如果<span class="italic">x</span> = 2，得数就是2.5。这些数据似乎表明最小值是2，这个答案是正确的，但我们如何证明呢？在本书第11章中，我们可以通过微积分直截了当地解决这个问题。但是，只要动动脑筋，我们也可以借助简单的几何知识，轻轻松松地完成这项任务。</p>
+
+    <p class="calibre9">下图是一个中间有空洞的正方形。整个图形由4个长方块拼成，每个长方块的边长分别为<span class="italic">x</span>和1/<span class="italic">x</span>。整个图形（包括中间的空洞）的面积是多少？</p>
+
+    <div class="chatu"><img alt="" class="calibre8" src="../images/01341.jpeg"/></div>
+
+    <p class="calibre37">一方面，由于该图形是边长为<span class="italic">x</span> + 1/<span class="italic">x</span>的正方形，因此它的面积为 (<span class="italic">x</span> + 1/<span class="italic">x</span>)<span class="sbiao">2</span>。另一方面，每个长方块的面积是1，这个图形的面积至少是4。也就是说：</p>
+
+    <p class="center">(<span class="italic">x</span> + 1/<span class="italic">x</span>)<span class="sbiao">2</span> H 4</p>
+
+    <p class="calibre9">从而得出 <span class="italic">x</span> + 1/<span class="italic">x</span> H 2。证明完毕。 <img alt="026" class="h-pic1" src="../images/00086.jpeg"/></p>
+  </div>
+
+  <p class="calibre11">从矩形面积的计算方法，我们几乎可以推导出所有几何图形面积的计算方法。我们先来推导三角形面积的计算方法。</p>
+
+  <p class="calibre11"><b class="calibre25">定理：</b>底为<span class="italic">b</span>、高为<span class="italic">h</span>的三角形的面积为<img alt="" class="h-pic1" src="../images/01343.jpeg"/><span class="italic">bh</span>。</p>
+
+  <p class="calibre11">下图中的3个三角形的底都是<span class="italic">b</span>，高都是<span class="italic">h</span>，因此它们的面积相等。从本质上讲，这与本章开头小测试中的问题3相同。对于很多人来说，这是一个让他们吃惊的事实。</p>
+
+  <div class="chatu">
+    <img alt="" class="calibre8" src="../images/01345.jpeg"/>
+
+    <h5 class="sigil_not_in_toc3">底为<span class="italic">b</span>、高为<span class="italic">h</span>的三角形的面积是<img alt="" class="h-pic1" src="../images/01343.jpeg"/><span class="italic">bh</span>。无论直角三角形、锐角三角形还是钝角三角形，都遵循这个规律</h5>
+  </div>
+
+  <p class="calibre14">根据角<span class="italic">A</span>与角<span class="italic">C</span>的大小，可以将这个问题分成3种情况考虑。如果角<span class="italic">A</span>或角<span class="italic">C</span>是直角，我们可以复制三角形<span class="italic">ABC</span>，并把两个三角形放在一起（如下图所示），构成面积为<span class="italic">bh</span>的矩形。由于三角形<span class="italic">ABC</span>的面积是矩形面积的1/2，因此三角形的面积必然等于<img alt="" class="h-pic1" src="../images/01343.jpeg"/><span class="italic">bh</span>。</p>
+
+  <div class="chatu">
+    <img alt="" class="calibre8" src="../images/01348.jpeg"/>
+
+    <h5 class="sigil_not_in_toc3">两个底为<span class="italic">b</span>、高为<span class="italic">h</span>的三角形可以构成一个面积为<span class="italic">bh</span>的矩形</h5>
+  </div>
+
+  <p class="calibre14">如果角<span class="italic">A</span>和角<span class="italic">C</span>都是锐角，我们也可以做出巧妙的证明。如下图所示，从点<span class="italic">B</span>向<img alt="j-pxx-ac" class="h-pic1" src="../images/01326.jpeg"/>画一条垂线（被称作三角形<span class="italic">ABC</span>的高），交点为<span class="italic">X</span>，那么垂线的长度为<span class="italic">h</span>。</p>
+
+  <div class="chatu"><img alt="" class="calibre8" src="../images/00803.jpeg"/></div>
+
+  <p class="calibre14"><img alt="j-pxx-ac" class="h-pic1" src="../images/01326.jpeg"/>可以分成<img alt="j-pxx-ax" class="h-pic1" src="../images/00463.jpeg"/>和<img alt="j-pxx-xc" class="h-pic1" src="../images/01351.jpeg"/>两条线段，它们的长度分别是<span class="italic">b</span><sub class="calibre31">1</sub>和<span class="italic">b</span><sub class="calibre31">2</sub>，因此 <span class="italic">b</span><sub class="calibre31">1</sub> + <span class="italic">b</span><sub class="calibre31">2</sub> = <span class="italic">b</span>。由于<span class="italic">BXA</span>和<span class="italic">BXC</span>都是直角三角形，因此从第一种情况可知，它们的面积分别是<img alt="" class="h-pic1" src="../images/01343.jpeg"/><span class="italic">b</span><sub class="calibre31">1</sub><span class="italic">h</span>和<img alt="" class="h-pic1" src="../images/01343.jpeg"/><span class="italic">b</span><sub class="calibre31">2</sub><span class="italic">h</span>。那么，三角形<span class="italic">ABC</span>的面积为：</p>
+
+  <p class="center1"><img alt="" class="h-pic1" src="../images/01343.jpeg"/><span class="italic">b</span><sub class="calibre31">1</sub><span class="italic">h</span> +<img alt="" class="h-pic1" src="../images/01343.jpeg"/><span class="italic">b</span><sub class="calibre31">2</sub><span class="italic">h</span> =<img alt="" class="h-pic1" src="../images/01343.jpeg"/> ( <span class="italic">b</span><sub class="calibre31">1</sub> + <span class="italic">b</span><sub class="calibre31">2</sub>)<span class="italic">h</span> =<img alt="" class="h-pic1" src="../images/01343.jpeg"/><span class="italic">bh</span></p>
+
+  <p class="calibre11">如果角<span class="italic">A</span>或角<span class="italic">C</span>是钝角，情况就会如下图所示。</p>
+
+  <div class="chatu"><img alt="" class="calibre8" src="../images/01353.jpeg"/></div>
+
+  <p class="calibre14">如果三角形<span class="italic">ABC</span>是锐角三角形，我们就把它表示成两个直角三角形的和；如果它是钝角三角形，我们就把它表示成两个直角三角形（<span class="italic">ABY</span>和<span class="italic">CBY</span>）的差。大直角三角形<span class="italic">ABY</span>的底是 <span class="italic">b</span> + <span class="italic">c</span>，它的面积为<img alt="" class="h-pic1" src="../images/01343.jpeg"/>(<span class="italic">b</span> + <span class="italic">c</span>)<span class="italic">h</span>，小直角三角形<span class="italic">CBY</span>的面积为<img alt="" class="h-pic1" src="../images/01343.jpeg"/><span class="italic">ch</span>，所以三角形<span class="italic">ABC</span>的面积是：</p>
+
+  <p class="center1"><img alt="" class="h-pic1" src="../images/01343.jpeg"/>(<span class="italic">b</span> + <span class="italic">c</span>)<span class="italic">h</span> –<img alt="" class="h-pic1" src="../images/01343.jpeg"/><span class="italic">ch</span> = <span class="italic">bh</span></p>
+
+  <p class="calibre11">证明完毕。 <img alt="026" class="h-pic1" src="../images/00086.jpeg"/></p>
+
+  <script src="../../math.js"></script></body>
+</html>

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="uuid_id">
+  <metadata xmlns:opf="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:calibre="http://calibre.kovidgoyal.net/2009/metadata">
+    <dc:title>刻意学习</dc:title>
+    <dc:creator opf:role="aut" opf:file-as="Scalers">Scalers</dc:creator>
+    <dc:contributor opf:role="bkp">calibre (8.4.0) [http://calibre-ebook.com]</dc:contributor>
+    <dc:description>我们常常感到困惑：尽管自己学习了大量知识，却仍然没有实现预期的个人成长与进步。原因可能是我们陷入了浅尝辄止的学习模式。刻意学习要求我们制定明确的目标，清晰定位自己的现状，并采用科学高效的方法，快速而稳健地迈向目标。从积累基础概念开始，逐步掌握核心原理与思考方法，最终提炼出应对生活的智慧。
+
+人的成长就是一个不断确立未来目标，同时动手实现的过程，学习和行动则是两大有力武器。遵循刻意学习的理念，再搭配持续行动的保障，二者相辅相成，我们将能改变现状，实现真正突破，成为更好的自己。</dc:description>
+    <dc:publisher>人民邮电出版社</dc:publisher>
+    <dc:date>2025-03-14T16:00:00+00:00</dc:date>
+    <dc:identifier id="uuid_id" opf:scheme="uuid">4605c01f-fd2c-48fb-98db-c54f5fc1eede</dc:identifier>
+    <dc:language>zh</dc:language>
+    <dc:identifier opf:scheme="calibre">379e78d4-3c06-4349-9617-fbc7ef20ec08</dc:identifier>
+    <meta name="calibre:title_sort" content="刻意学习"/>
+    <meta name="calibre:timestamp" content="2025-05-29T16:35:18.699774+00:00"/>
+    <meta name="cover" content="cover"/>
+  </metadata>
+  <manifest>
+    <item id="titlepage" href="titlepage.html" media-type="application/xhtml+xml"/>
+    <item id="cover.xhtml" href="EPUB/xhtml/cover.html" media-type="application/xhtml+xml"/>
+    <item id="copyright.xhtml" href="EPUB/xhtml/copyright.html" media-type="application/xhtml+xml"/>
+    <item id="chapter01.xhtml" href="EPUB/xhtml/chapter01.html" media-type="application/xhtml+xml"/>
+    <item id="chapter02.xhtml" href="EPUB/xhtml/chapter02.html" media-type="application/xhtml+xml"/>
+    <item id="chapter03.xhtml" href="EPUB/xhtml/chapter03.html" media-type="application/xhtml+xml"/>
+    <item id="chapter04.xhtml" href="EPUB/xhtml/chapter04.html" media-type="application/xhtml+xml"/>
+    <item id="chapter05.xhtml" href="EPUB/xhtml/chapter05.html" media-type="application/xhtml+xml"/>
+    <item id="chapter06.xhtml" href="EPUB/xhtml/chapter06.html" media-type="application/xhtml+xml"/>
+    <item id="chapter07.xhtml" href="EPUB/xhtml/chapter07.html" media-type="application/xhtml+xml"/>
+    <item id="chapter08.xhtml" href="EPUB/xhtml/chapter08.html" media-type="application/xhtml+xml"/>
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
+    <item id="page_css" href="page_styles.css" media-type="text/css"/>
+    <item id="css" href="stylesheet.css" media-type="text/css"/>
+    <item id="cover" href="EPUB/images/cover.jpg" media-type="image/jpeg"/>
+    <item id="image_000.png" href="EPUB/images/image_000.png" media-type="image/png"/>
+    <item id="image_001.png" href="EPUB/images/image_001.png" media-type="image/png"/>
+    <item id="image_002.jpg" href="EPUB/images/image_002.jpg" media-type="image/jpeg"/>
+    <item id="image_003.png" href="EPUB/images/image_003.png" media-type="image/png"/>
+    <item id="image_004.jpg" href="EPUB/images/image_004.jpg" media-type="image/jpeg"/>
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="titlepage"/>
+    <itemref idref="cover.xhtml"/>
+    <itemref idref="copyright.xhtml"/>
+    <itemref idref="chapter01.xhtml"/>
+    <itemref idref="chapter02.xhtml"/>
+    <itemref idref="chapter03.xhtml"/>
+    <itemref idref="chapter04.xhtml"/>
+    <itemref idref="chapter05.xhtml"/>
+    <itemref idref="chapter06.xhtml"/>
+    <itemref idref="chapter07.xhtml"/>
+    <itemref idref="chapter08.xhtml"/>
+  </spine>
+  <guide>
+    <reference type="cover" href="titlepage.html" title="Cover image"/>
+  </guide>
+</package>

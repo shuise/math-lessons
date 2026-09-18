@@ -1,0 +1,26 @@
+/* 版权信息页标题 */
+/* 版权信息页正文 */
+/* 封面图像居中 */
+/* 封面框图像居中 */
+/* 目录标题 */
+h1.contents-title {
+	
+	font-weight: normal;
+	border-style: none none dotted none;
+	border-width: 1.5px;
+	margin:1em 0em 1em 0em;
+	text-align:left;
+	text-indent: 0em;
+    duokan-text-indent: 0em;
+	
+
+}
+
+/* 目录页标题-一级 */
+div.contents-chapter-1 {
+	
+	font-weight: bold;
+	margin-left:0.5em;
+}
+/* 目录页标题-二级 */
+/* 目录页标题-三级 */

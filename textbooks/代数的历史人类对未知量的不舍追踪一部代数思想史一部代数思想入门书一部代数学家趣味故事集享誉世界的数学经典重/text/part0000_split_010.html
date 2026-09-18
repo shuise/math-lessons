@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head><link rel="stylesheet" href="../../style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>未知</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="../page_styles.css"/>
+</head>
+  <body class="calibre">
+<h1 id="nav_point_8" class="not-in-toc">数学基础知识：三次方程和四次方程（CQ）</h1>
+<p class="calibre1">中世纪之后，代数学的<strong class="calibre2">第一次伟大进步</strong>是给出了三次方程的一般解法，紧接着就是四次方程的一般解法。我将在第 4 章用 16 世纪的观点来讲述这段历史。我在这里只是对基础的代数内容进行简短的说明，用以阐明这个话题及其困难之处。</p>
+<p class="calibre1">搞清楚我们求解的是什么很重要。对于三次方程或者任意次方程，求出达到要求精度的近似<strong class="calibre2">数值</strong>解不是一件很困难的事情，有时你甚至能猜出一个正确的解。画图通常可以得到很接近的解。古希腊人、古阿拉伯人和中国人都掌握了很多复杂的算术和几何方法。中世纪的欧洲数学家也熟悉这些方法，他们能够很准确地计算出一个三次方程的实数数值解。</p>
+<p class="calibre1">他们没有得到真正的<strong class="calibre2">代数</strong>解，即求解三次方程的一般公式，就好比第 1 章的注释中给出的二次方程求解公式。近代数学家想找到这种一般形式的公式，只有找到这样的公式才能认为三次方程是可解的。</p>
+<p class="calibre7">※※※</p>
+<p class="calibre1">这是含有一个未知量的三次方程的一般形式 <span class="zhu_shi_bian_hao">1</span>：<img src="../images/00154.gif" alt="x^3+Px^2+Qx+R=0" class="calibre9"/>。首先，我们可以通过一个简单的代换去掉包含 <img src="../images/00052.gif" alt="x^2" class="calibre9"/> 的项：</p>
+<p class="zhu_shi_nei_rong"><span class="zhu_shi_bian_hao_xia">1</span>注意，这里假设 <img src="../images/00053.gif" alt="x^3" class="calibre9"/> 的系数是 1。这样的假设不失一般性。更一般的形式是 <img src="../images/00155.gif" alt="ax^3+bx+cx+d=0" class="calibre9"/>。<img src="../images/00045.gif" alt="a" class="calibre9"/> 可以是 0 或其他数。如果 <img src="../images/00045.gif" alt="a" class="calibre9"/> 是 0，这个方程就不是三次方程；如果 <img src="../images/00045.gif" alt="a" class="calibre9"/> 不是 0，方程的两端可以除以 <img src="../images/00045.gif" alt="a" class="calibre9"/>，把 <img src="../images/00053.gif" alt="x^3" class="calibre9"/> 的系数简化成 1。</p>
+<p class="calibre7"><img src="../images/00156.gif" alt="x^3+Px^2+Qx+R=\left(x+\dfrac{P}{3}\right)^3+\left(Q-\dfrac{P^2}{3}\right)\left(x+\dfrac{P}{3}\right)+\left(R-\dfrac{QP}{3}+\dfrac{2P^3}{27}\right)" class="calibre9"/></p>
+<p class="calibre1">换一种形式就是</p>
+<p class="calibre7"><img src="../images/00157.gif" alt="x^3+Px^2+Qx+R=X^3+\left(Q-\dfrac{P^2}{3}\right)X+\left(R-\dfrac{QP}{3}+\dfrac{2P^3}{27}\right)" class="calibre9"/></p>
+<p class="calibre1">其中 <img src="../images/00158.gif" alt="X=x+\dfrac{P}{3} " class="calibre9"/>。所以，只需要借助一个简单的代换就可以将任意的三次方程转化成不包含 <img src="../images/00052.gif" alt="x^2" class="calibre9"/> 项的方程，如果能求出这个较简单的方程中的 <img src="../images/00159.gif" alt="X" class="calibre9"/>，那么用 <img src="../images/00159.gif" alt="X" class="calibre9"/> 减去 <img src="../images/00160.gif" alt="\dfrac{P}{3} " class="calibre9"/> 就得到 <img src="../images/00002.gif" alt="x" class="calibre9"/>。这种不包含 <img src="../images/00052.gif" alt="x^2" class="calibre9"/> 项的三次方程被称为<strong class="calibre2">缺项三次方程</strong><span class="zhu_shi_bian_hao">2</span>。</p>
+<p class="zhu_shi_nei_rong"><span class="zhu_shi_bian_hao_xia">2</span>现在更常见的说法是“既约三次方程”。我更喜欢这个老说法。</p>
+<p class="calibre1">综上，我们只需考虑下面的缺项三次方程：</p>
+<p class="calibre7"><img src="../images/00161.gif" alt="x^3+px+q=0" class="calibre9"/></p>
+<p class="calibre7">※※※</p>
+<p class="calibre1">到此为止一切顺利，但是缺项三次方程的一般求解公式是什么呢？回想一下一般的二次方程</p>
+<p class="calibre7"><img src="../images/00071.gif" alt="x^2+px+q=0" class="calibre9"/></p>
+<p class="calibre1">它有两个解</p>
+<p class="calibre7"><img src="../images/00162.gif" alt="x=\dfrac{-p+\sqrt{p^2-4q}}{2} " class="calibre9"/> 和 <img src="../images/00163.gif" alt="x=\dfrac{-p-\sqrt{p^2-4q}}{2} " class="calibre9"/></p>
+<p class="calibre1">因为负数没有实数平方根，所以如果 <img src="../images/00164.gif" alt="p^2-4q" class="calibre9"/> 是负数，那么上面两个解就是复数；如果 <img src="../images/00164.gif" alt="p^2-4q" class="calibre9"/> 正好等于 0，那么上面两个解相等，因此从数值的观点来看，这个方程只有一个解；当然，如果 <img src="../images/00164.gif" alt="p^2-4q" class="calibre9"/> 是正数，那么这个方程就有两个实数解。</p>
+<p class="calibre1">所有这些情形都可以用二次函数的图像来说明。如果我们画出 <img src="../images/00165.gif" alt="y=x^2+px+q" class="calibre9"/> 的图像，那么这个二次方程的解就使得 <img src="../images/00166.gif" alt="y=0" class="calibre9"/>，即这条曲线与横轴的交点。我在上面总结的三种情况——无实数解、只有一个实数解及有两个实数解，分别如图 CQ-1、图 CQ-2 和图 CQ-3 所示。</p>
+<p class="calibre7"><img src="../images/00167.jpeg" alt="" width="27%" class="calibre20"/></p>
+<p class="calibre1"><strong class="calibre2">图 CQ-1</strong></p>
+<p class="calibre7"><img src="../images/00168.jpeg" alt="" width="27%" class="calibre20"/></p>
+<p class="calibre1"><strong class="calibre2">图 CQ-2</strong></p>
+<p class="calibre7"><img src="../images/00169.jpeg" alt="" width="27%" class="calibre20"/></p>
+<p class="calibre1"><strong class="calibre2">图 CQ-3</strong></p>
+<p class="calibre1">为了搞清楚求解三次方程的一般公式，我们可以从图像出发。此时有三种基本情形，如图 CQ-4、图 CQ-5 和图 CQ-6 所示。注意，图中的三次曲线都是从第三象限开始，到达第一象限。这是因为，当 <img src="../images/00002.gif" alt="x" class="calibre9"/> 非常大的时候（正的或者负的），<img src="../images/00170.gif" alt="x^3+px+q" class="calibre9"/> 中的 <img src="../images/00053.gif" alt="x^3" class="calibre9"/> 项“盖过”了其他项。对于“足够大”（“足够大”的尺度取决于 <img src="../images/00018.gif" alt="p" class="calibre9"/> 和 <img src="../images/00019.gif" alt="q" class="calibre9"/> 的大小）的 <img src="../images/00002.gif" alt="x" class="calibre9"/> 值，<img src="../images/00170.gif" alt="x^3+px+q" class="calibre9"/> 就像 <img src="../images/00053.gif" alt="x^3" class="calibre9"/> 一样。根据符号法则，负数的立方是负数，正数的立方是正数，所以三次多项式曲线总是从第三象限走向第一象限。因为这条曲线必然与横轴相交于<strong class="calibre2">某个</strong>位置，所以 <img src="../images/00161.gif" alt="x^3+px+q=0" class="calibre9"/> <strong class="calibre2">至少有一个</strong>实数解。</p>
+<p class="calibre7"><img src="../images/00171.jpeg" alt="" width="24%" class="calibre21"/></p>
+<p class="calibre1"><strong class="calibre2">图 CQ-4</strong></p>
+<p class="calibre7"><img src="../images/00172.jpeg" alt="" width="24%" class="calibre21"/></p>
+<p class="calibre1"><strong class="calibre2">图 CQ-5</strong></p>
+<p class="calibre7"><img src="../images/00173.jpeg" alt="" width="24%" class="calibre21"/></p>
+<p class="calibre1"><strong class="calibre2">图 CQ-6</strong></p>
+<p class="calibre1">正如这些图所展示的，事实上，一个三次方程可能有一个、两个或三个实数解，但是不可能一个实数解也没有，而且实数解也不可能超过三个。我们根据处理二次方程的经验可以猜测，在大多数情形下，这个三次方程只有一个实数解，还有两个在图上看不出来的复数解。这个猜测是正确的。</p>
+<p class="calibre7">※※※</p>
+<p class="calibre1">事实上，下面是三次方程 <img src="../images/00161.gif" alt="x^3+px+q=0" class="calibre9"/> 的三个解：</p>
+<p class="calibre7"><img src="../images/00174.gif" alt="x=\sqrt[{}^{{}^{{}^{{}^3}}}]{\dfrac{-q+\sqrt{q^2+(4p^3/27)}}{2}}+\sqrt[{}^{{}^{{}^{{}^3}}}]{\dfrac{-q-\sqrt{q^2+(4p^3/27)}}{2}}" class="calibre9"/></p>
+<p class="calibre7"><img src="../images/00175.gif" alt="x=\left(\dfrac{-1+{\rm i}\sqrt{3}}{2}\right)\sqrt[{}^{{}^{{}^{{}^3}}}]{\dfrac{-q+\sqrt{q^2+(4p^3/27)}}{2}}+\left(\dfrac{-1-{\rm i}\sqrt{3}}{2}\right)\sqrt[{}^{{}^{{}^{{}^3}}}]{\dfrac{-q-\sqrt{q^2+(4p^3/27)}}{2}}" class="calibre9"/></p>
+<p class="calibre7"><img src="../images/00176.gif" alt="x=\left(\dfrac{-1-{\rm i}\sqrt{3}}{2}\right)\sqrt[{}^{{}^{{}^{{}^3}}}]{\dfrac{-q+\sqrt{q^2+(4p^3/27)}}{2}}+\left(\dfrac{-1+{\rm i}\sqrt{3}}{2}\right)\sqrt[{}^{{}^{{}^{{}^3}}}]{\dfrac{-q-\sqrt{q^2+(4p^3/27)}}{2}}" class="calibre9"/></p>
+<p class="calibre1">我需要对此稍微解释一下。事实上，我得对此详细解释一下。</p>
+<p class="calibre1">首先，我们注意到每个解中两个立方根符号下面的项只有一处符号不同，一个是“+”，一个是“-”。如果你再仔细观察，你会发现这两项是下面这个二次方程的两个解：</p>
+<p class="calibre7"><img src="../images/00177.gif" alt="t^2+qt-\dfrac{p^3}{27}=0" class="calibre9"/></p>
+<p class="calibre1">（在这里，我把 <img src="../images/00002.gif" alt="x" class="calibre9"/> 换成“哑变量”<img src="../images/00051.gif" alt="t" class="calibre9"/>，以避免混淆两个变量。）为方便起见，我们把这两个解记为 <img src="../images/00178.gif" alt="\alpha" class="calibre9"/> 和 <img src="../images/00179.gif" alt="\beta" class="calibre9"/>。</p>
+<p class="calibre1">接下来，第二个解和第三个解中出现的复数是 1 的立方根。当然，在实数范围内，1 只有一个立方根，就是它本身，因为 1×1×1=1；然而，在复数范围内，它还有另外两个复数立方根。你如果提前预习了第 6 章和第 7 章之间的“数学基础知识：单位根”就会知道，上面出现的第一个复数通常表示为 <img src="../images/00180.gif" alt="\omega" class="calibre9"/>，第二个复数表示为 <img src="../images/00181.gif" alt="\omega^2" class="calibre9"/>，每一个数都是另一个数的平方。</p>
+<p class="calibre1">现在，我可以非常简洁地写出一般三次方程的解。它们是</p>
+<p class="calibre7"><img src="../images/00182.gif" alt="\begin{matrix}x=\sqrt[3]{\alpha}+\sqrt[3]{\beta}\\\\x=\omega\sqrt[3]{\alpha}+\omega^2\sqrt[3]{\beta}\\\\x=\omega^2\sqrt[3]{\alpha}+\omega\sqrt[3]{\beta}\end{matrix}" class="calibre9"/></p>
+<p class="calibre1">其中，<img src="../images/00180.gif" alt="\omega" class="calibre9"/> 和 <img src="../images/00181.gif" alt="\omega^2" class="calibre9"/> 是 1 的复数立方根，而 <img src="../images/00178.gif" alt="\alpha" class="calibre9"/> 和 <img src="../images/00179.gif" alt="\beta" class="calibre9"/> 是二次方程 <img src="../images/00177.gif" alt="t^2+qt-\dfrac{p^3}{27}=0" class="calibre9"/> 的解。</p>
+<p class="calibre7">※※※</p>
+<p class="calibre1">请你再仔细观察一下上面的三个解，似乎第一个解是实数，而第二个和第三个解是复数。但是我们知道三次方程可能出现三个实数解（图 CQ-6），这是怎么回事？</p>
+<p class="calibre1">问题在于 <img src="../images/00178.gif" alt="\alpha" class="calibre9"/> 和 <img src="../images/00179.gif" alt="\beta" class="calibre9"/> 可能都是复数。它们两个都包含 <img src="../images/00183.gif" alt="q^2+\dfrac{4p^3}{27} " class="calibre9"/> 的平方根，而 <img src="../images/00183.gif" alt="q^2+\dfrac{4p^3}{27} " class="calibre9"/> 可能是负数。如果它是负数，那么 <img src="../images/00178.gif" alt="\alpha" class="calibre9"/> 和 <img src="../images/00179.gif" alt="\beta" class="calibre9"/> 就都是复数；如果它是正数，那么 <img src="../images/00178.gif" alt="\alpha" class="calibre9"/> 和 <img src="../images/00179.gif" alt="\beta" class="calibre9"/> 就都是实数。它们都是复数的情况就是所谓的<strong class="calibre2">不可约情形</strong> <span class="zhu_shi_bian_hao">3</span>。此时，你就不得不求一个复数的立方根，这可不是一件容易的事。因此，三次方程的一般解尽管在理论上令人满意，但并不非常实用。</p>
+<p class="zhu_shi_nei_rong"><span class="zhu_shi_bian_hao_xia">3</span>这是一个非常容易引起混淆的术语，所以最好限制在这个历史背景中使用。在更一般的方程理论中，一个不可约方程是指：如果不扩大数域，引入一个新的“俄罗斯套娃”，那么它就不能因式分解。（详见“数学基础知识：域论”。）对于三次方程 <img src="../images/00184.gif" alt="x^3-7x+6=0" class="calibre9"/> 来说，<img src="../images/00183.gif" alt="q^2+\dfrac{4p^3}{27} " class="calibre9"/> 等于 <img src="../images/00185.gif" alt="-\dfrac{400}{27} " class="calibre9"/>，所以这是“不可约情形”。然而多项式 <img src="../images/00186.gif" alt="x^3-7x+6" class="calibre9"/> 可以完全分解成 <img src="../images/00187.gif" alt="(x-1)(x-2)(x+3)" class="calibre9"/>，所以，确切地说，它不是不可约的，只是中间过程中出现的<strong class="calibre2">二次方程</strong>是不可约的。</p>
+<p class="calibre1">我将三个解的实际情况整理成下面的表格，它们与 <img src="../images/00183.gif" alt="q^2+\dfrac{4p^3}{27} " class="calibre9"/> 的符号有关。我把 <img src="../images/00183.gif" alt="q^2+\dfrac{4p^3}{27} " class="calibre9"/> 称为这个方程的<strong class="calibre2">判别式</strong>（这样说恐怕有点儿不严谨）。表中的最下面一行是不可约情形。</p>
+<table class="table" width="90%" border="1"><tr class="calibre22"><td class="calibre23"/><td class="calibre23">第一个解</td><td class="calibre23">第二个解</td><td class="calibre23">第三个解</td></tr><tr class="calibre24"><td class="calibre23">判别式为正</td><td class="calibre23">实数</td><td class="calibre23">复数</td><td class="calibre23">复数</td></tr><tr class="calibre22"><td class="calibre23">判别式为0</td><td class="calibre23">实数</td><td colspan="2" class="calibre23">相等的实数</td></tr><tr class="calibre24"><td class="calibre23">判别式为负</td><td class="calibre23">实数</td><td class="calibre23">实数</td><td class="calibre23">实数</td></tr></table>
+
+<p class="calibre1">如果判别式为 0，那么 <img src="../images/00178.gif" alt="\alpha" class="calibre9"/> 和 <img src="../images/00179.gif" alt="\beta" class="calibre9"/> 相等，所以三个解被归结为 <img src="../images/00188.gif" alt="2\sqrt[3]{\alpha}" class="calibre9"/>、<img src="../images/00189.gif" alt="(\omega+\omega^2)\sqrt[3]{\alpha}" class="calibre9"/>、<img src="../images/00190.gif" alt="(\omega^2+\omega)\sqrt[3]{\alpha}" class="calibre9"/>。显然，后两个解相等，很容易验证 <img src="../images/00191.gif" alt="\omega+\omega^2" class="calibre9"/> 等于 -1。</p>
+<p class="calibre7">※※※</p>
+<p class="calibre1">我在上面未加证明地给出了一般三次方程的求解公式。证明过程用现代字母符号体系写出来并不困难。为求解 <img src="../images/00161.gif" alt="x^3+px+q=0" class="calibre9"/>，我们首先将 <img src="../images/00002.gif" alt="x" class="calibre9"/> 表示成两个数的和：<img src="../images/00192.gif" alt="x=u+v" class="calibre9"/>。当然，表示 <img src="../images/00002.gif" alt="x" class="calibre9"/> 的方法有无穷多种。此时，原来的三次方程变成 <img src="../images/00193.gif" alt="(u+v)^3+p(u+v)+q=0" class="calibre9"/>，重新整理后得</p>
+<p class="calibre7"><img src="../images/00194.gif" alt="(u^3+v^3)+3uv(u+v)=-q-p(u+v)" class="calibre9"/></p>
+<p class="calibre1">因为 <img src="../images/00195.gif" alt="u" class="calibre9"/> 和 <img src="../images/00196.gif" alt="v" class="calibre9"/> 的选择有无穷多种，所以，如果我可以选出特殊的 <img src="../images/00195.gif" alt="u" class="calibre9"/> 和 <img src="../images/00196.gif" alt="v" class="calibre9"/>，满足</p>
+<p class="calibre7"><img src="../images/00197.gif" alt="u^3+v^3=-q" class="calibre9"/> 和 <img src="../images/00198.gif" alt="3uv=-p" class="calibre9"/></p>
+<p class="calibre1">那么我就得到一个解。因为 <img src="../images/00198.gif" alt="3uv=-p" class="calibre9"/>，所以我可以用 <img src="../images/00195.gif" alt="u" class="calibre9"/> 和 <img src="../images/00018.gif" alt="p" class="calibre9"/> 表示 <img src="../images/00196.gif" alt="v" class="calibre9"/>，然后再把它代回第一个方程 <img src="../images/00197.gif" alt="u^3+v^3=-q" class="calibre9"/> 中，就得到下面的方程：</p>
+<p class="calibre7"><img src="../images/00199.gif" alt="u^6+qu^3-\dfrac{p^3}{27}=0" class="calibre9"/></p>
+<p class="calibre1">这是一个关于未知量 <img src="../images/00200.gif" alt="u^3" class="calibre9"/> 的二次方程。因为我还可以用 <img src="../images/00196.gif" alt="v" class="calibre9"/> 和 <img src="../images/00018.gif" alt="p" class="calibre9"/> 表示 <img src="../images/00195.gif" alt="u" class="calibre9"/>，用同样的方法可以得到一个以 <img src="../images/00196.gif" alt="v" class="calibre9"/> 为变量的与上面的方程相同的方程，所以 <img src="../images/00200.gif" alt="u^3" class="calibre9"/> 和 <img src="../images/00201.gif" alt="v^3" class="calibre9"/> 是上面这个二次方程的解。所以 <img src="../images/00195.gif" alt="u" class="calibre9"/> 和 <img src="../images/00196.gif" alt="v" class="calibre9"/> 就是这两个解的立方根，或者是这些立方根乘以 1 的立方根。所以原方程可能的解是 <img src="../images/00202.gif" alt="u+v" class="calibre9"/>、<img src="../images/00203.gif" alt="\omega u+\omega^2v" class="calibre9"/> 和 <img src="../images/00204.gif" alt="\omega^2u+\omega v" class="calibre9"/>。（注意，类似 <img src="../images/00205.gif" alt="u+\omega v" class="calibre9"/> 这样的组合不可能是解，因为要满足条件 <img src="../images/00198.gif" alt="3uv=-p" class="calibre9"/>，这意味着加号两边的数相乘必须得到实数。当 <img src="../images/00206.gif" alt="uv" class="calibre9"/> 是实数时，<img src="../images/00207.gif" alt="\omega u" class="calibre9"/> 乘以 <img src="../images/00208.gif" alt="\omega^2v" class="calibre9"/> 是实数，因为 <img src="../images/00209.gif" alt="\omega^3=1" class="calibre9"/>。）</p>
+<p class="calibre7">※※※</p>
+<p class="calibre1">一般四次方程</p>
+<p class="calibre7"><img src="../images/00210.gif" alt="ax^4+bx^3+cx^2+fx+g=0" class="calibre9"/></p>
+<p class="calibre1">的求解方法是降次法。同之前一样，我们通常将上面的方程简化或者“去掉某些项”，变成下面的形式：</p>
+<p class="calibre7"><img src="../images/00211.gif" alt="x^4+px^2+qx+r=0" class="calibre9"/></p>
+<p class="calibre1">通过一些简单的代换，这个方程可以被写成两个完全平方式的差。在求解过程中，你最终会得到一个三次方程：类似于将三次方程化归为二次方程的方法，可以把一个四次方程化归为一个三次方程。</p>
+<p class="calibre1">这四个解是用包含 <img src="../images/00018.gif" alt="p" class="calibre9"/>、<img src="../images/00019.gif" alt="q" class="calibre9"/> 和 <img src="../images/00056.gif" alt="r" class="calibre9"/> 的平方根和立方根的表达式表示的。把这四个解完整地写出来会占用大量篇幅，所以我在这里只写出其中一个：</p>
+<p class="calibre7"><img src="../images/00212.gif" alt="x=\dfrac{1}{2}\sqrt{-\dfrac{2p}{3}+\dfrac{\sqrt[3]{2}t}{3\sqrt[3]{u}}+\dfrac{\sqrt[3]{u}}{3\sqrt[3]{2}}}-\dfrac{1}{2}\sqrt{-\dfrac{4p}{3}-\dfrac{\sqrt[3]{2}t}{3\sqrt[3]{u}}-\dfrac{\sqrt[3]{u}}{3\sqrt[3]{2}}-\dfrac{2q}{\sqrt{-\dfrac{2p}{3}+\dfrac{\sqrt[3]{2}t}{3\sqrt[3]{u}}+\dfrac{\sqrt[3]{u}}{3\sqrt[3]{2}}}}}" class="calibre9"/></p>
+<p class="calibre1">其中 <img src="../images/00213.gif" alt="t=p^2+12r" class="calibre9"/>，并且</p>
+<p class="calibre7"><img src="../images/00214.gif" alt="u=2p^3+27q^2-72pr+\sqrt{(2p^3+27q^2-72pr)^2-4t^3} " class="calibre9"/></p>
+<p class="calibre1">这个解看起来很吓人，但是它只包含算术过程：求平方根、立方根以及 <img src="../images/00018.gif" alt="p" class="calibre9"/>、<img src="../images/00019.gif" alt="q" class="calibre9"/> 和 <img src="../images/00056.gif" alt="r" class="calibre9"/> 的四则运算。我们已经看到，三次方程的一般解法比二次方程的一般解法复杂一些，而四次方程的一般解法又复杂了一些。</p>
+<p class="calibre1">你可能由此猜测<strong class="calibre2">五次</strong>方程的一般解法可能比它更复杂，或许需要整整一页纸甚至好几页纸才能把解全部写出来，但它的解也只是由平方根、立方根，可能还有五次方根以不同的方式互相嵌套而成的。根据求解二次方程、三次方程和四次方程的经验，这个猜测完全是合情合理的。但很可惜，这个猜测是错误的。</p>
+
+<p class="calibre4" style="margin:0pt; border:0pt; height:1em" id="calibre_pb_30"> </p>
+<script src="../../math.js"></script></body></html>
