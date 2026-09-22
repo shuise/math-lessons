@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>复数与一元二次方程</title>
+<link rel="icon" type="image/png" href="../lib/logo.png?version=1.0.0">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<article>
+  <a class="back" href="./index.html">&larr; 返回专题列表</a>
+  <h1>复数与一元二次方程</h1>
+  <p class="tip">前置知识：<a href="../lessons/complex-numbers/index.html">复数基础</a>、<a href="../lessons/functions/part5/index.html">二次函数</a></p>
+
+  <h2>一、从"无解"说起</h2>
+  <p>在实数范围内，一元二次方程 <b>ax² + bx + c = 0</b>（a ≠ 0）的根由求根公式决定：</p>
+  <div class="formula">x = ( −b ± √Δ ) / (2a)，其中判别式 <b>Δ = b² − 4ac</b></div>
+  <p>当 Δ &lt; 0 时，根号下出现了<b>负数</b>（√(−正数)）。在实数集中，没有任何实数的平方是负数，因此在实数域内方程"<b>无解</b>"。</p>
+  <p>引入复数集（增加虚数单位 <b>i</b>，定义 <b>i² = −1</b>）后，任何负数都可以开平方，例如 √(−4) = √(4·i²) = 2i。这使得求根公式对任意系数<b>永远有效</b>，方程在复数域内<b>一定有解</b>。</p>
+  <div class="key-point">
+    <b>代数基本定理</b>：任何 n 次复系数多项式在复数域内恰好有 n 个根（计重根）。一元二次方程正是它在 n = 2 时的体现：Δ &lt; 0 时两个根是一对<b>共轭复数</b> u + vi 与 u − vi。
+  </div>
+
+  <h2>二、实数视角：抛物线与 x 轴</h2>
+  <p>在实数坐标平面中，y = ax² + bx + c 的图象是一条抛物线。方程有解 ⇔ 抛物线与 x 轴（y = 0）<b>有交点</b>。当 Δ &lt; 0 时，抛物线<b>悬浮</b>在 x 轴上方（或下方），与 x 轴没有交点——这就是"无解"的直观形象。</p>
+
+  <div class="panel">
+    <h3>🔬 交互实验台：拖动滑块，观察两幅图如何联动</h3>
+    <div class="ctrl"><label>a（二次项）</label><input type="range" id="inA" min="-2" max="2" step="0.5" value="1"><span class="val" id="vA">1</span></div>
+    <div class="ctrl"><label>b（一次项）</label><input type="range" id="inB" min="-4" max="4" step="0.5" value="0"><span class="val" id="vB">0</span></div>
+    <div class="ctrl"><label>c（常数项）</label><input type="range" id="inC" min="-4" max="4" step="0.5" value="1"><span class="val" id="vC">1</span></div>
+    <div class="readout" id="readout"></div>
+    <div class="two-col">
+      <div class="fig">
+        <svg id="svgParab" viewBox="0 0 460 340" width="460" height="340"></svg>
+        <div class="cap">实数视角：抛物线 y = ax² + bx + c 与 x 轴的交点（Δ ≥ 0 时出现）</div>
+      </div>
+      <div class="fig">
+        <svg id="svgCplx" viewBox="0 0 460 340" width="460" height="340"></svg>
+        <div class="cap">复数视角：两个根落在复平面上（Δ &lt; 0 时是一对共轭复根）</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>三、视角一：旋转 90° 的"隐形抛物线"</h2>
+  <p>为了给复数根"腾出位置"，把自变量 x 从一维实数轴扩展为<b>二维复平面</b>（x = u + vi），函数定义域变成四维。下面用三维图形理解（以 x² + 1 = 0 为例）：</p>
+  <ol>
+    <li><b>实数视角（v = 0）</b>：x 纯为实数时，图象就是熟悉的抛物线 y = u² + 1，悬浮在半空中，不接触 y = 0 的平面。</li>
+    <li><b>纯虚数方向（u 固定在顶点）</b>：沿虚轴方向（v 方向）延伸，代入展开：y = (vi)² + 1 = <b>1 − v²</b>——i² = −1 把向上开口的抛物线<b>翻转成向下开口</b>！</li>
+    <li><b>寻找交点</b>：于是在顶点正下方"长出"一条开口朝下、穿过 y = 0 平面的新抛物线。它与 y = 0 平面的两个交点 v = ±1，正好对应方程的两个复数根 <b>x = ±i</b>。</li>
+  </ol>
+  <div class="fig">
+    <svg id="svgHidden" viewBox="0 0 560 400" width="560" height="400"></svg>
+    <div class="cap">紫色实抛物线悬浮在 y=0 平面上方；青色"隐形抛物线"由纯虚方向翻转而来，穿过 y=0 平面于 x = ±i 两点</div>
+  </div>
+
+  <div class="note">
+    <b>✦ 有一次项时（b ≠ 0）</b>：如果方程是形如 x² + bx + c = 0（b ≠ 0），实抛物线的顶点不再落在虚轴（u = 0）上。我们先用配方法"把一次项消掉"：<br>
+    <div class="formula" style="margin:10px 0;">f(x) = x² + bx + c = (x + b/2)² + (c − b²/4)</div>
+    令 u₀ = −b/2（顶点实部），f(u₀) = c − b²/4 = f(u₀)（顶点对应的函数值）。当我们从<strong>顶点出发沿虚轴方向</strong>把 x = u₀ + vi 代入：
+    <div class="formula" style="margin:10px 0;">f(u₀ + vi) = f(u₀) + (vi)² = f(u₀) − v²</div>
+    翻转效果完全相同！只是隐形抛物线和两个复根都从 u = 0 <b>平移到了 u = u₀ 处</b>，与韦达定理中的"两根之和 = −b/a"保持一致。
+  </div>
+
+  <div class="fig">
+    <svg id="svgHiddenShift" viewBox="0 0 560 400" width="560" height="400"></svg>
+    <div class="cap">例 f(x) = x² + 2x + 2：顶点被平移到 u₀ = −1；隐形抛物线在 u = −1 处翻转，穿过 y=0 平面于 <b>x = −1 ± i</b>（虚线箭头表示从 u=0 到 u=u₀ 的平移）</div>
+  </div>
+
+  <div class="key-point">
+    <b>✦ 另一种看法：不做配方平移，直接"从顶点出发转 90°"</b><br>
+    复平面上，"虚轴方向"就是<strong>把实轴方向向量旋转 90°</strong>（乘以 i）。因此不管顶点在哪里，只要在顶点处沿实轴的切向量旋转 90°，得到的就是沿虚轴的方向。代入顶点后：
+    <div class="formula" style="margin:10px 0;">x = 顶点 + t·i ，t 为实数 ⇒ f(x) = f(顶点) − t²</div>
+    结果与先配方、再平移顶点到 u₀ 后沿虚轴延伸 <b>完全等价</b>——区别只是"先移动再延伸"与"先算顶点位置再从顶点直接延伸"。
+  </div>
+
+  <div class="fig">
+    <svg id="svgHiddenRotate" viewBox="0 0 560 400" width="560" height="400"></svg>
+    <div class="cap">直接旋转示意：在顶点 V 处把实轴方向向量（黑色水平箭头）<b>旋转 90° 逆时针</b>得到青色虚方向，再沿该方向（蓝色点画线）延伸就能穿出 y=0 平面触到两个复根（橙色圆点），无需先"配方平移"</div>
+  </div>
+
+  <h2>四、小结</h2>
+  <table>
+    <tr><th>判别式</th><th>实数域</th><th>复数域</th><th>抛物线与 x 轴</th><th>根在复平面上</th></tr>
+    <tr><td>Δ &gt; 0</td><td>两个不相等实根</td><td>同左（虚部为 0）</td><td>两个交点</td><td>实轴上两点</td></tr>
+    <tr><td>Δ = 0</td><td>两个相等实根</td><td>同左</td><td>相切（1 个切点）</td><td>实轴上一点</td></tr>
+    <tr><td>Δ &lt; 0</td><td>无解</td><td>一对共轭复根 u ± vi</td><td>无交点（悬浮）</td><td>关于实轴对称的两点</td></tr>
+  </table>
+  <div class="key-point"><b>一句话总结</b>：复数没有让"无解"的方程突然变得随便有解——它把根安放在实数轴看不见的"复平面"上。抛物线悬浮的位置，恰恰暗示了根的实部与虚部。</div>
+
+  <h2>想一想</h2>
+  <div class="example">
+    <p><b>挑战：</b>当 Δ &lt; 0 时，方程 ax² + bx + c = 0 的两个复数根为 u + vi 与 u − vi。<br>
+    ① 两根之和等于什么？② 两根之积呢？（用韦达定理验证你的答案，并说明它们都是实数）</p>
+    <button class="toggle-btn" onclick="tg('hintBox')">💡 思路提示</button>
+    <button class="toggle-btn" onclick="tg('ansBox')">📖 查看答案</button>
+    <div class="toggle-box" id="hintBox">韦达定理在复数域依然成立：两根之和 = −b/a，两根之积 = c/a。把根写成 u ± vi 代入 (u+vi)+(u−vi) 与 (u+vi)(u−vi) 算一算，注意 i² = −1。</div>
+    <div class="toggle-box" id="ansBox">
+      ① 两根之和：(u + vi) + (u − vi) = <b>2u = −b/a</b>（虚部正好抵消，是实数——这正是 u = −b/(2a) 的来历）。<br>
+      ② 两根之积：(u + vi)(u − vi) = u² + v² = <b>c/a</b>（因为 (vi)(−vi) = −v²i² = +v²）。<br>
+      共轭复根相加、相乘都"消掉"了 i，这解释了为什么实系数方程的虚根总是成对出现。
+    </div>
+  </div>
+
+  <p style="margin-top:28px;">
+    <a href="./index.html">&larr; 返回专题列表</a>
+  </p>
+</article>
+
+<script>
+// ========== 工具 ==========
+function tg(id){ document.getElementById(id).classList.toggle('show'); }
+var A=1, B=0, C=1;
+
+// ========== 实验台：两幅 SVG ==========
+// 坐标映射：x∈[-4.5,4.5] → 230+x*48 ；y∈[-7,7] → 170-y*22
+function px(x){ return 230 + x*48; }
+function py(y){ return 170 - y*22; }
+
+function svgAxes(svg, xLabel, yLabel){
+  var s = '';
+  // 网格
+  for(var gx=-4; gx<=4; gx++) s += '<line x1="'+px(gx)+'" y1="'+py(-7)+'" x2="'+px(gx)+'" y2="'+py(7)+'" stroke="#eee" stroke-width="1"/>';
+  for(var gy=-7; gy<=7; gy++) s += '<line x1="'+px(-4.5)+'" y1="'+py(gy)+'" x2="'+px(4.5)+'" y2="'+py(gy)+'" stroke="#eee" stroke-width="1"/>';
+  // 坐标轴
+  s += '<line x1="'+px(-4.5)+'" y1="'+py(0)+'" x2="'+px(4.5)+'" y2="'+py(0)+'" stroke="#555" stroke-width="1.6"/>';
+  s += '<line x1="'+px(0)+'" y1="'+py(-7)+'" x2="'+px(0)+'" y2="'+py(7)+'" stroke="#555" stroke-width="1.6"/>';
+  // 刻度
+  for(var t=-4; t<=4; t++){ if(t!==0) s += '<text x="'+px(t)+'" y="'+(py(0)+16)+'" text-anchor="middle" font-size="11" fill="#888">'+t+'</text>'; }
+  for(var ty=-6; ty<=6; ty+=2){ if(ty!==0) s += '<text x="'+(px(0)-8)+'" y="'+(py(ty)+4)+'" text-anchor="end" font-size="11" fill="#888">'+ty+'</text>'; }
+  s += '<text x="'+px(4.6)+'" y="'+(py(0)+4)+'" text-anchor="middle" font-size="12" fill="#555">'+xLabel+'</text>';
+  s += '<text x="'+(px(0)+14)+'" y="'+py(7)+6+'" text-anchor="middle" font-size="12" fill="#555">'+yLabel+'</text>';
+  return s;
+}
+
+function f(x){ return A*x*x + B*x + C; }
+
+function renderParab(){
+  var svg = document.getElementById('svgParab');
+  var s = svgAxes(svg, 'x', 'y');
+  // 抛物线（不做边界钳制，超出部分由 viewBox 裁剪，避免出现贴边水平折线）
+  var d = '';
+  for(var x=-4.5; x<=4.5001; x+=0.06){
+    var y = f(x);
+    d += (d==='' ? 'M' : 'L') + px(x).toFixed(1) + ',' + py(y).toFixed(1);
+  }
+  s += '<path d="'+d+'" fill="none" stroke="#6a1b9a" stroke-width="2.6"/>';
+  // 实根
+  if(A !== 0){
+    var D = B*B - 4*A*C;
+    if(D >= 0){
+      var sq = Math.sqrt(D);
+      [(-B-sq)/(2*A), (-B+sq)/(2*A)].forEach(function(r){
+        if(Math.abs(r) <= 4.5){
+          s += '<circle cx="'+px(r)+'" cy="'+py(0)+'" r="5.5" fill="#e65100" stroke="#fff" stroke-width="1.5"/>';
+          s += '<text x="'+px(r)+'" y="'+(py(0)-12)+'" text-anchor="middle" font-size="12" fill="#e65100" font-weight="bold">'+r.toFixed(2)+'</text>';
+        }
+      });
+    }
+  }
+  // 顶点虚线（Δ<0 时展示"悬浮距离"）
+  if(A !== 0){
+    var D2 = B*B - 4*A*C, vx = -B/(2*A), vy = f(vx);
+    if(Math.abs(vx) <= 4.5 && Math.abs(vy) <= 7){
+      s += '<line x1="'+px(vx)+'" y1="'+py(0)+'" x2="'+px(vx)+'" y2="'+py(vy)+'" stroke="#999" stroke-width="1" stroke-dasharray="5 3"/>';
+      s += '<text x="'+(px(vx)+6)+'" y="'+((py(0)+py(vy))/2)+'" text-anchor="start" font-size="11" fill="#888">|f(顶点)|</text>';
+    }
+  }
+  svg.innerHTML = s;
+}
+
+function renderCplx(){
+  var svg = document.getElementById('svgCplx');
+  var s = svgAxes(svg, 'u（实部）', 'v（虚部）');
+  if(A !== 0){
+    var D = B*B - 4*A*C;
+    if(D < 0){
+      var u = -B/(2*A), v = Math.sqrt(-D)/(2*Math.abs(A));
+      [[u, v],[u, -v]].forEach(function(p){
+        if(Math.abs(p[0])<=4.5 && Math.abs(p[1])<=7){
+          s += '<circle cx="'+px(p[0])+'" cy="'+py(p[1])+'" r="6" fill="#1565c0" stroke="#fff" stroke-width="1.5"/>';
+          s += '<line x1="'+px(p[0])+'" y1="'+py(p[1])+'" x2="'+px(p[0])+'" y2="'+py(0)+'" stroke="#1565c0" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/>';
+        }
+      });
+      s += '<text x="'+px(u)+'" y="'+(py(v)-12)+'" text-anchor="middle" font-size="12.5" fill="#1565c0" font-weight="bold">u + vi</text>';
+      s += '<text x="'+px(u)+'" y="'+(py(-v)+22)+'" text-anchor="middle" font-size="12.5" fill="#1565c0" font-weight="bold">u − vi</text>';
+      s += '<text x="'+px(u)+'" y="'+(py(0)-8)+'" text-anchor="middle" font-size="11" fill="#888">u = '+u.toFixed(2)+'</text>';
+    }
+  }
+  svg.innerHTML = s;
+}
+
+function renderReadout(){
+  var el = document.getElementById('readout');
+  var D = B*B - 4*A*C;
+  if(A === 0){
+    el.innerHTML = '<b>a = 0</b>：此时不是二次函数（是一次函数 y = '+B+'x + '+C+'），请把 a 拖离 0。';
+    return;
+  }
+  var badge = D>0 ? '<span class="status-d pos">Δ = '+D.toFixed(2)+' &gt; 0</span>'
+            : D===0 ? '<span class="status-d zero">Δ = 0</span>'
+                    : '<span class="status-d neg">Δ = '+D.toFixed(2)+' &lt; 0</span>';
+  var expr;
+  if(D > 0){
+    var sq = Math.sqrt(D);
+    expr = 'x₁ = '+((-B-sq)/(2*A)).toFixed(2)+'，x₂ = '+((-B+sq)/(2*A)).toFixed(2);
+  } else if(D === 0){
+    expr = 'x₁ = x₂ = '+(-B/(2*A)).toFixed(2);
+  } else {
+    var u = -B/(2*A), v = Math.sqrt(-D)/(2*Math.abs(A));
+    expr = '<span class="root-expr">x = '+u.toFixed(2)+' ± '+v.toFixed(2)+'i</span>';
+  }
+  el.innerHTML = badge + '　方程 '+fmtEq()+' 的根：<b>'+expr+'</b>';
+}
+function fmtEq(){
+  function term(k, sym, first){
+    if(k === 0) return '';
+    var sign = first ? (k < 0 ? '−' : '') : (k < 0 ? ' − ' : ' + ');
+    var ak = Math.abs(k);
+    var coef = (ak === 1 && sym) ? '' : String(ak);
+    return sign + coef + sym;
+  }
+  return 'y = ' + term(A, 'x²', true) + term(B, 'x', false) + term(C, '', false);
+}
+
+function renderAll(){
+  document.getElementById('vA').textContent = A;
+  document.getElementById('vB').textContent = B;
+  document.getElementById('vC').textContent = C;
+  renderParab(); renderCplx(); renderReadout();
+}
+
+['inA','inB','inC'].forEach(function(id){
+  document.getElementById(id).addEventListener('input', function(){
+    A = parseFloat(document.getElementById('inA').value);
+    B = parseFloat(document.getElementById('inB').value);
+    C = parseFloat(document.getElementById('inC').value);
+    renderAll();
+  });
+});
+
+// ========== 视角一：隐形抛物线（斜二测投影） ==========
+// 3D 点 (X=实轴, V=虚轴, Z=高度) → 2D：sx = ox + X*ex + V*vx ; sy = oy - Z*ez - V*vy
+(function(){
+  var ox=200, oy=300, ex=72, ez=58, vx=34, vy=17;
+  function P(X,V,Z){ return [ox + X*ex + V*vx, oy - Z*ez - V*vy]; }
+  function poly(pts){ return pts.map(function(p,i){ return (i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1); }).join(' '); }
+  var s = '';
+  // y=0 平面（平行四边形）
+  var q = [P(-2.3,-2.3,0), P(2.3,-2.3,0), P(2.3,2.3,0), P(-2.3,2.3,0)];
+  s += '<polygon points="'+q.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' ')+'" fill="rgba(21,101,192,0.06)" stroke="#b0bec5" stroke-width="1.2"/>';
+  s += '<text x="'+P(1.7,-1.9,0)[0]+'" y="'+P(1.7,-1.9,0)[1]+'" text-anchor="middle" font-size="12" fill="#90a4ae">y = 0 平面</text>';
+  // 实轴 / 虚轴
+  var ax0=P(-2.3,0,0), ax1=P(2.3,0,0), av0=P(0,-2.3,0), av1=P(0,2.3,0);
+  s += '<line x1="'+ax0[0]+'" y1="'+ax0[1]+'" x2="'+ax1[0]+'" y2="'+ax1[1]+'" stroke="#757575" stroke-width="1.4"/>';
+  s += '<line x1="'+av0[0]+'" y1="'+av0[1]+'" x2="'+av1[0]+'" y2="'+av1[1]+'" stroke="#757575" stroke-width="1.4" stroke-dasharray="6 3"/>';
+  s += '<text x="'+ax1[0]+8+'" y="'+ax1[1]+'" text-anchor="start" font-size="12" fill="#757575">实轴 u</text>';
+  s += '<text x="'+av1[0]+'" y="'+(av1[1]-8)+'" text-anchor="middle" font-size="12" fill="#757575">虚轴 v</text>';
+  // 实抛物线 y = u²+1（紫）
+  var pu=[]; for(var t=-1.55; t<=1.5501; t+=0.05) pu.push(P(t,0,t*t+1));
+  s += '<path d="'+poly(pu)+'" fill="none" stroke="#6a1b9a" stroke-width="2.8"/>';
+  s += '<text x="'+P(1.45,0,3.2)[0]+'" y="'+P(1.45,0,3.2)[1]+'" text-anchor="start" font-size="12.5" fill="#6a1b9a" font-weight="bold">y = u² + 1（悬浮）</text>';
+  // 隐形抛物线 y = 1 - v²（青，沿虚轴）
+  var ph=[]; for(var w=-1.75; w<=1.7501; w+=0.05) ph.push(P(0,w,1-w*w));
+  s += '<path d="'+poly(ph)+'" fill="none" stroke="#00838f" stroke-width="2.8" stroke-dasharray="7 3"/>';
+  s += '<text x="'+P(0,1.45,-1.9)[0]+'" y="'+P(0,1.45,-1.9)[1]+'" text-anchor="middle" font-size="12.5" fill="#00838f" font-weight="bold">y = 1 − v²（隐形翻转）</text>';
+  // 交点 ±i
+  [[0,-1],[0,1]].forEach(function(p){
+    var pt = P(p[0],p[1],0);
+    s += '<circle cx="'+pt[0]+'" cy="'+pt[1]+'" r="6" fill="#e65100" stroke="#fff" stroke-width="1.5"/>';
+    s += '<text x="'+(pt[0]+(p[1]>0?14:-14))+'" y="'+(pt[1]-10)+'" text-anchor="'+(p[1]>0?'start':'end')+'" font-size="13" fill="#e65100" font-weight="bold">x = '+(p[1]>0?'+':'−')+'i</text>';
+  });
+  // 顶点
+  var tv = P(0,0,1);
+  s += '<circle cx="'+tv[0]+'" cy="'+tv[1]+'" r="4" fill="#6a1b9a"/>';
+  s += '<text x="'+(tv[0]-12)+'" y="'+(tv[1]-8)+'" text-anchor="end" font-size="11.5" fill="#6a1b9a">顶点 (0, 1)</text>';
+  document.getElementById('svgHidden').innerHTML = s;
+})();
+
+// ========== 视角一（延伸）：有一次项时，顶点平移 u=u0 ==========
+// 例：f(x) = x² + 2x + 2，u0 = -1，f(u0) = 1，根 = -1 ± i ；共用投影参数
+(function(){
+  var ox=200, oy=300, ex=72, ez=58, vx=34, vy=17;
+  function P(X,V,Z){ return [ox + X*ex + V*vx, oy - Z*ez - V*vy]; }
+  function poly(pts){ return pts.map(function(p,i){ return (i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1); }).join(' '); }
+  var u0 = -1;
+  var s = '';
+  // y=0 平面
+  var q = [P(-2.6,-2.3,0), P(2.6,-2.3,0), P(2.6,2.3,0), P(-2.6,2.3,0)];
+  s += '<polygon points="'+q.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' ')+'" fill="rgba(21,101,192,0.06)" stroke="#b0bec5" stroke-width="1.2"/>';
+  s += '<text x="'+P(2,-2,0)[0]+'" y="'+P(2,-2,0)[1]+'" text-anchor="middle" font-size="12" fill="#90a4ae">y = 0 平面</text>';
+  // 实轴 / 虚轴（延伸 u 范围）/ 顶点垂直辅助线
+  var ax0=P(-2.6,0,0), ax1=P(2.6,0,0), av0=P(0,-2.3,0), av1=P(0,2.3,0);
+  s += '<line x1="'+ax0[0]+'" y1="'+ax0[1]+'" x2="'+ax1[0]+'" y2="'+ax1[1]+'" stroke="#757575" stroke-width="1.4"/>';
+  s += '<line x1="'+av0[0]+'" y1="'+av0[1]+'" x2="'+av1[0]+'" y2="'+av1[1]+'" stroke="#757575" stroke-width="1.4" stroke-dasharray="6 3"/>';
+  // 顶点垂直线（u = u0）
+  var Lbot=P(u0,-2.3,0), Ltop=P(u0,2.3,0), Lv=P(u0,0,1);
+  s += '<line x1="'+Lbot[0]+'" y1="'+Lbot[1]+'" x2="'+Ltop[0]+'" y2="'+Ltop[1]+'" stroke="#c62828" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.7"/>';
+  // 平移箭头 u=0 → u=u0
+  var ArA=P(0,-0.18,0), ArB=P(u0,-0.18,0);
+  s += '<defs><marker id="mkArrShift" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 z" fill="#c62828"/></marker></defs>';
+  s += '<line x1="'+ArA[0]+'" y1="'+ArA[1]+'" x2="'+ArB[0]+'" y2="'+ArB[1]+'" stroke="#c62828" stroke-width="1.8" stroke-dasharray="8 4" marker-end="url(#mkArrShift)"/>';
+  s += '<text x="'+((ArA[0]+ArB[0])/2)+'" y="'+(ArA[1]+18)+'" text-anchor="middle" font-size="11.5" fill="#c62828" font-weight="bold">平移 u₀ = '+u0+'</text>';
+  s += '<text x="'+ax1[0]+8+'" y="'+ax1[1]+'" text-anchor="start" font-size="12" fill="#757575">实轴 u</text>';
+  s += '<text x="'+av1[0]+'" y="'+(av1[1]-8)+'" text-anchor="middle" font-size="12" fill="#757575">虚轴 v</text>';
+  // 实抛物线 y = u² + 2u + 2 = (u+1)² + 1（紫），范围 u∈[-2.6, 0.6]
+  var pu=[]; for(var t=-2.6; t<=0.6001; t+=0.05) pu.push(P(t,0,t*t+2*t+2));
+  s += '<path d="'+poly(pu)+'" fill="none" stroke="#6a1b9a" stroke-width="2.8"/>';
+  s += '<text x="'+P(0.55,0,3.2)[0]+'" y="'+P(0.55,0,3.2)[1]+'" text-anchor="start" font-size="12.5" fill="#6a1b9a" font-weight="bold">y = u² + 2u + 2（悬浮）</text>';
+  // 隐形抛物线：在 u=u0 处沿虚轴，y = 1 - v²
+  var ph=[]; for(var w=-1.75; w<=1.7501; w+=0.05) ph.push(P(u0,w,1-w*w));
+  s += '<path d="'+poly(ph)+'" fill="none" stroke="#00838f" stroke-width="2.8" stroke-dasharray="7 3"/>';
+  s += '<text x="'+P(u0,1.55,-1.9)[0]+'" y="'+P(u0,1.55,-1.9)[1]+'" text-anchor="middle" font-size="12.5" fill="#00838f" font-weight="bold">y = 1 − v²（u = u₀ 处翻转）</text>';
+  // 根：(u0, ±1) → x = u0 ± i
+  [[u0,-1],[u0,1]].forEach(function(p){
+    var pt = P(p[0],p[1],0);
+    s += '<circle cx="'+pt[0]+'" cy="'+pt[1]+'" r="6" fill="#e65100" stroke="#fff" stroke-width="1.5"/>';
+    s += '<text x="'+(pt[0]+(p[1]>0?18:-18))+'" y="'+(pt[1]-10)+'" text-anchor="'+(p[1]>0?'start':'end')+'" font-size="13" fill="#e65100" font-weight="bold">x = '+u0+' '+(p[1]>0?'+ i':'− i')+'</text>';
+  });
+  // 顶点 (u0, 0, f(u0)=1)
+  var tv = P(u0,0,1);
+  s += '<circle cx="'+tv[0]+'" cy="'+tv[1]+'" r="4" fill="#6a1b9a"/>';
+  s += '<text x="'+(tv[0]-12)+'" y="'+(tv[1]-8)+'" text-anchor="end" font-size="11.5" fill="#6a1b9a">顶点 (u₀, 1)</text>';
+  document.getElementById('svgHiddenShift').innerHTML = s;
+})();
+
+// ========== 视角一（再延伸）：从顶点直接「旋转 90°」的示意 ==========
+// 仍以 f(x) = x² + 2x + 2，u0 = -1，顶点 V 为中心；共用投影参数
+// 规则固化（单一真源，遵循旋转中心 + 方向符号约定）：
+//   - 旋转中心 C = 顶点 V = (u0, 0, f(u0))，在投影屏幕上为 2D 点（屏幕 y 向下）
+//   - 「视觉上逆时针 90°（复平面乘以 i，把实轴方向转向虚轴正方向）」
+//     在屏幕 2D 上对应向量方向：从 3D 的 (dX,dV,dZ) 经 P() 投影得 2D (sx,sy)
+//     计算后取切向量：实方向 (1,0,0) 投影 2D = (ex, 0)；虚方向 (0,1,0) 投影 2D = (vx,-vy)
+//   - 用 SVG <g transform="rotate(angle cx cy)"> 整体旋转箭头避免漂移（注意 SVG 角度：顺时针为正，因为 y 向下）
+(function(){
+  var ox=200, oy=300, ex=72, ez=58, vx=34, vy=17;
+  var u0=-1;
+  function P(X,V,Z){ return [ox + X*ex + V*vx, oy - Z*ez - V*vy]; }
+  var V2 = P(u0, 0, 1);            // 顶点在屏幕上的 2D 位置 = 旋转中心 C
+  // 实方向（沿 u 轴，正向）从 V 出发的屏幕向量：取一小步 Δu=0.9
+  var RealEnd = P(u0+0.9, 0, 1);
+  // 虚方向（沿 v 正向，即乘以 i 的方向）从 V 出发：一小步 Δv=0.9
+  var ImagEnd = P(u0, 0.9, 1);
+  // 虚负方向
+  var ImagEndN = P(u0, -0.9, 1);
+  // 方向夹角（从 Real 到 Imag），用于绘制弧线（从实方向→虚方向 90°）
+  function ang(pt){ return Math.atan2(pt[1]-V2[1], pt[0]-V2[0]); }
+  var a0 = ang(RealEnd), a1 = ang(ImagEnd);
+  // SVG 弧参数（屏幕坐标系）：用二次贝塞尔画 90° 扇形弧
+  var R = 38;
+  // 用两个端点 + 中间控制点（从中心按 R 朝角度中值方向走）
+  var arcP1 = [ V2[0] + R*Math.cos(a0), V2[1] + R*Math.sin(a0) ];
+  var arcP2 = [ V2[0] + R*Math.cos(a1), V2[1] + R*Math.sin(a1) ];
+  var aMid = (a0 + a1) / 2;
+  // 为了让弧是"90° 的圆弧"，把中间控制点再朝外推一点
+  var arcMC = [ V2[0] + R/Math.cos(Math.PI/4)*Math.cos(aMid), V2[1] + R/Math.cos(Math.PI/4)*Math.sin(aMid) ];
+  var s = '';
+  // y=0 平面
+  var q = [P(-2.6,-2.3,0), P(2.6,-2.3,0), P(2.6,2.3,0), P(-2.6,2.3,0)];
+  s += '<polygon points="'+q.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' ')+'" fill="rgba(21,101,192,0.06)" stroke="#b0bec5" stroke-width="1.2"/>';
+  s += '<text x="'+P(2,-2,0)[0]+'" y="'+P(2,-2,0)[1]+'" text-anchor="middle" font-size="12" fill="#90a4ae">y = 0 平面</text>';
+  // 轴
+  var ax0=P(-2.6,0,0), ax1=P(2.6,0,0), av0=P(0,-2.3,0), av1=P(0,2.3,0);
+  s += '<line x1="'+ax0[0]+'" y1="'+ax0[1]+'" x2="'+ax1[0]+'" y2="'+ax1[1]+'" stroke="#757575" stroke-width="1.4"/>';
+  s += '<line x1="'+av0[0]+'" y1="'+av0[1]+'" x2="'+av1[0]+'" y2="'+av1[1]+'" stroke="#757575" stroke-width="1.4" stroke-dasharray="6 3"/>';
+  s += '<text x="'+ax1[0]+8+'" y="'+ax1[1]+'" text-anchor="start" font-size="12" fill="#757575">实轴 u</text>';
+  s += '<text x="'+av1[0]+'" y="'+(av1[1]-8)+'" text-anchor="middle" font-size="12" fill="#757575">虚轴 v</text>';
+  // 实抛物线（紫，只画关键轮廓，弱化）
+  var pu=[]; for(var t=-2.6; t<=0.6001; t+=0.05) pu.push([P(t,0,t*t+2*t+2)[0].toFixed(1), P(t,0,t*t+2*t+2)[1].toFixed(1)]);
+  s += '<path d="M'+pu.map(function(p){return p[0]+','+p[1];}).join(' L')+'" fill="none" stroke="#6a1b9a" stroke-width="2" opacity="0.65"/>';
+  // 顶点 V（显式黑圆点 —— 作为旋转中心）
+  s += '<circle cx="'+V2[0]+'" cy="'+V2[1]+'" r="5" fill="#212121" stroke="#fff" stroke-width="1.6"/>';
+  s += '<text x="'+(V2[0]+10)+'" y="'+(V2[1]+4)+'" text-anchor="start" font-size="13" fill="#212121" font-weight="bold">V（顶点 u₀ = '+u0+'）</text>';
+  // 实方向箭头（从 V 出发，水平向右）
+  s += '<defs>'
+    +'<marker id="mkArrR" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 z" fill="#212121"/></marker>'
+    +'<marker id="mkArrI" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 z" fill="#00838f"/></marker>'
+    +'<marker id="mkArrID" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 z" fill="#1a237e"/></marker>'
+    +'</defs>';
+  s += '<line x1="'+V2[0]+'" y1="'+V2[1]+'" x2="'+RealEnd[0]+'" y2="'+RealEnd[1]+'" stroke="#212121" stroke-width="2.2" marker-end="url(#mkArrR)"/>';
+  s += '<text x="'+(RealEnd[0]+10)+'" y="'+(RealEnd[1]-4)+'" text-anchor="start" font-size="12" fill="#212121" font-weight="bold">实方向（+u）</text>';
+  // 旋转 90° 弧（贝塞尔近似 + "90°"文字 + "乘以 i"）
+  s += '<path d="M'+arcP1[0].toFixed(1)+','+arcP1[1].toFixed(1)+' Q'+arcMC[0].toFixed(1)+','+arcMC[1].toFixed(1)+' '+arcP2[0].toFixed(1)+','+arcP2[1].toFixed(1)+'" fill="none" stroke="#e65100" stroke-width="2"/>';
+  var AngTxt = [ V2[0] + (R+16)*Math.cos(aMid), V2[1] + (R+16)*Math.sin(aMid) ];
+  s += '<text x="'+AngTxt[0].toFixed(1)+'" y="'+AngTxt[1].toFixed(1)+'" text-anchor="middle" font-size="12.5" fill="#e65100" font-weight="bold">× i（旋转 90° 逆）</text>';
+  // 虚方向箭头（从 V 出发，沿 v+ 方向）
+  s += '<line x1="'+V2[0]+'" y1="'+V2[1]+'" x2="'+ImagEnd[0]+'" y2="'+ImagEnd[1]+'" stroke="#00838f" stroke-width="2.2" marker-end="url(#mkArrI)"/>';
+  s += '<text x="'+(ImagEnd[0]+8)+'" y="'+(ImagEnd[1]-6)+'" text-anchor="start" font-size="12" fill="#00838f" font-weight="bold">虚方向（+v）</text>';
+  // 虚方向抛物延伸点画线（沿 u=u0 作 y=1-v² 的蓝色点画线）
+  var ph=[]; for(var w=-1.75; w<=1.7501; w+=0.05){ var p=P(u0,w,1-w*w); ph.push(p[0].toFixed(1)+','+p[1].toFixed(1)); }
+  s += '<path d="M'+ph.join(' L')+'" fill="none" stroke="#1a237e" stroke-width="2.2" stroke-dasharray="4 5"/>';
+  s += '<text x="'+P(u0,1.55,-1.9)[0]+'" y="'+P(u0,1.55,-1.9)[1]+'" text-anchor="middle" font-size="12.5" fill="#1a237e" font-weight="bold">沿虚方向延伸 → 穿出 y=0 平面</text>';
+  // 两个根（橙点）
+  [[u0,-1],[u0,1]].forEach(function(p){
+    var pt = P(p[0],p[1],0);
+    s += '<circle cx="'+pt[0]+'" cy="'+pt[1]+'" r="6" fill="#e65100" stroke="#fff" stroke-width="1.5"/>';
+    s += '<text x="'+(pt[0]+(p[1]>0?18:-18))+'" y="'+(pt[1]-10)+'" text-anchor="'+(p[1]>0?'start':'end')+'" font-size="13" fill="#e65100" font-weight="bold">x = '+u0+' '+(p[1]>0?'+ i':'− i')+'</text>';
+  });
+  // 虚负方向短箭头（补充 "−v"）
+  s += '<line x1="'+V2[0]+'" y1="'+V2[1]+'" x2="'+ImagEndN[0]+'" y2="'+ImagEndN[1]+'" stroke="#00838f" stroke-width="1.8" marker-end="url(#mkArrI)" opacity="0.7"/>';
+  document.getElementById('svgHiddenRotate').innerHTML = s;
+})();
+
+renderAll();
+</script>
+<script src="./dt.js"></script>
+</body>
+</html>
