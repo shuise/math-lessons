@@ -548,6 +548,20 @@ section.sec.c-sum { border-left: 6px solid var(--accent, #3949ab); }
 .unify-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
 #mainCanvas { border: 1px solid #ddd; border-radius: 10px; background: #fcfcfc; max-width: 100%; height: auto; }
 
+/* 5.10 参考书籍提示框（放在正文最前，列出本页相关书籍的在线阅读链接） */
+.ref-notice {
+  background: #f0f7ff; border: 1px solid #bbdefb; border-left: 4px solid #1a73e8;
+  border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 0 0 22px;
+  font-size: 0.93em; line-height: 1.9;
+}
+.ref-notice .rn-title { margin: 0 0 6px; font-weight: bold; color: #1a73e8; }
+.ref-notice .rn-tip { margin: 0 0 6px; color: #666; }
+.ref-notice ul { margin: 0; padding-left: 22px; }
+.ref-notice li { margin: 4px 0; }
+.ref-notice a { color: #1a73e8; font-weight: 600; text-decoration: none; border-bottom: 1px dashed #90caf9; }
+.ref-notice a:hover { border-bottom-style: solid; }
+.ref-notice .rn-why { color: #777; font-size: 0.94em; }
+
 /* ============================================================
    6. 移动端适配（≤720px）
    目标：不出现横向排版；表格、公式、画布随宽度收缩。
@@ -576,6 +590,7 @@ section.sec.c-sum { border-left: 6px solid var(--accent, #3949ab); }
   .readout { font-size: 0.9em; }
   .relation-chain { font-size: 14px; padding: 14px; line-height: 2; }
   .step-list li { padding-left: 22px; }
+  .ref-notice { padding: 12px 14px; }
 }
 
 /* ============================================================
