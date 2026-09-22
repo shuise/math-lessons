@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>德摩根定律与反证法</title>
+<link rel="icon" type="image/png" href="../lib/logo.png?version=1.0.0">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<article>
+  <a class="back" href="./index.html">&larr; 返回专题列表</a>
+  <h1>德摩根定律与反证法</h1>
+
+  <div class="ref-notice">
+    <p class="rn-title">参考书籍</p>
+    <p class="rn-tip">本页内容可配合以下书籍延伸阅读（点击书名在线阅读）：</p>
+    <ul>
+      <li><a href="https://fe.bluetech.top/textbooks/%E7%AE%80%E5%8D%95%E7%9A%84%E9%80%BB%E8%BE%91%E5%AD%A6/index.html" target="_blank" rel="noopener">简单的逻辑学</a><span class="rn-why">—— 命题的否定与逻辑基本规律</span></li>
+      <li><a href="https://fe.bluetech.top/textbooks/%E6%80%8E%E6%A0%B7%E8%A7%A3%E9%A2%98/index.html" target="_blank" rel="noopener">怎样解题</a><span class="rn-why">—— 反证法（归谬）在解题中的用法</span></li>
+      <li><a href="https://fe.bluetech.top/textbooks/%E8%BF%B7%E4%BA%BA%E7%9A%84%E9%80%BB%E8%BE%91%E9%A2%98/index.html" target="_blank" rel="noopener">迷人的逻辑题</a><span class="rn-why">—— 用反例与逐步推理拆解逻辑谜题</span></li>
+    </ul>
+  </div>
+
+  <p class="tip">讨论问题：为什么只需要一个反例，就能推翻"所有……都……"这样的全称命题？</p>
+
+  <h2>一、把命题翻译成符号语言</h2>
+  <p>先给命题和反例各配一套符号，问题就看得清楚了：</p>
+  <div class="formula-box">
+    <p><b>全称命题 P</b>：∀x ∈ M，p(x) 成立（集合 M 中<b>所有</b>元素都满足条件 p）</p>
+    <p><b>反例 x₀</b>：x₀ ∈ M，但 p(x₀) 不成立，即 <b>¬p(x₀) 为真</b></p>
+  </div>
+  <p>注意 P 的断言范围是<b>整个集合 M</b>——它一次性对所有元素下了判断，因此它的真假取决于"是否<b>每一个</b>都合格"。</p>
+
+  <h2>二、德摩根定律的量化版本</h2>
+  <p>对全称命题取否定，得到德摩根定律的量化形式：</p>
+  <div class="formula">¬(∀x，p(x)) &nbsp;⇔&nbsp; ∃x，¬p(x)</div>
+  <ul>
+    <li><b>左边</b>：把"所有都成立"整体否定掉，也就是断定命题 P 为假；</li>
+    <li><b>右边</b>：存在（至少一个）x 使 p(x) 不成立，也就是<span class="keyword">存在反例</span>；</li>
+    <li>两边<b>逻辑等价</b>——所以"说明 P 为假"与"找到那个 x₀"是同一件事。</li>
+  </ul>
+  <div class="key-point">
+    关键在"<b>等价</b>"二字：这不是"有反例能说明 P 假"的经验之谈，而是<b>逻辑结构</b>上的同一句话的两种写法。
+  </div>
+
+  <h2>三、直观理解：一次"通杀"检查</h2>
+  <p>把"所有"想成一道对每个个体逐一执行的检查：</p>
+  <ul>
+    <li>"所有"是对每个个体的<b>逐一断言</b>，像一道"通杀"检查；</li>
+    <li>只要有一个个体不合格，检查就<b>整体失败</b>，无需再检查其余个体；</li>
+    <li>反过来，若要把这道检查<b>判定为失败</b>，也必须拿出一个具体的"不合格"个体——空口说"总有人不合格"是不算数的。</li>
+  </ul>
+  <div class="example">
+    <p><b>例：</b>断言"班里所有同学都参加了运动会"——一旦发现一个没参加的同学，这个断言立刻为假。</p>
+    <p class="step">此时其余同学参加与否，已经<b>完全不影响</b>断言的结论。</p>
+    <p class="step">这也解释了全称命题为何"脆弱"：它的成立需要全部合格，被推翻却只需一处失守。</p>
+  </div>
+
+  <h2>四、为什么"一个"就够</h2>
+  <p>回到符号上看，理由是结构性的：</p>
+  <ul>
+    <li>全称命题的结构是"<b>∀</b>（任意）"，其否定（德摩根）恰好是"<b>∃</b>（存在）不成立"；</li>
+    <li>一个反例<b>直接命中</b> ∃¬，一步到位，因此在逻辑上已经充分；</li>
+    <li>这与"证明特称命题（∃）只需一个正例"恰好<b>对称</b>：
+      <ul>
+        <li>证明 ∃x，p(x)：举出一个满足条件的 x 即完成；</li>
+        <li>推翻 ∀x，p(x)：举出一个不满足条件的 x 即完成。</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>五、与反证法的联系</h2>
+  <p>反证法的第一步是"假设结论的反面成立"，这一步通常就是<b>假设反例存在</b>：</p>
+  <div class="example">
+    <p><b>例：证明 √2 是无理数。</b></p>
+    <p class="step">要证的结论：∀p, q ∈ N*，√2 ≠ p/q（凡有理数都写不成 √2，即"不存在这样的 p、q"）。</p>
+    <p class="step">反证法假设 √2 = p/q（p、q 互质）——这正是<b>假设反例存在</b>。</p>
+    <p class="step">由 p² = 2q² 推出 p、q 都是偶数，与"互质"矛盾，即导出 ¬p(x₀) 不可能成立。</p>
+    <p class="step">于是反例不存在，原全称命题成立。</p>
+  </div>
+  <p>所以，"找反例推翻命题"与"假设反例存在并导出矛盾"其实<b>同源</b>，只是方向相反：前者用 ∃¬ 直接击倒 ∀，后者先立起 ∃¬ 再把它拆掉，从而反过来保住 ∀。</p>
+
+  <div class="key-point">
+    <b>一句话总结</b>：全称命题的否定（德摩根量化版 ¬∀ ⇔ ∃¬）就是"存在一个不成立"，所以一个反例足以推翻整个全称命题；反证法则反过来——先假设反例存在，再证明它不可能。
+  </div>
+
+  <p style="margin-top:28px;">
+    <a href="./index.html">&larr; 返回专题列表</a>
+  </p>
+</article>
+
+<script src="./dt.js"></script>
+</body>
+</html>
